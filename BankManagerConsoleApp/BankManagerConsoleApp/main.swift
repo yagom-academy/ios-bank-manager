@@ -15,5 +15,18 @@ func inputNumber() -> String {
     return input
 }
 
+func vertifyInput(input: String) {
+    switch input {
+    case "1":
+        openBank()
+    case "2":
+        return
+    default:
+        print("잘못 입력하였습니다. 다시 입력하세요.")
+        printOpenBank()
+        vertifyInput(input: inputNumber())
+    }
+}
+
 printOpenBank()
-inputNumber()
+vertifyInput(input: inputNumber())
