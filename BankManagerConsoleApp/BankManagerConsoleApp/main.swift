@@ -17,3 +17,12 @@ private func getUserInput() -> String {
     }
     return input
 }
+
+private func setUpCustomer() -> [Customer] {
+    let todayCustomerNumber = generateRandomNumberOfCustomer()
+    var customers = [Customer(waitNumber: 1)]
+    for index in 2...todayCustomerNumber {
+        customers.append(Customer(waitNumber: index))
+    }
+    return customers
+}
