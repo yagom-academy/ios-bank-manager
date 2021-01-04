@@ -26,3 +26,15 @@ private func setUpCustomer() -> [Customer] {
     }
     return customers
 }
+
+private func performBankTask() {
+    let bankManager = BankManager(number: 1)
+    let customers = setUpCustomer()
+    let bank = Bank(customer: customers, bankManager: [bankManager])
+    
+    for index in 1...bank.numberOfCustomer {
+        bankManager.printStartTask(customerNumber: index)
+        bankManager.printFinishTask(customerNumber: index)
+    }
+    bank.printFinishBank()
+}
