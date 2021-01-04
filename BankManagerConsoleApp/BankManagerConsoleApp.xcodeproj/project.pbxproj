@@ -130,7 +130,7 @@
 			files = (
 				348D087B25A341B9001F60A3 /* bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				348D088025A346D3001F60A3 /* banker.swift in Sources */,
+				D974CDDC25A346DE006835D5 /* banker.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
