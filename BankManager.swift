@@ -5,3 +5,8 @@
 //
 
 import Foundation
+
+private let bankersNumber = 1
+
+private let bank = Bank(bankersNumber: bankersNumber)
+
