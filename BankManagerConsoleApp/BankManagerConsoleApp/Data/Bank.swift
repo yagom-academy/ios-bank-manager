@@ -11,8 +11,8 @@ class Bank {
     private var bankers: [Banker] = []
     private var customers: [Customer] = []
     
-    private var totalProcessedCustomersNumber: Int
-    private var totalBusinessHours: Double
+    private var totalProcessedCustomersNumber: Int = 0
+    private var totalBusinessHours: Double = 0
     
     private let processingTime = 0.7
     private let zeroAmount = 0
