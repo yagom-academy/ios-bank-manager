@@ -38,3 +38,23 @@ private func performBankTask() {
     }
     bank.printFinishBank()
 }
+
+private func openBank() {
+    print(BankMenu.Menu)
+    
+    switch getUserInput() {
+    case BankMenu.start:
+        performBankTask()
+        openBank()
+    case BankMenu.exit:
+        return
+    default:
+        guard let message = BankError.wrongUserInput.errorDescription else {
+            fatalError()
+        }
+        print(message)
+        openBank()
+    }
+}
+
+openBank()
