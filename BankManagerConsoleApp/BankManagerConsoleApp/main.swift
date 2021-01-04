@@ -28,5 +28,7 @@ func vertifyInput(input: String) {
     }
 }
 
-printOpenBank()
-vertifyInput(input: inputNumber())
+func main() {
+    printOpenBank()
+    vertifyInput(input: inputNumber())
+}
