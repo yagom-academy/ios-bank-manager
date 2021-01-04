@@ -10,6 +10,7 @@
 		348D087B25A341B9001F60A3 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D087A25A341B9001F60A3 /* BankClerk.swift */; };
 		348D088825A34D49001F60A3 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D088725A34D49001F60A3 /* Client.swift */; };
 		348D088C25A34E3C001F60A3 /* BusinessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D088B25A34E3C001F60A3 /* BusinessType.swift */; };
+		348D08A625A3808B001F60A3 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D087F25A346D3001F60A3 /* Bank.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -136,6 +137,7 @@
 				348D087B25A341B9001F60A3 /* BankClerk.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				348D088825A34D49001F60A3 /* Client.swift in Sources */,
+				348D08A625A3808B001F60A3 /* Bank.swift in Sources */,
 				348D088C25A34E3C001F60A3 /* BusinessType.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
