@@ -14,7 +14,7 @@ private var isTerminate = false
 enum BankInformation {
     static let windowNumber = 1
     static let bankersNumber = 1
-    static let bankersProcessing = 0.7
+    static let bankersProcessingTime = 0.7
 }
 
 private func showError(_ error: Error) {
@@ -28,7 +28,7 @@ private func showError(_ error: Error) {
 }
 
 private func startManage() throws {
-    BankManager.shared.initBank(windowNumber: BankInformation.windowNumber, bankersNumber: BankInformation.bankersNumber, bankersProcessingTime: BankInformation.bankersProcessing)
+    BankManager.shared.initBank(windowNumber: BankInformation.windowNumber, bankersNumber: BankInformation.bankersNumber, bankersProcessingTime: BankInformation.bankersProcessingTime)
     while !isTerminate {
         print(startMessage, terminator: "")
         guard let inputText = readLine() else {
