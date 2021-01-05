@@ -10,8 +10,10 @@ struct BankClerk {
     let clerkNumber: Int
     let processingTime: Int
     let taskState: Bool
-    
-    let clientNumber: Int
-    let numberOfClient: Int
-    let client: [String]
+}
+
+struct BankClient {
+    var clientNumber: Int
+    var numberOfClient: Int
+    var client: [Int]
 }
