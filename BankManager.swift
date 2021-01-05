@@ -5,7 +5,7 @@
 //
 
 struct BankManager {
-    var bank: Bank
+    //var bank: Bank
     
     func openBank() {
         
