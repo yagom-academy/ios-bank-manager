@@ -49,7 +49,7 @@ private func startManage() throws {
             break
         }
         if inputCode == openCode {
-            BankManager.shared.openBank()
+            try BankManager.shared.openBank(customersNumber: Int.random(in: 10...30))
         }
     }
 }
