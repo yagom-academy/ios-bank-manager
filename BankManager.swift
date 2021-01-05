@@ -16,4 +16,20 @@ class BankManager {
     private var businessTimes: Double {
         return Double(numberOfClients) * needTimeToWork
     }
+    
+    func printMenu() {
+        print(BankMenu.description, terminator: "")
+    }
+    
+    private func initTellerNumber(_ number: Int) {
+        for windowNumber in 1...number {
+            tellers.append(Teller(windowNumber: windowNumber))
+        }
+    }
+    
+    private func initClientNumber(_ number: Int) {
+        for waitingNumber in 1...number {
+            clients.append(Client(waitingNumber: waitingNumber, needTimeToWork: needTimeToWork))
+        }
+    }
 }
