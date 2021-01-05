@@ -15,6 +15,9 @@ struct BankManager {
     mutating func openBank() {
         print("은행개점")
         self.generateNumberOfClients()
+        bank.serve()
+        //bankClerk가 다수일 경우 어떤 bankClerk가 고객을 응대하는지에 대한 과정을 담아서 serve를 수정해야한다.
+        print(bank.endingMent)
     }
     
     func closeBank() {
