@@ -46,7 +46,7 @@ class BankManager {
         CFRunLoopRun()
     }
     
-    func updateTime() {
+    private func updateTime() {
         currentTime += timeInterval
         currentTime = currentTime.percisionNumber
         do {
