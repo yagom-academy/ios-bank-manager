@@ -10,7 +10,7 @@ import Foundation
 class Bank {
     private var windows: [Window] = []
     private var waitingCustomers = Queue<Customer>()
-    var delegate: BankDelegate?
+    weak var delegate: BankDelegate?
     
     // MARK: - init func
     init(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
@@ -80,6 +80,6 @@ class Bank {
     }
 }
 
-protocol BankDelegate {
+protocol BankDelegate: class {
     func close()
 }
