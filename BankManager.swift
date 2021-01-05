@@ -73,6 +73,6 @@ final class BankManager {
     private func closeBank() {
         tellers.removeAll()
         clients.removeAll()
-        currentClientNumber = 0
+        currentClientNumber = -1
     }
 }
