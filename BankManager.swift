@@ -21,6 +21,13 @@ class BankManager {
         print(BankMenu.description, terminator: "")
     }
 
+    func operateBank(teller: Int, client: Int) {
+        initTellerNumber(teller)
+        initClientNumber(client)
+        assignBusinessToTeller()
+        printCloseMessage()
+    }
+    
     private func initTellerNumber(_ number: Int) {
         for windowNumber in 1...number {
             tellers.append(Teller(windowNumber: windowNumber))
