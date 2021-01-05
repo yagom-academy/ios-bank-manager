@@ -22,7 +22,7 @@ private func showError(_ error: Error) {
     if let bankError = error as? BankError {
         errorMessage = bankError.localizedDescription
     } else {
-        errorMessage = BankError.unknow.localizedDescription
+        errorMessage = BankError.unknown.localizedDescription
     }
     print(errorMessage)
 }

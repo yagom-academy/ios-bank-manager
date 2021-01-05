@@ -51,7 +51,7 @@ class Bank {
                 return window
             }
             guard let customer = waitingCustomers.dequeue() else {
-                throw BankError.unknow
+                throw BankError.unknown
             }
             try window.startCustomerTask(currentTime: time, customer: customer)
             return window

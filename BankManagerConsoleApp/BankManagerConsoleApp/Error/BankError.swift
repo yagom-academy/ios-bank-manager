@@ -15,7 +15,7 @@ enum BankError: Error {
     case invalidateTime
     case invalidateBanker
     case invalidateCustomer
-    case unknow
+    case unknown
 }
 
 extension BankError: LocalizedError {
@@ -35,7 +35,7 @@ extension BankError: LocalizedError {
             return "은행원이 없는 창구입니다.\n다시 시도해 주세요."
         case .invalidateCustomer:
             return "배정된 고객이 없는 창구입니다.\n다시 시도해 주세요."
-        case .unknow:
+        case .unknown:
             return "알 수 없는 오류가 발생했습니다.\n다시 시도해 주세요."
         }
     }
