@@ -11,12 +11,5 @@ struct Bank {
     var totalVistedClientsNumber: Int
     var totalProcessedClientsNumber: Int
     var totalOperatingTime: Float
-    
-    func assignCounter() {
-        
-    }
-    
-    func close() {
-        
-    }
+
 }

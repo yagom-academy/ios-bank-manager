@@ -5,7 +5,7 @@
 //
 
 struct BankManager {
-    //var bank: Bank
+    var bank: Bank
     
     func openBank() {
         
@@ -15,22 +15,18 @@ struct BankManager {
         
     }
     
-    func visitClients(clientsNumber: Int) {
-        
+    mutating func visitClients(newClientsNumber: Int) {
+        for i in 1...newClientsNumber {
+            let client = Client(waitingNumber: i, business: .basic, assignedCounter: 0)
+            
+            bank.waitingList.append(client)
+            bank.totalVistedClientsNumber += newClientsNumber
+        }
     }
     
-    func printMenu() {
+    func assignCounter() {
         
     }
 
-    func selectMenu() -> Int {
-        print(" 1 : 은행개점 \n 2 : 종료\n 입력 :", terminator: " ")
-        
-        if let menuNumber = Int(readLine() ?? "") {
-            return menuNumber
-        }
-        
-        return 0
-    }
 }
 
