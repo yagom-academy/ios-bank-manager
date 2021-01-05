@@ -6,11 +6,15 @@
 
 import Foundation
 
-var bankManager = BankManager()
-private var selectedMenu = bankManager.selectMenu()
+private var bankManager = BankManager()
+bankManager.showMenu()
+private var selectedMenu = Int(readLine() ?? "")
 
 while selectedMenu == 1 {
-    print("은행개점")
-    selectedMenu = bankManager.selectMenu()
+    bankManager = BankManager()
+    bankManager.openBank()
+    bankManager.showMenu()
+    selectedMenu = Int(readLine() ?? "")
 }
-print("종료")
+
+bankManager.closeBank()
