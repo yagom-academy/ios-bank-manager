@@ -6,7 +6,12 @@
 
 import Foundation
 
-private let bankersNumber = 1
-
-private let bank = Bank(bankersNumber: bankersNumber)
-
+class BankManager {
+    static let shared = BankManager()
+    private init() {}
+    private var bank: Bank?
+    
+    func initBank(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
+        bank = Bank(windowNumber: windowNumber, bankersNumber: bankersNumber, bankersProcessingTime: bankersProcessingTime)
+    }
+}
