@@ -9,7 +9,7 @@ import Foundation
 
 extension Double {
     func setPrecision() -> Double {
-        let digit = 1e2
+        let digit = 1e3
         var presisionedNumber = self * digit
         presisionedNumber.round()
         presisionedNumber /= digit
