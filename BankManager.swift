@@ -8,6 +8,7 @@ import Foundation
 
 struct BankManager {
     let tellerNumber: Int
+    
     init(number: Int) {
         self.tellerNumber = number
     }

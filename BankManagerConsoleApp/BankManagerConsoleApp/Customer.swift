@@ -10,6 +10,7 @@ import Foundation
 struct Customer {
     let waitNumber: Int
     let timeNeedToFinishTask: Double
+    
     init(waitNumber: Int, needTime: Double = 0.7) {
         self.waitNumber = waitNumber
         self.timeNeedToFinishTask = needTime
