@@ -65,8 +65,7 @@ final class BankManager {
     }
     
     private func printCloseMessage() {
-        let businessTimesText: String = String(format: "%.2f", businessTimes)
-        let message = Bank.closeMessageFront + "\(clients.count)" + Bank.closeMessageMiddle + "\(businessTimesText)" + Bank.closeMessageEnd
+        let message = String(format: Bank.closeMessage, clients.count, businessTimes)
         print(message)
     }
     

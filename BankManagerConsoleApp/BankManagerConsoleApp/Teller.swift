@@ -30,12 +30,12 @@ final class Teller: OperationQueue {
     }
     
     private func printStartBusiness(for client: Client) {
-        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(client.waitingNumber)" + Bank.tellerMessageStart
+        let message = String(format: Bank.tellerStartMassage, windowNumber, client.waitingNumber)
         print(message)
     }
     
     private func printFinishBusiness(for client: Client) {
-        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(client.waitingNumber)" + Bank.tellerMessageEnd
+        let message = String(format: Bank.tellerFinishMessage, windowNumber, client.waitingNumber)
         print(message)
     }
 }
