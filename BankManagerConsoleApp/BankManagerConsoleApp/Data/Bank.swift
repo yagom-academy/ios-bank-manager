@@ -8,41 +8,45 @@
 import Foundation
 
 class Bank {
-    private var bankers: [Banker] = []
-    private var customers: [Customer] = []
-    
-    private var totalProcessedCustomersNumber: Int = 0
-    private var totalBusinessHours: Double = 0
-    
-    private let processingTime = 0.7
-    private let zeroAmount = 0
+    private var windows: [Window] = []
+    private var waitingCustomers = Queue<Customer>()
+    private var time: Double = 0
+    private var processedCustomersNumber: Int = 0
     
     // MARK: - init func
-    init(bankersNumber: Int) {
-        initTotalAmount()
-        initBanker(bankersNumber)
+    init(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
+        initWindow(windowNumber)
+        initBankers(number: bankersNumber, processingTime: bankersProcessingTime)
     }
     
-    private func initTotalAmount() {
-        totalProcessedCustomersNumber = zeroAmount
-        totalBusinessHours = Double(zeroAmount)
-    }
-    
-    private func initBanker(_ number: Int) {
+    private func initWindow(_ number: Int) {
         for windowNumber in 1...number {
-            bankers.append(Banker(windowNumber: windowNumber, processingTime: processingTime))
+            windows.append(Window(windowNumber: windowNumber))
         }
     }
     
-    private func initCustomer(_ number: Int) {
+    private func initBankers(number: Int, processingTime: Double) {
+        windows = windows.map({ (window: Window) -> Window in
+            window.setBanker(Banker(processingTime: processingTime))
+            return window
+        })
+    }
+    
+    private func resetRocord() {
+        time = 0
+        processedCustomersNumber = 0
+    }
+    
+    private func addWaitingCustomer(_ number: Int) {
         for waitingNumber in 1...number {
-            customers.append(Customer(waitingNumber: waitingNumber))
+            waitingCustomers.enqueue(Customer(waitingNumber: waitingNumber, taskAmount: 1))
         }
     }
     
+    // MARK: - open close func
     func openBank(customersNumber: Int) {
-        initTotalAmount()
-        initCustomer(customersNumber)
+        resetRocord()
+        addWaitingCustomer(customersNumber)
     }
     
     func closeBank() {
