@@ -28,7 +28,29 @@ func vertifyInput(input: String) {
     }
 }
 
+func setClientNumber() {
+    var clients: BankClient? = BankClient(clientNumber: 0, numberOfClient: 0, client: [0])
+    
+    clients?.numberOfClient = Int.random(in: 10...30)
+    guard let maxNumberOfClient: Int = clients?.numberOfClient else { print("maxNumber error"); return }
+    clients?.clientNumber = 0
+    guard var clientNumber: Int = clients?.clientNumber else { print("clientNumber error"); return }
+    clients?.client = [Int](repeating: clientNumber, count: maxNumberOfClient)
+    guard var client: [Int] = clients?.client else { print("clientArray error"); return }
+    
+    for index in 0...maxNumberOfClient - 1 {
+        clientNumber += 1
+        client[index] = clientNumber
+    }
+}
+
+func openBank() {
+    setClientNumber()
+}
+
 func main() {
     printOpenBank()
     vertifyInput(input: inputNumber())
 }
+
+main()
