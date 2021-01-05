@@ -28,4 +28,20 @@ struct BankManager {
             customers.append(Customer(customerNumber: customer, taskTime: taskTime))
         }
     }
+    
+    mutating func openBank() {
+        while !customers.isEmpty {
+            for window in 0..<bankers.count {
+                bankers[window].isWorking = true
+                if let customer = customers.first {
+                    print("\(customer.customerNumber)번 고객 업무 시작")
+                }
+            }
+            for window in 0..<bankers.count {
+                bankers[window].isWorking = false
+                print("\(customers.removeFirst().customerNumber)번 고객 업무 완료")
+                visitedCustomers += 1
+            }
+        }
+    }
 }
