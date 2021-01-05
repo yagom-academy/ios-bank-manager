@@ -6,7 +6,7 @@
 
 import Foundation
 
-private let startMessage = "1 : 은행개점\n2 : 종료\n입력 : "
+private let startMessage = "1 : 은행 개점\n2 : 종료\n입력 : "
 private let openCode = 1
 private let terminateCode = 2
 private var isTerminate = false
@@ -14,10 +14,9 @@ private var isTerminate = false
 enum BankInformation {
     static let windowNumber = 1
     static let bankersNumber = 1
-    static let bankersProcessingTime = 0.7
+    static let bankersProcessing = 0.7
 }
 
-// MARK: - Error Handling
 private func showError(_ error: Error) {
     let errorMessage: String
     if let bankError = error as? BankError {
@@ -29,7 +28,7 @@ private func showError(_ error: Error) {
 }
 
 private func startManage() throws {
-    BankManager.shared.initBank(windowNumber: BankInformation.windowNumber, bankersNumber: BankInformation.bankersNumber, bankersProcessingTime: BankInformation.bankersProcessingTime)
+    BankManager.shared.initBank(windowNumber: BankInformation.windowNumber, bankersNumber: BankInformation.bankersNumber, bankersProcessingTime: BankInformation.bankersProcessing)
     while !isTerminate {
         print(startMessage, terminator: "")
         guard let inputText = readLine() else {
