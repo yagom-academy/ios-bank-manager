@@ -25,3 +25,19 @@ enum Bank {
      
     static let milliseconds: Double = 1000000
 }
+
+enum BankError: Error {
+    case wrongInput
+    case unknown
+}
+
+extension BankError: LocalizedError {
+    private var errorDescription: String {
+        switch self {
+        case .wrongInput:
+            return "잘못된 입력입니다. 다시 입력해주세요"
+        case .unknown:
+            return "알 수 없는 에러입니다."
+        }
+    }
+}
