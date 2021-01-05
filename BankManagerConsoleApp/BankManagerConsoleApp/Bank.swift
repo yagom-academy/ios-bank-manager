@@ -20,6 +20,24 @@ struct Bank {
         }
         return sum
     }
+    var isBankOpen: Bool = true
+    
+    init(customerNumber: Int, bankManagerNumber: Int) {
+        self.initializeCustomers(customerNumber: customerNumber)
+        self.initializeBankManagers(bankManagerNumber: bankManagerNumber)
+    }
+    
+    mutating func initializeCustomers(customerNumber: Int) {
+        for number in 1...customerNumber {
+            customers.append(Customer(waitNumber: number))
+        }
+    }
+    
+    mutating func initializeBankManagers(bankManagerNumber: Int) {
+        for number in 1...bankManagerNumber {
+            bankManagers.append(BankManager(number: number))
+        }
+    }
     
     func printFinishBank() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalTime)초입니다.")
