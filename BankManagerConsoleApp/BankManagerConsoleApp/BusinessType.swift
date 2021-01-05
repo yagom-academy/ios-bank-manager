@@ -1,1 +1,3 @@
-
+enum BusinessType {
+    case base
+}
