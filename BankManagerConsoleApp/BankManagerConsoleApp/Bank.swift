@@ -11,5 +11,4 @@ struct Bank {
     var totalVistedClientsNumber: Int = 0
     var totalProcessedClientsNumber: Int = 0
     var totalOperatingTime: Float = 0
-
 }
