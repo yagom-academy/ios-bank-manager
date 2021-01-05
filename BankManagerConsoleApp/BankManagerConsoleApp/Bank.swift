@@ -8,14 +8,14 @@
 import Foundation
 
 struct Bank {
-    var customer: [Customer]
-    var bankManager: [BankManager]
+    private var customers: [Customer] = []
+    private var bankManagers: [BankManager] = []
     var numberOfCustomer: Int {
-        return customer.count
+        return customers.count
     }
     private var totalTime: Double {
         var sum: Double = 0
-        customer.forEach { customer in
+        customers.forEach { customer in
             sum += customer.timeNeedToFinishTask
         }
         return sum
