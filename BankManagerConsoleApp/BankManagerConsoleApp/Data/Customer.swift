@@ -9,4 +9,5 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
+    let taskAmount: Int
 }
