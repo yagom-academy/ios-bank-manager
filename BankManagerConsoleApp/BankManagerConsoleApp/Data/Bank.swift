@@ -59,11 +59,15 @@ class Bank {
     }
     
     // MARK: - check func
-    func checkEndWindow(time: Double) throws {
+    func checkEndWindow(time: Double) throws -> Int {
+        var processedCustomersNumber = 0
         windows = try windows.map { (window: Window) -> Window in
-            try window.checkEndCustomerTask(currentTime: time)
+            if try window.checkEndCustomerTask(currentTime: time) {
+                processedCustomersNumber += 1
+            }
             return window
         }
+        return processedCustomersNumber
     }
     
     func canClose() {
