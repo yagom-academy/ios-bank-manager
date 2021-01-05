@@ -20,8 +20,8 @@ private func getUserInput() -> String {
 
 private func setUpCustomer() -> [Customer] {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
-    var customers = [Customer(waitNumber: 1)]
-    for index in 2...todayCustomerNumber {
+    var customers: [Customer] = []
+    for index in 1...todayCustomerNumber {
         customers.append(Customer(waitNumber: index))
     }
     return customers
