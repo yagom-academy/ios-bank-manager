@@ -28,6 +28,7 @@ final class BankManager {
         assignBusinessToTeller()
         sleep(1)
         printCloseMessage()
+        reset()
     }
     
     private func initTellerNumber(_ number: Int) {
@@ -64,5 +65,11 @@ final class BankManager {
         let businessTimesText: String = String(format: "%.2f", businessTimes)
         let message = Bank.closeMessageFront + "\(numberOfClients)" + Bank.closeMessageMiddle + "\(businessTimesText)" + Bank.closeMessageEnd
         print(message)
+    }
+    
+    private func reset() {
+        tellers.removeAll()
+        clients.removeAll()
+        currentClientNumber = 0
     }
 }
