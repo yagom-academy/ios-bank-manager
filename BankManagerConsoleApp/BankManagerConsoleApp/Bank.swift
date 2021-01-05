@@ -6,10 +6,10 @@
 //
 
 struct Bank {
-    var serviceCounter: [Int : BankClerk]
-    var waitingList: [Client]
-    var totalVistedClientsNumber: Int
-    var totalProcessedClientsNumber: Int
-    var totalOperatingTime: Float
+    var serviceCounter: [Int : BankClerk] = [:]
+    var waitingList: [Client] = []
+    var totalVistedClientsNumber: Int = 0
+    var totalProcessedClientsNumber: Int = 0
+    var totalOperatingTime: Float = 0
 
 }

@@ -5,10 +5,12 @@
 //
 
 struct BankManager {
-    var bank: Bank
+    var bank = Bank()
     
-    func openBank() {
-        
+    mutating func openBank(bankClerkNumber: Int) {
+        for i in 1...bankClerkNumber {
+            bank.serviceCounter[i] = BankClerk()
+        }
     }
     
     func closeBank() {

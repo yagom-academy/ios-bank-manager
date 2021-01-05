@@ -1,7 +1,7 @@
 
 struct BankClerk {
-    var totalWorkingTime: Float
-    var isWorking: Bool
+    var totalWorkingTime: Float = 0
+    var isWorking: Bool = false
     
     func handleClientBusiness() {
     }
