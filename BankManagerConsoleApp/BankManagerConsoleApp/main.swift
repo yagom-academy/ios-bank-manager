@@ -6,13 +6,11 @@
 
 import Foundation
 
-let bankManager = BankManager()
+var bankManager = BankManager()
 private var selectedMenu = bankManager.selectMenu()
 
 while selectedMenu == 1 {
     print("은행개점")
-    
-    
     selectedMenu = bankManager.selectMenu()
 }
 print("종료")
