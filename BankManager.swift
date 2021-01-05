@@ -49,7 +49,6 @@ class BankManager {
     func updateTime() {
         currentTime += timeInterval
         currentTime = currentTime.setPrecision()
-        print("👋\(currentTime)")
         do {
             guard let managedBank = bank else {
                 throw BankError.emptyBank
