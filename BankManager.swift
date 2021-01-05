@@ -6,8 +6,12 @@
 
 import Foundation
 
-struct Client {
-    let number: Int
+struct BankClerk {
+    let clerkNumber: Int
     let processingTime: Int
-    let state: Bool
+    let taskState: Bool
+    
+    let clientNumber: Int
+    let numberOfClient: Int
+    let client: [String]
 }
