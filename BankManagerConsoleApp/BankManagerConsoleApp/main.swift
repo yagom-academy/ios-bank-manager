@@ -18,7 +18,7 @@ func main() {
         bank.printMenu()
         
         guard let input = readLine() else {
-            print(BankError.wrongInput.localizedDescription)
+            print(BankError.wrongInput.description)
             continue
         }
         
@@ -28,7 +28,7 @@ func main() {
         case BankMenu.end.rawValue:
             isStart = false
         default:
-            print(BankError.wrongInput.localizedDescription)
+            print(BankError.wrongInput.description)
         }
     }
 }

@@ -29,15 +29,13 @@ enum Bank {
 enum BankError: Error {
     case wrongInput
     case unknown
-}
-
-extension BankError: LocalizedError {
-    private var errorDescription: String {
+    
+    var description: String {
         switch self {
         case .wrongInput:
             return "잘못된 입력입니다. 다시 입력해주세요"
         case .unknown:
-            return "알 수 없는 에러입니다."
+            return "알 수 없는 에러가 발생했습니다."
         }
     }
 }
