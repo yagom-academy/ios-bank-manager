@@ -6,3 +6,18 @@
 //
 
 import Foundation
+struct Bank {
+    var serviceCenter: [BankClerk]
+    var waitingList: [Client]
+    var totalClients: Int
+    var workingHours: Int
+    
+    func assignClient() {
+        
+    }
+    
+    func close() {
+        
+    }
+    
+}
