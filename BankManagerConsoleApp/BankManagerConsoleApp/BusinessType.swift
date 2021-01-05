@@ -1,3 +1,3 @@
 enum BusinessType {
-    case basic
+    case basic(requiredTime: Float)
 }
