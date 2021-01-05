@@ -42,6 +42,7 @@ struct BankManager {
                 print("\(customers.removeFirst().customerNumber)번 고객 업무 완료")
                 visitedCustomers += 1
             }
+            businessTimes += taskTime
         }
         closeBank()
         initializeInfo()
