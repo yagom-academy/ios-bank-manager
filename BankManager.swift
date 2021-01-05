@@ -55,6 +55,14 @@ struct BankManager {
         }
         return sum
     }
+    var isAllBankClerkFinishWork: Bool {
+        let waitingBankClerks = bankClerks.filter{$0.isWorking == false}
+        if waitingBankClerks.count == bankClerks.count {
+            return true
+        } else {
+            return false
+        }
+    }
     
     // MARK: - Methods
     mutating func addBankClerk(count: Int) {
@@ -82,11 +90,8 @@ struct BankManager {
     
     mutating func doBusiness() {
         while true {
-            if watingClients.isEmpty {
-                let waitingBankClerks = bankClerks.filter{$0.isWorking == false}
-                if waitingBankClerks.count == bankClerks.count {
-                    break
-                }
+            if watingClients.isEmpty && isAllBankClerkFinishWork {
+                break
             } else {
                 startBankClerkWork()
             }
