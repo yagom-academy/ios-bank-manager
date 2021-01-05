@@ -12,6 +12,8 @@ struct BankManager {
         for i in 1...bankClerkNumber {
             bank.serviceCounter[i] = BankClerk()
         }
+        
+        visitClients(newClientsNumber: Int.random(in: 10...30))
     }
     
     func closeBank() {
@@ -20,11 +22,14 @@ struct BankManager {
     
     mutating func visitClients(newClientsNumber: Int) {
         // 0이나 음수가 들어오면?
-        for i in 1...newClientsNumber {
-            let client = Client(waitingNumber: i, business: .basic)
+        bank.totalVistedClientsNumber += newClientsNumber
+        
+        for _ in 1...newClientsNumber {
+            bank.totalVistedClientsNumber += 1
+            
+            let client = Client(waitingNumber: bank.totalVistedClientsNumber, business: .basic)
             
             bank.waitingList.append(client)
-            bank.totalVistedClientsNumber += newClientsNumber
         }
     }
     

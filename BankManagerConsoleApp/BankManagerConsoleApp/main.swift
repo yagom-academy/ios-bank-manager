@@ -26,3 +26,7 @@ func selectMenu() -> Int {
 //func printMenu() {
 //    
 //}
+
+func openBank() {
+    
+}
