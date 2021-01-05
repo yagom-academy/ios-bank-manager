@@ -10,7 +10,7 @@ import Foundation
 class Bank {
     private var windows: [Window] = []
     private var waitingCustomers = Queue<Customer>()
-    lazy var delegate: BankDelegate? = nil
+    var delegate: BankDelegate?
     
     // MARK: - init func
     init(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
