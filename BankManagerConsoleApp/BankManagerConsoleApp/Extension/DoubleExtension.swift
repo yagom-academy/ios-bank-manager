@@ -8,11 +8,11 @@
 import Foundation
 
 extension Double {
-    func setPrecision() -> Double {
-        let digit = 1e3
-        var presisionedNumber = self * digit
-        presisionedNumber.round()
-        presisionedNumber /= digit
-        return presisionedNumber
+    var percisionNumber: Double {
+        let digit = 1000.0
+        var percisionedNumber = self * digit
+        percisionedNumber.round()
+        percisionedNumber /= digit
+        return percisionedNumber
     }
 }

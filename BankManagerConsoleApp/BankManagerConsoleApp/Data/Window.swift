@@ -28,12 +28,12 @@ class Window {
     // MARK: - check func
     func checkEndCustomerTask(currentTime: Double) throws -> Bool {
         guard let assignedBanker = banker,
-              let taskStartTime = assignedBanker.taskStartTime?.setPrecision() else {
+              let taskStartTime = assignedBanker.taskStartTime?.percisionNumber else {
             throw BankError.invalidateBanker
         }
         let progressTime = currentTime - taskStartTime
         
-        if progressTime.setPrecision() >= assignedBanker.processingTime.setPrecision() {
+        if progressTime.percisionNumber >= assignedBanker.processingTime.percisionNumber {
             try endCustomerTask()
             return true
         }
