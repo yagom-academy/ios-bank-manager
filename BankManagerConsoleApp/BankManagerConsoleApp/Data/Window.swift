@@ -46,12 +46,11 @@ class Window {
         customer = nil
     }
     
-    func canStartTask() -> Bool {
+    func isEmptyWindowCustomer() -> Bool {
         return customer == nil
     }
     
     func startCustomerTask(currentTime: Double, customer: Customer) throws {
-        print("time: \(currentTime), customer: \(customer.waitingNumber)")
         guard let assignedBanker = banker else {
             throw BankError.invalidateBanker
         }
