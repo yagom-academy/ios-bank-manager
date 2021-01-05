@@ -17,4 +17,14 @@ class Teller: OperationQueue {
     init(windowNumber: Int) {
         self.windowNumber = windowNumber
     }
+    
+    func printStartBusiness(number: Int) {
+        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageStart
+        print(message)
+    }
+    
+    func printFinishBusiness(number: Int) {
+        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageEnd
+        print(message)
+    }
 }
