@@ -25,7 +25,7 @@ enum ConsoleError: Error {
 func bankManagerConsoleApp() {
     var isEnd = false
     while(!isEnd) {
-        printConsoleMessage()
+        printConsoleStartMessage()
 
         guard let input = readLine(),
               let command = Command(rawValue: input) else {
@@ -42,7 +42,7 @@ func bankManagerConsoleApp() {
     }
 }
 
-private func printConsoleMessage() {
+private func printConsoleStartMessage() {
     let startMessage = """
     1 : 은행개점
     2 : 종료

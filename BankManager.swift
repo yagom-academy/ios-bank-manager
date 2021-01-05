@@ -6,7 +6,6 @@
 
 import Foundation
 
-// fatalError 구체화
 final class BankManager {
     private let clerkCount: Int = 1
     private let customerCount: Int = Int.random(in: 10...30)
@@ -33,15 +32,13 @@ final class BankManager {
     private var totalTimes: [Double] = []
     private var totalTimeCount: Double {
         get {
-            guard let totalTime = totalTimes.max() else { fatalError() }
+            guard let totalTime = totalTimes.max() else { return 0 }
             
             return totalTime
         }
     }
     
     func open() {
-        if customerCount <= 0 { return }
-    
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         let bankTaskGroup: DispatchGroup = DispatchGroup()
         
@@ -57,21 +54,21 @@ final class BankManager {
             semaphore.wait()
         }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTimeCount)초입니다.")
+        printCloseMessage()
     }
     
     private func assignCustomer(_ customerIndex: Int, to clerk: DispatchQueue, group: DispatchGroup) {
         clerk.async(group: group) {
             let (currentTotalTime, processTime): (Double, Double) = self.getTimeInfo(clerk: clerk)
+            let updatedTotalTime: Double = currentTotalTime + processTime
             
             print("\(customerIndex)번 고객 업무 시작")
             self.sleep(processTime)
-            clerk.setSpecific(key: self.totalTimeKey, value: currentTotalTime + processTime)
+            clerk.setSpecific(key: self.totalTimeKey, value: updatedTotalTime)
             print("\(customerIndex)번 고객 업무 완료")
             
             if self.customers.isEmpty {
-                guard let totalTime: Double = clerk.getSpecific(key: self.totalTimeKey) else { return }
-                self.totalTimes.append(totalTime)
+                self.totalTimes.append(updatedTotalTime)
                 group.leave()
             } else {
                 self.assignCustomer(self.customers.removeFirst(), to: clerk, group: group)
@@ -89,5 +86,9 @@ final class BankManager {
     private func sleep(_ time: Double) {
         let time: useconds_t = useconds_t(time * 1000000)
         usleep(time)
+    }
+    
+    private func printCloseMessage() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTimeCount)초입니다.")
     }
 }
