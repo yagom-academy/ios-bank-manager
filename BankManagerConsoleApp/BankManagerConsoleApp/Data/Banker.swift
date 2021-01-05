@@ -9,4 +9,9 @@ import Foundation
 
 struct Banker {
     let processingTime: Double
+    var taskStartTime: Double?
+    
+    mutating func setTaskStartTime(_ time: Double) {
+        self.taskStartTime = time
+    }
 }
