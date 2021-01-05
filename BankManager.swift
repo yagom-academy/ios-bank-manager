@@ -10,10 +10,12 @@ class BankManager {
     static let shared = BankManager()
     private init() {}
     private var bank: Bank?
-    private var time: Double = 0
     private var processedCustomersNumber: Int = 0
+    private var currentTime: Double = 0.0
     private var bankTimer: Timer?
     private let timeInterval = 0.1
+    private let runLoop = CFRunLoopGetMain()
+    private let closeMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.1f초입니다."
     
     func initBank(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
         bank = Bank(windowNumber: windowNumber, bankersNumber: bankersNumber, bankersProcessingTime: bankersProcessingTime)
@@ -21,7 +23,7 @@ class BankManager {
     }
     
     private func resetRecord() throws {
-        time = 0
+        currentTime = 0.0
         bankTimer = nil
         processedCustomersNumber = 0
         guard let managedBank = bank else {
@@ -29,40 +31,60 @@ class BankManager {
         }
         managedBank.resetWaitingCustomers()
     }
-    let runLoop = CFRunLoopGetMain()
-    // MARK: - open close func
+    
+    // MARK: - bank operate func
     func openBank(customersNumber: Int) throws {
         try resetRecord()
         guard let managedBank = bank else {
             throw BankError.emptyBank
         }
         managedBank.addWaitingCustomer(customersNumber)
-        try managedBank.assignCustomer(time: time)
-        bankTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-            DispatchQueue.global().async {
-                try? self.updateTime()
-            }
+        try managedBank.assignCustomer(time: currentTime)
+        bankTimer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true, block: { _ in
+            self.updateTime()
         })
         CFRunLoopRun()
     }
     
-    func updateTime() throws {
-        time += timeInterval
-        guard let managedBank = bank else {
-            throw BankError.emptyBank
+    func updateTime() {
+        currentTime += timeInterval
+        currentTime = currentTime.setPrecision()
+        print("👋\(currentTime)")
+        do {
+            guard let managedBank = bank else {
+                throw BankError.emptyBank
+            }
+            self.processedCustomersNumber += try managedBank.checkEndWindow(time: currentTime)
+            try managedBank.assignCustomer(time: currentTime)
+        } catch {
+            self.showError(error)
         }
-        try managedBank.checkEndWindow(time: time)
-        try managedBank.assignCustomer(time: time)
     }
     
-     func closeBank(_ error: Error?) throws {
+     func closeBank() {
         bankTimer?.invalidate()
         CFRunLoopStop(runLoop)
+        print(String(format: closeMessage, processedCustomersNumber, currentTime))
+    }
+    
+    private func showError(_ error: Error) {
+        let errorMessage: String
+        if let bankError = error as? BankError {
+            errorMessage = bankError.localizedDescription
+        } else {
+            errorMessage = BankError.unknow.localizedDescription
+        }
+        print(errorMessage)
+        exitApp()
+    }
+    
+    private func exitApp() {
+        exit(1)
     }
 }
 
 extension BankManager: BankDelegate {
     func close() {
-        try? self.closeBank(nil)
+        self.closeBank()
     }
 }
