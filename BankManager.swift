@@ -8,27 +8,27 @@ import Foundation
 
 struct BankManager {
     // MARK: - Types
-    struct Banker {
-        var counterNumber: Int
+    struct BankClerk {
+        var bankWindowNumber: Int
         var isWorking: Bool
     }
     
     // MARK: - Properties
-    private var bankers: [Banker] = [Banker]()
+    private var bankClerks: [BankClerk] = [BankClerk]()
     private var watingClients: Queue<Int> = Queue<Int>()
     private var finishedClients: Queue<Int> = Queue<Int>()
     private var waitingTicketNumber: Int = 0
     
     // MARK: - Methods
-    mutating func addBanker(of: Int) {
+    mutating func addBankClerk(of: Int) {
         guard of > 0 else {
             return
         }
         
-        let lastCounterNumber = bankers.last?.counterNumber ?? 0
+        let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...of {
-            let banker = Banker(counterNumber: i + lastCounterNumber, isWorking: false)
-            bankers.append(banker)
+            let banker = BankClerk(bankWindowNumber: i + lastCounterNumber, isWorking: false)
+            bankClerks.append(banker)
         }
     }
     
@@ -43,8 +43,8 @@ struct BankManager {
         }
     }
     
-    init(_ numberOfBanker: Int, _ numberOfClient: Int) {
-        addBanker(of: numberOfBanker)
+    init(_ numberOfBankClerk: Int, _ numberOfClient: Int) {
+        addBankClerk(of: numberOfBankClerk)
         addClient(of: numberOfClient)
     }
 }
