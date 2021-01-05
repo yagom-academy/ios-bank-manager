@@ -9,8 +9,8 @@ import Foundation
 
 final class Teller: OperationQueue {
     private var windowNumber: Int
-    private var isWorking: Bool = false
     private var needTimeToWork: Double
+    private var isWorking: Bool = false
     var isNotWorking: Bool {
         return !isWorking
     }
