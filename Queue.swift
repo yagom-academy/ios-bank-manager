@@ -23,7 +23,11 @@ struct Queue<T> {
     }
     
     mutating func dequeue() -> T? {
-        return data.removeFirst()
+        if data.isEmpty {
+            return nil
+        } else {
+            return data.removeFirst()
+        }
     }
     
     public func peek() -> T? {
