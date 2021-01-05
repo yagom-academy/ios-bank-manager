@@ -1,8 +1,12 @@
-
-struct BankClerk {
-    var totalWorkingTime: Float
-    var isWorking: Bool
+class BankClerk {
+    var totalWorkingTime: Float = 0
+    var isWorking: Bool = false
     
-    func handleClientBusiness() {
+    func handleBusiness(of client: Client) {
+        switch client.business {
+        case .basic(let requiredTime):
+            totalWorkingTime += requiredTime
+        }
     }
 }
+
