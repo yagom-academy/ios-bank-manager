@@ -10,8 +10,6 @@ import Foundation
 class Bank {
     private var windows: [Window] = []
     private var waitingCustomers = Queue<Customer>()
-    private var time: Double = 0
-    private var processedCustomersNumber: Int = 0
     
     // MARK: - init func
     init(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
@@ -32,24 +30,43 @@ class Bank {
         })
     }
     
-    private func resetRocord() {
-        time = 0
-        processedCustomersNumber = 0
+    func resetWaitingCustomers() {
+        waitingCustomers.removeAll()
     }
     
-    private func addWaitingCustomer(_ number: Int) {
+    func addWaitingCustomer(_ number: Int) {
         for waitingNumber in 1...number {
             waitingCustomers.enqueue(Customer(waitingNumber: waitingNumber, taskAmount: 1))
         }
     }
     
-    // MARK: - open close func
-    func openBank(customersNumber: Int) {
-        resetRocord()
-        addWaitingCustomer(customersNumber)
+    func assignCustomer(time: Double) throws {
+        if waitingCustomers.isEmpty {
+            canClose()
+            return
+        }
+        windows = try windows.map { (window: Window) -> Window in
+            if !window.canStartTask() || waitingCustomers.isEmpty {
+                return window
+            }
+            guard let customer = waitingCustomers.dequeue() else {
+                throw BankError.unknow
+            }
+            try window.startCustomerTask(currentTime: time, customer: customer)
+            return window
+        }
     }
     
-    func closeBank() {
+    // MARK: - check func
+    func checkEndWindow(time: Double) throws {
+        windows = try windows.map { (window: Window) -> Window in
+            try window.checkEndCustomerTask(currentTime: time)
+            return window
+        }
+    }
+    
+    // TODO: 은행 폐점 가능?
+    func canClose() {
         
     }
 }
