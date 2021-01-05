@@ -40,8 +40,8 @@ class BankManager {
         }
         managedBank.addWaitingCustomer(customersNumber)
         try managedBank.assignCustomer(time: currentTime)
-        bankTimer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true, block: { _ in
-            self.updateTime()
+        bankTimer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true, block: { [weak self] _ in
+            self?.updateTime()
         })
         CFRunLoopRun()
     }
