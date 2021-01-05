@@ -6,49 +6,46 @@
 
 import Foundation
 
-// clerk, customer 각각 객체로 만들어도 될 듯 ( 왜냐면 processTime 이 각각 다를 경우 )
-
+// fatalError 구체화
 final class BankManager {
-    // private
-    // type 선언 통일! 할지말지
-    // number 보단 count
-    private let clerkNumber: Int = 1
-    private let customerNumber: Int = Int.random(in: 10...30)
-    // 0.25 면 100 등등 고려하기
-    // 그냥 올림으로 다시 바꾸기 double 해서
-    private var _processTime: Int = 7 //{ processTime * 10 }
-    public var processTime: Double = 0.7
+    private let clerkCount: Int = 1
+    private let customerCount: Int = Int.random(in: 10...30)
+    private let processTime: Double = 0.7
     
-    private let totalTimeKey = DispatchSpecificKey<Int>()
-    private let processTimeKey = DispatchSpecificKey<Int>()
+    private let totalTimeKey: DispatchSpecificKey<Double> = DispatchSpecificKey<Double>()
+    private let processTimeKey: DispatchSpecificKey<Double> = DispatchSpecificKey<Double>()
+    
     private lazy var clerks: [DispatchQueue] = {
         var clerks: [DispatchQueue] = []
-        for index in 0..<clerkNumber {
+        for index in 0..<clerkCount {
             let clerk = DispatchQueue(label: "\(index)")
-            // 배열로 따로 만들어도 됨
             clerk.setSpecific(key: totalTimeKey, value: 0)
-            clerk.setSpecific(key: processTimeKey, value: _processTime)
+            clerk.setSpecific(key: processTimeKey, value: processTime)
             clerks.append(clerk)
         }
         
         return clerks
     }()
     private lazy var customers: [Int] = {
-        Array(1...customerNumber)
+        Array(1...customerCount)
     }()
-    //
-//    private lazy var clerkTotalTimes: [Int] = {
-//        Array(1...customerNumber)
-//    }()
-    var totalTimes: [Int] = []
+    
+    private var totalTimes: [Double] = []
+    private var totalTimeCount: Double {
+        get {
+            guard let totalTime = totalTimes.max() else { fatalError() }
+            
+            return totalTime
+        }
+    }
     
     func open() {
-        if customerNumber <= 0 { return }
+        if customerCount <= 0 { return }
     
-        let semaphore = DispatchSemaphore(value: 0)
+        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         let bankTaskGroup: DispatchGroup = DispatchGroup()
         
-        for index in 0..<clerkNumber {
+        for index in 0..<clerkCount {
             bankTaskGroup.enter()
             assignCustomer(customers.removeFirst(), to: clerks[index], group: bankTaskGroup)
             bankTaskGroup.notify(queue: clerks[index]) {
@@ -56,19 +53,16 @@ final class BankManager {
             }
         }
         
-        for _ in 0..<clerkNumber {
+        for _ in 0..<clerkCount {
             semaphore.wait()
         }
         
-        // TODO: Double -> ComputedProperty 로 바꾸기
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(Double(totalTimes.max()!)/10)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTimeCount)초입니다.")
     }
     
     private func assignCustomer(_ customerIndex: Int, to clerk: DispatchQueue, group: DispatchGroup) {
         clerk.async(group: group) {
-            // private 함수로 따로 빼도 될듯
-            guard let currentTotalTime = clerk.getSpecific(key: self.totalTimeKey),
-                  let processTime = clerk.getSpecific(key: self.processTimeKey) else { return }
+            let (currentTotalTime, processTime): (Double, Double) = self.getTimeInfo(clerk: clerk)
             
             print("\(customerIndex)번 고객 업무 시작")
             self.sleep(processTime)
@@ -76,21 +70,24 @@ final class BankManager {
             print("\(customerIndex)번 고객 업무 완료")
             
             if self.customers.isEmpty {
-                guard let finalTotalTime = clerk.getSpecific(key: self.totalTimeKey) else { return }
-                self.totalTimes.append(finalTotalTime)
+                guard let totalTime: Double = clerk.getSpecific(key: self.totalTimeKey) else { return }
+                self.totalTimes.append(totalTime)
                 group.leave()
             } else {
                 self.assignCustomer(self.customers.removeFirst(), to: clerk, group: group)
             }
         }
     }
-//
-//    private func getTimeInfo() -> (Int, Int) {
-//
-//    }
+
+    private func getTimeInfo(clerk: DispatchQueue) -> (Double, Double) {
+        guard let totalTime: Double = clerk.getSpecific(key: totalTimeKey),
+              let processTime: Double = clerk.getSpecific(key: processTimeKey) else { fatalError() }
+        
+        return (totalTime, processTime)
+    }
     
-    private func sleep(_ time: Int) {
-        let time = useconds_t(time * 100000)
+    private func sleep(_ time: Double) {
+        let time: useconds_t = useconds_t(time * 1000000)
         usleep(time)
     }
 }

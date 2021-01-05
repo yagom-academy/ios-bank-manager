@@ -22,21 +22,23 @@ enum ConsoleError: Error {
     }
 }
 
-var isEnd = false
-while(!isEnd) {
-    printConsoleMessage()
+func bankManagerConsoleApp() {
+    var isEnd = false
+    while(!isEnd) {
+        printConsoleMessage()
 
-    guard let input = readLine(),
-          let command = Command(rawValue: input) else {
-        print(ConsoleError.wrongInput.errorMessage)
-        continue
-    }
-    
-    switch command {
-    case .open:
-        BankManager().open()
-    case .close:
-        isEnd = true
+        guard let input = readLine(),
+              let command = Command(rawValue: input) else {
+            print(ConsoleError.wrongInput.errorMessage)
+            continue
+        }
+        
+        switch command {
+        case .open:
+            BankManager().open()
+        case .close:
+            isEnd = true
+        }
     }
 }
 
@@ -49,3 +51,5 @@ private func printConsoleMessage() {
     print(startMessage)
     print("입력 : ", terminator: "")
 }
+
+bankManagerConsoleApp()
