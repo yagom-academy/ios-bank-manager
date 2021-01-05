@@ -57,24 +57,24 @@ struct BankManager {
     }
     
     // MARK: - Methods
-    mutating func addBankClerk(of: Int) {
-        guard of > 0 else {
+    mutating func addBankClerk(count: Int) {
+        guard count > 0 else {
             return
         }
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
-        for i in 1...of {
+        for i in 1...count {
             let banker = BankClerk(bankWindowNumber: i + lastCounterNumber, isWorking: false)
             bankClerks.append(banker)
         }
     }
     
-    mutating func addClient(of: Int) {
-        guard of > 0 else {
+    mutating func addClient(count: Int) {
+        guard count > 0 else {
             return
         }
         
-        for _ in 1...of {
+        for _ in 1...count {
             waitingTicketNumber += 1
             watingClients.enqueue(element: waitingTicketNumber)
         }
@@ -116,7 +116,7 @@ struct BankManager {
     }
     
     init(_ numberOfBankClerk: Int, _ numberOfClient: Int) {
-        addBankClerk(of: numberOfBankClerk)
-        addClient(of: numberOfClient)
+        addBankClerk(count: numberOfBankClerk)
+        addClient(count: numberOfClient)
     }
 }
