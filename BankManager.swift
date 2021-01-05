@@ -7,14 +7,19 @@
 import Foundation
 
 struct BankManager {
-    
+    // MARK: - Types
     struct Banker {
         var counterNumber: Int
         var isWorking: Bool
     }
     
-    private var bankers = [Banker]()
-        
+    // MARK: - Properties
+    private var bankers: [Banker] = [Banker]()
+    private var watingClients: Queue<Int> = Queue<Int>()
+    private var finishedClients: Queue<Int> = Queue<Int>()
+    private var waitingTicketNumber: Int = 0
+    
+    // MARK: - Methods
     mutating func addBanker(of: Int) {
         guard of > 0 else {
             return
@@ -26,8 +31,20 @@ struct BankManager {
             bankers.append(banker)
         }
     }
+    
+    mutating func addClient(of: Int) {
+        guard of > 0 else {
+            return
+        }
         
-    init(numberOfBanker: Int) {
+        for _ in 1...of {
+            waitingTicketNumber += 1
+            watingClients.enqueue(element: waitingTicketNumber)
+        }
+    }
+    
+    init(_ numberOfBanker: Int, _ numberOfClient: Int) {
         addBanker(of: numberOfBanker)
+        addClient(of: numberOfClient)
     }
 }
