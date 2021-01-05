@@ -26,7 +26,7 @@ class Window {
     }
     
     // MARK: - check func
-    func checkEndCustomerTask(currentTime: Double) throws {
+    func checkEndCustomerTask(currentTime: Double) throws -> Bool {
         guard let assignedBanker = banker,
               let taskStartTime = assignedBanker.taskStartTime else {
             throw BankError.invalidateBanker
@@ -35,7 +35,9 @@ class Window {
         
         if progressTime >= assignedBanker.processingTime {
             try endCustomerTask()
+            return true
         }
+        return false
     }
     
     private func endCustomerTask() throws {
