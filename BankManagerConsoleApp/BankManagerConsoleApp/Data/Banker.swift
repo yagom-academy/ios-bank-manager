@@ -8,6 +8,5 @@
 import Foundation
 
 struct Banker {
-    let windowNumber: Int
     let processingTime: Double
 }
