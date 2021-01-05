@@ -18,6 +18,16 @@ class Teller: OperationQueue {
         self.windowNumber = windowNumber
     }
     
+    func handleBusiness(for client: Client) {
+        let timeToWork: UInt32 = UInt32(Bank.milliseconds * client.needTimeToWork)
+
+        isWorking = true
+        printStartBusiness(number: client.waitingNumber)
+        usleep(timeToWork)
+        printFinishBusiness(number: client.waitingNumber)
+        isWorking = false
+    }
+    
     func printStartBusiness(number: Int) {
         let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageStart
         print(message)
