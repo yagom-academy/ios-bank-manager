@@ -8,6 +8,7 @@ import Foundation
 
 private var bankManager = BankManager()
 bankManager.showMenu()
+
 private var selectedMenu = Int(readLine() ?? "")
 
 while selectedMenu == 1 {
@@ -16,5 +17,4 @@ while selectedMenu == 1 {
     bankManager.showMenu()
     selectedMenu = Int(readLine() ?? "")
 }
-
 bankManager.closeBank()

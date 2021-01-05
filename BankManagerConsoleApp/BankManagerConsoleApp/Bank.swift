@@ -16,9 +16,10 @@ struct Bank {
             self.loadWaitingList(of: initialNumberOfClients)
         }
     }
+    var bankClerk = BankClerk(totalWorkingTime: 0.0, isWorking: false)
     
     init() {
-        self.serviceCounter = []
+        self.serviceCounter = [bankClerk]
         self.waitingList = []
         self.totalVistedClientsNumber = 0
         self.totalProcessedClientsNumber = 0
@@ -28,7 +29,7 @@ struct Bank {
     
     private mutating func loadWaitingList(of size: Int) {
         for i in 0..<size {
-            let newClient = Client(waitingNumber: i, business: .basic)
+            let newClient = Client(waitingNumber: i, business: .basic(requiredTime: 0.7))
             waitingList.append(newClient)
         }
     }
