@@ -32,4 +32,21 @@ class BankManager {
             clients.append(Client(waitingNumber: waitingNumber, needTimeToWork: needTimeToWork))
         }
     }
+    
+    private func assignBusinessToTeller() {
+        for client in clients {
+            for teller in tellers {
+                if teller.isNotWorking {
+                    teller.handleBusiness(for: client)
+                    break;
+                }
+            }
+        }
+    }
+    
+    private func printCloseMessage() {
+        let businessTimesText: String = String(format: "%.2f", businessTimes)
+        let message = Bank.closeCommentFront + "\(numberOfClients)" + Bank.closeCommentMiddle + "\(businessTimesText)" + Bank.closeCommentEnd
+        print(message)
+    }
 }
