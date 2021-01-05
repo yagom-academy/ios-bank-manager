@@ -9,19 +9,17 @@ import Foundation
 
 final class Teller: OperationQueue {
     private var windowNumber: Int
-    private var needTimeToWork: Double
     private var isWorking: Bool = false
     var isNotWorking: Bool {
         return !isWorking
     }
     
-    init(windowNumber: Int, needTimeToWork: Double) {
+    init(windowNumber: Int) {
         self.windowNumber = windowNumber
-        self.needTimeToWork = needTimeToWork
     }
     
-    func handleBusiness(for client: Int) {
-        let timeToWork: UInt32 = UInt32(Bank.milliseconds * needTimeToWork)
+    func handleBusiness(for client: Client) {
+        let timeToWork: UInt32 = UInt32(Bank.milliseconds * client.businessType.neededTime)
 
         isWorking = true
         printStartBusiness(for: client)
@@ -30,13 +28,13 @@ final class Teller: OperationQueue {
         isWorking = false
     }
     
-    private func printStartBusiness(for number: Int) {
-        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageStart
+    private func printStartBusiness(for client: Client) {
+        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(client.waitingNumber)" + Bank.tellerMessageStart
         print(message)
     }
     
-    private func printFinishBusiness(for number: Int) {
-        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageEnd
+    private func printFinishBusiness(for client: Client) {
+        let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(client.waitingNumber)" + Bank.tellerMessageEnd
         print(message)
     }
 }

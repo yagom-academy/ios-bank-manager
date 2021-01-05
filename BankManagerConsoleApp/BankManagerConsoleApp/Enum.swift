@@ -22,8 +22,19 @@ enum Bank {
     static let tellerMessageMiddle = "번 창구 : "
     static let tellerMessageStart = "번 고객 업무 시작"
     static let tellerMessageEnd = "번 고객 업무 완료"
-     
+    
     static let milliseconds: Double = 1000000
+}
+
+enum BusinessType {
+    case normal
+    
+    var neededTime: Double {
+        switch self {
+        case .normal:
+            return 0.7
+        }
+    }
 }
 
 enum BankError: Error {

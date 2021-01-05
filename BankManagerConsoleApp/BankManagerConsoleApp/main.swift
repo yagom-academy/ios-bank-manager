@@ -8,7 +8,7 @@ import Foundation
 
 func main() {
     let bank = BankManager()
-    let tellerNumber = 1
+    let tellerNumber = 3
     var isStart = true
     var clientNumber: Int {
         return Int.random(in: 10...30)

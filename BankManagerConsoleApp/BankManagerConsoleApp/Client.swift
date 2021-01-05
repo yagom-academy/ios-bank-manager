@@ -9,8 +9,10 @@ import Foundation
 
 final class Client {
     let waitingNumber: Int
+    let businessType: BusinessType
     
-    init(waitingNumber: Int) {
+    init(waitingNumber: Int, businessType: BusinessType = .normal) {
         self.waitingNumber = waitingNumber
+        self.businessType = businessType
     }
 }
