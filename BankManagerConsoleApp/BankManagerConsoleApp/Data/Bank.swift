@@ -10,6 +10,7 @@ import Foundation
 class Bank {
     private var windows: [Window] = []
     private var waitingCustomers = Queue<Customer>()
+    lazy var delegate: BankDelegate? = nil
     
     // MARK: - init func
     init(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
@@ -46,7 +47,7 @@ class Bank {
             return
         }
         windows = try windows.map { (window: Window) -> Window in
-            if !window.canStartTask() || waitingCustomers.isEmpty {
+            if !window.isEmptyWindowCustomer() || waitingCustomers.isEmpty {
                 return window
             }
             guard let customer = waitingCustomers.dequeue() else {
@@ -65,8 +66,16 @@ class Bank {
         }
     }
     
-    // TODO: 은행 폐점 가능?
     func canClose() {
-        
+        let allEmptyWindow = windows.reduce(true) { (first, second) -> Bool in
+            return first && second.isEmptyWindowCustomer()
+        }
+        if allEmptyWindow {
+            self.delegate?.close()
+        }
     }
+}
+
+protocol BankDelegate {
+    func close()
 }
