@@ -7,33 +7,35 @@
 
 import Foundation
 
-class Teller: OperationQueue {
-    var windowNumber: Int
-    var isWorking: Bool = false
+final class Teller: OperationQueue {
+    private var windowNumber: Int
+    private var isWorking: Bool = false
+    private var needTimeToWork: Double
     var isNotWorking: Bool {
         return !isWorking
     }
     
-    init(windowNumber: Int) {
+    init(windowNumber: Int, needTimeToWork: Double) {
         self.windowNumber = windowNumber
+        self.needTimeToWork = needTimeToWork
     }
     
     func handleBusiness(for client: Int) {
-        let timeToWork: UInt32 = UInt32(Bank.milliseconds * 0.7)
+        let timeToWork: UInt32 = UInt32(Bank.milliseconds * needTimeToWork)
 
         isWorking = true
-        printStartBusiness(number: client)
+        printStartBusiness(for: client)
         usleep(timeToWork)
-        printFinishBusiness(number: client)
+        printFinishBusiness(for: client)
         isWorking = false
     }
     
-    func printStartBusiness(number: Int) {
+    private func printStartBusiness(for number: Int) {
         let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageStart
         print(message)
     }
     
-    func printFinishBusiness(number: Int) {
+    private func printFinishBusiness(for number: Int) {
         let message = "\(windowNumber)" + Bank.tellerMessageMiddle + "\(number)" + Bank.tellerMessageEnd
         print(message)
     }

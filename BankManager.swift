@@ -6,11 +6,11 @@
 
 import Foundation
 
-class BankManager {
+final class BankManager {
     private var tellers: [Teller] = []
     private var clients: [Client] = []
-    private var needTimeToWork: Double = 0.7
     private var currentClientNumber = 0
+    private var needTimeToWork = 0.7
     private var numberOfClients: Int {
         return clients.count
     }
@@ -32,13 +32,13 @@ class BankManager {
     
     private func initTellerNumber(_ number: Int) {
         for windowNumber in 1...number {
-            tellers.append(Teller(windowNumber: windowNumber))
+            tellers.append(Teller(windowNumber: windowNumber, needTimeToWork: needTimeToWork))
         }
     }
     
     private func initClientNumber(_ number: Int) {
         for waitingNumber in 1...number {
-            clients.append(Client(waitingNumber: waitingNumber, needTimeToWork: needTimeToWork))
+            clients.append(Client(waitingNumber: waitingNumber))
         }
     }
     

@@ -7,12 +7,10 @@
 
 import Foundation
 
-class Client {
+final class Client {
     let waitingNumber: Int
-    let needTimeToWork: Double
     
-    init(waitingNumber: Int, needTimeToWork: Double) {
+    init(waitingNumber: Int) {
         self.waitingNumber = waitingNumber
-        self.needTimeToWork = needTimeToWork
     }
 }
