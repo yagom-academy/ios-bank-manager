@@ -7,12 +7,10 @@
 import Foundation
 
 final class BankManager {
+    static let shared = BankManager()
+    var clients: [Client] = []
     private var tellers: [Teller] = []
-    private var clients: [Client] = []
-    private var currentClientNumber = 0
-    private var totalClientNumber: Int {
-        return clients.count
-    }
+    private var currentClientNumber = -1
     private var businessTimes: Double {
         var sum: Double = 0
         clients.forEach { client in
@@ -20,6 +18,8 @@ final class BankManager {
         }
         return sum
     }
+    
+    private init() {}
     
     func printMenu() {
         print(BankMenu.description, terminator: "")
@@ -51,13 +51,13 @@ final class BankManager {
         while `continue` {
             DispatchQueue.global().async {
                 for teller in self.tellers {
-                    if self.currentClientNumber > self.totalClientNumber {
+                    if self.currentClientNumber >= self.clients.count - 1{
                         `continue` = false
                         break
                     }
                     if teller.isNotWorking {
-                        teller.handleBusiness(for: self.clients[self.currentClientNumber])
                         self.currentClientNumber += 1
+                        teller.handleBusiness(for: self.currentClientNumber)
                     }
                 }
             }
@@ -66,7 +66,7 @@ final class BankManager {
     
     private func printCloseMessage() {
         let businessTimesText: String = String(format: "%.2f", businessTimes)
-        let message = Bank.closeMessageFront + "\(totalClientNumber)" + Bank.closeMessageMiddle + "\(businessTimesText)" + Bank.closeMessageEnd
+        let message = Bank.closeMessageFront + "\(clients.count)" + Bank.closeMessageMiddle + "\(businessTimesText)" + Bank.closeMessageEnd
         print(message)
     }
     

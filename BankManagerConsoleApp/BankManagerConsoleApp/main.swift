@@ -7,15 +7,14 @@
 import Foundation
 
 func main() {
-    let bank = BankManager()
-    let tellerNumber = 3
+    let tellerNumber = 1
     var isStart = true
     var clientNumber: Int {
         return Int.random(in: 10...30)
     }
     
     while isStart {
-        bank.printMenu()
+        BankManager.shared.printMenu()
         
         guard let input = readLine() else {
             print(BankError.wrongInput.description)
@@ -24,7 +23,7 @@ func main() {
         
         switch input {
         case BankMenu.start.rawValue:
-            bank.operateBank(teller: tellerNumber, client: clientNumber)
+            BankManager.shared.operateBank(teller: tellerNumber, client: clientNumber)
         case BankMenu.end.rawValue:
             isStart = false
         default:
