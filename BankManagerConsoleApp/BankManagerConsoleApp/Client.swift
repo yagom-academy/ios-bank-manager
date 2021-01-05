@@ -1,6 +1,5 @@
-
 struct Client {
-    var waitingNumber: Int
-    var assignedConter: Int
+    let waitingNumber: Int
     let business: BusinessType
+    var assignedCounter: Int
 }

@@ -1,18 +1,22 @@
+//
+//  Bank.swift
+//  BankManagerConsoleApp
+//
+//  Created by 강인희 on 2021/01/05.
+//
 
 struct Bank {
-    var operatingCounter: [BankClerk]
-    // Dictionary?
+    var serviceCounter: [Int : BankClerk]
     var waitingList: [Client]
-    var totalClientsProcessedNumber: Int
+    var totalVistedClientsNumber: Int
+    var totalProcessedClientsNumber: Int
     var totalOperatingTime: Float
-    
-    // 마지막 번호표를 기억하는 프로퍼티가 필요하지 않을까?
     
     func assignCounter() {
         
     }
     
-    func closeWork() {
+    func close() {
         
     }
 }
