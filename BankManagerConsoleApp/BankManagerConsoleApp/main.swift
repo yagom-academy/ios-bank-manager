@@ -41,7 +41,7 @@ func openBank() {
         print("\(clientNumber)번 고객 업무 시작")
         print("\(clientNumber)번 고객 업무 완료")
     }
-    let taskTime: String = String(format: "%.2f", round( Double(maxNumberOfClient) * 0.7 * 100) / 100)
+    let taskTime: String = String(format: "%.2f", round(Double(maxNumberOfClient) * 0.7 * 100) / 100)
     print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(maxNumberOfClient)명이며, 총 업무시간은 \(taskTime)초입니다.")
     main()
 }

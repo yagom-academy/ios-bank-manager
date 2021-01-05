@@ -8,7 +8,6 @@ import Foundation
 
 struct BankClerk {
     let clerkNumber: Int
-    let processingTime: Int
     let taskState: Bool
 }
 
