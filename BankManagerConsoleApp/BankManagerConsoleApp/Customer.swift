@@ -8,7 +8,7 @@
 import Foundation
 
 struct Customer {
-    let waitNumber: Int
+    private let waitNumber: Int
     let timeNeedToFinishTask: Double
     
     init(waitNumber: Int, needTime: Double = 0.7) {

@@ -13,7 +13,7 @@ struct Bank {
     var numberOfCustomer: Int {
         return customer.count
     }
-    var totalTime: Double {
+    private var totalTime: Double {
         var sum: Double = 0
         customer.forEach { customer in
             sum += customer.timeNeedToFinishTask

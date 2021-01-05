@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    let tellerNumber: Int
+    private let tellerNumber: Int
     
     init(number: Int) {
         self.tellerNumber = number
