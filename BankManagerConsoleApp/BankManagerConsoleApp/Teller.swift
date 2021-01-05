@@ -18,13 +18,13 @@ class Teller: OperationQueue {
         self.windowNumber = windowNumber
     }
     
-    func handleBusiness(for client: Client) {
-        let timeToWork: UInt32 = UInt32(Bank.milliseconds * client.needTimeToWork)
+    func handleBusiness(for client: Int) {
+        let timeToWork: UInt32 = UInt32(Bank.milliseconds * 0.7)
 
         isWorking = true
-        printStartBusiness(number: client.waitingNumber)
+        printStartBusiness(number: client)
         usleep(timeToWork)
-        printFinishBusiness(number: client.waitingNumber)
+        printFinishBusiness(number: client)
         isWorking = false
     }
     

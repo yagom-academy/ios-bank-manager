@@ -10,6 +10,7 @@ class BankManager {
     private var tellers: [Teller] = []
     private var clients: [Client] = []
     private var needTimeToWork: Double = 0.7
+    private var currentClientNumber = 0
     private var numberOfClients: Int {
         return clients.count
     }
@@ -20,11 +21,12 @@ class BankManager {
     func printMenu() {
         print(BankMenu.description, terminator: "")
     }
-
+    
     func operateBank(teller: Int, client: Int) {
         initTellerNumber(teller)
         initClientNumber(client)
         assignBusinessToTeller()
+        sleep(1)
         printCloseMessage()
     }
     
@@ -41,11 +43,18 @@ class BankManager {
     }
     
     private func assignBusinessToTeller() {
-        for client in clients {
-            for teller in tellers {
-                if teller.isNotWorking {
-                    teller.handleBusiness(for: client)
-                    break;
+        var `continue` = true
+        while `continue` {
+            DispatchQueue.global().async {
+                for teller in self.tellers {
+                    if self.currentClientNumber >= self.numberOfClients {
+                        `continue` = false
+                        break
+                    }
+                    if teller.isNotWorking {
+                        self.currentClientNumber += 1
+                        teller.handleBusiness(for: self.currentClientNumber)
+                    }
                 }
             }
         }
