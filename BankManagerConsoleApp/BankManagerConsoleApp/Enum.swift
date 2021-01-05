@@ -19,9 +19,9 @@ enum Bank {
     static let closeMessageMiddle = "명이며, 총 업무시간은 "
     static let closeMessageEnd = "초입니다."
     
-    static let tellerCommentMiddle = "번 창구 : "
-    static let tellerCommentStart = "번 고객 업무 시작"
-    static let tellerCommentEnd = "번 고객 업무 완료"
+    static let tellerMessageMiddle = "번 창구 : "
+    static let tellerMessageStart = "번 고객 업무 시작"
+    static let tellerMessageEnd = "번 고객 업무 완료"
      
     static let milliseconds: Double = 1000000
 }
