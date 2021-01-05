@@ -5,45 +5,32 @@
 //
 
 struct BankManager {
-    var bank = Bank()
+    private var bank: Bank
+    private lazy var randomNumber: Int = 0
     
-    mutating func openBank(bankClerkNumber: Int) {
-        // 0이나 음수가 들어오면?
-        for i in 1...bankClerkNumber {
-            bank.serviceCounter[i] = BankClerk()
-        }
-        
-        visitClients(newClientsNumber: Int.random(in: 10...30))
+    init() {
+        self.bank = Bank()
+    }
+    
+    mutating func openBank() {
+        print("은행개점")
+        self.generateNumberOfClients()
+        bank.serve()
+        //bankClerk가 다수일 경우 어떤 bankClerk가 고객을 응대하는지에 대한 과정을 담아서 serve를 수정해야한다.
+        print(bank.endingMent)
     }
     
     func closeBank() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.totalProcessedClientsNumber)명이며, 총 업무시간은 \(bank.totalOperatingTime)초입니다.")
+        print("종료")
     }
     
-    mutating func visitClients(newClientsNumber: Int) {
-        // 0이나 음수가 들어오면?
-        bank.totalVistedClientsNumber += newClientsNumber
-        
-        for _ in 1...newClientsNumber {
-            bank.totalVistedClientsNumber += 1
-            
-            let client = Client(waitingNumber: bank.totalVistedClientsNumber, business: .basic)
-            
-            bank.waitingList.append(client)
-        }
+    func showMenu() {
+        print(" 1 : 은행개점 \n 2 : 종료\n 입력 :", terminator: " ")
     }
     
-    mutating func assignCounter() {
-        // bank.serviceCounter을 조회하다가 isWorking이 false이면 ClientList의 맨앞을 제거하고 업무를 처리하게끔 한다.
-//        for bankClerk in bank.serviceCounter.values {
-//
-//            if bankClerk.isWorking == false {
-//                guard let current = bank.waitingList.first else { return }
-//                bank.waitingList.removeFirst()
-//
-//                bankClerk.handleClientBusiness(client: current)
-//            }
-//        }
+    private mutating func generateNumberOfClients() {
+        let randomNumberOfClients = Int.random(in: 10...30)
+        bank.initialNumberOfClients = randomNumberOfClients
     }
 }
 
