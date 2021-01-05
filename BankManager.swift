@@ -20,7 +20,7 @@ class BankManager {
     func printMenu() {
         print(BankMenu.description, terminator: "")
     }
-    
+
     private func initTellerNumber(_ number: Int) {
         for windowNumber in 1...number {
             tellers.append(Teller(windowNumber: windowNumber))
@@ -46,7 +46,7 @@ class BankManager {
     
     private func printCloseMessage() {
         let businessTimesText: String = String(format: "%.2f", businessTimes)
-        let message = Bank.closeCommentFront + "\(numberOfClients)" + Bank.closeCommentMiddle + "\(businessTimesText)" + Bank.closeCommentEnd
+        let message = Bank.closeMessageFront + "\(numberOfClients)" + Bank.closeMessageMiddle + "\(businessTimesText)" + Bank.closeMessageEnd
         print(message)
     }
 }
