@@ -43,5 +43,11 @@ struct BankManager {
                 visitedCustomers += 1
             }
         }
+        closeBank()
+    }
+    
+    mutating func closeBank() {
+        let businessTimesToString: String = String(format: "%.2f", businessTimes)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomers)명이며, 총 업무시간은 \(businessTimesToString)초 업니다.")
     }
 }
