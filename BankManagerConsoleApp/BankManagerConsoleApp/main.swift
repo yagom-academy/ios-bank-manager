@@ -6,7 +6,7 @@
 
 import Foundation
 
-func printOpenBank() {
+func printMenu() {
     print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator:"")
 }
 
@@ -28,16 +28,16 @@ func vertifyInput(input: String) {
 }
 
 func openBank() {
-    var clients: BankClient? = BankClient(clientNumber: 0, numberOfClient: Int.random(in: 10...30), client: [0])
+    var client: BankClient? = BankClient(clientNumber: 0, numberOfClient: Int.random(in: 10...30), clientArray: [0])
     
-    guard let maxNumberOfClient: Int = clients?.numberOfClient else { return }
-    guard var clientNumber: Int = clients?.clientNumber else { return }
-    clients?.client = [Int](repeating: clientNumber, count: maxNumberOfClient)
-    guard var client: [Int] = clients?.client else { return }
+    guard let maxNumberOfClient: Int = client?.numberOfClient else { return }
+    guard var clientNumber: Int = client?.clientNumber else { return }
+    client?.clientArray = [Int](repeating: clientNumber, count: maxNumberOfClient)
+    guard var clientArray: [Int] = client?.clientArray else { return }
     
     for index in 0...maxNumberOfClient - 1 {
         clientNumber += 1
-        client[index] = clientNumber
+        clientArray[index] = clientNumber
         print("\(clientNumber)번 고객 업무 시작")
         print("\(clientNumber)번 고객 업무 완료")
     }
@@ -47,7 +47,7 @@ func openBank() {
 }
 
 func main() {
-    printOpenBank()
+    printMenu()
     vertifyInput(input: inputNumber())
 }
 

@@ -14,5 +14,5 @@ struct BankClerk {
 struct BankClient {
     var clientNumber: Int
     var numberOfClient: Int
-    var client: [Int]
+    var clientArray: [Int]
 }
