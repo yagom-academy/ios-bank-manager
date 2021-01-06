@@ -19,7 +19,7 @@ while true {
         break
     }
     let customerCount = UInt.random(in: 10...30)
-    let bankManager = BankManager(bankerCount: 1, customerCount: customerCount, bankerTaskTimes: 0.7)
+    let bankManager = BankManager(bankerCount: 1, customerCount: customerCount)
     bankManager.openBank()
 }
 
