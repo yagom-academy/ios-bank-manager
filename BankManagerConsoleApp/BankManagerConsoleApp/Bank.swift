@@ -5,62 +5,97 @@
 //  Created by 강인희 on 2021/01/05.
 //
 
-struct Bank {
-    private var serviceCounter: [BankClerk] = []
+import Foundation
+
+class Bank {
+    private var serviceCounter: [Int : BankClerk] = [ : ]
     private var waitingList: [Client] = []
     private var totalVistedClientsNumber: Int = 0
-    private var totalOperatingTime: Float = 0.0
-    private var numberOfEmployees: Int = 1
-    var endingMent: String {
-            return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistedClientsNumber)명이며, 총 업무시간은 \(totalOperatingTime)초입니다."
-    }
-    lazy var initialNumberOfClients: Int = 0 {
-        didSet {
-            self.loadWaitingList(of: initialNumberOfClients)
-            self.totalVistedClientsNumber = initialNumberOfClients
-        }
-    }
 
-    init() {
-        self.serviceCounter = loadBankClerks(of: numberOfEmployees)
-        self.waitingList = []
-        self.totalVistedClientsNumber = 0
-        self.totalOperatingTime = 0.0
+    var endingMent: String {
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(calculateTotalProcessedClientsNumber())명이며, 총 업무시간은 \(calculateTotalOperatingTime())초입니다."
     }
     
-    private mutating func loadBankClerks(of number: Int) -> [BankClerk]{
-        for _ in 0 ..< number {
-            let newBankClerk = BankClerk()
-            self.serviceCounter.append(newBankClerk)
+    init(employeeNumber: Int) {
+        self.serviceCounter = loadBankClerks(of: employeeNumber)
+        NotificationCenter.default.addObserver(self, selector: #selector(assignClient), name: NSNotification.Name("workable"), object: nil)
+    }
+    
+    private func loadBankClerks(of number: Int) -> [Int : BankClerk] {
+        guard number >= 0 else {
+            print("number에 0 이상의 값을입력해주세요")
+            return [ : ]
+        }
+        
+        if number == 0 {
+            print("일할 직원이 없습니다.")
+            return [ : ]
+        }
+        
+        for counterNumber in 1 ... number {
+            let newBankClerk = BankClerk(counterNumber: counterNumber)
+            self.serviceCounter[counterNumber] = newBankClerk
         }
         return self.serviceCounter
     }
     
-    private mutating func loadWaitingList(of size: Int) {
-        for i in 1...size {
-            let newClient = Client(waitingNumber: i, business: .basic(requiredTime: 0.7))
-            waitingList.append(newClient)
-        }
-        self.totalVistedClientsNumber = size
-    }
-    
-    mutating func serve() {
-        while (!waitingList.isEmpty) {
-            let inProcessClient = waitingList.removeFirst()
-            // bankClerk가 다수일경우, assignedEmployee를 설정하는 과정을 추가해야한다.
-            let assignedEmployee = serviceCounter[0]
-            assignedEmployee.isWorking = true
-            while assignedEmployee.isWorking {
-                print("\(inProcessClient.waitingNumber)번 고객 업무 시작")
-                assignedEmployee.handleBusiness(of: inProcessClient)
-                print("\(inProcessClient.waitingNumber)번 고객 업무 종료")
-                assignedEmployee.isWorking = false
-            }
+    func updateWaitingList(of size: Int) {
+        guard size >= 0 else {
+            print("size에 0 이상의 값을입력해주세요")
+            return
         }
         
-        for employee in serviceCounter {
-            totalOperatingTime = (totalOperatingTime >= employee.totalWorkingTime) ? totalOperatingTime : employee.totalWorkingTime
+        if size == 0 {
+            print("방문 고객이 없습니다.")
+            return
         }
-       
+        
+        for _ in  1...size {
+            self.totalVistedClientsNumber += 1
+            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .basic)
+            waitingList.append(newClient)
+        }
+    }
+    
+    func makeAllClerksWorkable() {
+        for clerk in serviceCounter.values {
+            clerk.workingStatus = .workable
+        }
+    }
+    
+    @objc private func assignClient(_ noti: Notification) {
+        guard let client = waitingList.first, let counterNumber = noti.userInfo?["counterNumber"] as? Int else {
+            return
+        }
+        
+        waitingList.removeFirst()
+        
+        guard let workableBankClerk = serviceCounter[counterNumber] else {
+            return
+        }
+        
+        workableBankClerk.handleClientBusiness(of: client)
+    }
+}
+
+// MARK : bank endingment
+extension Bank {
+    private func calculateTotalOperatingTime() -> Float {
+        let longestWorkingTime = serviceCounter.map { (key: Int, value: BankClerk) -> Float in
+            return value.totalWorkingTime
+        }.max() ?? 0
+    
+        let roundedNumber = round(longestWorkingTime * 100) / 100
+        return roundedNumber
+    }
+    
+    private func calculateTotalProcessedClientsNumber() -> Int {
+        let totalProcessedClientsNumber = serviceCounter.map { (key: Int, value: BankClerk) -> Int  in
+            return value.totalProcessedClients
+        }.reduce(0) { (result, currentNumber) -> Int in
+            return result + currentNumber
+        }
+        
+        return totalProcessedClientsNumber
     }
 }
