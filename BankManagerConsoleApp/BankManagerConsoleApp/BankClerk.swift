@@ -1,12 +1,35 @@
+
+import Foundation
+
 class BankClerk {
+    let counterNumber: Int
     var totalWorkingTime: Float = 0
-    var isWorking: Bool = false
-    
-    func handleBusiness(of client: Client) {
-        switch client.business {
-        case .basic(let requiredTime):
-            totalWorkingTime += requiredTime
+    var totalProcessedClients: Int = 0
+    var workingStatus: BankClerkStatus {
+        didSet {
+            if workingStatus == .workable {
+                NotificationCenter.default.post(name: Notification.Name("workable"), object: nil, userInfo: ["counterNumber": self.counterNumber])
+            }
         }
+    }
+    
+    init(counterNumber: Int) {
+        self.counterNumber = counterNumber
+        self.workingStatus = .off
+    }
+    
+    func handleClientBusiness(of client: Client) {
+        self.workingStatus = .working
+        print("\(client.waitingNumber)번 고객 업무 시작")
+        
+        switch client.business {
+        case .basic:
+            totalWorkingTime += 0.7
+        }
+        totalProcessedClients += 1
+        
+        print("\(client.waitingNumber)번 고객 업무 종료")
+        self.workingStatus = .workable
     }
 }
 
