@@ -6,11 +6,11 @@ struct Banker {
 }
 
 struct Customer {
-    var customerNumber: UInt
+    var waiting: UInt
     var taskTime: Double
 }
 
-struct BankManager {
+struct Bank {
     private var bankers = [Banker]()
     private var customers = [Customer]()
     private var businessTimes: Double = 0.0
@@ -24,8 +24,8 @@ struct BankManager {
     }
     
     mutating func configureCustomers(numberOfCustomers: UInt) {
-        for customer in 1...numberOfCustomers {
-            customers.append(Customer(customerNumber: customer, taskTime: taskTime))
+        for number in 1...numberOfCustomers {
+            customers.append(Customer(waiting: number, taskTime: taskTime))
         }
     }
     
@@ -34,13 +34,12 @@ struct BankManager {
             for window in 0..<bankers.count {
                 bankers[window].isWorking = true
                 if let customer = customers.first {
-                    print("\(customer.customerNumber)번 고객 업무 시작")
-                }
-            }
-            for window in 0..<bankers.count {
+                    print("\(customer.waiting)번 고객 업무 시작")
+
                 bankers[window].isWorking = false
-                print("\(customers.removeFirst().customerNumber)번 고객 업무 완료")
+                print("\(customers.removeFirst().waiting)번 고객 업무 완료")
                 visitedCustomers += 1
+                }
             }
             businessTimes += taskTime
         }
