@@ -7,25 +7,23 @@ func startBank() {
     print("입력 :", terminator: " ")
     
     guard let userInput = readLine() else {
-        return
+        print(InputError.wrongInput.localizedDescription)
+        return startBank()
     }
     
-    switch userInput{
+    switch userInput {
     case "1":
         bank.configureBankers(numberOfBankers: 1)
         bank.configureCustomers(numberOfCustomers: UInt.random(in: 10...30))
         bank.openBank()
-        startBank()
     case "2":
         exit(0)
+    case "":
+        print(InputError.noInput.localizedDescription)
     default:
-        if userInput == "" {
-            print(InputError.noInput.localizedDescription)
-        } else {
-            print(InputError.wrongInput.localizedDescription)
-        }
-        startBank()
+        print(InputError.wrongInput.localizedDescription)
     }
+    startBank()
 }
 
 startBank()
