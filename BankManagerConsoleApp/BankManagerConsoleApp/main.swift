@@ -11,7 +11,7 @@ func printOpenBank() {
 }
 
 func inputNumber() -> String {
-    guard let input = readLine() else { print("입력하지 않아서 종료합니다."); return "0" }
+    guard let input = readLine() else { return "0" }
     return input
 }
 
@@ -30,10 +30,10 @@ func vertifyInput(input: String) {
 func openBank() {
     var clients: BankClient? = BankClient(clientNumber: 0, numberOfClient: Int.random(in: 10...30), client: [0])
     
-    guard let maxNumberOfClient: Int = clients?.numberOfClient else { print("maxNumber error"); return }
-    guard var clientNumber: Int = clients?.clientNumber else { print("clientNumber error"); return }
+    guard let maxNumberOfClient: Int = clients?.numberOfClient else { return }
+    guard var clientNumber: Int = clients?.clientNumber else { return }
     clients?.client = [Int](repeating: clientNumber, count: maxNumberOfClient)
-    guard var client: [Int] = clients?.client else { print("clientArray error"); return }
+    guard var client: [Int] = clients?.client else { return }
     
     for index in 0...maxNumberOfClient - 1 {
         clientNumber += 1
