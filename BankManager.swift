@@ -10,7 +10,7 @@ final class BankManager {
     static let shared = BankManager()
     var clients: [Client] = []
     private var tellers: [Teller] = []
-    private var currentClientNumber = -1
+    private var currentClientNumber = 0
     private var businessTimes: Double {
         var sum: Double = 0
         clients.forEach { client in
@@ -49,16 +49,14 @@ final class BankManager {
     private func assignBusinessToTeller() {
         var `continue` = true
         while `continue` {
-            DispatchQueue.global().async {
-                for teller in self.tellers {
-                    if self.currentClientNumber >= self.clients.count - 1{
-                        `continue` = false
-                        break
-                    }
-                    if teller.isNotWorking {
-                        self.currentClientNumber += 1
-                        teller.handleBusiness(for: self.currentClientNumber)
-                    }
+            for teller in self.tellers {
+                if self.currentClientNumber >= self.clients.count - 1{
+                    `continue` = false
+                    break
+                }
+                if teller.isNotWorking {
+                    teller.handleBusiness(for: self.currentClientNumber)
+                    self.currentClientNumber += 1
                 }
             }
         }
@@ -72,6 +70,6 @@ final class BankManager {
     private func closeBank() {
         tellers.removeAll()
         clients.removeAll()
-        currentClientNumber = -1
+        currentClientNumber = 0
     }
 }
