@@ -6,8 +6,63 @@
 
 import Foundation
 
+// 우선순위 큐
+enum Level: CaseIterable {
+    case vvip, vip, general
+    
+    var priority: Int {
+        switch self {
+        case .vvip:
+            return 0
+        case .vip:
+            return 1
+        case .general:
+            return 2
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .vvip:
+            return "VVIP"
+        case .vip:
+            return "VIP"
+        case .general:
+            return "일반"
+        }
+    }
+}
+
+enum Task: CaseIterable {
+    case loan, deposit
+    
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
+    
+    var processTiem: Double {
+        switch self {
+        case .loan:
+            return 1.1
+        case .deposit:
+            return 0.7
+        }
+    }
+}
+
+struct Customer {
+    var number: Int
+    var level: Level
+    var task: Task
+}
+
 final class BankManager {
-    private let clerkCount: Int = 1
+    private let clerkCount: Int = 3
     private let customerCount: Int = Int.random(in: 10...30)
     private let processTime: Double = 0.7
     
@@ -25,8 +80,17 @@ final class BankManager {
         
         return clerks
     }()
-    private lazy var customers: [Int] = {
-        Array(1...customerCount)
+    private lazy var customers: [Customer] = {
+        var customers: [Customer] = []
+        for index in 1...customerCount {
+            if let level = Level.allCases.randomElement(),
+               let task = Task.allCases.randomElement() {
+                
+                customers.append(Customer(number: index, level: level, task: task))
+            }
+        }
+        
+        return customers
     }()
     
     private var totalTimes: [Double] = []
@@ -57,15 +121,15 @@ final class BankManager {
         printCloseMessage()
     }
     
-    private func assignCustomer(_ customerIndex: Int, to clerk: DispatchQueue, group: DispatchGroup) {
+    private func assignCustomer(_ customer: Customer, to clerk: DispatchQueue, group: DispatchGroup) {
         clerk.async {
             let (currentTotalTime, processTime): (Double, Double) = self.getTimeInfo(clerk: clerk)
             let updatedTotalTime: Double = currentTotalTime + processTime
             
-            print("\(customerIndex)번 고객 업무 시작")
+            print("\(customer.number)번 고객 업무 시작")
             self.sleep(processTime)
             clerk.setSpecific(key: self.totalTimeKey, value: updatedTotalTime)
-            print("\(customerIndex)번 고객 업무 완료")
+            print("\(customer.number)번 고객 업무 완료")
             
             if self.customers.isEmpty {
                 self.totalTimes.append(updatedTotalTime)
