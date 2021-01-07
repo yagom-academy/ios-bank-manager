@@ -50,7 +50,7 @@ final class Bank {
         var isContinue = true
         while isContinue {
             for teller in self.tellers {
-                if self.currentClientNumber >= self.clients.count - 1{
+                if self.currentClientNumber > self.clients.count - 1{
                     isContinue = false
                     break
                 }

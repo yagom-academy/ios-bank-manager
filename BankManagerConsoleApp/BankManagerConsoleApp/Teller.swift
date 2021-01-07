@@ -20,11 +20,11 @@ final class Teller {
     
     func handleBusiness(for clientNumber: Int) {
         let client = Bank.shared.clients[clientNumber]
-        let needTimeToWork: UInt32 = UInt32(BankConstant.milliseconds * client.businessType.neededTime)
+        let needTimeToWork = client.businessType.neededTime
 
         isWorking = true
         printStartBusiness(for: client)
-        usleep(needTimeToWork)
+        Thread.sleep(forTimeInterval: needTimeToWork)
         printFinishBusiness(for: client)
         isWorking = false
     }
