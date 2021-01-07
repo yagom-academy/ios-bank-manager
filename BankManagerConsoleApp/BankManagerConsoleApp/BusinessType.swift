@@ -1,4 +1,5 @@
 
 enum BusinessType {
-    case basic
+    case deposit
+    case loan
 }

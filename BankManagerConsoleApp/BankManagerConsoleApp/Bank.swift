@@ -46,7 +46,7 @@ class Bank {
         
         for _ in  1...size {
             self.totalVistedClientsNumber += 1
-            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .basic)
+            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .deposit)
             waitingList.append(newClient)
         }
     }

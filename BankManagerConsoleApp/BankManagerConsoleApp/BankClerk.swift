@@ -23,7 +23,7 @@ class BankClerk {
         print("\(client.waitingNumber)번 고객 업무 시작")
         
         switch client.business {
-        case .basic:
+        case .deposit:
             Thread.sleep(forTimeInterval: 0.7)
             totalWorkingTime += 0.7
         }
