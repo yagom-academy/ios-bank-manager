@@ -11,7 +11,11 @@ enum BankMenu: String {
     case start = "1"
     case end = "2"
     
-    static let description = "1: 은행 개점\n2: 종료\n입력 : "
+    static let description = """
+    1: 은행 개점
+    2: 종료
+    입력 :
+    """
 }
 
 enum BankConstant {

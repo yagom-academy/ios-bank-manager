@@ -22,7 +22,7 @@ final class Bank {
     private init() {}
     
     func printMenu() {
-        print(BankMenu.description, terminator: "")
+        print(BankMenu.description, terminator: " ")
     }
     
     func operateBank(teller: Int, client: Int) {
