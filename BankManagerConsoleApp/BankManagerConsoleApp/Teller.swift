@@ -33,12 +33,12 @@ final class Teller {
     }
     
     private func printStartBusiness(for client: Client) {
-        let message = String(format: BankConstant.tellerStartMassage, windowNumber, client.waitingNumber)
+        let message = String(format: BankConstant.tellerStartMassage, windowNumber, client.waitingNumber, client.priority.description, client.priority.description)
         print(message)
     }
     
     private func printFinishBusiness(for client: Client) {
-        let message = String(format: BankConstant.tellerFinishMessage, windowNumber, client.waitingNumber)
+        let message = String(format: BankConstant.tellerFinishMessage, windowNumber, client.waitingNumber, client.priority.description, client.priority.description)
         print(message)
     }
 }
