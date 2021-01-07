@@ -20,7 +20,7 @@ final class Teller: OperationQueue {
     
     func handleBusiness(for clientNumber: Int) {
         let client = Bank.shared.clients[clientNumber]
-        let needTimeToWork: UInt32 = UInt32(Bank.milliseconds * client.businessType.neededTime)
+        let needTimeToWork: UInt32 = UInt32(BankConstant.milliseconds * client.businessType.neededTime)
 
         isWorking = true
         printStartBusiness(for: client)
@@ -30,12 +30,12 @@ final class Teller: OperationQueue {
     }
     
     private func printStartBusiness(for client: Client) {
-        let message = String(format: Bank.tellerStartMassage, windowNumber, client.waitingNumber)
+        let message = String(format: BankConstant.tellerStartMassage, windowNumber, client.waitingNumber)
         print(message)
     }
     
     private func printFinishBusiness(for client: Client) {
-        let message = String(format: Bank.tellerFinishMessage, windowNumber, client.waitingNumber)
+        let message = String(format: BankConstant.tellerFinishMessage, windowNumber, client.waitingNumber)
         print(message)
     }
 }

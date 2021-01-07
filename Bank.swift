@@ -63,7 +63,7 @@ final class Bank {
     }
     
     private func printCloseMessage() {
-        let message = String(format: Bank.closeMessage, clients.count, businessTime)
+        let message = String(format: BankConstant.closeMessage, clients.count, businessTime)
         print(message)
     }
     
