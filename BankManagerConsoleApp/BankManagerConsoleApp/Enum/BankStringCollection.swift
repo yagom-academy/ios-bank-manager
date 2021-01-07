@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BankMenu {
+enum ConsoleApp {
     static let start = "1"
     static let exit = "2"
     static let Menu = "1 : 은행 개점 \n2 : 종료"
