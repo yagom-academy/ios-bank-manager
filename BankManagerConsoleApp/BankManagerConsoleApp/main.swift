@@ -18,36 +18,32 @@ private func getUserInput() -> String {
     return input
 }
 
-var todayCustomerNumber = generateRandomNumberOfCustomer()
 let bankManagerNumber = 1
-var bank = Bank(customerNumber: todayCustomerNumber, bankManagerNumber: bankManagerNumber)
-var firstTimeBankOpen: Bool = true
+var bank = Bank(bankManagerNumber: bankManagerNumber)
+
+private func initializeBankCustomer() {
+    let todayCustomerNumber = generateRandomNumberOfCustomer()
+    bank.numberOfCustomer = todayCustomerNumber
+    for waitNumber in 1...todayCustomerNumber {
+        bank.customers.append(Customer(waitNumber: waitNumber))
+    }
+}
 
 private func main() {
-    while bank.isBankOpen {
-        print(BankMenu.Menu)
-        
-        if !firstTimeBankOpen {
-            todayCustomerNumber = generateRandomNumberOfCustomer()
-            bank.initializeCustomers(customerNumber: todayCustomerNumber)
-            bank.initializeBankManagers(bankManagerNumber: bankManagerNumber)
-        }
-        
-        firstTimeBankOpen = false
+    var isConsoleAppTerminated: Bool = false
+    
+    while !isConsoleAppTerminated {
+        print("\(ConsoleApp.menu)")
         
         switch getUserInput() {
-        case BankMenu.start:
+        case ConsoleApp.start:
+            initializeBankCustomer()
             bank.performBankTask()
-            bank.printFinishBank()
-            bank.resetBank()
-        case BankMenu.exit:
-            bank.isBankOpen = false
+        case ConsoleApp.exit:
+            isConsoleAppTerminated = true
             break
         default:
-            guard let message = BankError.wrongUserInput.errorDescription else {
-                return
-            }
-            print(message)
+            print(BankError.wrongUserInput.localizedDescription)
         }
     }
 }
