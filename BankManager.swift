@@ -6,27 +6,40 @@
 
 import Foundation
 
+enum BankState: Int {
+    case open = 1
+    case close = 2
+}
+
 struct BankManager {
     private var bankState: Int = 0
     
     mutating func openBank() {
         repeat {
-            print(MessageCollection.initializationText, terminator: "")
+            let userInput = getInput()
+            self.bankState = userInput
+            let customers = countTodayCustomer()
             
-            guard let userInput: String = readLine(), let userInputNumber: Int = Int(userInput), (userInputNumber == 1 || userInputNumber == 2) else {
-                print(MessageCollection.inputErrorText)
-                return
-            }
-            self.bankState = userInputNumber
-            let customers = Array(1...Int.random(in: 10...30))
-            
-            if self.bankState == 1 {
+            if self.bankState == BankState.open.rawValue {
                 let taskedTime = BankClerk().serveCustomers(customers: customers)
-                MessageCollection.printCloseBankText(customers: customers.count, taskedTime: Double(taskedTime))
+                MessageCollection.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
             }
-        } while self.bankState == 1
+        } while self.bankState == BankState.open.rawValue
     }
 }
 
+func countTodayCustomer() -> Int {
+    let customers = Int.random(in: 10...30)
+    return customers
+}
 
-    
+func getInput() -> Int {
+    print(MessageCollection.initializationText, terminator: "")
+    guard let userInput: String = readLine(), let userInputNumber: Int = Int(userInput), (userInputNumber == BankState.open.rawValue || userInputNumber == BankState.close.rawValue) else {
+        print(MessageCollection.inputErrorText)
+        return getInput()
+    }
+    return userInputNumber
+}
+
+
