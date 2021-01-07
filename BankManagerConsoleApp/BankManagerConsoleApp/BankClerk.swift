@@ -24,6 +24,7 @@ class BankClerk {
         
         switch client.business {
         case .basic:
+            Thread.sleep(forTimeInterval: 0.7)
             totalWorkingTime += 0.7
         }
         totalProcessedClients += 1
