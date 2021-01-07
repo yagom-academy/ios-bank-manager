@@ -61,6 +61,20 @@ struct Customer {
     var task: Task
 }
 
+final class Clerk {
+    var number: Int
+    var queue: DispatchQueue
+    
+    init(_ index: Int) {
+        number = index
+        queue = DispatchQueue(label: "\(index)")
+    }
+    
+    private func work() {
+        
+    }
+}
+
 final class BankManager {
     private let clerkCount: Int = 3
     private let customerCount: Int = Int.random(in: 10...30)
