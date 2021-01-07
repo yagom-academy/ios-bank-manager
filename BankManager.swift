@@ -58,7 +58,7 @@ final class BankManager {
     }
     
     private func assignCustomer(_ customerIndex: Int, to clerk: DispatchQueue, group: DispatchGroup) {
-        clerk.async(group: group) {
+        clerk.async {
             let (currentTotalTime, processTime): (Double, Double) = self.getTimeInfo(clerk: clerk)
             let updatedTotalTime: Double = currentTotalTime + processTime
             
@@ -84,7 +84,7 @@ final class BankManager {
     }
     
     private func sleep(_ time: Double) {
-        let time: useconds_t = useconds_t(time * 1000000)
+        let time: useconds_t = useconds_t(time * 1_000_000)
         usleep(time)
     }
     
