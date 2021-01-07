@@ -22,7 +22,17 @@ struct ConsoleController {
     func operateUserInput(_ input: String) {
         switch input {
         case "1":
-            manageBank()
+            do {
+                try manageBank()
+            } catch {
+                switch error {
+                case BankOperationError.invalidValue:
+                    print("알 수 없는 에러가 발생했습니다.")
+                    break
+                default:
+                    break
+                }            
+            }
             runProgram()
         case "2":
             break
@@ -32,9 +42,9 @@ struct ConsoleController {
         }
     }
     
-    func manageBank() {
-        var bankManager = BankManager()
-        bankManager.openBank()
+    func manageBank() throws {
+        var bankManager = try BankManager()
+        try bankManager.openBank()
         bankManager.closeBank()
     }
     

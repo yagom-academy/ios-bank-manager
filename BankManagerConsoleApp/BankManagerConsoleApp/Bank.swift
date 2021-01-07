@@ -10,20 +10,14 @@ class Bank {
         return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(calculateTotalProcessedClientsNumber())명이며, 총 업무시간은 \(calculateTotalOperatingTime())초입니다."
     }
     
-    init(employeeNumber: Int) {
-        self.serviceCounter = loadBankClerks(of: employeeNumber)
+    init(employeeNumber: Int) throws {
+        self.serviceCounter = try loadBankClerks(of: employeeNumber)
         NotificationCenter.default.addObserver(self, selector: #selector(assignClient), name: NSNotification.Name("workable"), object: nil)
     }
     
-    private func loadBankClerks(of number: Int) -> [Int : BankClerk] {
-        guard number >= 0 else {
-            print("number에 0 이상의 값을입력해주세요")
-            return [ : ]
-        }
-        
-        if number == 0 {
-            print("일할 직원이 없습니다.")
-            return [ : ]
+    private func loadBankClerks(of number: Int) throws -> [Int : BankClerk] {
+        guard number > 0 else {
+            throw BankOperationError.invalidValue
         }
         
         for counterNumber in 1 ... number {
@@ -33,17 +27,11 @@ class Bank {
         return self.serviceCounter
     }
     
-    func updateWaitingList(of size: Int) {
-        guard size >= 0 else {
-            print("size에 0 이상의 값을입력해주세요")
-            return
+    func updateWaitingList(of size: Int) throws {
+        guard size > 0 else {
+            throw BankOperationError.invalidValue
         }
-        
-        if size == 0 {
-            print("방문 고객이 없습니다.")
-            return
-        }
-        
+
         for _ in  1...size {
             self.totalVistedClientsNumber += 1
             let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .basic)
