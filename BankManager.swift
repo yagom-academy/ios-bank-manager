@@ -29,16 +29,16 @@ class BankManager {
                 clientArray[index] = index + 1
             }
             while number != maxNumber {
-                print("\(number + 1)번 고객 업무 시작")
-                makeDeliay()
-                print("\(number + 1)번 고객 업무 완료")
+                print("\(clientArray[number])번 고객 업무 시작")
+                makeWorkingTime()
+                print("\(clientArray[number])번 고객 업무 완료")
                 number += 1
             }
             let endTime = NSDate().timeIntervalSince1970
             printTheEnd(maxClient: maxNumber, startTime: startTime, endTime: endTime)
         }
         
-        func makeDeliay() {
+        func makeWorkingTime() {
             let ms: Double = 1000000
             usleep(useconds_t(0.7 * ms))
         }
