@@ -5,7 +5,7 @@ class Bank {
     private var serviceCounter: [Int : BankClerk] = [ : ]
     private var waitingList: [Client] = []
     private var totalVistedClientsNumber: Int = 0
-
+    
     var endingMent: String {
         return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(calculateTotalProcessedClientsNumber())명이며, 총 업무시간은 \(calculateTotalOperatingTime())초입니다."
     }
@@ -78,7 +78,7 @@ extension Bank {
         let longestWorkingTime = serviceCounter.map { (key: Int, value: BankClerk) -> Float in
             return value.totalWorkingTime
         }.max() ?? 0
-    
+        
         let roundedNumber = round(longestWorkingTime * 100) / 100
         return roundedNumber
     }

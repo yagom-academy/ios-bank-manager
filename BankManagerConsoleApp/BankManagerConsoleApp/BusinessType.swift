@@ -1,5 +1,5 @@
 
-enum BusinessType {
-    case deposit
-    case loan
+enum BusinessType: String {
+    case deposit = "예금"
+    case loan = "대출"
 }
