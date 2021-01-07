@@ -21,3 +21,8 @@ enum BankManangerMessage {
     static let start = "번 고객 업무 시작"
     static let end = "번 고객 업무 완료"
 }
+
+enum BankManagerState {
+    case working
+    case notWorking
+}
