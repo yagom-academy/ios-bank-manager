@@ -16,15 +16,15 @@ func main() {
     while isContinue {
         Bank.shared.printMenu()
         
-        guard let input = readLine() else {
+        guard let input = readLine(), let command = BankMenu(rawValue: input) else {
             print(BankError.wrongInput.description)
             continue
         }
         
-        switch input {
-        case BankMenu.start.rawValue:
+        switch command {
+        case .start:
             Bank.shared.operateBank(teller: tellerNumber, client: clientNumber)
-        case BankMenu.end.rawValue:
+        case .end:
             isContinue = false
         default:
             print(BankError.wrongInput.description)
