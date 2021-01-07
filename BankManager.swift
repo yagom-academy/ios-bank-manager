@@ -9,15 +9,15 @@ import Foundation
 private class BankClerk {
     var bankWindowNumber: Int
     var isWorking: Bool
-    var currentClient: Int?
+    var currentClient: Client?
     var workTime: Double = 0.7
     var totalWorkTime: Double = 0.0
     var finishedClients: Int = 0
     
-    func startWork(for client: Int) {
+    func startWork(for client: Client) {
         isWorking = true
-        self.currentClient = client
-        print("\(client)번 고객 업무 시작")
+        currentClient = client
+        print("\(client.tag)번 고객 업무 시작")
     }
     
     func finishWork() {
@@ -25,7 +25,7 @@ private class BankClerk {
         totalWorkTime += workTime
         finishedClients += 1
         if let client = currentClient {
-            print("\(client)번 고객 업무 완료")
+            print("\(client.tag)번 고객 업무 완료")
         }
         currentClient = nil
     }
@@ -39,7 +39,7 @@ private class BankClerk {
 struct BankManager {
     // MARK: - Properties
     private var bankClerks: [BankClerk] = [BankClerk]()
-    private var watingClients: Queue<Int> = Queue<Int>()
+    private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
     var totalWorkTime: Double {
         var sum = 0.0
@@ -84,13 +84,13 @@ struct BankManager {
         
         for _ in 1...count {
             waitingTicketNumber += 1
-            watingClients.enqueue(element: waitingTicketNumber)
+            waitingClients.enqueue(element: Client(tag: waitingTicketNumber, priority: .normal))
         }
     }
     
     mutating func doBusiness() {
         while true {
-            if watingClients.isEmpty && isAllBankClerkFinishWork {
+            if waitingClients.isEmpty && isAllBankClerkFinishWork {
                 break
             } else {
                 startBankClerkWork()
@@ -104,7 +104,7 @@ struct BankManager {
         let waitBankClerks = bankClerks.filter{$0.isWorking == false}
         
         for waitBankClerk in waitBankClerks {
-            if let client = watingClients.dequeue() {
+            if let client = waitingClients.dequeue() {
                 waitBankClerk.startWork(for: client)
                 
                 let workTime = Int(waitBankClerk.workTime * 1000)
