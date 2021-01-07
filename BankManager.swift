@@ -11,15 +11,10 @@ struct BankManager {
     
     mutating func openBank() {
         repeat {
-            let initializationText: String = """
-            1 : 은행개점
-            2 : 종료
-            입력 : 
-            """
-            print(initializationText, terminator: "")
+            print(MessageCollection.initializationText, terminator: "")
             
             guard let userInput: String = readLine(), let userInputNumber: Int = Int(userInput), (userInputNumber == 1 || userInputNumber == 2) else {
-                print("올바른 입력을 부탁드립니다. 개점은 숫자 1을, 종료는 숫자 2를 입력해주세요!")
+                print(MessageCollection.inputErrorText)
                 return
             }
             self.bankState = userInputNumber
@@ -27,7 +22,7 @@ struct BankManager {
             
             if self.bankState == 1 {
                 let taskedTime = BankClerk().serveCustomers(customers: customers)
-                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers.count)명이며, 총 업무시간은 \(Double(taskedTime) / 1000000)초 입니다.")
+                MessageCollection.printCloseBankText(customers: customers.count, taskedTime: Double(taskedTime))
             }
         } while self.bankState == 1
     }

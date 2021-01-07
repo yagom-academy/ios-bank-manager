@@ -13,9 +13,9 @@ struct BankClerk {
         let waitingCustomers = DispatchQueue(label: "Serial Queue")
         waitingCustomers.sync {
             for customer in customers {
-                print("\(customer)번 고객 업무 시작")
+                MessageCollection.printTaskStartText(customer: customer)
                 usleep(700000)
-                print("\(customer)번 고객 업무 완료")
+                MessageCollection.printTaskCompletionText(customer: customer)
             }
         }
         return useconds_t(700000 * customers.count)
