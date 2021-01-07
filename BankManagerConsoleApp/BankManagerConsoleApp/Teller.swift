@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Teller: OperationQueue {
+final class Teller {
     private var windowNumber: Int
     private var isWorking: Bool = false
     var isNotWorking: Bool {
