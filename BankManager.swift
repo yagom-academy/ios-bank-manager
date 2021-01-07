@@ -11,7 +11,7 @@ final class BankManager {
     var clients: [Client] = []
     private var tellers: [Teller] = []
     private var currentClientNumber = 0
-    private var businessTimes: Double {
+    private var businessTime: Double {
         var sum: Double = 0
         clients.forEach { client in
             sum += client.businessType.neededTime
@@ -63,7 +63,7 @@ final class BankManager {
     }
     
     private func printCloseMessage() {
-        let message = String(format: Bank.closeMessage, clients.count, businessTimes)
+        let message = String(format: Bank.closeMessage, clients.count, businessTime)
         print(message)
     }
     
