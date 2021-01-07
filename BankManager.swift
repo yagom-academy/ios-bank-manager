@@ -8,16 +8,11 @@ import Foundation
 
 struct BankManager {
     private let tellerNumber: Int
-    
+    private(set) var state: BankManagerState
+    private var timeNeedToFinishTask: Double = 0.7
+
     init(number: Int) {
         self.tellerNumber = number
-    }
-    
-    func printStartTask(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 시작")
-    }
-    
-    func printFinishTask(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 완료")
+        self.state = .notWorking
     }
 }
