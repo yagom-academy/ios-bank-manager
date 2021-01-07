@@ -66,8 +66,8 @@ struct BankManager {
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...count {
-            let banker = BankClerk(bankWindowNumber: i + lastCounterNumber, isWorking: false)
-            bankClerks.append(banker)
+            let bankClerk = BankClerk(bankWindowNumber: i + lastCounterNumber, isWorking: false)
+            bankClerks.append(bankClerk)
         }
     }
     
