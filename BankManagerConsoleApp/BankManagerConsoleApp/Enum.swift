@@ -24,8 +24,8 @@ enum BankConstant {
     static let tellerFinishMessage = "%d번 창구: %d번 %@고객 %@업무 완료"
 }
 
-enum BusinessType {
-    case deposit
+enum BusinessType: Int, CaseIterable {
+    case deposit = 0
     case loan
     
     var neededTime: TimeInterval {

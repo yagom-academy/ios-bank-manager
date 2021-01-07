@@ -35,8 +35,16 @@ final class Bank {
     }
     
     private func initClientNumber(_ number: Int) {
+        func randomNumber(maxNumber: Int) -> Int {
+            return Int.random(in: 0..<maxNumber)
+        }
+        
         for waitingNumber in 1...number {
-            clients.append(Client(waitingNumber: waitingNumber))
+            guard let businessType = BusinessType(rawValue: randomNumber(maxNumber: BusinessType.allCases.count)), let priority = Client.Priority(rawValue: randomNumber(maxNumber: Client.Priority.allCases.count)) else {
+                return
+            }
+            
+            clients.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
         }
     }
     
