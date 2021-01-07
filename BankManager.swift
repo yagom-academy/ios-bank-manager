@@ -83,7 +83,7 @@ struct Clerk {
 }
 
 final class BankManager {
-    private let clerkCount: Int = 3
+    private let clerkCount: Int = 1
     private let customerCount: Int = Int.random(in: 10...30)
     private var totalTime: Double {
         get {
