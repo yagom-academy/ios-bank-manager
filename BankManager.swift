@@ -18,11 +18,10 @@ struct BankManager {
         bank.updateWaitingList(of: randomClientNumber)
         print("은행개점")
         bank.makeAllClerksWorkable()
-        print(bank.endingMent)
     }
     
     func closeBank() {
-        print("종료")
+        print(bank.endingMent)
     }
 }
 
