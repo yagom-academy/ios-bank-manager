@@ -6,7 +6,6 @@
 
 import Foundation
 
-// 우선순위 큐
 enum Level: CaseIterable {
     case vvip, vip, general
     
