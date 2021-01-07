@@ -7,29 +7,24 @@
 import Foundation
 
 final class Bank {
-    static let shared = Bank()
-    var clients: [Client] = []
+    private var clients: [Client] = []
     private var tellers: [Teller] = []
-    private var currentClientNumber = 0
-    private var businessTime: TimeInterval {
-        var sum: TimeInterval = 0
-        clients.forEach { client in
-            sum += client.businessType.neededTime
-        }
-        return sum
-    }
-    
-    private init() {}
-    
+    private var finishedClientNumber = 0
+    private var businessTime: TimeInterval?
+        
     func printMenu() {
         print(BankMenu.description, terminator: " ")
     }
     
     func operateBank(teller: Int, client: Int) {
+        var openTime = Date()
+        
+        openTime = Date()
         initTellerNumber(teller)
         initClientNumber(client)
         assignBusinessToTeller()
-        sleep(1)
+        sleep(10)
+        businessTime = Date().timeIntervalSince(openTime)
         printCloseMessage()
         closeBank()
     }
@@ -50,26 +45,33 @@ final class Bank {
         var isContinue = true
         while isContinue {
             for teller in self.tellers {
-                if self.currentClientNumber > self.clients.count - 1{
+                if self.clients.count == 0 {
                     isContinue = false
                     break
                 }
                 if teller.isNotWorking {
-                    teller.handleBusiness(for: self.currentClientNumber)
-                    self.currentClientNumber += 1
+                    let client = clients.removeFirst()
+                    teller.workingQueue.async {
+                        teller.handleBusiness(for: client)
+                    }
+                    self.finishedClientNumber += 1
                 }
             }
         }
     }
     
     private func printCloseMessage() {
-        let message = String(format: BankConstant.closeMessage, clients.count, businessTime)
+        guard let businessTime = businessTime else {
+            print(BankError.unknown.description)
+            return
+        }
+        let message = String(format: BankConstant.closeMessage, finishedClientNumber, businessTime)
         print(message)
     }
     
     private func closeBank() {
         tellers.removeAll()
         clients.removeAll()
-        currentClientNumber = 0
+        finishedClientNumber = 0
     }
 }

@@ -6,15 +6,16 @@
 
 import Foundation
 
-func main() {
-    let tellerNumber = 1
+private func main() {
+    let bank = Bank()
+    let tellerNumber = 2
     var isContinue = true
     var clientNumber: Int {
         return Int.random(in: 10...30)
     }
     
     while isContinue {
-        Bank.shared.printMenu()
+        bank.printMenu()
         
         guard let input = readLine(), let command = BankMenu(rawValue: input) else {
             print(BankError.wrongInput.description)
@@ -23,7 +24,7 @@ func main() {
         
         switch command {
         case .start:
-            Bank.shared.operateBank(teller: tellerNumber, client: clientNumber)
+            bank.operateBank(teller: tellerNumber, client: clientNumber)
         case .end:
             isContinue = false
         }

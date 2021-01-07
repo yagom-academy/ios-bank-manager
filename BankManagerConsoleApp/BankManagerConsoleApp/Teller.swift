@@ -9,6 +9,8 @@ import Foundation
 
 final class Teller {
     private var windowNumber: Int
+    var workingQueue: DispatchQueue
+    var workingHours: TimeInterval = 0
     private var isWorking: Bool = false
     var isNotWorking: Bool {
         return !isWorking
@@ -16,15 +18,16 @@ final class Teller {
     
     init(windowNumber: Int) {
         self.windowNumber = windowNumber
+        workingQueue = DispatchQueue(label: "\(windowNumber)")
     }
     
-    func handleBusiness(for clientNumber: Int) {
-        let client = Bank.shared.clients[clientNumber]
+    func handleBusiness(for client: Client) {
         let needTimeToWork = client.businessType.neededTime
 
         isWorking = true
         printStartBusiness(for: client)
         Thread.sleep(forTimeInterval: needTimeToWork)
+        workingHours += needTimeToWork
         printFinishBusiness(for: client)
         isWorking = false
     }
