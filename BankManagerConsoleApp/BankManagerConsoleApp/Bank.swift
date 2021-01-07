@@ -31,6 +31,11 @@ struct Bank {
         }
     }
     
+    mutating func performBankTask() {
+        assignCustomerToTeller()
+        closeBank()
+    }
+    
     mutating private func assignCustomerToTeller() {
         var bankTeller = bankManagers[0]
         self.openTime = Date()
