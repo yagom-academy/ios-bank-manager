@@ -45,7 +45,7 @@ enum Task: CaseIterable {
         }
     }
     
-    var processTiem: Double {
+    var processTime: Double {
         switch self {
         case .loan:
             return 1.1
@@ -61,7 +61,7 @@ struct Customer {
     var task: Task
 }
 
-final class Clerk {
+struct Clerk {
     var number: Int
     var queue: DispatchQueue
     
@@ -70,26 +70,33 @@ final class Clerk {
         queue = DispatchQueue(label: "\(index)")
     }
     
-    private func work() {
-        
+    func doTask(customer: Customer) {
+        print("\(customer.number)번 고객 업무 시작")
+        self.sleep(customer.task.processTime)
+        print("\(customer.number)번 고객 업무 완료")
+    }
+    
+    private func sleep(_ time: Double) {
+        let time: useconds_t = useconds_t(time * 1_000_000)
+        usleep(time)
     }
 }
 
 final class BankManager {
     private let clerkCount: Int = 3
     private let customerCount: Int = Int.random(in: 10...30)
-    private let processTime: Double = 0.7
-    
-    private let totalTimeKey: DispatchSpecificKey<Double> = DispatchSpecificKey<Double>()
-    private let processTimeKey: DispatchSpecificKey<Double> = DispatchSpecificKey<Double>()
-    
-    private lazy var clerks: [DispatchQueue] = {
-        var clerks: [DispatchQueue] = []
+    private var totalTime: Double {
+        get {
+            guard let totalTime = totalTimes.max() else { return 0 }
+            
+            return totalTime
+        }
+    }
+
+    private lazy var clerks: [Clerk] = {
+        var clerks: [Clerk] = []
         for index in 0..<clerkCount {
-            let clerk = DispatchQueue(label: "\(index)")
-            clerk.setSpecific(key: totalTimeKey, value: 0)
-            clerk.setSpecific(key: processTimeKey, value: processTime)
-            clerks.append(clerk)
+            clerks.append(Clerk(index))
         }
         
         return clerks
@@ -106,15 +113,7 @@ final class BankManager {
         
         return customers
     }()
-    
-    private var totalTimes: [Double] = []
-    private var totalTimeCount: Double {
-        get {
-            guard let totalTime = totalTimes.max() else { return 0 }
-            
-            return totalTime
-        }
-    }
+    private lazy var totalTimes: [Double] = [Double](repeating: 0, count: clerkCount)
     
     func open() {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
@@ -123,7 +122,7 @@ final class BankManager {
         for index in 0..<clerkCount {
             bankTaskGroup.enter()
             assignCustomer(customers.removeFirst(), to: clerks[index], group: bankTaskGroup)
-            bankTaskGroup.notify(queue: clerks[index]) {
+            bankTaskGroup.notify(queue: clerks[index].queue) {
                 semaphore.signal()
             }
         }
@@ -135,38 +134,21 @@ final class BankManager {
         printCloseMessage()
     }
     
-    private func assignCustomer(_ customer: Customer, to clerk: DispatchQueue, group: DispatchGroup) {
-        clerk.async {
-            let (currentTotalTime, processTime): (Double, Double) = self.getTimeInfo(clerk: clerk)
-            let updatedTotalTime: Double = currentTotalTime + processTime
-            
-            print("\(customer.number)번 고객 업무 시작")
-            self.sleep(processTime)
-            clerk.setSpecific(key: self.totalTimeKey, value: updatedTotalTime)
-            print("\(customer.number)번 고객 업무 완료")
+    private func assignCustomer(_ customer: Customer, to clerk: Clerk, group: DispatchGroup) {
+        clerk.queue.async {
+            clerk.doTask(customer: customer)
             
             if self.customers.isEmpty {
-                self.totalTimes.append(updatedTotalTime)
                 group.leave()
             } else {
                 self.assignCustomer(self.customers.removeFirst(), to: clerk, group: group)
             }
         }
-    }
-
-    private func getTimeInfo(clerk: DispatchQueue) -> (Double, Double) {
-        guard let totalTime: Double = clerk.getSpecific(key: totalTimeKey),
-              let processTime: Double = clerk.getSpecific(key: processTimeKey) else { fatalError() }
         
-        return (totalTime, processTime)
-    }
-    
-    private func sleep(_ time: Double) {
-        let time: useconds_t = useconds_t(time * 1_000_000)
-        usleep(time)
+        self.totalTimes[clerk.number] += customer.task.processTime
     }
     
     private func printCloseMessage() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTimeCount)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTime)초입니다.")
     }
 }
