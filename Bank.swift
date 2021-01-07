@@ -47,11 +47,11 @@ final class Bank {
     }
     
     private func assignBusinessToTeller() {
-        var `continue` = true
-        while `continue` {
+        var isContinue = true
+        while isContinue {
             for teller in self.tellers {
                 if self.currentClientNumber >= self.clients.count - 1{
-                    `continue` = false
+                    isContinue = false
                     break
                 }
                 if teller.isNotWorking {

@@ -8,12 +8,12 @@ import Foundation
 
 func main() {
     let tellerNumber = 1
-    var `continue` = true
+    var isContinue = true
     var clientNumber: Int {
         return Int.random(in: 10...30)
     }
     
-    while `continue` {
+    while isContinue {
         Bank.shared.printMenu()
         
         guard let input = readLine() else {
@@ -25,7 +25,7 @@ func main() {
         case BankMenu.start.rawValue:
             Bank.shared.operateBank(teller: tellerNumber, client: clientNumber)
         case BankMenu.end.rawValue:
-            `continue` = false
+            isContinue = false
         default:
             print(BankError.wrongInput.description)
         }
