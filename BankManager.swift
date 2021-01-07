@@ -8,20 +8,20 @@ import Foundation
 
 private class BankClerk {
     var bankWindowNumber: Int
-    var isWorking: Bool
+    var isWorking: Bool {
+        return currentClient != nil
+    }
     var currentClient: Client?
     var workTime: Double = 0.7
     var totalWorkTime: Double = 0.0
     var finishedClients: Int = 0
     
     func startWork(for client: Client) {
-        isWorking = true
         currentClient = client
         print("\(client.tag)번 고객 업무 시작")
     }
     
     func finishWork() {
-        isWorking = false
         totalWorkTime += workTime
         finishedClients += 1
         if let client = currentClient {
@@ -30,9 +30,8 @@ private class BankClerk {
         currentClient = nil
     }
     
-    init(bankWindowNumber: Int, isWorking: Bool) {
+    init(bankWindowNumber: Int) {
         self.bankWindowNumber = bankWindowNumber
-        self.isWorking = isWorking
     }
 }
 
@@ -66,7 +65,7 @@ struct BankManager {
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...count {
-            let bankClerk = BankClerk(bankWindowNumber: i + lastCounterNumber, isWorking: false)
+            let bankClerk = BankClerk(bankWindowNumber: i + lastCounterNumber)
             bankClerks.append(bankClerk)
         }
     }
@@ -96,7 +95,6 @@ struct BankManager {
     
     private mutating func startBankClerkWork() {
         let waitBankClerks = bankClerks.filter{$0.isWorking == false}
-        
         for waitBankClerk in waitBankClerks {
             if let client = waitingClients.dequeue() {
                 waitBankClerk.startWork(for: client)
