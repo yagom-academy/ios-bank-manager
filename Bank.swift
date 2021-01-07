@@ -11,8 +11,8 @@ final class Bank {
     var clients: [Client] = []
     private var tellers: [Teller] = []
     private var currentClientNumber = 0
-    private var businessTime: Double {
-        var sum: Double = 0
+    private var businessTime: TimeInterval {
+        var sum: TimeInterval = 0
         clients.forEach { client in
             sum += client.businessType.neededTime
         }

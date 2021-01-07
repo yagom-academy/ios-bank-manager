@@ -19,13 +19,13 @@ enum BankConstant {
     static let tellerStartMassage = "%d번 창구 : %d번 고객 업무 시작"
     static let tellerFinishMessage = "%d번 창구 : %d번 고객 업무 완료"
     
-    static let milliseconds: Double = 1_000_000
+    static let milliseconds: TimeInterval = 1_000_000
 }
 
 enum BusinessType {
     case normal
     
-    var neededTime: Double {
+    var neededTime: TimeInterval {
         switch self {
         case .normal:
             return 0.7
