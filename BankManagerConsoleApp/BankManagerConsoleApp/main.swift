@@ -26,8 +26,6 @@ func main() {
             Bank.shared.operateBank(teller: tellerNumber, client: clientNumber)
         case .end:
             isContinue = false
-        default:
-            print(BankError.wrongInput.description)
         }
     }
 }
