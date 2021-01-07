@@ -8,20 +8,20 @@ import Foundation
 
 private class BankClerk {
     var bankWindowNumber: Int
-    var isWorking: Bool
+    var isWorking: Bool {
+        currentClient != nil
+    }
     var currentClient: Client?
     var workTime: Double = 0.7
     var totalWorkTime: Double = 0.0
     var finishedClients: Int = 0
     
     func startWork(for client: Client) {
-        isWorking = true
         currentClient = client
         print("\(client.tag)번 고객 업무 시작")
     }
     
     func finishWork() {
-        isWorking = false
         totalWorkTime += workTime
         finishedClients += 1
         if let client = currentClient {
@@ -30,9 +30,8 @@ private class BankClerk {
         currentClient = nil
     }
     
-    init(bankWindowNumber: Int, isWorking: Bool) {
+    init(bankWindowNumber: Int) {
         self.bankWindowNumber = bankWindowNumber
-        self.isWorking = isWorking
     }
 }
 
@@ -42,11 +41,9 @@ struct BankManager {
     private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
     var totalWorkTime: Double {
-        var sum = 0.0
-        for bankClerk in bankClerks {
-            sum += bankClerk.totalWorkTime
+        bankClerks.reduce(0) {
+            $0 + $1.totalWorkTime
         }
-        return sum
     }
     var totalFinishedClients: Int {
         bankClerks.reduce(0) {
@@ -55,7 +52,7 @@ struct BankManager {
     }
     var isAllBankClerkFinishWork: Bool {
         let waitingBankClerks = bankClerks.filter{$0.isWorking == false}
-        return waitingClients.count == bankClerks.count
+        return waitingBankClerks.count == bankClerks.count
     }
     
     // MARK: - Methods
@@ -66,7 +63,7 @@ struct BankManager {
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...count {
-            let bankClerk = BankClerk(bankWindowNumber: i + lastCounterNumber, isWorking: false)
+            let bankClerk = BankClerk(bankWindowNumber: i + lastCounterNumber)
             bankClerks.append(bankClerk)
         }
     }
@@ -96,7 +93,6 @@ struct BankManager {
     
     private mutating func startBankClerkWork() {
         let waitBankClerks = bankClerks.filter{$0.isWorking == false}
-        
         for waitBankClerk in waitBankClerks {
             if let client = waitingClients.dequeue() {
                 waitBankClerk.startWork(for: client)
