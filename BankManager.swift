@@ -55,7 +55,7 @@ struct BankManager {
     }
     var isAllBankClerkFinishWork: Bool {
         let waitingBankClerks = bankClerks.filter{$0.isWorking == false}
-        return waitingClients.count == bankClerks.count
+        return waitingBankClerks.count == bankClerks.count
     }
     
     // MARK: - Methods
