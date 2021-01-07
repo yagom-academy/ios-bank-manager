@@ -7,4 +7,4 @@
 import Foundation
 
 var bank = BankManager()
-bank.startTask()
+bank.openBank()

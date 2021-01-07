@@ -9,7 +9,7 @@ import Foundation
 struct BankManager {
     private var bankState: Int = 0
     
-    mutating func startTask() {
+    mutating func openBank() {
         repeat {
             let initializationText: String = """
             1 : 은행개점
