@@ -41,11 +41,9 @@ struct BankManager {
     private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
     var totalWorkTime: Double {
-        var sum = 0.0
-        for bankClerk in bankClerks {
-            sum += bankClerk.totalWorkTime
+        bankClerks.reduce(0) {
+            $0 + $1.totalWorkTime
         }
-        return sum
     }
     var totalFinishedClients: Int {
         bankClerks.reduce(0) {
