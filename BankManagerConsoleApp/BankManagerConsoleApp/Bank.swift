@@ -32,5 +32,17 @@ struct Bank {
             bankManagers.append(BankManager(number: number))
         }
     }
+    
+    mutating private func assignCustomerToTeller() {
+        var bankTeller = bankManagers[0]
+        self.openTime = Date()
+        while(customers.count > 0) {
+            if bankTeller.state == .notWorking {
+                let customer = customers.removeFirst()
+                bankTeller.performTask(customerNumber: customer.waitNumber)
+            }
+        }
+        self.closeTime = Date()
+    }
 }
 
