@@ -23,7 +23,6 @@ final class Bank {
         initTellerNumber(teller)
         initClientNumber(client)
         assignBusinessToTeller()
-        sleep(10)
         businessTime = Date().timeIntervalSince(openTime)
         printCloseMessage()
         closeBank()
@@ -42,7 +41,9 @@ final class Bank {
     }
     
     private func assignBusinessToTeller() {
+        let semaphore = DispatchSemaphore(value: 0)
         var isContinue = true
+        
         while isContinue {
             for teller in self.tellers {
                 if self.clients.count == 0 {
@@ -53,11 +54,13 @@ final class Bank {
                     let client = clients.removeFirst()
                     teller.workingQueue.async {
                         teller.handleBusiness(for: client)
+                        semaphore.signal()
                     }
                     self.finishedClientNumber += 1
                 }
             }
         }
+        for _ in 0..<finishedClientNumber { semaphore.wait() }
     }
     
     private func printCloseMessage() {
