@@ -30,7 +30,7 @@ func startBank() {
 
 func configureCustomers() {
     let numberOfCustomers:UInt = UInt.random(in: 10...30)
-//    DispatchQueue.global().sync()
+    
     for number in 1...numberOfCustomers {
         let businessType:Int = Int.random(in: 1...2)
         taskTime = timeSetting(businessType)
@@ -45,7 +45,7 @@ func timeSetting(_ type: Int) -> Double {
     if type == 1 {
         taskTime = 0.7
     } else {
-        taskTime = 3
+        taskTime = 1.1
     }
     return taskTime
 }

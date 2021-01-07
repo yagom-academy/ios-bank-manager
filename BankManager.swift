@@ -1,9 +1,15 @@
 import Foundation
 
-struct Banker {
+class Banker {
     var windowNumber: UInt
     var isWorking: BankCondition = .notWorking
-    mutating func work(_ customers: Customer) {
+    
+    init(windowNumber: UInt, isWorking: BankCondition) {
+        self.windowNumber = windowNumber
+        self.isWorking = isWorking
+    }
+    
+    func work(_ customers: Customer) {
         isWorking = .working
         print("\(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 시작")
         Thread.sleep(forTimeInterval: customers.taskTime)
@@ -19,19 +25,18 @@ struct Customer {
     var businessType: BusinessType
 }
     
-struct Bank {
-    
+class Bank {
     private var bankers = [Banker]()
     private var businessTimes: Double = 0.0
     private var visitedCustomers: UInt = 0
-
-    mutating func configureBankers(numberOfBankers: UInt) {
+    
+    func configureBankers(numberOfBankers: UInt) {
         for window in 1...numberOfBankers {
             bankers.append(Banker(windowNumber: window, isWorking: .notWorking))
         }
     }
     
-    mutating func openBank() {
+    func openBank() {
         while !customers.isEmpty {
             for banker in 0..<bankers.count {
                 switch bankers[banker].isWorking {
@@ -54,7 +59,7 @@ struct Bank {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomers)명이며, 총 업무시간은 \(businessTimesToString)초 업니다.")
     }
     
-    mutating func initializeInfo() {
+    func initializeInfo() {
         bankers = [Banker]()
         customers = [Customer]()
         businessTimes = 0.0
