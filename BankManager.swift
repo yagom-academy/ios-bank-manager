@@ -1,24 +1,22 @@
 import Foundation
 
-enum BankCondition {
-    case working
-    case notWorking
-}
-
 struct Banker {
     var windowNumber: UInt
     var isWorking: BankCondition = .notWorking
     mutating func work(_ customers: Customer) {
         isWorking = .working
-        print("\(customers.waiting)번 고객 업무 시작")
-        print("\(customers.waiting)번 고객 업무 완료")
+        print("\(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 시작")
+        Thread.sleep(forTimeInterval: customers.taskTime)
+        print("\(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 완료")
         isWorking = .notWorking
     }
 }
-    
+
 struct Customer {
     var waiting: UInt
     var taskTime: Double
+    var priority: CustomerPriority
+    var businessType: BusinessType
 }
     
 struct Bank {
@@ -32,15 +30,16 @@ struct Bank {
             bankers.append(Banker(windowNumber: window, isWorking: .notWorking))
         }
     }
-
+    
     mutating func openBank() {
         while !customers.isEmpty {
             for banker in 0..<bankers.count {
                 switch bankers[banker].isWorking {
                 case .notWorking:
-                    bankers[banker].work(customers.removeFirst())
+                    let customer = customers.removeFirst()
+                    bankers[banker].work(customer)
                     visitedCustomers += 1
-                    businessTimes += taskTime
+                    businessTimes += customer.taskTime
                 case .working:
                     continue
                 }

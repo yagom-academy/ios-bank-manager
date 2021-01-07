@@ -30,9 +30,24 @@ func startBank() {
 
 func configureCustomers() {
     let numberOfCustomers:UInt = UInt.random(in: 10...30)
+//    DispatchQueue.global().sync()
     for number in 1...numberOfCustomers {
-        customers.append(Customer(waiting: number, taskTime: taskTime))
+        let businessType:Int = Int.random(in: 1...2)
+        taskTime = timeSetting(businessType)
+        
+        customers.append(Customer(waiting: number, taskTime: taskTime, priority: CustomerPriority(rawValue: Int.random(in: 1...3))!, businessType: BusinessType(rawValue: businessType)!))
     }
+    customers.sort { $0.priority.rawValue < $1.priority.rawValue }
+}
+
+func timeSetting(_ type: Int) -> Double {
+    var taskTime: Double
+    if type == 1 {
+        taskTime = 0.7
+    } else {
+        taskTime = 3
+    }
+    return taskTime
 }
 
 startBank()
