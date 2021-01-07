@@ -22,6 +22,8 @@ final class Bank {
         openTime = Date()
         initTellerNumber(teller)
         initClientNumber(client)
+        sortClientByPriority()
+        dump(clients)
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
         printCloseMessage()
@@ -46,6 +48,14 @@ final class Bank {
             
             clients.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
         }
+    }
+    
+    private func sortClientByPriority() {
+        let firstGroup: [Client] = clients.filter({ $0.priority == .first})
+        let secondGroup: [Client] = clients.filter({ $0.priority == .second})
+        let thirdGroup: [Client] = clients.filter({ $0.priority == .third})
+        
+        clients = firstGroup + secondGroup + thirdGroup
     }
     
     private func assignBusinessToTeller() {
