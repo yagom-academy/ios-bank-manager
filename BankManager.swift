@@ -9,7 +9,7 @@ import Foundation
 private class BankClerk {
     var bankWindowNumber: Int
     var isWorking: Bool {
-        return currentClient != nil
+        currentClient != nil
     }
     var currentClient: Client?
     var workTime: Double = 0.7
