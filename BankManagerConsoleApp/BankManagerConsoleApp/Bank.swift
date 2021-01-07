@@ -10,9 +10,7 @@ import Foundation
 struct Bank {
     var customers: [Customer] = []
     private var bankManagers: [BankManager] = []
-    var numberOfCustomer: Int {
-        return customers.count
-    }
+    var numberOfCustomer: Int?
     private var openTime: Date?
     private var closeTime: Date?
     private var totalTime: Double? {
@@ -43,6 +41,14 @@ struct Bank {
             }
         }
         self.closeTime = Date()
+    }
+    
+    mutating private func closeBank() {
+        guard let totalNumberOfCustomer = numberOfCustomer, let businessTime = totalTime else {
+            print(BankError.unknown.localizedDescription)
+            return
+        }
+        print(String(format: "\(BankMessage.close)", totalNumberOfCustomer ,businessTime))
     }
 }
 
