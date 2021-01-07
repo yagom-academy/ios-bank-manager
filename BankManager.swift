@@ -15,4 +15,13 @@ struct BankManager {
         self.tellerNumber = number
         self.state = .notWorking
     }
+    
+    mutating func performTask(customerNumber: Int) {
+        let second: Double = 1_000_000
+        self.state = .working
+        print("\(customerNumber) \(BankManangerMessage.start)")
+        usleep(useconds_t(timeNeedToFinishTask * second))
+        print("\(customerNumber) \(BankManangerMessage.end)")
+        self.state = .notWorking
+    }
 }
