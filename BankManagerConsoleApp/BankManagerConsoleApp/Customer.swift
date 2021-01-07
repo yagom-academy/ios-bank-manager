@@ -8,11 +8,9 @@
 import Foundation
 
 struct Customer {
-    private let waitNumber: Int
-    let timeNeedToFinishTask: Double
+    let waitNumber: Int
     
-    init(waitNumber: Int, needTime: Double = 0.7) {
+    init(waitNumber: Int) {
         self.waitNumber = waitNumber
-        self.timeNeedToFinishTask = needTime
     }
 }
