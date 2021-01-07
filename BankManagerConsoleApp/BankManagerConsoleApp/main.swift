@@ -14,7 +14,7 @@ func main() {
     }
     
     while `continue` {
-        BankManager.shared.printMenu()
+        Bank.shared.printMenu()
         
         guard let input = readLine() else {
             print(BankError.wrongInput.description)
@@ -23,7 +23,7 @@ func main() {
         
         switch input {
         case BankMenu.start.rawValue:
-            BankManager.shared.operateBank(teller: tellerNumber, client: clientNumber)
+            Bank.shared.operateBank(teller: tellerNumber, client: clientNumber)
         case BankMenu.end.rawValue:
             `continue` = false
         default:

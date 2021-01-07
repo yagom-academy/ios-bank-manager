@@ -19,7 +19,7 @@ final class Teller: OperationQueue {
     }
     
     func handleBusiness(for clientNumber: Int) {
-        let client = BankManager.shared.clients[clientNumber]
+        let client = Bank.shared.clients[clientNumber]
         let needTimeToWork: UInt32 = UInt32(Bank.milliseconds * client.businessType.neededTime)
 
         isWorking = true

@@ -6,8 +6,8 @@
 
 import Foundation
 
-final class BankManager {
-    static let shared = BankManager()
+final class Bank {
+    static let shared = Bank()
     var clients: [Client] = []
     private var tellers: [Teller] = []
     private var currentClientNumber = 0

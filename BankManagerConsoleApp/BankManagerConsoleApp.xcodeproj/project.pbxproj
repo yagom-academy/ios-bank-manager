@@ -11,7 +11,7 @@
 		4CDDB11B25A422CD00EDC9CE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDDB11A25A422CD00EDC9CE /* Client.swift */; };
 		4CDDB11E25A422EF00EDC9CE /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDDB11D25A422EF00EDC9CE /* Enum.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		C7D65D1B259C8190005510E0 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* Bank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +32,7 @@
 		4CDDB11D25A422EF00EDC9CE /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = ../../Bank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				C7D65D1A259C8190005510E0 /* Bank.swift */,
 				4CDDB11725A422B700EDC9CE /* Teller.swift */,
 				4CDDB11A25A422CD00EDC9CE /* Client.swift */,
 				4CDDB11D25A422EF00EDC9CE /* Enum.swift */,
@@ -132,7 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				C7D65D1B259C8190005510E0 /* Bank.swift in Sources */,
 				4CDDB11E25A422EF00EDC9CE /* Enum.swift in Sources */,
 				4CDDB11B25A422CD00EDC9CE /* Client.swift in Sources */,
 				4CDDB11825A422B700EDC9CE /* Teller.swift in Sources */,
