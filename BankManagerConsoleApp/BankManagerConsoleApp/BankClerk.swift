@@ -20,7 +20,7 @@ class BankClerk {
     
     func handleClientBusiness(of client: Client) {
         self.workingStatus = .working
-        print("\(client.waitingNumber)번 \(client.business.rawValue)업무 시작")
+        print("\(client.waitingNumber)번 \(client.grade.rawValue)고객 \(client.business.rawValue)업무 시작")
         
         switch client.business {
         case .deposit:
@@ -33,7 +33,7 @@ class BankClerk {
         
         totalProcessedClients += 1
         
-        print("\(client.waitingNumber)번 \(client.business.rawValue)업무 종료")
+        print("\(client.waitingNumber)번 \(client.grade.rawValue)고객 \(client.business.rawValue)업무 종료")
         self.workingStatus = .workable
     }
 }
