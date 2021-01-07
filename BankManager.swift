@@ -49,11 +49,9 @@ struct BankManager {
         return sum
     }
     var totalFinishedClients: Int {
-        var sum = 0
-        for bankClerk in bankClerks {
-            sum += bankClerk.finishedClients
+        bankClerks.reduce(0) {
+            $0 + $1.finishedClients
         }
-        return sum
     }
     var isAllBankClerkFinishWork: Bool {
         let waitingBankClerks = bankClerks.filter{$0.isWorking == false}
