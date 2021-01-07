@@ -13,6 +13,15 @@ struct Bank {
     var numberOfCustomer: Int {
         return customers.count
     }
+    private var openTime: Date?
+    private var closeTime: Date?
+    private var totalTime: Double? {
+        guard let openTime = openTime, let closeTime = closeTime else {
+            return nil
+        }
+        let calculatedTime = Double(closeTime.timeIntervalSince(openTime))
+        return calculatedTime
+    }
     
     init(bankManagerNumber: Int) {
         self.initializeBankManagers(bankManagerNumber: bankManagerNumber)
