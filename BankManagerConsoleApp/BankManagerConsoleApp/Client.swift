@@ -8,10 +8,10 @@
 import Foundation
 
 class Client {
-    enum Priority {
-        case VVIP
-        case VIP
+    enum Priority: Comparable {
         case normal
+        case VIP
+        case VVIP
     }
     
     private(set) var tag: Int
@@ -20,5 +20,15 @@ class Client {
     init(tag: Int, priority: Priority) {
         self.tag = tag
         self.priority = priority
+    }
+}
+
+extension Client: Comparable {
+    static func < (lhs: Client, rhs: Client) -> Bool {
+        return lhs.priority < rhs.priority
+    }
+    
+    static func == (lhs: Client, rhs: Client) -> Bool {
+        return lhs.priority == rhs.priority
     }
 }
