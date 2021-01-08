@@ -10,9 +10,4 @@ import Foundation
 struct Custmer {
     let index: Int
     let taskTime: Double
-    
-    init(index: Int, taskTime: Double) {
-        self.index = index
-        self.taskTime = taskTime
-    }
 }
