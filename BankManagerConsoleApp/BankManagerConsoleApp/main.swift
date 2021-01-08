@@ -34,6 +34,7 @@ private func main() {
     
     while !isConsoleAppTerminated {
         print("\(ConsoleApp.menu)")
+        print("입력 : ", terminator: "")
         
         switch getUserInput() {
         case ConsoleApp.start:
