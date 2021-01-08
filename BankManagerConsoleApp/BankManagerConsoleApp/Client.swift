@@ -12,6 +12,17 @@ class Client {
         case normal
         case VIP
         case VVIP
+        
+        var string: String {
+            switch self {
+            case .normal:
+                return "일반"
+            case .VIP:
+                return "VIP"
+            case .VVIP:
+                return "VVIP"
+            }
+        }
     }
     
     enum Business: CaseIterable {

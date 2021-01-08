@@ -18,14 +18,14 @@ private class BankClerk {
     
     func startWork(for client: Client) {
         currentClient = client
-        print("\(client.tag)번 고객 업무 시작")
+        print("\(client.tag)번 \(client.priority.string)고객 업무 시작")
     }
     
     func finishWork() {
         totalWorkTime += workTime
         finishedClients += 1
         if let client = currentClient {
-            print("\(client.tag)번 고객 업무 완료")
+            print("\(client.tag)번 \(client.priority.string)고객 업무 완료")
         }
         currentClient = nil
     }
