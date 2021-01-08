@@ -66,7 +66,7 @@ class Bank {
     func openBank() {
         while !customers.isEmpty {
             for windowNumber in 0..<bankers.count {
-                checkBankerIsWorking(bankerCondition: bankers[windowNumber].isWorking, windowNumber: windowNumber)
+                checkBankerIsWorking(windowNumber)
             }
         }
         checkEnd()
@@ -74,7 +74,24 @@ class Bank {
         closeBank()
         initializeInfo()
     }
-}
+    
+    private func checkBankerIsWorking(_windowNumber: Int) {
+        let banker = bankers[windowNumber]
+        switch banker.isWorking {
+            case .notWorking:
+                banker.changeBankerCondition()
+                if let customer = customers.first {
+                    dispatchQueue.async {
+                        banker.customer = customer
+                        banker.work()
+                    }
+                    numberOfCustomers += 1
+                    customers.removeFirst()
+                }
+            case .working:
+                return
+        }
+    }
     
     
     
