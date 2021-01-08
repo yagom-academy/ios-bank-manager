@@ -25,12 +25,18 @@ class BankManager {
     }
     
     func arrangeCustomerFirstTime() {
-        guard let firstCustmer = bankManager.waitingList.first else {
+        guard let firstCustomer = waitingList.first else {
             return
         }
-        bankManager.bankClerks.first?.customers.append(firstCustmer)
-        bankManager.bankClerks.first?.startWork()
-        bankManager.bankClerks.first?.finishWork()
+        self.bankClerks.first?.customers.append(firstCustomer)
+        self.bankClerks.first?.startWork()
+        self.bankClerks.first?.finishWork()
+//        guard let firstCustmer = bankManager.waitingList.first else {
+//            return
+//        }
+//        bankManager.bankClerks.first?.customers.append(firstCustmer)
+//        bankManager.bankClerks.first?.startWork()
+//        bankManager.bankClerks.first?.finishWork()
     }
     
     init(bankClerkCount: Int) {
