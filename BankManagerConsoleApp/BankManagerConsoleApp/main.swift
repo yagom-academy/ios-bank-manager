@@ -11,6 +11,28 @@ private func generateRandomNumberOfCustomer() -> Int {
     return randomNumber
 }
 
+private func generateRandomCustomerPriority() -> CustomerPriority {
+    let priority = Int.random(in: 0...2)
+    switch priority {
+    case Int(CustomerPriority.vvip.rawValue):
+        return .vvip
+    case Int(CustomerPriority.vip.rawValue):
+        return .vip
+    default:
+        return .normal
+    }
+}
+
+private func generateRandomCustomerTask() -> CustomerTask {
+    let taskType = Int.random(in: 0...1)
+    switch taskType {
+    case Int(CustomerTask.loan.rawValue):
+        return .loan
+    default:
+        return .deposit
+    }
+}
+
 private func getUserInput() -> String {
     guard let input = readLine() else {
         return BankError.noEnterFromUser.localizedDescription
@@ -25,7 +47,9 @@ private func initializeBankCustomer() {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
     bank.numberOfCustomer = todayCustomerNumber
     for waitNumber in 1...todayCustomerNumber {
-        bank.customers.append(Customer(waitNumber: waitNumber))
+        let customerPriority = generateRandomCustomerPriority()
+        let customerTask = generateRandomCustomerTask()
+        bank.customers.append(Customer(waitNumber: waitNumber, priority: customerPriority, taskType: customerTask))
     }
 }
 
