@@ -28,12 +28,17 @@ enum BankManagerState {
 }
 
 enum CustomerPriority: String {
-    case vvip = "0"
-    case vip = "1"
-    case normal = "2"
+    case VVIP = "0"
+    case VIP = "1"
+    case 일반 = "2"
 }
 
 enum CustomerTask: String {
-    case loan = "0"
-    case deposit = "1"
+    case 대출 = "0"
+    case 예금 = "1"
+}
+
+enum TimeNeedDependOnTask: String {
+    case 대출 = "1.1"
+    case 예금 = "0.7"
 }

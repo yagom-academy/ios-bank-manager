@@ -14,22 +14,22 @@ private func generateRandomNumberOfCustomer() -> Int {
 private func generateRandomCustomerPriority() -> CustomerPriority {
     let priority = Int.random(in: 0...2)
     switch priority {
-    case Int(CustomerPriority.vvip.rawValue):
-        return .vvip
-    case Int(CustomerPriority.vip.rawValue):
-        return .vip
+    case Int(CustomerPriority.VVIP.rawValue):
+        return .VVIP
+    case Int(CustomerPriority.VIP.rawValue):
+        return .VIP
     default:
-        return .normal
+        return .일반
     }
 }
 
 private func generateRandomCustomerTask() -> CustomerTask {
     let taskType = Int.random(in: 0...1)
     switch taskType {
-    case Int(CustomerTask.loan.rawValue):
-        return .loan
+    case Int(CustomerTask.대출.rawValue):
+        return .대출
     default:
-        return .deposit
+        return .예금
     }
 }
 
