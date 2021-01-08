@@ -29,20 +29,16 @@ class Client {
     private(set) var priority: Priority
     private(set) var business: BankBusiness
     
-    init(tag: Int, priority: Priority = .normal, business: BankBusiness = .loan) {
+    init(tag: Int) {
         self.tag = tag
-        
-        if let randomPriority = Priority.allCases.randomElement() {
-            self.priority = randomPriority
-        } else {
-            self.priority = priority
-        }
-        
-        if let randomBusiness = BankBusiness.allCases.randomElement() {
-            self.business = randomBusiness
-        } else {
-            self.business = business
-        }
+        self.priority = Priority.allCases.randomElement() ?? .normal
+        self.business = BankBusiness.allCases.randomElement() ?? .deposit
+    }
+    
+    init(tag: Int, priority: Priority, bankBusiness: BankBusiness) {
+        self.tag = tag
+        self.priority = priority
+        self.business = bankBusiness
     }
 }
 
