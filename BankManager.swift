@@ -49,6 +49,20 @@ struct Customer {
     var priority: CustomerPriority
     var businessType: BusinessType
 }
+
+class Bank {
+    private var bankers = [Banker]()
+    private var businessTimes: Double = 0.0
+    private var numberOfCustomers: UInt = 0
+    private var dispatchQueue = DispatchQueue.global()
+    private var semaphore = DispatchSemaphore(value: 0)
+    
+    func configureBankers(numberOfBankers: UInt) {
+        for window in 0..<numberOfBankers {
+            bankers.append(Banker(windowNumber: window, isWorking: .notWorking))
+        }
+    }
+}
     
     
     
