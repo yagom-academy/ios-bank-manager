@@ -8,7 +8,7 @@
 import Foundation
 
 class Client {
-    enum Priority: Comparable {
+    enum Priority: Comparable, CaseIterable {
         case normal
         case VIP
         case VVIP
@@ -17,9 +17,14 @@ class Client {
     private(set) var tag: Int
     private(set) var priority: Priority
     
-    init(tag: Int, priority: Priority) {
+    init(tag: Int, priority: Priority = .normal) {
         self.tag = tag
-        self.priority = priority
+        if let randomPriority = Priority.allCases.randomElement() {
+            self.priority = randomPriority
+        } else {
+            self.priority = priority
+        }
+        
     }
 }
 

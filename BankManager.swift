@@ -75,7 +75,7 @@ struct BankManager {
         
         for _ in 1...count {
             waitingTicketNumber += 1
-            waitingClients.enqueue(element: Client(tag: waitingTicketNumber, priority: .normal))
+            waitingClients.enqueue(element: Client(tag: waitingTicketNumber))
         }
     }
     
