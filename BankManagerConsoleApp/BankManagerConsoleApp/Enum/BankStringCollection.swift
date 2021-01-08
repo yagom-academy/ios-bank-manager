@@ -26,3 +26,14 @@ enum BankManagerState {
     case working
     case notWorking
 }
+
+enum CustomerPriority: String {
+    case vvip = "0"
+    case vip = "1"
+    case normal = "2"
+}
+
+enum CustomerTask: String {
+    case loan = "0"
+    case deposit = "1"
+}
