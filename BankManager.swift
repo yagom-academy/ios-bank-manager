@@ -68,7 +68,7 @@ struct BankManager {
     private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
     private var startBusinessTime: Double = 0.0
-    var currentBusinesstime: Double {
+    var currentBusinessTime: Double {
         CFAbsoluteTimeGetCurrent() - startBusinessTime
     }
     var totalBusinessTime: Double?
@@ -114,7 +114,7 @@ struct BankManager {
     }
     
     mutating func endBusiness() {
-        totalBusinessTime = currentBusinesstime
+        totalBusinessTime = currentBusinessTime
         
         printWorkEndMessage()
     }
