@@ -28,6 +28,15 @@ class Client {
     enum Business: CaseIterable {
         case loan
         case deposit
+        
+        var string: String {
+            switch self {
+            case .loan:
+                return "대출"
+            case .deposit:
+                return "예금"
+            }
+        }
     }
     
     private(set) var tag: Int
