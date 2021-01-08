@@ -32,9 +32,9 @@ private class BankClerk {
     // MARK: - Methods
     func startWork(for client: Client) {
         currentClient = client
-        print("\(client.tag)번 \(client.priority.string)고객 \(client.business.string)업무 시작")
+        print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 시작")
         
-        let workTime = Int(self.workTime(bankBusiness: client.business) * 1000)
+        let workTime = Int(self.workTime(bankBusiness: client.bankBusiness) * 1000)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(workTime)) {
             self.finishWork()
         }
@@ -43,7 +43,7 @@ private class BankClerk {
     func finishWork() {
         finishedClients += 1
         if let client = currentClient {
-            print("\(client.tag)번 \(client.priority.string)고객 \(client.business.string)업무 완료")
+            print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 완료")
         }
         currentClient = nil
     }

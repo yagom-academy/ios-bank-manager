@@ -27,18 +27,18 @@ class Client {
     
     private(set) var tag: Int
     private(set) var priority: Priority
-    private(set) var business: BankBusiness
+    private(set) var bankBusiness: BankBusiness
     
     init(tag: Int) {
         self.tag = tag
         self.priority = Priority.allCases.randomElement() ?? .normal
-        self.business = BankBusiness.allCases.randomElement() ?? .deposit
+        self.bankBusiness = BankBusiness.allCases.randomElement() ?? .deposit
     }
     
     init(tag: Int, priority: Priority, bankBusiness: BankBusiness) {
         self.tag = tag
         self.priority = priority
-        self.business = bankBusiness
+        self.bankBusiness = bankBusiness
     }
 }
 
