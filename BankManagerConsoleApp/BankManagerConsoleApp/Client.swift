@@ -25,25 +25,11 @@ class Client {
         }
     }
     
-    enum Business: CaseIterable {
-        case loan
-        case deposit
-        
-        var string: String {
-            switch self {
-            case .loan:
-                return "대출"
-            case .deposit:
-                return "예금"
-            }
-        }
-    }
-    
     private(set) var tag: Int
     private(set) var priority: Priority
-    private(set) var business: Business
+    private(set) var business: BankBusiness
     
-    init(tag: Int, priority: Priority = .normal, business: Business = .loan) {
+    init(tag: Int, priority: Priority = .normal, business: BankBusiness = .loan) {
         self.tag = tag
         
         if let randomPriority = Priority.allCases.randomElement() {
@@ -52,7 +38,7 @@ class Client {
             self.priority = priority
         }
         
-        if let randomBusiness = Business.allCases.randomElement() {
+        if let randomBusiness = BankBusiness.allCases.randomElement() {
             self.business = randomBusiness
         } else {
             self.business = business

@@ -6,6 +6,20 @@
 
 import Foundation
 
+enum BankBusiness: CaseIterable {
+    case loan
+    case deposit
+    
+    var string: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
+}
+
 private class BankClerk {
     // MARK: - Properties
     var bankWindowNumber: Int
@@ -13,13 +27,17 @@ private class BankClerk {
         currentClient != nil
     }
     var currentClient: Client?
-    var workTime: Double = 0.7
     var finishedClients: Int = 0
     
     // MARK: - Methods
     func startWork(for client: Client) {
         currentClient = client
         print("\(client.tag)번 \(client.priority.string)고객 \(client.business.string)업무 시작")
+        
+        let workTime = Int(self.workTime(bankBusiness: client.business) * 1000)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(workTime)) {
+            self.finishWork()
+        }
     }
     
     func finishWork() {
@@ -28,6 +46,15 @@ private class BankClerk {
             print("\(client.tag)번 \(client.priority.string)고객 \(client.business.string)업무 완료")
         }
         currentClient = nil
+    }
+    
+    func workTime(bankBusiness: BankBusiness) -> Double {
+        switch bankBusiness {
+        case .loan:
+            return 1.1
+        case .deposit:
+            return 0.7
+        }
     }
     
     init(bankWindowNumber: Int) {
@@ -88,6 +115,7 @@ struct BankManager {
     
     mutating func endBusiness() {
         totalBusinessTime = currentBusinesstime
+        
         printWorkEndMessage()
     }
     
@@ -106,11 +134,6 @@ struct BankManager {
         for waitBankClerk in waitBankClerks {
             if let client = waitingClients.dequeue() {
                 waitBankClerk.startWork(for: client)
-                
-                let workTime = Int(waitBankClerk.workTime * 1000)
-                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(workTime)) {
-                    waitBankClerk.finishWork()
-                }
             }
         }
     }
