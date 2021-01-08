@@ -42,7 +42,7 @@ struct Bank {
         while(customers.count > 0) {
             if bankTeller.state == .notWorking {
                 let customer = customers.removeFirst()
-                bankTeller.performTask(customerNumber: customer.waitNumber)
+                bankTeller.performTask(customerNumber: customer.waitNumber, customerPriority: customer.priority, customerTask: customer.taskType)
             }
         }
         self.closeTime = Date()
