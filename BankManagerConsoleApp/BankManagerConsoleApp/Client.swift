@@ -14,17 +14,29 @@ class Client {
         case VVIP
     }
     
+    enum Business: CaseIterable {
+        case loan
+        case deposit
+    }
+    
     private(set) var tag: Int
     private(set) var priority: Priority
+    private(set) var business: Business
     
-    init(tag: Int, priority: Priority = .normal) {
+    init(tag: Int, priority: Priority = .normal, business: Business = .loan) {
         self.tag = tag
+        
         if let randomPriority = Priority.allCases.randomElement() {
             self.priority = randomPriority
         } else {
             self.priority = priority
         }
         
+        if let randomBusiness = Business.allCases.randomElement() {
+            self.business = randomBusiness
+        } else {
+            self.business = business
+        }
     }
 }
 
