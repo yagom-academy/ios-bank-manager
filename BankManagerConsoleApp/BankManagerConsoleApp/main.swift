@@ -6,5 +6,5 @@
 
 import Foundation
 
-var bank = BankManager()
-bank.openBank()
+var bankManager = BankManager()
+bankManager.openBank()
