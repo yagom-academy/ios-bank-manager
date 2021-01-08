@@ -28,15 +28,9 @@ class BankManager {
         guard let firstCustomer = waitingList.first else {
             return
         }
-        self.bankClerks.first?.customers.append(firstCustomer)
-        self.bankClerks.first?.startWork()
-        self.bankClerks.first?.finishWork()
-//        guard let firstCustmer = bankManager.waitingList.first else {
-//            return
-//        }
-//        bankManager.bankClerks.first?.customers.append(firstCustmer)
-//        bankManager.bankClerks.first?.startWork()
-//        bankManager.bankClerks.first?.finishWork()
+        bankClerks.first?.customers.append(firstCustomer)
+        bankClerks.first?.startWork()
+        bankClerks.first?.finishWork()
     }
     
     init(bankClerkCount: Int) {

@@ -14,16 +14,20 @@ class BankClerk {
     var totalTaskTime: Double = 0.0
     var working: Bool = false {
         didSet {
-            if working == false {
-                guard let custmer = bankManager.waitingList.first else {
-                    print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(finishedCustomerNumber)명이며, 총 업무시간은 \(round(100 * totalTaskTime) / 100)초입니다.")
-                    bank.message()
-                    return
-                }
-                customers.append(custmer)
-                startWork()
-                finishWork()
+            work()
+        }
+    }
+    
+    func work() {
+        if working == false {
+            guard let custmer = bankManager.waitingList.first else {
+                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(finishedCustomerNumber)명이며, 총 업무시간은 \(round(100 * totalTaskTime) / 100)초입니다.")
+                bank.message()
+                return
             }
+            customers.append(custmer)
+            startWork()
+            finishWork()
         }
     }
     
