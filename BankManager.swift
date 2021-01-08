@@ -6,25 +6,20 @@
 
 import Foundation
 
-enum BankState: Int {
-    case open = 1
-    case close = 2
+enum BankState: String {
+    case `default` = "0"
+    case open = "1"
+    case close = "2"
 }
 
 struct BankManager {
-    private var bankState: Int = 0
+    private var bankState: BankState = .default 
     
     mutating func openBank() {
         repeat {
-            let userInput = getInput()
-            self.bankState = userInput
-            let customers = countTodayCustomer()
-            
-            if self.bankState == BankState.open.rawValue {
-                let taskedTime = BankClerk().serveCustomers(customers: customers)
-                MessageCollection.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
-            }
-        } while self.bankState == BankState.open.rawValue
+            self.bankState = getInput()
+            checkBankState(state: self.bankState)
+        } while self.bankState == BankState.open || self.bankState == BankState.default
     }
 }
 
@@ -33,13 +28,28 @@ func countTodayCustomer() -> Int {
     return customers
 }
 
-func getInput() -> Int {
-    print(MessageCollection.initializationText, terminator: "")
-    guard let userInput: String = readLine(), let userInputNumber: Int = Int(userInput), (userInputNumber == BankState.open.rawValue || userInputNumber == BankState.close.rawValue) else {
-        print(MessageCollection.inputErrorText)
-        return getInput()
+@discardableResult func getInput() -> BankState {
+    InputStateMessage.printInputProcessText(state: .initialization)
+    guard let userInput: String = readLine(), (userInput == BankState.open.rawValue || userInput == BankState.close.rawValue) else {
+        InputStateMessage.printInputProcessText(state: .error)
+        return BankState.default
     }
-    return userInputNumber
+    
+    if userInput == BankState.open.rawValue {
+        return BankState.open
+    }
+    return BankState.close
+}
+
+func checkBankState(state: BankState) {
+    switch state {
+    case .open:
+        let customers = countTodayCustomer()
+        let taskedTime = BankClerk().serveCustomers(customers: customers)
+        BankerMessage.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
+    case .default, .close:
+        break
+    }
 }
 
 
