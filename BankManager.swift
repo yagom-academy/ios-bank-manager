@@ -62,6 +62,18 @@ class Bank {
             bankers.append(Banker(windowNumber: window, isWorking: .notWorking))
         }
     }
+    
+    func openBank() {
+        while !customers.isEmpty {
+            for windowNumber in 0..<bankers.count {
+                checkBankerIsWorking(bankerCondition: bankers[windowNumber].isWorking, windowNumber: windowNumber)
+            }
+        }
+        checkEnd()
+        semaphore.wait()
+        closeBank()
+        initializeInfo()
+    }
 }
     
     
