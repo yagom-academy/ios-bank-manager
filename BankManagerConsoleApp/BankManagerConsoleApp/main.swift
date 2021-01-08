@@ -51,6 +51,10 @@ private func initializeBankCustomer() {
         let customerTask = generateRandomCustomerTask()
         bank.customers.append(Customer(waitNumber: waitNumber, priority: customerPriority, taskType: customerTask))
     }
+    
+    bank.customers.sort { (currentCustomer, nextCustomer) -> Bool in
+        currentCustomer.priority.rawValue < nextCustomer.priority.rawValue
+    }
 }
 
 private func main() {
