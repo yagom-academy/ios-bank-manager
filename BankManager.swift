@@ -17,7 +17,7 @@ struct BankClient {
 struct BankClerk {
     var bankWindowNumber: Int
     var taskState: Bool
-    var client: BankClient? = BankClient(number: 0)
+    var client: BankClient?
     
     mutating func task() {
         let startTime = NSDate().timeIntervalSince1970
