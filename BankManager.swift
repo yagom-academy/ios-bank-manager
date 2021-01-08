@@ -93,6 +93,25 @@ class Bank {
         }
     }
     
+    private func checkEnd() {
+        while true {
+            if customers.isEmpty {
+                var counter = 0
+                for windowNumber in 0..<bankers.count {
+                    if bankers[windowNumber].isWorking == .notWorking {
+                        counter += 1
+                    }
+                }
+                if counter == bankers.count {
+                    bankers.sort { $0.workTime > $1.workTime }
+                    businessTimes = bankers[0].workTime
+                    semaphore.signal()
+                    break
+                }
+            }
+        }
+    }
+}
     
     
     
