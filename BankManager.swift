@@ -42,6 +42,13 @@ class Banker {
         }
     }
 }
+
+struct Customer {
+    var waiting: UInt
+    var taskTime: Double
+    var priority: CustomerPriority
+    var businessType: BusinessType
+}
     
     
     
