@@ -15,7 +15,7 @@ func startBank() {
     
     switch userInput {
     case "1":
-        bank.configureBankers(numberOfBankers: 1)
+        bank.configureBankers(numberOfBankers: 3)
         configureCustomers()
         bank.openBank()
     case "2":
