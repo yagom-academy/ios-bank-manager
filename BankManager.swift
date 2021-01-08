@@ -7,22 +7,22 @@
 import Foundation
 
 private class BankClerk {
+    // MARK: - Properties
     var bankWindowNumber: Int
     var isWorking: Bool {
         currentClient != nil
     }
     var currentClient: Client?
     var workTime: Double = 0.7
-    var totalWorkTime: Double = 0.0
     var finishedClients: Int = 0
     
+    // MARK: - Methods
     func startWork(for client: Client) {
         currentClient = client
         print("\(client.tag)번 \(client.priority.string)고객 \(client.business.string)업무 시작")
     }
     
     func finishWork() {
-        totalWorkTime += workTime
         finishedClients += 1
         if let client = currentClient {
             print("\(client.tag)번 \(client.priority.string)고객 \(client.business.string)업무 완료")
@@ -40,11 +40,11 @@ struct BankManager {
     private var bankClerks: [BankClerk] = [BankClerk]()
     private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
-    var totalWorkTime: Double {
-        bankClerks.reduce(0) {
-            $0 + $1.totalWorkTime
-        }
+    private var startBusinessTime: Double = 0.0
+    var currentBusinesstime: Double {
+        CFAbsoluteTimeGetCurrent() - startBusinessTime
     }
+    var totalBusinessTime: Double?
     var totalFinishedClients: Int {
         bankClerks.reduce(0) {
             $0 + $1.finishedClients
@@ -79,6 +79,18 @@ struct BankManager {
         }
     }
     
+    mutating func startBusiness() {
+        startBusinessTime = CFAbsoluteTimeGetCurrent()
+        
+        doBusiness()
+        endBusiness()
+    }
+    
+    mutating func endBusiness() {
+        totalBusinessTime = currentBusinesstime
+        printWorkEndMessage()
+    }
+    
     mutating func doBusiness() {
         while true {
             if waitingClients.isEmpty && isAllBankClerkFinishWork {
@@ -87,8 +99,6 @@ struct BankManager {
                 startBankClerkWork()
             }
         }
-        
-        printWorkEndMessage()
     }
     
     private mutating func startBankClerkWork() {
@@ -106,8 +116,8 @@ struct BankManager {
     }
     
     private func printWorkEndMessage() {
-        let totalWorkTimeString = String(format: "%.2f", totalWorkTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalFinishedClients)명이며, 총 업무시간은 \(totalWorkTimeString)초입니다")
+        let totalBusinessTimeString = String(format: "%.2f", totalBusinessTime ?? 0)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalFinishedClients)명이며, 총 업무시간은 \(totalBusinessTimeString)초입니다")
     }
     
     init(_ numberOfBankClerk: Int, _ numberOfClient: Int) {

@@ -8,7 +8,7 @@ import Foundation
 
 func openBank() {
     var bankManager = BankManager(3, Int.random(in: 10...30))
-    bankManager.doBusiness()
+    bankManager.startBusiness()
 }
 
 var isContinue = true
