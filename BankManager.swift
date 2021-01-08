@@ -9,11 +9,13 @@ class Banker {
         self.isWorking = isWorking
     }
     
-    func work(_ customers: Customer) {
+    func work(_ customers: Customer, _ bankers: Banker) {
         isWorking = .working
-        print("\(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 시작")
+        print("\(bankers.windowNumber)번 창구에서 \(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 시작")
+        
         Thread.sleep(forTimeInterval: customers.taskTime)
-        print("\(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 완료")
+        
+        print("\(bankers.windowNumber)번 창구에서 \(customers.waiting)번 \(customers.priority)고객 \(customers.businessType)업무 완료")
         isWorking = .notWorking
     }
 }
@@ -30,6 +32,8 @@ class Bank {
     private var businessTimes: Double = 0.0
     private var visitedCustomers: UInt = 0
     
+    let semaphore = DispatchSemaphore(value: 0)
+    
     func configureBankers(numberOfBankers: UInt) {
         for window in 1...numberOfBankers {
             bankers.append(Banker(windowNumber: window, isWorking: .notWorking))
@@ -42,21 +46,25 @@ class Bank {
                 switch bankers[banker].isWorking {
                 case .notWorking:
                     let customer = customers.removeFirst()
-                    bankers[banker].work(customer)
+                    
+                    bankers[banker].work(customer, self.bankers[banker])
+                    
                     visitedCustomers += 1
                     businessTimes += customer.taskTime
+                    
                 case .working:
                     continue
                 }
             }
         }
+        sleep(2)
         closeBank()
         initializeInfo()
     }
     
     func closeBank() {
         let businessTimesToString: String = String(format: "%.2f", businessTimes)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomers)명이며, 총 업무시간은 \(businessTimesToString)초 업니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomers)명이며, 총 업무시간은 \(businessTimesToString)초 입니다.")
     }
     
     func initializeInfo() {
