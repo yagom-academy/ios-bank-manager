@@ -75,7 +75,7 @@ class Bank {
         initializeInfo()
     }
     
-    private func checkBankerIsWorking(_windowNumber: Int) {
+    private func checkBankerIsWorking(_ windowNumber: Int) {
         let banker = bankers[windowNumber]
         switch banker.isWorking {
             case .notWorking:
@@ -124,7 +124,3 @@ class Bank {
         numberOfCustomers = 0
     }
 }
-    
-    
-    
-
