@@ -12,7 +12,6 @@ class Bank {
     
     init(employeeNumber: Int) throws {
         self.serviceCounter = try loadBankClerks(of: employeeNumber)
-        NotificationCenter.default.addObserver(self, selector: #selector(assignClient), name: NSNotification.Name("workable"), object: nil)
     }
     
     private func loadBankClerks(of number: Int) throws -> [Int : BankClerk] {
@@ -39,25 +38,19 @@ class Bank {
         }
     }
     
-    func makeAllClerksWorkable() {
-        for clerk in serviceCounter.values {
-            clerk.workingStatus = .workable
-        }
-    }
-    
-    @objc private func assignClient(_ noti: Notification) {
-        guard let client = waitingList.first, let counterNumber = noti.userInfo?["counterNumber"] as? Int else {
-            return
-        }
-        
-        waitingList.removeFirst()
-        
-        guard let workableBankClerk = serviceCounter[counterNumber] else {
-            return
-        }
-        
-        workableBankClerk.handleClientBusiness(of: client)
-    }
+//    @objc private func assignClient(_ noti: Notification) {
+//        guard let client = waitingList.first, let counterNumber = noti.userInfo?["counterNumber"] as? Int else {
+//            return
+//        }
+//
+//        waitingList.removeFirst()
+//
+//        guard let workableBankClerk = serviceCounter[counterNumber] else {
+//            return
+//        }
+//
+//        workableBankClerk.handleClientBusiness(of: client)
+//    }
 }
 
 // MARK : bank endingment
