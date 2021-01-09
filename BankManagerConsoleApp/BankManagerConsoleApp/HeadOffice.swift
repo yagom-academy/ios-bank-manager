@@ -8,14 +8,15 @@
 import Foundation
 
 class HeadOffice {
-//    static let shared = HeadOffice()
-//    var loanQueue: DispatchQueue
-//    
-//    private init() {}
+    static let shared = HeadOffice()
+    var loanQueue: DispatchQueue = DispatchQueue(label: "HeadOffice")
+    let needTimeToJudgeLoan: TimeInterval = 0.5
     
-//    func judgeLoan() {
-//        loanQueue.async {
-//            <#code#>
-//        }
-//    }
+    private init() {}
+    
+    func judgeLoan(for client: Client) {
+        Dashboard.printStatus(for: client, about: .loanStart)
+        Thread.sleep(forTimeInterval: self.needTimeToJudgeLoan)
+        Dashboard.printStatus(for: client, about: .loanFinish)
+    }
 }

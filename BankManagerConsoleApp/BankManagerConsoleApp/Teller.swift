@@ -21,12 +21,37 @@ final class Teller {
     }
     
     func handleBusiness(for client: Client) {
-        let needTimeToWork = client.businessType.neededTime
-
         isWorking = true
+        switch client.businessType {
+        case .deposit:
+            handleDeposit(for: client)
+        case .loan:
+            handleLoan(for: client)
+        }
+        isWorking = false
+    }
+    
+    func handleDeposit(for client: Client) {
+        let needTimeToWork = client.businessType.neededTime
+        
         Dashboard.printStatus(for: client, about: .tellerStart)
         Thread.sleep(forTimeInterval: needTimeToWork)
         Dashboard.printStatus(for: client, about: .tellerFinish)
-        isWorking = false
+    }
+    
+    
+    func handleLoan(for client: Client) {
+        let semaphore = DispatchSemaphore(value: 0)
+        let needTimeToWork = client.businessType.neededTime
+        
+        Dashboard.printStatus(for: client, about: .tellerStart)
+        Thread.sleep(forTimeInterval: needTimeToWork)
+        HeadOffice.shared.loanQueue.async {
+            HeadOffice.shared.judgeLoan(for: client)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        Thread.sleep(forTimeInterval: needTimeToWork)
+        Dashboard.printStatus(for: client, about: .tellerFinish)
     }
 }
