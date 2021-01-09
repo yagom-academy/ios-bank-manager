@@ -16,6 +16,13 @@ struct BankManager {
     private var bankState: BankState = .default
     let customerClass: Int
     var customerList: [Customer] = []
+    var bankclerks: [BankClerk] = []
+    
+    mutating func writeBanKClerkList() {
+        for windowNumber in 1...3 {
+            bankclerks.append(BankClerk(windowNumber: windowNumber))
+        }
+    }
     
     mutating func writeCustomerList() {
         for waitingNumber in 0...countTodayCustomer() {
