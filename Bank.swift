@@ -11,17 +11,12 @@ final class Bank {
     private var tellers: [Teller] = []
     private var finishedClientNumber = 0
     private var businessTime: TimeInterval?
-        
-    func printMenu() {
-        print(BankMenu.description, terminator: " ")
-    }
-    
+  
     func operateBank(teller: Int, client: [Client]) {
-        var openTime = Date()
+        let openTime = Date()
         
-        openTime = Date()
-        clients = client
         initTellers(teller)
+        clients = client
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
         Dashboard.printCloseMessage(finishedClientNumber, businessTime)

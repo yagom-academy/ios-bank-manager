@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BankMenu: String {
+enum Menu: String {
     case start = "1"
     case end = "2"
     
