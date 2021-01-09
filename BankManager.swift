@@ -13,7 +13,18 @@ enum BankState: String {
 }
 
 struct BankManager {
-    private var bankState: BankState = .default 
+    private var bankState: BankState = .default
+    let customerClass: Int
+    var customerList: [Customer] = []
+    
+    mutating func writeCustomerList() {
+        for waitingNumber in 0...countTodayCustomer() {
+            guard let customerClass = Customer.CustomerClass(rawValue: Customer.setCustomerClass()) else {
+                return
+            }
+            customerList.append(Customer(waitingNumber: waitingNumber, customerClass: customerClass))
+        }
+    }
     
     mutating func openBank() {
         repeat {
@@ -45,8 +56,9 @@ func checkBankState(state: BankState) {
     switch state {
     case .open:
         let customers = countTodayCustomer()
-        let taskedTime = BankClerk().serveCustomers(customers: customers)
-        BankerMessage.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
+        
+        //let taskedTime = BankClerk().calculateTime
+        //BankerMessage.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
     case .default, .close:
         break
     }

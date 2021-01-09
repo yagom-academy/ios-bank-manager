@@ -8,31 +8,44 @@
 import Foundation
 
 struct Customer {
-    enum CustomerClass: Int {
+    let waitingNumber: Int
+    let customerClass: CustomerClass
+    
+    enum CustomerClass: Int, CaseIterable {
         case VVIP = 0
         case VIP = 1
         case normal = 2
+        
+        var description: String {
+            switch self {
+            case .VVIP:
+                return "VVIP 고객"
+            case .VIP:
+                return "VIP 고객"
+            case .normal:
+                return "일반 고객"
+            }
+        }
     }
     
-    enum CustomerClassMessage: String {
-        case VVIP = "VVIP 고객"
-        case VIP = "VIP 고객"
-        case normal = "일반 고객"
+    init(waitingNumber: Int, customerClass: CustomerClass) {
+        self.waitingNumber = waitingNumber
+        self.customerClass = customerClass
     }
     
-    func setCustomerClass() -> Int {
+    static func setCustomerClass() -> Int {
         let customerClass = Int.random(in: 0...2)
       return customerClass
     }
     
-    func setCustomerClassMessage(customerClass: Int) -> String {
+    func setCustomerClassMessage(customerClass: CustomerClass) -> String {
         switch customerClass {
-        case CustomerClass.VVIP.rawValue:
-            return CustomerClassMessage.VVIP.rawValue
-        case CustomerClass.VIP.rawValue:
-            return CustomerClassMessage.VIP.rawValue
-        default:
-            return CustomerClassMessage.normal.rawValue
+        case .VVIP:
+            return CustomerClass.VVIP.description
+        case .VIP:
+            return CustomerClass.VIP.description
+        case .normal:
+            return CustomerClass.normal.description
         }
     }
 }
