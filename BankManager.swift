@@ -17,7 +17,7 @@ struct BankManager {
         randomClientNumber = Int.random(in: 10...30)
         try bank.updateWaitingList(of: randomClientNumber)
         print("은행개점")
-        bank.solution()
+        bank.makeAllClerksWork()
     }
     
     func closeBank() {

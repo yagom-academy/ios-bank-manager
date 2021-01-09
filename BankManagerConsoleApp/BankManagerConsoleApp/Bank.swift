@@ -26,6 +26,19 @@ class Bank {
         }
     }
     
+    func makeAllClerksWork() {
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        for i in 1...bankClerkNumber {
+            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
+            
+            dispatchQueue.async {
+                self.handleWaitingList(with: semaphore)
+            }
+        }
+    }
+    
+    
     private func handleWaitingList(with semaphore: DispatchSemaphore) {
         let bankClerk = BankClerk()
         
@@ -39,18 +52,6 @@ class Bank {
             
             bankClerk.handleClientBusiness(of: client)
             self.totalVistedClientsNumber += 1
-        }
-    }
-    
-    func solution() {
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        for i in 1...bankClerkNumber {
-            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
-            
-            dispatchQueue.async {
-                self.handleWaitingList(with: semaphore)
-            }
         }
     }
 }
