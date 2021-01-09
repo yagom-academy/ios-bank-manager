@@ -14,7 +14,11 @@ class Dashboard {
         
     static func printStatus(for client: Client, about message: Message) {
         let message = String(format: message.rawValue, client.waitingNumber, client.priority.description, client.businessType.description)
-        print(message)
+        let format = DateFormatter()
+        format.dateFormat = "ss.S"
+        let now = Date()
+        let date = format.string(from: now)
+        print(message + " \(date)")
     }
     
     static func printCloseMessage(_ number: Int, _ time: TimeInterval?) {

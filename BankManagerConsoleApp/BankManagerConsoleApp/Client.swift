@@ -9,17 +9,17 @@ import Foundation
 
 final class Client {
     enum Priority: Comparable, CaseIterable {
-        case first
-        case second
-        case third
+        case VVIP
+        case VIP
+        case normal
         
         var description: String {
             switch self {
-            case .first:
+            case .VVIP:
                 return "VVIP"
-            case .second:
+            case .VIP:
                 return "VIP"
-            case .third:
+            case .normal:
                 return "일반"
             }
         }
@@ -29,7 +29,7 @@ final class Client {
     let businessType: BusinessType
     let priority: Priority
     
-    init(waitingNumber: Int, businessType: BusinessType = .deposit, priority: Priority = .third) {
+    init(waitingNumber: Int, businessType: BusinessType = .deposit, priority: Priority = .normal) {
         self.waitingNumber = waitingNumber
         self.businessType = businessType
         self.priority = priority
