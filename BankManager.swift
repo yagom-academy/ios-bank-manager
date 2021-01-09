@@ -14,7 +14,6 @@ enum BankState: String {
 
 struct BankManager {
     private var bankState: BankState = .default
-    let customerClass: Int
     var customerList: [Customer] = []
     var bankclerks: [BankClerk] = []
     
@@ -25,11 +24,22 @@ struct BankManager {
     }
     
     mutating func writeCustomerList() {
-        for waitingNumber in 0...countTodayCustomer() {
-            guard let customerClass = Customer.CustomerClass(rawValue: Customer.setCustomerClass()) else {
+        for waitingNumber in 1...countTodayCustomer() {
+            guard let customerClass = Customer.Class(rawValue: Customer.setCustomerClass()) else {
                 return
             }
             customerList.append(Customer(waitingNumber: waitingNumber, customerClass: customerClass))
+        }
+    }
+    
+    mutating func distributeCustomer() {
+        for customer in customerList {
+            for bankclerk in bankclerks {
+                if bankclerk.isWorking == false {
+                    bankclerk.serveCustomers(customer: customer)
+                    break
+                }
+            }
         }
     }
     
@@ -37,6 +47,9 @@ struct BankManager {
         repeat {
             self.bankState = getInput()
             checkBankState(state: self.bankState)
+            writeBanKClerkList()
+            writeCustomerList()
+            distributeCustomer()
         } while self.bankState == BankState.open || self.bankState == BankState.default
     }
 }
@@ -64,8 +77,8 @@ func checkBankState(state: BankState) {
     case .open:
         let customers = countTodayCustomer()
         
-        //let taskedTime = BankClerk().calculateTime
-        //BankerMessage.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
+    //let taskedTime = BankClerk().calculateTime
+    //BankerMessage.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
     case .default, .close:
         break
     }
