@@ -9,9 +9,25 @@ import Foundation
 private func main() {
     let bank = Bank()
     let tellerNumber = 3
+    let maxClientNumber = 30
+    let minClientNumber = 10
     var isContinue = true
-    var clientNumber: Int {
-        return Int.random(in: 10...30)
+    
+    func randomNumber(from minNumber: Int = 0, to maxNumber: Int) -> Int {
+        return Int.random(in: minNumber...maxNumber)
+    }
+    
+    func initClients(_ number: Int) -> [Client]? {
+        var clients: [Client] = []
+        
+        for waitingNumber in 1...number {
+            guard let businessType = BusinessType(rawValue: randomNumber(to: BusinessType.allCases.count - 1)), let priority = Client.Priority(rawValue: randomNumber(to: Client.Priority.allCases.count - 1)) else {
+                return nil
+            }
+            
+            clients.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
+        }
+        return clients
     }
     
     while isContinue {
@@ -24,7 +40,10 @@ private func main() {
         
         switch command {
         case .start:
-            bank.operateBank(teller: tellerNumber, client: clientNumber)
+            guard let clients = initClients(randomNumber(from: minClientNumber, to: maxClientNumber)) else {
+                return 
+            }
+            bank.operateBank(teller: tellerNumber, client: clients)
         case .end:
             isContinue = false
         }
