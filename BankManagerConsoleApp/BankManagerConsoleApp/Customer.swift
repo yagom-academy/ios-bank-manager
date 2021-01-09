@@ -19,4 +19,17 @@ struct Customer {
         case VIP = "VIP"
         case normal = "일반"
     }
+    
+    func setCustomerClass() -> Int {
+        let customerClass = Int.random(in: 0...2)
+        switch customerClass {
+        case CustomerClass.VVIP.rawValue:
+            return CustomerClass.VVIP.rawValue
+        case CustomerClass.VIP.rawValue:
+            return CustomerClass.VIP.rawValue
+        default:
+            return CustomerClass.normal.rawValue
+        }
+    }
 }
+
