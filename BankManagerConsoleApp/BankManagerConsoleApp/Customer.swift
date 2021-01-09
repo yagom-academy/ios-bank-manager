@@ -15,21 +15,14 @@ struct Customer {
     }
     
     enum CustomerClassMessage: String {
-        case VVIP = "VVIP"
-        case VIP = "VIP"
-        case normal = "일반"
+        case VVIP = "VVIP 고객"
+        case VIP = "VIP 고객"
+        case normal = "일반 고객"
     }
     
     func setCustomerClass() -> Int {
         let customerClass = Int.random(in: 0...2)
-        switch customerClass {
-        case CustomerClass.VVIP.rawValue:
-            return CustomerClass.VVIP.rawValue
-        case CustomerClass.VIP.rawValue:
-            return CustomerClass.VIP.rawValue
-        default:
-            return CustomerClass.normal.rawValue
-        }
+      return customerClass
     }
     
     func setCustomerClassMessage(customerClass: Int) -> String {
