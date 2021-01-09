@@ -6,7 +6,13 @@
 
 import Foundation
 
-struct ConsoleController {
+class ConsoleController {
+    private var bankManager = BankManager()
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(closeBank), name: Notification.Name("FinishWork"), object: nil)
+    }
+    
     func recieveUserInput() -> String {
         print(" 1 : 은행개점 \n 2 : 종료\n 입력 : ", terminator: "")
         
@@ -33,7 +39,6 @@ struct ConsoleController {
                     break
                 }            
             }
-            runProgram()
         case "2":
             break
         default :
@@ -43,9 +48,12 @@ struct ConsoleController {
     }
     
     func manageBank() throws {
-        var bankManager = BankManager()
         try bankManager.openBank()
+    }
+    
+    @objc func closeBank() {
         bankManager.closeBank()
+        runProgram()
     }
     
     func runProgram() {
