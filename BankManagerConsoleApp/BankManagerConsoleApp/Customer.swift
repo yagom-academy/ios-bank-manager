@@ -31,5 +31,16 @@ struct Customer {
             return CustomerClass.normal.rawValue
         }
     }
+    
+    func setCustomerClassMessage(customerClass: Int) -> String {
+        switch customerClass {
+        case CustomerClass.VVIP.rawValue:
+            return CustomerClassMessage.VVIP.rawValue
+        case CustomerClass.VIP.rawValue:
+            return CustomerClassMessage.VIP.rawValue
+        default:
+            return CustomerClassMessage.normal.rawValue
+        }
+    }
 }
 
