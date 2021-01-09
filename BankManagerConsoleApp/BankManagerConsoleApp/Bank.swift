@@ -26,25 +26,30 @@ class Bank {
         }
     }
     
+    private func handleWaitingList(with semaphore: DispatchSemaphore) {
+        let bankClerk = BankClerk()
+        
+        while !self.waitingList.isEmpty {
+            semaphore.wait()
+            guard let client = self.waitingList.first else {
+                return
+            }
+            self.waitingList.removeFirst()
+            semaphore.signal()
+            
+            bankClerk.handleClientBusiness(of: client)
+            self.totalVistedClientsNumber += 1
+        }
+    }
+    
     func solution() {
         let semaphore = DispatchSemaphore(value: 1)
         
         for i in 1...bankClerkNumber {
-            let bankClerk = BankClerk()
             let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
             
             dispatchQueue.async {
-                while !self.waitingList.isEmpty {
-                    semaphore.wait()
-                    guard let client = self.waitingList.first else {
-                        return
-                    }
-                    self.waitingList.removeFirst()
-                    semaphore.signal()
-                    
-                    bankClerk.handleClientBusiness(of: client)
-                    self.totalVistedClientsNumber += 1
-                }
+                self.handleWaitingList(with: semaphore)
             }
         }
     }
