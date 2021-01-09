@@ -9,9 +9,9 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
-    let customerClass: CustomerClass
+    let customerClass: Class
     
-    enum CustomerClass: Int, CaseIterable {
+    enum Class: Int, CaseIterable {
         case VVIP = 0
         case VIP = 1
         case normal = 2
@@ -28,7 +28,7 @@ struct Customer {
         }
     }
     
-    init(waitingNumber: Int, customerClass: CustomerClass) {
+    init(waitingNumber: Int, customerClass: Class) {
         self.waitingNumber = waitingNumber
         self.customerClass = customerClass
     }
@@ -38,14 +38,14 @@ struct Customer {
       return customerClass
     }
     
-    func setCustomerClassMessage(customerClass: CustomerClass) -> String {
+    func setCustomerClassMessage(customerClass: Class) -> String {
         switch customerClass {
         case .VVIP:
-            return CustomerClass.VVIP.description
+            return Class.VVIP.description
         case .VIP:
-            return CustomerClass.VIP.description
+            return Class.VIP.description
         case .normal:
-            return CustomerClass.normal.description
+            return Class.normal.description
         }
     }
 }
