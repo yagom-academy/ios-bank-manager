@@ -7,7 +7,7 @@ class Bank {
     private var totalVistedClientsNumber: Int = 0
     
     var endingMent: String {
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 명이며, 총 업무시간은 초입니다."
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistedClientsNumber)명이며, 총 업무시간은 초입니다."
     }
     
     init(employeeNumber: Int) {
@@ -26,18 +26,27 @@ class Bank {
         }
     }
     
-//    @objc private func assignClient(_ noti: Notification) {
-//        guard let client = waitingList.first, let counterNumber = noti.userInfo?["counterNumber"] as? Int else {
-//            return
-//        }
-//
-//        waitingList.removeFirst()
-//
-//        guard let workableBankClerk = serviceCounter[counterNumber] else {
-//            return
-//        }
-//
-//        workableBankClerk.handleClientBusiness(of: client)
-//    }
+    func solution() {
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        for i in 1...bankClerkNumber {
+            let bankClerk = BankClerk()
+            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
+            
+            dispatchQueue.async {
+                while !self.waitingList.isEmpty {
+                    semaphore.wait()
+                    guard let client = self.waitingList.first else {
+                        return
+                    }
+                    self.waitingList.removeFirst()
+                    semaphore.signal()
+                    
+                    bankClerk.handleClientBusiness(of: client)
+                    self.totalVistedClientsNumber += 1
+                }
+            }
+        }
+    }
 }
 

@@ -6,7 +6,7 @@
 
 struct BankManager {
     private var bank: Bank
-    private let clerkNumber: Int = 1
+    private let clerkNumber: Int = 3
     private lazy var randomClientNumber = 0
     
     init() {
@@ -17,6 +17,7 @@ struct BankManager {
         randomClientNumber = Int.random(in: 10...30)
         try bank.updateWaitingList(of: randomClientNumber)
         print("은행개점")
+        bank.solution()
     }
     
     func closeBank() {
