@@ -8,7 +8,7 @@
 import Foundation
 
 final class Client {
-    enum Priority: Int, CaseIterable {
+    enum Priority: Comparable, CaseIterable {
         case first
         case second
         case third
@@ -33,5 +33,15 @@ final class Client {
         self.waitingNumber = waitingNumber
         self.businessType = businessType
         self.priority = priority
+    }
+}
+
+extension Client: Comparable {
+    static func < (lhs: Client, rhs: Client) -> Bool {
+        return lhs.priority < rhs.priority
+    }
+    
+    static func == (lhs: Client, rhs: Client) -> Bool {
+        return lhs.priority == rhs.priority
     }
 }

@@ -31,9 +31,9 @@ private func main() {
     var isContinue = true
     
     while isContinue {
-        bank.printMenu()
+        Dashboard.printMenu()
         
-        guard let input = readLine(), let command = BankMenu(rawValue: input) else {
+        guard let input = readLine(), let command = Menu(rawValue: input) else {
             print(BankError.wrongInput.description)
             continue
         }

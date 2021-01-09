@@ -12,17 +12,11 @@ final class Bank {
     private var finishedClientNumber = 0
     private var businessTime: TimeInterval?
         
-    func printMenu() {
-        print(BankMenu.description, terminator: " ")
-    }
-    
     func operateBank(teller: Int, client: [Client]) {
-        var openTime = Date()
+        let openTime = Date()
         
-        openTime = Date()
-        clients = client
-        sortClientByPriority()
         initTellers(teller)
+        clients = client.sorted()
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
         Dashboard.printCloseMessage(finishedClientNumber, businessTime)
@@ -33,28 +27,6 @@ final class Bank {
         for windowNumber in 1...number {
             tellers.append(Teller(windowNumber: windowNumber))
         }
-    }
-    
-    private func initClientNumber(_ number: Int) {
-        func randomNumber(maxNumber: Int) -> Int {
-            return Int.random(in: 0..<maxNumber)
-        }
-        
-        for waitingNumber in 1...number {
-            guard let businessType = BusinessType(rawValue: randomNumber(maxNumber: BusinessType.allCases.count)), let priority = Client.Priority(rawValue: randomNumber(maxNumber: Client.Priority.allCases.count)) else {
-                return
-            }
-            
-            clients.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
-        }
-    }
-    
-    private func sortClientByPriority() {
-        let firstGroup: [Client] = clients.filter({ $0.priority == .first})
-        let secondGroup: [Client] = clients.filter({ $0.priority == .second})
-        let thirdGroup: [Client] = clients.filter({ $0.priority == .third})
-        
-        clients = firstGroup + secondGroup + thirdGroup
     }
     
     private func assignBusinessToTeller() {
@@ -77,7 +49,7 @@ final class Bank {
                 }
             }
         }
-        for _ in 0..<finishedClientNumber { semaphore.wait() }
+       for _ in 0..<finishedClientNumber { semaphore.wait() }
     }
     
     private func closeBank() {

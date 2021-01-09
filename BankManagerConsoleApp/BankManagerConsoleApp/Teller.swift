@@ -21,11 +21,9 @@ final class Teller {
     }
     
     func handleBusiness(for client: Client) {
-        let needTimeToWork = client.businessType.neededTime
-
         isWorking = true
         Dashboard.printStatus(for: client, about: .tellerStart)
-        Thread.sleep(forTimeInterval: needTimeToWork)
+        Thread.sleep(forTimeInterval: client.businessType.neededTime)
         Dashboard.printStatus(for: client, about: .tellerFinish)
         isWorking = false
     }
