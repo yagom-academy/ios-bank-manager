@@ -25,7 +25,7 @@ final class Bank {
         initTellers(teller)
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
-        printCloseMessage()
+        Dashboard.printCloseMessage(finishedClientNumber, businessTime)
         closeBank()
     }
     
@@ -78,15 +78,6 @@ final class Bank {
             }
         }
         for _ in 0..<finishedClientNumber { semaphore.wait() }
-    }
-    
-    private func printCloseMessage() {
-        guard let businessTime = businessTime else {
-            print(BankError.unknown.description)
-            return
-        }
-        let message = String(format: BankConstant.closeMessage, finishedClientNumber, businessTime)
-        print(message)
     }
     
     private func closeBank() {

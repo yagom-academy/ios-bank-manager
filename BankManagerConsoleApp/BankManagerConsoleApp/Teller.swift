@@ -25,20 +25,10 @@ final class Teller {
         let needTimeToWork = client.businessType.neededTime
 
         isWorking = true
-        printStartBusiness(for: client)
+        Dashboard.printStatus(for: client, about: .tellerStart)
         Thread.sleep(forTimeInterval: needTimeToWork)
         workingHours += needTimeToWork
-        printFinishBusiness(for: client)
+        Dashboard.printStatus(for: client, about: .tellerFinish)
         isWorking = false
-    }
-    
-    private func printStartBusiness(for client: Client) {
-        let message = String(format: BankConstant.tellerStartMassage, windowNumber, client.waitingNumber, client.priority.description, client.businessType.description)
-        print(message)
-    }
-    
-    private func printFinishBusiness(for client: Client) {
-        let message = String(format: BankConstant.tellerFinishMessage, windowNumber, client.waitingNumber, client.priority.description, client.businessType.description)
-        print(message)
     }
 }
