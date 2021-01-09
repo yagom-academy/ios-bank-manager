@@ -39,16 +39,15 @@ class Bank {
         
         for i in 1...bankClerkNumber {
             let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
-            
+        
             dispatchQueue.async(group: counterGroup) {
                 self.handleWaitingList(with: semaphore)
             }
         }
         
-        Thread.sleep(forTimeInterval: 100)
+        counterGroup.wait()
         
         counterGroup.notify(queue: DispatchQueue.global()) {
-            print("test")
             NotificationCenter.default.post(name: Notification.Name("FinishWork"), object: nil)
         }
     }

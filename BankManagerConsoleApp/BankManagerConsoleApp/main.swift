@@ -28,17 +28,7 @@ class ConsoleController {
     func operateUserInput(_ input: String) {
         switch input {
         case "1":
-            do {
-                try manageBank()
-            } catch {
-                switch error {
-                case BankOperationError.invalidValue:
-                    print("알 수 없는 에러가 발생했습니다.")
-                    break
-                default:
-                    break
-                }            
-            }
+            manageBank()
 //            runProgram()
         case "2":
             break
@@ -48,8 +38,18 @@ class ConsoleController {
         }
     }
     
-    func manageBank() throws {
-        try bankManager.openBank()
+    func manageBank() {
+        do {
+            try bankManager.openBank()
+        } catch {
+            switch error {
+            case BankOperationError.invalidValue:
+                print("알 수 없는 에러가 발생했습니다.")
+                break
+            default:
+                break
+            }
+        }
     }
     
     @objc func closeBank(_ noti: Notification) {
