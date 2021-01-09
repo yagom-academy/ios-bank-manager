@@ -6,20 +6,22 @@
 
 struct BankManager {
     private var bank: Bank
+    private let clerkNumber: Int = 1
+    private lazy var randomClientNumber = 0
     
-    init() {
-        self.bank = Bank(employeeNumber: 1)
+    init() throws {
+        self.bank = try Bank(employeeNumber: clerkNumber)
     }
     
-    mutating func openBank() {
-        bank.updateWaitingList(of: Int.random(in: 10...30))
+    mutating func openBank() throws {
+        randomClientNumber = Int.random(in: 10...30)
+        try bank.updateWaitingList(of: randomClientNumber)
         print("은행개점")
         bank.makeAllClerksWorkable()
-        print(bank.endingMent)
     }
     
     func closeBank() {
-        print("종료")
+        print(bank.endingMent)
     }
 }
 

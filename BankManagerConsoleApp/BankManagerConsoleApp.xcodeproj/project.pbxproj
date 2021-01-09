@@ -13,6 +13,7 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D974CDE625A37CE1006835D5 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974CDE525A37CE1006835D5 /* Bank.swift */; };
+		D99CC3D125A7403800A44579 /* BankOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99CC3D025A7403800A44579 /* BankOperationError.swift */; };
 		D99E12AA25A5CBF600212D34 /* BankClerkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99E12A925A5CBF600212D34 /* BankClerkStatus.swift */; };
 		D9A6620625A69A4D00B721A0 /* ClientGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6620525A69A4D00B721A0 /* ClientGrade.swift */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		D974CDE525A37CE1006835D5 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		D99CC3D025A7403800A44579 /* BankOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankOperationError.swift; sourceTree = "<group>"; };
 		D99E12A925A5CBF600212D34 /* BankClerkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerkStatus.swift; sourceTree = "<group>"; };
 		D9A6620525A69A4D00B721A0 /* ClientGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientGrade.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +81,7 @@
 				D974CDE525A37CE1006835D5 /* Bank.swift */,
 				D99E12A925A5CBF600212D34 /* BankClerkStatus.swift */,
 				D9A6620525A69A4D00B721A0 /* ClientGrade.swift */,
+				D99CC3D025A7403800A44579 /* BankOperationError.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			files = (
 				D99E12AA25A5CBF600212D34 /* BankClerkStatus.swift in Sources */,
 				348D087B25A341B9001F60A3 /* BankClerk.swift in Sources */,
+				D99CC3D125A7403800A44579 /* BankOperationError.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				348D088825A34D49001F60A3 /* Client.swift in Sources */,
 				D974CDE625A37CE1006835D5 /* Bank.swift in Sources */,
