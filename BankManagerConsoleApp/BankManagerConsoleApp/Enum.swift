@@ -24,7 +24,7 @@ enum Message: String {
     case tellerFinish = "%d번 %@고객 %@업무 완료"
 }
 
-enum BusinessType: Int, CaseIterable {
+enum BusinessType: CaseIterable {
     case deposit
     case loan
     
