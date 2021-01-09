@@ -27,7 +27,7 @@ enum Message: String {
 }
 
 enum BusinessType: Int, CaseIterable {
-    case deposit = 0
+    case deposit
     case loan
     
     var neededTime: TimeInterval {

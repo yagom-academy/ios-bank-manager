@@ -9,7 +9,7 @@ import Foundation
 
 final class Client {
     enum Priority: Int, CaseIterable {
-        case first = 0
+        case first
         case second
         case third
         
