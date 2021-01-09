@@ -10,7 +10,6 @@ import Foundation
 final class Teller {
     private var windowNumber: Int
     var workingQueue: DispatchQueue
-    var workingHours: TimeInterval = 0
     private var isWorking: Bool = false
     var isNotWorking: Bool {
         return !isWorking
@@ -27,7 +26,6 @@ final class Teller {
         isWorking = true
         Dashboard.printStatus(for: client, about: .tellerStart)
         Thread.sleep(forTimeInterval: needTimeToWork)
-        workingHours += needTimeToWork
         Dashboard.printStatus(for: client, about: .tellerFinish)
         isWorking = false
     }
