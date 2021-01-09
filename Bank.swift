@@ -16,27 +16,21 @@ final class Bank {
         print(BankMenu.description, terminator: " ")
     }
     
-    func operateBank(teller: Int, client: Int) {
+    func operateBank(teller: Int, client: [Client]) {
         var openTime = Date()
         
         openTime = Date()
-        initTellerNumber(teller)
-        initClientNumber(client)
+        clients = client
+        initTellers(teller)
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
         printCloseMessage()
         closeBank()
     }
     
-    private func initTellerNumber(_ number: Int) {
+    private func initTellers(_ number: Int) {
         for windowNumber in 1...number {
             tellers.append(Teller(windowNumber: windowNumber))
-        }
-    }
-    
-    private func initClientNumber(_ number: Int) {
-        for waitingNumber in 1...number {
-            clients.append(Client(waitingNumber: waitingNumber))
         }
     }
     
