@@ -8,14 +8,14 @@
 import Foundation
 
 class HeadOffice {
-    static let shared = HeadOffice()
-    var loanQueue: DispatchQueue
+//    static let shared = HeadOffice()
+//    var loanQueue: DispatchQueue
+//    
+//    private init() {}
     
-    private init() {}
-    
-    func judgeLoan() {
-        loanQueue.async {
-            <#code#>
-        }
-    }
+//    func judgeLoan() {
+//        loanQueue.async {
+//            <#code#>
+//        }
+//    }
 }
