@@ -9,8 +9,8 @@ struct BankManager {
     private let clerkNumber: Int = 1
     private lazy var randomClientNumber = 0
     
-    init() throws {
-        self.bank = try Bank(employeeNumber: clerkNumber)
+    init() {
+        self.bank = Bank(employeeNumber: clerkNumber)
     }
     
     mutating func openBank() throws {

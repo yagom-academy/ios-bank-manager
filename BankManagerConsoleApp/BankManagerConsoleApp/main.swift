@@ -43,7 +43,7 @@ struct ConsoleController {
     }
     
     func manageBank() throws {
-        var bankManager = try BankManager()
+        var bankManager = BankManager()
         try bankManager.openBank()
         bankManager.closeBank()
     }
