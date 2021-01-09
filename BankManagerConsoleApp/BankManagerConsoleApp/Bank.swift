@@ -4,10 +4,10 @@ import Foundation
 class Bank {
     private var bankClerkNumber: Int
     private var waitingList: [Client] = []
-    private var totalVistedClientsNumber: Int = 0
+    private var totalProcessedClientsNumber: Int = 0
     
     var endingMent: String {
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistedClientsNumber)명이며, 총 업무시간은 초입니다."
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsNumber)명이며, 총 업무시간은 초입니다."
     }
     
     init(employeeNumber: Int) {
@@ -19,29 +19,42 @@ class Bank {
             throw BankOperationError.invalidValue
         }
 
-        for _ in  1...size {
-            self.totalVistedClientsNumber += 1
-            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .deposit, grade: .VIP)
-            waitingList.append(newClient)
+        for i in  1...size {
+//            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .deposit, grade: .VIP)
+//            waitingList.append(newClient)
+            
+            if i % 2 == 0 {
+                let newClient = Client(waitingNumber: i, business: .deposit, grade: .VIP)
+                waitingList.append(newClient)
+            } else {
+                let newClient = Client(waitingNumber: i, business: .loan, grade: .VIP)
+                waitingList.append(newClient)
+            }
         }
     }
     
     func makeAllClerksWork() {
         let semaphore = DispatchSemaphore(value: 1)
+        let counterGroup = DispatchGroup()
         
         for i in 1...bankClerkNumber {
             let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
             
-            dispatchQueue.async {
+            dispatchQueue.async(group: counterGroup) {
                 self.handleWaitingList(with: semaphore)
             }
         }
+        
+        counterGroup.notify(queue: DispatchQueue.global()) {
+            
+        }
+    
     }
     
     
     private func handleWaitingList(with semaphore: DispatchSemaphore) {
         let bankClerk = BankClerk()
-        
+
         while !self.waitingList.isEmpty {
             semaphore.wait()
             guard let client = self.waitingList.first else {
@@ -51,7 +64,7 @@ class Bank {
             semaphore.signal()
             
             bankClerk.handleClientBusiness(of: client)
-            self.totalVistedClientsNumber += 1
+            self.totalProcessedClientsNumber += 1
         }
     }
 }
