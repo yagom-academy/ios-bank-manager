@@ -14,7 +14,7 @@ private func initClients(_ number: Int) -> [Client]? {
     var clients: [Client] = []
     
     for waitingNumber in 1...number {
-        guard let businessType = BusinessType(rawValue: randomNumber(to: BusinessType.allCases.count - 1)), let priority = Client.Priority(rawValue: randomNumber(to: Client.Priority.allCases.count - 1)) else {
+        guard let businessType = BusinessType.allCases.randomElement(), let priority = Client.Priority.allCases.randomElement() else {
             return nil
         }
         
