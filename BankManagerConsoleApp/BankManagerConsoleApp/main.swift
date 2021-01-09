@@ -7,7 +7,7 @@
 import Foundation
 
 class ConsoleController {
-    private var bankManager = BankManager()
+    var bankManager = BankManager()
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(closeBank), name: Notification.Name("FinishWork"), object: nil)
@@ -39,6 +39,7 @@ class ConsoleController {
                     break
                 }            
             }
+//            runProgram()
         case "2":
             break
         default :
@@ -51,7 +52,7 @@ class ConsoleController {
         try bankManager.openBank()
     }
     
-    @objc func closeBank() {
+    @objc func closeBank(_ noti: Notification) {
         bankManager.closeBank()
         runProgram()
     }

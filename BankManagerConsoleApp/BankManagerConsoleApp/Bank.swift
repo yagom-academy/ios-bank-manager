@@ -45,6 +45,8 @@ class Bank {
             }
         }
         
+        Thread.sleep(forTimeInterval: 100)
+        
         counterGroup.notify(queue: DispatchQueue.global()) {
             print("test")
             NotificationCenter.default.post(name: Notification.Name("FinishWork"), object: nil)
