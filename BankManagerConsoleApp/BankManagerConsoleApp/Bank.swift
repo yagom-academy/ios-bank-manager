@@ -43,7 +43,6 @@ class Bank {
         counterGroup.wait()
     }
     
-    
     private func handleWaitingList(with semaphore: DispatchSemaphore) {
         let bankClerk = BankClerk()
         

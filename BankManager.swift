@@ -3,13 +3,14 @@
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
 //
+
 import Foundation
 
 struct BankManager {
     private var bank: Bank
     private let clerkNumber: Int = 3
     private lazy var randomClientNumber = 0
-    private var queue = [Client]()
+    private var clientQueue = [Client]()
     
     init() {
         self.bank = Bank(employeeNumber: clerkNumber)
@@ -31,10 +32,10 @@ struct BankManager {
             }
             
             let newClient = Client(waitingNumber: i, business: randomBusinessType, grade: randomClientGrade)
-            queue.append(newClient)
+            clientQueue.append(newClient)
         }
 
-        try bank.updateWaitingList(from: queue)
+        try bank.updateWaitingList(from: clientQueue)
     }
     
     func closeBank() {
