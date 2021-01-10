@@ -14,15 +14,12 @@ class Bank {
         self.bankClerkNumber = employeeNumber
     }
 
-    func updateWaitingList(of size: Int) throws {
-        guard size > 0 else {
+    func updateWaitingList(to queue: [Client]) throws {
+        guard queue.count > 0 else {
             throw BankOperationError.invalidValue
         }
-
-        for i in  1...size {
-            let newClient = Client(waitingNumber: i, business: .deposit, grade: .VIP)
-            waitingList.append(newClient)
-        }
+        
+        self.waitingList = queue
     }
     
     func makeAllClerksWork() {
@@ -57,4 +54,3 @@ class Bank {
         }
     }
 }
-
