@@ -5,9 +5,11 @@ class Bank {
     private var bankClerkNumber: Int
     private var waitingList: [Client] = []
     private var totalProcessedClientsNumber: Int = 0
+    private var totalOperateTime: Double = 0
+    private var startTime: TimeInterval = 0
     
     var endingMent: String {
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsNumber)명이며, 총 업무시간은 초입니다."
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsNumber)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
     }
     
     init(employeeNumber: Int) {
@@ -58,3 +60,22 @@ class Bank {
     }
 }
 
+// MARK: Timer
+extension Bank {
+    func startTimer() {
+        startTime = Date.timeIntervalSinceReferenceDate
+    }
+
+    func stopTimer() {
+        let currentTime = Date.timeIntervalSinceReferenceDate
+        let timeDiferrence = currentTime - startTime
+        
+        totalOperateTime = roundToSecondDecimalPlace(number: timeDiferrence)
+    }
+    
+    private func roundToSecondDecimalPlace(number: Double) -> Double {
+        let newNumber = number * 100
+        let result = round(newNumber) / 100
+        return result
+    }
+}

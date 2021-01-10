@@ -7,7 +7,7 @@
 import Foundation
 
 class ConsoleController {
-    private var bankManager = BankManager()
+    var bankManager = BankManager()
     
     func recieveUserInput() -> String {
         print(" 1 : 은행개점 \n 2 : 종료\n 입력 : ", terminator: "")
