@@ -9,15 +9,15 @@ import Foundation
 
 struct BankerMessage {
     enum TaskStates: String {
-        case start = "번 고객 업무 시작"
-        case completion = "번 고객 업무 완료"
+        case start = " 업무 시작"
+        case completion = " 업무 완료"
     }
-    static func printTaskText(customer: Int, state: TaskStates) {
+    static func printTaskText(customer: Int, customerClass: String, state: TaskStates) {
         switch state {
         case .start:
-            print("\(customer)" + state.rawValue)
+            print("\(customer)번 " + customerClass + state.rawValue)
         case .completion:
-            print("\(customer)" + state.rawValue)
+            print("\(customer)번 " + customerClass + state.rawValue)
         }
     }
     

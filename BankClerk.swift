@@ -22,7 +22,7 @@ class BankClerk {
 //        let waitingCustomers = DispatchQueue(label: "Serial Queue")
 //        waitingCustomers.sync {
 //
-            BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .start)
+        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .start)
             self.isWorking = true
             usleep(700000)
             BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .completion)
