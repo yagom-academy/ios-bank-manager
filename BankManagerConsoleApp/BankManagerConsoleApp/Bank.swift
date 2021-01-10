@@ -33,7 +33,7 @@ class Bank {
         let counterGroup = DispatchGroup()
         
         for i in 1...bankClerkNumber {
-            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
+            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue")
             
             dispatchQueue.async(group: counterGroup) {
                 self.handleWaitingList(with: semaphore)
