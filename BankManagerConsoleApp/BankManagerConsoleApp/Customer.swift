@@ -10,6 +10,7 @@ import Foundation
 struct Customer {
     let waitingNumber: Int
     let customerClass: Class
+    let task: TaskType
     
     enum Class: CaseIterable, Comparable {
         case VVIP
@@ -28,25 +29,10 @@ struct Customer {
         }
     }
     
-    init(waitingNumber: Int, customerClass: Class) {
+    init(waitingNumber: Int, customerClass: Class, task: TaskType) {
         self.waitingNumber = waitingNumber
         self.customerClass = customerClass
-    }
-    
-    static func setCustomerClass() -> Int {
-        let customerClass = Int.random(in: 0...2)
-      return customerClass
-    }
-    
-    func setCustomerClassMessage(customerClass: Class) -> String {
-        switch customerClass {
-        case .VVIP:
-            return Class.VVIP.description
-        case .VIP:
-            return Class.VIP.description
-        case .normal:
-            return Class.normal.description
-        }
+        self.task = task
     }
 }
 

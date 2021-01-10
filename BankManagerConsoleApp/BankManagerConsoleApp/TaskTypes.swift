@@ -7,14 +7,17 @@
 
 import Foundation
 
-struct TaskType {
-    enum RequiredTime: useconds_t {
-        case deposit = 70000
-        case loan = 110000
-    }
+enum TaskType: useconds_t, CaseIterable {
+    case deposit = 700000
+    case loan = 1100000
     
-    enum TaskMessage: String {
-        case deposit = "예금"
-        case loan = "대출"
+    var description: String {
+        switch self {
+        case .deposit:
+            return " 예금"
+        case .loan:
+            return " 대출"
+        }
     }
 }
+
