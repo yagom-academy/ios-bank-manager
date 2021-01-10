@@ -35,6 +35,7 @@ struct BankManager {
     
     mutating func distributeCustomer() {
         var isContinue = true
+        let group = DispatchGroup()
         
         while isContinue {
             for bankclerk in bankclerks {
@@ -44,24 +45,25 @@ struct BankManager {
                         break
                     }
                     let customer = customerList.removeFirst()
-                    bankclerk.queue.async {
+                    bankclerk.queue.async(group: group) {
                         bankclerk.serveCustomers(customer: customer)
                     }
                     self.currentNumber += 1
                 }
             }
         }
+        group.wait()
     }
     
     mutating func openBank() {
-        while self.bankState == BankState.open || self.bankState == BankState.default {
-            self.bankState = getInput()
-            checkBankState(state: self.bankState)
-            writeBanKClerkList()
-            writeCustomerList()
-            distributeCustomer()
-            
-        }
+        self.bankState = getInput()
+        writeBanKClerkList()
+        writeCustomerList()
+        let startTime = DispatchTime.now()
+        distributeCustomer()
+        let endTime = DispatchTime.now()
+        let taskedTime = (endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1000
+        BankerMessage.printCloseBankText(customers: currentNumber, taskedTime: Double(taskedTime))
     }
     
     func countTodayCustomer() -> Int {
@@ -81,18 +83,4 @@ struct BankManager {
         }
         return BankState.close
     }
-    
-    func checkBankState(state: BankState) {
-        switch state {
-        case .open:
-            let customers = countTodayCustomer()
-            
-        //let taskedTime = BankClerk().calculateTime
-        //BankerMessage.printCloseBankText(customers: customers, taskedTime: Double(taskedTime))
-        case .default, .close:
-            break
-        }
-    }
-    
-    
 }
