@@ -8,7 +8,7 @@
 import Foundation
 import Dispatch
 
-class BankClerk {
+final class BankClerk {
     let windowNumber: Int
     var isWorking: Bool = false
     var queue: DispatchQueue

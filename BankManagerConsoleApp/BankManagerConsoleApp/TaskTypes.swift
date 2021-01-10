@@ -20,4 +20,3 @@ enum TaskType: useconds_t, CaseIterable {
         }
     }
 }
-

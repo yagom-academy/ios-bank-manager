@@ -29,10 +29,10 @@ struct Customer {
         }
     }
     
-    init(waitingNumber: Int, customerClass: Class, task: TaskType) {
+    init(waitingNumber: Int, customerClass: Class, customerTask: TaskType) {
         self.waitingNumber = waitingNumber
         self.customerClass = customerClass
-        self.task = task
+        self.task = customerTask
     }
 }
 

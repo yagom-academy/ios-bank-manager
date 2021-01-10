@@ -7,26 +7,27 @@
 import Foundation
 
 struct BankManager {
-    var customerList: [Customer] = []
-    var bankclerks: [BankClerk] = []
-    var currentNumber: Int = 0
+    private var customerList: [Customer] = []
+    private var bankclerks: [BankClerk] = []
+    private var currentNumber: Int = 0
+    private let assignedBankClerk = 3
     
-    mutating func writeBanKClerkList() {
-        for windowNumber in 1...3 {
+    mutating private func writeBanKClerkList() {
+        for windowNumber in 1...assignedBankClerk {
             bankclerks.append(BankClerk(windowNumber: windowNumber))
         }
     }
     
-    mutating func writeCustomerList() {
+    mutating private func writeCustomerList() {
         for waitingNumber in 1...countTodayCustomer() {
             guard let customerClass: Customer.Class = Customer.Class.allCases.randomElement(), let customerTask: TaskType = TaskType.allCases.randomElement() else {
                 return
             }
-            customerList.append(Customer(waitingNumber: waitingNumber, customerClass: customerClass, task: customerTask))
+            customerList.append(Customer(waitingNumber: waitingNumber, customerClass: customerClass, customerTask: customerTask))
         }
     }
     
-    mutating func distributeCustomer() {
+    mutating private func distributeCustomer() {
         var isContinue = true
         let group = DispatchGroup()
         
@@ -57,7 +58,7 @@ struct BankManager {
         BankerMessage.printCloseBankText(customers: currentNumber, taskedTime: Double(taskedTime))
     }
     
-    func countTodayCustomer() -> Int {
+    private func countTodayCustomer() -> Int {
         let customers = Int.random(in: 10...30)
         return customers
     }

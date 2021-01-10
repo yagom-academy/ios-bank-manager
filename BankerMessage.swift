@@ -12,6 +12,7 @@ struct BankerMessage {
         case start = " 업무 시작"
         case completion = " 업무 완료"
     }
+    
     static func printTaskText(customer: Int, customerClass: String, customerTask: String, state: TaskStates) {
         switch state {
         case .start:
