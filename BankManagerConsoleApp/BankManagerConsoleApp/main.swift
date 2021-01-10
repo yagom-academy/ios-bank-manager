@@ -9,7 +9,7 @@ import Foundation
 class ConsoleController {
     var bankManager = BankManager()
     
-    func recieveUserInput() -> String {
+    private func recieveUserInput() -> String {
         print(" 1 : 은행개점 \n 2 : 종료\n 입력 : ", terminator: "")
         
         guard let userInput = readLine() else {
@@ -21,7 +21,7 @@ class ConsoleController {
         return userInput
     }
     
-    func operateUserInput(_ input: String) {
+    private func operateUserInput(_ input: String) {
         switch input {
         case "1":
             manageBank()
@@ -34,7 +34,7 @@ class ConsoleController {
         }
     }
     
-    func manageBank() {
+    private func manageBank() {
         bankManager = BankManager()
         
         do {
@@ -52,7 +52,7 @@ class ConsoleController {
         bankManager.closeBank()
     }
     
-    func runProgram() {
+    fileprivate func runProgram() {
         bankManager = BankManager()
         let selectedMenu = consoleController.recieveUserInput()
         consoleController.operateUserInput(selectedMenu)
