@@ -1,7 +1,7 @@
 
 import Foundation
 
-class BankClerk {
+struct BankClerk {
     func handleClientBusiness(of client: Client) {
         print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 시작")
         
