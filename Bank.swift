@@ -49,7 +49,7 @@ final class Bank {
                 }
             }
         }
-       for _ in 0..<finishedClientNumber { semaphore.wait() }
+        for _ in 0..<finishedClientNumber { semaphore.wait() }
     }
     
     private func closeBank() {
