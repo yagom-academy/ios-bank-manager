@@ -6,14 +6,7 @@
 
 import Foundation
 
-enum BankState: String {
-    case `default` = "0"
-    case open = "1"
-    case close = "2"
-}
-
 struct BankManager {
-    private var bankState: BankState = .default
     var customerList: [Customer] = []
     var bankclerks: [BankClerk] = []
     var currentNumber: Int = 0
