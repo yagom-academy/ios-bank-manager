@@ -20,16 +20,8 @@ class Bank {
         }
 
         for i in  1...size {
-//            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .deposit, grade: .VIP)
-//            waitingList.append(newClient)
-            
-            if i % 2 == 0 {
-                let newClient = Client(waitingNumber: i, business: .deposit, grade: .VIP)
-                waitingList.append(newClient)
-            } else {
-                let newClient = Client(waitingNumber: i, business: .loan, grade: .VIP)
-                waitingList.append(newClient)
-            }
+            let newClient = Client(waitingNumber: i, business: .deposit, grade: .VIP)
+            waitingList.append(newClient)
         }
     }
     

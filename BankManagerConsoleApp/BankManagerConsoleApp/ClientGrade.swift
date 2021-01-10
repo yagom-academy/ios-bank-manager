@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ClientGrade: String {
+enum ClientGrade: String, CaseIterable {
     case VVIP
     case VIP
     case normal = "일반"
