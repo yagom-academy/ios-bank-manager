@@ -46,10 +46,6 @@ class Bank {
         }
         
         counterGroup.wait()
-        
-        counterGroup.notify(queue: DispatchQueue.global()) {
-            NotificationCenter.default.post(name: Notification.Name("FinishWork"), object: nil)
-        }
     }
     
     
