@@ -32,16 +32,16 @@ final class Teller {
     }
     
     func handleDeposit(for client: Client) {
-        Dashboard.printStatus(for: client, about: .tellerStart)
+        Dashboard.printStatus(for: client, about: Message.tellerStart)
         Thread.sleep(forTimeInterval: client.businessType.neededTime)
-        Dashboard.printStatus(for: client, about: .tellerFinish)
+        Dashboard.printStatus(for: client, about: Message.tellerFinish)
     }
     
     
     func handleLoan(for client: Client) {
         let semaphore = DispatchSemaphore(value: 0)
         
-        Dashboard.printStatus(for: client, about: .tellerStart)
+        Dashboard.printStatus(for: client, about: Message.tellerStart)
         Thread.sleep(forTimeInterval: client.businessType.neededTime)
         HeadOffice.shared.loanQueue.async {
             HeadOffice.shared.judgeLoan(for: client)
@@ -49,6 +49,6 @@ final class Teller {
         }
         semaphore.wait()
         Thread.sleep(forTimeInterval: client.businessType.neededTime)
-        Dashboard.printStatus(for: client, about: .tellerFinish)
+        Dashboard.printStatus(for: client, about: Message.tellerFinish)
     }
 }
