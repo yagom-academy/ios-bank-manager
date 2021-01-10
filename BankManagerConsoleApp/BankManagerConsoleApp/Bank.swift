@@ -14,7 +14,7 @@ class Bank {
         self.bankClerkNumber = employeeNumber
     }
 
-    func updateWaitingList(to queue: [Client]) throws {
+    func updateWaitingList(from queue: [Client]) throws {
         guard queue.count > 0 else {
             throw BankOperationError.invalidValue
         }

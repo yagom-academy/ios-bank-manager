@@ -36,7 +36,7 @@ struct BankManager {
             client1.grade.rawValue < client2.grade.rawValue
         }
 
-        try bank.updateWaitingList(to: queue)
+        try bank.updateWaitingList(from: queue)
     }
     
     func closeBank() {
