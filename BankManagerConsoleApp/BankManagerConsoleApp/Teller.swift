@@ -22,9 +22,9 @@ final class Teller {
     
     func handleBusiness(for client: Client) {
         isWorking = true
-        Dashboard.printStatus(for: client, about: .tellerStart)
+        Dashboard.printStatus(for: client, about: Message.tellerStart)
         Thread.sleep(forTimeInterval: client.businessType.neededTime)
-        Dashboard.printStatus(for: client, about: .tellerFinish)
+        Dashboard.printStatus(for: client, about: Message.tellerFinish)
         isWorking = false
     }
 }
