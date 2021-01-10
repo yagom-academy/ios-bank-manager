@@ -26,7 +26,7 @@ struct BankManager {
     
     mutating func writeCustomerList() {
         for waitingNumber in 1...countTodayCustomer() {
-            guard let customerClass = Customer.Class(rawValue: Customer.setCustomerClass()) else {
+            guard let customerClass: Customer.Class = Customer.Class.allCases.randomElement() else {
                 return
             }
             customerList.append(Customer(waitingNumber: waitingNumber, customerClass: customerClass))
@@ -45,9 +45,7 @@ struct BankManager {
                         break
                     }
                     let customer = customerList.removeFirst()
-                    bankclerk.queue.async(group: group) {
-                        bankclerk.serveCustomers(customer: customer)
-                    }
+                    bankclerk.serveCustomers(customer: customer, group: group)
                     self.currentNumber += 1
                 }
             }
@@ -60,6 +58,7 @@ struct BankManager {
         writeBanKClerkList()
         writeCustomerList()
         let startTime = DispatchTime.now()
+        customerList.sort()
         distributeCustomer()
         let endTime = DispatchTime.now()
         let taskedTime = (endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1000

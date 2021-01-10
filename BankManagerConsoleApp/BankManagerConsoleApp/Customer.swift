@@ -11,10 +11,10 @@ struct Customer {
     let waitingNumber: Int
     let customerClass: Class
     
-    enum Class: Int, CaseIterable {
-        case VVIP = 0
-        case VIP = 1
-        case normal = 2
+    enum Class: CaseIterable, Comparable {
+        case VVIP
+        case VIP
+        case normal
         
         var description: String {
             switch self {
@@ -50,3 +50,8 @@ struct Customer {
     }
 }
 
+extension Customer: Comparable {
+    static func < (lhs: Customer, rhs: Customer) -> Bool {
+        return lhs.customerClass < rhs.customerClass
+    }
+}

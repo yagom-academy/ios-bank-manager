@@ -18,11 +18,13 @@ class BankClerk {
         queue = DispatchQueue(label: "\(windowNumber)")
     }
     
-    func serveCustomers(customer: Customer) {
-        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .start)
+    func serveCustomers(customer: Customer, group: DispatchGroup) {
         self.isWorking = true
-        usleep(700000)
-        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .completion)
-        self.isWorking = false
+        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .start)
+        queue.async(group: group) {
+            usleep(700000)
+            BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, state: .completion)
+            self.isWorking = false
+        }
     }
 }
