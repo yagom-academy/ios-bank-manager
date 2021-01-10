@@ -3,7 +3,7 @@ import Foundation
 
 class BankClerk {
     func handleClientBusiness(of client: Client) {
-        print("\(client.waitingNumber)번 \(client.grade.rawValue)고객 \(client.business.rawValue)업무 시작")
+        print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 시작")
         
         switch client.business {
         case .deposit:
@@ -12,7 +12,7 @@ class BankClerk {
             Thread.sleep(forTimeInterval: 1.1)
         }
         
-        print("\(client.waitingNumber)번 \(client.grade.rawValue)고객 \(client.business.rawValue)업무 종료")
+        print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 종료")
     }
 }
 

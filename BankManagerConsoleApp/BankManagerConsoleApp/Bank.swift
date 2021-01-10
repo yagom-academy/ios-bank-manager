@@ -15,15 +15,16 @@ class Bank {
     init(employeeNumber: Int) {
         self.bankClerkNumber = employeeNumber
     }
-
-    func updateWaitingList(of size: Int) throws {
-        guard size > 0 else {
+    
+    func updateWaitingList(from queue: [Client]) throws {
+        guard queue.count > 0 else {
             throw BankOperationError.invalidValue
         }
-
-        for i in  1...size {
-            let newClient = Client(waitingNumber: i, business: .deposit, grade: .VIP)
-            waitingList.append(newClient)
+        
+        self.waitingList += queue
+        
+        waitingList.sort { (client1, client2) -> Bool in
+            client1.grade.rawValue < client2.grade.rawValue
         }
     }
     
@@ -33,7 +34,7 @@ class Bank {
         
         for i in 1...bankClerkNumber {
             let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue", attributes: .concurrent)
-        
+            
             dispatchQueue.async(group: counterGroup) {
                 self.handleWaitingList(with: semaphore)
             }
@@ -45,7 +46,7 @@ class Bank {
     
     private func handleWaitingList(with semaphore: DispatchSemaphore) {
         let bankClerk = BankClerk()
-
+        
         while !self.waitingList.isEmpty {
             semaphore.wait()
             guard let client = self.waitingList.first else {
@@ -65,7 +66,7 @@ extension Bank {
     func startTimer() {
         startTime = Date.timeIntervalSinceReferenceDate
     }
-
+    
     func stopTimer() {
         let currentTime = Date.timeIntervalSinceReferenceDate
         let timeDiferrence = currentTime - startTime

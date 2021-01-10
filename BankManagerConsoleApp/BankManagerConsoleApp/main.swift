@@ -53,6 +53,7 @@ class ConsoleController {
     }
     
     func runProgram() {
+        bankManager = BankManager()
         let selectedMenu = consoleController.recieveUserInput()
         consoleController.operateUserInput(selectedMenu)
     }
