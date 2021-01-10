@@ -54,7 +54,6 @@ struct BankManager {
     }
     
     mutating func openBank() {
-        self.bankState = getInput()
         writeBanKClerkList()
         writeCustomerList()
         let startTime = DispatchTime.now()
@@ -68,18 +67,5 @@ struct BankManager {
     func countTodayCustomer() -> Int {
         let customers = Int.random(in: 10...30)
         return customers
-    }
-    
-    @discardableResult func getInput() -> BankState {
-        InputStateMessage.printInputProcessText(state: .initialization)
-        guard let userInput: String = readLine(), (userInput == BankState.open.rawValue || userInput == BankState.close.rawValue) else {
-            InputStateMessage.printInputProcessText(state: .error)
-            return BankState.default
-        }
-        
-        if userInput == BankState.open.rawValue {
-            return BankState.open
-        }
-        return BankState.close
     }
 }
