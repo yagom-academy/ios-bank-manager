@@ -11,7 +11,7 @@ class Dashboard {
     static func printMenu() {
         print(Menu.description, terminator: " ")
     }
-        
+    
     static func printStatus(for client: Client, about message: Message) {
         let message = String(format: message.rawValue, client.waitingNumber, client.priority.description, client.businessType.description)
         print(message)
