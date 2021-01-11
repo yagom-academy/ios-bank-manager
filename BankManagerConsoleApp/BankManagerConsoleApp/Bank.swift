@@ -52,7 +52,7 @@ class Bank {
                     let customer = customers.removeFirst()
                     bankTeller.queue.async(group: bankTellerGroup) {
                         semaphore.wait()
-                        bankTeller.performTask(customerNumber: customer.waitNumber, customerPriority: customer.priority, customerTask: customer.taskType, semaphore: semaphore)
+                        bankTeller.performTask(customer: customer, semaphore: semaphore)
                     }
                 }
             }
