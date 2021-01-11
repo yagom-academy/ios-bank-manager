@@ -27,18 +27,33 @@ enum BankManagerState {
     case notWorking
 }
 
-enum CustomerPriority: String {
+enum CustomerPriority: String, CaseIterable {
     case VVIP = "0"
     case VIP = "1"
-    case 일반 = "2"
+    case normal = "2"
+    
+    var description: String {
+        switch self {
+        case .VVIP:
+            return "VVIP"
+        case .VIP:
+            return "VIP"
+        case .normal:
+            return "일반"
+        }
+    }
 }
 
-enum CustomerTask: String {
-    case 대출 = "0"
-    case 예금 = "1"
-}
-
-enum TimeNeedDependOnTask: String {
-    case 대출 = "1.1"
-    case 예금 = "0.7"
+enum CustomerTask: String, CaseIterable {
+    case loan = "대출"
+    case deposit = "예금"
+    
+    var timeForTask: Double {
+        switch self {
+        case .loan:
+            return 1.1
+        case .deposit:
+            return 0.7
+        }
+    }
 }

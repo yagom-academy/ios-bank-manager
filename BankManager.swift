@@ -18,24 +18,16 @@ struct BankManager {
     
     mutating func performTask(customerNumber: Int, customerPriority: CustomerPriority, customerTask: CustomerTask) {
         switch customerTask {
-        case .대출:
-            guard let timeNeedForLoan = Double(TimeNeedDependOnTask.대출.rawValue) else {
-                return
-            }
-            timeNeedToFinishTask = timeNeedForLoan
+        case .loan:
+            timeNeedToFinishTask = customerTask.timeForTask
         default:
-            guard let timeNeedForDeposit = Double(TimeNeedDependOnTask.대출.rawValue) else {
-                return
-            }
-            timeNeedToFinishTask = timeNeedForDeposit
+            timeNeedToFinishTask = customerTask.timeForTask
         }
         let second: Double = 1_000_000
-        let customerPriority = "\(customerPriority)"
-        let customerTask = "\(customerTask)"
         self.state = .working
-        print("\(BankManangerMessage.start)".format(customerNumber, customerPriority, customerTask))
+        print("\(BankManangerMessage.start)".format(customerNumber, customerPriority.description, customerTask.rawValue))
         usleep(useconds_t(timeNeedToFinishTask * second))
-        print("\(BankManangerMessage.end)".format(customerNumber, customerPriority, customerTask))
+        print("\(BankManangerMessage.end)".format(customerNumber, customerPriority.description, customerTask.rawValue))
         self.state = .notWorking
     }
 }
