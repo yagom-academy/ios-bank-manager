@@ -19,4 +19,13 @@ enum TaskType: CaseIterable {
             return 0.7
         }
     }
+    
+    var taskString: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
 }
