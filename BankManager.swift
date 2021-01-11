@@ -21,18 +21,10 @@ class BankManager {
     func makeBankClerk() {
         for index in 1...bankClerkCount {
             self.bankClerks.append(BankClerk(bankWindowNumber: index))
+            bankClerks[index - 1].working = .enable
         }
     }
-    
-    func arrangeCustomerFirstTime() {
-        guard let firstCustomer = waitingList.first else {
-            return
-        }
-        bankClerks.first?.customers.append(firstCustomer)
-        bankClerks.first?.startWork()
-        bankClerks.first?.finishWork()
-    }
-    
+
     init(bankClerkCount: Int) {
         self.bankClerkCount = bankClerkCount
     }
