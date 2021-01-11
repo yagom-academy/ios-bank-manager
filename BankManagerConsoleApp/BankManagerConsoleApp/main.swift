@@ -8,7 +8,7 @@ import Foundation
 
 class Bank {
     func message() {
-        print("1 : 은행개점\n2 : 종료\n입력 : ", terminator: "")
+        print(BankMessage.open.rawValue, terminator: "")
         guard let input = readLine() else {
             return
         }
@@ -20,7 +20,7 @@ class Bank {
         case "2":
             return
         default:
-            print("잘못입력하셨습니다. 다시 입력하세요")
+            print(BankMessage.error.rawValue)
             message()
         }
     }

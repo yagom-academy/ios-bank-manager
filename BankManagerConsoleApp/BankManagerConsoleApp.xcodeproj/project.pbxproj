@@ -11,6 +11,7 @@
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		FD5F023225A7630900695D9E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5F023125A7630900695D9E /* Customer.swift */; };
 		FD5F023525A763E700695D9E /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5F023425A763E700695D9E /* BankClerk.swift */; };
+		FDCE46E325A8498A002A4A05 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCE46E225A8498A002A4A05 /* Print.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		FD5F023125A7630900695D9E /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		FD5F023425A763E700695D9E /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
+		FDCE46E225A8498A002A4A05 /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				FD5F023125A7630900695D9E /* Customer.swift */,
+				FDCE46E225A8498A002A4A05 /* Print.swift */,
 				FD5F023425A763E700695D9E /* BankClerk.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -130,6 +133,7 @@
 			files = (
 				FD5F023225A7630900695D9E /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				FDCE46E325A8498A002A4A05 /* Print.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				FD5F023525A763E700695D9E /* BankClerk.swift in Sources */,
 			);

@@ -18,10 +18,17 @@ class BankClerk {
         }
     }
     
+    init(bankWindowNumber: Int) {
+        self.bankWindowNumber = bankWindowNumber
+    }
+}
+
+extension  BankClerk {
+    
     func work() {
         if working == false {
             guard let custmer = bankManager.waitingList.first else {
-                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(finishedCustomerNumber)명이며, 총 업무시간은 \(round(100 * totalTaskTime) / 100)초입니다.")
+                print(String(format: ClerkWork.ClosedMessage.rawValue, finishedCustomerNumber, totalTaskTime))
                 bank.message()
                 return
             }
@@ -37,7 +44,7 @@ class BankClerk {
         }
         bankManager.waitingList.removeFirst()
         working = true
-        print("\(customer.index)번 손님 업무 시작")
+        print(String(format: ClerkWork.stratMessage.rawValue, customer.index))
     }
     
     func finishWork() {
@@ -47,11 +54,8 @@ class BankClerk {
         finishedCustomerNumber += 1
         totalTaskTime += customer.taskTime
         customers.removeFirst()
-        print("\(customer.index)번 손님 업무 완료")
+        print(String(format: ClerkWork.FinishedMessage.rawValue, customer.index))
         working = false
     }
-    
-    init(bankWindowNumber: Int) {
-        self.bankWindowNumber = bankWindowNumber
-    }
 }
+
