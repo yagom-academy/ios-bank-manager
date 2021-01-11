@@ -9,7 +9,7 @@ import Foundation
 final class Bank {
     private var clients: [Client] = []
     private var tellers: [Teller] = []
-    private var finishedClientNumber = 0
+    private var finishedClientCount = 0
     private var businessTime: TimeInterval?
 
     func operateBank(teller: Int, client: [Client]) {
@@ -19,12 +19,12 @@ final class Bank {
         clients = client.sorted()
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
-        Dashboard.printCloseMessage(finishedClientNumber, businessTime)
+        Dashboard.printCloseMessage(finishedClientCount, businessTime)
         closeBank()
     }
     
-    private func initTellers(_ number: Int) {
-        for windowNumber in 1...number {
+    private func initTellers(_ count: Int) {
+        for windowNumber in 1...count {
             tellers.append(Teller(windowNumber: windowNumber))
         }
     }
@@ -42,7 +42,7 @@ final class Bank {
                 if teller.isNotWorking {
                     let client = clients.removeFirst()
                     teller.handleBusiness(for: client, withDispatchGroup: dispatchGroup)
-                    self.finishedClientNumber += 1
+                    self.finishedClientCount += 1
                 }
             }
         }
@@ -52,6 +52,6 @@ final class Bank {
     private func closeBank() {
         tellers.removeAll()
         clients.removeAll()
-        finishedClientNumber = 0
+        finishedClientCount = 0
     }
 }

@@ -10,8 +10,8 @@ import Foundation
 struct Clients {
     var list: [Client] = []
     
-    init(number: Int) {
-        for waitingNumber in 1...number {
+    init(count: Int) {
+        for waitingNumber in 1...count {
             guard let businessType = BusinessType.allCases.randomElement(), let priority = Client.Priority.allCases.randomElement() else {
                 return
             }
