@@ -21,7 +21,16 @@ class BankManager {
     func makeBankClerk() {
         for index in 1...bankClerkCount {
             self.bankClerks.append(BankClerk(bankWindowNumber: index))
-            bankClerks[index - 1].working = .enable
+        }
+    }
+    
+    func beReportedWork() {
+        guard waitingList.isEmpty else {
+            return
+        }
+        for bankClerk in bankClerks {
+            let closedMessage = String(format: ClerkWork.ClosedMessage.rawValue, bankClerk.finishedCustomerNumber, bankClerk.totalTaskTime)
+            print(closedMessage)
         }
     }
 

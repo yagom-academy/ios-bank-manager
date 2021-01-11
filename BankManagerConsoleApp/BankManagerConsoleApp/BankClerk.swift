@@ -12,13 +12,7 @@ class BankClerk {
     var customers: [Custmer] = []
     var finishedCustomerNumber: Int = 0
     var totalTaskTime: Double = 0.0
-    var working: WorkingStatus = .off {
-        didSet {
-            if working == .enable {
-                work()
-            }
-        }
-    }
+    var working: Bool = false
     
     init(bankWindowNumber: Int) {
         self.bankWindowNumber = bankWindowNumber
@@ -28,15 +22,14 @@ class BankClerk {
 extension  BankClerk {
     
     func work() {
-        guard let custmer = bankManager.waitingList.first else {
-            let closedMessage = String(format: ClerkWork.ClosedMessage.rawValue, finishedCustomerNumber, totalTaskTime)
-            print(closedMessage)
-            bank.message()
-            return
+        if working == false {
+            guard let custmer = bankManager.waitingList.first else {
+                return
+            }
+            customers.append(custmer)
+            startWork()
+            finishWork()
         }
-        customers.append(custmer)
-        startWork()
-        finishWork()
     }
     
     func startWork() {
@@ -44,7 +37,7 @@ extension  BankClerk {
             return
         }
         bankManager.waitingList.removeFirst()
-        working = .disable
+        working = true
         let startMessage = String(format: ClerkWork.stratMessage.rawValue, bankWindowNumber, customer.index)
         print(startMessage)
     }
@@ -58,7 +51,7 @@ extension  BankClerk {
         customers.removeFirst()
         let finishedMessage = String(format: ClerkWork.FinishedMessage.rawValue, bankWindowNumber, customer.index)
         print(finishedMessage)
-        working = .enable
+        working = false
     }
 }
 
