@@ -7,19 +7,18 @@
 
 import Foundation
 
-struct Banker {
-    let processingTime: Double
-    var taskStartTime: Double?
+class Banker {
+    private var processedCustomerNumber: Int = 0
+    private var customer: Customer?
     
-    mutating func setTaskStartTime(_ time: Double) {
-        self.taskStartTime = time
+    private let startTaskMessgae = "%d번 %@고객 %@업무 시작"
+    private let endTaskMessgae = "%d번 %@고객 %@업무 완료"
+    
+    func increaseCustomerNumber() {
+        processedCustomerNumber += 1
     }
     
-    func canEndTask(_ currentTime: Double) throws -> Bool {
-        guard let startTime = taskStartTime?.percisionNumber else {
-            throw BankError.invalidateBanker
-        }
-        let progressTime = currentTime - startTime
-        return progressTime.percisionNumber >= processingTime.percisionNumber
+    func setCustomer(_ customer: Customer) {
+        self.customer = customer
     }
 }
