@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+class Bank {
     var customers: [Customer] = []
     private var bankManagers: [BankManager] = []
     var numberOfCustomer: Int?
@@ -25,18 +25,18 @@ struct Bank {
         self.initializeBankManagers(bankManagerNumber: bankManagerNumber)
     }
     
-    mutating private func initializeBankManagers(bankManagerNumber: Int) {
+    private func initializeBankManagers(bankManagerNumber: Int) {
         for number in 1...bankManagerNumber {
             bankManagers.append(BankManager(number: number))
         }
     }
     
-    mutating func performBankTask() {
+    func performBankTask() {
         assignCustomerToTeller()
         closeBank()
     }
     
-    mutating private func assignCustomerToTeller() {
+    private func assignCustomerToTeller() {
         var bankTeller = bankManagers[0]
         self.openTime = Date()
         while(customers.count > 0) {
@@ -48,7 +48,7 @@ struct Bank {
         self.closeTime = Date()
     }
     
-    mutating private func closeBank() {
+    private func closeBank() {
         guard let totalNumberOfCustomer = numberOfCustomer, let businessTime = totalTime else {
             print(BankError.unknown.localizedDescription)
             return
