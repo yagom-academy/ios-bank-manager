@@ -21,7 +21,7 @@ struct Clients {
 }
 
 struct Client {
-    enum Priority: Comparable, CaseIterable {
+    enum Priority: Comparable, CaseIterable, CustomStringConvertible {
         case VVIP
         case VIP
         case normal

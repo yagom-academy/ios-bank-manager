@@ -17,7 +17,7 @@ func main() {
         Dashboard.printMenu()
         
         guard let input = readLine(), let command = Menu(rawValue: input) else {
-            print(BankError.wrongInput.description)
+            print("\(BankError.wrongInput)")
             continue
         }
         
