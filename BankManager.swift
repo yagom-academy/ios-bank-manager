@@ -7,6 +7,7 @@
 import Foundation
 
 struct BankManager {
+    let queue: DispatchQueue
     private let tellerNumber: Int
     private(set) var state: BankManagerState
     private var timeNeedToFinishTask: TimeInterval = 0.7
@@ -14,6 +15,7 @@ struct BankManager {
     init(number: Int) {
         self.tellerNumber = number
         self.state = .notWorking
+        self.queue = DispatchQueue.init(label: "\(number)")
     }
     
     mutating func performTask(customerNumber: Int, customerPriority: CustomerPriority, customerTask: CustomerTask) {

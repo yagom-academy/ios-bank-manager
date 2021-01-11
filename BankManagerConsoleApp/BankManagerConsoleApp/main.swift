@@ -28,7 +28,7 @@ private func getUserInput() -> String {
     return input
 }
 
-let bankManagerNumber = 1
+let bankManagerNumber = 3
 var bank = Bank(bankManagerNumber: bankManagerNumber)
 
 private func initializeBankCustomer() {
