@@ -7,7 +7,20 @@
 
 import Foundation
 
-final class Client {
+struct Clients {
+    var list: [Client] = []
+    
+    init(number: Int) {
+        for waitingNumber in 1...number {
+            guard let businessType = BusinessType.allCases.randomElement(), let priority = Client.Priority.allCases.randomElement() else {
+                return
+            }
+            list.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
+        }
+    }
+}
+
+struct Client {
     enum Priority: Comparable, CaseIterable {
         case VVIP
         case VIP

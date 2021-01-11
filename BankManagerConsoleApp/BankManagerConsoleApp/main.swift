@@ -23,31 +23,13 @@ func main() {
         
         switch command {
         case .start:
-            guard let clients = initClients(randomNumber(from: minClientNumber, to: maxClientNumber)) else {
-                return 
-            }
-            bank.operateBank(teller: tellerNumber, client: clients)
+            let randomNumber = Int.random(in: minClientNumber...maxClientNumber)
+            let clients = Clients.init(number: randomNumber)
+            bank.operateBank(teller: tellerNumber, client: clients.list)
         case .end:
             isContinue = false
         }
     }
-}
-
-private func randomNumber(from minNumber: Int = 0, to maxNumber: Int) -> Int {
-    return Int.random(in: minNumber...maxNumber)
-}
-
-private func initClients(_ number: Int) -> [Client]? {
-    var clients: [Client] = []
-    
-    for waitingNumber in 1...number {
-        guard let businessType = BusinessType.allCases.randomElement(), let priority = Client.Priority.allCases.randomElement() else {
-            return nil
-        }
-        
-        clients.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
-    }
-    return clients
 }
 
 main()
