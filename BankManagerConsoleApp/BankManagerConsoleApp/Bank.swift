@@ -13,11 +13,11 @@ struct Bank {
     var numberOfCustomer: Int?
     private var openTime: Date?
     private var closeTime: Date?
-    private var totalTime: Double? {
+    private var totalTime: TimeInterval? {
         guard let openTime = openTime, let closeTime = closeTime else {
             return nil
         }
-        let calculatedTime = Double(closeTime.timeIntervalSince(openTime))
+        let calculatedTime = TimeInterval(closeTime.timeIntervalSince(openTime))
         return calculatedTime
     }
     
