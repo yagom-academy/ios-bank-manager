@@ -7,7 +7,7 @@
 import Foundation
 
 final class Bank {
-    private var clients: Clients = []
+    private var clients: [Client] = []
     private var tellers: [Teller] = []
     private var finishedClientNumber = 0
     private var businessTime: TimeInterval?
