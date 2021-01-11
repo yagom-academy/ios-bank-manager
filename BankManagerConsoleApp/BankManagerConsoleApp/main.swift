@@ -26,7 +26,5 @@ class Bank {
 }
 
 var bank: Bank = Bank()
-var bankManager: BankManager = BankManager(bankClerkCount: 2)
+var bankManager: BankManager = BankManager(bankClerkCount: 1)
 bank.message()
-
-dump(bankManager)
