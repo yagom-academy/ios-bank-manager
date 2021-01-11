@@ -14,10 +14,7 @@ class Bank {
         }
         switch input {
         case "1":
-            bankManager.holdCustomers()
-            bankManager.makeBankClerk()
-            bankManager.work()
-            bankManager.beReportedWork()
+            open()
             message()
         case "2":
             return
@@ -26,9 +23,16 @@ class Bank {
             message()
         }
     }
+    
+    func open() {
+        bankManager.holdCustomers()
+        bankManager.makeBankClerk()
+        bankManager.work()
+        bankManager.beReportedWork()
+    }
 }
 
 var bank: Bank = Bank()
-var bankManager: BankManager = BankManager(bankClerkCount: 1)
+var bankManager: BankManager = BankManager(bankClerkCount: 2)
 bank.message()
 

@@ -29,7 +29,7 @@ class BankManager {
             return
         }
         for bankClerk in bankClerks {
-            let closedMessage = String(format: ClerkWork.ClosedMessage.rawValue, bankClerk.finishedCustomerNumber, bankClerk.totalTaskTime)
+            let closedMessage = String(format: ClerkWork.ClosedMessage.rawValue, bankClerk.bankWindowNumber, bankClerk.finishedCustomerNumber, bankClerk.totalTaskTime)
             print(closedMessage)
         }
     }
