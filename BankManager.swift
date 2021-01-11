@@ -34,8 +34,7 @@ private class BankClerk {
         currentClient = client
         print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 시작")
         
-        let workTime = Int(self.workTime(bankBusiness: client.bankBusiness) * 1000)
-        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(workTime)) {
+        DispatchQueue.global().asyncAfter(deadline: workTime(bankBusiness: client.bankBusiness)) {
             self.finishWork()
         }
     }
@@ -48,12 +47,12 @@ private class BankClerk {
         currentClient = nil
     }
     
-    func workTime(bankBusiness: BankBusiness) -> Double {
+    func workTime(bankBusiness: BankBusiness) -> DispatchTime {
         switch bankBusiness {
         case .loan:
-            return 1.1
+            return .now() + .milliseconds(1100)
         case .deposit:
-            return 0.7
+            return .now() + .milliseconds(700)
         }
     }
     
