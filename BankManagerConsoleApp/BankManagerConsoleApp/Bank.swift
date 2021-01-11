@@ -39,6 +39,7 @@ class Bank {
     private func assignCustomerToTeller() {
         var isStillCustomerLeft: Bool = true
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 3)
+        let bankTellerGroup: DispatchGroup = DispatchGroup()
         
         self.openTime = Date()
         while isStillCustomerLeft {
@@ -49,13 +50,14 @@ class Bank {
                 }
                 if bankTeller.state == .notWorking {
                     let customer = customers.removeFirst()
-                    bankTeller.queue.async() {
+                    bankTeller.queue.async(group: bankTellerGroup) {
                         semaphore.wait()
                         bankTeller.performTask(customerNumber: customer.waitNumber, customerPriority: customer.priority, customerTask: customer.taskType, semaphore: semaphore)
                     }
                 }
             }
         }
+        bankTellerGroup.wait()
         self.closeTime = Date()
     }
     
