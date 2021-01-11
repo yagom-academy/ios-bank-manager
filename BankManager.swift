@@ -6,28 +6,54 @@
 
 import Foundation
 
+enum BankBusiness: CaseIterable {
+    case loan
+    case deposit
+    
+    var string: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
+}
+
 private class BankClerk {
+    // MARK: - Properties
     var bankWindowNumber: Int
     var isWorking: Bool {
         currentClient != nil
     }
     var currentClient: Client?
-    var workTime: Double = 0.7
-    var totalWorkTime: Double = 0.0
     var finishedClients: Int = 0
     
+    // MARK: - Methods
     func startWork(for client: Client) {
         currentClient = client
-        print("\(client.tag)번 고객 업무 시작")
+        print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 시작")
+        
+        DispatchQueue.global().asyncAfter(deadline: workTime(bankBusiness: client.bankBusiness)) {
+            self.finishWork()
+        }
     }
     
     func finishWork() {
-        totalWorkTime += workTime
         finishedClients += 1
         if let client = currentClient {
-            print("\(client.tag)번 고객 업무 완료")
+            print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 완료")
         }
         currentClient = nil
+    }
+    
+    func workTime(bankBusiness: BankBusiness) -> DispatchTime {
+        switch bankBusiness {
+        case .loan:
+            return .now() + .milliseconds(1100)
+        case .deposit:
+            return .now() + .milliseconds(700)
+        }
     }
     
     init(bankWindowNumber: Int) {
@@ -40,11 +66,11 @@ struct BankManager {
     private var bankClerks: [BankClerk] = [BankClerk]()
     private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
-    var totalWorkTime: Double {
-        bankClerks.reduce(0) {
-            $0 + $1.totalWorkTime
-        }
+    private var startBusinessTime: Double = 0.0
+    var currentBusinessTime: Double {
+        CFAbsoluteTimeGetCurrent() - startBusinessTime
     }
+    var totalBusinessTime: Double?
     var totalFinishedClients: Int {
         bankClerks.reduce(0) {
             $0 + $1.finishedClients
@@ -75,11 +101,26 @@ struct BankManager {
         
         for _ in 1...count {
             waitingTicketNumber += 1
-            waitingClients.enqueue(element: Client(tag: waitingTicketNumber, priority: .normal))
+            waitingClients.enqueue(element: Client(tag: waitingTicketNumber))
         }
     }
     
     mutating func doBusiness() {
+        startBusiness()
+        makeBankClerkWork()
+        endBusiness()
+    }
+    
+    private mutating func startBusiness() {
+        startBusinessTime = CFAbsoluteTimeGetCurrent()
+    }
+    
+    private mutating func endBusiness() {
+        totalBusinessTime = currentBusinessTime
+        printWorkEndMessage()
+    }
+    
+    private mutating func makeBankClerkWork() {
         while true {
             if waitingClients.isEmpty && isAllBankClerkFinishWork {
                 break
@@ -87,8 +128,6 @@ struct BankManager {
                 startBankClerkWork()
             }
         }
-        
-        printWorkEndMessage()
     }
     
     private mutating func startBankClerkWork() {
@@ -96,18 +135,13 @@ struct BankManager {
         for waitBankClerk in waitBankClerks {
             if let client = waitingClients.dequeue() {
                 waitBankClerk.startWork(for: client)
-                
-                let workTime = Int(waitBankClerk.workTime * 1000)
-                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(workTime)) {
-                    waitBankClerk.finishWork()
-                }
             }
         }
     }
     
     private func printWorkEndMessage() {
-        let totalWorkTimeString = String(format: "%.2f", totalWorkTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalFinishedClients)명이며, 총 업무시간은 \(totalWorkTimeString)초입니다")
+        let totalBusinessTimeString = String(format: "%.2f", totalBusinessTime ?? 0)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalFinishedClients)명이며, 총 업무시간은 \(totalBusinessTimeString)초입니다")
     }
     
     init(_ numberOfBankClerk: Int, _ numberOfClient: Int) {
