@@ -9,6 +9,6 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
-    let customerGrame: Grade
+    let customerGrade: Grade
     let taskType: TaskType
 }
