@@ -6,7 +6,7 @@
 
 import Foundation
 
-private func main() {
+func main() {
     let bank = Bank()
     let tellerNumber = 3
     let maxClientNumber = 30
