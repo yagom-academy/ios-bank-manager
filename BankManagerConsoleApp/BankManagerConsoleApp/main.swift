@@ -29,10 +29,10 @@ func startBank() {
 }
 
 func configureCustomers() {
-    let numberOfCustomers:UInt = UInt.random(in: 10...30)
+    let numberOfCustomers: UInt = UInt.random(in: 10...30)
     
     for number in 1...numberOfCustomers {
-        let businessType:Int = Int.random(in: 1...2)
+        let businessType: Int = Int.random(in: 1...2)
         taskTime = timeSetting(businessType)
         
         customers.append(Customer(waiting: number, taskTime: taskTime, priority: CustomerPriority(rawValue: Int.random(in: 1...3))!, businessType: BusinessType(rawValue: businessType)!))
