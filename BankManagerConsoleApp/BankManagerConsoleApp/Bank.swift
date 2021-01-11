@@ -37,12 +37,23 @@ class Bank {
     }
     
     private func assignCustomerToTeller() {
-        var bankTeller = bankManagers[0]
+        var isStillCustomerLeft: Bool = true
+        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 3)
+        
         self.openTime = Date()
-        while(customers.count > 0) {
-            if bankTeller.state == .notWorking {
-                let customer = customers.removeFirst()
-                bankTeller.performTask(customerNumber: customer.waitNumber, customerPriority: customer.priority, customerTask: customer.taskType)
+        while isStillCustomerLeft {
+            for var bankTeller in self.bankManagers {
+                if customers.count == 0 {
+                    isStillCustomerLeft = false
+                    break
+                }
+                if bankTeller.state == .notWorking {
+                    let customer = customers.removeFirst()
+                    bankTeller.queue.async() {
+                        semaphore.wait()
+                        bankTeller.performTask(customerNumber: customer.waitNumber, customerPriority: customer.priority, customerTask: customer.taskType, semaphore: semaphore)
+                    }
+                }
             }
         }
         self.closeTime = Date()

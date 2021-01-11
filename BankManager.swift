@@ -18,7 +18,7 @@ struct BankManager {
         self.queue = DispatchQueue.init(label: "\(number)")
     }
     
-    mutating func performTask(customerNumber: Int, customerPriority: CustomerPriority, customerTask: CustomerTask) {
+    mutating func performTask(customerNumber: Int, customerPriority: CustomerPriority, customerTask: CustomerTask, semaphore: DispatchSemaphore) {
         switch customerTask {
         case .loan:
             timeNeedToFinishTask = customerTask.timeForTask
@@ -31,5 +31,6 @@ struct BankManager {
         usleep(useconds_t(timeNeedToFinishTask * second))
         print("\(BankManangerMessage.end)".format(customerNumber, customerPriority.description, customerTask.rawValue))
         self.state = .notWorking
+        semaphore.signal()
     }
 }
