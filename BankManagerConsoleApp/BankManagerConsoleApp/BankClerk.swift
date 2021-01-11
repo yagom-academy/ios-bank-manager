@@ -14,7 +14,9 @@ class BankClerk {
     var totalTaskTime: Double = 0.0
     var working: WorkingStatus = .off {
         didSet {
-            work()
+            if working == .enable {
+                work()
+            }
         }
     }
     
@@ -26,16 +28,14 @@ class BankClerk {
 extension  BankClerk {
     
     func work() {
-        if working == .enable {
-            guard let custmer = bankManager.waitingList.first else {
-                print(String(format: ClerkWork.ClosedMessage.rawValue, finishedCustomerNumber, totalTaskTime))
-                bank.message()
-                return
-            }
-            customers.append(custmer)
-            startWork()
-            finishWork()
+        guard let custmer = bankManager.waitingList.first else {
+            print(String(format: ClerkWork.ClosedMessage.rawValue, finishedCustomerNumber, totalTaskTime))
+            bank.message()
+            return
         }
+        customers.append(custmer)
+        startWork()
+        finishWork()
     }
     
     func startWork() {
