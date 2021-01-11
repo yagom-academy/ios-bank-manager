@@ -33,6 +33,19 @@ class BankManager {
             print(closedMessage)
         }
     }
+    
+    func work() {
+        while !waitingList.isEmpty {
+            for bankClerk in bankClerks {
+                if bankClerk.working == false {
+                    bankClerk.work()
+                }
+                if waitingList.isEmpty {
+                    return
+                }
+            }
+        }
+    }
 
     init(bankClerkCount: Int) {
         self.bankClerkCount = bankClerkCount

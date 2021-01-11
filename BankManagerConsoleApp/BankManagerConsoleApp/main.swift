@@ -16,6 +16,9 @@ class Bank {
         case "1":
             bankManager.holdCustomers()
             bankManager.makeBankClerk()
+            bankManager.work()
+            bankManager.beReportedWork()
+            message()
         case "2":
             return
         default:
@@ -28,3 +31,4 @@ class Bank {
 var bank: Bank = Bank()
 var bankManager: BankManager = BankManager(bankClerkCount: 1)
 bank.message()
+

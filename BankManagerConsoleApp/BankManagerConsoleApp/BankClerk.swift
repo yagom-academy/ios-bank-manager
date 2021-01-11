@@ -22,14 +22,12 @@ class BankClerk {
 extension  BankClerk {
     
     func work() {
-        if working == false {
-            guard let custmer = bankManager.waitingList.first else {
-                return
-            }
-            customers.append(custmer)
-            startWork()
-            finishWork()
+        guard let custmer = bankManager.waitingList.first else {
+            return
         }
+        customers.append(custmer)
+        startWork()
+        finishWork()
     }
     
     func startWork() {
