@@ -8,7 +8,7 @@
 import Foundation
 
 class BankClerk {
-    let bankWindowNumber: Int
+    var bankWindowNumber: Int
     var customers: [Custmer] = []
     var finishedCustomerNumber: Int = 0
     var totalTaskTime: Double = 0.0
@@ -29,7 +29,8 @@ extension  BankClerk {
     
     func work() {
         guard let custmer = bankManager.waitingList.first else {
-            print(String(format: ClerkWork.ClosedMessage.rawValue, finishedCustomerNumber, totalTaskTime))
+            let closedMessage = String(format: ClerkWork.ClosedMessage.rawValue, finishedCustomerNumber, totalTaskTime)
+            print(closedMessage)
             bank.message()
             return
         }
@@ -44,7 +45,8 @@ extension  BankClerk {
         }
         bankManager.waitingList.removeFirst()
         working = .disable
-        print(String(format: ClerkWork.stratMessage.rawValue, bankWindowNumber, customer.index))
+        let startMessage = String(format: ClerkWork.stratMessage.rawValue, bankWindowNumber, customer.index)
+        print(startMessage)
     }
     
     func finishWork() {
@@ -54,7 +56,8 @@ extension  BankClerk {
         finishedCustomerNumber += 1
         totalTaskTime += customer.taskTime
         customers.removeFirst()
-        print(String(format: ClerkWork.FinishedMessage.rawValue, bankWindowNumber, customer.index))
+        let finishedMessage = String(format: ClerkWork.FinishedMessage.rawValue, bankWindowNumber, customer.index)
+        print(finishedMessage)
         working = .enable
     }
 }
