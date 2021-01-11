@@ -105,20 +105,22 @@ struct BankManager {
         }
     }
     
-    mutating func startBusiness() {
-        startBusinessTime = CFAbsoluteTimeGetCurrent()
-        
-        doBusiness()
+    mutating func doBusiness() {
+        startBusiness()
+        makeBankClerkWork()
         endBusiness()
     }
     
-    mutating func endBusiness() {
+    private mutating func startBusiness() {
+        startBusinessTime = CFAbsoluteTimeGetCurrent()
+    }
+    
+    private mutating func endBusiness() {
         totalBusinessTime = currentBusinessTime
-        
         printWorkEndMessage()
     }
     
-    mutating func doBusiness() {
+    private mutating func makeBankClerkWork() {
         while true {
             if waitingClients.isEmpty && isAllBankClerkFinishWork {
                 break
