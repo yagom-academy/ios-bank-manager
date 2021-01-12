@@ -64,7 +64,7 @@ class Bank {
                 if self.customers.isEmpty {
                     break
                 }
-                if !banker.isWorking{
+                if !banker.isWorking {
                     totalProcessedCustomersNumber += 1
                     banker.startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
                 }
