@@ -17,9 +17,9 @@ func getInput() {
             return
         }
         switch userInput {
-        case "1":
+        case Menu.open.rawValue:
             bankManager.openBank()
-        case "2":
+        case Menu.close.rawValue:
             isContinue = false
             return
         default:

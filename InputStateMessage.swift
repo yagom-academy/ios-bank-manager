@@ -4,6 +4,10 @@
 //
 //  Created by 김태형 on 2021/01/07.
 //
+enum Menu: String {
+    case open = "1"
+    case close = "2"
+}
 
 struct InputStateMessage {
     enum InputState: String {
