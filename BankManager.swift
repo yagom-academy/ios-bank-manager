@@ -4,24 +4,42 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+import Foundation
+
 struct BankManager {
     private var bank: Bank
-    private let clerkNumber: Int = 1
-    private lazy var randomClientNumber = 0
+    private var clientQueue = [Client]()
     
-    init() throws {
-        self.bank = try Bank(employeeNumber: clerkNumber)
+    init() {
+        let clerkNumber: Int = 3
+        self.bank = Bank(employeeNumber: clerkNumber)
     }
     
     mutating func openBank() throws {
-        randomClientNumber = Int.random(in: 10...30)
-        try bank.updateWaitingList(of: randomClientNumber)
+        try generateRandomClients()
         print("은행개점")
-        bank.makeAllClerksWorkable()
+        bank.startTimer()
+        bank.makeAllClerksWork()
+    }
+    
+    private mutating func generateRandomClients() throws {
+        let randomClientNumber = Int.random(in: 10...30)
+        for i in 1...randomClientNumber {
+            guard let randomBusinessType = BusinessType.allCases.randomElement(),
+                  let randomClientGrade = ClientGrade.allCases.randomElement() else {
+                return
+            }
+            
+            let newClient = Client(waitingNumber: i, business: randomBusinessType, grade: randomClientGrade)
+            clientQueue.append(newClient)
+        }
+
+        try bank.updateWaitingList(from: clientQueue)
     }
     
     func closeBank() {
-        print(bank.endingMent)
+        bank.stopTimer()
+        bank.printEndingMent()
     }
 }
 

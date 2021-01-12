@@ -6,8 +6,10 @@
 
 import Foundation
 
-struct ConsoleController {
-    func recieveUserInput() -> String {
+class ConsoleController {
+    var bankManager = BankManager()
+    
+    private func recieveUserInput() -> String {
         print(" 1 : 은행개점 \n 2 : 종료\n 입력 : ", terminator: "")
         
         guard let userInput = readLine() else {
@@ -19,20 +21,10 @@ struct ConsoleController {
         return userInput
     }
     
-    func operateUserInput(_ input: String) {
+    private func operateUserInput(_ input: String) {
         switch input {
         case "1":
-            do {
-                try manageBank()
-            } catch {
-                switch error {
-                case BankOperationError.invalidValue:
-                    print("알 수 없는 에러가 발생했습니다.")
-                    break
-                default:
-                    break
-                }            
-            }
+            manageBank()
             runProgram()
         case "2":
             break
@@ -42,13 +34,26 @@ struct ConsoleController {
         }
     }
     
-    func manageBank() throws {
-        var bankManager = try BankManager()
-        try bankManager.openBank()
+    private func manageBank() {
+        bankManager = BankManager()
+        
+        do {
+            try bankManager.openBank()
+        } catch {
+            switch error {
+            case BankOperationError.invalidValue:
+                print("알 수 없는 에러가 발생했습니다.")
+                break
+            default:
+                break
+            }
+        }
+        
         bankManager.closeBank()
     }
     
-    func runProgram() {
+    fileprivate func runProgram() {
+        bankManager = BankManager()
         let selectedMenu = consoleController.recieveUserInput()
         consoleController.operateUserInput(selectedMenu)
     }

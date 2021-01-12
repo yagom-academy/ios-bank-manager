@@ -2,82 +2,81 @@
 import Foundation
 
 class Bank {
-    private var serviceCounter: [Int : BankClerk] = [ : ]
+    private var clerkNumber: Int
     private var waitingList: [Client] = []
-    private var totalVistedClientsNumber: Int = 0
-
-    var endingMent: String {
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(calculateTotalProcessedClientsNumber())명이며, 총 업무시간은 \(calculateTotalOperatingTime())초입니다."
+    private var totalProcessedClientsCount: Int = 0
+    private var totalOperateTime: Double = 0
+    private var startTime: TimeInterval = 0
+    
+    init(employeeNumber: Int) {
+        self.clerkNumber = employeeNumber
     }
     
-    init(employeeNumber: Int) throws {
-        self.serviceCounter = try loadBankClerks(of: employeeNumber)
-        NotificationCenter.default.addObserver(self, selector: #selector(assignClient), name: NSNotification.Name("workable"), object: nil)
-    }
-    
-    private func loadBankClerks(of number: Int) throws -> [Int : BankClerk] {
-        guard number > 0 else {
+    func updateWaitingList(from queue: [Client]) throws {
+        guard queue.count > 0 else {
             throw BankOperationError.invalidValue
         }
         
-        for counterNumber in 1 ... number {
-            let newBankClerk = BankClerk(counterNumber: counterNumber)
-            self.serviceCounter[counterNumber] = newBankClerk
-        }
-        return self.serviceCounter
-    }
-    
-    func updateWaitingList(of size: Int) throws {
-        guard size > 0 else {
-            throw BankOperationError.invalidValue
-        }
-
-        for _ in  1...size {
-            self.totalVistedClientsNumber += 1
-            let newClient = Client(waitingNumber: totalVistedClientsNumber, business: .basic)
-            waitingList.append(newClient)
+        self.waitingList += queue
+        
+        waitingList.sort { (client1, client2) -> Bool in
+            client1.grade.rawValue < client2.grade.rawValue
         }
     }
     
-    func makeAllClerksWorkable() {
-        for clerk in serviceCounter.values {
-            clerk.workingStatus = .workable
+    func makeAllClerksWork() {
+        let semaphore = DispatchSemaphore(value: 1)
+        let counterGroup = DispatchGroup()
+        
+        for i in 1...clerkNumber {
+            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue")
+            
+            dispatchQueue.async(group: counterGroup) {
+                self.handleWaitingList(with: semaphore)
+            }
+        }
+        
+        counterGroup.wait()
+    }
+    
+    private func handleWaitingList(with semaphore: DispatchSemaphore) {
+        let bankClerk = BankClerk()
+        
+        while !self.waitingList.isEmpty {
+            semaphore.wait()
+            guard let client = self.waitingList.first else {
+                return
+            }
+            self.waitingList.removeFirst()
+            semaphore.signal()
+            
+            bankClerk.handleClientBusiness(of: client)
+            self.totalProcessedClientsCount += 1
         }
     }
     
-    @objc private func assignClient(_ noti: Notification) {
-        guard let client = waitingList.first, let counterNumber = noti.userInfo?["counterNumber"] as? Int else {
-            return
-        }
-        
-        waitingList.removeFirst()
-        
-        guard let workableBankClerk = serviceCounter[counterNumber] else {
-            return
-        }
-        
-        workableBankClerk.handleClientBusiness(of: client)
+    func printEndingMent() {
+        let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsCount)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
+        print(endingMent)
     }
 }
 
-// MARK : bank endingment
+// MARK: Timer
 extension Bank {
-    private func calculateTotalOperatingTime() -> Float {
-        let longestWorkingTime = serviceCounter.map { (key: Int, value: BankClerk) -> Float in
-            return value.totalWorkingTime
-        }.max() ?? 0
-    
-        let roundedNumber = round(longestWorkingTime * 100) / 100
-        return roundedNumber
+    func startTimer() {
+        startTime = Date.timeIntervalSinceReferenceDate
     }
     
-    private func calculateTotalProcessedClientsNumber() -> Int {
-        let totalProcessedClientsNumber = serviceCounter.map { (key: Int, value: BankClerk) -> Int  in
-            return value.totalProcessedClients
-        }.reduce(0) { (result, currentNumber) -> Int in
-            return result + currentNumber
-        }
+    func stopTimer() {
+        let currentTime = Date.timeIntervalSinceReferenceDate
+        let timeDiferrence = currentTime - startTime
         
-        return totalProcessedClientsNumber
+        totalOperateTime = roundToSecondDecimalPlace(number: timeDiferrence)
+    }
+    
+    private func roundToSecondDecimalPlace(number: Double) -> Double {
+        let newNumber = number * 100
+        let result = round(newNumber) / 100
+        return result
     }
 }
