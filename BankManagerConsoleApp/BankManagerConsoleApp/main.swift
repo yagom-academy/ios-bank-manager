@@ -33,7 +33,7 @@ private let bank = Bank(bankManagerNumber: bankManagerNumber)
 
 private func initializeBankCustomer() {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
-    bank.numberOfCustomer = todayCustomerNumber
+    bank.customerTotalCount = todayCustomerNumber
     for waitNumber in 1...todayCustomerNumber {
         let customerPriority = generateRandomCustomerPriority()
         let customerTask = generateRandomCustomerTask()

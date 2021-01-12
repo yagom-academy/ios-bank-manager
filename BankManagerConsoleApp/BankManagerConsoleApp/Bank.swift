@@ -10,7 +10,7 @@ import Foundation
 class Bank {
     var customers: [Customer] = []
     private var bankManagers: [BankManager] = []
-    var numberOfCustomer: Int?
+    var customerTotalCount: Int?
     private var openTime: Date?
     private var closeTime: Date?
     private var totalTime: TimeInterval? {
@@ -62,7 +62,7 @@ class Bank {
     }
     
     private func closeBank() {
-        guard let totalNumberOfCustomer = numberOfCustomer, let businessTime = totalTime else {
+        guard let totalNumberOfCustomer = customerTotalCount, let businessTime = totalTime else {
             print(BankError.unknown.localizedDescription)
             return
         }
