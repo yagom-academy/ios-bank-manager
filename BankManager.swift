@@ -7,7 +7,7 @@
 import Foundation
 
 class BankManager {
-    let customerCount: Int = Int.random(in: 10...30)
+    private let customerCount: Int = Int.random(in: 10...30)
     let bankClerkCount: Int
     var waitingList: [Custmer] = []
     var bankClerks: [BankClerk] = []

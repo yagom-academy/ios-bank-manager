@@ -16,16 +16,13 @@ class BankClerk {
     init(bankWindowNumber: Int) {
         self.bankWindowNumber = bankWindowNumber
     }
-}
-
-extension  BankClerk {
     
     func work() {
         startWork()
         finishWork()
     }
     
-    func startWork() {
+    private func startWork() {
         guard let customer = bankManager.waitingList.first else {
             return
         }
@@ -34,7 +31,7 @@ extension  BankClerk {
         print(startMessage)
     }
     
-    func finishWork() {
+    private func finishWork() {
         guard let customer = bankManager.waitingList.first else {
             return
         }
