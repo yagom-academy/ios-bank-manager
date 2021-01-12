@@ -52,3 +52,5 @@ func duration(_ type: BusinessType) -> Double {
     }
     return taskTime
 }
+
+startBank()

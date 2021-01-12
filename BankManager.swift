@@ -24,7 +24,6 @@ class Banker {
             return
         }
         print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 시작")
-        flipCondition()
     }
     
     func flipCondition() {
@@ -36,7 +35,7 @@ class Banker {
         }
     }
     
-    private func workDone() {
+    func workDone() {
         if let customer = customer {
             workTime += customer.taskTime
             print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 종료")
@@ -70,7 +69,7 @@ struct Customer {
 class Bank {
     private var bankers = [Banker]()
     private var businessTimes: Double = 0.0
-    private var totalVisitedCustomers: UInt = 0
+    private var totalVistdCustomers: UInt = 0
     private var dispatchQueue = DispatchQueue.global()
     private var semaphore = DispatchSemaphore(value: 0)
     private let dispatchGroup = DispatchGroup()
@@ -108,12 +107,17 @@ class Bank {
         if let customer = customers.first {
             banker.flipCondition()
             dispatchGroup.enter()
-            dispatchQueue.asyncAfter(deadline: .now() + customer.taskTime, execute: {
+            
+            dispatchQueue.async {
                 banker.customer = customer
                 banker.work()
+            }
+            
+            dispatchQueue.asyncAfter(deadline: .now() + customer.taskTime) {
+                banker.flipCondition()
                 self.dispatchGroup.leave()
-            })
-            totalVisitedCustomers += 1
+            }
+            totalVistdCustomers += 1
             customers.removeFirst()
         }
     }
@@ -124,6 +128,7 @@ class Bank {
         })
     }
 
+    
     private func countOfTotalTime() {
         bankers.sort { $0.workTime > $1.workTime }
         businessTimes = bankers[0].workTime
@@ -132,13 +137,13 @@ class Bank {
     
     private func closeBank() {
         let businessTimeToString: String = String(format: "%.2f", businessTimes)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVisitedCustomers)명이며, 총 업무시간은 \(businessTimeToString)초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistdCustomers)명이며, 총 업무시간은 \(businessTimeToString)초 입니다.")
     }
     
     private func initializeInfo() {
         bankers = [Banker]()
         customers = [Customer]()
         businessTimes = 0.0
-        totalVisitedCustomers = 0
+        totalVistdCustomers = 0
     }
 }
