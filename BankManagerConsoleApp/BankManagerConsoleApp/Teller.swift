@@ -20,13 +20,14 @@ final class Teller {
         workingQueue = DispatchQueue(label: "\(windowNumber)")
     }
     
-    func handleBusiness(for client: Client) {
-        let needTimeToWork = client.businessType.neededTime
-
+    func handleBusiness(for client: Client, withDispatchGroup group: DispatchGroup) {
         isWorking = true
-        Dashboard.printStatus(for: client, about: .tellerStart)
-        Thread.sleep(forTimeInterval: needTimeToWork)
-        Dashboard.printStatus(for: client, about: .tellerFinish)
-        isWorking = false
+
+        workingQueue.async(group: group) {
+            Dashboard.printStatus(for: client, about: Message.tellerStart)
+            Thread.sleep(forTimeInterval: client.businessType.neededTime)
+            Dashboard.printStatus(for: client, about: Message.tellerFinish)
+            self.isWorking = false
+        }
     }
 }

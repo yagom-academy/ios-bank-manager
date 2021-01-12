@@ -9,28 +9,28 @@ import Foundation
 final class Bank {
     private var clients: [Client] = []
     private var tellers: [Teller] = []
-    private var finishedClientNumber = 0
+    private var finishedClientCount = 0
     private var businessTime: TimeInterval?
-  
+
     func operateBank(teller: Int, client: [Client]) {
         let openTime = Date()
         
         initTellers(teller)
-        clients = client
+        clients = client.sorted()
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
-        Dashboard.printCloseMessage(finishedClientNumber, businessTime)
+        Dashboard.printCloseMessage(finishedClientCount, businessTime)
         closeBank()
     }
     
-    private func initTellers(_ number: Int) {
-        for windowNumber in 1...number {
+    private func initTellers(_ count: Int) {
+        for windowNumber in 1...count {
             tellers.append(Teller(windowNumber: windowNumber))
         }
     }
     
     private func assignBusinessToTeller() {
-        let semaphore = DispatchSemaphore(value: 0)
+        let dispatchGroup = DispatchGroup()
         var isContinue = true
         
         while isContinue {
@@ -41,20 +41,17 @@ final class Bank {
                 }
                 if teller.isNotWorking {
                     let client = clients.removeFirst()
-                    teller.workingQueue.async {
-                        teller.handleBusiness(for: client)
-                        semaphore.signal()
-                    }
-                    self.finishedClientNumber += 1
+                    teller.handleBusiness(for: client, withDispatchGroup: dispatchGroup)
+                    self.finishedClientCount += 1
                 }
             }
         }
-        for _ in 0..<finishedClientNumber { semaphore.wait() }
+        dispatchGroup.wait()
     }
     
     private func closeBank() {
         tellers.removeAll()
         clients.removeAll()
-        finishedClientNumber = 0
+        finishedClientCount = 0
     }
 }

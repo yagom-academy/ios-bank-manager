@@ -7,22 +7,22 @@
 
 import Foundation
 
-class Dashboard {
+struct Dashboard {
     static func printMenu() {
         print(Menu.description, terminator: " ")
     }
     
-    static func printStatus(for client: Client, about message: Message) {
-        let message = String(format: message.rawValue, client.waitingNumber)
+    static func printStatus(for client: Client, about message: String) {
+        let message = String(format: message, client.waitingNumber, "\(client.priority)", "\(client.businessType)")
         print(message)
     }
     
-    static func printCloseMessage(_ number: Int, _ time: TimeInterval?) {
+    static func printCloseMessage(_ count: Int, _ time: TimeInterval?) {
         guard let time = time else {
-            print(BankError.unknown.description)
+            print("\(BankError.unknown)")
             return
         }
-        let message = String(format: Message.close.rawValue, number, time)
+        let message = String(format: Message.close, count, time)
         print(message)
     }
 }
