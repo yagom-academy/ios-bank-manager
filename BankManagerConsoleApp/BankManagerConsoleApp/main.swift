@@ -8,7 +8,7 @@ import Foundation
 
 func main() {
     let bank = Bank()
-    let tellerCount = 3
+    let tellers = Tellers(count: 3)
     let maxClientCount = 30
     let minClientCount = 10
     var isContinue = true
@@ -25,7 +25,7 @@ func main() {
         case .start:
             let randomNumber = Int.random(in: minClientCount...maxClientCount)
             let clients = Clients(count: randomNumber)
-            bank.open(teller: tellerCount, client: clients.list)
+            bank.open(teller: tellers.list, client: clients.list)
         case .end:
             isContinue = false
         }
