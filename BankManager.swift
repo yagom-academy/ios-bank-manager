@@ -19,16 +19,10 @@ struct BankManager {
     }
     
     mutating func performTask(customer: Customer, semaphore: DispatchSemaphore) {
-        switch customer.taskType {
-        case .loan:
-            timeNeedToFinishTask = customer.taskType.timeForTask
-        default:
-            timeNeedToFinishTask = customer.taskType.timeForTask
-        }
         let second: Double = 1_000_000
         self.state = .working
         print("\(BankManangerMessage.start)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
-        usleep(useconds_t(timeNeedToFinishTask * second))
+        usleep(useconds_t(customer.taskType.timeForTask * second))
         print("\(BankManangerMessage.end)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
         self.state = .notWorking
         semaphore.signal()
