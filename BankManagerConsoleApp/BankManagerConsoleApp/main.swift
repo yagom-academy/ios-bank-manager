@@ -11,16 +11,6 @@ private func generateRandomNumberOfCustomer() -> Int {
     return randomNumber
 }
 
-private func generateRandomCustomerPriority() -> Customer.Priority {
-    let priority = Customer.Priority.allCases.randomElement() ?? .normal
-    return priority
-}
-
-private func generateRandomCustomerTask() -> Customer.Task {
-    let taskType = Customer.Task.allCases.randomElement() ?? .deposit
-    return taskType
-}
-
 private func getUserInput() -> String {
     guard let input = readLine() else {
         return BankError.noEnterFromUser.localizedDescription
@@ -35,8 +25,10 @@ private func initializeBankCustomer() {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
     bank.customerTotalCount = todayCustomerNumber
     for waitNumber in 1...todayCustomerNumber {
-        let customerPriority = generateRandomCustomerPriority()
-        let customerTask = generateRandomCustomerTask()
+        guard let customerPriority = Customer.Priority.allCases.randomElement(), let customerTask = Customer.Task.allCases.randomElement() else {
+            print(BankError.unknown.localizedDescription)
+            return
+        }
         bank.customers.append(Customer(waitNumber: waitNumber, priority: customerPriority, taskType: customerTask))
     }
     
