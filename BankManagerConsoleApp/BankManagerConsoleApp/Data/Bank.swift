@@ -27,8 +27,8 @@ class Bank {
     func initCustomers(_ customerNumber: Int) throws {
         customers.removeAll()
         for number in 1...customerNumber {
-            guard let randomGrade = Grade.allCases.randomElement(),
-                  let randomTask = TaskType.allCases.randomElement() else {
+            guard let randomGrade = Customer.Grade.allCases.randomElement(),
+                  let randomTask = Customer.TaskType.allCases.randomElement()  else {
                 throw BankError.typeRandomElement
             }
             customers.append(Customer(waitingNumber: number, customerGrade: randomGrade, taskType: randomTask))
