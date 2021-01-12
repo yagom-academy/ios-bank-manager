@@ -58,7 +58,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C4D3BA325ADE7D70070DB26 /* enum */ = {
+		4C4D3BA325ADE7D70070DB26 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
 				4C4D3B9625ADE78D0070DB26 /* Menu.swift */,
@@ -66,7 +66,7 @@
 				4C4D3B9E25ADE7BC0070DB26 /* BusinessType.swift */,
 				4CDDB11D25A422EF00EDC9CE /* StringFormattingError.swift */,
 			);
-			path = enum;
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {
@@ -88,7 +88,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				4C4D3BA325ADE7D70070DB26 /* enum */,
+				4C4D3BA325ADE7D70070DB26 /* Enum */,
 				4CB8E9BA25A998E300C021F6 /* HeadOffice.swift */,
 				4CB8E9C325A99CE000C021F6 /* Dashboard.swift */,
 				C7D65D1A259C8190005510E0 /* Bank.swift */,

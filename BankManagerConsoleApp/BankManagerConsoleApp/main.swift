@@ -25,7 +25,7 @@ func main() {
         case .start:
             let randomNumber = Int.random(in: minClientCount...maxClientCount)
             let clients = Clients(count: randomNumber)
-            bank.operateBank(teller: tellerCount, client: clients.list)
+            bank.open(teller: tellerCount, client: clients.list)
         case .end:
             isContinue = false
         }

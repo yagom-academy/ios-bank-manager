@@ -12,7 +12,7 @@ final class Bank {
     private var finishedClientCount = 0
     private var businessTime: TimeInterval?
 
-    func operateBank(teller: Int, client: [Client]) {
+    func open(teller: Int, client: [Client]) {
         let openTime = Date()
         
         initTellers(teller)
