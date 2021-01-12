@@ -15,5 +15,5 @@ enum BankMessage: String {
 enum ClerkWork: String  {
     case stratMessage = "%d번 창구 %d번 손님 업무 시작"
     case FinishedMessage = "%d번 창구 %d번 손님 업부 완료"
-    case ClosedMessage = "%d창구 업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
+    case ClosedMessage = "%d번 창구 업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
 }

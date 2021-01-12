@@ -40,9 +40,6 @@ class BankManager {
                 if bankClerk.working == false {
                     bankClerk.work()
                 }
-                if waitingList.isEmpty {
-                    return
-                }
             }
         }
     }
