@@ -14,18 +14,14 @@ class Bank {
     private var totalProcessedCustomersNumber = 0
     private let bankGroup: DispatchGroup = DispatchGroup()
     private let closeMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
+    private let customerQueue = DispatchQueue.init(label: "customer")
     
     // MARK: - init func
     init(bankerNumber: Int) {
         for number in 1...bankerNumber {
             bankers.append(Banker(number))
         }
-    }
-    
-    func initBankers() {
-        for banker in bankers {
-            banker.isWorking = false
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(assignedCustomerToBanker(_:)), name: .finishBankerTask, object: nil)
     }
     
     func initCustomers(_ customerNumber: Int) throws {
@@ -51,7 +47,6 @@ class Bank {
     }
     
     func open(_ customerNumber: Int) throws {
-        initBankers()
         try initCustomers(customerNumber)
         openTime = Date()
         totalProcessedCustomersNumber = 0
@@ -59,19 +54,27 @@ class Bank {
     }
     
     private func work() throws {
-        while self.customers.isNotEmpty {
-            for banker in self.bankers {
-                if self.customers.isEmpty {
-                    break
-                }
-                if !banker.isWorking {
-                    totalProcessedCustomersNumber += 1
-                    banker.startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
-                }
+        for banker in self.bankers {
+            if self.customers.isEmpty {
+                break
             }
+            totalProcessedCustomersNumber += 1
+            banker.startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
         }
         self.bankGroup.wait()
         try self.close()
+    }
+    
+    @objc func assignedCustomerToBanker(_ notification: Notification) {
+        guard let bankerIndex = notification.object as? Int else {
+            return
+        }
+        customerQueue.async {
+            if self.customers.isNotEmpty {
+                self.totalProcessedCustomersNumber += 1
+                self.bankers[bankerIndex - 1].startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
+            }
+        }
     }
     
     private func close() throws {
