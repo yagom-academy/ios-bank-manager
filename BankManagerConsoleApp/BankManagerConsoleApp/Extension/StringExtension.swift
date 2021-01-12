@@ -20,7 +20,7 @@ extension String {
                 return String(arg)
             }
             
-            return BankError.noMatchingType.localizedDescription
+            return StringFormattingError.noMatchingType.localizedDescription
         } as [CVarArg]
         return String.init(format: self, arguments: args)
     }

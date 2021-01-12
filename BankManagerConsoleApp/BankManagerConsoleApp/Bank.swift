@@ -63,7 +63,7 @@ class Bank {
     
     private func closeBank() {
         guard let totalNumberOfCustomer = customerTotalCount, let businessTime = totalTime else {
-            print(BankError.unknown.localizedDescription)
+            print(StringFormattingError.unknown.localizedDescription)
             return
         }
         print(String(format: "\(BankMessage.close)", totalNumberOfCustomer ,businessTime))

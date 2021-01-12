@@ -13,7 +13,7 @@ private func generateRandomNumberOfCustomer() -> Int {
 
 private func getUserInput() -> String {
     guard let input = readLine() else {
-        return BankError.noEnterFromUser.localizedDescription
+        return StringFormattingError.noEnterFromUser.localizedDescription
     }
     return input
 }
@@ -26,7 +26,7 @@ private func initializeBankCustomer() {
     bank.customerTotalCount = todayCustomerNumber
     for waitNumber in 1...todayCustomerNumber {
         guard let customerPriority = Customer.Priority.allCases.randomElement(), let customerTask = Customer.Task.allCases.randomElement() else {
-            print(BankError.unknown.localizedDescription)
+            print(StringFormattingError.unknown.localizedDescription)
             return
         }
         bank.customers.append(Customer(waitNumber: waitNumber, priority: customerPriority, taskType: customerTask))
@@ -55,7 +55,7 @@ private func main() {
             isConsoleAppTerminated = true
             break
         default:
-            print(BankError.wrongUserInput.localizedDescription)
+            print(StringFormattingError.wrongUserInput.localizedDescription)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BankError.swift
+//  StringFormattingError.swift
 //  BankManagerConsoleApp
 //
 //  Created by Yeon on 2021/01/04.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum BankError: Error {
+enum StringFormattingError: Error {
     case wrongUserInput
     case noEnterFromUser
     case unknown
     case noMatchingType
 }
 
-extension BankError: LocalizedError {
+extension StringFormattingError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .wrongUserInput:
