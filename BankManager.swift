@@ -34,7 +34,6 @@ struct BankManager {
             let newClient = Client(waitingNumber: i, business: randomBusinessType, grade: randomClientGrade)
             clientQueue.append(newClient)
         }
-
         try bank.updateWaitingList(from: clientQueue)
     }
     
