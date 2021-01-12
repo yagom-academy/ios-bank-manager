@@ -1,6 +1,6 @@
 import Foundation
 
-enum BusinessType: Int {
-    case 예금 = 1
-    case 대출 = 2
+enum BusinessType: String, CaseIterable {
+    case loan = "대출"
+    case deposit = "예금"
 }

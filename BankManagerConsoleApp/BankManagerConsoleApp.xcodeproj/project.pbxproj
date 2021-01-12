@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9A2B366825A54F69009CB36E /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B366725A54F69009CB36E /* InputError.swift */; };
 		9A3F820025A71A5D0050466A /* BankCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F81FF25A71A5D0050466A /* BankCondition.swift */; };
-		9A3F820325A71B690050466A /* CustomerPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F820225A71B690050466A /* CustomerPriority.swift */; };
 		9A3F820625A71BB10050466A /* BusinessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F820525A71BB10050466A /* BusinessType.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		9A2B366725A54F69009CB36E /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 		9A3F81FF25A71A5D0050466A /* BankCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCondition.swift; sourceTree = "<group>"; };
-		9A3F820225A71B690050466A /* CustomerPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPriority.swift; sourceTree = "<group>"; };
 		9A3F820525A71BB10050466A /* BusinessType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessType.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -67,7 +65,6 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				9A3F820225A71B690050466A /* CustomerPriority.swift */,
 				9A3F820525A71BB10050466A /* BusinessType.swift */,
 				9A3F81FF25A71A5D0050466A /* BankCondition.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
@@ -136,7 +133,6 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				9A3F820025A71A5D0050466A /* BankCondition.swift in Sources */,
-				9A3F820325A71B690050466A /* CustomerPriority.swift in Sources */,
 				9A3F820625A71BB10050466A /* BusinessType.swift in Sources */,
 				9A2B366825A54F69009CB36E /* InputError.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
