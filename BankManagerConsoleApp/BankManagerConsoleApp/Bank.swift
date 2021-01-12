@@ -8,10 +8,6 @@ class Bank {
     private var totalOperateTime: Double = 0
     private var startTime: TimeInterval = 0
     
-    var endingMent: String {
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsNumber)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
-    }
-    
     init(employeeNumber: Int) {
         self.bankClerkNumber = employeeNumber
     }
@@ -57,6 +53,11 @@ class Bank {
             bankClerk.handleClientBusiness(of: client)
             self.totalProcessedClientsNumber += 1
         }
+    }
+    
+    func printEndingMent() {
+        let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsNumber)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
+        print(endingMent)
     }
 }
 

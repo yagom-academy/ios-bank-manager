@@ -40,7 +40,7 @@ struct BankManager {
     
     func closeBank() {
         bank.stopTimer()
-        print(bank.endingMent)
+        bank.printEndingMent()
     }
 }
 
