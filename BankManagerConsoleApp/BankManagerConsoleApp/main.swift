@@ -11,6 +11,16 @@ private func generateRandomNumberOfCustomer() -> Int {
     return randomNumber
 }
 
+private func generateRandomCustomerPriority() -> CustomerPriority {
+    let priority = CustomerPriority.allCases.randomElement() ?? .normal
+    return priority
+}
+
+private func generateRandomCustomerTask() -> CustomerTask {
+    let taskType = CustomerTask.allCases.randomElement() ?? .deposit
+    return taskType
+}
+
 private func getUserInput() -> String {
     guard let input = readLine() else {
         return BankError.noEnterFromUser.localizedDescription
@@ -18,14 +28,23 @@ private func getUserInput() -> String {
     return input
 }
 
-let bankManagerNumber = 1
-var bank = Bank(bankManagerNumber: bankManagerNumber)
+private let bankManagerNumber = 3
+private let bank = Bank(bankManagerNumber: bankManagerNumber)
 
 private func initializeBankCustomer() {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
     bank.numberOfCustomer = todayCustomerNumber
     for waitNumber in 1...todayCustomerNumber {
-        bank.customers.append(Customer(waitNumber: waitNumber))
+        let customerPriority = generateRandomCustomerPriority()
+        let customerTask = generateRandomCustomerTask()
+        bank.customers.append(Customer(waitNumber: waitNumber, priority: customerPriority, taskType: customerTask))
+    }
+    
+    bank.customers.sort { (currentCustomer, nextCustomer) -> Bool in
+        if currentCustomer.priority.rawValue == nextCustomer.priority.rawValue {
+            return currentCustomer.waitNumber < nextCustomer.waitNumber
+        }
+        return currentCustomer.priority.rawValue < nextCustomer.priority.rawValue
     }
 }
 
@@ -34,6 +53,7 @@ private func main() {
     
     while !isConsoleAppTerminated {
         print("\(ConsoleApp.menu)")
+        print("입력 : ", terminator: "")
         
         switch getUserInput() {
         case ConsoleApp.start:

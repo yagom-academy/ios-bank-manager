@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct Bank {
+class Bank {
     var customers: [Customer] = []
     private var bankManagers: [BankManager] = []
     var numberOfCustomer: Int?
     private var openTime: Date?
     private var closeTime: Date?
-    private var totalTime: Double? {
+    private var totalTime: TimeInterval? {
         guard let openTime = openTime, let closeTime = closeTime else {
             return nil
         }
-        let calculatedTime = Double(closeTime.timeIntervalSince(openTime))
+        let calculatedTime = TimeInterval(closeTime.timeIntervalSince(openTime))
         return calculatedTime
     }
     
@@ -25,30 +25,43 @@ struct Bank {
         self.initializeBankManagers(bankManagerNumber: bankManagerNumber)
     }
     
-    mutating private func initializeBankManagers(bankManagerNumber: Int) {
+    private func initializeBankManagers(bankManagerNumber: Int) {
         for number in 1...bankManagerNumber {
             bankManagers.append(BankManager(number: number))
         }
     }
     
-    mutating func performBankTask() {
+    func performBankTask() {
         assignCustomerToTeller()
         closeBank()
     }
     
-    mutating private func assignCustomerToTeller() {
-        var bankTeller = bankManagers[0]
+    private func assignCustomerToTeller() {
+        var isStillCustomerLeft: Bool = true
+        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 3)
+        let bankTellerGroup: DispatchGroup = DispatchGroup()
+        
         self.openTime = Date()
-        while(customers.count > 0) {
-            if bankTeller.state == .notWorking {
-                let customer = customers.removeFirst()
-                bankTeller.performTask(customerNumber: customer.waitNumber)
+        while isStillCustomerLeft {
+            for var bankTeller in self.bankManagers {
+                if customers.count == 0 {
+                    isStillCustomerLeft = false
+                    break
+                }
+                if bankTeller.state == .notWorking {
+                    let customer = customers.removeFirst()
+                    bankTeller.queue.async(group: bankTellerGroup) {
+                        semaphore.wait()
+                        bankTeller.performTask(customer: customer, semaphore: semaphore)
+                    }
+                }
             }
         }
+        bankTellerGroup.wait()
         self.closeTime = Date()
     }
     
-    mutating private func closeBank() {
+    private func closeBank() {
         guard let totalNumberOfCustomer = numberOfCustomer, let businessTime = totalTime else {
             print(BankError.unknown.localizedDescription)
             return
