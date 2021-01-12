@@ -8,17 +8,26 @@
 import Foundation
 
 class Banker {
-    private var processedCustomerNumber: Int = 0
-    private var customer: Customer?
-    
+    let workingQueue: DispatchQueue
+    var isWorking = false
     private let startTaskMessgae = "%d번 %@고객 %@업무 시작"
     private let endTaskMessgae = "%d번 %@고객 %@업무 완료"
     
-    func increaseCustomerNumber() {
-        processedCustomerNumber += 1
+    // MARK: - init func
+    init(_ number: Int) {
+        self.workingQueue = DispatchQueue(label: "\(number)")
     }
     
-    func setCustomer(_ customer: Customer) {
-        self.customer = customer
+    func startWork(customer: Customer) {
+        print(String(format: startTaskMessgae, customer.waitingNumber, customer.customerGrade.gradeString, customer.taskType.taskString))
+        isWorking = true
+        workingQueue.asyncAfter(deadline: .now() + customer.taskType.taskTime) {
+            self.finishWork(customer: customer)
+        }
+    }
+    
+    private func finishWork(customer: Customer) {
+        print(String(format: endTaskMessgae, customer.waitingNumber, customer.customerGrade.gradeString, customer.taskType.taskString))
+        isWorking = false
     }
 }
