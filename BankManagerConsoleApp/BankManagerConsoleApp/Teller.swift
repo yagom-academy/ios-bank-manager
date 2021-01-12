@@ -14,7 +14,7 @@ final class Teller {
     var isNotWorking: Bool {
         return !isWorking
     }
-    
+
     init(windowNumber: Int) {
         self.windowNumber = windowNumber
         workingQueue = DispatchQueue(label: "\(windowNumber)")
