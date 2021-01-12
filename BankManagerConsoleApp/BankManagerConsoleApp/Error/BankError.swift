@@ -28,11 +28,6 @@ extension InputError: LocalizedError {
 
 enum BankError: Error {
     case typeRandomElement
-        
-    case emptyBank
-    case invalidateTime
-    case invalidateBanker
-    case invalidateCustomer
     case unknown
 }
 
@@ -41,15 +36,6 @@ extension BankError: LocalizedError {
         switch self {
         case .typeRandomElement:
             return "타입을 가져오는데 실패했습니다.\n다시 시도해 주세요."
-        
-        case .emptyBank:
-            return "은행이 없습니다.\n다시 시도해 주세요."
-        case .invalidateTime:
-            return "시간이 없습니다.\n다시 시도해 주세요."
-        case .invalidateBanker:
-            return "은행원이 없는 창구입니다.\n다시 시도해 주세요."
-        case .invalidateCustomer:
-            return "배정된 고객이 없는 창구입니다.\n다시 시도해 주세요."
         case .unknown:
             return "알 수 없는 오류가 발생했습니다.\n다시 시도해 주세요."
         }
