@@ -15,6 +15,7 @@
 		D974CDE625A37CE1006835D5 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974CDE525A37CE1006835D5 /* Bank.swift */; };
 		D99CC3D125A7403800A44579 /* BankOperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99CC3D025A7403800A44579 /* BankOperationError.swift */; };
 		D9A6620625A69A4D00B721A0 /* ClientGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6620525A69A4D00B721A0 /* ClientGrade.swift */; };
+		D9C069B725AD382300181DB6 /* HeadQuarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C069B625AD382300181DB6 /* HeadQuarter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		D974CDE525A37CE1006835D5 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		D99CC3D025A7403800A44579 /* BankOperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankOperationError.swift; sourceTree = "<group>"; };
 		D9A6620525A69A4D00B721A0 /* ClientGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientGrade.swift; sourceTree = "<group>"; };
+		D9C069B625AD382300181DB6 /* HeadQuarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuarter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				D974CDE525A37CE1006835D5 /* Bank.swift */,
 				D9A6620525A69A4D00B721A0 /* ClientGrade.swift */,
 				D99CC3D025A7403800A44579 /* BankOperationError.swift */,
+				D9C069B625AD382300181DB6 /* HeadQuarter.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C069B725AD382300181DB6 /* HeadQuarter.swift in Sources */,
 				348D087B25A341B9001F60A3 /* BankClerk.swift in Sources */,
 				D99CC3D125A7403800A44579 /* BankOperationError.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
