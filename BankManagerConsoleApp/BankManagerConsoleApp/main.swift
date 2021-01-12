@@ -41,7 +41,10 @@ private func initializeBankCustomer() {
     }
     
     bank.customers.sort { (currentCustomer, nextCustomer) -> Bool in
-        currentCustomer.priority.rawValue < nextCustomer.priority.rawValue
+        if currentCustomer.priority.rawValue == nextCustomer.priority.rawValue {
+            return currentCustomer.waitNumber < nextCustomer.waitNumber
+        }
+        return currentCustomer.priority.rawValue < nextCustomer.priority.rawValue
     }
 }
 
