@@ -22,6 +22,12 @@ struct Heap<Element> {
     init(elements: [Element], sort: @escaping (Element, Element) -> Bool) {
         self.elements = elements
         self.sort = sort
+        
+        if !elements.isEmpty {
+            for i in stride(from: elements.count / 2 - 1, through: 0, by: -1) {
+                siftDown(from: i)
+            }
+        }
     }
     
     var isEmpty: Bool {
