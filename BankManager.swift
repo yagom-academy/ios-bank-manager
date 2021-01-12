@@ -35,7 +35,7 @@ struct BankManager {
     
     private func checkLoanDocument(customer: Customer) {
         print("\(BankManagerMessage.start)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
-        usleep(useconds_t(BankTask.documentCheck.timeForTask * second))
+        usleep(useconds_t(BankManager.Task.documentCheck.timeForTask * second))
     }
     
     private func requestLoanApproval(customer: Customer) {
@@ -43,8 +43,8 @@ struct BankManager {
     }
     
     private func implementLoanTask(customer: Customer) {
-        usleep(useconds_t(BankTask.loanImplement.timeForTask * second))
-        print("\(BankManangerMessage.end)".format(customer.waitNumber, customer.priority.description, BankTask.loanImplement.rawValue))
+        usleep(useconds_t(BankManager.Task.loanImplement.timeForTask * second))
+        print("\(BankManagerMessage.end)".format(customer.waitNumber, customer.priority.description, BankManager.Task.loanImplement.rawValue))
     }
     
     private func implementDepositTask(customer: Customer) {
@@ -56,5 +56,19 @@ struct BankManager {
     enum State {
         case working
         case notWorking
+    }
+    
+    enum Task: String {
+        case documentCheck
+        case loanImplement = "대출업무"
+        
+        var timeForTask: TimeInterval {
+            switch self {
+            case .loanImplement:
+                return 0.3
+            case .documentCheck:
+                return 0.3
+            }
+        }
     }
 }
