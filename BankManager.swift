@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager {
     let queue: DispatchQueue
-    let second: Double = 1_000_000
+    private let second: Double = 1_000_000
     private let tellerNumber: Int
     private(set) var state: State
     private var timeNeedToFinishTask: TimeInterval = 0.7

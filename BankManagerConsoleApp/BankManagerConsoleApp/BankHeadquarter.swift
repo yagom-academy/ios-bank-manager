@@ -8,8 +8,8 @@
 import Foundation
 
 class BankHeadquarter {
-    let queue: DispatchQueue
-    let second: Double = 1_000_000
+    private let queue: DispatchQueue
+    private let second: Double = 1_000_000
     static let shared = BankHeadquarter()
     
     private init() {
