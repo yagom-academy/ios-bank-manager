@@ -18,10 +18,6 @@ struct BankClerk {
     }
     
     private func waitForLoanPermission(of client: Client) {
-        print("\(client.waitingNumber)번 \(client.grade.description)고객 대출심사 시작 in \(Date.timeIntervalSinceReferenceDate)")
-        print("\(client.waitingNumber)번, \(Date.timeIntervalSinceReferenceDate) in loanQueue")
-        headQuarter.handleLoanQualificationQueue()
-        print("\(client.waitingNumber)번, \(Date.timeIntervalSinceReferenceDate) in loanQueue")
-        print("\(client.waitingNumber)번 \(client.grade.description)고객 대출심사 완료 in \(Date.timeIntervalSinceReferenceDate)")
+        headQuarter.handleLoanQualificationQueue(of: client)
     }
 }
