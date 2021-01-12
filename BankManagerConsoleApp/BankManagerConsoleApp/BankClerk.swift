@@ -3,7 +3,7 @@ import Foundation
 
 struct BankClerk {
     func handleClientBusiness(of client: Client) {
-        print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 시작 in \(Date.timeIntervalSinceReferenceDate)")
+        print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 시작")
         
         switch client.business {
         case .deposit:
@@ -14,7 +14,7 @@ struct BankClerk {
             Thread.sleep(forTimeInterval: 0.3)
         }
         
-        print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 종료 in \(Date.timeIntervalSinceReferenceDate)")
+        print("\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)업무 종료")
     }
     
     private func waitForLoanPermission(of client: Client) {

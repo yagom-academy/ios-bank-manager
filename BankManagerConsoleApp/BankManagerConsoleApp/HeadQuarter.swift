@@ -9,9 +9,9 @@ class HeadQuarter {
     
     func handleLoanQualificationQueue(of client: Client) {
         self.loanQualificationQueue.sync {
-            print("\(client.waitingNumber)번 \(client.grade.description)고객 대출심사 시작 in \(Date.timeIntervalSinceReferenceDate)")
+            print("\(client.waitingNumber)번 \(client.grade.description)고객 대출심사 시작")
             Thread.sleep(forTimeInterval: 0.5)
-            print("\(client.waitingNumber)번 \(client.grade.description)고객 대출심사 완료 in \(Date.timeIntervalSinceReferenceDate)")
+            print("\(client.waitingNumber)번 \(client.grade.description)고객 대출심사 완료")
         }
     }
 }
