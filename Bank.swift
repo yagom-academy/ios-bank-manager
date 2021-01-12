@@ -20,7 +20,7 @@ final class Bank {
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
         Dashboard.printCloseMessage(finishedClientCount, businessTime)
-        closeBank()
+        resetFinishedClientCount()
     }
     
     private func assignBusinessToTeller() {
@@ -43,9 +43,7 @@ final class Bank {
         dispatchGroup.wait()
     }
     
-    private func closeBank() {
-        tellers.removeAll()
-        clients.removeAll()
+    private func resetFinishedClientCount() {
         finishedClientCount = 0
     }
 }
