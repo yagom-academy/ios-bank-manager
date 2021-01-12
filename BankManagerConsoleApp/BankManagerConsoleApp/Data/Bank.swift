@@ -22,6 +22,12 @@ class Bank {
         }
     }
     
+    func initBankers() {
+        for banker in bankers {
+            banker.isWorking = false
+        }
+    }
+    
     func initCustomers(_ customerNumber: Int) throws {
         customers.removeAll()
         for number in 1...customerNumber {
@@ -31,6 +37,7 @@ class Bank {
             }
             customers.append(Customer(waitingNumber: number, customerGrade: randomGrade, taskType: randomTask))
         }
+        
         sortCustomers()
     }
     
@@ -44,19 +51,22 @@ class Bank {
     }
     
     func open(_ customerNumber: Int) throws {
+        initBankers()
         try initCustomers(customerNumber)
         openTime = Date()
+        totalProcessedCustomersNumber = 0
         try work()
     }
     
     private func work() throws {
         while self.customers.isNotEmpty {
             for banker in self.bankers {
-                if !banker.isWorking {
-                    bankGroup.enter()
+                if self.customers.isEmpty {
+                    break
+                }
+                if !banker.isWorking{
                     totalProcessedCustomersNumber += 1
-                    banker.startWork(customer: self.customers.removeFirst())
-                    bankGroup.leave()
+                    banker.startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
                 }
             }
         }
