@@ -8,78 +8,69 @@
 import Foundation
 
 class Bank {
-    private var windows: [Window] = []
-    private var waitingCustomers = Queue<Customer>()
-    weak var delegate: BankDelegate?
+    private var customers: [Customer] = []
+    private var bankers: [Banker] = []
+    private var openTime: Date?
+    private var totalProcessedCustomersNumber = 0
+    private let bankGroup: DispatchGroup = DispatchGroup()
+    private let closeMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
     
     // MARK: - init func
-    init(windowNumber: Int, bankersNumber: Int, bankersProcessingTime: Double) {
-        initWindow(windowNumber)
-        initBankers(number: bankersNumber, processingTime: bankersProcessingTime)
-    }
-    
-    private func initWindow(_ number: Int) {
-        for windowNumber in 1...number {
-            windows.append(Window(windowNumber: windowNumber))
+    init(bankerNumber: Int) {
+        for number in 1...bankerNumber {
+            bankers.append(Banker(number))
         }
     }
     
-    private func initBankers(number: Int, processingTime: Double) {
-        windows = windows.map({ (window: Window) -> Window in
-            window.setBanker(Banker(processingTime: processingTime))
-            return window
+    func initCustomers(_ customerNumber: Int) throws {
+        customers.removeAll()
+        for number in 1...customerNumber {
+            guard let randomGrade = Grade.allCases.randomElement(),
+                  let randomTask = TaskType.allCases.randomElement() else {
+                throw BankError.typeRandomElement
+            }
+            customers.append(Customer(waitingNumber: number, customerGrade: randomGrade, taskType: randomTask))
+        }
+        sortCustomers()
+    }
+    
+    private func sortCustomers() {
+        customers.sort(by: { (first, second) -> Bool in
+            if first.customerGrade == second.customerGrade {
+                return first.waitingNumber < second.waitingNumber
+            }
+            return first.customerGrade.gradePriority < second.customerGrade.gradePriority
         })
     }
     
-    func resetWaitingCustomers() {
-        waitingCustomers.removeAll()
+    func open(_ customerNumber: Int) throws {
+        try initCustomers(customerNumber)
+        openTime = Date()
+        try work()
     }
     
-    func addWaitingCustomer(_ number: Int) {
-        for waitingNumber in 1...number {
-            waitingCustomers.enqueue(Customer(waitingNumber: waitingNumber, taskAmount: 1))
-        }
-    }
-    
-    func assignCustomer(time: Double) throws {
-        if waitingCustomers.isEmpty {
-            canClose()
-            return
-        }
-        windows = try windows.map { (window: Window) -> Window in
-            if !window.isEmptyWindowCustomer() || waitingCustomers.isEmpty {
-                return window
+    private func work() throws {
+        while self.customers.isNotEmpty {
+            for banker in self.bankers {
+                if !banker.isWorking {
+                    bankGroup.enter()
+                    totalProcessedCustomersNumber += 1
+                    banker.startWork(customer: self.customers.removeFirst())
+                    bankGroup.leave()
+                }
             }
-            guard let customer = waitingCustomers.dequeue() else {
-                throw BankError.unknown
-            }
-            try window.startCustomerTask(currentTime: time, customer: customer)
-            return window
         }
+        self.bankGroup.wait()
+        try self.close()
     }
     
-    // MARK: - check func
-    func checkEndWindow(time: Double) throws -> Int {
-        var processedCustomersNumber = 0
-        windows = try windows.map { (window: Window) -> Window in
-            if try window.checkEndCustomerTask(currentTime: time) {
-                processedCustomersNumber += 1
-            }
-            return window
+    private func close() throws {
+        guard let open = self.openTime else {
+            throw BankError.close
         }
-        return processedCustomersNumber
+        let closeTime = Date()
+        let totalTime = TimeInterval(closeTime.timeIntervalSince(open))
+        print(String(format: closeMessage, self.totalProcessedCustomersNumber, totalTime))
     }
     
-    func canClose() {
-        let allEmptyWindow = windows.reduce(true) { (first, second) -> Bool in
-            return first && second.isEmptyWindowCustomer()
-        }
-        if allEmptyWindow {
-            self.delegate?.close()
-        }
-    }
-}
-
-protocol BankDelegate: class {
-    func close()
 }
