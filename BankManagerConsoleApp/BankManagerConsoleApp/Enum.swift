@@ -26,7 +26,7 @@ enum Message {
     static let loanFinish = "%d번 %@고객 %@심사 완료"
 }
 
-enum BusinessType: CaseIterable {
+enum BusinessType: CaseIterable, CustomStringConvertible {
     case deposit
     case loan
     
@@ -49,7 +49,7 @@ enum BusinessType: CaseIterable {
     }
 }
 
-enum BankError: Error {
+enum BankError: Error, CustomStringConvertible {
     case wrongInput
     case unknown
     

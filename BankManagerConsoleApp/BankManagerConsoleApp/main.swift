@@ -8,46 +8,28 @@ import Foundation
 
 func main() {
     let bank = Bank()
-    let tellerNumber = 3
-    let maxClientNumber = 30
-    let minClientNumber = 10
+    let tellerCount = 3
+    let maxClientCount = 30
+    let minClientCount = 10
     var isContinue = true
     
     while isContinue {
         Dashboard.printMenu()
         
         guard let input = readLine(), let command = Menu(rawValue: input) else {
-            print(BankError.wrongInput.description)
+            print("\(BankError.wrongInput)")
             continue
         }
         
         switch command {
         case .start:
-            guard let clients = initClients(randomNumber(from: minClientNumber, to: maxClientNumber)) else {
-                return 
-            }
-            bank.operateBank(teller: tellerNumber, client: clients)
+            let randomNumber = Int.random(in: minClientCount...maxClientCount)
+            let clients = Clients.init(count: randomNumber)
+            bank.operateBank(teller: tellerCount, client: clients.list)
         case .end:
             isContinue = false
         }
     }
-}
-
-private func randomNumber(from minNumber: Int = 0, to maxNumber: Int) -> Int {
-    return Int.random(in: minNumber...maxNumber)
-}
-
-private func initClients(_ number: Int) -> [Client]? {
-    var clients: [Client] = []
-    
-    for waitingNumber in 1...number {
-        guard let businessType = BusinessType.allCases.randomElement(), let priority = Client.Priority.allCases.randomElement() else {
-            return nil
-        }
-        
-        clients.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
-    }
-    return clients
 }
 
 main()

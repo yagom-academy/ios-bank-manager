@@ -20,13 +20,16 @@ final class Teller {
         workingQueue = DispatchQueue(label: "\(windowNumber)")
     }
     
-    func handleBusiness(for client: Client) {
+    func handleBusiness(for client: Client, withDispatchGroup group: DispatchGroup) {
         isWorking = true
-        switch client.businessType {
-        case .deposit:
-            handleDeposit(for: client)
-        case .loan:
-            handleLoan(for: client)
+        
+        workingQueue.async(group: group) {
+            switch client.businessType {
+            case .deposit:
+                self.handleDeposit(for: client)
+            case .loan:
+                self.handleLoan(for: client)
+            }
         }
         isWorking = false
     }

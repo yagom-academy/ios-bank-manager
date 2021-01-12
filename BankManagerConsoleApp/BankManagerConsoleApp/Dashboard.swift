@@ -13,7 +13,7 @@ struct Dashboard {
     }
     
     static func printStatus(for client: Client, about message: String) {
-        let message = String(format: message, client.waitingNumber, client.priority.description, client.businessType.description)
+        let message = String(format: message, client.waitingNumber, "\(client.priority)", "\(client.businessType)")
         let format = DateFormatter()
         format.dateFormat = "ss.S"
         let now = Date()
@@ -21,12 +21,12 @@ struct Dashboard {
         print(message + " \(date)")
     }
     
-    static func printCloseMessage(_ number: Int, _ time: TimeInterval?) {
+    static func printCloseMessage(_ count: Int, _ time: TimeInterval?) {
         guard let time = time else {
-            print(BankError.unknown.description)
+            print("\(BankError.unknown)")
             return
         }
-        let message = String(format: Message.close, number, time)
+        let message = String(format: Message.close, count, time)
         print(message)
     }
 }
