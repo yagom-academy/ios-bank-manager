@@ -13,19 +13,30 @@ private func generateRandomNumberOfCustomer() -> Int {
 
 private func getUserInput() -> String {
     guard let input = readLine() else {
-        return BankError.noEnterFromUser.localizedDescription
+        return StringFormattingError.noEnterFromUser.localizedDescription
     }
     return input
 }
 
-let bankManagerNumber = 1
-var bank = Bank(bankManagerNumber: bankManagerNumber)
+private let bankManagerNumber = 3
+private let bank = Bank(bankManagerNumber: bankManagerNumber)
 
 private func initializeBankCustomer() {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
-    bank.numberOfCustomer = todayCustomerNumber
+    bank.customerTotalCount = todayCustomerNumber
     for waitNumber in 1...todayCustomerNumber {
-        bank.customers.append(Customer(waitNumber: waitNumber))
+        guard let customerPriority = Customer.Priority.allCases.randomElement(), let customerTask = Customer.Task.allCases.randomElement() else {
+            print(StringFormattingError.unknown.localizedDescription)
+            return
+        }
+        bank.customers.append(Customer(waitNumber: waitNumber, priority: customerPriority, taskType: customerTask))
+    }
+    
+    bank.customers.sort { (currentCustomer, nextCustomer) -> Bool in
+        if currentCustomer.priority.rawValue == nextCustomer.priority.rawValue {
+            return currentCustomer.waitNumber < nextCustomer.waitNumber
+        }
+        return currentCustomer.priority.rawValue < nextCustomer.priority.rawValue
     }
 }
 
@@ -34,6 +45,7 @@ private func main() {
     
     while !isConsoleAppTerminated {
         print("\(ConsoleApp.menu)")
+        print("입력 : ", terminator: "")
         
         switch getUserInput() {
         case ConsoleApp.start:
@@ -43,7 +55,7 @@ private func main() {
             isConsoleAppTerminated = true
             break
         default:
-            print(BankError.wrongUserInput.localizedDescription)
+            print(StringFormattingError.wrongUserInput.localizedDescription)
         }
     }
 }

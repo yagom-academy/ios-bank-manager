@@ -7,10 +7,21 @@
 
 import Foundation
 
-extension String.StringInterpolation {
-    mutating func appendInterpolation(_ value: Double) {
-        let roundedNumber = round(value * 1000) / 1000
-        
-        appendLiteral(String(format: "%.2f", roundedNumber))
+extension String {
+    func format(_ arguments: CVarArg...) -> String {
+        let args = arguments.map {
+            if let arg = $0 as? Int {
+                return String(arg)
+            }
+            if let arg = $0 as? Double {
+                return String(arg)
+            }
+            if let arg = $0 as? String {
+                return String(arg)
+            }
+            
+            return StringFormattingError.noMatchingType.localizedDescription
+        } as [CVarArg]
+        return String.init(format: self, arguments: args)
     }
 }
