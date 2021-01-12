@@ -52,8 +52,7 @@ private func startManage() {
         }
         if inputCode == BankCode.open {
             do {
-                try bank.initCustomers(Int.random(in: BankInformation.customerStartRandomNumber...BankInformation.customerEndRandomNumber))
-                bank.open()
+                try bank.open(Int.random(in: BankInformation.customerStartRandomNumber...BankInformation.customerEndRandomNumber))
             } catch {
                 showError(error)
             }
