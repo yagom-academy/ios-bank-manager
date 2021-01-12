@@ -9,7 +9,7 @@ import Foundation
 
 final class Teller {
     private var windowNumber: Int
-    var workingQueue: DispatchQueue
+    let workingQueue: DispatchQueue
     private var isWorking: Bool = false
     var isNotWorking: Bool {
         return !isWorking

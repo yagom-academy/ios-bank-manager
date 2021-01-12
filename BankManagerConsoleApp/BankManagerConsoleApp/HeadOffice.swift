@@ -10,7 +10,7 @@ import Foundation
 final class HeadOffice {
     static let shared = HeadOffice()
     private let neededTimeToJudgeLoan: TimeInterval = 0.5
-    var loanQueue: DispatchQueue = DispatchQueue(label: "HeadOffice")
+    let loanQueue: DispatchQueue = DispatchQueue(label: "HeadOffice")
     
     private init() {}
     
