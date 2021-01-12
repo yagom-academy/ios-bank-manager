@@ -2,14 +2,14 @@
 import Foundation
 
 class Bank {
-    private var bankClerkNumber: Int
+    private var clerkNumber: Int
     private var waitingList: [Client] = []
-    private var totalProcessedClientsNumber: Int = 0
+    private var totalProcessedClientsCount: Int = 0
     private var totalOperateTime: Double = 0
     private var startTime: TimeInterval = 0
     
     init(employeeNumber: Int) {
-        self.bankClerkNumber = employeeNumber
+        self.clerkNumber = employeeNumber
     }
     
     func updateWaitingList(from queue: [Client]) throws {
@@ -28,7 +28,7 @@ class Bank {
         let semaphore = DispatchSemaphore(value: 1)
         let counterGroup = DispatchGroup()
         
-        for i in 1...bankClerkNumber {
+        for i in 1...clerkNumber {
             let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue")
             
             dispatchQueue.async(group: counterGroup) {
@@ -51,12 +51,12 @@ class Bank {
             semaphore.signal()
             
             bankClerk.handleClientBusiness(of: client)
-            self.totalProcessedClientsNumber += 1
+            self.totalProcessedClientsCount += 1
         }
     }
     
     func printEndingMent() {
-        let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsNumber)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
+        let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsCount)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
         print(endingMent)
     }
 }
