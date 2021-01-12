@@ -66,6 +66,7 @@ class BankManager {
     private var idleBankerQueue: Queue<Banker> = Queue<Banker>()
     private var customerQueue: Queue<Customer> = Queue<Customer>()
     private var bankerSemaphore: DispatchSemaphore?
+    private var bankCloseSemaphore = DispatchSemaphore(value: 0)
     
     init(bankerCount: UInt, customerCount: UInt) {
         self.bankerCount = bankerCount
@@ -82,9 +83,11 @@ class BankManager {
         for _ in 0..<customerQueue.count {
             assignCustomerToBanker()
         }
+        self.bankCloseSemaphore.wait()
         let totalTaskTime = Date().timeIntervalSince(startTaskTime)
         self.totalTaskTime = Double(totalTaskTime)
-        closeBank()
+        
+        self.closeBank()
     }
     
     /// 고객의 수 만큼 customerQueue에 고객 객체를 초기화하는 함수.
@@ -108,6 +111,7 @@ class BankManager {
         guard let bankerSemaphore = self.bankerSemaphore else {
             return
         }
+        
         bankerSemaphore.wait()
         guard let banker = idleBankerQueue.dequeue() else {
             return
@@ -115,19 +119,13 @@ class BankManager {
         let customer = customerQueue.dequeue()
         banker.customer = customer
         
-        if customerQueue.count > 0 {
-            busyBankerQueue.async {
-                banker.performTask(duration: 0.7)
-                self.idleBankerQueue.enqueue(item: banker)
-                self.completeCustomerCount += 1
-                bankerSemaphore.signal()
-            }
-        } else {
-            busyBankerQueue.sync {
-                banker.performTask(duration: 0.7)
-                self.idleBankerQueue.enqueue(item: banker)
-                self.completeCustomerCount += 1
-                bankerSemaphore.signal()
+        busyBankerQueue.async {
+            banker.performTask(duration: 0.7)
+            self.idleBankerQueue.enqueue(item: banker)
+            self.completeCustomerCount += 1
+            bankerSemaphore.signal()
+            if self.completeCustomerCount == self.customerCount {
+                self.bankCloseSemaphore.signal()
             }
         }
     }
@@ -136,4 +134,12 @@ class BankManager {
     private func closeBank() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.completeCustomerCount)명이며, 총 업무시간은 \(String(format: "%.2f", self.totalTaskTime))초입니다.")
     }
+}
+
+class Step2BankManager: BankManager {
+    
+    class PrioritiyQueue<T>: Queue<T> {
+        
+    }
+
 }
