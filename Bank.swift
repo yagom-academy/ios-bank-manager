@@ -34,15 +34,15 @@ final class Bank {
         var isContinue = true
         
         while isContinue {
-            for teller in self.tellers {
-                if self.clients.count == 0 {
+            for teller in tellers {
+                if clients.count == 0 {
                     isContinue = false
                     break
                 }
                 if teller.isNotWorking {
                     let client = clients.removeFirst()
                     teller.handleBusiness(for: client, withDispatchGroup: dispatchGroup)
-                    self.finishedClientCount += 1
+                    finishedClientCount += 1
                 }
             }
         }

@@ -30,8 +30,8 @@ final class Teller {
             case .loan:
                 self.handleLoan(for: client)
             }
+            self.isWorking = false
         }
-        isWorking = false
     }
     
     func handleDeposit(for client: Client) {

@@ -15,7 +15,8 @@ struct Clients {
             guard let businessType = BusinessType.allCases.randomElement(), let priority = Client.Priority.allCases.randomElement() else {
                 return
             }
-            list.append(Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority))
+            let clinet = Client(waitingNumber: waitingNumber, businessType: businessType, priority: priority)
+            list.append(clinet)
         }
     }
 }
