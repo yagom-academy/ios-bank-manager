@@ -14,7 +14,7 @@ final class Teller {
     var isNotWorking: Bool {
         return !isWorking
     }
-
+    
     init(windowNumber: Int) {
         self.windowNumber = windowNumber
         workingQueue = DispatchQueue(label: "\(windowNumber)")
@@ -22,7 +22,7 @@ final class Teller {
     
     func handleBusiness(for client: Client, withDispatchGroup group: DispatchGroup) {
         isWorking = true
-        
+
         workingQueue.async(group: group) {
             switch client.businessType {
             case .deposit:
