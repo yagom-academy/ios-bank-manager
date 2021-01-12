@@ -28,8 +28,8 @@ private func getUserInput() -> String {
     return input
 }
 
-let bankManagerNumber = 3
-var bank = Bank(bankManagerNumber: bankManagerNumber)
+private let bankManagerNumber = 3
+private let bank = Bank(bankManagerNumber: bankManagerNumber)
 
 private func initializeBankCustomer() {
     let todayCustomerNumber = generateRandomNumberOfCustomer()
