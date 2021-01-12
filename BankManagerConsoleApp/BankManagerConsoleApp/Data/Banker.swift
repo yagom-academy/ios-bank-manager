@@ -18,16 +18,18 @@ class Banker {
         self.workingQueue = DispatchQueue(label: "\(number)")
     }
     
-    func startWork(customer: Customer) {
+    func startWork(customer: Customer, group: DispatchGroup) {
+        group.enter()
         print(String(format: startTaskMessgae, customer.waitingNumber, customer.customerGrade.gradeString, customer.taskType.taskString))
         isWorking = true
         workingQueue.asyncAfter(deadline: .now() + customer.taskType.taskTime) {
-            self.finishWork(customer: customer)
+            self.finishWork(customer: customer, group: group)
         }
     }
     
-    private func finishWork(customer: Customer) {
+    private func finishWork(customer: Customer, group: DispatchGroup) {
         print(String(format: endTaskMessgae, customer.waitingNumber, customer.customerGrade.gradeString, customer.taskType.taskString))
         isWorking = false
+        group.leave()
     }
 }
