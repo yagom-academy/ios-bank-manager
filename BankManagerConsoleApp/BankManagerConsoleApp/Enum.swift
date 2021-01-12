@@ -49,7 +49,7 @@ enum BusinessType: CaseIterable, CustomStringConvertible {
     }
 }
 
-enum BankError: Error, CustomStringConvertible {
+enum StringFormattingError: Error, CustomStringConvertible {
     case wrongInput
     case unknown
     
