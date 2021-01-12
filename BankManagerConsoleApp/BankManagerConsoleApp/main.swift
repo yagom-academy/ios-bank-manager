@@ -11,13 +11,13 @@ private func generateRandomNumberOfCustomer() -> Int {
     return randomNumber
 }
 
-private func generateRandomCustomerPriority() -> CustomerPriority {
-    let priority = CustomerPriority.allCases.randomElement() ?? .normal
+private func generateRandomCustomerPriority() -> Customer.Priority {
+    let priority = Customer.Priority.allCases.randomElement() ?? .normal
     return priority
 }
 
-private func generateRandomCustomerTask() -> CustomerTask {
-    let taskType = CustomerTask.allCases.randomElement() ?? .deposit
+private func generateRandomCustomerTask() -> Customer.Task {
+    let taskType = Customer.Task.allCases.randomElement() ?? .deposit
     return taskType
 }
 

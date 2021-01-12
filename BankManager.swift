@@ -9,7 +9,7 @@ import Foundation
 struct BankManager {
     let queue: DispatchQueue
     private let tellerNumber: Int
-    private(set) var state: BankManagerState
+    private(set) var state: State
     private var timeNeedToFinishTask: TimeInterval = 0.7
 
     init(number: Int) {
@@ -26,5 +26,10 @@ struct BankManager {
         print("\(BankManangerMessage.end)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
         self.state = .notWorking
         semaphore.signal()
+    }
+    
+    enum State {
+        case working
+        case notWorking
     }
 }
