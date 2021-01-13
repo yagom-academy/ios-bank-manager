@@ -21,18 +21,19 @@ class ClientOperation: Operation {
     }
     
     private func handleClientBusiness(of client: ClientOperation) {
+        guard let clientBusiness = client.business else {
+            return
+        }
+        
         print(ConsoleOutput.currentProcess(client, .start).message)
 
-        switch client.business {
+        switch clientBusiness {
         case .deposit:
             Thread.sleep(forTimeInterval: 0.7)
         case .loan:
             Thread.sleep(forTimeInterval: 0.3)
             waitForLoanPermission(of: client)
             Thread.sleep(forTimeInterval: 0.3)
-        case .none:
-            break
-            // throw
         }
         
         print(ConsoleOutput.currentProcess(client, .done).message)

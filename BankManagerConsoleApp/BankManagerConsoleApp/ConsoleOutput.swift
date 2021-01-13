@@ -24,8 +24,7 @@ enum ConsoleOutput {
             return "잘못된 입력값입니다. 다시 시도해주세요."
         case let .currentProcess(client, processStatus):
             guard let clientWaitingNumber = client.waitingNumber, let clientGrade = client.grade?.description, let  clientBusiness = client.business?.rawValue else {
-                return "a"
-                // throw
+                return BankOperationError.unknownError.rawValue
             }
             
             return "\(clientWaitingNumber)번 \(clientGrade)고객 \(clientBusiness)\(processStatus.rawValue)"

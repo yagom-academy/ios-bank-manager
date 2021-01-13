@@ -21,8 +21,7 @@ class Bank {
         
         waitingList.sort { (client1, client2) -> Bool in
             guard let client1Grade = client1.grade?.rawValue, let client2Grade = client2.grade?.rawValue else {
-                return true
-                // throw
+                throw BankOperationError.unknownError
             }
             return client1Grade < client2Grade
         }
