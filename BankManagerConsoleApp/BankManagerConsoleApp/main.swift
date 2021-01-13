@@ -10,6 +10,7 @@ import Foundation
 private let startMessage = "1 : 은행 개점\n2 : 종료\n입력 : "
 private var isTerminate = false
 private var bank = Bank()
+private var bankHeadOffice = BankHeadOffice()
 
 // MARK: - show error
 private func showError(_ error: Error) {
