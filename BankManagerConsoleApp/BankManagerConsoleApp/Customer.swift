@@ -9,10 +9,10 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
-    let customerClass: Class
+    let grade: Grade
     let task: TaskType
     
-    enum Class: CaseIterable, Comparable {
+    enum Grade: CaseIterable, Comparable {
         case VVIP
         case VIP
         case normal
@@ -28,16 +28,10 @@ struct Customer {
             }
         }
     }
-    
-    init(waitingNumber: Int, customerClass: Class, customerTask: TaskType) {
-        self.waitingNumber = waitingNumber
-        self.customerClass = customerClass
-        self.task = customerTask
-    }
 }
 
 extension Customer: Comparable {
     static func < (lhs: Customer, rhs: Customer) -> Bool {
-        return lhs.customerClass < rhs.customerClass
+        return lhs.grade < rhs.grade
     }
 }

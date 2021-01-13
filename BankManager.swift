@@ -20,10 +20,10 @@ struct BankManager {
     
     mutating private func writeCustomerList() {
         for waitingNumber in 1...countTodayCustomer() {
-            guard let customerClass: Customer.Class = Customer.Class.allCases.randomElement(), let customerTask: TaskType = TaskType.allCases.randomElement() else {
+            guard let customerClass: Customer.Grade = Customer.Grade.allCases.randomElement(), let customerTask: TaskType = TaskType.allCases.randomElement() else {
                 return
             }
-            customerList.append(Customer(waitingNumber: waitingNumber, customerClass: customerClass, customerTask: customerTask))
+            customerList.append(Customer(waitingNumber: waitingNumber, grade: customerClass, task: customerTask))
         }
     }
     

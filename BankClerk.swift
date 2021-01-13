@@ -20,10 +20,10 @@ final class BankClerk {
     
     func serveCustomers(customer: Customer, group: DispatchGroup) {
         self.isWorking = true
-        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, customerTask: customer.task.description, state: .start)
+        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .start)
         queue.async(group: group) {
             usleep(customer.task.rawValue)
-            BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.customerClass.description, customerTask: customer.task.description, state: .completion)
+            BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .completion)
             self.isWorking = false
         }
     }
