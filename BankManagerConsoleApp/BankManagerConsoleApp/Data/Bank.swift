@@ -37,11 +37,7 @@ class Bank {
     func initCustomers(_ customerNumber: Int) throws {
         customers.removeAll()
         for number in 1...customerNumber {
-            guard let randomGrade = Customer.Grade.allCases.randomElement(),
-                  let randomTask = Customer.TaskType.allCases.randomElement()  else {
-                throw BankError.typeRandomElement
-            }
-            customers.append(Customer(waitingNumber: number, customerGrade: randomGrade, taskType: randomTask))
+            customers.append(try Customer(waitingNumber: number))
         }
         
         sortCustomers()
@@ -49,10 +45,10 @@ class Bank {
     
     private func sortCustomers() {
         customers.sort(by: { (first, second) -> Bool in
-            if first.customerGrade == second.customerGrade {
+            if first.grade == second.grade {
                 return first.waitingNumber < second.waitingNumber
             }
-            return first.customerGrade.gradePriority < second.customerGrade.gradePriority
+            return first.grade.gradePriority < second.grade.gradePriority
         })
     }
     

@@ -9,7 +9,7 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
-    let customerGrade: Grade
+    let grade: Grade
     let taskType: TaskType
     
     enum Grade: CaseIterable {
@@ -62,5 +62,14 @@ struct Customer {
             }
         }
     }
-
+    
+    init(waitingNumber: Int) throws {
+        guard let randomGrade = Grade.allCases.randomElement(),
+              let randomTask = TaskType.allCases.randomElement() else {
+            throw BankError.typeRandomElement
+        }
+        self.waitingNumber = waitingNumber
+        grade = randomGrade
+        taskType = randomTask
+    }
 }
