@@ -38,6 +38,7 @@ class Bank {
         for number in 1...customerNumber {
             customers.append(try Customer(waitingNumber: number))
         }
+        
         sortCustomers()
     }
     
