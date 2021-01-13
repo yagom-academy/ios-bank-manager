@@ -1,23 +1,23 @@
 import Foundation
 
 class Client: Operation {
-    let waitingNumber: Int
-    let business: BusinessType
-    let grade: ClientGrade
+    private(set) var waitingNumber: Int?
+    private(set) var business: BusinessType?
+    private(set) var grade: ClientGrade?
     
-    override init() {
-        let randomClientNumber = Int.random(in: 10...30)
+    init(waitingNumber: Int) {
         guard let randomBusinessType = BusinessType.allCases.randomElement(),
               let randomClientGrade = ClientGrade.allCases.randomElement() else {
             return
         }
         
-        self.waitingNumber = randomClientNumber
+        self.waitingNumber = waitingNumber
         self.business = randomBusinessType
         self.grade = randomClientGrade
     }
     
     override func main() {
-        <#code#>
+        let clerk = BankClerk()
+        clerk.handleClientBusiness(of: self)
     }
 }

@@ -20,11 +20,15 @@ class Bank {
         self.waitingList += queue
         
         waitingList.sort { (client1, client2) -> Bool in
-            client1.grade.rawValue < client2.grade.rawValue
+            client1.grade!.rawValue < client2.grade!.rawValue
         }
     }
     
     func makeAllClerksWork() {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 3
+        queue.addOperations(waitingList, waitUntilFinished: true)
+        
 //        let semaphore = DispatchSemaphore(value: 1)
 //        let counterGroup = DispatchGroup()
 //
@@ -37,38 +41,22 @@ class Bank {
 //        }
 //
 //        counterGroup.wait()
-        
-        let someOperation = BlockOperation {
-            self.handleWaitingList()
-        }
-        
-        someOperation.addExecutionBlock {
-            self.handleWaitingList()
-        }
-        
-        someOperation.addExecutionBlock {
-            self.handleWaitingList()
-        }
-        
-        let queue = OperationQueue()
-        queue.addOperation(someOperation)
-        
-        queue.waitUntilAllOperationsAreFinished()
     }
     
-    private func handleWaitingList() {
-        let bankClerk = BankClerk()
-        
-        while !self.waitingList.isEmpty {
-            guard let client = self.waitingList.first else {
-                return
-            }
-            self.waitingList.removeFirst()
-            
-            bankClerk.handleClientBusiness(of: client)
-            self.totalProcessedClientsCount += 1
-        }
-    }
+//    private func handleWaitingList() {
+//        let bankClerk = BankClerk()
+//
+//        while !self.waitingList.isEmpty {
+//            guard let client = self.waitingList.first else {
+//                return
+//            }
+//            self.waitingList.removeFirst()
+//
+//            bankClerk.handleClientBusiness(of: client)
+//            self.totalProcessedClientsCount += 1
+//        }
+//        
+//    }
     
     func printEndingMent() {
         let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsCount)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
