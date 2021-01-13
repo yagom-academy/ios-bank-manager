@@ -4,8 +4,11 @@ import Foundation
 class Bank {
     private var clerkNumber: Int
     private var waitingList: [ClientOperation] = []
-    private var totalOperateTime: Double = 0
     private var startTime: TimeInterval = 0
+    var totalOperateTime: Double = 0
+    var totalClientCount: Int {
+        return waitingList.count
+    }
     
     init(employeeNumber: Int) {
         self.clerkNumber = employeeNumber
