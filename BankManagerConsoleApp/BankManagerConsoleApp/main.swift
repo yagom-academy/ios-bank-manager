@@ -17,8 +17,7 @@ private func showError(_ error: Error) {
     
     if let inputError = error as? InputError {
         errorMessage = inputError.localizedDescription
-    }
-    else if let bankError = error as? BankError {
+    } else if let bankError = error as? BankError {
         errorMessage = bankError.localizedDescription
     } else {
         errorMessage = BankError.unknown.localizedDescription
