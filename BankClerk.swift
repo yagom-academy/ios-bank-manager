@@ -9,13 +9,13 @@ import Foundation
 import Dispatch
 
 final class BankClerk {
-    let windowNumber: Int
+    let bankWindowNumber: Int
     var isWorking: Bool = false
     var queue: DispatchQueue
     
-    init(windowNumber: Int) {
-        self.windowNumber = windowNumber
-        queue = DispatchQueue(label: "\(windowNumber)")
+    init(bankWindowNumber: Int) {
+        self.bankWindowNumber = bankWindowNumber
+        queue = DispatchQueue(label: "\(bankWindowNumber)")
     }
     
     func serveCustomers(customer: Customer, group: DispatchGroup) {

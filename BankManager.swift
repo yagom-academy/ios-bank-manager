@@ -13,8 +13,8 @@ struct BankManager {
     private let assignedBankClerk = 3
     
     mutating private func writeBanKClerkList() {
-        for windowNumber in 1...assignedBankClerk {
-            bankclerks.append(BankClerk(windowNumber: windowNumber))
+        for bankWindowNumber in 1...assignedBankClerk {
+            bankclerks.append(BankClerk(bankWindowNumber: bankWindowNumber))
         }
     }
     
