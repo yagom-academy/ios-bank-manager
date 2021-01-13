@@ -24,7 +24,7 @@ struct BankManager {
         switch customer.taskType {
         case .loan:
             checkLoanDocument(customer: customer)
-            requestLoanApproval(customer: customer)
+            requestLoanApprovalToHeadquarter(customer: customer)
             implementLoanTask(customer: customer)
         default:
             implementDepositTask(customer: customer)
@@ -38,7 +38,7 @@ struct BankManager {
         usleep(useconds_t(BankManager.Task.documentCheck.timeForTask * second))
     }
     
-    private func requestLoanApproval(customer: Customer) {
+    private func requestLoanApprovalToHeadquarter(customer: Customer) {
         BankHeadquarter.shared.approveLoanTask(customer: customer)
     }
     
