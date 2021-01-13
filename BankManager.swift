@@ -9,7 +9,7 @@ import Foundation
 struct BankManager {
     private var customerList: [Customer] = []
     private var bankclerks: [BankClerk] = []
-    private var totalCustomers: Int = 0
+    private var numberOfCustomer: Int = 0
     private let assignedBankClerk = 3
     
     mutating private func writeBanKClerkList() {
@@ -40,7 +40,7 @@ struct BankManager {
                     }
                     let customer = customerList.removeFirst()
                     bankclerk.serveCustomers(customer: customer, group: group)
-                    self.totalCustomers += 1
+                    self.numberOfCustomer += 1
                 }
             }
         }
@@ -55,7 +55,7 @@ struct BankManager {
         distributeCustomer()
         let endTime = DispatchTime.now()
         let taskedTime = (endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1000
-        BankerMessage.printCloseBankText(customers: totalCustomers, taskedTime: Double(taskedTime))
+        BankerMessage.printCloseBankText(customers: numberOfCustomer, taskedTime: Double(taskedTime))
     }
     
     private func countTodayCustomer() -> Int {
