@@ -35,11 +35,9 @@ class Bank {
     }
     
     func initCustomers(_ customerNumber: Int) throws {
-        customers.removeAll()
         for number in 1...customerNumber {
             customers.append(try Customer(waitingNumber: number))
         }
-        
         sortCustomers()
     }
     
@@ -53,11 +51,16 @@ class Bank {
     }
     
     func open() throws {
+        resetData()
         let customerNumber = Int.random(in: Information.customerStartRandomNumber...Information.customerEndRandomNumber)
         try initCustomers(customerNumber)
         openTime = Date()
-        totalProcessedCustomersNumber = 0
         try work()
+    }
+    
+    private func resetData() {
+        customers.removeAll()
+        totalProcessedCustomersNumber = 0
     }
     
     private func work() throws {
