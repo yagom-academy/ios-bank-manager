@@ -16,8 +16,8 @@ struct BankManager {
     }
     
     mutating func openBank() throws {
-        try generateRandomClients()
-        print("은행개점")
+        try generateRandomClients() 
+        print(ConsoleOutput.bankOpening.message)
         bank.startTimer()
         bank.makeAllClerksWork()
     }
