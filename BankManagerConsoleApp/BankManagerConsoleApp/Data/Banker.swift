@@ -21,14 +21,14 @@ class Banker {
     
     func startWork(customer: Customer, group: DispatchGroup) {
         group.enter()
-        print(String(format: startTaskMessgae, customer.waitingNumber, customer.grade.gradeString, customer.taskType.taskString))
+        print(String(format: startTaskMessgae, customer.waitingNumber, customer.grade.description, customer.taskType.description))
         workingQueue.asyncAfter(deadline: .now() + customer.taskType.time) {
             self.finishWork(customer: customer, group: group)
         }
     }
     
     private func finishWork(customer: Customer, group: DispatchGroup) {
-        print(String(format: endTaskMessgae, customer.waitingNumber, customer.grade.gradeString, customer.taskType.taskString))
+        print(String(format: endTaskMessgae, customer.waitingNumber, customer.grade.description, customer.taskType.description))
         NotificationCenter.default.post(name: .finishBankerTask, object: self.bankerNumber)
         group.leave()
     }

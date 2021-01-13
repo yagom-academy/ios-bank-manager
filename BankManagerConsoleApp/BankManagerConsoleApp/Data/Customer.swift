@@ -17,17 +17,6 @@ struct Customer {
         case VIP
         case normal
         
-        var gradeString: String {
-            switch self {
-            case .VVIP:
-                return "VVIP"
-            case .VIP:
-                return "VIP"
-            case .normal:
-                return "일반"
-            }
-        }
-        
         var priority: Int {
             switch self {
             case .VVIP:
@@ -52,15 +41,6 @@ struct Customer {
                 return 0.7
             }
         }
-        
-        var taskString: String {
-            switch self {
-            case .loan:
-                return "대출"
-            case .deposit:
-                return "예금"
-            }
-        }
     }
     
     init(waitingNumber: Int) throws {
@@ -71,5 +51,29 @@ struct Customer {
         self.waitingNumber = waitingNumber
         grade = randomGrade
         taskType = randomTask
+    }
+}
+
+extension Customer.Grade: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .VVIP:
+            return "VVIP"
+        case .VIP:
+            return "VIP"
+        case .normal:
+            return "일반"
+        }
+    }
+}
+
+extension Customer.TaskType: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
     }
 }
