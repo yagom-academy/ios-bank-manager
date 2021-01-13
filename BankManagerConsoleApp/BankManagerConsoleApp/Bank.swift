@@ -4,7 +4,6 @@ import Foundation
 class Bank {
     private var clerkNumber: Int
     private var waitingList: [ClientOperation] = []
-    private var totalProcessedClientsCount: Int = 0
     private var totalOperateTime: Double = 0
     private var startTime: TimeInterval = 0
     
@@ -38,8 +37,7 @@ class Bank {
     }
     
     func printEndingMent() {
-        let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsCount)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
-        print(endingMent)
+        print(ConsoleOutput.bankClosing(self).message)
     }
 }
 
