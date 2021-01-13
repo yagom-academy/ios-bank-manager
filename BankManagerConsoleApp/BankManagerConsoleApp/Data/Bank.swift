@@ -31,13 +31,31 @@ class Bank {
         for number in 1...Information.bankersNumber {
             bankers.append(Banker(number))
         }
+        setNotification()
+    }
+    
+    private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(assignedCustomerToBanker(_:)), name: .finishBankerTask, object: nil)
     }
     
     func initCustomers(_ customerNumber: Int) throws {
-        for number in 1...customerNumber {
-            customers.append(try Customer(waitingNumber: number))
-        }
+//        for number in 1...customerNumber {
+//            customers.append(try Customer(waitingNumber: number))
+//        }
+        
+        let temp = [
+            Customer(waitingNumber: 1, grade: .normal, task: .deposit),
+            Customer(waitingNumber: 2, grade: .VVIP, task: .loan),
+            Customer(waitingNumber: 3, grade: .normal, task: .loan),
+            Customer(waitingNumber: 4, grade: .normal, task: .deposit),
+            Customer(waitingNumber: 5, grade: .normal, task: .loan),
+            Customer(waitingNumber: 6, grade: .VIP, task: .deposit),
+            Customer(waitingNumber: 7, grade: .VVIP, task: .loan),
+            Customer(waitingNumber: 8, grade: .VVIP, task: .deposit),
+            Customer(waitingNumber: 9, grade: .VIP, task: .deposit),
+            Customer(waitingNumber: 10, grade: .VVIP, task: .deposit)
+        ]
+        self.customers = temp
         
         sortCustomers()
     }
