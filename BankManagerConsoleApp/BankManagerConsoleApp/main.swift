@@ -22,9 +22,15 @@ while true {
     if menu == .exit {
         break
     }
-    let customerCount = UInt.random(in: 10...30)
-    let bankManager = BankManager(bankerCount: 3, customerCount: customerCount)
+    let customers = [BankManager.Customer(number: 1, grade: BankManager.Grade.normal, task: BankManager.Task.deposit),
+                     BankManager.Customer(number: 2, grade: BankManager.Grade.VIP, task: BankManager.Task.loan),
+                     BankManager.Customer(number: 3, grade: BankManager.Grade.VVIP, task: BankManager.Task.loan),
+                     BankManager.Customer(number: 4, grade: BankManager.Grade.normal, task: BankManager.Task.deposit),
+                     BankManager.Customer(number: 5, grade: BankManager.Grade.VVIP, task: BankManager.Task.loan),
+                     BankManager.Customer(number: 6, grade: BankManager.Grade.normal, task: BankManager.Task.deposit),
+                     BankManager.Customer(number: 7, grade: BankManager.Grade.VIP, task: BankManager.Task.loan),
+    ]
+    let bankManager = BankManager(bankerCount: 3, customers: customers)
     bankManager.openBank()
 }
-
 
