@@ -26,7 +26,7 @@ class Bank {
     
     func makeAllClerksWork() {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 3
+        queue.maxConcurrentOperationCount = clerkNumber
         queue.addOperations(waitingList, waitUntilFinished: true)
         
 //        let semaphore = DispatchSemaphore(value: 1)
