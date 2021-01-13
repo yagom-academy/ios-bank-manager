@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		348D087B25A341B9001F60A3 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D087A25A341B9001F60A3 /* BankClerk.swift */; };
 		348D088825A34D49001F60A3 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D088725A34D49001F60A3 /* Client.swift */; };
 		348D088C25A34E3C001F60A3 /* BusinessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D088B25A34E3C001F60A3 /* BusinessType.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -32,7 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		348D087A25A341B9001F60A3 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		348D088725A34D49001F60A3 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		348D088B25A34E3C001F60A3 /* BusinessType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessType.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				348D087A25A341B9001F60A3 /* BankClerk.swift */,
 				348D088725A34D49001F60A3 /* Client.swift */,
 				348D088B25A34E3C001F60A3 /* BusinessType.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -147,7 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9C069B725AD382300181DB6 /* HeadQuarter.swift in Sources */,
-				348D087B25A341B9001F60A3 /* BankClerk.swift in Sources */,
 				D99CC3D125A7403800A44579 /* BankOperationError.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				348D088825A34D49001F60A3 /* Client.swift in Sources */,
