@@ -44,8 +44,7 @@ private func main() {
     var isConsoleAppTerminated: Bool = false
     
     while !isConsoleAppTerminated {
-        print("\(ConsoleApp.menu)")
-        print("입력 : ", terminator: "")
+        print("\(ConsoleApp.menu)",terminator : "")
         
         switch getUserInput() {
         case ConsoleApp.start:

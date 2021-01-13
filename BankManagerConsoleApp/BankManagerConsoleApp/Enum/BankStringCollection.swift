@@ -10,7 +10,7 @@ import Foundation
 enum ConsoleApp {
     static let start = "1"
     static let exit = "2"
-    static let menu = "1 : 은행 개점 \n2 : 종료"
+    static let menu = "1 : 은행 개점 \n2 : 종료\n입력 : "
 }
 
 enum BankMessage {
