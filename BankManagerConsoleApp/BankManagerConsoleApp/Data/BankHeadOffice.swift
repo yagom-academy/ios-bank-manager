@@ -19,17 +19,16 @@ class BankHeadOffice {
         self.workingQueue = DispatchQueue(label: "headOffice")
     }
     
-    func addJudge(bankerNumber: Int, customer: Customer, group: DispatchGroup) {
-        group.enter()
-        print(String(format: startJudgeMessage, customer.waitingNumber, customer.grade.description))
-        workingQueue.asyncAfter(deadline: .now() + judgeTime) {
-            self.finishJudge(bankerNumber: bankerNumber, customer: customer, group: group)
+    func addJudge(banker: Banker, customer: Customer, group: DispatchGroup) {
+        workingQueue.async {
+            print(String(format: self.startJudgeMessage, customer.waitingNumber, customer.grade.description))
+            Thread.sleep(forTimeInterval: self.judgeTime)
+            self.finishJudge(banker: banker, customer: customer, group: group)
         }
     }
     
-    private func finishJudge(bankerNumber: Int, customer: Customer, group: DispatchGroup) {
+    private func finishJudge(banker: Banker, customer: Customer, group: DispatchGroup) {
         print(String(format: endJudgeMessage, customer.waitingNumber, customer.grade.description))
-        NotificationCenter.default.post(name: .finishLoanJudge, object: bankerNumber)
-        group.leave()
+        banker.executionLoan(customer: customer, group: group)
     }
 }
