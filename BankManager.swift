@@ -6,95 +6,6 @@
 
 import Foundation
 
-enum Level: CaseIterable {
-    case vvip, vip, general
-    
-    var priority: Int {
-        switch self {
-        case .vvip:
-            return 0
-        case .vip:
-            return 1
-        case .general:
-            return 2
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .vvip:
-            return "VVIP"
-        case .vip:
-            return "VIP"
-        case .general:
-            return "일반"
-        }
-    }
-}
-
-enum Task: CaseIterable {
-    case loan, deposit
-    
-    var description: String {
-        switch self {
-        case .loan:
-            return "대출"
-        case .deposit:
-            return "예금"
-        }
-    }
-    
-    var processTime: Double {
-        switch self {
-        case .loan:
-            return 0.7
-        case .deposit:
-            return 1.1
-        }
-    }
-}
-
-struct Customer {
-    var number: Int
-    var level: Level
-    var task: Task
-}
-
-struct Clerk {
-    var number: Int
-    var queue: DispatchQueue
-    
-    init(_ index: Int) {
-        number = index
-        queue = DispatchQueue(label: "\(index)")
-    }
-    
-    func doTask(customer: Customer) {
-        print("\(customer.number)번 \(customer.level.description)고객 \(customer.task.description)업무 시작")
-        self.sleep(customer.task.processTime)
-        print("\(customer.number)번 \(customer.level.description)고객 \(customer.task.description)업무 완료")
-    }
-    
-    private func sleep(_ time: Double) {
-        let time: useconds_t = useconds_t(time * 1_000_000)
-        usleep(time)
-    }
-    
-    private func requestLoanJudgement() {
-        //HeadOffice.
-    }
-}
-
-final class HeadOffice {
-    static let shared: HeadOffice = HeadOffice()
-    static var currentTime: Double = 0
-    static let timer: Timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-        print("Timer \(currentTime)")
-        currentTime += 0.1
-    }
-    static let queue: DispatchQueue = DispatchQueue(label: "headOffice")
-}
-
 final class BankManager {
     private let clerkCount: Int = 3
     private let customerCount: Int = Int.random(in: 10...30)
@@ -115,24 +26,24 @@ final class BankManager {
         return clerks
     }()
     private lazy var customers: PriorityQueue<Customer> = {
-        var customers: [Customer] = []
+        var customers: PriorityQueue<Customer> = PriorityQueue(
+            sort: { $0.level.priority < $1.level.priority },
+            elements: []
+        )
+        
         for index in 1...customerCount {
             if let level = Level.allCases.randomElement(),
                let task = Task.allCases.randomElement() {
                 
-                customers.append(Customer(number: index, level: level, task: task))
+                customers.enqueue(Customer(number: index, level: level, task: task))
             }
         }
         
-        return PriorityQueue(
-            sort: { $0.level.priority < $1.level.priority },
-            elements: customers
-        )
+        return customers
     }()
     private lazy var totalTimes: [Double] = [Double](repeating: 0, count: clerkCount)
     
     func open() {
-        HeadOffice.timer.fire()
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         let bankTaskGroup: DispatchGroup = DispatchGroup()
         
