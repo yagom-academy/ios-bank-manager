@@ -26,8 +26,4 @@ struct Clerk {
         let time: useconds_t = useconds_t(time * 1_000_000)
         usleep(time)
     }
-    
-    private func requestLoanJudgement() {
-        // step 3
-    }
 }
