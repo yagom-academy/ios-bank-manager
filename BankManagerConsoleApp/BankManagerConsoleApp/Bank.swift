@@ -18,11 +18,15 @@ class Bank {
         }
         
         self.waitingList += queue
-        
-        waitingList.sort { (client1, client2) -> Bool in
+        try sortWaitingList()
+    }
+    
+    func sortWaitingList() throws {
+        try waitingList.sort { (client1, client2) -> Bool in
             guard let client1Grade = client1.grade?.rawValue, let client2Grade = client2.grade?.rawValue else {
                 throw BankOperationError.unknownError
             }
+            
             return client1Grade < client2Grade
         }
     }
