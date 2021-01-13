@@ -28,7 +28,7 @@ struct Customer {
             }
         }
         
-        var gradePriority: Int {
+        var priority: Int {
             switch self {
             case .VVIP:
                 return 0
@@ -44,7 +44,7 @@ struct Customer {
         case loan
         case deposit
         
-        var taskTime: Double {
+        var time: Double {
             switch self {
             case .loan:
                 return 1.1

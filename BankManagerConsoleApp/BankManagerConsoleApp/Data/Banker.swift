@@ -22,7 +22,7 @@ class Banker {
     func startWork(customer: Customer, group: DispatchGroup) {
         group.enter()
         print(String(format: startTaskMessgae, customer.waitingNumber, customer.grade.gradeString, customer.taskType.taskString))
-        workingQueue.asyncAfter(deadline: .now() + customer.taskType.taskTime) {
+        workingQueue.asyncAfter(deadline: .now() + customer.taskType.time) {
             self.finishWork(customer: customer, group: group)
         }
     }

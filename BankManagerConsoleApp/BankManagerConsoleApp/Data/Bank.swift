@@ -48,7 +48,7 @@ class Bank {
             if first.grade == second.grade {
                 return first.waitingNumber < second.waitingNumber
             }
-            return first.grade.gradePriority < second.grade.gradePriority
+            return first.grade.priority < second.grade.priority
         })
     }
     
