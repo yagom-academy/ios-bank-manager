@@ -25,30 +25,45 @@ class Bank {
     }
     
     func makeAllClerksWork() {
-        let semaphore = DispatchSemaphore(value: 1)
-        let counterGroup = DispatchGroup()
+//        let semaphore = DispatchSemaphore(value: 1)
+//        let counterGroup = DispatchGroup()
+//
+//        for i in 1...clerkNumber {
+//            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue")
+//
+//            dispatchQueue.async(group: counterGroup) {
+//                self.handleWaitingList(with: semaphore)
+//            }
+//        }
+//
+//        counterGroup.wait()
         
-        for i in 1...clerkNumber {
-            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue")
-            
-            dispatchQueue.async(group: counterGroup) {
-                self.handleWaitingList(with: semaphore)
-            }
+        let someOperation = BlockOperation {
+            self.handleWaitingList()
         }
         
-        counterGroup.wait()
+        someOperation.addExecutionBlock {
+            self.handleWaitingList()
+        }
+        
+        someOperation.addExecutionBlock {
+            self.handleWaitingList()
+        }
+        
+        let queue = OperationQueue()
+        queue.addOperation(someOperation)
+        
+        queue.waitUntilAllOperationsAreFinished()
     }
     
-    private func handleWaitingList(with semaphore: DispatchSemaphore) {
+    private func handleWaitingList() {
         let bankClerk = BankClerk()
         
         while !self.waitingList.isEmpty {
-            semaphore.wait()
             guard let client = self.waitingList.first else {
                 return
             }
             self.waitingList.removeFirst()
-            semaphore.signal()
             
             bankClerk.handleClientBusiness(of: client)
             self.totalProcessedClientsCount += 1

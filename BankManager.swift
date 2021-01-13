@@ -23,14 +23,7 @@ struct BankManager {
     }
     
     private mutating func generateRandomClients() throws {
-        let randomClientNumber = Int.random(in: 10...30)
-        for i in 1...randomClientNumber {
-            guard let randomBusinessType = BusinessType.allCases.randomElement(),
-                  let randomClientGrade = ClientGrade.allCases.randomElement() else {
-                return
-            }
-            
-            let newClient = Client(waitingNumber: i, business: randomBusinessType, grade: randomClientGrade)
+            let newClient = Client()
             clientQueue.append(newClient)
         }
         try bank.updateWaitingList(from: clientQueue)
