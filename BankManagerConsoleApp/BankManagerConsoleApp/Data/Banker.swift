@@ -17,9 +17,14 @@ class Banker {
     init(_ number: Int) {
         self.workingQueue = DispatchQueue(label: "\(number)")
         self.number = number
+        setNotification()
     }
     
     private func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(processingLoanTask(_:)), name: .finishLoanJudge, object: nil)
+    }
+    
+    @objc func processingLoanTask(_ notification: Notification) {
         
     }
     
