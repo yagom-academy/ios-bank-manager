@@ -1,9 +1,9 @@
 import Foundation
 
 class Client: Operation {
-    private(set) var waitingNumber: Int?
-    private(set) var business: BusinessType?
-    private(set) var grade: ClientGrade?
+    private(set) var waitingNumber: Int = 0
+    private(set) var business: BusinessType = .loan
+    private(set) var grade: ClientGrade = .VIP
     
     init(waitingNumber: Int) {
         guard let randomBusinessType = BusinessType.allCases.randomElement(),

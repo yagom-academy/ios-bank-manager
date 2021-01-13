@@ -20,7 +20,7 @@ class Bank {
         self.waitingList += queue
         
         waitingList.sort { (client1, client2) -> Bool in
-            client1.grade!.rawValue < client2.grade!.rawValue
+            client1.grade.rawValue < client2.grade.rawValue
         }
     }
     
