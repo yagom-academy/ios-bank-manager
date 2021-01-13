@@ -3,12 +3,12 @@ import Foundation
 
 class HeadQuarter {
     static let main: HeadQuarter = HeadQuarter()
-    let loanQualificationQueue = DispatchQueue(label: "loanQualification")
+    private let loanScreeningQueue = DispatchQueue(label: "loanScreening")
     
     private init() {}
     
-    func handleLoanQualificationQueue(of client: ClientOperation) {
-        self.loanQualificationQueue.sync {
+    func handleLoanScreeningQueue(of client: ClientOperation) {
+        self.loanScreeningQueue.sync {
             print(ConsoleOutput.currentProcess(client, .startExamination).message)
             Thread.sleep(forTimeInterval: 0.5)
             print(ConsoleOutput.currentProcess(client, .completeExamination).message)

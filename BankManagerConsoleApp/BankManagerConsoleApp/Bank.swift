@@ -23,7 +23,7 @@ class Bank {
         try sortWaitingList()
     }
     
-    func sortWaitingList() throws {
+    private func sortWaitingList() throws {
         try waitingList.sort { (client1, client2) -> Bool in
             guard let client1Grade = client1.grade?.rawValue, let client2Grade = client2.grade?.rawValue else {
                 throw BankOperationError.unknownError
@@ -33,10 +33,10 @@ class Bank {
         }
     }
     
-    func makeAllClerksWork() {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = clerkNumber
-        queue.addOperations(waitingList, waitUntilFinished: true)
+    func startWorking() {
+        let clientOperationQueue = OperationQueue()
+        clientOperationQueue.maxConcurrentOperationCount = clerkNumber
+        clientOperationQueue.addOperations(waitingList, waitUntilFinished: true)
     }
     
     func printEndingMent() {

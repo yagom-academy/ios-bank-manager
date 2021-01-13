@@ -33,5 +33,4 @@ enum ConsoleOutput {
             return "\(clientWaitingNumber)번 \(clientGrade)고객 \(clientBusiness)\(processStatus.rawValue)"
         }
     }
-    
 }

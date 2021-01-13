@@ -17,10 +17,10 @@ class ClientOperation: Operation {
     }
     
     override func main() {
-        handleClientBusiness(of: self)
+        operateBusiness(of: self)
     }
     
-    private func handleClientBusiness(of client: ClientOperation) {
+    private func operateBusiness(of client: ClientOperation) {
         guard let clientBusiness = client.business else {
             return
         }
@@ -40,6 +40,6 @@ class ClientOperation: Operation {
     }
     
     private func waitForLoanPermission(of client: ClientOperation) {
-        headQuarter.handleLoanQualificationQueue(of: client)
+        headQuarter.handleLoanScreeningQueue(of: client)
     }
 }

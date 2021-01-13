@@ -7,7 +7,7 @@
 import Foundation
 
 class ConsoleController {
-    var bankManager = BankManager()
+    private var bankManager = BankManager()
     
     private func recieveUserInput() -> String {
         print(ConsoleOutput.menuChoice.message, terminator: "")
