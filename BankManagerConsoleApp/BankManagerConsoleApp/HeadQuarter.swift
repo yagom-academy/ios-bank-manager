@@ -7,9 +7,11 @@ class HeadQuarter {
     
     private init() {}
     
-    func handleLoanQualificationQueue() {
+    func handleLoanQualificationQueue(of client: Client) {
         self.loanQualificationQueue.sync {
+            print(ConsoleOutput.currentProcess(client, .startExamination).message)
             Thread.sleep(forTimeInterval: 0.5)
+            print(ConsoleOutput.currentProcess(client, .completeExamination).message)
         }
     }
 }
