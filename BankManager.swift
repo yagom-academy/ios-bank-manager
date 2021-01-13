@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager {
     private var bank: Bank
-    private var clientQueue = [Client]()
+    private var clientQueue = [ClientOperation]()
     
     init() {
         let clerkNumber: Int = 3
@@ -25,7 +25,7 @@ struct BankManager {
     private mutating func generateRandomClients() throws {
         let randomClientNumber = Int.random(in: 10...30)
         for i in 1...randomClientNumber {
-            let newClient = Client(waitingNumber: i)
+            let newClient = ClientOperation(waitingNumber: i)
             clientQueue.append(newClient)
         }
         

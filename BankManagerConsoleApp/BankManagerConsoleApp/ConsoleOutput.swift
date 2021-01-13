@@ -12,7 +12,7 @@ enum ConsoleOutput {
     case menuChoice
     case bankOpening
     case invalidInput
-    case currentProcess(Client, ProcessStatus)
+    case currentProcess(ClientOperation, ProcessStatus)
     
     var message: String {
         switch self {

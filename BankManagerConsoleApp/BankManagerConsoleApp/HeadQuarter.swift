@@ -7,7 +7,7 @@ class HeadQuarter {
     
     private init() {}
     
-    func handleLoanQualificationQueue(of client: Client) {
+    func handleLoanQualificationQueue(of client: ClientOperation) {
         self.loanQualificationQueue.sync {
             print(ConsoleOutput.currentProcess(client, .startExamination).message)
             Thread.sleep(forTimeInterval: 0.5)

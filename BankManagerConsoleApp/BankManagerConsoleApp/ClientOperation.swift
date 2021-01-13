@@ -1,6 +1,6 @@
 import Foundation
 
-class Client: Operation {
+class ClientOperation: Operation {
     private(set) var waitingNumber: Int = 0
     private(set) var business: BusinessType = .loan
     private(set) var grade: ClientGrade = .VIP
@@ -20,7 +20,7 @@ class Client: Operation {
         handleClientBusiness(of: self)
     }
     
-    func handleClientBusiness(of client: Client) {
+    private func handleClientBusiness(of client: ClientOperation) {
         print(ConsoleOutput.currentProcess(client, .start).message)
 
         switch client.business {
@@ -35,7 +35,7 @@ class Client: Operation {
         print(ConsoleOutput.currentProcess(client, .done).message)
     }
     
-    private func waitForLoanPermission(of client: Client) {
+    private func waitForLoanPermission(of client: ClientOperation) {
         headQuarter.handleLoanQualificationQueue(of: client)
     }
 }
