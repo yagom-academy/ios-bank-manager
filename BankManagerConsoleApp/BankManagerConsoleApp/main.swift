@@ -7,7 +7,7 @@
 import Foundation
 
 func getInput() {
-    var isContinue = true
+    let isContinue = true
     
     while isContinue {
         var bankManager = BankManager()
@@ -20,7 +20,6 @@ func getInput() {
         case Menu.open.rawValue:
             bankManager.openBank()
         case Menu.close.rawValue:
-            isContinue = false
             return
         default:
             InputStateMessage.printInputProcessText(state: .inputError)
