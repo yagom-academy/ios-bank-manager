@@ -12,20 +12,12 @@ class Banker {
     private let workingQueue: DispatchQueue
     private let startTaskMessgae = "%d번 %@고객 %@업무 시작"
     private let endTaskMessgae = "%d번 %@고객 %@업무 완료"
+    private let loanDocumentReviewTime = 0.3
     
     // MARK: - init func
     init(_ number: Int) {
         self.workingQueue = DispatchQueue(label: "\(number)")
         self.number = number
-        setNotification()
-    }
-    
-    private func setNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(processingLoanTask(_:)), name: .finishLoanJudge, object: nil)
-    }
-    
-    @objc func processingLoanTask(_ notification: Notification) {
-        
     }
     
     func startWork(customer: Customer, group: DispatchGroup) {
@@ -40,7 +32,15 @@ class Banker {
     }
     
     private func processLoan(customer: Customer, group: DispatchGroup) {
-        BankHeadOffice.shared.addJudge(bankerNumber: self.number, customer: customer, group: group)
+        workingQueue.asyncAfter(deadline: .now() + loanDocumentReviewTime) {
+            BankHeadOffice.shared.addJudge(banker: self, customer: customer, group: group)
+        }
+    }
+    
+    func executionLoan(customer: Customer, group: DispatchGroup) {
+        workingQueue.asyncAfter(deadline: .now() + loanDocumentReviewTime) {
+            self.finishWork(customer: customer, group: group)
+        }
     }
     
     private func processDeposit(customer: Customer, group: DispatchGroup) {
