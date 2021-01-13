@@ -9,7 +9,6 @@ import Foundation
 
 class BankHeadquarter {
     private let queue: DispatchQueue
-    private let second: Double = 1_000_000
     static let shared = BankHeadquarter()
     
     private init() {
@@ -19,7 +18,7 @@ class BankHeadquarter {
     func approveLoanTask(customer: Customer) {
         queue.sync { 
             print("\(BankManagerMessage.start)".format(customer.waitNumber, customer.priority.description, BankHeadquarter.Task.loanJudgement.rawValue))
-            usleep(useconds_t(BankHeadquarter.Task.loanJudgement.timeForTask * second))
+            usleep(useconds_t(BankHeadquarter.Task.loanJudgement.timeForTask * Time.second.rawValue))
             print("\(BankManagerMessage.end)".format(customer.waitNumber, customer.priority.description, BankHeadquarter.Task.loanJudgement.rawValue))
         }
     }

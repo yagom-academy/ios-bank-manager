@@ -21,3 +21,7 @@ enum BankManagerMessage {
     static let start = "%@번 %@고객 %@ 시작"
     static let end = "%@번 %@고객 %@ 완료"
 }
+
+enum Time: TimeInterval {
+    case second = 1_000_000
+}
