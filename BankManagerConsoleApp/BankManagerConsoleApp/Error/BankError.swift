@@ -7,18 +7,13 @@
 
 import Foundation
 
-enum BankError: Error {
+enum InputError: Error {
     case input
     case number
     case mismatchNumber
-    case emptyBank
-    case invalidateTime
-    case invalidateBanker
-    case invalidateCustomer
-    case unknown
 }
 
-extension BankError: LocalizedError {
+extension InputError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .input:
@@ -27,14 +22,23 @@ extension BankError: LocalizedError {
             return "숫자를 입력해주세요."
         case .mismatchNumber:
             return "알맞은 숫자를 입력해주세요."
-        case .emptyBank:
-            return "은행이 없습니다.\n다시 시도해 주세요."
-        case .invalidateTime:
-            return "시간이 없습니다.\n다시 시도해 주세요."
-        case .invalidateBanker:
-            return "은행원이 없는 창구입니다.\n다시 시도해 주세요."
-        case .invalidateCustomer:
-            return "배정된 고객이 없는 창구입니다.\n다시 시도해 주세요."
+        }
+    }
+}
+
+enum BankError: Error {
+    case typeRandomElement
+    case close
+    case unknown
+}
+
+extension BankError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .typeRandomElement:
+            return "타입을 가져오는데 실패했습니다.\n다시 시도해 주세요."
+        case .close:
+            return "은행을 폐점하는데 실패했습니다.\n다시 시도해 주세요."
         case .unknown:
             return "알 수 없는 오류가 발생했습니다.\n다시 시도해 주세요."
         }

@@ -7,19 +7,29 @@
 
 import Foundation
 
-struct Banker {
-    let processingTime: Double
-    var taskStartTime: Double?
+class Banker {
+    private let bankerNumber: Int
+    private let workingQueue: DispatchQueue
+    private let startTaskMessgae = "%d번 %@고객 %@업무 시작"
+    private let endTaskMessgae = "%d번 %@고객 %@업무 완료"
     
-    mutating func setTaskStartTime(_ time: Double) {
-        self.taskStartTime = time
+    // MARK: - init func
+    init(_ number: Int) {
+        self.workingQueue = DispatchQueue(label: "\(number)")
+        self.bankerNumber = number
     }
     
-    func canEndTask(_ currentTime: Double) throws -> Bool {
-        guard let startTime = taskStartTime?.percisionNumber else {
-            throw BankError.invalidateBanker
+    func startWork(customer: Customer, group: DispatchGroup) {
+        group.enter()
+        print(String(format: startTaskMessgae, customer.waitingNumber, customer.grade.description, customer.taskType.description))
+        workingQueue.asyncAfter(deadline: .now() + customer.taskType.time) {
+            self.finishWork(customer: customer, group: group)
         }
-        let progressTime = currentTime - startTime
-        return progressTime.percisionNumber >= processingTime.percisionNumber
+    }
+    
+    private func finishWork(customer: Customer, group: DispatchGroup) {
+        print(String(format: endTaskMessgae, customer.waitingNumber, customer.grade.description, customer.taskType.description))
+        NotificationCenter.default.post(name: .finishBankerTask, object: self.bankerNumber)
+        group.leave()
     }
 }
