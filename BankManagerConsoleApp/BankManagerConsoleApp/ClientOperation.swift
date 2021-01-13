@@ -1,9 +1,9 @@
 import Foundation
 
 class ClientOperation: Operation {
-    private(set) var waitingNumber: Int = 0
-    private(set) var business: BusinessType = .loan
-    private(set) var grade: ClientGrade = .VIP
+    private(set) var waitingNumber: Int?
+    private(set) var business: BusinessType?
+    private(set) var grade: ClientGrade?
     
     init(waitingNumber: Int) {
         guard let randomBusinessType = BusinessType.allCases.randomElement(),
@@ -30,6 +30,9 @@ class ClientOperation: Operation {
             Thread.sleep(forTimeInterval: 0.3)
             waitForLoanPermission(of: client)
             Thread.sleep(forTimeInterval: 0.3)
+        case .none:
+            break
+            // throw
         }
         
         print(ConsoleOutput.currentProcess(client, .done).message)

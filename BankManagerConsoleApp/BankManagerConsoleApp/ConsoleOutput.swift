@@ -23,7 +23,12 @@ enum ConsoleOutput {
         case .invalidInput:
             return "잘못된 입력값입니다. 다시 시도해주세요."
         case let .currentProcess(client, processStatus):
-            return "\(client.waitingNumber)번 \(client.grade.description)고객 \(client.business.rawValue)\(processStatus.rawValue)"
+            guard let clientWaitingNumber = client.waitingNumber, let clientGrade = client.grade?.description, let  clientBusiness = client.business?.rawValue else {
+                return "a"
+                // throw
+            }
+            
+            return "\(clientWaitingNumber)번 \(clientGrade)고객 \(clientBusiness)\(processStatus.rawValue)"
         }
     }
     
