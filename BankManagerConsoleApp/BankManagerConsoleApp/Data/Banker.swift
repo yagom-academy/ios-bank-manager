@@ -9,7 +9,7 @@ import Foundation
 
 class Banker {
     private let bankerNumber: Int
-    let workingQueue: DispatchQueue
+    private let workingQueue: DispatchQueue
     private let startTaskMessgae = "%d번 %@고객 %@업무 시작"
     private let endTaskMessgae = "%d번 %@고객 %@업무 완료"
     
