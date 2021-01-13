@@ -7,19 +7,73 @@
 
 import Foundation
 
-private enum CustomerMessage {
-    static let start = "번 고객 업무 시작"
-    static let end = "번 고객 업무 완료"
-}
-
 struct Customer {
     let waitingNumber: Int
-    let taskAmount: Int
+    let grade: Grade
+    let taskType: TaskType
     
-    var startMessage: String {
-        return "\(waitingNumber)\(CustomerMessage.start)"
+    enum Grade: CaseIterable {
+        case VVIP
+        case VIP
+        case normal
+        
+        var priority: Int {
+            switch self {
+            case .VVIP:
+                return 0
+            case .VIP:
+                return 1
+            case .normal:
+                return 2
+            }
+        }
     }
-    var endMessage: String {
-        return "\(waitingNumber)\(CustomerMessage.end)"
+    
+    enum TaskType: CaseIterable {
+        case loan
+        case deposit
+        
+        var time: Double {
+            switch self {
+            case .loan:
+                return 1.1
+            case .deposit:
+                return 0.7
+            }
+        }
+    }
+    
+    init(waitingNumber: Int) throws {
+        guard let randomGrade = Grade.allCases.randomElement(),
+              let randomTask = TaskType.allCases.randomElement() else {
+            throw BankError.typeRandomElement
+        }
+        self.waitingNumber = waitingNumber
+        grade = randomGrade
+        taskType = randomTask
+    }
+}
+
+extension Customer.Grade: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .VVIP:
+            return "VVIP"
+        case .VIP:
+            return "VIP"
+        case .normal:
+            return "일반"
+        }
+    }
+}
+
+extension Customer.TaskType: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
     }
 }

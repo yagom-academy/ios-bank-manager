@@ -6,20 +6,18 @@
 
 import Foundation
 
+// MARK: - dummy
 private let startMessage = "1 : 은행 개점\n2 : 종료\n입력 : "
-private let openCode = 1
-private let terminateCode = 2
 private var isTerminate = false
+private var bank = Bank()
 
-enum BankInformation {
-    static let windowNumber = 1
-    static let bankersNumber = 1
-    static let bankersProcessingTime = 0.7
-}
-
+// MARK: - show error
 private func showError(_ error: Error) {
     let errorMessage: String
-    if let bankError = error as? BankError {
+    
+    if let inputError = error as? InputError {
+        errorMessage = inputError.localizedDescription
+    } else if let bankError = error as? BankError {
         errorMessage = bankError.localizedDescription
     } else {
         errorMessage = BankError.unknown.localizedDescription
@@ -27,35 +25,29 @@ private func showError(_ error: Error) {
     print(errorMessage)
 }
 
-private func startManage() throws {
-    BankManager.shared.initBank(windowNumber: BankInformation.windowNumber, bankersNumber: BankInformation.bankersNumber, bankersProcessingTime: BankInformation.bankersProcessingTime)
+private func startManage() {
     while !isTerminate {
         print(startMessage, terminator: "")
         guard let inputText = readLine() else {
-            throw BankError.input
+            showError(InputError.input)
+            continue
         }
         guard let inputCode = Int(inputText) else {
-            showError(BankError.number)
+            showError(InputError.number)
             continue
         }
-        guard inputCode == terminateCode || inputCode == openCode else {
-            showError(BankError.mismatchNumber)
-            continue
-        }
-        
-        if inputCode == terminateCode {
+        if inputCode == Bank.Code.close {
             isTerminate = true
             break
         }
-        if inputCode == openCode {
-            try BankManager.shared.openBank(customersNumber: Int.random(in: 10...30))
+        if inputCode == Bank.Code.open {
+            do {
+                try bank.open()
+            } catch {
+                showError(error)
+            }
         }
     }
 }
 
-do {
-    try startManage()
-} catch {
-    showError(error)
-}
-
+startManage()
