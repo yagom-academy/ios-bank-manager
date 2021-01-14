@@ -12,6 +12,8 @@ class Banker {
     var customer: Customer?
     var workTime: Double
     
+    private let semaphore = DispatchSemaphore(value:0)
+    
     init(windowNumber: UInt, isWorking: BankCondition) {
         self.windowNumber = windowNumber
         self.isWorking = isWorking
@@ -24,6 +26,21 @@ class Banker {
             return
         }
         print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 시작")
+        
+        if customer.businessType == .loan {
+            print("\(customer.waiting)번 \(customer.priority.describing)고객 대출서류 검토 시작")
+            waitExamineLoan(customer)
+            print("\(customer.waiting)번 \(customer.priority.describing)고객 대출서류 검토 완료")
+        }
+        semaphore.signal()
+    }
+    
+    func waitExamineLoan(_ customer: Customer) {
+        Thread.sleep(forTimeInterval: customer.taskTime)
+        DispatchQueue.global().sync {
+            HeadOffice.main.examineLoan(customer)
+        }
+        Thread.sleep(forTimeInterval: customer.taskTime)
     }
     
     func flipCondition() {
@@ -37,6 +54,7 @@ class Banker {
     
     func doneWorking() {
         if let customer = customer {
+            semaphore.wait()
             workTime += customer.taskTime
             print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 종료")
         }
