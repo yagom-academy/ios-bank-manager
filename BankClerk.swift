@@ -9,13 +9,13 @@ import Foundation
 
 class BankClerk {
     // MARK: - Properties
-    var bankWindowNumber: Int
+    private(set) var bankWindowNumber: Int
     var isWorking: Bool {
         currentClient != nil
     }
-    var currentClient: Client?
-    var finishedClients: Int = 0
-    let taskQueue: DispatchQueue
+    private var currentClient: Client?
+    private(set) var finishedClients: Int = 0
+    private let taskQueue: DispatchQueue
     
     // MARK: - Methods
     func startWork(for client: Client) {
@@ -27,7 +27,7 @@ class BankClerk {
         }
     }
     
-    func finishWork() {
+    private func finishWork() {
         finishedClients += 1
         if let client = currentClient {
             print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 완료")
@@ -35,7 +35,7 @@ class BankClerk {
         currentClient = nil
     }
     
-    func taskTime(bankBusiness: BankBusiness) -> TimeInterval {
+    private func taskTime(bankBusiness: BankBusiness) -> TimeInterval {
         switch bankBusiness {
         case .loan:
             return 1.1
