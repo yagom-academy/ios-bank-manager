@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8202F3D825B06EC600E7F236 /* Headquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8202F3D725B06EC600E7F236 /* Headquarter.swift */; };
 		824536E625A6AD28004C0424 /* InputStateMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824536E525A6AD28004C0424 /* InputStateMessage.swift */; };
 		827C304825A9A5630003A3B3 /* TaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827C304725A9A5630003A3B3 /* TaskTypes.swift */; };
 		827C304C25A9A7A30003A3B3 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827C304B25A9A7A30003A3B3 /* Customer.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8202F3D725B06EC600E7F236 /* Headquarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headquarter.swift; sourceTree = "<group>"; };
 		824536E525A6AD28004C0424 /* InputStateMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InputStateMessage.swift; path = ../../InputStateMessage.swift; sourceTree = "<group>"; };
 		827C304725A9A5630003A3B3 /* TaskTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTypes.swift; sourceTree = "<group>"; };
 		827C304B25A9A7A30003A3B3 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				8202F3D725B06EC600E7F236 /* Headquarter.swift */,
 				827C304B25A9A7A30003A3B3 /* Customer.swift */,
 				8B7DAA3725A4AB81000EBAB3 /* BankClerk.swift */,
 				824536E525A6AD28004C0424 /* InputStateMessage.swift */,
@@ -139,6 +142,7 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				827C304C25A9A7A30003A3B3 /* Customer.swift in Sources */,
+				8202F3D825B06EC600E7F236 /* Headquarter.swift in Sources */,
 				8B7DAA3825A4AB81000EBAB3 /* BankClerk.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				8BDCBCB225A7FFA200F2A2A9 /* BankerMessage.swift in Sources */,
