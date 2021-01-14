@@ -15,18 +15,19 @@ class BankClerk {
         static let executeLoan: TimeInterval = 0.3
     }
 
-    
     // MARK: - Properties
+    private let bankHeadOffice: BankHeadOffice
     private(set) var bankWindowNumber: Int
     var isWorking: Bool {
         currentClient != nil
     }
-    private var currentClient: Client?
+    private(set) var currentClient: Client?
     private(set) var finishedClients: Int = 0
     private let taskQueue: DispatchQueue
     
     // MARK: - Methods
-    init(bankWindow number: Int) {
+    init(_ bankHeadOffice: BankHeadOffice, bankWindow number: Int) {
+        self.bankHeadOffice = bankHeadOffice
         bankWindowNumber = number
         taskQueue = DispatchQueue(label: "\(number)번 창구")
     }
@@ -63,15 +64,21 @@ class BankClerk {
     private func reviewLoanDocument() {
         taskQueue.async {
             Thread.sleep(forTimeInterval: TaskTime.reviewLoanDocument)
-            self.executeLoan()
+            self.requestLoan()
         }
     }
 
     private func requestLoan() {
-        //bankHeadOffice.addJudgementLoan(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLoanApproval(_:)), name: NSNotification.Name("requestLoan#\(bankWindowNumber)"), object: nil)
+        bankHeadOffice.addJudgementLoan(self)
+    }
+    
+    @objc private func didReceiveLoanApproval(_ notification: Notification) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("requestLoan#\(bankWindowNumber)"), object: nil)
+        executeLoan()
     }
 
-    func executeLoan() {
+    private func executeLoan() {
         taskQueue.async {
             Thread.sleep(forTimeInterval: TaskTime.executeLoan)
             self.finishWork()

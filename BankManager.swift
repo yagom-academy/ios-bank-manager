@@ -22,6 +22,7 @@ enum BankBusiness: CaseIterable {
 
 struct BankManager {
     // MARK: - Properties
+    private let bankHeadOffice: BankHeadOffice
     private var bankClerks: [BankClerk] = [BankClerk]()
     private var waitingClients: Queue<Client> = Queue<Client>()
     private var waitingTicketNumber: Int = 0
@@ -41,6 +42,12 @@ struct BankManager {
     }
     
     // MARK: - Methods
+    init(_ bankHeadOffice: BankHeadOffice, _ numberOfBankClerk: Int, _ numberOfClient: Int) {
+        self.bankHeadOffice = bankHeadOffice
+        addBankClerk(count: numberOfBankClerk)
+        addClient(count: numberOfClient)
+    }
+    
     mutating func addBankClerk(count: Int) {
         guard count > 0 else {
             return
@@ -48,7 +55,7 @@ struct BankManager {
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...count {
-            let bankClerk = BankClerk(bankWindow: i + lastCounterNumber)
+            let bankClerk = BankClerk(bankHeadOffice, bankWindow: i + lastCounterNumber)
             bankClerks.append(bankClerk)
         }
     }
@@ -101,10 +108,5 @@ struct BankManager {
     private func printWorkEndMessage() {
         let totalBusinessTimeString = String(format: "%.2f", totalBusinessTime ?? 0)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalFinishedClients)명이며, 총 업무시간은 \(totalBusinessTimeString)초입니다")
-    }
-    
-    init(_ numberOfBankClerk: Int, _ numberOfClient: Int) {
-        addBankClerk(count: numberOfBankClerk)
-        addClient(count: numberOfClient)
     }
 }
