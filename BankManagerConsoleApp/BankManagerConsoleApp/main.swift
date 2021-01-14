@@ -6,5 +6,25 @@
 
 import Foundation
 
-var bankManager = BankManager()
-bankManager.openBank()
+func getInput() {
+    let isContinue = true
+    
+    while isContinue {
+        var bankManager = BankManager()
+        InputStateMessage.printInputProcessText(state: .initialization)
+        guard let userInput: String = readLine() else {
+            InputStateMessage.printInputProcessText(state: .error)
+            return
+        }
+        switch userInput {
+        case Menu.open.rawValue:
+            bankManager.openBank()
+        case Menu.close.rawValue:
+            return
+        default:
+            InputStateMessage.printInputProcessText(state: .inputError)
+        }
+    }
+}
+
+getInput()

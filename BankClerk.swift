@@ -8,16 +8,23 @@
 import Foundation
 import Dispatch
 
-struct BankClerk {
-    func serveCustomers(customers: Int) -> useconds_t {
-        let waitingCustomers = DispatchQueue(label: "Serial Queue")
-        waitingCustomers.sync {
-            for customer in 1...customers {
-                BankerMessage.printTaskText(customer: customer, state: .start)
-                usleep(700000)
-                BankerMessage.printTaskText(customer: customer, state: .completion)
-            }
+final class BankClerk {
+    let bankWindowNumber: Int
+    var isWorking: Bool = false
+    var queue: DispatchQueue
+    
+    init(bankWindowNumber: Int) {
+        self.bankWindowNumber = bankWindowNumber
+        queue = DispatchQueue(label: "\(bankWindowNumber)")
+    }
+    
+    func serveCustomers(customer: Customer, group: DispatchGroup) {
+        self.isWorking = true
+        BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .start)
+        queue.async(group: group) {
+            usleep(customer.task.rawValue)
+            BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .completion)
+            self.isWorking = false
         }
-        return useconds_t(700000 * customers)
     }
 }
