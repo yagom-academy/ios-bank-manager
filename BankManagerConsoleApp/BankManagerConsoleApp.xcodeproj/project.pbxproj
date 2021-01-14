@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		419AF68025A6AD37001162AF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AF67F25A6AD37001162AF /* Client.swift */; };
+		5642714525B0ADB800199AA6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5642714425B0ADB800199AA6 /* Client.swift */; };
 		56BEB47425A3225300C95BC6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BEB47325A3225300C95BC6 /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		419AF67F25A6AD37001162AF /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		5642714425B0ADB800199AA6 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Client.swift; path = ../../Client.swift; sourceTree = "<group>"; };
 		56BEB47325A3225300C95BC6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = ../../Queue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				419AF67F25A6AD37001162AF /* Client.swift */,
+				5642714425B0ADB800199AA6 /* Client.swift */,
 				56BEB47325A3225300C95BC6 /* Queue.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
@@ -130,7 +130,7 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				56BEB47425A3225300C95BC6 /* Queue.swift in Sources */,
-				419AF68025A6AD37001162AF /* Client.swift in Sources */,
+				5642714525B0ADB800199AA6 /* Client.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
