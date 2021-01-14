@@ -10,14 +10,12 @@ class Banker {
         }
     }
     var customer: Customer?
-    var workTime: Double
     
     private let semaphore = DispatchSemaphore(value:0)
     
     init(windowNumber: UInt, isWorking: BankCondition) {
         self.windowNumber = windowNumber
         self.isWorking = isWorking
-        workTime = 0.0
     }
     
     func work() {
@@ -55,7 +53,6 @@ class Banker {
     func doneWorking() {
         if let customer = customer {
             semaphore.wait()
-            workTime += customer.taskTime
             print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 종료")
         }
     }
@@ -98,7 +95,7 @@ class Bank {
     }
     
     func openBank() {
-        countTime {
+        calculateTotalTime {
             while !customers.isEmpty {
                 for windowNumber in 0..<bankers.count {
                     checkBankerIsWorking(windowNumber)
@@ -107,7 +104,7 @@ class Bank {
             checkEnd()
             semaphore.wait()
         }
-            initializeInfo()
+        initializeInfo()
     }
     
     private func checkBankerIsWorking(_ windowNumber: Int) {
@@ -152,7 +149,7 @@ class Bank {
         totalVistedCustomers = 0
     }
     
-    func countTime(bankTaskFunction: () -> ()) {
+    private func calculateTotalTime(bankTaskFunction: () -> ()) {
         let startTime = CFAbsoluteTimeGetCurrent()
         bankTaskFunction()
         let totalTime = CFAbsoluteTimeGetCurrent() - startTime
