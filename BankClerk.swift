@@ -8,6 +8,20 @@
 import Foundation
 import Dispatch
 
+enum Task {
+    case reviewDocument
+    case excuteLoan
+    
+    var time: useconds_t {
+        switch self {
+        case .excuteLoan:
+            return 300000
+        case .reviewDocument:
+            return 300000
+        }
+    }
+}
+
 final class BankClerk {
     let bankWindowNumber: Int
     var isWorking: Bool = false
@@ -23,7 +37,6 @@ final class BankClerk {
         BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .start)
         queue.async(group: group) {
             if customer.task == .loan {
-                
                 Headquarter.common.judgeLoan(customer: customer)
             }
             usleep(customer.task.rawValue)
