@@ -12,21 +12,15 @@ final class Bank {
     private var finishedClientCount = 0
     private var businessTime: TimeInterval?
 
-    func operateBank(teller: Int, client: [Client]) {
+    func open(teller: [Teller], client: [Client]) {
         let openTime = Date()
         
-        initTellers(teller)
+        tellers = teller
         clients = client.sorted()
         assignBusinessToTeller()
         businessTime = Date().timeIntervalSince(openTime)
         Dashboard.printCloseMessage(finishedClientCount, businessTime)
-        closeBank()
-    }
-    
-    private func initTellers(_ count: Int) {
-        for windowNumber in 1...count {
-            tellers.append(Teller(windowNumber: windowNumber))
-        }
+        resetFinishedClientCount()
     }
     
     private func assignBusinessToTeller() {
@@ -34,24 +28,22 @@ final class Bank {
         var isContinue = true
         
         while isContinue {
-            for teller in self.tellers {
-                if self.clients.count == 0 {
+            for teller in tellers {
+                if clients.count == 0 {
                     isContinue = false
                     break
                 }
                 if teller.isNotWorking {
                     let client = clients.removeFirst()
                     teller.handleBusiness(for: client, withDispatchGroup: dispatchGroup)
-                    self.finishedClientCount += 1
+                    finishedClientCount += 1
                 }
             }
         }
         dispatchGroup.wait()
     }
     
-    private func closeBank() {
-        tellers.removeAll()
-        clients.removeAll()
+    private func resetFinishedClientCount() {
         finishedClientCount = 0
     }
 }

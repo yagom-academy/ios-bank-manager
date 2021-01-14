@@ -19,7 +19,7 @@ struct Dashboard {
     
     static func printCloseMessage(_ count: Int, _ time: TimeInterval?) {
         guard let time = time else {
-            print("\(BankError.unknown)")
+            print("\(StringFormattingError.unknown)")
             return
         }
         let message = String(format: Message.close, count, time)
