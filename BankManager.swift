@@ -33,7 +33,7 @@ class Banker {
         semaphore.signal()
     }
     
-    func waitExamineLoan(_ customer: Customer) {
+    private func waitExamineLoan(_ customer: Customer) {
         Thread.sleep(forTimeInterval: 0.3)
         DispatchQueue.global().sync {
             HeadOffice.main.examineLoan(customer)
@@ -50,7 +50,7 @@ class Banker {
         }
     }
     
-    func doneWorking() {
+    private func doneWorking() {
         if let customer = customer {
             semaphore.wait()
             print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 종료")
