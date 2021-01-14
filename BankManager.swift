@@ -36,11 +36,11 @@ class Banker {
     }
     
     func waitExamineLoan(_ customer: Customer) {
-        Thread.sleep(forTimeInterval: customer.taskTime)
+        Thread.sleep(forTimeInterval: 0.3)
         DispatchQueue.global().sync {
             HeadOffice.main.examineLoan(customer)
         }
-        Thread.sleep(forTimeInterval: customer.taskTime)
+        Thread.sleep(forTimeInterval: 0.3)
     }
     
     func flipCondition() {

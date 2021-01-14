@@ -46,7 +46,7 @@ func duration(_ type: BusinessType) -> Double {
     var taskTime: Double
     switch type {
     case .loan:
-        taskTime = 0.3
+        taskTime = 0.6
     case .deposit:
         taskTime = 0.7
     }
