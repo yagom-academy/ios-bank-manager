@@ -10,12 +10,12 @@ class Banker {
         }
     }
     var customer: Customer?
-    var workTime: Double
+    
+    private let semaphore = DispatchSemaphore(value:0)
     
     init(windowNumber: UInt, isWorking: BankCondition) {
         self.windowNumber = windowNumber
         self.isWorking = isWorking
-        workTime = 0.0
     }
     
     func work() {
@@ -24,6 +24,21 @@ class Banker {
             return
         }
         print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 시작")
+        
+        if customer.businessType == .loan {
+            print("\(customer.waiting)번 \(customer.priority.describing)고객 대출서류 검토 시작")
+            waitExamineLoan(customer)
+            print("\(customer.waiting)번 \(customer.priority.describing)고객 대출서류 검토 완료")
+        }
+        semaphore.signal()
+    }
+    
+    private func waitExamineLoan(_ customer: Customer) {
+        Thread.sleep(forTimeInterval: 0.3)
+        DispatchQueue.global().sync {
+            HeadOffice.main.examineLoan(customer)
+        }
+        Thread.sleep(forTimeInterval: 0.3)
     }
     
     func flipCondition() {
@@ -35,9 +50,9 @@ class Banker {
         }
     }
     
-    func doneWorking() {
+    private func doneWorking() {
         if let customer = customer {
-            workTime += customer.taskTime
+            semaphore.wait()
             print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 종료")
         }
     }
@@ -68,8 +83,7 @@ struct Customer {
 
 class Bank {
     private var bankers = [Banker]()
-    private var businessTimes: Double = 0.0
-    private var totalVistdCustomers: UInt = 0
+    private var totalVistedCustomers: UInt = 0
     private var dispatchQueue = DispatchQueue.global()
     private var semaphore = DispatchSemaphore(value: 0)
     private let dispatchGroup = DispatchGroup()
@@ -81,14 +95,15 @@ class Bank {
     }
     
     func openBank() {
-        while !customers.isEmpty {
-            for windowNumber in 0..<bankers.count {
-                checkBankerIsWorking(windowNumber)
+        calculateTotalTime {
+            while !customers.isEmpty {
+                for windowNumber in 0..<bankers.count {
+                    checkBankerIsWorking(windowNumber)
+                }
             }
+            checkEnd()
+            semaphore.wait()
         }
-        checkEnd()
-        semaphore.wait()
-        closeBank()
         initializeInfo()
     }
     
@@ -117,33 +132,30 @@ class Bank {
                 banker.flipCondition()
                 self.dispatchGroup.leave()
             }
-            totalVistdCustomers += 1
+            totalVistedCustomers += 1
             customers.removeFirst()
         }
     }
     
     private func checkEnd() {
         dispatchGroup.notify(queue: dispatchQueue, execute: {
-            self.decideTotalTime()
+            self.semaphore.signal()
         })
-    }
-
-    
-    private func decideTotalTime() {
-        bankers.sort { $0.workTime > $1.workTime }
-        businessTimes = bankers[0].workTime
-        semaphore.signal()
-    }
-    
-    private func closeBank() {
-        let businessTimeToString: String = String(format: "%.2f", businessTimes)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistdCustomers)명이며, 총 업무시간은 \(businessTimeToString)초 입니다.")
     }
     
     private func initializeInfo() {
         bankers = [Banker]()
         customers = [Customer]()
-        businessTimes = 0.0
-        totalVistdCustomers = 0
+        totalVistedCustomers = 0
+    }
+    
+    private func calculateTotalTime(bankTaskFunction: () -> ()) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        bankTaskFunction()
+        let totalTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        let totalTimeToString: String = String(format: "%.2f", totalTime)
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistedCustomers)명이며, 총 업무시간은 \(totalTimeToString)초 입니다.")
     }
 }
