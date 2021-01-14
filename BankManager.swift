@@ -5,7 +5,7 @@ class Banker {
     var isWorking: BankCondition {
         willSet {
             if newValue == .notWorking {
-                workDone()
+                doneWorking()
             }
         }
     }
@@ -35,7 +35,7 @@ class Banker {
         }
     }
     
-    func workDone() {
+    func doneWorking() {
         if let customer = customer {
             workTime += customer.taskTime
             print("\(customer.waiting)번 \(customer.priority.describing)고객 \(customer.businessType.rawValue) 업무 종료")
@@ -124,12 +124,12 @@ class Bank {
     
     private func checkEnd() {
         dispatchGroup.notify(queue: dispatchQueue, execute: {
-            self.countOfTotalTime()
+            self.decideTotalTime()
         })
     }
 
     
-    private func countOfTotalTime() {
+    private func decideTotalTime() {
         bankers.sort { $0.workTime > $1.workTime }
         businessTimes = bankers[0].workTime
         semaphore.signal()
