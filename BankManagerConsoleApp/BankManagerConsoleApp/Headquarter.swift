@@ -13,28 +13,34 @@ enum JudgementState {
     var description: String {
         switch self {
         case .start:
-            return "대출심사 시작"
+            return " 대출심사 시작"
         case .end:
-            return "대출심사 완료"
+            return " 대출심사 완료"
         }
     }
 }
 
-struct Headquarter {
-    let judgementTime : useconds_t = 300000
+class Headquarter {
+    let judgementTime: useconds_t = 300000
+    let queue: DispatchQueue = DispatchQueue(label: "headquarter")
+    static let common = Headquarter()
+    
+    private init() {}
     
     func judgeLoan(customer: Customer) {
-        printJudgementState(state: .start, customer: customer.waitingNumber, customerClass: customer.grade.description)
-        usleep(judgementTime)
-        printJudgementState(state: .end, customer: customer.waitingNumber, customerClass: customer.grade.description)
+        queue.async() {
+            self.printJudgementState(state: .start, customer: customer.waitingNumber, customerClass: customer.grade.description)
+            usleep(self.judgementTime)
+            self.printJudgementState(state: .end, customer: customer.waitingNumber, customerClass: customer.grade.description)
+        }
     }
     
     func printJudgementState(state: JudgementState, customer: Int, customerClass: String) {
         switch state {
         case .start:
-            print("\(customer)번" + customerClass + state.description)
+            print("\(customer)번 " + customerClass + state.description)
         case .end:
-            print("\(customer)번" + customerClass + state.description)
+            print("\(customer)번 " + customerClass + state.description)
         }
     }
 }

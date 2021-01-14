@@ -22,6 +22,10 @@ final class BankClerk {
         self.isWorking = true
         BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .start)
         queue.async(group: group) {
+            if customer.task == .loan {
+                
+                Headquarter.common.judgeLoan(customer: customer)
+            }
             usleep(customer.task.rawValue)
             BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .completion)
             self.isWorking = false
