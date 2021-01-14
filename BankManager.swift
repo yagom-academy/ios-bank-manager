@@ -86,8 +86,7 @@ struct Customer {
 
 class Bank {
     private var bankers = [Banker]()
-    private var businessTimes: Double = 0.0
-    private var totalVistdCustomers: UInt = 0
+    private var totalVistedCustomers: UInt = 0
     private var dispatchQueue = DispatchQueue.global()
     private var semaphore = DispatchSemaphore(value: 0)
     private let dispatchGroup = DispatchGroup()
@@ -99,15 +98,16 @@ class Bank {
     }
     
     func openBank() {
-        while !customers.isEmpty {
-            for windowNumber in 0..<bankers.count {
-                checkBankerIsWorking(windowNumber)
+        countTime {
+            while !customers.isEmpty {
+                for windowNumber in 0..<bankers.count {
+                    checkBankerIsWorking(windowNumber)
+                }
             }
+            checkEnd()
+            semaphore.wait()
         }
-        checkEnd()
-        semaphore.wait()
-        closeBank()
-        initializeInfo()
+            initializeInfo()
     }
     
     private func checkBankerIsWorking(_ windowNumber: Int) {
@@ -135,33 +135,30 @@ class Bank {
                 banker.flipCondition()
                 self.dispatchGroup.leave()
             }
-            totalVistdCustomers += 1
+            totalVistedCustomers += 1
             customers.removeFirst()
         }
     }
     
     private func checkEnd() {
         dispatchGroup.notify(queue: dispatchQueue, execute: {
-            self.decideTotalTime()
+            self.semaphore.signal()
         })
-    }
-
-    
-    private func decideTotalTime() {
-        bankers.sort { $0.workTime > $1.workTime }
-        businessTimes = bankers[0].workTime
-        semaphore.signal()
-    }
-    
-    private func closeBank() {
-        let businessTimeToString: String = String(format: "%.2f", businessTimes)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistdCustomers)명이며, 총 업무시간은 \(businessTimeToString)초 입니다.")
     }
     
     private func initializeInfo() {
         bankers = [Banker]()
         customers = [Customer]()
-        businessTimes = 0.0
-        totalVistdCustomers = 0
+        totalVistedCustomers = 0
+    }
+    
+    func countTime(bankTaskFunction: () -> ()) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        bankTaskFunction()
+        let totalTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        let totalTimeToString: String = String(format: "%.2f", totalTime)
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVistedCustomers)명이며, 총 업무시간은 \(totalTimeToString)초 입니다.")
     }
 }

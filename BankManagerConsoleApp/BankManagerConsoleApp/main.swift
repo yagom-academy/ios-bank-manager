@@ -14,11 +14,9 @@ func startBank() {
 
     switch userInput {
     case "1":
-        countTotalTime {
-            bank.configureBankers(numberOfBankers: 3)
-            configureCustomers()
-            bank.openBank()
-        }
+        bank.configureBankers(numberOfBankers: 3)
+        configureCustomers()
+        bank.openBank()
     case "2":
         exit(0)
     case "":
@@ -53,16 +51,6 @@ func duration(_ type: BusinessType) -> Double {
         taskTime = 0.7
     }
     return taskTime
-}
-
-func countTotalTime(bankTaskFunction: () -> ()) {
-    let startTime = CFAbsoluteTimeGetCurrent()
-    bankTaskFunction()
-    let totalTime = CFAbsoluteTimeGetCurrent() - startTime
-    
-    let totalTimeToString: String = String(format: "%.2f", totalTime)
-    
-    print("걸린 시간 = \(totalTimeToString)")
 }
 
 startBank()
