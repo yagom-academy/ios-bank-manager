@@ -7,7 +7,7 @@
 import Foundation
 
 class BankManager {
-    enum Grade: String {
+    enum Grade: String, CaseIterable {
         case VVIP = "VVIP"
         case VIP = "VIP"
         case normal = "일반"
@@ -24,7 +24,7 @@ class BankManager {
         }
     }
 
-    enum Task: String {
+    enum Task: String, CaseIterable {
         case loan = "대출"
         case deposit = "예금"
         
@@ -94,7 +94,7 @@ class BankManager {
     }
     
     class CustomerPriorityQueue {
-        private var queue: [Customer] = []
+        var queue: [Customer] = []
         private var lock = NSLock()
         
         var count: Int {
@@ -109,13 +109,17 @@ class BankManager {
             queue.append(customer)
             
             var currentIndex = self.queue.count - 1
-            while currentIndex > 0 && (currentIndex - 1) / 2 >= 0 {
-                if customer.grade.priority > queue[(currentIndex - 1) / 2].grade.priority
-                || (customer.grade.priority == queue[(currentIndex - 1) / 2].grade.priority && customer.number > queue[(currentIndex - 1) / 2].number) {
+            var parentIndex = (currentIndex - 1) / 2
+            while currentIndex > 0
+                    && parentIndex >= 0 {
+                if customer.grade.priority > queue[parentIndex].grade.priority
+                || (customer.grade.priority == queue[parentIndex].grade.priority
+                        && customer.number > queue[parentIndex].number) {
                     break
                 }
-                queue[currentIndex] = queue[(currentIndex - 1) / 2]
-                currentIndex = (currentIndex - 1) / 2
+                queue[currentIndex] = queue[parentIndex]
+                currentIndex = parentIndex
+                parentIndex = (currentIndex - 1) / 2
             }
             queue[currentIndex] = customer
         }
@@ -137,20 +141,25 @@ class BankManager {
                 return firstCustomer
             }
             var currentIndex = 0
-            var childIndex = (currentIndex * 2) + 1
-            while childIndex <= self.queue.count - 1 {
-                if childIndex + 1 <= self.queue.count - 1 {
-                    if queue[childIndex].grade.priority > queue[childIndex + 1].grade.priority
-                    || (queue[childIndex].grade.priority == queue[childIndex + 1].grade.priority && queue[childIndex].number > queue[childIndex + 1].number) {
-                        childIndex = childIndex + 1
+            var leftChildIndex = (currentIndex * 2) + 1
+            var rightChildIndex = leftChildIndex + 1
+            while leftChildIndex <= self.queue.count - 1 {
+                if leftChildIndex + 1 <= self.queue.count - 1 {
+                    if queue[leftChildIndex].grade.priority > queue[rightChildIndex].grade.priority
+                    || (queue[leftChildIndex].grade.priority == queue[rightChildIndex].grade.priority
+                            && queue[leftChildIndex].number > queue[rightChildIndex].number) {
+                        leftChildIndex = rightChildIndex
                     }
                 }
-                if lastCustomer.grade.priority < queue[childIndex].grade.priority || (lastCustomer.grade.priority == queue[childIndex].grade.priority && lastCustomer.number < queue[childIndex].number) {
+                if lastCustomer.grade.priority < queue[leftChildIndex].grade.priority
+                    || (lastCustomer.grade.priority == queue[leftChildIndex].grade.priority
+                            && lastCustomer.number < queue[leftChildIndex].number) {
                     break
                 }
-                queue[currentIndex] = queue[childIndex]
-                currentIndex = childIndex
-                childIndex = (childIndex * 2) + 1
+                queue[currentIndex] = queue[leftChildIndex]
+                currentIndex = leftChildIndex
+                leftChildIndex = (leftChildIndex * 2) + 1
+                rightChildIndex = leftChildIndex + 1
             }
             queue[currentIndex] = lastCustomer
             
@@ -177,13 +186,24 @@ class BankManager {
         initCustomers(customers)
     }
     
+    init(bankerCount: UInt, customerCount: UInt) {
+        self.bankerCount = bankerCount
+        self.customerCount = customerCount
+        self.bankerSemaphore = DispatchSemaphore(value: Int(bankerCount))
+        
+        initBankers()
+        initCutomersByRandom(customerCount)
+    }
+    
     /// 은행을 개점하고 고객이 더 이상 없으면 폐점하는 함수.
     func openBank() {
         let startTaskTime = Date()
         for _ in 0..<customerQueue.count {
             assignCustomerToBanker()
         }
-        self.bankCloseSemaphore.wait()
+        if completeCustomerCount < customerCount {
+            self.bankCloseSemaphore.wait()
+        }
         let totalTaskTime = Date().timeIntervalSince(startTaskTime)
         self.totalTaskTime = Double(totalTaskTime)
         
@@ -193,6 +213,17 @@ class BankManager {
     /// 입력된 고객 배열을 우선순위 큐에 넣는 함수.
     private func initCustomers(_ customers: [Customer]) {
         for customer in customers {
+            customerQueue.enqueue(customer: customer)
+        }
+    }
+    
+    private func initCutomersByRandom(_ cutomerCount: UInt) {
+        for i in 1...customerCount {
+            let randomNumberForGrade = Int.random(in: 0..<Grade.allCases.count)
+            let randomGrade = Grade.allCases[randomNumberForGrade]
+            let randomNumberForTask = Int.random(in: 0..<Task.allCases.count)
+            let randomTask = Task.allCases[randomNumberForTask]
+            let customer = Customer(number: i, grade: randomGrade, task: randomTask)
             customerQueue.enqueue(customer: customer)
         }
     }
