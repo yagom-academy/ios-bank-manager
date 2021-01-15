@@ -7,11 +7,23 @@ class HeadQuarter {
     
     private init() {}
     
-    func handleLoanScreeningQueue(of client: ClientOperation) {
-        self.loanScreeningQueue.sync {
+    func handleLoanScreeningQueue(of client: ClientOperation) throws -> Bool {
+        try self.loanScreeningQueue.sync {
             print(ConsoleOutput.currentProcess(client, .startExamination).message)
             Thread.sleep(forTimeInterval: 0.5)
-            print(ConsoleOutput.currentProcess(client, .completeExamination).message)
+            
+            guard let qualification = client.isQualified else {
+                throw BankOperationError.unknownError
+            }
+            
+            switch qualification {
+            case true:
+                print(ConsoleOutput.currentProcess(client, .completeExamination).message)
+                return true
+            case false:
+                print("대출 심사 실패!")
+                return false
+            }
         }
     }
 }

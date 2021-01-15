@@ -4,6 +4,7 @@ class ClientOperation: Operation {
     private(set) var waitingNumber: Int?
     private(set) var business: BusinessType?
     private(set) var grade: ClientGrade?
+    private(set) var isQualified: Bool?
     
     init(waitingNumber: Int) {
         guard let randomBusinessType = BusinessType.allCases.randomElement(),
@@ -14,13 +15,25 @@ class ClientOperation: Operation {
         self.waitingNumber = waitingNumber
         self.business = randomBusinessType
         self.grade = randomClientGrade
+        self.isQualified = true
     }
     
     override func main() {
-        operateBusiness(of: self)
+        do {
+            try operateBusiness(of: self)
+        } catch {
+            switch error {
+            case BankOperationError.unknownError:
+                print(BankOperationError.unknownError.rawValue)
+                break
+            default:
+                print(BankOperationError.unknownError.rawValue)
+                break
+            }
+        }
     }
     
-    private func operateBusiness(of client: ClientOperation) {
+    private func operateBusiness(of client: ClientOperation) throws {
         guard let clientBusiness = client.business else {
             return
         }
@@ -29,17 +42,26 @@ class ClientOperation: Operation {
 
         switch clientBusiness {
         case .deposit:
-            Thread.sleep(forTimeInterval: 0.7)
+            handleDepositBusiness()
         case .loan:
-            Thread.sleep(forTimeInterval: 0.3)
-            waitForLoanPermission(of: client)
-            Thread.sleep(forTimeInterval: 0.3)
+            try handleLoanBusiness(of: client)
         }
         
         print(ConsoleOutput.currentProcess(client, .done).message)
     }
     
-    private func waitForLoanPermission(of client: ClientOperation) {
-        headQuarter.handleLoanScreeningQueue(of: client)
+    private func handleDepositBusiness() {
+        Thread.sleep(forTimeInterval: 0.7)
+    }
+    
+    private func handleLoanBusiness(of client: ClientOperation) throws {
+        Thread.sleep(forTimeInterval: 0.3)
+        
+        switch try headQuarter.handleLoanScreeningQueue(of: client) {
+        case true:
+            Thread.sleep(forTimeInterval: 0.3)
+        case false:
+            break
+        }
     }
 }
