@@ -36,8 +36,8 @@ struct Customer {
     }
 
     enum Task: String, CaseIterable {
-        case loan = "대출"
-        case deposit = "예금"
+        case loan = "대출업무"
+        case deposit = "예금업무"
         
         var timeForTask: Double {
             switch self {

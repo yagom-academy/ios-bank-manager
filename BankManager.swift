@@ -19,17 +19,61 @@ struct BankManager {
     }
     
     mutating func performTask(customer: Customer, semaphore: DispatchSemaphore) {
-        let second: Double = 1_000_000
         self.state = .working
-        print("\(BankManangerMessage.start)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
-        usleep(useconds_t(customer.taskType.timeForTask * second))
-        print("\(BankManangerMessage.end)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
+        switch customer.taskType {
+        case .loan:
+            checkLoanDocument(customer: customer)
+            requestLoanApprovalToHeadquarter(customer: customer)
+            implementLoanTask(customer: customer)
+        default:
+            implementDepositTask(customer: customer)
+        }
         self.state = .notWorking
         semaphore.signal()
+    }
+    
+    private func checkLoanDocument(customer: Customer) {
+        print(BankManagerMessage.start.format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
+        usleep(useconds_t(BankManager.Task.documentCheck.timeForTask * Time.second.rawValue))
+    }
+    
+    private func requestLoanApprovalToHeadquarter(customer: Customer) {
+        let bankHeadquarterSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+        let bankHeadquarterGroup: DispatchGroup = DispatchGroup()
+        BankHeadquarter.shared.queue.async(group: bankHeadquarterGroup) {
+            bankHeadquarterSemaphore.wait()
+            BankHeadquarter.shared.approveLoanTask(customer: customer, semaphore: bankHeadquarterSemaphore)
+        }
+        bankHeadquarterGroup.wait()
+    }
+    
+    private func implementLoanTask(customer: Customer) {
+        usleep(useconds_t(BankManager.Task.loanImplement.timeForTask * Time.second.rawValue))
+        print(BankManagerMessage.end.format(customer.waitNumber, customer.priority.description, BankManager.Task.loanImplement.rawValue))
+    }
+    
+    private func implementDepositTask(customer: Customer) {
+        print(BankManagerMessage.start.format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
+        usleep(useconds_t(customer.taskType.timeForTask * Time.second.rawValue))
+        print(BankManagerMessage.end.format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
     }
     
     enum State {
         case working
         case notWorking
+    }
+    
+    enum Task: String {
+        case documentCheck
+        case loanImplement = "대출업무"
+        
+        var timeForTask: TimeInterval {
+            switch self {
+            case .loanImplement:
+                return 0.3
+            case .documentCheck:
+                return 0.3
+            }
+        }
     }
 }
