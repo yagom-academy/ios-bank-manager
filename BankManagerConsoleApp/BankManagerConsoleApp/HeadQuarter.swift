@@ -11,19 +11,24 @@ class HeadQuarter {
         try self.loanScreeningQueue.sync {
             print(ConsoleOutput.currentProcess(client, .startExamination).message)
             Thread.sleep(forTimeInterval: 0.5)
-            
-            guard let qualification = client.isLoanQualified else {
-                throw BankOperationError.unknownError
-            }
-            
-            switch qualification {
-            case true:
-                print(ConsoleOutput.currentProcess(client, .completeExamination).message)
-                return true
-            case false:
-                print("대출 심사 실패!")
-                return false
-            }
+        
+            let clientLoanQualification = try checkIsLoanQualified(of: client)
+            return clientLoanQualification
+        }
+    }
+    
+    func checkIsLoanQualified(of client: ClientOperation) throws -> Bool {
+        guard let qualification = client.isLoanQualified else {
+            throw BankOperationError.unknownError
+        }
+        
+        switch qualification {
+        case true:
+            print(ConsoleOutput.currentProcess(client, .completeExamination).message)
+            return true
+        case false:
+            print("대출 심사 실패!")
+            return false
         }
     }
 }

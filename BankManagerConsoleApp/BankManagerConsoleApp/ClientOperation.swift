@@ -4,13 +4,7 @@ class ClientOperation: Operation {
     private(set) var waitingNumber: Int?
     private(set) var grade: ClientGrade?
     private(set) var isLoanQualified: Bool?
-    private(set) var business: BusinessType? {
-        didSet {
-            if self.business == BusinessType.loan {
-                self.isLoanQualified = true
-            }
-        }
-    }
+    private(set) var business: BusinessType?
     
     init(waitingNumber: Int) {
         guard let randomBusinessType = BusinessType.allCases.randomElement(),
@@ -21,6 +15,11 @@ class ClientOperation: Operation {
         self.waitingNumber = waitingNumber
         self.business = randomBusinessType
         self.grade = randomClientGrade
+        
+        // 기획서에 대출이 가능한 조건에 대한 언급이 없어 모두 true로 초기화했습니다.
+        if self.business == BusinessType.loan {
+            self.isLoanQualified = true
+        }
     }
     
     override func main() {
