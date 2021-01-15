@@ -39,10 +39,8 @@ class BankClerk {
         switch client.bankBusiness {
         case .deposit:
             executeDeposit()
-            break
         case .loan:
             reviewLoanDocument()
-            break
         }
     }
     
