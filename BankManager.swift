@@ -20,51 +20,11 @@ enum BankBusiness: CaseIterable {
     }
 }
 
-private class BankClerk {
-    // MARK: - Properties
-    var bankWindowNumber: Int
-    var isWorking: Bool {
-        currentClient != nil
-    }
-    var currentClient: Client?
-    var finishedClients: Int = 0
-    
-    // MARK: - Methods
-    func startWork(for client: Client) {
-        currentClient = client
-        print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 시작")
-        
-        DispatchQueue.global().asyncAfter(deadline: workTime(bankBusiness: client.bankBusiness)) {
-            self.finishWork()
-        }
-    }
-    
-    func finishWork() {
-        finishedClients += 1
-        if let client = currentClient {
-            print("\(client.tag)번 \(client.priority.string)고객 \(client.bankBusiness.string)업무 완료")
-        }
-        currentClient = nil
-    }
-    
-    func workTime(bankBusiness: BankBusiness) -> DispatchTime {
-        switch bankBusiness {
-        case .loan:
-            return .now() + .milliseconds(1100)
-        case .deposit:
-            return .now() + .milliseconds(700)
-        }
-    }
-    
-    init(bankWindowNumber: Int) {
-        self.bankWindowNumber = bankWindowNumber
-    }
-}
-
 struct BankManager {
     // MARK: - Properties
-    private var bankClerks: [BankClerk] = [BankClerk]()
-    private var waitingClients: Queue<Client> = Queue<Client>()
+    private let bankHeadOffice: BankHeadOffice
+    private var bankClerks = [BankClerk]()
+    private var waitingClients = Queue<Client>()
     private var waitingTicketNumber: Int = 0
     private var startBusinessTime: Double = 0.0
     var currentBusinessTime: Double {
@@ -82,6 +42,12 @@ struct BankManager {
     }
     
     // MARK: - Methods
+    init(_ bankHeadOffice: BankHeadOffice, _ numberOfBankClerk: Int, _ numberOfClient: Int) {
+        self.bankHeadOffice = bankHeadOffice
+        addBankClerk(count: numberOfBankClerk)
+        addClient(count: numberOfClient)
+    }
+    
     mutating func addBankClerk(count: Int) {
         guard count > 0 else {
             return
@@ -89,7 +55,7 @@ struct BankManager {
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...count {
-            let bankClerk = BankClerk(bankWindowNumber: i + lastCounterNumber)
+            let bankClerk = BankClerk(bankHeadOffice, bankWindow: i + lastCounterNumber)
             bankClerks.append(bankClerk)
         }
     }
@@ -142,10 +108,5 @@ struct BankManager {
     private func printWorkEndMessage() {
         let totalBusinessTimeString = String(format: "%.2f", totalBusinessTime ?? 0)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalFinishedClients)명이며, 총 업무시간은 \(totalBusinessTimeString)초입니다")
-    }
-    
-    init(_ numberOfBankClerk: Int, _ numberOfClient: Int) {
-        addBankClerk(count: numberOfBankClerk)
-        addClient(count: numberOfClient)
     }
 }
