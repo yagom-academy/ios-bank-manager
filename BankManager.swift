@@ -26,11 +26,11 @@ struct BankManager {
     private var bankClerks = [BankClerk]()
     private var waitingClients = Queue<Client>()
     private var waitingTicketNumber: Int = 0
-    private var startBusinessTime: Double = 0.0
-    var currentBusinessTime: Double {
+    private var startBusinessTime: CFAbsoluteTime = 0.0
+    var currentBusinessTime: CFAbsoluteTime {
         CFAbsoluteTimeGetCurrent() - startBusinessTime
     }
-    var totalBusinessTime: Double?
+    var totalBusinessTime: CFAbsoluteTime?
     var totalFinishedClients: Int {
         bankClerks.reduce(0) {
             $0 + $1.finishedClients
