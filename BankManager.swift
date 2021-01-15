@@ -38,7 +38,13 @@ struct BankManager {
     }
     
     private func requestLoanApprovalToHeadquarter(customer: Customer) {
-        BankHeadquarter.shared.approveLoanTask(customer: customer)
+        let bankHeadquarterSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+        let bankHeadquarterGroup: DispatchGroup = DispatchGroup()
+        BankHeadquarter.shared.queue.async(group: bankHeadquarterGroup) {
+            bankHeadquarterSemaphore.wait()
+            BankHeadquarter.shared.approveLoanTask(customer: customer, semaphore: bankHeadquarterSemaphore)
+        }
+        bankHeadquarterGroup.wait()
     }
     
     private func implementLoanTask(customer: Customer) {
