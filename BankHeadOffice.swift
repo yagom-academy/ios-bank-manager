@@ -18,8 +18,8 @@ class BankHeadOffice {
     
     // MARK: - Methods
     func addJudgementLoan(_ bankClerk: BankClerk) {
-        judgementLoanQueue.sync {
-            judgeLoan(bankClerk)
+        judgementLoanQueue.async {
+            self.judgeLoan(bankClerk)
         }
     }
     
