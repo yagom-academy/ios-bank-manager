@@ -9,7 +9,7 @@ import Foundation
 
 class BankClerk {
     // MARK: - Constants
-    struct TaskTime {
+    enum TaskTime {
         static let executeDeposit: TimeInterval = 0.7
         static let reviewLoanDocument: TimeInterval = 0.3
         static let executeLoan: TimeInterval = 0.3
