@@ -23,8 +23,8 @@ enum BankBusiness: CaseIterable {
 struct BankManager {
     // MARK: - Properties
     private let bankHeadOffice: BankHeadOffice
-    private var bankClerks: [BankClerk] = [BankClerk]()
-    private var waitingClients: Queue<Client> = Queue<Client>()
+    private var bankClerks = [BankClerk]()
+    private var waitingClients = Queue<Client>()
     private var waitingTicketNumber: Int = 0
     private var startBusinessTime: Double = 0.0
     var currentBusinessTime: Double {

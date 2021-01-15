@@ -9,8 +9,8 @@ import Foundation
 
 class BankHeadOffice {
     // MARK: - Properties
-    static let shared: BankHeadOffice = BankHeadOffice()
-    private let judgementLoanQueue: DispatchQueue = DispatchQueue(label: "JudgementLoan")
+    static let shared = BankHeadOffice()
+    private let judgementLoanQueue = DispatchQueue(label: "JudgementLoan")
     private let judgeLoanTime: TimeInterval = 0.5
     
     // MARK: - Initializer
