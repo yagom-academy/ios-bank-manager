@@ -12,7 +12,7 @@ class HeadQuarter {
             print(ConsoleOutput.currentProcess(client, .startExamination).message)
             Thread.sleep(forTimeInterval: 0.5)
             
-            guard let qualification = client.isQualified else {
+            guard let qualification = client.isLoanQualified else {
                 throw BankOperationError.unknownError
             }
             

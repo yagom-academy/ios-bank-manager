@@ -2,9 +2,15 @@ import Foundation
 
 class ClientOperation: Operation {
     private(set) var waitingNumber: Int?
-    private(set) var business: BusinessType?
     private(set) var grade: ClientGrade?
-    private(set) var isQualified: Bool?
+    private(set) var isLoanQualified: Bool?
+    private(set) var business: BusinessType? {
+        didSet {
+            if self.business == BusinessType.loan {
+                self.isLoanQualified = true
+            }
+        }
+    }
     
     init(waitingNumber: Int) {
         guard let randomBusinessType = BusinessType.allCases.randomElement(),
@@ -15,7 +21,6 @@ class ClientOperation: Operation {
         self.waitingNumber = waitingNumber
         self.business = randomBusinessType
         self.grade = randomClientGrade
-        self.isQualified = true
     }
     
     override func main() {
