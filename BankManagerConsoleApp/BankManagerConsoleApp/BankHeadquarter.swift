@@ -16,9 +16,9 @@ class BankHeadquarter {
     }
     
     func approveLoanTask(customer: Customer, semaphore: DispatchSemaphore) {
-        print("\(BankManagerMessage.start)".format(customer.waitNumber, customer.priority.description, BankHeadquarter.Task.loanJudgement.rawValue))
+        print(BankManagerMessage.start.format(customer.waitNumber, customer.priority.description, BankHeadquarter.Task.loanJudgement.rawValue))
         usleep(useconds_t(BankHeadquarter.Task.loanJudgement.timeForTask * Time.second.rawValue))
-        print("\(BankManagerMessage.end)".format(customer.waitNumber, customer.priority.description, BankHeadquarter.Task.loanJudgement.rawValue))
+        print(BankManagerMessage.end.format(customer.waitNumber, customer.priority.description, BankHeadquarter.Task.loanJudgement.rawValue))
         semaphore.signal()
     }
     

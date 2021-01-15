@@ -33,7 +33,7 @@ struct BankManager {
     }
     
     private func checkLoanDocument(customer: Customer) {
-        print("\(BankManagerMessage.start)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
+        print(BankManagerMessage.start.format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
         usleep(useconds_t(BankManager.Task.documentCheck.timeForTask * Time.second.rawValue))
     }
     
@@ -49,13 +49,13 @@ struct BankManager {
     
     private func implementLoanTask(customer: Customer) {
         usleep(useconds_t(BankManager.Task.loanImplement.timeForTask * Time.second.rawValue))
-        print("\(BankManagerMessage.end)".format(customer.waitNumber, customer.priority.description, BankManager.Task.loanImplement.rawValue))
+        print(BankManagerMessage.end.format(customer.waitNumber, customer.priority.description, BankManager.Task.loanImplement.rawValue))
     }
     
     private func implementDepositTask(customer: Customer) {
-        print("\(BankManagerMessage.start)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
+        print(BankManagerMessage.start.format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
         usleep(useconds_t(customer.taskType.timeForTask * Time.second.rawValue))
-        print("\(BankManagerMessage.end)".format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
+        print(BankManagerMessage.end.format(customer.waitNumber, customer.priority.description, customer.taskType.rawValue))
     }
     
     enum State {
