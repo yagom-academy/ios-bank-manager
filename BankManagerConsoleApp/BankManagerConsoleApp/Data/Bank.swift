@@ -31,13 +31,30 @@ class Bank {
         for number in 1...Information.bankersNumber {
             bankers.append(Banker(number))
         }
+        setNotification()
+    }
+    
+    private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(assignedCustomerToBanker(_:)), name: .finishBankerTask, object: nil)
     }
     
-    func initCustomers(_ customerNumber: Int) throws {
+    @objc func assignedCustomerToBanker(_ notification: Notification) {
+        guard let bankerIndex = notification.object as? Int else {
+            return
+        }
+        customerQueue.async {
+            if self.customers.isNotEmpty {
+                self.totalProcessedCustomersNumber += 1
+                self.bankers[bankerIndex - 1].startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
+            }
+        }
+    }
+    
+    private func initCustomers(_ customerNumber: Int) throws {
         for number in 1...customerNumber {
             customers.append(try Customer(waitingNumber: number))
         }
+        
         sortCustomers()
     }
     
@@ -73,18 +90,6 @@ class Bank {
         }
         self.bankGroup.wait()
         try self.close()
-    }
-    
-    @objc func assignedCustomerToBanker(_ notification: Notification) {
-        guard let bankerIndex = notification.object as? Int else {
-            return
-        }
-        customerQueue.async {
-            if self.customers.isNotEmpty {
-                self.totalProcessedCustomersNumber += 1
-                self.bankers[bankerIndex - 1].startWork(customer: self.customers.removeFirst(), group: self.bankGroup)
-            }
-        }
     }
     
     private func close() throws {
