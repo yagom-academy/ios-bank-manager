@@ -25,10 +25,12 @@ class Client {
         }
     }
     
+    // MARK: - Properties
     private(set) var tag: Int
     private(set) var priority: Priority
     private(set) var bankBusiness: BankBusiness
     
+    // MARK: - Initializer
     init(tag: Int, priority: Priority, bankBusiness: BankBusiness) {
         self.tag = tag
         self.priority = priority
