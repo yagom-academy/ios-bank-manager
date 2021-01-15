@@ -6,6 +6,7 @@ enum ProcessStatus: String {
     case done = "업무 종료"
     case startExamination = "심사 시작"
     case completeExamination = "심사 완료"
+    case failExamination = "심사 실패"
 }
 
 enum ConsoleOutput {

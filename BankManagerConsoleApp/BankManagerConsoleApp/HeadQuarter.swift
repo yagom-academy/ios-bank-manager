@@ -27,7 +27,7 @@ class HeadQuarter {
             print(ConsoleOutput.currentProcess(client, .completeExamination).message)
             return true
         case false:
-            print("대출 심사 실패!")
+            print(ConsoleOutput.currentProcess(client, .failExamination).message)
             return false
         }
     }
