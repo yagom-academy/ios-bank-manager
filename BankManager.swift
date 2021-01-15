@@ -6,83 +6,8 @@
 
 import Foundation
 
-enum Level: CaseIterable {
-    case vvip, vip, general
-    
-    var priority: Int {
-        switch self {
-        case .vvip:
-            return 0
-        case .vip:
-            return 1
-        case .general:
-            return 2
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .vvip:
-            return "VVIP"
-        case .vip:
-            return "VIP"
-        case .general:
-            return "일반"
-        }
-    }
-}
-
-enum Task: CaseIterable {
-    case loan, deposit
-    
-    var description: String {
-        switch self {
-        case .loan:
-            return "대출"
-        case .deposit:
-            return "예금"
-        }
-    }
-    
-    var processTime: Double {
-        switch self {
-        case .loan:
-            return 0.7
-        case .deposit:
-            return 0.7
-        }
-    }
-}
-
-struct Customer {
-    var number: Int
-    var level: Level
-    var task: Task
-}
-
-struct Clerk {
-    var number: Int
-    var queue: DispatchQueue
-    
-    init(_ index: Int) {
-        number = index
-        queue = DispatchQueue(label: "\(index)")
-    }
-    
-    func doTask(customer: Customer) {
-        print("\(customer.number)번 고객 업무 시작")
-        self.sleep(customer.task.processTime)
-        print("\(customer.number)번 고객 업무 완료")
-    }
-    
-    private func sleep(_ time: Double) {
-        let time: useconds_t = useconds_t(time * 1_000_000)
-        usleep(time)
-    }
-}
-
 final class BankManager {
-    private let clerkCount: Int = 1
+    private let clerkCount: Int = 3
     private let customerCount: Int = Int.random(in: 10...30)
     private var totalTime: Double {
         get {
@@ -100,13 +25,17 @@ final class BankManager {
         
         return clerks
     }()
-    private lazy var customers: [Customer] = {
-        var customers: [Customer] = []
+    private lazy var customers: PriorityQueue<Customer> = {
+        var customers: PriorityQueue<Customer> = PriorityQueue(
+            sort: { $0.level.priority < $1.level.priority },
+            elements: []
+        )
+        
         for index in 1...customerCount {
             if let level = Level.allCases.randomElement(),
                let task = Task.allCases.randomElement() {
                 
-                customers.append(Customer(number: index, level: level, task: task))
+                customers.enqueue(Customer(number: index, level: level, task: task))
             }
         }
         
@@ -118,15 +47,18 @@ final class BankManager {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         let bankTaskGroup: DispatchGroup = DispatchGroup()
         
+        var workingClerkCount: Int = 0
         for index in 0..<clerkCount {
             bankTaskGroup.enter()
-            assignCustomer(customers.removeFirst(), to: clerks[index], group: bankTaskGroup)
+            guard let customer = customers.dequeue() else { break }
+            assignCustomer(customer, to: clerks[index], group: bankTaskGroup)
+            workingClerkCount += 1
             bankTaskGroup.notify(queue: clerks[index].queue) {
                 semaphore.signal()
             }
         }
         
-        for _ in 0..<clerkCount {
+        for _ in 0..<workingClerkCount {
             semaphore.wait()
         }
         
@@ -137,10 +69,10 @@ final class BankManager {
         clerk.queue.async {
             clerk.doTask(customer: customer)
             
-            if self.customers.isEmpty {
-                group.leave()
+            if let customer = self.customers.dequeue() {
+                self.assignCustomer(customer, to: clerk, group: group)
             } else {
-                self.assignCustomer(self.customers.removeFirst(), to: clerk, group: group)
+                group.leave()
             }
         }
         
