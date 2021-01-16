@@ -25,15 +25,17 @@ class Headquarter {
     let judgementTime: useconds_t = 500000
     let queue: DispatchQueue = DispatchQueue(label: "headquarter")
     static let common = Headquarter()
+    let group = DispatchGroup()
     
     private init() {}
     
     func judgeLoan(customer: Customer) {
-        queue.async() {
+        queue.async(group: group) {
             self.printJudgementState(state: .start, customer: customer.waitingNumber, customerClass: customer.grade.description)
             usleep(self.judgementTime)
             self.printJudgementState(state: .end, customer: customer.waitingNumber, customerClass: customer.grade.description)
         }
+        group.wait()
     }
     
     func printJudgementState(state: JudgementState, customer: Int, customerClass: String) {

@@ -44,8 +44,9 @@ final class BankClerk {
                 self.performTask(task: .reviewDocument)
                 Headquarter.common.judgeLoan(customer: customer)
                 self.performTask(task: .excuteLoan)
+            } else {
+                usleep(customer.task.rawValue)
             }
-            usleep(customer.task.rawValue)
             BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .completion)
             self.isWorking = false
         }
