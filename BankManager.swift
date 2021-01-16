@@ -42,10 +42,10 @@ struct BankManager {
     }
     
     // MARK: - Methods
-    init(_ bankHeadOffice: BankHeadOffice, _ numberOfBankClerk: Int, _ numberOfClient: Int) {
+    init(bankHeadOffice: BankHeadOffice, bankClerks: Int, clients: Int) {
         self.bankHeadOffice = bankHeadOffice
-        addBankClerk(count: numberOfBankClerk)
-        addClient(count: numberOfClient)
+        addBankClerk(count: bankClerks)
+        addClient(count: clients)
     }
     
     mutating func addBankClerk(count: Int) {
@@ -55,7 +55,7 @@ struct BankManager {
         
         let lastCounterNumber = bankClerks.last?.bankWindowNumber ?? 0
         for i in 1...count {
-            let bankClerk = BankClerk(bankHeadOffice, bankWindow: i + lastCounterNumber)
+            let bankClerk = BankClerk(bankHeadOffice: bankHeadOffice, bankWindowNumber: i + lastCounterNumber)
             bankClerks.append(bankClerk)
         }
     }

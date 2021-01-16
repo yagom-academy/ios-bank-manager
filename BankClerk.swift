@@ -26,10 +26,10 @@ class BankClerk {
     private let taskQueue: DispatchQueue
     
     // MARK: - Methods
-    init(_ bankHeadOffice: BankHeadOffice, bankWindow number: Int) {
+    init(bankHeadOffice: BankHeadOffice, bankWindowNumber: Int) {
         self.bankHeadOffice = bankHeadOffice
-        bankWindowNumber = number
-        taskQueue = DispatchQueue(label: "\(number)번 창구")
+        self.bankWindowNumber = bankWindowNumber
+        taskQueue = DispatchQueue(label: "\(bankWindowNumber)번 창구")
     }
     
     func startWork(for client: Client) {
