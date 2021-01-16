@@ -22,9 +22,7 @@ while true {
     if menu == .exit {
         break
     }
-    let customerCount = UInt.random(in: 10...30)
-    let bankManager = BankManager(bankerCount: 3, customerCount: customerCount)
+    let bankManager = BankManager(bankerCount: 3, customerCount: 10)
     bankManager.openBank()
 }
-
 
