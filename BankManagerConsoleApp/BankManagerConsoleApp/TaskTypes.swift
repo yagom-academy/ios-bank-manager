@@ -10,7 +10,6 @@ import Foundation
 enum TaskType: useconds_t, CaseIterable {
     case deposit = 700000
     case loan = 1100000
-    case review = 300000
     
     var description: String {
         switch self {
@@ -18,8 +17,6 @@ enum TaskType: useconds_t, CaseIterable {
             return " 예금"
         case .loan:
             return " 대출"
-        case .review:
-            return "서류 심사"
         }
     }
 }

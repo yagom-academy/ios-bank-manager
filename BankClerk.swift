@@ -32,12 +32,18 @@ final class BankClerk {
         queue = DispatchQueue(label: "\(bankWindowNumber)")
     }
     
+    func performTask(task: Task) {
+        usleep(task.time)
+    }
+    
     func serveCustomers(customer: Customer, group: DispatchGroup) {
         self.isWorking = true
         BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .start)
         queue.async(group: group) {
             if customer.task == .loan {
+                self.performTask(task: .reviewDocument)
                 Headquarter.common.judgeLoan(customer: customer)
+                self.performTask(task: .excuteLoan)
             }
             usleep(customer.task.rawValue)
             BankerMessage.printTaskText(customer: customer.waitingNumber, customerClass: customer.grade.description, customerTask: customer.task.description, state: .completion)

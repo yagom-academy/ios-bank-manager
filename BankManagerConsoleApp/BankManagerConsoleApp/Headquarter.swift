@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum JudgementState {
     case start
     case end
@@ -21,7 +22,7 @@ enum JudgementState {
 }
 
 class Headquarter {
-    let judgementTime: useconds_t = 300000
+    let judgementTime: useconds_t = 500000
     let queue: DispatchQueue = DispatchQueue(label: "headquarter")
     static let common = Headquarter()
     
