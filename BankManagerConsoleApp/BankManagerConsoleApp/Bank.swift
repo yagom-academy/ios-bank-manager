@@ -3,61 +3,44 @@ import Foundation
 
 class Bank {
     private var clerkNumber: Int
-    private var waitingList: [Client] = []
-    private var totalProcessedClientsCount: Int = 0
-    private var totalOperateTime: Double = 0
+    private var waitingList: [ClientOperation] = []
     private var startTime: TimeInterval = 0
+    var totalOperateTime: Double = 0
+    var totalClientCount: Int {
+        return waitingList.count
+    }
     
     init(employeeNumber: Int) {
         self.clerkNumber = employeeNumber
     }
     
-    func updateWaitingList(from queue: [Client]) throws {
-        guard queue.count > 0 else {
-            throw BankOperationError.invalidValue
+    func updateWaitingList(from queue: [ClientOperation]) throws {
+        guard queue.count > 0  else {
+            throw BankOperationError.unknownError
         }
         
         self.waitingList += queue
-        
-        waitingList.sort { (client1, client2) -> Bool in
-            client1.grade.rawValue < client2.grade.rawValue
+        try sortWaitingList()
+    }
+    
+    private func sortWaitingList() throws {
+        try waitingList.sort { (client1, client2) -> Bool in
+            guard let client1Grade = client1.grade?.rawValue, let client2Grade = client2.grade?.rawValue else {
+                throw BankOperationError.unknownError
+            }
+            
+            return client1Grade < client2Grade
         }
     }
     
-    func makeAllClerksWork() {
-        let semaphore = DispatchSemaphore(value: 1)
-        let counterGroup = DispatchGroup()
-        
-        for i in 1...clerkNumber {
-            let dispatchQueue = DispatchQueue(label: "Counter\(i)Queue")
-            
-            dispatchQueue.async(group: counterGroup) {
-                self.handleWaitingList(with: semaphore)
-            }
-        }
-        
-        counterGroup.wait()
-    }
-    
-    private func handleWaitingList(with semaphore: DispatchSemaphore) {
-        let bankClerk = BankClerk()
-        
-        while !self.waitingList.isEmpty {
-            semaphore.wait()
-            guard let client = self.waitingList.first else {
-                return
-            }
-            self.waitingList.removeFirst()
-            semaphore.signal()
-            
-            bankClerk.handleClientBusiness(of: client)
-            self.totalProcessedClientsCount += 1
-        }
+    func startWorking() {
+        let clientOperationQueue = OperationQueue()
+        clientOperationQueue.maxConcurrentOperationCount = clerkNumber
+        clientOperationQueue.addOperations(waitingList, waitUntilFinished: true)
     }
     
     func printEndingMent() {
-        let endingMent =  "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalProcessedClientsCount)명이며, 총 업무시간은 \(totalOperateTime)초입니다."
-        print(endingMent)
+        print(ConsoleOutput.bankClosing(self).message)
     }
 }
 

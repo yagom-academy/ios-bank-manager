@@ -7,13 +7,13 @@
 import Foundation
 
 class ConsoleController {
-    var bankManager = BankManager()
+    private var bankManager = BankManager()
     
     private func recieveUserInput() -> String {
-        print(" 1 : 은행개점 \n 2 : 종료\n 입력 : ", terminator: "")
+        print(ConsoleOutput.menuChoice.message, terminator: "")
         
         guard let userInput = readLine() else {
-            print("잘못된 입력값입니다. 다시 시도해주세요.")
+            print(ConsoleOutput.invalidInput.message)
             runProgram()
             return "2"
         }
@@ -29,7 +29,7 @@ class ConsoleController {
         case "2":
             break
         default :
-            print("잘못된 입력값입니다. 다시 시도해주세요.")
+            print(ConsoleOutput.invalidInput.message)
             runProgram()
         }
     }
@@ -41,10 +41,11 @@ class ConsoleController {
             try bankManager.openBank()
         } catch {
             switch error {
-            case BankOperationError.invalidValue:
-                print("알 수 없는 에러가 발생했습니다.")
+            case BankOperationError.unknownError:
+                print(BankOperationError.unknownError.rawValue)
                 break
             default:
+                print(BankOperationError.unknownError.rawValue)
                 break
             }
         }
