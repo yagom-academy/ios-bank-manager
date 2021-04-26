@@ -8,8 +8,8 @@
 import Foundation
 
 class Bank {
-  var customers = [Customer]()
-  var bankManagers = [BankManager]()
+  var customers: [Int:Customer] = [:]
+  var bankManagers: [Int:BankManager] = [:]
   var totalCompletedCustomer = 0
   var totalWorkedTime = 0.0
   var currentOrderNumber = 1
@@ -17,11 +17,11 @@ class Bank {
   init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
     for orderNumber in 1...randomNumber {
-      customers.append(Customer(order: orderNumber))
+      customers[orderNumber] = Customer(order: orderNumber)
     }
     
     for counterNumber in 1...numOfManagers {
-      bankManagers.append(BankManager(counterNumber))
+      bankManagers[counterNumber] = BankManager(counterNumber)
     }
   }
   
@@ -31,18 +31,24 @@ class Bank {
     repeat {
       if customers.isEmpty {
         isRepeat = false
-      } else if customers.contains(Customer(order: currentOrderNumber)) {
-        continue
+      }
+      
+      if let _ = customers[currentOrderNumber] {
+        guard let workingCounter = bankManagers.first else {
+          continue
+        }
+        
+        work(order: currentOrderNumber, counter: workingCounter)
+        
       } else {
-        work(order: currentOrderNumber)
-        // FIXME: - 처리가 끝난 고객은 배열에서 제거해야 함
+        continue
       }
     } while isRepeat
     
     close()
   }
   
-  func work(order: Int) {
+  func work(order: Int, counter: Dictionary<Int, BankManager>.Element) {
     let workingTime = 0.7
 
     print("\(order)번 고객 업무 시작")
