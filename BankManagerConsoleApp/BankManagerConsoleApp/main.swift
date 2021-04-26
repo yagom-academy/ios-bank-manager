@@ -5,3 +5,8 @@
 // 
 
 import Foundation
+
+let setOfBankManager = Set<BankManager>([BankManager(counterNumber: 1)])
+let testBank = Bank(bankManagers: setOfBankManager)
+
+testBank.open()
