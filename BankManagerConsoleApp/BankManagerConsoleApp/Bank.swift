@@ -8,11 +8,12 @@
 import Foundation
 
 class Bank {
+  let operationQueue = OperationQueue()
   var customers: [Int:Customer] = [:]
   var bankManagers: [Int:BankManager] = [:]
+  var currentOrderNumber = 1
   var totalCompletedCustomer = 0
   var totalWorkedTime = 0.0
-  var currentOrderNumber = 1
   
   init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
@@ -35,6 +36,7 @@ class Bank {
       
       if let _ = customers[currentOrderNumber] {
         guard let workingCounter = bankManagers.first else {
+          operationQueue.waitUntilAllOperationsAreFinished()
           continue
         }
         
@@ -51,15 +53,19 @@ class Bank {
   func work(order: Int, counter: Dictionary<Int, BankManager>.Element) {
     let workingTime = 0.7
 
+    self.bankManagers[counter.key] = nil
     print("\(order)번 고객 업무 시작")
-    OperationQueue().addOperation {
+    operationQueue.addOperation {
       let unit = 1000000.0
       usleep(UInt32(workingTime * unit))
+      
+      print("\(order)번 고객 업무 완료")
+      self.totalWorkedTime += workingTime
+      self.customers[self.currentOrderNumber] = nil
+      self.currentOrderNumber += 1
+      self.bankManagers[counter.key] = counter.value
+      self.totalCompletedCustomer += 1
     }
-    // TODO: - 비동기실험해야함
-    
-    print("\(order)번 고객 업무 완료")
-    totalWorkedTime += workingTime
   }
   
   func close() {
