@@ -5,3 +5,15 @@
 //
 
 import Foundation
+
+class BankManager {
+  let counterNumber: Int
+  
+  init(counterNumber: Int) {
+    self.counterNumber = counterNumber
+  }
+  
+  func process() {
+    
+  }
+}
