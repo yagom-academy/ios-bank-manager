@@ -1,4 +1,5 @@
-## iOS 커리어 스타터 캠프
+## Team 
+
 
 ### 🏢 은행 매니저 프로젝트 저장소
 
@@ -67,4 +68,4 @@
 
   🧐 Bank에 openAlert() 등을 작성하고 extension에 구현 vs extension에만 구현:
 
-   
+ 
