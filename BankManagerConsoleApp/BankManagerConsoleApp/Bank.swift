@@ -8,7 +8,7 @@
 import Foundation
 
 class Bank {
-  private let operationQueue = OperationQueue()
+  let operationQueue = OperationQueue()
   private var customers: [Int:Customer] = [:]
   private var bankCounters: [Int:BankManager] = [:]
   private var currentTicketNumber = 1
@@ -39,32 +39,13 @@ class Bank {
           continue
         }
         
-        work(order: currentTicketNumber, counter: workingCounter)
+        workingCounter.value.process(bank: self)
       } else {
         continue
       }
     } while isRepeat
     
     close()
-  }
-  
-  private func work(order: Int, counter: Dictionary<Int, BankManager>.Element) {
-    let workingTime = 0.7
-    
-    print("\(order)번 고객 업무 시작")
-    self.bankCounters[counter.key] = nil
-    
-    operationQueue.addOperation {
-      let unit = 1000000.0
-      usleep(UInt32(workingTime * unit))
-      
-      print("\(order)번 고객 업무 완료")
-      self.totalWorkedTime += workingTime
-      self.customers[self.currentTicketNumber] = nil
-      self.currentTicketNumber += 1
-      self.bankCounters[counter.key] = counter.value
-      self.totalCompletedCustomer += 1
-    }
   }
   
   func close() {
@@ -74,5 +55,36 @@ class Bank {
     총 업무 시간은 \(totalWorkedTime)초입니다.
     """
     print(complateString)
+  }
+}
+
+// MARK: - BankManagerProcess
+extension Bank {
+  func startBankWork(counter: Int) {
+    bankCounters[counter] = nil
+  }
+  
+  func addToTotalTime(as workingTime: Double) {
+    totalWorkedTime += workingTime
+  }
+  
+  func sendOutCustomer(ticket customerTicketNumber: Int) {
+    customers[customerTicketNumber] = nil
+  }
+  
+  func showCurrentTicket() -> Int {
+    return currentTicketNumber
+  }
+  
+  func makeToNextTicket() {
+    currentTicketNumber += 1
+  }
+  
+  func setBankCounter(number counterNumber: Int) {
+    bankCounters[counterNumber] = BankManager(counterNumber)
+  }
+  
+  func addToTotalCustomer() {
+    totalCompletedCustomer += 1
   }
 }
