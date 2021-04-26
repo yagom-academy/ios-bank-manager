@@ -9,16 +9,16 @@ import Foundation
 
 class Bank {
   var customers = Set<Customer>()
-  let bankManagers: Set<BankManager>
+  var bankManagers = Set<BankManager>()
   
-  init(bankManagers: Set<BankManager>) {
-    self.bankManagers = bankManagers
-  }
-  
-  func initCustomers() {
+  init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
     for orderNumber in 1...randomNumber {
       customers.insert(Customer(orderNumber))
+    }
+    
+    for counterNumber in 1...numOfManagers {
+      bankManagers.insert(BankManager(counterNumber))
     }
   }
   
