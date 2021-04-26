@@ -6,10 +6,11 @@
 //
 
 import Foundation
-class Customer {
+
+struct Customer: Hashable {
   let orderNumber: Int
   
-  init(orderNumber: Int) {
+  init(_ orderNumber: Int) {
     self.orderNumber = orderNumber
   }
 }
