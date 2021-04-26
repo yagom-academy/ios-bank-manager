@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager: Hashable { 
-  let counterNumber: Int
+  private let counterNumber: Int
   
   init(_ counterNumber: Int) {
     self.counterNumber = counterNumber
