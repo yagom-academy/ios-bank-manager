@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Customer: Hashable {
+class Customer {
   let orderNumber: Int
   
   init(_ orderNumber: Int) {

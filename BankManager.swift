@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct BankManager: Hashable { 
+class BankManager { 
   let counterNumber: Int
   
   init(_ counterNumber: Int) {

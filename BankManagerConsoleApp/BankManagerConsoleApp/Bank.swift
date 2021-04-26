@@ -8,17 +8,17 @@
 import Foundation
 
 class Bank {
-  var customers = Set<Customer>()
-  var bankManagers = Set<BankManager>()
+  var customers = [Customer]()
+  var bankManagers = [BankManager]()
   
   init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
     for orderNumber in 1...randomNumber {
-      customers.insert(Customer(orderNumber))
+      customers.append(Customer(orderNumber))
     }
     
     for counterNumber in 1...numOfManagers {
-      bankManagers.insert(BankManager(counterNumber))
+      bankManagers.append(BankManager(counterNumber))
     }
   }
   
