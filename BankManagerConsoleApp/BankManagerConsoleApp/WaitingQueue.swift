@@ -10,7 +10,7 @@ struct WaitingQueue {
     var first: Customer? {
         return queue.first
     }
-    
+    @discardableResult
     mutating func enqueue(_ customer: Customer) -> Result<Customer, WaitingQueueError> {
         queue.append(customer)
         return .success(customer)

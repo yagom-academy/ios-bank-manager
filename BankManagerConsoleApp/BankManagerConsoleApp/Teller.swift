@@ -6,7 +6,7 @@
 //
 
 struct Teller {
-    let tellerNumber: Int
+    let tellerNumber: Int = 1
     
     func processTask() {
         startTask()

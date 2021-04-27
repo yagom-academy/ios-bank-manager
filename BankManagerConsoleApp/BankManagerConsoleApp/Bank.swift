@@ -9,6 +9,7 @@ struct Bank {
     var teller: Teller?
     var remainingCustomer: Int = 0
     var totalCustomer: Int = 0
+    var waitingQueue = WaitingQueue()
     
     init() {
         self.remainingCustomer = Int.random(in: 10...30)
@@ -18,13 +19,20 @@ struct Bank {
     private func open() {
         // 텔러 업무 처리
     }
+    
     func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)이며, 총 업무 시간은 \(totalProcessedTime())초입니다.")
     }
+    
     mutating private func visitNewCustomer() {
-        totalCustomer += 1
-        remainingCustomer += 1
+        for _ in 1...totalCustomer {
+            totalCustomer += 1
+            remainingCustomer += 1
+            let customer = Customer(waitingNumber: totalCustomer)
+            waitingQueue.enqueue(customer)
+        }
     }
+    
     private func checkIfNoCustomer() {
         if remainingCustomer == 0 {
             self.close()
