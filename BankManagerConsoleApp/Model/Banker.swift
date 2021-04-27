@@ -12,9 +12,7 @@ struct Banker {
     private var counterNumber: Int
 
     func handleClientBussiness() {
-        //print("\(totalNumberOfClinet) 고객 업무 시작")
         Bank.totalBusinessTime += 0.7
-       // print("\(totalNumberOfClinet) 고객 업무 완료")
     }
 }
 

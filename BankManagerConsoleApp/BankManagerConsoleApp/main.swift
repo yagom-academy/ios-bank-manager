@@ -6,4 +6,10 @@
 
 import Foundation
 
-print("1. 은행 개점/n 2. 종료")
+func startBank() {
+    print("1. 은행 개점 \n2. 종료")
+    let userInput = readLine()
+//    var bank = Bank(numberOfBanker: <#Int#>, totalNumberOfClinet: <#Int#>)
+}
+
+
