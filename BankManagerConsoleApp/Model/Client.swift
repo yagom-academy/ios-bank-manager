@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum BussinessProcessState {
-case finish
-case notyet
+struct Client {
+    var BussinessProcessState: Bool
+    var waitingNumber: Int
+    var assignedBankerNumber: Int
 }
 
-var waitingNumber: Int
-var assignedBankerNumber: Int
+

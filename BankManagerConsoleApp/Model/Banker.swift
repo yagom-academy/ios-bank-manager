@@ -7,9 +7,13 @@
 
 import Foundation
 
-var identityNumber: Int
-var counterNumber: Int
+struct Banker {
+    var identityNumber: Int
+    private var counterNumber: Int
 
-func handleClientBussiness {
-    
+    func handleClientBussiness() {
+        Bank.totalBusinessTime += 0.7
+    }
 }
+
+
