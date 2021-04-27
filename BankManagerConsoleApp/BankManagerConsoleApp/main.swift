@@ -8,41 +8,54 @@ import Foundation
 
 func startBank() throws {
     while true {
+        /// 입력 기능
         print("1. 은행 개점 \n2. 종료")
         print("입력 :", terminator: " " )
         guard let userInput = readLine() else { throw BankError.userInput }
         guard let userInputNumber = Int(userInput) else { return }
         
-        if userInputNumber == 2 {
+        
+        /// 입력 validation 체크
+        if userInputNumber == 2 { // userInputNumber 사용됨
             return
-        } else if userInputNumber != 1 {
+        } else if userInputNumber != 1 { // userInputNumber 사용됨
             throw BankError.userInput
         }
         
-        let numberOfClinet = Int.random(in: 10...30)
-        var clientArray : [Client] = []
+        
+        /// Banker 생성
         let numberOfBanker = 1
         var bankerArray : [Banker] = []
-        let bank = Bank(numberOfBanker: numberOfBanker, numberOfWaitingClient: numberOfClinet, totalNumberOfClinet: numberOfClinet)
-        
         for identityNumber in 1...numberOfBanker {
             bankerArray.append(Banker(identityNumber: identityNumber, counterNumber: identityNumber))
         }
-        
+    
+        /// Client 생성
+        let numberOfClinet = Int.random(in: 10...30)
+        var clientArray : [Client] = []
         for waitingNumber in 1...numberOfClinet {
-            let assignedBanker = bankerArray[ waitingNumber % numberOfBanker ]
+            let assignedBanker = bankerArray[ waitingNumber % numberOfBanker ] // numberOfBanker
             clientArray.append(Client(BussinessProcessState: false, waitingNumber: waitingNumber, assignedBankerNumber: assignedBanker.identityNumber))
         }
         
-        for client in clientArray {
+        /// 고객 업무 처리 기능
+        for client in clientArray { // clientArray
             print("\(client.waitingNumber)번 고객 업무 시작")
             Banker.handleClientBussiness()
             print("\(client.waitingNumber)번 고객 업무 종료")
         }
         
+        
+        ///
+        let bank = Bank(numberOfBanker: numberOfBanker, numberOfWaitingClient: numberOfClinet, totalNumberOfClinet: numberOfClinet)
         bank.closeBusiness()
     }
 }
+
+
+
+
+
 
 
 do {
