@@ -16,7 +16,6 @@ extension BankError: LocalizedError {
         switch self {
         case .userInput:
             return "UserInput is Error"
-            
         }
     }
 }

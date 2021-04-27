@@ -13,6 +13,7 @@ struct Banker {
 
     static func handleClientBussiness() {
         Bank.totalBusinessTime += 0.7
+        Bank.totalBusinessTime = round( Bank.totalBusinessTime * 1000 ) / 1000
     }
 }
 
