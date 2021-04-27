@@ -12,7 +12,6 @@ func startBank() {
     let userInputNumber = Int(userInput)
     if userInputNumber == 1 {
         print("입력 : 1")
-       
     } else if userInputNumber == 2 {
         print("입력 : 2")
         return
@@ -20,7 +19,8 @@ func startBank() {
         print("메뉴 숫자 1과 2중에 입력해주세요")
       startBank()
     }
-    //    var bank = Bank(numberOfBanker: <#Int#>, totalNumberOfClinet: <#Int#>)
+    let numberOfClinet = Int.random(in: 10...30)
+    let bank = Bank(numberOfBanker: 1, numberOfWaitingClient: numberOfClinet, totalNumberOfClinet: numberOfClinet, totalBusinessTime: 0)
 }
 
 
