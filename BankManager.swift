@@ -6,44 +6,35 @@
 
 import Foundation
 
-protocol Bank: class {
-    var numberTicket: Int { get set }
-    func closeAlert()
-}
-
-extension Bank {
-    var numerTicket: Int {
-        numberTicket += 1
-        return numberTicket
+struct BankManager {
+    private let bank: Bank
+    private let bankTeller: BankTeller
+    private let looper: Looper
+    private let consoleViewer: ConsoleViewer
+    
+    init(bank: Bank, bankTeller: BankTeller, looper: Looper, consoleViewer: ConsoleViewer) {
+        self.bank = bank
+        self.bankTeller = bankTeller
+        self.looper = looper
+        self.consoleViewer = consoleViewer
     }
-}
-
-protocol BankTeller {
-    func handleBanking()
-    func startTask()
-    func endTask()
-}
-
-extension BankTeller {
-    func handleBanking() {
-        let queue = OperationQueue()
-        let startBlock = BlockOperation {
-            startTask()
-            sleep(1)
-            endTask()
+    
+    func openBank() {
+        while looper.shouldContinue(userInput: getUserInput()) {
+            let customerNumber = Int.random(in: 10...30)
+            for _ in 1...customerNumber {
+                bankTeller.handleBanking(ofCustomerNumber: bank.getNewTicket())
+            }
+            bank.close()
         }
-        queue.addOperations([startBlock], waitUntilFinished: true)
     }
     
-    func startTask() {
-        print("고객 업무 시작")
-    }
-    
-    func endTask() {
-        print("고객 업무 완료")
+    func getUserInput() -> String {
+        consoleViewer.showStartMenu()
+        guard let userInput = readLine() else {
+            return ""
+        }
+        return userInput
     }
 }
 
-protocol Customer {
-    var ticketNumber: Int { get }
-}
