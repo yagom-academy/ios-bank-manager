@@ -6,22 +6,25 @@
 
 import Foundation
 
-func startBank() throws {
+func startBankMenu() throws {
+    /// 입력 기능
+    print("1. 은행 개점 \n2. 종료")
+    print("입력 :", terminator: " " )
+    guard let userInput = readLine() else { throw BankError.userInput }
+    guard let userInputNumber = Int(userInput) else { return }
+    if userInputNumber == 1 {
+        startBank() 
+    }
+    /// 입력 validation 체크
+    else if userInputNumber == 2 { // userInputNumber 사용됨
+        return
+    } else if userInputNumber != 1 { // userInputNumber 사용됨
+        throw BankError.userInput
+    }
+}
+
+func startBank() {
     while true {
-        /// 입력 기능
-        print("1. 은행 개점 \n2. 종료")
-        print("입력 :", terminator: " " )
-        guard let userInput = readLine() else { throw BankError.userInput }
-        guard let userInputNumber = Int(userInput) else { return }
-        
-        
-        /// 입력 validation 체크
-        if userInputNumber == 2 { // userInputNumber 사용됨
-            return
-        } else if userInputNumber != 1 { // userInputNumber 사용됨
-            throw BankError.userInput
-        }
-        
         
         /// Banker 생성
         let numberOfBanker = 1
@@ -46,7 +49,7 @@ func startBank() throws {
         }
         
         
-        ///
+        
         let bank = Bank(numberOfBanker: numberOfBanker, numberOfWaitingClient: numberOfClinet, totalNumberOfClinet: numberOfClinet)
         bank.closeBusiness()
     }
@@ -59,7 +62,7 @@ func startBank() throws {
 
 
 do {
-    try startBank()
+    try startBankMenu()
 } catch {
     print(error.localizedDescription)
 }
