@@ -11,14 +11,14 @@ struct WaitingQueue {
         return queue.first
     }
     
-    mutating func enqueue(customer: Customer) -> Result<Customer, Error> {
+    mutating func enqueue(customer: Customer) -> Result<Customer, WaitingQueueError> {
         queue.append(customer)
         return .success(customer)
     }
 
-    mutating func dequeue() -> Result<Customer, Error> {
+    mutating func dequeue() -> Result<Customer, WaitingQueueError> {
         if queue.isEmpty {
-            return .failure(Error)
+            return .failure(.queueIsEmpty)
         } else {
             return .success(queue.removeFirst())
     }
