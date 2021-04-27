@@ -44,7 +44,7 @@ private func handleClient(clientArray: [Client]) {
     for client in clientArray { // clientArray
         print("\(client.waitingNumber)번 고객 업무 시작")
         Banker.handleClientBussiness()
-        print("\(client.waitingNumber)번 고객 업무 종료")
+        print("\(client.waitingNumber)번 고객 업무 완료")
     }
 }
 
