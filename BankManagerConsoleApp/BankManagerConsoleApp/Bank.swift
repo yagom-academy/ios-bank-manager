@@ -8,52 +8,44 @@
 import Foundation
 
 class Bank {
-  var customers = [Customer]()
-  var bankManagers = [BankManager]()
-  var totalCompletedCustomer = 0
-  var totalWorkedTime = 0.0
-  var currentOrderNumber = 1
+  let operationQueue = OperationQueue()
+  private var customers: [Int:Customer] = [:]
+  private var bankCounters: [Int:BankManager] = [:]
+  private var currentTicketNumber = 1
+  private var totalCompletedCustomer = 0
+  private var totalWorkedTime = 0.0
   
   init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
-    for orderNumber in 1...randomNumber {
-      customers.append(Customer(order: orderNumber))
+    for ticketNumber in 1...randomNumber {
+      customers[ticketNumber] = Customer(order: ticketNumber)
     }
     
     for counterNumber in 1...numOfManagers {
-      bankManagers.append(BankManager(counterNumber))
+      bankCounters[counterNumber] = BankManager(counterNumber)
     }
   }
   
   func open() {
     var isRepeat = true
-    
     repeat {
       if customers.isEmpty {
         isRepeat = false
-      } else if customers.contains(Customer(order: currentOrderNumber)) {
-        continue
+      }
+      
+      if let _ = customers[currentTicketNumber] {
+        guard let workingCounter = bankCounters.first else {
+          operationQueue.waitUntilAllOperationsAreFinished()
+          continue
+        }
+        
+        workingCounter.value.process(bank: self)
       } else {
-        work(order: currentOrderNumber)
-        // FIXME: - 처리가 끝난 고객은 배열에서 제거해야 함
+        continue
       }
     } while isRepeat
     
     close()
-  }
-  
-  func work(order: Int) {
-    let workingTime = 0.7
-
-    print("\(order)번 고객 업무 시작")
-    OperationQueue().addOperation {
-      let unit = 1000000.0
-      usleep(UInt32(workingTime * unit))
-    }
-    // TODO: - 비동기실험해야함
-    
-    print("\(order)번 고객 업무 완료")
-    totalWorkedTime += workingTime
   }
   
   func close() {
@@ -63,5 +55,36 @@ class Bank {
     총 업무 시간은 \(totalWorkedTime)초입니다.
     """
     print(complateString)
+  }
+}
+
+// MARK: - BankManagerProcess
+extension Bank {
+  func startBankWork(counter: Int) {
+    bankCounters[counter] = nil
+  }
+  
+  func addToTotalTime(as workingTime: Double) {
+    totalWorkedTime += workingTime
+  }
+  
+  func sendOutCustomer(ticket customerTicketNumber: Int) {
+    customers[customerTicketNumber] = nil
+  }
+  
+  func showCurrentTicket() -> Int {
+    return currentTicketNumber
+  }
+  
+  func makeToNextTicket() {
+    currentTicketNumber += 1
+  }
+  
+  func setBankCounter(number counterNumber: Int) {
+    bankCounters[counterNumber] = BankManager(counterNumber)
+  }
+  
+  func addToTotalCustomer() {
+    totalCompletedCustomer += 1
   }
 }
