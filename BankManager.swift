@@ -11,6 +11,7 @@ struct BankManager {
     private let bankTeller: BankTeller
     private let looper: Looper
     private let consoleViewer: ConsoleViewer
+    var stubbedCustomerNumber: Int?
     
     init(bank: Bank, bankTeller: BankTeller, looper: Looper, consoleViewer: ConsoleViewer) {
         self.bank = bank
