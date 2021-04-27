@@ -12,6 +12,11 @@ enum BankError: Error {
 }
 
 extension BankError: LocalizedError {
-    
-    
+    var errorDescription: String? {
+        switch self {
+        case .userInput:
+            return "UserInput is Error"
+            
+        }
+    }
 }

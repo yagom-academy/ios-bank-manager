@@ -6,15 +6,15 @@
 
 import Foundation
 
-func startBank() {
+func startBank() throws {
     print("1. 은행 개점 \n2. 종료")
-    guard let userInput = readLine() else { return print("nil값입니다. 숫자를 입력해주세요")}
+    guard let userInput = readLine() else { throw BankError.userInput }
     let userInputNumber = Int(userInput)
     print("입력 : \(userInputNumber)")
     if userInputNumber == 2 {
         return
     } else {
-        print("메뉴 숫자 1과 2중에 입력해주세요")
+        throw BankError.userInput
     }
     
     let numberOfClinet = Int.random(in: 10...30)
