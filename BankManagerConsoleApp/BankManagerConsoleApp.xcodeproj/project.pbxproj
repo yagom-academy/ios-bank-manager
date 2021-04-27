@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C4581AB2638563C00EA6A83 /* ConsoleAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581AA2638563C00EA6A83 /* ConsoleAppTest.swift */; };
+		1C4581B226385A5400EA6A83 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		1C4581B526385A5600EA6A83 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
+		1C4581B826385A5800EA6A83 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF5B263830B500CE9F75 /* BankTeller.swift */; };
+		1C4581BB26385A5A00EA6A83 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
+		1C4581BE26385A5C00EA6A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
 		1C6BFF5C263830B500CE9F75 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF5B263830B500CE9F75 /* BankTeller.swift */; };
 		1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
@@ -29,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		0D4F5029572D820B84D5F708 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
+		1C4581A82638563C00EA6A83 /* ConsoleAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsoleAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C4581AA2638563C00EA6A83 /* ConsoleAppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleAppTest.swift; sourceTree = "<group>"; };
+		1C4581AC2638563C00EA6A83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C6BFF58263830AC00CE9F75 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		1C6BFF5B263830B500CE9F75 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
 		1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +49,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1C4581A52638563C00EA6A83 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7694E73259C3EC00053667F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,6 +67,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C4581A92638563C00EA6A83 /* ConsoleAppTest */ = {
+			isa = PBXGroup;
+			children = (
+				1C4581AA2638563C00EA6A83 /* ConsoleAppTest.swift */,
+				1C4581AC2638563C00EA6A83 /* Info.plist */,
+			);
+			path = ConsoleAppTest;
+			sourceTree = "<group>";
+		};
 		68B857802FD429ECB555063A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
+				1C4581A92638563C00EA6A83 /* ConsoleAppTest */,
 				C7694E77259C3EC00053667F /* Products */,
 				68B857802FD429ECB555063A /* Pods */,
 				E142929FC25E56E4AF5DB315 /* Frameworks */,
@@ -74,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
+				1C4581A82638563C00EA6A83 /* ConsoleAppTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,6 +128,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1C4581A72638563C00EA6A83 /* ConsoleAppTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C4581AF2638563C00EA6A83 /* Build configuration list for PBXNativeTarget "ConsoleAppTest" */;
+			buildPhases = (
+				1C4581A42638563C00EA6A83 /* Sources */,
+				1C4581A52638563C00EA6A83 /* Frameworks */,
+				1C4581A62638563C00EA6A83 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConsoleAppTest;
+			productName = ConsoleAppTest;
+			productReference = 1C4581A82638563C00EA6A83 /* ConsoleAppTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C7694E75259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7694E7D259C3EC00053667F /* Build configuration list for PBXNativeTarget "BankManagerConsoleApp" */;
@@ -126,9 +170,12 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
+					1C4581A72638563C00EA6A83 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					C7694E75259C3EC00053667F = {
 						CreatedOnToolsVersion = 12.1;
 					};
@@ -148,9 +195,20 @@
 			projectRoot = "";
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
+				1C4581A72638563C00EA6A83 /* ConsoleAppTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1C4581A62638563C00EA6A83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		1CBCA2D42636E1A0000D5A13 /* ShellScript */ = {
@@ -195,6 +253,19 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1C4581A42638563C00EA6A83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C4581B526385A5600EA6A83 /* Bank.swift in Sources */,
+				1C4581AB2638563C00EA6A83 /* ConsoleAppTest.swift in Sources */,
+				1C4581BE26385A5C00EA6A83 /* main.swift in Sources */,
+				1C4581B226385A5400EA6A83 /* BankManager.swift in Sources */,
+				1C4581BB26385A5A00EA6A83 /* ConsoleViewController.swift in Sources */,
+				1C4581B826385A5800EA6A83 /* BankTeller.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7694E72259C3EC00053667F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,6 +281,44 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		1C4581AD2638563C00EA6A83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 267JUTDVY2;
+				INFOPLIST_FILE = ConsoleAppTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = neph.ConsoleAppTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1C4581AE2638563C00EA6A83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 267JUTDVY2;
+				INFOPLIST_FILE = ConsoleAppTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = neph.ConsoleAppTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		C7694E7B259C3EC00053667F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -348,6 +457,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1C4581AF2638563C00EA6A83 /* Build configuration list for PBXNativeTarget "ConsoleAppTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C4581AD2638563C00EA6A83 /* Debug */,
+				1C4581AE2638563C00EA6A83 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C7694E71259C3EC00053667F /* Build configuration list for PBXProject "BankManagerConsoleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
