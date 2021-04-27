@@ -17,3 +17,7 @@ final class Client: Operation {
         Thread.sleep(forTimeInterval: Double.duration)
     }
 }
+
+extension Double {
+    static let duration = 0.7
+}
