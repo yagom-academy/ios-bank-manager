@@ -9,9 +9,9 @@ import Foundation
 func startBank() throws {
     while true {
         print("1. 은행 개점 \n2. 종료")
+        print("입력 :", terminator: " " )
         guard let userInput = readLine() else { throw BankError.userInput }
         guard let userInputNumber = Int(userInput) else { return }
-        print("입력 : \(userInputNumber)")
         
         if userInputNumber == 2 {
             return
