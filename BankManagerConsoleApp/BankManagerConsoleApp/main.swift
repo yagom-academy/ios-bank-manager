@@ -6,9 +6,7 @@
 
 import Foundation
 
-let bank = Bank(numOfManagers: 1)
 var isRepeat = true
-
 repeat {
   print("1: 은행 개점")
   print("2: 종료")
@@ -20,6 +18,7 @@ repeat {
 
   switch selectedNumber {
   case 1:
+    let bank = Bank(numOfManagers: 1)
     bank.open()
   case 2:
     isRepeat = false
