@@ -14,13 +14,14 @@ func startBankMenu() -> Bool{
     return true
 }
 
-func checkInputValidation(userInputNumber: Int) {
+func checkInputValidation(userInputNumber: Int) throws {
     /// 입력 validation 체크
-//    if userInputNumber == 2 { // userInputNumber 사용됨
-//        return
-//    } else if userInputNumber != 1 { // userInputNumber 사용됨
-//        throw BankError.userInput
-//    }
+    if userInputNumber == 2 { // userInputNumber 사용됨
+        return
+    } else if userInputNumber != 1 { // userInputNumber 사용됨
+        throw BankError.userInput
+    }
+    
 }
 
 func createBanker(numberOfBanker: Int) -> [Banker] {
@@ -51,6 +52,7 @@ func handleClient(clientArray: [Client]) {
 func startBank() throws {
     while true {
         var isValid = startBankMenu()
+        //checkInputValidation(userInputNumber: <#T##Int#>)
         
         let bankerArray = createBanker(numberOfBanker: 1)
         let clientArray = createClient(numberOfClinet: Int.random(in: 10...30), bankerArray: bankerArray)
