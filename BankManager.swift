@@ -8,10 +8,7 @@ import Foundation
 
 protocol Bank: class {
     var numberTicket: Int { get set }
-    
-    func openAlert()
     func closeAlert()
-    func giveNumberTicket() -> Int
 }
 
 extension Bank {
@@ -19,9 +16,31 @@ extension Bank {
         numberTicket += 1
         return numberTicket
     }
+}
+
+protocol BankTeller {
+    func handleBanking()
+    func startTask()
+    func endTask()
+}
+
+extension BankTeller {
+    func handleBanking() {
+        let queue = OperationQueue()
+        let startBlock = BlockOperation {
+            startTask()
+            sleep(1)
+            endTask()
+        }
+        queue.addOperations([startBlock], waitUntilFinished: true)
+    }
     
-    func giveNumberTicket() -> Int {
-        return 1
+    func startTask() {
+        print("고객 업무 시작")
+    }
+    
+    func endTask() {
+        print("고객 업무 완료")
     }
 }
 
