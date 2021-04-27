@@ -12,6 +12,7 @@ func startBank() {
     let userInputNumber = Int(userInput)
     if userInputNumber == 1 {
         print("입력 : 1")
+        //print("\()번 고객 업무 시작")
     } else if userInputNumber == 2 {
         print("입력 : 2")
         return
