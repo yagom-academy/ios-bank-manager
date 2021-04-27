@@ -34,17 +34,18 @@ private func createBanker(numberOfBanker: Int) -> [Banker] {
 private func createClient(numberOfClinet: Int , bankerArray: [Banker]) -> [Client] {
     var clientArray : [Client] = []
     for waitingNumber in 1...numberOfClinet {
-        let assignedBanker = bankerArray[ waitingNumber % bankerArray.count ] // numberOfBanker
+        let assignedBanker = bankerArray[ waitingNumber % bankerArray.count ]
         clientArray.append(Client(BussinessProcessState: false, waitingNumber: waitingNumber, assignedBankerNumber: assignedBanker.identityNumber))
     }
     return clientArray
 }
 
-private func handleClient(clientArray: [Client]) {
-    for client in clientArray { // clientArray
-        print("\(client.waitingNumber)번 고객 업무 시작")
+private func handleClient(clientArray: inout [Client]) {
+    for clientIndex in 0...clientArray.count-1 {
+        print("\(clientArray[clientIndex].waitingNumber)번 고객 업무 시작")
         Banker.handleClientBussiness()
-        print("\(client.waitingNumber)번 고객 업무 완료")
+        clientArray[clientIndex].BussinessProcessState = true
+        print("\(clientArray[clientIndex].waitingNumber)번 고객 업무 완료")
     }
 }
 
@@ -54,8 +55,8 @@ private func manageBank() throws {
         guard let isValid = checkInputValidation() else { throw BankError.userInput }
         guard isValid else { return }
         let bankerArray = createBanker(numberOfBanker: 1)
-        let clientArray = createClient(numberOfClinet: Int.random(in: 10...30), bankerArray: bankerArray)
-        handleClient(clientArray: clientArray)
+        var clientArray = createClient(numberOfClinet: Int.random(in: 10...30), bankerArray: bankerArray)
+        handleClient(clientArray: &clientArray)
         let bank = Bank(numberOfBanker: bankerArray.count, numberOfWaitingClient: clientArray.count, totalNumberOfClinet: clientArray.count)
         bank.closeBusiness()
     }
