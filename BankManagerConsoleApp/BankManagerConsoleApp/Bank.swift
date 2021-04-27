@@ -75,7 +75,7 @@ extension Bank {
     return currentTicketNumber
   }
   
-  func makeToNextTicket() {
+  func makeTicketNumberToNext() {
     currentTicketNumber += 1
   }
   

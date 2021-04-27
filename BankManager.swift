@@ -19,6 +19,7 @@ struct BankManager: Hashable {
     
     print("\(currentTicket)번 고객 업무 시작")
     bank.startBankWork(counter: counterNumber)
+    bank.makeTicketNumberToNext()
     bank.operationQueue.addOperation {
       let unit = 1000000.0
       usleep(UInt32(workingTime * unit))
@@ -27,7 +28,6 @@ struct BankManager: Hashable {
       bank.sendOutCustomer(ticket: currentTicket)
       bank.addToTotalCustomer()
       bank.setBankCounter(number: counterNumber)
-      bank.makeToNextTicket()
     }
   }
 }
