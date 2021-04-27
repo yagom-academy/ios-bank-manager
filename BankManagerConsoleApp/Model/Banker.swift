@@ -9,11 +9,10 @@ import Foundation
 
 struct Banker {
     var identityNumber: Int
-    private var counterNumber: Int
+    var counterNumber: Int
 
-    func handleClientBussiness() {
-       // starkBank.bank.totalBusinessTime += 0.7
-        
+    static func handleClientBussiness() {
+        Bank.totalBusinessTime += 0.7
     }
 }
 
