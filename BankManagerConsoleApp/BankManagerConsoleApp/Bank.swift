@@ -13,7 +13,6 @@ class Bank {
   private var bankCounters: [Int:BankManager] = [:]
   private var currentTicketNumber = 1
   private var totalCompletedCustomer = 0
-  private var totalWorkedTime = 0.0
   
   init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
@@ -27,13 +26,15 @@ class Bank {
   }
   
   func open() {
+    let openTime = CFAbsoluteTimeGetCurrent()
+    
     var isRepeat = true
     repeat {
       if customers.isEmpty {
         isRepeat = false
       }
       
-      if let _ = customers[currentTicketNumber] {
+      if customers[currentTicketNumber] != nil {
         guard let workingCounter = bankCounters.first else {
           operationQueue.waitUntilAllOperationsAreFinished()
           continue
@@ -45,14 +46,16 @@ class Bank {
       }
     } while isRepeat
     
-    close()
+    close(from: openTime)
   }
   
-  func close() {
+  func close(from openTime: CFAbsoluteTime) {
+    let closeTime = CFAbsoluteTimeGetCurrent()
+
     let complateString = """
     업무가 마감되었습니다.
     오늘 업무를 처리한 고객은 총 \(totalCompletedCustomer)명이며,
-    총 업무 시간은 \(totalWorkedTime)초입니다.
+    총 업무 시간은 \(closeTime - openTime)초입니다.
     """
     print(complateString)
   }
@@ -62,10 +65,6 @@ class Bank {
 extension Bank {
   func startBankWork(counter: Int) {
     bankCounters[counter] = nil
-  }
-  
-  func addToTotalTime(as workingTime: Double) {
-    totalWorkedTime += workingTime
   }
   
   func sendOutCustomer(ticket customerTicketNumber: Int) {

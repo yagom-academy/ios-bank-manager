@@ -26,7 +26,6 @@ struct BankManager: Hashable {
       print("\(currentTicket)번 고객 업무 완료")
       bank.sendOutCustomer(ticket: currentTicket)
       bank.addToTotalCustomer()
-      bank.addToTotalTime(as: workingTime)
       bank.setBankCounter(number: counterNumber)
       bank.makeToNextTicket()
     }
