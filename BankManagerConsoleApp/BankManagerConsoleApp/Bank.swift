@@ -6,9 +6,9 @@
 //
 
 struct Bank {
-    private var teller: Teller?
-    private var remainingCustomer: Int = 0
-    private var totalCustomer: Int = 0
+    var teller: Teller?
+    var remainingCustomer: Int = 0
+    var totalCustomer: Int = 0
     
     init() {
         self.remainingCustomer = Int.random(in: 10...30)
@@ -18,7 +18,7 @@ struct Bank {
     private func open() {
         // 텔러 업무 처리
     }
-    private func close() {
+    func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)이며, 총 업무 시간은 \(totalProcessedTime())초입니다.")
     }
     mutating private func visitNewCustomer() {
@@ -30,7 +30,7 @@ struct Bank {
             self.close()
         }
     }
-    private func totalProcessedTime() -> Double {
+    func totalProcessedTime() -> Double {
         let processingTimePerTask: Double = 0.7
         return processingTimePerTask * Double(totalCustomer)
     }

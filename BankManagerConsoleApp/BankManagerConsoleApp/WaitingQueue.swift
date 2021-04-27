@@ -6,12 +6,12 @@
 //
 
 struct WaitingQueue {
-    private(set) var queue: [Customer] = []
+    private(set) var queue: [Customer]
     var first: Customer? {
         return queue.first
     }
     
-    mutating func enqueue(customer: Customer) -> Result<Customer, WaitingQueueError> {
+    mutating func enqueue(_ customer: Customer) -> Result<Customer, WaitingQueueError> {
         queue.append(customer)
         return .success(customer)
     }
@@ -21,5 +21,10 @@ struct WaitingQueue {
             return .failure(.queueIsEmpty)
         } else {
             return .success(queue.removeFirst())
+        }
+    }
+    
+    init(_ queue: [Customer] = []) {
+        self.queue = queue
     }
 }
