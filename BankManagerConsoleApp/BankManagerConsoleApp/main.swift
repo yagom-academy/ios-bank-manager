@@ -6,4 +6,4 @@
 
 import Foundation
 
-
+print("1. 은행 개점/n 2. 종료")
