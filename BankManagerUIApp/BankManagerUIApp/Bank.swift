@@ -9,7 +9,6 @@ import Foundation
 
 final class Bank {
     var bankManager: BankManageable
-    private var teller = OperationQueue()
     
     init(bankManager: BankManageable) {
         self.bankManager = bankManager

@@ -8,14 +8,14 @@
 import Foundation
 
 final class BankManager: BankManageable {
-    lazy var waitingLine = manageWaitingLine(numberOfTellers: 1)
+    lazy var waitingLine = manageWaitingLine()
     private var windowsNumber: Int
     
     init(windowsNumber: Int) {
         self.windowsNumber = windowsNumber
     }
     
-    private func updateWaitingLine() {
-        
+    func assignBankTeller(numberOfTellers: Int) {
+        waitingLine.maxConcurrentOperationCount = numberOfTellers
     }
 }

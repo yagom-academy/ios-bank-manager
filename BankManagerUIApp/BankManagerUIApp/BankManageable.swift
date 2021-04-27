@@ -8,14 +8,13 @@
 import Foundation
 
 protocol BankManageable {
-    func manageWaitingLine(numberOfTellers: Int) -> OperationQueue
+    func manageWaitingLine() -> OperationQueue
     func acceptClient() -> Operation
 }
 
 extension BankManageable {
-    func manageWaitingLine(numberOfTellers: Int) -> OperationQueue {
+    func manageWaitingLine() -> OperationQueue {
         let waitingQueue = OperationQueue()
-        waitingQueue.maxConcurrentOperationCount = numberOfTellers
         return waitingQueue
     }
     
