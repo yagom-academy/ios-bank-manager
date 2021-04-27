@@ -5,8 +5,6 @@
 //  Created by Ryan-Son on 2021/04/27.
 //
 
-import Foundation
-
 struct Bank {
     private var teller: Teller?
     private var remainingCustomer: Int = 0
