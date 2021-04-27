@@ -7,29 +7,31 @@
 
 import Foundation
 
-protocol Bank: class {
-    var numberTicket: Int { get set }
-    func getNewTicket() -> Int
-    func close()
+protocol Bank {
+    var ticketNumber: Int { get set }
+    mutating func getNewTicket() -> Int
+    func getTimeDuration() -> String
+    mutating func closeBank()
+    mutating func resetTicketNumber()
 }
 
 extension Bank {
-    func getNewTicket() -> Int {
-        numberTicket += 1
-        return numberTicket
+    mutating func getNewTicket() -> Int {
+        ticketNumber += 1
+        return ticketNumber
     }
     
     func getTimeDuration() -> String {
-        let timeDuration = Double(numberTicket) * 0.7
+        let timeDuration = Double(ticketNumber) * 0.7
         return String(format: "%.2f", timeDuration)
     }
     
-    func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberTicket)명이며, 총 업무시간은 \(getTimeDuration())초입니다.")
-        resetNumberTicket()
+    mutating func closeBank() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(ticketNumber)명이며, 총 업무시간은 \(getTimeDuration())초입니다.")
+        resetTicketNumber()
     }
     
-    func resetNumberTicket() {
-        numberTicket = 0
+    mutating func resetTicketNumber() {
+        ticketNumber = 0
     }
 }

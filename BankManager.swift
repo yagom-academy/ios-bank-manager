@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    private let bank: Bank
+    private var bank: Bank
     private let bankTeller: BankTeller
     private let looper: Looper
     private let consoleViewer: ConsoleViewer
@@ -19,13 +19,13 @@ struct BankManager {
         self.consoleViewer = consoleViewer
     }
     
-    func openBank() {
+    mutating func openBank() {
         while looper.shouldContinue(userInput: getUserInput()) {
             let customerNumber = Int.random(in: 10...30)
             for _ in 1...customerNumber {
                 bankTeller.handleBanking(ofCustomerNumber: bank.getNewTicket())
             }
-            bank.close()
+            bank.closeBank()
         }
     }
     

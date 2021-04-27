@@ -5,14 +5,14 @@
 // 
 
 import Foundation
-class SomeBank: Bank {
-    var numberTicket: Int = 0
+struct SomeBank: Bank {
+    var ticketNumber: Int = 0
 }
 struct SomeBankTeller: BankTeller {}
 struct SomeLooper: Looper {}
 struct SomeConsoleViewer: ConsoleViewer {}
 
-let bankManager = BankManager(bank: SomeBank(),
+var bankManager = BankManager(bank: SomeBank(),
                               bankTeller: SomeBankTeller(),
                               looper: SomeLooper(),
                               consoleViewer: SomeConsoleViewer())
