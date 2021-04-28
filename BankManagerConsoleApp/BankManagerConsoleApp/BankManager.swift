@@ -1,36 +1,46 @@
 //
 //  BankManager.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
+//  BankManagerConsoleApp
+//
+//  Created by steven on 2021/04/28.
 //
 
 import Foundation
 
-class CustomerMaker {
-    private var numberOfCustomer: Int
+struct CustomerMaker {
     
-    init() {
-        self.numberOfCustomer = Int.random(in: 10...30)
+    private var _numberOfCustomer: Int
+    var numberOfCustomer: Int {
+        return _numberOfCustomer
+    }
+    
+    init(numberOfCustomer: Int) {
+        self._numberOfCustomer = numberOfCustomer
     }
     
     func makeCustomers() -> [Customer] {
         var customers: [Customer] = []
-        for i in 1...numberOfCustomer {
+        for i in 1..._numberOfCustomer {
             customers.append(Customer(waitingNumber: i))
         }
         return customers
     }
+    
 }
 
-class BankManager {
+struct BankManager {
+    
     private var numberOfBanker: Int
     private var waitingLine: OperationQueue
     private var customerMaker: CustomerMaker
+    var numberOfCustomer: Int {
+        return customerMaker.numberOfCustomer
+    }
     
     init(numberOfBanker: Int) {
         self.numberOfBanker = numberOfBanker
         waitingLine = OperationQueue()
-        customerMaker = CustomerMaker()
+        customerMaker = CustomerMaker(numberOfCustomer: Int.random(in: 10...30))
         waitingLine.maxConcurrentOperationCount = self.numberOfBanker
     }
     
@@ -38,4 +48,6 @@ class BankManager {
         customerMaker.makeCustomers().forEach{ waitingLine.addOperation($0.bankTask) }
         waitingLine.waitUntilAllOperationsAreFinished()
     }
+    
 }
+
