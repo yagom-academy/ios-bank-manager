@@ -11,7 +11,6 @@ struct Client {
     var BussinessProcessState: Bool
     var waitingNumber: Int
     var assignedBankerNumber: Int
-    
 }
 
 
