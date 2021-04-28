@@ -27,20 +27,6 @@ class BankTest: XCTestCase {
         XCTAssertEqual(middleTicketNumber, 11)
     }
     
-    func test_Bank_getTimeDuration_for_only_OneCustomer() {
-        dummyBank.getNewTicket()
-        let minimumTimeDuration = dummyBank.getTimeDuration()
-        XCTAssertEqual(minimumTimeDuration, "0.70")
-    }
-    
-    func test_Bank_getTimeDuration_for_only_30_Customer() {
-        for _ in 1...30 {
-            dummyBank.getNewTicket()
-        }
-        let minimumTimeDuration = dummyBank.getTimeDuration()
-        XCTAssertEqual(minimumTimeDuration, "21.00")
-    }
-    
     func test_Bank_resetTicketNumeber() {
         for _ in 1...30 {
             dummyBank.getNewTicket()
@@ -49,4 +35,3 @@ class BankTest: XCTestCase {
         XCTAssertEqual(dummyBank.ticketNumber, 0)
     }
 }
-

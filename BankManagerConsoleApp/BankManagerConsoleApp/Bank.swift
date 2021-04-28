@@ -10,8 +10,6 @@ import Foundation
 protocol Bank {
     var ticketNumber: Int { get set }
     mutating func getNewTicket() -> Int
-    func getTimeDuration() -> String
-    mutating func closeBank()
     mutating func resetTicketNumber()
 }
 
@@ -21,13 +19,14 @@ extension Bank {
         return ticketNumber
     }
     
-    func getTimeDuration() -> String {
-        let timeDuration = Double(ticketNumber) * 0.7
+    func formatTimeDuration(time: CFAbsoluteTime) -> String {
+        let timeDuration = time
         return String(format: "%.2f", timeDuration)
     }
     
-    mutating func closeBank() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(ticketNumber)명이며, 총 업무시간은 \(getTimeDuration())초입니다.")
+    mutating func closeBank(spentTime: CFAbsoluteTime) {
+        let spentTime = formatTimeDuration(time: spentTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(ticketNumber)명이며, 총 업무시간은 \(spentTime)초입니다.")
         resetTicketNumber()
     }
     

@@ -22,11 +22,13 @@ struct BankManager {
     
     mutating func openBank() {
         while looper.shouldContinue(userInput: getUserInput()) {
+            let openTime = CFAbsoluteTimeGetCurrent()
             let customerNumber = Int.random(in: 10...30)
             for _ in 1...customerNumber {
                 bankTeller.handleBanking(ofCustomerNumber: bank.getNewTicket())
             }
-            bank.closeBank()
+            let closeTime = CFAbsoluteTimeGetCurrent()
+            bank.closeBank(spentTime: closeTime - openTime)
         }
     }
     

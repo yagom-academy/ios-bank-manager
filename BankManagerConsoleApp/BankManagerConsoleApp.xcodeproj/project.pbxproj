@@ -16,6 +16,7 @@
 		1C4581C22638608900EA6A83 /* BankTellerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581C12638608900EA6A83 /* BankTellerTest.swift */; };
 		1C4581C8263861D700EA6A83 /* ConsoleViewerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581C7263861D700EA6A83 /* ConsoleViewerTest.swift */; };
 		1C4581CC2638625900EA6A83 /* LooperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581CB2638625900EA6A83 /* LooperTest.swift */; };
+		1C4581D22639490200EA6A83 /* BankManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581D12639490200EA6A83 /* BankManagerTest.swift */; };
 		1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
 		1C6BFF5C263830B500CE9F75 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF5B263830B500CE9F75 /* BankTeller.swift */; };
 		1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
@@ -44,6 +45,7 @@
 		1C4581C12638608900EA6A83 /* BankTellerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTellerTest.swift; sourceTree = "<group>"; };
 		1C4581C7263861D700EA6A83 /* ConsoleViewerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewerTest.swift; sourceTree = "<group>"; };
 		1C4581CB2638625900EA6A83 /* LooperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooperTest.swift; sourceTree = "<group>"; };
+		1C4581D12639490200EA6A83 /* BankManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerTest.swift; sourceTree = "<group>"; };
 		1C6BFF58263830AC00CE9F75 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		1C6BFF5B263830B500CE9F75 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
 		1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				1C4581C12638608900EA6A83 /* BankTellerTest.swift */,
 				1C4581C7263861D700EA6A83 /* ConsoleViewerTest.swift */,
 				1C4581CB2638625900EA6A83 /* LooperTest.swift */,
+				1C4581D12639490200EA6A83 /* BankManagerTest.swift */,
 				1C4581AC2638563C00EA6A83 /* Info.plist */,
 			);
 			path = ConsoleAppTest;
@@ -273,6 +276,7 @@
 				1C4581B226385A5400EA6A83 /* BankManager.swift in Sources */,
 				1C4581BB26385A5A00EA6A83 /* ConsoleViewController.swift in Sources */,
 				1C4581B826385A5800EA6A83 /* BankTeller.swift in Sources */,
+				1C4581D22639490200EA6A83 /* BankManagerTest.swift in Sources */,
 				1C4581C8263861D700EA6A83 /* ConsoleViewerTest.swift in Sources */,
 				1C4581CC2638625900EA6A83 /* LooperTest.swift in Sources */,
 			);
