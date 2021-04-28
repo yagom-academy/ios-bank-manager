@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MenuPrinter {
+struct BankPrinter {
     enum MenuPhrase {
         static let bankOpen = "1 : 은행개점"
         static let exit = "2 : 종료"
@@ -18,6 +18,14 @@ struct MenuPrinter {
         print(MenuPhrase.bankOpen)
         print(MenuPhrase.exit)
         print(MenuPhrase.input, terminator:"")
+    }
+    
+    static func printFinishPharse(_ totalCustomerNumber: Int, _ totalSecond: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerNumber)명이며, 총 업무시간은 \(totalSecond)초입니다.")
+    }
+    
+    static func printWrongInputPharse() {
+        print("잘못된 입력입니다. 다시 입력해주세요.")
     }
 }
 
@@ -45,12 +53,12 @@ class Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         bankManager.inputCustomersToWaitingLine()
         let endTime = CFAbsoluteTimeGetCurrent()
-        print(endTime - startTime)
+        BankPrinter.printFinishPharse(bankManager.numberOfCustomer, endTime - startTime)
     }
     
     func open() {
         while (true) {
-            MenuPrinter.printMenu()
+            BankPrinter.printMenu()
             let input = Inputer.receive()
             switch input {
             case "1":
@@ -58,7 +66,7 @@ class Bank {
             case "2":
                 return
             default:
-                print("잘못된 입력입니다. 다시 입력해주세요.")
+                BankPrinter.printWrongInputPharse()
             }
         }
     }
