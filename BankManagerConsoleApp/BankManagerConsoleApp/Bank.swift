@@ -21,11 +21,23 @@ struct BankPrinter {
     }
     
     static func printFinishPharse(_ totalCustomerNumber: Int, _ totalSecond: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerNumber)명이며, 총 업무시간은 \(totalSecond)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerNumber)명이며, 총 업무시간은 \(totalSecond.printToTwoDecimalPoint())초입니다.")
     }
     
     static func printWrongInputPharse() {
         print("잘못된 입력입니다. 다시 입력해주세요.")
+    }
+}
+
+extension Double {
+    func printToTwoDecimalPoint() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.roundingMode = .floor
+        numberFormatter.maximumFractionDigits = 2
+        guard let result = numberFormatter.string(for: self) else {
+            return String(self)
+        }
+        return result
     }
 }
 
