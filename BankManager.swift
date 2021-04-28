@@ -16,7 +16,7 @@ struct BankManager {
     
     mutating func start() {
         while true {
-            print("시작: 1, 종료: 2")
+            print("1: 은행 개점\n2: 종료\n입력: ", terminator: "")
             guard let userInput: String = readLine(),
                   let userInputNumber: Int = Int(userInput) else { return }
             

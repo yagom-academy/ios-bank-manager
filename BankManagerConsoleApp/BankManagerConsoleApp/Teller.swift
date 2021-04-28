@@ -9,11 +9,14 @@ import Foundation
 
 struct Teller {
     let tellerNumber: Int = 1
-    
-    func processTask(for waitingNumber: Int) {
+    func processTask(for waitingNumber: Int) -> CFAbsoluteTime {
+        let startTime = CFAbsoluteTimeGetCurrent()
         startTask(for: waitingNumber)
         waitForFinishingTask()
         finishTask(for: waitingNumber)
+        let processedTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        return processedTime
     }
     
     func startTask(for waitingNumber: Int) {
@@ -22,7 +25,8 @@ struct Teller {
     
     func waitForFinishingTask() {
         let processingTimePerTask: Double = 0.7
-        sleep(UInt32(processingTimePerTask))
+        
+        RunLoop.current.run(until: Date().advanced(by: processingTimePerTask))
     }
     
     func finishTask(for waitingNumber: Int) {
