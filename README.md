@@ -20,6 +20,8 @@
   - 동시성 프로그래밍을 위한 기반기술(GCD, Operation) 등의 이해
   - Dispatch와 Operation의 차이를 이해하고 상황에 맞게 선택하여 사용
 - 04/28(수)
+  - Concurrency Programming 자료 by 앨런 예습
+  - Step1 - flowchart, UML 그리다가 코드로 넘어감. 프로젝트 내 폴더 및 파일 분리에 관해 고민.
 - 04/29(목)
 - 04/30(금)
 
@@ -32,3 +34,7 @@
 - [[유투브] CPU 코어와 스레드(ft.하이퍼스레딩) 가장 쉬운 설명 듣고 가시죠 - [高지식] 거니](https://www.youtube.com/watch?v=_dhLLWJNhwY)
 - [[블로그] [기술]동기와 비동기](https://velog.io/@stay136/%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91%EB%8F%99%EA%B8%B0%EC%99%80-%EB%B9%84%EB%8F%99%EA%B8%B0)
 - [[블로그] iOS ) Concurrency Programming Guide - Concurrency and Application Design](https://zeddios.tistory.com/509)
+- [[부스트코스] GCD, DispatchQueue](https://www.boostcourse.org/mo326/lecture/16916?isDesc=false)
+- [[블로그] GCD vs Operation Queue](https://caution-dev.github.io/ios/2019/03/15/iOS-GCD-vs-Operation-Queue.html)
+- [[블로그] iOS 비동기처리기술 GCD, Operation Queue 소개](https://0urtrees.tistory.com/30)
+- [[블로그] iOS & Swift 공부 - Operation Queue](https://velog.io/@kevinkim2586/iOS-Swift-%EA%B3%B5%EB%B6%80-Operation-Queue)
