@@ -52,7 +52,7 @@ struct Inputer {
     
 }
 
-class Bank {
+struct Bank {
     
     private var bankManager: BankManager
     

@@ -25,7 +25,7 @@ class BankTask: Operation {
     
 }
 
-class Customer {
+struct Customer {
     
     private var _bankTask: BankTask
     private var waitingNumber: Int

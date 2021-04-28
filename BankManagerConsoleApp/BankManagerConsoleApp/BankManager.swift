@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CustomerMaker {
+struct CustomerMaker {
     
     private var _numberOfCustomer: Int
     var numberOfCustomer: Int {
@@ -28,7 +28,7 @@ class CustomerMaker {
     
 }
 
-class BankManager {
+struct BankManager {
     
     private var numberOfBanker: Int
     private var waitingLine: OperationQueue
