@@ -6,38 +6,48 @@
 //
 
 struct Bank {
-    var teller: Teller?
-    var remainingCustomer: Int = 0
+    var teller: Teller
     var totalCustomer: Int = 0
     var waitingQueue = WaitingQueue()
     
-    init() {
-        self.remainingCustomer = Int.random(in: 10...30)
-        self.totalCustomer = remainingCustomer
+    init(teller: Teller) {
+        self.teller = teller
+        self.totalCustomer = Int.random(in: 10...30)
     }
     
-    private func open() {
+    mutating func open() {
         // 텔러 업무 처리
+        let nextCustomer: Result = waitingQueue.dequeue()
+        
+        visitNewCustomer()
+        
+        switch nextCustomer {
+        case .success(let customer):
+            teller.processTask(for: customer.waitingNumber)
+        case .failure(let error):
+            print(error)
+        }
+        
+        close()
     }
     
-    func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)이며, 총 업무 시간은 \(totalProcessedTime())초입니다.")
+    private func close() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer) 명이며, 총 업무 시간은 \(totalProcessedTime())초입니다.")
     }
     
     mutating private func visitNewCustomer() {
-        for _ in 1...totalCustomer {
-            totalCustomer += 1
-            remainingCustomer += 1
-            let customer = Customer(waitingNumber: totalCustomer)
+        for waitingNumber in 1...totalCustomer {
+            let customer = Customer(waitingNumber: waitingNumber)
             waitingQueue.enqueue(customer)
         }
     }
     
     private func checkIfNoCustomer() {
-        if remainingCustomer == 0 {
+        if waitingQueue.queue.isEmpty {
             self.close()
         }
     }
+    
     func totalProcessedTime() -> Double {
         let processingTimePerTask: Double = 0.7
         return processingTimePerTask * Double(totalCustomer)

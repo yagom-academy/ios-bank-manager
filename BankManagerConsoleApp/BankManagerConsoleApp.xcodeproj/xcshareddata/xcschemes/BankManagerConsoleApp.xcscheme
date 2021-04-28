@@ -27,7 +27,16 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C7694E75259C3EC00053667F"
+            BuildableName = "BankManagerConsoleApp"
+            BlueprintName = "BankManagerConsoleApp"
+            ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
       </Testables>
    </TestAction>
