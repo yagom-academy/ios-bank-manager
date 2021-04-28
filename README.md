@@ -27,6 +27,11 @@
 
 <br>
 
+### step1 UML
+![step1_1](https://user-images.githubusercontent.com/65153742/116431054-5cbc6f00-a882-11eb-80e9-b80dbc5c2267.jpg)
+
+<br>
+
 ### 참고 링크
 - [[인프런] iOS Concurrency(동시성) 프로그래밍, 동기 비동기 처리 그리고 GCD/Operation - 디스패치큐와 오퍼레이션큐의 이해](https://www.inflearn.com/course/iOS-Concurrency-GCD-Operation#)
 - [[유투브] 프로세스는 뭐고 스레드는 뭔가요?](https://www.youtube.com/watch?v=iks_Xb9DtTM)
