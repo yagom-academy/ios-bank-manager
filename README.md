@@ -27,6 +27,11 @@
 
 <br>
 
+### 학습키워드 정리
+- [동기와 비동기, 비동기식 처리 기술](https://github.com/SoKoooool/ios-bank-manager/blob/4aa993fceb671e08808ba4231f34b9f6e9dbe282/Docs/%EB%8F%99%EA%B8%B0%EC%99%80%20%EB%B9%84%EB%8F%99%EA%B8%B0.md)
+
+<br>
+
 ### step1 UML
 ![step1_1](https://user-images.githubusercontent.com/65153742/116431054-5cbc6f00-a882-11eb-80e9-b80dbc5c2267.jpg)
 
