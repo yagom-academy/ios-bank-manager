@@ -8,13 +8,14 @@
 import Foundation
 
 class CustomerMaker {
+    
     private var _numberOfCustomer: Int
     var numberOfCustomer: Int {
         return _numberOfCustomer
     }
     
-    init() {
-        self._numberOfCustomer = Int.random(in: 10...30)
+    init(numberOfCustomer: Int) {
+        self._numberOfCustomer = numberOfCustomer
     }
     
     func makeCustomers() -> [Customer] {
@@ -24,9 +25,11 @@ class CustomerMaker {
         }
         return customers
     }
+    
 }
 
 class BankManager {
+    
     private var numberOfBanker: Int
     private var waitingLine: OperationQueue
     private var customerMaker: CustomerMaker
@@ -37,7 +40,7 @@ class BankManager {
     init(numberOfBanker: Int) {
         self.numberOfBanker = numberOfBanker
         waitingLine = OperationQueue()
-        customerMaker = CustomerMaker()
+        customerMaker = CustomerMaker(numberOfCustomer: Int.random(in: 10...30))
         waitingLine.maxConcurrentOperationCount = self.numberOfBanker
     }
     
@@ -45,5 +48,6 @@ class BankManager {
         customerMaker.makeCustomers().forEach{ waitingLine.addOperation($0.bankTask) }
         waitingLine.waitUntilAllOperationsAreFinished()
     }
+    
 }
 

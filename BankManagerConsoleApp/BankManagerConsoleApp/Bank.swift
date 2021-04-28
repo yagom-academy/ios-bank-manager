@@ -8,16 +8,11 @@
 import Foundation
 
 struct BankPrinter {
-    enum MenuPhrase {
-        static let bankOpen = "1 : 은행개점"
-        static let exit = "2 : 종료"
-        static let input = "입력 : "
-    }
-    
+
     static func printMenu() {
-        print(MenuPhrase.bankOpen)
-        print(MenuPhrase.exit)
-        print(MenuPhrase.input, terminator:"")
+        print("1 : 은행개점")
+        print("2 : 종료")
+        print("입력 : ", terminator:"")
     }
     
     static func printFinishPharse(_ totalCustomerNumber: Int, _ totalSecond: Double) {
@@ -27,9 +22,11 @@ struct BankPrinter {
     static func printWrongInputPharse() {
         print("잘못된 입력입니다. 다시 입력해주세요.")
     }
+
 }
 
 extension Double {
+
     func printToTwoDecimalPoint() -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.roundingMode = .floor
@@ -39,22 +36,24 @@ extension Double {
         }
         return result
     }
+
 }
 
 struct Inputer {
-    enum StringConstant {
-        static let blank = ""
-    }
+
+    static let blank = ""
     
     static func receive() -> String {
         guard let input = readLine() else {
-            return StringConstant.blank
+            return blank
         }
         return input
     }
+    
 }
 
 class Bank {
+    
     private var bankManager: BankManager
     
     init() {
@@ -82,4 +81,5 @@ class Bank {
             }
         }
     }
+    
 }
