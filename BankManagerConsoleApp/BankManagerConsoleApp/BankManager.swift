@@ -8,7 +8,7 @@
 import Foundation
 
 private func startBankMenu() {
-    print("1. 은행 개점 \n2. 종료")
+    print("1 : 은행 개점 \n2 : 종료")
     print("입력 :", terminator: " " )
 }
 
