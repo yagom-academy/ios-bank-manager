@@ -14,6 +14,10 @@ class RandomGeneratorTest: XCTestCase {
         dummyRandomGenerator = RandomGenerator()
     }
     
+    override func tearDownWithError() throws {
+        dummyRandomGenerator = nil
+    }
+    
     func test_createRandomNumber() {
         for _ in 1...10000 {
             DispatchQueue.global().async {
