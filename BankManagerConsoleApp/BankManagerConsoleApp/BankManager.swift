@@ -31,7 +31,6 @@ class BankManager {
 
       currentTicketNumber += 1
 
-      // 일이없는 은행원에게 일을 시킨다
       operationQueue.addOperation {
         workableBanker?.process(customer)
         
@@ -43,14 +42,6 @@ class BankManager {
   
   func setBankCounters(number: Int) {
     bankers[number] = Banker(number)
-  }
-  
-  func isAvailable() -> Bool {
-    if bankers.isEmpty {
-      return false
-    } else {
-      return true
-    }
   }
   
   func startBankWork(counter: Int) {

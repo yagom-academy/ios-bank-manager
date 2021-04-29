@@ -40,7 +40,6 @@ class Bank {
       bankManager.process(customers)
     } while isRepeat
     
-    // TODO: - operation queue가 다 비었을 때 close하도록
     bankManager.operationQueue.waitUntilAllOperationsAreFinished()
     close(from: openTime)
   }
