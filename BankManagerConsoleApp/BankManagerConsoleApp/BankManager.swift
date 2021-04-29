@@ -13,8 +13,8 @@ class CustomerMaker {
         return _numberOfCustomer
     }
     
-    init() {
-        self._numberOfCustomer = Int.random(in: 10...30)
+    init(numberOfCustomer: Int) {
+        self._numberOfCustomer = numberOfCustomer
     }
     
     func makeCustomers() -> [Customer] {
@@ -37,7 +37,7 @@ class BankManager {
     init(numberOfBanker: Int) {
         self.numberOfBanker = numberOfBanker
         waitingLine = OperationQueue()
-        customerMaker = CustomerMaker()
+        customerMaker = CustomerMaker(numberOfCustomer: Int.random(in: 10...30))
         waitingLine.maxConcurrentOperationCount = self.numberOfBanker
     }
     
