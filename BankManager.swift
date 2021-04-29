@@ -63,7 +63,9 @@ class BankManager {
     }
 
     private func finishBank(todayTotalVisitCustomers: Int) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(todayTotalVisitCustomers)명이며, 총 업무 시간은 \(Double(todayTotalVisitCustomers) * 0.7)초 입니다.")
+        var workTime = Double(todayTotalVisitCustomers) * 0.7
+        workTime = round(workTime * 100) / 100
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(todayTotalVisitCustomers)명이며, 총 업무 시간은 \(workTime)초 입니다.")
     }
 
 }
