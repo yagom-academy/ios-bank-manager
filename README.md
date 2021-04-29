@@ -23,12 +23,17 @@
   - Concurrency Programming 자료 by 앨런 예습
   - Step1 - flowchart, UML 그리다가 코드로 넘어감. 프로젝트 내 폴더 및 파일 분리에 관해 고민.
 - 04/29(목)
+  - 강의) Concurrency Programming by 앨런 / 프로젝트 관련 질문
+  - Operation Queue 적용하여 Step1 코딩 시작
 - 04/30(금)
 
 <br>
 
-### 학습키워드 정리
+### 학습키워드
 - [동기와 비동기, 비동기식 처리 기술](https://github.com/SoKoooool/ios-bank-manager/blob/4aa993fceb671e08808ba4231f34b9f6e9dbe282/Docs/%EB%8F%99%EA%B8%B0%EC%99%80%20%EB%B9%84%EB%8F%99%EA%B8%B0.md)
+- [GCD, Dispatch Source, Operation Queue 질문](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/GCD%2C%20Dispatch%20Source%2C%20Operation%20Queue%20%EC%A7%88%EB%AC%B8.md)
+- sleep(), usleep(), Thread.sleep(Thread.sleep(forTimeInterval: )
+- [OperationQueue 메서드](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/OperationQueue%20%EB%A9%94%EC%84%9C%EB%93%9C.md)
 
 <br>
 
@@ -48,3 +53,5 @@
 - [[블로그] GCD vs Operation Queue](https://caution-dev.github.io/ios/2019/03/15/iOS-GCD-vs-Operation-Queue.html)
 - [[블로그] iOS 비동기처리기술 GCD, Operation Queue 소개](https://0urtrees.tistory.com/30)
 - [[블로그] iOS & Swift 공부 - Operation Queue](https://velog.io/@kevinkim2586/iOS-Swift-%EA%B3%B5%EB%B6%80-Operation-Queue)
+- [[stack overlow] How to sleep for few milliseconds in swift 2.2?](https://stackoverflow.com/questions/38119742/how-to-sleep-for-few-milliseconds-in-swift-2-2)
+- [[부스트코스] 2) OperationQueue](https://www.boostcourse.org/mo326/lecture/16898?isDesc=false)
