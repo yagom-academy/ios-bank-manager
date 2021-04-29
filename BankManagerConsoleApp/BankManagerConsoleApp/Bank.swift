@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
   private var customers: [Int:Customer] = [:]
   private var bankManager = BankManager()
   
@@ -24,7 +24,7 @@ class Bank {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(removeCustomer(notification:)),
-      name: NSNotification.Name(rawValue: "noti"),
+      name: NSNotification.Name(rawValue: "completedCustomer"),
       object: nil)
   }
   
@@ -46,11 +46,12 @@ class Bank {
   
   func close(from openTime: CFAbsoluteTime) {
     let closeTime = CFAbsoluteTimeGetCurrent()
-
+    let totalWorkTime = round((closeTime - openTime) * 100) / 100
+    
     let complateString = """
     업무가 마감되었습니다.
     오늘 업무를 처리한 고객은 총 \(bankManager.showTotalCompletedCustomer())명이며,
-    총 업무 시간은 \(closeTime - openTime)초입니다.
+    총 업무 시간은 \(totalWorkTime)초입니다.
     """
     print(complateString)
   }
@@ -60,7 +61,10 @@ class Bank {
 extension Bank {
   @objc func removeCustomer(notification: Notification) {
     if let userInfo = notification.userInfo {
-      customers.removeValue(forKey: userInfo["current"] as! Int)
+      guard let ticketNumber = userInfo["ticketNumber"] as? Int else {
+        return
+      }
+      customers.removeValue(forKey: ticketNumber)
     }
   }
 }

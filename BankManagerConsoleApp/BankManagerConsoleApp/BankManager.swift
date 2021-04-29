@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BankManager {
+final class BankManager {
   let operationQueue = OperationQueue()
 
   private var bankers: [Int:Banker] = [:]
@@ -22,19 +22,22 @@ class BankManager {
       }
       
       let workableBanker = self.bankers.first?.value
-      self.bankers.removeValue(forKey: workableBanker?.showCounterNumber() ?? 0)
+      guard let counterNumber = workableBanker?.showCounterNumber() else {
+        return
+      }
+      self.bankers.removeValue(forKey: counterNumber)
 
       NotificationCenter.default.post(
-        name: NSNotification.Name(rawValue: "noti"),
+        name: NSNotification.Name(rawValue: "completedCustomer"),
         object: nil,
-        userInfo: ["current":currentTicketNumber])
+        userInfo: ["ticketNumber":currentTicketNumber])
 
       currentTicketNumber += 1
 
       operationQueue.addOperation {
         workableBanker?.process(customer)
         
-        self.bankers[workableBanker?.showCounterNumber() ?? 0] = workableBanker
+        self.bankers[counterNumber] = workableBanker
         self.totalCompletedCustomer += 1
       }
     }
@@ -43,11 +46,7 @@ class BankManager {
   func setBankCounters(number: Int) {
     bankers[number] = Banker(number)
   }
-  
-  func startBankWork(counter: Int) {
-    bankers[counter] = nil
-  }
-  
+
   func showTotalCompletedCustomer() -> Int {
     return totalCompletedCustomer
   }

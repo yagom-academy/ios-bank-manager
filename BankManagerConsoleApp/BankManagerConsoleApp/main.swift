@@ -10,6 +10,7 @@ var isRepeat = true
 repeat {
   print("1: 은행 개점")
   print("2: 종료")
+  print("입력 : ", terminator: "")
   guard let selectedNumber = Int(readLine() ?? "0"),
             selectedNumber == 1 || selectedNumber == 2 else {
     print("올바른 값을 입력해주세요.")
@@ -18,7 +19,7 @@ repeat {
 
   switch selectedNumber {
   case 1:
-    let bank = Bank(numOfManagers: 3)
+    let bank = Bank(numOfManagers: 1)
     bank.open()
   case 2:
     isRepeat = false
