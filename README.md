@@ -25,6 +25,7 @@
 - 04/29(목)
   - 강의) Concurrency Programming by 앨런 / 프로젝트 관련 질문
   - Operation Queue 적용하여 Step1 코딩 시작
+  - 네이밍 고민 (feat. 고마운 Ryan)
 - 04/30(금)
 
 <br>
