@@ -7,13 +7,45 @@
 
 import Foundation
 
+enum TaskType: CaseIterable {
+    case deposit
+    case load
+    
+    var taskTime: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .load:
+            return 1.1
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .load:
+            return "대출"
+        }
+    }
+    
+    static var random: TaskType {
+        guard let randomTaskType = TaskType.allCases.randomElement() else {
+            return TaskType.deposit
+        }
+        return randomTaskType
+    }
+}
+
 class BankTask: Operation {
     
+    private var taskType: TaskType
     private var taskTime: Double
     private var waitingNumber: Int
     
-    init(taskTime: Double, _ waitingNumber: Int) {
-        self.taskTime = taskTime
+    init(_ waitingNumber: Int) {
+        self.taskType = TaskType.random
+        self.taskTime = taskType.taskTime
         self.waitingNumber = waitingNumber
     }
     
@@ -58,7 +90,7 @@ struct Customer {
     }
     
     init(waitingNumber: Int) {
-        self._bankTask = BankTask(taskTime: 0.7, waitingNumber)
+        self._bankTask = BankTask(waitingNumber)
         self.waitingNumber = waitingNumber
         self.grade = CustomerGrade.random
     }
