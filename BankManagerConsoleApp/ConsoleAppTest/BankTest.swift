@@ -9,29 +9,27 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 class BankTest: XCTestCase {
-    struct DummyBank: Bank {
-        var ticketNumber: Int = 0
-    }
-    var dummyBank = DummyBank()
+    var dummyBank = Bank(numberOfBankTeller: 1)
     
     func test_Bank_getNewTicket_for_firstTicketNumber() {
-        let firstTicketNumber = dummyBank.getNewTicket()
+        let firstTicketNumber = dummyBank.getNewTicketNumber()
         XCTAssertEqual(firstTicketNumber, 1)
     }
     
     func test_Bank_getNewTicket_for_middleTicketNumber() {
         for _ in 1...10 {
-            dummyBank.getNewTicket()
+            dummyBank.getNewTicketNumber()
         }
-        let middleTicketNumber = dummyBank.getNewTicket()
+        let middleTicketNumber = dummyBank.getNewTicketNumber()
         XCTAssertEqual(middleTicketNumber, 11)
     }
     
-    func test_Bank_resetTicketNumeber() {
-        for _ in 1...30 {
-            dummyBank.getNewTicket()
+    func test_Bank_ticketNumber가_openBank_호출시_0으로_초기화되는지_테스트() {
+        for _ in 1...Int.random(in: 10...30) {
+            dummyBank.getNewTicketNumber()
         }
-        dummyBank.resetTicketNumber()
-        XCTAssertEqual(dummyBank.ticketNumber, 0)
+        dummyBank.openBank()
+        let ticketNumber = dummyBank.ticketNumber
+        XCTAssertEqual(ticketNumber, 0)
     }
 }
