@@ -8,36 +8,35 @@ import Foundation
 
 struct BankManager {
     private var bank: Bank
-    private let bankTeller: BankTeller
-    private let looper: Looper
-    private let consoleViewer: ConsoleViewer
-    var stubbedCustomerNumber: Int?
+    private var consoleViewController: ConsoleViewController
+    private let randomGenerator: RandomGenerator
+    private let bankOperationQueue = OperationQueue()
     
-    init(bank: Bank, bankTeller: BankTeller, looper: Looper, consoleViewer: ConsoleViewer) {
+    init(bank: Bank, consoleViewer: ConsoleViewController, randomGenerator: RandomGenerator) {
         self.bank = bank
-        self.bankTeller = bankTeller
-        self.looper = looper
-        self.consoleViewer = consoleViewer
+        self.consoleViewController = consoleViewer
+        self.randomGenerator = randomGenerator
+        bankOperationQueue.maxConcurrentOperationCount = bank.numberOfBankTeller
     }
     
-    mutating func openBank() {
-        while looper.shouldContinue(userInput: getUserInput()) {
-            let openTime = CFAbsoluteTimeGetCurrent()
-            let customerNumber = Int.random(in: 10...30)
-            for _ in 1...customerNumber {
-                bankTeller.handleBanking(ofCustomerNumber: bank.getNewTicket())
+    mutating func start() {
+        while true {
+            bankOperationQueue.addOperation(ConsoleTaskOperation(consoleViewController: consoleViewController))
+            
+            guard consoleViewController.shouldContinue else {
+                return
             }
-            let closeTime = CFAbsoluteTimeGetCurrent()
-            bank.closeBank(spentTime: closeTime - openTime)
+            
+            bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .openBank))
+            bankOperationQueue.waitUntilAllOperationsAreFinished()
+            
+            for _ in 1...randomGenerator.createRandomNumber() {
+                let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber())
+                let operation = HandleCustomerOperation(customer: randomCustomer)
+                bankOperationQueue.addOperation(operation)
+            }
+
+            bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .closeBank))
         }
-    }
-    
-    func getUserInput() -> String {
-        consoleViewer.showStartMenu()
-        guard let userInput = readLine() else {
-            return ""
-        }
-        return userInput
     }
 }
-

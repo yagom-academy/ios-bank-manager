@@ -5,15 +5,8 @@
 // 
 
 import Foundation
-struct SomeBank: Bank {
-    var ticketNumber: Int = 0
-}
-struct SomeBankTeller: BankTeller {}
-struct SomeLooper: Looper {}
-struct SomeConsoleViewer: ConsoleViewer {}
 
-var bankManager = BankManager(bank: SomeBank(),
-                              bankTeller: SomeBankTeller(),
-                              looper: SomeLooper(),
-                              consoleViewer: SomeConsoleViewer())
-bankManager.openBank()
+var bankManager = BankManager(bank: Bank(numberOfBankTeller: 1),
+                              consoleViewer: ConsoleViewController(),
+                              randomGenerator: RandomGenerator())
+bankManager.start()

@@ -7,26 +7,31 @@
 
 import Foundation
 
-protocol ConsoleViewer {
-    func showStartMenu()
-}
-
-extension ConsoleViewer {
+struct ConsoleViewController {
+    var shouldContinue: Bool = true
+    
     func showStartMenu() {
-        print("""
+        print(
+ """
  1 : 은행개점
  2 : 종료
  입력 : 
  """, terminator: "")
     }
-}
-
-protocol Looper {
-    func shouldContinue(userInput: String) -> Bool
-}
-
-extension Looper {
-    func shouldContinue(userInput: String) -> Bool {
-        return userInput == "1" ? true : false
+    
+    mutating func getUserInput() {
+        guard let userInput = readLine() else {
+            return
+        }
+        
+        switch userInput {
+        case "1":
+            shouldContinue = true
+        case "2":
+            shouldContinue = false
+        default:
+            shouldContinue = false
+        }
     }
+    
 }
