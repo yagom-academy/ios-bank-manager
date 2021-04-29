@@ -22,6 +22,7 @@ struct BankManager {
     mutating func start() {
         while true {
             bankOperationQueue.addOperation(ConsoleTaskOperation(consoleViewController: consoleViewController))
+            bankOperationQueue.waitUntilAllOperationsAreFinished()
             
             guard consoleViewController.shouldContinue else {
                 return
@@ -35,8 +36,9 @@ struct BankManager {
                 let operation = HandleCustomerOperation(customer: randomCustomer)
                 bankOperationQueue.addOperation(operation)
             }
-
+            bankOperationQueue.waitUntilAllOperationsAreFinished()
             bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .closeBank))
+            bankOperationQueue.waitUntilAllOperationsAreFinished()
         }
     }
 }

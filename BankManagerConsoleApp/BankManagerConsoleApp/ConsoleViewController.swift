@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ConsoleViewController {
+class ConsoleViewController {
     var shouldContinue: Bool = true
     
     func showStartMenu() {
@@ -19,7 +19,7 @@ struct ConsoleViewController {
  """, terminator: "")
     }
     
-    mutating func getUserInput() {
+    func getUserInput() {
         guard let userInput = readLine() else {
             return
         }
