@@ -32,6 +32,10 @@ class BankManager {
                 self.workTask(order: index)
             }
         }
+        closeBank()
+    }
+    
+    func closeBank() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(Double(numberOfClient) * 0.7)초입니다.")
     }
 }
