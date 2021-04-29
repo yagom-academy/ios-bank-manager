@@ -45,7 +45,9 @@ struct BankManager {
     }
     
     func inputCustomersToWaitingLine() {
-        customerMaker.makeCustomers().forEach{
+        var customers = customerMaker.makeCustomers()
+        customers.sort{ $0.bankTask.queuePriority.rawValue > $1.bankTask.queuePriority.rawValue }
+        customers.forEach {
             waitingLine.addOperation($0.bankTask)
         }
         waitingLine.waitUntilAllOperationsAreFinished()
