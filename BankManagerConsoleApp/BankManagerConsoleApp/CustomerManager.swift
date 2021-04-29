@@ -14,8 +14,6 @@ class CustomerManager {
         let randomCustomerNumber: Int = Int.random(in: 10...30)
         let customers = Array(1...randomCustomerNumber)
         
-        print("(임시 콘솔 프린트) 오늘 방문할 고객은 총 \(randomCustomerNumber)명 입니다.")
-        
         return customers
     }
     
@@ -28,4 +26,5 @@ class CustomerManager {
     func countCustomers() -> Int {
         return customers.count
     }
+    
 }

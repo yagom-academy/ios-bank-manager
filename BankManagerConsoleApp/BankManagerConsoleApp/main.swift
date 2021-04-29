@@ -6,5 +6,5 @@
 
 import Foundation
 
-let testBank = BankManager()
-testBank.openBank()
+let BankManagerConsole = BankManager()
+BankManagerConsole.openBank()
