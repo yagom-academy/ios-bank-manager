@@ -8,9 +8,13 @@
 import Foundation
 
 struct Customer: Hashable {
-  private let orderNumber: Int
+  private let ticketNumber: Int
   
   init(order orderNumber: Int) {
-    self.orderNumber = orderNumber
+    self.ticketNumber = orderNumber
+  }
+  
+  func showTicketNumber() -> Int {
+    return ticketNumber
   }
 }
