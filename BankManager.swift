@@ -5,3 +5,8 @@
 //
 
 import Foundation
+
+struct Teller {
+    let counterNumber: Int
+    let identityNumber: Int
+}
