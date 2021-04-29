@@ -6,9 +6,6 @@
 
 import Foundation
 
-// 은행원
-// 현재 번호를 확인하고, 해당 고객 인스턴스를 호출한다
-// currentCustomer
 struct Banker: Hashable { 
   private let counterNumber: Int
   
@@ -24,5 +21,9 @@ struct Banker: Hashable {
     print("\(currentTicket)번 고객 업무 시작")
     usleep(UInt32(workingTime * unit))
     print("\(currentTicket)번 고객 업무 완료")
+  }
+  
+  func showCounterNumber() -> Int {
+    return counterNumber
   }
 }

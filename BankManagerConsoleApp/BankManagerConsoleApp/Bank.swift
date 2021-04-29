@@ -8,7 +8,6 @@
 import Foundation
 
 class Bank {
-  let operationQueue = OperationQueue()
   private var customers: [Int:Customer] = [:]
   private var bankManager = BankManager()
   
@@ -22,7 +21,11 @@ class Bank {
       bankManager.setBankCounters(number: counterNumber)
     }
     
-    NotificationCenter.default.addObserver(self, selector: #selector(removeCustomer(notification:)), name: NSNotification.Name(rawValue: "noti"), object: nil)
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(removeCustomer(notification:)),
+      name: NSNotification.Name(rawValue: "noti"),
+      object: nil)
   }
   
   func open() {
@@ -37,6 +40,8 @@ class Bank {
       bankManager.process(customers)
     } while isRepeat
     
+    // TODO: - operation queue가 다 비었을 때 close하도록
+    bankManager.operationQueue.waitUntilAllOperationsAreFinished()
     close(from: openTime)
   }
   
@@ -59,19 +64,4 @@ extension Bank {
       customers.removeValue(forKey: userInfo["current"] as! Int)
     }
   }
-//  func sendOutCustomer(ticket customerTicketNumber: Int) {
-//    customers[customerTicketNumber] = nil
-//  }
-//
-//  func showCurrentTicket() -> Int {
-//    return currentTicketNumber
-//  }
-//
-//  func makeTicketNumberToNext() {
-//    currentTicketNumber += 1
-//  }
-//
-//  func addToTotalCustomer() {
-//    totalCompletedCustomer += 1
-//  }
 }

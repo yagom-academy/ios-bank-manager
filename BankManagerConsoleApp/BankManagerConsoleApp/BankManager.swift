@@ -16,20 +16,28 @@ class BankManager {
   
   func process(_ customers: [Int:Customer]) {
     if let customer = customers[currentTicketNumber] {
-      guard isAvailable() else {
+      guard !bankers.isEmpty else {
         operationQueue.waitUntilAllOperationsAreFinished()
         return
       }
       
-      // 일이없는 은행원에게 일을 시킨다
-      operationQueue.addOperation {
-        let workableBanker = self.bankers.first?.value
-        workableBanker?.process(customer)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "noti"), object: nil, userInfo: ["current":self.currentTicketNumber])
-        self.totalCompletedCustomer += 1
-      }
+      let workableBanker = self.bankers.first?.value
+      self.bankers.removeValue(forKey: workableBanker?.showCounterNumber() ?? 0)
+
+      NotificationCenter.default.post(
+        name: NSNotification.Name(rawValue: "noti"),
+        object: nil,
+        userInfo: ["current":currentTicketNumber])
 
       currentTicketNumber += 1
+
+      // 일이없는 은행원에게 일을 시킨다
+      operationQueue.addOperation {
+        workableBanker?.process(customer)
+        
+        self.bankers[workableBanker?.showCounterNumber() ?? 0] = workableBanker
+        self.totalCompletedCustomer += 1
+      }
     }
   }
   
