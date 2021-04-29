@@ -32,6 +32,7 @@ class BankManager {
                 self.workTask(order: index)
             }
         }
+        counter.waitUntilAllOperationsAreFinished()
         closeBank()
     }
     
