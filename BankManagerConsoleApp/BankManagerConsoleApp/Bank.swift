@@ -7,27 +7,15 @@
 
 import Foundation
 
-final class Bank {
-  private var customers: [Int:Customer] = [:]
-  private var bankManager = BankManager()
+protocol Bankable {
+  var customers: [Int:Customer] { get set }
+  var bankManager: BankManager { get set }
   
-  init(numOfManagers: Int) {
-    let randomNumber = Int.random(in: 10...30)
-    for ticketNumber in 1...randomNumber {
-      customers[ticketNumber] = Customer(order: ticketNumber)
-    }
-    
-    for counterNumber in 1...numOfManagers {
-      bankManager.setBankCounters(number: counterNumber)
-    }
-    
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(removeCustomer(notification:)),
-      name: NSNotification.Name(rawValue: "completedCustomer"),
-      object: nil)
-  }
-  
+  func open()
+  func close(from openTime: CFAbsoluteTime)
+}
+
+extension Bankable {
   func open() {
     let openTime = CFAbsoluteTimeGetCurrent()
     
@@ -57,7 +45,29 @@ final class Bank {
   }
 }
 
-// MARK: - BankManagerProcess
+final class Bank: Bankable {
+  var customers: [Int:Customer] = [:]
+  var bankManager = BankManager()
+  
+  init(numOfManagers: Int) {
+    let randomNumber = Int.random(in: 10...30)
+    for ticketNumber in 1...randomNumber {
+      customers[ticketNumber] = Customer(order: ticketNumber)
+    }
+    
+    for counterNumber in 1...numOfManagers {
+      bankManager.setBankCounters(number: counterNumber)
+    }
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(removeCustomer(notification:)),
+      name: NSNotification.Name(rawValue: "completedCustomer"),
+      object: nil)
+  }
+}
+
+// MARK: - NotificationCenter Method
 extension Bank {
   @objc func removeCustomer(notification: Notification) {
     if let userInfo = notification.userInfo {
