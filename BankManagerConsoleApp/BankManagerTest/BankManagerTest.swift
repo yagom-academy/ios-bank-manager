@@ -8,7 +8,7 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-class BankManagerTests: XCTestCase {
+final class BankManagerTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -18,36 +18,18 @@ class BankManagerTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
     }
-    
-    func test_totalProcessedTime() {
-        let bank = Bank()
-        let totalTime: Double = Double(bank.totalCustomer) * 0.7
-        XCTAssertEqual(bank.totalProcessedTime(), totalTime)
+
+    func test_visitNewCustomer() {
+        var bank = Bank(1)
+        let customers: [Customer] = bank.visitNewCustomer()
+        XCTAssertEqual(customers.count, bank.totalCustomer)
     }
-    
-    func test_WaitingQueue_enqueue() {
-        var waitingQueue = WaitingQueue()
-        XCTAssertEqual(waitingQueue.enqueue(Customer(waitingNumber: 1)), .success(Customer(waitingNumber: 1)))
+
+    func test_assignTeller() {
+        let bank = Bank(1)
+        bank.assignTeller()
+        XCTAssertEqual(bank.waitingQueue.maxConcurrentOperationCount, bank.numberOfTeller)
     }
+
     
-    func test_WaitingQueue_emptyQueue_dequeue() {
-        var waitingQueue = WaitingQueue()
-        XCTAssertEqual(waitingQueue.dequeue(), .failure(.queueIsEmpty))
-    }
-    
-    func test_WaitingQueue_dequeue() {
-        var waitingQueue = WaitingQueue([Customer(waitingNumber: 1)])
-        
-        XCTAssertEqual(waitingQueue.dequeue(), .success(Customer(waitingNumber: 1)))
-    }
-    
-    func test_WaitingQueue_emptyQueue_first() {
-        let waitingQueue = WaitingQueue()
-        XCTAssertEqual(waitingQueue.first, nil)
-    }
-    
-    func test_WaitingQueue_Queue_first() {
-        let waitingQueue = WaitingQueue([Customer(waitingNumber: 1)])
-        XCTAssertEqual(waitingQueue.first, Customer(waitingNumber: 1))
-    }
 }

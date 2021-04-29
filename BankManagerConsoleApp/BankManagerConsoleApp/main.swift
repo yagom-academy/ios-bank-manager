@@ -4,7 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bankManager = BankManager()
+private var bankManager = BankManager()
 bankManager.start()
 
 

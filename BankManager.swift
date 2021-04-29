@@ -7,27 +7,41 @@
 import Foundation
 
 struct BankManager {
-    private var bank = Bank(teller: Teller())
+    private var bank: Bank
     
-    private enum Option {
+    init(numberOfTeller: Int = 1) {
+        self.bank = Bank(numberOfTeller)
+    }
+    
+    private enum Menu {
         static let openBank = 1
         static let closeBank = 2
     }
     
+    private func selectMenu() throws -> Int {
+        print("1: 은행 개점\n2: 종료\n입력: ", terminator: "")
+        guard let userInput: String = readLine(),
+              let userInputNumber: Int = Int(userInput) else {
+            throw BankManagerError.invaildMenu(#function)
+        }
+        return userInputNumber
+    }
+    
     mutating func start() {
         while true {
-            print("1: 은행 개점\n2: 종료\n입력: ", terminator: "")
-            guard let userInput: String = readLine(),
-                  let userInputNumber: Int = Int(userInput) else { return }
-            
-            switch userInputNumber {
-            case Option.openBank:
-                bank.open()
-            case Option.closeBank:
-                return
-            default:
-                print("유효하지 않은 입력입니다.")
+            do {
+                switch try selectMenu() {
+                case Menu.openBank:
+                    bank.open()
+                case Menu.closeBank:
+                    return
+                default:
+                    print("유효하지 않은 입력입니다.")
+                }
+            } catch {
+                print(error)
             }
         }
     }
 }
+

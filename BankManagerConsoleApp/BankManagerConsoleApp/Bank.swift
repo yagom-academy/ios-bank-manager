@@ -8,44 +8,55 @@
 import Foundation
 
 struct Bank {
-    var teller: Teller
     var totalCustomer: Int = 0
-    var waitingQueue = WaitingQueue()
-    var totalProcessedTime: CFAbsoluteTime = 0
+    var waitingQueue: OperationQueue = OperationQueue()
+    var numberOfTeller: Int
+    var time: Double = 0
     
-    init(teller: Teller) {
-        self.teller = teller
+    private enum NumberOfCustomer {
+        static let minimum: Int = 10
+        static let maximum: Int = 30
+    }
+    
+    init(_ numberOfTeller: Int) {
+        self.numberOfTeller = numberOfTeller
+    }
+    
+    private func totalProcessedTime(_ closure: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        closure()
+        let processedTime = CFAbsoluteTimeGetCurrent() - startTime
+        return processedTime
     }
     
     mutating func open() {
-        // 텔러 업무 처리
-        totalProcessedTime = 0
-        visitNewCustomer()
-
-        while !waitingQueue.queue.isEmpty {
-            let nextCustomer: Result = waitingQueue.dequeue()
-            
-            switch nextCustomer {
-            case .success(let customer):
-                totalProcessedTime += teller.processTask(for: customer.waitingNumber)
-            case .failure(let error):
-                print(error)
-            }
+        assignTeller()
+        time = totalProcessedTime {
+            visitNewCustomer()
         }
-        
         close()
     }
     
     private func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer) 명이며, 총 업무 시간은 \(round(totalProcessedTime * 100) / 100)초입니다.")
+        let totalProcessedTime = floor(time * 100) / 100
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
     }
     
-    mutating private func visitNewCustomer() {
-        totalCustomer = Int.random(in: 10...30)
+    func assignTeller() {
+        waitingQueue.maxConcurrentOperationCount = numberOfTeller
+    }
+    
+    @discardableResult
+    mutating func visitNewCustomer() -> [Customer] {
+        var customers: [Customer] = []
+        totalCustomer = Int.random(in: NumberOfCustomer.minimum...NumberOfCustomer.maximum)
         
         for waitingNumber in 1...totalCustomer {
-            let customer = Customer(waitingNumber: waitingNumber)
-            waitingQueue.enqueue(customer)
+            customers.append(Customer(waitingNumber))
         }
+        waitingQueue.addOperations(customers, waitUntilFinished: true)
+        
+        return customers
     }
 }
+

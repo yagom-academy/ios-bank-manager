@@ -7,16 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52B68B9D263824AB0007B69F /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68B9C263824AB0007B69F /* Teller.swift */; };
-		52B68BA02638273B0007B69F /* WaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68B9F2638273B0007B69F /* WaitingQueue.swift */; };
+		52B2BCFE263ABD14003932BB /* BankManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2BCFD263ABD14003932BB /* BankManagerError.swift */; };
+		52B2BD01263ABF0E003932BB /* BankManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2BCFD263ABD14003932BB /* BankManagerError.swift */; };
 		52B68BA426382A2F0007B69F /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68BA326382A2F0007B69F /* Customer.swift */; };
-		52B68BB526382F730007B69F /* WaitingQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68BB426382F730007B69F /* WaitingQueueError.swift */; };
 		52B68BD6263832270007B69F /* BankManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68BD5263832270007B69F /* BankManagerTest.swift */; };
 		52B68BDE263836F60007B69F /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1BDBE326381A1F00A9F227 /* Bank.swift */; };
 		52B68BE2263836F80007B69F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		52B68BE6263836FA0007B69F /* WaitingQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68BB426382F730007B69F /* WaitingQueueError.swift */; };
-		52B68BEA263836FC0007B69F /* WaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68B9F2638273B0007B69F /* WaitingQueue.swift */; };
-		52B68BEB263836FE0007B69F /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68B9C263824AB0007B69F /* Teller.swift */; };
 		52B68BEF263836FF0007B69F /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68BA326382A2F0007B69F /* Customer.swift */; };
 		52B68BF3263837010007B69F /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		AA1BDBE426381A1F00A9F227 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1BDBE326381A1F00A9F227 /* Bank.swift */; };
@@ -37,10 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		52B68B9C263824AB0007B69F /* Teller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
-		52B68B9F2638273B0007B69F /* WaitingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQueue.swift; sourceTree = "<group>"; };
+		52B2BCFD263ABD14003932BB /* BankManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerError.swift; sourceTree = "<group>"; };
 		52B68BA326382A2F0007B69F /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		52B68BB426382F730007B69F /* WaitingQueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQueueError.swift; sourceTree = "<group>"; };
 		52B68BD3263832260007B69F /* BankManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B68BD5263832270007B69F /* BankManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerTest.swift; sourceTree = "<group>"; };
 		52B68BD7263832270007B69F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,10 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				52B2BCFD263ABD14003932BB /* BankManagerError.swift */,
 				52B68BA326382A2F0007B69F /* Customer.swift */,
-				52B68B9C263824AB0007B69F /* Teller.swift */,
-				52B68B9F2638273B0007B69F /* WaitingQueue.swift */,
-				52B68BB426382F730007B69F /* WaitingQueueError.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				AA1BDBE326381A1F00A9F227 /* Bank.swift */,
 			);
@@ -197,14 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B68BE6263836FA0007B69F /* WaitingQueueError.swift in Sources */,
 				52B68BEF263836FF0007B69F /* Customer.swift in Sources */,
-				52B68BEA263836FC0007B69F /* WaitingQueue.swift in Sources */,
 				52B68BF3263837010007B69F /* BankManager.swift in Sources */,
 				52B68BD6263832270007B69F /* BankManagerTest.swift in Sources */,
 				52B68BDE263836F60007B69F /* Bank.swift in Sources */,
+				52B2BD01263ABF0E003932BB /* BankManagerError.swift in Sources */,
 				52B68BE2263836F80007B69F /* main.swift in Sources */,
-				52B68BEB263836FE0007B69F /* Teller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,12 +203,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1BDBE426381A1F00A9F227 /* Bank.swift in Sources */,
-				52B68BA02638273B0007B69F /* WaitingQueue.swift in Sources */,
-				52B68BB526382F730007B69F /* WaitingQueueError.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				52B2BCFE263ABD14003932BB /* BankManagerError.swift in Sources */,
 				52B68BA426382A2F0007B69F /* Customer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
-				52B68B9D263824AB0007B69F /* Teller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
