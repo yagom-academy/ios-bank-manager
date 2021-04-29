@@ -7,7 +7,8 @@
 
 import Foundation
 
-class CustomerMaker {
+struct CustomerMaker {
+    
     private var _numberOfCustomer: Int
     var numberOfCustomer: Int {
         return _numberOfCustomer
@@ -24,9 +25,11 @@ class CustomerMaker {
         }
         return customers
     }
+    
 }
 
-class BankManager {
+struct BankManager {
+    
     private var numberOfBanker: Int
     private var waitingLine: OperationQueue
     private var customerMaker: CustomerMaker
@@ -45,5 +48,6 @@ class BankManager {
         customerMaker.makeCustomers().forEach{ waitingLine.addOperation($0.bankTask) }
         waitingLine.waitUntilAllOperationsAreFinished()
     }
+    
 }
 

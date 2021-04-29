@@ -8,6 +8,7 @@
 import Foundation
 
 class BankTask: Operation {
+    
     private var taskTime: Double
     private var waitingNumber: Int
     
@@ -21,9 +22,11 @@ class BankTask: Operation {
         Thread.sleep(forTimeInterval: taskTime)
         print(waitingNumber, "번 고객 업무 완료")
     }
+    
 }
 
-class Customer {
+struct Customer {
+    
     private var _bankTask: BankTask
     private var waitingNumber: Int
     var bankTask: BankTask {
@@ -34,4 +37,5 @@ class Customer {
         self._bankTask = BankTask(taskTime: 0.7, waitingNumber)
         self.waitingNumber = waitingNumber
     }
+    
 }
