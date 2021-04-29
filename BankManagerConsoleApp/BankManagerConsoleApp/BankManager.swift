@@ -13,18 +13,6 @@ class BankManager {
   private var bankers: [Int:Banker] = [:]
   private var currentTicketNumber = 1
   private var totalCompletedCustomer = 0
-
-  func setBankCounters(number: Int) {
-    bankers[number] = Banker(number)
-  }
-  
-  func isAvailable() -> Bool {
-    if bankers.isEmpty {
-      return false
-    } else {
-      return true
-    }
-  }
   
   func process(_ customers: [Int:Customer]) {
     if let customer = customers[currentTicketNumber] {
@@ -37,11 +25,23 @@ class BankManager {
       operationQueue.addOperation {
         let workableBanker = self.bankers.first?.value
         workableBanker?.process(customer)
-//        bank.sendOutCustomer(ticket: currentTicket)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "noti"), object: nil, userInfo: ["current":self.currentTicketNumber])
         self.totalCompletedCustomer += 1
       }
 
       currentTicketNumber += 1
+    }
+  }
+  
+  func setBankCounters(number: Int) {
+    bankers[number] = Banker(number)
+  }
+  
+  func isAvailable() -> Bool {
+    if bankers.isEmpty {
+      return false
+    } else {
+      return true
     }
   }
   
@@ -53,5 +53,3 @@ class BankManager {
     return totalCompletedCustomer
   }
 }
-
-

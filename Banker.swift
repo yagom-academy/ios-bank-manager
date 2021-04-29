@@ -24,6 +24,5 @@ struct Banker: Hashable {
     print("\(currentTicket)번 고객 업무 시작")
     usleep(UInt32(workingTime * unit))
     print("\(currentTicket)번 고객 업무 완료")
-    
   }
 }

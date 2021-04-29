@@ -21,6 +21,8 @@ class Bank {
     for counterNumber in 1...numOfManagers {
       bankManager.setBankCounters(number: counterNumber)
     }
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(removeCustomer(notification:)), name: NSNotification.Name(rawValue: "noti"), object: nil)
   }
   
   func open() {
@@ -52,6 +54,11 @@ class Bank {
 
 // MARK: - BankManagerProcess
 extension Bank {
+  @objc func removeCustomer(notification: Notification) {
+    if let userInfo = notification.userInfo {
+      customers.removeValue(forKey: userInfo["current"] as! Int)
+    }
+  }
 //  func sendOutCustomer(ticket customerTicketNumber: Int) {
 //    customers[customerTicketNumber] = nil
 //  }
