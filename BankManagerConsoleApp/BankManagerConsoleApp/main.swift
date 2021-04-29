@@ -18,7 +18,7 @@ repeat {
 
   switch selectedNumber {
   case 1:
-    let bank = Bank(numOfManagers: 1)
+    let bank = Bank(numOfManagers: 3)
     bank.open()
   case 2:
     isRepeat = false
