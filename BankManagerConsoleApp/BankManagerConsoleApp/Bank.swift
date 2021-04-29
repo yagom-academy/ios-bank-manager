@@ -10,7 +10,7 @@ import Foundation
 class Bank {
   let operationQueue = OperationQueue()
   private var customers: [Int:Customer] = [:]
-  private var bankCounters: [Int:BankManager] = [:]
+  private var bankCounters = BankCounter()
   private var currentTicketNumber = 1
   private var totalCompletedCustomer = 0
   
@@ -21,7 +21,7 @@ class Bank {
     }
     
     for counterNumber in 1...numOfManagers {
-      bankCounters[counterNumber] = BankManager(counterNumber)
+      bankCounters.setBankCounters(number: counterNumber)
     }
   }
   
@@ -34,13 +34,13 @@ class Bank {
         isRepeat = false
       }
       
-      if customers[currentTicketNumber] != nil {
-        guard let workingCounter = bankCounters.first else {
+      if let customer = customers[currentTicketNumber] {
+        guard bankCounters.isAvailable() else {
           operationQueue.waitUntilAllOperationsAreFinished()
           continue
         }
         
-        workingCounter.value.process(bank: self)
+        bankCounters.process(customer)
       } else {
         continue
       }
@@ -63,10 +63,6 @@ class Bank {
 
 // MARK: - BankManagerProcess
 extension Bank {
-  func startBankWork(counter: Int) {
-    bankCounters[counter] = nil
-  }
-  
   func sendOutCustomer(ticket customerTicketNumber: Int) {
     customers[customerTicketNumber] = nil
   }
@@ -77,10 +73,6 @@ extension Bank {
   
   func makeTicketNumberToNext() {
     currentTicketNumber += 1
-  }
-  
-  func setBankCounter(number counterNumber: Int) {
-    bankCounters[counterNumber] = BankManager(counterNumber)
   }
   
   func addToTotalCustomer() {
