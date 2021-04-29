@@ -40,12 +40,14 @@ struct BankManager {
     init(numberOfBanker: Int) {
         self.numberOfBanker = numberOfBanker
         waitingLine = OperationQueue()
-        customerMaker = CustomerMaker(numberOfCustomer: Int.random(in: 10...30))
+        customerMaker = CustomerMaker(numberOfCustomer: /*Int.random(in: 10...30)*/10)
         waitingLine.maxConcurrentOperationCount = self.numberOfBanker
     }
     
     func inputCustomersToWaitingLine() {
-        customerMaker.makeCustomers().forEach{ waitingLine.addOperation($0.bankTask) }
+        customerMaker.makeCustomers().forEach{
+            waitingLine.addOperation($0.bankTask)
+        }
         waitingLine.waitUntilAllOperationsAreFinished()
     }
     

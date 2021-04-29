@@ -42,17 +42,21 @@ class BankTask: Operation {
     private var taskType: TaskType
     private var taskTime: Double
     private var waitingNumber: Int
+    private var customerGrade: CustomerGrade
     
-    init(_ waitingNumber: Int) {
+    init(_ waitingNumber: Int, _ grade: CustomerGrade) {
         self.taskType = TaskType.random
         self.taskTime = taskType.taskTime
         self.waitingNumber = waitingNumber
+        self.customerGrade = grade
+        super.init()
+        super.queuePriority = grade.queuePriority
     }
     
     override func main() {
-        print(waitingNumber, "번 고객 업무 시작")
+        print("\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
-        print(waitingNumber, "번 고객 업무 완료")
+        print("\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
     }
     
 }
@@ -61,6 +65,17 @@ enum CustomerGrade: CaseIterable {
     case vvip
     case vip
     case basic
+    
+    var name: String {
+        switch self {
+        case .vvip:
+            return "VVIP"
+        case .vip:
+            return "VIP"
+        case .basic:
+            return "일반"
+        }
+    }
     
     var queuePriority: Operation.QueuePriority {
         switch self {
@@ -90,9 +105,9 @@ struct Customer {
     }
     
     init(waitingNumber: Int) {
-        self._bankTask = BankTask(waitingNumber)
-        self.waitingNumber = waitingNumber
         self.grade = CustomerGrade.random
+        self._bankTask = BankTask(waitingNumber, grade)
+        self.waitingNumber = waitingNumber
     }
     
 }

@@ -58,7 +58,7 @@ struct Bank {
     private var bankManager: BankManager
     
     init() {
-        bankManager = BankManager(numberOfBanker: 1)
+        bankManager = BankManager(numberOfBanker: 3)
     }
     
     private func startWork() {
