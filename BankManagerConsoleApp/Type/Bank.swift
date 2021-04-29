@@ -8,7 +8,6 @@
 import Foundation
 
 struct Bank {
-    var numberOfBanker: Int
     var numberOfWaitingClient : Int
     var totalNumberOfClinet: Int
     static var totalBusinessTime: Float = 0

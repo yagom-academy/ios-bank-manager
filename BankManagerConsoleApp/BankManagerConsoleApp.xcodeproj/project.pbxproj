@@ -48,14 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		66C2D44F26379D750066A921 /* Model */ = {
+		66C2D44F26379D750066A921 /* Type */ = {
 			isa = PBXGroup;
 			children = (
 				66C2D44626379D580066A921 /* Bank.swift */,
 				66C2D44926379D640066A921 /* Banker.swift */,
 				66C2D44C26379D710066A921 /* Client.swift */,
 			);
-			path = Model;
+			path = Type;
 			sourceTree = "<group>";
 		};
 		8A568B632637AE730080B567 /* Error */ = {
@@ -70,7 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				8A568B632637AE730080B567 /* Error */,
-				66C2D44F26379D750066A921 /* Model */,
+				66C2D44F26379D750066A921 /* Type */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
