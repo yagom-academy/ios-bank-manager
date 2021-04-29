@@ -10,9 +10,7 @@ import Foundation
 class Bank {
   let operationQueue = OperationQueue()
   private var customers: [Int:Customer] = [:]
-  private var bankCounters = BankCounter()
-  private var currentTicketNumber = 1
-  private var totalCompletedCustomer = 0
+  private var bankManager = BankManager()
   
   init(numOfManagers: Int) {
     let randomNumber = Int.random(in: 10...30)
@@ -21,7 +19,7 @@ class Bank {
     }
     
     for counterNumber in 1...numOfManagers {
-      bankCounters.setBankCounters(number: counterNumber)
+      bankManager.setBankCounters(number: counterNumber)
     }
   }
   
@@ -34,16 +32,7 @@ class Bank {
         isRepeat = false
       }
       
-      if let customer = customers[currentTicketNumber] {
-        guard bankCounters.isAvailable() else {
-          operationQueue.waitUntilAllOperationsAreFinished()
-          continue
-        }
-        
-        bankCounters.process(customer)
-      } else {
-        continue
-      }
+      bankManager.process(customers)
     } while isRepeat
     
     close(from: openTime)
@@ -54,7 +43,7 @@ class Bank {
 
     let complateString = """
     업무가 마감되었습니다.
-    오늘 업무를 처리한 고객은 총 \(totalCompletedCustomer)명이며,
+    오늘 업무를 처리한 고객은 총 \(bankManager.showTotalCompletedCustomer())명이며,
     총 업무 시간은 \(closeTime - openTime)초입니다.
     """
     print(complateString)
@@ -63,19 +52,19 @@ class Bank {
 
 // MARK: - BankManagerProcess
 extension Bank {
-  func sendOutCustomer(ticket customerTicketNumber: Int) {
-    customers[customerTicketNumber] = nil
-  }
-  
-  func showCurrentTicket() -> Int {
-    return currentTicketNumber
-  }
-  
-  func makeTicketNumberToNext() {
-    currentTicketNumber += 1
-  }
-  
-  func addToTotalCustomer() {
-    totalCompletedCustomer += 1
-  }
+//  func sendOutCustomer(ticket customerTicketNumber: Int) {
+//    customers[customerTicketNumber] = nil
+//  }
+//
+//  func showCurrentTicket() -> Int {
+//    return currentTicketNumber
+//  }
+//
+//  func makeTicketNumberToNext() {
+//    currentTicketNumber += 1
+//  }
+//
+//  func addToTotalCustomer() {
+//    totalCompletedCustomer += 1
+//  }
 }
