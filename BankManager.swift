@@ -5,3 +5,13 @@
 //
 
 import Foundation
+
+class BankManager {
+    let mainQueue = OperationQueue()
+    var customer: Int = 0
+    var banker: Int
+    
+    init(banker: Int) {
+        self.banker = banker
+    }
+}
