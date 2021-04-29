@@ -22,7 +22,7 @@ class BankManager {
     func workTask(order: Int) {
         print("\(order)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: 0.7)
-        print("\(order)n번 고객 업무 완료★")
+        print("\(order)번 고객 업무 완료★")
     }
     
     func sendToCounter() {
