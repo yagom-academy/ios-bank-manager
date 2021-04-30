@@ -21,7 +21,7 @@ struct BankManager {
     
     private func handleCustomer() {
         for _ in 1...randomGenerator.createRandomNumber() {
-            let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber())
+            let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber(), task: Customer.Task.allCases.randomElement()!)
             let operation = HandleCustomerOperation(customer: randomCustomer)
             bankOperationQueue.addOperation(operation)
         }

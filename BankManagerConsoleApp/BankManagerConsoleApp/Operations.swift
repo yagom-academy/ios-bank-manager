@@ -15,20 +15,14 @@ class HandleCustomerOperation: Operation {
     }
     
     func handleBanking(customer: Customer) {
-        print("\(customer.ticketNumber)번 고객 업무 시작")
-        usleep(TaskTime.normal)
-        print("\(customer.ticketNumber)번 고객 업무 완료")
+        print("\(customer.ticketNumber)번 고객 \(customer.task.name)업무 시작")
+        usleep(customer.task.time)
+        print("\(customer.ticketNumber)번 고객 \(customer.task.name)업무 완료")
     }
     
     init(customer: Customer) {
         self.customer = customer
         super.init()
-    }
-}
-
-extension HandleCustomerOperation {
-    enum TaskTime {
-        static let normal: useconds_t = 700_000
     }
 }
 

@@ -8,8 +8,8 @@
 import Foundation
 
 struct RandomGenerator {
-    func generateRandomCustomer(ticketNumber: Int) -> Customer {
-        return Customer(ticketNumber: ticketNumber)
+    func generateRandomCustomer(ticketNumber: Int, task: Customer.Task) -> Customer {
+        return Customer(ticketNumber: ticketNumber, task: task)
     }
     
     func createRandomNumber() -> Int {
