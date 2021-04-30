@@ -24,59 +24,33 @@ private func checkInputValidation() -> Bool? {
     return nil
 }
 
-private func createClient(numberOfClient: Int ) -> [Int] {
-    var clientArray : [Int] = []
-    for waitingNumber in 1...numberOfClient {
-        clientArray.append(waitingNumber)
+private func createClient() -> Int {
+    let numberOfClient: Int = Int.random(in: 10...30)
+    for clientNumber in 1...numberOfClient {
+        Bank.clientQueue.append(Client(waitingNumber: clientNumber))
     }
-    return clientArray
+    return numberOfClient
 }
 
-private func handleClient(bankerArray: [Banker], clientArray: inout [Client]) {
-    let operationQueue = OperationQueue()
-    for clientIndex in 1...clientArray.count {
-        operationQueue.addOperation(bankerArray[clientIndex])
-        clientArray[clientIndex].BussinessProcessState = true
+private func createBanker(numberOfBanker:Int) {
+    for i in 1...numberOfBanker {
+        let notification = NSNotification.Name.init("\(i)th Banker")
+        let banker = Banker(bankerNumber: i ,client: nil, notification: notification)
+        NotificationCenter.default.addObserver(banker, selector: #selector(Banker.finishWork(notification:)), name: notification, object: nil)
+        Bank.operationQueue.addOperation(banker)
     }
 }
 
 private func manageBank() throws {
-    let numberOfBank = 1
+    let numberOfBanker: Int = 1
     while true {
         startBankMenu()
         guard let isValid = checkInputValidation() else { throw BankError.userInput }
         guard isValid else { return }
-        
-        // 클라이언트 큐 만들기
-        // 클라이언트 큐에 고객 수 만큼 삽입하기
-        var clientArray = createClient(numberOfClient: Int.random(in: 10...30))
-        
-        // bankerStateArray 만들기
-        var bankerStateArray = [Bool](repeating: false, count: numberOfBank)
-        
-        // operation 큐 만들기
-        let operationQueue = OperationQueue()
-        
-        // operation 큐에 banker 수 만큼 addOperation 하기
-        for bankerIdentityNumber in 1...numberOfBank {
-            if clientArray.count == 0 {break}
-            let clientNumber = clientArray.removeFirst()
-            operationQueue.addOperation(Banker(identityNumber: bankerIdentityNumber, counterNumber: bankerIdentityNumber, client: Client(BussinessProcessState: false, waitingNumber: clientNumber)))
-            bankerStateArray[bankerIdentityNumber-1] = true
-        }
-        
-        // bankerStateArray에 False가 있는지 확인하기 KVO
-        
-        // client 큐가 비어있지 않으면 pop해서 operation 큐에 addOperaion 하기
-        if clientArray.count != 0 {
-            let clientNumber = clientArray.removeFirst()
-//            operationQueue.addOperation(Banker(identityNumber: bankerIdentityNumber, counterNumber: bankerIdentityNumber, client: Client(BussinessProcessState: false, waitingNumber: clientNumber)))
-//            bankerStateArray[bankerIdentityNumber-1] = true
-        }
-        
-        // bankerStateArray의 모든 원소가 false인지 확인하기 KVO
-        
-        let bank = Bank(numberOfWaitingClient: clientArray.count, totalNumberOfClinet: clientArray.count)
+        let numberOfClient = createClient()
+        createBanker(numberOfBanker: numberOfBanker)
+        Bank.operationQueue.waitUntilAllOperationsAreFinished()
+        let bank = Bank(numberOfWaitingClient: numberOfClient, totalNumberOfClinet: numberOfClient)
         bank.closeBusiness()
     }
 }

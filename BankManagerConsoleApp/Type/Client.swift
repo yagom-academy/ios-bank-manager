@@ -7,9 +7,12 @@
 
 import Foundation
 
-struct Client {
-    var BussinessProcessState: Bool
+class Client {
     var waitingNumber: Int
+
+    init(waitingNumber:Int) {
+        self.waitingNumber = waitingNumber
+    }
 }
 
 

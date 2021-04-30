@@ -6,4 +6,9 @@
 
 import Foundation
 
-//startBank()
+startBank()
+
+
+
+
+
