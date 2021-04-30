@@ -23,14 +23,12 @@ struct Bank {
     
     // MARK: - Private Methods
     mutating func open() {
-        let clients: [Client] = clients(number: generateRandomClientNumber())
+        let clients: [Client] = clients(
+            number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
+        )
         let totalProcessTime: Double = measureTime { processTasks(of: clients) }
         
         close(totalProcessTime, numberOfClient: clients.count)
-    }
-    
-    func generateRandomClientNumber() -> Int {
-        return Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
     }
     
     func measureTime(_ closure: () -> Void) -> Double {
