@@ -28,7 +28,7 @@ struct Bank {
         )
         let totalProcessTime: Double = measureTime { processTasks(of: clients) }
         
-        close(totalProcessTime, numberOfClient: clients.count)
+        close(numberOfClient: clients.count, totalProcessTime)
     }
     
     mutating func makeClients(number: Int) -> [Client] {
@@ -54,7 +54,7 @@ struct Bank {
         waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
     
-    func close(_ totalProcessTime: Double, numberOfClient: Int) {
+    func close(numberOfClient: Int, _ totalProcessTime: Double) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(totalProcessTime)초입니다.")
     }
 }
