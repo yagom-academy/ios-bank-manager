@@ -47,7 +47,11 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         subjectMethodsToBeMeasured()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        return floor(processTime * 100) / 100
+        return processTime
+    }
+    
+    func preferredNumberFormat(_ number: Double) -> Double {
+        return floor(number * 100) / 100
     }
     
     mutating func processTasks(of clients: [Client]) {
@@ -55,7 +59,7 @@ struct Bank {
     }
     
     func close(numberOfClient: Int, _ totalProcessTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(totalProcessTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(preferredNumberFormat(totalProcessTime))초입니다.")
     }
 }
 
