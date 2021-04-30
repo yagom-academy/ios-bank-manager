@@ -46,6 +46,11 @@
 
 <br>
 
+### step1 구현화면
+![화면 기록 2021-04-30 오후 6 16 11](https://user-images.githubusercontent.com/65153742/116675060-61973500-a9e0-11eb-8908-7a8b8f5910dd.gif)
+
+<br>
+
 ### 참고 링크
 - [[인프런] iOS Concurrency(동시성) 프로그래밍, 동기 비동기 처리 그리고 GCD/Operation - 디스패치큐와 오퍼레이션큐의 이해](https://www.inflearn.com/course/iOS-Concurrency-GCD-Operation#)
 - [[유투브] 프로세스는 뭐고 스레드는 뭔가요?](https://www.youtube.com/watch?v=iks_Xb9DtTM)
