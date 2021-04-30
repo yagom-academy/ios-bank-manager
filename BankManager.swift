@@ -29,12 +29,12 @@ struct BankManager {
         return userInputNumber
     }
     
-    mutating private func moveToSelectedMenu() throws {
-        switch try selectMenu() {
+    mutating private func move(to selectedMenu: Int) {
+        switch selectedMenu {
         case Menu.openBank:
             bank.open()
         case Menu.exit:
-            return
+            exit(0)
         default:
             print("유효하지 않은 입력입니다. 1과 2 중에서 선택해주세요.")
         }
@@ -43,7 +43,8 @@ struct BankManager {
     mutating func start() {
         while true {
             do {
-                try moveToSelectedMenu()
+                let selectedMenu: Int = try selectMenu()
+                move(to: selectedMenu)
             } catch {
                 print(error)
             }
