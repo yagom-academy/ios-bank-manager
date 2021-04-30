@@ -31,13 +31,6 @@ struct Bank {
         close(totalProcessTime, numberOfClient: clients.count)
     }
     
-    func measureTime(_ closure: () -> Void) -> Double {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        closure()
-        let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        return processTime
-    }
-    
     mutating func clients(number: Int) -> [Client] {
         var clients: [Client] = []
         
@@ -46,6 +39,13 @@ struct Bank {
         }
         
         return clients
+    }
+    
+    func measureTime(_ closure: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        closure()
+        let processTime = CFAbsoluteTimeGetCurrent() - startTime
+        return processTime
     }
     
     mutating private func processTasks(of clients: [Client]) {
