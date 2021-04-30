@@ -11,7 +11,7 @@ struct Bank {
     // MARK: - Properties
     private(set) var waitingQueue: OperationQueue = OperationQueue()
     
-    init(numberOfTeller: Int) {
+    init(numberOfTeller: Int = 1) {
         self.waitingQueue.maxConcurrentOperationCount = numberOfTeller
     }
     
@@ -33,6 +33,10 @@ struct Bank {
     
     mutating func makeClients(number: Int) -> [Client] {
         var clients: [Client] = []
+        
+        guard number >= 1 else {
+            return clients
+        }
         
         for waitingNumber in 1...number {
             clients.append(Client(waitingNumber))

@@ -18,35 +18,38 @@ final class BankManagerTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testClients_whenInitiated_checksArrayAndNumberAreSame() {
-        var sutBank: Bank = Bank(numberOfTeller: 1)
-        let clients: [Client] = sutBank.clients()
+    func testMakeClients_whenClientNumberLessThanOne_returnEmptyArray() {
+        var sutBank: Bank = Bank()
         
-        XCTAssertEqual(clients.count, sutBank.totalClient)
-    }
-
-    func testAssignTeller_whenThreeTellers_checksAssignedState() {
-        let sutBank: Bank = Bank(numberOfTeller: 3)
-        
-        sutBank.assignTeller()
-        
-        XCTAssertEqual(sutBank.waitingQueue.maxConcurrentOperationCount, 3)
-        XCTAssertEqual(sutBank.numberOfTeller, 3)
-    }
-    
-    func testClose_whenProcessedTimeHasMoreThanTwoDecimalPlaces_checksResultHasTwoDecimalPlaces() {
-        var sutBank: Bank = Bank(numberOfTeller: 1)
-        
-        sutBank.        total:processedTime = 123.56789
-        XCTAssertEqual(sutBank.close(), 123.56)
-    }
-    
-    func testTotalProcessedTime_whenGivenProcessingTime_checksGivenValueAndCalculatedResultAreSame() {
-        let sutBank: Bank = Bank(numberOfTeller: 1)
-        let sleepTime: Double = sutBank.processedTime {
-            Thread.sleep(forTimeInterval: 0.01)
+        for lessThanOne in -1...0 {
+            XCTAssertEqual(sutBank.makeClients(number: lessThanOne), [])
         }
-        
-        XCTAssertEqual(floor(sleepTime * 100) / 100, 0.01)
     }
+    
+    func testMakeClients_whenClientNumberIsMoreThanOne_returnClientsWithWaitingNumber() {
+        var sutBank: Bank = Bank()
+        let sutClients: [Client] = sutBank.makeClients(number: 3)
+        
+        XCTAssertEqual(sutClients.count, 3)
+        
+        for index in 0...2 {
+            XCTAssertEqual(sutClients[index].waitingNumber, index + 1)
+        }
+    }
+    
+//    func testClose_whenProcessedTimeHasMoreThanTwoDecimalPlaces_checksResultHasTwoDecimalPlaces() {
+//        var sutBank: Bank = Bank(numberOfTeller: 1)
+//
+//        sutBank.        total:processedTime = 123.56789
+//        XCTAssertEqual(sutBank.close(), 123.56)
+//    }
+    
+//    func testTotalProcessedTime_whenGivenProcessingTime_checksGivenValueAndCalculatedResultAreSame() {
+//        let sutBank: Bank = Bank(numberOfTeller: 1)
+//        let sleepTime: Double = sutBank.processedTime {
+//            Thread.sleep(forTimeInterval: 0.01)
+//        }
+//        
+//        XCTAssertEqual(floor(sleepTime * 100) / 100, 0.01)
+//    }
 }
