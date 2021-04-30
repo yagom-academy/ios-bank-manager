@@ -6,13 +6,18 @@
 
 import Foundation
 
+func makeRandomNumberOfCustomers() -> Int {
+    return Int.random(in: 10...30)
+}
+
+let numberOfCustomers = makeRandomNumberOfCustomers()
+
 struct Bank {
     let queue = OperationQueue()
     
     func displayConsoleMenu() {
         provideOption()
         let userNumberInput = receiveUserNumberInput()
-        let numberOfCustomers = makeRandomNumberOfCustomers()
         switch userNumberInput {
         case 1:
             queue.maxConcurrentOperationCount = 1
@@ -24,8 +29,7 @@ struct Bank {
                 }
             }
             queue.waitUntilAllOperationsAreFinished()
-            
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(Double(numberOfCustomers) * 0.7)초 입니다.")
+            informResult()
             displayConsoleMenu()
         case 2:
             exit(0)
@@ -45,8 +49,8 @@ struct Bank {
         return inputNumber
     }
     
-    func makeRandomNumberOfCustomers() -> Int {
-        return Int.random(in: 10...30)
+    func informResult() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(Double(numberOfCustomers) * 0.7)초 입니다.")
     }
 }
 
