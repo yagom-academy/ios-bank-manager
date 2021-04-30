@@ -6,7 +6,7 @@
 
 import Foundation
 
-let bankManager = BankManager(numberOfTeller: 1)
+let bankManager = BankManager(numberOfTeller: 3)
 
 func start() {
     while true {
@@ -25,6 +25,8 @@ func start() {
             bankManager.sendToCounter()
         case "2":
             return
+        case "3":
+            bankManager.generateNumberOfClient()
         default:
             print("잘못된 입력입니다. 1과 2번중에 선택하여 입력해주세요.")
         }

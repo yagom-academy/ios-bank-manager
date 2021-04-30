@@ -6,9 +6,15 @@
 
 import Foundation
 
+enum ClientType: Int, CaseIterable {
+    case vvip = 0
+    case vip = 1
+    case normal = 2
+}
+
 class BankManager {
     let counter = OperationQueue()
-    var numberOfClient: Int = 0
+    var numberOfClients = [Client]()
     var numberOfTeller: Int
     
     init(numberOfTeller: Int) {
@@ -16,27 +22,33 @@ class BankManager {
     }
     
     func generateNumberOfClient() {
-        numberOfClient = Int.random(in: 10...30)
+        let generateRandomClientNumber = Int.random(in: 10...30)
+        
+        for number in 1...generateRandomClientNumber {
+            guard let clientCase = ClientType.allCases.randomElement() else {
+                return
+            }
+            let client = Client(waitNumber: number, clientType: clientCase)
+            numberOfClients.append(client)
+        }
+        print(numberOfClients)
+        numberOfClients.removeAll()
     }
     
-    func workTask(order: Int) {
-        print("\(order)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
-        print("\(order)번 고객 업무 완료★")
+    func workTask() {
+        
     }
     
     func sendToCounter() {
         counter.maxConcurrentOperationCount = numberOfTeller
-        for index in 1...numberOfClient {
-            counter.addOperation {
-                self.workTask(order: index)
-            }
-        }
-        counter.waitUntilAllOperationsAreFinished()
-        closeBank()
     }
     
     func closeBank() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(Double(numberOfClient) * 0.7)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients.count)명이며, 총 업무시간은 \(Double(numberOfClients.count) * 0.7)초입니다.")
     }
+}
+
+struct Client {
+    let waitNumber: Int
+    let clientType: ClientType
 }
