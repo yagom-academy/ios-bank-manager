@@ -14,7 +14,7 @@ final class Bank {
     
     private func createClient() {
         for number in 1...Int.random(in: 10...30) {
-            clients.append(Client(waitingNumber: number))
+            clients.append(Client(waitingNumber: number, taskTime: 0.7))
         }
     }
     

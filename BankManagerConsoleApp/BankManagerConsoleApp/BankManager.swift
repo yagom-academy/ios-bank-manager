@@ -13,11 +13,13 @@ struct Teller {
 
 struct Client {
     let waitingNumber: Int
+    let taskTime: Double
     let task: BankTaskOperation
     
-    init(waitingNumber: Int) {
+    init(waitingNumber: Int, taskTime: Double) {
         self.waitingNumber = waitingNumber
-        self.task = BankTaskOperation(waitingNumber, 0.7)
+        self.taskTime = taskTime
+        self.task = BankTaskOperation(waitingNumber, taskTime)
     }
 }
 
