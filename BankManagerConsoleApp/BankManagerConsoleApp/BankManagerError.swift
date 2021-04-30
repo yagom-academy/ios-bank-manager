@@ -8,12 +8,12 @@
 import Foundation
 
 enum BankManagerError: Error, CustomStringConvertible {
-    case invaildMenu(String)
+    case invalidMenu(String)
     
     var description: String {
         switch self {
-        case .invaildMenu(let functionName):
-            return "invaildInput \(functionName)"
+        case .invalidMenu(let functionName):
+            return "invalidInput. Method Name: \(functionName)"
         }
     }
 }

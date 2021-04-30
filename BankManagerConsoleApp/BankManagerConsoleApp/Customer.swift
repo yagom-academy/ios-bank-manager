@@ -11,7 +11,6 @@ final class Customer: Operation {
     
     private enum TimeForProcessingTask {
         static let deposit: Double = 0.7
-        static let withdrawal: Double = 1.1
     }
 
     init(_ waitingNumber: Int) {
@@ -19,9 +18,9 @@ final class Customer: Operation {
     }
     
     override func main() {
-        print("\(waitingNumber) 번 고객 업무 시작")
+        print("\(waitingNumber) 번 고객 업무 시작.")
         Thread.sleep(forTimeInterval: TimeForProcessingTask.deposit)
-        print("\(waitingNumber) 번 고객 업무 종료")
+        print("\(waitingNumber) 번 고객 업무 종료!")
     }
 }
 

@@ -14,15 +14,15 @@ struct BankManager {
     }
     
     private enum Menu {
-        static let openBank = 1
-        static let closeBank = 2
+        static let openBank: Int = 1
+        static let closeBank: Int = 2
     }
     
     private func selectMenu() throws -> Int {
         print("1: 은행 개점\n2: 종료\n입력: ", terminator: "")
         guard let userInput: String = readLine(),
               let userInputNumber: Int = Int(userInput) else {
-            throw BankManagerError.invaildMenu(#function)
+            throw BankManagerError.invalidMenu(#function)
         }
         return userInputNumber
     }
