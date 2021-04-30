@@ -14,12 +14,13 @@ struct BankManager {
     }
     
     private enum Menu {
+        static let text: String = "1: 은행 개점\n2: 종료\n입력: "
         static let openBank: Int = 1
         static let closeBank: Int = 2
     }
     
     private func selectMenu() throws -> Int {
-        print("1: 은행 개점\n2: 종료\n입력: ", terminator: "")
+        print(Menu.text, terminator: "")
         guard let userInput: String = readLine(),
               let userInputNumber: Int = Int(userInput) else {
             throw BankManagerError.invalidMenu(#function)
