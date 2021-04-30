@@ -15,11 +15,16 @@ struct Bank {
         let numberOfCustomers = makeRandomNumberOfCustomers()
         switch userNumberInput {
         case 1:
+            queue.maxConcurrentOperationCount = 1
             for i in 1...numberOfCustomers {
-                print("\(i)번 고객 업무 시작")
-                usleep(700000)
-                print("\(i)번 고객 업무 완료")
+                queue.addOperation {
+                    print("\(i)번 고객 업무 시작")
+                    usleep(700000)
+                    print("\(i)번 고객 업무 완료")
+                }
             }
+            queue.waitUntilAllOperationsAreFinished()
+            
             print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(Double(numberOfCustomers) * 0.7)초 입니다.")
             displayConsoleMenu()
         case 2:
