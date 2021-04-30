@@ -8,16 +8,28 @@ import Foundation
 
 final class Client: Operation {
     var waitingNumber: Int?
+    var creditRate: creditRating?
+    var typeOfwork: workType?
     
     override func main() {
-        guard let client = waitingNumber else {
+        guard let client = waitingNumber, let credit = creditRate, let taskType = typeOfwork else {
             return
         }
-        print("\(client)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: Double.duration)
+        work(client, credit, taskType)
+        
+    }
+    
+    private func work(_ waitingNumber: Int, _ credit: creditRating, _ taskType: workType) {
+        switch taskType {
+        case .deposit:
+            print("\(waitingNumber)번 \(credit)고객 \(taskType)업무 시작")
+            Thread.sleep(forTimeInterval: workType.deposit.duration)
+            print("\(waitingNumber)번 \(credit)고객 \(taskType)업무 완료")
+        case .loan:
+            print("\(waitingNumber)번 \(credit)고객 \(taskType)업무 시작")
+            Thread.sleep(forTimeInterval: workType.loan.duration)
+            print("\(waitingNumber)번 \(credit)고객 \(taskType)업무 완료")
+        }
     }
 }
 
-extension Double {
-    static let duration = 0.7
-}
