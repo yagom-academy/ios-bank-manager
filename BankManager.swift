@@ -11,10 +11,10 @@ class BankManager {
     func openBank() {
         var bankOpenMenuState: Bool = BankOpenMenu()
         
-        while bankOpenMenuState {
+        if bankOpenMenuState {
             bankWorkProgress()
             
-            bankOpenMenuState = BankOpenMenu()
+            openBank()
         }
     }
     
