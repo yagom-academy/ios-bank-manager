@@ -16,7 +16,7 @@ struct BankPrinter {
     }
     
     static func printFinishPharse(_ totalCustomerNumber: Int, _ totalSecond: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerNumber)명이며, 총 업무시간은 \(totalSecond.printToTwoDecimalPoint())초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerNumber)명이며, 총 업무시간은 \(totalSecond.cutNumberToTwoDecimalPoint())초입니다.")
     }
     
     static func printWrongInputPharse() {
@@ -27,7 +27,7 @@ struct BankPrinter {
 
 extension Double {
 
-    func printToTwoDecimalPoint() -> String {
+    func cutNumberToTwoDecimalPoint() -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.roundingMode = .floor
         numberFormatter.maximumFractionDigits = 2
@@ -39,13 +39,11 @@ extension Double {
 
 }
 
-struct Inputer {
-
-    static let blank = ""
+struct InputHelper {
     
-    static func receive() -> String {
+    static func receive() -> String? {
         guard let input = readLine() else {
-            return blank
+            return nil
         }
         return input
     }
@@ -70,7 +68,7 @@ struct Bank {
     func open() {
         while (true) {
             BankPrinter.printMenu()
-            let input = Inputer.receive()
+            let input = InputHelper.receive()
             switch input {
             case "1":
                 startWork()
