@@ -29,19 +29,16 @@ struct BankManager {
     
     mutating func start() {
         while true {
-            bankOperationQueue.addOperation(ConsoleTaskOperation(consoleViewController: consoleViewController))
-            bankOperationQueue.waitUntilAllOperationsAreFinished()
+            bankOperationQueue.addOperations([ConsoleTaskOperation(consoleViewController: consoleViewController)], waitUntilFinished: true)
             
             guard consoleViewController.shouldContinue else { return }
-            
-            bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .openBank))
-            bankOperationQueue.waitUntilAllOperationsAreFinished()
+        
+            bankOperationQueue.addOperations([BankTaskOperation(bank: bank, task: .openBank)], waitUntilFinished: true)
             
             handleCustomer()
             bankOperationQueue.waitUntilAllOperationsAreFinished()
             
-            bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .closeBank))
-            bankOperationQueue.waitUntilAllOperationsAreFinished()
+            bankOperationQueue.addOperations([BankTaskOperation(bank: bank, task: .closeBank)], waitUntilFinished: true)
         }
     }
 }
