@@ -60,8 +60,3 @@ final class Bank {
         }
     }
 }
-
-enum MenuSelection: String {
-    case start = "1"
-    case end = "2"
-}
