@@ -9,10 +9,10 @@ import Foundation
 final class Client: Operation {
     var waitingNumber: Int?
     var creditRate: creditRating?
-    var typeOfwork: workType?
+    var typeOfWork: workType?
     
     override func main() {
-        guard let client = waitingNumber, let credit = creditRate, let taskType = typeOfwork else {
+        guard let client = waitingNumber, let credit = creditRate, let taskType = typeOfWork else {
             return
         }
         work(client, credit, taskType)

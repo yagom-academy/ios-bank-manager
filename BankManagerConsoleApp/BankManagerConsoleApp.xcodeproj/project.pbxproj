@@ -61,9 +61,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				BABE3F3C263C344300F33385 /* BankService.swift */,
 				C7D65D1A259C8190005510E0 /* Client.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				BABE3F3C263C344300F33385 /* BankService.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
