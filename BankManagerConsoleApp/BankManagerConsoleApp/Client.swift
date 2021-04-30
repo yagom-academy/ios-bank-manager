@@ -2,7 +2,7 @@
 //  Client.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yunhwa on 2021/04/27.
+//  Created by Yun, Ryan on 2021/04/27.
 //
 import Foundation
 

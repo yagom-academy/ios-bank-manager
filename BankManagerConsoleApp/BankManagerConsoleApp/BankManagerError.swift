@@ -2,7 +2,7 @@
 //  BankManagerError.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yunhwa on 2021/04/29.
+//  Created by Yun, Ryan on 2021/04/29.
 //
 
 import Foundation
