@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76D796B0263BBE1C002095B4 /* CustomerMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D796AF263BBE1C002095B4 /* CustomerMaker.swift */; };
+		76D796B2263BBE42002095B4 /* BankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D796B1263BBE42002095B4 /* BankTask.swift */; };
 		B0AD40BD263951AB00729039 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40BC263951AB00729039 /* Bank.swift */; };
 		B0AD40C02639526700729039 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40BF2639526700729039 /* Customer.swift */; };
 		B0AD40C4263954B200729039 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40C3263954B200729039 /* BankManager.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		76D796AF263BBE1C002095B4 /* CustomerMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMaker.swift; sourceTree = "<group>"; };
+		76D796B1263BBE42002095B4 /* BankTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTask.swift; sourceTree = "<group>"; };
 		B0AD40BC263951AB00729039 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		B0AD40BF2639526700729039 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		B0AD40C3263954B200729039 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 				B0AD40BC263951AB00729039 /* Bank.swift */,
 				B0AD40BF2639526700729039 /* Customer.swift */,
 				B0AD40C3263954B200729039 /* BankManager.swift */,
+				76D796AF263BBE1C002095B4 /* CustomerMaker.swift */,
+				76D796B1263BBE42002095B4 /* BankTask.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -128,7 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D796B2263BBE42002095B4 /* BankTask.swift in Sources */,
 				B0AD40BD263951AB00729039 /* Bank.swift in Sources */,
+				76D796B0263BBE1C002095B4 /* CustomerMaker.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				B0AD40C02639526700729039 /* Customer.swift in Sources */,
 				B0AD40C4263954B200729039 /* BankManager.swift in Sources */,
