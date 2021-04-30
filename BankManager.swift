@@ -19,25 +19,27 @@ struct BankManager {
         bankOperationQueue.maxConcurrentOperationCount = bank.numberOfBankTeller
     }
     
+    private func handleCustomer() {
+        for _ in 1...randomGenerator.createRandomNumber() {
+            let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber())
+            let operation = HandleCustomerOperation(customer: randomCustomer)
+            bankOperationQueue.addOperation(operation)
+        }
+    }
+    
     mutating func start() {
         while true {
             bankOperationQueue.addOperation(ConsoleTaskOperation(consoleViewController: consoleViewController))
             bankOperationQueue.waitUntilAllOperationsAreFinished()
             
-            guard consoleViewController.shouldContinue else {
-                return
-            }
+            guard consoleViewController.shouldContinue else { return }
             
             bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .openBank))
             bankOperationQueue.waitUntilAllOperationsAreFinished()
             
-            for _ in 1...randomGenerator.createRandomNumber() {
-                let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber())
-                let operation = HandleCustomerOperation(customer: randomCustomer)
-                bankOperationQueue.addOperation(operation)
-            }
-            
+            handleCustomer()
             bankOperationQueue.waitUntilAllOperationsAreFinished()
+            
             bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .closeBank))
             bankOperationQueue.waitUntilAllOperationsAreFinished()
         }
