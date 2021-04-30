@@ -40,11 +40,12 @@ final class BankManagerTests: XCTestCase {
         let sleepTime: Double? = sutBank?.totalProcessedTime {
             Thread.sleep(forTimeInterval: 0.01)
         }
-        guard let sleepTime = sleepTime else {
+        guard let sleepTime: Double = sleepTime else {
             XCTFail("Failed to initialize sleepTime.")
             return
         }
+        let flooredSleepTime: Double = floor(sleepTime * 100) / 100
         
-        XCTAssertEqual(floor(sleepTime * 100) / 100, 0.01)
+        XCTAssertEqual(flooredSleepTime, 0.01)
     }
 }
