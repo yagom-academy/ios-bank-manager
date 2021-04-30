@@ -9,6 +9,7 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerTests: XCTestCase {
+    var sutBank: Bank = Bank()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -19,15 +20,12 @@ final class BankManagerTests: XCTestCase {
     }
 
     func testMakeClients_whenClientNumberLessThanOne_returnsEmptyArray() {
-        var sutBank: Bank = Bank()
-        
         for lessThanOne in -1...0 {
             XCTAssertEqual(sutBank.makeClients(number: lessThanOne), [])
         }
     }
     
     func testMakeClients_whenClientNumberIsMoreThanOne_returnsClientsWithWaitingNumber() {
-        var sutBank: Bank = Bank()
         let sutClients: [Client] = sutBank.makeClients(number: 3)
         
         XCTAssertEqual(sutClients.count, 3)
@@ -38,27 +36,28 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testMeasureTime_whenNoTaskGiven_returnsZero() {
-        let sutBank: Bank = Bank()
         let sleepTime: Double = sutBank.measureTime { }
         
         XCTAssertEqual(sleepTime, 0)
     }
     
     func testMeasureTime_whenProcessTimeIsGiven_returnsGivenTime() {
-        let sutBank: Bank = Bank()
         let sleepTime: Double = sutBank.measureTime {
             Thread.sleep(forTimeInterval: 0.01)
         }
         
-        XCTAssertEqual(sleepTime, 0.01)
+        XCTAssertEqual(floor(sleepTime * 100) / 100, 0.01)
     }
     
     func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
-        var sutBank: Bank = Bank()
         let processTime: Double = sutBank.measureTime {
             sutBank.processTasks(of: [Client(1)])
         }
         
-        XCTAssertEqual(processTime, 0.7)
+        XCTAssertEqual(floor(processTime * 100) / 100 , 0.7)
+    }
+    
+    func testPreferredNumberFormat_whenNumberMoreThanTwoDecimalPlacesIsGiven_returnsNumberWithTwoDecimalPlaces() {
+        XCTAssertEqual(sutBank.preferredNumberFormat(123.456789), 123.45)
     }
 }
