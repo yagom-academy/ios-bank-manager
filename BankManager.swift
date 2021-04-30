@@ -9,16 +9,16 @@ import Foundation
 class BankManager {
     
     func openBank() {
-        var bankState: Bool = choiceBankState()
+        var bankOpenMenuState: Bool = BankOpenMenu()
         
-        while bankState {
+        while bankOpenMenuState {
             bankWorkProgress()
             
-            bankState = choiceBankState()
+            bankOpenMenuState = BankOpenMenu()
         }
     }
     
-    private func choiceBankState() -> Bool {
+    private func BankOpenMenu() -> Bool {
         
         while true {
             print("1 : 은행개점")
