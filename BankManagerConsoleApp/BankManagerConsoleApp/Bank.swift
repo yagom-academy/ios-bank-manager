@@ -8,9 +8,9 @@
 import Foundation
 
 struct Bank {
-    var totalClient: Int = 0
-    var waitingQueue: OperationQueue = OperationQueue()
-    var numberOfTeller: Int
+    private(set) var totalClient: Int = 0
+    private(set) var waitingQueue: OperationQueue = OperationQueue()
+    private(set) var numberOfTeller: Int
     var processedTime: Double = 0
     
     private enum NumberOfClient {
@@ -59,7 +59,7 @@ struct Bank {
         return clients
     }
     
-    mutating func processTasks(of clients: [Client]) {
+    mutating private func processTasks(of clients: [Client]) {
         waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
 }
