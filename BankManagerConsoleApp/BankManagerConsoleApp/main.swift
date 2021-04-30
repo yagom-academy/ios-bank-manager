@@ -6,16 +6,13 @@
 
 import Foundation
 
-func makeRandomNumberOfCustomers() -> Int {
-    return Int.random(in: 10...30)
-}
-
-let numberOfCustomers = makeRandomNumberOfCustomers()
-
 struct Bank {
+    let queue = OperationQueue()
+    
     func displayConsoleMenu() {
         provideOption()
         let userNumberInput = receiveUserNumberInput()
+        let numberOfCustomers = makeRandomNumberOfCustomers()
         switch userNumberInput {
         case 1:
             for i in 1...numberOfCustomers {
@@ -41,6 +38,10 @@ struct Bank {
     func receiveUserNumberInput() -> Int {
         guard let optionalInput = readLine(), let inputNumber = Int(optionalInput) else { return 0 }
         return inputNumber
+    }
+    
+    func makeRandomNumberOfCustomers() -> Int {
+        return Int.random(in: 10...30)
     }
 }
 
