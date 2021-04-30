@@ -10,7 +10,7 @@ struct BankManager {
     private var bank: Bank
     
     init(numberOfTeller: Int = 1) {
-        self.bank = Bank(numberOfTeller)
+        self.bank = Bank(numberOfTeller: numberOfTeller)
     }
     
     private enum Menu {

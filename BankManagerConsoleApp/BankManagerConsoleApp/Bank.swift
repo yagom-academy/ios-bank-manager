@@ -18,11 +18,11 @@ struct Bank {
         static let maximum: Int = 30
     }
     
-    init(_ numberOfTeller: Int) {
+    init(numberOfTeller: Int) {
         self.numberOfTeller = numberOfTeller
     }
     
-    private func totalProcessedTime(_ closure: () -> Void) -> Double {
+    func totalProcessedTime(_ closure: () -> Void) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
         closure()
         let processedTime = CFAbsoluteTimeGetCurrent() - startTime
@@ -37,9 +37,11 @@ struct Bank {
         close()
     }
     
-    private func close() {
+    @discardableResult
+    func close() -> Double {
         let totalProcessedTime = floor(processedTime * 100) / 100
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
+        return totalProcessedTime
     }
     
     func assignTeller() {
