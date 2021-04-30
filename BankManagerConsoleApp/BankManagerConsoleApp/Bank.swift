@@ -24,7 +24,7 @@ final class Bank {
         }
     }
     
-    private func selectMenu() -> String? {
+    private func selectMenu() -> MenuSelection? {
         print("""
         1 : 은행 개점
         2 : 종료
@@ -33,7 +33,7 @@ final class Bank {
         
         guard let menuNumber = readLine() else { return nil }
         
-        return menuNumber
+        return MenuSelection(rawValue: menuNumber)
     }
     
     private func open() {
@@ -65,16 +65,16 @@ final class Bank {
     }
     
     func operate() {
-        var menuNumber: String?
+        var menuNumber: MenuSelection?
         
         while true {
             menuNumber = selectMenu()
             
             switch menuNumber {
-            case "1":
+            case .start:
                 open()
                 close()
-            case "2":
+            case .end:
                 return
             default:
                 print("잘못된 입력입니다.")
@@ -82,4 +82,9 @@ final class Bank {
             }
         }
     }
+}
+
+enum MenuSelection: String {
+    case start = "1"
+    case end = "2"
 }
