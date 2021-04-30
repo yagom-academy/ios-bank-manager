@@ -49,19 +49,15 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         subjectMethodsToBeMeasured()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        return processTime
+        return floor(processTime * 100) / 100
     }
     
     mutating private func processTasks(of clients: [Client]) {
         waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
     
-    @discardableResult
-    func close(_ totalProcessTime: Double, numberOfClient: Int) -> Double {
-        let flooredTotalProcessTime: Double = floor(totalProcessTime * 100) / 100
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(flooredTotalProcessTime)초입니다.")
-        return flooredTotalProcessTime
+    func close(_ totalProcessTime: Double, numberOfClient: Int) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(totalProcessTime)초입니다.")
     }
 }
 
