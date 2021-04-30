@@ -6,14 +6,18 @@
 
 import Foundation
 
-// MARK: -Bank
+func makeRandomNumberOfCustomers() -> Int {
+    return Int.random(in: 10...30)
+}
+
+let numberOfCustomers = makeRandomNumberOfCustomers()
+
 struct Bank {
     func displayConsoleMenu() {
         provideOption()
         let userNumberInput = receiveUserNumberInput()
         switch userNumberInput {
         case 1:
-            let numberOfCustomers = makeRandomNumberOfCustomers()
             for i in 1...numberOfCustomers {
                 print("\(i)번 고객 업무 시작")
                 usleep(700000)
@@ -37,10 +41,6 @@ struct Bank {
     func receiveUserNumberInput() -> Int {
         guard let optionalInput = readLine(), let inputNumber = Int(optionalInput) else { return 0 }
         return inputNumber
-    }
-    
-    func makeRandomNumberOfCustomers() -> Int {
-        return Int.random(in: 10...30)
     }
 }
 
