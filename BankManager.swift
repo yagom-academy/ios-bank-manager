@@ -14,18 +14,17 @@ class Bank {
         showInitialMenu()
         
         guard let input = receiveUserInput() else { return }
-        
-        if input == SelectMenu.start.rawValue {
-            enqueueClient(pickRandomClientsNumber())
-            conductService(by: teller)
-        } else if input == SelectMenu.end.rawValue {
-            return
-        } else {
-            print(Messages.unknownInputMessage.rawValue)
-            startService()
-        }
-        
-        startService()
+        switch input {
+                case SelectMenu.start.rawValue:
+                    enqueueClient(pickRandomClientsNumber())
+                    conductService(by: teller)
+                    startService()
+                case SelectMenu.end.rawValue:
+                    return
+                default:
+                    print(Messages.unknownInputMessage.rawValue)
+                    startService()
+                }
     }
     
     private func showInitialMenu() {
