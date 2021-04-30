@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class Bank {
     private var clients: [Client] = []
     private var tellers: Teller = Teller(number: 1)
