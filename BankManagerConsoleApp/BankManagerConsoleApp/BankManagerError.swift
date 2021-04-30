@@ -5,8 +5,6 @@
 //  Created by Yun, Ryan on 2021/04/29.
 //
 
-import Foundation
-
 enum BankManagerError: Error, CustomStringConvertible {
     case invalidMenu(String)
     
