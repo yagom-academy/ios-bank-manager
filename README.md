@@ -27,6 +27,9 @@
   - Operation Queue 적용하여 Step1 코딩 시작
   - 네이밍 고민 (feat. 고마운 Ryan)
 - 04/30(금)
+  - 1기 졸업식 참석
+  - step1 PR, step2에 대한 설계 고민
+  - TWL 작성
 
 <br>
 
