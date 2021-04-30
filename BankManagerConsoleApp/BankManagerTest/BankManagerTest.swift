@@ -12,18 +12,20 @@ final class BankManagerTests: XCTestCase {
     private var sutBank: Bank?
     
     override func setUpWithError() throws {
-        try super.setUpWithError()
-        
         sutBank = Bank(numberOfTeller: 1)
+        
+        try super.setUpWithError()
     }
     
     override func tearDownWithError() throws {
+        sutBank = nil
+        
         try super.tearDownWithError()
     }
 
-    func test_bank_visitNewCustomer() {
-        let customers: [Customer]? = sutBank?.visitNewCustomer()
-        XCTAssertEqual(customers?.count, sutBank?.totalCustomer)
+    func test_bank_visitNewClient() {
+        let clients: [Client]? = sutBank?.visitNewClient()
+        XCTAssertEqual(clients?.count, sutBank?.totalClient)
     }
 
     func test_bank_assignTeller() {

@@ -8,12 +8,12 @@
 import Foundation
 
 struct Bank {
-    var totalCustomer: Int = 0
+    var totalClient: Int = 0
     var waitingQueue: OperationQueue = OperationQueue()
     var numberOfTeller: Int
     var processedTime: Double = 0
     
-    private enum NumberOfCustomer {
+    private enum NumberOfClient {
         static let minimum: Int = 10
         static let maximum: Int = 30
     }
@@ -32,7 +32,7 @@ struct Bank {
     mutating func open() {
         assignTeller()
         processedTime = totalProcessedTime {
-            visitNewCustomer()
+            visitNewClient()
         }
         close()
     }
@@ -40,7 +40,7 @@ struct Bank {
     @discardableResult
     func close() -> Double {
         let totalProcessedTime = floor(processedTime * 100) / 100
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
         return totalProcessedTime
     }
     
@@ -49,16 +49,16 @@ struct Bank {
     }
     
     @discardableResult
-    mutating func visitNewCustomer() -> [Customer] {
-        var customers: [Customer] = []
-        totalCustomer = Int.random(in: NumberOfCustomer.minimum...NumberOfCustomer.maximum)
+    mutating func visitNewClient() -> [Client] {
+        var clients: [Client] = []
+        totalClient = Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         
-        for waitingNumber in 1...totalCustomer {
-            customers.append(Customer(waitingNumber))
+        for waitingNumber in 1...totalClient {
+            clients.append(Client(waitingNumber))
         }
         
-        waitingQueue.addOperations(customers, waitUntilFinished: true)
-        return customers
+        waitingQueue.addOperations(clients, waitUntilFinished: true)
+        return clients
     }
 }
 

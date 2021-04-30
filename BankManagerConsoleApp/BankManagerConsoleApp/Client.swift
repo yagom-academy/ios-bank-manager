@@ -1,12 +1,12 @@
 //
-//  Customer.swift
+//  Client.swift
 //  BankManagerConsoleApp
 //
 //  Created by Yunhwa on 2021/04/27.
 //
 import Foundation
 
-final class Customer: Operation {
+final class Client: Operation {
     let waitingNumber: Int
     
     private enum TimeForProcessingTask {
