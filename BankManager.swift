@@ -41,13 +41,13 @@ class BankManager {
     
     private func bankWorkProgress() {
         let customerManager: CustomerManager = CustomerManager()
-        let todayTotalVisitCustomers: Int = customerManager.countCustomers()
+        let TotalCustomersCount: Int = customerManager.countCustomers()
         
         while true {
             let remainingCustomer: Int = customerManager.countCustomers()
         
             if remainingCustomer == 0 {
-                finishBank(todayTotalVisitCustomers: todayTotalVisitCustomers)
+                finishBank(todayTotalVisitCustomers: TotalCustomersCount)
                 break
             } else {
                 let customer: Int = customerManager.matchBankerAndCustomer()
