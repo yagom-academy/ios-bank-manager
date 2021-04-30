@@ -12,8 +12,8 @@ enum BankManagerError: Error, CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .invalidMenu(let functionName):
-            return "invalidInput. Method Name: \(functionName)"
+        case .invalidMenu(let userInput):
+            return "Invalid Input. User Input: \(userInput)"
         }
     }
 }
