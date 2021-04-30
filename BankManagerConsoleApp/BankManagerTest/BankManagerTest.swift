@@ -18,7 +18,7 @@ final class BankManagerTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testClients_whenInitiated_checksArrayandNumberAreSame() {
+    func testClients_whenInitiated_checksArrayAndNumberAreSame() {
         var sutBank: Bank = Bank(numberOfTeller: 1)
         let clients: [Client] = sutBank.clients()
         

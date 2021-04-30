@@ -8,27 +8,23 @@
 import Foundation
 
 struct Bank {
+    // MARK: - Properties
     private(set) var totalClient: Int = 0
     private(set) var waitingQueue: OperationQueue = OperationQueue()
     private(set) var numberOfTeller: Int
     var processedTime: Double = 0
     
+    init(numberOfTeller: Int) {
+        self.numberOfTeller = numberOfTeller
+    }
+    
+    // MARK: - NameSpaces
     private enum NumberOfClient {
         static let minimum: Int = 10
         static let maximum: Int = 30
     }
     
-    init(numberOfTeller: Int) {
-        self.numberOfTeller = numberOfTeller
-    }
-    
-    func totalProcessedTime(_ closure: () -> Void) -> Double {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        closure()
-        let processedTime = CFAbsoluteTimeGetCurrent() - startTime
-        return processedTime
-    }
-    
+    // MARK: - Private Methods
     mutating func open() {
         assignTeller()
         processedTime = totalProcessedTime {
@@ -37,15 +33,15 @@ struct Bank {
         close()
     }
     
-    @discardableResult
-    func close() -> Double {
-        let totalProcessedTime = floor(processedTime * 100) / 100
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
-        return totalProcessedTime
-    }
-    
     func assignTeller() {
         waitingQueue.maxConcurrentOperationCount = numberOfTeller
+    }
+    
+    func totalProcessedTime(_ closure: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        closure()
+        let processedTime = CFAbsoluteTimeGetCurrent() - startTime
+        return processedTime
     }
     
     mutating func clients() -> [Client] {
@@ -61,6 +57,13 @@ struct Bank {
     
     mutating private func processTasks(of clients: [Client]) {
         waitingQueue.addOperations(clients, waitUntilFinished: true)
+    }
+    
+    @discardableResult
+    func close() -> Double {
+        let totalProcessedTime = floor(processedTime * 100) / 100
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
+        return totalProcessedTime
     }
 }
 

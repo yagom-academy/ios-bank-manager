@@ -7,18 +7,21 @@
 import Foundation
 
 struct BankManager {
+    // MARK: - Properties
     private var bank: Bank
     
     init(numberOfTeller: Int = 1) {
         self.bank = Bank(numberOfTeller: numberOfTeller)
     }
     
+    // MARK: - NameSpaces
     private enum Menu {
         static let text: String = "1: 은행 개점\n2: 종료\n입력: "
         static let openBank: Int = 1
         static let exit: Int = 2
     }
     
+    // MARK: - Private Methods
     private func selectMenu() throws -> Int {
         print(Menu.text, terminator: "")
         let userInput: String? = readLine()
