@@ -6,6 +6,7 @@
 
 import Foundation
 
+// MARK: -Bank
 struct Bank {
     func displayConsoleMenu() {
         provideOption()
