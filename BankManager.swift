@@ -6,7 +6,7 @@
 
 import Foundation
 
-class BankManager {
+final class BankManager {
     
     func openBank() {
         let bankOpenMenuState: Bool = BankOpenMenu()
@@ -70,7 +70,7 @@ class BankManager {
     
     
     
-    func visitCustomers() -> [Customer] {
+    private func visitCustomers() -> [Customer] {
         var result: [Customer] = []
         let waitNumbers: [Int] = Array(1...Int.random(in: 10...30))
 
@@ -82,13 +82,13 @@ class BankManager {
         return result
     }
     
-    func matchBankerAndCustomer(customers: inout [Customer]) -> Int {
+    private func matchBankerAndCustomer(customers: inout [Customer]) -> Int {
         let customer: Customer = customers.removeFirst()
         
         return customer.waitNumber
     }
     
-    func countCustomers(customers: [Customer]) -> Int {
+    private func countCustomers(customers: [Customer]) -> Int {
         return customers.count
     }
 }

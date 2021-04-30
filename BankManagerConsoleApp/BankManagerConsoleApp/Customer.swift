@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Customer {
+final class Customer {
     let waitNumber: Int
     
     init(waitNumber: Int) {
