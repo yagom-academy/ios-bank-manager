@@ -9,6 +9,7 @@ import Foundation
 
 class HandleCustomerOperation: Operation {
     let customer: Customer
+    
     override func main() {
         handleBanking(customer: customer)
     }

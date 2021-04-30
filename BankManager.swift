@@ -36,6 +36,7 @@ struct BankManager {
                 let operation = HandleCustomerOperation(customer: randomCustomer)
                 bankOperationQueue.addOperation(operation)
             }
+            
             bankOperationQueue.waitUntilAllOperationsAreFinished()
             bankOperationQueue.addOperation(BankTaskOperation(bank: bank, task: .closeBank))
             bankOperationQueue.waitUntilAllOperationsAreFinished()
