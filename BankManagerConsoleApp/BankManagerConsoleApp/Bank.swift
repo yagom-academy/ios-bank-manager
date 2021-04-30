@@ -23,7 +23,7 @@ struct Bank {
     
     // MARK: - Private Methods
     mutating func open() {
-        let clients: [Client] = clients(
+        let clients: [Client] = makeClients(
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         )
         let totalProcessTime: Double = measureTime { processTasks(of: clients) }
@@ -31,7 +31,7 @@ struct Bank {
         close(totalProcessTime, numberOfClient: clients.count)
     }
     
-    mutating func clients(number: Int) -> [Client] {
+    mutating func makeClients(number: Int) -> [Client] {
         var clients: [Client] = []
         
         for waitingNumber in 1...number {
@@ -41,9 +41,9 @@ struct Bank {
         return clients
     }
     
-    func measureTime(_ closure: () -> Void) -> Double {
+    func measureTime(_ subjectMethodsToBeMeasured: () -> Void) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
-        closure()
+        subjectMethodsToBeMeasured()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
         return processTime
     }
