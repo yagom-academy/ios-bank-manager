@@ -37,13 +37,13 @@ final class BankManagerTests: XCTestCase {
     func testClose_whenProcessedTimeHasMoreThanTwoDecimalPlaces_checksResultHasTwoDecimalPlaces() {
         var sutBank: Bank = Bank(numberOfTeller: 1)
         
-        sutBank.processedTime = 123.56789
+        sutBank.        total:processedTime = 123.56789
         XCTAssertEqual(sutBank.close(), 123.56)
     }
     
     func testTotalProcessedTime_whenGivenProcessingTime_checksGivenValueAndCalculatedResultAreSame() {
         let sutBank: Bank = Bank(numberOfTeller: 1)
-        let sleepTime: Double = sutBank.totalProcessedTime {
+        let sleepTime: Double = sutBank.processedTime {
             Thread.sleep(forTimeInterval: 0.01)
         }
         

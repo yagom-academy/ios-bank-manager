@@ -9,13 +9,10 @@ import Foundation
 
 struct Bank {
     // MARK: - Properties
-    private(set) var totalClient: Int = 0
     private(set) var waitingQueue: OperationQueue = OperationQueue()
-    private(set) var numberOfTeller: Int
-    var processedTime: Double = 0
     
     init(numberOfTeller: Int) {
-        self.numberOfTeller = numberOfTeller
+        self.waitingQueue.maxConcurrentOperationCount = numberOfTeller
     }
     
     // MARK: - NameSpaces
@@ -26,29 +23,27 @@ struct Bank {
     
     // MARK: - Private Methods
     mutating func open() {
-        assignTeller()
-        processedTime = totalProcessedTime {
-            processTasks(of: clients())
-        }
-        close()
+        let clients: [Client] = clients(number: generateRandomClientNumber())
+        let totalProcessTime: Double = measureTime { processTasks(of: clients) }
+        
+        close(totalProcessTime, numberOfClient: clients.count)
     }
     
-    func assignTeller() {
-        waitingQueue.maxConcurrentOperationCount = numberOfTeller
+    func generateRandomClientNumber() -> Int {
+        return Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
     }
     
-    func totalProcessedTime(_ closure: () -> Void) -> Double {
+    func measureTime(_ closure: () -> Void) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
         closure()
-        let processedTime = CFAbsoluteTimeGetCurrent() - startTime
-        return processedTime
+        let processTime = CFAbsoluteTimeGetCurrent() - startTime
+        return processTime
     }
     
-    mutating func clients() -> [Client] {
+    mutating func clients(number: Int) -> [Client] {
         var clients: [Client] = []
-        totalClient = Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         
-        for waitingNumber in 1...totalClient {
+        for waitingNumber in 1...number {
             clients.append(Client(waitingNumber))
         }
         
@@ -60,10 +55,11 @@ struct Bank {
     }
     
     @discardableResult
-    func close() -> Double {
-        let totalProcessedTime = floor(processedTime * 100) / 100
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient) 명이며, 총 업무 시간은 \(totalProcessedTime)초입니다.")
-        return totalProcessedTime
+    func close(_ totalProcessTime: Double, numberOfClient: Int) -> Double {
+        let flooredTotalProcessTime: Double = floor(totalProcessTime * 100) / 100
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(flooredTotalProcessTime)초입니다.")
+        return flooredTotalProcessTime
     }
 }
 
