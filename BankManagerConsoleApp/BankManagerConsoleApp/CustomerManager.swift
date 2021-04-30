@@ -11,10 +11,7 @@ class CustomerManager {
     private lazy var customers: [Int] = visitCustomers()
     
     private func visitCustomers() -> [Int] {
-        let randomCustomerNumber: Int = Int.random(in: 10...30)
-        let customers = Array(1...randomCustomerNumber)
-        
-        return customers
+        return Array(1...Int.random(in: 10...30))
     }
     
     func matchBankerAndCustomer() -> Int {
