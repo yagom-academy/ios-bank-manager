@@ -54,8 +54,8 @@ struct Bank {
         for waitingNumber in 1...totalCustomer {
             customers.append(Customer(waitingNumber))
         }
-        waitingQueue.addOperations(customers, waitUntilFinished: true)
         
+        waitingQueue.addOperations(customers, waitUntilFinished: true)
         return customers
     }
 }

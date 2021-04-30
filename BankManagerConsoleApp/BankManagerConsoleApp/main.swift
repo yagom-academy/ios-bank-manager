@@ -6,5 +6,3 @@
 
 private var bankManager = BankManager()
 bankManager.start()
-
-

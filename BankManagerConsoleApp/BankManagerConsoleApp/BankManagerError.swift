@@ -13,7 +13,7 @@ enum BankManagerError: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .invaildMenu(let functionName):
-            return "invaildInput\(functionName)"
+            return "invaildInput \(functionName)"
         }
     }
 }

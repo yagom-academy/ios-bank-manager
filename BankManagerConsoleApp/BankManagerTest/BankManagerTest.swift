@@ -9,10 +9,8 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerTests: XCTestCase {
-    
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
     }
     
     override func tearDownWithError() throws {
@@ -30,6 +28,4 @@ final class BankManagerTests: XCTestCase {
         bank.assignTeller()
         XCTAssertEqual(bank.waitingQueue.maxConcurrentOperationCount, bank.numberOfTeller)
     }
-
-    
 }
