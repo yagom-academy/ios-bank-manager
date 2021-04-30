@@ -4,4 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+private var bankManager = BankManager()
+bankManager.start()
