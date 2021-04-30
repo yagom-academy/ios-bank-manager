@@ -32,7 +32,7 @@ struct Bank {
     mutating func open() {
         assignTeller()
         processedTime = totalProcessedTime {
-            visitNewClient()
+            processTasks(of: clients())
         }
         close()
     }
@@ -48,8 +48,7 @@ struct Bank {
         waitingQueue.maxConcurrentOperationCount = numberOfTeller
     }
     
-    @discardableResult
-    mutating func visitNewClient() -> [Client] {
+    mutating func clients() -> [Client] {
         var clients: [Client] = []
         totalClient = Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         
@@ -57,8 +56,11 @@ struct Bank {
             clients.append(Client(waitingNumber))
         }
         
-        waitingQueue.addOperations(clients, waitUntilFinished: true)
         return clients
+    }
+    
+    mutating func processTasks(of clients: [Client]) {
+        waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
 }
 

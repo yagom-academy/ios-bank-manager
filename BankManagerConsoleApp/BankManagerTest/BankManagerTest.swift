@@ -23,8 +23,8 @@ final class BankManagerTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_bank_visitNewClient() {
-        let clients: [Client]? = sutBank?.visitNewClient()
+    func test_bank_clients() {
+        let clients: [Client]? = sutBank?.clients()
         XCTAssertEqual(clients?.count, sutBank?.totalClient)
     }
 
