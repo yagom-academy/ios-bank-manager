@@ -16,7 +16,7 @@ struct Customer {
     }
 
     init(waitingNumber: Int) {
-        self._bankTask = BankTask(taskTime: 0.7, waitingNumber)
+        self._bankTask = BankTask(taskTime: 0.7, waitingNumber: waitingNumber)
         self.waitingNumber = waitingNumber
     }
     

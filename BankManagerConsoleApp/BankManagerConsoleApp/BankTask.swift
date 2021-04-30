@@ -12,7 +12,7 @@ class BankTask: Operation {
     private var taskTime: Double
     private var waitingNumber: Int
     
-    init(taskTime: Double, _ waitingNumber: Int) {
+    init(taskTime: Double, waitingNumber: Int) {
         self.taskTime = taskTime
         self.waitingNumber = waitingNumber
     }
