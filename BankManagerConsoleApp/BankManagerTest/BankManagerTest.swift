@@ -37,6 +37,13 @@ final class BankManagerTests: XCTestCase {
         }
     }
     
+    func testMeasureTime_whenNoTaskGiven_returnsZero() {
+        let sutBank: Bank = Bank()
+        let sleepTime: Double = sutBank.measureTime { }
+        
+        XCTAssertEqual(sleepTime, 0)
+    }
+    
     func testMeasureTime_whenProcessTimeIsGiven_returnsGivenTime() {
         let sutBank: Bank = Bank()
         let sleepTime: Double = sutBank.measureTime {
