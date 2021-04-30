@@ -9,10 +9,11 @@ import Foundation
 class BankManager {
     
     func openBank() {
-        var bankOpenMenuState: Bool = BankOpenMenu()
+        let bankOpenMenuState: Bool = BankOpenMenu()
+        var customers: [Customer] = visitCustomers()
         
         if bankOpenMenuState {
-            bankWorkProgress()
+            bankWorkProgress(customers: &customers)
             
             openBank()
         }
@@ -38,19 +39,18 @@ class BankManager {
             }
         }
     }
-    
-    private func bankWorkProgress() {
-        let customerManager: CustomerManager = CustomerManager()
-        let TotalCustomersCount: Int = customerManager.countCustomers()
+   
+    private func bankWorkProgress(customers: inout [Customer]) {
+        let TotalCustomersCount: Int = countCustomers(customers: customers)
         
         while true {
-            let remainingCustomer: Int = customerManager.countCustomers()
+            let remainingCustomer: Int = countCustomers(customers: customers)
         
             if remainingCustomer == 0 {
                 finishBank(todayTotalVisitCustomers: TotalCustomersCount)
                 break
             } else {
-                let customer: Int = customerManager.matchBankerAndCustomer()
+                let customer: Int = matchBankerAndCustomer(customers: &customers)
                 bankerWorkProgress(customerNumber: customer)
             }
         }
@@ -67,5 +67,28 @@ class BankManager {
         workTime = round(workTime * 100) / 100
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(todayTotalVisitCustomers)명이며, 총 업무 시간은 \(workTime)초 입니다.")
     }
+    
+    
+    
+    func visitCustomers() -> [Customer] {
+        var result: [Customer] = []
+        let waitNumbers: [Int] = Array(1...Int.random(in: 10...30))
 
+        for number in waitNumbers {
+            let customer: Customer = Customer(waitNumber: number)
+            result.append(customer)
+        }
+
+        return result
+    }
+    
+    func matchBankerAndCustomer(customers: inout [Customer]) -> Int {
+        let customer: Customer = customers.removeFirst()
+        
+        return customer.waitNumber
+    }
+    
+    func countCustomers(customers: [Customer]) -> Int {
+        return customers.count
+    }
 }
