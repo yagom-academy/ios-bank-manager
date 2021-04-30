@@ -24,7 +24,7 @@ enum creditRating: CustomStringConvertible {
     }
 }
 
-enum workType {
+enum workType: CustomStringConvertible {
     case deposit
     case loan
     
@@ -36,4 +36,16 @@ enum workType {
             return 1.1
         }
     }
+    
+    var description: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
+    
 }
+
+

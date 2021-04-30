@@ -12,12 +12,16 @@ final class Bank {
     var vvipQueue: [Client] = []
     var vipQueue: [Client] = []
     var normalQueue: [Client] = []
+    var commonQueue: [Client] = []
     let bankWindow1 = OperationQueue()
     let bankWindow2 = OperationQueue()
     let bankWindow3 = OperationQueue()
     
     
     func serveClient() {
+        bankWindow1.maxConcurrentOperationCount = 3
+//        bankWindow2.maxConcurrentOperationCount = 1
+//        bankWindow3.maxConcurrentOperationCount = 1
         while true {
             var workTime = Double.zero
             displayMenu()
@@ -25,8 +29,8 @@ final class Bank {
             switch menuNumber {
             case 1:
                 let totalCustomer = customerNumber()
-                let randomClientAttribute = acceeptRandomClient()
                 for waitNumber in 1...totalCustomer {
+                    let randomClientAttribute = acceeptRandomClient()
                     let client = Client()
                     client.waitingNumber = waitNumber
                     client.creditRate = creditRatings[randomClientAttribute.0]
@@ -37,11 +41,13 @@ final class Bank {
                         workTime += typeOfTask.duration
                     }
                 }
+                bankWindow1.addOperations(vvipQueue, waitUntilFinished: false)
+                bankWindow1.addOperations(vipQueue, waitUntilFinished: false)
+                bankWindow1.addOperations(normalQueue, waitUntilFinished: true)
                 
-                
-                
-                
-//                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은\(String(format: "%.2f", workTime))초 입니다.")
+//                scheduleService()
+//                sleep(20)
+                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은\(String(format: "%.2f", workTime))초 입니다.")
                 continue
             case 2:
                 exit(0)
@@ -86,6 +92,54 @@ final class Bank {
             normalQueue.append(client)
         }
     }
+    
+//    private func scheduleService() {
+//        while !vvipQueue.isEmpty || !vipQueue.isEmpty || !normalQueue.isEmpty {
+//            if vvipQueue.isEmpty == false {
+//                if bankWindow1.operationCount == 0 {
+//                    bankWindow1.addOperation(vvipQueue.removeFirst())
+//                    continue
+//                } else if bankWindow2.operationCount == 0 {
+//                    bankWindow2.addOperation(vvipQueue.removeFirst())
+//                    continue
+//                } else if bankWindow3.operationCount == 0 {
+//                    bankWindow3.addOperation(vvipQueue.removeFirst())
+//                    continue
+//                } else {
+//                    bankWindow1.addOperation(vvipQueue.removeFirst())
+//                    continue
+//                }
+//            } else if vipQueue.isEmpty == false {
+//                if bankWindow1.operationCount == 0 {
+//                    bankWindow1.addOperation(vipQueue.removeFirst())
+//                    continue
+//                } else if bankWindow2.operationCount == 0 {
+//                    bankWindow2.addOperation(vipQueue.removeFirst())
+//                    continue
+//                } else if bankWindow3.operationCount == 0 {
+//                    bankWindow3.addOperation(vipQueue.removeFirst())
+//                    continue
+//                } else {
+//                    bankWindow1.addOperation(vipQueue.removeFirst())
+//                    continue
+//                }
+//            } else {
+//                if bankWindow1.operationCount == 0 {
+//                    bankWindow1.addOperation(normalQueue.removeFirst())
+//                    continue
+//                } else if bankWindow2.operationCount == 0 {
+//                    bankWindow2.addOperation(normalQueue.removeFirst())
+//                    continue
+//                } else if bankWindow3.operationCount == 0 {
+//                    bankWindow3.addOperation(normalQueue.removeFirst())
+//                    continue
+//                } else {
+//                    bankWindow1.addOperation(normalQueue.removeFirst())
+//                    continue
+//                }
+//            }
+//        }
+//    }
 }
 
 
