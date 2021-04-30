@@ -8,19 +8,12 @@
 import Foundation
 final class Bank {
     private var clients: [Client] = []
-    private var tellers: [Teller] = []
-    private var tasks: [Operation] = []
+    private var tellers: Teller = Teller(number: 1)
     private var totalTaskTime: Double = 0
     
     private func createClient() {
         for number in 1...Int.random(in: 10...30) {
             clients.append(Client(waitingNumber: number, taskTime: 0.7))
-        }
-    }
-    
-    private func createTeller(number: Int) {
-        for number in 1...number {
-            tellers.append(Teller(counterNumber: number, identityNumber: number))
         }
     }
     
@@ -37,31 +30,14 @@ final class Bank {
     }
     
     private func open() {
-        let clientWaitingLineQueue = OperationQueue()
-        
-        createTeller(number: 1)
         createClient()
-        
-        clientWaitingLineQueue.maxConcurrentOperationCount = tellers.count
-        
-        handleTask(clientWaitingLineQueue)
-    }
-    
-    private func handleTask(_ clientWaitingLine: OperationQueue) {
-        for client in clients {
-            tasks.append(client.task)
-            totalTaskTime += client.task.taskTime
-        }
-        
-        clientWaitingLine.addOperations(tasks, waitUntilFinished: true)
+        totalTaskTime = tellers.handleTask(clients)
     }
     
     private func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clients.count)명이며, 총 업무시간은 \(String(format: "%.2f", totalTaskTime))초입니다.")
         
         clients.removeAll()
-        tellers.removeAll()
-        tasks.removeAll()
     }
     
     func operate() {
