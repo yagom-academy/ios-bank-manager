@@ -9,7 +9,7 @@ import Foundation
 
 struct Bank {
     // MARK: - Properties
-    private(set) var waitingQueue: OperationQueue = OperationQueue()
+    private var waitingQueue: OperationQueue = OperationQueue()
     
     init(numberOfTeller: Int = 1) {
         self.waitingQueue.maxConcurrentOperationCount = numberOfTeller
@@ -34,9 +34,7 @@ struct Bank {
     mutating func makeClients(number: Int) -> [Client] {
         var clients: [Client] = []
         
-        guard number >= 1 else {
-            return clients
-        }
+        guard number >= 1 else { return clients }
         
         for waitingNumber in 1...number {
             clients.append(Client(waitingNumber))
@@ -52,7 +50,7 @@ struct Bank {
         return floor(processTime * 100) / 100
     }
     
-    mutating private func processTasks(of clients: [Client]) {
+    mutating func processTasks(of clients: [Client]) {
         waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
     

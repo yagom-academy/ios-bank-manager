@@ -46,10 +46,12 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(sleepTime, 0.01)
     }
     
-//    func testClose_whenProcessedTimeHasMoreThanTwoDecimalPlaces_checksResultHasTwoDecimalPlaces() {
-//        var sutBank: Bank = Bank(numberOfTeller: 1)
-//
-//        sutBank.        total:processedTime = 123.56789
-//        XCTAssertEqual(sutBank.close(), 123.56)
-//    }
+    func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
+        var sutBank: Bank = Bank()
+        let processTime: Double = sutBank.measureTime {
+            sutBank.processTasks(of: [Client(1)])
+        }
+        
+        XCTAssertEqual(processTime, 0.7)
+    }
 }
