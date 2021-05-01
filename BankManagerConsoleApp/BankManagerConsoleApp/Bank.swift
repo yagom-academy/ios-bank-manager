@@ -31,11 +31,29 @@ class Bank {
             for index in 0..<observers.count {
                 guard let customer = observers[index].dequeue() else { continue }
                 customer.go(to: teller)
-            } 
+            }
         }
     }
     
-    class Teller {}
+    class Teller {
+        let counterNumber: Int
+        static let taskingTime: Double = 0.7
+        
+        init(counterNumber: Int) {
+            self.counterNumber = counterNumber
+        }
+        
+        func work(forCustomerOf waitingNumber: Int, by notificationBoard: NotificationBoard) {
+            print("\(waitingNumber)번 고객 업무 시작")
+            usleep(useconds_t(Int(Teller.taskingTime * 1_000_000)))
+            print("\(waitingNumber)번 고객 업무 완료")
+            call(to: notificationBoard)
+        }
+        
+        func call(to notificationBoard: NotificationBoard) {
+            notificationBoard.call(by: self)
+        }
+    }
 
     struct CustomerQueue {
         private var queue: [Customer] = []
