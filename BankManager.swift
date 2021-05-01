@@ -9,7 +9,7 @@ import Foundation
 final class BankManager {
     
     func openBank() {
-        let bankOpenMenuState: Bool = BankOpenMenu()
+        let bankOpenMenuState: Bool = bankOpenMenu()
         var customers: [Customer] = visitCustomers()
         
         if bankOpenMenuState {
@@ -19,7 +19,7 @@ final class BankManager {
         }
     }
     
-    private func BankOpenMenu() -> Bool {
+    private func bankOpenMenu() -> Bool {
         
         while true {
             print("1 : 은행개점")
