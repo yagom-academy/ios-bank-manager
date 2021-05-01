@@ -41,19 +41,19 @@ class BankManager {
         for i in 1...numberOfBanker {
             let notification = NSNotification.Name.init("\(i)th Banker")
             let banker = Banker(bankerNumber: i ,client: nil, notification: notification)
-            NotificationCenter.default.addObserver(self, selector: #selector(BankManager.work(notification:)), name: notification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(BankManager.updateBankCounter(notification:)), name: notification, object: nil)
             operationQueue.addOperation(banker)
         }
     }
     
-    func removeAllObserver(numberOfBanker: Int) {
-        for i in 1...numberOfBanker {
+    func removeAllObserver(numberOfObserver: Int) {
+        for i in 1...numberOfObserver {
             let notification = NSNotification.Name.init("\(i)th Banker")
             NotificationCenter.default.removeObserver(self, name:notification, object:nil)
         }
     }
     
-    @objc func work(notification : Notification) {
+    @objc func updateBankCounter(notification : Notification) {
         lock.lock()
         guard let userInformation = notification.userInfo else { return }
         updateTotalBusinessTime(userInformation:userInformation)
@@ -83,7 +83,7 @@ class BankManager {
             createBanker(numberOfBanker: numberOfBanker)
             operationQueue.waitUntilAllOperationsAreFinished()
             bank.closeBusiness()
-            removeAllObserver(numberOfBanker: numberOfBanker)
+            removeAllObserver(numberOfObserver: numberOfBanker)
             
         }
     }
