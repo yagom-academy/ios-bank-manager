@@ -23,7 +23,7 @@ class RandomGeneratorTest: XCTestCase {
             DispatchQueue.global().async {
                 let randomNumberInRange = self.dummyRandomGenerator?.createRandomNumber()
                 guard let random = randomNumberInRange else {
-                    XCTFail()
+                    XCTFail("fail to random create")
                     return
                 }
                 XCTAssertTrue(10 <= random && random <= 30)

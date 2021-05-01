@@ -15,50 +15,13 @@ class HandleCustomerOperation: Operation {
     }
     
     func handleBanking(customer: Customer) {
-        print("\(customer.ticketNumber)번 고객 \(customer.task.name)업무 시작")
+        print("\(customer.ticketNumber)번 \(customer.priority.name)고객 \(customer.task.name)업무 시작")
         usleep(customer.task.time)
-        print("\(customer.ticketNumber)번 고객 \(customer.task.name)업무 완료")
+        print("\(customer.ticketNumber)번 \(customer.priority.name)고객 \(customer.task.name)업무 완료")
     }
     
     init(customer: Customer) {
         self.customer = customer
         super.init()
-    }
-}
-
-class BankTaskOperation: Operation {
-    enum Task {
-        case openBank
-        case closeBank
-    }
-    
-    var bank: Bank
-    let task: Task
-    
-    init(bank: Bank, task: Task) {
-        self.bank = bank
-        self.task = task
-    }
-    
-    override func main() {
-        switch task {
-        case .openBank:
-            bank.openBank()
-        case .closeBank:
-            bank.closeBank()
-        }
-    }
-}
-
-class ConsoleTaskOperation: Operation {
-    var consoleViewController: ConsoleViewController
-    
-    init(consoleViewController: ConsoleViewController) {
-        self.consoleViewController = consoleViewController
-    }
-    
-    override func main() {
-        consoleViewController.showStartMenu()
-        consoleViewController.getUserInput()
     }
 }

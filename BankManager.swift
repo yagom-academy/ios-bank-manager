@@ -11,6 +11,7 @@ struct BankManager {
     private var consoleViewController: ConsoleViewController
     private let randomGenerator: RandomGenerator
     private let bankOperationQueue = OperationQueue()
+    private var randomCustomers: [Customer]?
     
     init(bank: Bank, consoleViewer: ConsoleViewController, randomGenerator: RandomGenerator) {
         self.bank = bank
@@ -19,26 +20,34 @@ struct BankManager {
         bankOperationQueue.maxConcurrentOperationCount = bank.numberOfBankTeller
     }
     
-    private func handleCustomer() {
-        for _ in 1...randomGenerator.createRandomNumber() {
-            let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber(), task: Customer.Task.allCases.randomElement()!)
-            let operation = HandleCustomerOperation(customer: randomCustomer)
-            bankOperationQueue.addOperation(operation)
-        }
+    private mutating func createRandomCustomer() {
+        randomCustomers = randomGenerator.generateRandomCustomer(bank: &bank)
+    }
+    
+    private mutating func handleCustomer() {
+        guard var randomCustomers = randomCustomers else { return }
+        
+        randomCustomers.sort{ $0.priority > $1.priority }
+        
+        randomCustomers.forEach({
+            let customerOperation = HandleCustomerOperation(customer: $0)
+            bankOperationQueue.addOperation(customerOperation)
+        })
+        
+        bankOperationQueue.waitUntilAllOperationsAreFinished()
     }
     
     mutating func start() {
         while true {
-            bankOperationQueue.addOperations([ConsoleTaskOperation(consoleViewController: consoleViewController)], waitUntilFinished: true)
+            createRandomCustomer()
+            consoleViewController.showStartMenu()
+            consoleViewController.getUserInput()
             
             guard consoleViewController.shouldContinue else { return }
-        
-            bankOperationQueue.addOperations([BankTaskOperation(bank: bank, task: .openBank)], waitUntilFinished: true)
             
+            bank.openBank()
             handleCustomer()
-            bankOperationQueue.waitUntilAllOperationsAreFinished()
-            
-            bankOperationQueue.addOperations([BankTaskOperation(bank: bank, task: .closeBank)], waitUntilFinished: true)
+            bank.closeBank()
         }
     }
 }

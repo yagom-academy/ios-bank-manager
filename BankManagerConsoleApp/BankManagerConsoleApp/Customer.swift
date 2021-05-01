@@ -8,7 +8,38 @@
 import Foundation
 
 struct Customer {
-    enum Task :CaseIterable {
+    let ticketNumber: Int
+    let priority: Priority
+    let task: Task
+}
+
+extension Customer {
+    enum Priority: CaseIterable, Comparable {
+        case normal
+        case VIP
+        case VVIP
+        
+        var name: String {
+            switch self {
+            case .VVIP:
+                return "VVIP"
+            case .VIP:
+                return "VIP"
+            case .normal:
+                return "일반"
+            }
+        }
+        
+        static var random: Priority {
+            if let randomPriority = Priority.allCases.randomElement() {
+                return randomPriority
+            } else {
+                return Priority.VIP
+            }
+        }
+    }
+    
+    enum Task: CaseIterable {
         case loan
         case deposit
         
@@ -29,12 +60,13 @@ struct Customer {
                 return 700_000
             }
         }
+        
+        static var random: Task {
+            if let randomTask = Task.allCases.randomElement() {
+                return randomTask
+            } else {
+                return Task.loan
+            }
+        }
     }
-    
-    let ticketNumber: Int
-    let task: Task
-}
-
-extension Customer {
-    
 }

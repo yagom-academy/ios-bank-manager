@@ -6,7 +6,7 @@
 
 import Foundation
 
-var bankManager = BankManager(bank: Bank(numberOfBankTeller: 1),
+var bankManager = BankManager(bank: Bank(numberOfBankTeller: 3),
                               consoleViewer: ConsoleViewController(),
                               randomGenerator: RandomGenerator())
 bankManager.start()

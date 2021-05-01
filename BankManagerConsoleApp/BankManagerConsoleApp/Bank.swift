@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Bank {
-    var ticketNumber: Int = 0 
+struct Bank {
+    var ticketNumber: Int = 0
     var numberOfBankTeller: Int
     var openTime: CFAbsoluteTime?
     var closeTime: CFAbsoluteTime?
@@ -17,17 +17,16 @@ class Bank {
         self.numberOfBankTeller = numberOfBankTeller
     }
     
-    func getNewTicketNumber() -> Int {
+    mutating func getNewTicketNumber() -> Int {
         ticketNumber += 1
         return ticketNumber
     }
     
-    func openBank() {
+    mutating func openBank() {
         openTime = CFAbsoluteTimeGetCurrent()
-        setTicketNumberToZero()
     }
     
-    func closeBank() {
+    mutating func closeBank() {
         closeTime = CFAbsoluteTimeGetCurrent()
         
         guard let open = openTime,
@@ -35,9 +34,10 @@ class Bank {
         
         let spentTime = formatTimeDuration(time: close - open)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(ticketNumber)명이며, 총 업무시간은 \(spentTime)초입니다.")
+        setTicketNumberToZero()
     }
     
-    private func setTicketNumberToZero() {
+    mutating private func setTicketNumberToZero() {
         ticketNumber = 0
     }
     

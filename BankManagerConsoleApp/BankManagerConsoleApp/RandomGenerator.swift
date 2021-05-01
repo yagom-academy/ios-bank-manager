@@ -8,11 +8,22 @@
 import Foundation
 
 struct RandomGenerator {
-    func generateRandomCustomer(ticketNumber: Int, task: Customer.Task) -> Customer {
-        return Customer(ticketNumber: ticketNumber, task: task)
+    func generateRandomCustomer(bank: inout Bank) -> [Customer] {
+        let totalCustomer = createRandomNumberInRange(10, to: 30)
+        var customers = [Customer]()
+        
+        for _ in 1...totalCustomer {
+            let ticketNumber = bank.getNewTicketNumber()
+            let priority = Customer.Priority.random
+            let task = Customer.Task.random
+            let randomCustomer  = Customer(ticketNumber: ticketNumber, priority: priority, task: task)
+            customers.append(randomCustomer)
+        }
+        
+        return customers
     }
     
-    func createRandomNumber() -> Int {
-        return Int.random(in: 10...30)
+    func createRandomNumberInRange(_ start: Int, to end: Int) -> Int {
+        return Int.random(in: start...end)
     }
 }
