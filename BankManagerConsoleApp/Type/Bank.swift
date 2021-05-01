@@ -8,15 +8,13 @@
 import Foundation
 
 class Bank {
-    var numberOfWaitingClient : Int
     var totalNumberOfClinet: Int
     static var totalBusinessTime: Float = 0
     static var clientQueue: [Client] = []
     static var operationQueue = OperationQueue()
     static let lock = NSLock()
     
-    init(numberOfWaitingClient: Int, totalNumberOfClinet: Int) {
-        self.numberOfWaitingClient = numberOfWaitingClient
+    init(totalNumberOfClinet: Int) {
         self.totalNumberOfClinet = totalNumberOfClinet
     }
     

@@ -50,7 +50,7 @@ private func manageBank() throws {
         let numberOfClient = createClient()
         createBanker(numberOfBanker: numberOfBanker)
         Bank.operationQueue.waitUntilAllOperationsAreFinished()
-        let bank = Bank(numberOfWaitingClient: numberOfClient, totalNumberOfClinet: numberOfClient)
+        let bank = Bank(totalNumberOfClinet: numberOfClient)
         bank.closeBusiness()
     }
 }
