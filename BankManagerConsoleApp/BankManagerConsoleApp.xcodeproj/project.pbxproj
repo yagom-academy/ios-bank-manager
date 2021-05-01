@@ -13,6 +13,8 @@
 		D0A820AC263BD93D00800571 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		D0A820B2263BE75A00800571 /* BankControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820B1263BE75A00800571 /* BankControllerTests.swift */; };
 		D0A820B6263BE76D00800571 /* BankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820B5263BE76D00800571 /* BankTests.swift */; };
+		D0A820BC263C267500800571 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820BB263C267500800571 /* Bank.swift */; };
+		D0A820C0263C269B00800571 /* BankController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820BF263C269B00800571 /* BankController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +39,8 @@
 		D0A820A6263BD74000800571 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A820B1263BE75A00800571 /* BankControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankControllerTests.swift; sourceTree = "<group>"; };
 		D0A820B5263BE76D00800571 /* BankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTests.swift; sourceTree = "<group>"; };
+		D0A820BB263C267500800571 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		D0A820BF263C269B00800571 /* BankController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				D0A820BB263C267500800571 /* Bank.swift */,
+				D0A820BF263C269B00800571 /* BankController.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -205,8 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A820BC263C267500800571 /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				D0A820C0263C269B00800571 /* BankController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
