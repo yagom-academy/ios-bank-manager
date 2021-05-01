@@ -7,8 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C4581AB2638563C00EA6A83 /* BankTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581AA2638563C00EA6A83 /* BankTest.swift */; };
+		1C4581B226385A5400EA6A83 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		1C4581B526385A5600EA6A83 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
+		1C4581BB26385A5A00EA6A83 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
+		1C4581BE26385A5C00EA6A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
+		1C4581D6263A7B5B00EA6A83 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581D5263A7B5B00EA6A83 /* Customer.swift */; };
+		1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
+		1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
+		1CDF895A263AD05B008CD062 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8959263AD05B008CD062 /* RandomGenerator.swift */; };
+		1CDF895E263AD06F008CD062 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* Operations.swift */; };
+		1CDF8961263AECAB008CD062 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581D5263A7B5B00EA6A83 /* Customer.swift */; };
+		1CDF8964263AECAC008CD062 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8959263AD05B008CD062 /* RandomGenerator.swift */; };
+		1CDF8967263AECAE008CD062 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* Operations.swift */; };
+		1CDF8971263AEF0A008CD062 /* RandomGeneratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8970263AEF0A008CD062 /* RandomGeneratorTest.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		CF2CF53BA9B76AA5837606B0 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27574928C2F5BBF11D2B27CC /* Pods_BankManagerConsoleApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,27 +39,69 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D4F5029572D820B84D5F708 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
+		1C4581A82638563C00EA6A83 /* ConsoleAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConsoleAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C4581AA2638563C00EA6A83 /* BankTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTest.swift; sourceTree = "<group>"; };
+		1C4581AC2638563C00EA6A83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C4581D5263A7B5B00EA6A83 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		1C6BFF58263830AC00CE9F75 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
+		1CDF8959263AD05B008CD062 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
+		1CDF895D263AD06F008CD062 /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		1CDF8970263AEF0A008CD062 /* RandomGeneratorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorTest.swift; sourceTree = "<group>"; };
+		27574928C2F5BBF11D2B27CC /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A97936BAC56A3E03C87DE9B7 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C7694E73259C3EC00053667F /* Frameworks */ = {
+		1C4581A52638563C00EA6A83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7694E73259C3EC00053667F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2CF53BA9B76AA5837606B0 /* Pods_BankManagerConsoleApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C4581A92638563C00EA6A83 /* ConsoleAppTest */ = {
+			isa = PBXGroup;
+			children = (
+				1C4581AA2638563C00EA6A83 /* BankTest.swift */,
+				1CDF8970263AEF0A008CD062 /* RandomGeneratorTest.swift */,
+				1C4581AC2638563C00EA6A83 /* Info.plist */,
+			);
+			path = ConsoleAppTest;
+			sourceTree = "<group>";
+		};
+		68B857802FD429ECB555063A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A97936BAC56A3E03C87DE9B7 /* Pods-BankManagerConsoleApp.debug.xcconfig */,
+				0D4F5029572D820B84D5F708 /* Pods-BankManagerConsoleApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
+				1C4581A92638563C00EA6A83 /* ConsoleAppTest */,
 				C7694E77259C3EC00053667F /* Products */,
+				68B857802FD429ECB555063A /* Pods */,
+				E142929FC25E56E4AF5DB315 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
+				1C4581A82638563C00EA6A83 /* ConsoleAppTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,21 +118,53 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				1C6BFF58263830AC00CE9F75 /* Bank.swift */,
+				1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */,
+				1C4581D5263A7B5B00EA6A83 /* Customer.swift */,
+				1CDF8959263AD05B008CD062 /* RandomGenerator.swift */,
+				1CDF895D263AD06F008CD062 /* Operations.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
+		E142929FC25E56E4AF5DB315 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27574928C2F5BBF11D2B27CC /* Pods_BankManagerConsoleApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1C4581A72638563C00EA6A83 /* ConsoleAppTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C4581AF2638563C00EA6A83 /* Build configuration list for PBXNativeTarget "ConsoleAppTest" */;
+			buildPhases = (
+				1C4581A42638563C00EA6A83 /* Sources */,
+				1C4581A52638563C00EA6A83 /* Frameworks */,
+				1C4581A62638563C00EA6A83 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConsoleAppTest;
+			productName = ConsoleAppTest;
+			productReference = 1C4581A82638563C00EA6A83 /* ConsoleAppTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C7694E75259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7694E7D259C3EC00053667F /* Build configuration list for PBXNativeTarget "BankManagerConsoleApp" */;
 			buildPhases = (
+				A06C616AABE997C27FFE06D9 /* [CP] Check Pods Manifest.lock */,
 				C7694E72259C3EC00053667F /* Sources */,
 				C7694E73259C3EC00053667F /* Frameworks */,
 				C7694E74259C3EC00053667F /* CopyFiles */,
+				1CBCA2D42636E1A0000D5A13 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -91,9 +181,12 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
+					1C4581A72638563C00EA6A83 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					C7694E75259C3EC00053667F = {
 						CreatedOnToolsVersion = 12.1;
 					};
@@ -113,16 +206,90 @@
 			projectRoot = "";
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
+				1C4581A72638563C00EA6A83 /* ConsoleAppTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		1C4581A62638563C00EA6A83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1CBCA2D42636E1A0000D5A13 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		A06C616AABE997C27FFE06D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BankManagerConsoleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		1C4581A42638563C00EA6A83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CDF8961263AECAB008CD062 /* Customer.swift in Sources */,
+				1C4581B526385A5600EA6A83 /* Bank.swift in Sources */,
+				1CDF8971263AEF0A008CD062 /* RandomGeneratorTest.swift in Sources */,
+				1CDF8967263AECAE008CD062 /* Operations.swift in Sources */,
+				1C4581AB2638563C00EA6A83 /* BankTest.swift in Sources */,
+				1C4581BE26385A5C00EA6A83 /* main.swift in Sources */,
+				1CDF8964263AECAC008CD062 /* RandomGenerator.swift in Sources */,
+				1C4581B226385A5400EA6A83 /* BankManager.swift in Sources */,
+				1C4581BB26385A5A00EA6A83 /* ConsoleViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7694E72259C3EC00053667F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */,
+				1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */,
+				1CDF895A263AD05B008CD062 /* RandomGenerator.swift in Sources */,
+				1CDF895E263AD06F008CD062 /* Operations.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				1C4581D6263A7B5B00EA6A83 /* Customer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +297,44 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		1C4581AD2638563C00EA6A83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 267JUTDVY2;
+				INFOPLIST_FILE = ConsoleAppTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = neph.ConsoleAppTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1C4581AE2638563C00EA6A83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 267JUTDVY2;
+				INFOPLIST_FILE = ConsoleAppTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = neph.ConsoleAppTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		C7694E7B259C3EC00053667F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -247,6 +452,7 @@
 		};
 		C7694E7E259C3EC00053667F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A97936BAC56A3E03C87DE9B7 /* Pods-BankManagerConsoleApp.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -256,6 +462,7 @@
 		};
 		C7694E7F259C3EC00053667F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D4F5029572D820B84D5F708 /* Pods-BankManagerConsoleApp.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -266,6 +473,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1C4581AF2638563C00EA6A83 /* Build configuration list for PBXNativeTarget "ConsoleAppTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C4581AD2638563C00EA6A83 /* Debug */,
+				1C4581AE2638563C00EA6A83 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C7694E71259C3EC00053667F /* Build configuration list for PBXProject "BankManagerConsoleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
