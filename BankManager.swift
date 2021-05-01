@@ -41,7 +41,7 @@ struct BankManager {
         while true {
             createRandomCustomer()
             consoleViewController.showStartMenu()
-            consoleViewController.getUserInput()
+            consoleViewController.chooseStartOrEnd()
             
             guard consoleViewController.shouldContinue else { return }
             

@@ -19,7 +19,7 @@ struct ConsoleViewController {
  """, terminator: "")
     }
     
-    mutating func getUserInput() {
+    mutating func chooseStartOrEnd() {
         guard let userInput = readLine() else {
             return
         }

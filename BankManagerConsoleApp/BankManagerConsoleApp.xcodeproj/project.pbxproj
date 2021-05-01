@@ -16,11 +16,12 @@
 		1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
 		1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
 		1CDF895A263AD05B008CD062 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8959263AD05B008CD062 /* RandomGenerator.swift */; };
-		1CDF895E263AD06F008CD062 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* Operations.swift */; };
+		1CDF895E263AD06F008CD062 /* HandleCustomerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */; };
 		1CDF8961263AECAB008CD062 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581D5263A7B5B00EA6A83 /* Customer.swift */; };
 		1CDF8964263AECAC008CD062 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8959263AD05B008CD062 /* RandomGenerator.swift */; };
-		1CDF8967263AECAE008CD062 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* Operations.swift */; };
-		1CDF8971263AEF0A008CD062 /* RandomGeneratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8970263AEF0A008CD062 /* RandomGeneratorTest.swift */; };
+		1CDF8967263AECAE008CD062 /* HandleCustomerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */; };
+		1CDF89AF263DB2B3008CD062 /* RandomGeneratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF89AE263DB2B3008CD062 /* RandomGeneratorTest.swift */; };
+		1CDF89B5263DB3F2008CD062 /* HandleCustomerOperationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF89B4263DB3F2008CD062 /* HandleCustomerOperationTest.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		CF2CF53BA9B76AA5837606B0 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27574928C2F5BBF11D2B27CC /* Pods_BankManagerConsoleApp.framework */; };
@@ -47,8 +48,9 @@
 		1C6BFF58263830AC00CE9F75 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
 		1CDF8959263AD05B008CD062 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
-		1CDF895D263AD06F008CD062 /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
-		1CDF8970263AEF0A008CD062 /* RandomGeneratorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorTest.swift; sourceTree = "<group>"; };
+		1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleCustomerOperation.swift; sourceTree = "<group>"; };
+		1CDF89AE263DB2B3008CD062 /* RandomGeneratorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorTest.swift; sourceTree = "<group>"; };
+		1CDF89B4263DB3F2008CD062 /* HandleCustomerOperationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleCustomerOperationTest.swift; sourceTree = "<group>"; };
 		27574928C2F5BBF11D2B27CC /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97936BAC56A3E03C87DE9B7 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,8 +80,9 @@
 		1C4581A92638563C00EA6A83 /* ConsoleAppTest */ = {
 			isa = PBXGroup;
 			children = (
+				1CDF89B4263DB3F2008CD062 /* HandleCustomerOperationTest.swift */,
+				1CDF89AE263DB2B3008CD062 /* RandomGeneratorTest.swift */,
 				1C4581AA2638563C00EA6A83 /* BankTest.swift */,
-				1CDF8970263AEF0A008CD062 /* RandomGeneratorTest.swift */,
 				1C4581AC2638563C00EA6A83 /* Info.plist */,
 			);
 			path = ConsoleAppTest;
@@ -122,7 +125,7 @@
 				1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */,
 				1C4581D5263A7B5B00EA6A83 /* Customer.swift */,
 				1CDF8959263AD05B008CD062 /* RandomGenerator.swift */,
-				1CDF895D263AD06F008CD062 /* Operations.swift */,
+				1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -269,9 +272,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CDF8961263AECAB008CD062 /* Customer.swift in Sources */,
+				1CDF89B5263DB3F2008CD062 /* HandleCustomerOperationTest.swift in Sources */,
 				1C4581B526385A5600EA6A83 /* Bank.swift in Sources */,
-				1CDF8971263AEF0A008CD062 /* RandomGeneratorTest.swift in Sources */,
-				1CDF8967263AECAE008CD062 /* Operations.swift in Sources */,
+				1CDF8967263AECAE008CD062 /* HandleCustomerOperation.swift in Sources */,
+				1CDF89AF263DB2B3008CD062 /* RandomGeneratorTest.swift in Sources */,
 				1C4581AB2638563C00EA6A83 /* BankTest.swift in Sources */,
 				1C4581BE26385A5C00EA6A83 /* main.swift in Sources */,
 				1CDF8964263AECAC008CD062 /* RandomGenerator.swift in Sources */,
@@ -287,7 +291,7 @@
 				1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */,
 				1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */,
 				1CDF895A263AD05B008CD062 /* RandomGenerator.swift in Sources */,
-				1CDF895E263AD06F008CD062 /* Operations.swift in Sources */,
+				1CDF895E263AD06F008CD062 /* HandleCustomerOperation.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				1C4581D6263A7B5B00EA6A83 /* Customer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,

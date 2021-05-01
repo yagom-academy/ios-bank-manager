@@ -19,25 +19,29 @@ class BankTest: XCTestCase {
         dummyBank = nil
     }
     
-    func test_Bank_getNewTicket_for_firstTicketNumber() {
+    func test_getNewTicketNumber_호출시_ticketNumber_증가하는지() {
+        for _ in 1...10 {
+            dummyBank?.getNewTicketNumber()
+        }
+        
+        let tenthTicketNumber = dummyBank?.ticketNumber
+        
+        XCTAssertEqual(tenthTicketNumber, 10)
+    }
+    
+    func test_getNewTicket_호출시_ticketNumber_반환이_정상적으로되는지() {
         let firstTicketNumber = dummyBank?.getNewTicketNumber()
         XCTAssertEqual(firstTicketNumber, 1)
     }
     
-    func test_Bank_getNewTicket_for_middleTicketNumber() {
-        for _ in 1...10 {
-            dummyBank?.getNewTicketNumber()
-        }
-        let middleTicketNumber = dummyBank?.getNewTicketNumber()
-        XCTAssertEqual(middleTicketNumber, 11)
-    }
-    
-    func test_Bank_ticketNumber가_openBank_호출시_0으로_초기화되는지_테스트() {
+    func test_ticketNumber가_closeBank_호출시_0으로_초기화되는지_테스트() {
         for _ in 1...Int.random(in: 10...30) {
             dummyBank?.getNewTicketNumber()
         }
-        dummyBank?.openBank()
-        let ticketNumber = dummyBank?.ticketNumber
-        XCTAssertEqual(ticketNumber, 0)
+        dummyBank?.openTime = CFAbsoluteTimeGetCurrent() //closeBank의 openTime을 지정해주기 위해 필요
+        dummyBank?.closeBank()
+        let resettedTicketNumber = dummyBank?.ticketNumber
+        
+        XCTAssertEqual(resettedTicketNumber, 0)
     }
 }
