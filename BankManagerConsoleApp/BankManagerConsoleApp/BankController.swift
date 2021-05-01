@@ -18,7 +18,6 @@ class BankController {
         self.bank = bank
     }
 
-
     func receiveCustomer(number: Int) {}
 
     func prepareTeller(number: Int) {}
