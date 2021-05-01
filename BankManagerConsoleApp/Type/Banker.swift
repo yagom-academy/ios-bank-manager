@@ -24,6 +24,7 @@ class Banker: Operation {
         if let client = self.client {
             print("\(client.waitingNumber)번 고객 업무 시작")
             businessTime = 0.7
+            Thread.sleep(forTimeInterval: Double(businessTime))
             print("\(client.waitingNumber)번 고객 업무 완료")
         }
         NotificationCenter.default.post(name: notification, object: nil, userInfo: ["bankerNumber": bankerNumber, "notificationNumber": notification,"businessTime": businessTime])
