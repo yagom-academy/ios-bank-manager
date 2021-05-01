@@ -20,7 +20,7 @@ class Bank {
         }
         
         func removeObserver(_ observer: CustomerQueue) {
-            observers.removeAll(where: $0.name == observer.name)
+            observers.removeAll(where: { $0.name == observer.name })
         }
         
         func call(by teller: Teller) {
@@ -28,10 +28,10 @@ class Bank {
         }
         
         func floatOnBoard(by teller: Teller) {
-            for customerQueue in observers {
-                guard let customer = customerQueue.dequeue() else { continue }
+            for index in 0..<observers.count {
+                guard let customer = observers[index].dequeue() else { continue }
                 customer.go(to: teller)
-            }
+            } 
         }
     }
     
