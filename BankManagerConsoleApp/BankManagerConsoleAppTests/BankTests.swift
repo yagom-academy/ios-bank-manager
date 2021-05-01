@@ -7,6 +7,4 @@
 
 import XCTest
 
-class BankTests: XCTestCase {
-
-}
+class BankTests: XCTestCase {}

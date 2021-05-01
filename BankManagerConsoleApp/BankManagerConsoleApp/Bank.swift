@@ -7,3 +7,16 @@
 
 import Foundation
 
+class Bank {
+    var counters: [Teller] = []
+    let customerQueue: CustomerQueue = CustomerQueue()
+    let notificationBoard: NotificationBoard = NotificationBoard()
+
+    class NotificationBoard {}
+
+    class Teller {}
+
+    struct CustomerQueue {}
+
+    class Customer {}
+}
