@@ -30,7 +30,7 @@ class Bank {
         func floatOnBoard(by teller: Teller) {
             for index in 0..<observers.count {
                 guard let customer = observers[index].dequeue() else { continue }
-                customer.go(to: teller)
+                customer.go(to: teller, by: self)
             }
         }
     }
@@ -72,5 +72,15 @@ class Bank {
         }
     }
 
-    class Customer {}
+    class Customer {
+        let waitingNumber: Int
+
+        init(waitingNumber: Int) {
+            self.waitingNumber = waitingNumber
+        }
+
+        func go(to teller: Teller, by notificationBoard: NotificationBoard) {
+            teller.work(forCustomerOf: self.waitingNumber, by: notificationBoard)
+        }
+    }
 }
