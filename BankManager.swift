@@ -47,7 +47,7 @@ final class BankManager {
             let remainingCustomer: Int = countCustomers(customers: customers)
         
             if remainingCustomer == 0 {
-                finishBank(todayTotalVisitCustomers: TotalCustomersCount)
+                finishBank(totalCustomerCount: TotalCustomersCount)
                 break
             } else {
                 let customer: Int = matchBankerAndCustomer(customers: &customers)
