@@ -8,7 +8,6 @@ import Foundation
 
 final class Bank {
     let client = Client()
-    let serialQueue = DispatchQueue(label: "serial")
     let creditRatings: [creditRating] = [.vvip, .vip, .normal]
     let typeOfWorks: [workType] = [.deposit, .loan]
     var vvipQueue: [Client] = []
@@ -21,46 +20,44 @@ final class Bank {
     
     
     func serveClient() {
-        serialQueue.sync {
-            while true {
-                bankWindow1.maxConcurrentOperationCount = 3
-                //        bankWindow2.maxConcurrentOperationCount = 1
-                //        bankWindow3.maxConcurrentOperationCount = 1
-                var workTime = Double.zero
-                displayMenu()
-                let menuNumber = inputMenuNumber()
-                switch menuNumber {
-                case 1:
-                    var clientWaitLine: [Client] = []
-                    let totalCustomer = customerNumber()
-                    for waitNumber in 1...totalCustomer {
-                        let randomClientAttribute = acceeptRandomClient()
-                        let client = Client()
-                        client.waitingNumber = waitNumber
-                        client.creditRate = creditRatings[randomClientAttribute.0]
-                        client.typeOfWork = typeOfWorks[randomClientAttribute.1]
-                        assignPriority(client)
-                        clientWaitLine.append(client)
-                        //                    setPriority(client)
-                        client.completionBlock = {
-                            guard let typeOfTask = client.typeOfWork else { return }
-                            workTime += typeOfTask.duration
-                        }
+        while true {
+            bankWindow1.maxConcurrentOperationCount = 3
+            //        bankWindow2.maxConcurrentOperationCount = 1
+            //        bankWindow3.maxConcurrentOperationCount = 1
+            var workTime = Double.zero
+            displayMenu()
+            let menuNumber = inputMenuNumber()
+            switch menuNumber {
+            case 1:
+                var clientWaitLine: [Client] = []
+                let totalCustomer = customerNumber()
+                for waitNumber in 1...totalCustomer {
+                    let randomClientAttribute = acceeptRandomClient()
+                    let client = Client()
+                    client.waitingNumber = waitNumber
+                    client.creditRate = creditRatings[randomClientAttribute.0]
+                    client.typeOfWork = typeOfWorks[randomClientAttribute.1]
+                    assignPriority(client)
+                    clientWaitLine.append(client)
+                    //                    setPriority(client)
+                    client.completionBlock = {
+                        guard let typeOfTask = client.typeOfWork else { return }
+                        workTime += typeOfTask.duration
                     }
-                    bankWindow1.addOperations(clientWaitLine, waitUntilFinished: true)
-                    //                bankWindow1.addOperations(vipQueue, waitUntilFinished: false)
-                    //                bankWindow1.addOperations(normalQueue, waitUntilFinished: true)
-                    
-                    //                scheduleService()
-                    //                sleep(20)
-                    print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은\(String(format: "%.2f", workTime))초 입니다.")
-                    continue
-                case 2:
-                    exit(0)
-                default:
-                    print("잘못된 입력")
-                    continue
                 }
+                bankWindow1.addOperations(clientWaitLine, waitUntilFinished: true)
+                //                bankWindow1.addOperations(vipQueue, waitUntilFinished: false)
+                //                bankWindow1.addOperations(normalQueue, waitUntilFinished: true)
+                
+                //                scheduleService()
+                //                sleep(20)
+                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은\(String(format: "%.2f", workTime))초 입니다.")
+                continue
+            case 2:
+                exit(0)
+            default:
+                print("잘못된 입력")
+                continue
             }
         }
     }
