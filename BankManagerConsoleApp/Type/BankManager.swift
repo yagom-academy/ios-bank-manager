@@ -20,11 +20,10 @@ class BankManager {
     }
     
     private func checkInputValidation() -> Bool? {
-        guard let userInput = readLine() else { return nil }
-        guard let userInputNumber = Int(userInput) else { return nil }
-        if userInputNumber == 1 {
+        guard let userInput = readLine(), let userInputNumber = Int(userInput) else { return nil }
+        if userInputNumber == BankMenu.start {
             return true
-        } else if userInputNumber == 2 {
+        } else if userInputNumber == BankMenu.exit {
             return false
         }
         return nil
@@ -53,21 +52,21 @@ class BankManager {
         }
     }
     
-    @objc func updateBankCounter(notification : Notification) {
+    @objc func updateBankCounter(notification: Notification) {
         lock.lock()
         guard let userInformation = notification.userInfo else { return }
-        updateTotalBusinessTime(userInformation:userInformation)
-        if clientQueue.count != 0 {
-            guard let bankerNumber = userInformation["bankerNumber"] as? Int else { return }
-            guard let notificationNumber = userInformation["notificationNumber"] as? NSNotification.Name else { return }
-            let banker = Banker(bankerNumber: bankerNumber ,client: clientQueue.removeFirst(), notification: notificationNumber)
+        updateTotalBusinessTime(userInformation: userInformation)
+        if !clientQueue.isEmpty {
+            guard let bankerNumber = userInformation[UserInformationKey.bankerNumber] as? Int else { return }
+            guard let notificationNumber = userInformation[UserInformationKey.notificationNumber] as? NSNotification.Name else { return }
+            let banker = Banker(bankerNumber: bankerNumber, client: clientQueue.removeFirst(), notification: notificationNumber)
             operationQueue.addOperation(banker)
         }
         lock.unlock()
     }
     
     func updateTotalBusinessTime(userInformation: [AnyHashable:Any]) {
-        guard let businessTime = userInformation["businessTime"] as? Float else { return }
+        guard let businessTime = userInformation[UserInformationKey.businessTime] as? Float else { return }
         bank.totalBusinessTime += businessTime
         bank.totalBusinessTime = round( bank.totalBusinessTime * 100 ) / 100
     }
@@ -79,7 +78,7 @@ class BankManager {
             guard let isValid = checkInputValidation() else { throw BankError.userInput }
             guard isValid else { return }
             let numberOfClient = createClient(numberOfClient: Int.random(in: 10...30))
-            self.bank = Bank(totalNumberOfClinet: numberOfClient)
+            bank.totalNumberOfClinet = numberOfClient
             createBanker(numberOfBanker: numberOfBanker)
             operationQueue.waitUntilAllOperationsAreFinished()
             bank.closeBusiness()
@@ -93,6 +92,7 @@ class BankManager {
             try manageBank()
         } catch {
             print(error.localizedDescription)
+            startBank()
         }
     }
 }

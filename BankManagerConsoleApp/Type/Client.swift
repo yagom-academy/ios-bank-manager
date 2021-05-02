@@ -7,12 +7,8 @@
 
 import Foundation
 
-class Client {
+struct Client {
     var waitingNumber: Int
-
-    init(waitingNumber:Int) {
-        self.waitingNumber = waitingNumber
-    }
 }
 
 

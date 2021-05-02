@@ -11,7 +11,7 @@ class Banker: Operation {
     let bankerNumber: Int
     let client: Client?
     let notification: NSNotification.Name
-    
+    var businessTime: Float = 0
     
     init(bankerNumber: Int, client: Client? , notification: NSNotification.Name) {
         self.bankerNumber = bankerNumber
@@ -20,7 +20,7 @@ class Banker: Operation {
     }
     
     override func main() {
-        var businessTime: Float = 0
+        businessTime = 0
         if let client = self.client {
             print("\(client.waitingNumber)번 고객 업무 시작")
             businessTime = 0.7
