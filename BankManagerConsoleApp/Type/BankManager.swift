@@ -38,6 +38,7 @@ class BankManager {
             let client = Client(grade: grade, priority: priority, waitingNumber: clientNumber, taskType: taskType)
             clientQueue.append(client)
         }
+        clientQueue = clientQueue.sorted(by:{$0.priority < $1.priority})
         return numberOfClient
     }
     
@@ -95,7 +96,7 @@ class BankManager {
     }
     
     func manageBank() throws {
-        let numberOfBanker: Int = 1
+        let numberOfBanker: Int = 3
         while true {
             startBankMenu()
             guard let isValid = checkInputValidation() else { throw BankError.userInput }
