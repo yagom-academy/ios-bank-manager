@@ -38,7 +38,7 @@ class BankManager {
             let client = Client(grade: grade, priority: priority, waitingNumber: clientNumber, taskType: taskType)
             clientQueue.append(client)
         }
-        clientQueue = clientQueue.sorted(by:{$0.priority < $1.priority})
+        clientQueue = clientQueue.sorted(by: {$0.priority < $1.priority})
         return numberOfClient
     }
     
@@ -89,7 +89,7 @@ class BankManager {
         lock.unlock()
     }
     
-    func updateTotalBusinessTime(userInformation: [AnyHashable:Any]) {
+    func updateTotalBusinessTime(userInformation: [AnyHashable: Any]) {
         guard let businessTime = userInformation[UserInformationKey.businessTime] as? Float else { return }
         bank.totalBusinessTime += businessTime
         bank.totalBusinessTime = round( bank.totalBusinessTime * 100 ) / 100
