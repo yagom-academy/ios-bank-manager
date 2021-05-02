@@ -56,7 +56,7 @@ class BankManager {
         lock.lock()
         guard let userInformation = notification.userInfo else { return }
         updateTotalBusinessTime(userInformation: userInformation)
-        if !clientQueue.isEmpty {
+        if clientQueue.isNotEmpty {
             guard let bankerNumber = userInformation[UserInformationKey.bankerNumber] as? Int else { return }
             guard let notificationNumber = userInformation[UserInformationKey.notificationNumber] as? NSNotification.Name else { return }
             let banker = Banker(bankerNumber: bankerNumber, client: clientQueue.removeFirst(), notification: notificationNumber)
@@ -88,11 +88,13 @@ class BankManager {
     }
     
     func startBank() {
-        do {
-            try manageBank()
-        } catch {
-            print(error.localizedDescription)
-            startBank()
+        while true {
+            do {
+                try manageBank()
+                break
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }
