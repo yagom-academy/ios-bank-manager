@@ -19,7 +19,7 @@ struct ConsoleViewController {
  """, terminator: "")
     }
     
-    mutating func chooseStartOrEnd() {
+    mutating func chooseStartOrEnd() throws {
         guard let userInput = readLine() else {
             return
         }
@@ -30,7 +30,7 @@ struct ConsoleViewController {
         case "2":
             shouldContinue = false
         default:
-            shouldContinue = false
+            throw BankManagerError.invalidUserInput
         }
     }
 }

@@ -24,8 +24,8 @@ struct BankManager {
         randomCustomers = randomGenerator.generateRandomCustomer(bank: &bank)
     }
     
-    private mutating func handleCustomer() {
-        guard var randomCustomers = randomCustomers else { return }
+    private mutating func handleCustomer() throws {
+        guard var randomCustomers = randomCustomers else { throw BankManagerError.failToGenerateRandomCustomers }
         
         randomCustomers.sort{ $0.priority > $1.priority }
         
@@ -41,13 +41,25 @@ struct BankManager {
         while true {
             createRandomCustomer()
             consoleViewController.showStartMenu()
-            consoleViewController.chooseStartOrEnd()
+            
+            do {
+                try consoleViewController.chooseStartOrEnd()
+            } catch {
+                print(error)
+                continue
+            }
             
             guard consoleViewController.shouldContinue else { return }
             
             bank.openBank()
-            handleCustomer()
-            bank.closeBank()
+            do {
+                try handleCustomer()
+                try bank.closeBank()
+            } catch {
+                print(error)
+                continue
+            }
+            
         }
     }
 }
