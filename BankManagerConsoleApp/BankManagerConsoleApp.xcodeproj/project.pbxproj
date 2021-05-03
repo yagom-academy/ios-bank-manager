@@ -17,8 +17,6 @@
 		1CB01E69263E4D3E003FEF29 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E68263E4D3E003FEF29 /* Errors.swift */; };
 		1CB01E6F263FD107003FEF29 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E68263E4D3E003FEF29 /* Errors.swift */; };
 		1CB01E79263FE8EF003FEF29 /* TicketGeneratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E78263FE8EF003FEF29 /* TicketGeneratorTest.swift */; };
-		1CB01E7D263FE932003FEF29 /* TicketGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E7C263FE932003FEF29 /* TicketGenerator.swift */; };
-		1CB01E8226400AD5003FEF29 /* TicketGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E7C263FE932003FEF29 /* TicketGenerator.swift */; };
 		1CB01E8626400CD2003FEF29 /* RandomGeneratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E8526400CD2003FEF29 /* RandomGeneratorTest.swift */; };
 		1CDF895A263AD05B008CD062 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8959263AD05B008CD062 /* RandomGenerator.swift */; };
 		1CDF895E263AD06F008CD062 /* HandleCustomerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */; };
@@ -51,7 +49,6 @@
 		1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
 		1CB01E68263E4D3E003FEF29 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		1CB01E78263FE8EF003FEF29 /* TicketGeneratorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketGeneratorTest.swift; sourceTree = "<group>"; };
-		1CB01E7C263FE932003FEF29 /* TicketGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketGenerator.swift; sourceTree = "<group>"; };
 		1CB01E8526400CD2003FEF29 /* RandomGeneratorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorTest.swift; sourceTree = "<group>"; };
 		1CDF8959263AD05B008CD062 /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
 		1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleCustomerOperation.swift; sourceTree = "<group>"; };
@@ -128,7 +125,6 @@
 				1C6BFF58263830AC00CE9F75 /* Bank.swift */,
 				1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */,
 				1C4581D5263A7B5B00EA6A83 /* Customer.swift */,
-				1CB01E7C263FE932003FEF29 /* TicketGenerator.swift */,
 				1CDF8959263AD05B008CD062 /* RandomGenerator.swift */,
 				1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -279,7 +275,6 @@
 				1CB01E8626400CD2003FEF29 /* RandomGeneratorTest.swift in Sources */,
 				1CDF8961263AECAB008CD062 /* Customer.swift in Sources */,
 				1CB01E79263FE8EF003FEF29 /* TicketGeneratorTest.swift in Sources */,
-				1CB01E8226400AD5003FEF29 /* TicketGenerator.swift in Sources */,
 				1C4581B526385A5600EA6A83 /* Bank.swift in Sources */,
 				1CDF8967263AECAE008CD062 /* HandleCustomerOperation.swift in Sources */,
 				1C4581BE26385A5C00EA6A83 /* main.swift in Sources */,
@@ -300,7 +295,6 @@
 				1CDF895E263AD06F008CD062 /* HandleCustomerOperation.swift in Sources */,
 				1CB01E69263E4D3E003FEF29 /* Errors.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				1CB01E7D263FE932003FEF29 /* TicketGenerator.swift in Sources */,
 				1C4581D6263A7B5B00EA6A83 /* Customer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);

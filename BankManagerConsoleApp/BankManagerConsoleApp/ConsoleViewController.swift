@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct ConsoleViewController {
+protocol ConsoleViewControllable {
+    func showStartMenu()
+    func shouldContinue() -> Result<Bool, BankManagerError>
+}
+
+struct ConsoleViewController: ConsoleViewControllable {
     func showStartMenu() {
         print(
  """

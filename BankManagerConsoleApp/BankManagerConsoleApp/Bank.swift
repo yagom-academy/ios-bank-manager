@@ -7,7 +7,14 @@
 
 import Foundation
 
-struct Bank {
+protocol Bankable {
+    var numberOfBankTeller: Int { get }
+    
+    mutating func openBank()
+    mutating func closeBank(totalCustomerNumber: Int?) throws
+}
+
+struct Bank: Bankable {
     private(set) var numberOfBankTeller: Int
     private var openTime: CFAbsoluteTime?
     private var closeTime: CFAbsoluteTime?
@@ -20,15 +27,25 @@ struct Bank {
         openTime = CFAbsoluteTimeGetCurrent()
     }
     
-    mutating func closeBank() throws {
+    mutating func closeBank(totalCustomerNumber: Int?) throws {
         closeTime = CFAbsoluteTimeGetCurrent()
+        let spentTime = try getSpentTime()
         
+        guard let numberOfCustomers = totalCustomerNumber else {
+            throw BankManagerError.failToGetTotalCustomerNumber
+        }
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(spentTime)초입니다.")
+    }
+    
+    private func getSpentTime() throws -> String {
         guard let open = openTime,
-              let close = closeTime else { throw BankManagerError.failToCaclulateSpentTime }
+              let close = closeTime else {
+            throw BankManagerError.failToCaclulateSpentTime
+        }
         
-        let spentTime = formatTimeDuration(time: close - open)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(TicketGenerator.ticketNumber)명이며, 총 업무시간은 \(spentTime)초입니다.")
-        TicketGenerator.resetTicketNumberToZero()
+        let spentTime = formatTimeDuration(time: open - close)
+        return spentTime
     }
     
     private func formatTimeDuration(time: CFAbsoluteTime) -> String {

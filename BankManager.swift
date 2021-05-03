@@ -7,11 +7,12 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank
-    private var consoleViewController: ConsoleViewController
-    private let randomGenerator: RandomGenerator
+    private var bank: Bankable
+    private var consoleViewController: ConsoleViewControllable
+    private var randomGenerator: RandomGeneratable
     private let bankOperationQueue = OperationQueue()
     private var randomCustomers: [Customer]?
+    private var totalCustomerNumber: Int? 
     private var shouldContinue: Bool {
         var result: Result<Bool, BankManagerError> = .success(true)
         var shouldContinue = true
@@ -42,7 +43,7 @@ struct BankManager {
             bank.openBank()
             do {
                 try handleCustomer()
-                try bank.closeBank()
+                try bank.closeBank(totalCustomerNumber: totalCustomerNumber)
             } catch {
                 print(error)
             }
@@ -51,6 +52,7 @@ struct BankManager {
     
     private mutating func createRandomCustomer() {
         randomCustomers = randomGenerator.generateRandomCustomer()
+        totalCustomerNumber = randomGenerator.totalCustomer
     }
     
     private mutating func handleCustomer() throws {
