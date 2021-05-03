@@ -9,11 +9,10 @@ import Foundation
 
 class BankTaskOperation: Operation {
     let waitingNumber: Int
-    let taskTime: Double
+    let taskTime: Double = 0.7
     
-    init(_ clientNumber: Int, _ taskTime: Double) {
+    init(_ clientNumber: Int) {
         self.waitingNumber = clientNumber
-        self.taskTime = taskTime
     }
     
     override func main() {

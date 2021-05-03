@@ -9,20 +9,18 @@ import Foundation
 
 struct Client {
     let waitingNumber: Int
-    let taskTime: Double
     let task: BankTaskOperation
     
-    init(waitingNumber: Int, taskTime: Double) {
+    init(waitingNumber: Int) {
         self.waitingNumber = waitingNumber
-        self.taskTime = taskTime
-        self.task = BankTaskOperation(waitingNumber, taskTime)
+        self.task = BankTaskOperation(waitingNumber)
     }
     
     static func create() -> [Client] {
         var clients: [Client] = []
         
         for number in 1...Int.random(in: 10...30) {
-            clients.append(Client(waitingNumber: number, taskTime: 0.7))
+            clients.append(Client(waitingNumber: number))
         }
         
         return clients
