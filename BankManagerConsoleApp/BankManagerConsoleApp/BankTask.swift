@@ -9,13 +9,13 @@ import Foundation
 
 class BankTask: Operation {
     
-    private var taskType: TaskType
+    private var taskType: BankTaskType
     private var taskTime: Double
     private var waitingNumber: Int
     private var customerGrade: CustomerGrade
     
     init(_ waitingNumber: Int, _ grade: CustomerGrade) {
-        self.taskType = TaskType.random
+        self.taskType = BankTaskType.random
         self.taskTime = taskType.taskTime
         self.waitingNumber = waitingNumber
         self.customerGrade = grade
