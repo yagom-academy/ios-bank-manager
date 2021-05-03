@@ -4,5 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-private var bankManager = BankManager()
+private var bankManager = BankManager(numberOfTeller: 3)
 bankManager.start()

@@ -10,7 +10,7 @@ struct BankManager {
     // MARK: - Properties
     private var bank: Bank
     
-    init(numberOfTeller: Int = 1) {
+    init(numberOfTeller: Int) {
         self.bank = Bank(numberOfTeller: numberOfTeller)
     }
     

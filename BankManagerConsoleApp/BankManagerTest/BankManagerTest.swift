@@ -38,7 +38,7 @@ final class BankManagerTests: XCTestCase {
     func testMeasureTime_whenNoTaskGiven_returnsZero() {
         let processTime: Double = sutBank.measureTime { }
         
-        XCTAssertEqual(processTime, 0)
+        XCTAssertEqual(floor(processTime), 0)
     }
     
     func testMeasureTime_whenProcessTimeIsGiven_returnsGivenTime() {
@@ -61,5 +61,22 @@ final class BankManagerTests: XCTestCase {
     
     func testPreferredNumberFormat_whenNumberMoreThanTwoDecimalPlacesIsGiven_returnsNumberWithTwoDecimalPlaces() {
         XCTAssertEqual(sutBank.preferredNumberFormat(123.456789), 123.45)
+    }
+
+    func testStarttask_whenClientHasWaitingNumberOne_returnStartTaskTextWithWaitingNumberOne() {
+        let client: Client = Client(1)
+        XCTAssertEqual(client.startTask(), "1 번 고객 업무 시작.")
+    }
+
+    func testEndTask_whenClientHasWaitingNumberOne_returnEndTaskTextWithWaitingNumberOne() {
+        let client: Client = Client(1)
+        XCTAssertEqual(client.endTask(), "1 번 고객 업무 종료!")
+    }
+    
+    func testClose_whenNumberOfClientAndTotalProcessTimeAreGiven_returnCloseTextWithGivenNumbers() {
+        XCTAssertEqual(
+            sutBank.close(numberOfClient: 3, 2.1),
+            "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 3 명이며, 총 업무 시간은 2.1초입니다."
+        )
     }
 }

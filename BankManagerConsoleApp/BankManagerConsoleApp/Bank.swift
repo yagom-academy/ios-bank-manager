@@ -9,10 +9,16 @@ import Foundation
 
 struct Bank {
     // MARK: - Properties
-    private var waitingQueue: OperationQueue = OperationQueue()
+
+    private var tellers: [OperationQueue] = []
     
-    init(numberOfTeller: Int = 1) {
-        self.waitingQueue.maxConcurrentOperationCount = numberOfTeller
+    init(numberOfTeller: Int) {
+        for counterNumber in 1...numberOfTeller {
+            let teller: OperationQueue = OperationQueue()
+            teller.name = String(counterNumber)
+            teller.maxConcurrentOperationCount = 1
+            self.tellers.append(teller)
+        }
     }
     
     // MARK: - NameSpaces
@@ -29,8 +35,9 @@ struct Bank {
         let totalProcessTime: Double = measureTime { () -> Void in
             return processTasks(of: clients)
         }
+        let closeText = close(numberOfClient: clients.count, totalProcessTime)
         
-        close(numberOfClient: clients.count, totalProcessTime)
+        print(closeText)
     }
     
     mutating func makeClients(number: Int) -> [Client] {
@@ -60,11 +67,11 @@ struct Bank {
     }
     
     mutating func processTasks(of clients: [Client]) {
-        waitingQueue.addOperations(clients, waitUntilFinished: true)
+        tellers[0].addOperations(clients, waitUntilFinished: true)
     }
     
-    func close(numberOfClient: Int, _ totalProcessTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(preferredNumberFormat(totalProcessTime))초입니다.")
+    func close(numberOfClient: Int, _ totalProcessTime: Double) -> String {
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(preferredNumberFormat(totalProcessTime))초입니다."
     }
 }
 
