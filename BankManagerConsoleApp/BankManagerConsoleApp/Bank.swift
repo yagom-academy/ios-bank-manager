@@ -9,16 +9,10 @@ import Foundation
 
 struct Bank {
     // MARK: - Properties
-
-    private var tellers: [OperationQueue] = []
+    private var waitingQueue: OperationQueue = OperationQueue()
     
     init(numberOfTeller: Int) {
-        for counterNumber in 1...numberOfTeller {
-            let teller: OperationQueue = OperationQueue()
-            teller.name = String(counterNumber)
-            teller.maxConcurrentOperationCount = 1
-            self.tellers.append(teller)
-        }
+        self.waitingQueue.maxConcurrentOperationCount = numberOfTeller
     }
     
     // MARK: - NameSpaces
@@ -67,7 +61,7 @@ struct Bank {
     }
     
     mutating func processTasks(of clients: [Client]) {
-        tellers[0].addOperations(clients, waitUntilFinished: true)
+        waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
     
     func close(numberOfClient: Int, _ totalProcessTime: Double) -> String {

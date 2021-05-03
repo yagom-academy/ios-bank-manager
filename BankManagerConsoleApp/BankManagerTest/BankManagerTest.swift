@@ -9,7 +9,7 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerTests: XCTestCase {
-    var sutBank: Bank = Bank()
+    var sutBank: Bank = Bank(numberOfTeller: 1)
     
     override func setUpWithError() throws {
         try super.setUpWithError()
