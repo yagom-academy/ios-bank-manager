@@ -9,7 +9,7 @@ import Foundation
 
 final class Bank {
     private var clients: [Client]
-    private var tellers: BankManager = BankManager(numberOfManager: 1)
+    private var bankManager: BankManager = BankManager(numberOfManager: 1)
     private var totalTaskTime: Double = 0
     
     init(_ clients: [Client]) {
@@ -35,7 +35,7 @@ final class Bank {
     }
     
     private func open() {
-        totalTaskTime = tellers.handleTask(clients)
+        totalTaskTime = bankManager.handleTask(clients)
     }
     
     private func close() {
