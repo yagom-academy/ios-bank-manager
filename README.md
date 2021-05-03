@@ -30,6 +30,9 @@
   - 1기 졸업식 참석
   - step1 PR, step2에 대한 설계 고민
   - TWL 작성
+- 05/03(월)
+  - 강의) ARC / Memory Struct
+  - step1 PR 코멘트 바탕으로 코드 수정 -  입력 함수에 대한 고민
 
 <br>
 
@@ -38,6 +41,7 @@
 - [GCD, Dispatch Source, Operation Queue 질문](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/GCD%2C%20Dispatch%20Source%2C%20Operation%20Queue%20%EC%A7%88%EB%AC%B8.md)
 - sleep(), usleep(), Thread.sleep(Thread.sleep(forTimeInterval: )
 - [OperationQueue 메서드](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/OperationQueue%20%EB%A9%94%EC%84%9C%EB%93%9C.md)
+- ARC / Memory Struct
 
 <br>
 
