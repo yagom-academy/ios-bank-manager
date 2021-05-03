@@ -38,10 +38,14 @@ class BankTest: XCTestCase {
         for _ in 1...Int.random(in: 10...30) {
             dummyBank?.getNewTicketNumber()
         }
-        dummyBank?.openTime = CFAbsoluteTimeGetCurrent() //closeBank의 openTime을 지정해주기 위해 필요
-        dummyBank?.closeBank()
-        let resettedTicketNumber = dummyBank?.ticketNumber
         
-        XCTAssertEqual(resettedTicketNumber, 0)
+        dummyBank?.openBank() //closeBank의 openTime을 지정해주기 위해 필요
+        do {
+            try dummyBank?.closeBank()
+            let resettedTicketNumber = dummyBank?.ticketNumber
+            XCTAssertEqual(resettedTicketNumber, 0)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
     }
 }

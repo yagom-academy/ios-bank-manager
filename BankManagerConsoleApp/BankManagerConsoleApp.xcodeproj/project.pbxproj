@@ -16,6 +16,7 @@
 		1C6BFF59263830AC00CE9F75 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF58263830AC00CE9F75 /* Bank.swift */; };
 		1C6BFF62263830D000CE9F75 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BFF61263830D000CE9F75 /* ConsoleViewController.swift */; };
 		1CB01E69263E4D3E003FEF29 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E68263E4D3E003FEF29 /* Errors.swift */; };
+		1CB01E6F263FD107003FEF29 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB01E68263E4D3E003FEF29 /* Errors.swift */; };
 		1CDF895A263AD05B008CD062 /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF8959263AD05B008CD062 /* RandomGenerator.swift */; };
 		1CDF895E263AD06F008CD062 /* HandleCustomerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF895D263AD06F008CD062 /* HandleCustomerOperation.swift */; };
 		1CDF8961263AECAB008CD062 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4581D5263A7B5B00EA6A83 /* Customer.swift */; };
@@ -281,6 +282,7 @@
 				1CDF89AF263DB2B3008CD062 /* RandomGeneratorTest.swift in Sources */,
 				1C4581AB2638563C00EA6A83 /* BankTest.swift in Sources */,
 				1C4581BE26385A5C00EA6A83 /* main.swift in Sources */,
+				1CB01E6F263FD107003FEF29 /* Errors.swift in Sources */,
 				1CDF8964263AECAC008CD062 /* RandomGenerator.swift in Sources */,
 				1C4581B226385A5400EA6A83 /* BankManager.swift in Sources */,
 				1C4581BB26385A5A00EA6A83 /* ConsoleViewController.swift in Sources */,

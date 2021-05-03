@@ -23,7 +23,7 @@ class HandleCustomerOperationTest: XCTestCase {
             XCTFail("dummyOperation is nil")
             return
         }
-        operation.handleBanking(customer: operation.customer)
+        operation.main()
     }
 
 }

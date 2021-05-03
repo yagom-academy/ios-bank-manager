@@ -12,6 +12,22 @@ struct BankManager {
     private let randomGenerator: RandomGenerator
     private let bankOperationQueue = OperationQueue()
     private var randomCustomers: [Customer]?
+    private var shouldContinue: Bool {
+        var result: Result<Bool, BankManagerError> = .success(true)
+        var shouldContinue = true
+        
+        repeat {
+            consoleViewController.showStartMenu()
+            result = consoleViewController.shouldContinue()
+            do {
+                shouldContinue = try result.get()
+            } catch {
+                print(error)
+            }
+        } while result == .failure(.invalidUserInput)
+        
+        return shouldContinue
+    }
     
     init(bank: Bank, consoleViewer: ConsoleViewController, randomGenerator: RandomGenerator) {
         self.bank = bank
@@ -21,28 +37,15 @@ struct BankManager {
     }
     
     mutating func start() {
-        while true {
+        while shouldContinue {
             createRandomCustomer()
-            consoleViewController.showStartMenu()
-            
-            do {
-                try consoleViewController.chooseStartOrEnd()
-            } catch {
-                print(error)
-                continue
-            }
-            
-            guard consoleViewController.shouldContinue else { return }
-            
             bank.openBank()
             do {
                 try handleCustomer()
                 try bank.closeBank()
             } catch {
                 print(error)
-                continue
             }
-            
         }
     }
     

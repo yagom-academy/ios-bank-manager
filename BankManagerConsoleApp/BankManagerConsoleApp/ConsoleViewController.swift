@@ -8,8 +8,6 @@
 import Foundation
 
 struct ConsoleViewController {
-    private(set) var shouldContinue = true
-    
     func showStartMenu() {
         print(
  """
@@ -19,18 +17,18 @@ struct ConsoleViewController {
  """, terminator: "")
     }
     
-    mutating func chooseStartOrEnd() throws {
+    func shouldContinue() -> Result<Bool, BankManagerError> {
         guard let userInput = readLine() else {
-            return
+            return .failure(.invalidUserInput)
         }
         
         switch userInput {
         case "1":
-            shouldContinue = true
+            return .success(true)
         case "2":
-            shouldContinue = false
+            return .success(false)
         default:
-            throw BankManagerError.invalidUserInput
+            return .failure(.invalidUserInput)
         }
     }
 }

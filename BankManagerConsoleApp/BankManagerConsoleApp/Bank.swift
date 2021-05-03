@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    private var ticketNumber: Int = 0
+    private(set) var ticketNumber: Int = 0
     private(set) var numberOfBankTeller: Int
     private var openTime: CFAbsoluteTime?
     private var closeTime: CFAbsoluteTime?
