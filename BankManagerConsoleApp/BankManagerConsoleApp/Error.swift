@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ErrorHandler: Error {
+enum Errors: Error {
     case invalidInputError
     case unknownError
 }

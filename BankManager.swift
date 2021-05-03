@@ -15,16 +15,19 @@ class Bank {
         
         guard let input = receiveUserInput() else { return }
         switch input {
-                case SelectMenu.start.rawValue:
-                    enqueueClient(pickRandomClientsNumber())
-                    conductService(by: teller)
-                    startService()
-                case SelectMenu.end.rawValue:
-                    return
-                default:
-                    print(Messages.unknownInputMessage.rawValue)
-                    startService()
-                }
+        case "1" :
+            let theNumberofClients = pickTheNumberOfClients()
+            
+            enqueueClient(theNumberofClients)
+            conductService(by: teller)
+            
+            startService()
+        case "2":
+            return
+        default:
+            print(Messages.unknownInputMessage.rawValue)
+            startService()
+        }
     }
     
     private func showInitialMenu() {
@@ -42,7 +45,7 @@ class Bank {
         return input
     }
     
-    private func pickRandomClientsNumber() -> Int {
+    private func pickTheNumberOfClients() -> Int {
         let randomClientsNumber = Int.random(in: 10...30)
         return randomClientsNumber
     }
@@ -54,7 +57,7 @@ class Bank {
     }
     
     private func conductService(by teller: Teller) {
-        var workhours: Double = 0
+        var processingTime: Double = 0
         var clientsCount: Int = 0
         
         while !client.isEmpty {
@@ -65,15 +68,17 @@ class Bank {
             teller.announceServiceStart(firstClientNumber)
             usleep(700000)
             teller.announceServiceFinish(firstClientNumber)
+            
             client.dequeue()
-            workhours = sumOfficeHours(workhours)
+            
+            processingTime = sumOfficeHours(processingTime)
             clientsCount += 1
         }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientsCount)명이며, 총 업무시간은 \(String(format: "%.1f", workhours))초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientsCount)명이며, 총 업무시간은 \(String(format: "%.1f", processingTime))초입니다.")
     }
     
-    private func sumOfficeHours(_ unithour: Double) -> Double {
-        return unithour + 0.7
+    private func sumOfficeHours(_ unitHour: Double) -> Double {
+        return unitHour + 0.7
     }
 }
