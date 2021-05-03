@@ -32,26 +32,15 @@ class BankManager {
     private func createClient(numberOfClient: Int) -> Int {
         for clientNumber in 1...numberOfClient {
             let priority = Int.random(in: 1...3)
-            let grade = setGrade(priority: priority)
             let taskTypeNumber = Int.random(in: 1...2)
             let taskType = setTaskType(taskTypeNumber: taskTypeNumber)
-            let client = Client(grade: grade, priority: priority, waitingNumber: clientNumber, taskType: taskType)
+            let client = Client( priority: priority, waitingNumber: clientNumber, taskType: taskType)
             clientQueue.append(client)
         }
         clientQueue = clientQueue.sorted(by: {$0.priority < $1.priority})
         return numberOfClient
     }
     
-    private func setGrade(priority: Int) -> String {
-        switch priority {
-        case 1:
-            return ClientGrade.vvip
-        case 2:
-            return ClientGrade.vip
-        default:
-            return ClientGrade.general
-        }
-    }
     
     private func setTaskType(taskTypeNumber: Int) -> String {
         if taskTypeNumber == 1 {
@@ -124,11 +113,8 @@ class BankManager {
 }
 
 extension Array {
-    @inlinable public var isNotEmpty: Bool {
-        if self.isEmpty {
-            return false
-        }
-        return true
+    public var isNotEmpty: Bool {
+        return !self.isEmpty
     }
 }
 
