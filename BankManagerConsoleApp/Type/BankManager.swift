@@ -34,13 +34,12 @@ class BankManager {
             let priority = Int.random(in: 1...3)
             let taskTypeNumber = Int.random(in: 1...2)
             let taskType = setTaskType(taskTypeNumber: taskTypeNumber)
-            let client = Client( priority: priority, waitingNumber: clientNumber, taskType: taskType)
+            let client = Client(priority: priority, waitingNumber: clientNumber, taskType: taskType)
             clientQueue.append(client)
         }
         clientQueue = clientQueue.sorted(by: {$0.priority < $1.priority})
         return numberOfClient
     }
-    
     
     private func setTaskType(taskTypeNumber: Int) -> String {
         if taskTypeNumber == 1 {

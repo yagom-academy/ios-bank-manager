@@ -21,11 +21,11 @@ class Banker: Operation {
     
     override func main() {
         if let client = self.client {
-            let grade = setGrade(priority: client.priority)
-            print("\(client.waitingNumber)번 \(grade) \(client.taskType)업무 시작")
+            let clientGrade = setGrade(priority: client.priority)
+            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 시작")
             businessTime = setBusinessTime(taskType: client.taskType)
             Thread.sleep(forTimeInterval: Double(businessTime))
-            print("\(client.waitingNumber)번 \(grade) \(client.taskType)업무 완료")
+            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료")
         }
         NotificationCenter.default.post(name: notification, object: nil, userInfo: [UserInformationKey.bankerNumber: bankerNumber, UserInformationKey.notificationNumber: notification,UserInformationKey.businessTime: businessTime])
     }
