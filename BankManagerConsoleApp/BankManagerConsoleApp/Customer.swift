@@ -37,30 +37,6 @@ enum TaskType: CaseIterable {
     }
 }
 
-class BankTask: Operation {
-    
-    private var taskType: TaskType
-    private var taskTime: Double
-    private var waitingNumber: Int
-    private var customerGrade: CustomerGrade
-    
-    init(_ waitingNumber: Int, _ grade: CustomerGrade) {
-        self.taskType = TaskType.random
-        self.taskTime = taskType.taskTime
-        self.waitingNumber = waitingNumber
-        self.customerGrade = grade
-        super.init()
-        super.queuePriority = customerGrade.queuePriority
-    }
-    
-    override func main() {
-        print("🔴\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작", super.queuePriority.rawValue)
-        Thread.sleep(forTimeInterval: taskTime)
-        print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
-    }
-    
-}
-
 enum CustomerGrade: CaseIterable {
     case vvip
     case vip
