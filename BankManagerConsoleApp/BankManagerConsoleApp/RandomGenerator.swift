@@ -23,7 +23,7 @@ struct RandomGenerator {
         return customers
     }
     
-    func createRandomNumberInRange(_ start: Int, to end: Int) -> Int {
+    private func createRandomNumberInRange(_ start: Int, to end: Int) -> Int {
         return Int.random(in: start...end)
     }
 }

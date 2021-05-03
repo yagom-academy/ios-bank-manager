@@ -8,7 +8,7 @@
 import Foundation
 
 struct ConsoleViewController {
-    var shouldContinue = true
+    private(set) var shouldContinue = true
     
     func showStartMenu() {
         print(

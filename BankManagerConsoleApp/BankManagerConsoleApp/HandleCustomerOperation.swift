@@ -10,18 +10,18 @@ import Foundation
 class HandleCustomerOperation: Operation {
     let customer: Customer
     
+    init(customer: Customer) {
+        self.customer = customer
+        super.init()
+    }
+    
     override func main() {
         handleBanking(customer: customer)
     }
     
-    func handleBanking(customer: Customer) {
+    private func handleBanking(customer: Customer) {
         print("\(customer.ticketNumber)번 \(customer.priority.name)고객 \(customer.task.name)업무 시작")
         usleep(customer.task.time)
         print("\(customer.ticketNumber)번 \(customer.priority.name)고객 \(customer.task.name)업무 완료")
-    }
-    
-    init(customer: Customer) {
-        self.customer = customer
-        super.init()
     }
 }
