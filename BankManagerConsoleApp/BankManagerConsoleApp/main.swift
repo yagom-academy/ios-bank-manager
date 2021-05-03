@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+let clients: [Client] = Client.create()
+Bank(clients).operate()
