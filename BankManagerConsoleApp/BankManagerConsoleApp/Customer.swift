@@ -15,7 +15,7 @@ struct Customer {
     var bankTask: BankTask {
         return _bankTask
     }
-    
+
     init(waitingNumber: Int) {
         self.grade = CustomerGrade.random
         self._bankTask = BankTask(waitingNumber: waitingNumber, grade: grade)
