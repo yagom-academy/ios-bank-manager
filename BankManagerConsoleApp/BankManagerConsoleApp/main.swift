@@ -7,50 +7,36 @@
 import Foundation
 
 final class Bank {
-    let client = Client()
+    let task = Task()
     let creditRatings: [creditRating] = [.vvip, .vip, .normal]
     let typeOfWorks: [workType] = [.deposit, .loan]
-    var vvipQueue: [Client] = []
-    var vipQueue: [Client] = []
-    var normalQueue: [Client] = []
-
-    let bankWindow1 = OperationQueue()
-    let bankWindow2 = OperationQueue()
-    let bankWindow3 = OperationQueue()
-    
+    var waitingLine: [Task] = []
+    let bankWindow = OperationQueue()
     
     func serveClient() {
         while true {
-            bankWindow1.maxConcurrentOperationCount = 3
-            //        bankWindow2.maxConcurrentOperationCount = 1
-            //        bankWindow3.maxConcurrentOperationCount = 1
+            bankWindow.maxConcurrentOperationCount = 3
             var workTime = Double.zero
             displayMenu()
             let menuNumber = inputMenuNumber()
             switch menuNumber {
             case 1:
-                var clientWaitLine: [Client] = []
+                var taskList: [Task] = []
                 let totalCustomer = customerNumber()
                 for waitNumber in 1...totalCustomer {
                     let randomClientAttribute = acceeptRandomClient()
-                    let client = Client()
-                    client.waitingNumber = waitNumber
-                    client.creditRate = creditRatings[randomClientAttribute.0]
-                    client.typeOfWork = typeOfWorks[randomClientAttribute.1]
-                    assignPriority(client)
-                    clientWaitLine.append(client)
-                    //                    setPriority(client)
-                    client.completionBlock = {
-                        guard let typeOfTask = client.typeOfWork else { return }
+                    let taskPerClient = Task()
+                    taskPerClient.waitingNumber = waitNumber
+                    taskPerClient.creditRate = creditRatings[randomClientAttribute.0]
+                    taskPerClient.typeOfWork = typeOfWorks[randomClientAttribute.1]
+                    assignPriority(taskPerClient)
+                    taskList.append(taskPerClient)
+                    taskPerClient.completionBlock = {
+                        guard let typeOfTask = taskPerClient.typeOfWork else { return }
                         workTime += typeOfTask.duration
                     }
                 }
-                bankWindow1.addOperations(clientWaitLine, waitUntilFinished: true)
-                //                bankWindow1.addOperations(vipQueue, waitUntilFinished: false)
-                //                bankWindow1.addOperations(normalQueue, waitUntilFinished: true)
-                
-                //                scheduleService()
-                //                sleep(20)
+                bankWindow.addOperations(taskList, waitUntilFinished: true)
                 print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은\(String(format: "%.2f", workTime))초 입니다.")
                 continue
             case 2:
@@ -65,6 +51,7 @@ final class Bank {
     private func displayMenu() {
         print("1 : 은행개점")
         print("2 : 종료")
+        print("입력", terminator: " : " )
     }
 
     private func inputMenuNumber() -> Int {
@@ -85,78 +72,17 @@ final class Bank {
         return (creditRate, typeOfWork)
     }
     
-    private func assignPriority(_ client: Client) {
-        guard let rate = client.creditRate else { return }
+    private func assignPriority(_ task: Task) {
+        guard let rate = task.creditRate else { return }
         switch rate {
         case .vvip:
-            return client.qualityOfService = .userInteractive
+            return task.qualityOfService = .userInteractive
         case .vip:
-            return client.qualityOfService = .userInitiated
+            return task.qualityOfService = .userInitiated
         case .normal:
-            return client.qualityOfService = .default
+            return task.qualityOfService = .default
         }
     }
-    
-//    private func setPriority(_ client: Client) {
-//        guard let rate = client.creditRate else { return }
-//        switch rate {
-//        case .vvip:
-//            vvipQueue.append(client)
-//        case .vip:
-//            vipQueue.append(client)
-//        case .normal:
-//            normalQueue.append(client)
-//        }
-//    }
-    
-//    private func scheduleService() {
-//        while !vvipQueue.isEmpty || !vipQueue.isEmpty || !normalQueue.isEmpty {
-//            if vvipQueue.isEmpty == false {
-//                if bankWindow1.operationCount == 0 {
-//                    bankWindow1.addOperation(vvipQueue.removeFirst())
-//                    continue
-//                } else if bankWindow2.operationCount == 0 {
-//                    bankWindow2.addOperation(vvipQueue.removeFirst())
-//                    continue
-//                } else if bankWindow3.operationCount == 0 {
-//                    bankWindow3.addOperation(vvipQueue.removeFirst())
-//                    continue
-//                } else {
-//                    bankWindow1.addOperation(vvipQueue.removeFirst())
-//                    continue
-//                }
-//            } else if vipQueue.isEmpty == false {
-//                if bankWindow1.operationCount == 0 {
-//                    bankWindow1.addOperation(vipQueue.removeFirst())
-//                    continue
-//                } else if bankWindow2.operationCount == 0 {
-//                    bankWindow2.addOperation(vipQueue.removeFirst())
-//                    continue
-//                } else if bankWindow3.operationCount == 0 {
-//                    bankWindow3.addOperation(vipQueue.removeFirst())
-//                    continue
-//                } else {
-//                    bankWindow1.addOperation(vipQueue.removeFirst())
-//                    continue
-//                }
-//            } else {
-//                if bankWindow1.operationCount == 0 {
-//                    bankWindow1.addOperation(normalQueue.removeFirst())
-//                    continue
-//                } else if bankWindow2.operationCount == 0 {
-//                    bankWindow2.addOperation(normalQueue.removeFirst())
-//                    continue
-//                } else if bankWindow3.operationCount == 0 {
-//                    bankWindow3.addOperation(normalQueue.removeFirst())
-//                    continue
-//                } else {
-//                    bankWindow1.addOperation(normalQueue.removeFirst())
-//                    continue
-//                }
-//            }
-//        }
-//    }
 }
-
 
 Bank().serveClient()

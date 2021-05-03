@@ -6,7 +6,7 @@
 
 import Foundation
 
-final class Client: Operation {
+final class Task: Operation {
     var waitingNumber: Int?
     var creditRate: creditRating?
     var typeOfWork: workType?
