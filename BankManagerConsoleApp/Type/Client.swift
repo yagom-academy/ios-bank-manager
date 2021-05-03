@@ -8,7 +8,7 @@
 import Foundation
 
 struct Client {
-    var priority: Int
+    var grade: Int
     var waitingNumber: Int
     var taskType: String
 }

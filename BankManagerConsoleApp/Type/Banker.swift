@@ -21,7 +21,7 @@ class Banker: Operation {
     
     override func main() {
         if let client = self.client {
-            let clientGrade = setGrade(priority: client.priority)
+            let clientGrade = convertGradeToString(grade: client.grade)
             print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 시작")
             businessTime = setBusinessTime(taskType: client.taskType)
             Thread.sleep(forTimeInterval: Double(businessTime))
@@ -37,8 +37,8 @@ class Banker: Operation {
         return 0.7
     }
     
-    private func setGrade(priority: Int) -> String {
-        switch priority {
+    private func convertGradeToString(grade: Int) -> String {
+        switch grade {
         case 1:
             return ClientGrade.vvip
         case 2:

@@ -31,13 +31,13 @@ class BankManager {
     
     private func createClient(numberOfClient: Int) -> Int {
         for clientNumber in 1...numberOfClient {
-            let priority = Int.random(in: 1...3)
+            let grade = Int.random(in: 1...3)
             let taskTypeNumber = Int.random(in: 1...2)
             let taskType = setTaskType(taskTypeNumber: taskTypeNumber)
-            let client = Client(priority: priority, waitingNumber: clientNumber, taskType: taskType)
+            let client = Client(grade: grade, waitingNumber: clientNumber, taskType: taskType)
             clientQueue.append(client)
         }
-        clientQueue = clientQueue.sorted(by: {$0.priority < $1.priority})
+        clientQueue = clientQueue.sorted(by: {$0.grade < $1.grade})
         return numberOfClient
     }
     
