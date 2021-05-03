@@ -24,7 +24,7 @@ class BankTask: Operation {
     }
     
     override func main() {
-        print("🔴\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작", super.queuePriority.rawValue)
+        print("🔴\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
         print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
     }
