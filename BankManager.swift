@@ -8,25 +8,25 @@ import Foundation
 
 class BankManager {
     let counter = OperationQueue()
-    var numberOfClient: Int = 0
-    var numberOfTeller: Int
+    private var numberOfClient: UInt = 0
+    private var numberOfTeller: UInt
     
-    init(numberOfTeller: Int) {
+    init(numberOfTeller: UInt) {
         self.numberOfTeller = numberOfTeller
     }
     
     func generateNumberOfClient() {
-        numberOfClient = Int.random(in: 10...30)
+        numberOfClient = UInt.random(in: 10...30)
     }
     
-    func workTask(order: Int) {
+    func workTask(order: UInt) {
         print("\(order)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: 0.7)
         print("\(order)번 고객 업무 완료★")
     }
     
     func sendToCounter() {
-        counter.maxConcurrentOperationCount = numberOfTeller
+        counter.maxConcurrentOperationCount = Int(numberOfTeller)
         for index in 1...numberOfClient {
             counter.addOperation {
                 self.workTask(order: index)
