@@ -34,4 +34,18 @@ class BankManagerTest: XCTestCase {
   @objc func success() {
     XCTAssert(true)
   }
+  
+  ///하이디의 피드백이 담긴 Test Function
+  func test_Notification_확인2() {
+    let expectation = XCTestExpectation(description: "노티가 온다")
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "completedCustomer"), object: nil, queue: nil, using: { _ in
+      expectation.fulfill()
+    })
+    
+    bankManager.setBankCounters(number: 1)
+    bankManager.process([1:Customer(order: 1)])
+    
+    wait(for: [expectation], timeout: 1)
+  }
 }
