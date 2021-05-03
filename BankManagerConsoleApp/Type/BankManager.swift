@@ -9,10 +9,10 @@ import Foundation
 
 class BankManager {
     
-    var bank = Bank(totalNumberOfClinet: 0)
-    var clientQueue: [Client] = []
-    var operationQueue = OperationQueue()
-    let lock = NSLock()
+    private var bank = Bank(totalNumberOfClinet: 0)
+    private var clientQueue: [Client] = []
+    private var operationQueue = OperationQueue()
+    private let lock = NSLock()
 
     private func startBankMenu() {
         print("1 : 은행 개점 \n2 : 종료")
@@ -57,7 +57,7 @@ class BankManager {
         }
     }
     
-    func removeAllObserver(numberOfObserver: Int) {
+    private func removeAllObserver(numberOfObserver: Int) {
         for i in 1...numberOfObserver {
             let notification = NSNotification.Name.init("\(i)th Banker")
             NotificationCenter.default.removeObserver(self, name:notification, object:nil)
@@ -77,7 +77,7 @@ class BankManager {
         lock.unlock()
     }
     
-    func updateTotalBusinessTime(userInformation: [AnyHashable: Any]) {
+    private func updateTotalBusinessTime(userInformation: [AnyHashable: Any]) {
         guard let businessTime = userInformation[UserInformationKey.businessTime] as? Float else { return }
         bank.totalBusinessTime += businessTime
         bank.totalBusinessTime = round( bank.totalBusinessTime * 100 ) / 100
