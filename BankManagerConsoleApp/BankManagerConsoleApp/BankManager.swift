@@ -24,8 +24,8 @@ struct BankManager {
     }
     
     func inputCustomersToWaitingLine() {
-        customerMaker.makeCustomers().forEach{ waitingLine.addOperation($0.bankTask) }
-        waitingLine.waitUntilAllOperationsAreFinished()
+        let customers = customerMaker.makeCustomers()
+        waitingLine.addOperations(customers.map({ $0.bankTask }), waitUntilFinished: true)
     }
     
 }

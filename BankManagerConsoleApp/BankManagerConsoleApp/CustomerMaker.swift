@@ -2,7 +2,7 @@
 //  CustomerMaker.swift
 //  BankManagerConsoleApp
 //
-//  Created by sookim on 2021/04/30.
+//  Created by sookim on 2021/05/03.
 //
 
 import Foundation
