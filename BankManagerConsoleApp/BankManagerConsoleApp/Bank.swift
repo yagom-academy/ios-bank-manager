@@ -40,14 +40,10 @@ extension Double {
 
 }
 
-struct Inputer {
+struct InputHelper {
 
-    static let blank = ""
-    
-    static func receive() -> String {
-        guard let input = readLine() else {
-            return blank
-        }
+    static func receive() -> String? {
+        guard let input = readLine() else { return nil }
         return input
     }
     
@@ -71,7 +67,7 @@ struct Bank {
     func open() {
         while (true) {
             BankPrinter.printMenu()
-            let input = Inputer.receive()
+            let input = InputHelper.receive()
             switch input {
             case "1":
                 startWork()
