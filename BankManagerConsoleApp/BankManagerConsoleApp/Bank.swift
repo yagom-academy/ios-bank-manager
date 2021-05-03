@@ -19,7 +19,7 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         bankManager.inputCustomersToWaitingLine()
         let endTime = CFAbsoluteTimeGetCurrent()
-        BankPrinter.printFinishPharse(bankManager.numberOfCustomer, endTime - startTime)
+        BankPrinter.printFinishPharse(totalCustomerNumber: bankManager.numberOfCustomer, totalSecond: endTime - startTime)
     }
     
     func open() {
