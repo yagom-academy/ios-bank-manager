@@ -9,7 +9,7 @@ import Foundation
 
 final class Bank {
     private var clients: [Client]
-    private var tellers: Teller = Teller(number: 1)
+    private var tellers: BankManager = BankManager(numberOfManager: 1)
     private var totalTaskTime: Double = 0
     
     init(_ clients: [Client]) {

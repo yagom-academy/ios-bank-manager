@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Teller {
-    let number: Int
+struct BankManager {
+    let numberOfManager: Int
     
     mutating func handleTask(_ clients: [Client]) -> Double {
         var totalTaskTime: Double = 0
         var tasks: [Operation] = []
         let clientWaitingLineQueue = OperationQueue()
         
-        clientWaitingLineQueue.maxConcurrentOperationCount = number
+        clientWaitingLineQueue.maxConcurrentOperationCount = numberOfManager
         
         for client in clients {
             tasks.append(client.task)
