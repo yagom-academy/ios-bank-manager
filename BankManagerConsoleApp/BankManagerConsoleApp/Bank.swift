@@ -13,7 +13,7 @@ class Bank {
     let notificationBoard: NotificationBoard = NotificationBoard()
 
     class NotificationBoard {
-        private var observers: [CustomerQueue] = []
+        private(set) var observers: [CustomerQueue] = []
 
         func addObserver(_ observer: CustomerQueue) {
             observers.append(observer)
@@ -56,7 +56,7 @@ class Bank {
     }
 
     class CustomerQueue {
-        private var queue: [Customer] = []
+        private(set) var queue: [Customer] = []
         let name: String
 
         init(name: String) {
