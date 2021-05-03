@@ -13,6 +13,7 @@ class BankManager {
     
     init(numberOfTeller: UInt) {
         self.numberOfTeller = numberOfTeller
+        generateNumberOfClient()
     }
     
     private func generateNumberOfClient() {
@@ -28,7 +29,7 @@ class BankManager {
         print(tellerFinishWorkMessage)
     }
     
-    func sendToCounter() {
+    func processOfTellerTask() {
         counter.maxConcurrentOperationCount = Int(numberOfTeller)
         for index in 1...numberOfClient {
             counter.addOperation {
