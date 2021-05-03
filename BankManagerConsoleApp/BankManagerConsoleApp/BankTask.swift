@@ -14,7 +14,7 @@ class BankTask: Operation {
     private var waitingNumber: Int
     private var customerGrade: CustomerGrade
     
-    init(_ waitingNumber: Int, _ grade: CustomerGrade) {
+    init(waitingNumber: Int, grade: CustomerGrade) {
         self.taskType = BankTaskType.random
         self.taskTime = taskType.taskTime
         self.waitingNumber = waitingNumber

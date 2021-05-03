@@ -18,7 +18,7 @@ struct Customer {
     
     init(waitingNumber: Int) {
         self.grade = CustomerGrade.random
-        self._bankTask = BankTask(waitingNumber, grade)
+        self._bankTask = BankTask(waitingNumber: waitingNumber, grade: grade)
         self.waitingNumber = waitingNumber
     }
     
