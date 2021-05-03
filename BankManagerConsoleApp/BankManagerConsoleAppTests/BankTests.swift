@@ -83,31 +83,31 @@ class TellerTests: XCTestCase {
 class CustomerQueueTest: XCTestCase {
     var sut: Bank.CustomerQueue!
     var customer: Bank.Customer!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Bank.CustomerQueue(name: "큐큐큐큐큐큐")
         customer = Bank.Customer(waitingNumber: 0)
     }
-    
+
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
         customer = nil
     }
-    
+
     func test_빈queue에_enqueue한경우_queue의_첫번째요소의waitingNumber와_넣어준customer인스턴스의_waitingNumber가_같은가() {
         sut.enqueue(customer)
-        
+
         XCTAssertEqual(sut.queue[0].waitingNumber, customer.waitingNumber)
     }
-    
+
     func test_queue에서_dequeue한경우_요소가있는경우_첫번째인덱스의_요소가나오는가() {
         sut.enqueue(customer)
-        
+
         XCTAssertEqual(sut.dequeue()!.waitingNumber, customer.waitingNumber)
     }
-    
+
     func test_빈queue에서_dequeue한경우_nil이_나오는가() {
         XCTAssertNil(sut.dequeue())
     }
