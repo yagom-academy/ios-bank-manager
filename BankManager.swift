@@ -20,23 +20,6 @@ struct BankManager {
         bankOperationQueue.maxConcurrentOperationCount = bank.numberOfBankTeller
     }
     
-    private mutating func createRandomCustomer() {
-        randomCustomers = randomGenerator.generateRandomCustomer(bank: &bank)
-    }
-    
-    private mutating func handleCustomer() throws {
-        guard var randomCustomers = randomCustomers else { throw BankManagerError.failToGenerateRandomCustomers }
-        
-        randomCustomers.sort{ $0.priority > $1.priority }
-        
-        randomCustomers.forEach({
-            let customerOperation = HandleCustomerOperation(customer: $0)
-            bankOperationQueue.addOperation(customerOperation)
-        })
-        
-        bankOperationQueue.waitUntilAllOperationsAreFinished()
-    }
-    
     mutating func start() {
         while true {
             createRandomCustomer()
@@ -61,5 +44,22 @@ struct BankManager {
             }
             
         }
+    }
+    
+    private mutating func createRandomCustomer() {
+        randomCustomers = randomGenerator.generateRandomCustomer(bank: &bank)
+    }
+    
+    private mutating func handleCustomer() throws {
+        guard var randomCustomers = randomCustomers else { throw BankManagerError.failToGenerateRandomCustomers }
+        
+        randomCustomers.sort{ $0.priority > $1.priority }
+        
+        randomCustomers.forEach({
+            let customerOperation = HandleCustomerOperation(customer: $0)
+            bankOperationQueue.addOperation(customerOperation)
+        })
+        
+        bankOperationQueue.waitUntilAllOperationsAreFinished()
     }
 }
