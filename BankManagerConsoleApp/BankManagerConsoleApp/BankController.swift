@@ -28,7 +28,11 @@ class BankController {
         }
     }
 
-    func prepareTeller(number: Int) {}
+    func prepareTeller(number: Int) {
+        for index in 0..<number {
+            bank.counters.append(Bank.Teller(counterNumber: index))
+        }
+    }
 
     func openBank() {}
 
