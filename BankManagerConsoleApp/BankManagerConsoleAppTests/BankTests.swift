@@ -59,3 +59,23 @@ class NotificationBoardTests: XCTestCase {
         }
     }
 }
+
+class TellerTests: XCTestCase {
+    let bank = Bank()
+    let sut = Bank.Teller(counterNumber: 5)
+    let notificationBoard = Bank.NotificationBoard()
+
+    func test_teller는_원하는시간정도로_업무시간을_소요하는가() {
+        func checkTime() -> Double {
+            let workStart = ProcessInfo.processInfo.systemUptime
+            sut.work(forCustomerOf: 4, by: notificationBoard)
+            let workEnd = ProcessInfo.processInfo.systemUptime
+            return workEnd - workStart
+        }
+
+        let timeCheck = checkTime()
+
+        XCTAssertGreaterThan(timeCheck, 0.7)
+        XCTAssertLessThan(timeCheck, 0.8)
+    }
+}
