@@ -13,7 +13,7 @@ class Bank {
     let notificationBoard: NotificationBoard = NotificationBoard()
 
     class NotificationBoard {
-        var observers: [CustomerQueue] = []
+        private var observers: [CustomerQueue] = []
 
         func addObserver(_ observer: CustomerQueue) {
             observers.append(observer)
@@ -27,7 +27,7 @@ class Bank {
             floatOnBoard(by: teller)
         }
 
-        func floatOnBoard(by teller: Teller) {
+        private func floatOnBoard(by teller: Teller) {
             for index in 0..<observers.count {
                 guard let customer = observers[index].dequeue() else { continue }
                 customer.go(to: teller, by: self)
@@ -50,12 +50,12 @@ class Bank {
             call(to: notificationBoard)
         }
 
-        func call(to notificationBoard: NotificationBoard) {
+        private func call(to notificationBoard: NotificationBoard) {
             notificationBoard.call(by: self)
         }
     }
 
-    struct CustomerQueue {
+    class CustomerQueue {
         private var queue: [Customer] = []
         let name: String
 
@@ -63,11 +63,11 @@ class Bank {
             self.name = name
         }
 
-        mutating func enqueue(customer: Customer) {
+        func enqueue(_ customer: Customer) {
             queue.append(customer)
         }
 
-        mutating func dequeue() -> Customer? {
+        func dequeue() -> Customer? {
             return queue.removeFirst()
         }
     }
