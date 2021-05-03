@@ -16,3 +16,8 @@ enum Messages: String {
     case unknownInputMessage = "잘못된 입력입니다.다시 입력해주세요"
     case initialChoiceMessage = "1 : 은행 개점 \n2 : 종료"
 }
+
+enum RandomNumberBoundary: Int {
+    case minimum = 10
+    case maximum = 30
+}
