@@ -8,14 +8,12 @@
 import Foundation
 
 final class Bank {
-    private var clients: [Client] = []
+    private var clients: [Client]
     private var tellers: Teller = Teller(number: 1)
     private var totalTaskTime: Double = 0
     
-    private func createClient() {
-        for number in 1...Int.random(in: 10...30) {
-            clients.append(Client(waitingNumber: number, taskTime: 0.7))
-        }
+    init(_ clients: [Client]) {
+        self.clients = clients
     }
     
     private func selectMenu() -> MenuSelection? {
@@ -37,7 +35,6 @@ final class Bank {
     }
     
     private func open() {
-        createClient()
         totalTaskTime = tellers.handleTask(clients)
     }
     

@@ -17,4 +17,14 @@ struct Client {
         self.taskTime = taskTime
         self.task = BankTaskOperation(waitingNumber, taskTime)
     }
+    
+    static func create() -> [Client] {
+        var clients: [Client] = []
+        
+        for number in 1...Int.random(in: 10...30) {
+            clients.append(Client(waitingNumber: number, taskTime: 0.7))
+        }
+        
+        return clients
+    }
 }
