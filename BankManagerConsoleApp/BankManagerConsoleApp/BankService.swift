@@ -26,26 +26,34 @@ enum creditRating: CustomStringConvertible {
 
 enum workType: CustomStringConvertible {
     case deposit
-    case loan
+    case loanReview
+    case loanEvaluation
+    case loanExecution
     
     var duration: Double {
         switch self {
         case .deposit:
             return 0.7
-        case .loan:
-            return 1.1
+        case .loanReview:
+            return 0.3
+        case .loanEvaluation:
+            return 0.5
+        case .loanExecution:
+            return 0.3
         }
     }
     
     var description: String {
         switch self {
         case .deposit:
-            return "예금"
-        case .loan:
-            return "대출"
+            return "예금업무"
+        case .loanReview:
+            return "대출업무 시작"
+        case .loanEvaluation:
+            return "대출심사"
+        case .loanExecution:
+            return "대출업무 완료"
         }
     }
     
 }
-
-
