@@ -68,6 +68,7 @@ class Bank {
         }
 
         func dequeue() -> Customer? {
+            guard false == queue.isEmpty else { return nil }
             return queue.removeFirst()
         }
     }
