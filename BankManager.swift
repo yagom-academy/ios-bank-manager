@@ -50,7 +50,7 @@ struct BankManager {
     }
     
     private mutating func createRandomCustomer() {
-        randomCustomers = randomGenerator.generateRandomCustomer(bank: &bank)
+        randomCustomers = randomGenerator.generateRandomCustomer()
     }
     
     private mutating func handleCustomer() throws {
