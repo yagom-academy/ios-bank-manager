@@ -22,8 +22,8 @@ struct BankManager {
     }
     
     // MARK: - Private Methods
-    private func printMenu() {
-        print(Menu.text, terminator: "")
+    func menuText() -> String {
+        return Menu.text
     }
     
     private func selectMenu() throws -> String {
@@ -36,7 +36,8 @@ struct BankManager {
     mutating func start() {
         while true {
             do {
-                printMenu()
+                let menuText: String = menuText()
+                print(menuText, terminator: "")
                 let selectedMenu: String = try selectMenu()
                 
                 switch selectedMenu {
