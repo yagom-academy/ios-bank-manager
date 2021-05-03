@@ -26,7 +26,9 @@ struct Bank {
         let clients: [Client] = makeClients(
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         )
-        let totalProcessTime: Double = measureTime { processTasks(of: clients) }
+        let totalProcessTime: Double = measureTime { () -> Void in
+            return processTasks(of: clients)
+        }
         
         close(numberOfClient: clients.count, totalProcessTime)
     }
@@ -34,10 +36,13 @@ struct Bank {
     mutating func makeClients(number: Int) -> [Client] {
         var clients: [Client] = []
         
-        guard number >= 1 else { return clients }
+        guard number >= 1 else {
+            return clients
+        }
         
         for waitingNumber in 1...number {
-            clients.append(Client(waitingNumber))
+            let client: Client = Client(waitingNumber)
+            clients.append(client)
         }
         
         return clients
