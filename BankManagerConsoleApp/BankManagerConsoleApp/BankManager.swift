@@ -14,7 +14,7 @@ final class BankManager {
   private var currentTicketNumber = 1
   private var totalCompletedCustomer = 0
   
-  func process(_ customers: [Int:Customer]) {
+  func process(_ customers: [Int:Customer], completionHandler: @escaping (()->Void) = { }) {
     if let customer = customers[currentTicketNumber] {
       guard !bankers.isEmpty else {
         operationQueue.waitUntilAllOperationsAreFinished()
@@ -39,6 +39,7 @@ final class BankManager {
         
         self.bankers[counterNumber] = workableBanker
         self.totalCompletedCustomer += 1
+        completionHandler()
       }
     }
   }
