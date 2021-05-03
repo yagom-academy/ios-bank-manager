@@ -22,7 +22,11 @@ class BankController {
         self.bank = bank
     }
 
-    func receiveCustomer(number: Int) {}
+    func receiveCustomer(number: Int) {
+        for index in 0..<number {
+            bank.customerQueue.enqueue(Bank.Customer(waitingNumber: index))
+        }
+    }
 
     func prepareTeller(number: Int) {}
 
