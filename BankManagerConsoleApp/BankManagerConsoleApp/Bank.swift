@@ -7,20 +7,6 @@
 
 import Foundation
 
-extension Double {
-
-    func cutNumberToTwoDecimalPoint() -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.roundingMode = .floor
-        numberFormatter.maximumFractionDigits = 2
-        guard let result = numberFormatter.string(for: self) else {
-            return String(self)
-        }
-        return result
-    }
-
-}
-
 struct Bank {
     
     private var bankManager: BankManager
