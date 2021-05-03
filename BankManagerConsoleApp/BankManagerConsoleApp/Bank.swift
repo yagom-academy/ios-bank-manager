@@ -11,7 +11,7 @@ struct Bank {
     // MARK: - Properties
     private var waitingQueue: OperationQueue = OperationQueue()
     
-    init(numberOfTeller: Int = 1) {
+    init(numberOfTeller: Int) {
         self.waitingQueue.maxConcurrentOperationCount = numberOfTeller
     }
     
@@ -26,18 +26,24 @@ struct Bank {
         let clients: [Client] = makeClients(
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         )
-        let totalProcessTime: Double = measureTime { processTasks(of: clients) }
+        let totalProcessTime: Double = measureTime { () -> Void in
+            return processTasks(of: clients)
+        }
+        let closeText = close(numberOfClient: clients.count, totalProcessTime)
         
-        close(numberOfClient: clients.count, totalProcessTime)
+        print(closeText)
     }
     
     mutating func makeClients(number: Int) -> [Client] {
         var clients: [Client] = []
         
-        guard number >= 1 else { return clients }
+        guard number >= 1 else {
+            return clients
+        }
         
         for waitingNumber in 1...number {
-            clients.append(Client(waitingNumber))
+            let client: Client = Client(waitingNumber)
+            clients.append(client)
         }
         
         return clients
@@ -58,8 +64,8 @@ struct Bank {
         waitingQueue.addOperations(clients, waitUntilFinished: true)
     }
     
-    func close(numberOfClient: Int, _ totalProcessTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(preferredNumberFormat(totalProcessTime))초입니다.")
+    func close(numberOfClient: Int, _ totalProcessTime: Double) -> String {
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(preferredNumberFormat(totalProcessTime))초입니다."
     }
 }
 

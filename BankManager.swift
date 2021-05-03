@@ -10,44 +10,43 @@ struct BankManager {
     // MARK: - Properties
     private var bank: Bank
     
-    init(numberOfTeller: Int = 1) {
+    init(numberOfTeller: Int) {
         self.bank = Bank(numberOfTeller: numberOfTeller)
     }
     
     // MARK: - NameSpaces
     private enum Menu {
         static let text: String = "1: 은행 개점\n2: 종료\n입력: "
-        static let openBank: Int = 1
-        static let exit: Int = 2
+        static let openBank: String = "1"
+        static let exit: String = "2"
     }
     
     // MARK: - Private Methods
-    private func selectMenu() throws -> Int {
+    private func printMenu() {
         print(Menu.text, terminator: "")
-        let userInput: String? = readLine()
-        guard let userInputText: String = userInput,
-              let userInputNumber: Int = Int(userInputText) else {
-            throw BankManagerError.invalidMenu("\"\(userInput ?? "nil")\"")
-        }
-        return userInputNumber
     }
     
-    mutating private func move(to selectedMenu: Int) {
-        switch selectedMenu {
-        case Menu.openBank:
-            bank.open()
-        case Menu.exit:
-            exit(0)
-        default:
-            print("유효하지 않은 입력입니다. 1과 2 중에서 선택해주세요.")
+    private func selectMenu() throws -> String {
+        guard let userInputText: String = readLine() else {
+            throw BankManagerError.invalidMenu
         }
+        return userInputText
     }
     
     mutating func start() {
         while true {
             do {
-                let selectedMenu: Int = try selectMenu()
-                move(to: selectedMenu)
+                printMenu()
+                let selectedMenu: String = try selectMenu()
+                
+                switch selectedMenu {
+                case Menu.openBank:
+                    bank.open()
+                case Menu.exit:
+                    return
+                default:
+                    print("유효하지 않은 입력입니다. 1과 2 중에서 선택해주세요.")
+                }
             } catch {
                 print(error)
             }

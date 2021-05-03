@@ -6,12 +6,12 @@
 //
 
 enum BankManagerError: Error, CustomStringConvertible {
-    case invalidMenu(String)
+    case invalidMenu
     
     var description: String {
         switch self {
-        case .invalidMenu(let userInput):
-            return "Invalid Input. User Input: \(userInput)"
+        case .invalidMenu:
+            return "Invalid Input"
         }
     }
 }
