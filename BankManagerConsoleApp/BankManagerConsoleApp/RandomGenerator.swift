@@ -24,6 +24,9 @@ struct RandomGenerator {
     }
     
     private func createRandomNumberInRange(_ start: Int, to end: Int) -> Int {
+        guard start < end else {
+            return Int.random(in: end...start)
+        }
         return Int.random(in: start...end)
     }
 }
