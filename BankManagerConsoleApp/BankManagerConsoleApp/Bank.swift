@@ -27,7 +27,13 @@ final class Bank {
         
         guard let menuNumber = readLine() else { return nil }
         
-        return MenuSelection(rawValue: menuNumber)
+        if menuNumber == "1" {
+            return .start
+        } else if menuNumber == "2" {
+            return .end
+        } else {
+            return nil
+        }
     }
     
     private func open() {
