@@ -45,12 +45,8 @@ final class Bank {
     }
     
     func operate() {
-        var menuNumber: MenuSelection?
-        
         while true {
-            menuNumber = selectMenu()
-            
-            switch menuNumber {
+            switch selectMenu() {
             case .start:
                 open()
                 close()
