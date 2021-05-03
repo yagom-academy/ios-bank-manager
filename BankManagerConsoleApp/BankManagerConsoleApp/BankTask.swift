@@ -8,17 +8,17 @@
 import Foundation
 
 class BankTaskOperation: Operation {
-    let clientNumber: Int
+    let waitingNumber: Int
     let taskTime: Double
     
     init(_ clientNumber: Int, _ taskTime: Double) {
-        self.clientNumber = clientNumber
+        self.waitingNumber = clientNumber
         self.taskTime = taskTime
     }
     
     override func main() {
-        print("\(clientNumber)번 고객 업무 시작")
+        print("\(waitingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
-        print("\(clientNumber)번 고객 업무 완료")
+        print("\(waitingNumber)번 고객 업무 완료")
     }
 }
