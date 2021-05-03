@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02ADD769263FE3EB000828E3 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820BB263C267500800571 /* Bank.swift */; };
+		02ADD76A263FE43B000828E3 /* BankController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820BF263C269B00800571 /* BankController.swift */; };
+		02ADD76B26400225000828E3 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D0A820A5263BD74000800571 /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A820A4263BD74000800571 /* BankManagerConsoleAppTests.swift */; };
@@ -223,9 +226,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A820B2263BE75A00800571 /* BankControllerTests.swift in Sources */,
+				02ADD76B26400225000828E3 /* BankManager.swift in Sources */,
 				D0A820B6263BE76D00800571 /* BankTests.swift in Sources */,
+				02ADD769263FE3EB000828E3 /* Bank.swift in Sources */,
 				D0A820AC263BD93D00800571 /* main.swift in Sources */,
 				D0A820A5263BD74000800571 /* BankManagerConsoleAppTests.swift in Sources */,
+				02ADD76A263FE43B000828E3 /* BankController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
