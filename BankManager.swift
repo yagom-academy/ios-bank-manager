@@ -17,22 +17,20 @@ struct BankManager {
     // MARK: - NameSpaces
     private enum Menu {
         static let text: String = "1: 은행 개점\n2: 종료\n입력: "
-        static let openBank: Int = 1
-        static let exit: Int = 2
+        static let openBank: String = "1"
+        static let exit: String = "2"
     }
     
     // MARK: - Private Methods
-    private func selectMenu() throws -> Int {
+    private func selectMenu() throws -> String {
         print(Menu.text, terminator: "")
-        let userInput: String? = readLine()
-        guard let userInputText: String = userInput,
-              let userInputNumber: Int = Int(userInputText) else {
-            throw BankManagerError.invalidMenu("\"\(userInput ?? "nil")\"")
+        guard let userInputText: String = readLine() else {
+            throw BankManagerError.invalidMenu
         }
-        return userInputNumber
+        return userInputText
     }
     
-    mutating private func move(to selectedMenu: Int) {
+    mutating private func move(to selectedMenu: String) {
         switch selectedMenu {
         case Menu.openBank:
             bank.open()
@@ -46,7 +44,7 @@ struct BankManager {
     mutating func start() {
         while true {
             do {
-                let selectedMenu: Int = try selectMenu()
+                let selectedMenu: String = try selectMenu()
                 move(to: selectedMenu)
             } catch {
                 print(error)

@@ -13,6 +13,7 @@ final class Client: Operation {
     
     init(_ waitingNumber: Int) {
         self.waitingNumber = waitingNumber
+        
     }
     
     // MARK: - NameSpaces
