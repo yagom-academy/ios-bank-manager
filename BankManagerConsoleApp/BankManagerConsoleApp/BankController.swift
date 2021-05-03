@@ -8,11 +8,15 @@
 import Foundation
 
 class BankController {
-    let bank: Bank
-    var openTime: TimeInterval?
-    var closeTime: TimeInterval?
-    var businessHours: TimeInterval?
-    var customerWaitingCount: Int = 0
+    private let bank: Bank
+    private var openTime: TimeInterval?
+    private var closeTime: TimeInterval?
+    private var businessHours: TimeInterval? {
+        guard let boundOpenTime = openTime, let boundCloseTime = closeTime else { return nil }
+
+        return (boundCloseTime - boundOpenTime)
+    }
+    private var customerWaitingCount: Int = 0
 
     init(of bank: Bank) {
         self.bank = bank
