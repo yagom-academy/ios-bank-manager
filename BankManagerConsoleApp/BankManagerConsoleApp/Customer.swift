@@ -7,10 +7,36 @@
 
 import Foundation
 
-struct Customer: Hashable {
+class Customer: Operation {
   private let ticketNumber: Int
-  private let grade: CustomerGrade
+  private var grade: CustomerGrade
   private let task: TaskType
+  
+  override var queuePriority: Operation.QueuePriority {
+    get {
+      switch grade {
+      case .vvip:
+        return .veryHigh
+      case .vip:
+        return .normal
+      case .normal:
+        return .veryLow
+      }
+    }
+    
+    set {
+      switch newValue {
+      case .veryHigh:
+        self.grade = .vvip
+      case .normal:
+        self.grade = .vip
+      case .veryLow:
+        self.grade = .normal
+      default:
+        self.grade = .normal
+      }
+    }
+  }
   
   init(order orderNumber: Int, grade: CustomerGrade, task: TaskType) {
     self.ticketNumber = orderNumber
