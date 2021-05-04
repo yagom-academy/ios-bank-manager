@@ -12,6 +12,7 @@ class Banker: Operation {
     let client: Client?
     let notification: NSNotification.Name
     var businessTime: Float = 0
+    let operationQueue = OperationQueue()
     
     init(bankerNumber: Int, client: Client?, notification: NSNotification.Name) {
         self.bankerNumber = bankerNumber
@@ -42,11 +43,10 @@ class Banker: Operation {
     }
     
     private func requestLoan(notificationName: Notification.Name, client: Client) {
-        
+        operationQueue.isSuspended = true
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["client": client])
-
-        
-        
+        operationQueue.addOperation {}
+        operationQueue.waitUntilAllOperationsAreFinished()
     }
     
     private func convertGradeToString(grade: Int) -> String {
