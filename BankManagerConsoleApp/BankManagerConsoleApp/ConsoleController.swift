@@ -7,7 +7,6 @@
 
 class ConsoleController {
     private var randomCustomerNumber: Int!
-    private let tellerNumber: Int = 1
     private var userInput: UserInput?
     private let menuScript: String = """
         1 : 은행개점
@@ -23,7 +22,7 @@ class ConsoleController {
         case wrongNumberInput
         case nilInput
         case stringInput
-        
+
         var description: String {
             switch self {
             case .wrongNumberInput:
@@ -52,5 +51,10 @@ class ConsoleController {
         }
     }
 
-    private func handleBankManager(by bankController: BankController) {}
+    private func handleBankManager(by bankController: BankController) {
+        if userInput == .openBank {
+            bankController.openBank(customerNumber: randomCustomerNumber)
+            bankController.closeBank()
+        }
+    }
 }

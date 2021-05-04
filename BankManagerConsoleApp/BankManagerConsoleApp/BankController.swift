@@ -37,7 +37,7 @@ class BankController {
         }
     }
 
-    func openBank(customerNumber: Int, tellerNumber: Int) {
+    func openBank(customerNumber: Int) {
         openTime = ProcessInfo.processInfo.systemUptime
         receiveCustomer(number: customerNumber)
         bank.customerQueue.dequeue()?.go(to: bank.counters[0],
