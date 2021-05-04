@@ -6,14 +6,15 @@
 
 import Foundation
 
-class BankManager {
+final class BankManager {
     private var customers: [Customer] = []
+    private let tak: Banker = Banker()
     
     func openBank() {
         let bankOpenMenuState: Bool = bankOpenMenu()
         
         if bankOpenMenuState {
-            customers = visitCustomers()
+            visitCustomers()
             bankWorkProgress()
             openBank()
         }
@@ -39,52 +40,37 @@ class BankManager {
             }
         }
     }
-   
+    
     private func bankWorkProgress() {
         let totalCustomersCount: Int = self.customers.count
         var remainingCustomerCount: Int = totalCustomersCount
         
         while remainingCustomerCount > 0 {
             remainingCustomerCount = self.customers.count
-        
+            
             if remainingCustomerCount == 0 {
                 finishBank(totalCustomerCount: totalCustomersCount)
                 break
             } else {
-                let customer: Int = matchBankerAndCustomer()
-                bankerWorkProgress(customerNumber: customer)
+                let customer: Int = tak.matchBankerAndCustomer(customers: &customers)
+                tak.bankerWorkProgress(customerNumber: customer)
             }
         }
     }
     
-    private func bankerWorkProgress(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 시작")
-        usleep(700000)
-        print("\(customerNumber)번 고객 업무 완료")
-    }
-
     private func finishBank(totalCustomerCount: Int) {
         var workTime = Double(totalCustomerCount) * 0.7
         workTime = round(workTime * 100) / 100
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무 시간은 \(workTime)초 입니다.")
     }
     
-    private func visitCustomers() -> [Customer] {
-        var result: [Customer] = []
+    private func visitCustomers(){
         let waitNumbers: [Int] = Array(1...Int.random(in: 10...30))
-
+        
         for number in waitNumbers {
             let customer: Customer = Customer(waitNumber: number)
-            result.append(customer)
+            self.customers.append(customer)
         }
-
-        return result
-    }
-    
-    private func matchBankerAndCustomer() -> Int {
-        let customer: Customer = self.customers.removeFirst()
-        
-        return customer.waitNumber
     }
     
 }
