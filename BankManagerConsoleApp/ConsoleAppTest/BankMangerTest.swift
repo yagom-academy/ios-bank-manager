@@ -58,7 +58,7 @@ class BankMangerTest: XCTestCase {
         sut = nil
     }
     
-    func test_start() {
+    func test_userInput이_1일때_start_메서드가_무한loop에_빠지지않고_종료되는지() {
         sut.start()
     }
 
