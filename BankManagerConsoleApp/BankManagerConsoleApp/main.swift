@@ -6,6 +6,7 @@
 
 import Foundation
 
+
 var isRepeat = true
 repeat {
   print("1: 은행 개점")

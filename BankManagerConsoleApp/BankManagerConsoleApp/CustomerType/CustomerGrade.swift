@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomerGrade: Int {
+enum CustomerGrade: Int, CaseIterable {
   case vvip = 0
   case vip = 1
   case normal = 2

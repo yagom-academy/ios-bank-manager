@@ -9,11 +9,12 @@ import Foundation
 import Foundation
 
 final class Bank {
-  var bankManager: BankManager
-  var totalCustomerCount: Int = 0
+  private let bankerNumber = 3
+  private var bankManager: BankManager
+  private var totalCustomerCount: Int = 0
   
   init() {
-    self.bankManager = BankManager(numberOfBankers: 3)
+    self.bankManager = BankManager(numberOfBankers: bankerNumber)
   }
 
   func open() {

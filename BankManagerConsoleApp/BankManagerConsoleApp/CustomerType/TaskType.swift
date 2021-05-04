@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TaskType: Int {
+enum TaskType: Int, CaseIterable {
   case deposit = 0
   case loan = 1
   
