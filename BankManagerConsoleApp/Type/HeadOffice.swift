@@ -11,7 +11,7 @@ class HeadOffice {
     let lock = NSLock()
     @objc func checkLoanRequest(notification: Notification) {
         guard let userInformation = notification.userInfo else { return }
-        guard let banker = userInformation["banker"] as? Banker, let client = userInformation["client"] as? Client else {
+        guard let banker = userInformation[UserInformationKey.banker] as? Banker, let client = userInformation[UserInformationKey.client] as? Client else {
             return
         }
         let clientGrade = banker.convertGradeToString(grade: client.grade)

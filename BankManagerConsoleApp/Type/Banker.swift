@@ -52,7 +52,7 @@ class Banker: Operation {
     
     private func requestLoan(notificationName: Notification.Name, client: Client) {
         operationQueue.isSuspended = true
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["banker":self, "client": client])
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: [UserInformationKey.banker:self, UserInformationKey.client: client])
         operationQueue.addOperation {}
         operationQueue.waitUntilAllOperationsAreFinished()
     }
