@@ -8,9 +8,11 @@ import Foundation
 
 class BankManager {
     let counter = OperationQueue()
-
+    var clients = [Client]()
+    
     private var numberOfClient: UInt = 0
     private var numberOfTeller: UInt
+    private var waitingNumber: UInt = 1
     
     init(numberOfTeller: UInt) {
         self.numberOfTeller = numberOfTeller
@@ -18,7 +20,15 @@ class BankManager {
     }
     
     private func generateClient() {
-        numberOfClient = UInt.random(in: 1...1)
+        guard let randomClientClass = ClientType.allCases.randomElement(),
+              let randomBusinessType = BusinessType.allCases.randomElement() else {
+            return
+        }
+        
+        let client = Client(waitingNumber: waitingNumber, clientClass: randomClientClass, businessType: randomBusinessType)
+        waitingNumber += 1
+        
+        clients.append(client)
     }
 
     func workTask(order: UInt) {
