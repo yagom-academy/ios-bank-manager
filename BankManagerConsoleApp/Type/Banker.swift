@@ -32,17 +32,20 @@ class Banker: Operation {
     
     private func setBusinessTime(taskType: String) {
         if taskType == ClientTask.loan {
+            let loanNotification = Notification.Name("Notification")
+            NotificationCenter.default.addObserver(HeadOffice(), selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
             requestLoan()
             businessTime =  1.1
+            NotificationCenter.default.removeObserver(HeadOffice(), name: loanNotification, object: nil)
         }
         businessTime =  0.7
     }
     
     private func requestLoan() {
-        let loanNotification = Notification.Name("Notification")
-        NotificationCenter.default.addObserver(HeadOffice(), selector: #selector(HeadOffice.checkLoanRequest), name: loanNotification, object: nil)
+        
+        
 
-        NotificationCenter.default.removeObserver(HeadOffice(), name: loanNotification, object: nil)
+        
         
     }
     

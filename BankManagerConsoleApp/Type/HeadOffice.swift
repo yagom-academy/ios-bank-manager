@@ -9,7 +9,7 @@ import Foundation
 
 class HeadOffice {
     let lock = NSLock()
-    @objc func checkLoanRequest() {
+    @objc func checkLoanRequest(notification: Notification) {
         lock.lock()
         lock.unlock()
     }
