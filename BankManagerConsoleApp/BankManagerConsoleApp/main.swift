@@ -6,5 +6,14 @@
 
 import Foundation
 
-let clients: [Client] = Client.create()
-Bank(clients).operate()
+while true {
+    switch Bank.selectMenu() {
+    case .start:
+        let clients: [Client] = Client.create()
+        Bank(clients).operate()
+    case .end:
+        exit(0)
+    default:
+        print("잘못된 입력입니다.")
+    }
+}

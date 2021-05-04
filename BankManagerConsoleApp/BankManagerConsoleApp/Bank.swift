@@ -16,7 +16,7 @@ final class Bank {
         self.clients = clients
     }
     
-    private func selectMenu() -> MenuSelection? {
+    static func selectMenu() -> MenuSelection? {
         print("""
         1 : 은행 개점
         2 : 종료
@@ -28,7 +28,7 @@ final class Bank {
         return matchMenuSelection(menuNumber)
     }
     
-    private func matchMenuSelection(_ menuNumber: String) -> MenuSelection? {
+    private static func matchMenuSelection(_ menuNumber: String) -> MenuSelection? {
         switch menuNumber {
         case "1":
             return .start
@@ -45,21 +45,10 @@ final class Bank {
     
     private func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clients.count)명이며, 총 업무시간은 \(String(format: "%.2f", totalTaskTime))초입니다.")
-        
-        clients.removeAll()
     }
     
     func operate() {
-        while true {
-            switch selectMenu() {
-            case .start:
-                open()
-                close()
-            case .end:
-                return
-            default:
-                print("잘못된 입력입니다.")
-            }
-        }
+        open()
+        close()
     }
 }
