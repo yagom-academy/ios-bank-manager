@@ -26,7 +26,21 @@ class BankTask: Operation {
     override func main() {
         print("🔴\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
+        
+        if taskType.name == "대출" {
+            headOfficeJob(headTask: HeadOfficeBankTask(waitingNumber: waitingNumber, customerGrade: customerGrade.name), judgeQueue: BankManager.headOfficeQueue)
+        }
+        
         print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
     }
-    
+
+    func headOfficeJob(headTask: HeadOfficeBankTask, judgeQueue: OperationQueue) {
+        
+        var array: [HeadOfficeBankTask] = []
+        array.append(headTask)
+        judgeQueue.maxConcurrentOperationCount = 1
+        judgeQueue.addOperations(array, waitUntilFinished: true)
+        Thread.sleep(forTimeInterval: taskTime)
+        
+    }
 }
