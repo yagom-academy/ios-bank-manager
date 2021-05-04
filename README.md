@@ -33,7 +33,9 @@
 - 05/03(월)
   - 강의) ARC / Memory Struct
   - step1 PR 코멘트 바탕으로 코드 수정 -  입력 함수에 대한 고민
-
+- 05/04(화)
+    - 소스파일 분리 후 Client 타입을 만들어 그에 맞게 코드 수정
+    - 고객등급에 따른 우선순위 고민 - 선택정렬, Operation.QueuePriority
 <br>
 
 ### 학습키워드
@@ -42,6 +44,7 @@
 - sleep(), usleep(), Thread.sleep(Thread.sleep(forTimeInterval: )
 - [OperationQueue 메서드](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/OperationQueue%20%EB%A9%94%EC%84%9C%EB%93%9C.md)
 - ARC / Memory Struct
+- 선택정렬 / Operation.QueuePriority
 
 <br>
 
@@ -56,6 +59,7 @@
 <br>
 
 ### 참고 링크
+#### 동시성 프로그래밍, 동기 vs 비동기, GCD/Operation
 - [[인프런] iOS Concurrency(동시성) 프로그래밍, 동기 비동기 처리 그리고 GCD/Operation - 디스패치큐와 오퍼레이션큐의 이해](https://www.inflearn.com/course/iOS-Concurrency-GCD-Operation#)
 - [[유투브] 프로세스는 뭐고 스레드는 뭔가요?](https://www.youtube.com/watch?v=iks_Xb9DtTM)
 - [[유투브] 비동기 프로그래밍이 뭔가요?](https://www.youtube.com/watch?v=m0icCqHY39U)
@@ -68,3 +72,9 @@
 - [[블로그] iOS & Swift 공부 - Operation Queue](https://velog.io/@kevinkim2586/iOS-Swift-%EA%B3%B5%EB%B6%80-Operation-Queue)
 - [[stack overlow] How to sleep for few milliseconds in swift 2.2?](https://stackoverflow.com/questions/38119742/how-to-sleep-for-few-milliseconds-in-swift-2-2)
 - [[부스트코스] 2) OperationQueue](https://www.boostcourse.org/mo326/lecture/16898?isDesc=false)
+#### 선택정렬
+- [[유투브] 선택정렬 - Select-sort with Gypsy folk dance](https://www.youtube.com/watch?v=Ns4TPTC8whw&t=322s)
+- [[블로그] Swift3 ) Swift로 선택정렬(Selection Sort)짜보기 - Zedd](https://zeddios.tistory.com/66)
+#### Operation.QueuePriority
+- [[블로그] [iOS] Operation? Operation Queue? 작업을 객체로 만들어보자!](https://onelife2live.tistory.com/18)
+- [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
