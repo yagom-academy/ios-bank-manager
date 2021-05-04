@@ -34,7 +34,7 @@ class BankControllerTests: XCTestCase {
 
         XCTAssertEqual(bank.customerQueue.queue[1].waitingNumber, 1)
     }
-    
+
     func test_10명을_prepareTeller를_하면_창구에_10명이_들어가진다() {
         sut.prepareTeller(number: 10)
 
