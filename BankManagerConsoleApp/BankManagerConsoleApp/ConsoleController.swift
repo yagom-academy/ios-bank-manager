@@ -6,13 +6,15 @@
 //
 
 class ConsoleController {
-    private var randomCustomerNumber: Int!
     private var userInput: UserInput?
     private let menuScript: String = """
         1 : 은행개점
         2 : 종료
         """
-
+    private var randomCustomerNumber: Int {
+        return Int.random(in: 10...30)
+    }
+    
     enum UserInput: Int {
         case openBank = 1
         case quit = 2
