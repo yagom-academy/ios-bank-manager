@@ -14,7 +14,7 @@ class ConsoleController {
     private var randomCustomerNumber: Int {
         return Int.random(in: 10...30)
     }
-    
+
     enum UserInput: Int {
         case openBank = 1
         case quit = 2
