@@ -13,12 +13,13 @@ class Banker: Operation {
     let notification: NSNotification.Name
     var businessTime: Float = 0
     let operationQueue = OperationQueue()
-    let headOffice = HeadOffice()
+    let headOffice: HeadOffice
     
-    init(bankerNumber: Int, client: Client?, notification: NSNotification.Name) {
+    init(bankerNumber: Int, client: Client?, notification: NSNotification.Name, headOffice: HeadOffice) {
         self.bankerNumber = bankerNumber
         self.client = client
         self.notification = notification
+        self.headOffice = headOffice
     }
     
     override func main() {
