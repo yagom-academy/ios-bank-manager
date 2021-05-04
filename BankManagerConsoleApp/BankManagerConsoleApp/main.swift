@@ -1,7 +1,8 @@
 //
 //  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
+//  Created by Yun, Ryan. 
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+private var bankManager = BankManager(numberOfTeller: 1)
+bankManager.start()
