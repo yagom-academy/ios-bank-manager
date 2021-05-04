@@ -14,13 +14,13 @@ struct Customer {
     
 }
 
-enum Tier: CaseIterable {
-    case vvip
-    case vip
-    case normal
+enum Tier: String, CaseIterable {
+    case vvip = "vvip"
+    case vip = "vip"
+    case normal = "일반"
 }
 
-enum Business: CaseIterable {
-    case deposit
-    case loan
+enum Business: String, CaseIterable {
+    case deposit = "예금"
+    case loan = "대출"
 }

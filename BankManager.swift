@@ -52,8 +52,8 @@ final class BankManager {
                 finishBank(totalCustomerCount: totalCustomersCount)
                 break
             } else {
-                let customer: Int = tak.matchBankerAndCustomer(customers: &customers)
-                tak.bankerWorkProgress(customerNumber: customer)
+                let customer: Customer = self.customers.removeFirst()
+                tak.bankerWorkProgress(customer: customer)
             }
         }
     }

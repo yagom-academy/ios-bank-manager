@@ -9,16 +9,16 @@ import Foundation
 
 struct Banker {
     
-    func bankerWorkProgress(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 시작")
-        usleep(700000)
-        print("\(customerNumber)번 고객 업무 완료")
-    }
-    
-    func matchBankerAndCustomer(customers: inout [Customer]) -> Int {
-        let customer: Customer = customers.removeFirst()
+    func bankerWorkProgress(customer: Customer) {
+        print("\(customer.waitNumber)번 \(customer.tier.rawValue)고객 \(customer.business.rawValue)업무 시작")
+        switch customer.business {
+        case .deposit:
+            usleep(700000)
+        default:
+            usleep(1100000)
+        }
         
-        return customer.waitNumber
+        print("\(customer.waitNumber)번 \(customer.tier.rawValue)고객 \(customer.business.rawValue)업무 완료")
     }
     
 }
