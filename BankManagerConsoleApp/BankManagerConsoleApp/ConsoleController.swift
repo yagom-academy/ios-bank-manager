@@ -35,7 +35,18 @@ class ConsoleController {
         }
     }
 
-    func start(with bankController: BankController) {}
+    func start(with bankController: BankController) {
+        while userInput != .quit {
+            print(menuScript)
+            do {
+                try selectMenu()
+            } catch {
+                print(error)
+                continue
+            }
+            handleBankManager(by: bankController)
+        }
+    }
 
     private func selectMenu() throws {
         guard let userInputString = readLine() else { throw Error.nilInput }
