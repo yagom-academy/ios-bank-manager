@@ -19,7 +19,7 @@ final class BankManager {
   
   func inputCustomersIntoOperationQueue() -> Int {
     let totalCustomerCount = customers.count
-    //TODO: operationQueue에 customers의 Task를 넣어주는 로직
+    operationQueue.addOperations(customers.map { $0.task }, waitUntilFinished: true)
     return totalCustomerCount
   }
 }
