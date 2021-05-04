@@ -24,29 +24,48 @@ extension CreditRating: CustomStringConvertible {
     }
 }
 
-enum workType: CustomStringConvertible {
+enum WorkType: CaseIterable {
     case deposit
-    case loanReview
-    case loanEvaluation
-    case loanExecution
+    case loan
+    enum LoanProcess {
+        case loanReview, loanEvaluation, loanExecution
+        
+        var duration: Double {
+            switch self {
+            case .loanReview:
+                return 0.3
+            case .loanEvaluation:
+                return 0.5
+            case .loanExecution:
+                return 0.3
+            }
+        }
+    }
     
     var duration: Double {
         switch self {
         case .deposit:
             return 0.7
-        case .loanReview:
-            return 0.3
-        case .loanEvaluation:
-            return 0.5
-        case .loanExecution:
-            return 0.3
+        case .loan:
+            return 1.1
         }
     }
-    
+}
+
+extension WorkType: CustomStringConvertible {
     var description: String {
         switch self {
         case .deposit:
             return "예금업무"
+        case .loan:
+            return "대출업무"
+        }
+    }
+}
+
+extension WorkType.LoanProcess: CustomStringConvertible {
+    var description: String {
+        switch self {
         case .loanReview:
             return "대출업무 시작"
         case .loanEvaluation:
