@@ -13,8 +13,8 @@ final class Bank {
   private var bankManager: BankManager
   private var totalCustomerCount: Int = 0
   
-  init() {
-    self.bankManager = BankManager(numberOfBankers: bankerNumber)
+  init() throws {
+    try self.bankManager = BankManager(numberOfBankers: bankerNumber)
   }
 
   func open() {

@@ -11,9 +11,9 @@ final class BankManager {
   var operationQueue: OperationQueue
   var customers: [Customer] = []
   
-  init(numberOfBankers: Int) {
+  init(numberOfBankers: Int) throws {
     self.operationQueue = OperationQueue()
-    self.customers = CustomerMaker().makeCustomer(count: Int.random(in: 10...30))
+    try self.customers = CustomerMaker().makeCustomer(count: Int.random(in: 10...30))
     operationQueue.maxConcurrentOperationCount = numberOfBankers
   }
   

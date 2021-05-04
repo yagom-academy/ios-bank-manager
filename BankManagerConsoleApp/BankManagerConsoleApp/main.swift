@@ -20,7 +20,17 @@ repeat {
 
   switch selectedNumber {
   case 1:
-    Bank().open()
+    do {
+      try Bank().open()
+    } catch {
+      switch error {
+      case BankError.invalidNumberOfCustomers:
+        print("고객 수 랜덤생성 실패")
+      default:
+        print("알 수 없는 오류")
+      }
+    }
+    
   case 2:
     isRepeat = false
     break

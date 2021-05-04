@@ -8,21 +8,21 @@
 import Foundation
 
 final class CustomerMaker {
-  func makeCustomer(count: Int) -> [Customer] {
+  func makeCustomer(count: Int) throws -> [Customer] {
     var customers: [Customer] = []
     for index in 1...count {
-      customers.append(randomCustomer(number: index))
+      try customers.append(randomCustomer(number: index))
     }
     return customers
   }
   
-  func randomCustomer(number: Int) -> Customer {
+  func randomCustomer(number: Int) throws -> Customer {
     guard let grade = CustomerGrade(rawValue: Int.random(in: 0..<CustomerGrade.allCases.count)) else {
-      return Customer(order: number, grade: .normal, taskType: .deposit)
+      throw BankError.invalidNumberOfCustomers
     }
     
     guard let task = TaskType(rawValue: Int.random(in: 0..<TaskType.allCases.count)) else {
-      return Customer(order: number, grade: .normal, taskType: .deposit)
+      throw BankError.invalidNumberOfCustomers
     }
     return Customer(order: number, grade: grade, taskType: task)
   }
