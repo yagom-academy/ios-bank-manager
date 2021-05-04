@@ -49,7 +49,7 @@ class Banker: Operation {
         operationQueue.waitUntilAllOperationsAreFinished()
     }
     
-    private func convertGradeToString(grade: Int) -> String {
+    func convertGradeToString(grade: Int) -> String {
         switch grade {
         case 1:
             return ClientGrade.vvip
