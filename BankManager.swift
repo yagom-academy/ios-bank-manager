@@ -6,12 +6,6 @@
 
 import Foundation
 
-enum ClientType: Int, CaseIterable {
-    case vvip = 0
-    case vip = 1
-    case normal = 2
-}
-
 class BankManager {
     let counter = OperationQueue()
 
@@ -20,14 +14,14 @@ class BankManager {
     
     init(numberOfTeller: UInt) {
         self.numberOfTeller = numberOfTeller
-        generateNumberOfClient()
+        generateClient()
     }
     
-    private func generateNumberOfClient() {
-        numberOfClient = UInt.random(in: 10...30)
+    private func generateClient() {
+        numberOfClient = UInt.random(in: 1...1)
     }
-    
-    private func workTask(order: UInt) {
+
+    func workTask(order: UInt) {
         let tellerStartWorkMessage = "\(order)번 고객 업무 시작"
         let tellerFinishWorkMessage = "\(order)번 고객 업무 완료★"
         
@@ -54,7 +48,3 @@ class BankManager {
     }
 }
 
-struct Client {
-    let waitNumber: Int
-    let clientType: ClientType
-}
