@@ -37,9 +37,9 @@ class Banker: Operation {
         if taskType == ClientTask.loan {
             let loanNotification = Notification.Name("\(client.waitingNumber)th Notification")
             NotificationCenter.default.addObserver(headOffice, selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
-            updateBusinessTime(time: 0.3) // 대출심사 전
+            updateBusinessTime(time: 0.3)
             requestLoan(notificationName: loanNotification, client: client)
-            updateBusinessTime(time: 0.3) // 대출심사 후
+            updateBusinessTime(time: 0.3)
             NotificationCenter.default.removeObserver(headOffice, name: loanNotification, object: nil)
             return
         }
