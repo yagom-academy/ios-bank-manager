@@ -7,10 +7,9 @@
 
 import Foundation
 
-final class HeadBank: Bankable {
+final class HeadBank {
     static let shared = HeadBank()
     var bankWindow = OperationQueue()
-    var evaluationSheet: BankTaskable?
     
     private init() { }
     

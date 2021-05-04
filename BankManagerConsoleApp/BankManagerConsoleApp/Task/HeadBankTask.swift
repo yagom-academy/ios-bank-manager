@@ -8,7 +8,6 @@
 import Foundation
 
 final class HeadBankTask: Operation {
-    var evaluationSheet: BankTaskable?
     var waitingNumber: UInt?
     var creditRate: CreditRating?
     var workType: WorkType?
@@ -17,6 +16,7 @@ final class HeadBankTask: Operation {
         guard let waitNumber = waitingNumber,
               let credit = creditRate,
               let work = workType else {
+            
             return
         }
         evaluateCredit(waitNumber, credit, work)
