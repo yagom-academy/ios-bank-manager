@@ -27,7 +27,7 @@ class Banker: Operation {
             print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 시작")
             setBusinessTime(taskType: client.taskType, client: client)
             Thread.sleep(forTimeInterval: Double(businessTime))
-            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료")
+            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료 \(businessTime)")
         }
         NotificationCenter.default.post(name: notification, object: nil, userInfo: [UserInformationKey.bankerNumber: bankerNumber, UserInformationKey.notificationNumber: notification,UserInformationKey.businessTime: businessTime])
     }
@@ -40,8 +40,9 @@ class Banker: Operation {
             requestLoan(notificationName: loanNotification, client: client)
             businessTime += 0.3 // 대출심사 후
             NotificationCenter.default.removeObserver(headOffice, name: loanNotification, object: nil)
+            return
         }
-        businessTime +=  0.7
+        businessTime += 0.7
     }
     
     private func requestLoan(notificationName: Notification.Name, client: Client) {
