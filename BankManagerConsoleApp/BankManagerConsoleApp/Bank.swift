@@ -25,11 +25,16 @@ final class Bank {
         
         guard let menuNumber = readLine() else { return nil }
         
-        if menuNumber == "1" {
+        return matchMenuSelection(menuNumber)
+    }
+    
+    private func matchMenuSelection(_ menuNumber: String) -> MenuSelection? {
+        switch menuNumber {
+        case "1":
             return .start
-        } else if menuNumber == "2" {
+        case "2":
             return .end
-        } else {
+        default:
             return nil
         }
     }
