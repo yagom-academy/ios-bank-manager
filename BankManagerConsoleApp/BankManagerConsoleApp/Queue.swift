@@ -34,3 +34,15 @@ struct Queue<T> {
     return array.first
   }
 }
+
+extension Queue {
+  func filter(check: (T)->Bool) -> Queue<T> {
+    var result = Queue<T>()
+    for element in array {
+      if check(element) {
+        result.enqueue(element)
+      }
+    }
+    return result
+  }
+}

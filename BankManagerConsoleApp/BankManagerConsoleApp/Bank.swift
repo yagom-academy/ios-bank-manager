@@ -8,8 +8,11 @@
 import Foundation
 
 protocol Bankable {
-  var customers: [Int:Customer] { get set }
+  var customers: Queue<Customer> { get set }
   var bankManager: BankManager { get set }
+  var vvipQueue: Queue<Customer> { get set }
+  var vipQueue: Queue<Customer> { get set }
+  var normalQueue: Queue<Customer> { get set }
   
   func open()
   func close(from openTime: CFAbsoluteTime)
@@ -21,11 +24,12 @@ extension Bankable {
     
     var isRepeat = true
     repeat {
-      if customers.isEmpty {
+      if vvipQueue.isEmpty && vipQueue.isEmpty && normalQueue.isEmpty {
         isRepeat = false
       }
       
-      bankManager.process(customers)
+//      bankManager.process(customers)
+//      TODO: bankManager.process(vvipQueue, vipQueue, normalQueue: normalQueue)로 변경
     } while isRepeat
     
     bankManager.operationQueue.waitUntilAllOperationsAreFinished()
@@ -46,12 +50,19 @@ extension Bankable {
 }
 
 final class Bank: Bankable {
-  var customers: [Int:Customer] = [:]
+  var customers: Queue<Customer> = Queue<Customer>()
+  var vvipQueue: Queue = Queue<Customer>()
+  var vipQueue: Queue = Queue<Customer>()
+  var normalQueue: Queue = Queue<Customer>()
   var bankManager = BankManager()
   
   init(numOfManagers: Int) throws {
     let randomNumber = Int.random(in: 10...30)
     customers = try setCustomer(count: randomNumber)
+    
+    vvipQueue = divideCustomerByGrade(customers, grade: .vvip)
+    vipQueue = divideCustomerByGrade(customers, grade: .vip)
+    normalQueue = divideCustomerByGrade(customers, grade: .normal)
     
     for counterNumber in 1...numOfManagers {
       bankManager.setBankCounters(number: counterNumber)
@@ -69,17 +80,29 @@ final class Bank: Bankable {
 extension Bank {
   @objc func removeCustomer(notification: Notification) {
     if let userInfo = notification.userInfo {
-      guard let ticketNumber = userInfo["ticketNumber"] as? Int else {
+      guard let userGrade = userInfo["userGrade"] as? CustomerGrade else {
         return
       }
-      customers.removeValue(forKey: ticketNumber)
+      removeCustomer(accordingTo: userGrade)
+    }
+  }
+  
+  private func removeCustomer(accordingTo userGrade: CustomerGrade) {
+    switch userGrade {
+    case .vvip:
+      _ = vvipQueue.dequeue()
+    case .vip:
+      _ = vipQueue.dequeue()
+    case .normal:
+      _ = normalQueue.dequeue()
     }
   }
 }
 
+// MARK: - Function About Customer
 extension Bank {
-  private func setCustomer(count: Int) throws -> [Int:Customer] {
-    var customers: [Int:Customer] = [:]
+  private func setCustomer(count: Int) throws -> Queue<Customer> {
+    var customers: Queue<Customer> = Queue<Customer>()
     for ticketNumber in 1...count {
       guard let grade = CustomerGrade(rawValue: Int.random(in: 0...2)) else {
         throw BankError.invalidNumberOfCustomers
@@ -89,8 +112,14 @@ extension Bank {
         throw BankError.invalidNumberOfCustomers
       }
       
-      customers[ticketNumber] = Customer(order: ticketNumber, grade: grade, task: task)
+      customers.enqueue(Customer(order: ticketNumber, grade: grade, task: task))
     }
     return customers
+  }
+  
+  private func divideCustomerByGrade(_ customers: Queue<Customer>, grade: CustomerGrade) -> Queue<Customer> {
+    var queue: Queue<Customer> = Queue<Customer>()
+    queue = customers.filter{ $0.showGrade() == grade }
+    return queue
   }
 }
