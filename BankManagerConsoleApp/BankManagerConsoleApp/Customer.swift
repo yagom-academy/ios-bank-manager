@@ -53,6 +53,15 @@ extension CustomerGrade: CustomStringConvertible {
 enum TaskType: Int {
   case deposit = 0
   case loan = 1
+  
+  var taskTime: Double {
+    switch self {
+    case .deposit:
+      return 0.7
+    case .loan:
+      return 1.1
+    }
+  }
 }
 
 extension TaskType: CustomStringConvertible {
