@@ -32,7 +32,7 @@ class ConsoleController {
             case .nilInput:
                 return "입력된 값이 없습니다. 다시 입력해 주세요."
             case .stringInput:
-                return "문자열입니다. 다시 입력해 주세요."
+                return "잘못된 입력입니다. 다시 입력해 주세요."
             }
         }
     }
