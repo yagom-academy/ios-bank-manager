@@ -59,7 +59,6 @@ final class Bank {
                 return
             default:
                 print("잘못된 입력입니다.")
-                continue
             }
         }
     }
