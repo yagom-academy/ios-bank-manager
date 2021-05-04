@@ -77,7 +77,7 @@ class Bank {
         let waitingNumber: Int
 
         init(waitingNumber: Int) {
-            self.waitingNumber = waitingNumber
+            self.waitingNumber = waitingNumber + 1
         }
 
         func go(to teller: Teller, by notificationBoard: NotificationBoard) {
