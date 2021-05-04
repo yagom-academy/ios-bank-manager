@@ -46,10 +46,10 @@ class BankControllerTests: XCTestCase {
 
         XCTAssertEqual(1, bank.counters[1].counterNumber)
     }
-    
+
     func test_openBank에_customer1명_teller1명_배치시_customerQueue의count가_0이되는가() {
-    sut.openBank(customerNumber: 10, tellerNumber: 1)
-    
-    XCTAssertEqual(bank.customerQueue.queue.count, 0)
+        sut.openBank(customerNumber: 10, tellerNumber: 1)
+
+        XCTAssertEqual(bank.customerQueue.queue.count, 0)
     }
 }
