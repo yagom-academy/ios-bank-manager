@@ -40,9 +40,9 @@ class Banker: Operation {
     
     private func requestLoan() {
         let loanNotification = Notification.Name("Notification")
-//        NotificationCenter.default.addObserver(<#T##observer: Any##Any#>, selector: <#T##Selector#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
-//        
-//        NotificationCenter.default.removeObserver(<#T##observer: Any##Any#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
+        NotificationCenter.default.addObserver(HeadOffice(), selector: #selector(HeadOffice.checkLoanRequest), name: loanNotification, object: nil)
+
+        NotificationCenter.default.removeObserver(HeadOffice(), name: loanNotification, object: nil)
         
     }
     
