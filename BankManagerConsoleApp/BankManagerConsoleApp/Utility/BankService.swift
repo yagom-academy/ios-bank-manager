@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum creditRating: CustomStringConvertible {
-    case vvip
-    case vip
-    case normal
-    
+enum CreditRating: CaseIterable {
+    case vvip, vip, normal
+}
+
+extension CreditRating: CustomStringConvertible {
     var description: String {
         switch self {
         case .vvip:
@@ -55,5 +55,4 @@ enum workType: CustomStringConvertible {
             return "대출업무 완료"
         }
     }
-    
 }
