@@ -20,6 +20,7 @@ class BankController {
 
     init(of bank: Bank) {
         self.bank = bank
+        bank.notificationBoard.addObserver(bank.customerQueue)
     }
 
     func receiveCustomer(number: Int) {
