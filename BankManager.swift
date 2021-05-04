@@ -6,7 +6,7 @@
 
 import Foundation
 
-final class BankManager {
+class BankManager {
     
     func openBank() {
         let bankOpenMenuState: Bool = bankOpenMenu()
@@ -41,13 +41,14 @@ final class BankManager {
     }
    
     private func bankWorkProgress(customers: inout [Customer]) {
-        let TotalCustomersCount: Int = countCustomers(customers: customers)
+        let totalCustomersCount: Int = countCustomers(customers: customers)
+        var remainingCustomerCount: Int = totalCustomersCount
         
-        while true {
-            let remainingCustomer: Int = countCustomers(customers: customers)
+        while remainingCustomerCount > 0 {
+            remainingCustomerCount = countCustomers(customers: customers)
         
-            if remainingCustomer == 0 {
-                finishBank(totalCustomerCount: TotalCustomersCount)
+            if remainingCustomerCount == 0 {
+                finishBank(totalCustomerCount: totalCustomersCount)
                 break
             } else {
                 let customer: Int = matchBankerAndCustomer(customers: &customers)
@@ -67,8 +68,6 @@ final class BankManager {
         workTime = round(workTime * 100) / 100
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무 시간은 \(workTime)초 입니다.")
     }
-    
-    
     
     private func visitCustomers() -> [Customer] {
         var result: [Customer] = []
@@ -91,4 +90,5 @@ final class BankManager {
     private func countCustomers(customers: [Customer]) -> Int {
         return customers.count
     }
+    
 }
