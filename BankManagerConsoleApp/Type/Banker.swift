@@ -28,7 +28,7 @@ class Banker: Operation {
             print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 시작")
             setBusinessTime(taskType: client.taskType, client: client)
             Thread.sleep(forTimeInterval: Double(businessTime))
-            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료 \(businessTime)")
+            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료")
         }
         NotificationCenter.default.post(name: notification, object: nil, userInfo: [UserInformationKey.bankerNumber: bankerNumber, UserInformationKey.notificationNumber: notification,UserInformationKey.businessTime: businessTime])
     }
