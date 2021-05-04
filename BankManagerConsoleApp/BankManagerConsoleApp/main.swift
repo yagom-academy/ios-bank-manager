@@ -19,8 +19,13 @@ repeat {
 
   switch selectedNumber {
   case 1:
-    let bank = Bank(numOfManagers: 1)
-    bank.open()
+    let bank = try? Bank(numOfManagers: 1)
+    if let bank = bank {
+      bank.open()
+    } else {
+      isRepeat = false
+      break
+    }
   case 2:
     isRepeat = false
     break

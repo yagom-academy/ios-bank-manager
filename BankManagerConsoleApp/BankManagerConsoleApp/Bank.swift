@@ -49,11 +49,9 @@ final class Bank: Bankable {
   var customers: [Int:Customer] = [:]
   var bankManager = BankManager()
   
-  init(numOfManagers: Int) {
+  init(numOfManagers: Int) throws {
     let randomNumber = Int.random(in: 10...30)
-    for ticketNumber in 1...randomNumber {
-      customers[ticketNumber] = Customer(order: ticketNumber)
-    }
+    customers = try setCustomer(count: randomNumber)
     
     for counterNumber in 1...numOfManagers {
       bankManager.setBankCounters(number: counterNumber)
@@ -76,5 +74,23 @@ extension Bank {
       }
       customers.removeValue(forKey: ticketNumber)
     }
+  }
+}
+
+extension Bank {
+  private func setCustomer(count: Int) throws -> [Int:Customer] {
+    var customers: [Int:Customer] = [:]
+    for ticketNumber in 1...count {
+      guard let grade = CustomerGrade(rawValue: Int.random(in: 0...2)) else {
+        throw BankError.invalidNumberOfCustomers
+      }
+      
+      guard let task = TaskType(rawValue: Int.random(in: 0...1)) else {
+        throw BankError.invalidNumberOfCustomers
+      }
+      
+      customers[ticketNumber] = Customer(order: ticketNumber, grade: grade, task: task)
+    }
+    return customers
   }
 }
