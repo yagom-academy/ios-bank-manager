@@ -14,13 +14,13 @@ struct Customer {
     
 }
 
-enum Tier: Comparable {
+enum Tier: CaseIterable {
     case vvip
     case vip
     case normal
 }
 
-enum Business: Comparable {
+enum Business: CaseIterable {
     case deposit
     case loan
 }

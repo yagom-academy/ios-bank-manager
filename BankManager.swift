@@ -68,7 +68,14 @@ final class BankManager {
         let waitNumbers: [Int] = Array(1...Int.random(in: 10...30))
         
         for number in waitNumbers {
-            let customer: Customer = Customer(waitNumber: number)
+            guard let tier = Tier.allCases.randomElement() else {
+                return
+            }
+            guard let business = Business.allCases.randomElement() else {
+                return
+            }
+            
+            let customer: Customer = Customer(waitNumber: number, tier: tier, business: business)
             self.customers.append(customer)
         }
     }
