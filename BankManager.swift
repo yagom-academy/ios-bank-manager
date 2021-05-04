@@ -30,6 +30,20 @@ class BankManager {
         
         clients.append(client)
     }
+    
+    private func generateNumberOfClient() -> UInt {
+        let numberOfClient = Int.random(in: 10...30)
+        return UInt(numberOfClient)
+    }
+    
+    private func addToClient(number: Int) {
+        let number = generateNumberOfClient()
+        for index in 1...number {
+            counter.addOperation {
+                self.workTask(order: UInt(index))
+            }
+        }
+    }
 
     func workTask(order: UInt) {
         let tellerStartWorkMessage = "\(order)번 고객 업무 시작"
@@ -42,11 +56,7 @@ class BankManager {
     
     func processOfTellerTask() {
         counter.maxConcurrentOperationCount = Int(numberOfTeller)
-        for index in 1...numberOfClient {
-            counter.addOperation {
-                self.workTask(order: index)
-            }
-        }
+        
         counter.waitUntilAllOperationsAreFinished()
         closeBank()
     }
@@ -57,4 +67,3 @@ class BankManager {
         print(closeBankMessage)
     }
 }
-
