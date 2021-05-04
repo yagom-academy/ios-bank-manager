@@ -7,14 +7,14 @@
 import Foundation
 
 class BankManager {
+    private var customers: [Customer] = []
     
     func openBank() {
         let bankOpenMenuState: Bool = bankOpenMenu()
-        var customers: [Customer] = visitCustomers()
         
         if bankOpenMenuState {
-            bankWorkProgress(customers: &customers)
-            
+            customers = visitCustomers()
+            bankWorkProgress()
             openBank()
         }
     }
@@ -40,18 +40,18 @@ class BankManager {
         }
     }
    
-    private func bankWorkProgress(customers: inout [Customer]) {
-        let totalCustomersCount: Int = countCustomers(customers: customers)
+    private func bankWorkProgress() {
+        let totalCustomersCount: Int = self.customers.count
         var remainingCustomerCount: Int = totalCustomersCount
         
         while remainingCustomerCount > 0 {
-            remainingCustomerCount = countCustomers(customers: customers)
+            remainingCustomerCount = self.customers.count
         
             if remainingCustomerCount == 0 {
                 finishBank(totalCustomerCount: totalCustomersCount)
                 break
             } else {
-                let customer: Int = matchBankerAndCustomer(customers: &customers)
+                let customer: Int = matchBankerAndCustomer()
                 bankerWorkProgress(customerNumber: customer)
             }
         }
@@ -81,14 +81,10 @@ class BankManager {
         return result
     }
     
-    private func matchBankerAndCustomer(customers: inout [Customer]) -> Int {
-        let customer: Customer = customers.removeFirst()
+    private func matchBankerAndCustomer() -> Int {
+        let customer: Customer = self.customers.removeFirst()
         
         return customer.waitNumber
-    }
-    
-    private func countCustomers(customers: [Customer]) -> Int {
-        return customers.count
     }
     
 }
