@@ -8,25 +8,22 @@
 import XCTest
 
 class RandomGeneratorTest: XCTestCase {
-    var dummyRandomGenerator: RandomGenerator?
+    var sut: RandomGenerator!
+    
     override func setUpWithError() throws {
-        dummyRandomGenerator = RandomGenerator()
+        sut = RandomGenerator()
     }
 
     override func tearDownWithError() throws {
-        dummyRandomGenerator = nil
+        sut = nil
     }
 
-    func test_generateRandomCustomer가_RandomRange만큼의_Customer을_반환하는지() {
-        guard let randomGenerator = dummyRandomGenerator else {
-            XCTFail("dummyRandomGenrator is nil")
-            return
-        }
+    func test_generateRandomCustomer_호출시_totalCustomer가_10이상_30이하로_setting_되는지_1000회_test() {
         for _ in 1...1000 {
-            DispatchQueue.global().async {
-                let randomCustomer = randomGenerator.generateRandomCustomer()
-                XCTAssertTrue(randomCustomer.count <= 30 && randomCustomer.count >= 10)
-            }
+//            DispatchQueue.global().async {
+                self.sut.generateRandomCustomer()
+                XCTAssertTrue(10 <= self.sut.totalCustomer && self.sut.totalCustomer <= 30)
+//            }
         }
     }
 }

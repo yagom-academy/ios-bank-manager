@@ -8,11 +8,15 @@
 import Foundation
 
 protocol ConsoleViewControllable {
+    var userInput: String { get }
+    mutating func getUserInput()
     func showStartMenu()
     func shouldContinue() -> Result<Bool, BankManagerError>
 }
 
 struct ConsoleViewController: ConsoleViewControllable {
+    private(set) var userInput = ""
+    
     func showStartMenu() {
         print(
  """
@@ -22,10 +26,14 @@ struct ConsoleViewController: ConsoleViewControllable {
  """, terminator: "")
     }
     
-    func shouldContinue() -> Result<Bool, BankManagerError> {
-        guard let userInput = readLine() else {
-            return .failure(.invalidUserInput)
+    mutating func getUserInput() {
+        guard let input = readLine() else {
+            return
         }
+        userInput = input
+    }
+    
+    func shouldContinue() -> Result<Bool, BankManagerError> {
         
         switch userInput {
         case "1":

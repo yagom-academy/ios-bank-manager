@@ -12,25 +12,9 @@ struct BankManager {
     private var randomGenerator: RandomGeneratable
     private let bankOperationQueue = OperationQueue()
     private var randomCustomers: [Customer]?
-    private var totalCustomerNumber: Int? 
-    private var shouldContinue: Bool {
-        var result: Result<Bool, BankManagerError> = .success(true)
-        var shouldContinue = true
-        
-        repeat {
-            consoleViewController.showStartMenu()
-            result = consoleViewController.shouldContinue()
-            do {
-                shouldContinue = try result.get()
-            } catch {
-                print(error)
-            }
-        } while result == .failure(.invalidUserInput)
-        
-        return shouldContinue
-    }
+    private var totalCustomerNumber: Int = 0
     
-    init(bank: Bank, consoleViewer: ConsoleViewController, randomGenerator: RandomGenerator) {
+    init(bank: Bankable, consoleViewer: ConsoleViewControllable, randomGenerator: RandomGeneratable) {
         self.bank = bank
         self.consoleViewController = consoleViewer
         self.randomGenerator = randomGenerator
@@ -38,7 +22,7 @@ struct BankManager {
     }
     
     mutating func start() {
-        while shouldContinue {
+        while shouldContinue() {
             createRandomCustomer()
             bank.openBank()
             do {
@@ -66,5 +50,23 @@ struct BankManager {
         })
         
         bankOperationQueue.waitUntilAllOperationsAreFinished()
+    }
+    
+    private mutating func shouldContinue() -> Bool {
+        var result: Result<Bool, BankManagerError> = .success(true)
+        var shouldContinue = true
+        
+        repeat {
+            consoleViewController.showStartMenu()
+            consoleViewController.getUserInput()
+            result = consoleViewController.shouldContinue()
+            do {
+                shouldContinue = try result.get()
+            } catch {
+                print(error)
+            }
+        } while result == .failure(.invalidUserInput)
+        
+        return shouldContinue
     }
 }
