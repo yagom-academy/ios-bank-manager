@@ -6,17 +6,25 @@
 
 import Foundation
 
-final class LocalBankTask: Operation, BankTaskable {
-    var waitingNumber: UInt?
-    var creditRate: CreditRating?
-    var workType: WorkType?
+final class LocalBankTask: Operation {
+    let waitingNumber: UInt
+    let creditRate: CreditRating
+    let workType: WorkType
+    
+    init?(_ number: UInt) {
+        guard let credit = CreditRating.allCases.shuffled().first,
+              let work = WorkType.allCases.shuffled().first else {
+            
+            return nil
+        }
+        
+        self.waitingNumber = number
+        self.creditRate = credit
+        self.workType = work
+    }
 
     override func main() {
-        guard let waitNumber = waitingNumber,
-              let credit = creditRate,
-              let taskType = workType else { return }
-        
-        work(waitNumber, credit, taskType)
+        work(waitingNumber, creditRate, workType)
     }
     
     private func work(_ waitNumber: UInt, _ credit: CreditRating, _ taskType: WorkType) {
