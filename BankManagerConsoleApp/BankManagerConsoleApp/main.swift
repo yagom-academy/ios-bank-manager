@@ -19,7 +19,7 @@ repeat {
 
   switch selectedNumber {
   case 1:
-    let bank = try? Bank(numOfManagers: 1)
+    let bank = try? Bank(numOfManagers: 3)
     if let bank = bank {
       bank.open()
     } else {

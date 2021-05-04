@@ -28,8 +28,7 @@ extension Bankable {
         isRepeat = false
       }
       
-//      bankManager.process(customers)
-//      TODO: bankManager.process(vvipQueue, vipQueue, normalQueue: normalQueue)로 변경
+      bankManager.process(vvipQueue: vvipQueue, vipQueue: vipQueue, normalQueue: normalQueue)
     } while isRepeat
     
     bankManager.operationQueue.waitUntilAllOperationsAreFinished()
