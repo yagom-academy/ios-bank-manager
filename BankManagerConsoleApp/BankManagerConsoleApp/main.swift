@@ -6,6 +6,7 @@
 
 import Foundation
 
+
 var isRepeat = true
 repeat {
   print("1: 은행 개점")
@@ -19,13 +20,17 @@ repeat {
 
   switch selectedNumber {
   case 1:
-    let bank = try? Bank(numOfManagers: 1)
-    if let bank = bank {
-      bank.open()
-    } else {
-      isRepeat = false
-      break
+    do {
+      try Bank().open()
+    } catch {
+      switch error {
+      case BankError.invalidNumberOfCustomers:
+        print("고객 수 랜덤생성 실패")
+      default:
+        print("알 수 없는 오류")
+      }
     }
+    
   case 2:
     isRepeat = false
     break
