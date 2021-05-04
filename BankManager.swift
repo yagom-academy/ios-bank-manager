@@ -8,8 +8,9 @@ import Foundation
 
 final class BankManager {
     private var customers: [Customer] = []
-    private let tak: Banker = Banker()
-    
+    private var tak: Banker = Banker()
+    private var bankersWorkTime: Double = 0
+
     func openBank() {
         let bankOpenMenuState: Bool = bankOpenMenu()
         
@@ -49,7 +50,8 @@ final class BankManager {
             remainingCustomerCount = self.customers.count
             
             if remainingCustomerCount == 0 {
-                finishBank(totalCustomerCount: totalCustomersCount)
+                self.bankersWorkTime += tak.workTime
+                finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
                 break
             } else {
                 let customer: Customer = self.customers.removeFirst()
@@ -58,10 +60,11 @@ final class BankManager {
         }
     }
     
-    private func finishBank(totalCustomerCount: Int) {
-        var workTime = Double(totalCustomerCount) * 0.7
-        workTime = round(workTime * 100) / 100
+    private func finishBank(totalCustomerCount: Int, bankersWorkTime: Double) {
+        let workTime: Double = round(bankersWorkTime * 100) / 100
+        
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무 시간은 \(workTime)초 입니다.")
+
     }
     
     private func visitCustomers(){
