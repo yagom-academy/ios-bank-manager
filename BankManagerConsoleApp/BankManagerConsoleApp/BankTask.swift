@@ -9,15 +9,19 @@ import Foundation
 
 class BankTaskOperation: Operation {
     let waitingNumber: Int
-    let taskTime: Double = 0.7
+    private let taskTime: Double = 0.7
     
-    init(_ clientNumber: Int) {
-        self.waitingNumber = clientNumber
+    init(_ waitingNumber: Int) {
+        self.waitingNumber = waitingNumber
     }
     
     override func main() {
         print("\(waitingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
         print("\(waitingNumber)번 고객 업무 완료")
+    }
+    
+    func getTaskTime() -> Double {
+        return taskTime
     }
 }
