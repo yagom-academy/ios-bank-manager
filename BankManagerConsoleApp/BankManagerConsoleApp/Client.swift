@@ -8,21 +8,19 @@
 import Foundation
 
 struct Client {
-    let waitingNumber: Int
-    let task: BankTaskOperation
-    
-    init(waitingNumber: Int) {
-        self.waitingNumber = waitingNumber
-        self.task = BankTaskOperation(waitingNumber)
-    }
+    private let task: BankTaskOperation
     
     static func create() -> [Client] {
         var clients: [Client] = []
         
         for number in 1...Int.random(in: 10...30) {
-            clients.append(Client(waitingNumber: number))
+            clients.append(Client(task: BankTaskOperation(number)))
         }
         
         return clients
+    }
+    
+    func getTask() -> BankTaskOperation {
+        return task
     }
 }
