@@ -13,13 +13,13 @@ final class BankManager {
   
   init(numberOfBankers: Int) {
     self.operationQueue = OperationQueue()
-    //TODO: CustomerMaker를 통한 customers 초기화
+    self.customers = CustomerMaker().makeCustomer(count: Int.random(in: 10...30))
     operationQueue.maxConcurrentOperationCount = numberOfBankers
   }
   
   func inputCustomersIntoOperationQueue() -> Int {
     let totalCustomerCount = customers.count
-
+    //TODO: operationQueue에 customers의 Task를 넣어주는 로직
     return totalCustomerCount
   }
 }
