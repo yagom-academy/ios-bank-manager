@@ -13,6 +13,7 @@ class Banker: Operation {
     let notification: NSNotification.Name
     var businessTime: Float = 0
     let operationQueue = OperationQueue()
+    let headOffice = HeadOffice()
     
     init(bankerNumber: Int, client: Client?, notification: NSNotification.Name) {
         self.bankerNumber = bankerNumber
@@ -34,10 +35,10 @@ class Banker: Operation {
     private func setBusinessTime(taskType: String, client: Client) {
         if taskType == ClientTask.loan {
             let loanNotification = Notification.Name("\(client.waitingNumber)th Notification")
-            NotificationCenter.default.addObserver(HeadOffice(), selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
+            NotificationCenter.default.addObserver(headOffice, selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
             requestLoan(notificationName: loanNotification, client: client)
             businessTime =  1.1
-            NotificationCenter.default.removeObserver(HeadOffice(), name: loanNotification, object: nil)
+            NotificationCenter.default.removeObserver(headOffice, name: loanNotification, object: nil)
         }
         businessTime =  0.7
     }
