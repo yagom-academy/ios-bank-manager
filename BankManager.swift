@@ -67,7 +67,7 @@ final class BankManager {
 
     }
     
-    private func visitCustomers(){
+    private func visitCustomers() {
         let waitNumbers: [Int] = Array(1...Int.random(in: 10...30))
         
         for number in waitNumbers {
@@ -81,6 +81,8 @@ final class BankManager {
             let customer: Customer = Customer(waitNumber: number, tier: tier, business: business)
             self.customers.append(customer)
         }
+        
+        self.customers.sort(by: {$0.tier.rawValue < $1.tier.rawValue})
     }
     
 }

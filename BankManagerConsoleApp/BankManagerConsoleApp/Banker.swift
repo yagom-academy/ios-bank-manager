@@ -11,7 +11,8 @@ struct Banker {
     var workTime: Double = 0
     
     mutating func bankerWorkProgress(customer: Customer) {
-        print("\(customer.waitNumber)번 \(customer.tier.rawValue)고객 \(customer.business.rawValue)업무 시작")
+        print("\(customer.waitNumber)번 \(customer.tier.tierName)고객 \(customer.business.rawValue)업무 시작")
+        
         switch customer.business {
         case .deposit:
             usleep(700000)
@@ -21,7 +22,7 @@ struct Banker {
             self.workTime += 1.1
         }
         
-        print("\(customer.waitNumber)번 \(customer.tier.rawValue)고객 \(customer.business.rawValue)업무 완료")
+        print("\(customer.waitNumber)번 \(customer.tier.tierName)고객 \(customer.business.rawValue)업무 완료")
     }
     
 }
