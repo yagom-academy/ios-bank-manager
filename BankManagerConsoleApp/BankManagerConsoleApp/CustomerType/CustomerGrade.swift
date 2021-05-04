@@ -11,6 +11,17 @@ enum CustomerGrade: Int {
   case vvip = 0
   case vip = 1
   case normal = 2
+  
+  var queuePriority: Operation.QueuePriority {
+    switch self {
+    case .vvip:
+      return .veryHigh
+    case .vip:
+      return .normal
+    case .normal:
+      return .veryLow
+    }
+  }
 }
 
 extension CustomerGrade: CustomStringConvertible {

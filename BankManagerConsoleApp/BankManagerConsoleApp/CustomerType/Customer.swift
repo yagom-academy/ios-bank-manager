@@ -11,6 +11,11 @@ class Customer {
   private let ticketNumber: Int
   private var grade: CustomerGrade
   private let taskType: TaskType
+  var task: BankTask {
+    get {
+      return BankTask(number: ticketNumber, grade: grade, type: taskType)
+    }
+  }
 
   init(order orderNumber: Int, grade: CustomerGrade, taskType: TaskType) {
     self.ticketNumber = orderNumber
