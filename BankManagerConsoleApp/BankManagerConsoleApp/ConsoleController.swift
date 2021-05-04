@@ -28,7 +28,19 @@ class ConsoleController {
 
     private func printMenu() {}
 
-    private func selectMenu() throws {}
+    private func selectMenu() throws {
+        guard let userInputString = readLine() else { throw Error.nilInput }
+        guard let userInputNumber = Int(userInputString) else { throw Error.stringInput }
+
+        switch userInputNumber {
+        case UserInput.openBank.rawValue:
+            userInput = UserInput.openBank
+        case UserInput.quit.rawValue:
+            userInput = UserInput.quit
+        default:
+            throw Error.wrongNumberInput
+        }
+    }
 
     private func handleBankManager() {}
 }
