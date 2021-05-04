@@ -7,6 +7,7 @@
 
 class ConsoleController {
     private var randomCustomerNumber: Int!
+    private let tellerNumber: Int = 1
     private var userInput: UserInput?
     private let menuScript: String = """
         1 : 은행개점
@@ -18,15 +19,24 @@ class ConsoleController {
         case quit = 2
     }
 
-    enum Error: String, Swift.Error {
-        case wrongNumberInput = "잘못된 숫자입니다. 다시 입력해 주세요."
-        case nilInput = "입력된 값이 없습니다. 다시 입력해 주세요."
-        case stringInput = "문자열입니다. 다시 입력해 주세요."
+    enum Error: Swift.Error, CustomStringConvertible {
+        case wrongNumberInput
+        case nilInput
+        case stringInput
+        
+        var description: String {
+            switch self {
+            case .wrongNumberInput:
+                return "잘못된 숫자입니다. 다시 입력해 주세요."
+            case .nilInput:
+                return "입력된 값이 없습니다. 다시 입력해 주세요."
+            case .stringInput:
+                return "문자열입니다. 다시 입력해 주세요."
+            }
+        }
     }
 
-    func start() {}
-
-    private func printMenu() {}
+    func start(with bankController: BankController) {}
 
     private func selectMenu() throws {
         guard let userInputString = readLine() else { throw Error.nilInput }
@@ -42,5 +52,5 @@ class ConsoleController {
         }
     }
 
-    private func handleBankManager() {}
+    private func handleBankManager(by bankController: BankController) {}
 }

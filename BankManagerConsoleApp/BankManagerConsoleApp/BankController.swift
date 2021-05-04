@@ -18,8 +18,9 @@ class BankController {
     }
     private var customerWaitingCount: Int = 0
 
-    init(of bank: Bank) {
+    init(of bank: Bank, tellerNumber: Int) {
         self.bank = bank
+        prepareTeller(number: tellerNumber)
         bank.notificationBoard.addObserver(bank.customerQueue)
     }
 
@@ -39,7 +40,6 @@ class BankController {
     func openBank(customerNumber: Int, tellerNumber: Int) {
         openTime = ProcessInfo.processInfo.systemUptime
         receiveCustomer(number: customerNumber)
-        prepareTeller(number: tellerNumber)
         bank.customerQueue.dequeue()?.go(to: bank.counters[0],
                                          by: bank.notificationBoard)
     }
