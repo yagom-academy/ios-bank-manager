@@ -11,6 +11,7 @@ class HeadOffice {
     let lock = NSLock()
     @objc func checkLoanRequest(notification: Notification) {
         lock.lock()
+        
         lock.unlock()
     }
 }
