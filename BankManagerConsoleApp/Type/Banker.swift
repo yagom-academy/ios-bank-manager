@@ -36,11 +36,12 @@ class Banker: Operation {
         if taskType == ClientTask.loan {
             let loanNotification = Notification.Name("\(client.waitingNumber)th Notification")
             NotificationCenter.default.addObserver(headOffice, selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
+            businessTime += 0.3 // 대출심사 전
             requestLoan(notificationName: loanNotification, client: client)
-            businessTime =  1.1
+            businessTime += 0.3 // 대출심사 후
             NotificationCenter.default.removeObserver(headOffice, name: loanNotification, object: nil)
         }
-        businessTime =  0.7
+        businessTime +=  0.7
     }
     
     private func requestLoan(notificationName: Notification.Name, client: Client) {
