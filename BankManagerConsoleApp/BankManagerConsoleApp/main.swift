@@ -6,7 +6,7 @@
 
 import Foundation
 
-var numberOfTellr: UInt = 1
+var numberOfTellr: UInt = 3
 var isRepeat = true
 
 enum InputErrorType: Error {
