@@ -7,8 +7,6 @@
 
 import XCTest
 
-class BankTests: XCTestCase {}
-
 class NotificationBoardTests: XCTestCase {
     var sut: Bank.NotificationBoard!
     var defaultCustomerQueue: Bank.CustomerQueue!

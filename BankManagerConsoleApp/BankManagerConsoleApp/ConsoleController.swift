@@ -5,6 +5,8 @@
 //  Created by duckbok on 2021/05/04.
 //
 
+import Foundation
+
 class ConsoleController {
     private var userInput: UserInput?
     private let menuScript: String = """
