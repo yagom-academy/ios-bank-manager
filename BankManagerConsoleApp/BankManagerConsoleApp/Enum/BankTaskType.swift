@@ -16,7 +16,7 @@ enum BankTaskType: CaseIterable {
         case .deposit:
             return 0.7
         case .load:
-            return 1.1
+            return 0.3
         }
     }
     
