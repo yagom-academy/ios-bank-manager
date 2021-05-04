@@ -9,9 +9,18 @@ import Foundation
 
 struct Customer {
     let waitNumber: Int
+    let tier: Tier
+    let business: Business
     
-    init(waitNumber: Int) {
-        self.waitNumber = waitNumber
-    }
-    
+}
+
+enum Tier: Comparable {
+    case vvip
+    case vip
+    case normal
+}
+
+enum Business: Comparable {
+    case deposit
+    case loan
 }
