@@ -28,8 +28,14 @@ struct Bank {
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         )
         clients = sortByGrade(for: clients)
+        
+        var tasks: [BankingTask] = []
+        clients.forEach({ client in
+            tasks.append(client.bankingTask)
+        })
+        
         let totalProcessTime: Double = measureTime { () -> Void in
-            return processTasks(of: clients)
+            return processTasks(of: tasks)
         }
         let closeText = close(numberOfClient: clients.count, totalProcessTime)
         
@@ -70,8 +76,8 @@ struct Bank {
         return floor(number * 100) / 100
     }
     
-    mutating func processTasks(of clients: [Client]) {
-        waitingQueue.addOperations(clients, waitUntilFinished: true)
+    mutating func processTasks(of tasks: [BankingTask]) {
+        waitingQueue.addOperations(tasks, waitUntilFinished: true)
     }
     
     func close(numberOfClient: Int, _ totalProcessTime: Double) -> String {
