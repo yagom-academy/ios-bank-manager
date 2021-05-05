@@ -36,6 +36,11 @@
 - 05/04(화)
     - 소스파일 분리 후 Client 타입을 만들어 그에 맞게 코드 수정
     - 고객등급에 따른 우선순위 고민 - 선택정렬, Operation.QueuePriority
+- 05/05(수)
+  - step1 2차 코멘트 바탕으로 코드 수정 
+  - 열거형 - CustomStringConvertible
+  - Closure - Escaping vs Non escaping
+  - BlockOperation 공부
 <br>
 
 ### 학습키워드
@@ -75,6 +80,7 @@
 #### 선택정렬
 - [[유투브] 선택정렬 - Select-sort with Gypsy folk dance](https://www.youtube.com/watch?v=Ns4TPTC8whw&t=322s)
 - [[블로그] Swift3 ) Swift로 선택정렬(Selection Sort)짜보기 - Zedd](https://zeddios.tistory.com/66)
-#### Operation.QueuePriority
+#### OperationQueue
 - [[블로그] [iOS] Operation? Operation Queue? 작업을 객체로 만들어보자!](https://onelife2live.tistory.com/18)
 - [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
+- [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
