@@ -7,38 +7,66 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank
-    private var consoleViewController: ConsoleViewController
-    private let randomGenerator: RandomGenerator
+    private var bank: Bankable
+    private var consoleViewController: ConsoleViewControllable
+    private var randomGenerator: RandomGeneratable
     private let bankOperationQueue = OperationQueue()
+    private var randomCustomers: [Customer]?
+    private var totalCustomerNumber: Int = 0
     
-    init(bank: Bank, consoleViewer: ConsoleViewController, randomGenerator: RandomGenerator) {
+    init(bank: Bankable, consoleViewer: ConsoleViewControllable, randomGenerator: RandomGeneratable) {
         self.bank = bank
         self.consoleViewController = consoleViewer
         self.randomGenerator = randomGenerator
         bankOperationQueue.maxConcurrentOperationCount = bank.numberOfBankTeller
     }
     
-    private func handleCustomer() {
-        for _ in 1...randomGenerator.createRandomNumber() {
-            let randomCustomer = randomGenerator.generateRandomCustomer(ticketNumber: bank.getNewTicketNumber())
-            let operation = HandleCustomerOperation(customer: randomCustomer)
-            bankOperationQueue.addOperation(operation)
+    mutating func start() {
+        while shouldContinue() {
+            createRandomCustomer()
+            bank.openBank()
+            do {
+                try handleCustomer()
+                try bank.closeBank(totalCustomerNumber: totalCustomerNumber)
+            } catch {
+                print(error)
+            }
         }
     }
     
-    mutating func start() {
-        while true {
-            bankOperationQueue.addOperations([ConsoleTaskOperation(consoleViewController: consoleViewController)], waitUntilFinished: true)
-            
-            guard consoleViewController.shouldContinue else { return }
+    private mutating func createRandomCustomer() {
+        randomCustomers = randomGenerator.generateRandomCustomer()
+        totalCustomerNumber = randomGenerator.totalCustomer
+    }
+    
+    private mutating func handleCustomer() throws {
+        guard var randomCustomers = randomCustomers else { throw BankManagerError.failToGenerateRandomCustomers }
         
-            bankOperationQueue.addOperations([BankTaskOperation(bank: bank, task: .openBank)], waitUntilFinished: true)
-            
-            handleCustomer()
-            bankOperationQueue.waitUntilAllOperationsAreFinished()
-            
-            bankOperationQueue.addOperations([BankTaskOperation(bank: bank, task: .closeBank)], waitUntilFinished: true)
-        }
+        randomCustomers.sort{ $0.priority > $1.priority }
+        
+        randomCustomers.forEach({
+            let customerOperation = HandleCustomerOperation(customer: $0)
+            bankOperationQueue.addOperation(customerOperation)
+        })
+        
+        bankOperationQueue.waitUntilAllOperationsAreFinished()
+    }
+    
+    private mutating func shouldContinue() -> Bool {
+        var result: Result<Bool, BankManagerError> = .success(true)
+        var shouldContinue = true
+        
+        repeat {
+            consoleViewController.showStartMenu()
+            consoleViewController.getUserInput()
+            result = consoleViewController.shouldContinue()
+            do {
+                shouldContinue = try result.get()
+            } catch {
+                print(error)
+            }
+        } while result == .failure(.invalidUserInput)
+        
+        return shouldContinue
     }
 }

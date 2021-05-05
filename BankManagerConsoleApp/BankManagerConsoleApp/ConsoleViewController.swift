@@ -7,8 +7,15 @@
 
 import Foundation
 
-class ConsoleViewController {
-    var shouldContinue: Bool = true
+protocol ConsoleViewControllable {
+    var userInput: String { get }
+    mutating func getUserInput()
+    func showStartMenu()
+    func shouldContinue() -> Result<Bool, BankManagerError>
+}
+
+struct ConsoleViewController: ConsoleViewControllable {
+    private(set) var userInput = ""
     
     func showStartMenu() {
         print(
@@ -19,19 +26,22 @@ class ConsoleViewController {
  """, terminator: "")
     }
     
-    func getUserInput() {
-        guard let userInput = readLine() else {
+    mutating func getUserInput() {
+        guard let input = readLine() else {
             return
         }
+        userInput = input
+    }
+    
+    func shouldContinue() -> Result<Bool, BankManagerError> {
         
         switch userInput {
         case "1":
-            shouldContinue = true
+            return .success(true)
         case "2":
-            shouldContinue = false
+            return .success(false)
         default:
-            shouldContinue = false
+            return .failure(.invalidUserInput)
         }
     }
-    
 }

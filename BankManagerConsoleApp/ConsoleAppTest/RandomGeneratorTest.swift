@@ -2,32 +2,28 @@
 //  RandomGeneratorTest.swift
 //  ConsoleAppTest
 //
-//  Created by 천수현 on 2021/04/29.
+//  Created by 천수현 on 2021/05/03.
 //
 
 import XCTest
 
 class RandomGeneratorTest: XCTestCase {
-    var dummyRandomGenerator: RandomGenerator?
+    var sut: RandomGenerator!
     
     override func setUpWithError() throws {
-        dummyRandomGenerator = RandomGenerator()
+        sut = RandomGenerator()
     }
-    
+
     override func tearDownWithError() throws {
-        dummyRandomGenerator = nil
+        sut = nil
     }
-    
-    func test_createRandomNumber() {
-        for _ in 1...10000 {
-            DispatchQueue.global().async {
-                let randomNumberInRange = self.dummyRandomGenerator?.createRandomNumber()
-                guard let random = randomNumberInRange else {
-                    XCTFail()
-                    return
-                }
-                XCTAssertTrue(10 <= random && random <= 30)
-            }
+
+    func test_generateRandomCustomer_호출시_totalCustomer가_10이상_30이하로_setting_되는지_1000회_test() {
+        for _ in 1...1000 {
+//            DispatchQueue.global().async {
+                self.sut.generateRandomCustomer()
+                XCTAssertTrue(10 <= self.sut.totalCustomer && self.sut.totalCustomer <= 30)
+//            }
         }
     }
 }
