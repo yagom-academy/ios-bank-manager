@@ -42,12 +42,12 @@ struct BankManager {
     private mutating func handleCustomer() throws {
         guard var randomCustomers = randomCustomers else { throw BankManagerError.failToGenerateRandomCustomers }
         
-        randomCustomers.sort{ $0.priority > $1.priority }
+        randomCustomers.sort { $0.priority > $1.priority }
         
-        randomCustomers.forEach({
+        randomCustomers.forEach {
             let customerOperation = HandleCustomerOperation(customer: $0)
             bankOperationQueue.addOperation(customerOperation)
-        })
+        }
         
         bankOperationQueue.waitUntilAllOperationsAreFinished()
     }

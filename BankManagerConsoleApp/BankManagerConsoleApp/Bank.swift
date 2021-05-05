@@ -51,3 +51,23 @@ struct Bank: Bankable {
         return String(format: "%.2f", timeDuration)
     }
 }
+
+extension Bank {
+    enum Task {
+        case deposit
+        case examineLoanDocument
+        case judgementLoan
+        case loan
+        
+        var time: useconds_t {
+            switch self {
+            case .deposit:
+                return 1_100_000
+            case .examineLoanDocument, .loan:
+                return 300_000
+            case .judgementLoan:
+                return 500_000
+            }
+        }
+    }
+}

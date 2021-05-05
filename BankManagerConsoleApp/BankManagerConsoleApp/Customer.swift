@@ -51,16 +51,7 @@ extension Customer {
                 return "예금"
             }
         }
-        
-        var time: useconds_t {
-            switch self {
-            case .loan :
-                return 1_100_000
-            case .deposit :
-                return 700_000
-            }
-        }
-        
+    
         static var random: Task {
             if let randomTask = Task.allCases.randomElement() {
                 return randomTask
