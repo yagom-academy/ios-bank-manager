@@ -9,10 +9,11 @@ import Foundation
 
 final class Bank {
     private var clients: [Client]
-    private var bankManager: BankManager = BankManager(numberOfManager: 1)
+    private var bankManager: BankManager
     private var totalTaskTime: Double = 0
     
-    init(_ clients: [Client]) {
+    init(_ bankManger: BankManager, _ clients: [Client]) {
+        self.bankManager = bankManger
         self.clients = clients
     }
     

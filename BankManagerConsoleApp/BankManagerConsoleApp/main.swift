@@ -9,8 +9,9 @@ import Foundation
 while true {
     switch Bank.selectMenu() {
     case .start:
+        let bankManger = BankManager(numberOfManager: 3)
         let clients: [Client] = Client.create()
-        Bank(clients).operate()
+        Bank(bankManger, clients).operate()
     case .end:
         exit(0)
     default:
