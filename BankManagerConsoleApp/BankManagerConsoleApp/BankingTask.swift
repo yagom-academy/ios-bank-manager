@@ -48,11 +48,11 @@ final class BankingTask: Operation {
     
     // MARK: - Private Method
     func startTask() -> String {
-        return "\(owner!.waitingNumber)번 \(owner!.grade.name) 고객 \(type.name)업무 시작."
+        return "💸 \(owner!.waitingNumber)번 \(owner!.grade.name)고객 \(type.name)업무 시작."
     }
     
     func endTask() -> String {
-        return "\(owner!.waitingNumber)번 \(owner!.grade.name) 고객 \(type.name)업무 종료!"
+        return "✅ \(owner!.waitingNumber)번 \(owner!.grade.name)고객 \(type.name)업무 완료!"
     }
     
     // MARK: - Override Method from the Operation Class

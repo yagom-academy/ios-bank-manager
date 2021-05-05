@@ -29,15 +29,15 @@ struct Bank {
         )
         clients = sortByGrade(for: clients)
         
-        var tasks: [BankingTask] = []
-        clients.forEach({ client in
-            tasks.append(client.bankingTask)
-        })
+        let tasks: [BankingTask] = clients.map { client in
+            return client.bankingTask
+        }
         
         let totalProcessTime: Double = measureTime { () -> Void in
             return processTasks(of: tasks)
         }
-        let closeText = close(numberOfClient: clients.count, totalProcessTime)
+        
+        let closeText: String = close(numberOfClient: clients.count, totalProcessTime)
         
         print(closeText)
     }
