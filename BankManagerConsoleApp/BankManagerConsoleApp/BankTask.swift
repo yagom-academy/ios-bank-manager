@@ -28,7 +28,7 @@ class BankTask: Operation {
         Thread.sleep(forTimeInterval: taskTime)
         
         if taskType.name == "대출" {
-            headOfficeJob(headTask: HeadOfficeBankTask(waitingNumber: waitingNumber, customerGrade: customerGrade.name), judgeQueue: BankManager.headOfficeQueue)
+            NotificationCenter.default.post(name: Notification.Name("HeadOffice"), object: nil, userInfo: ["waitingNumber": waitingNumber, "customerGrade": customerGrade])
         }
         
         print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
