@@ -79,4 +79,10 @@ final class BankManagerTests: XCTestCase {
             "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 3 명이며, 총 업무 시간은 2.1초입니다."
         )
     }
+    
+    func testMenuText_whenCalled_returnMenuText() {
+        let bankManager: BankManager = BankManager(numberOfTeller: 1)
+        
+        XCTAssertEqual(bankManager.menuText(), "1: 은행 개점\n2: 종료\n입력: ")
+    }
 }

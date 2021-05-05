@@ -22,8 +22,8 @@ struct BankManager {
     }
     
     // MARK: - Private Methods
-    private func printMenu() {
-        print(Menu.text, terminator: "")
+    func menuText() -> String {
+        return Menu.text
     }
     
     private func selectMenu() throws -> String {
@@ -33,19 +33,28 @@ struct BankManager {
         return userInputText
     }
     
+    mutating private func move(to selectedMenu: String) -> Bool {
+        switch selectedMenu {
+        case Menu.openBank:
+            return true
+        case Menu.exit:
+            return false
+        default:
+            print("유효하지 않은 입력입니다. 1과 2 중에서 선택해주세요.")
+            return false
+        }
+    }
     mutating func start() {
         while true {
             do {
-                printMenu()
+                let printMenu: String = menuText()
+                print(printMenu, terminator: "")
                 let selectedMenu: String = try selectMenu()
-                
-                switch selectedMenu {
-                case Menu.openBank:
+                let shouldOpenBank: Bool = move(to: selectedMenu)
+                if shouldOpenBank {
                     bank.open()
-                case Menu.exit:
+                } else {
                     return
-                default:
-                    print("유효하지 않은 입력입니다. 1과 2 중에서 선택해주세요.")
                 }
             } catch {
                 print(error)
