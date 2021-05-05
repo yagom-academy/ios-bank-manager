@@ -22,13 +22,12 @@ struct Bank {
     }
     
     // MARK: - Private Methods
+    
     mutating func open() {
         var clients: [Client] = makeClients(
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         )
-        clients = clients.sorted(by: { (current: Client, next: Client) -> Bool in
-            return current.grade < next.grade
-        })
+        clients = sortByGrade(for: clients)
         let totalProcessTime: Double = measureTime { () -> Void in
             return processTasks(of: clients)
         }
@@ -50,6 +49,14 @@ struct Bank {
         }
         
         return clients
+    }
+    
+    func sortByGrade(for clients: [Client]) -> [Client] {
+        let sortedClients: [Client] =  clients.sorted(
+            by: { (current: Client, next: Client) -> Bool in
+            return current.grade < next.grade
+        })
+        return sortedClients
     }
     
     func measureTime(_ subjectMethodsToBeMeasured: () -> Void) -> Double {
