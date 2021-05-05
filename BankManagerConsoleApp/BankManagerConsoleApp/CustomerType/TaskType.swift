@@ -19,6 +19,10 @@ enum TaskType: Int, CaseIterable {
       return 1.1
     }
   }
+  
+  static func random() -> Self? {
+    return allCases.randomElement()
+  }
 }
 
 extension TaskType: CustomStringConvertible {

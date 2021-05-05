@@ -22,6 +22,10 @@ enum CustomerGrade: Int, CaseIterable {
       return .veryLow
     }
   }
+  
+  static func random() -> Self? {
+    return allCases.randomElement()
+  }
 }
 
 extension CustomerGrade: CustomStringConvertible {

@@ -17,11 +17,11 @@ final class CustomerMaker {
   }
   
   func randomCustomer(number: Int) throws -> Customer {
-    guard let grade = CustomerGrade(rawValue: Int.random(in: 0..<CustomerGrade.allCases.count)) else {
+    guard let grade = CustomerGrade.random() else {
       throw BankError.invalidNumberOfCustomers
     }
     
-    guard let task = TaskType(rawValue: Int.random(in: 0..<TaskType.allCases.count)) else {
+    guard let task = TaskType.random() else {
       throw BankError.invalidNumberOfCustomers
     }
     return Customer(order: number, grade: grade, taskType: task)
