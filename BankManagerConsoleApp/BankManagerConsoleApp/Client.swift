@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Client: Operation {
+class Client: Operation {
     // MARK: - Properties
     let waitingNumber: Int
     let grade: Grade
@@ -22,7 +22,7 @@ final class Client: Operation {
         static let deposit: Double = 0.7
     }
     
-    enum Grade: CaseIterable {
+    enum Grade: CaseIterable, Comparable {
         case vvip
         case vip
         case normal
