@@ -9,6 +9,7 @@ import Foundation
 
 struct Customer {
     
+    private var grade: CustomerGrade
     private var _bankTask: BankTask
     private var waitingNumber: Int
     var bankTask: BankTask {
@@ -16,7 +17,8 @@ struct Customer {
     }
 
     init(waitingNumber: Int) {
-        self._bankTask = BankTask(taskTime: 0.7, waitingNumber: waitingNumber)
+        self.grade = CustomerGrade.random
+        self._bankTask = BankTask(waitingNumber: waitingNumber, grade: grade)
         self.waitingNumber = waitingNumber
     }
     
