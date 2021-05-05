@@ -41,9 +41,7 @@ private func selectOfResult() {
         switch userText {
         case "1":
             let bankManager = BankManager(numberOfTeller: numberOfTellr)
-            bankManager.processOfTellerTask() {
-                bankManager.closeBank()
-            }
+            bankManager.processOfTellerTask()
         case "2":
             isRepeat = false
         default:
@@ -53,7 +51,6 @@ private func selectOfResult() {
         print(error)
     }
 }
-
 
 func start() {
     while isRepeat {

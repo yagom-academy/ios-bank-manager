@@ -36,15 +36,26 @@ class BankManager {
         
         clients.append(client)
     }
-
+    
     private func addToClient(number: UInt) {
-        for index in 0..<numberOfClient {
-            counter.addOperation {
+        
+        let block1 = BlockOperation {
+            for index in 0..<self.numberOfClient {
                 self.workTask(order: self.clients[Int(index)])
             }
         }
+        let block2 = BlockOperation {
+            for index in 0..<self.numberOfClient {
+                self.workTask(order: self.clients[Int(index)])
+            }
+        }
+        let block3 = BlockOperation {
+            for index in 0..<self.numberOfClient {
+                self.workTask(order: self.clients[Int(index)])
+            }
+        }
+        counter.addOperations([block1, block2, block3], waitUntilFinished: true)
     }
-    
     
     func workTask(order: Client) {
         let tellerStartWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 시작"
@@ -55,20 +66,19 @@ class BankManager {
         print(tellerFinishWorkMessage)
     }
     
-    func processOfTellerTask(_ completion: @escaping () -> Void) {
+    func processOfTellerTask() {
         let number = generateNumberOfClient()
+        numberOfClient = number
         for _ in 1...number {
             generateClient()
         }
         addToClient(number: number)
-//        counter.waitUntilAllOperationsAreFinished()
         closeBank()
-        completion()
     }
     
     func closeBank() {
         waitingNumber = 1
-        let closeBankMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(Double(numberOfClient) * 0.7)초입니다."
+        let closeBankMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(numberOfClient))명이며, 총 업무시간은 \(Double(numberOfClient) * 0.7)초입니다."
         
         print(closeBankMessage)
     }

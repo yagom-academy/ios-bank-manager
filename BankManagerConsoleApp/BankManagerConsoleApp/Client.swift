@@ -12,15 +12,6 @@ enum ClientType: Int, CaseIterable, Comparable {
     case vip = 1
     case normal = 2
     
-    static func < (lhs: ClientType, rhs: ClientType) -> Bool {
-        if (lhs == .normal && rhs == .vip)
-        || (lhs == .normal && rhs == .vvip)
-        || (lhs == .vip && rhs == .vvip) {
-            return true
-        } else {
-            return false
-        }
-    }
 }
 
 enum BusinessType: Double, CaseIterable {
