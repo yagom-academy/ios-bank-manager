@@ -77,6 +77,22 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(try client.bankingTask.endTask(), "✅ 1번 일반고객 예금업무 완료!")
     }
     
+    func testStartTask_whenNoOwnerAssignedToBankingTask_throwError() {
+        let sutBankingTask: BankingTask = BankingTask(.deposit)
+        
+        XCTAssertThrowsError(try sutBankingTask.startTask()) { error in
+            XCTAssertEqual(error as? BankManagerError, .ownerNotAssigned)
+        }
+    }
+
+    func testEndTask_whenNoOwnerAssignedToBankingTask_throwError() {
+        let sutBankingTask: BankingTask = BankingTask(.deposit)
+        
+        XCTAssertThrowsError(try sutBankingTask.endTask()) { error in
+            XCTAssertEqual(error as? BankManagerError, .ownerNotAssigned)
+        }
+    }
+    
     func testClose_whenNumberOfClientAndTotalProcessTimeAreGiven_returnCloseTextWithGivenNumbers() {
         let sutBank: Bank = Bank(numberOfTeller: 1)
         XCTAssertEqual(
