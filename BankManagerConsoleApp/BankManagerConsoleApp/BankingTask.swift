@@ -8,41 +8,12 @@
 import Foundation
 
 final class BankingTask: Operation {
+    // MARK: - Properties
     var owner: Client?
-    let type: TaskType
+    private let type: TaskType
     
     init(_ type: TaskType) {
         self.type = type
-    }
-    
-    enum TaskType: CaseIterable {
-        case deposit
-        case loan
-        
-        var name: String {
-            switch self {
-            case .deposit:
-                return "예금"
-            case .loan:
-                return "대출"
-            }
-        }
-        
-        var processTime: Double {
-            switch self {
-            case .deposit:
-                return 0.7
-            case .loan:
-                return 1.1
-            }
-        }
-        
-        static var random: TaskType {
-            guard let randomTask: TaskType = TaskType.allCases.randomElement() else {
-                return .deposit
-            }
-            return randomTask
-        }
     }
     
     // MARK: - Private Method
@@ -73,6 +44,39 @@ final class BankingTask: Operation {
             print(endTaskText)
         } catch {
             print(error)
+        }
+    }
+}
+
+// MARK: - NameSpaces
+extension BankingTask {
+    enum TaskType: CaseIterable {
+        case deposit
+        case loan
+        
+        var name: String {
+            switch self {
+            case .deposit:
+                return "예금"
+            case .loan:
+                return "대출"
+            }
+        }
+        
+        var processTime: Double {
+            switch self {
+            case .deposit:
+                return 0.7
+            case .loan:
+                return 1.1
+            }
+        }
+        
+        static var random: TaskType {
+            guard let randomTask: TaskType = TaskType.allCases.randomElement() else {
+                return .deposit
+            }
+            return randomTask
         }
     }
 }

@@ -22,7 +22,6 @@ struct Bank {
     }
     
     // MARK: - Private Methods
-    
     mutating func open() {
         var clients: [Client] = makeClients(
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
