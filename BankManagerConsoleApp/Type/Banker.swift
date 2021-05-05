@@ -26,15 +26,15 @@ class Banker: Operation {
         if let client = self.client {
             let clientGrade = convertGradeToString(grade: client.grade)
             print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 시작")
-            setBusinessTime(taskType: client.taskType, client: client)
+            setBusinessTime(taskType: client.taskType)
             print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료")
         }
         NotificationCenter.default.post(name: notification, object: nil, userInfo: [UserInformationKey.bankerNumber: bankerNumber, UserInformationKey.notificationNumber: notification,UserInformationKey.businessTime: businessTime])
     }
     
-    private func setBusinessTime(taskType: String, client: Client) {
+    private func setBusinessTime(taskType: String) {
         if taskType == ClientTask.loan {
-            let loanNotification = Notification.Name("\(client.waitingNumber)th Notification")
+            let loanNotification = Notification.Name("\(client?.waitingNumber)th Notification")
             NotificationCenter.default.addObserver(headOffice, selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
             updateBusinessTime(time: 0.3)
             requestLoan(notificationName: loanNotification, client: client)
@@ -50,7 +50,7 @@ class Banker: Operation {
         Thread.sleep(forTimeInterval: Double(time))
     }
     
-    private func requestLoan(notificationName: Notification.Name, client: Client) {
+    private func requestLoan(notificationName: Notification.Name, client: Client?) {
         operationQueue.isSuspended = true
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: [UserInformationKey.banker:self, UserInformationKey.client: client])
         operationQueue.addOperation {}

@@ -10,7 +10,6 @@ import Foundation
 class HeadOffice {
     let lock = NSLock()
     @objc func checkLoanRequest(notification: Notification) {
-//        guard let userInformation = notification.userInfo else { return }
         guard let banker = notification.userInfo?[UserInformationKey.banker] as? Banker, let client = notification.userInfo?[UserInformationKey.client] as? Client else {
             return
         }
