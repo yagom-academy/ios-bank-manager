@@ -49,7 +49,7 @@ struct Bank {
         }
         
         for waitingNumber in 1...number {
-            let client: Client = Client(waitingNumber, .random, .random)
+            let client: Client = Client(waitingNumber, grade: .random, task: .random)
             clients.append(client)
         }
         
