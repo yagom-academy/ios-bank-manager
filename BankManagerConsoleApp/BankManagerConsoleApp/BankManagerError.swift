@@ -5,7 +5,7 @@
 //  Created by Yun, Ryan on 2021/04/29.
 //
 
-enum BankManagerError: Error {
+enum BankManagerError: Error, Equatable {
     case invalidMenu
     case ownerNotAssigned
 }

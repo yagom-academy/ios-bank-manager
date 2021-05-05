@@ -55,7 +55,7 @@ final class BankManagerTests: XCTestCase {
     func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
         var sutBank: Bank = Bank(numberOfTeller: 1)
         let processTime: Double = sutBank.measureTime { () -> Void in
-            let tasks: [BankingTask] = [Client(1, .normal, .deposit).bankingTask]
+            let tasks: [BankingTask] = [Client(1, grade: .normal, task: .deposit).bankingTask]
             return sutBank.process(tasks)
         }
         
@@ -68,12 +68,12 @@ final class BankManagerTests: XCTestCase {
     }
 
     func testStarttask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateStartText() {
-        let client: Client = Client(1, .normal, .deposit)
+        let client: Client = Client(1, grade: .normal, task: .deposit)
         XCTAssertEqual(try client.bankingTask.startTask(), "💸 1번 일반고객 예금업무 시작.")
     }
 
     func testEndTask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateEndText() {
-        let client: Client = Client(1, .normal, .deposit)
+        let client: Client = Client(1, grade: .normal, task: .deposit)
         XCTAssertEqual(try client.bankingTask.endTask(), "✅ 1번 일반고객 예금업무 완료!")
     }
     
