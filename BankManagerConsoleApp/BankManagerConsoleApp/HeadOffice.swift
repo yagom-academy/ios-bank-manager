@@ -8,7 +8,7 @@
 import Foundation
 
 class HeadOffice {
-    let headOfficeQueue = OperationQueue()
+    private let headOfficeQueue = OperationQueue()
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(input), name: Notification.Name("HeadOffice"), object: nil)
@@ -16,13 +16,17 @@ class HeadOffice {
     }
     
     @objc func input(notification: Notification) {
-        guard let datas = notification.userInfo else { return  }
+        guard let datas = notification.userInfo else { return }
         
-        guard let waitingNumber = datas["waitingNumber"] else { return }
-        guard let customerGrade = datas["customerGrade"] else { return }
+        guard let waitingNumber = datas["waitingNumber"],
+              let customerGrade = datas["customerGrade"] else { return }
         
         var array: [HeadOfficeBankTask] = []
-        array.append(HeadOfficeBankTask(waitingNumber: waitingNumber as! Int, customerGrade: customerGrade as! CustomerGrade))
+
+        if let waitingNumber = waitingNumber as? Int,
+           let customerGrade = customerGrade as? CustomerGrade {
+            array.append(HeadOfficeBankTask(waitingNumber: waitingNumber, customerGrade: customerGrade))
+        }
         headOfficeQueue.addOperations(array, waitUntilFinished: true)
         Thread.sleep(forTimeInterval: 0.3)
     }
