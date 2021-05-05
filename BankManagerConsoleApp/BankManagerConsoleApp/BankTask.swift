@@ -33,14 +33,5 @@ class BankTask: Operation {
         
         print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
     }
-
-    func headOfficeJob(headTask: HeadOfficeBankTask, judgeQueue: OperationQueue) {
-        
-        var array: [HeadOfficeBankTask] = []
-        array.append(headTask)
-        judgeQueue.maxConcurrentOperationCount = 1
-        judgeQueue.addOperations(array, waitUntilFinished: true)
-        Thread.sleep(forTimeInterval: taskTime)
-        
-    }
+    
 }

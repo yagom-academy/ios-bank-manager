@@ -10,17 +10,17 @@ import Foundation
 class HeadOfficeBankTask: Operation {
     
     private var waitingNumber: Int
-    private var customerGrade: String
+    private var customerGrade: CustomerGrade
 
-    init(waitingNumber: Int, customerGrade: String) {
+    init(waitingNumber: Int, customerGrade: CustomerGrade) {
         self.waitingNumber = waitingNumber
         self.customerGrade = customerGrade
     }
 
     override func main() {
-        print("🟡\(waitingNumber)번 \(customerGrade)고객 대출심사 시작")
+        print("🟡\(waitingNumber)번 \(customerGrade.name)고객 대출심사 시작")
         Thread.sleep(forTimeInterval: 0.5)
-        print("🟢\(waitingNumber)번 \(customerGrade)고객 대출심사 완료")
+        print("🟢\(waitingNumber)번 \(customerGrade.name)고객 대출심사 완료")
     }
 
 }

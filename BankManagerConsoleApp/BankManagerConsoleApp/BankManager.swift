@@ -12,7 +12,6 @@ struct BankManager {
     private var numberOfBanker: Int
     private var waitingLine: OperationQueue
     private var customerMaker: CustomerMaker
-    static var headOfficeQueue: OperationQueue = OperationQueue()
     var numberOfCustomer: Int {
         return customerMaker.numberOfCustomer
     }
