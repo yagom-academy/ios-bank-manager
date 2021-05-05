@@ -55,8 +55,8 @@ final class BankManagerTests: XCTestCase {
     func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
         var sutBank: Bank = Bank(numberOfTeller: 1)
         let processTime: Double = sutBank.measureTime { () -> Void in
-            let clients: [Client] = [Client(1)]
-            return sutBank.processTasks(of: clients)
+            let tasks: [BankingTask] = [Client(1).bankingTask]
+            return sutBank.processTasks(of: tasks)
         }
         
         XCTAssertEqual(floor(processTime * 100) / 100 , 0.7)
@@ -67,15 +67,15 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(sutBank.preferredNumberFormat(123.456789), 123.45)
     }
 
-    func testStarttask_whenClientHasWaitingNumberOne_returnStartTaskTextWithWaitingNumberOne() {
-        let client: Client = Client(1)
-        XCTAssertEqual(client.startTask(), "1 번 고객 업무 시작.")
-    }
-
-    func testEndTask_whenClientHasWaitingNumberOne_returnEndTaskTextWithWaitingNumberOne() {
-        let client: Client = Client(1)
-        XCTAssertEqual(client.endTask(), "1 번 고객 업무 종료!")
-    }
+//    func testStarttask_whenClientHasWaitingNumberOne_returnStartTaskTextWithWaitingNumberOne() {
+//        let client: Client = Client(1)
+//        XCTAssertEqual(client.startTask(), "1 번 고객 업무 시작.")
+//    }
+//
+//    func testEndTask_whenClientHasWaitingNumberOne_returnEndTaskTextWithWaitingNumberOne() {
+//        let client: Client = Client(1)
+//        XCTAssertEqual(client.endTask(), "1 번 고객 업무 종료!")
+//    }
     
     func testClose_whenNumberOfClientAndTotalProcessTimeAreGiven_returnCloseTextWithGivenNumbers() {
         let sutBank: Bank = Bank(numberOfTeller: 1)
@@ -104,5 +104,15 @@ final class BankManagerTests: XCTestCase {
     func testMove_whenSelectedMenuIsNotOneOrTwo_returnFalse() {
         var sutBankManager: BankManager = BankManager(numberOfTeller: 1)
         XCTAssertEqual(sutBankManager.move(to: "ryan"), false)
+    }
+    
+    func testSortByGrade_whenNumberOfClientsIsThirty_returnSortedClients() {
+        var sutBank: Bank = Bank(numberOfTeller: 1)
+        var clients: [Client] = sutBank.makeClients(number: 30)
+        clients = sutBank.sortByGrade(for: clients)
+        
+        for index in 0...(clients.count - 2) {
+            XCTAssertEqual(clients[index].grade <= clients[index + 1].grade, true)
+        }
     }
 }

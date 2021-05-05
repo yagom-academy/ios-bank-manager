@@ -17,6 +17,7 @@
 		52B68BF3263837010007B69F /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		52DDD9F426426E3E00F1089A /* BankingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DDD9F326426E3E00F1089A /* BankingTask.swift */; };
 		AA1BDBE426381A1F00A9F227 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1BDBE326381A1F00A9F227 /* Bank.swift */; };
+		AA9FD664264297F3006FCFA5 /* BankingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DDD9F326426E3E00F1089A /* BankingTask.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -198,6 +199,7 @@
 				52B68BDE263836F60007B69F /* Bank.swift in Sources */,
 				52B2BD01263ABF0E003932BB /* BankManagerError.swift in Sources */,
 				52B68BE2263836F80007B69F /* main.swift in Sources */,
+				AA9FD664264297F3006FCFA5 /* BankingTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
