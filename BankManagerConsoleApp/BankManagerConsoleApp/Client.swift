@@ -13,7 +13,7 @@ struct Client: Equatable {
     let grade: Grade
     var bankingTask: BankingTask
     
-    init(_ waitingNumber: Int, _ grade: Grade, _ task: BankingTask.TaskType) {
+    init(_ waitingNumber: Int, grade: Grade, task: BankingTask.TaskType) {
         self.waitingNumber = waitingNumber
         self.grade = grade
         self.bankingTask = BankingTask(task)
