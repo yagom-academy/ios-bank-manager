@@ -15,5 +15,11 @@ class HeadOffice {
     
     @objc func input(notification: Notification) {
         print("대기열에 집어 넣음")
+        
+        guard let datas = notification.userInfo else { return  }
+        
+        guard let waitingNumber = datas["waitingNumber"] else { return }
+        
+        print("waitingNumber = ", waitingNumber)
     }
 }
