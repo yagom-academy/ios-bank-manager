@@ -35,13 +35,13 @@ final class LocalBankTask: Operation {
             print("\(waitNumber)번 \(credit)고객 \(taskType.description) 완료")
         case .loan:
             let loanProcess = WorkType.LoanProcess.self
-            print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanReview)")
+            print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution) 시작")
             let headBankTask = HeadBankTask()
             headBankTask.waitingNumber = waitNumber
             headBankTask.creditRate = credit
             headBankTask.workType = taskType
             HeadBank.shared.serveClient(headBankTask)
-            print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution)")
+            print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution) 완료")
         }
     }
 }

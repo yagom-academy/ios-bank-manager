@@ -26,5 +26,6 @@ final class HeadBankTask: Operation {
         let loanProcess = WorkType.LoanProcess.self
         print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanEvaluation) 시작")
         Thread.sleep(forTimeInterval: work.duration)
+        print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanEvaluation) 완료")
     }
 }
