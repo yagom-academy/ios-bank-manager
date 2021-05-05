@@ -28,12 +28,10 @@ enum WorkType: CaseIterable {
     case deposit
     case loan
     enum LoanProcess {
-        case loanReview, loanEvaluation, loanExecution
+        case loanEvaluation, loanExecution
         
         var duration: Double {
             switch self {
-            case .loanReview:
-                return 0.3
             case .loanEvaluation:
                 return 0.5
             case .loanExecution:
@@ -66,12 +64,10 @@ extension WorkType: CustomStringConvertible {
 extension WorkType.LoanProcess: CustomStringConvertible {
     var description: String {
         switch self {
-        case .loanReview:
-            return "대출업무 시작"
+        case .loanExecution:
+            return "대출업무"
         case .loanEvaluation:
             return "대출심사"
-        case .loanExecution:
-            return "대출업무 완료"
         }
     }
 }
