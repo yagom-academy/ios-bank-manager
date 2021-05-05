@@ -70,8 +70,7 @@ class BankManager {
         guard let userInformation = notification.userInfo else { return }
         updateTotalBusinessTime(userInformation: userInformation)
         if clientQueue.isNotEmpty {
-            guard let bankerNumber = userInformation[UserInformationKey.bankerNumber] as? Int else { return }
-            guard let notificationNumber = userInformation[UserInformationKey.notificationNumber] as? NSNotification.Name else { return }
+            guard let bankerNumber = userInformation[UserInformationKey.bankerNumber] as? Int, let notificationNumber = userInformation[UserInformationKey.notificationNumber] as? NSNotification.Name else { return }
             let banker = Banker(bankerNumber: bankerNumber, client: clientQueue.removeFirst(), notification: notificationNumber, headOffice: headOffice)
             operationQueue.addOperation(banker)
         }
