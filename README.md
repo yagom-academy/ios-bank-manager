@@ -84,3 +84,4 @@
 - [[블로그] [iOS] Operation? Operation Queue? 작업을 객체로 만들어보자!](https://onelife2live.tistory.com/18)
 - [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
 - [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
+- [블로그] iOS ) Operation실험 - Zedd
