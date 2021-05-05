@@ -9,11 +9,7 @@ import Foundation
 
 final class CustomerMaker {
   func makeCustomer(count: Int) throws -> [Customer] {
-    var customers: [Customer] = []
-    for index in 1...count {
-      try customers.append(randomCustomer(number: index))
-    }
-    return customers
+    return try (1...count).map { try randomCustomer(number: $0) }
   }
   
   func randomCustomer(number: Int) throws -> Customer {
