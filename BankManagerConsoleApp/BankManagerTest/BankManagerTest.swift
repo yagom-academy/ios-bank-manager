@@ -9,7 +9,6 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerTests: XCTestCase {
-    var sutBank: Bank = Bank(numberOfTeller: 1)
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -20,12 +19,14 @@ final class BankManagerTests: XCTestCase {
     }
 
     func testMakeClients_whenClientNumberLessThanOne_returnsEmptyArray() {
+        var sutBank: Bank = Bank(numberOfTeller: 1)
         for lessThanOne in -1...0 {
             XCTAssertEqual(sutBank.makeClients(number: lessThanOne), [])
         }
     }
     
     func testMakeClients_whenClientNumberIsMoreThanOne_returnsClientsWithWaitingNumber() {
+        var sutBank: Bank = Bank(numberOfTeller: 1)
         let sutClients: [Client] = sutBank.makeClients(number: 3)
         
         XCTAssertEqual(sutClients.count, 3)
@@ -36,12 +37,14 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testMeasureTime_whenNoTaskGiven_returnsZero() {
+        let sutBank: Bank = Bank(numberOfTeller: 1)
         let processTime: Double = sutBank.measureTime { }
         
         XCTAssertEqual(floor(processTime), 0)
     }
     
     func testMeasureTime_whenProcessTimeIsGiven_returnsGivenTime() {
+        let sutBank: Bank = Bank(numberOfTeller: 1)
         let processTime: Double = sutBank.measureTime { () -> Void in
             return Thread.sleep(forTimeInterval: 0.01)
         }
@@ -50,7 +53,7 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
-       
+        var sutBank: Bank = Bank(numberOfTeller: 1)
         let processTime: Double = sutBank.measureTime { () -> Void in
             let clients: [Client] = [Client(1)]
             return sutBank.processTasks(of: clients)
@@ -60,6 +63,7 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testPreferredNumberFormat_whenNumberMoreThanTwoDecimalPlacesIsGiven_returnsNumberWithTwoDecimalPlaces() {
+        let sutBank: Bank = Bank(numberOfTeller: 1)
         XCTAssertEqual(sutBank.preferredNumberFormat(123.456789), 123.45)
     }
 
@@ -74,6 +78,7 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testClose_whenNumberOfClientAndTotalProcessTimeAreGiven_returnCloseTextWithGivenNumbers() {
+        let sutBank: Bank = Bank(numberOfTeller: 1)
         XCTAssertEqual(
             sutBank.close(numberOfClient: 3, 2.1),
             "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 3 명이며, 총 업무 시간은 2.1초입니다."
@@ -81,8 +86,23 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testMenuText_whenCalled_returnMenuText() {
-        let bankManager: BankManager = BankManager(numberOfTeller: 1)
+        let sutBankManager: BankManager = BankManager(numberOfTeller: 1)
         
-        XCTAssertEqual(bankManager.menuText(), "1: 은행 개점\n2: 종료\n입력: ")
+        XCTAssertEqual(sutBankManager.menuText(), "1: 은행 개점\n2: 종료\n입력: ")
+    }
+    
+    func testMove_whenSelectedMenuIsOne_returnTrue() {
+        var sutBankManager: BankManager = BankManager(numberOfTeller: 1)
+        XCTAssertEqual(sutBankManager.move(to: "1"), true)
+    }
+    
+    func testMove_whenSelectedMenuIsTwo_returnFalse() {
+        var sutBankManager: BankManager = BankManager(numberOfTeller: 1)
+        XCTAssertEqual(sutBankManager.move(to: "2"), false)
+    }
+    
+    func testMove_whenSelectedMenuIsNotOneOrTwo_returnFalse() {
+        var sutBankManager: BankManager = BankManager(numberOfTeller: 1)
+        XCTAssertEqual(sutBankManager.move(to: "ryan"), false)
     }
 }

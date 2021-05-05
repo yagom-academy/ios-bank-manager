@@ -33,7 +33,7 @@ struct BankManager {
         return userInputText
     }
     
-    mutating private func move(to selectedMenu: String) -> Bool {
+    mutating func move(to selectedMenu: String) -> Bool {
         switch selectedMenu {
         case Menu.openBank:
             return true
@@ -44,6 +44,7 @@ struct BankManager {
             return false
         }
     }
+    
     mutating func start() {
         while true {
             do {
@@ -51,6 +52,7 @@ struct BankManager {
                 print(printMenu, terminator: "")
                 let selectedMenu: String = try selectMenu()
                 let shouldOpenBank: Bool = move(to: selectedMenu)
+                
                 if shouldOpenBank {
                     bank.open()
                 } else {
