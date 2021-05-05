@@ -36,18 +36,18 @@ class Banker: Operation {
         if taskType == ClientTask.loan {
             let loanNotification = Notification.Name("\(client?.waitingNumber)th Notification")
             NotificationCenter.default.addObserver(headOffice, selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
-            updateBusinessTime(time: 0.3)
+            updateBusinessTime(type: BankerTask.loanDocumentReview)
             requestLoan(notificationName: loanNotification, client: client)
-            updateBusinessTime(time: 0.3)
+            updateBusinessTime(type: BankerTask.loanExcution)
             NotificationCenter.default.removeObserver(headOffice, name: loanNotification, object: nil)
             return
         }
-        updateBusinessTime(time: 0.7)
+        updateBusinessTime(type: BankerTask.deposit)
     }
     
-    func updateBusinessTime(time: Float) {
-        self.businessTime += time
-        Thread.sleep(forTimeInterval: Double(time))
+    func updateBusinessTime(type: Float) {
+        self.businessTime += type
+        Thread.sleep(forTimeInterval: Double(type))
     }
     
     private func requestLoan(notificationName: Notification.Name, client: Client?) {
