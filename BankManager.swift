@@ -44,12 +44,9 @@ final class BankManager {
     
     private func bankWorkProgress() {
         let totalCustomersCount: Int = self.customers.count
-        var remainingCustomerCount: Int = totalCustomersCount
         
-        while remainingCustomerCount > 0 {
-            remainingCustomerCount = self.customers.count
-            
-            if remainingCustomerCount == 0 {
+        while self.customers.count > 0 {
+            if self.customers.count == 0 {
                 self.bankersWorkTime += tak.workTime
                 finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
                 break
