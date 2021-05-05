@@ -25,24 +25,25 @@ class Banker: Operation {
     override func main() {
         if let client = self.client {
             let clientGrade = convertGradeToString(grade: client.grade)
-            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 시작")
+            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType.rawValue)업무 시작")
             setBusinessTime(taskType: client.taskType)
-            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType)업무 완료")
+            print("\(client.waitingNumber)번 \(clientGrade) \(client.taskType.rawValue)업무 완료")
         }
         NotificationCenter.default.post(name: notification, object: nil, userInfo: [UserInformationKey.bankerNumber: bankerNumber, UserInformationKey.notificationNumber: notification,UserInformationKey.businessTime: businessTime])
     }
     
-    private func setBusinessTime(taskType: String) {
-        if taskType == ClientTask.loan {
+    private func setBusinessTime(taskType: ClientTask) {
+        switch taskType {
+        case ClientTask.loan :
             let loanNotification = Notification.Name("\(client?.waitingNumber)th Notification")
             NotificationCenter.default.addObserver(headOffice, selector: #selector(HeadOffice.checkLoanRequest(notification:)), name: loanNotification, object: nil)
             updateBusinessTime(type: BankerTask.loanDocumentReview)
             requestLoan(notificationName: loanNotification, client: client)
             updateBusinessTime(type: BankerTask.loanExcution)
             NotificationCenter.default.removeObserver(headOffice, name: loanNotification, object: nil)
-            return
+        case ClientTask.deposit :
+            updateBusinessTime(type: BankerTask.deposit)
         }
-        updateBusinessTime(type: BankerTask.deposit)
     }
     
     func updateBusinessTime(type: Float) {

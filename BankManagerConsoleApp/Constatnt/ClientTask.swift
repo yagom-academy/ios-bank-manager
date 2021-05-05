@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ClientTask {
-    static let loan = "대출"
-    static let deposit = "예금"
+enum ClientTask: String {
+    case loan = "대출"
+    case deposit = "예금"
 }

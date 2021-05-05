@@ -42,7 +42,7 @@ class BankManager {
         return numberOfClient
     }
     
-    private func setTaskType(taskTypeNumber: Int) -> String {
+    private func setTaskType(taskTypeNumber: Int) -> ClientTask {
         if taskTypeNumber == 1 {
             return ClientTask.loan
         }
