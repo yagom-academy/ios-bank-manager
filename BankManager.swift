@@ -46,14 +46,13 @@ final class BankManager {
         let totalCustomersCount: Int = self.customers.count
         
         while self.customers.count > 0 {
-            if self.customers.count == 0 {
-                self.bankersWorkTime += tak.workTime
-                finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
-                break
-            } else {
-                let customer: Customer = self.customers.removeFirst()
-                tak.bankerWorkProgress(customer: customer)
-            }
+            let customer: Customer = self.customers.removeFirst()
+            tak.bankerWorkProgress(customer: customer)
+        }
+        
+        if self.customers.count == 0 {
+            self.bankersWorkTime += tak.workTime
+            finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
         }
     }
     
