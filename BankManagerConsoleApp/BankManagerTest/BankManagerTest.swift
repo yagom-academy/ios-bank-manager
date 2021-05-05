@@ -55,11 +55,11 @@ final class BankManagerTests: XCTestCase {
     func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
         var sutBank: Bank = Bank(numberOfTeller: 1)
         let processTime: Double = sutBank.measureTime { () -> Void in
-            let tasks: [BankingTask] = [Client(1).bankingTask]
-            return sutBank.processTasks(of: tasks)
+            let tasks: [BankingTask] = [Client(1, .normal, .deposit).bankingTask]
+            return sutBank.process(tasks)
         }
         
-        XCTAssertEqual(floor(processTime * 100) / 100 , 0.7)
+        XCTAssertEqual(floor(processTime * 10) / 10 , 0.7)
     }
     
     func testPreferredNumberFormat_whenNumberMoreThanTwoDecimalPlacesIsGiven_returnsNumberWithTwoDecimalPlaces() {
@@ -67,15 +67,15 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(sutBank.preferredNumberFormat(123.456789), 123.45)
     }
 
-//    func testStarttask_whenClientHasWaitingNumberOne_returnStartTaskTextWithWaitingNumberOne() {
-//        let client: Client = Client(1)
-//        XCTAssertEqual(client.startTask(), "1 번 고객 업무 시작.")
-//    }
-//
-//    func testEndTask_whenClientHasWaitingNumberOne_returnEndTaskTextWithWaitingNumberOne() {
-//        let client: Client = Client(1)
-//        XCTAssertEqual(client.endTask(), "1 번 고객 업무 종료!")
-//    }
+    func testStarttask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateStartText() {
+        let client: Client = Client(1, .normal, .deposit)
+        XCTAssertEqual(try client.bankingTask.startTask(), "💸 1번 일반고객 예금업무 시작.")
+    }
+
+    func testEndTask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateEndText() {
+        let client: Client = Client(1, .normal, .deposit)
+        XCTAssertEqual(try client.bankingTask.endTask(), "✅ 1번 일반고객 예금업무 완료!")
+    }
     
     func testClose_whenNumberOfClientAndTotalProcessTimeAreGiven_returnCloseTextWithGivenNumbers() {
         let sutBank: Bank = Bank(numberOfTeller: 1)

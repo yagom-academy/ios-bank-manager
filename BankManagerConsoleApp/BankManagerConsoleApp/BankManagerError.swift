@@ -7,6 +7,7 @@
 
 enum BankManagerError: Error {
     case invalidMenu
+    case ownerNotAssigned
 }
 
 extension BankManagerError: CustomStringConvertible {
@@ -14,6 +15,8 @@ extension BankManagerError: CustomStringConvertible {
         switch self {
         case .invalidMenu:
             return "Invalid Input"
+        case .ownerNotAssigned:
+            return "Owner is not assigned yet."
         }
     }
 }

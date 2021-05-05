@@ -34,7 +34,7 @@ struct Bank {
         }
         
         let totalProcessTime: Double = measureTime { () -> Void in
-            return processTasks(of: tasks)
+            return process(tasks)
         }
         
         let closeText: String = close(numberOfClient: clients.count, totalProcessTime)
@@ -50,7 +50,7 @@ struct Bank {
         }
         
         for waitingNumber in 1...number {
-            let client: Client = Client(waitingNumber)
+            let client: Client = Client(waitingNumber, Client.Grade.random, BankingTask.TaskType.random)
             clients.append(client)
         }
         
@@ -76,7 +76,7 @@ struct Bank {
         return floor(number * 100) / 100
     }
     
-    mutating func processTasks(of tasks: [BankingTask]) {
+    mutating func process(_ tasks: [BankingTask]) {
         waitingQueue.addOperations(tasks, waitUntilFinished: true)
     }
     

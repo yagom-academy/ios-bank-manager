@@ -9,14 +9,13 @@ import Foundation
 
 final class BankingTask: Operation {
     var owner: Client?
-    let type: Task
+    let type: TaskType
     
-    override init() {
-        self.type = Task.random
-        super.init()
+    init(_ type: TaskType) {
+        self.type = type
     }
     
-    enum Task: CaseIterable {
+    enum TaskType: CaseIterable {
         case deposit
         case loan
         
@@ -38,8 +37,8 @@ final class BankingTask: Operation {
             }
         }
         
-        static var random: Task {
-            guard let randomTask: Task = Task.allCases.randomElement() else {
+        static var random: TaskType {
+            guard let randomTask: TaskType = TaskType.allCases.randomElement() else {
                 return .deposit
             }
             return randomTask
@@ -47,21 +46,33 @@ final class BankingTask: Operation {
     }
     
     // MARK: - Private Method
-    func startTask() -> String {
-        return "💸 \(owner!.waitingNumber)번 \(owner!.grade.name)고객 \(type.name)업무 시작."
+    func startTask() throws -> String {
+        guard let owner: Client = owner else {
+            throw BankManagerError.ownerNotAssigned
+        }
+        
+        return "💸 \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 시작."
     }
     
-    func endTask() -> String {
-        return "✅ \(owner!.waitingNumber)번 \(owner!.grade.name)고객 \(type.name)업무 완료!"
+    func endTask() throws -> String {
+        guard let owner: Client = owner else {
+            throw BankManagerError.ownerNotAssigned
+        }
+        
+        return "✅ \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 완료!"
     }
     
     // MARK: - Override Method from the Operation Class
     override func main() {
-        let startTaskText: String = startTask()
-        let endTaskText: String = endTask()
-        
-        print(startTaskText)
-        Thread.sleep(forTimeInterval: type.processTime)
-        print(endTaskText)
+        do {
+            let startTaskText: String = try startTask()
+            let endTaskText: String = try endTask()
+            
+            print(startTaskText)
+            Thread.sleep(forTimeInterval: type.processTime)
+            print(endTaskText)
+        } catch {
+            print(error)
+        }
     }
 }
