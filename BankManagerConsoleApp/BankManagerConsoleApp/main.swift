@@ -8,6 +8,6 @@ import Foundation
 
 let yagomBank: Bank = Bank()
 let yagomBankController: BankController = BankController(of: yagomBank, tellerNumber: 1)
-let yagomConsoleController = ConsoleController()
+var yagomConsoleController = ConsoleController()
 
 yagomConsoleController.start(with: yagomBankController)

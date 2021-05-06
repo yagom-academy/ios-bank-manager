@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ConsoleController {
+struct ConsoleController {
     private var userInput: UserInput?
     private var randomCustomerNumber: Int {
         return Int.random(in: Constants.ConsoleController.customerNumberRange)
@@ -32,7 +32,7 @@ class ConsoleController {
         }
     }
 
-    func start(with bankController: BankController) {
+    mutating func start(with bankController: BankController) {
         while userInput != .quit {
             print(Constants.ConsoleController.menuScript)
             do {
@@ -45,7 +45,7 @@ class ConsoleController {
         }
     }
 
-    private func classifyUserInput() throws {
+    private mutating func classifyUserInput() throws {
         guard let userInputString = readLine() else { throw InputError.empty }
         guard let userInputNumber = Int(userInputString) else { throw InputError.wrong }
 
