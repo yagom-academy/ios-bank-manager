@@ -41,7 +41,10 @@
   - 열거형 - CustomStringConvertible
   - Closure - Escaping vs Non escaping
   - BlockOperation 공부
-
+- 05/06(목)
+  - 강의) iOS App Life Cycle
+  - Operation / BlockOperation
+  - [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
 <br>
 
 ### 학습키워드
@@ -51,6 +54,8 @@
 - [OperationQueue 메서드](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/OperationQueue%20%EB%A9%94%EC%84%9C%EB%93%9C.md)
 - ARC / Memory Struct
 - 선택정렬 / Operation.QueuePriority
+- iOS App Life Cycle
+- Operation / BlockOperation
 
 <br>
 
@@ -87,5 +92,5 @@
 - [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
 
 - [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
-- [블로그] iOS ) Operation실험 - Zedd
-
+- [[블로그] iOS) Operation실험 - Zedd](https://zeddios.tistory.com/512)
+- [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
