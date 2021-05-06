@@ -8,10 +8,10 @@ import Foundation
 
 struct BankManager {
     // MARK: - Properties
-    private var bank: Bank
+    private var bank: LocalBank
     
     init(numberOfTeller: Int) {
-        self.bank = Bank(numberOfTeller: numberOfTeller)
+        self.bank = LocalBank(numberOfTeller: numberOfTeller)
     }
     
     // MARK: - NameSpaces

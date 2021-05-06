@@ -19,15 +19,15 @@ final class BankManagerTests: XCTestCase {
     }
 
     func testMakeClients_whenClientNumberLessThanOne_returnsEmptyArray() {
-        var sutBank: Bank = Bank(numberOfTeller: 1)
+        var sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
         for lessThanOne in -1...0 {
-            XCTAssertEqual(sutBank.makeClients(number: lessThanOne), [])
+            XCTAssertEqual(sutLocalBank.makeClients(number: lessThanOne), [])
         }
     }
     
     func testMakeClients_whenClientNumberIsMoreThanOne_returnsClientsWithWaitingNumber() {
-        var sutBank: Bank = Bank(numberOfTeller: 1)
-        let sutClients: [Client] = sutBank.makeClients(number: 3)
+        var sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
+        let sutClients: [Client] = sutLocalBank.makeClients(number: 3)
         
         XCTAssertEqual(sutClients.count, 3)
         
@@ -37,15 +37,15 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testMeasureTime_whenNoTaskGiven_returnsZero() {
-        let sutBank: Bank = Bank(numberOfTeller: 1)
-        let processTime: Double = sutBank.measureTime { }
+        let sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
+        let processTime: Double = sutLocalBank.measureTime { }
         
         XCTAssertEqual(floor(processTime), 0)
     }
     
     func testMeasureTime_whenProcessTimeIsGiven_returnsGivenTime() {
-        let sutBank: Bank = Bank(numberOfTeller: 1)
-        let processTime: Double = sutBank.measureTime { () -> Void in
+        let sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
+        let processTime: Double = sutLocalBank.measureTime { () -> Void in
             return Thread.sleep(forTimeInterval: 0.01)
         }
         
@@ -53,23 +53,23 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testProcessTasks_whenProcessOneDepositTask_takesPointSevenSeconds() {
-        var sutBank: Bank = Bank(numberOfTeller: 1)
-        let processTime: Double = sutBank.measureTime { () -> Void in
+        var sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
+        let processTime: Double = sutLocalBank.measureTime { () -> Void in
             let tasks: [BankingTask] = [Client(1, grade: .normal, task: .deposit).bankingTask]
-            return sutBank.process(tasks)
+            return sutLocalBank.process(tasks)
         }
         
         XCTAssertEqual(floor(processTime * 10) / 10 , 0.7)
     }
     
     func testPreferredNumberFormat_whenNumberMoreThanTwoDecimalPlacesIsGiven_returnsNumberWithTwoDecimalPlaces() {
-        let sutBank: Bank = Bank(numberOfTeller: 1)
-        XCTAssertEqual(sutBank.preferredNumberFormat(123.456789), 123.45)
+        let sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
+        XCTAssertEqual(sutLocalBank.preferredNumberFormat(123.456789), 123.45)
     }
 
     func testStarttask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateStartText() {
-        let client: Client = Client(1, grade: .normal, task: .deposit)
-        XCTAssertEqual(try client.bankingTask.startTask(), "💸 1번 일반고객 예금업무 시작.")
+        let sutLocalBank: Client = Client(1, grade: .normal, task: .deposit)
+        XCTAssertEqual(try sutLocalBank.bankingTask.startTask(), "🏦 1번 일반고객 예금업무 시작.")
     }
 
     func testEndTask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateEndText() {
@@ -77,7 +77,15 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(try client.bankingTask.endTask(), "✅ 1번 일반고객 예금업무 완료!")
     }
     
-    func testStartTask_whenNoOwnerAssignedToBankingTask_throwError() {
+    func testRejectLoanExecution_whenClientHasWaitingNumberOneNormalGrade_returnAppropriateText() {
+        let client: Client = Client(1, grade: .normal, task: .loan)
+        XCTAssertEqual(
+            try client.bankingTask.rejectLoanExecution(),
+            "❌ 1번 일반고객의 대출이 거절되었습니다."
+        )
+    }
+    
+    func testStartTask_whenOwnerNotAssignedToBankingTask_throwError() {
         let sutBankingTask: BankingTask = BankingTask(.deposit)
         
         XCTAssertThrowsError(try sutBankingTask.startTask()) { error in
@@ -85,7 +93,7 @@ final class BankManagerTests: XCTestCase {
         }
     }
 
-    func testEndTask_whenNoOwnerAssignedToBankingTask_throwError() {
+    func testEndTask_whenOwnerNotAssignedToBankingTask_throwError() {
         let sutBankingTask: BankingTask = BankingTask(.deposit)
         
         XCTAssertThrowsError(try sutBankingTask.endTask()) { error in
@@ -93,10 +101,18 @@ final class BankManagerTests: XCTestCase {
         }
     }
     
+    func testRejectLoanExecution_whenOwnerNotAssignedToBankingTask_throwError() {
+        let sutBankingTask: BankingTask = BankingTask(.deposit)
+        
+        XCTAssertThrowsError(try sutBankingTask.startTask()) { error in
+            XCTAssertEqual(error as? BankManagerError, .ownerNotAssigned)
+        }
+    }
+    
     func testClose_whenNumberOfClientAndTotalProcessTimeAreGiven_returnCloseTextWithGivenNumbers() {
-        let sutBank: Bank = Bank(numberOfTeller: 1)
+        let sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
         XCTAssertEqual(
-            sutBank.close(numberOfClient: 3, 2.1),
+            sutLocalBank.close(numberOfClient: 3, 2.1),
             "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 3 명이며, 총 업무 시간은 2.1초입니다."
         )
     }
@@ -123,12 +139,30 @@ final class BankManagerTests: XCTestCase {
     }
     
     func testSortByGrade_whenNumberOfClientsIsThirty_returnSortedClients() {
-        var sutBank: Bank = Bank(numberOfTeller: 1)
-        var clients: [Client] = sutBank.makeClients(number: 30)
-        clients = sutBank.sortByGrade(for: clients)
+        var sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
+        var clients: [Client] = sutLocalBank.makeClients(number: 30)
+        clients = sutLocalBank.sortByGrade(for: clients)
         
         for index in 0...(clients.count - 2) {
             XCTAssertEqual(clients[index].grade <= clients[index + 1].grade, true)
         }
+    }
+    
+    func testStartLoanScreening_whenClientHasWaitingNumberOneAndNormalGrade_returnAppropriateText() {
+        let sutClient: Client = Client(1, grade: .normal, task: .loan)
+        
+        XCTAssertEqual(
+            BankHeadquarter.startLoanScreening(of: sutClient),
+            "🧾 1번 일반고객 대출심사 시작."
+        )
+    }
+    
+    func testEndLoanScreening_whenClientHasWaitingNumberOneAndNormalGrade_returnAppropriateText() {
+        let sutClient: Client = Client(1, grade: .normal, task: .loan)
+        
+        XCTAssertEqual(
+            BankHeadquarter.endLoanScreening(of: sutClient),
+            "👍 1번 일반고객 대출심사 완료!"
+        )
     }
 }

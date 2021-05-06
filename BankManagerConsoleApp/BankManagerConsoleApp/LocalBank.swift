@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+struct LocalBank {
     // MARK: - Properties
     private var waitingQueue: OperationQueue = OperationQueue()
     
