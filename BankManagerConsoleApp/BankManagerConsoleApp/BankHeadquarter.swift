@@ -2,7 +2,7 @@
 //  BankHeadquarter.swift
 //  BankManagerConsoleApp
 //
-//  Created by Ryan-Son on 2021/05/06.
+//  Created by Yun, Ryan on 2021/05/06.
 //
 
 import Foundation
