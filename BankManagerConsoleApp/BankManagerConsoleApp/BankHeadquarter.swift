@@ -24,11 +24,11 @@ struct BankHeadquarter {
     }
     
     static func startLoanScreening(of client: Client) -> String {
-        return "🧾 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 시작"
+        return "🧾 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 시작."
     }
     
     static func endLoanScreening(of client: Client) -> String {
-        return "👍 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 완료"
+        return "👍 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 완료!"
     }
     
     

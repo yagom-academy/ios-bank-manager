@@ -23,7 +23,12 @@ final class BankingTask: Operation {
         }
         
         do {
+            let startTaskText: String = try startTask()
+            let endTaskText: String = try endTask()
+            
+            print(startTaskText)
             try processTask(of: owner)
+            print(endTaskText)
         } catch {
             print(error)
         }
@@ -69,22 +74,15 @@ extension BankingTask {
     }
     
     private func processTask(of owner: Client) throws {
-        let startTaskText: String = try startTask()
-        let endTaskText: String = try endTask()
-        
-        print(startTaskText)
-        
         switch type {
         case .deposit:
             processDeposit()
-            print(endTaskText)
         case .loan:
             reviewDocuments()
             let isApproved: Bool = BankHeadquarter.screenLoan(for: owner)
             
             if isApproved {
                 executeLoan()
-                print(endTaskText)
             } else {
                 let rejectLoanExecutionText: String = try rejectLoanExecution()
                 print(rejectLoanExecutionText)
