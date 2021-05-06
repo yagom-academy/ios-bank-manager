@@ -69,7 +69,7 @@ final class BankManagerTests: XCTestCase {
 
     func testStarttask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateStartText() {
         let sutLocalBank: Client = Client(1, grade: .normal, task: .deposit)
-        XCTAssertEqual(try sutLocalBank.bankingTask.startTask(), "💸 1번 일반고객 예금업무 시작.")
+        XCTAssertEqual(try sutLocalBank.bankingTask.startTask(), "🏦 1번 일반고객 예금업무 시작.")
     }
 
     func testEndTask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateEndText() {
@@ -77,7 +77,7 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(try client.bankingTask.endTask(), "✅ 1번 일반고객 예금업무 완료!")
     }
     
-    func testStartTask_whenNoOwnerAssignedToBankingTask_throwError() {
+    func testStartTask_whenOwnerNotAssignedToBankingTask_throwError() {
         let sutBankingTask: BankingTask = BankingTask(.deposit)
         
         XCTAssertThrowsError(try sutBankingTask.startTask()) { error in
@@ -85,10 +85,18 @@ final class BankManagerTests: XCTestCase {
         }
     }
 
-    func testEndTask_whenNoOwnerAssignedToBankingTask_throwError() {
+    func testEndTask_whenOwnerNotAssignedToBankingTask_throwError() {
         let sutBankingTask: BankingTask = BankingTask(.deposit)
         
         XCTAssertThrowsError(try sutBankingTask.endTask()) { error in
+            XCTAssertEqual(error as? BankManagerError, .ownerNotAssigned)
+        }
+    }
+    
+    func testRejectLoanExecution_whenOwnerNotAssignedToBankingTask_throwError() {
+        let sutBankingTask: BankingTask = BankingTask(.deposit)
+        
+        XCTAssertThrowsError(try sutBankingTask.startTask()) { error in
             XCTAssertEqual(error as? BankManagerError, .ownerNotAssigned)
         }
     }
@@ -130,5 +138,23 @@ final class BankManagerTests: XCTestCase {
         for index in 0...(clients.count - 2) {
             XCTAssertEqual(clients[index].grade <= clients[index + 1].grade, true)
         }
+    }
+    
+    func testStartLoanScreening_whenClientHasWaitingNumberOneAndNormalGrade_returnAppropriateText() {
+        let sutClient: Client = Client(1, grade: .normal, task: .loan)
+        
+        XCTAssertEqual(
+            BankHeadquarter.startLoanScreening(of: sutClient),
+            "🧾 1번 일반고객 대출심사 시작."
+        )
+    }
+    
+    func testEndLoanScreening_whenClientHasWaitingNumberOneAndNormalGrade_returnAppropriateText() {
+        let sutClient: Client = Client(1, grade: .normal, task: .loan)
+        
+        XCTAssertEqual(
+            BankHeadquarter.endLoanScreening(of: sutClient),
+            "👍 1번 일반고객 대출심사 완료!"
+        )
     }
 }

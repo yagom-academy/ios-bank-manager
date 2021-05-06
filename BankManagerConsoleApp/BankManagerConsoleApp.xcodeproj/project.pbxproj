@@ -23,6 +23,7 @@
 		AAF214402643E37F00ADF94C /* TaskForLocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143F2643E37F00ADF94C /* TaskForLocalBank.swift */; };
 		AAF214432643F37E00ADF94C /* Clientable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF214422643F37E00ADF94C /* Clientable.swift */; };
 		AAF214452643F3D500ADF94C /* TaskForLocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143F2643E37F00ADF94C /* TaskForLocalBank.swift */; };
+		AAF214462643F6AE00ADF94C /* Clientable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF214422643F37E00ADF94C /* Clientable.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -212,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF214462643F6AE00ADF94C /* Clientable.swift in Sources */,
 				52B68BEF263836FF0007B69F /* Client.swift in Sources */,
 				52B68BF3263837010007B69F /* BankManager.swift in Sources */,
 				AAF2143E2643C74E00ADF94C /* BankHeadquarter.swift in Sources */,
