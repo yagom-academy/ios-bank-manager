@@ -16,7 +16,22 @@ final class BankingTask: Operation {
         self.type = type
     }
     
-    // MARK: - Private Method
+    // MARK: - Override Method from the Operation Class
+    override func main() {
+        guard let owner: Client = owner else {
+            return
+        }
+        
+        do {
+            try processTask(of: owner)
+        } catch {
+            print(error)
+        }
+    }
+}
+
+// MARK: - Private Methods
+extension BankingTask {
     func startTask() throws -> String {
         guard let owner: Client = owner else {
             throw BankManagerError.ownerNotAssigned
@@ -74,19 +89,6 @@ final class BankingTask: Operation {
                 let rejectLoanExecutionText: String = try rejectLoanExecution()
                 print(rejectLoanExecutionText)
             }
-        }
-    }
-    
-    // MARK: - Override Method from the Operation Class
-    override func main() {
-        guard let owner: Client = owner else {
-            return
-        }
-        
-        do {
-            try processTask(of: owner)
-        } catch {
-            print(error)
         }
     }
 }

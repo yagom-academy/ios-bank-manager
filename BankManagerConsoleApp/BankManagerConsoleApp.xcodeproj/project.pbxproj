@@ -21,6 +21,7 @@
 		AAF2143D2643C74A00ADF94C /* BankHeadquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143C2643C74A00ADF94C /* BankHeadquarter.swift */; };
 		AAF2143E2643C74E00ADF94C /* BankHeadquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143C2643C74A00ADF94C /* BankHeadquarter.swift */; };
 		AAF214402643E37F00ADF94C /* TaskForLocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143F2643E37F00ADF94C /* TaskForLocalBank.swift */; };
+		AAF214412643ED5A00ADF94C /* TaskForLocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143F2643E37F00ADF94C /* TaskForLocalBank.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -205,6 +206,7 @@
 				AAF2143E2643C74E00ADF94C /* BankHeadquarter.swift in Sources */,
 				52B68BD6263832270007B69F /* BankManagerTest.swift in Sources */,
 				52B68BDE263836F60007B69F /* LocalBank.swift in Sources */,
+				AAF214412643ED5A00ADF94C /* TaskForLocalBank.swift in Sources */,
 				52B2BD01263ABF0E003932BB /* BankManagerError.swift in Sources */,
 				52B68BE2263836F80007B69F /* main.swift in Sources */,
 				AA9FD664264297F3006FCFA5 /* BankingTask.swift in Sources */,
