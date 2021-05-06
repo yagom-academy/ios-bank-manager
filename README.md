@@ -565,7 +565,7 @@ BankManagerConsole.openBank()
 
 ### Step2 실제 구현
 
-![](https://tva1.sinaimg.cn/large/008i3skNgy1gq95dp3op8g30tw0dc1l1.gif)
+![](https://tva1.sinaimg.cn/large/008i3skNgy1gq96qj211og30tw0dc1l1.gif)
 
 ### 구현 목표
 
