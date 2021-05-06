@@ -40,7 +40,7 @@ class ConsoleController {
         while userInput != .quit {
             print(menuScript)
             do {
-                try selectMenu()
+                try classifyUserInput()
             } catch {
                 print(error)
                 continue
@@ -49,7 +49,7 @@ class ConsoleController {
         }
     }
 
-    private func selectMenu() throws {
+    private func classifyUserInput() throws {
         guard let userInputString = readLine() else { throw InputError.empty }
         guard let userInputNumber = Int(userInputString) else { throw InputError.wrong }
 
