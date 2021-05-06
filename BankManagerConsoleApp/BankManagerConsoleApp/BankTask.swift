@@ -27,13 +27,13 @@ class BankTask: Operation {
     }
     
     override func main() {
-        print("🔴\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작")
+        print("▶️\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작")
         Thread.sleep(forTimeInterval: taskType.taskTime)
         if taskType == .loan {
             sendToHeadOffice()
             Thread.sleep(forTimeInterval: taskType.taskTime)
         }
-        print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
+        print("⏹\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
     }
     
 }

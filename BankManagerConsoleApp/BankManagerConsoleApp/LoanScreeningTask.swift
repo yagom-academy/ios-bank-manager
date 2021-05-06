@@ -18,9 +18,9 @@ class LoanScreeningTask: Operation {
     }
 
     override func main() {
-        print("🟡\(waitingNumber)번 \(customerGrade.name)고객 대출심사 시작")
+        print("🤔\(waitingNumber)번 \(customerGrade.name)고객 대출심사 시작")
         Thread.sleep(forTimeInterval: 0.5)
-        print("🟢\(waitingNumber)번 \(customerGrade.name)고객 대출심사 완료")
+        print("🤝\(waitingNumber)번 \(customerGrade.name)고객 대출심사 완료")
     }
 
 }
