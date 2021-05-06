@@ -104,7 +104,7 @@ final class BankManagerTests: XCTestCase {
     func testRejectLoanExecution_whenOwnerNotAssignedToBankingTask_throwError() {
         let sutBankingTask: BankingTask = BankingTask(.deposit)
         
-        XCTAssertThrowsError(try sutBankingTask.startTask()) { error in
+        XCTAssertThrowsError(try sutBankingTask.rejectLoanExecution()) { error in
             XCTAssertEqual(error as? BankManagerError, .ownerNotAssigned)
         }
     }
