@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA9905A426403A69009C3843 /* HeadBankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9905A326403A69009C3843 /* HeadBankTask.swift */; };
+		BA9905AA26404A24009C3843 /* HeadBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9905A926404A24009C3843 /* HeadBank.swift */; };
+		BAAA8FE22640E0F700B40803 /* LocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAA8FE12640E0F700B40803 /* LocalBank.swift */; };
+		BABE3F3D263C344300F33385 /* BankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE3F3C263C344300F33385 /* BankService.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		C7D65D1B259C8190005510E0 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* Client.swift */; };
+		C7D65D1B259C8190005510E0 /* LocalBankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* LocalBankTask.swift */; };
+		EAC684232643D9B8002A9CE3 /* Clientable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC684222643D9B8002A9CE3 /* Clientable.swift */; };
+		EAC684252643F30B002A9CE3 /* BankInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC684242643F30B002A9CE3 /* BankInterface.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +30,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA9905A326403A69009C3843 /* HeadBankTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadBankTask.swift; sourceTree = "<group>"; };
+		BA9905A926404A24009C3843 /* HeadBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadBank.swift; sourceTree = "<group>"; };
+		BAAA8FE12640E0F700B40803 /* LocalBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBank.swift; sourceTree = "<group>"; };
+		BABE3F3C263C344300F33385 /* BankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankService.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Client.swift; path = ../../Client.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* LocalBankTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBankTask.swift; sourceTree = "<group>"; };
+		EAC684222643D9B8002A9CE3 /* Clientable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clientable.swift; sourceTree = "<group>"; };
+		EAC684242643F30B002A9CE3 /* BankInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +52,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BAAA8FE72640F9C200B40803 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				BA9905A326403A69009C3843 /* HeadBankTask.swift */,
+				C7D65D1A259C8190005510E0 /* LocalBankTask.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		BAAA8FE92640F9F900B40803 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				BABE3F3C263C344300F33385 /* BankService.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -59,10 +88,23 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* Client.swift */,
+				EAC684212643D987002A9CE3 /* Protocol */,
+				BAAA8FE92640F9F900B40803 /* Utility */,
+				BAAA8FE72640F9C200B40803 /* Task */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				BA9905A926404A24009C3843 /* HeadBank.swift */,
+				BAAA8FE12640E0F700B40803 /* LocalBank.swift */,
+				EAC684242643F30B002A9CE3 /* BankInterface.swift */,
 			);
 			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		EAC684212643D987002A9CE3 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				EAC684222643D9B8002A9CE3 /* Clientable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,7 +134,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1210;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					C7694E75259C3EC00053667F = {
 						CreatedOnToolsVersion = 12.1;
@@ -122,8 +164,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAAA8FE22640E0F700B40803 /* LocalBank.swift in Sources */,
+				BA9905AA26404A24009C3843 /* HeadBank.swift in Sources */,
+				EAC684232643D9B8002A9CE3 /* Clientable.swift in Sources */,
+				EAC684252643F30B002A9CE3 /* BankInterface.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				C7D65D1B259C8190005510E0 /* Client.swift in Sources */,
+				BABE3F3D263C344300F33385 /* BankService.swift in Sources */,
+				C7D65D1B259C8190005510E0 /* LocalBankTask.swift in Sources */,
+				BA9905A426403A69009C3843 /* HeadBankTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +296,7 @@
 		C7694E7E259C3EC00053667F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -257,6 +306,7 @@
 		C7694E7F259C3EC00053667F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
