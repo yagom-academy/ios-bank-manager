@@ -9,7 +9,9 @@ import Foundation
 
 struct BankHeadquarter {
     // MARK: - Properties
-    private static let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private static let semaphore: DispatchSemaphore = DispatchSemaphore(
+        value: Task.NumberToBeProcessedAtOnce
+    )
     
     // MARK: - Name spaces
     private enum Task {
@@ -21,6 +23,8 @@ struct BankHeadquarter {
                 return 0.5
             }
         }
+        
+        static let NumberToBeProcessedAtOnce: Int = 1
     }
     
     // MARK: - Private Methods
