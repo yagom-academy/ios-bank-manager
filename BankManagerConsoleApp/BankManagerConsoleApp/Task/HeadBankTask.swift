@@ -8,24 +8,20 @@
 import Foundation
 
 final class HeadBankTask: Operation {
-    var waitingNumber: UInt?
-    var creditRate: CreditRating?
-    var workType: WorkType?
+    var waitingNumber: UInt
+    var creditRate: CreditRating
+    var workType: WorkType
     
-    override func main() {
-        guard let waitNumber = waitingNumber,
-              let credit = creditRate,
-              let work = workType else {
-            
-            return
-        }
-        evaluateCredit(waitNumber, credit, work)
+    init(_ waitingNumber: UInt, _ creditRate: CreditRating, _ workType: WorkType) {
+        self.waitingNumber = waitingNumber
+        self.creditRate = creditRate
+        self.workType = workType
     }
     
-    private func evaluateCredit(_ waitNumber: UInt, _ credit: CreditRating, _ work: WorkType) {
+    override func main() {
         let loanProcess = WorkType.LoanProcess.self
-        print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanEvaluation) 시작")
-        Thread.sleep(forTimeInterval: work.duration)
-        print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanEvaluation) 완료")
+        print("\(waitingNumber)번 \(creditRate)고객 \(loanProcess.loanEvaluation) 시작")
+        Thread.sleep(forTimeInterval: workType.duration)
+        print("\(waitingNumber)번 \(creditRate)고객 \(loanProcess.loanEvaluation) 완료")
     }
 }

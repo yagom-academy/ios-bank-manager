@@ -10,24 +10,16 @@ import Foundation
 final class HeadBank {
     static let shared = HeadBank()
     var bankWindow = OperationQueue()
+    let semaphore = DispatchSemaphore(value: 1)
     
-    private init() { }
-    
-    func serveClient(_ data: HeadBankTask) {
-        let semaphore = DispatchSemaphore(value: 1)
-        bankWindow.maxConcurrentOperationCount = 1
-        let headBankTask = acceptClientDocument(data)
-        semaphore.wait()
-        bankWindow.addOperation(headBankTask)
-        semaphore.signal()
-        headBankTask.waitUntilFinished()
+    private init() {
+        self.bankWindow.maxConcurrentOperationCount = 1
     }
     
-    private func acceptClientDocument(_ data: HeadBankTask) -> HeadBankTask {
-        let headBankTask = HeadBankTask()
-        headBankTask.waitingNumber = data.waitingNumber
-        headBankTask.creditRate = data.creditRate
-        headBankTask.workType = data.workType
-        return headBankTask
+    func serveClient(_ clientData: HeadBankTask) {
+        semaphore.wait()
+        bankWindow.addOperation(clientData)
+        semaphore.signal()
+        clientData.waitUntilFinished()
     }
 }

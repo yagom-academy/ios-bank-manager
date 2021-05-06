@@ -13,6 +13,7 @@
 		BABE3F3D263C344300F33385 /* BankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE3F3C263C344300F33385 /* BankService.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* LocalBankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* LocalBankTask.swift */; };
+		EAC684232643D9B8002A9CE3 /* Clientable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC684222643D9B8002A9CE3 /* Clientable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* LocalBankTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBankTask.swift; sourceTree = "<group>"; };
+		EAC684222643D9B8002A9CE3 /* Clientable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clientable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				EAC684212643D987002A9CE3 /* Protocol */,
 				BAAA8FE92640F9F900B40803 /* Utility */,
 				BAAA8FE72640F9C200B40803 /* Task */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -91,6 +94,14 @@
 				BAAA8FE12640E0F700B40803 /* LocalBank.swift */,
 			);
 			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		EAC684212643D987002A9CE3 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				EAC684222643D9B8002A9CE3 /* Clientable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +163,7 @@
 			files = (
 				BAAA8FE22640E0F700B40803 /* LocalBank.swift in Sources */,
 				BA9905AA26404A24009C3843 /* HeadBank.swift in Sources */,
+				EAC684232643D9B8002A9CE3 /* Clientable.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				BABE3F3D263C344300F33385 /* BankService.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* LocalBankTask.swift in Sources */,

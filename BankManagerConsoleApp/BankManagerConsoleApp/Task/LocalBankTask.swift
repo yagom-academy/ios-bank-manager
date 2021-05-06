@@ -10,7 +10,6 @@ final class LocalBankTask: Operation {
     let waitingNumber: UInt
     let creditRate: CreditRating
     let workType: WorkType
-    
     init?(_ number: UInt) {
         guard let credit = CreditRating.allCases.shuffled().first,
               let work = WorkType.allCases.shuffled().first else {
@@ -36,10 +35,8 @@ final class LocalBankTask: Operation {
         case .loan:
             let loanProcess = WorkType.LoanProcess.self
             print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution) 시작")
-            let headBankTask = HeadBankTask()
-            headBankTask.waitingNumber = waitNumber
-            headBankTask.creditRate = credit
-            headBankTask.workType = taskType
+            
+            let headBankTask = HeadBankTask(waitNumber, credit, workType)
             HeadBank.shared.serveClient(headBankTask)
             print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution) 완료")
         }
