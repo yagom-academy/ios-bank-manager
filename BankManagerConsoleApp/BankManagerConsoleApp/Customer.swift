@@ -9,16 +9,11 @@ import Foundation
 
 struct Customer {
     
-    private var grade: CustomerGrade
-    private var _bankTask: BankTask
-    private var waitingNumber: Int
-    var bankTask: BankTask {
-        return _bankTask
-    }
+    private(set) var grade: CustomerGrade
+    private(set) var waitingNumber: Int
 
     init(waitingNumber: Int) {
         self.grade = CustomerGrade.random
-        self._bankTask = BankTask(waitingNumber: waitingNumber, grade: grade)
         self.waitingNumber = waitingNumber
     }
     
