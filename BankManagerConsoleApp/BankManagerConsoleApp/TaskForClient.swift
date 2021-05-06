@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BankingTask: Operation {
+final class TaskForClient: Operation {
     // MARK: - Properties
     var owner: Client?
     private let type: TaskType
@@ -33,6 +33,26 @@ final class BankingTask: Operation {
         return "✅ \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 완료!"
     }
     
+    func rejectLoanExecution() throws -> String {
+        guard let owner: Client = owner else {
+            throw BankManagerError.ownerNotAssigned
+        }
+        
+        return "❌ \(owner.waitingNumber)번 \(owner.grade.name)고객의 대출이 거절되었습니다."
+    }
+    
+    private func processDeposit() {
+        Thread.sleep(forTimeInterval: TaskForLocalBank.deposit.processTime)
+    }
+    
+    private func reviewDocuments() {
+        Thread.sleep(forTimeInterval: TaskForLocalBank.loanDocumentsReview.processTime)
+    }
+    
+    private func executeLoan() {
+        Thread.sleep(forTimeInterval: TaskForLocalBank.loanExecution.processTime)
+    }
+    
     // MARK: - Override Method from the Operation Class
     override func main() {
         guard let owner: Client = owner else {
@@ -47,17 +67,18 @@ final class BankingTask: Operation {
             
             switch type {
             case .deposit:
-                Thread.sleep(forTimeInterval: TaskType.deposit.processTime)
+                processDeposit()
                 print(endTaskText)
             case .loan:
-                Thread.sleep(forTimeInterval: 0.3)
+                reviewDocuments()
                 let isApproved: Bool = BankHeadquarter.screenLoan(for: owner)
                 
                 if isApproved {
-                    Thread.sleep(forTimeInterval: 0.3)
+                    executeLoan()
                     print(endTaskText)
                 } else {
-                    print("❌ \(owner.waitingNumber)번 \(owner.grade.name)고객의 대출이 거절되었습니다.")
+                    let rejectLoanExecutionText: String = try rejectLoanExecution()
+                    print(rejectLoanExecutionText)
                 }
             }
         } catch {
@@ -67,7 +88,7 @@ final class BankingTask: Operation {
 }
 
 // MARK: - NameSpaces
-extension BankingTask {
+extension TaskForClient {
     enum TaskType: CaseIterable {
         case deposit
         case loan
@@ -78,15 +99,6 @@ extension BankingTask {
                 return "예금"
             case .loan:
                 return "대출"
-            }
-        }
-        
-        var processTime: Double {
-            switch self {
-            case .deposit:
-                return 0.7
-            case .loan:
-                return 1.1
             }
         }
         

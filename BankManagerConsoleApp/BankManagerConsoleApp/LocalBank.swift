@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+struct LocalBank {
     // MARK: - Properties
     private var waitingQueue: OperationQueue = OperationQueue()
     
@@ -28,8 +28,8 @@ struct Bank {
         )
         clients = sortByGrade(for: clients)
         
-        let tasks: [BankingTask] = clients.map { client in
-            return client.bankingTask
+        let tasks: [TaskForClient] = clients.map { client in
+            return client.task
         }
         
         let totalProcessTime: Double = measureTime { () -> Void in
@@ -75,7 +75,7 @@ struct Bank {
         return floor(number * 100) / 100
     }
     
-    mutating func process(_ tasks: [BankingTask]) {
+    mutating func process(_ tasks: [TaskForClient]) {
         waitingQueue.addOperations(tasks, waitUntilFinished: true)
     }
     

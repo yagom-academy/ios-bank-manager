@@ -11,13 +11,13 @@ struct Client: Equatable {
     // MARK: - Properties
     let waitingNumber: Int
     let grade: Grade
-    var bankingTask: BankingTask
+    var task: TaskForClient
     
-    init(_ waitingNumber: Int, grade: Grade, task: BankingTask.TaskType) {
+    init(_ waitingNumber: Int, grade: Grade, task: TaskForClient.TaskType) {
         self.waitingNumber = waitingNumber
         self.grade = grade
-        self.bankingTask = BankingTask(task)
-        self.bankingTask.owner = self
+        self.task = TaskForClient(task)
+        self.task.owner = self
     }
 }
 
