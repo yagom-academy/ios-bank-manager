@@ -7,11 +7,20 @@
 
 import Foundation
 
-struct Customer {
-    let waitNumber: Int
-    let tier: Tier
-    let business: Business
+class Customer {
+    private let _waitNumber: Int
+    private let _tier: Tier
+    private let _business: Business
     
+    var waitNumber: Int { return _waitNumber }
+    var tier: Tier { return _tier }
+    var business: Business { return _business }
+    
+    init(_waitNumber: Int, _tier: Tier, _business: Business) {
+        self._waitNumber = _waitNumber
+        self._tier = _tier
+        self._business = _business
+    }
 }
 
 enum Tier: Int, CaseIterable {

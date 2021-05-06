@@ -8,9 +8,13 @@ import Foundation
 
 final class BankManager {
     private var customers: [Customer] = []
-    private var tak: Banker = Banker()
     private var bankersWorkTime: Double = 0
-
+    
+    private var banker: Banker = Banker()
+    
+    private let operationQueue = OperationQueue()
+    private let semaphore = DispatchSemaphore(value: 1)
+    
     func openBank() {
         let bankOpenMenuState: Bool = bankOpenMenu()
         
@@ -45,14 +49,21 @@ final class BankManager {
     private func bankWorkProgress() {
         let totalCustomersCount: Int = self.customers.count
         
-        while self.customers.count > 0 {
-            let customer: Customer = self.customers.removeFirst()
-            tak.bankerWorkProgress(customer: customer)
+        let bankTellerA = BlockOperation {
+            self.banker.bankerWorkProgress(customers: &self.customers)
+        }
+        let bankTellerB = BlockOperation {
+            self.banker.bankerWorkProgress(customers: &self.customers)
+        }
+        let bankTellerC = BlockOperation {
+            self.banker.bankerWorkProgress(customers: &self.customers)
         }
         
+        operationQueue.addOperations([bankTellerA, bankTellerB, bankTellerC], waitUntilFinished: true)
+        
         if self.customers.count == 0 {
-            self.bankersWorkTime += tak.workTime
-            finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
+            self.bankersWorkTime += self.banker.workTime
+            self.finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
         }
     }
     
@@ -60,7 +71,9 @@ final class BankManager {
         let workTime: Double = round(bankersWorkTime * 100) / 100
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무 시간은 \(workTime)초 입니다.")
-
+        
+        self.bankersWorkTime = 0
+        self.banker.workTime = 0
     }
     
     private func visitCustomers() {
@@ -74,7 +87,7 @@ final class BankManager {
                 return
             }
             
-            let customer: Customer = Customer(waitNumber: number, tier: tier, business: business)
+            let customer: Customer = Customer(_waitNumber: number, _tier: tier, _business: business)
             self.customers.append(customer)
         }
         
