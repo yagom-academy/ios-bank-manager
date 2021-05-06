@@ -7,37 +7,43 @@
 
 import Foundation
 
-final class Client: Operation {
+struct Client: Equatable {
     // MARK: - Properties
     let waitingNumber: Int
+    let grade: Grade
+    var bankingTask: BankingTask
     
-    init(_ waitingNumber: Int) {
+    init(_ waitingNumber: Int, grade: Grade, task: BankingTask.TaskType) {
         self.waitingNumber = waitingNumber
-        
-    }
-    
-    // MARK: - NameSpaces
-    private enum TimeForProcessingTask {
-        static let deposit: Double = 0.7
-    }
-    
-    // MARK: - Private Method
-    func startTask() -> String {
-        return "\(waitingNumber) 번 고객 업무 시작."
-    }
-    
-    func endTask() -> String {
-        return "\(waitingNumber) 번 고객 업무 종료!"
-    }
-    
-    // MARK: - Override Method from the Operation Class
-    override func main() {
-        let startTaskText: String = startTask()
-        let endTaskText: String = endTask()
-        
-        print(startTaskText)
-        Thread.sleep(forTimeInterval: TimeForProcessingTask.deposit)
-        print(endTaskText)
+        self.grade = grade
+        self.bankingTask = BankingTask(task)
+        self.bankingTask.owner = self
     }
 }
 
+// MARK: - NameSpaces
+extension Client {
+    enum Grade: CaseIterable, Comparable {
+        case vvip
+        case vip
+        case normal
+        
+        var name: String {
+            switch self {
+            case .vvip:
+                return "VVIP"
+            case .vip:
+                return "VIP"
+            case .normal:
+                return "일반"
+            }
+        }
+        
+        static var random: Grade {
+            guard let randomGrade: Grade = Grade.allCases.randomElement() else {
+                return .normal
+            }
+            return randomGrade
+        }
+    }
+}

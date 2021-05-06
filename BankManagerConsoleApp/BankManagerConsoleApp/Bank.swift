@@ -23,13 +23,20 @@ struct Bank {
     
     // MARK: - Private Methods
     mutating func open() {
-        let clients: [Client] = makeClients(
+        var clients: [Client] = makeClients(
             number: Int.random(in: NumberOfClient.minimum...NumberOfClient.maximum)
         )
-        let totalProcessTime: Double = measureTime { () -> Void in
-            return processTasks(of: clients)
+        clients = sortByGrade(for: clients)
+        
+        let tasks: [BankingTask] = clients.map { client in
+            return client.bankingTask
         }
-        let closeText = close(numberOfClient: clients.count, totalProcessTime)
+        
+        let totalProcessTime: Double = measureTime { () -> Void in
+            return process(tasks)
+        }
+        
+        let closeText: String = close(numberOfClient: clients.count, totalProcessTime)
         
         print(closeText)
     }
@@ -42,11 +49,19 @@ struct Bank {
         }
         
         for waitingNumber in 1...number {
-            let client: Client = Client(waitingNumber)
+            let client: Client = Client(waitingNumber, grade: .random, task: .random)
             clients.append(client)
         }
         
         return clients
+    }
+    
+    func sortByGrade(for clients: [Client]) -> [Client] {
+        let sortedClients: [Client] =  clients.sorted(
+            by: { (current: Client, next: Client) -> Bool in
+            return current.grade < next.grade
+        })
+        return sortedClients
     }
     
     func measureTime(_ subjectMethodsToBeMeasured: () -> Void) -> Double {
@@ -60,8 +75,8 @@ struct Bank {
         return floor(number * 100) / 100
     }
     
-    mutating func processTasks(of clients: [Client]) {
-        waitingQueue.addOperations(clients, waitUntilFinished: true)
+    mutating func process(_ tasks: [BankingTask]) {
+        waitingQueue.addOperations(tasks, waitUntilFinished: true)
     }
     
     func close(numberOfClient: Int, _ totalProcessTime: Double) -> String {
