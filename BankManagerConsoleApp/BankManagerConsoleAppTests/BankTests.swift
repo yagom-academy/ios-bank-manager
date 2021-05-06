@@ -50,7 +50,7 @@ class NotificationBoardTests: XCTestCase {
 
         sut.addObserver(defaultCustomerQueue)
         sut.addObserver(strangeCustomerQueue)
-        sut.call(by: teller)
+        sut.call(sender: teller)
 
         for observer in sut.observers {
             XCTAssertTrue(observer.queue.isEmpty)
@@ -66,7 +66,7 @@ class TellerTests: XCTestCase {
     func test_teller는_원하는시간정도로_업무시간을_소요하는가() {
         func checkTime() -> Double {
             let workStart = ProcessInfo.processInfo.systemUptime
-            sut.work(forCustomerOf: 4, by: notificationBoard)
+            sut.work(forCustomerOf: 4, sender: notificationBoard)
             let workEnd = ProcessInfo.processInfo.systemUptime
             return workEnd - workStart
         }
