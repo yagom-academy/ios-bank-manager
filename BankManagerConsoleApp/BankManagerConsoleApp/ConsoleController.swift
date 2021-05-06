@@ -22,19 +22,16 @@ class ConsoleController {
         case quit = 2
     }
 
-    enum Error: Swift.Error, CustomStringConvertible {
-        case wrongNumberInput
-        case nilInput
-        case stringInput
+    enum InputError: Swift.Error, CustomStringConvertible {
+        case wrong
+        case empty
 
         var description: String {
             switch self {
-            case .wrongNumberInput:
-                return "잘못된 숫자입니다. 다시 입력해 주세요."
-            case .nilInput:
-                return "입력된 값이 없습니다. 다시 입력해 주세요."
-            case .stringInput:
+            case .wrong:
                 return "잘못된 입력입니다. 다시 입력해 주세요."
+            case .empty:
+                return "입력된 값이 없습니다. 다시 입력해 주세요."
             }
         }
     }
@@ -53,8 +50,8 @@ class ConsoleController {
     }
 
     private func selectMenu() throws {
-        guard let userInputString = readLine() else { throw Error.nilInput }
-        guard let userInputNumber = Int(userInputString) else { throw Error.stringInput }
+        guard let userInputString = readLine() else { throw InputError.empty }
+        guard let userInputNumber = Int(userInputString) else { throw InputError.wrong }
 
         switch userInputNumber {
         case UserInput.openBank.rawValue:
@@ -62,7 +59,7 @@ class ConsoleController {
         case UserInput.quit.rawValue:
             userInput = UserInput.quit
         default:
-            throw Error.wrongNumberInput
+            throw InputError.wrong
         }
     }
 
