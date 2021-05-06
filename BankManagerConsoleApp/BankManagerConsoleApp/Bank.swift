@@ -45,7 +45,7 @@ class Bank {
 
         func work(forCustomerOf waitingNumber: Int, sender notificationBoard: NotificationBoard) {
             print("\(waitingNumber)번 고객 업무 시작")
-            usleep(useconds_t(Int(Teller.taskingTime * 1_000_000)))
+            Thread.sleep(forTimeInterval: Bank.Teller.taskingTime)
             print("\(waitingNumber)번 고객 업무 완료")
             call(to: notificationBoard)
         }
