@@ -21,11 +21,16 @@ class BankTask: Operation {
         super.queuePriority = customerGrade.queuePriority
     }
     
+    private func sendToHeadOffice() {
+        let taskInfo = ["waitingNumber": waitingNumber, "customerGrade": customerGrade] as [String : Any]
+        NotificationCenter.default.post(name: Notification.Name("HeadOffice"), object: nil, userInfo: taskInfo)
+    }
+    
     override func main() {
         print("🔴\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 시작")
         Thread.sleep(forTimeInterval: taskType.taskTime)
         if taskType == .loan {
-            NotificationCenter.default.post(name: Notification.Name("HeadOffice"), object: nil, userInfo: ["waitingNumber": waitingNumber, "customerGrade": customerGrade])
+            sendToHeadOffice()
             Thread.sleep(forTimeInterval: taskType.taskTime)
         }
         print("🔵\(waitingNumber)번 \(customerGrade.name)고객 \(taskType.name)업무 완료")
