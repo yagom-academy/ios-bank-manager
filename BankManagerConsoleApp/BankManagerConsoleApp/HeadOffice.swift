@@ -18,16 +18,11 @@ class HeadOffice {
     @objc func input(notification: Notification) {
         guard let datas = notification.userInfo else { return }
         
-        guard let waitingNumber = datas["waitingNumber"],
-              let customerGrade = datas["customerGrade"] else { return }
+        guard let waitingNumber = datas["waitingNumber"] as? Int,
+              let customerGrade = datas["customerGrade"] as? CustomerGrade else { return }
         
-        var array: [LoadScreeningTask] = []
-
-        if let waitingNumber = waitingNumber as? Int,
-           let customerGrade = customerGrade as? CustomerGrade {
-            array.append(LoadScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade))
-        }
-        waitingLine.addOperations(array, waitUntilFinished: true)
+        let loanScreeningTask = LoadScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade)
+        waitingLine.addOperations([loanScreeningTask], waitUntilFinished: true)
 
     }
     
