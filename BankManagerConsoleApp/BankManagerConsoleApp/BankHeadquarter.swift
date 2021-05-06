@@ -23,16 +23,16 @@ struct BankHeadquarter {
         }
     }
     
-    static func startLoanScreening(of client: Client) -> String {
+    static func startLoanScreening(of client: Clientable) -> String {
         return "🧾 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 시작."
     }
     
-    static func endLoanScreening(of client: Client) -> String {
+    static func endLoanScreening(of client: Clientable) -> String {
         return "👍 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 완료!"
     }
     
     
-    static func screenLoan(for client: Client) -> Bool {
+    static func screenLoan(for client: Clientable) -> Bool {
         semaphore.wait()
         
         let startLoanScreeningText: String = startLoanScreening(of: client)

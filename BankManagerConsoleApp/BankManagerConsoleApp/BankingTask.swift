@@ -9,7 +9,7 @@ import Foundation
 
 final class BankingTask: Operation {
     // MARK: - Properties
-    var owner: Client?
+    var owner: Clientable?
     private let type: TaskType
     
     init(_ type: TaskType) {
@@ -18,7 +18,7 @@ final class BankingTask: Operation {
     
     // MARK: - Override Method from the Operation Class
     override func main() {
-        guard let owner: Client = owner else {
+        guard let owner: Clientable = owner else {
             return
         }
         
@@ -38,15 +38,15 @@ final class BankingTask: Operation {
 // MARK: - Private Methods
 extension BankingTask {
     func startTask() throws -> String {
-        guard let owner: Client = owner else {
+        guard let owner: Clientable = owner else {
             throw BankManagerError.ownerNotAssigned
         }
         
-        return "💸 \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 시작."
+        return "🏦 \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 시작."
     }
     
     func endTask() throws -> String {
-        guard let owner: Client = owner else {
+        guard let owner: Clientable = owner else {
             throw BankManagerError.ownerNotAssigned
         }
         
@@ -54,7 +54,7 @@ extension BankingTask {
     }
     
     func rejectLoanExecution() throws -> String {
-        guard let owner: Client = owner else {
+        guard let owner: Clientable = owner else {
             throw BankManagerError.ownerNotAssigned
         }
         
@@ -73,7 +73,7 @@ extension BankingTask {
         Thread.sleep(forTimeInterval: TaskForLocalBank.loanExecution.processTime)
     }
     
-    private func processTask(of owner: Client) throws {
+    private func processTask(of owner: Clientable) throws {
         switch type {
         case .deposit:
             processDeposit()
