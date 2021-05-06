@@ -8,10 +8,7 @@ import Foundation
 
 final class BankManager {
     private var customers: [Customer] = []
-    private var bankersWorkTime: Double = 0
-    
     private var banker: Banker = Banker()
-    
     private let operationQueue = OperationQueue()
     
     func openBank() {
@@ -48,21 +45,20 @@ final class BankManager {
     private func bankWorkProgress() {
         let totalCustomersCount: Int = self.customers.count
         
-        let bankTellerA = BlockOperation {
+        let bankerTak = BlockOperation {
             self.banker.bankerWorkProgress(customers: &self.customers)
         }
-        let bankTellerB = BlockOperation {
+        let bankerWody = BlockOperation {
             self.banker.bankerWorkProgress(customers: &self.customers)
         }
-        let bankTellerC = BlockOperation {
+        let bankerDelma = BlockOperation {
             self.banker.bankerWorkProgress(customers: &self.customers)
         }
         
-        operationQueue.addOperations([bankTellerA, bankTellerB, bankTellerC], waitUntilFinished: true)
+        operationQueue.addOperations([bankerTak, bankerWody, bankerDelma], waitUntilFinished: true)
         
         if self.customers.count == 0 {
-            self.bankersWorkTime += self.banker.workTime
-            self.finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.bankersWorkTime)
+            self.finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.banker.workTime)
         }
     }
     
@@ -71,7 +67,6 @@ final class BankManager {
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무 시간은 \(workTime)초 입니다.")
         
-        self.bankersWorkTime = 0
         self.banker.workTime = 0
     }
     
@@ -86,7 +81,8 @@ final class BankManager {
                 return
             }
             
-            let customer: Customer = Customer(_waitNumber: number, _tier: tier, _business: business)
+            let customer: Customer = Customer(waitNumber: number, tier: tier, business: business)
+            
             self.customers.append(customer)
         }
         

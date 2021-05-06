@@ -16,10 +16,10 @@ class Customer {
     var tier: Tier { return _tier }
     var business: Business { return _business }
     
-    init(_waitNumber: Int, _tier: Tier, _business: Business) {
-        self._waitNumber = _waitNumber
-        self._tier = _tier
-        self._business = _business
+    init(waitNumber: Int, tier: Tier, business: Business) {
+        self._waitNumber = waitNumber
+        self._tier = tier
+        self._business = business
     }
 }
 
