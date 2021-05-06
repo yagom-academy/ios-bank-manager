@@ -30,7 +30,6 @@ final class Banker {
             
             print("🔵\(customer.waitNumber)번 \(customer.tier.tierName)고객 \(customer.business.rawValue)업무 완료")
         }
-        
     }
 
 }
