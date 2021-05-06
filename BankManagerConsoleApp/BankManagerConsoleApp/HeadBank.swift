@@ -16,7 +16,7 @@ final class HeadBank {
         self.bankWindow.maxConcurrentOperationCount = 1
     }
     
-    func serveClient(_ clientData: HeadBankTask) {
+    func serveClient(localLoanData clientData: HeadBankTask) {
         semaphore.wait()
         bankWindow.addOperation(clientData)
         semaphore.signal()

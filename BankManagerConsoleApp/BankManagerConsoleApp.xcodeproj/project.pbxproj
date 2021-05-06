@@ -14,6 +14,7 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* LocalBankTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* LocalBankTask.swift */; };
 		EAC684232643D9B8002A9CE3 /* Clientable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC684222643D9B8002A9CE3 /* Clientable.swift */; };
+		EAC684252643F30B002A9CE3 /* BankInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC684242643F30B002A9CE3 /* BankInterface.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* LocalBankTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBankTask.swift; sourceTree = "<group>"; };
 		EAC684222643D9B8002A9CE3 /* Clientable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clientable.swift; sourceTree = "<group>"; };
+		EAC684242643F30B002A9CE3 /* BankInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				BA9905A926404A24009C3843 /* HeadBank.swift */,
 				BAAA8FE12640E0F700B40803 /* LocalBank.swift */,
+				EAC684242643F30B002A9CE3 /* BankInterface.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				BAAA8FE22640E0F700B40803 /* LocalBank.swift in Sources */,
 				BA9905AA26404A24009C3843 /* HeadBank.swift in Sources */,
 				EAC684232643D9B8002A9CE3 /* Clientable.swift in Sources */,
+				EAC684252643F30B002A9CE3 /* BankInterface.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				BABE3F3D263C344300F33385 /* BankService.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* LocalBankTask.swift in Sources */,

@@ -12,7 +12,7 @@ final class HeadBankTask: Operation {
     var creditRate: CreditRating
     var workType: WorkType
     
-    init(_ waitingNumber: UInt, _ creditRate: CreditRating, _ workType: WorkType) {
+    init(number waitingNumber: UInt, rating creditRate: CreditRating, type workType: WorkType) {
         self.waitingNumber = waitingNumber
         self.creditRate = creditRate
         self.workType = workType

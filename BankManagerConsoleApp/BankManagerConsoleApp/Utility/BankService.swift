@@ -27,6 +27,7 @@ extension CreditRating: CustomStringConvertible {
 enum WorkType: CaseIterable {
     case deposit
     case loan
+    
     enum LoanProcess {
         case loanEvaluation, loanExecution
         

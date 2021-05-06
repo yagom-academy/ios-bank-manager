@@ -13,7 +13,6 @@ final class LocalBankTask: Operation {
     init?(_ number: UInt) {
         guard let credit = CreditRating.allCases.shuffled().first,
               let work = WorkType.allCases.shuffled().first else {
-            
             return nil
         }
         
@@ -23,10 +22,10 @@ final class LocalBankTask: Operation {
     }
 
     override func main() {
-        work(waitingNumber, creditRate, workType)
+        work(number: waitingNumber, rating: creditRate, type: workType)
     }
     
-    private func work(_ waitNumber: UInt, _ credit: CreditRating, _ taskType: WorkType) {
+    private func work(number waitNumber: UInt, rating credit: CreditRating, type taskType: WorkType) {
         switch taskType {
         case .deposit:
             print("\(waitNumber)번 \(credit)고객 \(taskType.description) 시작")
@@ -36,8 +35,8 @@ final class LocalBankTask: Operation {
             let loanProcess = WorkType.LoanProcess.self
             print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution) 시작")
             
-            let headBankTask = HeadBankTask(waitNumber, credit, workType)
-            HeadBank.shared.serveClient(headBankTask)
+            let headBankTask = HeadBankTask(number: waitNumber, rating: credit, type: workType)
+            HeadBank.shared.serveClient(localLoanData: headBankTask)
             print("\(waitNumber)번 \(credit)고객 \(loanProcess.loanExecution) 완료")
         }
     }
