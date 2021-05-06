@@ -11,11 +11,11 @@ class HeadOffice {
     private let waitingLine = OperationQueue()
     
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(input), name: Notification.Name("HeadOffice"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addToWaitingLine), name: Notification.Name("HeadOffice"), object: nil)
         waitingLine.maxConcurrentOperationCount = 1
     }
     
-    @objc func input(notification: Notification) {
+    @objc func addToWaitingLine(notification: Notification) {
         guard let datas = notification.userInfo else { return }
         
         guard let waitingNumber = datas["waitingNumber"] as? Int,
