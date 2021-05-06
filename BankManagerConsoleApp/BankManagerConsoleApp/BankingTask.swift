@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TaskForClient: Operation {
+final class BankingTask: Operation {
     // MARK: - Properties
     var owner: Client?
     private let type: TaskType
@@ -53,6 +53,30 @@ final class TaskForClient: Operation {
         Thread.sleep(forTimeInterval: TaskForLocalBank.loanExecution.processTime)
     }
     
+    private func processTask(of owner: Client) throws {
+        let startTaskText: String = try startTask()
+        let endTaskText: String = try endTask()
+        
+        print(startTaskText)
+        
+        switch type {
+        case .deposit:
+            processDeposit()
+            print(endTaskText)
+        case .loan:
+            reviewDocuments()
+            let isApproved: Bool = BankHeadquarter.screenLoan(for: owner)
+            
+            if isApproved {
+                executeLoan()
+                print(endTaskText)
+            } else {
+                let rejectLoanExecutionText: String = try rejectLoanExecution()
+                print(rejectLoanExecutionText)
+            }
+        }
+    }
+    
     // MARK: - Override Method from the Operation Class
     override func main() {
         guard let owner: Client = owner else {
@@ -60,27 +84,7 @@ final class TaskForClient: Operation {
         }
         
         do {
-            let startTaskText: String = try startTask()
-            let endTaskText: String = try endTask()
-            
-            print(startTaskText)
-            
-            switch type {
-            case .deposit:
-                processDeposit()
-                print(endTaskText)
-            case .loan:
-                reviewDocuments()
-                let isApproved: Bool = BankHeadquarter.screenLoan(for: owner)
-                
-                if isApproved {
-                    executeLoan()
-                    print(endTaskText)
-                } else {
-                    let rejectLoanExecutionText: String = try rejectLoanExecution()
-                    print(rejectLoanExecutionText)
-                }
-            }
+            try processTask(of: owner)
         } catch {
             print(error)
         }
@@ -88,7 +92,7 @@ final class TaskForClient: Operation {
 }
 
 // MARK: - NameSpaces
-extension TaskForClient {
+extension BankingTask {
     enum TaskType: CaseIterable {
         case deposit
         case loan

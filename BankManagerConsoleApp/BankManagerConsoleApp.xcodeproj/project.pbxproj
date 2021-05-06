@@ -15,9 +15,9 @@
 		52B68BE2263836F80007B69F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		52B68BEF263836FF0007B69F /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B68BA326382A2F0007B69F /* Client.swift */; };
 		52B68BF3263837010007B69F /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
-		52DDD9F426426E3E00F1089A /* TaskForClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DDD9F326426E3E00F1089A /* TaskForClient.swift */; };
+		52DDD9F426426E3E00F1089A /* BankingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DDD9F326426E3E00F1089A /* BankingTask.swift */; };
 		AA1BDBE426381A1F00A9F227 /* LocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1BDBE326381A1F00A9F227 /* LocalBank.swift */; };
-		AA9FD664264297F3006FCFA5 /* TaskForClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DDD9F326426E3E00F1089A /* TaskForClient.swift */; };
+		AA9FD664264297F3006FCFA5 /* BankingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DDD9F326426E3E00F1089A /* BankingTask.swift */; };
 		AAF2143D2643C74A00ADF94C /* BankHeadquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143C2643C74A00ADF94C /* BankHeadquarter.swift */; };
 		AAF2143E2643C74E00ADF94C /* BankHeadquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143C2643C74A00ADF94C /* BankHeadquarter.swift */; };
 		AAF214402643E37F00ADF94C /* TaskForLocalBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2143F2643E37F00ADF94C /* TaskForLocalBank.swift */; };
@@ -43,7 +43,7 @@
 		52B68BD3263832260007B69F /* BankManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B68BD5263832270007B69F /* BankManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerTest.swift; sourceTree = "<group>"; };
 		52B68BD7263832270007B69F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52DDD9F326426E3E00F1089A /* TaskForClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskForClient.swift; sourceTree = "<group>"; };
+		52DDD9F326426E3E00F1089A /* BankingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingTask.swift; sourceTree = "<group>"; };
 		AA1BDBE326381A1F00A9F227 /* LocalBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBank.swift; sourceTree = "<group>"; };
 		AAF2143C2643C74A00ADF94C /* BankHeadquarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankHeadquarter.swift; sourceTree = "<group>"; };
 		AAF2143F2643E37F00ADF94C /* TaskForLocalBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskForLocalBank.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				52B2BCFD263ABD14003932BB /* BankManagerError.swift */,
 				52B68BA326382A2F0007B69F /* Client.swift */,
-				52DDD9F326426E3E00F1089A /* TaskForClient.swift */,
+				52DDD9F326426E3E00F1089A /* BankingTask.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				AA1BDBE326381A1F00A9F227 /* LocalBank.swift */,
 				AAF2143C2643C74A00ADF94C /* BankHeadquarter.swift */,
@@ -207,7 +207,7 @@
 				52B68BDE263836F60007B69F /* LocalBank.swift in Sources */,
 				52B2BD01263ABF0E003932BB /* BankManagerError.swift in Sources */,
 				52B68BE2263836F80007B69F /* main.swift in Sources */,
-				AA9FD664264297F3006FCFA5 /* TaskForClient.swift in Sources */,
+				AA9FD664264297F3006FCFA5 /* BankingTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +219,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AAF214402643E37F00ADF94C /* TaskForLocalBank.swift in Sources */,
 				52B2BCFE263ABD14003932BB /* BankManagerError.swift in Sources */,
-				52DDD9F426426E3E00F1089A /* TaskForClient.swift in Sources */,
+				52DDD9F426426E3E00F1089A /* BankingTask.swift in Sources */,
 				52B68BA426382A2F0007B69F /* Client.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				AAF2143D2643C74A00ADF94C /* BankHeadquarter.swift in Sources */,
