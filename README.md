@@ -41,6 +41,7 @@
   - 열거형 - CustomStringConvertible
   - Closure - Escaping vs Non escaping
   - BlockOperation 공부
+
 <br>
 
 ### 학습키워드
@@ -77,11 +78,14 @@
 - [[블로그] iOS & Swift 공부 - Operation Queue](https://velog.io/@kevinkim2586/iOS-Swift-%EA%B3%B5%EB%B6%80-Operation-Queue)
 - [[stack overlow] How to sleep for few milliseconds in swift 2.2?](https://stackoverflow.com/questions/38119742/how-to-sleep-for-few-milliseconds-in-swift-2-2)
 - [[부스트코스] 2) OperationQueue](https://www.boostcourse.org/mo326/lecture/16898?isDesc=false)
+
 #### 선택정렬
 - [[유투브] 선택정렬 - Select-sort with Gypsy folk dance](https://www.youtube.com/watch?v=Ns4TPTC8whw&t=322s)
 - [[블로그] Swift3 ) Swift로 선택정렬(Selection Sort)짜보기 - Zedd](https://zeddios.tistory.com/66)
 #### OperationQueue
 - [[블로그] [iOS] Operation? Operation Queue? 작업을 객체로 만들어보자!](https://onelife2live.tistory.com/18)
 - [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
+
 - [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
 - [블로그] iOS ) Operation실험 - Zedd
+

@@ -6,11 +6,15 @@
 
 import Foundation
 
-var numberOfTellr: UInt = 1
+var numberOfTellr: UInt = 3
 var isRepeat = true
 
-enum InputErrorType: Error {
-    case unknown
+enum InputErrorType: String, Error, CustomStringConvertible {
+    case unknown = "입력오류. 잘못된 문자입니다. 다시 입력해주세요!"
+    
+    var description: String {
+         return "\(self.rawValue)"
+     }
 }
 
 private func showBankOption() {
