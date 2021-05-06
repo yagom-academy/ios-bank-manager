@@ -35,13 +35,31 @@ final class BankingTask: Operation {
     
     // MARK: - Override Method from the Operation Class
     override func main() {
+        guard let owner: Client = owner else {
+            return
+        }
+        
         do {
             let startTaskText: String = try startTask()
             let endTaskText: String = try endTask()
             
             print(startTaskText)
-            Thread.sleep(forTimeInterval: type.processTime)
-            print(endTaskText)
+            
+            switch type {
+            case .deposit:
+                Thread.sleep(forTimeInterval: TaskType.deposit.processTime)
+                print(endTaskText)
+            case .loan:
+                Thread.sleep(forTimeInterval: 0.3)
+                let isApproved: Bool = BankHeadquarter.screenLoan(for: owner)
+                
+                if isApproved {
+                    Thread.sleep(forTimeInterval: 0.3)
+                    print(endTaskText)
+                } else {
+                    print("❌ \(owner.waitingNumber)번 \(owner.grade.name)고객의 대출이 거절되었습니다.")
+                }
+            }
         } catch {
             print(error)
         }
