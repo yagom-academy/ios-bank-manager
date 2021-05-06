@@ -16,7 +16,7 @@ enum TaskType: Int, CaseIterable {
     case .deposit:
       return 0.7
     case .loan:
-      return 1.1
+      return 0.3
     }
   }
   
