@@ -59,13 +59,18 @@
 
 <br>
 
-### step1 UML
+### step1 Flowchart
 ![step1_1](https://user-images.githubusercontent.com/65153742/116431054-5cbc6f00-a882-11eb-80e9-b80dbc5c2267.jpg)
 
 <br>
 
 ### step1 구현화면
 ![화면 기록 2021-04-30 오후 6 16 11](https://user-images.githubusercontent.com/65153742/116675060-61973500-a9e0-11eb-8908-7a8b8f5910dd.gif)
+
+<br>
+
+### step2 구현화면(시간측정X)
+![화면 기록 2021-05-06 오후 9 46 21](https://user-images.githubusercontent.com/65153742/117300577-a6c1d800-aeb4-11eb-961b-86746ac1002e.gif)
 
 <br>
 
@@ -90,7 +95,6 @@
 #### OperationQueue
 - [[블로그] [iOS] Operation? Operation Queue? 작업을 객체로 만들어보자!](https://onelife2live.tistory.com/18)
 - [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
-
 - [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
 - [[블로그] iOS) Operation실험 - Zedd](https://zeddios.tistory.com/512)
 - [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
