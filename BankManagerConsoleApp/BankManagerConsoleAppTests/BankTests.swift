@@ -40,7 +40,7 @@ class NotificationBoardTests: XCTestCase {
         XCTAssertEqual(sut.observers[0].name, strangeCustomerQueue.name)
     }
 
-    func test_call을_하면_floatOnBoard에_의해_모든_Observer의_queue가_🍺진다() {
+    func test_call을_하면_floatOnBoard에_의해_모든_Observer의_queue가_비워진다() {
         let teller = Bank.Teller(counterNumber: 0)
 
         defaultCustomerQueue.enqueue(Bank.Customer(waitingNumber: 0))
