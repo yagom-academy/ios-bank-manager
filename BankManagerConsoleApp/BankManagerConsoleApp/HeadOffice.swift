@@ -21,7 +21,7 @@ class HeadOffice {
         guard let waitingNumber = datas["waitingNumber"] as? Int,
               let customerGrade = datas["customerGrade"] as? CustomerGrade else { return }
         
-        let loanScreeningTask = LoadScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade)
+        let loanScreeningTask = LoanScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade)
         waitingLine.addOperations([loanScreeningTask], waitUntilFinished: true)
 
     }
