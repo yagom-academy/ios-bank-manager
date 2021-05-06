@@ -9,10 +9,10 @@ import Foundation
 
 struct BankHeadquarter {
     // MARK: - Properties
-    static let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private static let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
     // MARK: - Name spaces
-    enum Task {
+    private enum Task {
         case loanScreening
         
         var processTime: Double {

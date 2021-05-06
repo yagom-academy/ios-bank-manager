@@ -64,7 +64,7 @@ final class BankManagerTests: XCTestCase {
     
     func testPreferredNumberFormat_whenNumberMoreThanTwoDecimalPlacesIsGiven_returnsNumberWithTwoDecimalPlaces() {
         let sutLocalBank: LocalBank = LocalBank(numberOfTeller: 1)
-        XCTAssertEqual(sutLocalBank.preferredNumberFormat(123.456789), 123.45)
+        XCTAssertEqual(sutLocalBank.getPreferredNumberFormat(123.456789), 123.45)
     }
 
     func testStarttask_whenClientHasWaitingNumberOneNormalGradeDepositTask_returnAppropriateStartText() {
@@ -120,7 +120,7 @@ final class BankManagerTests: XCTestCase {
     func testMenuText_whenCalled_returnMenuText() {
         let sutBankManager: BankManager = BankManager(numberOfTeller: 1)
         
-        XCTAssertEqual(sutBankManager.menuText(), "1: 은행 개점\n2: 종료\n입력: ")
+        XCTAssertEqual(sutBankManager.getMenuText(), "1: 은행 개점\n2: 종료\n입력: ")
     }
     
     func testMove_whenSelectedMenuIsOne_returnTrue() {
