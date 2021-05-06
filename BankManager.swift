@@ -7,9 +7,9 @@
 import Foundation
 
 class BankManager {
-    let counter = OperationQueue()
-    var clients = [Client]()
-    var opClients = [Operation]()
+    private let counter = OperationQueue()
+    private var clients = [Client]()
+    private var tasks = [Operation]()
     
     private var numberOfClient: UInt = 0
     private var numberOfTeller: UInt
@@ -38,17 +38,17 @@ class BankManager {
         clients.append(client)
     }
     
-    private func addToClient(number: UInt) {
+    private func addToClient() {
         for index in 0..<self.numberOfClient {
             workTask(order: self.clients[Int(index)])
         }
-        counter.addOperations(opClients, waitUntilFinished: true)
+        counter.addOperations(tasks, waitUntilFinished: true)
     }
     
     func workTask(order: Client) {
         let operation = BlockOperation {
-            let tellerStartWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 시작"
-            let tellerFinishWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 완료★"
+            let tellerStartWorkMessage = "⭕️ \(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 시작"
+            let tellerFinishWorkMessage = "🛑 \(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 완료"
             
             print(tellerStartWorkMessage)
             Thread.sleep(forTimeInterval: order.businessType.rawValue)
@@ -63,7 +63,8 @@ class BankManager {
         case .normal:
             operation.queuePriority = .normal
         }
-        opClients.append(operation)
+        
+        tasks.append(operation)
     }
     
     func processOfTellerTask() {
@@ -72,14 +73,17 @@ class BankManager {
         for _ in 1...number {
             generateClient()
         }
-        addToClient(number: number)
+        addToClient()
         closeBank()
     }
     
     func closeBank() {
-        waitingNumber = 1
-        let closeBankMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(numberOfClient))명이며, 총 업무시간은 \(Double(numberOfClient) * 0.7)초입니다."
+        let closeBankMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(numberOfClient))명이며, 총 업무시간은 \(Float(numberOfClient) * 0.7)초입니다."
         
         print(closeBankMessage)
+        
+        waitingNumber = 0
+        numberOfClient = 0
     }
 }
+
