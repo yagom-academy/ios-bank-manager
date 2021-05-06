@@ -69,6 +69,11 @@
 
 <br>
 
+### step2 구현화면
+![화면 기록 2021-05-06 오후 8 44 26](https://user-images.githubusercontent.com/65153742/117297787-93613d80-aeb1-11eb-8d31-c722444672f8.gif)
+
+<br>
+
 ### 참고 링크
 #### 동시성 프로그래밍, 동기 vs 비동기, GCD/Operation
 - [[인프런] iOS Concurrency(동시성) 프로그래밍, 동기 비동기 처리 그리고 GCD/Operation - 디스패치큐와 오퍼레이션큐의 이해](https://www.inflearn.com/course/iOS-Concurrency-GCD-Operation#)
