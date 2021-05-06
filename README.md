@@ -259,7 +259,7 @@ class CustomerManager {
 ```
 
 - 피드백 내용 수정 후
-```
+```swift
 import Foundation
 
 class BankManager {
@@ -359,5 +359,244 @@ final class Customer {
 }
 ```
 
+### 2차 피드백
+
+#### 고민한 점
+
+1. 고객 정보를 담은 배열의 데이터를 전역변수로 선언해 다루면 어떤 이점이 있을까?
+2. BankManager안의 메서드 역할들이 현실 세계에서 '은행'과 '은행원'의 역할로 나눌 수 있는데, 어떻게 BankManager와 Banker 타입으로 나눌 수 있을까?
+
+#### 데이터를 전역변수로 선언하는 스타일의 장점
+
+- 데이터를 전역변수로 선언했을 때 메서드에 복잡한 파라미터 관계를 끊을 수 있다
+- 일일이 파라미터로 데이터를 불러와 다루지 않으며 가독성을 높일 수 있다
+- 참조에 의한 호출이 아니므로 inout과 값의 제어를 더 깔끔하게 처리할 수 있다
+
+#### BankManager 타입의 일부 메서드를 Banker 타입으로 분리했을 때 장점
+
+- STEP1의 경우 한 명의 은행원을 가정하지만, STEP2부터 은행원이 늘어나므로 다수의 은행원을 가정하는 상황에서 유리할 것 같다
+- 타입을 테스트하고 관리하는데 편리해진다.
+
+#### Step1 최종
+
+```swift
+import Foundation
+
+final class BankManager {
+    private var customers: [Customer] = []
+    private var banker: Banker = Banker()
+    private let operationQueue = OperationQueue()
+    
+    func openBank() {
+        let bankOpenMenuState: Bool = bankOpenMenu()
+        
+        if bankOpenMenuState {
+            visitCustomers()
+            bankWorkProgress()
+            openBank()
+        }
+    }
+    
+    private func bankOpenMenu() -> Bool {
+        
+        while true {
+            print("1 : 은행개점")
+            print("2 : 종료")
+            print("입력 : ", terminator : "")
+            
+            guard let inputNumber = readLine() else {
+                return false
+            }
+            
+            if inputNumber == "1" {
+                return true
+            } else if inputNumber == "2" {
+                return false
+            } else {
+                print("잘못된 입력입니다, 다시 입력해주세요.")
+            }
+        }
+    }
+    
+    private func bankWorkProgress() {
+        let totalCustomersCount: Int = self.customers.count
+        
+        let bankerTak = BlockOperation {
+            self.banker.bankerWorkProgress(customers: &self.customers)
+        }
+        let bankerWody = BlockOperation {
+            self.banker.bankerWorkProgress(customers: &self.customers)
+        }
+        let bankerDelma = BlockOperation {
+            self.banker.bankerWorkProgress(customers: &self.customers)
+        }
+        
+        operationQueue.addOperations([bankerTak, bankerWody, bankerDelma], waitUntilFinished: true)
+        
+        if self.customers.count == 0 {
+            self.finishBank(totalCustomerCount: totalCustomersCount, bankersWorkTime: self.banker.workTime)
+        }
+    }
+    
+    private func finishBank(totalCustomerCount: Int, bankersWorkTime: Double) {
+        let workTime: Double = round(bankersWorkTime * 100) / 100
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무 시간은 \(workTime)초 입니다.")
+        
+        self.banker.workTime = 0
+    }
+    
+    private func visitCustomers() {
+        let waitNumbers: [Int] = Array(1...Int.random(in: 10...30))
+        
+        for number in waitNumbers {
+            guard let tier = Tier.allCases.randomElement() else {
+                return
+            }
+            guard let business = Business.allCases.randomElement() else {
+                return
+            }
+            
+            let customer: Customer = Customer(waitNumber: number, tier: tier, business: business)
+            
+            self.customers.append(customer)
+        }
+        
+        self.customers.sort(by: {$0.tier.rawValue < $1.tier.rawValue})
+    }
+    
+}
+
+final class Banker {
+    var workTime: Double = 0
+    let semaphore = DispatchSemaphore(value: 1)
+
+    func bankerWorkProgress(customers: inout [Customer]) {
+        while customers.count > 0 {
+            semaphore.wait()
+            let customer: Customer = customers.removeFirst()
+            semaphore.signal()
+            
+            print("🟢\(customer.waitNumber)번 \(customer.tier.tierName)고객 \(customer.business.rawValue)업무 시작")
+            
+            switch customer.business {
+            case .deposit:
+                usleep(700000)
+                self.workTime += 0.7
+            default:
+                usleep(1100000)
+                self.workTime += 1.1
+            }
+            
+            print("🔵\(customer.waitNumber)번 \(customer.tier.tierName)고객 \(customer.business.rawValue)업무 완료")
+        }
+    }
+
+}
+
+class Customer {
+    private let _waitNumber: Int
+    private let _tier: Tier
+    private let _business: Business
+    
+    var waitNumber: Int { return _waitNumber }
+    var tier: Tier { return _tier }
+    var business: Business { return _business }
+    
+    init(waitNumber: Int, tier: Tier, business: Business) {
+        self._waitNumber = waitNumber
+        self._tier = tier
+        self._business = business
+    }
+}
+
+enum Tier: Int, CaseIterable {
+    case vvip = 0
+    case vip = 1
+    case normal = 2
+}
+
+enum Business: String, CaseIterable {
+    case deposit = "예금"
+    case loan = "대출"
+}
+
+extension Tier {
+    var tierName: String {
+        switch self {
+        case .vvip:
+            return "vvip"
+        case .vip:
+            return "vip"
+        default:
+            return "일반"
+        }
+    }
+}
+
+let BankManagerConsole = BankManager()
+BankManagerConsole.openBank()
+```
+
+
+
 ## Step2
-- TroubleShooting
+
+### 프로젝트 요구사항
+
+- 은행은 고객의 우선순위에 따라 대기 중인 고객 중 우선순위가 높은 고객을 먼저 응대합니다
+- Step 2의 은행에는 3명의 은행원이 근무합니다.
+  - 한 명의 은행원은 한 명의 고객을 응대할 수 있습니다
+- 고객은 다음의 우선순위 등급이 있습니다
+  - 0순위 : VVIP
+  - 1순위 : VIP
+  - 2순위 : 일반
+- 고객이 원하는 업무의 종류와 소요시간은 아래와 같습니다
+  - 대출 : 1.1초
+  - 예금 : 0.7초
+- 대기중인 고객의 업무처리를 시작할 때 아래와 같이 출력합니다
+  - "3번 일반 고객 대출업무 시작"
+- 고객의 업무를 처리하면 아래와 같이 출력합니다
+  - "11번 VVIP 고객 예금업무 완료"
+
+### Step2 실행 예시
+
+![](https://tva1.sinaimg.cn/large/008i3skNgy1gq95d2yp1dj30uc0u0k3y.jpg)
+
+### Step2 실제 구현
+
+![](https://tva1.sinaimg.cn/large/008i3skNgy1gq95dp3op8g30tw0dc1l1.gif)
+
+### 구현 목표
+
+- 고객(Customer)
+  - 고객의 `Tier` 설정(우선순위). Tier가 높은 고객을 먼저 업무 처리
+    - Tier의 rawValue설정
+    - 고객의 Tier를 random으로 뽑아오는 tier 프로퍼티 생성(옵셔널 바인딩) 
+    - tier의 rawValue를 기준으로 sort함수를 사용해 오름차순 정렬
+  - 고객의 업무내용을 뜻하는 `Business` 열거형 생성
+    - 업무의 종류 생성
+- 은행원(Banker)
+  - 업무시간을 나타내는 workTime 프로퍼티 생성
+  - dispatchSemaphore 클래스를 상속받는 semaphore프로퍼티 생성
+  - 대기중인 고객이 있을 경우 업무 진행
+    - 정렬된 고객대기열에서 removeFirst()로 한명씩 업무 진행 
+    - 업무 내용에 따라 다른 작업시간 설정
+  - `BlockOperation`타입의 프로퍼티 생성 -> 은행원의 역할을 하는 3개의 Block
+  - OperationQueue 생성 후 3명의 은행원 투입
+
+### TroubleShooting
+
+- 3명의 은행원을 설정하면 비동기적으로 작동은 하나, 고객 하나에 3명의 은행원이 모두 접근하게 되는 현상 발생
+
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gq96mbi9ixj30gm0kkq9t.jpg" style="zoom:50%;" />
+
+- Semaphore 에 대한 개념 공부하고  이 Semaphore를 이용해 다른 쓰레드가 접근하지 못하게 한 뒤 고객 대기열에서 첫번째 고객 제거 후 signal()로 쓰레드 재가동하는 방법으로 해결
+
+
+
+### 궁금했던 점
+
+- 이번 프로젝트를 통해 동기 / 비동기에 대한 개념과 Operation에 대한 개념을 어느정도 익혔는데, 이번 프로젝트에서는 요구사항으로 GCD대신 Operation을 사용하라는 제한이 있어서 OperationQueue를 사용했지만 막상 사용해보니 DispatchQueue보다 진입장벽이 높은 것치고 그에 대한 보상(가독성이 훨씬 좋아진다, 코드 양이 줄어든다 등)이 과연 충분한가? 라는 의문이 들었음...
+- Operation에게 제어해야 할 데이터(customers)를 전달하기 위해서 BlockOperation을 사용했는데, 데이터를 전달(혹은 제어)해야하는 구조에서 BlockOperation보다 더 나은 비동기 프로그래밍 구조가 있지않을까?
+- class의 Operation 상속을 통한 프로그래밍을 했다면 main()함수에 데이터를 전달하는 방법이 있을까?
