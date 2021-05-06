@@ -13,7 +13,6 @@ final class BankManager {
     private var banker: Banker = Banker()
     
     private let operationQueue = OperationQueue()
-    private let semaphore = DispatchSemaphore(value: 1)
     
     func openBank() {
         let bankOpenMenuState: Bool = bankOpenMenu()
