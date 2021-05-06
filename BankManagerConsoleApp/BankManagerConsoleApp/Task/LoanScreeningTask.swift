@@ -7,10 +7,10 @@
 
 import Foundation
 
-class LoanScreeningTask: Operation {
+class LoanScreeningTask: Operation, Taskable {
     
-    private var waitingNumber: Int
-    private var customerGrade: CustomerGrade
+    private(set) var waitingNumber: Int
+    private(set) var customerGrade: CustomerGrade
 
     init(waitingNumber: Int, customerGrade: CustomerGrade) {
         self.waitingNumber = waitingNumber

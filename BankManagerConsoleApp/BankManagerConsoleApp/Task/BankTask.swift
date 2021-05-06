@@ -3,15 +3,15 @@
 //  BankManagerConsoleApp
 //
 //  Created by sookim on 2021/05/03.
-
+//
 
 import Foundation
 
-class BankTask: Operation {
+class BankTask: Operation, Taskable {
     
     private var taskType: BankTaskType
-    private var waitingNumber: Int
-    private var customerGrade: CustomerGrade
+    private(set) var waitingNumber: Int
+    private(set) var customerGrade: CustomerGrade
     
     init(waitingNumber: Int, grade: CustomerGrade) {
         self.taskType = BankTaskType.random
