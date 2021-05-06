@@ -77,6 +77,14 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(try client.bankingTask.endTask(), "✅ 1번 일반고객 예금업무 완료!")
     }
     
+    func testRejectLoanExecution_whenClientHasWaitingNumberOneNormalGrade_returnAppropriateText() {
+        let client: Client = Client(1, grade: .normal, task: .loan)
+        XCTAssertEqual(
+            try client.bankingTask.rejectLoanExecution(),
+            "❌ 1번 일반고객의 대출이 거절되었습니다."
+        )
+    }
+    
     func testStartTask_whenOwnerNotAssignedToBankingTask_throwError() {
         let sutBankingTask: BankingTask = BankingTask(.deposit)
         
