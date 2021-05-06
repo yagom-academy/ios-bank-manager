@@ -9,12 +9,8 @@ import Foundation
 
 class ConsoleController {
     private var userInput: UserInput?
-    private let menuScript: String = """
-        1 : 은행개점
-        2 : 종료
-        """
     private var randomCustomerNumber: Int {
-        return Int.random(in: 10...30)
+        return Int.random(in: Constants.ConsoleController.customerNumberRange)
     }
 
     enum UserInput: Int {
@@ -38,7 +34,7 @@ class ConsoleController {
 
     func start(with bankController: BankController) {
         while userInput != .quit {
-            print(menuScript)
+            print(Constants.ConsoleController.menuScript)
             do {
                 try classifyUserInput()
             } catch {

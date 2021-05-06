@@ -37,7 +37,6 @@ class Bank {
 
     class Teller {
         let counterNumber: Int
-        static let taskingTime: TimeInterval = 0.7
 
         init(counterNumber: Int) {
             self.counterNumber = counterNumber
@@ -45,7 +44,7 @@ class Bank {
 
         func work(forCustomerOf waitingNumber: Int, sender notificationBoard: NotificationBoard) {
             print("\(waitingNumber)번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: Bank.Teller.taskingTime)
+            Thread.sleep(forTimeInterval: Constants.Teller.taskTime)
             print("\(waitingNumber)번 고객 업무 완료")
             call(to: notificationBoard)
         }
