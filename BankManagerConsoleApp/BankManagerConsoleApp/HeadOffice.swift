@@ -8,11 +8,11 @@
 import Foundation
 
 class HeadOffice {
-    private let headOfficeQueue = OperationQueue()
+    private let waitingLine = OperationQueue()
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(input), name: Notification.Name("HeadOffice"), object: nil)
-        headOfficeQueue.maxConcurrentOperationCount = 1
+        waitingLine.maxConcurrentOperationCount = 1
     }
     
     @objc func input(notification: Notification) {
@@ -27,7 +27,7 @@ class HeadOffice {
            let customerGrade = customerGrade as? CustomerGrade {
             array.append(LoadScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade))
         }
-        headOfficeQueue.addOperations(array, waitUntilFinished: true)
+        waitingLine.addOperations(array, waitUntilFinished: true)
 
     }
     
