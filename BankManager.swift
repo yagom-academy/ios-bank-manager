@@ -64,7 +64,7 @@ class BankManager {
             operation.queuePriority = .normal
         }
         
-        tasks.append(operation)
+        tasks.append(operation) 
     }
     
     func processOfTellerTask() {

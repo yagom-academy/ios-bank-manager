@@ -1,7 +1,6 @@
 //
 //  Client.swift
 //  BankManagerConsoleApp
-//
 //  Created by TORI on 2021/05/04.
 //
 
