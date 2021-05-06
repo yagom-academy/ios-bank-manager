@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HeadOfficeBankTask: Operation {
+class LoadScreeningTask: Operation {
     
     private var waitingNumber: Int
     private var customerGrade: CustomerGrade

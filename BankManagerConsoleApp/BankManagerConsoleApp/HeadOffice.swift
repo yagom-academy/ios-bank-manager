@@ -21,11 +21,11 @@ class HeadOffice {
         guard let waitingNumber = datas["waitingNumber"],
               let customerGrade = datas["customerGrade"] else { return }
         
-        var array: [HeadOfficeBankTask] = []
+        var array: [LoadScreeningTask] = []
 
         if let waitingNumber = waitingNumber as? Int,
            let customerGrade = customerGrade as? CustomerGrade {
-            array.append(HeadOfficeBankTask(waitingNumber: waitingNumber, customerGrade: customerGrade))
+            array.append(LoadScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade))
         }
         headOfficeQueue.addOperations(array, waitUntilFinished: true)
         Thread.sleep(forTimeInterval: 0.3)
