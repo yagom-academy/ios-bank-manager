@@ -23,12 +23,24 @@ struct BankHeadquarter {
         }
     }
     
+    static func startLoanScreening(of client: Client) -> String {
+        return "🧾 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 시작"
+    }
+    
+    static func endLoanScreening(of client: Client) -> String {
+        return "👍 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 완료"
+    }
+    
+    
     static func screenLoan(for client: Client) -> Bool {
         semaphore.wait()
         
-        print("🧾 \(client.waitingNumber)번 \(client.grade.name)고객 대출 심사 시작")
+        let startLoanScreeningText: String = startLoanScreening(of: client)
+        let endLoanScreeningText: String = endLoanScreening(of: client)
+        
+        print(startLoanScreeningText)
         Thread.sleep(forTimeInterval: Task.loanScreening.processTime)
-        print("👍 \(client.waitingNumber)번 \(client.grade.name)고객 대출 심사 완료")
+        print(endLoanScreeningText)
         
         semaphore.signal()
         
