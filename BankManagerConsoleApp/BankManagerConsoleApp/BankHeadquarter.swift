@@ -23,6 +23,7 @@ struct BankHeadquarter {
         }
     }
     
+    // MARK: - Private Methods
     static func startLoanScreening(of client: Clientable) -> String {
         return "🧾 \(client.waitingNumber)번 \(client.grade.name)고객 대출심사 시작."
     }
