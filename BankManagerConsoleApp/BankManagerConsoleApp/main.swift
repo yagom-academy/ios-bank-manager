@@ -8,23 +8,17 @@ import Foundation
 
 final class main {
     func openBank() {
-        displayMenu()
+        BankInterface().displayMenu()
         switch inputMenuNumber() {
         case 1:
             let bankTeller = 3
-            LocalBank().serveClient(bankTeller)
+            LocalBank().serveClient(numberOfBankTellers: bankTeller)
         case 2:
             exit(0)
         default:
             print("오류 발생")
             exit(1)
         }
-    }
-    
-    private func displayMenu() {
-        print("1 : 은행개점")
-        print("2 : 종료")
-        print("입력", terminator: " : " )
     }
 
     private func inputMenuNumber() -> Int {
