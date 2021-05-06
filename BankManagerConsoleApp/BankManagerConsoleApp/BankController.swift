@@ -41,7 +41,7 @@ class BankController {
         openTime = ProcessInfo.processInfo.systemUptime
         receiveCustomer(number: customerNumber)
         bank.customerQueue.dequeue()?.go(to: bank.counters[0],
-                                         by: bank.notificationBoard)
+                                         sender: bank.notificationBoard)
     }
 
     func closeBank() {

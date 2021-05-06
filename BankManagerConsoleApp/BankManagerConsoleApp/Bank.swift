@@ -23,14 +23,14 @@ class Bank {
             observers.removeAll(where: { $0.name == observer.name })
         }
 
-        func call(by teller: Teller) {
-            floatOnBoard(by: teller)
+        func call(sender teller: Teller) {
+            floatOnBoard(sender: teller)
         }
 
-        private func floatOnBoard(by teller: Teller) {
+        private func floatOnBoard(sender teller: Teller) {
             for index in 0..<observers.count {
                 guard let customer = observers[index].dequeue() else { continue }
-                customer.go(to: teller, by: self)
+                customer.go(to: teller, sender: self)
             }
         }
     }
@@ -43,7 +43,7 @@ class Bank {
             self.counterNumber = counterNumber
         }
 
-        func work(forCustomerOf waitingNumber: Int, by notificationBoard: NotificationBoard) {
+        func work(forCustomerOf waitingNumber: Int, sender notificationBoard: NotificationBoard) {
             print("\(waitingNumber)번 고객 업무 시작")
             usleep(useconds_t(Int(Teller.taskingTime * 1_000_000)))
             print("\(waitingNumber)번 고객 업무 완료")
@@ -51,7 +51,7 @@ class Bank {
         }
 
         private func call(to notificationBoard: NotificationBoard) {
-            notificationBoard.call(by: self)
+            notificationBoard.call(sender: self)
         }
     }
 
@@ -80,8 +80,8 @@ class Bank {
             self.waitingNumber = waitingNumber + 1
         }
 
-        func go(to teller: Teller, by notificationBoard: NotificationBoard) {
-            teller.work(forCustomerOf: self.waitingNumber, by: notificationBoard)
+        func go(to teller: Teller, sender notificationBoard: NotificationBoard) {
+            teller.work(forCustomerOf: self.waitingNumber, sender: notificationBoard)
         }
     }
 }
