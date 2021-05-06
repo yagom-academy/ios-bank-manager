@@ -8,7 +8,14 @@
 import Foundation
 
 struct BankDirector {
+    let numberOfCustomers = Bank().makeRandomNumberOfCustomers()
     var customerQueue: [Customers] = []
+    
+    init() {
+        self.customerQueue = customerQueue
+    }
+    
+    
     
     func sendCustomersToQueue() {
         
