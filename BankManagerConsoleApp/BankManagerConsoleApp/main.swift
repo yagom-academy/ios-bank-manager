@@ -5,3 +5,5 @@
 // 
 
 import Foundation
+
+Bank().displayConsoleMenu()
