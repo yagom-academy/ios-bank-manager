@@ -8,14 +8,14 @@
 import Foundation
 
 enum ClientType: Int, CaseIterable {
-    case vvip = 0
-    case vip = 1
-    case normal = 2
+    case VVIP = 0
+    case VIP = 1
+    case 일반 = 2
 }
 
 enum BusinessType: Double, CaseIterable {
-    case deposit = 0.7
-    case loan = 1.1
+    case 예금 = 0.7
+    case 대출 = 1.1
 }
 
 struct Client {

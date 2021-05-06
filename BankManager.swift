@@ -56,11 +56,11 @@ class BankManager {
         }
         
         switch order.clientClass {
-        case .vvip:
+        case .VVIP:
             operation.queuePriority = .veryHigh
-        case .vip:
+        case .VIP:
             operation.queuePriority = .high
-        case .normal:
+        case .일반:
             operation.queuePriority = .normal
         }
         
