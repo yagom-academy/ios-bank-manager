@@ -28,7 +28,7 @@ class HeadOffice {
             array.append(LoadScreeningTask(waitingNumber: waitingNumber, customerGrade: customerGrade))
         }
         headOfficeQueue.addOperations(array, waitUntilFinished: true)
-        Thread.sleep(forTimeInterval: 0.3)
+
     }
     
 }
