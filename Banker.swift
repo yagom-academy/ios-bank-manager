@@ -14,13 +14,13 @@ struct Banker: Hashable {
   }
   
   func process(_ customer: Customer) {
-    let workingTime = 0.7
+    let workingTime: Double = customer.showTask().taskTime
     let unit = 1000000.0
     let currentTicket = customer.showTicketNumber()
     
-    print("\(currentTicket)번 고객 업무 시작")
+    print("\(currentTicket)번 \(customer.showGrade())고객 \(customer.showTask())업무 시작")
     usleep(UInt32(workingTime * unit))
-    print("\(currentTicket)번 고객 업무 완료")
+    print("\(currentTicket)번 \(customer.showGrade())고객 \(customer.showTask())업무 완료")
   }
   
   func showCounterNumber() -> Int {

@@ -8,46 +8,18 @@
 import Foundation
 
 final class BankManager {
-  let operationQueue = OperationQueue()
-
-  private var bankers: [Int:Banker] = [:]
-  private var currentTicketNumber = 1
-  private var totalCompletedCustomer = 0
+  var operationQueue: OperationQueue
+  var customers: [Customer] = []
   
-  func process(_ customers: [Int:Customer]) {
-    if let customer = customers[currentTicketNumber] {
-      guard !bankers.isEmpty else {
-        operationQueue.waitUntilAllOperationsAreFinished()
-        return
-      }
-      
-      let workableBanker = self.bankers.first?.value
-      guard let counterNumber = workableBanker?.showCounterNumber() else {
-        return
-      }
-      self.bankers.removeValue(forKey: counterNumber)
-
-      NotificationCenter.default.post(
-        name: NSNotification.Name(rawValue: "completedCustomer"),
-        object: nil,
-        userInfo: ["ticketNumber":currentTicketNumber])
-
-      currentTicketNumber += 1
-
-      operationQueue.addOperation {
-        workableBanker?.process(customer)
-        
-        self.bankers[counterNumber] = workableBanker
-        self.totalCompletedCustomer += 1
-      }
-    }
+  init(numberOfBankers: Int) throws {
+    self.operationQueue = OperationQueue()
+    try self.customers = CustomerMaker().makeCustomer(count: Int.random(in: 10...30))
+    operationQueue.maxConcurrentOperationCount = numberOfBankers
   }
   
-  func setBankCounters(number: Int) {
-    bankers[number] = Banker(number)
-  }
-
-  func showTotalCompletedCustomer() -> Int {
-    return totalCompletedCustomer
+  func inputCustomersIntoOperationQueue() -> Int {
+    let totalCustomerCount = customers.count
+    operationQueue.addOperations(customers.map { $0.task }, waitUntilFinished: true)
+    return totalCustomerCount
   }
 }
