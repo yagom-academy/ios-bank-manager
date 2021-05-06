@@ -37,7 +37,7 @@ class Bank {
 
     class Teller {
         let counterNumber: Int
-        static let taskingTime: Double = 0.7
+        static let taskingTime: TimeInterval = 0.7
 
         init(counterNumber: Int) {
             self.counterNumber = counterNumber
