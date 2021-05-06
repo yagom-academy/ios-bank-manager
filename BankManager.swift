@@ -9,6 +9,7 @@ import Foundation
 class BankManager {
     let counter = OperationQueue()
     var clients = [Client]()
+    var opClients = [Operation]()
     
     private var numberOfClient: UInt = 0
     private var numberOfTeller: UInt
@@ -38,32 +39,31 @@ class BankManager {
     }
     
     private func addToClient(number: UInt) {
-        
-        let block1 = BlockOperation {
-            for index in 0..<self.numberOfClient {
-                self.workTask(order: self.clients[Int(index)])
-            }
+        for index in 0..<self.numberOfClient {
+            workTask(order: self.clients[Int(index)])
         }
-        let block2 = BlockOperation {
-            for index in 0..<self.numberOfClient {
-                self.workTask(order: self.clients[Int(index)])
-            }
-        }
-        let block3 = BlockOperation {
-            for index in 0..<self.numberOfClient {
-                self.workTask(order: self.clients[Int(index)])
-            }
-        }
-        counter.addOperations([block1, block2, block3], waitUntilFinished: true)
+        counter.addOperations(opClients, waitUntilFinished: true)
     }
     
     func workTask(order: Client) {
-        let tellerStartWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 시작"
-        let tellerFinishWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 완료★"
+        let operation = BlockOperation {
+            let tellerStartWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 시작"
+            let tellerFinishWorkMessage = "\(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 완료★"
+            
+            print(tellerStartWorkMessage)
+            Thread.sleep(forTimeInterval: order.businessType.rawValue)
+            print(tellerFinishWorkMessage)
+        }
         
-        print(tellerStartWorkMessage)
-        Thread.sleep(forTimeInterval: 0.7)
-        print(tellerFinishWorkMessage)
+        switch order.clientClass {
+        case .vvip:
+            operation.queuePriority = .veryHigh
+        case .vip:
+            operation.queuePriority = .high
+        case .normal:
+            operation.queuePriority = .normal
+        }
+        opClients.append(operation)
     }
     
     func processOfTellerTask() {

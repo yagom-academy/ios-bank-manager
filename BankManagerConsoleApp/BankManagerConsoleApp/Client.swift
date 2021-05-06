@@ -7,11 +7,10 @@
 
 import Foundation
 
-enum ClientType: Int, CaseIterable, Comparable {
+enum ClientType: Int, CaseIterable {
     case vvip = 0
     case vip = 1
     case normal = 2
-    
 }
 
 enum BusinessType: Double, CaseIterable {
@@ -24,3 +23,5 @@ struct Client {
     let clientClass: ClientType
     let businessType: BusinessType
 }
+
+
