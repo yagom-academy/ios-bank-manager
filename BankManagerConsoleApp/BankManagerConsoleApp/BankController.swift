@@ -37,9 +37,16 @@ class BankController {
         }
     }
 
+    func reset() {
+        openTime = nil
+        closeTime = nil
+        customerWaitingCount = 0
+    }
+
     func openBank(customerNumber: Int) {
         openTime = ProcessInfo.processInfo.systemUptime
         receiveCustomer(number: customerNumber)
+        
         for counter in bank.counters {
             bank.customerQueue.dequeue()?.go(to: counter, sender: bank.notificationBoard)
         }
@@ -50,9 +57,6 @@ class BankController {
         let businessHoursText: String = businessHours?.description ?? "nil"
 
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerWaitingCount)명이며, 총 업무시간은 \(businessHoursText)초입니다.")
-
-        openTime = nil
-        closeTime = nil
-        customerWaitingCount = 0
+        reset()
     }
 }
