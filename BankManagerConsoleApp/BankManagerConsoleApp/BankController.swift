@@ -20,7 +20,7 @@ class BankController {
 
     init(of bank: Bank, tellerNumber: Int) {
         self.bank = bank
-        prepareTeller(number: tellerNumber)
+        employTeller(number: tellerNumber)
         bank.notificationBoard.addObserver(bank.customerQueue)
     }
 
@@ -31,7 +31,7 @@ class BankController {
         }
     }
 
-    func prepareTeller(number: Int) {
+    func employTeller(number: Int) {
         for index in 0..<number {
             bank.counters.append(Bank.Teller(counterNumber: index))
         }

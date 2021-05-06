@@ -36,13 +36,13 @@ class BankControllerTests: XCTestCase {
     }
 
     func test_10명을_prepareTeller를_하면_창구에_10명이_들어가진다() {
-        sut.prepareTeller(number: 10)
+        sut.employTeller(number: 10)
 
         XCTAssertEqual(10, bank.counters.count)
     }
 
     func test_prepareTeller를_하면_은행원이_index와_같은_창구번호를_가진다() {
-        sut.prepareTeller(number: 2)
+        sut.employTeller(number: 2)
 
         XCTAssertEqual(1, bank.counters[1].counterNumber)
     }
