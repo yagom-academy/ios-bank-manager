@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct Task {
-    var waitingNumber: Int = 0
-    var grade: CustomerPriority
-}
+//class Task: Operation {
+//    var waitingNumber: Int = 0
+//    var grade: CustomerPriority
+//
+//    override init() {
+//        self.waitingNumber = waitingNumber
+//        self.grade = grade
+//    }
+//}
 
