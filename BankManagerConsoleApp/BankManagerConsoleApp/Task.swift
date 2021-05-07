@@ -7,13 +7,8 @@
 
 import Foundation
 
-//class Task: Operation {
-//    var waitingNumber: Int = 0
-//    var grade: CustomerPriority
-//
-//    override init() {
-//        self.waitingNumber = waitingNumber
-//        self.grade = grade
-//    }
-//}
-
+class Task: Operation {
+    var waitingNumber: Int
+    var grade: CustomerPriority
+    var visitPurpose: TaskType
+}
