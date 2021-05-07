@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Task {
-    var waitingNumber: Int = 0
+class Task: Operation {
+    var waitingNumber: Int
     var grade: CustomerPriority
+    var visitPurpose: TaskType
 }
 

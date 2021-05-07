@@ -8,12 +8,8 @@
 import Foundation
 
 struct BankDirector {
-    var customerQueue: [Customers] = []
-    
     func sendCustomersToQueue() {
         
     }
-    func makeRandomNumberOfCustomers() {
 
-    }
 }

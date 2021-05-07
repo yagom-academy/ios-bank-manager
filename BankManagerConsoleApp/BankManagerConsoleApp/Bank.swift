@@ -19,7 +19,7 @@ struct Bank {
         let userNumberInput = receiveUserNumberInput()
         switch userNumberInput {
         case 1:
-            queue.maxConcurrentOperationCount = 1
+            queue.maxConcurrentOperationCount = 3
             let start = CFAbsoluteTimeGetCurrent()
             let numberOfCustomers = makeRandomNumberOfCustomers()
             for i in 1...numberOfCustomers {
@@ -46,13 +46,13 @@ struct Bank {
         print("2 : 종료")
     }
     
-    func receiveUserNumberInput() -> Int {
-        guard let optionalInput = readLine(), let inputNumber = Int(optionalInput) else { return 0 }
-        return inputNumber
-    }
-    
     func informResult(_ start: Double, _ end: Double, _ totalNumberOfCustomers: Int) {
         let totalWorkTime = String(format: "%.2f", end - start)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumberOfCustomers)명이며, 총 업무시간은 \(totalWorkTime)초 입니다.")
+    }
+    
+    func receiveUserNumberInput() -> Int {
+        guard let optionalInput = readLine(), let inputNumber = Int(optionalInput) else { return 0 }
+        return inputNumber
     }
 }
