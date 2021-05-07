@@ -20,4 +20,8 @@ class Customer {
     self.grade = grade
     self.taskType = taskType
   }
+  
+  func showCustomerProperty() -> (Int, CustomerGrade, TaskType) {
+    return (ticketNumber, grade, taskType)
+  }
 }

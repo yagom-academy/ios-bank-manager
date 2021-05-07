@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 
 final class Bank {
   private let bankerNumber = 3
