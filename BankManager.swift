@@ -45,7 +45,7 @@ class BankManager {
         counter.addOperations(tasks, waitUntilFinished: true)
     }
     
-    func workTask(order: Client) {
+    private func workTask(order: Client) {
         let operation = BlockOperation {
             let tellerStartWorkMessage = "⭕️ \(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 시작"
             let tellerFinishWorkMessage = "🛑 \(order.waitingNumber)번 \(order.clientClass)고객님 \(order.businessType)업무 완료"
@@ -64,26 +64,34 @@ class BankManager {
             operation.queuePriority = .normal
         }
         
-        tasks.append(operation) 
+        tasks.append(operation)
     }
     
-    func processOfTellerTask() {
-        let number = generateNumberOfClient()
-        numberOfClient = number
-        for _ in 1...number {
-            generateClient()
-        }
-        addToClient()
-        closeBank()
-    }
-    
-    func closeBank() {
-        let closeBankMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(numberOfClient))명이며, 총 업무시간은 \(Float(numberOfClient) * 0.7)초입니다."
+    private func closeBank(workTime: Double) {
+        let closeBankMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(numberOfClient))명이며, 총 업무시간은 \(Float(workTime))초입니다."
         
         print(closeBankMessage)
         
         waitingNumber = 0
         numberOfClient = 0
+    }
+    
+    public func measureTime(_ closure: () -> () ) -> TimeInterval {
+        let startDate = Date()
+        closure()
+        return Date().timeIntervalSince(startDate)
+    }
+    
+    func processOfTellerTask() {
+        let timer = measureTime {
+            let number = generateNumberOfClient()
+            numberOfClient = number
+            for _ in 1...number {
+                generateClient()
+            }
+            addToClient()
+        }
+        closeBank(workTime: timer)
     }
 }
 
