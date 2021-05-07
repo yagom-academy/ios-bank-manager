@@ -9,19 +9,15 @@ import Foundation
 
 final class CustomerMaker {
   func makeCustomer(count: Int) throws -> [Customer] {
-    var customers: [Customer] = []
-    for index in 1...count {
-      try customers.append(randomCustomer(number: index))
-    }
-    return customers
+    return try (1...count).map { try randomCustomer(number: $0) }
   }
   
   func randomCustomer(number: Int) throws -> Customer {
-    guard let grade = CustomerGrade(rawValue: Int.random(in: 0..<CustomerGrade.allCases.count)) else {
+    guard let grade = CustomerGrade.random() else {
       throw BankError.invalidNumberOfCustomers
     }
     
-    guard let task = TaskType(rawValue: Int.random(in: 0..<TaskType.allCases.count)) else {
+    guard let task = TaskType.random() else {
       throw BankError.invalidNumberOfCustomers
     }
     return Customer(order: number, grade: grade, taskType: task)

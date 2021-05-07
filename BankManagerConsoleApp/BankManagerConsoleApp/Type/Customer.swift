@@ -7,19 +7,25 @@
 
 import Foundation
 
-class Customer {
+final class Customer {
   private let ticketNumber: Int
   private var grade: CustomerGrade
   private let taskType: TaskType
-  var task: BankTask {
-    get {
-      return BankTask(number: ticketNumber, grade: grade, type: taskType)
-    }
+  private var task: BankTask {
+    return BankTask(number: ticketNumber, grade: grade, type: taskType)
   }
 
   init(order orderNumber: Int, grade: CustomerGrade, taskType: TaskType) {
     self.ticketNumber = orderNumber
     self.grade = grade
     self.taskType = taskType
+  }
+
+  func showTask() -> BankTask {
+    return task
+  }
+  
+  func showCustomerProperty() -> (Int, CustomerGrade, TaskType) {
+    return (ticketNumber, grade, taskType)
   }
 }
