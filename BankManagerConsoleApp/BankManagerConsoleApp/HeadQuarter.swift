@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HeadQuarter {
+final class HeadQuarter {
   static let headQuarter: HeadQuarter = HeadQuarter()
   private var operationQueue = OperationQueue()
   

@@ -22,7 +22,7 @@ class BankManagerTest: XCTestCase {
     }
     
     func inputCustomersIntoOperationQueue(completion: @escaping ()->Void) {
-      operationQueue.addOperations(customers.map { $0.task }, waitUntilFinished: true)
+      operationQueue.addOperations(customers.map { $0.showTask() }, waitUntilFinished: true)
       operationQueue.waitUntilAllOperationsAreFinished()
       completion()
     }

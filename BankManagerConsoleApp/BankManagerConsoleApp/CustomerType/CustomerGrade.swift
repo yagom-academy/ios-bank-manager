@@ -11,7 +11,7 @@ enum CustomerGrade: Int, CaseIterable {
   case vvip = 0
   case vip = 1
   case normal = 2
-  
+
   var queuePriority: Operation.QueuePriority {
     switch self {
     case .vvip:
@@ -22,7 +22,7 @@ enum CustomerGrade: Int, CaseIterable {
       return .veryLow
     }
   }
-  
+
   static func random() -> Self? {
     return allCases.randomElement()
   }

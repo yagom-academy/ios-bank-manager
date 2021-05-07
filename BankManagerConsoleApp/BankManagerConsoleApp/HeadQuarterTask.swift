@@ -8,8 +8,8 @@
 import Foundation
 
 class HeadQuarterTask: Operation {
-  let number: Int
-  let grade: CustomerGrade
+  private let number: Int
+  private let grade: CustomerGrade
   
   init(number: Int, grade: CustomerGrade) {
     self.number = number

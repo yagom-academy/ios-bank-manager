@@ -7,10 +7,10 @@
 
 import Foundation
 
-class BankTask: Operation {
-  var grade: CustomerGrade
-  var number: Int
-  var type: TaskType
+final class BankTask: Operation {
+  private var grade: CustomerGrade
+  private var number: Int
+  private var type: TaskType
   private let headQuarter: HeadQuarter = HeadQuarter.headQuarter
   
   init(number: Int, grade: CustomerGrade, type: TaskType) {
