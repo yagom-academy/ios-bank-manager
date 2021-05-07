@@ -31,6 +31,7 @@
 		C3FC11DC2644CE9700DEA50C /* HeadQuarterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D11B2526442F7C00B9EEB6 /* HeadQuarterTask.swift */; };
 		C3FC11DF2644CE9B00DEA50C /* BankError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348A1082640DD1600D51367 /* BankError.swift */; };
 		C3FC11E92644DC6F00DEA50C /* HeadQuarterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FC11E82644DC6F00DEA50C /* HeadQuarterTest.swift */; };
+		C3FC11ED2644E1DA00DEA50C /* BankTaskTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FC11EC2644E1DA00DEA50C /* BankTaskTest.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		C3D11B2526442F7C00B9EEB6 /* HeadQuarterTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuarterTask.swift; sourceTree = "<group>"; };
 		C3FC11CF2644CDEA00DEA50C /* CustomerMakerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMakerTest.swift; sourceTree = "<group>"; };
 		C3FC11E82644DC6F00DEA50C /* HeadQuarterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuarterTest.swift; sourceTree = "<group>"; };
+		C3FC11EC2644E1DA00DEA50C /* BankTaskTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTaskTest.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +89,7 @@
 		C348A0DB263FCABF00D51367 /* BankManagerTest */ = {
 			isa = PBXGroup;
 			children = (
+				C3FC11EC2644E1DA00DEA50C /* BankTaskTest.swift */,
 				C3FC11E82644DC6F00DEA50C /* HeadQuarterTest.swift */,
 				C3FC11CF2644CDEA00DEA50C /* CustomerMakerTest.swift */,
 				C348A0DC263FCABF00D51367 /* BankManagerTest.swift */,
@@ -240,6 +243,7 @@
 				C3FC11D32644CE8700DEA50C /* TaskType.swift in Sources */,
 				C348A0E4263FCAE100D51367 /* BankManager.swift in Sources */,
 				C3FC11E92644DC6F00DEA50C /* HeadQuarterTest.swift in Sources */,
+				C3FC11ED2644E1DA00DEA50C /* BankTaskTest.swift in Sources */,
 				C348A0E7263FCAE400D51367 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
