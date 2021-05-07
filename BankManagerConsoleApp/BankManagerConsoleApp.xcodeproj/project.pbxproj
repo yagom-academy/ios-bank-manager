@@ -98,21 +98,49 @@
 			path = BankManagerTest;
 			sourceTree = "<group>";
 		};
-		C348A12D2641641100D51367 /* CustomerType */ = {
+		C348A12D2641641100D51367 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				853620982636DC4000BCDE8C /* Customer.swift */,
 				C348A12E2641645800D51367 /* CustomerGrade.swift */,
-				C348A138264165BC00D51367 /* BankTask.swift */,
 				C348A1342641647C00D51367 /* TaskType.swift */,
 			);
-			path = CustomerType;
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		C3FC11F42644ECAD00DEA50C /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				C348A138264165BC00D51367 /* BankTask.swift */,
+				C3D11B2526442F7C00B9EEB6 /* HeadQuarterTask.swift */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
+		C3FC11F52644ECC300DEA50C /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				C348A1082640DD1600D51367 /* BankError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		C3FC11F82644ECCF00DEA50C /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				8536209B2636DD3F00BCDE8C /* Bank.swift */,
+				C348A1292641633C00D51367 /* CustomerMaker.swift */,
+				853620982636DC4000BCDE8C /* Customer.swift */,
+				C3D11B2126442F1100B9EEB6 /* HeadQuarter.swift */,
+				853C50B8263A76F300B42E5F /* BankManager.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
+				C7694E79259C3EC00053667F /* main.swift */,
 				C348A0DB263FCABF00D51367 /* BankManagerTest */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
@@ -130,14 +158,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C348A12D2641641100D51367 /* CustomerType */,
-				8536209B2636DD3F00BCDE8C /* Bank.swift */,
-				C348A1292641633C00D51367 /* CustomerMaker.swift */,
-				C7694E79259C3EC00053667F /* main.swift */,
-				C3D11B2126442F1100B9EEB6 /* HeadQuarter.swift */,
-				C3D11B2526442F7C00B9EEB6 /* HeadQuarterTask.swift */,
-				853C50B8263A76F300B42E5F /* BankManager.swift */,
-				C348A1082640DD1600D51367 /* BankError.swift */,
+				C348A12D2641641100D51367 /* Enum */,
+				C3FC11F82644ECCF00DEA50C /* Type */,
+				C3FC11F42644ECAD00DEA50C /* Operation */,
+				C3FC11F52644ECC300DEA50C /* Error */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
