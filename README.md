@@ -69,8 +69,8 @@
 
 <br>
 
-### step2 구현화면(시간측정X)
-![화면 기록 2021-05-06 오후 9 46 21](https://user-images.githubusercontent.com/65153742/117300577-a6c1d800-aeb4-11eb-961b-86746ac1002e.gif)
+### step2 구현화면
+![화면 기록 2021-05-07 오후 12 35 32](https://user-images.githubusercontent.com/65153742/117394301-df9f9280-af30-11eb-84e5-7753d881d063.gif)
 
 <br>
 
