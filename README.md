@@ -30,12 +30,28 @@
   - 1기 졸업식 참석
   - step1 PR, step2에 대한 설계 고민
   - TWL 작성
+<br>
+
 - 05/03(월)
   - 강의) ARC / Memory Struct
   - step1 PR 코멘트 바탕으로 코드 수정 -  입력 함수에 대한 고민
 - 05/04(화)
     - 소스파일 분리 후 Client 타입을 만들어 그에 맞게 코드 수정
     - 고객등급에 따른 우선순위 고민 - 선택정렬, Operation.QueuePriority
+- 05/05(수)
+  - step1 2차 코멘트 바탕으로 코드 수정 
+  - 열거형 - CustomStringConvertible
+  - Closure - Escaping vs Non escaping
+  - BlockOperation 공부
+- 05/06(목)
+  - 강의) iOS App Life Cycle
+  - Operation / BlockOperation
+  - [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
+  - step PR
+- 05/07(금)
+  - 은행 업무 작업 처리시간 측정
+  - Trailing Closure 공부
+  - TWL 작성
 <br>
 
 ### 학습키워드
@@ -45,16 +61,25 @@
 - [OperationQueue 메서드](https://github.com/SoKoooool/ios-bank-manager/blob/main/Docs/OperationQueue%20%EB%A9%94%EC%84%9C%EB%93%9C.md)
 - ARC / Memory Struct
 - 선택정렬 / Operation.QueuePriority
+- iOS App Life Cycle
+- Operation / BlockOperation
+- Trailing Closure
+- 코드 시간 측정
 
 <br>
 
-### step1 UML
+### step1 Flowchart
 ![step1_1](https://user-images.githubusercontent.com/65153742/116431054-5cbc6f00-a882-11eb-80e9-b80dbc5c2267.jpg)
 
 <br>
 
 ### step1 구현화면
 ![화면 기록 2021-04-30 오후 6 16 11](https://user-images.githubusercontent.com/65153742/116675060-61973500-a9e0-11eb-8908-7a8b8f5910dd.gif)
+
+<br>
+
+### step2 구현화면
+![화면 기록 2021-05-07 오후 12 35 32](https://user-images.githubusercontent.com/65153742/117394301-df9f9280-af30-11eb-84e5-7753d881d063.gif)
 
 <br>
 
@@ -72,9 +97,20 @@
 - [[블로그] iOS & Swift 공부 - Operation Queue](https://velog.io/@kevinkim2586/iOS-Swift-%EA%B3%B5%EB%B6%80-Operation-Queue)
 - [[stack overlow] How to sleep for few milliseconds in swift 2.2?](https://stackoverflow.com/questions/38119742/how-to-sleep-for-few-milliseconds-in-swift-2-2)
 - [[부스트코스] 2) OperationQueue](https://www.boostcourse.org/mo326/lecture/16898?isDesc=false)
+
 #### 선택정렬
 - [[유투브] 선택정렬 - Select-sort with Gypsy folk dance](https://www.youtube.com/watch?v=Ns4TPTC8whw&t=322s)
 - [[블로그] Swift3 ) Swift로 선택정렬(Selection Sort)짜보기 - Zedd](https://zeddios.tistory.com/66)
-#### Operation.QueuePriority
+#### OperationQueue
 - [[블로그] [iOS] Operation? Operation Queue? 작업을 객체로 만들어보자!](https://onelife2live.tistory.com/18)
 - [[Apple Developer Documentation] Operation.QueuePriority](https://developer.apple.com/documentation/foundation/operation/queuepriority)
+- [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
+- [[블로그] iOS) Operation실험 - Zedd](https://zeddios.tistory.com/512)
+- [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
+#### iOS App Life Cycle
+- [[블로그] [iOS] 앱의 생명주기(App Life Cycle)와 앱의 구조(App Structure) - jinShine](https://jinshine.github.io/2018/05/28/iOS/%EC%95%B1%EC%9D%98%20%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0(App%20Life%20Cycle)%EC%99%80%20%EC%95%B1%EC%9D%98%20%EA%B5%AC%EC%A1%B0(App%20Structure)/)
+- [[블로그] [iOS] AppDelegate와 SceneDelegate - 레나참나](https://velog.io/@dev-lena/iOS-AppDelegate%EC%99%80-SceneDelegate)
+- [[블로그] iOS Application Life Cycle - Jake](https://velog.io/@minni/iOS-Application-Life-Cycle)
+- [[WWDC 2019] -  Architecting Your App for Multiple Windows](https://developer.apple.com/videos/play/wwdc2019/258/)
+#### 코드 시간
+- [[GitHub] Swift 코드 실행시간 측정](https://gist.github.com/betterhee/fdbec1ebb3e3cf053766aaf4b355d596)
