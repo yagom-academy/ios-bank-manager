@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+struct LocalBank {
     // MARK: - Properties
     private var waitingQueue: OperationQueue = OperationQueue()
     
@@ -71,7 +71,7 @@ struct Bank {
         return processTime
     }
     
-    func preferredNumberFormat(_ number: Double) -> Double {
+    func getPreferredNumberFormat(_ number: Double) -> Double {
         return floor(number * 100) / 100
     }
     
@@ -80,7 +80,7 @@ struct Bank {
     }
     
     func close(numberOfClient: Int, _ totalProcessTime: Double) -> String {
-        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(preferredNumberFormat(totalProcessTime))초입니다."
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient) 명이며, 총 업무 시간은 \(getPreferredNumberFormat(totalProcessTime))초입니다."
     }
 }
 

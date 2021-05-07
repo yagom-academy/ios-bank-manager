@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Client: Equatable {
+struct Client: Equatable, Clientable {
     // MARK: - Properties
     let waitingNumber: Int
     let grade: Grade

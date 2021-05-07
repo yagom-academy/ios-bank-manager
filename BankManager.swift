@@ -8,10 +8,10 @@ import Foundation
 
 struct BankManager {
     // MARK: - Properties
-    private var bank: Bank
+    private var bank: LocalBank
     
     init(numberOfTeller: Int) {
-        self.bank = Bank(numberOfTeller: numberOfTeller)
+        self.bank = LocalBank(numberOfTeller: numberOfTeller)
     }
     
     // MARK: - NameSpaces
@@ -22,7 +22,7 @@ struct BankManager {
     }
     
     // MARK: - Private Methods
-    func menuText() -> String {
+    func getMenuText() -> String {
         return Menu.text
     }
     
@@ -48,7 +48,7 @@ struct BankManager {
     mutating func start() {
         while true {
             do {
-                let printMenu: String = menuText()
+                let printMenu: String = getMenuText()
                 print(printMenu, terminator: "")
                 let selectedMenu: String = try selectMenu()
                 let shouldOpenBank: Bool = move(to: selectedMenu)

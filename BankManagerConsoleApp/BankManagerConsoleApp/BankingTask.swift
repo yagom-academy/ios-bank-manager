@@ -2,48 +2,91 @@
 //  BankingTask.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yunhwa on 2021/05/05.
+//  Created by Yun, Ryan on 2021/05/05.
 //
 
 import Foundation
 
 final class BankingTask: Operation {
     // MARK: - Properties
-    var owner: Client?
+    var owner: Clientable?
     private let type: TaskType
     
     init(_ type: TaskType) {
         self.type = type
     }
     
-    // MARK: - Private Method
+    // MARK: - Override Method from the Operation Class
+    override func main() {
+        guard let owner: Clientable = owner else {
+            return
+        }
+        
+        do {
+            let startTaskText: String = try startTask()
+            let endTaskText: String = try endTask()
+            
+            print(startTaskText)
+            try processTask(of: owner)
+            print(endTaskText)
+        } catch {
+            print(error)
+        }
+    }
+}
+
+// MARK: - Private Methods
+extension BankingTask {
     func startTask() throws -> String {
-        guard let owner: Client = owner else {
+        guard let owner: Clientable = owner else {
             throw BankManagerError.ownerNotAssigned
         }
         
-        return "💸 \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 시작."
+        return "🏦 \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 시작."
     }
     
     func endTask() throws -> String {
-        guard let owner: Client = owner else {
+        guard let owner: Clientable = owner else {
             throw BankManagerError.ownerNotAssigned
         }
         
         return "✅ \(owner.waitingNumber)번 \(owner.grade.name)고객 \(type.name)업무 완료!"
     }
     
-    // MARK: - Override Method from the Operation Class
-    override func main() {
-        do {
-            let startTaskText: String = try startTask()
-            let endTaskText: String = try endTask()
+    func rejectLoanExecution() throws -> String {
+        guard let owner: Clientable = owner else {
+            throw BankManagerError.ownerNotAssigned
+        }
+        
+        return "❌ \(owner.waitingNumber)번 \(owner.grade.name)고객의 대출이 거절되었습니다."
+    }
+    
+    private func processDeposit() {
+        Thread.sleep(forTimeInterval: TaskForLocalBank.deposit.processTime)
+    }
+    
+    private func reviewDocuments() {
+        Thread.sleep(forTimeInterval: TaskForLocalBank.loanDocumentsReview.processTime)
+    }
+    
+    private func executeLoan() {
+        Thread.sleep(forTimeInterval: TaskForLocalBank.loanExecution.processTime)
+    }
+    
+    private func processTask(of owner: Clientable) throws {
+        switch type {
+        case .deposit:
+            processDeposit()
+        case .loan:
+            reviewDocuments()
+            let isApproved: Bool = BankHeadquarter.screenLoan(for: owner)
             
-            print(startTaskText)
-            Thread.sleep(forTimeInterval: type.processTime)
-            print(endTaskText)
-        } catch {
-            print(error)
+            if isApproved {
+                executeLoan()
+            } else {
+                let rejectLoanExecutionText: String = try rejectLoanExecution()
+                print(rejectLoanExecutionText)
+            }
         }
     }
 }
@@ -60,15 +103,6 @@ extension BankingTask {
                 return "예금"
             case .loan:
                 return "대출"
-            }
-        }
-        
-        var processTime: Double {
-            switch self {
-            case .deposit:
-                return 0.7
-            case .loan:
-                return 1.1
             }
         }
         
