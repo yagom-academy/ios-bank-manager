@@ -13,8 +13,10 @@ class HeadQuarter {
   
   private init() { }
   
-  func processTask(number: Int, grade: CustomerGrade) {
-      operationQueue.maxConcurrentOperationCount = 1
-      operationQueue.addOperations( [HeadQuarterTask(number: number, grade: grade)] , waitUntilFinished: true)
+  func processTask(number: Int, grade: CustomerGrade, completion: @escaping ()->Void = { }) {
+    operationQueue.maxConcurrentOperationCount = 1
+    let task = HeadQuarterTask(number: number, grade: grade)
+    task.completionBlock = completion
+    operationQueue.addOperations( [task] , waitUntilFinished: true)
   }
 }
