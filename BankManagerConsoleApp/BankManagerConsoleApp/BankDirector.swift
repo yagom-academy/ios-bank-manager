@@ -7,10 +7,19 @@
 
 import Foundation
 
-struct BankDirector {
-    let numberOfCustomers = Bank().makeRandomNumberOfCustomers()
+class BankDirector {
+    let queue = OperationQueue()
     
-    func sendCustomersToQueue() {
-        
+    var customerQueue: [Task] = []
+    
+    func createCustomers(numberOfCustomers: Int) {
+        queue.maxConcurrentOperationCount = 3
+        for waitingNumber in 1...numberOfCustomers {
+            let customer = Task(number: waitingNumber, grade: CustomerPriority.random, visitPurpose: TaskType.random)
+            customerQueue.append(customer)
+        }
+        queue.addOperations(customerQueue, waitUntilFinished: true)
     }
 }
+
+

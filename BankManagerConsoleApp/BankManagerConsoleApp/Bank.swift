@@ -8,15 +8,29 @@
 import Foundation
 
 struct Bank {
-    let queue = OperationQueue()
-
+    let numberOfBankers = 3
+    
     func makeRandomNumberOfCustomers() -> Int {
         return Int.random(in: 10...30)
     }
     
     func displayConsoleMenu() {
         provideOption()
-        Banker().handleCustomers()
+        let numberOfCustomers = makeRandomNumberOfCustomers()
+        
+        switch receiveUserNumberInput() {
+           case 1:
+                let start = CFAbsoluteTimeGetCurrent()
+                BankDirector().createCustomers(numberOfCustomers: numberOfCustomers)
+                let end = CFAbsoluteTimeGetCurrent()
+                informResult(start, end, numberOfCustomers)
+                displayConsoleMenu()
+            case 2:
+                exit(0)
+            default:
+                print("잘못된 입력입니다.")
+                displayConsoleMenu()
+           }
     }
     
     func provideOption() {
