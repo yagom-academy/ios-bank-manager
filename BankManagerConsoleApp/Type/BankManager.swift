@@ -13,6 +13,7 @@ class BankManager {
     private var clientQueue: [Client] = []
     private var operationQueue = OperationQueue()
     private let lock = NSLock()
+    private let headOffice = HeadOffice()
 
     private func startBankMenu() {
         print("1 : 은행 개점 \n2 : 종료")
@@ -41,7 +42,7 @@ class BankManager {
         return numberOfClient
     }
     
-    private func setTaskType(taskTypeNumber: Int) -> String {
+    private func setTaskType(taskTypeNumber: Int) -> ClientTask {
         if taskTypeNumber == 1 {
             return ClientTask.loan
         }
@@ -51,7 +52,7 @@ class BankManager {
     private func createBanker(numberOfBanker: Int) {
         for i in 1...numberOfBanker {
             let notification = NSNotification.Name.init("\(i)th Banker")
-            let banker = Banker(bankerNumber: i ,client: nil, notification: notification)
+            let banker = Banker(bankerNumber: i ,client: nil, notification: notification, headOffice: headOffice)
             NotificationCenter.default.addObserver(self, selector: #selector(BankManager.updateBankCounter(notification:)), name: notification, object: nil)
             operationQueue.addOperation(banker)
         }
@@ -69,9 +70,8 @@ class BankManager {
         guard let userInformation = notification.userInfo else { return }
         updateTotalBusinessTime(userInformation: userInformation)
         if clientQueue.isNotEmpty {
-            guard let bankerNumber = userInformation[UserInformationKey.bankerNumber] as? Int else { return }
-            guard let notificationNumber = userInformation[UserInformationKey.notificationNumber] as? NSNotification.Name else { return }
-            let banker = Banker(bankerNumber: bankerNumber, client: clientQueue.removeFirst(), notification: notificationNumber)
+            guard let bankerNumber = userInformation[UserInformationKey.bankerNumber] as? Int, let notificationNumber = userInformation[UserInformationKey.notificationNumber] as? NSNotification.Name else { return }
+            let banker = Banker(bankerNumber: bankerNumber, client: clientQueue.removeFirst(), notification: notificationNumber, headOffice: headOffice)
             operationQueue.addOperation(banker)
         }
         lock.unlock()

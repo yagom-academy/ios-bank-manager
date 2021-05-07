@@ -10,7 +10,7 @@ import Foundation
 struct Client {
     var grade: Int
     var waitingNumber: Int
-    var taskType: String
+    var taskType: ClientTask
 }
 
 
