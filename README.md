@@ -30,6 +30,8 @@
   - 1기 졸업식 참석
   - step1 PR, step2에 대한 설계 고민
   - TWL 작성
+<br>
+
 - 05/03(월)
   - 강의) ARC / Memory Struct
   - step1 PR 코멘트 바탕으로 코드 수정 -  입력 함수에 대한 고민
@@ -45,6 +47,11 @@
   - 강의) iOS App Life Cycle
   - Operation / BlockOperation
   - [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
+  - step PR
+- 05/07(금)
+  - 은행 업무 작업 처리시간 측정
+  - Trailing Closure 공부
+  - TWL 작성
 <br>
 
 ### 학습키워드
@@ -56,6 +63,8 @@
 - 선택정렬 / Operation.QueuePriority
 - iOS App Life Cycle
 - Operation / BlockOperation
+- Trailing Closure
+- 코드 시간 측정
 
 <br>
 
@@ -98,3 +107,10 @@
 - [[Apple Developer Documentation] addOperations:waitUntilFinished:](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
 - [[블로그] iOS) Operation실험 - Zedd](https://zeddios.tistory.com/512)
 - [addOperations:waitUntilFinished: 적용](https://developer.apple.com/documentation/foundation/nsoperationqueue/1408358-addoperations)
+#### iOS App Life Cycle
+- [[블로그] [iOS] 앱의 생명주기(App Life Cycle)와 앱의 구조(App Structure) - jinShine](https://jinshine.github.io/2018/05/28/iOS/%EC%95%B1%EC%9D%98%20%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0(App%20Life%20Cycle)%EC%99%80%20%EC%95%B1%EC%9D%98%20%EA%B5%AC%EC%A1%B0(App%20Structure)/)
+- [[블로그] [iOS] AppDelegate와 SceneDelegate - 레나참나](https://velog.io/@dev-lena/iOS-AppDelegate%EC%99%80-SceneDelegate)
+- [[블로그] iOS Application Life Cycle - Jake](https://velog.io/@minni/iOS-Application-Life-Cycle)
+- [[WWDC 2019] -  Architecting Your App for Multiple Windows](https://developer.apple.com/videos/play/wwdc2019/258/)
+#### 코드 시간
+- [[GitHub] Swift 코드 실행시간 측정](https://gist.github.com/betterhee/fdbec1ebb3e3cf053766aaf4b355d596)
