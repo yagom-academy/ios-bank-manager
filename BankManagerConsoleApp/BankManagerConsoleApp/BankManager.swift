@@ -17,27 +17,12 @@ struct BankManager {
         clientWaitingLineQueue.maxConcurrentOperationCount = numberOfManager
         
         for client in clients {
-            var task = client.getTask()
-            
-            assignTaskPriority(&task)
-            
-            tasks.append(task)
+            tasks.append(client.getTask())
         }
         
         clientWaitingLineQueue.addOperations(tasks, waitUntilFinished: true)
         
         return calculateTaskTime(tasks)
-    }
-    
-    private func assignTaskPriority(_ task: inout BankTaskOperation) {
-        switch task.getClientRating() {
-        case .vvip:
-            task.queuePriority = .veryHigh
-        case .vip:
-            task.queuePriority = .high
-        case .normal:
-            task.queuePriority = .normal
-        }
     }
     
     private func calculateTaskTime(_ tasks: [BankTaskOperation]) -> Double {

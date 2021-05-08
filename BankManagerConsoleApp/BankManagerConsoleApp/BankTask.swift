@@ -9,20 +9,26 @@ import Foundation
 
 class BankTaskOperation: Operation {
     private let waitingNumber: Int
-    private let clientRating: Client.Rating
+    private let clientRating: String
     private var taskTime: Double = 0
     
-    init(_ waitingNumber: Int, _ priority: Client.Rating) {
+    init(_ waitingNumber: Int, _ clientRating: String, _ priority: QueuePriority) {
         self.waitingNumber = waitingNumber
-        self.clientRating = priority
+        self.clientRating = clientRating
+        super.init()
+        super.queuePriority = priority
     }
     
     enum TaskType: String, CustomStringConvertible, CaseIterable {
-        case loan = "대출업무"
-        case deposit = "예금업무"
+        case loan, deposit
             
         var description: String {
-            return "\(self.rawValue)"
+            switch self {
+            case .loan:
+                return "대출업무"
+            case .deposit:
+                return "예금업무"
+            }
         }
             
         var time: Double {
@@ -55,9 +61,5 @@ class BankTaskOperation: Operation {
     
     func getTaskTime() -> Double {
         return taskTime
-    }
-    
-    func getClientRating() -> Client.Rating {
-        return clientRating
     }
 }

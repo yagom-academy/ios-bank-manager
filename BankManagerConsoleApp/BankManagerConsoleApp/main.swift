@@ -11,7 +11,12 @@ while true {
     case .start:
         do {
             let bankManger = BankManager(numberOfManager: 3)
-            let clients: [Client] =  try Client.create()
+            var clients: [Client] = []
+            
+            for number in 1...Int.random(in: 10...30) {
+                clients.append(try Client.create(number))
+            }
+            
             Bank(bankManger, clients).operate()
         } catch let error {
             print("\(error.localizedDescription)")

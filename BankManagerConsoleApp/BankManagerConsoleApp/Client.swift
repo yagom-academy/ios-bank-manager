@@ -11,24 +11,36 @@ struct Client {
     private let task: BankTaskOperation
     
     enum Rating: String, CustomStringConvertible, CaseIterable {
-        case vvip = "VVIP"
-        case vip = "VIP"
-        case normal = "일반"
+        case vvip, vip, normal
             
         var description: String {
-            return "\(self.rawValue)"
+            switch self {
+            case .vvip:
+                return "VVIP"
+            case .vip:
+                return "VIP"
+            case .normal:
+                return "일반"
+            }
+        }
+        
+        var queuePriority: Operation.QueuePriority {
+            switch self {
+            case .vvip:
+                return .veryHigh
+            case .vip:
+                return .high
+            case .normal:
+                return .normal
+            }
         }
     }
     
-    static func create() throws -> [Client] {
-        var clients: [Client] = []
+    static func create(_ number: Int) throws -> Client {
+        guard let rating = Rating.allCases.randomElement() else { throw BankError.invalidClientPriority }
+        let queuePriority = rating.queuePriority
         
-        for number in 1...Int.random(in: 10...30) {
-            guard let priority = Rating.allCases.randomElement() else { throw BankError.invalidClientPriority }
-            clients.append(Client(task: BankTaskOperation(number, priority)))
-        }
-        
-        return clients
+        return Client(task: BankTaskOperation(number, rating.description, queuePriority))
     }
     
     func getTask() -> BankTaskOperation {
