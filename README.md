@@ -600,3 +600,11 @@ BankManagerConsole.openBank()
 - 이번 프로젝트를 통해 동기 / 비동기에 대한 개념과 Operation에 대한 개념을 어느정도 익혔는데, 이번 프로젝트에서는 요구사항으로 GCD대신 Operation을 사용하라는 제한이 있어서 OperationQueue를 사용했지만 막상 사용해보니 DispatchQueue보다 진입장벽이 높은 것치고 그에 대한 보상(가독성이 훨씬 좋아진다, 코드 양이 줄어든다 등)이 과연 충분한가? 라는 의문이 들었음...
 - Operation에게 제어해야 할 데이터(customers)를 전달하기 위해서 BlockOperation을 사용했는데, 데이터를 전달(혹은 제어)해야하는 구조에서 BlockOperation보다 더 나은 비동기 프로그래밍 구조가 있지않을까?
 - class의 Operation 상속을 통한 프로그래밍을 했다면 main()함수에 데이터를 전달하는 방법이 있을까?
+
+
+
+
+
+### UML
+
+![UML](https://tva1.sinaimg.cn/large/008i3skNgy1gqbe2e4i6lj31fc0te479.jpg)
