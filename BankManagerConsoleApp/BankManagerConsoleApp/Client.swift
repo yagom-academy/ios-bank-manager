@@ -38,9 +38,8 @@ struct Client {
     
     static func create(_ number: Int) throws -> Client {
         guard let rating = Rating.allCases.randomElement() else { throw BankError.invalidClientPriority }
-        let queuePriority = rating.queuePriority
         
-        return Client(task: BankTaskOperation(number, rating.description, queuePriority))
+        return Client(task: BankTaskOperation(number, rating.description, rating.queuePriority))
     }
     
     func getTask() -> BankTaskOperation {
