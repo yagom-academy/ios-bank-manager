@@ -9,14 +9,14 @@ import Foundation
 
 enum BankTaskType: CaseIterable {
     case deposit
-    case load
+    case loan
     
     var taskTime: Double {
         switch self {
         case .deposit:
             return 0.7
-        case .load:
-            return 1.1
+        case .loan:
+            return 0.3
         }
     }
     
@@ -24,7 +24,7 @@ enum BankTaskType: CaseIterable {
         switch self {
         case .deposit:
             return "예금"
-        case .load:
+        case .loan:
             return "대출"
         }
     }

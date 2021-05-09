@@ -6,4 +6,5 @@
 
 import Foundation
 
+let headOffice = HeadOffice()
 Bank().open()
