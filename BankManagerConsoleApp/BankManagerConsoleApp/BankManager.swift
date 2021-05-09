@@ -10,19 +10,27 @@ import Foundation
 struct BankManager {
     let numberOfManager: Int
     
-    mutating func handleTask(_ clients: [Client]) -> Double {
-        var totalTaskTime: Double = 0
-        var tasks: [Operation] = []
+    func handleTask(_ clients: [Client]) -> Double {
+        var tasks: [BankTaskOperation] = []
         let clientWaitingLineQueue = OperationQueue()
         
         clientWaitingLineQueue.maxConcurrentOperationCount = numberOfManager
         
         for client in clients {
-            tasks.append(client.task)
-            totalTaskTime += client.task.taskTime
+            tasks.append(client.getTask())
         }
         
         clientWaitingLineQueue.addOperations(tasks, waitUntilFinished: true)
+        
+        return calculateTaskTime(tasks)
+    }
+    
+    private func calculateTaskTime(_ tasks: [BankTaskOperation]) -> Double {
+        var totalTaskTime: Double = 0
+        
+        for task in tasks {
+            totalTaskTime += task.getTaskTime()
+        }
         
         return totalTaskTime
     }

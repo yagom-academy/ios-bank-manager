@@ -9,14 +9,15 @@ import Foundation
 
 final class Bank {
     private var clients: [Client]
-    private var bankManager: BankManager = BankManager(numberOfManager: 1)
+    private var bankManager: BankManager
     private var totalTaskTime: Double = 0
     
-    init(_ clients: [Client]) {
+    init(_ bankManger: BankManager, _ clients: [Client]) {
+        self.bankManager = bankManger
         self.clients = clients
     }
     
-    private func selectMenu() -> MenuSelection? {
+    static func selectMenu() -> MenuSelection? {
         print("""
         1 : 은행 개점
         2 : 종료
@@ -25,11 +26,16 @@ final class Bank {
         
         guard let menuNumber = readLine() else { return nil }
         
-        if menuNumber == "1" {
+        return matchMenuSelection(menuNumber)
+    }
+    
+    private static func matchMenuSelection(_ menuNumber: String) -> MenuSelection? {
+        switch menuNumber {
+        case "1":
             return .start
-        } else if menuNumber == "2" {
+        case "2":
             return .end
-        } else {
+        default:
             return nil
         }
     }
@@ -40,22 +46,10 @@ final class Bank {
     
     private func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clients.count)명이며, 총 업무시간은 \(String(format: "%.2f", totalTaskTime))초입니다.")
-        
-        clients.removeAll()
     }
     
     func operate() {
-        while true {
-            switch selectMenu() {
-            case .start:
-                open()
-                close()
-            case .end:
-                return
-            default:
-                print("잘못된 입력입니다.")
-                continue
-            }
-        }
+        open()
+        close()
     }
 }

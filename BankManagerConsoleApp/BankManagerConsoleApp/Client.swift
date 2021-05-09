@@ -8,21 +8,41 @@
 import Foundation
 
 struct Client {
-    let waitingNumber: Int
-    let task: BankTaskOperation
+    private let task: BankTaskOperation
     
-    init(waitingNumber: Int) {
-        self.waitingNumber = waitingNumber
-        self.task = BankTaskOperation(waitingNumber)
-    }
-    
-    static func create() -> [Client] {
-        var clients: [Client] = []
-        
-        for number in 1...Int.random(in: 10...30) {
-            clients.append(Client(waitingNumber: number))
+    enum Rating: String, CustomStringConvertible, CaseIterable {
+        case vvip, vip, normal
+            
+        var description: String {
+            switch self {
+            case .vvip:
+                return "VVIP"
+            case .vip:
+                return "VIP"
+            case .normal:
+                return "일반"
+            }
         }
         
-        return clients
+        var queuePriority: Operation.QueuePriority {
+            switch self {
+            case .vvip:
+                return .veryHigh
+            case .vip:
+                return .high
+            case .normal:
+                return .normal
+            }
+        }
+    }
+    
+    static func create(_ number: Int) throws -> Client {
+        guard let rating = Rating.allCases.randomElement() else { throw BankError.invalidClientPriority }
+        
+        return Client(task: BankTaskOperation(number, rating.description, rating.queuePriority))
+    }
+    
+    func getTask() -> BankTaskOperation {
+        return task
     }
 }
