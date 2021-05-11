@@ -8,37 +8,29 @@
 import Foundation
 
 struct Bank {
-    let queue = OperationQueue()
-
+    let numberOfBankers = 3
+    
     func makeRandomNumberOfCustomers() -> Int {
         return Int.random(in: 10...30)
     }
     
     func displayConsoleMenu() {
         provideOption()
-        let userNumberInput = receiveUserNumberInput()
-        switch userNumberInput {
-        case 1:
-            queue.maxConcurrentOperationCount = 3
-            let start = CFAbsoluteTimeGetCurrent()
-            let numberOfCustomers = makeRandomNumberOfCustomers()
-            for i in 1...numberOfCustomers {
-                queue.addOperation {
-                    print("\(i)번 고객 업무 시작")
-                    usleep(700000)
-                    print("\(i)번 고객 업무 완료")
-                }
-            }
-            queue.waitUntilAllOperationsAreFinished()
-            let end = CFAbsoluteTimeGetCurrent()
-            informResult(start, end, numberOfCustomers)
-            displayConsoleMenu()
-        case 2:
-            exit(0)
-        default:
-            print("잘못된 입력입니다.")
-            displayConsoleMenu()
-        }
+        let numberOfCustomers = makeRandomNumberOfCustomers()
+        
+        switch receiveUserNumberInput() {
+           case 1:
+                let start = CFAbsoluteTimeGetCurrent()
+                BankDirector().createCustomers(numberOfCustomers: numberOfCustomers)
+                let end = CFAbsoluteTimeGetCurrent()
+                informResult(start, end, numberOfCustomers)
+                displayConsoleMenu()
+            case 2:
+                exit(0)
+            default:
+                print("잘못된 입력입니다.")
+                displayConsoleMenu()
+           }
     }
     
     func provideOption() {

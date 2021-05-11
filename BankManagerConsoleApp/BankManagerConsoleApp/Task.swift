@@ -11,8 +11,8 @@ class Task: Operation {
     var waitingNumber: Int
     var grade: CustomerPriority
     var visitPurpose: TaskType
-    
-    init(waitingNumber: Int, grade: CustomerPriority) {
+
+    init(number waitingNumber: Int, grade: CustomerPriority, visitPurpose: TaskType) {
         self.waitingNumber = waitingNumber
         self.grade = grade
         self.visitPurpose = TaskType.random

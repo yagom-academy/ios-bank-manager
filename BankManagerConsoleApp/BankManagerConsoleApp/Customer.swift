@@ -7,30 +7,6 @@
 
 import Foundation
 
-var customerQueue: [Customer] = []
-
-struct Customer {
-    var waitingNumber: Int
-    var grade: CustomerPriority
-    var visitPurpose: TaskType
-
-    init(waitingNumber: Int, grade: CustomerPriority, visitPurpose: TaskType) {
-        self.waitingNumber = waitingNumber
-        self.grade = grade
-        self.visitPurpose = visitPurpose
-    }
-    
-    var customerQueue: [Customer] = []
-    
-    func createCustomers(numberOfCustomers: Int) -> [Customer] {
-        var customerQueue: [Customer] = []
-        for i in 1...numberOfCustomers {
-            customerQueue.append(Customer(waitingNumber: i, grade: grade, visitPurpose: visitPurpose))
-        }
-        return customerQueue
-    }
-}
-
 enum CustomerPriority: CaseIterable {
     case VVIP
     case VIP
@@ -43,7 +19,7 @@ enum CustomerPriority: CaseIterable {
         case .VIP:
             return "VIP"
         case .normal:
-            return "normal"
+            return "일반"
         }
     }
         
@@ -73,9 +49,9 @@ enum TaskType: CaseIterable {
     var purpose: String {
         switch self {
         case .deposit:
-            return "deposit"
+            return "예금"
         case .loan:
-            return "loan"
+            return "대출"
         }
     }
     
@@ -95,3 +71,4 @@ enum TaskType: CaseIterable {
         return randomTaskType
     }
 }
+
