@@ -19,7 +19,7 @@ final class BankManager {
   
   func inputCustomersIntoOperationQueue() -> Int {
     let totalCustomerCount = customers.count
-    operationQueue.addOperations(customers.map { $0.task }, waitUntilFinished: true)
+    operationQueue.addOperations(customers.map { $0.showTask() }, waitUntilFinished: true)
     return totalCustomerCount
   }
 }
