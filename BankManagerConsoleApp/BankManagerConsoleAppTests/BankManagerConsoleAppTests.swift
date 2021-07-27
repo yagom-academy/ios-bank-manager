@@ -5,28 +5,82 @@
 //  Created by Yongwoo Marco on 2021/07/27.
 //
 
+@testable import BankManagerConsoleApp
 import XCTest
 
 class BankManagerConsoleAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var sut = LinkedList<Int>()
+ 
+    func test_sut에서_peekFirst을_실패한다() {
+        // given
+        
+        // when
+        let result = sut.peekFirst()
+        // then
+        XCTAssertEqual(nil, result)
+    }
+    
+    func test_sut에서_peekFirst을_성공한다() {
+        // given
+        let firstNumber = 1
+        sut.append(1)
+        // when
+        let test = sut.peekFirst()
+        // then
+        XCTAssertEqual(firstNumber, test)
+    }
+    
+    func test_sut에서_clear을_실패한다() {
+        // given
+        var testArr = [
+            Pointer(value: 1, weakPointer: nil),
+            Pointer(value: 2, weakPointer: nil),
+            Pointer(value: 3, weakPointer: nil),
+            Pointer(value: 4, weakPointer: nil)
+        ]
+        testArr.enumerated().forEach({ value in
+            sut.append(value.element.value)
+            testArr[value.offset].weakPointer = sut.peekLastNode()
+        })
+        
+        // when
+        sut.clear()
+        let result = testArr.filter({ $0.weakPointer != nil }).count
+                
+        // then
+        XCTAssertNotEqual(result, 4)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_sut에서_clear을_성공한다() {
+        // given
+        var testArr = [
+            Pointer(value: 1, weakPointer: nil),
+            Pointer(value: 2, weakPointer: nil),
+            Pointer(value: 3, weakPointer: nil),
+            Pointer(value: 4, weakPointer: nil)
+        ]
+        testArr.enumerated().forEach({ value in
+            sut.append(value.element.value)
+            testArr[value.offset].weakPointer = sut.peekLastNode()
+        })
+        
+        // when
+        sut.clear()
+        let result = testArr.filter({ $0.weakPointer != nil }).count
+                
+        // then
+        XCTAssertEqual(result, 0)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
+
+struct Pointer {
+    let value: Int
+    weak var weakPointer: Node<Int>?
+}
+
+extension Node: Equatable {
+    static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
+        return true
+    }
+}
+
