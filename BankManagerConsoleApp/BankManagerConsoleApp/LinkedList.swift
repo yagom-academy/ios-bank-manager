@@ -15,6 +15,10 @@ class Node <T> {
     init(value: T) {
         self.value = value
     }
+    
+    deinit {
+        print("사라짐 \(value)")
+    }
 }
 
 class LinkedList <T> {
@@ -31,8 +35,43 @@ class LinkedList <T> {
         }
         return head.value
     }
-
+    
     func clear() {
         head = nil
+        tail = nil
+    }
+    
+    func getFirst() -> Node<T>? {
+        return head
+    }
+    
+    func getLast() -> Node<T>? {
+        return tail
+    }
+    
+    func append(value: T) {
+        let newNode = Node(value: value)
+        if let tailNode = tail {
+            tailNode.next = newNode
+            newNode.previous = tailNode
+        } else {
+            head = newNode
+        }
+        tail = newNode
+    }
+    
+    func removeFirst() {
+        guard let headNode = head else {
+            return
+        }
+        if let newHead = headNode.next {
+            newHead.previous = nil
+            head = newHead
+        } else {
+            head = nil
+            tail = nil
+        }
     }
 }
+
+
