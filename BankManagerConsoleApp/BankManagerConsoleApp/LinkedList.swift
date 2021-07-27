@@ -15,6 +15,10 @@ struct LinkedList<T> {
         return head == nil
     }
     
+    func peekFirst() -> T? {
+        return head?.value
+    }
+    
     mutating func clear() {
         head = nil
     }
@@ -33,5 +37,15 @@ struct LinkedList<T> {
         } else {
             push(newValue)
         }
+    }
+    
+    mutating func popFirst() -> T? {
+        defer {
+            head = head?.next
+            if head == nil {
+                tail = nil
+            }
+        }
+        return head?.value
     }
 }
