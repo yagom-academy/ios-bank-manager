@@ -17,4 +17,8 @@ class Queue<Value> {
     func enqueue(_ value: Value) {
         linkedList.append(value)
     }
+    
+    func dequeue(_ value: Value) -> Value? {
+        return linkedList.remove(value)
+    }
 }
