@@ -18,6 +18,6 @@ class Node<Value> {
 
 extension Node {
     func printNodes() -> String {
-        "\(value) -> \(String(describing: next))"
+        return "\(value) -> \(String(describing: next))"
     }
 }
