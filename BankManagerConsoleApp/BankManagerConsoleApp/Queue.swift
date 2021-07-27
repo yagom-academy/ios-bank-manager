@@ -21,4 +21,8 @@ class Queue<Value> {
     func dequeue(_ value: Value) -> Value? {
         return linkedList.remove(value)
     }
+    
+    func clear() {
+        linkedList.removeAll()
+    }
 }
