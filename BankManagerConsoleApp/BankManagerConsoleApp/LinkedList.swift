@@ -34,4 +34,8 @@ class LinkedList<Value> {
     func removeAll() {
         head = nil
     }
+    
+    func glance() -> Value? {
+        return head?.value
+    }
 }
