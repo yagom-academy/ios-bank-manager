@@ -1,6 +1,6 @@
 //
 //  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
+//  Created by Charlotte, Soll. 
 //  Copyright © yagom academy. All rights reserved.
 // 
 
