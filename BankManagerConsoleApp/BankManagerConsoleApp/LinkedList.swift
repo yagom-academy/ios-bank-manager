@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Node <T> {
+class Node<T> {
     var previous: Node<T>?
     weak var next: Node<T>?
     var value: T
@@ -17,7 +17,7 @@ class Node <T> {
     }
 }
 
-class LinkedList <T> {
+class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     

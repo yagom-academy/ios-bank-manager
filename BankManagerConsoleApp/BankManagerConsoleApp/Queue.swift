@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Queue <T> {
-    private let linkedList = LinkedList<T> ()
+class Queue<T> {
+    private let linkedList = LinkedList<T>()
     
     func isEmpty() -> Bool {
         return linkedList.isEmpty
