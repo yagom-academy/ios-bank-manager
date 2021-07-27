@@ -11,17 +11,18 @@ class LinkedList<Value> {
     private var head: Node<Value>?
     private var tail: Node<Value>?
     
-    // ieEmpty - 굳이 왜 연산프로퍼티일까?? 그러게요...음.. 흐음 public -흐음
-    // 연산프로퍼트 vs 메소드
-    
     func isEmpty() -> Bool {
         return head == nil
     }
     
-    func push(_ value: Value) {
-        if isEmpty() && tail == nil {
+    func append(_ value: Value) {
+        guard !isEmpty() && tail != nil else {
             head = Node(value: value)
             tail = head
+            return
         }
+        
+        tail?.next = Node(value: value)
+        tail = tail?.next
     }
 }
