@@ -20,6 +20,10 @@ class LinkedList<T> {
     var head: Node<T>
     var tail: Node<T>
     
+    var isEmpty: Bool {
+        return head === tail
+    }
+    
     init(data: T) {
         let dummyNode = Node(with: data)
         head = dummyNode
@@ -56,5 +60,18 @@ class LinkedList<T> {
         if targetNode === tail {
             tail = newNode
         }
+    }
+    
+    //TODO: pop, removeLast, removeAfter,
+    func pop() -> Node<T>? {
+        if self.isEmpty {
+            return nil
+        }
+        let poppedNode = head.next
+        head.next = poppedNode?.next
+        if poppedNode === tail {
+            tail = head
+        }
+        return poppedNode
     }
 }
