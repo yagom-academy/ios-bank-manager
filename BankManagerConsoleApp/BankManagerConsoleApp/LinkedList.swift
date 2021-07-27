@@ -74,4 +74,17 @@ class LinkedList<T> {
         }
         return poppedNode
     }
+    
+    func removeLast() -> Node<T>? {
+        if self.isEmpty {
+            return nil
+        }
+        var currentNode = head
+        while let nextNode = currentNode.next, nextNode !== tail {
+            currentNode = nextNode
+        }
+        let rearNode = tail
+        tail = currentNode
+        return rearNode
+    }
 }
