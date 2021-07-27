@@ -26,6 +26,12 @@ class LinkedList<T> {
         tail = dummyNode
     }
     
+    func push(data: T) {
+        let newNode = Node(data: data)
+        newNode.next = head.next
+        head.next = newNode
+    }
+    
     func append(data: T) {
         let newNode = Node(data: data)
         tail.next = newNode
