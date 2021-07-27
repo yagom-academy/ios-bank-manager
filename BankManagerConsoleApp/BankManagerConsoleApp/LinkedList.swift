@@ -15,10 +15,6 @@ class Node <T> {
     init(value: T) {
         self.value = value
     }
-    
-    deinit {
-        print("사라짐 \(value)")
-    }
 }
 
 class LinkedList <T> {
@@ -27,13 +23,6 @@ class LinkedList <T> {
     
     var isEmpty: Bool {
         return head == nil
-    }
-    
-    func peek() -> T? {
-        guard let head = head else {
-            return nil
-        }
-        return head.value
     }
     
     func clear() {
@@ -49,7 +38,7 @@ class LinkedList <T> {
         return tail
     }
     
-    func append(value: T) {
+    func append(_ value: T) {
         let newNode = Node(value: value)
         if let tailNode = tail {
             tailNode.next = newNode
