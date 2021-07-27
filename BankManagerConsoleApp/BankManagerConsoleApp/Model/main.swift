@@ -5,5 +5,3 @@
 // 
 
 import Foundation
-
-print("하하하하")
