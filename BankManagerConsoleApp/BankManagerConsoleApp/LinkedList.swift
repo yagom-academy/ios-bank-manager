@@ -62,17 +62,17 @@ class LinkedList<T> {
         }
     }
     
-    //TODO: pop, removeLast, removeAfter,
+    //TODO: clear, peek
     func pop() -> Node<T>? {
         if self.isEmpty {
             return nil
         }
-        let poppedNode = head.next
-        head.next = poppedNode?.next
-        if poppedNode === tail {
+        let frontNode = head.next
+        head.next = frontNode?.next
+        if frontNode === tail {
             tail = head
         }
-        return poppedNode
+        return frontNode
     }
     
     func removeLast() -> Node<T>? {
@@ -86,5 +86,17 @@ class LinkedList<T> {
         let rearNode = tail
         tail = currentNode
         return rearNode
+    }
+    
+    func remove(after targetNode: Node<T>) -> Node<T>? {
+        guard self.contains(targetNode) else {
+            return nil
+        }
+        let nodeToRemove = targetNode.next
+        targetNode.next = nodeToRemove?.next
+        if nodeToRemove === tail {
+            tail = targetNode
+        }
+        return nodeToRemove
     }
 }
