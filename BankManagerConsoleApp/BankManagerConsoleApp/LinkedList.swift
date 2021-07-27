@@ -8,7 +8,10 @@
 import Foundation
 
 final class LinkedList<T> {
-   private var head: Node<T>?
+    private var head: Node<T>?
+    var isEmpty: Bool {
+        head == nil
+    }
     
     func append(data: T) {
         if head == nil {
@@ -22,5 +25,16 @@ final class LinkedList<T> {
         }
         currentNode?.link = Node(data: data, link: nil)
     }
+    
+    func removeFirst() -> Node<T>? {
+        defer {
+            head = head?.link
+        }
+        return head
+    }
 }
+
+
+
+
 
