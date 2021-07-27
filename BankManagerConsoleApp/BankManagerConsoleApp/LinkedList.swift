@@ -37,4 +37,20 @@ class LinkedList<T> {
         tail.next = newNode
         tail = newNode
     }
+    
+    func insert(data: T, after targetNode: Node<T>) {
+        var currentNode = head
+        while let nextNode = currentNode.next, nextNode !== targetNode {
+            currentNode = nextNode
+        }
+        if currentNode === tail {
+            return
+        }
+        let newNode = Node(data: data)
+        newNode.next = targetNode.next
+        targetNode.next = newNode
+        if targetNode === tail {
+            tail = newNode
+        }
+    }
 }
