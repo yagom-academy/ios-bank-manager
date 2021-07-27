@@ -19,8 +19,13 @@ struct LinkedList<T> {
         return head?.value
     }
     
+    func peekLastNode() -> Node<T>? {
+        return tail
+    }
+    
     mutating func clear() {
         head = nil
+        tail = nil
     }
     
     mutating func push(_ newValue: T) {
