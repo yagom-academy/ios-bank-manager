@@ -12,42 +12,42 @@ class BankManagerConsoleAppTests: XCTestCase {
     var sut = LinkedList<Int>()
 
     func test_실패케이스_링크드리스트의_push메서드를_호출하면_head노드에_새노드가추가된다() {
-        //given
+        // given
         let inputNumber = 1
-        //when
+        // when
         sut.push(inputNumber)
-        //then
+        // then
         XCTAssertNotEqual(sut.first?.value, nil)
     }
     
     func test_성공케이스_링크드리스트의_push메서드를_호출하면_head노드에_새노드가추가된다() {
-        //given
+        // given
         let inputNumber = 1
-        //when
+        // when
         sut.push(inputNumber)
-        //then
+        // then
         XCTAssertEqual(sut.first?.value, inputNumber)
     }
     
     func test_실패케이스_링크드리스트의_append메서드를_호출하면_tail노드에_새노드가추가된다() {
-        //given
+        // given
         let inputNumber = 1
-        //when
+        // when
         sut.append(inputNumber)
-        //then
+        // then
         XCTAssertNotEqual(sut.peekLastNode()?.value, nil)
     }
     
     func test_성공케이스_링크드리스트의_append메서드를_호출하면_taii노드에_새노드가추가된다() {
-        //given
+        // given
         let inputNumber = 1
-        //when
+        // when
         sut.append(inputNumber)
-        //then
+        // then
         XCTAssertEqual(sut.peekLastNode()?.value, inputNumber)
     }
     
-    func test_실패케이스_sut에서_clear을하면_노드의개수가_0이_나온다() {
+    func test_실패케이스_링크드리스트의_clear을하면_노드의개수가_0이_나온다() {
         // given
         var dummyNodes = [
             DummyNode(value: 1, weakPointer: nil),
@@ -66,7 +66,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(result, 4)
     }
     
-    func test_성공케이스_sut에서_clear을하면_노드의개수가_0이_나온다() {
+    func test_성공케이스_링크드리스트의_clear을하면_노드의개수가_0이_나온다() {
         // given
         var dummyNodes = [
             DummyNode(value: 1, weakPointer: nil),
@@ -78,13 +78,30 @@ class BankManagerConsoleAppTests: XCTestCase {
             sut.append(value.element.value)
             dummyNodes[value.offset].weakPointer = sut.peekLastNode()
         })
-        
         // when
         sut.clear()
         let result = dummyNodes.filter({ $0.weakPointer != nil }).count
-        
         // then
         XCTAssertEqual(result, 0)
+    }
+    
+    func test_실패케이스_링크드리스트의_popFirst매서드를_호출하면_head노드를_pop한다() {
+        // given
+
+        // when
+        let popFirst = sut.popFirst()
+        // then
+        XCTAssertEqual(popFirst, nil)
+    }
+    
+    func test_성공케이스_링크드리스트의_popFirst매서드를_호출하면_head노드를_pop한다() {
+        // given
+        let inputNumber = 1
+        sut.push(inputNumber)
+        // when
+        let popFirst = sut.popFirst()!
+        // then
+        XCTAssertEqual(popFirst, inputNumber)
     }
 }
 
