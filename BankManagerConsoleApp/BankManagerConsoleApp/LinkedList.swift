@@ -30,4 +30,8 @@ class LinkedList<Value> {
         defer { head = head?.next }
         return head?.value ?? nil
     }
+    
+    func removeAll() {
+        head = nil
+    }
 }
