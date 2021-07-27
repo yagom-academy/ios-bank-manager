@@ -25,4 +25,8 @@ class Queue<Value> {
     func clear() {
         linkedList.removeAll()
     }
+    
+    func peek() -> Value? {
+        return linkedList.glance()
+    }
 }
