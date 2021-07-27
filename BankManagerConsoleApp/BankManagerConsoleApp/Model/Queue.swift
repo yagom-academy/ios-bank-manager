@@ -8,6 +8,7 @@
 import Foundation
 
 protocol Queue {
+    
     func enqueue()
     func dequeue()
     func clear()
