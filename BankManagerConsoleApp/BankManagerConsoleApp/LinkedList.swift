@@ -32,6 +32,15 @@ final class LinkedList<T> {
         }
         return head
     }
+    
+    func removeAll() {
+        head = nil
+    }
+    
+    func peekFirst() -> Node<T>? {
+        return head
+    }
+    
 }
 
 
