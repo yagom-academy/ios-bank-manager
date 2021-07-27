@@ -22,3 +22,13 @@ extension Node: CustomStringConvertible {
         return String(describing: value)
     }
 }
+
+extension Node: Equatable {
+    static func == (lhs: Node<Type>, rhs: Node<Type>) -> Bool {
+        return lhs.next === rhs.next
+    }
+    
+    static func != (lhs: Node<Type>, rhs: Node<Type>) -> Bool {
+        return lhs.next !== rhs.next
+    }
+}
