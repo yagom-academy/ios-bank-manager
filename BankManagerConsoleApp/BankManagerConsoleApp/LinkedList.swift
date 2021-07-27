@@ -11,7 +11,7 @@ class Node<T> {
     var data: T
     var next: Node<T>?
     
-    init(data: T) {
+    init(with data: T) {
         self.data = data
     }
 }
@@ -21,32 +21,36 @@ class LinkedList<T> {
     var tail: Node<T>
     
     init(data: T) {
-        let dummyNode = Node(data: data)
+        let dummyNode = Node(with: data)
         head = dummyNode
         tail = dummyNode
     }
     
     func push(data: T) {
-        let newNode = Node(data: data)
+        let newNode = Node(with: data)
         newNode.next = head.next
         head.next = newNode
     }
     
     func append(data: T) {
-        let newNode = Node(data: data)
+        let newNode = Node(with: data)
         tail.next = newNode
         tail = newNode
     }
     
-    func insert(data: T, after targetNode: Node<T>) {
+    func contains(_ targetNode: Node<T>) -> Bool {
         var currentNode = head
         while let nextNode = currentNode.next, nextNode !== targetNode {
             currentNode = nextNode
         }
-        if currentNode === tail {
+        return currentNode !== tail
+    }
+    
+    func insert(data: T, after targetNode: Node<T>) {
+        guard self.contains(targetNode) else {
             return
         }
-        let newNode = Node(data: data)
+        let newNode = Node(with: data)
         newNode.next = targetNode.next
         targetNode.next = newNode
         if targetNode === tail {
