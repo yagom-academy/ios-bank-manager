@@ -14,15 +14,10 @@ struct LinkedList<T> {
     var isEmpty: Bool {
         return head == nil
     }
-    
-    func peekFirst() -> T? {
-        return head?.value
+    var first: Node<T>? {
+        return head
     }
-    
-    func peekLastNode() -> Node<T>? {
-        return tail
-    }
-    
+        
     mutating func clear() {
         head = nil
         tail = nil
