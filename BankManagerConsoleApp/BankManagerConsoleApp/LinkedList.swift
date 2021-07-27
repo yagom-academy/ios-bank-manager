@@ -17,4 +17,11 @@ class LinkedList<Value> {
     func isEmpty() -> Bool {
         return head == nil
     }
+    
+    func push(_ value: Value) {
+        if isEmpty() && tail == nil {
+            head = Node(value: value)
+            tail = head
+        }
+    }
 }
