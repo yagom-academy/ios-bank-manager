@@ -25,4 +25,9 @@ class LinkedList<Value> {
         tail?.next = Node(value: value)
         tail = tail?.next
     }
+    
+    func remove(_ value: Value) -> Value? {
+        defer { head = head?.next }
+        return head?.value ?? nil
+    }
 }
