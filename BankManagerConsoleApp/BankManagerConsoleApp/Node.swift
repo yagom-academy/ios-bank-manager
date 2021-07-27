@@ -14,5 +14,10 @@ class Node<Value> {
     init(value: Value, next: Node? = nil) {
         self.value = value
     }
-    //d
+}
+
+extension Node {
+    func printNodes() -> String {
+        "\(value) -> \(String(describing: next))"
+    }
 }
