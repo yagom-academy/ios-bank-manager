@@ -16,3 +16,23 @@ class Node <T> {
         self.value = value
     }
 }
+
+class LinkedList <T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
+    func peek() -> T? {
+        guard let head = head else {
+            return nil
+        }
+        return head.value
+    }
+
+    func clear() {
+        head = nil
+    }
+}
