@@ -26,8 +26,8 @@ class LinkedList<Type> {
         tail = newNode
     }
     
-    func remove(node: Node<Type>) {
-        let argumentIdentity = node.next
+    func remove(node: Node<Type>?) {
+        let argumentIdentity = node?.next
         var currentNode = head?.next
         var previousNode: Node<Type>?
 
@@ -41,5 +41,32 @@ class LinkedList<Type> {
         } else {
             head = currentNode?.next
         }
+    }
+    
+    func clear() {
+        head = nil
+        tail = nil
+    }
+}
+
+extension LinkedList: CustomStringConvertible {
+    var description: String {
+        guard self.head != nil else {
+            return ""
+        }
+        guard self.head?.next != nil else {
+            return "[\(self.head?.description ?? String.blank)]"
+        }
+        
+        var string = "["
+        var node = self.head
+        while node != nil {
+            string += (node?.description ?? String.blank) + ", "
+            node = node?.next
+        }
+        let _ = string.popLast()
+        let _ = string.popLast()
+        
+        return string + "]"
     }
 }
