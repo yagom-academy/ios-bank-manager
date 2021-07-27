@@ -11,6 +11,7 @@ import XCTest
 class BankManagerConsoleAppTests: XCTestCase {
     var sut = LinkedList<Int>()
 
+    // MARK: --- LinkedList UnitTest
     func test_실패케이스_링크드리스트의_push메서드를_호출하면_head노드에_새노드가추가된다() {
         // given
         let inputNumber = 1
@@ -85,7 +86,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
-    func test_실패케이스_링크드리스트의_popFirst매서드를_호출하면_head노드를_pop한다() {
+    func test_실패케이스_링크드리스트의_popFirst메서드를_호출하면_head노드를_pop한다() {
         // given
 
         // when
@@ -94,7 +95,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(popFirst, nil)
     }
     
-    func test_성공케이스_링크드리스트의_popFirst매서드를_호출하면_head노드를_pop한다() {
+    func test_성공케이스_링크드리스트의_popFirst메서드를_호출하면_head노드를_pop한다() {
         // given
         let inputNumber = 1
         sut.push(inputNumber)
@@ -102,6 +103,66 @@ class BankManagerConsoleAppTests: XCTestCase {
         let popFirst = sut.popFirst()!
         // then
         XCTAssertEqual(popFirst, inputNumber)
+    }
+    
+    // MARK: --- Queue UnitTest
+    var sutQueue = Queue<Int>()
+    
+    func test_실패케이스_큐의_enqueue메서드를_호출하면_큐의_list의_tail노드에_새노드가추가된다() {
+        // given
+        let inputNumber = 1
+        // when
+        sutQueue.enqueue(inputNumber)
+        // then
+        XCTAssertNotEqual(sutQueue.peek!, 0)
+    }
+    
+    func test_성공케이스_큐의_enqueue메서드를_호출하면_큐의_list의_taii노드에_새노드가추가된다() {
+        // given
+        let inputNumber = 1
+        // when
+        sutQueue.enqueue(inputNumber)
+        // then
+        XCTAssertEqual(sutQueue.peek!, inputNumber)
+    }
+    
+    func test_실패케이스_큐의_dequeue메서드를_호출하면_큐의_list의_head노드가_pop한다() {
+        // given
+
+        // when
+        let pop = sutQueue.dequeue()
+        // then
+        XCTAssertEqual(pop, nil)
+    }
+    
+    func test_성공케이스_큐의_dequeue메서드를_호출하면_큐의_list의_head노드가_pop한다() {
+        // given
+        let inputNumber = 1
+        sutQueue.enqueue(inputNumber)
+        // when
+        let pop = sutQueue.dequeue()!
+        // then
+        XCTAssertEqual(pop, inputNumber)
+    }
+    
+    func test_실패케이스_큐의_clear메서드를_호출하면_큐의_list의_모든노드가_제거된다() {
+        // given
+        let inputNumber = 1
+        sutQueue.enqueue(inputNumber)
+        // when
+        sutQueue.clear()
+        // then
+        XCTAssertFalse(!sutQueue.isEmpty)
+    }
+    
+    func test_성공케이스_큐의_clear메서드를_호출하면_큐의_list의_모든노드가_제거된다() {
+        // given
+        let inputNumber = 1
+        sutQueue.enqueue(inputNumber)
+        // when
+        sutQueue.clear()
+        // then
+        XCTAssertTrue(sutQueue.isEmpty)
     }
 }
 
@@ -125,3 +186,5 @@ extension LinkedList {
         return current
     }
 }
+
+
