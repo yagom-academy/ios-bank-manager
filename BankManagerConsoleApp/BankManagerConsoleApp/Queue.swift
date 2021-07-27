@@ -10,6 +10,10 @@ import Foundation
 class Queue<Value> {
     let linkedList = LinkedList<Value>()
     
+    func isEmpty() -> Bool {
+        return linkedList.isEmpty()
+    }
+    
     func enqueue(_ value: Value) {
         linkedList.append(value)
     }
