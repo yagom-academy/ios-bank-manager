@@ -4,29 +4,40 @@
 //
 //  Created by 김태영 on 2021/07/28.
 //
-
 import XCTest
 
+@testable import BankManagerConsoleApp
+
+
 class BankManagerConsoleAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var sutQueue: LinkedListQueue<Int>!
+    
+    override func setUp() {
+        super.setUp()
+        sutQueue = LinkedListQueue()
     }
+    // given
+    // when
+    // then
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_enqueue_했을때_새로운_노드가_추가된다() {
+        // given
+        let value = 1
+        // when
+        sutQueue.enqueue(value: value)
+        let result = sutQueue.peek
+        // then
+        XCTAssertEqual(value, result)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_dequeue_했을때_head의_값이_반환된다() {
+        // given
+        let value = 1
+        sutQueue.enqueue(value: value)
+        // when
+        let result = sutQueue.dequeue()
+        // then
+        XCTAssertEqual(value, result)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

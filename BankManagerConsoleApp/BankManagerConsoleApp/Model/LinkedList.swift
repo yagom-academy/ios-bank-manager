@@ -9,11 +9,19 @@ import Foundation
 
 class LinkedList<T> {
     
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
 
     var headIsEmpty: Bool {
         head == nil
+    }
+    
+    var headValue: T? {
+        return head?.value
+    }
+    
+    var tailValue: T? {
+        return tail?.value
     }
     
     func append(value: T) {
