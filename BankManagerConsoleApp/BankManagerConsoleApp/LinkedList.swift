@@ -20,6 +20,14 @@ final class LinkedList<T> {
     
     private var head: Node<T>?
     
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
+    var first: T? {
+        return head?.data
+    }
+    
     func addLast(data: T?) {
         if head == nil {
             head = Node(data: data)
