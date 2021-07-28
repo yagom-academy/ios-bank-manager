@@ -9,7 +9,7 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 class QueueMethodTest: XCTestCase {
-    func test_testQueuee에_1을추가했을때_Queue의첫번째값이1이다() {
+    func test_testQueue에_1을추가했을때_Queue의첫번째값이1이다() {
         //given
         var testQueue = Queue<Int>()
         
@@ -48,7 +48,7 @@ class QueueMethodTest: XCTestCase {
         XCTAssertEqual(outputValue, expectedResult)
     }
     
-    func test_Queue에_1과2를넣고_dequeu메소드사용시_Queue의가장첫번째값은2가된다() {
+    func test_Queue에1과2를넣고_dequeu메소드사용시_Queue의가장첫번째값은2가된다() {
         //given
         var testQueue = Queue<Int>()
         testQueue.enqueue(1)
