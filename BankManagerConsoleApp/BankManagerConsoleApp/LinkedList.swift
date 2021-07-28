@@ -31,4 +31,15 @@ final class LinkedList<T> {
         }
         node?.next = Node(data: data)
     }
+    
+    func removeFirst() -> T? {
+        if head == nil {
+            return nil
+        }
+        let copiedHead = head
+        let value = copiedHead?.data
+        head = copiedHead?.next
+        copiedHead?.next = nil
+        return value
+    }
 }
