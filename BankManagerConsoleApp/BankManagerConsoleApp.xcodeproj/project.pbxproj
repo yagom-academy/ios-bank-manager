@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A877AA9C26AFF6A500A77397 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = A877AA9B26AFF6A500A77397 /* Node.swift */; };
 		A877AA9E26AFFF3000A77397 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A877AA9D26AFFF3000A77397 /* LinkedList.swift */; };
+		A877AA9F26B1842F00A77397 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF133A5826B00ACB009FED1B /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		DF133A5926B00ACB009FED1B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF133A5826B00ACB009FED1B /* Queue.swift */; };
@@ -17,7 +18,6 @@
 		DF133A7726B12EE1009FED1B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		DF133A7826B12EE1009FED1B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = A877AA9B26AFF6A500A77397 /* Node.swift */; };
 		DF133A7926B12EE1009FED1B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A877AA9D26AFFF3000A77397 /* LinkedList.swift */; };
-		DF133A7A26B12EE1009FED1B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF133A5826B00ACB009FED1B /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -201,11 +201,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A877AA9F26B1842F00A77397 /* Queue.swift in Sources */,
 				DF133A7626B12EE1009FED1B /* BankManager.swift in Sources */,
 				DF133A7726B12EE1009FED1B /* main.swift in Sources */,
 				DF133A7826B12EE1009FED1B /* Node.swift in Sources */,
 				DF133A7926B12EE1009FED1B /* LinkedList.swift in Sources */,
-				DF133A7A26B12EE1009FED1B /* Queue.swift in Sources */,
 				DF133A7126B12B29009FED1B /* QueueMethodTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

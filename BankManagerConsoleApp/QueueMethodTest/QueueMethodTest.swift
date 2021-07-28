@@ -35,6 +35,19 @@ class QueueMethodTest: XCTestCase {
         XCTAssertEqual(outputValue, expectedResult)
     }
     
+    func test_값이있는Queue를_isEmpty메소드로확인했을때_결과값이false가나올것이다() {
+        // given
+        var testQueue = Queue<Int>()
+        testQueue.enqueue(1)
+        
+        //when
+        let outputValue = testQueue.isEmpty()
+        let expectedResult = false
+        
+        //then
+        XCTAssertEqual(outputValue, expectedResult)
+    }
+    
     func test_Queue에_1과2를넣고_dequeu메소드사용시_Queue의가장첫번째값은2가된다() {
         //given
         var testQueue = Queue<Int>()
@@ -49,4 +62,7 @@ class QueueMethodTest: XCTestCase {
         //then
         XCTAssertEqual(outputValue, expectedResult)
     }
+    
+ 
+    
 }
