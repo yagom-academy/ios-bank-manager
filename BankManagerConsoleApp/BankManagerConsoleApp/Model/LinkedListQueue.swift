@@ -11,7 +11,6 @@ struct LinkedListQueue<T> {
     
     private let list = LinkedList<T>()
     
-    
     var peek: T? {
         return list.headValue
     }

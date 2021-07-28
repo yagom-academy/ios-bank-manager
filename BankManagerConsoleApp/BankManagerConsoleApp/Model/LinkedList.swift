@@ -10,7 +10,7 @@ import Foundation
 class LinkedList<T> {
     
     private var head: Node<T>?
-    private var tail: Node<T>?
+    private weak var tail: Node<T>?
 
     var headIsEmpty: Bool {
         head == nil
@@ -27,11 +27,10 @@ class LinkedList<T> {
     func append(value: T) {
         if headIsEmpty {
             head = Node(value: value, next: nil)
-        }
-        if tail == nil {
             tail = head
-        } else if tail != nil {
+        } else {
             tail?.next = Node(value: value, next: nil)
+            tail = tail?.next
         }
     }
     
