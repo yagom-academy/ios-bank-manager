@@ -17,4 +17,18 @@ final class LinkedList<T> {
             self.next = next
         }
     }
+    
+    private var head: Node<T>?
+    
+    func addLast(data: T?) {
+        if head == nil {
+            head = Node(data: data)
+            return
+        }
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data: data)
+    }
 }
