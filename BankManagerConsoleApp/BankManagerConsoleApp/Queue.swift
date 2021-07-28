@@ -11,10 +11,19 @@ struct Queue<T> {
     private var list = LinkedList<T>()
     
     var isEmpty: Bool {
-        return list.isEmpty
+        list.isEmpty
     }
     
     var peek: T? {
         list.first
+    }
+    
+    func enqueue(data: T) {
+        list.addLast(data: data)
+    }
+    
+    
+    func dequeue() -> T? {
+        list.removeFirst()
     }
 }
