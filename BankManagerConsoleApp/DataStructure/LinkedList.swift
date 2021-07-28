@@ -52,16 +52,16 @@ class LinkedList<Type> {
 extension LinkedList: CustomStringConvertible {
     var description: String {
         guard self.head != nil else {
-            return ""
+            return .blank
         }
         guard self.head?.next != nil else {
-            return "[\(self.head?.description ?? String.blank)]"
+            return "[\(self.head?.description ?? .blank)]"
         }
         
         var string = "["
         var node = self.head
         while node != nil {
-            string += (node?.description ?? String.blank) + ", "
+            string += (node?.description ?? .blank) + ", "
             node = node?.next
         }
         let _ = string.popLast()
