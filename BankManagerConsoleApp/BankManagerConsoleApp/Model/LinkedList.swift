@@ -7,13 +7,38 @@
 
 import Foundation
 
-class LinkedList {
+class LinkedList<T> {
     
-    var head: Node?
-    var tail: Node?
+    var head: Node<T>?
+    var tail: Node<T>?
+
+    var isEmpty: Bool {
+        head == nil
+    }
     
-    init(head: Node?, tail: Node?) {
-        self.head = head
-        self.tail = tail
+    func append(value: T) {
+        if isEmpty {
+            head = Node(value: value, next: nil)
+        }
+        if tail == nil {
+            tail = head
+        } else if tail != nil {
+            tail?.next = Node(value: value, next: nil)
+        }
+    }
+    
+    func removeFirst() -> T? {
+        defer {
+            head = head?.next
+            if isEmpty {
+                tail = nil
+            }
+        }
+        return head?.value
+    }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
     }
 }

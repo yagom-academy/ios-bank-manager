@@ -9,7 +9,7 @@ import Foundation
 
 struct LinkedListQueue<T> {
     
-    let list = LinkedList(head: nil, tail: nil)
+    let list = LinkedList<T>()
     
     func enqueue() {}
     func dequeue() {}

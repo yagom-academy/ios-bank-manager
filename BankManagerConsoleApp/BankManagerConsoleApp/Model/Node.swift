@@ -7,14 +7,12 @@
 
 import Foundation
 
-protocol NodeValue { }
-
-class Node {
+class Node<T> {
     
-    var value: NodeValue?
+    var value: T
     var next: Node?
     
-    init(value: NodeValue?, next: Node?) {
+    init(value: T, next: Node?) {
         self.value = value
         self.next = next
     }
