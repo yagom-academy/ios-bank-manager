@@ -9,7 +9,7 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 class QueueMethodTest: XCTestCase {
-    func test_testQueuee에_1을추가했을때_Queue의첫번째값이1일것이다() {
+    func test_testQueuee에_1을추가했을때_Queue의첫번째값이1이다() {
         //given
         var testQueue = Queue<Int>()
         
@@ -23,7 +23,7 @@ class QueueMethodTest: XCTestCase {
         XCTAssertEqual(outputValue, expectedResult)
     }
     
-    func test_비어있는Queue를_isEmpty메소드로확인했을때_결과값이true가나올것이다() {
+    func test_비어있는Queue를_isEmpty메소드로확인했을때_결과값이true가나온다() {
         //given
         var testQueue = Queue<Int>()
         
@@ -35,7 +35,7 @@ class QueueMethodTest: XCTestCase {
         XCTAssertEqual(outputValue, expectedResult)
     }
     
-    func test_값이있는Queue를_isEmpty메소드로확인했을때_결과값이false가나올것이다() {
+    func test_값이있는Queue를_isEmpty메소드로확인했을때_결과값이false가나온다() {
         // given
         var testQueue = Queue<Int>()
         testQueue.enqueue(1)
@@ -63,6 +63,18 @@ class QueueMethodTest: XCTestCase {
         XCTAssertEqual(outputValue, expectedResult)
     }
     
- 
-    
+    func test_Queue에1과2를넣고_clear메소드사용시_Queue의모든값이사라진다() {
+        //given
+        var testQueue = Queue<Int>()
+        testQueue.enqueue(1)
+        testQueue.enqueue(2)
+        
+        //when
+        testQueue.clear()
+        let outputValue = testQueue.isEmpty()
+        let expectedValue = true
+        
+        //then
+        XCTAssertEqual(outputValue, expectedValue)
+    }
 }
