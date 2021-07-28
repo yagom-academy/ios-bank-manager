@@ -23,21 +23,21 @@ class LinkedList<Type> {
         } else {
             tail?.next = newNode
         }
+        
         tail = newNode
     }
     
-    func remove(node: Node<Type>?) {
-        let argumentIdentity = node?.next
-        var currentNode = head?.next
+    func remove(target: Node<Type>?) {
+        var currentNode = head
         var previousNode: Node<Type>?
 
-        while argumentIdentity != currentNode {
+        while target != currentNode {
             previousNode = currentNode
             currentNode = currentNode?.next
         }
         
         if let previousNode = previousNode {
-            previousNode.next = currentNode?.next
+            previousNode.next = currentNode
         } else {
             head = currentNode?.next
         }
