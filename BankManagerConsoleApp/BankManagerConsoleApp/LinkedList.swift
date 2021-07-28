@@ -21,15 +21,16 @@ extension LinkedList {
     
     mutating func append(_ value: Value) {
         if isEmpty() {
-            tail?.next = Node(value: value)
-            tail = tail?.next
+            head = Node(value: value)
+            tail = head
+            return
         }
         
-        head = Node(value: value)
-        tail = head
+        tail?.next = Node(value: value)
+        tail = tail?.next
     }
     
-    mutating func remove(_ value: Value) -> Value? {
+    mutating func remove() -> Value? {
         defer { head = head?.next }
         return head?.value ?? nil
     }

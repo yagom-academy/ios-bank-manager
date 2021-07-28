@@ -22,8 +22,8 @@ extension Queue {
         linkedList.append(value)
     }
     
-    mutating func dequeue(_ value: Value) -> Value? {
-        return linkedList.remove(value)
+    mutating func dequeue() -> Value? {
+        return linkedList.remove()
     }
     
     mutating func clear() {

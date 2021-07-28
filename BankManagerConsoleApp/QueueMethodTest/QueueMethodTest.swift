@@ -15,11 +15,12 @@ class QueueMethodTest: XCTestCase {
         
         //when
         testQueue.enqueue(1)
+        testQueue.enqueue(2)
         let outputValue = testQueue.peek() ?? .zero
-        let expectResult = 1
+        let expectedResult = 1
         
         //then
-        XCTAssertEqual(outputValue, expectResult)
+        XCTAssertEqual(outputValue, expectedResult)
     }
     
     func test_비어있는Queue를_isEmpty메소드로확인했을때_결과값이true가나올것이다() {
@@ -28,9 +29,24 @@ class QueueMethodTest: XCTestCase {
         
         //when
         let outputValue = testQueue.isEmpty()
-        let expectResult = true
+        let expectedResult = true
         
         //then
-        XCTAssertEqual(outputValue, expectResult)
+        XCTAssertEqual(outputValue, expectedResult)
+    }
+    
+    func test_Queue에_1과2를넣고_dequeu메소드사용시_Queue의가장첫번째값은2가된다() {
+        //given
+        var testQueue = Queue<Int>()
+        testQueue.enqueue(1)
+        testQueue.enqueue(2)
+        
+        //when
+        testQueue.dequeue()
+        let outputValue = testQueue.peek() ?? .zero
+        let expectedResult = 2
+        
+        //then
+        XCTAssertEqual(outputValue, expectedResult)
     }
 }
