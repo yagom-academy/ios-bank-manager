@@ -7,32 +7,36 @@
 
 import Foundation
 
-class LinkedList<Value> {
+struct LinkedList<Value> {
+    //MARK: Properties
     private var head: Node<Value>?
     private var tail: Node<Value>?
-    
+}
+
+//MARK:- Node Manage Method
+extension LinkedList {
     func isEmpty() -> Bool {
         return head == nil
     }
     
-    func append(_ value: Value) {
-        guard !isEmpty() && tail != nil else {
-            head = Node(value: value)
-            tail = head
-            return
+    mutating func append(_ value: Value) {
+        if isEmpty() {
+            tail?.next = Node(value: value)
+            tail = tail?.next
         }
         
-        tail?.next = Node(value: value)
-        tail = tail?.next
+        head = Node(value: value)
+        tail = head
     }
     
-    func remove(_ value: Value) -> Value? {
+    mutating func remove(_ value: Value) -> Value? {
         defer { head = head?.next }
         return head?.value ?? nil
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
+        tail = nil
     }
     
     func glance() -> Value? {
