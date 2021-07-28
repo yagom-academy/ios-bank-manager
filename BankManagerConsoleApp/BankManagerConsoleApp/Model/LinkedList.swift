@@ -12,12 +12,12 @@ class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
 
-    var isEmpty: Bool {
+    var headIsEmpty: Bool {
         head == nil
     }
     
     func append(value: T) {
-        if isEmpty {
+        if headIsEmpty {
             head = Node(value: value, next: nil)
         }
         if tail == nil {
@@ -30,7 +30,7 @@ class LinkedList<T> {
     func removeFirst() -> T? {
         defer {
             head = head?.next
-            if isEmpty {
+            if headIsEmpty {
                 tail = nil
             }
         }

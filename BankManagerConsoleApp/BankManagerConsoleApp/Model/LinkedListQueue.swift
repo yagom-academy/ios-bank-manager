@@ -9,11 +9,25 @@ import Foundation
 
 struct LinkedListQueue<T> {
     
-    let list = LinkedList<T>()
+    let list = LinkedList<Int>()
     
-    func enqueue() {}
-    func dequeue() {}
-    func clear() {}
-    func peek() {}
-    func isEmpty() {}
+    var peek: Int? {
+        return list.head?.value
+    }
+    
+    func enqueue(watingNumber: Int) {
+        list.append(value: watingNumber)
+    }
+    
+    func dequeue() -> Int? {
+        return list.removeFirst()
+    }
+    
+    func clear() {
+        list.removeAll()
+    }
+    
+    func isEmpty() -> Bool {
+        return list.headIsEmpty
+    }
 }
