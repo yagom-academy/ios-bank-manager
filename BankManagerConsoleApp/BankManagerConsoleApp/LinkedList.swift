@@ -38,11 +38,8 @@ struct LinkedList<T> {
         if isEmpty() {
             return nil
         }
-        guard let checkedNode = checkFirst(),
-              let nextNode = head?.next
-        else {
-            return nil
-        }
+        guard let checkedNode = checkFirst() else { return nil }
+        let nextNode = head?.next
         head?.value = nil
         head?.next = nil
         head = nextNode
