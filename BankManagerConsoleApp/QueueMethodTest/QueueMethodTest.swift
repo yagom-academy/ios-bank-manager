@@ -21,4 +21,16 @@ class QueueMethodTest: XCTestCase {
         //then
         XCTAssertEqual(outputValue, expectResult)
     }
+    
+    func test_비어있는Queue를_isEmpty메소드로확인했을때_결과값이true가나올것이다() {
+        //given
+        var testQueue = Queue<Int>()
+        
+        //when
+        let outputValue = testQueue.isEmpty()
+        let expectResult = true
+        
+        //then
+        XCTAssertEqual(outputValue, expectResult)
+    }
 }

@@ -351,7 +351,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = LHNXD357QL;
+				DEVELOPMENT_TEAM = 7MJ69FU8BU;
 				INFOPLIST_FILE = QueueMethodTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -370,7 +370,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = LHNXD357QL;
+				DEVELOPMENT_TEAM = 7MJ69FU8BU;
 				INFOPLIST_FILE = QueueMethodTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
