@@ -6,4 +6,4 @@
 
 |UML|
 |---|
-|![image](./UML/UML.png)|
+![ios-bank-manager-UML](https://user-images.githubusercontent.com/59643667/127248890-7cb46921-ac32-469c-8bc7-47d9ddf18449.png)
