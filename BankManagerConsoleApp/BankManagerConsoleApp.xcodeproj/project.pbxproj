@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792EADD026B1114E00ED0B89 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792EADCF26B1114E00ED0B89 /* Node.swift */; };
+		792EADD226B1115800ED0B89 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792EADD126B1115800ED0B89 /* LinkedList.swift */; };
 		79649DE726AFD2570096A96A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79649DE626AFD2570096A96A /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		792EADCF26B1114E00ED0B89 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		792EADD126B1115800ED0B89 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		79649DE626AFD2570096A96A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				79649DE626AFD2570096A96A /* Queue.swift */,
+				792EADCF26B1114E00ED0B89 /* Node.swift */,
+				792EADD126B1115800ED0B89 /* LinkedList.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -127,7 +133,9 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				79649DE726AFD2570096A96A /* Queue.swift in Sources */,
+				792EADD226B1115800ED0B89 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				792EADD026B1114E00ED0B89 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
