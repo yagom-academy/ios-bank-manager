@@ -8,6 +8,7 @@
 import Foundation
 
 class Node<Value> {
+    //MARK: Properties
     var value: Value
     var next: Node?
     
@@ -16,6 +17,7 @@ class Node<Value> {
     }
 }
 
+//MARK:-Node Print Method
 extension Node {
     func printNodes() -> String {
         return "\(value) -> \(String(describing: next))"

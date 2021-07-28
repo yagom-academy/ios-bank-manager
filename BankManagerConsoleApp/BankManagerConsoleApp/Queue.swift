@@ -7,26 +7,30 @@
 
 import Foundation
 
-class Queue<Value> {
-    let linkedList = LinkedList<Value>()
-    
+struct Queue<Value> {
+    //MARK: Properties
+    var linkedList = LinkedList<Value>()
+}
+
+//MARK:-Queue Manage Method
+extension Queue {
     func isEmpty() -> Bool {
         return linkedList.isEmpty()
     }
     
-    func enqueue(_ value: Value) {
+    mutating func enqueue(_ value: Value) {
         linkedList.append(value)
     }
     
-    func dequeue(_ value: Value) -> Value? {
+    mutating func dequeue(_ value: Value) -> Value? {
         return linkedList.remove(value)
     }
     
-    func clear() {
+    mutating func clear() {
         linkedList.removeAll()
     }
     
-    func peek() -> Value? {
+    mutating func peek() -> Value? {
         return linkedList.glance()
     }
 }
