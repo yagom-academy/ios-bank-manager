@@ -50,4 +50,8 @@ final class LinkedList<T> {
         copiedHead?.next = nil
         return value
     }
+    
+    func removeAll() {
+        head = nil
+    }
 }
