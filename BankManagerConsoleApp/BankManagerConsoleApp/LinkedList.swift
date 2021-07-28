@@ -50,6 +50,7 @@ struct LinkedList<T> {
     mutating func removeAll() {
         head = nil
         tail = nil
+        count = 0
     }
     
     mutating func increaseCount() {
