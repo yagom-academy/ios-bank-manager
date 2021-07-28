@@ -17,9 +17,6 @@ class BankManagerConsoleAppTests: XCTestCase {
         super.setUp()
         sutQueue = LinkedListQueue()
     }
-    // given
-    // when
-    // then
 
     func test_enqueue_했을때_새로운_노드가_추가된다() {
         // given
@@ -39,5 +36,23 @@ class BankManagerConsoleAppTests: XCTestCase {
         let result = sutQueue.dequeue()
         // then
         XCTAssertEqual(value, result)
+    }
+    func test_clear_했을때_큐의_head가_nil이된다() {
+        // given
+        let value = 1
+        sutQueue.enqueue(value: value)
+        // when
+        sutQueue.clear()
+        // then
+        let result = sutQueue.peek
+        XCTAssertEqual(result, nil)
+    }
+    func test_isEmpty_했을때_head에_값이_없을때_true다() {
+        // given
+        var result: Bool
+        // when
+        result = sutQueue.isEmpty()
+        // then
+        XCTAssertTrue(result)
     }
 }
