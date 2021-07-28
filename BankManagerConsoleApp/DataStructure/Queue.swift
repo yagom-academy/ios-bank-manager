@@ -7,42 +7,29 @@
 
 import Foundation
 
-class Queue<Type> {
-    private var queue: LinkedList<Type>
-    var isEmpty: Bool {
-        return queue.isEmpty
-    }
+class Queue<Type>: LinkedList<Type> {
     
     func enqueue(value: Type) {
-        queue.append(value: value)
+        self.append(value: value)
     }
     
     func dequeue() -> Type? {
-        let result = queue.head?.value
-        queue.remove(node: queue.head)
-        return result
+        defer {
+            self.remove(node: self.head)
+        }
+        return self.head?.value
     }
-    
-    func clear() {
-        queue.clear()
-    }
-    
+        
     func peek() -> Type? {
-        return queue.head?.value
-    }
-    
-    init() {
-        queue = LinkedList()
+        return self.head?.value
     }
     
     init(initialValue: Type) {
-        queue = LinkedList()
+        super.init()
         self.enqueue(value: initialValue)
     }
-}
-
-extension Queue: CustomStringConvertible {
-    var description: String {
-        return queue.description
+    
+    override init() {
+        super.init()
     }
 }
