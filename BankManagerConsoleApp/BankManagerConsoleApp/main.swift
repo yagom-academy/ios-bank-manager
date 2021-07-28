@@ -5,3 +5,4 @@
 // 
 
 import Foundation
+let queue = Queue<Int>()
