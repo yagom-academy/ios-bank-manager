@@ -84,8 +84,6 @@
 				89340EDB26AEDCDE007A0636 /* Node.swift */,
 				63CA8C6626AEEBEF00FBFF8B /* LinkedList.swift */,
 				89340EDD26AF995D007A0636 /* Queue.swift */,
-				635E4FD626B11E1D00B91F2E /* Customer.swift */,
-				635E4FD926B11F1500B91F2E /* Bank.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -98,14 +96,24 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		896FD28D26B12E93006E8FA2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				635E4FD926B11F1500B91F2E /* Bank.swift */,
+				635E4FD626B11E1D00B91F2E /* Customer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
 				89340EDF26AF9F97007A0636 /* Constants */,
-				89340EDA26AEDCB5007A0636 /* DataStructure */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				63D7E0A526AFC4120037475E /* BankManagerTest */,
 				C7694E77259C3EC00053667F /* Products */,
+				896FD28D26B12E93006E8FA2 /* Model */,
+				89340EDA26AEDCB5007A0636 /* DataStructure */,
 			);
 			sourceTree = "<group>";
 		};
