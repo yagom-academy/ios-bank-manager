@@ -77,4 +77,18 @@ class QueueMethodTest: XCTestCase {
         //then
         XCTAssertEqual(outputValue, expectedValue)
     }
+    
+    func test_Queue에1과2를넣고_peek메소드사용시_맨앞의값인1이나온다() {
+        //given
+        var testQueue = Queue<Int>()
+        testQueue.enqueue(1)
+        testQueue.enqueue(2)
+        
+        //when
+        let outputValue = testQueue.peek()
+        let expectedValue = 1
+        
+        //then
+        XCTAssertEqual(outputValue, expectedValue)
+    }
 }
