@@ -2,7 +2,7 @@
 //  Queue.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yongwoo Marco on 2021/07/27.
+//  Created by Luyan, Marco on 2021/07/27.
 //
 
 import Foundation

@@ -2,50 +2,50 @@
 //  BankManagerConsoleAppTests.swift
 //  BankManagerConsoleAppTests
 //
-//  Created by Yongwoo Marco on 2021/07/27.
+//  Created by Luyan, Marco on 2021/07/27.
 //
 
 @testable import BankManagerConsoleApp
 import XCTest
 
 class BankManagerConsoleAppTests: XCTestCase {
-    var sut = LinkedList<Int>()
+    var sutLinkedList = LinkedList<Int>()
 
     // MARK: --- LinkedList UnitTest
     func test_실패케이스_링크드리스트의_push메서드를_호출하면_head노드에_새노드가추가된다() {
         // given
         let inputNumber = 1
         // when
-        sut.push(inputNumber)
+        sutLinkedList.push(inputNumber)
         // then
-        XCTAssertNotEqual(sut.first?.value, nil)
+        XCTAssertNotEqual(sutLinkedList.first?.value, nil)
     }
     
     func test_성공케이스_링크드리스트의_push메서드를_호출하면_head노드에_새노드가추가된다() {
         // given
         let inputNumber = 1
         // when
-        sut.push(inputNumber)
+        sutLinkedList.push(inputNumber)
         // then
-        XCTAssertEqual(sut.first?.value, inputNumber)
+        XCTAssertEqual(sutLinkedList.first?.value, inputNumber)
     }
     
     func test_실패케이스_링크드리스트의_append메서드를_호출하면_tail노드에_새노드가추가된다() {
         // given
         let inputNumber = 1
         // when
-        sut.append(inputNumber)
+        sutLinkedList.append(inputNumber)
         // then
-        XCTAssertNotEqual(sut.peekLastNode()?.value, nil)
+        XCTAssertNotEqual(sutLinkedList.peekLastNode()?.value, nil)
     }
     
     func test_성공케이스_링크드리스트의_append메서드를_호출하면_taii노드에_새노드가추가된다() {
         // given
         let inputNumber = 1
         // when
-        sut.append(inputNumber)
+        sutLinkedList.append(inputNumber)
         // then
-        XCTAssertEqual(sut.peekLastNode()?.value, inputNumber)
+        XCTAssertEqual(sutLinkedList.peekLastNode()?.value, inputNumber)
     }
     
     func test_실패케이스_링크드리스트의_clear을하면_노드의개수가_0이_나온다() {
@@ -57,11 +57,11 @@ class BankManagerConsoleAppTests: XCTestCase {
             DummyNode(value: 4, weakPointer: nil)
         ]
         dummyNodes.enumerated().forEach({ value in
-            sut.append(value.element.value)
-            dummyNodes[value.offset].weakPointer = sut.peekLastNode()
+            sutLinkedList.append(value.element.value)
+            dummyNodes[value.offset].weakPointer = sutLinkedList.peekLastNode()
         })
         // when
-        sut.clear()
+        sutLinkedList.clear()
         let result = dummyNodes.filter({ $0.weakPointer != nil }).count
         // then
         XCTAssertNotEqual(result, 4)
@@ -76,11 +76,11 @@ class BankManagerConsoleAppTests: XCTestCase {
             DummyNode(value: 4, weakPointer: nil)
         ]
         dummyNodes.enumerated().forEach({ value in
-            sut.append(value.element.value)
-            dummyNodes[value.offset].weakPointer = sut.peekLastNode()
+            sutLinkedList.append(value.element.value)
+            dummyNodes[value.offset].weakPointer = sutLinkedList.peekLastNode()
         })
         // when
-        sut.clear()
+        sutLinkedList.clear()
         let result = dummyNodes.filter({ $0.weakPointer != nil }).count
         // then
         XCTAssertEqual(result, 0)
@@ -90,7 +90,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         // given
 
         // when
-        let popFirst = sut.popFirst()
+        let popFirst = sutLinkedList.popFirst()
         // then
         XCTAssertEqual(popFirst, nil)
     }
@@ -98,9 +98,9 @@ class BankManagerConsoleAppTests: XCTestCase {
     func test_성공케이스_링크드리스트의_popFirst메서드를_호출하면_head노드를_pop한다() {
         // given
         let inputNumber = 1
-        sut.push(inputNumber)
+        sutLinkedList.push(inputNumber)
         // when
-        let popFirst = sut.popFirst()!
+        let popFirst = sutLinkedList.popFirst()!
         // then
         XCTAssertEqual(popFirst, inputNumber)
     }
