@@ -22,8 +22,11 @@ struct Queue<T> {
         list.addLast(data: data)
     }
     
-    
     func dequeue() -> T? {
         list.removeFirst()
+    }
+    
+    func clear() {
+        list.removeAll()
     }
 }
