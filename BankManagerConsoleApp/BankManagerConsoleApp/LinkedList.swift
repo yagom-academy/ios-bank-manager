@@ -25,17 +25,17 @@ class LinkedList<T> {
         return head == nil
     }
     
-    func clear() {
-        head = nil
-        tail = nil
-    }
-    
-    func getFirst() -> Node<T>? {
+    var first: Node<T>? {
         return head
     }
     
-    func getLast() -> Node<T>? {
+    var last: Node<T>? {
         return tail
+    }
+    
+    func clear() {
+        head = nil
+        tail = nil
     }
     
     func append(_ value: T) {

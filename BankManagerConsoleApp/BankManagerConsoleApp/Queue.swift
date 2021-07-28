@@ -10,23 +10,25 @@ import Foundation
 class Queue<T> {
     private let linkedList = LinkedList<T>()
     
-    func isEmpty() -> Bool {
+    var isEmpty: Bool {
         return linkedList.isEmpty
     }
     
-    func peek() -> T? {
-        return linkedList.getFirst()?.value
+    var peek: T? {
+        return linkedList.first?.value
     }
     
     func clear() {
         linkedList.clear()
     }
     
-    func enqueue(_ vlaue: T) {
-        linkedList.append(vlaue)
+    func enqueue(_ value: T) {
+        linkedList.append(value)
     }
     
-    func dequeue() {
+    func dequeue() -> T? {
+        let fistNode = linkedList.first
         linkedList.removeFirst()
+        return fistNode?.value
     }
 }
