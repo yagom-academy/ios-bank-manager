@@ -26,9 +26,18 @@ func decideToStartProgram() -> Decision {
     }
 }
 
+func makeCustomerQueue() -> Queue<Customer> {
+    let numberOfCustomers = Int.random(in: 10...30)
+    var customerQueue = Queue<Customer>()
+    for number in 1...numberOfCustomers {
+        customerQueue.enqueue(Customer(waitingNumber: number))
+    }
+    return customerQueue
+}
+
 // MARK: --- main Program
 while true {
     guard decideToStartProgram() == .excute else { break }
-    print("실행") // test code
+    let customerQueue = makeCustomerQueue()
+
 }
-print("종료") // test code
