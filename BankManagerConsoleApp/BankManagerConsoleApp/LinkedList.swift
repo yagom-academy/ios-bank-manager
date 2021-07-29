@@ -8,17 +8,25 @@
 import Foundation
 
 class Node<T> {
-    var data: T
+    var data: T!
     var next: Node<T>?
     
     init(with data: T) {
         self.data = data
     }
+    
+    private init() {
+        self.data = nil
+    }
+    
+    fileprivate static func obtainDummyNode() -> Node<T> {
+        return Node<T>()
+    }
 }
 
 class LinkedList<T> {
-    var head: Node<T>
-    var tail: Node<T>
+    private var head: Node<T>
+    private var tail: Node<T>
     
     var peek: Node<T>? {
         return head.next
@@ -28,8 +36,8 @@ class LinkedList<T> {
         return head === tail
     }
     
-    init(data: T) {
-        let dummyNode = Node(with: data)
+    init() {
+        let dummyNode = Node<T>.obtainDummyNode()
         head = dummyNode
         tail = dummyNode
     }
