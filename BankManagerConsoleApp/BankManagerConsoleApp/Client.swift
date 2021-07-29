@@ -10,7 +10,7 @@ import Foundation
 class Client {
     let tasks: [TaskCategory]
     
-    init(tasks: [TaskCategory]) {
+    init(tasks: [TaskCategory] = [.defaultTask]) {
         self.tasks = tasks
     }
 }
