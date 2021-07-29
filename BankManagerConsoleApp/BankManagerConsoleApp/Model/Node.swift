@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Node<T> {
+final class Node<T> {
     
     var value: T
     var next: Node?
