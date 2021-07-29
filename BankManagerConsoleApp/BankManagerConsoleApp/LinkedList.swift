@@ -20,6 +20,10 @@ class LinkedList<T> {
     var head: Node<T>
     var tail: Node<T>
     
+    var peek: Node<T>? {
+        return head.next
+    }
+    
     var isEmpty: Bool {
         return head === tail
     }
@@ -62,7 +66,6 @@ class LinkedList<T> {
         }
     }
     
-    //TODO: clear, peek
     func pop() -> Node<T>? {
         if self.isEmpty {
             return nil
