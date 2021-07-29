@@ -6,6 +6,9 @@
 
 import Foundation
 
+struct BankManager {
+    let processingTime: Double = 0.7
+}
 
 struct Customer {
     let waitingNumber: Int
