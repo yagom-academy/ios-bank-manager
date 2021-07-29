@@ -9,7 +9,7 @@ import Foundation
 
 class LinkedList<Type> {
     private(set) var head: Node<Type>?
-    private(set) var tail: Node<Type>?
+    private var tail: Node<Type>?
     
     var isEmpty: Bool {
         return head == nil
@@ -26,18 +26,17 @@ class LinkedList<Type> {
         tail = newNode
     }
     
-    func remove(node: Node<Type>?) {
-        let argumentIdentity = node?.next
-        var currentNode = head?.next
+    func remove(target: Node<Type>?) {
+        var currentNode = head
         var previousNode: Node<Type>?
-
-        while argumentIdentity != currentNode {
+        
+        while target != currentNode {
             previousNode = currentNode
             currentNode = currentNode?.next
         }
         
         if let previousNode = previousNode {
-            previousNode.next = currentNode?.next
+            previousNode.next = currentNode
         } else {
             head = currentNode?.next
         }
@@ -51,22 +50,24 @@ class LinkedList<Type> {
 
 extension LinkedList: CustomStringConvertible {
     var description: String {
-        guard self.head != nil else {
+        guard let head = self.head else {
             return .blank
         }
-        guard self.head?.next != nil else {
-            return "[\(self.head?.description ?? .blank)]"
+        
+        guard head.next != nil else {
+            return "[\(head.description)]"
         }
         
-        var string = "["
-        var node = self.head
+        var resultString = "[\(head.description)"
+        var node = head.next
         while node != nil {
-            string += (node?.description ?? .blank) + ", "
+            resultString += (node?.description ?? .blank)
+            if node?.next != nil {
+                resultString += ", "
+            }
             node = node?.next
         }
-        let _ = string.popLast()
-        let _ = string.popLast()
-        
-        return string + "]"
+
+        return resultString + "]"
     }
 }
