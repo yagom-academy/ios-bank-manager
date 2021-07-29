@@ -36,4 +36,16 @@ class BankManagerConsoleAppTests: XCTestCase {
         //then
         XCTAssertEqual(expectResult, outputValue)
     }
+    
+    //TODO: peek, isEmpty
+    func test_혀나블짱짱과야곰짱짱을_enqueue하고clear한뒤에peek해보면_nil이다() {
+        //given
+        let expectInputValue = ["혀나블짱짱", "야곰짱짱"]
+        //when
+        expectInputValue.forEach { sut.enqueue($0) }
+        sut.clear()
+        let outputValue = sut.peek
+        //then
+        XCTAssertNil(outputValue)
+    }
 }
