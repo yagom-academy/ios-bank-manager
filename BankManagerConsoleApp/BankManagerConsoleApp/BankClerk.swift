@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BankClerk: Workable {
+struct BankClerk: Workable {
     var workTime: Double = 0.7
     
     func businessProcessing(for client: BankClient) {

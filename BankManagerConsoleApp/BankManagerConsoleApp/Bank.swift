@@ -12,6 +12,10 @@ protocol Workable {
     func businessProcessing(for client: BankClient)
 }
 
+protocol Available {
+    
+}
+
 enum UserInput: String {
     case open = "1"
     case close = "2"
@@ -46,12 +50,14 @@ class Bank {
         guard let inputNumber = readLine() else {
             return nil
         }
-        switch inputNumber {
-        case UserInput.open.rawValue:
-            return UserInput.open
-        case UserInput.close.rawValue:
-            return UserInput.close
-        default:
+        if let menuNumber = UserInput(rawValue: inputNumber) {
+            switch menuNumber {
+            case .open:
+                return UserInput.open
+            case .close:
+                return UserInput.close
+            }
+        } else {
             print("잘못된 입력입니다. 다시 입력해주세요.")
             return generateInputUserMenuNumber()
         }

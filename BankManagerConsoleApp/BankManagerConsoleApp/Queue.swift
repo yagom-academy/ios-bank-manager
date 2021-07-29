@@ -36,7 +36,7 @@ class Queue<T> {
         linkedList.append(value)
     }
     
-    func dequeue() -> T? {
+    @discardableResult func dequeue() -> T? {
         let fistNode = linkedList.first
         linkedList.removeFirst()
         return fistNode?.value

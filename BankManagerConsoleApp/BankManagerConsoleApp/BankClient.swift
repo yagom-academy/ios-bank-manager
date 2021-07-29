@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct BankClient {
+struct BankClient: Available {
     let waittingNumber: Int
 }
