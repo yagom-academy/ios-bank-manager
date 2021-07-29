@@ -15,7 +15,7 @@ class Queue<Type>: LinkedList<Type> {
     
     func dequeue() -> Type? {
         defer {
-            self.remove(node: self.head)
+            self.remove(target: self.head)
         }
         return self.head?.value
     }
