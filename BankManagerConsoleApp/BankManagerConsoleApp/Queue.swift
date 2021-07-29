@@ -8,11 +8,14 @@
 import Foundation
 
 class Queue<Element> {
-    //TODO: isEmpty
     private var linkedList = LinkedList<Element>()
     
     var peek: Element? {
         linkedList.peek?.data
+    }
+    
+    var isEmpty: Bool {
+        linkedList.isEmpty
     }
     
     func enqueue(_ newElement: Element) {
