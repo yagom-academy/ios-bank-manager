@@ -25,4 +25,15 @@ class BankManagerConsoleAppTests: XCTestCase {
         //then
         XCTAssertEqual(expectResult, outputValue)
     }
+    
+    func test_야곰짱짱을_enqueue한뒤에dequeue해보면_야곰짱짱이다() {
+        //given
+        let expectInputValue = "야곰 짱짱"
+        //when
+        sut.enqueue(expectInputValue)
+        let expectResult = "야곰 짱짱"
+        let outputValue = sut.dequeue()
+        //then
+        XCTAssertEqual(expectResult, outputValue)
+    }
 }
