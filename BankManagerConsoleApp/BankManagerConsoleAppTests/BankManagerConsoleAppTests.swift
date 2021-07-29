@@ -54,10 +54,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         //when
         sut.enqueue(expectInputValue)
         _ = sut.peek
-        let expectResult = false
         let outputValue = sut.isEmpty
         //then
-        XCTAssertEqual(expectResult, outputValue)
+        XCTAssertFalse(outputValue)
     }
     
     func test_어떠한값도_enqueue하지않고isEmpty해보면_true이다() {
