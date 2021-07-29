@@ -5,3 +5,7 @@
 // 
 
 import Foundation
+
+let bank = Bank()
+
+bank.programStart()

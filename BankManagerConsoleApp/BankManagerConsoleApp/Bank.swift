@@ -18,7 +18,7 @@ enum UserInput: String {
 }
 
 class Bank {
-    let bankClerk = BankClerk()
+    private let bankClerk = BankClerk()
     private lazy var bankClients = generateNewClients()
     private var totalWorkTime: Double = 0
     private let generateNewClients = { () -> Queue<BankClient> in
@@ -55,6 +55,30 @@ class Bank {
         default:
             print("잘못된 입력입니다. 다시 입력해주세요.")
             return generateInputUserMenuNumber()
+        }
+    }
+    
+    private func startWork() {
+        let numberOfClients = bankClients.count
+        while let client = bankClients.dequeue() {
+            bankClerk.businessProcessing(for: client)
+            totalWorkTime += bankClerk.workTime
+        }
+        let convertedWorkTime = String(format: "%.2f", totalWorkTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertedWorkTime)입니다.")
+    }
+    
+    func programStart() {
+        printMenu()
+        guard let userInput = generateInputUserMenuNumber() else {
+            return
+        }
+        if userInput == UserInput.open {
+            startWork()
+            resetBank()
+            return programStart()
+        } else if userInput == UserInput.close {
+            return
         }
     }
 }

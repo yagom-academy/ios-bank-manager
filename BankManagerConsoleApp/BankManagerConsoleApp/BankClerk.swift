@@ -12,7 +12,7 @@ class BankClerk: Workable {
     
     func businessProcessing(for client: BankClient) {
         print("\(client.waittingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: workTime)
+//        Thread.sleep(forTimeInterval: workTime)
         print("\(client.waittingNumber)번 고객 업무 종료")
     }
 }
