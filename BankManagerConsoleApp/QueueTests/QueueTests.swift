@@ -54,4 +54,64 @@ class QueueTests: XCTestCase {
         //then
         XCTAssertNil(expectResult)
     }
+    
+    func test_enqueue를_세번하고_dequeue했을때_반환값확인() {
+        //given
+        let one = 1
+        let two = 2
+        let three = 3
+        //when
+        queueSut.enqueue(data: one)
+        queueSut.enqueue(data: two)
+        queueSut.enqueue(data: three)
+        let expectResultOne = queueSut.dequeue()
+        let expectResultTwo = queueSut.dequeue()
+        let expectResultThree = queueSut.dequeue()
+        //then
+        XCTAssertEqual(expectResultOne, one)
+        XCTAssertEqual(expectResultTwo, two)
+        XCTAssertEqual(expectResultThree, three)
+    }
+
+    func test_1_2를enqueue하고_dequeue를한번하면_peek은_2을반환한다() {
+        //given
+        let one = 1
+        let two = 2
+        //when
+        queueSut.enqueue(data: one)
+        queueSut.enqueue(data: two)
+        queueSut.dequeue()
+        let expectResult = queueSut.peek
+        // then
+        XCTAssertEqual(expectResult, two)
+    }
+    
+    func test_enqueue를두번하고_dequeue를두번하면_peek은nil이다() {
+        // given
+        let number1 = 123
+        let number2 = 456
+        // when
+        queueSut.enqueue(data: number1)
+        queueSut.enqueue(data: number2)
+        queueSut.dequeue()
+        queueSut.dequeue()
+        let expectResult = queueSut.peek
+        // then
+        XCTAssertNil(expectResult)
+    }
+    
+    func test_enqueue를여러번하고_clear하면_queue요소는없다() {
+        //given
+        let one = 1
+        let two = 2
+        let three = 3
+        // when
+        queueSut.enqueue(data: one)
+        queueSut.enqueue(data: two)
+        queueSut.enqueue(data: three)
+        queueSut.clear()
+        let expectResult = queueSut.isEmpty
+        // then
+        XCTAssertTrue(expectResult)
+    }
 }
