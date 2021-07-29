@@ -33,7 +33,6 @@ class Bank {
     
     private func resetBank() {
         totalWorkTime = 0
-        bankClients.clear()
         bankClients = generateNewClients()
     }
     
