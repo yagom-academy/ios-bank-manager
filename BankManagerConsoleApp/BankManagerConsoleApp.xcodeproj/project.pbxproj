@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C495EFAE26B2CE11009BCF9A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495EFAD26B2CE11009BCF9A /* Queue.swift */; };
+		C495EFAF26B2DA98009BCF9A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46D867C26AF980F00A010EF /* LinkedList.swift */; };
+		C495EFB026B2DA98009BCF9A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495EFAD26B2CE11009BCF9A /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D46D867D26AF980F00A010EF /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46D867C26AF980F00A010EF /* LinkedList.swift */; };
@@ -192,6 +194,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C495EFAF26B2DA98009BCF9A /* LinkedList.swift in Sources */,
+				C495EFB026B2DA98009BCF9A /* Queue.swift in Sources */,
 				D46D868C26B2D61900A010EF /* BankManagerConsoleAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
