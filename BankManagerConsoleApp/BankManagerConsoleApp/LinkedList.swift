@@ -99,4 +99,9 @@ class LinkedList<T> {
         }
         return nodeToRemove
     }
+    
+    func clear() {
+        head.next = nil
+        tail = head
+    }
 }
