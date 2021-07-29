@@ -19,6 +19,7 @@ final class LinkedList<T> {
     }
     
     private var head: Node<T>?
+    private var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -31,13 +32,12 @@ final class LinkedList<T> {
     func addLast(data: T?) {
         if head == nil {
             head = Node(data: data)
+            tail = head
             return
         }
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: data)
+        let copiedTail = Node(data: data)
+        tail?.next = copiedTail
+        tail = copiedTail
     }
     
     func removeFirst() -> T? {
@@ -47,6 +47,7 @@ final class LinkedList<T> {
         let copiedHead = head
         let value = copiedHead?.data
         head = copiedHead?.next
+        tail = head
         copiedHead?.next = nil
         return value
     }
