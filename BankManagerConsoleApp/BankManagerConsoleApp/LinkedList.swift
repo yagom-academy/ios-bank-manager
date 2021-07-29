@@ -13,7 +13,7 @@ struct LinkedList<T> {
     private var count: Int = 0
     
     func isEmpty() -> Bool {
-        return count == 0
+        return head == nil
     }
     
     mutating func append(_ value: T) {
@@ -27,18 +27,12 @@ struct LinkedList<T> {
         increaseCount()
     }
     
-    mutating func checkFirst() -> T? {
-        if isEmpty() {
-            return nil
-        }
+    mutating func checkValueOfFirstNode() -> T? {
         return head?.value
     }
     
-    mutating func remove() -> T? {
-        if isEmpty() {
-            return nil
-        }
-        guard let checkedNode = checkFirst() else { return nil }
+    mutating func removeFirstNode() -> T? {
+        guard let checkedNode = checkValueOfFirstNode() else { return nil }
         let nextNode = head?.next
         head?.value = nil
         head?.next = nil

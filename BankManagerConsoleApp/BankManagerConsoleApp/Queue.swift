@@ -15,7 +15,7 @@ struct Queue<T> {
     }
     
     mutating func dequeue() -> T? {
-        return linkedList.remove()
+        return linkedList.removeFirstNode()
     }
     
     mutating func clear() {
@@ -23,7 +23,7 @@ struct Queue<T> {
     }
     
     mutating func peek() -> T? {
-        return linkedList.checkFirst()
+        return linkedList.checkValueOfFirstNode()
     }
     
     mutating func isEmpty() -> Bool {
