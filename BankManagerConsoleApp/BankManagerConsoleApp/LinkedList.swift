@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LinkedList<T> {
+class LinkedList<T> {
     private var head: Node<T>? = nil
     private var tail: Node<T>? = nil
     private var count: Int = 0
@@ -16,7 +16,7 @@ struct LinkedList<T> {
         return head == nil
     }
     
-    mutating func append(_ value: T) {
+    func append(_ value: T) {
         let newNode = Node<T>(value: value)
         if isEmpty() {
             head = newNode
@@ -24,35 +24,22 @@ struct LinkedList<T> {
             tail?.next = newNode
         }
         tail = newNode
-        increaseCount()
     }
     
-    mutating func checkValueOfFirstNode() -> T? {
+    func bringValueOfFirst() -> T? {
         return head?.value
     }
     
-    mutating func removeFirstNode() -> T? {
-        guard let checkedNode = checkValueOfFirstNode() else { return nil }
-        let nextNode = head?.next
-        head?.value = nil
-        head?.next = nil
-        head = nextNode
-        decreaseCount()
-        
-        return checkedNode
+    func removeFirst() -> T? {
+        defer {
+            head = head?.next
+        }
+        return head?.value
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
         tail = nil
         count = 0
-    }
-    
-    mutating func increaseCount() {
-        count += 1
-    }
-    
-    mutating func decreaseCount() {
-        count -= 1
     }
 }
