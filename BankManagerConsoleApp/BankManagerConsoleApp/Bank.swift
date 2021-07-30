@@ -17,4 +17,9 @@ class Bank {
         customerQueue.clear()
         totalNumberOfVisitors = .zero
     }
+    
+    func takeNumberTicket() -> UInt {
+        totalNumberOfVisitors += 1
+        return totalNumberOfVisitors
+    }
 }
