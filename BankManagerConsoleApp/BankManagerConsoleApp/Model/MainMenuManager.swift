@@ -32,7 +32,7 @@ class MainManager {
     public func start() {
         userInput.receiveUserInput()
         if userInput.isChoosefirstSelection == true {
-
+            bankManager.openBank()
         }
     }
 }

@@ -6,10 +6,7 @@
 
 import Foundation
 
-//var main = MainManager()
-//
-//main.start()
-
 let main = MainManager()
 main.start()
 
+Date

@@ -14,9 +14,9 @@ enum BankManagerMessage {
     var description: String {
         switch self {
         case .workStart:
-            return "고객 대출업무 시작"
+            return "고객 업무 시작"
         case .workComplete:
-            return "고객 예금업무 시작"
+            return "고객 업무 종료"
         case .bankIsClosed:
             return "업무가 마감되었습니다."
         }
@@ -25,11 +25,12 @@ enum BankManagerMessage {
 
 class BankManager {
     
-    let numberOfCustomer: Int
-    let watingQueue = LinkedListQueue<Int32>()
+    private(set) var numberOfCustomer: Int
+    private let watingQueue = LinkedListQueue<Int>()
+    private let workingSpeed = UInt32(0.7)
     
     init() {
-        numberOfCustomer = Int.random(in: 1...30)
+        numberOfCustomer = Int.random(in: 10...30)
         print(numberOfCustomer)
     }
     
@@ -40,16 +41,16 @@ class BankManager {
     
     private func insertCustomerWatingQueue() {
         for customer in 1...numberOfCustomer {
-            watingQueue.enqueue(value: Int32(customer))
+            watingQueue.enqueue(value: Int(customer))
         }
     }
     
     private func workStart() {
         repeat {
-            guard let watingNumber: Int32 = watingQueue.dequeue() else { return }
+            guard let watingNumber: Int = watingQueue.dequeue() else { return }
             print("\(watingNumber)번" + BankManagerMessage.workStart.description)
-            sleep(UInt32(watingNumber))
+            sleep(UInt32(workingSpeed))
             print("\(watingNumber)번" + BankManagerMessage.workComplete.description)
-        } while watingQueue.isEmpty() == true
+        } while watingQueue.isEmpty() != true
     }
 }
