@@ -7,26 +7,12 @@
 
 import Foundation
 
+typealias TaskResult = (UInt, Double)
+
 class Bank {
-    enum TaskMessage {
-        case beginning
-        case completion
-        
-        func showMessage(number: Int) -> String {
-            switch self {
-            case .beginning:
-                return "\(number)번 고객 업무 시작"
-            case .completion:
-                return "\(number)번 고객 업무 완료"
-            }
-        }
-    }
-    
     var clientQueue: Queue<Client> = Queue<Client>()
     var bankTellerQueue: Queue<BankTeller> = Queue<BankTeller>()
-    var openingHour: TimeInterval = 0
-    var closingHour: TimeInterval = 0
-    var numberOfClient: UInt = 0
+    var queueTicketNumber: UInt = 1
     
     init(numberOfBankTeller: UInt = 1) {
         for _ in 1...numberOfBankTeller {
@@ -34,19 +20,37 @@ class Bank {
         }
     }
     
-    func finishWork() {
-        
+    func issueQueueTicket(to client: Client) {
+        client.setQueueTicket(queueTicket: queueTicketNumber)
+        queueTicketNumber += 1
     }
     
-    func showClosingMessage() {
-        
+    func receiveClient(clients: [Client]) {
+        for client in clients {
+            issueQueueTicket(to: client)
+            clientQueue.enqueue(value: client)
+        }
     }
     
-    func receiveClient() {
-        
+    private func calculateTotalTaskTime(start: DispatchTime, end: DispatchTime) -> Double {
+        return Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
     }
     
-    func doTask() {
+    func doTask() -> TaskResult {
+        let startTime = DispatchTime.now()
         
+        while !clientQueue.isEmpty() {
+            if !bankTellerQueue.isEmpty(),
+               let client = clientQueue.dequeue(),
+               let bankTeller = bankTellerQueue.dequeue() {
+                bankTeller.handleTask(with: client)
+                bankTellerQueue.enqueue(value: bankTeller)
+            }
+        }
+        
+        let endTime = DispatchTime.now()
+        let totalTaskTIme = calculateTotalTaskTime(start: startTime, end: endTime)
+        
+        return (queueTicketNumber, totalTaskTIme)
     }
 }
