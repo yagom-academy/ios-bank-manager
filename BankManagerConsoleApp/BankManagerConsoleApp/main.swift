@@ -39,5 +39,7 @@ func makeCustomerQueue() -> Queue<Customer> {
 while true {
     guard decideToStartProgram() == .excute else { break }
     let customerQueue = makeCustomerQueue()
-
+    var yagomBank = Bank(customer: customerQueue)
+    yagomBank.open()
+    yagomBank.close()
 }
