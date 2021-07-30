@@ -31,8 +31,15 @@ struct BankManager {
         print("잘못된 입력 입니다.")
     }
     
+    func customNuberFormatter(number: Double, dotDigit: Int = 2) -> Double {
+        let powNumber = pow(10.0, Double(dotDigit))
+        let multipliedPowNumber = Int(number * powNumber)
+        let dividedNumber = Double(multipliedPowNumber) / powNumber
+        return dividedNumber
+    }
+    
     private func showClosingMessage(numberOfClient: UInt, totalTaskTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(totalTaskTime)초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(customNuberFormatter(number: totalTaskTime))초 입니다.")
     }
     
     private func inputFromUser() -> Menu {
@@ -49,8 +56,8 @@ struct BankManager {
     private func generateClients() -> [Client] {
         var clients: [Client] = []
         let minimumClientCount = 10
-        let maximunClientCOunt = 30
-        let randomNumber = Int.random(in: minimumClientCount...maximunClientCOunt)
+        let maximunClientCount = 30
+        let randomNumber = Int.random(in: minimumClientCount...maximunClientCount)
         
         for _ in 0..<randomNumber {
             let client = Client()
