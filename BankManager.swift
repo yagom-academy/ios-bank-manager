@@ -27,11 +27,20 @@ struct Bank {
     private var customerCount: Int = 0
     private var totalTime: Double = 0
     
-    func open() {
-        
+    init(customer: Queue<Customer>) {
+        self.customerQueue = customer
+    }
+    
+    mutating func open() {
+        while let customer = customerQueue.dequeue() {
+            manager.serve(customer) {
+                totalTime += $0
+                customerCount += 1
+            }
+        }
     }
     
     func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
     }
 }
