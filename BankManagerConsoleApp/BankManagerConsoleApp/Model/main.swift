@@ -7,3 +7,5 @@
 import Foundation
 
 
+var main = MainMenu()
+main.startMainMenu()
