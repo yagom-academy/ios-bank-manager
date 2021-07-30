@@ -66,11 +66,13 @@ struct BankManager {
         return clients
     }
     
-    private func openBank() {
+    private func executeBankBusiness() {
         let clients = generateClients()
         bank.receiveClient(clients: clients)
+        bank.readyForWork()
         let (numberOfClient, totalTaskTime) = bank.doTask()
         showClosingMessage(numberOfClient: numberOfClient, totalTaskTime: totalTaskTime)
+        bank.finishWork()
     }
     
     func run() {
@@ -78,7 +80,7 @@ struct BankManager {
             let userInput = inputFromUser()
             switch userInput {
             case .openingBank:
-                openBank()
+                executeBankBusiness()
             case .exit:
                 return
             }

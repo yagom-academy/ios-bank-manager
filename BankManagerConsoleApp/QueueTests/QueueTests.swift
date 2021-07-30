@@ -2,7 +2,7 @@
 //  QueueTests.swift
 //  QueueTests
 //
-//  Created by YongHoon JJo on 2021/07/27.
+//  Created by Jost, Hosinging 2021/07/27.
 //
 
 import XCTest

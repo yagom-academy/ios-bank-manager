@@ -10,6 +10,7 @@ import Foundation
 typealias TaskReport = (UInt, Double)
 
 class Bank {
+    var bankTellers: [BankTeller] = []
     var clientQueue: Queue<Client> = Queue<Client>()
     var bankTellerQueue: Queue<BankTeller> = Queue<BankTeller>()
     
@@ -17,8 +18,21 @@ class Bank {
     
     init(numberOfBankTeller: UInt = 1) {
         for _ in 1...numberOfBankTeller {
-            bankTellerQueue.enqueue(value: BankTeller())
+            let bankTeller = BankTeller()
+            bankTellers.append(bankTeller)
         }
+    }
+    
+    func readyForWork() {
+        for bankTeller in bankTellers {
+            bankTellerQueue.enqueue(value: bankTeller)
+        }
+    }
+    
+    func finishWork() {
+        queueTicketMachine.reset()
+        clientQueue.clear()
+        bankTellerQueue.clear()
     }
     
     func issueQueueTicket(to client: Client) {
