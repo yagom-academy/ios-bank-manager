@@ -9,12 +9,11 @@ import Foundation
 
 final class LinkedList<T> {
     private final class Node<T> {
-        var data: T?
+        var data: T
         var next: Node?
         
-        init(data: T?, next: Node? = nil) {
+        init(data: T, next: Node? = nil) {
             self.data = data
-            self.next = next
         }
     }
     
@@ -29,7 +28,7 @@ final class LinkedList<T> {
         head?.data
     }
     
-    func addLast(data: T?) {
+    func addLast(data: T) {
         if isEmpty {
             head = Node(data: data)
             tail = head
