@@ -30,7 +30,7 @@ final class LinkedList<T> {
     }
     
     func addLast(data: T?) {
-        if head == nil {
+        if isEmpty {
             head = Node(data: data)
             tail = head
             return
@@ -40,7 +40,7 @@ final class LinkedList<T> {
     }
     
     func removeFirst() -> T? {
-        if head == nil {
+        if isEmpty {
             return nil
         }
         let copiedHead = head
