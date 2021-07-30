@@ -30,7 +30,7 @@ class BankManagerTest: XCTestCase {
         XCTAssertEqual(enqueuedResult, expectedResult)
     }
     
-    func test_3만들어간queue에서_dequeue를하면_queue는비어있다() {
+    func test_숫자가하나만들어간queue에서_dequeue를하면_queue는비어있다() {
         queue.enqueue(value: 3)
         
         queue.dequeue()
