@@ -26,4 +26,8 @@ class Bank {
     func hire(employees: [BankTeller]) {
         bankTellers = employees
     }
+    
+    func receive(customers: [Customer]) {
+        customers.forEach { customerQueue.enqueue($0) }
+    }
 }
