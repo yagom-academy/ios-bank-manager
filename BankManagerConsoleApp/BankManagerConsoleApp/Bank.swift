@@ -10,34 +10,39 @@ import Foundation
 typealias TaskReport = (UInt, Double)
 
 class Bank {
-    var bankTellers: [BankTeller] = []
-    var clientQueue: Queue<Client> = Queue<Client>()
-    var bankTellerQueue: Queue<BankTeller> = Queue<BankTeller>()
+    // MARK:- private Properties
+    private var bankTellers: [BankTeller] = []
+    private var clientQueue = Queue<Client>()
+    private var bankTellerQueue = Queue<BankTeller>()
+    private var queueTicketMachine = QueueTicketMachine()
     
-    var queueTicketMachine = QueueTicketMachine()
-    
+    // MARK:- initializer
     init(numberOfBankTeller: UInt = 1) {
         for _ in 1...numberOfBankTeller {
             let bankTeller = BankTeller()
             bankTellers.append(bankTeller)
         }
     }
+}
+
+// MARK:- private Methods
+extension Bank {
+    private func issueQueueTicket(to client: Client) {
+        let queueTicket = queueTicketMachine.issueQueueTicket()
+        client.setQueueTicket(queueTicket: queueTicket)
+    }
     
+    private func calculateTotalTaskTime(start: DispatchTime, end: DispatchTime) -> Double {
+        return Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
+    }
+}
+
+// MARK:- internal Methods (BankManager executeBankBusiness() 에서 호출되는 메서드들)
+extension Bank {
     func readyForWork() {
         for bankTeller in bankTellers {
             bankTellerQueue.enqueue(value: bankTeller)
         }
-    }
-    
-    func finishWork() {
-        queueTicketMachine.reset()
-        clientQueue.clear()
-        bankTellerQueue.clear()
-    }
-    
-    func issueQueueTicket(to client: Client) {
-        let queueTicket = queueTicketMachine.issueQueueTicket()
-        client.setQueueTicket(queueTicket: queueTicket)
     }
     
     func receiveClient(clients: [Client]) {
@@ -45,10 +50,6 @@ class Bank {
             issueQueueTicket(to: client)
             clientQueue.enqueue(value: client)
         }
-    }
-    
-    private func calculateTotalTaskTime(start: DispatchTime, end: DispatchTime) -> Double {
-        return Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
     }
     
     func doTask() -> TaskReport {
@@ -68,5 +69,11 @@ class Bank {
         let numberOfClient = queueTicketMachine.getCurrentTicketNumber()
         
         return (numberOfClient, totalTaskTIme)
+    }
+    
+    func finishWork() {
+        queueTicketMachine.reset()
+        clientQueue.clear()
+        bankTellerQueue.clear()
     }
 }

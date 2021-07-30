@@ -8,9 +8,11 @@
 import Foundation
 
 class Node<T> {
+    // MARK:- Properties
     var value: T
     var next: Node?
     
+    // MARK:- initializer
     init(value: T) {
         self.value = value
     }

@@ -22,10 +22,12 @@ class BankTeller {
         }
     }
     
+    // MARK:- private Method
     private func showMessage(taskMessage: TaskMessage, number: UInt) {
         print(taskMessage.notifyMessage(by: number))
     }
     
+    // MARK:- internal Method
     func handleTask(with client: Client) {
         guard let queueTicket = client.submitQueueTicket() else {
             return

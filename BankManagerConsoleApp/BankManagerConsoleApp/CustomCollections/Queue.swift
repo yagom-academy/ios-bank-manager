@@ -8,9 +8,11 @@
 import Foundation
 
 class Queue<T> {
+    // MARK:- private Properties
     private var head: Node<T>?
     private var tail: Node<T>?
     
+    // MARK:- Methods
     func isEmpty() -> Bool {
         return head == nil
     }

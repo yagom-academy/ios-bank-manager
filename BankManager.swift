@@ -12,36 +12,17 @@ struct BankManager {
         case exit = 2
     }
     
+    // MARK:- Property
     private let bank: Bank
     
+    // MARK:- initializer
     init() {
         self.bank = Bank()
     }
-    
-    private func showMenu() {
-        let menu = """
-            1 : 은행개점
-            2 : 종료
-            입력 :
-            """
-        print(menu, terminator: " ")
-    }
-    
-    private func showWrongInputMessage() {
-        print("잘못된 입력 입니다.")
-    }
-    
-    func customNuberFormatter(number: Double, dotDigit: Int = 2) -> Double {
-        let powNumber = pow(10.0, Double(dotDigit))
-        let multipliedPowNumber = Int(number * powNumber)
-        let dividedNumber = Double(multipliedPowNumber) / powNumber
-        return dividedNumber
-    }
-    
-    private func showClosingMessage(numberOfClient: UInt, totalTaskTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(customNuberFormatter(number: totalTaskTime))초 입니다.")
-    }
-    
+}
+
+// MARK:- run() related Methods
+extension BankManager {
     private func inputFromUser() -> Menu {
         showMenu()
         guard let input = readLine(),
@@ -51,19 +32,6 @@ struct BankManager {
             return inputFromUser()
         }
         return menuNumber
-    }
-    
-    private func generateClients() -> [Client] {
-        var clients: [Client] = []
-        let minimumClientCount = 10
-        let maximunClientCount = 30
-        let randomNumber = Int.random(in: minimumClientCount...maximunClientCount)
-        
-        for _ in 0..<randomNumber {
-            let client = Client()
-            clients.append(client)
-        }
-        return clients
     }
     
     private func executeBankBusiness() {
@@ -85,5 +53,48 @@ struct BankManager {
                 return
             }
         }
+    }
+}
+
+// MARK:- print() related Methods
+extension BankManager {
+    private func showMenu() {
+        let menu = """
+            1 : 은행개점
+            2 : 종료
+            입력 :
+            """
+        print(menu, terminator: " ")
+    }
+    
+    private func showWrongInputMessage() {
+        print("잘못된 입력 입니다.")
+    }
+    
+    private func showClosingMessage(numberOfClient: UInt, totalTaskTime: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(customNuberFormatter(number: totalTaskTime))초 입니다.")
+    }
+}
+
+// MARK:- ETC. private Methods
+extension BankManager {
+    private func customNuberFormatter(number: Double, dotDigit: Int = 2) -> Double {
+        let powNumber = pow(10.0, Double(dotDigit))
+        let multipliedPowNumber = Int(number * powNumber)
+        let dividedNumber = Double(multipliedPowNumber) / powNumber
+        return dividedNumber
+    }
+    
+    private func generateClients() -> [Client] {
+        var clients: [Client] = []
+        let minimumClientCount = 10
+        let maximunClientCount = 30
+        let randomNumber = Int.random(in: minimumClientCount...maximunClientCount)
+        
+        for _ in 0..<randomNumber {
+            let client = Client()
+            clients.append(client)
+        }
+        return clients
     }
 }

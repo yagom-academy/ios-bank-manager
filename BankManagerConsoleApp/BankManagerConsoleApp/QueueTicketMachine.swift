@@ -8,8 +8,10 @@
 import Foundation
 
 struct QueueTicketMachine {
-    var queueTicketNumber: UInt = 0
+    // MARK:- private Property
+    private var queueTicketNumber: UInt = 0
     
+    // MARK:- internal Methods
     mutating func issueQueueTicket() -> UInt {
         queueTicketNumber += 1
         return queueTicketNumber
