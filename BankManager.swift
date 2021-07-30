@@ -18,4 +18,10 @@ class BankManager {
         let maximumCustomerNumber: UInt = 30
         return UInt.random(in: minimumCustomerNumber...maximumCustomerNumber)
     }
+    
+    func createCustomers() -> [Customer] {
+        return [0..<generateRandomCustomerNumber()].map { _ in
+            return Customer(desiredTask: .unspecified, waitingNumber: bank.takeNumberTicket())
+        }
+    }
 }
