@@ -21,8 +21,8 @@ struct Queue<T> {
     func enqueue(data: T) {
         list.addLast(data: data)
     }
-    @discardableResult
-    func dequeue() -> T? {
+    
+    @discardableResult func dequeue() -> T? {
         list.removeFirst()
     }
     
