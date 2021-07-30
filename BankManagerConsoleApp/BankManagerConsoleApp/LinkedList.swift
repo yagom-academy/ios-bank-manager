@@ -22,11 +22,11 @@ final class LinkedList<T> {
     private weak var tail: Node<T>?
     
     var isEmpty: Bool {
-        return head == nil
+        head == nil
     }
     
     var first: T? {
-        return head?.data
+        head?.data
     }
     
     func addLast(data: T?) {
