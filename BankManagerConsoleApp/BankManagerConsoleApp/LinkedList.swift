@@ -6,13 +6,13 @@
 
 import Foundation
 
-struct LinkedList<T> {
+class LinkedList<T> {
     var head: Node<T>?
     var isEmpty: Bool {
         return head == nil
     }
     
-    mutating func append(_ appendingNode: Node<T>) {
+    func append(_ appendingNode: Node<T>) {
         if isEmpty {
             head = appendingNode
             return
@@ -24,13 +24,13 @@ struct LinkedList<T> {
         node?.next = appendingNode
     }
     
-    mutating func removeFirst() {
+    func removeFirst() {
         if isEmpty == false {
             head = head?.next
         }
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
     }
 }
