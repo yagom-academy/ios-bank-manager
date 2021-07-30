@@ -38,6 +38,7 @@ struct LinkedList<T> {
         head?.next = nil
         head = nextNode
         decreaseCount()
+        
         return checkedNode
     }
     

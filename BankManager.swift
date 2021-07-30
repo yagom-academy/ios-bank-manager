@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    let workTime: Double
+    let workTime: Double? = 0
     
     func startWork(_ customerNumber: Int) {
         for index in 1...customerNumber {
