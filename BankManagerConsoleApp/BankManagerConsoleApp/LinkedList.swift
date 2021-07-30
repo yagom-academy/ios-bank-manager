@@ -35,9 +35,8 @@ final class LinkedList<T> {
             tail = head
             return
         }
-        let copiedTail = Node(data: data)
-        tail?.next = copiedTail
-        tail = copiedTail
+        tail?.next = Node(data: data)
+        tail = tail?.next
     }
     
     func removeFirst() -> T? {
