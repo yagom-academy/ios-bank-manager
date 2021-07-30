@@ -8,21 +8,14 @@
 import Foundation
 
 struct Bank {
-    let banker: Int?
     let customer: Customer
     let customerQueue = BankManagerQueue<Int>()
+    let banker: Banker
     
     func initCustomerQueue() {
-        for customer in 1...customer.numbers {
+        for customer in Int.one...customer.numbers {
             customerQueue.enqueue(data: customer)
         }
     }
     
-    func begenToWork() {
-        if let startCurrentCustomer = customerQueue.peek(),
-           let finishCurrentCustomer = customerQueue.dequeue() {
-            print("\(startCurrentCustomer) 번 고객업무 시작")
-            print("\(finishCurrentCustomer) 번 고객업무 완료")
-        }
-    }
 }

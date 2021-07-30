@@ -8,5 +8,5 @@
 import Foundation
 
 struct Customer {
-    let numbers = Int.random(in: 10..<30)
+    let numbers = Int.random(in: Int.ten..<Int.thirty)
 }
