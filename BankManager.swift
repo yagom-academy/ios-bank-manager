@@ -8,6 +8,13 @@ import Foundation
 
 struct BankManager {
     let processingTime: Double = 0.7
+    
+    func serve(_ customer: Customer, completion: (Double) -> Void) {
+        print("\(customer.waitingNumber)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: processingTime)
+        print("\(customer.waitingNumber)번 고객 업무 완료")
+        completion(processingTime)
+    }
 }
 
 struct Customer {
