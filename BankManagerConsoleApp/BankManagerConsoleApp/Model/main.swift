@@ -6,6 +6,10 @@
 
 import Foundation
 
+//var main = MainManager()
+//
+//main.start()
 
-var main = MainMenu()
-main.startMainMenu()
+let main = MainManager()
+main.start()
+

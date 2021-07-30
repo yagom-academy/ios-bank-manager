@@ -24,12 +24,25 @@ enum MainMenuMessage {
     }
 }
 
-struct MainMenu {
+class MainManager {
+    
+    let userInput = UserInputManager()
+    let bankManager = BankManager()
+    
+    public func start() {
+        userInput.receiveUserInput()
+        if userInput.isChoosefirstSelection == true {
+
+        }
+    }
+}
+
+class UserInputManager {
     
     private var userInput: String?
     
-    public mutating func startMainMenu() {
-        beginToReceiveUserInput()
+    public func receiveUserInput() {
+        repeatUntilCollectSelection()
     }
     
     private func displayMainMenuMessage() {
@@ -38,21 +51,20 @@ struct MainMenu {
         print(MainMenuMessage.userInput.description, terminator: "")
     }
     
-    private mutating func beginToReceiveUserInput() {
-        let wrongUserInput: Bool = self.userInput != Optional("1")
-                                && self.userInput != Optional("2")
-        repeat {
-            displayMainMenuMessage()
-            getUserInput()
-        } while wrongUserInput == false
-    }
-    
-    private mutating func getUserInput() {
+    private func getUserInput() {
         self.userInput = readLine()
     }
     
-    private func unwrapUserInput() -> String {
-        guard let userInputResult = self.userInput else { return "" }
-        return userInputResult
+    private func repeatUntilCollectSelection() {
+            displayMainMenuMessage()
+            getUserInput()
+    }
+    
+    public var isChoosefirstSelection: Bool {
+        if self.userInput == Optional("1") {
+            return true
+        } else {
+            return false
+        }
     }
 }
