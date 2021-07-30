@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LinkedListQueue<T> {
+class LinkedListQueue<T> {
     
     private let list = LinkedList<T>()
     
@@ -15,19 +15,19 @@ struct LinkedListQueue<T> {
         return list.headValue
     }
     
-    mutating func enqueue(value: T) {
+    func enqueue(value: T) {
         list.append(value: value)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         return list.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         list.removeAll()
     }
     
-    mutating func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return list.headIsEmpty
     }
 }

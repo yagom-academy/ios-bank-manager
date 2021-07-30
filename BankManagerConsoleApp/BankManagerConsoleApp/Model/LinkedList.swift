@@ -37,9 +37,6 @@ class LinkedList<T> {
     func removeFirst() -> T? {
         defer {
             head = head?.next
-            if headIsEmpty {
-                tail = nil
-            }
         }
         return head?.value
     }
