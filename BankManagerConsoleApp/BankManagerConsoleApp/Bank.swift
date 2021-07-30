@@ -13,7 +13,7 @@ class Bank {
     var customerQueue = Queue<Customer>()
     var totalNumberOfVisitors: UInt = .zero
     
-    func reset() {
+    func close() {
         numberOfBankTellers = .zero
         bankTellerQueue.clear()
         customerQueue.clear()
@@ -36,6 +36,7 @@ class Bank {
     
     func serveCustomers() {
         let semaphore = DispatchSemaphore(value: numberOfBankTellers)
+        let group = DispatchGroup()
         while let currentCustomer = customerQueue.dequeue() {
             semaphore.wait()
             guard let bankTeller = bankTellerQueue.dequeue() else {
@@ -43,11 +44,14 @@ class Bank {
                 semaphore.signal()
                 continue
             }
+            group.enter()
             DispatchQueue.global().async {
                 bankTeller.serve(customer: currentCustomer)
                 self.bankTellerQueue.enqueue(bankTeller)
                 semaphore.signal()
+                group.leave()
             }
         }
+        group.wait()
     }
 }
