@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		273CFCC826B14B4700B338E0 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC726B14B4700B338E0 /* LinkedList.swift */; };
 		273CFCCA26B15CB600B338E0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC926B15CB600B338E0 /* Queue.swift */; };
+		273CFCEC26B3EDFB00B338E0 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCEB26B3EDFB00B338E0 /* LinkedListTests.swift */; };
+		273CFCF126B3EFD400B338E0 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC726B14B4700B338E0 /* LinkedList.swift */; };
 		435AD78626B255E100F4BB8C /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435AD78526B255E100F4BB8C /* QueueTests.swift */; };
 		435AD78B26B255EA00F4BB8C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC926B15CB600B338E0 /* Queue.swift */; };
 		435AD78F26B2574B00F4BB8C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC726B14B4700B338E0 /* LinkedList.swift */; };
@@ -31,6 +33,9 @@
 /* Begin PBXFileReference section */
 		273CFCC726B14B4700B338E0 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		273CFCC926B15CB600B338E0 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		273CFCE926B3EDFB00B338E0 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		273CFCEB26B3EDFB00B338E0 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
+		273CFCED26B3EDFB00B338E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435AD78326B255E100F4BB8C /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		435AD78526B255E100F4BB8C /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		435AD78726B255E100F4BB8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,6 +45,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		273CFCE626B3EDFB00B338E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		435AD78026B255E100F4BB8C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		273CFCEA26B3EDFB00B338E0 /* LinkedListTests */ = {
+			isa = PBXGroup;
+			children = (
+				273CFCEB26B3EDFB00B338E0 /* LinkedListTests.swift */,
+				273CFCED26B3EDFB00B338E0 /* Info.plist */,
+			);
+			path = LinkedListTests;
+			sourceTree = "<group>";
+		};
 		435AD78426B255E100F4BB8C /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +92,7 @@
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				435AD78426B255E100F4BB8C /* QueueTests */,
+				273CFCEA26B3EDFB00B338E0 /* LinkedListTests */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +102,7 @@
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
 				435AD78326B255E100F4BB8C /* QueueTests.xctest */,
+				273CFCE926B3EDFB00B338E0 /* LinkedListTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +121,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		273CFCE826B3EDFB00B338E0 /* LinkedListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 273CFCF026B3EDFB00B338E0 /* Build configuration list for PBXNativeTarget "LinkedListTests" */;
+			buildPhases = (
+				273CFCE526B3EDFB00B338E0 /* Sources */,
+				273CFCE626B3EDFB00B338E0 /* Frameworks */,
+				273CFCE726B3EDFB00B338E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LinkedListTests;
+			productName = LinkedListTests;
+			productReference = 273CFCE926B3EDFB00B338E0 /* LinkedListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		435AD78226B255E100F4BB8C /* QueueTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 435AD78826B255E100F4BB8C /* Build configuration list for PBXNativeTarget "QueueTests" */;
@@ -141,6 +181,9 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
+					273CFCE826B3EDFB00B338E0 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					435AD78226B255E100F4BB8C = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -164,11 +207,19 @@
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
 				435AD78226B255E100F4BB8C /* QueueTests */,
+				273CFCE826B3EDFB00B338E0 /* LinkedListTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		273CFCE726B3EDFB00B338E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		435AD78126B255E100F4BB8C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -179,6 +230,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		273CFCE526B3EDFB00B338E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				273CFCF126B3EFD400B338E0 /* LinkedList.swift in Sources */,
+				273CFCEC26B3EDFB00B338E0 /* LinkedListTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		435AD77F26B255E100F4BB8C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +263,44 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		273CFCEE26B3EDFB00B338E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 6BGZ2P844G;
+				INFOPLIST_FILE = LinkedListTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamking.LinkedListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		273CFCEF26B3EDFB00B338E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 6BGZ2P844G;
+				INFOPLIST_FILE = LinkedListTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamking.LinkedListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		435AD78926B255E100F4BB8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -375,6 +473,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		273CFCF026B3EDFB00B338E0 /* Build configuration list for PBXNativeTarget "LinkedListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				273CFCEE26B3EDFB00B338E0 /* Debug */,
+				273CFCEF26B3EDFB00B338E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		435AD78826B255E100F4BB8C /* Build configuration list for PBXNativeTarget "QueueTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

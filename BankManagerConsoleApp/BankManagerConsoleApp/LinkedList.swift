@@ -38,7 +38,7 @@ final class LinkedList<T> {
         tail = tail?.next
     }
     
-    func removeFirst() -> T? {
+    @discardableResult func removeFirst() -> T? {
         if isEmpty {
             return nil
         }
