@@ -22,4 +22,8 @@ class Bank {
         totalNumberOfVisitors += 1
         return totalNumberOfVisitors
     }
+    
+    func hire(employees: [BankTeller]) {
+        bankTellers = employees
+    }
 }
