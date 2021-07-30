@@ -7,12 +7,13 @@
 
 import Foundation
 
-typealias TaskResult = (UInt, Double)
+typealias TaskReport = (UInt, Double)
 
 class Bank {
     var clientQueue: Queue<Client> = Queue<Client>()
     var bankTellerQueue: Queue<BankTeller> = Queue<BankTeller>()
-    var queueTicketNumber: UInt = 1
+    
+    var queueTicketMachine = QueueTicketMachine()
     
     init(numberOfBankTeller: UInt = 1) {
         for _ in 1...numberOfBankTeller {
@@ -21,8 +22,8 @@ class Bank {
     }
     
     func issueQueueTicket(to client: Client) {
-        client.setQueueTicket(queueTicket: queueTicketNumber)
-        queueTicketNumber += 1
+        let queueTicket = queueTicketMachine.issueQueueTicket()
+        client.setQueueTicket(queueTicket: queueTicket)
     }
     
     func receiveClient(clients: [Client]) {
@@ -36,7 +37,7 @@ class Bank {
         return Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
     }
     
-    func doTask() -> TaskResult {
+    func doTask() -> TaskReport {
         let startTime = DispatchTime.now()
         
         while !clientQueue.isEmpty() {
@@ -50,7 +51,8 @@ class Bank {
         
         let endTime = DispatchTime.now()
         let totalTaskTIme = calculateTotalTaskTime(start: startTime, end: endTime)
+        let numberOfClient = queueTicketMachine.getCurrentTicketNumber()
         
-        return (queueTicketNumber, totalTaskTIme)
+        return (numberOfClient, totalTaskTIme)
     }
 }
