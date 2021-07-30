@@ -11,4 +11,10 @@ class Bank {
     var bankTellers = [BankTeller]()
     var customerQueue = Queue<Customer>()
     var totalNumberOfVisitors: UInt = .zero
+    
+    func reset() {
+        bankTellers.removeAll()
+        customerQueue.clear()
+        totalNumberOfVisitors = .zero
+    }
 }
