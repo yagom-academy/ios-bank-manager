@@ -19,7 +19,7 @@ final class LinkedList<T> {
     }
     
     private var head: Node<T>?
-    private var tail: Node<T>?
+    private weak var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -44,9 +44,8 @@ final class LinkedList<T> {
             return nil
         }
         let copiedHead = head
-        let value = copiedHead?.data
+        let value = head?.data
         head = copiedHead?.next
-        tail = head
         copiedHead?.next = nil
         return value
     }
