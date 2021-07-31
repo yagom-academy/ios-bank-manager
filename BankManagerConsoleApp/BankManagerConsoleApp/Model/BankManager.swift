@@ -27,11 +27,9 @@ class BankManager {
     
     private(set) var numberOfCustomer: Int
     private let watingQueue = LinkedListQueue<Int>()
-    private let workingSpeed = UInt32(0.7)
     
     init() {
         numberOfCustomer = Int.random(in: 10...30)
-        print(numberOfCustomer)
     }
     
     func openBank() {
@@ -47,6 +45,7 @@ class BankManager {
     
     private func workStart() {
         repeat {
+            let workingSpeed = UInt32(0.7)
             guard let watingNumber: Int = watingQueue.dequeue() else { return }
             print("\(watingNumber)번" + BankManagerMessage.workStart.description)
             sleep(UInt32(workingSpeed))
