@@ -5,3 +5,9 @@
 // 
 
 import Foundation
+
+var queue = Queue(initialValue: 3)
+queue.enqueue(value: 4)
+queue.enqueue(value: 5)
+
+print(queue)
