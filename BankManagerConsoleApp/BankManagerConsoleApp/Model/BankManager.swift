@@ -34,7 +34,7 @@ class BankManager {
         print(numberOfCustomer)
     }
     
-    public func openBank() {
+    func openBank() {
         insertCustomerWatingQueue()
         workStart()
     }

@@ -41,11 +41,11 @@ class UserInputManager {
     
     private var userInput: String?
     
-    public func receiveUserInput() {
+    func receiveUserInput() {
         repeatUntilCollectSelection()
     }
     
-    private func displayMainMenuMessage() {
+    func displayMainMenuMessage() {
         print(MainMenuMessage.firstSelection.description)
         print(MainMenuMessage.secondSelection.description)
         print(MainMenuMessage.userInput.description, terminator: "")
@@ -60,7 +60,7 @@ class UserInputManager {
             getUserInput()
     }
     
-    public var isChoosefirstSelection: Bool {
+    var isChoosefirstSelection: Bool {
         if self.userInput == Optional("1") {
             return true
         } else {
