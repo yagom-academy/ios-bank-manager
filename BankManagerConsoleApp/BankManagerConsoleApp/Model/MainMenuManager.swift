@@ -77,16 +77,10 @@ struct UserInputManager {
         while userInput != firstSelection && userInput != secondSelection {
             displayMainMenuMessage()
             getUserInput()
-            isCollectSelection()
-        }
-    }
-    
-    private func isCollectSelection() {
-        let firstSelection = Optional("1")
-        let secondSelection = Optional("2")
-        
-        if userInput != firstSelection && userInput != secondSelection {
-            print(MainMenuMessage.wrongInput.description)
+            
+            if userInput != firstSelection && userInput != secondSelection {
+                print(MainMenuMessage.wrongInput.description)
+            }
         }
     }
 }
