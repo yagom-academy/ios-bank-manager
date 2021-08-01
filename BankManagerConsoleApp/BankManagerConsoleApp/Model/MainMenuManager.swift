@@ -41,9 +41,10 @@ class MainManager {
 
 struct UserInputManager {
     private var userInput: String?
+    private let firstSelection = Optional("1")
+    private let secondSelection = Optional("2")
     
     var canStartProgram: Bool {
-        let firstSelection = Optional("1")
         if self.userInput == firstSelection {
             return true
         } else {
@@ -65,22 +66,17 @@ struct UserInputManager {
         self.userInput = readLine()
     }
     
-    private mutating func unwrapUserInput() {
-        guard let unwrapUserInput: String = self.userInput else { return }
-        userInput = unwrapUserInput
+    private func displayIncorrectInput() {
+        if userInput != firstSelection && userInput != secondSelection {
+            print(MainMenuMessage.wrongInput.description)
+        }
     }
     
     private mutating func repeatUntilCollectSelection() {
-        let firstSelection = Optional("1")
-        let secondSelection = Optional("2")
-        
         while userInput != firstSelection && userInput != secondSelection {
             displayMainMenuMessage()
             getUserInput()
-            
-            if userInput != firstSelection && userInput != secondSelection {
-                print(MainMenuMessage.wrongInput.description)
-            }
+            displayIncorrectInput()
         }
     }
 }
