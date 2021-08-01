@@ -32,9 +32,19 @@ class MainManager {
     private let bankManager = BankManager()
     
     public func start() {
-        userInput.receiveUserInput()
-        if userInput.canStartProgram == true {
+        if iscanStartProgram == true {
             bankManager.bankSimulator()
+        }
+    }
+    
+    private var iscanStartProgram: Bool {
+        let returnedUserInput = userInput.returnUserInput()
+        let firstSelection = Optional("1")
+        
+        if returnedUserInput == firstSelection {
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -44,15 +54,12 @@ struct UserInputManager {
     private let firstSelection = Optional("1")
     private let secondSelection = Optional("2")
     
-    var canStartProgram: Bool {
-        if self.userInput == firstSelection {
-            return true
-        } else {
-            return false
-        }
+    mutating func returnUserInput() -> String? {
+        receiveUserInput()
+        return userInput
     }
     
-    mutating func receiveUserInput() {
+    private mutating func receiveUserInput() {
         repeatUntilCollectSelection()
     }
     
