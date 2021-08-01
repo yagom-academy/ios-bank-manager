@@ -18,7 +18,7 @@ class BankManagerConsoleAppTests: XCTestCase {
 
     func test_큐에하나의노드를인큐했을때_큐안의노드의데이터가_인큐한노드의데이터인지() {
         let 노드 = Node<Double>(data: 1.1)
-        queue.Enqueue(node: 노드)
+        queue.enqueue(data: 노드.data)
         let 헤드의데이터 = queue.linkedList.head?.data
         XCTAssertEqual(헤드의데이터, 노드.data)
     }
@@ -27,9 +27,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         let 노드1 = Node<Double>(data: 1.1)
         let 노드2 = Node<Double>(data: 1.2)
         let 노드3 = Node<Double>(data: 1.3)
-        queue.Enqueue(node: 노드1)
-        queue.Enqueue(node: 노드2)
-        queue.Enqueue(node: 노드3)
+        queue.enqueue(data: 노드1.data)
+        queue.enqueue(data: 노드2.data)
+        queue.enqueue(data: 노드3.data)
         let 노드1의데이터 = queue.linkedList.head?.data
         let 노드2의데이터 = queue.linkedList.head?.next?.data
         let 노드3의데이터 = queue.linkedList.head?.next?.next?.data
@@ -40,7 +40,7 @@ class BankManagerConsoleAppTests: XCTestCase {
 
     func test_큐에노드1개를인큐한후_디큐했을때_큐가비었는지() {
         let 노드 = Node<Double>(data: 1.1)
-        queue.Enqueue(node: 노드)
+        queue.enqueue(data: 노드.data)
         queue.dequeue()
         XCTAssertEqual(queue.isEmpty(), true)
     }
@@ -49,9 +49,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         let 노드1 = Node<Double>(data: 1.1)
         let 노드2 = Node<Double>(data: 1.2)
         let 노드3 = Node<Double>(data: 1.3)
-        queue.Enqueue(node: 노드1)
-        queue.Enqueue(node: 노드2)
-        queue.Enqueue(node: 노드3)
+        queue.enqueue(data: 노드1.data)
+        queue.enqueue(data: 노드2.data)
+        queue.enqueue(data: 노드3.data)
         queue.dequeue()
         XCTAssertEqual(queue.linkedList.head?.data, 노드2.data)
         XCTAssertEqual(queue.linkedList.head?.next?.data, 노드3.data)
@@ -65,9 +65,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         let 노드1 = Node<Double>(data: 1.1)
         let 노드2 = Node<Double>(data: 1.2)
         let 노드3 = Node<Double>(data: 1.3)
-        queue.Enqueue(node: 노드1)
-        queue.Enqueue(node: 노드2)
-        queue.Enqueue(node: 노드3)
+        queue.enqueue(data: 노드1.data)
+        queue.enqueue(data: 노드2.data)
+        queue.enqueue(data: 노드3.data)
         let 피크한노드의데이터 = queue.peek()?.data
         XCTAssertEqual(피크한노드의데이터, 노드1.data)
     }
@@ -75,9 +75,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         let 노드1 = Node<Double>(data: 1.1)
         let 노드2 = Node<Double>(data: 1.2)
         let 노드3 = Node<Double>(data: 1.3)
-        queue.Enqueue(node: 노드1)
-        queue.Enqueue(node: 노드2)
-        queue.Enqueue(node: 노드3)
+        queue.enqueue(data: 노드1.data)
+        queue.enqueue(data: 노드2.data)
+        queue.enqueue(data: 노드3.data)
         queue.clear()
         XCTAssertEqual(queue.isEmpty(), true)
     }
