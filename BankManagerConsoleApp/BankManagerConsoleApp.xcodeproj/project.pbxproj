@@ -71,9 +71,9 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				9BD137C126B3D835000A9596 /* MainMenuManager.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				9B7C829F26AFD56D009FBB99 /* Node.swift */,
-				B44645C326AFD7E200578535 /* LinkedList.swift */,
 				B44645BF26AFD2AE00578535 /* LinkedListQueue.swift */,
+				B44645C326AFD7E200578535 /* LinkedList.swift */,
+				9B7C829F26AFD56D009FBB99 /* Node.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

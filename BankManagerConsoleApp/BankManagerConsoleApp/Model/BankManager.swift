@@ -9,7 +9,6 @@ import Foundation
 enum BankManagerMessage {
     case workStart
     case workComplete
-    case bankIsClosed
     
     var description: String {
         switch self {
@@ -17,24 +16,22 @@ enum BankManagerMessage {
             return "고객 업무 시작"
         case .workComplete:
             return "고객 업무 종료"
-        case .bankIsClosed:
-            return "업무가 마감되었습니다."
         }
     }
 }
 
-class BankManager {
-    
-    private(set) var numberOfCustomer: Int
+class BankManager {    
+    private var numberOfCustomer: Int
     private let watingQueue = LinkedListQueue<Int>()
     
     init() {
         numberOfCustomer = Int.random(in: 10...30)
     }
     
-    func openBank() {
+    func bankSimulator() {
         insertCustomerWatingQueue()
         workStart()
+        bankIsClosed(workTime: 0.7777777)
     }
     
     private func insertCustomerWatingQueue() {
@@ -51,5 +48,9 @@ class BankManager {
             sleep(UInt32(workingSpeed))
             print("\(watingNumber)번" + BankManagerMessage.workComplete.description)
         } while watingQueue.isEmpty() != true
+    }
+    
+    private func bankIsClosed(workTime: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomer)명이며, 총 업무시간은 \(String(format: "%.2f", workTime))초 입니다.")
     }
 }

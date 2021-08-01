@@ -11,6 +11,7 @@ enum MainMenuMessage {
     case firstSelection
     case secondSelection
     case userInput
+    case wrongInput
     
     var description: String {
         switch self {
@@ -20,51 +21,72 @@ enum MainMenuMessage {
             return "2 : 종료"
         case .userInput:
             return "입력 : "
+        case .wrongInput:
+            return "잘못된 입력입니다."
         }
     }
 }
 
 class MainManager {
-    
-    let userInput = UserInputManager()
-    let bankManager = BankManager()
+    private var userInput = UserInputManager()
+    private let bankManager = BankManager()
     
     public func start() {
         userInput.receiveUserInput()
-        if userInput.isChoosefirstSelection == true {
-            bankManager.openBank()
+        if userInput.canStartProgram == true {
+            bankManager.bankSimulator()
         }
     }
 }
 
-class UserInputManager {
-    
+struct UserInputManager {
     private var userInput: String?
     
-    func receiveUserInput() {
+    var canStartProgram: Bool {
+        let firstSelection = Optional("1")
+        if self.userInput == firstSelection {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    mutating func receiveUserInput() {
         repeatUntilCollectSelection()
     }
     
-    func displayMainMenuMessage() {
+    private func displayMainMenuMessage() {
         print(MainMenuMessage.firstSelection.description)
         print(MainMenuMessage.secondSelection.description)
         print(MainMenuMessage.userInput.description, terminator: "")
     }
     
-    private func getUserInput() {
+    private mutating func getUserInput() {
         self.userInput = readLine()
     }
     
-    private func repeatUntilCollectSelection() {
-            displayMainMenuMessage()
-            getUserInput()
+    private mutating func unwrapUserInput() {
+        guard let unwrapUserInput: String = self.userInput else { return }
+        userInput = unwrapUserInput
     }
     
-    var isChoosefirstSelection: Bool {
-        if self.userInput == Optional("1") {
-            return true
-        } else {
-            return false
+    private mutating func repeatUntilCollectSelection() {
+        let firstSelection = Optional("1")
+        let secondSelection = Optional("2")
+        
+        while userInput != firstSelection && userInput != secondSelection {
+            displayMainMenuMessage()
+            getUserInput()
+            isCollectSelection()
+        }
+    }
+    
+    private func isCollectSelection() {
+        let firstSelection = Optional("1")
+        let secondSelection = Optional("2")
+        
+        if userInput != firstSelection && userInput != secondSelection {
+            print(MainMenuMessage.wrongInput.description)
         }
     }
 }
