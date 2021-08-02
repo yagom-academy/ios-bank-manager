@@ -37,9 +37,11 @@ class BankManager {
     }
     
     func bankSimulator() {
+        let startTime = CFAbsoluteTimeGetCurrent()
         insertCustomerWatingQueue()
         workStart()
-        displayBankIsClosed(workTime: 0.7777777)
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        displayBankIsClosed(workTime: durationTime)
     }
     
     private func insertCustomerWatingQueue() {
@@ -49,11 +51,11 @@ class BankManager {
     }
     
     private func workStart() {
-        let workingSpeed = Double(0.7)
+        let workingTime: Double = 0.7
         repeat {
             guard let watingNumber: Int = watingQueue.dequeue() else { return }
             print(WorkStatusMessage.workStart.returnWorkStatus(number: watingNumber))
-            sleep(UInt32(workingSpeed))
+            Thread.sleep(forTimeInterval: workingTime)
             print(WorkStatusMessage.workComplete.returnWorkStatus(number: watingNumber))
         } while watingQueue.isEmpty() != true
     }
