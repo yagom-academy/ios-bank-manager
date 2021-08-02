@@ -15,7 +15,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         sut = Queue()
     }
     
-    func test_혀나블짱짱을_enqueue했을때peek해보면_혀나블짱짱이다() {
+    func test_큐를생성하고_혀나블짱짱을enqueue한뒤peek해보면_혀나블짱짱이다() {
         //given
         let expectInputValue = "혀나블 짱짱"
         //when
@@ -26,7 +26,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(expectResult, outputValue)
     }
     
-    func test_야곰짱짱을_enqueue한뒤에dequeue해보면_야곰짱짱이다() {
+    func test_큐를생성하고_야곰짱짱을enqueue한뒤에dequeue해보면_야곰짱짱이다() {
         //given
         let expectInputValue = "야곰 짱짱"
         //when
@@ -37,7 +37,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(expectResult, outputValue)
     }
     
-    func test_혀나블짱짱과야곰짱짱을_enqueue하고clear한뒤에peek해보면_nil이다() {
+    func test_큐를생성하고_혀나블짱짱과야곰짱짱을enqueue및clear한뒤에peek해보면_nil이다() {
         //given
         let expectInputValue = ["혀나블짱짱", "야곰짱짱"]
         //when
@@ -48,9 +48,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNil(outputValue)
     }
     
-    func test_조이짱짱을_enqueue하고peek한뒤에isEmpty해보면_false이다() {
+    func test_큐를생성하고_코든짱짱을enqueue및peek한뒤에isEmpty해보면_false이다() {
         //given
-        let expectInputValue = "조이짱짱"
+        let expectInputValue = "코든짱짱"
         //when
         sut.enqueue(expectInputValue)
         _ = sut.peek
@@ -59,8 +59,9 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertFalse(outputValue)
     }
     
-    func test_어떠한값도_enqueue하지않고isEmpty해보면_true이다() {
+    func test_큐를새로생성하고_isEmpty해보면_true이다() {
         //given
+        sut = Queue()
         //when
         let outputValue = sut.isEmpty
         //then
