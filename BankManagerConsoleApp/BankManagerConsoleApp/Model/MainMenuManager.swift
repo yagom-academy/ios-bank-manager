@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum MainMenuMessage {
-    case firstSelection
-    case secondSelection
+enum MainMenuMessage: String {
+    case firstSelection = "1"
+    case secondSelection = "2"
     case userInput
     case wrongInput
     
@@ -51,8 +51,6 @@ class MainManager {
 
 struct UserInputManager {
     private var userInput: String?
-    private let firstSelection = Optional("1")
-    private let secondSelection = Optional("2")
     
     mutating func returnUserInput() -> String? {
         receiveUserInput()
@@ -70,20 +68,22 @@ struct UserInputManager {
     }
     
     private mutating func repeatUntilCollectSelection() {
-        while userInput != firstSelection && userInput != secondSelection {
+        while userInput != MainMenuMessage.firstSelection.rawValue
+                && userInput != MainMenuMessage.secondSelection.rawValue {
             displayMainMenuMessage()
             getUserInput()
             displayIncorrectInput()
         }
     }
+
+    private func displayIncorrectInput() {
+        if userInput != MainMenuMessage.firstSelection.rawValue
+            && userInput != MainMenuMessage.secondSelection.rawValue {
+            print(MainMenuMessage.wrongInput.description)
+        }
+    }
     
     private mutating func receiveUserInput() {
         repeatUntilCollectSelection()
-    }
-    
-    private func displayIncorrectInput() {
-        if userInput != firstSelection && userInput != secondSelection {
-            print(MainMenuMessage.wrongInput.description)
-        }
     }
 }
