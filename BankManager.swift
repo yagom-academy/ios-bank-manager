@@ -72,19 +72,12 @@ extension BankManager {
     }
     
     private func showClosingMessage(numberOfClient: UInt, totalTaskTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(customNumberFormatter(number: totalTaskTime))초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(String(format: "%.2f", totalTaskTime))초 입니다.")
     }
 }
 
 // MARK:- ETC. private Methods
 extension BankManager {
-    private func customNumberFormatter(number: Double, dotDigit: Int = 2) -> Double {
-        let powNumber = pow(10.0, Double(dotDigit))
-        let multipliedPowNumber = Int(number * powNumber)
-        let dividedNumber = Double(multipliedPowNumber) / powNumber
-        return dividedNumber
-    }
-    
     private func generateClients() -> [Client] {
         var clients: [Client] = []
         let clientRange = ClientCount.minimumCount...ClientCount.maximunCount
