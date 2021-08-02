@@ -22,20 +22,13 @@ struct Bank {
     }
     
     func doTask() {
+        let bankClerk = BankClerk(id: 1)
         var customer: Customer?
         while !queue.isEmpty {
             customer = queue.dequeue()
-            startTask(about: customer)
+            bankClerk.startTask(about: customer)
         }
         endTask(after: customer)
-    }
-    
-    private func startTask(about customer: Customer?) {
-        guard let customer = customer else {
-            return
-        }
-        print("\(customer.id)번 고객 업무 시작")
-        print("\(customer.id)번 고객 업무 종료")
     }
     
     private func endTask(after customer: Customer?) {
