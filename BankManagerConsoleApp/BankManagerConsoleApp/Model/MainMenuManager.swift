@@ -39,9 +39,8 @@ class MainManager {
     
     private var isCanStartProgram: Bool {
         let returnedUserInput = userInput.returnUserInput()
-        let firstSelection = Optional("1")
         
-        if returnedUserInput == firstSelection {
+        if returnedUserInput == MainMenuMessage.firstSelection.rawValue {
             return true
         } else {
             return false
