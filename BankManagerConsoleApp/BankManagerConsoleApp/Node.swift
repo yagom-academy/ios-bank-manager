@@ -20,6 +20,10 @@ class Node<Value> {
         self.value = value
         self.next = next
     }
+    
+    deinit {
+        print("\(self.value)가 해제되었습니다.")
+    }
 }
 
 //MARK:-Node Print Method
