@@ -10,7 +10,7 @@ enum WorkStatusMessage {
     case workStart
     case workComplete
     
-    func displayWorkStatus(number: Int) -> String {
+    func returnWorkStatus(number: Int) -> String {
         switch self {
         case .workStart:
             return "\(number)번 고객 업무 시작"
@@ -23,8 +23,8 @@ enum WorkStatusMessage {
 enum BankIsClosedMessage {
     case bankIsClosed
     
-    func displayBankIsClosed(number: Int, time: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(number)명이며, 총 업무시간은 \(String(format: "%.2f", time))초 입니다.")
+    func returnClosedBankMessage(number: Int, time: Double) -> String {
+        return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(number)명이며, 총 업무시간은 \(String(format: "%.2f", time))초 입니다."
     }
 }
 
@@ -39,7 +39,7 @@ class BankManager {
     func bankSimulator() {
         insertCustomerWatingQueue()
         workStart()
-        bankIsClosed(workTime: 0.7777777)
+        displayBankIsClosed(workTime: 0.7777777)
     }
     
     private func insertCustomerWatingQueue() {
@@ -49,16 +49,16 @@ class BankManager {
     }
     
     private func workStart() {
+        let workingSpeed = Double(0.7)
         repeat {
-            let workingSpeed = UInt32(0.7)
             guard let watingNumber: Int = watingQueue.dequeue() else { return }
-            print(WorkStatusMessage.workStart.displayWorkStatus(number: watingNumber))
+            print(WorkStatusMessage.workStart.returnWorkStatus(number: watingNumber))
             sleep(UInt32(workingSpeed))
-            print(WorkStatusMessage.workComplete.displayWorkStatus(number: watingNumber))
+            print(WorkStatusMessage.workComplete.returnWorkStatus(number: watingNumber))
         } while watingQueue.isEmpty() != true
     }
     
-    private func bankIsClosed(workTime: Double) {
-        BankIsClosedMessage.bankIsClosed.displayBankIsClosed(number: self.numberOfCustomer, time: workTime)
+    private func displayBankIsClosed(workTime: Double) {
+        print(BankIsClosedMessage.bankIsClosed.returnClosedBankMessage(number: self.numberOfCustomer, time: workTime))
     }
 }
