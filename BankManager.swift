@@ -23,13 +23,12 @@ struct BankManager {
 
 // MARK:- run() related Methods
 extension BankManager {
-    private func inputFromUser() -> Menu {
+    private func inputFromUser() throws -> Menu {
         showMenu()
         guard let input = readLine(),
               let inputNumber = Int(input),
               let menuNumber = Menu(rawValue: inputNumber) else {
-            showWrongInputMessage()
-            return inputFromUser()
+            throw BankManagerErrorMessage.wrongInput
         }
         return menuNumber
     }
@@ -44,15 +43,22 @@ extension BankManager {
     }
     
     func run() {
-        while true {
-            let userInput = inputFromUser()
-            switch userInput {
-            case .openingBank:
-                executeBankBusiness()
-            case .exit:
-                return
+        do {
+            while true {
+                let userInput = try inputFromUser()
+                switch userInput {
+                case .openingBank:
+                    executeBankBusiness()
+                case .exit:
+                    return
+                }
             }
+        } catch let error as BankManagerErrorMessage {
+            showErrorDescription(message: error)
+        } catch {
+            print("예기치 못한 오류 발생. 프로그램을 종료합니다.")
         }
+        
     }
 }
 
@@ -67,8 +73,11 @@ extension BankManager {
         print(menu, terminator: " ")
     }
     
-    private func showWrongInputMessage() {
-        print("잘못된 입력 입니다.")
+    private func showErrorDescription(message: BankManagerErrorMessage) {
+        guard let errorDescription = message.errorDescription else {
+            return
+        }
+        print(errorDescription)
     }
     
     private func showClosingMessage(numberOfClient: UInt, totalTaskTime: Double) {
