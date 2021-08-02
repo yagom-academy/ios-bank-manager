@@ -10,10 +10,15 @@ import Foundation
 class Node<Value> {
     //MARK: Properties
     var value: Value
-    var next: Node?
+    var next: Node? = nil
     
-    init(value: Value, next: Node? = nil) {
+    init(value: Value) {
         self.value = value
+    }
+    
+    init(value: Value, next: Node?) {
+        self.value = value
+        self.next = next
     }
 }
 
