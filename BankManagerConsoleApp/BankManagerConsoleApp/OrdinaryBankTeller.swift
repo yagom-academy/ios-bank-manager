@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OrdinaryBankTeller: BankTeller {
+struct OrdinaryBankTeller: BankTeller {
     let duty: BankingTask = .unspecified
     
     func serve(customer: Customer) {
