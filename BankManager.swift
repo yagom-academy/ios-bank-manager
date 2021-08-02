@@ -9,14 +9,15 @@ import Foundation
 struct BankManager {
     private let bank = Bank()
     
-    private func choiceMenuWithGuide() -> Bank.BankStatus? {
+    private func choiceMenuWithGuide() -> Bank.Status? {
         print("1 : 은행개점")
         print("2 : 종료")
         print("입력 : ", terminator: "")
         guard let userInput = readLine(), let filterdInput = Int(userInput) else {
             return nil
         }
-        return Bank.BankStatus(rawValue: filterdInput)
+
+        return Bank.Status(rawValue: filterdInput)
     }
     
     func toggleBank() {

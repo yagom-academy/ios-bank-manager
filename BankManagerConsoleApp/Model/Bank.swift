@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    enum BankStatus: Int {
+    enum Status: Int {
         case open = 1
         case close = 2
     }
