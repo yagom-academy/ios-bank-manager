@@ -9,29 +9,33 @@ import Foundation
 
 struct Bank {
     let userInteraction = UserInteraction()
-    var customer: Customer
     let customerQueue = BankManagerQueue<Int>()
     let banker: Banker
+    var customers = Int.zero
     
     mutating func startTask() {
         while true {
             userInteraction.selectMode()
             if userInteraction.userInput() {
-                initCustomerQueue()
+                generateTodayCustomers()
+                insertCustomerQueue(of: customers)
                 while !customerQueue.isEmpty {
                     banker.doBusiness(customerQueue: customerQueue)
                 }
-                userInteraction.settlementResult(customers: customer.number)
+                userInteraction.settlementResult(customers: customers)
             } else {
                 return
             }
         }
     }
     
-    mutating func initCustomerQueue() {
-        customer.makeRandomNumber()
-        for customer in Int.one...customer.number {
+    func insertCustomerQueue(of customers: Int) {
+        for customer in Int.one...customers {
             customerQueue.enqueue(data: customer)
         }
+    }
+    
+    mutating func generateTodayCustomers() {
+        customers = Int.random(in: Int.ten..<Int.thirty)
     }
 }
