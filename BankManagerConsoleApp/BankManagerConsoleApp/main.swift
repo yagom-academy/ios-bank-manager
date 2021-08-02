@@ -5,3 +5,7 @@
 // 
 
 import Foundation
+
+let t = BankManager()
+
+t.processTask()
