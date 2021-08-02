@@ -7,23 +7,6 @@
 
 import Foundation
 
-class Node<T> {
-    var data: T!
-    var next: Node<T>?
-    
-    init(with data: T) {
-        self.data = data
-    }
-    
-    private init() {
-        self.data = nil
-    }
-    
-    fileprivate static func obtainDummyNode() -> Node<T> {
-        return Node<T>()
-    }
-}
-
 struct LinkedList<T> {
     private var head: Node<T>
     private var tail: Node<T>
