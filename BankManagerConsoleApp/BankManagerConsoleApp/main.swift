@@ -11,14 +11,14 @@ enum Decision: String {
     case exit = "2"
 }
 
-func announceMessage() {
+func displayMenu() {
     print("1 : 은행개점\n2 : 종료")
     print("입력 : ", terminator: "")
 }
 
 func decideToStartProgram() -> Decision {
     while true {
-        announceMessage()
+        displayMenu()
         if let unwrappedString = readLine(),
            let decision = Decision.init(rawValue: unwrappedString) {
             return decision
@@ -26,20 +26,20 @@ func decideToStartProgram() -> Decision {
     }
 }
 
-func makeCustomerQueue() -> Queue<Customer> {
+func makeClientQueue() -> Queue<Client> {
     let numberOfCustomers = Int.random(in: 10...30)
-    var customerQueue = Queue<Customer>()
+    var clientQueue = Queue<Client>()
     for number in 1...numberOfCustomers {
-        customerQueue.enqueue(Customer(waitingNumber: number))
+        clientQueue.enqueue(Client(waitingNumber: number))
     }
-    return customerQueue
+    return clientQueue
 }
 
 // MARK: --- main Program
 while true {
     guard decideToStartProgram() == .excute else { break }
-    let customerQueue = makeCustomerQueue()
-    var yagomBank = Bank(customer: customerQueue)
+    let clientQueue = makeClientQueue()
+    var yagomBank = BankManager(client: clientQueue)
     yagomBank.open()
     yagomBank.close()
 }
