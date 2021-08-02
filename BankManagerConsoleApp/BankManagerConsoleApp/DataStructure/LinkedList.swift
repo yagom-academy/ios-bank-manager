@@ -7,6 +7,19 @@
 
 import Foundation
 
+class Node<T> {
+    var data: T!
+    var next: Node<T>?
+    
+    init(with data: T) {
+        self.data = data
+    }
+    
+    fileprivate init() {
+        self.data = nil
+    }
+}
+
 struct LinkedList<T> {
     private var head: Node<T>
     private var tail: Node<T>
@@ -20,7 +33,7 @@ struct LinkedList<T> {
     }
     
     init() {
-        let dummyNode = Node<T>.obtainDummyNode()
+        let dummyNode = Node<T>()
         head = dummyNode
         tail = dummyNode
     }
