@@ -7,5 +7,5 @@
 import Foundation
 
 struct BankManager {
-    
+    private enum Menu { }
 }
