@@ -7,7 +7,7 @@
 import Foundation
 
 class BankManager {
-    let bank = Bank()
+    private let bank = Bank()
     
     func runBank() {
         let bankTellers = createBankTellers()
@@ -19,23 +19,23 @@ class BankManager {
         bank.close()
     }
     
-    func createBankTellers() -> [BankTeller] {
+    private func createBankTellers() -> [BankTeller] {
         return [OrdinaryBankTeller()]
     }
     
-    func generateRandomCustomerNumber() -> UInt {
+    private func generateRandomCustomerNumber() -> UInt {
         let minimumCustomerNumber: UInt = 10
         let maximumCustomerNumber: UInt = 30
         return UInt.random(in: minimumCustomerNumber...maximumCustomerNumber)
     }
     
-    func createCustomers() -> [Customer] {
+    private func createCustomers() -> [Customer] {
         return Array(0..<generateRandomCustomerNumber()).map { _ in
             return Customer(desiredTask: .unspecified, waitingNumber: bank.takeNumberTicket())
         }
     }
     
-    func trackTime(while job: () -> ()) -> TimeInterval {
+    private func trackTime(while job: () -> ()) -> TimeInterval {
         let startTime = Date()
         job()
         return Date().timeIntervalSince(startTime)
