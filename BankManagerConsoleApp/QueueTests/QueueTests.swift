@@ -16,8 +16,9 @@ class QueueTests: XCTestCase {
     }
     
     func test_queue가_비어있다() {
+        //given, when
         let expectResult = queueSut.isEmpty
-        
+        //then
         XCTAssertTrue(expectResult)
     }
     
@@ -48,8 +49,9 @@ class QueueTests: XCTestCase {
     }
     
     func test_빈queue에_dequeue를했을때_반환값은_nil이다() {
+        //given, when
         let expectResult = queueSut.dequeue()
-        
+        //then
         XCTAssertNil(expectResult)
     }
     
