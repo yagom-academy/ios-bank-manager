@@ -14,19 +14,11 @@ struct Bank {
     }
     
     private var queue = Queue<Customer>()
-    private var defaultFrom = 1
-    private var defaultTo: Int {
-        return Int.random(in: 10...30)
-    }
     
-    private func receiveCustomer(range: ClosedRange<Int>) {
+    func receiveCustomer(range: ClosedRange<Int>) {
         for order in range {
             queue.enqueue(value: Customer(id: order))
         }
-    }
-    
-    func receiveCustomer() {
-        receiveCustomer(range: defaultFrom...defaultTo)
     }
     
     func doTask() {

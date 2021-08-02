@@ -6,5 +6,5 @@
 
 import Foundation
 
-let process = BankManager()
-process.runProcess()
+let bankManager = BankManager()
+bankManager.toggleBank()

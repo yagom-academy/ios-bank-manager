@@ -19,12 +19,15 @@ struct BankManager {
         return Bank.BankStatus(rawValue: filterdInput)
     }
     
-    func runProcess() {
+    func toggleBank() {
         while true {
             let bankStatus = choiceMenuWithGuide()
             switch bankStatus {
             case .open:
-                bank.receiveCustomer()
+                let customerRangeStart = 1
+                let customerRangeEnd = Int.random(in: 10...30)
+                
+                bank.receiveCustomer(range: customerRangeStart...customerRangeEnd)
                 bank.doTask()
             case .close:
                 return
@@ -33,5 +36,4 @@ struct BankManager {
             }
         }
     }
-    
 }
