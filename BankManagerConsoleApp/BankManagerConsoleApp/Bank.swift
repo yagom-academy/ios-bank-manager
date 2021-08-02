@@ -66,7 +66,7 @@ extension Bank {
         
         let endTime = DispatchTime.now()
         let totalTaskTIme = calculateTotalTaskTime(start: startTime, end: endTime)
-        let numberOfClient = queueTicketMachine.getCurrentTicketNumber()
+        let numberOfClient = queueTicketMachine.getCurrentTicketNumber
         
         return (numberOfClient, totalTaskTIme)
     }

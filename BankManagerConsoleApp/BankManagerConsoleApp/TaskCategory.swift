@@ -10,7 +10,7 @@ import Foundation
 enum TaskCategory {
     case defaultTask
     
-    func getTaskTime() -> TimeInterval {
+    var getTaskTime: Double {
         switch self {
         case .defaultTask:
             return 0.7

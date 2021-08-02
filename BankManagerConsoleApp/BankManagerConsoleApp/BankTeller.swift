@@ -35,7 +35,7 @@ class BankTeller {
         
         showMessage(taskMessage: .beginning, number: queueTicket)
         for task in client.tasks {
-            Thread.sleep(forTimeInterval: task.getTaskTime())
+            Thread.sleep(forTimeInterval: task.getTaskTime)
         }
         showMessage(taskMessage: .completion, number: queueTicket)
     }
