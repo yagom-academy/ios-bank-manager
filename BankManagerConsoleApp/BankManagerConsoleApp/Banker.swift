@@ -8,13 +8,7 @@
 import Foundation
 
 class Banker {
-    private let customerQueue:BankManagerQueue<Int>
-    
-    init(customerQueue: BankManagerQueue<Int>) {
-        self.customerQueue = customerQueue
-    }
-    
-    func doBusiness() {
+    func doBusiness(customerQueue: BankManagerQueue<Int>) {
         if let startCurrentCustomer = customerQueue.peek(),
            let finishCurrentCustomer = customerQueue.dequeue() {
             print("\(startCurrentCustomer)" + BankMessage.startWork)

@@ -8,5 +8,10 @@
 import Foundation
 
 struct Customer {
-    let numbers = Int.random(in: Int.ten..<Int.thirty)
+    var number = 0
+    
+    mutating func makeRandomNumber() {
+        self.number = Int.random(in: Int.ten..<Int.thirty)
+    }
+
 }

@@ -8,37 +8,40 @@
 import Foundation
 
 struct Bank {
-    let customer: Customer
+    var customer: Customer
     let customerQueue = BankManagerQueue<Int>()
     let banker: Banker
     
-    func startTask() {
-        selectMode()
-        if userInput() {
-            initCustomerQueue()
-            while !customerQueue.isEmpty {
-                banker.doBusiness()
+    mutating func startTask() {
+        while true {
+            selectMode()
+            if userInput() {
+                initCustomerQueue()
+                while !customerQueue.isEmpty {
+                    banker.doBusiness(customerQueue: customerQueue)
+                }
+                print(BankMessage.bankClosed(customers: customer.number))
+            } else {
+                return
             }
-            print(BankMessage.bankClosed(customers: customer.numbers))
         }
     }
     
-    func initCustomerQueue() {
-        for customer in Int.one...customer.numbers {
+    mutating func initCustomerQueue() {
+        customer.makeRandomNumber()
+        for customer in Int.one...customer.number {
             customerQueue.enqueue(data: customer)
         }
     }
     
     func selectMode() {
-        print(BankMessage.openBank)
-        print(BankMessage.closedBank)
+        print(BankMessage.showSelectMessage, terminator: " ")
     }
     
     func userInput() -> Bool {
         if let input = readLine(), let intInput = Int(input), intInput == Int.one {
             return true
         }
-        print("잘못된 입력입니다.")
         return false
     }
 }
