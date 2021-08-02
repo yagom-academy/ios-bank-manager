@@ -6,6 +6,6 @@
 
 import Foundation
 
-let t = BankManager()
+let bankManager = BankManager()
 
-t.processTask()
+bankManager.open()

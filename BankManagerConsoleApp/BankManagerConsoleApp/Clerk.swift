@@ -11,8 +11,8 @@ struct Clerk {
     let businessProcessingTime: Double = 0.7
    
     func doTask(customer: Customer) {
-        print("\(customer.waitingNumber)고객 시작")
+        print("\(customer.waitingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: businessProcessingTime)
-        print("\(customer.waitingNumber)고객 완료")
+        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }

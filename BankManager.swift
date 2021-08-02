@@ -28,7 +28,7 @@ struct BankManager {
         }
     }
     
-    func processTask() {
+    private func processTask() {
         receiveCustomers()
         var totalCustomer = 0
         while !customerQueue.isEmpty {
@@ -47,5 +47,20 @@ struct BankManager {
             return nil
         }
         return Menu(rawValue: input)
+    }
+    
+    func open() {
+        var isContinue: Bool = true
+        while isContinue {
+            let menu = printMenu()
+            switch menu {
+            case .open:
+                processTask()
+            case .close:
+                isContinue.toggle()
+            default:
+                print("다시 입력하세요.")
+            }
+        }
     }
 }
