@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Customer {
+struct Customer {
     private let _desiredTask: BankingTask
     private let _waitingNumber: UInt
     
