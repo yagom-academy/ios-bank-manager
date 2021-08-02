@@ -8,10 +8,10 @@
 import Foundation
 
 class Bank {
-    var numberOfBankTellers: Int = .zero
-    var bankTellerQueue = Queue<BankTeller>()
-    var customerQueue = Queue<Customer>()
-    var totalNumberOfVisitors: UInt = .zero
+    private var numberOfBankTellers: Int = .zero
+    private var bankTellerQueue = Queue<BankTeller>()
+    private var customerQueue = Queue<Customer>()
+    private var totalNumberOfVisitors: UInt = .zero
     
     func close() {
         numberOfBankTellers = .zero
