@@ -6,7 +6,7 @@
 
 import Foundation
 
-class BankManager {
+struct BankManager {
     private let bank = Bank()
     
     func runBank() {
