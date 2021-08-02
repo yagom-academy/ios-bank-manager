@@ -10,10 +10,6 @@ struct BankManager {
     private enum Menu: String {
         case open = "1"
         case close = "2"
-        
-        var userInput: String {
-            return self.rawValue
-        }
     }
     
     private let clerk = Clerk()
