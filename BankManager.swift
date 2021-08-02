@@ -87,9 +87,8 @@ extension BankManager {
     
     private func generateClients() -> [Client] {
         var clients: [Client] = []
-        let minimumClientCount = 10
-        let maximunClientCount = 30
-        let randomNumber = Int.random(in: minimumClientCount...maximunClientCount)
+        let clientRange = ClientCount.minimumCount...ClientCount.maximunCount
+        let randomNumber = Int.random(in: clientRange)
         
         for _ in 0..<randomNumber {
             let client = Client()
