@@ -8,19 +8,20 @@
 import Foundation
 
 struct Bank {
+    let userInteraction = UserInteraction()
     var customer: Customer
     let customerQueue = BankManagerQueue<Int>()
     let banker: Banker
     
     mutating func startTask() {
         while true {
-            selectMode()
-            if userInput() {
+            userInteraction.selectMode()
+            if userInteraction.userInput() {
                 initCustomerQueue()
                 while !customerQueue.isEmpty {
                     banker.doBusiness(customerQueue: customerQueue)
                 }
-                print(BankMessage.bankClosed(customers: customer.number))
+                userInteraction.settlementResult(customers: customer.number)
             } else {
                 return
             }
@@ -32,16 +33,5 @@ struct Bank {
         for customer in Int.one...customer.number {
             customerQueue.enqueue(data: customer)
         }
-    }
-    
-    func selectMode() {
-        print(BankMessage.showSelectMessage, terminator: " ")
-    }
-    
-    func userInput() -> Bool {
-        if let input = readLine(), let intInput = Int(input), intInput == Int.one {
-            return true
-        }
-        return false
     }
 }
