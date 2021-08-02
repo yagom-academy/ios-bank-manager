@@ -9,4 +9,5 @@ import Foundation
 
 struct Customer {
     let id: Int
+    let requirement: Bank.Job
 }

@@ -13,11 +13,22 @@ struct Bank {
         case close = 2
     }
     
+    enum Job {
+        case loan
+        
+        var time: UInt32 {
+            switch self {
+            case .loan:
+                return 700000
+            }
+        }
+    }
+    
     private var queue = Queue<Customer>()
     
     func receiveCustomer(range: ClosedRange<Int>) {
         for order in range {
-            queue.enqueue(value: Customer(id: order))
+            queue.enqueue(value: Customer(id: order, requirement: Job.loan))
         }
     }
     
