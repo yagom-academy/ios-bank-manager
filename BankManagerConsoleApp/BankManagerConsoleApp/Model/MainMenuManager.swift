@@ -31,7 +31,7 @@ class MainManager {
     private var userInput = UserInputManager()
     private let bankManager = BankManager()
     
-    public func start() {
+    func start() {
         if isCanStartProgram == true {
             bankManager.bankSimulator()
         }
