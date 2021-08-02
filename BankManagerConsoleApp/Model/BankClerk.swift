@@ -16,7 +16,7 @@ struct BankClerk {
         }
         
         print("\(customer.id)번 고객 업무 시작")
-        usleep(customer.requirement.time)
+        Thread.sleep(forTimeInterval: customer.requirement.time)
         print("\(customer.id)번 고객 업무 종료")
     }
 }

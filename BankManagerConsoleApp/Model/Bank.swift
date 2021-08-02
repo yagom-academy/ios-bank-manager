@@ -16,10 +16,10 @@ struct Bank {
     enum Job {
         case loan
         
-        var time: UInt32 {
+        var time: TimeInterval {
             switch self {
             case .loan:
-                return 700000
+                return 0.7
             }
         }
     }
