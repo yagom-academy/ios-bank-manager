@@ -6,20 +6,32 @@
 
 import Foundation
 
-var needContinue = true
-let bankManager = BankManager()
+enum BankManagement{
+    static let manager = BankManager()
+    static let openBank = 1
+    static let closeBank = 2
+}
 
-while needContinue {
+func startBankManage() {
+    let userInput = receiveUserInput()
+    if userInput == BankManagement.closeBank {
+        return
+    }
+    BankManagement.manager.runBank()
+    return startBankManage()
+}
+
+func receiveUserInput() -> Int {
     print("1 : 은행개졈")
     print("2 : 종료")
     print("입력 : ", terminator: "")
     guard let userInput = readLine(),
           let inputNumber = Int(userInput),
-          inputNumber == 1 || inputNumber == 2 else {
-        continue
+          inputNumber == BankManagement.openBank || inputNumber == BankManagement.closeBank
+    else {
+        return receiveUserInput()
     }
-    if inputNumber == 2 {
-        break
-    }
-    bankManager.runBank()
+    return inputNumber
 }
+
+startBankManage()
