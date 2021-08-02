@@ -15,4 +15,17 @@ struct BankManager {
             self.rawValue
         }
     }
+    
+    let clerk = Clerk()
+    let customerQueue = Queue<Customer>()
+    
+    func receiveCustomers() {
+        let minimumCustomerNumber = 10
+        let maximumCustomerNumber = 30
+        let numberOfCustomer = Int.random(in: minimumCustomerNumber...maximumCustomerNumber)
+        
+        for number in 1...numberOfCustomer {
+            customerQueue.enqueue(data: Customer(waitingNumber: number))
+        }
+    }
 }
