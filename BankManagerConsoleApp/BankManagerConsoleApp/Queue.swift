@@ -9,7 +9,7 @@ import Foundation
 
 struct Queue<Value> {
     //MARK: Properties
-    var linkedList = LinkedList<Value>()
+    private var linkedList = LinkedList<Value>()
 }
 
 //MARK:-Queue Manage Method

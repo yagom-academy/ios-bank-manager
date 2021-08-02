@@ -32,7 +32,7 @@ extension LinkedList {
     
     mutating func remove() -> Value? {
         defer { head = head?.next }
-        return head?.value ?? nil
+        return head?.value
     }
     
     mutating func removeAll() {
