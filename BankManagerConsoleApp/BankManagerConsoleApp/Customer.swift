@@ -8,11 +8,23 @@
 import Foundation
 
 class Customer {
-    let desiredTask: BankingTask
-    let waitingNumber: UInt
+    private let _desiredTask: BankingTask
+    private let _waitingNumber: UInt
+    
+    var desiredTask: BankingTask {
+        get {
+            return self._desiredTask
+        }
+    }
+    
+    var waitingNumber: UInt {
+        get {
+            return self._waitingNumber
+        }
+    }
     
     init(desiredTask: BankingTask, waitingNumber: UInt) {
-        self.desiredTask = desiredTask
-        self.waitingNumber = waitingNumber
+        self._desiredTask = desiredTask
+        self._waitingNumber = waitingNumber
     }
 }
