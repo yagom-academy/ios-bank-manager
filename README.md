@@ -1,6 +1,2 @@
-## iOS 커리어 스타터 캠프
-
-### 은행 매니저 프로젝트 저장소
-
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
-
+# Step2 UML
+<img width="1316" alt="Screen Shot 2021-08-02 at 9 58 38 PM" src="https://user-images.githubusercontent.com/80380535/127865854-2b613b84-0580-46ba-9f25-9c2518d95167.png">
