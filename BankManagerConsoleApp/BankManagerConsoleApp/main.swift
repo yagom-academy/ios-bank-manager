@@ -6,5 +6,5 @@
 
 import Foundation
 
-var bank = Bank()
-bank.runProcess()
+let process = BankManager()
+process.runProcess()
