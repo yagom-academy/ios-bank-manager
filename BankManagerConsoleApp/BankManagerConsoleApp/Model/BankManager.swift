@@ -15,7 +15,7 @@ enum WorkStatusMessage {
         case .workStart:
             return "\(number)번 고객 업무 시작"
         case .workComplete:
-            return "\(number)고객 업무 종료"
+            return "\(number)번 고객 업무 종료"
         }
     }
 }

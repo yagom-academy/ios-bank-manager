@@ -32,12 +32,12 @@ class MainManager {
     private let bankManager = BankManager()
     
     public func start() {
-        if iscanStartProgram == true {
+        if isCanStartProgram == true {
             bankManager.bankSimulator()
         }
     }
     
-    private var iscanStartProgram: Bool {
+    private var isCanStartProgram: Bool {
         let returnedUserInput = userInput.returnUserInput()
         let firstSelection = Optional("1")
         
@@ -59,10 +59,6 @@ struct UserInputManager {
         return userInput
     }
     
-    private mutating func receiveUserInput() {
-        repeatUntilCollectSelection()
-    }
-    
     private func displayMainMenuMessage() {
         print(MainMenuMessage.firstSelection.description)
         print(MainMenuMessage.secondSelection.description)
@@ -73,17 +69,21 @@ struct UserInputManager {
         self.userInput = readLine()
     }
     
-    private func displayIncorrectInput() {
-        if userInput != firstSelection && userInput != secondSelection {
-            print(MainMenuMessage.wrongInput.description)
-        }
-    }
-    
     private mutating func repeatUntilCollectSelection() {
         while userInput != firstSelection && userInput != secondSelection {
             displayMainMenuMessage()
             getUserInput()
             displayIncorrectInput()
+        }
+    }
+    
+    private mutating func receiveUserInput() {
+        repeatUntilCollectSelection()
+    }
+    
+    private func displayIncorrectInput() {
+        if userInput != firstSelection && userInput != secondSelection {
+            print(MainMenuMessage.wrongInput.description)
         }
     }
 }
