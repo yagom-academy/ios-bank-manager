@@ -10,7 +10,7 @@ import Foundation
 enum TaskCategory {
     case defaultTask
     
-    var getTaskTime: Double {
+    var taskTime: Double {
         switch self {
         case .defaultTask:
             return 0.7
