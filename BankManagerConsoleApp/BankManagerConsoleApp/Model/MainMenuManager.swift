@@ -66,9 +66,15 @@ struct UserInputManager {
         self.userInput = readLine()
     }
     
+    private var isInCorrectInput: Bool {
+        let firstConstraint: Bool = userInput != MainMenuMessage.firstSelection.rawValue
+        let secondConstraint: Bool = userInput != MainMenuMessage.secondSelection.rawValue
+        let result: Bool = firstConstraint && secondConstraint
+        return result
+    }
+    
     private mutating func repeatUntilCollectSelection() {
-        while userInput != MainMenuMessage.firstSelection.rawValue
-                && userInput != MainMenuMessage.secondSelection.rawValue {
+        while isInCorrectInput {
             displayMainMenuMessage()
             getUserInput()
             displayIncorrectInput()
@@ -76,8 +82,7 @@ struct UserInputManager {
     }
 
     private func displayIncorrectInput() {
-        if userInput != MainMenuMessage.firstSelection.rawValue
-            && userInput != MainMenuMessage.secondSelection.rawValue {
+        if isInCorrectInput {
             print(MainMenuMessage.wrongInput.description)
         }
     }
