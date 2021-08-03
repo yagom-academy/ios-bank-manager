@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+let main = MainManager()
+main.start()
