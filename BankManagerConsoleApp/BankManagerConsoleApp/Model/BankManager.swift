@@ -57,10 +57,17 @@ class BankManager {
             print(WorkStatusMessage.workStart.returnWorkStatus(number: watingNumber))
             Thread.sleep(forTimeInterval: workingTime)
             print(WorkStatusMessage.workComplete.returnWorkStatus(number: watingNumber))
-        } while watingQueue.isEmpty() != true
+        } while watingQueueIsNotEmpty == true
     }
     
     private func displayBankClosed(workTime: Double) {
         print(BankIsClosedMessage.bankIsClosed.returnClosedBankMessage(number: self.numberOfCustomer, time: workTime))
+    }
+}
+
+extension BankManager {
+    var watingQueueIsNotEmpty: Bool {
+        let result: Bool = !watingQueue.isEmpty()
+        return result
     }
 }
