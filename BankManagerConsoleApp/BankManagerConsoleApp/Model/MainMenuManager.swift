@@ -32,15 +32,14 @@ class MainManager {
     private let bankManager = BankManager()
     
     func start() {
+        userInput.receiveUserInput()
         if isCanStartProgram == true {
             bankManager.bankSimulator()
         }
     }
     
     private var isCanStartProgram: Bool {
-        let returnedUserInput = userInput.returnUserInput()
-        
-        if returnedUserInput == MainMenuMessage.firstSelection.rawValue {
+        if userInput.returnUserInput == MainMenuMessage.firstSelection.rawValue {
             return true
         } else {
             return false
@@ -51,9 +50,8 @@ class MainManager {
 struct UserInputManager {
     private var userInput: String?
     
-    mutating func returnUserInput() -> String? {
-        receiveUserInput()
-        return userInput
+    mutating func receiveUserInput() {
+        repeatUntilCollectSelection()
     }
     
     private func displayMainMenuMessage() {
@@ -87,7 +85,7 @@ struct UserInputManager {
         }
     }
     
-    private mutating func receiveUserInput() {
-        repeatUntilCollectSelection()
+    var returnUserInput: String? {
+        return userInput
     }
 }
