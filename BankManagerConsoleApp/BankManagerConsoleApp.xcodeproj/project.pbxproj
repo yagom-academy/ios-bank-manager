@@ -21,6 +21,7 @@
 		DF133A7826B12EE1009FED1B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = A877AA9B26AFF6A500A77397 /* Node.swift */; };
 		DF133A7926B12EE1009FED1B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A877AA9D26AFFF3000A77397 /* LinkedList.swift */; };
 		DFA9DCF226B8D94100F91CFD /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA9DCF126B8D94100F91CFD /* Bank.swift */; };
+		DFA9DCF426B9147D00F91CFD /* TimeCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA9DCF326B9147D00F91CFD /* TimeCheck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,7 @@
 		DF133A7026B12B29009FED1B /* QueueMethodTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueMethodTest.swift; sourceTree = "<group>"; };
 		DF133A7226B12B29009FED1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFA9DCF126B8D94100F91CFD /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		DFA9DCF326B9147D00F91CFD /* TimeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCheck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				A8BC98D326B8CF0000B75BCE /* BankClerk.swift */,
 				DFA9DCF126B8D94100F91CFD /* Bank.swift */,
 				A8BC98D726B907DB00B75BCE /* Customer.swift */,
+				DFA9DCF326B9147D00F91CFD /* TimeCheck.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				A877AA9C26AFF6A500A77397 /* Node.swift in Sources */,
 				A8BC98D826B907DB00B75BCE /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				DFA9DCF426B9147D00F91CFD /* TimeCheck.swift in Sources */,
 				A877AA9E26AFFF3000A77397 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				DFA9DCF226B8D94100F91CFD /* Bank.swift in Sources */,

@@ -9,6 +9,7 @@ import Foundation
 
 struct Bank {
     var clerkNumber: Int = 1
+    var bankClerk = BankClerk()
 }
 
 extension Bank {
