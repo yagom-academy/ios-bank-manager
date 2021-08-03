@@ -62,7 +62,7 @@ class BankManagerConsoleAppTests: XCTestCase {
     }
     
     // MARK: LinkedListQueue의 실패케이스 테스트 코드
-    func test_enqueue_했을때_헤드가_nil이면_실패() {
+    func test_enqueue_했을때_헤드가_nil이면_실패한다() {
         // given
         let value = 1
         // when
@@ -72,7 +72,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(nil, result)
     }
     
-    func test_dequeue_했을때_head가_nil이면실패() {
+    func test_dequeue_했을때_head가_nil이면실패한다() {
         // given
         sutQueue.enqueue(value: 1)
         // when
@@ -81,7 +81,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(nil, result)
     }
     
-    func test_clear_했을때_큐의_head가_nil이_아니면_실패() {
+    func test_clear_했을때_큐의_head가_nil이_아니면_실패한다() {
         // given
         let wrongResult = 1
         sutQueue.enqueue(value: 1)
@@ -94,7 +94,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(wrongResult, result)
     }
     
-    func test_Queue에_값이있는경우_isEmpty_했을때_nil이면_실패() {
+    func test_Queue에_값이있는경우_isEmpty_했을때_nil이면_실패한다() {
         // given
         sutQueue.enqueue(value: 1)
         // when
@@ -179,7 +179,7 @@ class BankManagerConsoleAppTests: XCTestCase {
     }
     
     // MARK: LinkedList의 실패케이스 테스트 코드
-    func test_headIsEmpty_했을때_head에_값이_없는_경우_false면_실패() {
+    func test_headIsEmpty_했을때_head에_값이_없는_경우_false면_실패한다() {
         // given
         var result: Bool
         // when
@@ -188,7 +188,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(false, result)
     }
     
-    func test_headValue에_1을_넣었는데_2가_반환되면_실패() {
+    func test_headValue에_1을_넣었는데_2가_반환되면_실패한다() {
         // given
         let dummyValue = 1
         sutList.append(value: dummyValue)
@@ -198,7 +198,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(2, result)
     }
     
-    func test_tailValue에_1을_넣었는데_2가_반환되면_실패() {
+    func test_tailValue에_1을_넣었는데_2가_반환되면_실패한다() {
         // given
         let dummyValue = 1
         sutList.append(value: dummyValue)
@@ -208,7 +208,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(2, result)
     }
     
-    func test_append_했을때_headIsEmpty_가_true면_실패() {
+    func test_append_했을때_headIsEmpty_가_true면_실패한다() {
         // given
         sutList.append(value: 1)
         // when
@@ -217,7 +217,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(true, result)
     }
     
-    func test_값이있는_노드에서_removeFirst_했을때_head의_값이_nil이면_실패() {
+    func test_값이있는_노드에서_removeFirst_했을때_head의_값이_nil이면_실패한다() {
         // given
         sutList.append(value: 1)
         // when
@@ -226,7 +226,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(nil, result)
     }
     
-    func test_removeFirst_했을때_head가_다음_노드가_2가아니면_실패() {
+    func test_removeFirst_했을때_head가_다음_노드가_2가아니면_실패한다() {
         // given
         sutList.append(value: 1)
         sutList.append(value: 2)
@@ -236,7 +236,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNotEqual(2, result)
     }
     
-    func test_removeAll_했을때_head와_tail이_nil이_아니면_실패() {
+    func test_removeAll_했을때_head와_tail이_nil이_아니면_실패한다() {
         // given
         sutList.append(value: 1)
         sutList.append(value: 2)
