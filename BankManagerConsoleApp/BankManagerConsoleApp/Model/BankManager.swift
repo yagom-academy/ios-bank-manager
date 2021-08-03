@@ -41,7 +41,7 @@ class BankManager {
         insertCustomerWatingQueue()
         workStart()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
-        displayBankIsClosed(workTime: durationTime)
+        displayBankClosed(workTime: durationTime)
     }
     
     private func insertCustomerWatingQueue() {
@@ -60,7 +60,7 @@ class BankManager {
         } while watingQueue.isEmpty() != true
     }
     
-    private func displayBankIsClosed(workTime: Double) {
+    private func displayBankClosed(workTime: Double) {
         print(BankIsClosedMessage.bankIsClosed.returnClosedBankMessage(number: self.numberOfCustomer, time: workTime))
     }
 }
