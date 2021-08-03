@@ -11,8 +11,8 @@ struct BankClerk {
 }
 
 extension BankClerk {
-    func handleTask(of customerNumber: Int?) {
-        guard let customerNumber = customerNumber else {
+    func work(for customer: Int?) {
+        guard let customerNumber = customer else {
             return
         }
         print("\(customerNumber)번 고객 업무시작")

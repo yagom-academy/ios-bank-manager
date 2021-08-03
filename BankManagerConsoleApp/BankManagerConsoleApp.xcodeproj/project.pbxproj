@@ -96,8 +96,8 @@
 				A877AA9B26AFF6A500A77397 /* Node.swift */,
 				A877AA9D26AFFF3000A77397 /* LinkedList.swift */,
 				DF133A5826B00ACB009FED1B /* Queue.swift */,
-				A8BC98D326B8CF0000B75BCE /* BankClerk.swift */,
 				DFA9DCF126B8D94100F91CFD /* Bank.swift */,
+				A8BC98D326B8CF0000B75BCE /* BankClerk.swift */,
 				A8BC98D726B907DB00B75BCE /* Customer.swift */,
 				DFA9DCF326B9147D00F91CFD /* TimeCheck.swift */,
 			);

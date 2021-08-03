@@ -8,15 +8,6 @@
 import Foundation
 
 struct Customer {
-    let totalNumber: Int
-    
-    init() {
-        let range = (10...30)
-        let totalNumber = Int.random(in: range)
-        self.totalNumber = totalNumber
-    }
-
-    init(totalNumber: Int) {
-        self.totalNumber = totalNumber
-    }
+    var tiketNumber: Int
+    var business: String
 }
