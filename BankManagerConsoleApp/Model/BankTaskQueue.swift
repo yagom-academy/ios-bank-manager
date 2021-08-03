@@ -13,15 +13,16 @@ struct BankTaskQueue {
     let dispatchSemaphore: DispatchSemaphore
     let clerks: [BankClerk]
     
-    func matchingClerkAnd(customer: Customer?) {
+    func matchingClerkWith(customer: Customer?, afterFunction: @escaping () -> Void) {
         var targetClerk = clerks.filter { bankClerk in
             return bankClerk.isWorking == false
         }[0]
         
         dispatchSemaphore.wait()
-        dispatchQueue.asyncAfter(deadline: .now() + identify.time) {
+        dispatchQueue.async {
             targetClerk.startTask(about: customer)
             dispatchSemaphore.signal()
+            afterFunction()
         }
     }
 }

@@ -61,13 +61,20 @@ struct Bank {
         let bankConfigure = configure()
 
         var customer: Customer?
+        let group = DispatchGroup()
         while !queue.isEmpty {
+            group.enter()
             customer = queue.dequeue()
             let targetQueue = bankConfigure.filter { bankTaskQueue in
                 return customer?.requirement == bankTaskQueue.identify
             }[0]
-            targetQueue.matchingClerkAnd(customer: customer)
+            
+            targetQueue.matchingClerkWith(customer: customer) {
+                group.leave()
+            }
         }
+        
+        let _ = group.wait(timeout: .distantFuture)
         endTask(after: customer)
     }
     
@@ -87,6 +94,7 @@ struct Bank {
                 let id = job.rawValue * 100 + Int(clerkNumber)
                 return BankClerk(id: id)
             }
+            
             let bankTaskQueue = BankTaskQueue(
                 identify: job,
                 dispatchQueue: dispatchQueue,
