@@ -7,29 +7,30 @@
 
 import Foundation
 
-class BankTeller {
-    enum TaskMessage {
-        case beginning
-        case completion
-        
-        func notifyMessage(by number: UInt, taskName: String) -> String {
-            switch self {
-            case .beginning:
-                return "\(number)번 고객 \(taskName)업무 시작"
-            case .completion:
-                return "\(number)번 고객 \(taskName)업무 완료"
-            }
+enum TaskStatus {
+    case beginning
+    case completion
+    
+    func notifyMessage(by number: UInt, taskName: String) -> String {
+        switch self {
+        case .beginning:
+            return "\(number)번 고객 \(taskName)업무 시작"
+        case .completion:
+            return "\(number)번 고객 \(taskName)업무 완료"
         }
     }
-    
+}
+
+class BankTeller {
     var role: TaskCategory
+    var status: TaskStatus = .completion
     
     init(role: TaskCategory) {
         self.role = role
     }
     
     // MARK:- private Method
-    private func showMessage(taskMessage: TaskMessage, number: UInt, task: TaskCategory) {
+    private func showMessage(taskMessage: TaskStatus, number: UInt, task: TaskCategory) {
         print(taskMessage.notifyMessage(by: number, taskName: task.name))
     }
     
@@ -39,8 +40,10 @@ class BankTeller {
             return
         }
         
+        status = .beginning
         showMessage(taskMessage: .beginning, number: queueTicket, task: client.task)
         Thread.sleep(forTimeInterval: client.task.taskTime)
         showMessage(taskMessage: .completion, number: queueTicket, task: client.task)
+        status = .completion
     }
 }
