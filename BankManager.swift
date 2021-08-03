@@ -76,6 +76,7 @@ extension BankManager {
             case .wrongInput:
                 print(error.errorDescription ?? "")
             }
+            return
         }
         print("예기치 못한 오류 발생. 프로그램을 종료합니다.")
     }
