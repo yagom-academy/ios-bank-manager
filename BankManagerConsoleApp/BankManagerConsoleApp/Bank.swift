@@ -17,9 +17,9 @@ class Bank {
     private var queueTicketMachine = QueueTicketMachine()
     
     // MARK:- initializer
-    init(numberOfBankTeller: UInt = 1) {
-        for _ in 1...numberOfBankTeller {
-            let bankTeller = BankTeller()
+    init(roles: [TaskCategory]) {
+        for role in roles {
+            let bankTeller = BankTeller(role: role)
             bankTellers.append(bankTeller)
         }
     }

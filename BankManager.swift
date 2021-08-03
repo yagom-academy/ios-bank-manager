@@ -17,7 +17,7 @@ struct BankManager {
     
     // MARK:- initializer
     init() {
-        self.bank = Bank()
+        self.bank = Bank(roles: [.deposit, .loan, .deposit])
     }
 }
 

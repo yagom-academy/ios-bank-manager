@@ -2,7 +2,7 @@
 //  ErrorMessage.swift
 //  BankManagerConsoleApp
 //
-//  Created by YongHoon JJo on 2021/08/02.
+//  Created by Jost, Hosinging on 2021/08/02.
 //
 
 import Foundation

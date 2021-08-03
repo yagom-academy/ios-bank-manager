@@ -22,6 +22,12 @@ class BankTeller {
         }
     }
     
+    var role: TaskCategory
+    
+    init(role: TaskCategory) {
+        self.role = role
+    }
+    
     // MARK:- private Method
     private func showMessage(taskMessage: TaskMessage, number: UInt) {
         print(taskMessage.notifyMessage(by: number))
