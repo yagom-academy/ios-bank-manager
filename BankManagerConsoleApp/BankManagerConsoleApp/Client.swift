@@ -13,7 +13,7 @@ class Client {
     private var queueTicket: UInt?
     
     // MARK:- initializer
-    init(task: TaskCategory) {
+    init(task: TaskCategory = TaskCategory.randomElement) {
         self.task = task
     }
     

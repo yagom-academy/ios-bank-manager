@@ -94,7 +94,7 @@ extension BankManager {
         let randomNumber = Int.random(in: clientRange)
         
         for _ in 0..<randomNumber {
-            let client = Client(task: .defaultTask)
+            let client = Client()
             clients.append(client)
         }
         return clients

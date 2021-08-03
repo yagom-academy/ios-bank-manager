@@ -7,13 +7,23 @@
 
 import Foundation
 
-enum TaskCategory {
-    case defaultTask
+enum TaskCategory: CaseIterable {
+    case deposit
+    case loan
     
     var taskTime: Double {
         switch self {
-        case .defaultTask:
+        case .deposit:
             return 0.7
+        case .loan:
+            return 1.1
         }
+    }
+    
+    static var randomElement: TaskCategory {
+        guard let randomTask = TaskCategory.allCases.randomElement() else {
+            return .deposit
+        }
+        return randomTask
     }
 }
