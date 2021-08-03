@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol Workable {
+protocol Clerk {
     var workTime: Double { get }
-    func businessProcessing(for client: BankClient)
+    func serveBanking(for client: BankClient)
 }
 
-protocol Available {
+protocol Client {
     
 }
 
-enum UserInput: String {
+enum BankMenu: String {
     case open = "1"
     case close = "2"
 }
@@ -29,7 +29,7 @@ class Bank {
         let newClients = Queue<BankClient>()
         let totalNumberOfClients = Int.random(in: 10...30)
         for waittingNumber in 1...totalNumberOfClients {
-            let client = BankClient(waittingNumber: waittingNumber)
+            let client = BankClient(waitingNumber: waittingNumber)
             newClients.enqueue(client)
         }
         return newClients
@@ -45,17 +45,17 @@ class Bank {
         print("2: 종료")
     }
     
-    private func generateInputUserMenuNumber() -> UserInput? {
+    private func generateInputUserMenuNumber() -> BankMenu? {
         print("입력 : ", terminator: "")
         guard let inputNumber = readLine() else {
             return nil
         }
-        if let menuNumber = UserInput(rawValue: inputNumber) {
+        if let menuNumber = BankMenu(rawValue: inputNumber) {
             switch menuNumber {
             case .open:
-                return UserInput.open
+                return BankMenu.open
             case .close:
-                return UserInput.close
+                return BankMenu.close
             }
         } else {
             print("잘못된 입력입니다. 다시 입력해주세요.")
@@ -64,25 +64,26 @@ class Bank {
     }
     
     private func startWork() {
-        let numberOfClients = bankClients.count
+        var numberOfClients = 0
         while let client = bankClients.dequeue() {
-            bankClerk.businessProcessing(for: client)
+            bankClerk.serveBanking(for: client)
+            numberOfClients += 1
             totalWorkTime += bankClerk.workTime
         }
         let convertedWorkTime = String(format: "%.2f", totalWorkTime)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertedWorkTime)입니다.")
     }
     
-    func programStart() {
+    func openBank() {
         printMenu()
         guard let userInput = generateInputUserMenuNumber() else {
             return
         }
-        if userInput == UserInput.open {
+        if userInput == BankMenu.open {
             startWork()
             resetBank()
-            return programStart()
-        } else if userInput == UserInput.close {
+            return openBank()
+        } else if userInput == BankMenu.close {
             return
         }
     }

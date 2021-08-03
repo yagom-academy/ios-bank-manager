@@ -8,4 +8,4 @@ import Foundation
 
 let bank = Bank()
 
-bank.programStart()
+bank.openBank()

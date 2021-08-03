@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct BankClient: Available {
-    let waittingNumber: Int
+struct BankClient: Client {
+    let waitingNumber: Int
 }

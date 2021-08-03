@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct BankClerk: Workable {
+struct BankClerk: Clerk {
     var workTime: Double = 0.7
     
-    func businessProcessing(for client: BankClient) {
-        print("\(client.waittingNumber)번 고객 업무 시작")
+    func serveBanking(for client: BankClient) {
+        print("\(client.waitingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: workTime)
-        print("\(client.waittingNumber)번 고객 업무 종료")
+        print("\(client.waitingNumber)번 고객 업무 종료")
     }
 }
