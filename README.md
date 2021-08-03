@@ -12,3 +12,16 @@
 
 
 ![image](https://user-images.githubusercontent.com/52707151/127147493-c0895489-e349-4b75-aed0-4b902836fd2f.png)
+
+---
+### step-2 구현
+
+* struct UserInteraction: 사용자의 입력값과, 결과를 출력해주는 타입 구현
+* enum BankMessage: 문자열을 저장하고 있는 열거형 타입 구현
+* class Banker: 고객의 대기열을 가지고, 일을 처리하는 Banker 타입 구현
+* struct Bank: 고객의 대기열과, 은행원을 소유하고 있고 전체적인 은행업무를 담당하는 타입 구현
+* Int + Extention: 하드코딩을 피하기위해 Int타입 Extention으로 사용할 정수값을 타입프로퍼티로 구현하였다.
+
+
+
+![image](https://user-images.githubusercontent.com/52707151/127963289-9754b272-f889-483e-b3c4-2cac0cd2566e.png)
