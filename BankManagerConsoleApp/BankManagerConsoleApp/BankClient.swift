@@ -8,5 +8,6 @@
 import Foundation
 
 struct BankClient: Client {
-    let waitingNumber: Int
+    var bankType: BankType = BankType.random
+    var waitingNumber: Int
 }

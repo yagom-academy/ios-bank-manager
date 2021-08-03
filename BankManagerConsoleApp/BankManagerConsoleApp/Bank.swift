@@ -8,12 +8,34 @@
 import Foundation
 
 protocol Clerk {
-    var workTime: Double { get }
+    var bankType: BankType { set get }
     func serveBanking(for client: BankClient)
 }
 
 protocol Client {
+    var bankType: BankType { set get }
+    var waitingNumber: Int { get }
+}
+
+enum BankType: CaseIterable {
+    case deposit
+    case loan
     
+    var workingTime: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
+    
+    static var random: BankType {
+        guard let random = BankType.allCases.randomElement() else {
+            return .deposit
+        }
+        return random
+    }
 }
 
 enum BankMenu: String {
@@ -22,7 +44,7 @@ enum BankMenu: String {
 }
 
 class Bank {
-    private let bankClerk = BankClerk()
+    private var bankClerk: [Clerk] = []
     private lazy var bankClients = generateNewClients()
     private var totalWorkTime: Double = 0
     private let generateNewClients = { () -> Queue<BankClient> in
@@ -33,6 +55,18 @@ class Bank {
             newClients.enqueue(client)
         }
         return newClients
+    }
+    
+    init(deposit: Int = 2, loan: Int = 1) {
+        for _ in 0 ..< deposit {
+            let depositClerk = BankClerk(bankType: .deposit)
+            bankClerk.append(depositClerk)
+        }
+        
+        for _ in 0 ..< loan {
+            let loanClerk = BankClerk(bankType: .loan)
+            bankClerk.append(loanClerk)
+        }
     }
     
     private func resetBank() {
@@ -66,9 +100,9 @@ class Bank {
     private func startWork() {
         var numberOfClients = 0
         while let client = bankClients.dequeue() {
-            bankClerk.serveBanking(for: client)
+            bankClerk[0].serveBanking(for: client)
             numberOfClients += 1
-            totalWorkTime += bankClerk.workTime
+            totalWorkTime += bankClerk[0].bankType.workingTime
         }
         let convertedWorkTime = String(format: "%.2f", totalWorkTime)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertedWorkTime)입니다.")

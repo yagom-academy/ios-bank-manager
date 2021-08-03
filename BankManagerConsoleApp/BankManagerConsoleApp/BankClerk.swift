@@ -8,11 +8,11 @@
 import Foundation
 
 struct BankClerk: Clerk {
-    var workTime: Double = 0.7
+    var bankType: BankType
     
     func serveBanking(for client: BankClient) {
         print("\(client.waitingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: workTime)
+        Thread.sleep(forTimeInterval: bankType.workingTime)
         print("\(client.waitingNumber)번 고객 업무 종료")
     }
 }
