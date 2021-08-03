@@ -9,12 +9,12 @@ import Foundation
 
 class Client {
     // MARK:- Properties
-    let tasks: [TaskCategory]
+    let task: TaskCategory
     private var queueTicket: UInt?
     
     // MARK:- initializer
-    init(tasks: [TaskCategory] = [.defaultTask]) {
-        self.tasks = tasks
+    init(task: TaskCategory) {
+        self.task = task
     }
     
     // MARK:- internal Methods
