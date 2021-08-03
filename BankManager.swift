@@ -53,12 +53,9 @@ extension BankManager {
                     return
                 }
             }
-        } catch let error as BankManagerErrorMessage {
-            showErrorDescription(message: error)
         } catch {
-            print("예기치 못한 오류 발생. 프로그램을 종료합니다.")
+            showErrorDescription(message: error)
         }
-        
     }
 }
 
@@ -73,11 +70,14 @@ extension BankManager {
         print(menu, terminator: " ")
     }
     
-    private func showErrorDescription(message: BankManagerErrorMessage) {
-        guard let errorDescription = message.errorDescription else {
-            return
+    private func showErrorDescription(message: Error) {
+        if let error = message as? BankManagerErrorMessage {
+            switch error {
+            case .wrongInput:
+                print(error.errorDescription ?? "")
+            }
         }
-        print(errorDescription)
+        print("예기치 못한 오류 발생. 프로그램을 종료합니다.")
     }
     
     private func showClosingMessage(numberOfClient: UInt, totalTaskTime: Double) {
