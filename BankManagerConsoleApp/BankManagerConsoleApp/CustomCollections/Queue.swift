@@ -17,6 +17,10 @@ class Queue<T> {
         return head == nil
     }
     
+    func isNotEmpty() -> Bool {
+        return head != nil
+    }
+    
     func enqueue(value: T) {
         let newNode = Node(value: value)
         
