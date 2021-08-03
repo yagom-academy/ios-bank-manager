@@ -6,31 +6,34 @@
 
 import Foundation
 
-class LinkedList<T> {
+struct LinkedList<T> {
     var head: Node<T>?
     var isEmpty: Bool {
         return head == nil
     }
     
-    func append(_ appendingNode: Node<T>) {
+    mutating func append(_ node: Node<T>) {
         if isEmpty {
-            head = appendingNode
+            head = node
             return
         }
-        var node = head
-        while node?.next != nil {
-            node = node?.next
+        var currentNode = head
+        while currentNode?.next != nil {
+            currentNode = currentNode?.next
         }
-        node?.next = appendingNode
+        currentNode?.next = node
     }
     
-    func removeFirst() {
+    mutating func removeFirst() -> T? {
+        let currentHead = head
         if isEmpty == false {
             head = head?.next
         }
+        return currentHead?.data
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
     }
 }
+
