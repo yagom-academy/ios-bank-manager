@@ -55,12 +55,14 @@ extension Bank {
     func doTask() -> TaskReport {
         let startTime = DispatchTime.now()
         
-        while clientQueue.isNotEmpty() {
-            if bankTellerQueue.isNotEmpty(),
-               let client = clientQueue.dequeue(),
-               let bankTeller = bankTellerQueue.dequeue() {
-                bankTeller.handleTask(with: client)
-                bankTellerQueue.enqueue(value: bankTeller)
+        while self.clientQueue.isNotEmpty() {
+            DispatchQueue.global().async {
+                if self.bankTellerQueue.isNotEmpty(),
+                   let client = self.clientQueue.dequeue(),
+                   let bankTeller = self.bankTellerQueue.dequeue() {
+                    bankTeller.handleTask(with: client)
+                    self.bankTellerQueue.enqueue(value: bankTeller)
+                }
             }
         }
         

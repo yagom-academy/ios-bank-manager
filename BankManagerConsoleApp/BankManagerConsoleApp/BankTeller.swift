@@ -12,12 +12,12 @@ class BankTeller {
         case beginning
         case completion
         
-        func notifyMessage(by number: UInt) -> String {
+        func notifyMessage(by number: UInt, taskName: String) -> String {
             switch self {
             case .beginning:
-                return "\(number)번 고객 업무 시작"
+                return "\(number)번 고객 \(taskName)업무 시작"
             case .completion:
-                return "\(number)번 고객 업무 완료"
+                return "\(number)번 고객 \(taskName)업무 완료"
             }
         }
     }
@@ -29,8 +29,8 @@ class BankTeller {
     }
     
     // MARK:- private Method
-    private func showMessage(taskMessage: TaskMessage, number: UInt) {
-        print(taskMessage.notifyMessage(by: number))
+    private func showMessage(taskMessage: TaskMessage, number: UInt, task: TaskCategory) {
+        print(taskMessage.notifyMessage(by: number, taskName: task.name))
     }
     
     // MARK:- internal Method
@@ -39,8 +39,8 @@ class BankTeller {
             return
         }
         
-        showMessage(taskMessage: .beginning, number: queueTicket)
+        showMessage(taskMessage: .beginning, number: queueTicket, task: client.task)
         Thread.sleep(forTimeInterval: client.task.taskTime)
-        showMessage(taskMessage: .completion, number: queueTicket)
+        showMessage(taskMessage: .completion, number: queueTicket, task: client.task)
     }
 }

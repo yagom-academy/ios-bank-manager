@@ -20,6 +20,15 @@ enum TaskCategory: CaseIterable {
         }
     }
     
+    var name: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
+    
     static var randomElement: TaskCategory {
         guard let randomTask = TaskCategory.allCases.randomElement() else {
             return .deposit
