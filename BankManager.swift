@@ -7,19 +7,10 @@
 import Foundation
 
 struct BankManager {
-    var bank = Bank()
+    private var bank = Bank()
 }
 
 extension BankManager {
-    enum BankOpenMenu {
-        static let open = "1"
-        static let exit = "2"
-    }
-    
-    mutating func start() {
-        decideBankOpen(selectedOption: takeAnswer())
-    }
-    
     func takeAnswer() -> String? {
         let question = """
             1 : 은행개점
@@ -31,33 +22,28 @@ extension BankManager {
         return input
     }
     
-    mutating func decideBankOpen(selectedOption: String?) {
-        guard let selected = selectedOption else {
-            return
-        }
-        
-//        switch selected {
-//        case BankOpenMenu.open:
-//            let customer = Customer().totalNumber
-//            return calculateWorkTime(with: customer)
-//        case BankOpenMenu.exit:
-//
-//        default:
-//            fatalError()
-//        }
+    func gatherCustomers() -> Int {
+        let range = (10...30)
+        let totalNumber = Int.random(in: range)
+        return totalNumber
     }
     
-    mutating func work(with customer: Int) {
-        var waitingLine = self.bank.makeWaitingLine(from: customer)
-        for _ in 1...customer {
-            self.bank.bankClerk.handleTask(of: waitingLine.dequeue())
-        }
+    mutating func formWaitingLine(from totalCustomer: Int) {
+        bank.makeWaitingLine(from: totalCustomer)
     }
     
-    mutating func calculateWorkTime(with: Int) -> String {
-        let time = timeCheck {
-            work(with: with)
-        }
-        return time
+    mutating func askWork() {
+        bank.letClerkWork()
+    }
+    
+    func showWorkResult(_ total: Int, _ time: String) {
+        bankManager.bank.notifyClosing(totalCustomer: total, totalTime: time)
+    }
+    
+    func checkWorkingTime(_ block: () -> ()) -> String {
+        let start = Date()
+        block()
+        let totalTime = Date().timeIntervalSince(start)
+        return totalTime.description
     }
 }
