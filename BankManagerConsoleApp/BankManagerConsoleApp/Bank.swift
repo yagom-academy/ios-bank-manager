@@ -16,6 +16,11 @@ class Bank {
     private var bankTellerQueue = Queue<BankTeller>()
     private var queueTicketMachine = QueueTicketMachine()
     
+    private var loanClientQueue = Queue<Client>()
+    private var depositClientQueue = Queue<Client>()
+    private var loanBankTellerQueue = Queue<BankTeller>()
+    private var depositBankTellerQueue = Queue<BankTeller>()
+    
     // MARK:- initializer
     init(roles: [TaskCategory]) {
         for role in roles {
@@ -41,14 +46,24 @@ extension Bank {
 extension Bank {
     func readyForWork() {
         for bankTeller in bankTellers {
-            bankTellerQueue.enqueue(value: bankTeller)
+            switch bankTeller.role {
+            case .deposit:
+                depositBankTellerQueue.enqueue(value: bankTeller)
+            case .loan:
+                loanBankTellerQueue.enqueue(value: bankTeller)
+            }
         }
     }
     
     func receiveClient(clients: [Client]) {
         for client in clients {
             issueWaitingNumberTicket(to: client)
-            clientQueue.enqueue(value: client)
+            switch client.task {
+            case .deposit:
+                depositClientQueue.enqueue(value: client)
+            case .loan:
+                loanClientQueue.enqueue(value: client)
+            }
         }
     }
     
