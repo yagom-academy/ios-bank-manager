@@ -12,6 +12,3 @@ extension Int {
     static let ten = 10
     static let thirty = 30
 }
-
-
-

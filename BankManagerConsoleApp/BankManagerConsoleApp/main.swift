@@ -6,5 +6,5 @@
 
 import Foundation
 
-var bank = Bank(banker: Banker())
+var bank = Bank.init()
 bank.startTask()

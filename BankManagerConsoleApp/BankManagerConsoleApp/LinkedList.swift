@@ -11,7 +11,7 @@ final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     var isEmpty: Bool {
-       return head == nil
+        return head == nil
     }
     
     func append(data: T) {
@@ -20,7 +20,6 @@ final class LinkedList<T> {
         if isEmpty {
             head = newNode
             tail = head
-            return
         } else {
             tail?.next = newNode
             tail = newNode
