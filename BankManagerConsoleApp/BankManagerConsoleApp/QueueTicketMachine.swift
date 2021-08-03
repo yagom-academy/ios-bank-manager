@@ -15,7 +15,7 @@ struct QueueTicketMachine {
     }
     
     // MARK:- internal Methods
-    mutating func issueQueueTicket() -> UInt {
+    mutating func issueWatingNumberTicket() -> UInt {
         queueTicketNumber += 1
         return queueTicketNumber
     }

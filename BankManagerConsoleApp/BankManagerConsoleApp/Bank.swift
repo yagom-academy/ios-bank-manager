@@ -27,8 +27,8 @@ class Bank {
 
 // MARK:- private Methods
 extension Bank {
-    private func issueQueueTicket(to client: Client) {
-        let queueTicket = queueTicketMachine.issueQueueTicket()
+    private func issueWaitingNumberTicket(to client: Client) {
+        let queueTicket = queueTicketMachine.issueWatingNumberTicket()
         client.setQueueTicket(queueTicket: queueTicket)
     }
     
@@ -47,7 +47,7 @@ extension Bank {
     
     func receiveClient(clients: [Client]) {
         for client in clients {
-            issueQueueTicket(to: client)
+            issueWaitingNumberTicket(to: client)
             clientQueue.enqueue(value: client)
         }
     }
