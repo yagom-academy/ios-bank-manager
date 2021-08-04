@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BankingTask: CaseIterable {
+enum BankingTask: CaseIterable, CustomStringConvertible {
     case deposit
     case loan
     
@@ -26,6 +26,15 @@ enum BankingTask: CaseIterable {
             return 0.7
         case .loan:
             return 1.1
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
         }
     }
 }
@@ -76,7 +85,8 @@ final class BankManager {
     }
     
     func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, ", terminator: "")
+        print("총 업무시간은\(String(format: "%.2f", duration))초입니다.")
         self.clientCount = 0
         self.duration = 0
     }
