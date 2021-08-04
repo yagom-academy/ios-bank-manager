@@ -7,36 +7,7 @@
 
 import Foundation
 
-protocol Clerk {
-    var bankType: BankType { set get }
-    func serveBanking(for client: BankClient)
-}
 
-protocol Client {
-    var bankType: BankType { set get }
-    var waitingNumber: Int { get }
-}
-
-enum BankType: String, CaseIterable {
-    case deposit = "예금"
-    case loan = "대출"
-    
-    var workingTime: Double {
-        switch self {
-        case .deposit:
-            return 0.7
-        case .loan:
-            return 1.1
-        }
-    }
-    
-    static var random: BankType {
-        guard let random = BankType.allCases.randomElement() else {
-            return .deposit
-        }
-        return random
-    }
-}
 
 enum BankMenu: String {
     case open = "1"
@@ -44,12 +15,18 @@ enum BankMenu: String {
 }
 
 class Bank {
-    private var bankTypeTask: [BankType: Task] = [:]
-    private let numberOfClerk = (deposit:2, loan:1)
+    
+    private enum NumberOfClient {
+        static let maximumNumber = 30
+        static let minimunNumber = 10
+    }
+    
+    private var taskByTaskType: [TaskType: Task] = [:]
+    private let numberOfClerk = (deposit: 2, loan: 1)
     private lazy var bankClients = generateNewClients()
-    private let generateNewClients = { () -> Queue<BankClient> in
-        let newClients = Queue<BankClient>()
-        let totalNumberOfClients = Int.random(in: 10...30)
+    private let generateNewClients = { () -> Queue<Clientable> in
+        let newClients = Queue<Clientable>()
+        let totalNumberOfClients = Int.random(in: NumberOfClient.minimunNumber...NumberOfClient.maximumNumber)
         for waitingNumber in 1...totalNumberOfClients {
             let client = BankClient(waitingNumber: waitingNumber)
             newClients.enqueue(client)
@@ -66,7 +43,7 @@ class Bank {
         print("2: 종료")
     }
     
-    private func generateInputUserMenuNumber() -> BankMenu? {
+    private func generateBankMenuNumber() -> BankMenu? {
         print("입력 : ", terminator: "")
         guard let inputNumber = readLine() else {
             return nil
@@ -80,7 +57,7 @@ class Bank {
             }
         } else {
             print("잘못된 입력입니다. 다시 입력해주세요.")
-            return generateInputUserMenuNumber()
+            return generateBankMenuNumber()
         }
     }
     
@@ -90,11 +67,11 @@ class Bank {
         let group = DispatchGroup()
         while let currentClient = bankClients.dequeue() {
             group.enter()
-            bankTypeTask[currentClient.bankType]?.dispatchQueue.async { [self] in
-                bankTypeTask[currentClient.bankType]?.semaphore.wait()
+            taskByTaskType[currentClient.bankType]?.dispatchQueue.async { [self] in
+                taskByTaskType[currentClient.bankType]?.semaphore.wait()
                 let currentClerk = BankClerk(bankType: currentClient.bankType)
                 currentClerk.serveBanking(for: currentClient)
-                bankTypeTask[currentClient.bankType]?.semaphore.signal()
+                taskByTaskType[currentClient.bankType]?.semaphore.signal()
                 group.leave()
                 totalNumberOfClients += 1
             }
@@ -108,7 +85,7 @@ class Bank {
         let loanSemaphore = DispatchSemaphore(value: numberOfClerk.loan)
         let depositTask = Task(semaphore: depositSemaphore)
         let loanTask = Task(semaphore: loanSemaphore)
-        bankTypeTask = [.deposit: depositTask, .loan: loanTask]
+        taskByTaskType = [.deposit: depositTask, .loan: loanTask]
     }
     
     func close(numberOfClients: Int, workTime: Double) {
@@ -118,15 +95,15 @@ class Bank {
     
     func openBank() {
         printMenu()
-        guard let userInput = generateInputUserMenuNumber() else {
+        guard let bankMenu = generateBankMenuNumber() else {
             return
         }
-        if userInput == BankMenu.open {
+        if bankMenu == BankMenu.open {
             generateBankTypeTask()
             serveClient()
             resetBank()
             return openBank()
-        } else if userInput == BankMenu.close {
+        } else if bankMenu == BankMenu.close {
             return
         }
     }

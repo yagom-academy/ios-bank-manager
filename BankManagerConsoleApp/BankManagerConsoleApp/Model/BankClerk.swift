@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct BankClerk: Clerk {
-    var bankType: BankType
-    
-    func serveBanking(for client: BankClient) {
+protocol Clerkable {
+    var bankType: TaskType { set get }
+    func serveBanking(for client: Clientable)
+}
+
+struct BankClerk: Clerkable {
+    var bankType: TaskType
+    func serveBanking(for client: Clientable) {
         print("\(client.waitingNumber)번 고객 \(client.bankType.rawValue) 업무 시작")
         Thread.sleep(forTimeInterval: bankType.workingTime)
         print("\(client.waitingNumber)번 고객 \(client.bankType.rawValue) 업무 종료")
