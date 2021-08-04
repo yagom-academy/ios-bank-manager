@@ -6,8 +6,8 @@
 
 import Foundation
 
-let minimumClients = 10
-let maximumClients = 30
+let minimumClients: UInt = 10
+let maximumClients: UInt = 30
 
 var numberOfClients = UInt.random(in: minimumClients...maximumClients)
 
