@@ -10,13 +10,13 @@ import Foundation
 struct BankClerk {
     let id: Int
     
-    func startTask(about customer: Customer?) {
+    func doTask(about customer: Customer?) {
         guard let customer = customer else {
             return
         }
         
         print("\(customer.id)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: customer.requirement.time)
+        Thread.sleep(forTimeInterval: customer.businessType.requiredTime)
         print("\(customer.id)번 고객 업무 종료")
     }
 }

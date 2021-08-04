@@ -8,15 +8,15 @@
 import Foundation
 
 struct Bank {
-    enum Status: Int {
+    enum OperationStatus: Int {
         case open = 1
         case close = 2
     }
     
-    enum Job {
+    enum BusinessType {
         case loan
         
-        var time: TimeInterval {
+        var requiredTime: TimeInterval {
             switch self {
             case .loan:
                 return 0.7
@@ -24,25 +24,25 @@ struct Bank {
         }
     }
     
-    private var queue = Queue<Customer>()
+    private var customerQueue = Queue<Customer>()
     
     func receiveCustomer(range: ClosedRange<Int>) {
         for order in range {
-            queue.enqueue(value: Customer(id: order, requirement: Job.loan))
+            customerQueue.enqueue(value: Customer(id: order, businessType: BusinessType.loan))
         }
     }
     
-    func doTask() {
+    func startBusiness() {
         let bankClerk = BankClerk(id: 1)
         var customer: Customer?
-        while !queue.isEmpty {
-            customer = queue.dequeue()
-            bankClerk.startTask(about: customer)
+        while !customerQueue.isEmpty {
+            customer = customerQueue.dequeue()
+            bankClerk.doTask(about: customer)
         }
-        endTask(after: customer)
+        endBusiness(after: customer)
     }
     
-    private func endTask(after customer: Customer?) {
+    private func endBusiness(after customer: Customer?) {
         guard let customer = customer else {
             return
         }
