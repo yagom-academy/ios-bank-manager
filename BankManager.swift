@@ -35,8 +35,8 @@ extension BankManager {
         let clients = generateClients()
         bank.receiveClient(clients: clients)
         bank.readyForWork()
-        let (numberOfClient, totalTaskTime): TaskReport = bank.doTask()
-        showClosingMessage(numberOfClient: numberOfClient, totalTaskTime: totalTaskTime)
+        let task: TaskReport = bank.doTask()
+        showClosingMessage(numberOfClient: task.numberOfClient, totalTaskTime: task.totalTaskTime)
         bank.finishWork()
     }
     

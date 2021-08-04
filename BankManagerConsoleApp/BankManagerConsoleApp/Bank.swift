@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias TaskReport = (UInt, Double)
+typealias TaskReport = (numberOfClient: UInt, totalTaskTime: Double)
 
 class Bank {
     // MARK:- private Properties
