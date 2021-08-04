@@ -59,9 +59,22 @@ final class BankManager {
     }
     
     func open() {
+        let servingGroup = DispatchGroup()
         while let client = clientQueue.dequeue() {
-            
+            let bankingTask = client.bankingTask
+            guard departments[bankingTask] != nil else { fatalError() }
+            departments[bankingTask]?.dispatchQueue.async(group: servingGroup) { [self] in
+                departments[bankingTask]?.dispatchSemaphore.wait()
+                defer { departments[bankingTask]?.dispatchSemaphore.signal() }
+                
+                let bankTeller = departments[bankingTask]!.assignBankTeller()!
+                bankTeller.serve(client) {
+                    clientCount += 1
+                }
+                departments[bankingTask]?.setup(bankTeller)
+            }
         }
+        servingGroup.wait()
     }
     
     func close() {
