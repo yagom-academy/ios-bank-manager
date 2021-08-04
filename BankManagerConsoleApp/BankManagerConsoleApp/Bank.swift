@@ -30,17 +30,20 @@ class Bank {
         return processTime
     }
     
-    func openBank() {
+    func printWorkDone(_ time: Double) {
         numberFormatter.roundingMode = .floor
         numberFormatter.maximumSignificantDigits = 2
-       
+        
+        if let formattedTime = numberFormatter.string(for: time) {
+            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)이며, 총 업무시간은 \(formattedTime)초입니다.")
+        }
+    }
+    
+    func openBank() {
         let totalWorkTime = checkTotalTime {
             makeRandomCustomerNumber()
             bankManager[0].startWork(customerNumber)
         }
-        
-        if let formattedTime = numberFormatter.string(for: totalWorkTime) {
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)이며, 총 업무시간은 \(formattedTime)초입니다.")
-        }
+        printWorkDone(totalWorkTime)
     }
 }
