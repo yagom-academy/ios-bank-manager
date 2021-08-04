@@ -8,6 +8,7 @@
 import Foundation
 
 class Client {
+    
     let waitingNumber: UInt
 
     init(waitingNumber: UInt) {

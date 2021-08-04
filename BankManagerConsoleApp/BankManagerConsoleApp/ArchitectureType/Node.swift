@@ -8,6 +8,7 @@
 import Foundation
 
 class Node<T> {
+    
     var data: T
     var next: Node?
     

@@ -7,6 +7,7 @@
 import Foundation
 
 struct LinkedList<T> {
+    
     var head: Node<T>?
     var isEmpty: Bool {
         return head == nil
@@ -24,12 +25,12 @@ struct LinkedList<T> {
         currentNode?.next = node
     }
     
-    mutating func removeFirst() -> T? {
+    mutating func removeFirst() -> Node<T>? {
         let currentHead = head
         if isEmpty == false {
             head = head?.next
         }
-        return currentHead?.data
+        return currentHead
     }
     
     mutating func removeAll() {
