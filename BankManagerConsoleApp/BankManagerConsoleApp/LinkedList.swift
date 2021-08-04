@@ -14,7 +14,6 @@ final class LinkedList<T> {
         
         init(data: T) {
             self.data = data
-            self.next = nil
         }
     }
     
