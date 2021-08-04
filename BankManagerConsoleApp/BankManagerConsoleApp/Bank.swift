@@ -20,12 +20,15 @@ class Bank {
     private var depositBankTellerQueue = Queue<BankTeller>()
     
     // MARK:- initializer
-    init(roles: [TaskCategory]) {
-        for role in roles {
-            let bankTeller = BankTeller(role: role)
-            bankTellers.append(bankTeller)
-        }
-    }
+//    init(roles: [TaskCategory]) {
+//        for role in roles {
+//            let bankTeller = BankTeller(role: role)
+//            bankTellers.append(bankTeller)
+//        }
+//    }
+//    init() {
+//        self.bankTellers = bankTellers
+//    }
 }
 
 // MARK:- private Methods
@@ -42,6 +45,10 @@ extension Bank {
 
 // MARK:- internal Methods (BankManager executeBankBusiness() 에서 호출되는 메서드들)
 extension Bank {
+    func setBankTellers(bankTellers: [BankTeller]) {
+        self.bankTellers = bankTellers
+    }
+    
     func readyForWork() {
         for bankTeller in bankTellers {
             switch bankTeller.role {

@@ -13,12 +13,13 @@ struct BankManager {
     }
     
     // MARK:- Property
-    private let bank: Bank
+    private let bank = Bank()
+    private let bankTellers: [BankTeller]
     
     // MARK:- initializer
-    init() {
-        self.bank = Bank(roles: [.deposit, .loan, .deposit])
-    }
+//    init() {
+//        self.bank = Bank()
+//    }
 }
 
 // MARK:- run() related Methods
@@ -34,6 +35,9 @@ extension BankManager {
     }
     
     private func executeBankBusiness() {
+        let bankTellers = generateBankTellers(roles: [.deposit, .deposit, .loan])
+        bank.setBankTellers(bankTellers: bankTellers)
+        
         let clients = generateClients()
         bank.receiveClient(clients: clients)
         bank.readyForWork()
@@ -98,5 +102,14 @@ extension BankManager {
             clients.append(client)
         }
         return clients
+    }
+    
+    func generateBankTellers(roles: [TaskCategory]) -> [BankTeller] {
+//        let bankTellers: [BankTeller] = roles.map { role in BankTeller(role: role) }
+        var bankTellers: [BankTeller] = []
+        for role in roles {
+            bankTellers.append(BankTeller(role: role))
+        }
+        return bankTellers
     }
 }
