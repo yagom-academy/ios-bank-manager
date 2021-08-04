@@ -13,13 +13,6 @@ class Bank {
     // MARK:- private Properties
     private var bankTellers: [BankTeller] = []
     private var queueTicketMachine = QueueTicketMachine()
-    
-//    private var loanClientQueue = Queue<Client>()taskQueue
-//    private var loanBankTellerQueue = Queue<BankTeller>()
-//
-//    private var depositClientQueue = Queue<Client>()
-//    private var depositBankTellerQueue = Queue<BankTeller>()
-    
     private var waitingQueue: [TaskCategory: TaskQueue] = [:]
     
     init () {
@@ -52,13 +45,6 @@ extension Bank {
             if let taskWaitingQueue = waitingQueue[bankTeller.role] {
                 taskWaitingQueue.readyForWork(bankTeller: bankTeller)
             }
-            
-//            switch bankTeller.role {
-//            case .deposit:
-//                depositBankTellerQueue.enqueue(value: bankTeller)
-//            case .loan:
-//                loanBankTellerQueue.enqueue(value: bankTeller)
-//            }
         }
     }
     
@@ -68,13 +54,6 @@ extension Bank {
                 issueWaitingNumberTicket(to: client)
                 taskWaitingQueue.receiveClient(client: client)
             }
-            
-//            switch client.task {
-//            case .deposit:
-//                depositClientQueue.enqueue(value: client)
-//            case .loan:
-//                loanClientQueue.enqueue(value: client)
-//            }
         }
     }
     
@@ -83,7 +62,7 @@ extension Bank {
         return notCompletedBankTeller.count > 0
     }
     
-    func isAllClientsQueueNotEmpty() -> Bool {
+    func isSomeClientsQueueNotEmpty() -> Bool {
         for (_, taskQueue) in waitingQueue {
             if taskQueue.isClientQueueNotEmpty() {
                 return true
@@ -95,24 +74,7 @@ extension Bank {
     func doTask() -> TaskReport {
         let startTime = DispatchTime.now()
         
-//        while self.depositClientQueue.isNotEmpty() || self.loanClientQueue.isNotEmpty() || isNotAllCompleted() {
-        while isAllClientsQueueNotEmpty() || isAllBankTellersNotCompleted() {
-//            DispatchQueue.global().async {
-//                if self.depositBankTellerQueue.isNotEmpty(),
-//                   let client = self.depositClientQueue.dequeue(),
-//                   let bankTeller = self.depositBankTellerQueue.dequeue() {
-//                    bankTeller.handleTask(with: client)
-//                    self.depositBankTellerQueue.enqueue(value: bankTeller)
-//                }
-//            }
-//            DispatchQueue.global().async {
-//                if self.loanBankTellerQueue.isNotEmpty(),
-//                   let client = self.loanClientQueue.dequeue(),
-//                   let bankTeller = self.loanBankTellerQueue.dequeue() {
-//                    bankTeller.handleTask(with: client)
-//                    self.loanBankTellerQueue.enqueue(value: bankTeller)
-//                }
-//            }
+        while isSomeClientsQueueNotEmpty() || isAllBankTellersNotCompleted() {
             for (_, taskQueue) in waitingQueue {
                 DispatchQueue.global().async {
                     if taskQueue.isBankTellerQueueNotEmpty(),
@@ -135,10 +97,6 @@ extension Bank {
     
     func finishWork() {
         queueTicketMachine.reset()
-//        loanClientQueue.clear()
-//        loanBankTellerQueue.clear()
-//        depositClientQueue.clear()
-//        depositBankTellerQueue.clear()
         
         for (_, taskQueue) in waitingQueue {
             taskQueue.clear()
