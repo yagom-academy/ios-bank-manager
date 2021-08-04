@@ -12,7 +12,7 @@ final class LinkedList<T> {
         var data: T
         var next: Node?
         
-        init(data: T, next: Node? = nil) {
+        init(data: T) {
             self.data = data
         }
     }
@@ -42,10 +42,8 @@ final class LinkedList<T> {
         if isEmpty {
             return nil
         }
-        let copiedHead = head
         let value = head?.data
-        head = copiedHead?.next
-        copiedHead?.next = nil
+        head = head?.next
         return value
     }
     
