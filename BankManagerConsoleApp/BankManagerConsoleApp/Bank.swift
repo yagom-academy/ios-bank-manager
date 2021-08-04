@@ -118,8 +118,9 @@ extension Bank {
                     if taskQueue.isBankTellerQueueNotEmpty(),
                        let client = taskQueue.dequeueClient(),
                        let bankTeller = taskQueue.dequeueBankTeller() {
-                        bankTeller.handleTask(with: client)
-                        taskQueue.readyForWork(bankTeller: bankTeller)
+                        bankTeller.handleTask(with: client) {
+                            taskQueue.readyForWork(bankTeller: bankTeller)
+                        }   
                     }
                 }
             }
