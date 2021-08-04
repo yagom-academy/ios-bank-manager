@@ -28,9 +28,10 @@ func decideToStartProgram() -> Bool {
 
 
 // MARK: --- main Program
+let yagomBank = BankManager()
 while true {
     guard decideToStartProgram() else { break }
-    let yagomBank = BankManager()
+    yagomBank.lineupClients()
     yagomBank.open()
     yagomBank.close()
 }

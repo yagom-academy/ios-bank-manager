@@ -52,11 +52,7 @@ final class BankManager {
         self.totalTime = 0
     }
     
-    private func makeRandomNumber() -> Int {
-        return Int.random(in: 10...30)
-    }
-    
-    private func lineupClients(_ numberOfClients: Int) {
+    func lineupClients(_ numberOfClients: Int = Int.random(in: 10...30)) {
         for number in 1...numberOfClients {
             clientQueue.enqueue(Client(waitingNumber: number, bankingTask: BankingTask.selectRandomCase()))
         }
@@ -70,5 +66,7 @@ final class BankManager {
     
     func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
+        self.clientCount = 0
+        self.totalTime = 0
     }
 }
