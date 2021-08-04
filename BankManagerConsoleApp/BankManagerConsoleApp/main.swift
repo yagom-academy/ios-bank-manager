@@ -6,7 +6,10 @@
 
 import Foundation
 
-var numberOfClients = UInt.random(in: 10...30)
+let minimumClients = 10
+let maximumClients = 30
+
+var numberOfClients = UInt.random(in: minimumClients...maximumClients)
 
 let bankManager = BankManager()
 try? bankManager.chooseOption()

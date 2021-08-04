@@ -6,10 +6,6 @@
 
 import Foundation
 
-enum BankError: Error {
-    case invalidOption
-}
-
 class BankManager {
     
     private enum Selector {
