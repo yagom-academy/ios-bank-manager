@@ -7,6 +7,15 @@
 
 import Foundation
 
+enum BankingTask: CaseIterable {
+    case deposit
+    case loan
+    
+    static func selectRandomCase() -> BankingTask {
+        guard let element = BankingTask.allCases.randomElement() else { fatalError("원하는 업무가 없음.")}
+        return element
+    }
+}
 
 
 final class BankManager {
@@ -21,6 +30,7 @@ final class BankManager {
     
     private func lineUpClients(_ numberOfClients: Int) {
         for number in 1...numberOfClients {
+            self.clientQueue.enqueue(Client(waitingNumber: number, bankingTask: BankingTask.selectRandomCase()))
         }
     }
     
