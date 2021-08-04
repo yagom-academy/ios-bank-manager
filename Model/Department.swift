@@ -16,7 +16,7 @@ class Department {
     init(bankingTask: BankingTask) {
         self.bankingTask = bankingTask
         self.bankTellers = .init(repeating: BankTeller(bankingTask: bankingTask), count: bankingTask.numberOfBankWindow)
-        self.dispatchQueue = .init(label: "Department.\(bankingTask)")
+        self.dispatchQueue = .init(label: "Department.\(bankingTask)", attributes: .concurrent)
         self.dispatchSemaphore = .init(value: bankingTask.numberOfBankWindow)
     }
     
