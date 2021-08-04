@@ -8,7 +8,7 @@
 import Foundation
 
 class BankClerk {
-    let id: Int
+    private let id: Int
     var isWorking = false
     
     func ready() {

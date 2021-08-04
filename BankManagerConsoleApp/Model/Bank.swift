@@ -67,11 +67,7 @@ struct Bank {
 
         endBusiness(totalCustomer: totalCustomer, totalTime: totalTime)
     }
-    
-    private func endBusiness(totalCustomer: Int, totalTime: TimeInterval) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime)) 입니다.")
-    }
-    
+
     private func prepareWindows() -> [BusinessQueue] {
         return BusinessType.allCases.map { businessType -> BusinessQueue in
             let thisBusinessTypeClerks = (1...businessType.clerkNumber).map { clerkNumber -> BankClerk in
@@ -87,8 +83,8 @@ struct Bank {
             return businessQueue
         }
     }
-    
-    func open(bankWindows: [BusinessQueue]) {
+
+    private func open(bankWindows: [BusinessQueue]) {
         let group = DispatchGroup()
         var customer: Customer?
 
@@ -104,5 +100,9 @@ struct Bank {
             }
         }
         let _ = group.wait(timeout: .distantFuture)
+    }
+
+    private func endBusiness(totalCustomer: Int, totalTime: TimeInterval) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime)) 입니다.")
     }
 }
