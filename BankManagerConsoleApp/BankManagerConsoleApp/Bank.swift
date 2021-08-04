@@ -9,7 +9,7 @@ import Foundation
 
 protocol Clerk {
     var bankType: BankType { set get }
-    func serveBanking(for client: BankClient)
+    func serveBanking(for client: BankClient, notifyEnd: @escaping (BankClerk) -> Void )
 }
 
 protocol Client {
@@ -17,9 +17,9 @@ protocol Client {
     var waitingNumber: Int { get }
 }
 
-enum BankType: CaseIterable {
-    case deposit
-    case loan
+enum BankType: String, CaseIterable {
+    case deposit = "예금"
+    case loan = "대출"
     
     var workingTime: Double {
         switch self {
@@ -44,7 +44,8 @@ enum BankMenu: String {
 }
 
 class Bank {
-    private var bankClerk: [Clerk] = []
+    private var bankTypeTask: [BankType: Task] = [:]
+    
     private lazy var bankClients = generateNewClients()
     private var totalWorkTime: Double = 0
     private let generateNewClients = { () -> Queue<BankClient> in
@@ -57,17 +58,17 @@ class Bank {
         return newClients
     }
     
-    init(deposit: Int = 2, loan: Int = 1) {
-        for _ in 0 ..< deposit {
-            let depositClerk = BankClerk(bankType: .deposit)
-            bankClerk.append(depositClerk)
-        }
-        
-        for _ in 0 ..< loan {
-            let loanClerk = BankClerk(bankType: .loan)
-            bankClerk.append(loanClerk)
-        }
-    }
+    //    init(deposit: Int = 2, loan: Int = 1) {
+    //        for _ in 0 ..< deposit {
+    //            let depositClerk = BankClerk(bankType: .deposit)
+    //            bankClerk.append(depositClerk)
+    //        }
+    //
+    //        for _ in 0 ..< loan {
+    //            let loanClerk = BankClerk(bankType: .loan)
+    //            bankClerk.append(loanClerk)
+    //        }
+    //    }
     
     private func resetBank() {
         totalWorkTime = 0
@@ -97,16 +98,34 @@ class Bank {
         }
     }
     
-    private func startWork() {
-        var numberOfClients = 0
-        while let client = bankClients.dequeue() {
-            bankClerk[0].serveBanking(for: client)
-            numberOfClients += 1
-            totalWorkTime += bankClerk[0].bankType.workingTime
+    func serveClient() {
+        let group = DispatchGroup()
+        while let currentClient = bankClients.dequeue() {
+            group.enter()
+            bankTypeTask[currentClient.bankType]?.dispatchQueue.async { [self] in
+                bankTypeTask[currentClient.bankType]?.semaphore.wait()
+                let currentClerk = BankClerk(bankType: currentClient.bankType)
+                currentClerk.serveBanking(for: currentClient) { endClerk in
+                    
+                }
+                bankTypeTask[currentClient.bankType]?.semaphore.signal()
+                group.leave()
+            }
         }
-        let convertedWorkTime = String(format: "%.2f", totalWorkTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertedWorkTime)입니다.")
+        group.wait()
     }
+    
+    func generateBankTypeTask() {
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depositTask = Task(semaphore: depositSemaphore)
+        let loanTask = Task(semaphore: loanSemaphore)
+        bankTypeTask = [.deposit: depositTask, .loan: loanTask]
+    }
+    
+    //    func close(numberOfClients: Int, workTime: Double) {
+    //        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertedWorkTime)입니다.")
+    //    }
     
     func openBank() {
         printMenu()
@@ -114,7 +133,8 @@ class Bank {
             return
         }
         if userInput == BankMenu.open {
-            startWork()
+            generateBankTypeTask()
+            serveClient()
             resetBank()
             return openBank()
         } else if userInput == BankMenu.close {

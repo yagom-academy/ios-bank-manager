@@ -11,6 +11,7 @@
 		4D4F3E8D26B2BA9300A0D002 /* BankClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4F3E8C26B2BA9300A0D002 /* BankClient.swift */; };
 		4D4F3E8F26B2BAA100A0D002 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4F3E8E26B2BAA100A0D002 /* BankClerk.swift */; };
 		4D4F3E9126B2BB4A00A0D002 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4F3E9026B2BB4A00A0D002 /* Bank.swift */; };
+		4DC4B0E826BA696500A63CF6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4B0E726BA696500A63CF6 /* Task.swift */; };
 		4DD38C3A26AFE01D001B4981 /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD38C3926AFE01D001B4981 /* QueueTest.swift */; };
 		4DD38C3F26AFE652001B4981 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5C7CB26AFCCD5002F4BF3 /* LinkedList.swift */; };
 		4DD38C4026AFE652001B4981 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83591626AFDB8100518A88 /* Queue.swift */; };
@@ -36,6 +37,7 @@
 		4D4F3E8C26B2BA9300A0D002 /* BankClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClient.swift; sourceTree = "<group>"; };
 		4D4F3E8E26B2BAA100A0D002 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		4D4F3E9026B2BB4A00A0D002 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		4DC4B0E726BA696500A63CF6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		4DD38C3726AFE01D001B4981 /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD38C3926AFE01D001B4981 /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
 		4DD38C3B26AFE01D001B4981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				3F83591626AFDB8100518A88 /* Queue.swift */,
 				4D4F3E8C26B2BA9300A0D002 /* BankClient.swift */,
 				4D4F3E8E26B2BAA100A0D002 /* BankClerk.swift */,
+				4DC4B0E726BA696500A63CF6 /* Task.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC4B0E826BA696500A63CF6 /* Task.swift in Sources */,
 				4DD5C7CC26AFCCD5002F4BF3 /* LinkedList.swift in Sources */,
 				4D4F3E8F26B2BAA100A0D002 /* BankClerk.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
