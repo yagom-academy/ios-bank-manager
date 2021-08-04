@@ -88,8 +88,6 @@ struct Bank {
     
     private func configure() -> [BankTaskQueue] {
         return BusinessType.allCases.map { businessType -> BankTaskQueue in
-            let dispatchQueue = DispatchQueue(label: businessType.description, attributes: .concurrent)
-            let dispatchSemaphore = DispatchSemaphore(value: Int(businessType.clerkNumber))
             let thisBusinessTypeClerks = (1...businessType.clerkNumber).map { clerkNumber -> BankClerk in
                 let id = businessType.rawValue * 100 + Int(clerkNumber)
                 return BankClerk(id: id)
@@ -97,8 +95,6 @@ struct Bank {
             
             let bankTaskQueue = BankTaskQueue(
                 identify: businessType,
-                dispatchQueue: dispatchQueue,
-                dispatchSemaphore: dispatchSemaphore,
                 clerks: thisBusinessTypeClerks
             )
             return bankTaskQueue
