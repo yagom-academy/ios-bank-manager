@@ -9,5 +9,5 @@ import Foundation
 
 struct Client {
     let waitingNumber: Int
-    let bankingTask: BankingTask
+    let bankingTask: BankingTask = BankingTask.allCases.randomElement() ?? .deposit
 }

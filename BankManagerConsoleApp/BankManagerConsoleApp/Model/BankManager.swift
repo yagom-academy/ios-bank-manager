@@ -11,11 +11,6 @@ enum BankingTask: CaseIterable {
     case deposit
     case loan
     
-    static func selectRandomCase() -> BankingTask {
-        guard let element = BankingTask.allCases.randomElement() else { fatalError("원하는 업무가 없음.")}
-        return element
-    }
-    
     var numberOfBankWindow: Int {
         switch self {
         case .deposit:
@@ -54,7 +49,7 @@ final class BankManager {
     
     func lineupClients(_ numberOfClients: Int = Int.random(in: 10...30)) {
         for number in 1...numberOfClients {
-            clientQueue.enqueue(Client(waitingNumber: number, bankingTask: BankingTask.selectRandomCase()))
+            clientQueue.enqueue(Client(waitingNumber: number))
         }
     }
     
