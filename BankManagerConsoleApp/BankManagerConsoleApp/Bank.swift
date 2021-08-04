@@ -8,28 +8,28 @@
 import Foundation
 
 class Bank {
-    let bankManager: [BankManager]
-    let waitList = Queue<Int>()
-    var countOfCustomer: Int = 0
-    let minCustomerNumber = 10
-    let maxCustomerNumber = 30
-    let numberFormatter = NumberFormatter()
+    private let bankManager: [BankManager]
+    private let waitList = Queue<Int>()
+    private var countOfCustomer: Int = 0
+    private let minCustomerNumber = 10
+    private let maxCustomerNumber = 30
+    private let numberFormatter = NumberFormatter()
     
     init(bankManager: [BankManager]) {
         self.bankManager = bankManager
     }
     
-    func makeRandomCustomerNumber() {
+    private func makeRandomCustomerNumber() {
         countOfCustomer = Int.random(in: minCustomerNumber...maxCustomerNumber)
     }
     
-    func addCustomer() {
+    private func addCustomer() {
         (1...countOfCustomer).forEach { index in
             waitList.enqueue(index)
         }
     }
     
-    func assignTask(to bankManager: BankManager) {
+    private func assignTask(to bankManager: BankManager) {
         while waitList.isEmpty() == false {
             guard let customer = waitList.dequeue() else {
                 return
@@ -38,14 +38,14 @@ class Bank {
         }
     }
     
-    func checkTotalTime(of process: () -> ()) -> Double {
+    private func checkTotalTime(of process: () -> ()) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
         process()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
         return processTime
     }
     
-    func printWorkDone(_ time: Double) {
+    private func printWorkDone(_ time: Double) {
         numberFormatter.roundingMode = .floor
         numberFormatter.maximumSignificantDigits = 2
         
