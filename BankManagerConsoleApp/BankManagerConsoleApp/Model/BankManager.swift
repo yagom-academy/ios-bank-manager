@@ -35,7 +35,7 @@ final class BankManager {
     private var clientQueue: Queue<Client>
     private var departments: Dictionary<BankingTask, Department>
     private var clientCount: Int
-    private var totalTime: Double
+    private var duration: Double
     
     init() {
         self.clientQueue = .init()
@@ -44,7 +44,7 @@ final class BankManager {
             departments.updateValue(Department(bankingTask: task), forKey: task)
         }
         self.clientCount = 0
-        self.totalTime = 0
+        self.duration = 0
     }
     
     func lineupClients(_ numberOfClients: Int = Int.random(in: 10...30)) {
@@ -55,6 +55,9 @@ final class BankManager {
     
     func open() {
         let servingGroup = DispatchGroup()
+        let startTime = CFAbsoluteTimeGetCurrent()
+        defer { duration = CFAbsoluteTimeGetCurrent() - startTime }
+        
         while let client = clientQueue.dequeue() {
             let bankingTask = client.bankingTask
             guard departments[bankingTask] != nil else { fatalError() }
@@ -75,6 +78,6 @@ final class BankManager {
     func close() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
         self.clientCount = 0
-        self.totalTime = 0
+        self.duration = 0
     }
 }
