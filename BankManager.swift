@@ -10,10 +10,8 @@ struct BankManager {
     let workTime: Double? = 0
     
     func startWork(_ customerNumber: Int) {
-        for index in 1...customerNumber {
-            print("\(index)번 고객 업무 시작")
-            usleep(700000)
-            print("\(index)번 고객 업무 완료")
-        }
+        print("\(customerNumber)번 고객 업무 시작")
+        usleep(700000)
+        print("\(customerNumber)번 고객 업무 완료")
     }
 }
