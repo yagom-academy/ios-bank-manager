@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+var bank = Bank.init()
+bank.startTask()
