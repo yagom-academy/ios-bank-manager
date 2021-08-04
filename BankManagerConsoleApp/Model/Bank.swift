@@ -59,34 +59,17 @@ struct Bank {
 
     func startBusiness() {
         let bankWindows = prepareWindows()
-        var customer: Customer?
+        let totalCustomer = customerQueue.length
 
         let totalTime = Timer.calculateDuration {
-            let group = DispatchGroup()
-
-            while !customerQueue.isEmpty {
-                group.enter()
-                customer = customerQueue.dequeue()
-                let targetQueue = bankWindows.filter { bankTaskQueue in
-                    return customer?.businessType == bankTaskQueue.identity
-                }[0]
-
-                targetQueue.matchingClerkWith(customer: customer) {
-                    group.leave()
-                }
-            }
-            let _ = group.wait(timeout: .distantFuture)
+            open(bankWindows: bankWindows)
         }
 
-        endBusiness(after: customer, totalTime: totalTime)
+        endBusiness(totalCustomer: totalCustomer, totalTime: totalTime)
     }
     
-    private func endBusiness(after customer: Customer?, totalTime: TimeInterval) {
-        guard let customer = customer else {
-            return
-        }
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer.id)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime)) 입니다.")
+    private func endBusiness(totalCustomer: Int, totalTime: TimeInterval) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime)) 입니다.")
     }
     
     private func prepareWindows() -> [BusinessQueue] {
@@ -103,5 +86,23 @@ struct Bank {
             
             return businessQueue
         }
+    }
+    
+    func open(bankWindows: [BusinessQueue]) {
+        let group = DispatchGroup()
+        var customer: Customer?
+
+        while !customerQueue.isEmpty {
+            group.enter()
+            customer = customerQueue.dequeue()
+            let targetQueue = bankWindows.filter { bankTaskQueue in
+                return customer?.businessType == bankTaskQueue.identity
+            }[0]
+
+            targetQueue.matchingClerkWith(customer: customer) {
+                group.leave()
+            }
+        }
+        let _ = group.wait(timeout: .distantFuture)
     }
 }

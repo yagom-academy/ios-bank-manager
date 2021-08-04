@@ -12,6 +12,17 @@ struct Queue<Type> {
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
+    var length: Int {
+        var count = 0
+        var node = linkedList.head
+        
+        repeat {
+            count += 1
+            node = node?.next
+        } while node != nil
+        
+        return count
+    }
     
     func enqueue(value: Type) {
         linkedList.append(value: value)
