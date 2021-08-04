@@ -1,6 +1,8 @@
-## iOS 커리어 스타터 캠프
+# 은행창구 매니저 프로젝트
 
-### 은행 매니저 프로젝트 저장소
+프로젝트 기간: 2021년 07월 26일 ~ 08월 06일
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
+## UML
+
+<img width="829" alt="Screen Shot 2021-08-04 at 10 36 49 PM" src="https://user-images.githubusercontent.com/24707229/128190828-1330b256-713f-4d2b-bf67-fcdcc6610bb7.png">
 
