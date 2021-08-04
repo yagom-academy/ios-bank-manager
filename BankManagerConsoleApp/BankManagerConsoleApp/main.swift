@@ -37,10 +37,20 @@ func checkUserInput() -> Bool {
     }
 }
 
-func startTask(_ userInput: String?) {
+func startTask() {
     let newbankManager = [BankManager()]
     let bank = Bank(bankManager: newbankManager)
     bank.openBank()
 }
 
+func taskManager() {
+    while true {
+        printMenu()
+        if checkUserInput() == false {
+            return
+        }
+        startTask()
+    }
+}
 
+taskManager()
