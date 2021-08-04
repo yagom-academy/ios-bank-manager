@@ -2,7 +2,7 @@
 //  Department.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yongwoo Marco on 2021/08/04.
+//  Created by Luyan, Marco on 2021/08/04.
 //
 
 import Foundation

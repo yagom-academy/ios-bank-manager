@@ -1,42 +1,24 @@
 //
-//  Teller.swift
+//  BankTeller.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yongwoo Marco on 2021/07/31.
+//  Created by Luyan, Marco on 2021/08/04.
 //
 
 import Foundation
 
-struct BankTeller: Taskable {
-    let task: Task
+struct BankTeller {
+    let bankingTask: BankingTask
     
-    func serve(_ client: Client) {
-        print("\(client.waitingNumber)번 고객 \(client.task.description) 업무 시작")
+    func serve(_ client: Client, completion: () -> Void) {
+        print("\(client.waitingNumber)번 고객 \(bankingTask)업무 시작")
+//        Thread.sleep(forTimeInterval: bankingTask.processingTime)
+        let runLoop = RunLoop.current
+        Timer.scheduledTimer(withTimeInterval: bankingTask.processingTime, repeats: false) { _ in
+            print("\(client.waitingNumber)번 고객 \(bankingTask)업무 완료")
+        }
+        runLoop.run()
         
-        Thread.sleep(forTimeInterval: task.taskTime)
-        
-        print("\(client.waitingNumber)번 고객 \(client.task.description) 업무 완료")
+        completion()
     }
 }
-
-
-//func serveCustomers() {
-//        let semaphore = DispatchSemaphore(value: numberOfBankTellers)
-//        let group = DispatchGroup()
-//        while let currentCustomer = customerQueue.dequeue() {
-//            semaphore.wait()
-//            guard let bankTeller = bankTellerQueue.dequeue() else {
-//                customerQueue.enqueue(currentCustomer)
-//                semaphore.signal()
-//                continue
-//            }
-//            group.enter()
-//            DispatchQueue.global().async {
-//                bankTeller.serve(customer: currentCustomer)
-//                self.bankTellerQueue.enqueue(bankTeller)
-//                semaphore.signal()
-//                group.leave()
-//            }
-//        }
-//        group.wait()
-//}

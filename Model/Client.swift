@@ -1,17 +1,13 @@
 //
-//  Customer.swift
+//  Client.swift
 //  BankManagerConsoleApp
 //
-//  Created by Yongwoo Marco on 2021/07/31.
+//  Created by Luyan, Marco on 2021/08/02.
 //
 
 import Foundation
 
-protocol Taskable {
-    var task: Task { get }
-}
-
-struct Client: Taskable {
+struct Client {
     let waitingNumber: Int
-    let task: Task = Task.randomElement
+    let bankingTask: BankingTask = BankingTask.allCases.randomElement() ?? .deposit
 }

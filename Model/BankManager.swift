@@ -6,54 +6,87 @@
 
 import Foundation
 
-struct BankManager {
-    private var queuesByTask: Dictionary<Task, (Task, Array<BankTeller>, Queue<Client>)> = [:]
+enum BankingTask: CaseIterable, CustomStringConvertible {
+    case deposit
+    case loan
     
-    init(_ clientQueues: Dictionary<Task, Queue<Client>>) {
-        Task.allCases.forEach { (task) in
-            let bankTellers = Array<BankTeller>(repeating: BankTeller(task: task), count: task.windowCount)
-            let clients = clientQueues[task] ?? Queue<Client>()
-            queuesByTask.updateValue((task, bankTellers, clients), forKey: task)
+    var numberOfBankWindow: Int {
+        switch self {
+        case .deposit:
+            return 2
+        case .loan:
+            return 1
         }
     }
     
-    func open(_ completion: @escaping (Int, Double) -> Void) {
-        var clientCount: Int = 0
-        var totalTime: Double = 0
+    var processingTime: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
+}
+
+
+final class BankManager {
+    private var clientQueue: Queue<Client>
+    private var departments: Dictionary<BankingTask, Department>
+    private var clientCount: Int
+    private var duration: Double
+    
+    init() {
+        self.clientQueue = .init()
+        self.departments = .init()
+        for task in BankingTask.allCases {
+            departments.updateValue(Department(bankingTask: task), forKey: task)
+        }
+        self.clientCount = 0
+        self.duration = 0
+    }
+    
+    func lineupClients(_ numberOfClients: Int = Int.random(in: 10...30)) {
+        for number in 1...numberOfClients {
+            clientQueue.enqueue(Client(waitingNumber: number))
+        }
+    }
+    
+    func open() {
+        let servingGroup = DispatchGroup()
+        let startTime = CFAbsoluteTimeGetCurrent()
+        defer { duration = CFAbsoluteTimeGetCurrent() - startTime }
         
-        let queueGroup = DispatchGroup()
-        for task in Task.allCases {
-            queueGroup.enter()
-            DispatchQueue.init(label: "serial.queue.\(task)").async(group: queueGroup) {
-                let bankTellers = queuesByTask[task]?.1 ?? Array<BankTeller>(repeating: BankTeller(task: task), count: task.windowCount)
-                let clients = queuesByTask[task]?.2 ?? Queue<Client>()
-                dequeueClient(task, bankTellers, clients) {
-                    
+        while let client = clientQueue.dequeue() {
+            let bankingTask = client.bankingTask
+            guard departments[bankingTask] != nil else { fatalError() }
+            departments[bankingTask]?.dispatchQueue.async(group: servingGroup) { [self] in
+                departments[bankingTask]?.dispatchSemaphore.wait()
+                defer { departments[bankingTask]?.dispatchSemaphore.signal() }
+                
+                let bankTeller = departments[bankingTask]!.assignBankTeller()!
+                bankTeller.serve(client) {
+                    clientCount += 1
                 }
+                departments[bankingTask]?.setup(bankTeller)
             }
-            queueGroup.leave()
         }
-        queueGroup.wait()
-        completion(clientCount, totalTime)
+        servingGroup.wait()
     }
     
-    private func dequeueClient(_ task: Task, _ bankTellers: Array<BankTeller>, _ clients: Queue<Client>, _ completion: () -> Void) {
-        var bankTellers = bankTellers, clients = clients
-        let semaphore = DispatchSemaphore(value: task.windowCount)
-//        let taskGroup = DispatchGroup()
-        while let task = clients.dequeue() {
-            semaphore.wait()
-            guard let bankTeller = bankTellers.popLast() else {
-                continue
-            }
-//            taskGroup.enter()
-            DispatchQueue.init(label: "\(task)", attributes: .concurrent).async {
-                bankTeller.serve(task)
-                bankTellers.append(bankTeller) // insert(0, bankTeller)
-                semaphore.signal()
-//                taskGroup.leave()
-            }
-        }
-//        taskGroup.wait()
+    func close() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, ", terminator: "")
+        print("총 업무시간은\(String(format: "%.2f", duration))초입니다.")
+        self.clientCount = 0
+        self.duration = 0
     }
 }
