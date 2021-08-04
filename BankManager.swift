@@ -11,21 +11,19 @@ struct BankManager {
         case open = "1"
         case close = "2"
     }
+    enum Number {
+        static let firstNumber = 1
+        static let increaseOne = 1
+        static let minimumNumber = 10
+        static let maximumNumber = 30
+    }
     
     private let clerk = Clerk()
     private let customerQueue = Queue<Customer>()
-    private var numberOfCustomer: Int {
-        return Int.random(in: 10...30)
-    }
-    
-    private func receiveCustomers()  {
-        for number in 1...numberOfCustomer {
-            customerQueue.enqueue(data: Customer(waitingNumber: number))
-        }
-    }
+    private var numberOfCustomer = Int.random(in: Number.minimumNumber...Number.maximumNumber)
     
     private func processTask() {
-        receiveCustomers()
+        customers(customer: customerQueue)
         var totalCustomer = 0
         var totalTaskTime: Double = 0
         while !customerQueue.isEmpty {
@@ -33,7 +31,7 @@ struct BankManager {
                 return
             }
             clerk.doTask(customer: Customer(waitingNumber: customer.waitingNumber))
-            totalCustomer += 1
+            totalCustomer += Number.increaseOne
             totalTaskTime += clerk.businessProcessingTime
         }
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(String(format: "%.2f", totalTaskTime))초입니다.")
@@ -66,3 +64,10 @@ struct BankManager {
     }
 }
 
+extension BankManager: Receivable {
+    func customers(customer: Queue<Customer>) {
+        for number in Number.firstNumber...numberOfCustomer {
+            customerQueue.enqueue(data: Customer(waitingNumber: number))
+        }
+    }
+}
