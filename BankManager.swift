@@ -51,15 +51,14 @@ struct BankManager {
     }
     
     func open() {
-        var isContinue: Bool = true
-        while isContinue {
+        while true {
             printMenu()
             let menu = getInputValue()
             switch menu {
             case .open:
                 processTask()
             case .close:
-                isContinue.toggle()
+                return
             default:
                 print("다시 입력하세요.")
             }
