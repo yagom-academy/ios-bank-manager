@@ -15,31 +15,56 @@ enum BankingTask: CaseIterable {
         guard let element = BankingTask.allCases.randomElement() else { fatalError("원하는 업무가 없음.")}
         return element
     }
+    
+    var numberOfBankWindow: Int {
+        switch self {
+        case .deposit:
+            return 2
+        case .loan:
+            return 1
+        }
+    }
+    
+    var processingTime: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
 }
 
 
 final class BankManager {
-    private var clientQueue: Queue<Client> = .init()
-    private var manager: BankTeller = BankTeller()
-    private var clientCount: Int = 0
-    private var totalTime: Double = 0
+    private var clientQueue: Queue<Client>
+    private var departments: Dictionary<BankingTask, Department>
+    private var clientCount: Int
+    private var totalTime: Double
+    
+    init() {
+        self.clientQueue = .init()
+        self.departments = .init()
+        for task in BankingTask.allCases {
+            departments.updateValue(Department(bankingTask: task), forKey: task)
+        }
+        self.clientCount = 0
+        self.totalTime = 0
+    }
     
     private func makeRandomNumber() -> Int {
         return Int.random(in: 10...30)
     }
     
-    private func lineUpClients(_ numberOfClients: Int) {
+    private func lineupClients(_ numberOfClients: Int) {
         for number in 1...numberOfClients {
-            self.clientQueue.enqueue(Client(waitingNumber: number, bankingTask: BankingTask.selectRandomCase()))
+            clientQueue.enqueue(Client(waitingNumber: number, bankingTask: BankingTask.selectRandomCase()))
         }
     }
     
     func open() {
         while let client = clientQueue.dequeue() {
-            manager.serve(client) {
-                totalTime += $0
-                clientCount += 1
-            }
+            
         }
     }
     
