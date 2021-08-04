@@ -9,7 +9,7 @@ import Foundation
 
 protocol Clerk {
     var bankType: BankType { set get }
-    func serveBanking(for client: BankClient, notifyEnd: @escaping (BankClerk) -> Void )
+    func serveBanking(for client: BankClient)
 }
 
 protocol Client {
@@ -45,33 +45,19 @@ enum BankMenu: String {
 
 class Bank {
     private var bankTypeTask: [BankType: Task] = [:]
-    
+    private let numberOfClerk = (deposit:2, loan:1)
     private lazy var bankClients = generateNewClients()
-    private var totalWorkTime: Double = 0
     private let generateNewClients = { () -> Queue<BankClient> in
         let newClients = Queue<BankClient>()
         let totalNumberOfClients = Int.random(in: 10...30)
-        for waittingNumber in 1...totalNumberOfClients {
-            let client = BankClient(waitingNumber: waittingNumber)
+        for waitingNumber in 1...totalNumberOfClients {
+            let client = BankClient(waitingNumber: waitingNumber)
             newClients.enqueue(client)
         }
         return newClients
     }
     
-    //    init(deposit: Int = 2, loan: Int = 1) {
-    //        for _ in 0 ..< deposit {
-    //            let depositClerk = BankClerk(bankType: .deposit)
-    //            bankClerk.append(depositClerk)
-    //        }
-    //
-    //        for _ in 0 ..< loan {
-    //            let loanClerk = BankClerk(bankType: .loan)
-    //            bankClerk.append(loanClerk)
-    //        }
-    //    }
-    
     private func resetBank() {
-        totalWorkTime = 0
         bankClients = generateNewClients()
     }
     
@@ -99,33 +85,36 @@ class Bank {
     }
     
     func serveClient() {
+        var totalNumberOfClients = 0
+        let startTime = CFAbsoluteTimeGetCurrent()
         let group = DispatchGroup()
         while let currentClient = bankClients.dequeue() {
             group.enter()
             bankTypeTask[currentClient.bankType]?.dispatchQueue.async { [self] in
                 bankTypeTask[currentClient.bankType]?.semaphore.wait()
                 let currentClerk = BankClerk(bankType: currentClient.bankType)
-                currentClerk.serveBanking(for: currentClient) { endClerk in
-                    
-                }
+                currentClerk.serveBanking(for: currentClient)
                 bankTypeTask[currentClient.bankType]?.semaphore.signal()
                 group.leave()
+                totalNumberOfClients += 1
             }
         }
         group.wait()
+        close(numberOfClients: totalNumberOfClients, workTime: CFAbsoluteTimeGetCurrent() - startTime)
     }
     
     func generateBankTypeTask() {
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depositSemaphore = DispatchSemaphore(value: numberOfClerk.deposit)
+        let loanSemaphore = DispatchSemaphore(value: numberOfClerk.loan)
         let depositTask = Task(semaphore: depositSemaphore)
         let loanTask = Task(semaphore: loanSemaphore)
         bankTypeTask = [.deposit: depositTask, .loan: loanTask]
     }
     
-    //    func close(numberOfClients: Int, workTime: Double) {
-    //        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertedWorkTime)입니다.")
-    //    }
+    func close(numberOfClients: Int, workTime: Double) {
+        let convertWorkTime = String(format: "%.2f", workTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무 시간은 \(convertWorkTime)초입니다.")
+    }
     
     func openBank() {
         printMenu()
