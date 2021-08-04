@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct BankTaskQueue {
-    let identify: Bank.BusinessType
+struct BusinessQueue {
+    let identity: Bank.BusinessType
     let clerks: [BankClerk]
     private let dispatchQueue: DispatchQueue
     private let dispatchSemaphore: DispatchSemaphore
@@ -28,11 +28,11 @@ struct BankTaskQueue {
         }
     }
     
-    init(identify: Bank.BusinessType, clerks: [BankClerk]) {
-        self.identify = identify
+    init(identity: Bank.BusinessType, clerks: [BankClerk]) {
+        self.identity = identity
         self.clerks = clerks
         
-        dispatchQueue = DispatchQueue(label: identify.description, attributes: .concurrent)
-        dispatchSemaphore = DispatchSemaphore(value: Int(identify.clerkNumber))
+        dispatchQueue = DispatchQueue(label: identity.description, attributes: .concurrent)
+        dispatchSemaphore = DispatchSemaphore(value: Int(identity.clerkNumber))
     }
 }

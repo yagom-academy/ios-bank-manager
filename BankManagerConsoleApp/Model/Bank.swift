@@ -58,15 +58,17 @@ struct Bank {
     }
 
     func startBusiness() {
-        let bankConfigure = configure()
-
+        let bankWindows = prepareWindows()
+        
         var customer: Customer?
         let group = DispatchGroup()
+        let currentTime = Date()
+        
         while !customerQueue.isEmpty {
             group.enter()
             customer = customerQueue.dequeue()
-            let targetQueue = bankConfigure.filter { bankTaskQueue in
-                return customer?.businessType == bankTaskQueue.identify
+            let targetQueue = bankWindows.filter { bankTaskQueue in
+                return customer?.businessType == bankTaskQueue.identity
             }[0]
             
             targetQueue.matchingClerkWith(customer: customer) {
@@ -75,29 +77,31 @@ struct Bank {
         }
         
         let _ = group.wait(timeout: .distantFuture)
-        endBusiness(after: customer)
+        let totalTime = -currentTime.timeIntervalSinceNow
+        endBusiness(after: customer, totalTime: totalTime)
     }
     
-    private func endBusiness(after customer: Customer?) {
+    private func endBusiness(after customer: Customer?, totalTime: TimeInterval) {
         guard let customer = customer else {
             return
         }
-        let finishTime = Double(customer.id) * 0.7
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer.id)명이며, 총 업무시간은 \(String(format: "%.2f", finishTime)) 입니다.")
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customer.id)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime)) 입니다.")
     }
     
-    private func configure() -> [BankTaskQueue] {
-        return BusinessType.allCases.map { businessType -> BankTaskQueue in
+    private func prepareWindows() -> [BusinessQueue] {
+        return BusinessType.allCases.map { businessType -> BusinessQueue in
             let thisBusinessTypeClerks = (1...businessType.clerkNumber).map { clerkNumber -> BankClerk in
                 let id = businessType.rawValue * 100 + Int(clerkNumber)
                 return BankClerk(id: id)
             }
             
-            let bankTaskQueue = BankTaskQueue(
-                identify: businessType,
+            let businessQueue = BusinessQueue(
+                identity: businessType,
                 clerks: thisBusinessTypeClerks
             )
-            return bankTaskQueue
+            
+            return businessQueue
         }
     }
 }
