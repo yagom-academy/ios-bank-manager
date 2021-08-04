@@ -7,17 +7,21 @@
 import Foundation
 
 enum Menu: String, CustomStringConvertible {
-    case open = "은행 개점"
-    case close = "종료"
+    case open = "1 : 은행 개점"
+    case close = "2 : 종료"
+    case input = "입력 : "
     
     var description: String {
         return self.rawValue
     }
 }
 
-func run() -> String? {
-    print("1 : \(Menu.open)\n2 : \(Menu.close)")
-    print("입력 : ", terminator: "")
+func printMenu() {
+    print("\(Menu.open)\n\(Menu.close)")
+    print(Menu.input, terminator: "")
+}
+
+func readUserInput() -> String? {
     guard let userInput: String = readLine() else {
         return nil
     }
@@ -31,8 +35,8 @@ func startTask(_ userInput: String?) {
         
         bank.openBank()
         
-        run()
+        readUserInput()
     }
 }
 
-startTask(run())
+startTask(readUserInput())
