@@ -28,15 +28,19 @@ func readUserInput() -> String? {
     return userInput
 }
 
-func startTask(_ userInput: String?) {
-    while userInput == "1" {
-        let newbankManager = [BankManager()]
-        let bank = Bank(bankManager: newbankManager)
-        
-        bank.openBank()
-        
-        readUserInput()
+func checkUserInput() -> Bool {
+    let userChoice = readUserInput()
+    if userChoice == "1" {
+        return true
+    } else {
+        return false
     }
 }
 
-startTask(readUserInput())
+func startTask(_ userInput: String?) {
+    let newbankManager = [BankManager()]
+    let bank = Bank(bankManager: newbankManager)
+    bank.openBank()
+}
+
+
