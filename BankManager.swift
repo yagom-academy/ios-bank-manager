@@ -13,13 +13,7 @@ struct BankManager {
     }
     
     // MARK:- Property
-    private let bank = Bank()
-    private let bankTellers: [BankTeller]
-    
-    // MARK:- initializer
-//    init() {
-//        self.bank = Bank()
-//    }
+    private let bank = Bank()   
 }
 
 // MARK:- run() related Methods
