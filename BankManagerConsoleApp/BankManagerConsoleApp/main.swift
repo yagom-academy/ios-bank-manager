@@ -16,30 +16,21 @@ func displayMenu() {
     print("입력 : ", terminator: "")
 }
 
-func decideToStartProgram() -> Decision {
+func decideToStartProgram() -> Bool {
     while true {
         displayMenu()
         if let unwrappedString = readLine(),
            let decision = Decision.init(rawValue: unwrappedString) {
-            return decision
+            return decision == .excute
         }
     }
 }
 
-func makeClientQueue() -> Queue<Client> {
-    let numberOfCustomers = Int.random(in: 10...30)
-    var clientQueue = Queue<Client>()
-    for number in 1...numberOfCustomers {
-        clientQueue.enqueue(Client(waitingNumber: number))
-    }
-    return clientQueue
-}
 
 // MARK: --- main Program
 while true {
-    guard decideToStartProgram() == .excute else { break }
-    let clientQueue = makeClientQueue()
-    var yagomBank = BankManager(client: clientQueue)
+    guard decideToStartProgram() else { break }
+    let yagomBank = BankManager()
     yagomBank.open()
     yagomBank.close()
 }

@@ -7,17 +7,24 @@
 
 import Foundation
 
-struct BankManager {
-    private var clientQueue: Queue<Client>
+
+
+final class BankManager {
+    private var clientQueue: Queue<Client> = .init()
     private var manager: BankTeller = BankTeller()
     private var clientCount: Int = 0
     private var totalTime: Double = 0
     
-    init(client: Queue<Client>) {
-        self.clientQueue = client
+    private func makeRandomNumber() -> Int {
+        return Int.random(in: 10...30)
     }
     
-    mutating func open() {
+    private func lineUpClients(_ numberOfClients: Int) {
+        for number in 1...numberOfClients {
+        }
+    }
+    
+    func open() {
         while let client = clientQueue.dequeue() {
             manager.serve(client) {
                 totalTime += $0
