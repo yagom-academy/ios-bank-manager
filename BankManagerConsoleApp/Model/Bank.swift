@@ -59,25 +59,25 @@ struct Bank {
 
     func startBusiness() {
         let bankWindows = prepareWindows()
-        
         var customer: Customer?
-        let group = DispatchGroup()
-        let currentTime = Date()
-        
-        while !customerQueue.isEmpty {
-            group.enter()
-            customer = customerQueue.dequeue()
-            let targetQueue = bankWindows.filter { bankTaskQueue in
-                return customer?.businessType == bankTaskQueue.identity
-            }[0]
-            
-            targetQueue.matchingClerkWith(customer: customer) {
-                group.leave()
+
+        let totalTime = Timer.calculateDuration {
+            let group = DispatchGroup()
+
+            while !customerQueue.isEmpty {
+                group.enter()
+                customer = customerQueue.dequeue()
+                let targetQueue = bankWindows.filter { bankTaskQueue in
+                    return customer?.businessType == bankTaskQueue.identity
+                }[0]
+
+                targetQueue.matchingClerkWith(customer: customer) {
+                    group.leave()
+                }
             }
+            let _ = group.wait(timeout: .distantFuture)
         }
-        
-        let _ = group.wait(timeout: .distantFuture)
-        let totalTime = -currentTime.timeIntervalSinceNow
+
         endBusiness(after: customer, totalTime: totalTime)
     }
     

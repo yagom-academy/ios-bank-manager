@@ -19,6 +19,7 @@
 		63D7E0BB26AFC6720037475E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89340EDB26AEDCDE007A0636 /* Node.swift */; };
 		63D7E0BC26AFC6720037475E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA8C6626AEEBEF00FBFF8B /* LinkedList.swift */; };
 		63D7E0BD26AFC6720037475E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89340EDD26AF995D007A0636 /* Queue.swift */; };
+		8911F6C126BA5C7F0078B6A6 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8911F6C026BA5C7F0078B6A6 /* Timer.swift */; };
 		89340EDC26AEDCDE007A0636 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89340EDB26AEDCDE007A0636 /* Node.swift */; };
 		89340EDE26AF995D007A0636 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89340EDD26AF995D007A0636 /* Queue.swift */; };
 		89340EE126AF9FB2007A0636 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89340EE026AF9FB2007A0636 /* StringConstants.swift */; };
@@ -48,6 +49,7 @@
 		63D7E0A426AFC4120037475E /* BankManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D7E0A626AFC4120037475E /* BankManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerTest.swift; sourceTree = "<group>"; };
 		63D7E0A826AFC4120037475E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8911F6C026BA5C7F0078B6A6 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		89340EDB26AEDCDE007A0636 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		89340EDD26AF995D007A0636 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		89340EE026AF9FB2007A0636 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 			path = BankManagerTest;
 			sourceTree = "<group>";
 		};
+		8911F6BF26BA5C630078B6A6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8911F6C026BA5C7F0078B6A6 /* Timer.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		89340EDA26AEDCB5007A0636 /* DataStructure */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				8911F6BF26BA5C630078B6A6 /* Extension */,
 				89340EDF26AF9F97007A0636 /* Constants */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				63D7E0A526AFC4120037475E /* BankManagerTest */,
@@ -256,6 +267,7 @@
 				89340EE126AF9FB2007A0636 /* StringConstants.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				63CA8C6726AEEBEF00FBFF8B /* LinkedList.swift in Sources */,
+				8911F6C126BA5C7F0078B6A6 /* Timer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
