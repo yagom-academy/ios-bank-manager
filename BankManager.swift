@@ -13,7 +13,7 @@ struct BankManager {
     }
     
     // MARK:- Property
-    private let bank = Bank()   
+    private let bank = Bank()
 }
 
 // MARK:- run() related Methods
@@ -23,7 +23,7 @@ extension BankManager {
         guard let input = readLine(),
               let inputNumber = Int(input),
               let menuNumber = Menu(rawValue: inputNumber) else {
-            throw BankManagerErrorMessage.wrongInput
+            throw BankManagerError.wrongInput
         }
         return menuNumber
     }
@@ -69,11 +69,8 @@ extension BankManager {
     }
     
     private func showErrorDescription(message: Error) {
-        if let error = message as? BankManagerErrorMessage {
-            switch error {
-            case .wrongInput:
-                print(error.errorDescription ?? "")
-            }
+        if let error = message as? BankManagerError {
+            print(error.errorDescription ?? "")
             return
         }
         print("예기치 못한 오류 발생. 프로그램을 종료합니다.")

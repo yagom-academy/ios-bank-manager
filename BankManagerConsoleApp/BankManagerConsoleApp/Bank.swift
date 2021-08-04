@@ -15,20 +15,10 @@ class Bank {
     private var queueTicketMachine = QueueTicketMachine()
     
     private var loanClientQueue = Queue<Client>()
-    private var depositClientQueue = Queue<Client>()
     private var loanBankTellerQueue = Queue<BankTeller>()
-    private var depositBankTellerQueue = Queue<BankTeller>()
     
-    // MARK:- initializer
-//    init(roles: [TaskCategory]) {
-//        for role in roles {
-//            let bankTeller = BankTeller(role: role)
-//            bankTellers.append(bankTeller)
-//        }
-//    }
-//    init() {
-//        self.bankTellers = bankTellers
-//    }
+    private var depositClientQueue = Queue<Client>()
+    private var depositBankTellerQueue = Queue<BankTeller>()
 }
 
 // MARK:- private Methods
@@ -87,6 +77,14 @@ extension Bank {
                    let bankTeller = self.depositBankTellerQueue.dequeue() {
                     bankTeller.handleTask(with: client)
                     self.depositBankTellerQueue.enqueue(value: bankTeller)
+                }
+            }
+            DispatchQueue.global().async {
+                if self.loanBankTellerQueue.isNotEmpty(),
+                   let client = self.loanClientQueue.dequeue(),
+                   let bankTeller = self.loanBankTellerQueue.dequeue() {
+                    bankTeller.handleTask(with: client)
+                    self.loanBankTellerQueue.enqueue(value: bankTeller)
                 }
             }
             DispatchQueue.global().async {
