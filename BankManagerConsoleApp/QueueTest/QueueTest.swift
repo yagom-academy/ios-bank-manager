@@ -21,7 +21,7 @@ class QueueTest: XCTestCase {
         // given
         sut.enqueue(1)
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         let expectResult = false
         // then
         XCTAssertEqual(result, expectResult)
@@ -32,7 +32,7 @@ class QueueTest: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         // when
-        let result = sut.peek()
+        let result = sut.peek
         let expectResult = 1
         // then
         XCTAssertEqual(result, expectResult)
@@ -45,7 +45,7 @@ class QueueTest: XCTestCase {
         sut.enqueue(3)
         // when
         sut.clear()
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         let expectResult = true
         // then
         XCTAssertEqual(result, expectResult)
@@ -56,9 +56,9 @@ class QueueTest: XCTestCase {
         // when
         sut.enqueue(1)
         sut.enqueue(2)
-        let firstValue = sut.peek()
+        let firstValue = sut.peek
         sut.dequeue()
-        let secondValue = sut.peek()
+        let secondValue = sut.peek
         let expectFirstValue = 1
         let expectSecondValue = 2
         // then
@@ -72,7 +72,7 @@ class QueueTest: XCTestCase {
         sut.enqueue(2)
         // when
         sut.dequeue()
-        let result = sut.peek()
+        let result = sut.peek
         let expectResult = 2
         // then
         XCTAssertEqual(result, expectResult)

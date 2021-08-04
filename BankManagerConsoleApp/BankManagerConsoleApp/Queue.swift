@@ -18,6 +18,16 @@ class Queue<T> {
         return linkedList.first?.value
     }
     
+    var count: Int {
+        var count: Int = 0
+        var node = linkedList.first
+        while node != nil {
+            node = node?.next
+            count += 1
+        }
+        return count
+    }
+    
     func clear() {
         linkedList.clear()
     }
@@ -26,7 +36,7 @@ class Queue<T> {
         linkedList.append(value)
     }
     
-    func dequeue() -> T? {
+    @discardableResult func dequeue() -> T? {
         let fistNode = linkedList.first
         linkedList.removeFirst()
         return fistNode?.value
