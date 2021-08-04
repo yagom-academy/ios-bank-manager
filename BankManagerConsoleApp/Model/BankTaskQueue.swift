@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankTaskQueue {
-    let identify: Bank.Job
+    let identify: Bank.BusinessType
     let dispatchQueue: DispatchQueue
     let dispatchSemaphore: DispatchSemaphore
     let clerks: [BankClerk]
@@ -20,7 +20,7 @@ struct BankTaskQueue {
         
         dispatchSemaphore.wait()
         dispatchQueue.async {
-            targetClerk.startTask(about: customer)
+            targetClerk.doTask(about: customer)
             dispatchSemaphore.signal()
             afterFunction()
         }

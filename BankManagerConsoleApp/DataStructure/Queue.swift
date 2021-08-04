@@ -7,28 +7,31 @@
 
 import Foundation
 
-class Queue<Type>: LinkedList<Type> {
+struct Queue<Type> {
+    private let linkedList = LinkedList<Type>()
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
     
     func enqueue(value: Type) {
-        self.append(value: value)
+        linkedList.append(value: value)
     }
     
     func dequeue() -> Type? {
-        let headValue = self.head?.value
-        self.remove(target: self.head)
+        let headValue = linkedList.head?.value
+        linkedList.remove(target: linkedList.head)
         return headValue
     }
         
     func peek() -> Type? {
-        return self.head?.value
+        return linkedList.head?.value
     }
     
-    init(initialValue: Type) {
-        super.init()
-        self.enqueue(value: initialValue)
+    init(value: Type) {
+        self.enqueue(value: value)
     }
     
-    override init() {
-        super.init()
+    init() {
+        
     }
 }

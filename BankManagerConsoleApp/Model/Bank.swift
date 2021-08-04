@@ -8,16 +8,16 @@
 import Foundation
 
 struct Bank {
-    enum Status: Int {
+    enum OperationStatus: Int {
         case open = 1
         case close = 2
     }
     
-    enum Job: Int, CaseIterable, CustomStringConvertible {
+    enum BusinessType: Int, CaseIterable, CustomStringConvertible {
         case loan = 1
         case deposit = 2
         
-        var time: TimeInterval {
+        var requiredTime: TimeInterval {
             switch self {
             case .loan:
                 return 1.1
@@ -45,28 +45,28 @@ struct Bank {
         }
     }
     
-    private var queue = Queue<Customer>()
+    private var customerQueue = Queue<Customer>()
     
     func receiveCustomer(range: ClosedRange<Int>) {
         for order in range {
-            let randomNumber = Int.random(in: 1...Job.allCases.count)
-            guard let randomJob = Job(rawValue: randomNumber) else {
+            let randomNumber = Int.random(in: 1...BusinessType.allCases.count)
+            guard let randomBusinessType = BusinessType(rawValue: randomNumber) else {
                 continue
             }
-            queue.enqueue(value: Customer(id: order, requirement: randomJob))
+            customerQueue.enqueue(value: Customer(id: order, businessType: randomBusinessType))
         }
     }
 
-    func doTask() {
+    func startBusiness() {
         let bankConfigure = configure()
 
         var customer: Customer?
         let group = DispatchGroup()
-        while !queue.isEmpty {
+        while !customerQueue.isEmpty {
             group.enter()
-            customer = queue.dequeue()
+            customer = customerQueue.dequeue()
             let targetQueue = bankConfigure.filter { bankTaskQueue in
-                return customer?.requirement == bankTaskQueue.identify
+                return customer?.businessType == bankTaskQueue.identify
             }[0]
             
             targetQueue.matchingClerkWith(customer: customer) {
@@ -75,10 +75,10 @@ struct Bank {
         }
         
         let _ = group.wait(timeout: .distantFuture)
-        endTask(after: customer)
+        endBusiness(after: customer)
     }
     
-    private func endTask(after customer: Customer?) {
+    private func endBusiness(after customer: Customer?) {
         guard let customer = customer else {
             return
         }
@@ -87,19 +87,19 @@ struct Bank {
     }
     
     private func configure() -> [BankTaskQueue] {
-        return Job.allCases.map { job -> BankTaskQueue in
-            let dispatchQueue = DispatchQueue(label: job.description, attributes: .concurrent)
-            let dispatchSemaphore = DispatchSemaphore(value: Int(job.clerkNumber))
-            let thisJobClerks = (1...job.clerkNumber).map { clerkNumber -> BankClerk in
-                let id = job.rawValue * 100 + Int(clerkNumber)
+        return BusinessType.allCases.map { businessType -> BankTaskQueue in
+            let dispatchQueue = DispatchQueue(label: businessType.description, attributes: .concurrent)
+            let dispatchSemaphore = DispatchSemaphore(value: Int(businessType.clerkNumber))
+            let thisBusinessTypeClerks = (1...businessType.clerkNumber).map { clerkNumber -> BankClerk in
+                let id = businessType.rawValue * 100 + Int(clerkNumber)
                 return BankClerk(id: id)
             }
             
             let bankTaskQueue = BankTaskQueue(
-                identify: job,
+                identify: businessType,
                 dispatchQueue: dispatchQueue,
                 dispatchSemaphore: dispatchSemaphore,
-                clerks: thisJobClerks
+                clerks: thisBusinessTypeClerks
             )
             return bankTaskQueue
         }
