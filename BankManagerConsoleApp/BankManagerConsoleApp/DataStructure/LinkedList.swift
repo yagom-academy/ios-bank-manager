@@ -8,7 +8,7 @@
 import Foundation
 
 class Node<T> {
-    var data: T!
+    var data: T?
     var next: Node<T>?
     
     init(with data: T) {
