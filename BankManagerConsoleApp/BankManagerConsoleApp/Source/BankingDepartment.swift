@@ -36,6 +36,8 @@ class BankingDepartment {
     }
     
     func serve(customer: Customer) {
-        
+        print("\(customer.waitingNumber)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: customer.desiredTask.timeRequired)
+        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }
