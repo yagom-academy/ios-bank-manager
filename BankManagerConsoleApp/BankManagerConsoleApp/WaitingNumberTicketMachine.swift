@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QueueTicketMachine {
+struct WaitingNumberTicketMachine {
     // MARK:- private Property
     private var queueTicketNumber: UInt = 0
     var getCurrentTicketNumber: UInt {

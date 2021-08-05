@@ -12,7 +12,7 @@ typealias TaskReport = (numberOfClient: UInt, totalTaskTime: Double)
 class Bank {
     // MARK:- private Properties
     private var bankTellers: [BankTeller] = []
-    private var queueTicketMachine = QueueTicketMachine()
+    private var waitingNumberTicketMachine = WaitingNumberTicketMachine()
     private var taskWaitingQueues: [TaskCategory: WaitingQueue] = [:]
     
     init () {
@@ -25,8 +25,8 @@ class Bank {
 // MARK:- private Methods
 extension Bank {
     private func issueWaitingNumberTicket(to client: Client) {
-        let queueTicket = queueTicketMachine.issueWatingNumberTicket()
-        client.setQueueTicket(queueTicket: queueTicket)
+        let waitingNumberTicket = waitingNumberTicketMachine.issueWatingNumberTicket()
+        client.setQueueTicket(queueTicket: waitingNumberTicket)
     }
     
     private func calculateTotalTaskTime(start: DispatchTime, end: DispatchTime) -> Double {
@@ -90,13 +90,13 @@ extension Bank {
         
         let endTime = DispatchTime.now()
         let totalTaskTIme = calculateTotalTaskTime(start: startTime, end: endTime)
-        let numberOfClient = queueTicketMachine.getCurrentTicketNumber
+        let numberOfClient = waitingNumberTicketMachine.getCurrentTicketNumber
         
         return (numberOfClient, totalTaskTIme)
     }
     
     func finishWork() {
-        queueTicketMachine.reset()
+        waitingNumberTicketMachine.reset()
         
         for (_, taskQueue) in taskWaitingQueues {
             taskQueue.clear()

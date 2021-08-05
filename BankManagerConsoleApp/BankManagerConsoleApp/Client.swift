@@ -10,7 +10,7 @@ import Foundation
 class Client {
     // MARK:- Properties
     let task: TaskCategory
-    private var queueTicket: UInt?
+    private var waitingNumberTicket: UInt?
     
     // MARK:- initializer
     init() {
@@ -19,10 +19,10 @@ class Client {
     
     // MARK:- internal Methods
     func setQueueTicket(queueTicket: UInt) {
-        self.queueTicket = queueTicket
+        self.waitingNumberTicket = queueTicket
     }
     
     func submitQueueTicket() -> UInt? {
-        return queueTicket
+        return waitingNumberTicket
     }
 }
