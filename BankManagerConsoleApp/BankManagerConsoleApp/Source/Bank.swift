@@ -44,23 +44,8 @@ class Bank {
     }
     
     func serveCustomers() {
-        let semaphore = DispatchSemaphore(value: numberOfBankTellers)
-        let group = DispatchGroup()
-        while let currentCustomer = customerQueue.dequeue() {
-            semaphore.wait()
-            guard let bankTeller = bankTellerQueue.dequeue() else {
-                customerQueue.enqueue(currentCustomer)
-                semaphore.signal()
-                continue
-            }
-            group.enter()
-            DispatchQueue.global().async {
-                bankTeller.serve(customer: currentCustomer)
-                self.bankTellerQueue.enqueue(bankTeller)
-                semaphore.signal()
-                group.leave()
-            }
+        departments.forEach { _, bankingDepartment in
+            bankingDepartment.serveCustomers()
         }
-        group.wait()
     }
 }
