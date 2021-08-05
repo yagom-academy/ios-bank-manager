@@ -29,6 +29,7 @@ func receiveUserInput() -> Int {
           let inputNumber = Int(userInput),
           inputNumber == BankManagement.openBank || inputNumber == BankManagement.closeBank
     else {
+        print("잘못 입력하셨습니다. 다시 입력해주세요.")
         return receiveUserInput()
     }
     return inputNumber
