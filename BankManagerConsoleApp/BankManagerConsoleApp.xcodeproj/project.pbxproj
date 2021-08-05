@@ -91,13 +91,13 @@
 				D45855A626B3E72700E5830E /* Protocol */,
 				D45855A526B3E70800E5830E /* Enumeration */,
 				D45855A426B3E6DC00E5830E /* DataStructure */,
-				C9B1CFD926B8242B00999300 /* Model */,
+				C9B1CFD926B8242B00999300 /* Source */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
-		C9B1CFD926B8242B00999300 /* Model */ = {
+		C9B1CFD926B8242B00999300 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
@@ -105,7 +105,7 @@
 				C4D1238126B3E96D00AECE79 /* Customer.swift */,
 				D45855B926B3ED0D00E5830E /* OrdinaryBankTeller.swift */,
 			);
-			path = Model;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		D45855A426B3E6DC00E5830E /* DataStructure */ = {
