@@ -42,6 +42,13 @@ class Bank {
         customers.forEach { customerQueue.enqueue($0) }
     }
     
+    func sendCustomersToDepartment() {
+        while let currentCustomer = customerQueue.dequeue() {
+            let desiredDepartment = departments[currentCustomer.desiredTask]
+            desiredDepartment?.receive(customer: currentCustomer)
+        }
+    }
+    
     func serveCustomers() {
         let semaphore = DispatchSemaphore(value: numberOfBankTellers)
         let group = DispatchGroup()
