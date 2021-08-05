@@ -8,11 +8,14 @@
 import Foundation
 
 enum BankingCategory {
-    case unspecified
+    case loan
+    case deposit
     
     var timeRequired: Double {
         switch self {
-        case .unspecified:
+        case .loan:
+            return 1.1
+        case .deposit:
             return 0.7
         }
     }
