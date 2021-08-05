@@ -8,9 +8,11 @@
 import Foundation
 
 class Customer {
+    let order: Int
     let task: Task
     
-    init() {
+    init(_ order: Int) {
         self.task = Task.random()
+        self.order = order
     }
 }

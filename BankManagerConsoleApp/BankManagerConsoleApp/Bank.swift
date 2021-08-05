@@ -8,41 +8,50 @@
 import Foundation
 
 class Bank {
-    let bankManager: [BankManager]
-    let waitList = Queue<Customer>()
-    var customerNumber: Int = 0
-    let minCustomerNumber = 10
-    let maxCustomerNumber = 30
-    let numberFormatter = NumberFormatter()
-    
+    private let bankManager: [BankManager]
+    private let waitList = Queue<Customer>()
+    private var countOfCustomer: Int = 0
+    private let minCustomerNumber = 10
+    private let maxCustomerNumber = 30
+    private let numberFormatter = NumberFormatter()
+
     init(bankManager: [BankManager]) {
         self.bankManager = bankManager
     }
     
-    func addCustomer() {
-        (0..<customerNumber).forEach { _ in
-            let customer = Customer()
+    private func makeRandomCustomerNumber() {
+        countOfCustomer = Int.random(in: minCustomerNumber...maxCustomerNumber)
+    }
+
+    private func addCustomer() {
+        (1...countOfCustomer).forEach { order in
+            let customer = Customer(order)
             waitList.enqueue(customer)
         }
     }
     
-    func makeRandomCustomerNumber() {
-        customerNumber = Int.random(in: minCustomerNumber...maxCustomerNumber)
+    private func assignTask(to bankManager: BankManager) {
+        while waitList.isEmpty() == false {
+            guard let customer = waitList.dequeue() else {
+                return
+            }
+            bankManager.startWork(customer)
+        }
     }
     
-    func checkTotalTime(of process: () -> ()) -> Double {
+    private func checkTotalTime(of process: () -> ()) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
         process()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
         return processTime
     }
     
-    func printWorkDone(_ time: Double) {
+    private func printWorkDone(_ time: Double) {
         numberFormatter.roundingMode = .floor
         numberFormatter.maximumSignificantDigits = 2
         
         if let formattedTime = numberFormatter.string(for: time) {
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)이며, 총 업무시간은 \(formattedTime)초입니다.")
+            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(countOfCustomer)이며, 총 업무시간은 \(formattedTime)초입니다.")
         }
     }
     
@@ -50,7 +59,7 @@ class Bank {
         let totalWorkTime = checkTotalTime {
             makeRandomCustomerNumber()
             addCustomer()
-            bankManager[0].startWork(customerNumber)
+            assignTask(to: bankManager[0])
         }
         printWorkDone(totalWorkTime)
     }
