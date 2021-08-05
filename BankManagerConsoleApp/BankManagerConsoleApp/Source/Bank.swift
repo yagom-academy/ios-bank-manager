@@ -10,7 +10,6 @@ import Foundation
 class Bank {
     private var numberOfBankTellers: Int = .zero
     private var bankTellerQueue = Queue<BankTeller>()
-    private var customerQueue = Queue<Customer>()
     private var totalNumberOfVisitors: UInt = .zero
     private var departments = [BankingCategory:BankingDepartment]()
     private let dispatchGroup = DispatchGroup()
@@ -24,7 +23,6 @@ class Bank {
     func close() {
         numberOfBankTellers = .zero
         bankTellerQueue.clear()
-        customerQueue.clear()
         totalNumberOfVisitors = .zero
     }
     
@@ -39,11 +37,7 @@ class Bank {
     }
     
     func receive(customers: [Customer]) {
-        customers.forEach { customerQueue.enqueue($0) }
-    }
-    
-    func sendCustomersToDepartment() {
-        while let currentCustomer = customerQueue.dequeue() {
+        customers.forEach { currentCustomer in
             let desiredDepartment = departments[currentCustomer.desiredTask]
             desiredDepartment?.receive(customer: currentCustomer)
         }
