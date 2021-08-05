@@ -19,8 +19,11 @@ extension BankManager {
     mutating func start() {
         let totalCustomer = gatherCustomers()
         formWaitingLine(from: totalCustomer)
+        
         let totalTime = checkWorkingTime {
-            askWork()
+            while bank.dequeueCustomer() != nil {
+                askWork()
+            }
         }
         showWorkResult(totalCustomer, totalTime)
     }
@@ -51,7 +54,7 @@ extension BankManager {
     }
     
     private mutating func askWork() {
-        bank.letClerkWork()
+        bank.letClerkWork(BankProcessTime.loan, BankProcessTime.deposit)
     }
     
     private mutating func showWorkResult(_ total: Int, _ time: String) {

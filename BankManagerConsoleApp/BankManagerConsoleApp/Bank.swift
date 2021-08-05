@@ -33,9 +33,9 @@ extension Bank {
     private func handleDeposit(_ semaphoreValue: Int, _ customer: Customer, _ depositWorkTime: Double) {
         let semaphore = DispatchSemaphore(value: semaphoreValue)
         let depositGroup = DispatchGroup()
+        depositGroup.enter()
         semaphore.wait()
         DispatchQueue.global().async(group: depositGroup) {
-            depositGroup.enter()
             bankClerk.work(for: customer, during: depositWorkTime)
             semaphore.signal()
             depositGroup.leave()
