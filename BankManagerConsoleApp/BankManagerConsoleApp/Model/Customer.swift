@@ -8,23 +8,11 @@
 import Foundation
 
 struct Customer {
-    private let _desiredTask: BankingTask
-    private let _waitingNumber: UInt
-    
-    var desiredTask: BankingTask {
-        get {
-            return self._desiredTask
-        }
-    }
-    
-    var waitingNumber: UInt {
-        get {
-            return self._waitingNumber
-        }
-    }
+    let desiredTask: BankingTask
+    let waitingNumber: UInt
     
     init(desiredTask: BankingTask, waitingNumber: UInt) {
-        self._desiredTask = desiredTask
-        self._waitingNumber = waitingNumber
+        self.desiredTask = desiredTask
+        self.waitingNumber = waitingNumber
     }
 }
