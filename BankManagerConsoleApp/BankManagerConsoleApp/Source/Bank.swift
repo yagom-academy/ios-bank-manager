@@ -8,8 +8,6 @@
 import Foundation
 
 class Bank {
-    private var numberOfBankTellers: Int = .zero
-    private var bankTellerQueue = Queue<BankTeller>()
     private var totalNumberOfVisitors: UInt = .zero
     private var departments = [BankingCategory:BankingDepartment]()
     private let dispatchGroup = DispatchGroup()
@@ -21,19 +19,12 @@ class Bank {
     }
     
     func close() {
-        numberOfBankTellers = .zero
-        bankTellerQueue.clear()
         totalNumberOfVisitors = .zero
     }
     
     func takeNumberTicket() -> UInt {
         totalNumberOfVisitors += 1
         return totalNumberOfVisitors
-    }
-    
-    func hire(employees: [BankTeller]) {
-        numberOfBankTellers = employees.count
-        employees.forEach { bankTellerQueue.enqueue($0) }
     }
     
     func receive(customers: [Customer]) {
