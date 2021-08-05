@@ -8,10 +8,10 @@
 import Foundation
 
 struct Customer {
-    let desiredTask: BankingTask
+    let desiredTask: BankingCategory
     let waitingNumber: UInt
     
-    init(desiredTask: BankingTask, waitingNumber: UInt) {
+    init(desiredTask: BankingCategory, waitingNumber: UInt) {
         self.desiredTask = desiredTask
         self.waitingNumber = waitingNumber
     }

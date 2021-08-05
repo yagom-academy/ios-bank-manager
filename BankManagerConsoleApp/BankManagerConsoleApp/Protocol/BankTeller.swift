@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BankTeller {
-    var duty: BankingTask { get }
+    var duty: BankingCategory { get }
     
     func serve(customer: Customer)
 }

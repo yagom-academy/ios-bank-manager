@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BankingTask {
+enum BankingCategory {
     case unspecified
     
     var timeRequired: Double {

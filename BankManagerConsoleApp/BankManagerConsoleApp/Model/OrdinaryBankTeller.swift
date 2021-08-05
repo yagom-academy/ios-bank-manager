@@ -8,7 +8,7 @@
 import Foundation
 
 struct OrdinaryBankTeller: BankTeller {
-    let duty: BankingTask = .unspecified
+    let duty: BankingCategory = .unspecified
     
     func serve(customer: Customer) {
         print("\(customer.waitingNumber)번 고객 업무 시작")
