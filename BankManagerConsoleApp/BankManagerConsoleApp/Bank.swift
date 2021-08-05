@@ -13,8 +13,6 @@ class Bank {
     private let loanManagerQueue = Queue<BankManager>()
     private let waitList = Queue<Customer>()
     private var countOfCustomer: Int = 0
-    private let minCustomerNumber = 10
-    private let maxCustomerNumber = 30
     private let numberFormatter = NumberFormatter()
 
     init(bankManagers: [BankManager]) {
@@ -22,6 +20,9 @@ class Bank {
     }
     
     private func makeRandomCustomerNumber() {
+        let minCustomerNumber = 10
+        let maxCustomerNumber = 30
+        
         countOfCustomer = Int.random(in: minCustomerNumber...maxCustomerNumber)
     }
 
