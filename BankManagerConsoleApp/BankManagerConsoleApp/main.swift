@@ -38,8 +38,12 @@ func checkUserInput() -> Bool {
 }
 
 func startTask() {
-    let newbankManager = [BankManager()]
-    let bank = Bank(bankManager: newbankManager)
+    var bankManagers: [BankManager] = []
+    bankManagers.append(BankManager(task: .deposit))
+    bankManagers.append(BankManager(task: .deposit))
+    bankManagers.append(BankManager(task: .loan))
+
+    let bank = Bank(bankManagers: bankManagers)
     bank.openBank()
 }
 

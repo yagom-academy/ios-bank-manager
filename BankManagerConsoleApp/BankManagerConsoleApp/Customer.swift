@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Customer {
+struct Customer {
     let order: Int
     let task: Task
     

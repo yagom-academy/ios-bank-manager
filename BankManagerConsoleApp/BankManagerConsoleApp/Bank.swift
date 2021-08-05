@@ -8,15 +8,15 @@
 import Foundation
 
 class Bank {
-    private let bankManager: [BankManager]
+    private let bankManagers: [BankManager]
     private let waitList = Queue<Customer>()
     private var countOfCustomer: Int = 0
     private let minCustomerNumber = 10
     private let maxCustomerNumber = 30
     private let numberFormatter = NumberFormatter()
 
-    init(bankManager: [BankManager]) {
-        self.bankManager = bankManager
+    init(bankManagers: [BankManager]) {
+        self.bankManagers = bankManagers
     }
     
     private func makeRandomCustomerNumber() {
@@ -59,7 +59,7 @@ class Bank {
         let totalWorkTime = checkTotalTime {
             makeRandomCustomerNumber()
             addCustomer()
-            assignTask(to: bankManager[0])
+            assignTask(to: bankManagers[0])
         }
         printWorkDone(totalWorkTime)
     }
