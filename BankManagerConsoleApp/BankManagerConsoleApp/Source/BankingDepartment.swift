@@ -9,11 +9,15 @@ import Foundation
 
 struct BankingDepartment {
     let duty: BankingCategory
-    var queue = Queue<Customer>()
+    var customerQueue = Queue<Customer>()
     let semaphore: DispatchSemaphore
     
     init(duty: BankingCategory, numberOfBankTellers: Int) {
         self.duty = duty
         semaphore = DispatchSemaphore(value: numberOfBankTellers)
+    }
+    
+    mutating func receive(customer: Customer) {
+        customerQueue.enqueue(customer)
     }
 }
