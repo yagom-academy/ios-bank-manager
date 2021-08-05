@@ -8,6 +8,9 @@
 import Foundation
 
 struct Clerk {
+    let deposit: Int
+    let loan: Int
+    
     func doTask(customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(customer.businessType.getName)업무 시작")
         Thread.sleep(forTimeInterval: customer.businessType.processingTime)

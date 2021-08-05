@@ -11,6 +11,7 @@ struct BankManager {
         case open = "1"
         case close = "2"
     }
+    
     enum Number {
         static let firstNumber = 1
         static let increaseOne = 1
@@ -18,7 +19,7 @@ struct BankManager {
         static let maximumNumber = 30
     }
     
-    private let clerk = Clerk()
+    private let clerk = Clerk(deposit: 2, loan: 1)
     private let customerQueue = Queue<Customer>()
     private var numberOfCustomer = Int.random(in: Number.minimumNumber...Number.maximumNumber)
     
