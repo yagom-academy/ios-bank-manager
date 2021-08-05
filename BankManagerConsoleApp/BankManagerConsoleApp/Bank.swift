@@ -9,6 +9,8 @@ import Foundation
 
 class Bank {
     private let bankManagers: [BankManager]
+    private let depositManagerQueue = Queue<BankManager>()
+    private let loanManagerQueue = Queue<BankManager>()
     private let waitList = Queue<Customer>()
     private var countOfCustomer: Int = 0
     private let minCustomerNumber = 10
@@ -30,12 +32,34 @@ class Bank {
         }
     }
     
-    private func assignTask(to bankManager: BankManager) {
+    private func enqueueManagers() {
+        bankManagers.filter { $0.task == .deposit }
+            .forEach {
+                depositManagerQueue.enqueue($0)
+            }
+        bankManagers.filter { $0.task == .loan }
+            .forEach {
+                loanManagerQueue.enqueue($0)
+            }
+    }
+    
+    private func assignTask() {
         while waitList.isEmpty() == false {
             guard let customer = waitList.dequeue() else {
                 return
             }
-            bankManager.startWork(customer)
+            switch customer.task {
+            case .deposit:
+                if let depositManager = depositManagerQueue.dequeue() {
+                    depositManager.startWork(customer)
+                    depositManagerQueue.enqueue(depositManager)
+                }
+            case .loan:
+                if let loanManager = loanManagerQueue.dequeue() {
+                    loanManager.startWork(customer)
+                    loanManagerQueue.enqueue(loanManager)
+                }
+            }
         }
     }
     
@@ -59,7 +83,8 @@ class Bank {
         let totalWorkTime = checkTotalTime {
             makeRandomCustomerNumber()
             addCustomer()
-            assignTask(to: bankManagers[0])
+            enqueueManagers()
+            assignTask()
         }
         printWorkDone(totalWorkTime)
     }
