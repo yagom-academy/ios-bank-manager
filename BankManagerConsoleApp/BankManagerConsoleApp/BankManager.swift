@@ -12,7 +12,11 @@ enum BankMenu {
 }
 
 struct BankManager {
-    private var bank = Bank()
+    private var bank: Bank
+    
+    init(bank: Bank) {
+        self.bank = bank
+    }
 }
 
 extension BankManager {

@@ -8,11 +8,22 @@
 import Foundation
 
 struct Bank {
-    private var bankClerk = BankClerk()
+    private var bankClerk: BankClerk
     private var waitingLine = Queue<Customer>()
+
+    init(bankClerk: BankClerk = BankClerk()) {
+        self.bankClerk = bankClerk
+    }
+    // 의존성주입 : bankclerk에 대한 바뀔 수 있는 여지를 추가로 줌. 또한 외부에서 접근을 막하줌과 동시에 내부에 인스턴스를 가지도록 함
+    // 하드코딩 : 코드 내부에 데이터가 그대로 입력되어있는 경우, 모든 하드코딩이 나쁘진 않다
 }
 
 extension Bank {
+    
+//    func configure(bankClerk: BankClerk) {
+//        self.bankClerk =
+//    } //  언제든지 바꿀 수 있다. 지금의 사용과는 맞지 않다.
+    
     mutating func makeWaitingLine(from totalCustomerNumber: Int) {
         for i in 1...totalCustomerNumber {
             waitingLine.enqueue(Customer(ticketNumber: i))

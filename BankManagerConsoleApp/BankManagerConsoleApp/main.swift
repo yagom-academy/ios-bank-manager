@@ -6,7 +6,9 @@
 
 import Foundation
 
-var bankManager = BankManager()
+//let bankClerk = BankClerk() - 디폴트로 bank에서 생성자 만들어주기
+let bank = Bank()
+var bankManager = BankManager(bank: bank)
 
 func main() {
     var flag = true
