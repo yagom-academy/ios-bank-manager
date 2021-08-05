@@ -7,17 +7,35 @@
 
 import Foundation
 
-struct BankingDepartment {
+class BankingDepartment {
     let duty: BankingCategory
     var customerQueue = Queue<Customer>()
     let semaphore: DispatchSemaphore
+    let taskGroup: DispatchGroup
     
-    init(duty: BankingCategory, numberOfBankTellers: Int) {
+    init(duty: BankingCategory, numberOfBankTellers: Int, taskGroup: DispatchGroup) {
         self.duty = duty
         semaphore = DispatchSemaphore(value: numberOfBankTellers)
+        self.taskGroup = taskGroup
     }
     
-    mutating func receive(customer: Customer) {
+    func receive(customer: Customer) {
         customerQueue.enqueue(customer)
+    }
+    
+    func serveCustomers() {
+        while let currentCustomer = customerQueue.dequeue() {
+            semaphore.wait()
+            taskGroup.enter()
+            DispatchQueue.global().async {
+                self.serve(customer: currentCustomer)
+                self.semaphore.signal()
+                self.taskGroup.leave()
+            }
+        }
+    }
+    
+    func serve(customer: Customer) {
+        
     }
 }
