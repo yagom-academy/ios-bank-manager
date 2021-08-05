@@ -43,7 +43,7 @@ class BankTeller {
         status = .beginning
         showMessage(taskMessage: .beginning, number: queueTicket, task: client.task)
 //        Thread.sleep(forTimeInterval: client.task.taskTime)
-        DispatchQueue(label:"bankTellerHandleTask", attributes: .concurrent).asyncAfter(deadline: .now() + client.task.taskTime) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + client.task.taskTime) {
             self.showMessage(taskMessage: .completion, number: queueTicket, task: client.task)
             self.status = .completion
             readyForWork()
