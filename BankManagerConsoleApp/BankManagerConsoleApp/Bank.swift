@@ -9,21 +9,31 @@ import Foundation
 
 struct Bank {
     private var bankClerk = BankClerk()
-    private var waitingLine = Queue<Int>()
+    private var waitingLine = Queue<Customer>()
 }
 
 extension Bank {
     mutating func makeWaitingLine(from totalCustomerNumber: Int) {
         for i in 1...totalCustomerNumber {
-            waitingLine.enqueue(i)
+            waitingLine.enqueue(Customer(ticketNumber: i))
         }
     }
     
-    mutating func letClerkWork() {
-        while waitingLine.isEmpty() == false {
-            let currentCustomer = waitingLine.peek()
-            waitingLine.dequeue()
-            bankClerk.work(for: currentCustomer)
+    mutating func letClerkWork(_ customer: Customer) {
+        guard let customerBusiness = customer.business else {
+            return
+        }
+        
+        let loanWorkTime = 1.1
+        let depositWorkTime = 0.7
+        
+        switch customerBusiness {
+        case "대출":
+            bankClerk.work(for: customer, during: loanWorkTime)
+        case "예금":
+            bankClerk.work(for: customer, during: depositWorkTime)
+        default:
+            print("unknown")
         }
     }
     
