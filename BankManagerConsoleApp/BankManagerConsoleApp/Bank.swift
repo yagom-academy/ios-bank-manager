@@ -16,23 +16,24 @@ struct Bank {
     mutating func startTask() {
         while true {
             userInteraction.selectMode()
-            guard userInteraction.userInput() else { return }
+            guard userInteraction.isBankOpen() else { return }
             generateTodayCustomers()
             insertCustomerQueue(of: customers)
             while !customerQueue.isEmpty {
                 banker.doBusiness(customerQueue: customerQueue)
             }
-            userInteraction.settlementResult(customers: customers)
+            userInteraction.showSettlementResult(customers: customers)
         }
     }
     
-    private func insertCustomerQueue(of customers: Int) {
-        for customer in Int.one...customers {
+    
+    private func insertCustomerQueue(of totalCustomers: Int) {
+        for customer in CustomerNumber.firstCustomer...totalCustomers {
             customerQueue.enqueue(data: customer)
         }
     }
     
     private mutating func generateTodayCustomers() {
-        customers = Int.random(in: Int.ten..<Int.thirty)
+        customers = Int.random(in: CustomerNumber.minimumCustomer..<CustomerNumber.maximumCustomer)
     }
 }

@@ -7,8 +7,6 @@
 
 import Foundation
 
-extension Int {
-    static let one = 1
-    static let ten = 10
-    static let thirty = 30
+enum SelectMode {
+    static let bankOpen = 1
 }
