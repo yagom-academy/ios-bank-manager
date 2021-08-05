@@ -19,19 +19,35 @@ extension Bank {
         }
     }
     
+    private func handleLoan(_ customer: Customer, _ loanWorkTime: Double) {
+        let loanQueue = DispatchQueue(label: "loanQueue")
+        loanQueue.async {
+            bankClerk.work(for: customer, during: loanWorkTime)
+        }
+    }
+    
+    private func handleDeposit(_ semaphoreValue: Int, _ customer: Customer, _ depositWorkTime: Double) {
+        let semaphore = DispatchSemaphore(value: semaphoreValue)
+        semaphore.wait()
+        DispatchQueue.global().async {
+            bankClerk.work(for: customer, during: depositWorkTime)
+            semaphore.signal()
+        }
+    }
+    
     mutating func letClerkWork(_ customer: Customer) {
+        let loanWorkTime = 1.1
+        let depositWorkTime = 0.7
+
         guard let customerBusiness = customer.business else {
             return
         }
-        
-        let loanWorkTime = 1.1
-        let depositWorkTime = 0.7
-        
+                
         switch customerBusiness {
         case "대출":
-            bankClerk.work(for: customer, during: loanWorkTime)
+            handleLoan(customer, loanWorkTime)
         case "예금":
-            bankClerk.work(for: customer, during: depositWorkTime)
+            handleDeposit(2, customer, depositWorkTime)
         default:
             print("unknown")
         }
