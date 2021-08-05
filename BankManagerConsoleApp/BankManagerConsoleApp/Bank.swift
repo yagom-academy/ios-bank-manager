@@ -19,6 +19,10 @@ extension Bank {
         }
     }
     
+    mutating func dequeueCustomer() -> Customer? {
+        return waitingLine.dequeue()
+    }
+    
     private func handleLoan(_ customer: Customer, _ loanWorkTime: Double) {
         let loanQueue = DispatchQueue(label: "loanQueue")
         loanQueue.async {
@@ -28,26 +32,27 @@ extension Bank {
     
     private func handleDeposit(_ semaphoreValue: Int, _ customer: Customer, _ depositWorkTime: Double) {
         let semaphore = DispatchSemaphore(value: semaphoreValue)
+        let depositGroup = DispatchGroup()
         semaphore.wait()
-        DispatchQueue.global().async {
+        DispatchQueue.global().async(group: depositGroup) {
+            depositGroup.enter()
             bankClerk.work(for: customer, during: depositWorkTime)
             semaphore.signal()
+            depositGroup.leave()
         }
     }
     
-    mutating func letClerkWork(_ customer: Customer) {
-        let loanWorkTime = 1.1
-        let depositWorkTime = 0.7
-
-        guard let customerBusiness = customer.business else {
+    mutating func letClerkWork(_ loanWorkTime: Double, _ depositWorkTime: Double) {
+        guard let currentCustomer = dequeueCustomer(),
+              let customerBusiness = currentCustomer.business else {
             return
         }
-                
+        
         switch customerBusiness {
         case "대출":
-            handleLoan(customer, loanWorkTime)
+            handleLoan(currentCustomer, loanWorkTime)
         case "예금":
-            handleDeposit(2, customer, depositWorkTime)
+            handleDeposit(2, currentCustomer, depositWorkTime)
         default:
             print("unknown")
         }
