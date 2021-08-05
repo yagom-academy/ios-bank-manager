@@ -12,6 +12,14 @@ class Bank {
     private var bankTellerQueue = Queue<BankTeller>()
     private var customerQueue = Queue<Customer>()
     private var totalNumberOfVisitors: UInt = .zero
+    private var departments = [BankingCategory:BankingDepartment]()
+    private let dispatchGroup = DispatchGroup()
+    
+    init(departmentInformation: (departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)...) {
+        departmentInformation.forEach { category, numberOfTellers in
+            self.departments[category] = BankingDepartment(duty: category, numberOfBankTellers: numberOfTellers, taskGroup: self.dispatchGroup)
+        }
+    }
     
     func close() {
         numberOfBankTellers = .zero
