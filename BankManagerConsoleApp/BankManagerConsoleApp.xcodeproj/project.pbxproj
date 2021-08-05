@@ -13,6 +13,7 @@
 		273CFCF126B3EFD400B338E0 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC726B14B4700B338E0 /* LinkedList.swift */; };
 		4328949326B7E88A0092C538 /* Clerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4328949226B7E88A0092C538 /* Clerk.swift */; };
 		4328949526B7E8920092C538 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4328949426B7E8920092C538 /* Customer.swift */; };
+		43303F5F26BBDAFE00342D17 /* BusinessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43303F5E26BBDAFE00342D17 /* BusinessType.swift */; };
 		435AD78626B255E100F4BB8C /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435AD78526B255E100F4BB8C /* QueueTests.swift */; };
 		435AD78B26B255EA00F4BB8C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC926B15CB600B338E0 /* Queue.swift */; };
 		435AD78F26B2574B00F4BB8C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273CFCC726B14B4700B338E0 /* LinkedList.swift */; };
@@ -41,6 +42,7 @@
 		273CFCED26B3EDFB00B338E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4328949226B7E88A0092C538 /* Clerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clerk.swift; sourceTree = "<group>"; };
 		4328949426B7E8920092C538 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		43303F5E26BBDAFE00342D17 /* BusinessType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessType.swift; sourceTree = "<group>"; };
 		435AD78326B255E100F4BB8C /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		435AD78526B255E100F4BB8C /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		435AD78726B255E100F4BB8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				273CFCC726B14B4700B338E0 /* LinkedList.swift */,
 				273CFCC926B15CB600B338E0 /* Queue.swift */,
 				4328949226B7E88A0092C538 /* Clerk.swift */,
+				43303F5E26BBDAFE00342D17 /* BusinessType.swift */,
 				4328949426B7E8920092C538 /* Customer.swift */,
 				7585CD5E26BA6C6000EFA530 /* Receivable.swift */,
 			);
@@ -265,6 +268,7 @@
 				4328949326B7E88A0092C538 /* Clerk.swift in Sources */,
 				273CFCC826B14B4700B338E0 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				43303F5F26BBDAFE00342D17 /* BusinessType.swift in Sources */,
 				4328949526B7E8920092C538 /* Customer.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				7585CD5F26BA6C6000EFA530 /* Receivable.swift in Sources */,
