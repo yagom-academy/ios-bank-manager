@@ -8,11 +8,9 @@
 import Foundation
 
 struct Clerk {
-    let businessProcessingTime: Double = 0.7
-    
     func doTask(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: businessProcessingTime)
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        print("\(customer.waitingNumber)번 고객 \(customer.businessType.getName)업무 시작")
+        Thread.sleep(forTimeInterval: customer.businessType.processingTime)
+        print("\(customer.waitingNumber)번 고객 \(customer.businessType.getName)업무 완료")
     }
 }
