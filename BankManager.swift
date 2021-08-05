@@ -30,7 +30,7 @@ struct BankManager {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            clerk.doTask(customer: Customer(waitingNumber: customer.waitingNumber))
+            clerk.doTask(customer: Customer(waitingNumber: customer.waitingNumber, businessType: customer.businessType))
             totalCustomer += Number.increaseOne
             totalTaskTime += clerk.businessProcessingTime
         }
@@ -67,7 +67,9 @@ struct BankManager {
 extension BankManager: Receivable {
     func customers(customer: Queue<Customer>) {
         for number in Number.firstNumber...numberOfCustomer {
-            customerQueue.enqueue(data: Customer(waitingNumber: number))
+            guard let customerType = BusinessType.allCases.randomElement() else { return }
+            let customer = Customer(waitingNumber: number, businessType: customerType)
+            customerQueue.enqueue(data: customer)
         }
     }
 }
