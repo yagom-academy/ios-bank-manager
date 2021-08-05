@@ -13,11 +13,11 @@ class Bank {
     // MARK:- private Properties
     private var bankTellers: [BankTeller] = []
     private var queueTicketMachine = QueueTicketMachine()
-    private var waitingQueue: [TaskCategory: TaskQueue] = [:]
+    private var taskWaitingQueues: [TaskCategory: WaitingQueue] = [:]
     
     init () {
         for taskCase in TaskCategory.allCases {
-            waitingQueue[taskCase] = TaskQueue()
+            taskWaitingQueues[taskCase] = WaitingQueue()
         }
     }
 }
@@ -42,7 +42,7 @@ extension Bank {
     
     func readyForWork() {
         for bankTeller in bankTellers {
-            if let taskWaitingQueue = waitingQueue[bankTeller.role] {
+            if let taskWaitingQueue = taskWaitingQueues[bankTeller.role] {
                 taskWaitingQueue.readyForWork(bankTeller: bankTeller)
             }
         }
@@ -50,7 +50,7 @@ extension Bank {
     
     func receiveClient(clients: [Client]) {
         for client in clients {
-            if let taskWaitingQueue = waitingQueue[client.task] {
+            if let taskWaitingQueue = taskWaitingQueues[client.task] {
                 issueWaitingNumberTicket(to: client)
                 taskWaitingQueue.receiveClient(client: client)
             }
@@ -63,8 +63,8 @@ extension Bank {
     }
     
     func isSomeClientsQueueNotEmpty() -> Bool {
-        for (_, taskQueue) in waitingQueue {
-            if taskQueue.isClientQueueNotEmpty() {
+        for (_, waitingQueue) in taskWaitingQueues {
+            if waitingQueue.isClientQueueNotEmpty() {
                 return true
             }
         }
@@ -75,13 +75,13 @@ extension Bank {
         let startTime = DispatchTime.now()
         
         while isSomeClientsQueueNotEmpty() || isAllBankTellersNotCompleted() {
-            for (_, taskQueue) in waitingQueue {
+            for (_, waitingQueue) in taskWaitingQueues {
                 DispatchQueue.global().async {
-                    if taskQueue.isBankTellerQueueNotEmpty(),
-                       let client = taskQueue.dequeueClient(),
-                       let bankTeller = taskQueue.dequeueBankTeller() {
+                    if waitingQueue.isBankTellerQueueNotEmpty(),
+                       let client = waitingQueue.dequeueClient(),
+                       let bankTeller = waitingQueue.dequeueBankTeller() {
                         bankTeller.handleTask(with: client) {
-                            taskQueue.readyForWork(bankTeller: bankTeller)
+                            waitingQueue.readyForWork(bankTeller: bankTeller)
                         }   
                     }
                 }
@@ -98,7 +98,7 @@ extension Bank {
     func finishWork() {
         queueTicketMachine.reset()
         
-        for (_, taskQueue) in waitingQueue {
+        for (_, taskQueue) in taskWaitingQueues {
             taskQueue.clear()
         }
     }

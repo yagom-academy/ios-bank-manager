@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TaskQueue {
+class WaitingQueue {
     private var clientQueue = Queue<Client>()
     private var bankTellerQueue = Queue<BankTeller>()
     
