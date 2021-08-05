@@ -8,11 +8,21 @@
 import Foundation
 
 class Banker {
-    func doBusiness(customerQueue: BankManagerQueue<Int>) {
+    let type: BusinessType
+    init(type: BusinessType) {
+        self.type = type
+    }
+    
+    func doBusiness(customerQueue: BankManagerQueue<Customer>) {
+        let semaphore = DispatchSemaphore(value: 2)
+        semaphore.wait()
         if let startCurrentCustomer = customerQueue.peek(),
            let finishCurrentCustomer = customerQueue.dequeue() {
-            print("\(startCurrentCustomer)" + BankMessage.startWork)
-            print("\(finishCurrentCustomer)" + BankMessage.finishWork)
+            print("\(startCurrentCustomer.numberTicket)" + BankMessage.startWork)
+            DispatchQueue.global().asyncAfter(deadline: .now() + type.workingTime) {
+                print("\(finishCurrentCustomer)" + BankMessage.finishWork)
+                semaphore.signal()
+            }
         }
     }
 }

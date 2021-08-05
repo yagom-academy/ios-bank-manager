@@ -11,7 +11,9 @@ struct Bank {
     private let userInteraction = UserInteraction()
     private let depositCustomerQueue = BankManagerQueue<Customer>()
     private let loanCustomerQueue = BankManagerQueue<Customer>()
-    private let banker = Banker()
+    private let banker = Banker(type: .deposit)
+    private let banker1 = Banker(type: .deposit)
+    private let banker2 = Banker(type: .loan)
     private var customers = Int.zero
     
     mutating func startTask() {
@@ -21,9 +23,11 @@ struct Bank {
             generateTodayCustomers()
             insertCustomerQueue(of: customers)
             while !depositCustomerQueue.isEmpty {
-                
+                banker.doBusiness(customerQueue: depositCustomerQueue)
+                banker1.doBusiness(customerQueue: depositCustomerQueue)
+
             }
-            userInteraction.showSettlementResult(customers: customers)
+//            userInteraction.showSettlementResult(customers: customers)
         }
     }
     
