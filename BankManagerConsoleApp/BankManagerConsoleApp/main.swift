@@ -6,7 +6,8 @@
 
 import Foundation
 
-var bankManager = BankManager()
+let bank = Bank()
+var bankManager = BankManager(bank: bank)
 
 func main() {
     var flag = true

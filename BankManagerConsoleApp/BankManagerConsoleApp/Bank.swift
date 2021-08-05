@@ -8,8 +8,12 @@
 import Foundation
 
 struct Bank {
-    private var bankClerk = BankClerk()
+    private var bankClerk: BankClerk
     private var waitingLine = Queue<Customer>()
+    
+    init(bankClerk: BankClerk = BankClerk()) {
+        self.bankClerk = bankClerk
+    }
 }
 
 extension Bank {
