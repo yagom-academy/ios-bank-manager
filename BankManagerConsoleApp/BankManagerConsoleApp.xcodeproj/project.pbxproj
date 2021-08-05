@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		748A2EC426BC06220010C690 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A2EC326BC06220010C690 /* Customer.swift */; };
 		7492276826AFCA1F00EBF45E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7492276726AFCA1F00EBF45E /* LinkedList.swift */; };
 		7492277026AFFB0300EBF45E /* BankManagerConsolAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7492276F26AFFB0300EBF45E /* BankManagerConsolAppTest.swift */; };
 		7492277526AFFBFD00EBF45E /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		748A2EC326BC06220010C690 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		7492276726AFCA1F00EBF45E /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		7492276D26AFFB0300EBF45E /* BankManagerConsolAppTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsolAppTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7492276F26AFFB0300EBF45E /* BankManagerConsolAppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsolAppTest.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				E686210926B3CB1900B562B5 /* SelectMode.swift */,
 				74C6477926B3B97D0024ABD4 /* Bank.swift */,
+				748A2EC326BC06220010C690 /* Customer.swift */,
 				E686210726B3C63A00B562B5 /* Banker.swift */,
 				E686210526B3C42E00B562B5 /* BankMessage.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -223,6 +226,7 @@
 				E6BFE22C26BBDC6C009DBF03 /* CustomerNumber.swift in Sources */,
 				E685EDDB26AFC96500AD100D /* Node.swift in Sources */,
 				E685EDDD26AFECFD00AD100D /* BankManagerQueue.swift in Sources */,
+				748A2EC426BC06220010C690 /* Customer.swift in Sources */,
 				E686210A26B3CB1900B562B5 /* SelectMode.swift in Sources */,
 				E602E52F26B810790009BD27 /* UserInteraction.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,

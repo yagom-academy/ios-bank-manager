@@ -9,7 +9,8 @@ import Foundation
 
 struct Bank {
     private let userInteraction = UserInteraction()
-    private let customerQueue = BankManagerQueue<Int>()
+    private let depositCustomerQueue = BankManagerQueue<Customer>()
+    private let loanCustomerQueue = BankManagerQueue<Customer>()
     private let banker = Banker()
     private var customers = Int.zero
     
@@ -19,17 +20,27 @@ struct Bank {
             guard userInteraction.isBankOpen() else { return }
             generateTodayCustomers()
             insertCustomerQueue(of: customers)
-            while !customerQueue.isEmpty {
-                banker.doBusiness(customerQueue: customerQueue)
+            while !depositCustomerQueue.isEmpty {
+                
             }
             userInteraction.showSettlementResult(customers: customers)
         }
     }
     
+    private func isDepositType(of customer: Customer) -> Bool {
+        return customer.business == .deposit
+    }
     
     private func insertCustomerQueue(of totalCustomers: Int) {
-        for customer in CustomerNumber.firstCustomer...totalCustomers {
-            customerQueue.enqueue(data: customer)
+        for sequence in CustomerNumber.firstCustomer...totalCustomers {
+            guard let randomCusotomerBusinessType = BusinessType.allCases.randomElement() else { return }
+            let currentCustomer = Customer(numberTicket: sequence, business: randomCusotomerBusinessType)
+            
+            if isDepositType(of: currentCustomer) {
+                depositCustomerQueue.enqueue(data: currentCustomer)
+            } else {
+                loanCustomerQueue.enqueue(data: currentCustomer)
+            }
         }
     }
     

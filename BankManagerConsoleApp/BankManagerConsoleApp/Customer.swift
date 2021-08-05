@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+enum BusinessType: CaseIterable {
+    case deposit
+    case loan
+}
+
+struct Customer {
+    let numberTicket: Int
+    let business: BusinessType
+}
