@@ -10,7 +10,7 @@ import Foundation
 class Bank {
     private var bankClerk: BankClerk
     private var waitingLine = Queue<Customer>()
-
+    
     init(bankClerk: BankClerk = BankClerk()) {
         self.bankClerk = bankClerk
     }
@@ -63,6 +63,7 @@ extension Bank {
                 print("error")
             }
         }
+        
         loanGroup.notify(queue: loanQueue) {
             self.notifyClosing(totalCustomer: loanCusomerNubmer + depositCustomerNumber, totalTime: "10")
         }

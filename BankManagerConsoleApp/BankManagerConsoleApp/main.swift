@@ -15,7 +15,7 @@ func main() {
 
     while flag {
         switch userInput {
-        case BankMenu.open:
+        case BankMenu.openBank:
             bankManager.start()
             main()
         case BankMenu.exit:

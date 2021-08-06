@@ -15,6 +15,7 @@ extension BankClerk {
         guard let customerBusiness = customer.business else {
             return
         }
+        
         print("\(customer.ticketNumber)번 고객 \(customerBusiness)업무 시작")
         Thread.sleep(forTimeInterval: time)
         print("\(customer.ticketNumber)번 고객 \(customerBusiness)업무 완료")

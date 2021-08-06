@@ -7,7 +7,7 @@
 import Foundation
 
 enum BankMenu {
-    static let open = "1"
+    static let openBank = "1"
     static let exit = "2"
 }
 
@@ -57,12 +57,5 @@ extension BankManager {
     
     private mutating func showWorkResult(_ total: Int, _ time: String) {
         bank.notifyClosing(totalCustomer: total, totalTime: time)
-    }
-    
-    private func checkWorkingTime(_ block: () -> ()) -> String {
-        let start = Date()
-        block()
-        let totalTime = Date().timeIntervalSince(start)
-        return totalTime.description
     }
 }
