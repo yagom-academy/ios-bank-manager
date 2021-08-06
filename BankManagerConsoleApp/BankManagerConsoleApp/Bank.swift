@@ -35,7 +35,7 @@ extension Bank {
         let depositGroup = DispatchGroup()
         let loanQueue = DispatchQueue(label: "loanQueue")
         let depositQueue = DispatchQueue.global()
-        var loanCusomerNubmer = 0
+        var loanCustomerNubmer = 0
         var depositCustomerNumber = 0
         
         while waitingLine.isEmpty() == false {
@@ -46,7 +46,7 @@ extension Bank {
             
             switch customerBusiness {
             case "대출":
-                loanCusomerNubmer += 1
+                loanCustomerNubmer += 1
                 loanGroup.enter()
                 loanQueue.async {
                     self.bankClerk.work(for: currentCustomer, during: loanWorkTime)
@@ -67,7 +67,7 @@ extension Bank {
         }
         
         loanGroup.notify(queue: loanQueue) {
-            self.notifyClosing(totalCustomer: loanCusomerNubmer + depositCustomerNumber, totalTime: "10")
+            self.notifyClosing(totalCustomer: loanCustomerNubmer + depositCustomerNumber, totalTime: "10")
         }
     }
     
