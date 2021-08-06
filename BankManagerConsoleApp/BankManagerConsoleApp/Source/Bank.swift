@@ -36,7 +36,10 @@ class Bank {
     
     func serveCustomers() {
         departments.forEach { _, bankingDepartment in
-            bankingDepartment.serveCustomers()
+            DispatchQueue.global().async {
+                bankingDepartment.serveCustomers()
+            }
         }
+        dispatchGroup.wait()
     }
 }
