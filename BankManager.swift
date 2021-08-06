@@ -25,7 +25,7 @@ struct BankManager {
         case .open:
             let customerRangeStart = 1
             let customerRangeEnd = Int.random(in: 10...30)
-            bank = Bank(range: customerRangeStart...customerRangeEnd)
+            bank = Bank(customerRange: customerRangeStart...customerRangeEnd)
             bank?.startBusiness()
             return true
         case .close:

@@ -74,19 +74,23 @@ struct Bank {
     }
 
     private func prepareWindows() -> [BusinessQueue] {
-        return BusinessType.allCases.map { businessType -> BusinessQueue in
-            let thisBusinessTypeClerks = (1...businessType.clerkNumber).map { clerkNumber -> BankClerk in
+        var businessWindows = [BusinessQueue]()
+        let bankBusinessTypes = BusinessType.allCases
+
+        for businessType in bankBusinessTypes {
+            var thisBusinessTypeClerks = [BankClerk]()
+            
+            for clerkNumber in  1...businessType.clerkNumber {
                 let id = businessType.rawValue * 100 + Int(clerkNumber)
-                return BankClerk(id: id)
+                let clerk = BankClerk(id: id)
+                thisBusinessTypeClerks.append(clerk)
             }
             
-            let businessQueue = BusinessQueue(
-                identity: businessType,
-                clerks: thisBusinessTypeClerks
-            )
-            
-            return businessQueue
+            let businessQueue = BusinessQueue(identity: businessType, clerks: thisBusinessTypeClerks)
+            businessWindows.append(businessQueue)
         }
+        
+        return businessWindows
     }
 
     private func open(bankWindows: [BusinessQueue]) {
