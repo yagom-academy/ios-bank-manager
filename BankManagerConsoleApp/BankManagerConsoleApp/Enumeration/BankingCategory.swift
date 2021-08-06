@@ -7,15 +7,12 @@
 
 import Foundation
 
-enum BankingCategory: CaseIterable {
-    case invalidTask
+enum BankingCategory: CaseIterable, CustomStringConvertible {
     case loan
     case deposit
     
     var timeRequired: Double {
         switch self {
-        case .invalidTask:
-            return 0.0
         case .loan:
             return 1.1
         case .deposit:
@@ -23,7 +20,16 @@ enum BankingCategory: CaseIterable {
         }
     }
     
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
+    
     static var randomTask: BankingCategory {
-        return Self.allCases.randomElement() ?? .invalidTask
+        return Self.allCases.randomElement() ?? .deposit
     }
 }

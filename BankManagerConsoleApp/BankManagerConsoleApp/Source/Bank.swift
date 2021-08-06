@@ -11,6 +11,7 @@ class Bank {
     private var totalNumberOfVisitors: UInt = .zero
     private var departments = [BankingCategory:BankingDepartment]()
     private let departmentGroup = DispatchGroup()
+    private var elapsedTime = 0.0
     
     init(departmentInformation: [(departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)]) {
         departmentInformation.forEach { category, numberOfTellers in
@@ -19,6 +20,7 @@ class Bank {
     }
     
     func close() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalNumberOfVisitors)명이며, 총 업무시간은 \(String(format: "%.2f", elapsedTime))초입니다.")
         totalNumberOfVisitors = .zero
     }
     
@@ -35,6 +37,7 @@ class Bank {
     }
     
     func serveCustomers() {
+        let startTime = Date()
         departments.forEach { _, bankingDepartment in
             departmentGroup.enter()
             DispatchQueue.global().async {
@@ -42,5 +45,6 @@ class Bank {
             }
         }
         departmentGroup.wait()
+        elapsedTime = Date().timeIntervalSince(startTime)
     }
 }
