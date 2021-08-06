@@ -58,7 +58,7 @@ extension Bank {
     }
     
     func isAllBankTellersNotCompleted() -> Bool {
-        let notCompletedBankTeller = bankTellers.filter { $0.status != .completion }
+        let notCompletedBankTeller = bankTellers.filter { $0.client != nil }
         return notCompletedBankTeller.count > 0
     }
     

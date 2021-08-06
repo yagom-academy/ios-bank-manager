@@ -23,10 +23,15 @@ enum TaskStatus {
 
 class BankTeller {
     var role: TaskCategory
-    var status: TaskStatus = .completion
+//    var status: TaskStatus = .completion
+    var client: Client?
     
     init(role: TaskCategory) {
         self.role = role
+    }
+    
+    func setClient(client: Client?) {
+        self.client = client
     }
     
     // MARK:- private Method
@@ -40,12 +45,13 @@ class BankTeller {
             return
         }
         
-        status = .beginning
+//        status = .beginning
+        setClient(client: client)
         showMessage(taskMessage: .beginning, number: queueTicket, task: client.task)
-//        Thread.sleep(forTimeInterval: client.task.taskTime)
         DispatchQueue.global().asyncAfter(deadline: .now() + client.task.taskTime) {
             self.showMessage(taskMessage: .completion, number: queueTicket, task: client.task)
-            self.status = .completion
+//            self.status = .completion
+            self.setClient(client: nil)
             readyForWork()
         }
     }
