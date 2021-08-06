@@ -7,16 +7,25 @@
 
 import Foundation
 
-enum BusinessType: CaseIterable {
+enum BusinessType: CaseIterable, CustomStringConvertible {
     case deposit
     case loan
 
     var workingTime: Double {
         switch self {
         case .deposit:
-            return 0.7
+            return 3
         case .loan:
-            return 1.1
+            return 5
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
         }
     }
 }

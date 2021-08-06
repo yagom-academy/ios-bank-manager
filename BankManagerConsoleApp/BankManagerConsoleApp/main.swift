@@ -7,4 +7,6 @@
 import Foundation
 
 var bank = Bank.init()
+bank.addBanker(howMany: 2, type: .deposit)
+bank.addBanker(howMany: 1, type: .loan)
 bank.startTask()
