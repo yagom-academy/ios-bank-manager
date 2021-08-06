@@ -29,7 +29,7 @@ struct BankManager {
     
     private func createCustomers() -> [Customer] {
         return Array(0..<generateRandomCustomerNumber()).map { _ in
-            return Customer(desiredTask: .unspecified, waitingNumber: bank.takeNumberTicket())
+            return Customer(desiredTask: BankingCategory.randomTask, waitingNumber: bank.takeNumberTicket())
         }
     }
     

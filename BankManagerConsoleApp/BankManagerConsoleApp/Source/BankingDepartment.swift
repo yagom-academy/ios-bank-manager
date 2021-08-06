@@ -12,7 +12,6 @@ class BankingDepartment {
     var customerQueue = Queue<Customer>()
     let semaphore: DispatchSemaphore
     let taskGroup: DispatchGroup
-    let dispatchQueueForSemaphore = DispatchQueue(label: "semaphore")
     
     init(duty: BankingCategory, numberOfBankTellers: Int, taskGroup: DispatchGroup) {
         self.duty = duty
