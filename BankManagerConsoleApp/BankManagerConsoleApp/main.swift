@@ -16,7 +16,7 @@ func main() {
     while flag {
         switch userInput {
         case BankMenu.open:
-            bankManager.start(completion: <#T##() -> Bool#>)
+            bankManager.start()
             main()
         case BankMenu.exit:
             bankManager.end()

@@ -20,11 +20,10 @@ struct BankManager {
 }
 
 extension BankManager {
-    mutating func start( completion: @escaping () -> Bool) {
+    mutating func start() {
         let totalCustomer = gatherCustomers()
         formWaitingLine(from: totalCustomer)
         askWork()
-        completion()
     }
     
     func end() {

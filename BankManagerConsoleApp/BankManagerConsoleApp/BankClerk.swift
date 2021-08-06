@@ -12,8 +12,11 @@ struct BankClerk {
 
 extension BankClerk {
     func work(for customer: Customer, during time: Double) {
-        print("\(customer.ticketNumber)번 고객 \(customer.business)업무 시작")
+        guard let customerBusiness = customer.business else {
+            return
+        }
+        print("\(customer.ticketNumber)번 고객 \(customerBusiness)업무 시작")
         Thread.sleep(forTimeInterval: time)
-        print("\(customer.ticketNumber)번 고객 \(customer.business)업무 완료")
+        print("\(customer.ticketNumber)번 고객 \(customerBusiness)업무 완료")
     }
 }

@@ -33,6 +33,8 @@ extension Bank {
         let depositGroup = DispatchGroup()
         let loanQueue = DispatchQueue(label: "loanQueue")
         let depositQueue = DispatchQueue.global()
+        var loanCusomerNubmer = 0
+        var depositCustomerNumber = 0
         
         while waitingLine.isEmpty() == false {
             guard let currentCustomer = dequeueCustomer(),
@@ -42,12 +44,14 @@ extension Bank {
             
             switch customerBusiness {
             case "대출":
+                loanCusomerNubmer += 1
                 loanGroup.enter()
                 loanQueue.async {
                     self.bankClerk.work(for: currentCustomer, during: loanWorkTime)
                     loanGroup.leave()
                 }
             case "예금":
+                depositCustomerNumber += 1
                 depositGroup.enter()
                 semaphore.wait()
                 depositQueue.async(group: depositGroup) {
@@ -56,11 +60,11 @@ extension Bank {
                     depositGroup.leave()
                 }
             default:
-                print("unknown")
+                print("error")
             }
         }
         loanGroup.notify(queue: loanQueue) {
-            self.notifyClosing(totalCustomer: 10, totalTime: "10")
+            self.notifyClosing(totalCustomer: loanCusomerNubmer + depositCustomerNumber, totalTime: "10")
         }
     }
     
