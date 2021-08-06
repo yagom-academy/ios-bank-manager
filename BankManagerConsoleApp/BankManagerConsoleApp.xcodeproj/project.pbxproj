@@ -47,7 +47,7 @@
 		435AD78726B255E100F4BB8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +84,26 @@
 			path = LinkedListTests;
 			sourceTree = "<group>";
 		};
+		273CFCF826BD028700B338E0 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				4328949226B7E88A0092C538 /* Clerk.swift */,
+				4328949426B7E8920092C538 /* Customer.swift */,
+				43303F5E26BBDAFE00342D17 /* BusinessType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		273CFCF926BD02A200B338E0 /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				273CFCC726B14B4700B338E0 /* LinkedList.swift */,
+				273CFCC926B15CB600B338E0 /* Queue.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
 		435AD78426B255E100F4BB8C /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,13 +136,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				273CFCF926BD02A200B338E0 /* DataStructure */,
+				273CFCF826BD028700B338E0 /* Type */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				273CFCC726B14B4700B338E0 /* LinkedList.swift */,
-				273CFCC926B15CB600B338E0 /* Queue.swift */,
-				4328949226B7E88A0092C538 /* Clerk.swift */,
-				43303F5E26BBDAFE00342D17 /* BusinessType.swift */,
-				4328949426B7E8920092C538 /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
