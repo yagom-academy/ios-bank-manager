@@ -6,6 +6,6 @@
 
 import Foundation
 
-let bank = Bank()
+let bank = Bank(NumberOfdepositClerk: 2, NumberOfloanClerk: 1)
 
 bank.openBank()

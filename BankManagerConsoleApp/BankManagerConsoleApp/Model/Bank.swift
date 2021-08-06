@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 enum BankMenu: String {
     case open = "1"
     case close = "2"
@@ -20,9 +18,8 @@ class Bank {
         static let maximumNumber = 30
         static let minimunNumber = 10
     }
-    
-    private var taskByTaskType: [TaskType: Task] = [:]
-    private let numberOfClerk = (deposit: 2, loan: 1)
+    typealias matchWithClerkAndClient = (client: Queue<Clientable>, clerk: Queue<Clerkable>)
+    private var matchWithClerkAndClientByTaskType: [TaskType: matchWithClerkAndClient]
     private lazy var bankClients = generateNewClients()
     private let generateNewClients = { () -> Queue<Clientable> in
         let newClients = Queue<Clientable>()
@@ -32,6 +29,32 @@ class Bank {
             newClients.enqueue(client)
         }
         return newClients
+    }
+    
+    init(NumberOfdepositClerk: Int, NumberOfloanClerk: Int) {
+        let depositClientAndClerk = matchWithClerkAndClient(Queue<Clientable>(), Queue<Clerkable>())
+        let loanClientAndClerk = matchWithClerkAndClient(Queue<Clientable>(), Queue<Clerkable>())
+        self.matchWithClerkAndClientByTaskType = [.deposit: depositClientAndClerk, .loan:loanClientAndClerk]
+        
+        for _ in 0 ..< NumberOfdepositClerk {
+            let clerk = BankClerk(bankType: .deposit)
+            matchWithClerkAndClientByTaskType[.deposit]?.clerk.enqueue(clerk)
+        }
+        
+        for _ in 0 ..< NumberOfloanClerk {
+            let clerk = BankClerk(bankType: .loan)
+            matchWithClerkAndClientByTaskType[.loan]?.clerk.enqueue(clerk)
+        }
+    }
+    
+    private func sotrClient() {
+        while let client = bankClients.dequeue() {
+            if client.bankType == .deposit {
+                matchWithClerkAndClientByTaskType[.deposit]?.client.enqueue(client)
+            } else {
+                matchWithClerkAndClientByTaskType[.loan]?.client.enqueue(client)
+            }
+        }
     }
     
     private func resetBank() {
@@ -61,31 +84,52 @@ class Bank {
         }
     }
     
-    func serveClient() {
+    func serveClient(semaphere: DispatchSemaphore, client: Queue<Clientable>, clerk: Queue<Clerkable>, endServe: @escaping (Int) -> Void ) {
+        while let currentClient = client.dequeue() {
+            semaphere.wait()
+            guard let currentClerk = clerk.dequeue() else {
+                client.enqueue(currentClient)
+                semaphere.signal()
+                continue
+            }
+            currentClerk.serveBanking(for: currentClient) { (endClerk) in
+                clerk.enqueue(endClerk)
+            }
+            semaphere.signal()
+            endServe(0)
+        }
+    }
+        
+    func prepareServe() {
+        guard let deposit = matchWithClerkAndClientByTaskType[.deposit],
+              let loan = matchWithClerkAndClientByTaskType[.loan] else {
+            return
+        }
+        
         var totalNumberOfClients = 0
         let startTime = CFAbsoluteTimeGetCurrent()
+        let depositSemaphore = DispatchSemaphore(value: deposit.clerk.count)
+        let loanSemaphore = DispatchSemaphore(value: loan.clerk.count)
         let group = DispatchGroup()
-        while let currentClient = bankClients.dequeue() {
-            group.enter()
-            taskByTaskType[currentClient.bankType]?.dispatchQueue.async { [self] in
-                taskByTaskType[currentClient.bankType]?.semaphore.wait()
-                let currentClerk = BankClerk(bankType: currentClient.bankType)
-                currentClerk.serveBanking(for: currentClient)
-                taskByTaskType[currentClient.bankType]?.semaphore.signal()
-                group.leave()
+        let globalQueue = DispatchQueue.global()
+        
+        group.enter()
+        globalQueue.async { [self] in
+            serveClient(semaphere: depositSemaphore, client: deposit.client, clerk: deposit.clerk) { _ in
                 totalNumberOfClients += 1
             }
+            group.leave()
+        }
+        
+        group.enter()
+        globalQueue.async { [self] in
+            serveClient(semaphere: loanSemaphore, client: loan.client, clerk: loan.clerk) { _ in
+                totalNumberOfClients += 1
+            }
+            group.leave()
         }
         group.wait()
         close(numberOfClients: totalNumberOfClients, workTime: CFAbsoluteTimeGetCurrent() - startTime)
-    }
-    
-    func generateBankTypeTask() {
-        let depositSemaphore = DispatchSemaphore(value: numberOfClerk.deposit)
-        let loanSemaphore = DispatchSemaphore(value: numberOfClerk.loan)
-        let depositTask = Task(semaphore: depositSemaphore)
-        let loanTask = Task(semaphore: loanSemaphore)
-        taskByTaskType = [.deposit: depositTask, .loan: loanTask]
     }
     
     func close(numberOfClients: Int, workTime: Double) {
@@ -99,8 +143,8 @@ class Bank {
             return
         }
         if bankMenu == BankMenu.open {
-            generateBankTypeTask()
-            serveClient()
+            sotrClient()
+            prepareServe()
             resetBank()
             return openBank()
         } else if bankMenu == BankMenu.close {
