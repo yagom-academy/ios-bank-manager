@@ -14,6 +14,7 @@ class Bank {
     private let waitList = Queue<Customer>()
     private var countOfCustomer: Int = 0
     private let numberFormatter = NumberFormatter()
+    private let taskGroup = DispatchGroup.init()
 
     init(bankManagers: [BankManager]) {
         self.bankManagers = bankManagers
@@ -45,20 +46,31 @@ class Bank {
     }
     
     private func assignTask() {
+        let taskQueue = DispatchQueue(label: "TaskQueue", attributes: .concurrent)
+        let semaphore = DispatchSemaphore.init(value: bankManagers.count)
+        
         while waitList.isEmpty() == false {
-            guard let customer = waitList.dequeue() else {
+            guard let customer = self.waitList.dequeue() else {
                 return
             }
             switch customer.task {
             case .deposit:
-                if let depositManager = depositManagerQueue.dequeue() {
-                    depositManager.startWork(customer)
-                    depositManagerQueue.enqueue(depositManager)
+                if let depositManager = self.depositManagerQueue.dequeue() {
+                    semaphore.wait()
+                    taskQueue.async(group: taskGroup) {
+                        depositManager.startWork(customer)
+                        semaphore.signal()
+                    }
+                    self.depositManagerQueue.enqueue(depositManager)
                 }
             case .loan:
-                if let loanManager = loanManagerQueue.dequeue() {
-                    loanManager.startWork(customer)
-                    loanManagerQueue.enqueue(loanManager)
+                if let loanManager = self.loanManagerQueue.dequeue() {
+                    semaphore.wait()
+                    taskQueue.async(group: taskGroup) {
+                        loanManager.startWork(customer)
+                        semaphore.signal()
+                    }
+                    self.loanManagerQueue.enqueue(loanManager)
                 }
             }
         }
@@ -87,6 +99,8 @@ class Bank {
             enqueueManagers()
             assignTask()
         }
-        printWorkDone(totalWorkTime)
+        taskGroup.notify(queue: .global()) {
+            self.printWorkDone(totalWorkTime)
+        }
     }
 }

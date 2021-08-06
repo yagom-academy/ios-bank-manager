@@ -30,26 +30,26 @@ func checkUserInput() -> Bool {
     return readUserInput() == validValue
 }
 
-func prepareTask() {
+func prepareBank() -> Bank {
     var bankManagers: [BankManager] = []
     bankManagers.append(BankManager(task: .deposit))
     bankManagers.append(BankManager(task: .deposit))
     bankManagers.append(BankManager(task: .loan))
 
     let bank = Bank(bankManagers: bankManagers)
-    bank.openBank()
+    return bank
 }
 
-func doTask() {
+func doTask(by bank: Bank) {
     while true {
         printMenu()
         if checkUserInput() == false {
             return
         }
-        prepareTask()
+        bank.openBank()
     }
 }
 
-doTask()
+doTask(by: prepareBank())
 
 

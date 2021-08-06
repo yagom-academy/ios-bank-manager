@@ -11,7 +11,12 @@ struct BankManager {
     
     func startWork(_ customer: Customer) {
         print("\(customer.order)번 고객 \(customer.task) 시작")
-        usleep(700000)
+        switch customer.task {
+        case .deposit:
+            Thread.sleep(forTimeInterval: 1.1)
+        case .loan:
+            Thread.sleep(forTimeInterval: 0.7)
+        }
         print("\(customer.order)번 고객 \(customer.task) 완료")
     }
 }
