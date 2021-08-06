@@ -12,7 +12,7 @@ struct BankManager {
     let numberOfCustomer: Int
 
     func processTask() {
-        customers(customer: customerQueue)
+        receiveCustomers(customer: customerQueue)
         var totalCustomer = 0
         let increaseOne = 1
         var totalTaskTime: Double = 0
@@ -29,10 +29,8 @@ struct BankManager {
 
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(String(format: "%.2f",totalTaskTime))초입니다.")
     }
-}
-
-extension BankManager: Receivable {
-    func customers(customer: Queue<Customer>) {
+    
+    func receiveCustomers(customer: Queue<Customer>) {
         let firstNumber = 1
         for number in firstNumber...numberOfCustomer {
             guard let customerType = BusinessType.allCases.randomElement() else { return }
