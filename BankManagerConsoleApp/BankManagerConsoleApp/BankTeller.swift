@@ -23,7 +23,6 @@ enum TaskStatus {
 
 class BankTeller {
     var role: TaskCategory
-//    var status: TaskStatus = .completion
     var client: Client?
     
     init(role: TaskCategory) {
@@ -45,12 +44,10 @@ class BankTeller {
             return
         }
         
-//        status = .beginning
         setClient(client: client)
         showMessage(taskMessage: .beginning, number: queueTicket, task: client.task)
         DispatchQueue.global().asyncAfter(deadline: .now() + client.task.taskTime) {
             self.showMessage(taskMessage: .completion, number: queueTicket, task: client.task)
-//            self.status = .completion
             self.setClient(client: nil)
             readyForWork()
         }
