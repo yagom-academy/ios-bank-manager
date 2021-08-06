@@ -8,10 +8,10 @@
 import Foundation
 
 class BankingDepartment {
-    let duty: BankingCategory
-    var customerQueue = Queue<Customer>()
-    let semaphore: DispatchSemaphore
-    let departmentGroup: DispatchGroup
+    private let duty: BankingCategory
+    private var customerQueue = Queue<Customer>()
+    private let semaphore: DispatchSemaphore
+    private let departmentGroup: DispatchGroup
     
     init(duty: BankingCategory, numberOfBankTellers: Int, departmentGroup: DispatchGroup) {
         self.duty = duty
@@ -38,7 +38,7 @@ class BankingDepartment {
         departmentGroup.leave()
     }
     
-    func serve(customer: Customer) {
+    private func serve(customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(customer.desiredTask)업무 시작")
         Thread.sleep(forTimeInterval: customer.desiredTask.timeRequired)
         print("\(customer.waitingNumber)번 고객 \(customer.desiredTask)업무 완료")
