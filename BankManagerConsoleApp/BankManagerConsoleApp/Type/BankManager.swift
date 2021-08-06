@@ -26,12 +26,7 @@ struct BankManager {
             }
             
             if customer.businessType == .loan {
-                DispatchQueue.global().async(group: group) {
-                    loanSemaphore.wait()
-                    window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
-                                                     businessType: customer.businessType))
-                    loanSemaphore.signal()
-                }
+                handleLoan(for: customer, group: group, semaphore: loanSemaphore)
             } else {
                 DispatchQueue.global().async(group: group) {
                     depositSemaphore.wait()
@@ -59,6 +54,17 @@ struct BankManager {
             guard let customerType = BusinessType.allCases.randomElement() else { return }
             let customer = Customer(waitingNumber: number, businessType: customerType)
             customerQueue.enqueue(data: customer)
+        }
+    }
+    
+    private func handleLoan(for customer: Customer,
+                            group: DispatchGroup,
+                            semaphore: DispatchSemaphore) {
+        DispatchQueue.global().async(group: group) {
+            semaphore.wait()
+            window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
+                                             businessType: customer.businessType))
+            semaphore.signal()
         }
     }
 }
