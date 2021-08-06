@@ -13,8 +13,6 @@ class Bank {
     // MARK:- private Properties
     private var bankTellers: [BankTeller] = []
     private var waitingNumberTicketMachine = WaitingNumberTicketMachine()
-    private var taskWaitingQueues: [TaskCategory: WaitingQueue] = [:]
-    
     private var taskWaitingQueueMap: [TaskCategory: Queue<Client>] = [:]
     
     init () {
@@ -40,14 +38,6 @@ extension Bank {
 extension Bank {
     func setBankTellers(bankTellers: [BankTeller]) {
         self.bankTellers = bankTellers
-    }
-    
-    func readyForWork() {
-        for bankTeller in bankTellers {
-            if let taskWaitingQueue = taskWaitingQueues[bankTeller.role] {
-                taskWaitingQueue.readyForWork(bankTeller: bankTeller)
-            }
-        }
     }
     
     func receiveClient(clients: [Client]) {
