@@ -12,7 +12,7 @@ class Bank {
     private var departments = [BankingCategory:BankingDepartment]()
     private let dispatchGroup = DispatchGroup()
     
-    init(departmentInformation: (departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)...) {
+    init(departmentInformation: [(departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)]) {
         departmentInformation.forEach { category, numberOfTellers in
             self.departments[category] = BankingDepartment(duty: category, numberOfBankTellers: numberOfTellers, taskGroup: self.dispatchGroup)
         }
