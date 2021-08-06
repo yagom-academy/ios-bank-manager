@@ -19,6 +19,7 @@
 		D32074A326B692C6006CF313 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30CC6EF26B454AD00F4809A /* Queue.swift */; };
 		D32074A426B692C6006CF313 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30CC6F226B454B900F4809A /* LinkedList.swift */; };
 		D354B34A26BB03B800FDDFFB /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354B34926BB03B800FDDFFB /* Error.swift */; };
+		D372EB7B26BD5E99007AB606 /* BusinessCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372EB7A26BD5E99007AB606 /* BusinessCategory.swift */; };
 		D3BC03D826B9796600789E39 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC03D726B9796600789E39 /* Client.swift */; };
 		D3BC03DC26B9797F00789E39 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC03DB26B9797F00789E39 /* BankTeller.swift */; };
 		D3BC03E026B9798E00789E39 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BC03DF26B9798E00789E39 /* Bank.swift */; };
@@ -47,6 +48,7 @@
 		D30CC6FB26B4550200F4809A /* BankManagerConsoleAppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTest.swift; sourceTree = "<group>"; };
 		D30CC6FD26B4550200F4809A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D354B34926BB03B800FDDFFB /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		D372EB7A26BD5E99007AB606 /* BusinessCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCategory.swift; sourceTree = "<group>"; };
 		D3BC03D726B9796600789E39 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		D3BC03DB26B9797F00789E39 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
 		D3BC03DF26B9798E00789E39 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				D3BC03D726B9796600789E39 /* Client.swift */,
 				D3BC03DB26B9797F00789E39 /* BankTeller.swift */,
 				D3BC03DF26B9798E00789E39 /* Bank.swift */,
+				D372EB7A26BD5E99007AB606 /* BusinessCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				D30CC6ED26B4549900F4809A /* Node.swift in Sources */,
 				D3BC03E026B9798E00789E39 /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				D372EB7B26BD5E99007AB606 /* BusinessCategory.swift in Sources */,
 				D3BC03D826B9796600789E39 /* Client.swift in Sources */,
 				D30CC6F326B454B900F4809A /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,

@@ -7,11 +7,14 @@
 
 import Foundation
 
-class Client {
-    
+class Client: Node<UInt> {
+
     let waitingNumber: UInt
+    var work: BusinessCategory? = nil
 
     init(waitingNumber: UInt) {
         self.waitingNumber = waitingNumber
+        super.init(data: waitingNumber)
     }
 }
+

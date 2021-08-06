@@ -21,12 +21,12 @@ class BankManager {
         }
     }
     
-    func chooseOption() throws {
-        printMenu()
-        try recieveOption()
+    func runManager() {
+        printOptions()
+        try? recieveOption()
     }
     
-    private func printMenu() {
+    private func printOptions() {
         print("1: 은행 개점\n2: 종료\n입력: ",terminator: "")
     }
     
@@ -49,5 +49,6 @@ class BankManager {
     private func runBank() {
         let bank = Bank()
         bank.openBank()
+        runManager()
     }
 }

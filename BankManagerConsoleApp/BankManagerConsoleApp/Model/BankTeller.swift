@@ -8,27 +8,19 @@
 import Foundation
 
 protocol BankTellerRole {
-    func receive(client: UInt)
+    func receive(clientNumber: UInt, work: BusinessCategory)
 }
 
 class BankTeller: BankTellerRole {
     
-    enum Work {
-        case deposit
-        case loan
-        var time: Double {
-            switch self {
-            case .deposit:
-                return 0.7
-            case .loan:
-                return 1.1
-            }
+    func receive(clientNumber: UInt, work: BusinessCategory) {
+        print("\(clientNumber)번 \(work.description)업무처리 시작")
+        switch work {
+        case .deposit:
+            usleep(work.time)
+        case .loan:
+            usleep(work.time)
         }
-    }
-    
-    func receive(client: UInt) {
-        print("\(client)번 업무처리 시작")
-        usleep(700000)
-        print("\(client)번 업무처리 완료")
+        print("\(clientNumber)번 \(work.description)업무처리 완료")
     }
 }
