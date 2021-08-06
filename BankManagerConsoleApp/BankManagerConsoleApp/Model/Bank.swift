@@ -84,7 +84,8 @@ class Bank {
         }
     }
     
-    func serveClient(semaphere: DispatchSemaphore, client: Queue<Clientable>, clerk: Queue<Clerkable>, endServe: @escaping (Int) -> Void ) {
+    func serveClient(semaphere: DispatchSemaphore, client: Queue<Clientable>, clerk: Queue<Clerkable>, endServe: @escaping () -> Void ) {
+        let group = DispatchGroup()
         while let currentClient = client.dequeue() {
             semaphere.wait()
             guard let currentClerk = clerk.dequeue() else {
@@ -92,14 +93,19 @@ class Bank {
                 semaphere.signal()
                 continue
             }
-            currentClerk.serveBanking(for: currentClient) { (endClerk) in
-                clerk.enqueue(endClerk)
+            group.enter()
+            DispatchQueue.global().async {
+                currentClerk.serveBanking(for: currentClient) { (endClerk) in
+                    clerk.enqueue(currentClerk)
+                    semaphere.signal()
+                }
+                endServe()
+                group.leave()
             }
-            semaphere.signal()
-            endServe(0)
         }
+        group.wait()
     }
-        
+    
     func prepareServe() {
         guard let deposit = matchWithClerkAndClientByTaskType[.deposit],
               let loan = matchWithClerkAndClientByTaskType[.loan] else {
@@ -115,7 +121,7 @@ class Bank {
         
         group.enter()
         globalQueue.async { [self] in
-            serveClient(semaphere: depositSemaphore, client: deposit.client, clerk: deposit.clerk) { _ in
+            serveClient(semaphere: depositSemaphore, client: deposit.client, clerk: deposit.clerk) {
                 totalNumberOfClients += 1
             }
             group.leave()
@@ -123,11 +129,12 @@ class Bank {
         
         group.enter()
         globalQueue.async { [self] in
-            serveClient(semaphere: loanSemaphore, client: loan.client, clerk: loan.clerk) { _ in
+            serveClient(semaphere: loanSemaphore, client: loan.client, clerk: loan.clerk) {
                 totalNumberOfClients += 1
             }
             group.leave()
         }
+        
         group.wait()
         close(numberOfClients: totalNumberOfClients, workTime: CFAbsoluteTimeGetCurrent() - startTime)
     }

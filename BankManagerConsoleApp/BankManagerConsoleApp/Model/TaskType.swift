@@ -27,8 +27,3 @@ enum TaskType: String, CaseIterable {
         return random
     }
 }
-
-struct Task {
-    let dispatchQueue = DispatchQueue.global()
-    let semaphore: DispatchSemaphore
-}
