@@ -10,11 +10,11 @@ import Foundation
 class Bank {
     private var totalNumberOfVisitors: UInt = .zero
     private var departments = [BankingCategory:BankingDepartment]()
-    private let dispatchGroup = DispatchGroup()
+    private let departmentGroup = DispatchGroup()
     
     init(departmentInformation: [(departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)]) {
         departmentInformation.forEach { category, numberOfTellers in
-            self.departments[category] = BankingDepartment(duty: category, numberOfBankTellers: numberOfTellers, taskGroup: self.dispatchGroup)
+            self.departments[category] = BankingDepartment(duty: category, numberOfBankTellers: numberOfTellers, departmentGroup: self.departmentGroup)
         }
     }
     
@@ -36,10 +36,11 @@ class Bank {
     
     func serveCustomers() {
         departments.forEach { _, bankingDepartment in
+            departmentGroup.enter()
             DispatchQueue.global().async {
                 bankingDepartment.serveCustomers()
             }
         }
-        dispatchGroup.wait()
+        departmentGroup.wait()
     }
 }

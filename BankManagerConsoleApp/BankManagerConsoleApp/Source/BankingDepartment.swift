@@ -11,12 +11,12 @@ class BankingDepartment {
     let duty: BankingCategory
     var customerQueue = Queue<Customer>()
     let semaphore: DispatchSemaphore
-    let taskGroup: DispatchGroup
+    let departmentGroup: DispatchGroup
     
-    init(duty: BankingCategory, numberOfBankTellers: Int, taskGroup: DispatchGroup) {
+    init(duty: BankingCategory, numberOfBankTellers: Int, departmentGroup: DispatchGroup) {
         self.duty = duty
         semaphore = DispatchSemaphore(value: numberOfBankTellers)
-        self.taskGroup = taskGroup
+        self.departmentGroup = departmentGroup
     }
     
     func receive(customer: Customer) {
@@ -24,15 +24,18 @@ class BankingDepartment {
     }
     
     func serveCustomers() {
+        let tellerGroup = DispatchGroup()
         while let currentCustomer = customerQueue.dequeue() {
             semaphore.wait()
-            taskGroup.enter()
+            tellerGroup.enter()
             DispatchQueue.global().async {
                 self.serve(customer: currentCustomer)
                 self.semaphore.signal()
-                self.taskGroup.leave()
+                tellerGroup.leave()
             }
         }
+        tellerGroup.wait()
+        departmentGroup.leave()
     }
     
     func serve(customer: Customer) {

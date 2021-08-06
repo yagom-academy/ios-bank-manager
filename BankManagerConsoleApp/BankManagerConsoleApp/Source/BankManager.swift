@@ -9,7 +9,7 @@ import Foundation
 struct BankManager {
     private let bank: Bank
     
-    init(departmentInformation: (departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)...) {
+    init(_ departmentInformation: (departmentCategory: BankingCategory, numberOfDepartmentTellers: Int)...) {
         bank = Bank(departmentInformation: departmentInformation)
     }
     

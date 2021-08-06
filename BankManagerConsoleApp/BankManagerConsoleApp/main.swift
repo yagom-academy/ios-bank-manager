@@ -6,8 +6,8 @@
 
 import Foundation
 
-enum BankManagement{
-    static let manager = BankManager()
+enum BankManagement {
+    static let manager = BankManager((departmentCategory: .loan, numberOfDepartmentTellers: 2), (departmentCategory: .deposit, numberOfDepartmentTellers: 1))
     static let openBank = 1
     static let closeBank = 2
 }
