@@ -14,9 +14,9 @@ enum BusinessType: CaseIterable, CustomStringConvertible {
     var workingTime: Double {
         switch self {
         case .deposit:
-            return 3
+            return 0.7
         case .loan:
-            return 5
+            return 1.1
         }
     }
     
