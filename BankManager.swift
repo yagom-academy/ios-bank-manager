@@ -27,10 +27,16 @@ struct BankManager {
             totalTaskTime += customer.businessType.processingTime
         }
 
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(String(format: "%.2f",totalTaskTime))초입니다.")
+        close(customerCount: totalCustomer, taskTime: totalTaskTime)
     }
     
-    func receiveCustomers(customer: Queue<Customer>) {
+    private func close(customerCount: Int, taskTime: Double) {
+        let time = String(format: "%.2f", taskTime)
+            
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(time)초입니다.")
+    }
+    
+    private func receiveCustomers(customer: Queue<Customer>) {
         let firstNumber = 1
         for number in firstNumber...numberOfCustomer {
             guard let customerType = BusinessType.allCases.randomElement() else { return }
