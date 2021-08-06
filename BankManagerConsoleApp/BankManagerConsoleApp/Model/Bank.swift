@@ -13,9 +13,11 @@ class Bank {
     private let loanBankTeller = BankTeller()
     private var waitingLine = Queue<Client>()
     
-    static let minimumClients: UInt = 3
-    static let maximumClients: UInt = 5
-    private var numberOfClients = UInt.random(in: minimumClients...maximumClients)
+    var numberOfClients: UInt
+    
+    init(numberOfClients: UInt) {
+        self.numberOfClients = numberOfClients
+    }
     
     func openBank() {
         let group = DispatchGroup()

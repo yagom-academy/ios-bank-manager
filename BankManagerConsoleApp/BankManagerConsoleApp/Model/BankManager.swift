@@ -23,23 +23,23 @@ class BankManager {
     
     func runManager() {
         printOptions()
-        try? recieveOption()
+        recieveOption()
     }
     
     private func printOptions() {
         print("1: 은행 개점\n2: 종료\n입력: ",terminator: "")
     }
     
-    private func recieveOption() throws {
+    private func recieveOption() {
         
         guard let stringOption = readLine() else {
-            throw BankError.invalidOption
+            return
         }
         
         switch stringOption {
-        case BankManager.Selector.openBank.option:
+        case Selector.openBank.option:
             runBank()
-        case BankManager.Selector.closeBank.option:
+        case Selector.closeBank.option:
             return
         default:
             return
@@ -47,7 +47,12 @@ class BankManager {
     }
     
     private func runBank() {
-        let bank = Bank()
+        
+        let minimumClients: UInt = 3
+        let maximumClients: UInt = 5
+        let randomNumber = UInt.random(in: minimumClients...maximumClients)
+        
+        let bank = Bank(numberOfClients: randomNumber)
         bank.openBank()
         runManager()
     }
