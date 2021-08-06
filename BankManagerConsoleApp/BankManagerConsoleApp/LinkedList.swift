@@ -10,7 +10,6 @@ import Foundation
 class LinkedList<T> {
     private var head: Node<T>? = nil
     private var tail: Node<T>? = nil
-    private var count: Int = 0
     
     func isEmpty() -> Bool {
         return head == nil
@@ -40,6 +39,5 @@ class LinkedList<T> {
     func removeAll() {
         head = nil
         tail = nil
-        count = 0
     }
 }

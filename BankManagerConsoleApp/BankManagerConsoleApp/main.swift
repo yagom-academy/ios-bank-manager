@@ -22,22 +22,15 @@ func printMenu() {
 }
 
 func readUserInput() -> String? {
-    guard let userInput: String = readLine() else {
-        return nil
-    }
-    return userInput
+    return readLine()
 }
 
 func checkUserInput() -> Bool {
-    let userChoice = readUserInput()
-    if userChoice == "1" {
-        return true
-    } else {
-        return false
-    }
+    let validValue:String = "1"
+    return readUserInput() == validValue
 }
 
-func startTask() {
+func prepareTask() {
     var bankManagers: [BankManager] = []
     bankManagers.append(BankManager(task: .deposit))
     bankManagers.append(BankManager(task: .deposit))
@@ -47,16 +40,16 @@ func startTask() {
     bank.openBank()
 }
 
-func taskManager() {
+func doTask() {
     while true {
         printMenu()
         if checkUserInput() == false {
             return
         }
-        startTask()
+        prepareTask()
     }
 }
 
-taskManager()
+doTask()
 
 
