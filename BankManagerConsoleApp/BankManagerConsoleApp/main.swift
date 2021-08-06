@@ -6,7 +6,7 @@
 
 import Foundation
 
-let bankManager = BankManager()
+var bankManager = BankManager()
 
 while true {
     let bankStatus = bankManager.choiceMenuWithGuide()

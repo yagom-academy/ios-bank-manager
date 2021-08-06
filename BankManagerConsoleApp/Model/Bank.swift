@@ -46,26 +46,31 @@ struct Bank {
     }
     
     private var customerQueue = Queue<Customer>()
+    private let customerTotalCount: Int
     
-    func receiveCustomer(range: ClosedRange<Int>) {
-        for order in range {
-            let randomNumber = Int.random(in: 1...BusinessType.allCases.count)
-            guard let randomBusinessType = BusinessType(rawValue: randomNumber) else {
-                continue
-            }
-            customerQueue.enqueue(value: Customer(id: order, businessType: randomBusinessType))
-        }
+    init(customerRange range: ClosedRange<Int>) {
+        self.customerTotalCount = range.count
+        
+        receiveCustomer(range: range)
     }
-
+    
     func startBusiness() {
         let bankWindows = prepareWindows()
-        let totalCustomer = customerQueue.length
-
+        
         let totalTime = Timer.calculateDuration {
             open(bankWindows: bankWindows)
         }
 
-        endBusiness(totalCustomer: totalCustomer, totalTime: totalTime)
+        endBusiness(totalCustomer: customerTotalCount, totalTime: totalTime)
+    }
+    
+    private func receiveCustomer(range: ClosedRange<Int>) {
+        for order in range {
+            guard let randomBusinessType = BusinessType.allCases.randomElement() else {
+                continue
+            }
+            customerQueue.enqueue(value: Customer(id: order, businessType: randomBusinessType))
+        }
     }
 
     private func prepareWindows() -> [BusinessQueue] {

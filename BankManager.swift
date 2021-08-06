@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    private let bank = Bank()
+    private var bank: Bank?
     
     func choiceMenuWithGuide() -> Bank.OperationStatus? {
         print("1 : 은행개점")
@@ -20,14 +20,13 @@ struct BankManager {
         return Bank.OperationStatus(rawValue: filterdInput)
     }
     
-    func controlBankOperation(by bankStatus: Bank.OperationStatus?) -> Bool {
+    mutating func controlBankOperation(by bankStatus: Bank.OperationStatus?) -> Bool {
         switch bankStatus {
         case .open:
             let customerRangeStart = 1
             let customerRangeEnd = Int.random(in: 10...30)
-            
-            bank.receiveCustomer(range: customerRangeStart...customerRangeEnd)
-            bank.startBusiness()
+            bank = Bank(range: customerRangeStart...customerRangeEnd)
+            bank?.startBusiness()
             return true
         case .close:
             return false
