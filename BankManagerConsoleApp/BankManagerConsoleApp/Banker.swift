@@ -13,16 +13,13 @@ class Banker {
         self.type = type
     }
     
-    func doBusiness(customerQueue: BankManagerQueue<Customer>) {
-        let semaphore = DispatchSemaphore(value: 2)
-        semaphore.wait()
-        if let startCurrentCustomer = customerQueue.peek(),
-           let finishCurrentCustomer = customerQueue.dequeue() {
-            print("\(startCurrentCustomer.numberTicket)" + BankMessage.startWork)
-            DispatchQueue.global().asyncAfter(deadline: .now() + type.workingTime) {
-                print("\(finishCurrentCustomer)" + BankMessage.finishWork)
-                semaphore.signal()
-            }
-        }
+    func doBusiness(customer: Customer) {
+        print(BankMessage.workingMessage(numberTicket: customer.numberTicket,
+                                         type: customer.business,
+                                         isStartWork: true))
+        Thread.sleep(forTimeInterval: type.workingTime)
+        print(BankMessage.workingMessage(numberTicket: customer.numberTicket,
+                                         type: customer.business,
+                                         isStartWork: false))
     }
 }

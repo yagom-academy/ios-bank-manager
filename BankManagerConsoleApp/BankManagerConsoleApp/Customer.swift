@@ -10,7 +10,7 @@ import Foundation
 enum BusinessType: CaseIterable {
     case deposit
     case loan
-    
+
     var workingTime: Double {
         switch self {
         case .deposit:

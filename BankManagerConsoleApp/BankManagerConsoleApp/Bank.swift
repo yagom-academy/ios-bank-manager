@@ -9,12 +9,20 @@ import Foundation
 
 struct Bank {
     private let userInteraction = UserInteraction()
-    private let depositCustomerQueue = BankManagerQueue<Customer>()
-    private let loanCustomerQueue = BankManagerQueue<Customer>()
-    private let banker = Banker(type: .deposit)
-    private let banker1 = Banker(type: .deposit)
-    private let banker2 = Banker(type: .loan)
+    private let customerQueue = BankManagerQueue<Customer>()
     private var customers = Int.zero
+    private var bankers = [Banker]()
+    
+    
+    mutating func addBanker(howMany: Int, type: BusinessType) {
+        guard howMany != 0 else {
+            return
+        }
+        
+        for _ in 1...howMany {
+            bankers.append(Banker(type: type))
+        }
+    }
     
     mutating func startTask() {
         while true {
@@ -22,12 +30,22 @@ struct Bank {
             guard userInteraction.isBankOpen() else { return }
             generateTodayCustomers()
             insertCustomerQueue(of: customers)
-            while !depositCustomerQueue.isEmpty {
-                banker.doBusiness(customerQueue: depositCustomerQueue)
-                banker1.doBusiness(customerQueue: depositCustomerQueue)
-
+            addBanker(howMany: 2, type: .deposit)
+            addBanker(howMany: 1, type: .loan)
+            
+            while let customer = customerQueue.dequeue() {
+                
+                var banker = bankers.removeFirst()
+                
+                while banker.type != customer.business {
+                    bankers.append(banker)
+                    banker = bankers.removeFirst()
+                }
+                
+                banker.doBusiness(customer: customer)
+                bankers.append(banker)
+                
             }
-//            userInteraction.showSettlementResult(customers: customers)
         }
     }
     
@@ -39,12 +57,7 @@ struct Bank {
         for sequence in CustomerNumber.firstCustomer...totalCustomers {
             guard let randomCusotomerBusinessType = BusinessType.allCases.randomElement() else { return }
             let currentCustomer = Customer(numberTicket: sequence, business: randomCusotomerBusinessType)
-            
-            if isDepositType(of: currentCustomer) {
-                depositCustomerQueue.enqueue(data: currentCustomer)
-            } else {
-                loanCustomerQueue.enqueue(data: currentCustomer)
-            }
+            customerQueue.enqueue(data: currentCustomer)
         }
     }
     
