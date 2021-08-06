@@ -7,27 +7,44 @@
 import Foundation
 
 struct BankManager {
-    private let clerk = Clerk(deposit: 2, loan: 1)
     private let customerQueue = Queue<Customer>()
+    let window: Clerk
     let numberOfCustomer: Int
 
     func processTask() {
         receiveCustomers(customer: customerQueue)
         var totalCustomer = 0
         let increaseOne = 1
-        var totalTaskTime: Double = 0
+        let startTime = CFAbsoluteTimeGetCurrent()
+        let group = DispatchGroup()
+        let loanSemaphore = DispatchSemaphore(value: window.loan)
+        let depositSemaphore = DispatchSemaphore(value: window.deposit)
 
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-
-            clerk.doTask(customer: Customer(waitingNumber: customer.waitingNumber, businessType: customer.businessType))
+            
+            if customer.businessType == .loan {
+                DispatchQueue.global().async(group: group) {
+                    loanSemaphore.wait()
+                    window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
+                                                     businessType: customer.businessType))
+                    loanSemaphore.signal()
+                }
+            } else {
+                DispatchQueue.global().async(group: group) {
+                    depositSemaphore.wait()
+                    window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
+                                                     businessType: customer.businessType))
+                    depositSemaphore.signal()
+                }
+            }
             totalCustomer += increaseOne
-            totalTaskTime += customer.businessType.processingTime
         }
 
-        close(customerCount: totalCustomer, taskTime: totalTaskTime)
+        group.wait()
+        close(customerCount: totalCustomer, taskTime: CFAbsoluteTimeGetCurrent() - startTime)
     }
     
     private func close(customerCount: Int, taskTime: Double) {

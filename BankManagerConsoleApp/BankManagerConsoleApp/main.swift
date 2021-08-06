@@ -26,7 +26,7 @@ private func open() {
     let minCustomerCount = 10
     let maxCustomerCount = 30
     let randomNumber = Int.random(in: minCustomerCount...maxCustomerCount)
-    let bank = BankManager(numberOfCustomer: randomNumber)
+    let bank = BankManager(window: Clerk(deposit: 2, loan: 1), numberOfCustomer: randomNumber)
 
     while true {
         printMenu()
