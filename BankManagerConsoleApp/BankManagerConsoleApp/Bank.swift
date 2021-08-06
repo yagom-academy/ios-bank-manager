@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+class Bank {
     private var bankClerk: BankClerk
     private var waitingLine = Queue<Customer>()
 
@@ -17,57 +17,54 @@ struct Bank {
 }
 
 extension Bank {
-    
-//    func configure(bankClerk: BankClerk) {
-//        self.bankClerk =
-//    } //  언제든지 바꿀 수 있다. 지금의 사용과는 맞지 않다.
-    
-    mutating func makeWaitingLine(from totalCustomerNumber: Int) {
+    func makeWaitingLine(from totalCustomerNumber: Int) {
         for i in 1...totalCustomerNumber {
             waitingLine.enqueue(Customer(ticketNumber: i))
         }
     }
     
-    mutating func dequeueCustomer() -> Customer? {
+    func dequeueCustomer() -> Customer? {
         return waitingLine.dequeue()
     }
     
-    private func handleLoan(_ customer: Customer, _ loanWorkTime: Double) {
-        let loanQueue = DispatchQueue(label: "loanQueue")
-        loanQueue.async {
-            bankClerk.work(for: customer, during: loanWorkTime)
-        }
-    }
-    
-    private func handleDeposit(_ semaphoreValue: Int, _ customer: Customer, _ depositWorkTime: Double) {
-        let semaphore = DispatchSemaphore(value: semaphoreValue)
+    func letClerkWork(_ loanWorkTime: Double, _ depositWorkTime: Double) {
+        let semaphore = DispatchSemaphore(value: 2)
+        let loanGroup = DispatchGroup()
         let depositGroup = DispatchGroup()
-        depositGroup.enter()
-        semaphore.wait()
-        DispatchQueue.global().async(group: depositGroup) {
-            bankClerk.work(for: customer, during: depositWorkTime)
-            semaphore.signal()
-            depositGroup.leave()
-        }
-    }
-    
-    mutating func letClerkWork(_ loanWorkTime: Double, _ depositWorkTime: Double) {
-        guard let currentCustomer = dequeueCustomer(),
-              let customerBusiness = currentCustomer.business else {
-            return
-        }
+        let loanQueue = DispatchQueue(label: "loanQueue")
+        let depositQueue = DispatchQueue.global()
         
-        switch customerBusiness {
-        case "대출":
-            handleLoan(currentCustomer, loanWorkTime)
-        case "예금":
-            handleDeposit(2, currentCustomer, depositWorkTime)
-        default:
-            print("unknown")
+        while waitingLine.isEmpty() == false {
+            guard let currentCustomer = dequeueCustomer(),
+                  let customerBusiness = currentCustomer.business else {
+                return
+            }
+            
+            switch customerBusiness {
+            case "대출":
+                loanGroup.enter()
+                loanQueue.async {
+                    self.bankClerk.work(for: currentCustomer, during: loanWorkTime)
+                    loanGroup.leave()
+                }
+            case "예금":
+                depositGroup.enter()
+                semaphore.wait()
+                depositQueue.async(group: depositGroup) {
+                    self.bankClerk.work(for: currentCustomer, during: depositWorkTime)
+                    semaphore.signal()
+                    depositGroup.leave()
+                }
+            default:
+                print("unknown")
+            }
+        }
+        loanGroup.notify(queue: loanQueue) {
+            self.notifyClosing(totalCustomer: 10, totalTime: "10")
         }
     }
     
-    mutating func notifyClosing(totalCustomer: Int, totalTime: String) {
+    func notifyClosing(totalCustomer: Int, totalTime: String) {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 2

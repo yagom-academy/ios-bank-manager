@@ -20,16 +20,11 @@ struct BankManager {
 }
 
 extension BankManager {
-    mutating func start() {
+    mutating func start( completion: @escaping () -> Bool) {
         let totalCustomer = gatherCustomers()
         formWaitingLine(from: totalCustomer)
-        
-        let totalTime = checkWorkingTime {
-            while bank.dequeueCustomer() != nil {
-                askWork()
-            }
-        }
-        showWorkResult(totalCustomer, totalTime)
+        askWork()
+        completion()
     }
     
     func end() {

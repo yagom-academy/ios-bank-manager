@@ -11,11 +11,13 @@ var bankManager = BankManager(bank: bank)
 
 func main() {
     var flag = true
+    let userInput = bankManager.takeAnswer()
+
     while flag {
-        let userInput = bankManager.takeAnswer()
         switch userInput {
         case BankMenu.open:
-            bankManager.start()
+            bankManager.start(completion: <#T##() -> Bool#>)
+            main()
         case BankMenu.exit:
             bankManager.end()
             flag = false
