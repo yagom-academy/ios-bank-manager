@@ -15,9 +15,12 @@ class Bank {
     private var waitingNumberTicketMachine = WaitingNumberTicketMachine()
     private var taskWaitingQueues: [TaskCategory: WaitingQueue] = [:]
     
+    private var taskWaitingQueueMap: [TaskCategory: Queue<Client>] = [:]
+    
     init () {
         for taskCase in TaskCategory.allCases {
-            taskWaitingQueues[taskCase] = WaitingQueue()
+//            taskWaitingQueues[taskCase] = WaitingQueue()
+            taskWaitingQueueMap[taskCase] = Queue<Client>()
         }
     }
 }
@@ -50,9 +53,13 @@ extension Bank {
     
     func receiveClient(clients: [Client]) {
         for client in clients {
-            if let taskWaitingQueue = taskWaitingQueues[client.task] {
+//            if let taskWaitingQueue = taskWaitingQueues[client.task] {
+//                issueWaitingNumberTicket(to: client)
+//                taskWaitingQueue.receiveClient(client: client)
+//            }
+            if let taskWaitingQueue = taskWaitingQueueMap[client.task] {
                 issueWaitingNumberTicket(to: client)
-                taskWaitingQueue.receiveClient(client: client)
+                taskWaitingQueue.enqueue(value: client)
             }
         }
     }
@@ -63,30 +70,54 @@ extension Bank {
     }
     
     func isSomeClientsQueueNotEmpty() -> Bool {
-        for (_, waitingQueue) in taskWaitingQueues {
-            if waitingQueue.isClientQueueNotEmpty() {
+//        for (_, waitingQueue) in taskWaitingQueues {
+//            if waitingQueue.isClientQueueNotEmpty() {
+//                return true
+//            }
+//        }
+//        return false
+        
+        for (_, waitingQueue) in taskWaitingQueueMap {
+            if waitingQueue.isNotEmpty() {
                 return true
             }
         }
         return false
     }
     
+    func handleTask(bankTeller: BankTeller) {
+        if let waitingQueue = taskWaitingQueueMap[bankTeller.role],
+           let client = waitingQueue.dequeue() {
+            bankTeller.handleTask(with: client) {
+                self.handleTask(bankTeller: bankTeller)
+            }
+        }
+    }
+    
     func doTask() -> TaskReport {
         let startTime = DispatchTime.now()
         
-        while isSomeClientsQueueNotEmpty() || isAllBankTellersNotCompleted() {
-            for (_, waitingQueue) in taskWaitingQueues {
-                DispatchQueue.global().async {
-                    if waitingQueue.isBankTellerQueueNotEmpty(),
-                       let client = waitingQueue.dequeueClient(),
-                       let bankTeller = waitingQueue.dequeueBankTeller() {
-                        bankTeller.handleTask(with: client) {
-                            waitingQueue.readyForWork(bankTeller: bankTeller)
-                        }   
-                    }
-                }
+//        while isSomeClientsQueueNotEmpty() || isAllBankTellersNotCompleted() {
+//            for (_, waitingQueue) in taskWaitingQueues {
+//                DispatchQueue.global().async {
+//                    if waitingQueue.isBankTellerQueueNotEmpty(),
+//                       let client = waitingQueue.dequeueClient(),
+//                       let bankTeller = waitingQueue.dequeueBankTeller() {
+//                        bankTeller.handleTask(with: client) {
+//                            waitingQueue.readyForWork(bankTeller: bankTeller)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        
+        for bankTeller in bankTellers {
+            DispatchQueue.global().async {
+                self.handleTask(bankTeller: bankTeller)
             }
         }
+        
+        while isSomeClientsQueueNotEmpty() || isAllBankTellersNotCompleted() {}
         
         let endTime = DispatchTime.now()
         let totalTaskTIme = calculateTotalTaskTime(start: startTime, end: endTime)
@@ -98,7 +129,10 @@ extension Bank {
     func finishWork() {
         waitingNumberTicketMachine.reset()
         
-        for (_, taskQueue) in taskWaitingQueues {
+//        for (_, taskQueue) in taskWaitingQueues {
+//            taskQueue.clear()
+//        }
+        for (_, taskQueue) in taskWaitingQueueMap {
             taskQueue.clear()
         }
     }
