@@ -28,12 +28,7 @@ struct BankManager {
             if customer.businessType == .loan {
                 handleLoan(for: customer, group: group, semaphore: loanSemaphore)
             } else {
-                DispatchQueue.global().async(group: group) {
-                    depositSemaphore.wait()
-                    window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
-                                                     businessType: customer.businessType))
-                    depositSemaphore.signal()
-                }
+                handleDeposit(for: customer, group: group, semaphore: depositSemaphore)
             }
             totalCustomer += increaseOne
         }
@@ -60,6 +55,17 @@ struct BankManager {
     private func handleLoan(for customer: Customer,
                             group: DispatchGroup,
                             semaphore: DispatchSemaphore) {
+        DispatchQueue.global().async(group: group) {
+            semaphore.wait()
+            window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
+                                             businessType: customer.businessType))
+            semaphore.signal()
+        }
+    }
+    
+    private func handleDeposit(for customer: Customer,
+                               group: DispatchGroup,
+                               semaphore: DispatchSemaphore) {
         DispatchQueue.global().async(group: group) {
             semaphore.wait()
             window.doTask(customer: Customer(waitingNumber: customer.waitingNumber,
