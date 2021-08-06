@@ -7,8 +7,6 @@
 
 import Foundation
 
-var isRepeat = true
-
 class Bank {
     
     private let depositBankTeller = BankTeller()
