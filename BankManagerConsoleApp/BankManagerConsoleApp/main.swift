@@ -6,6 +6,40 @@
 
 import Foundation
 
-let bankManager = BankManager()
+private enum Menu: String {
+    case open = "1"
+    case close = "2"
+}
 
-bankManager.open()
+private func printMenu() {
+    print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
+}
+
+private func getInputValue() -> Menu? {
+    guard let input = readLine() else {
+        return nil
+    }
+    return Menu(rawValue: input)
+}
+
+private func open() {
+    let minCustomerCount = 10
+    let maxCustomerCount = 30
+    let randomNumber = Int.random(in: minCustomerCount...maxCustomerCount)
+    let bank = BankManager(numberOfCustomer: randomNumber)
+
+    while true {
+        printMenu()
+        let menu = getInputValue()
+        switch menu {
+        case .open:
+            bank.processTask()
+        case .close:
+            return
+        default:
+            print("잘 못 입력되었습니다. 1 또는 2를 입력하세요.")
+        }
+    }
+}
+
+open()
