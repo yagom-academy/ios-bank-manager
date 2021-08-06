@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: NameSpace
-enum BankBusiness: String, CaseIterable {
+enum CustomerBusiness: String, CaseIterable {
     case loan = "대출"
     case deposit = "예금"
     

@@ -14,6 +14,6 @@ struct Customer {
     
     init(ticketNumber: Int) {
         self.ticketNumber = ticketNumber
-        self.business = BankBusiness.allCases.randomElement()?.task
+        self.business = CustomerBusiness.allCases.randomElement()?.task
     }
 }
