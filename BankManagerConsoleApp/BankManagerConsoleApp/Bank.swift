@@ -10,13 +10,18 @@ import Foundation
 struct Bank {
     private var bankClerk: BankClerk
     private var waitingLine = Queue<Customer>()
-    
+
     init(bankClerk: BankClerk = BankClerk()) {
         self.bankClerk = bankClerk
     }
 }
 
 extension Bank {
+    
+//    func configure(bankClerk: BankClerk) {
+//        self.bankClerk =
+//    } //  언제든지 바꿀 수 있다. 지금의 사용과는 맞지 않다.
+    
     mutating func makeWaitingLine(from totalCustomerNumber: Int) {
         for i in 1...totalCustomerNumber {
             waitingLine.enqueue(Customer(ticketNumber: i))
@@ -37,9 +42,9 @@ extension Bank {
     private func handleDeposit(_ semaphoreValue: Int, _ customer: Customer, _ depositWorkTime: Double) {
         let semaphore = DispatchSemaphore(value: semaphoreValue)
         let depositGroup = DispatchGroup()
+        depositGroup.enter()
         semaphore.wait()
         DispatchQueue.global().async(group: depositGroup) {
-            depositGroup.enter()
             bankClerk.work(for: customer, during: depositWorkTime)
             semaphore.signal()
             depositGroup.leave()
