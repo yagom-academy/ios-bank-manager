@@ -6,9 +6,11 @@
 
 import Foundation
 
+//MARK: Properties
 let bank = Bank()
 var bankManager = BankManager(bank: bank)
 
+//MARK: BankMangerConsoleApp Execute Function
 func main() {
     var flag = true
     let userInput = bankManager.takeAnswer()

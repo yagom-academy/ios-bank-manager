@@ -6,12 +6,14 @@
 
 import Foundation
 
+//MARK: Menu Input Namespace
 enum BankMenu {
     static let openBank = "1"
     static let exit = "2"
 }
 
 struct BankManager {
+    //MARK: Properties
     private var bank: Bank
     
     init(bank: Bank) {
@@ -19,6 +21,7 @@ struct BankManager {
     }
 }
 
+//MARK:- ConsoleApp Manage Method
 extension BankManager {
     mutating func start() {
         let totalCustomer = gatherCustomers()

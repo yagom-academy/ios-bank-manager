@@ -95,10 +95,10 @@
 				DFA9DCF126B8D94100F91CFD /* Bank.swift */,
 				A8BC98D326B8CF0000B75BCE /* BankClerk.swift */,
 				A8BC98D726B907DB00B75BCE /* Customer.swift */,
+				A8CF952026BC054400EA01C0 /* BankWork.swift */,
 				A877AA9B26AFF6A500A77397 /* Node.swift */,
 				A877AA9D26AFFF3000A77397 /* LinkedList.swift */,
 				DF133A5826B00ACB009FED1B /* Queue.swift */,
-				A8CF952026BC054400EA01C0 /* BankWork.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";

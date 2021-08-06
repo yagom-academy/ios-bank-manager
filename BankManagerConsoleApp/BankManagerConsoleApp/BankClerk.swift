@@ -10,6 +10,7 @@ import Foundation
 struct BankClerk {
 }
 
+//MARK:- Handle Task Method
 extension BankClerk {
     func work(for customer: Customer, during time: Double) {
         guard let customerBusiness = customer.business else {

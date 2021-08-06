@@ -8,6 +8,7 @@
 import Foundation
 
 class Bank {
+    //MARK: Properties
     private var bankClerk: BankClerk
     private var waitingLine = Queue<Customer>()
     
@@ -16,6 +17,7 @@ class Bank {
     }
 }
 
+//MARK:- Bank Running Method
 extension Bank {
     func makeWaitingLine(from totalCustomerNumber: Int) {
         for i in 1...totalCustomerNumber {
