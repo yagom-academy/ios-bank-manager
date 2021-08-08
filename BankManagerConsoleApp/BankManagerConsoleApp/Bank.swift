@@ -45,6 +45,7 @@ class Bank {
             }
     }
     
+    // FIXME: 대출, 예금 매니저별로 semaphore count 제한
     private func assignTask() {
         let taskQueue = DispatchQueue(label: "TaskQueue", attributes: .concurrent)
         let semaphore = DispatchSemaphore.init(value: bankManagers.count)
@@ -99,8 +100,7 @@ class Bank {
             enqueueManagers()
             assignTask()
         }
-        taskGroup.notify(queue: .global()) {
-            self.printWorkDone(totalWorkTime)
-        }
+        taskGroup.wait()
+        printWorkDone(totalWorkTime)
     }
 }

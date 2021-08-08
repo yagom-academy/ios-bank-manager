@@ -51,5 +51,3 @@ func doTask(by bank: Bank) {
 }
 
 doTask(by: prepareBank())
-
-
