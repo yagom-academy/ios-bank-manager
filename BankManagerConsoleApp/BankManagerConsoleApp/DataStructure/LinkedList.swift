@@ -8,23 +8,19 @@
 import Foundation
 
 class Node<T> {
-    var data: T!
+    var data: T?
     var next: Node<T>?
     
     init(with data: T) {
         self.data = data
     }
     
-    private init() {
+    fileprivate init() {
         self.data = nil
-    }
-    
-    fileprivate static func obtainDummyNode() -> Node<T> {
-        return Node<T>()
     }
 }
 
-class LinkedList<T> {
+struct LinkedList<T> {
     private var head: Node<T>
     private var tail: Node<T>
     
@@ -37,7 +33,7 @@ class LinkedList<T> {
     }
     
     init() {
-        let dummyNode = Node<T>.obtainDummyNode()
+        let dummyNode = Node<T>()
         head = dummyNode
         tail = dummyNode
     }
@@ -48,7 +44,7 @@ class LinkedList<T> {
         head.next = newNode
     }
     
-    func append(data: T) {
+    mutating func append(data: T) {
         let newNode = Node(with: data)
         tail.next = newNode
         tail = newNode
@@ -62,7 +58,7 @@ class LinkedList<T> {
         return currentNode !== tail
     }
     
-    func insert(data: T, after targetNode: Node<T>) {
+    mutating func insert(data: T, after targetNode: Node<T>) {
         guard self.contains(targetNode) else {
             return
         }
@@ -74,7 +70,7 @@ class LinkedList<T> {
         }
     }
     
-    func pop() -> Node<T>? {
+    mutating func pop() -> Node<T>? {
         if self.isEmpty {
             return nil
         }
@@ -86,7 +82,7 @@ class LinkedList<T> {
         return frontNode
     }
     
-    func removeLast() -> Node<T>? {
+    mutating func removeLast() -> Node<T>? {
         if self.isEmpty {
             return nil
         }
@@ -99,7 +95,7 @@ class LinkedList<T> {
         return rearNode
     }
     
-    func remove(after targetNode: Node<T>) -> Node<T>? {
+    mutating func remove(after targetNode: Node<T>) -> Node<T>? {
         guard self.contains(targetNode) else {
             return nil
         }
@@ -111,7 +107,7 @@ class LinkedList<T> {
         return nodeToRemove
     }
     
-    func clear() {
+    mutating func clear() {
         head.next = nil
         tail = head
     }

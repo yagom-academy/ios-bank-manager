@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Queue<Element> {
+struct Queue<Element> {
     private var linkedList = LinkedList<Element>()
     
     var peek: Element? {
@@ -18,15 +18,15 @@ class Queue<Element> {
         linkedList.isEmpty
     }
     
-    func enqueue(_ newElement: Element) {
+    mutating func enqueue(_ newElement: Element) {
         linkedList.append(data: newElement)
     }
     
-    func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         linkedList.pop()?.data
     }
     
-    func clear() {
+    mutating func clear() {
         linkedList.clear()
     }
 }
