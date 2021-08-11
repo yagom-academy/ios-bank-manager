@@ -6,23 +6,27 @@
 
 import Foundation
 
+//MARK: Menu Input Namespace
 enum BankMenu {
-    static let open = "1"
+    static let openBank = "1"
     static let exit = "2"
 }
 
 struct BankManager {
-    private var bank = Bank()
+    //MARK: Properties
+    private var bank: Bank
+    
+    init(bank: Bank) {
+        self.bank = bank
+    }
 }
 
+//MARK:- ConsoleApp Manage Method
 extension BankManager {
     mutating func start() {
         let totalCustomer = gatherCustomers()
         formWaitingLine(from: totalCustomer)
-        let totalTime = checkWorkingTime {
-            askWork()
-        }
-        showWorkResult(totalCustomer, totalTime)
+        askWork()
     }
     
     func end() {
@@ -51,17 +55,10 @@ extension BankManager {
     }
     
     private mutating func askWork() {
-        bank.letClerkWork()
+        bank.letClerkWork(BankProcessTime.loan, BankProcessTime.deposit)
     }
     
     private mutating func showWorkResult(_ total: Int, _ time: String) {
         bank.notifyClosing(totalCustomer: total, totalTime: time)
-    }
-    
-    private func checkWorkingTime(_ block: () -> ()) -> String {
-        let start = Date()
-        block()
-        let totalTime = Date().timeIntervalSince(start)
-        return totalTime.description
     }
 }

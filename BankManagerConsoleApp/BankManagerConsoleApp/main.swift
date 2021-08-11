@@ -6,15 +6,20 @@
 
 import Foundation
 
-var bankManager = BankManager()
+//MARK: Properties
+let bank = Bank()
+var bankManager = BankManager(bank: bank)
 
+//MARK: BankMangerConsoleApp Execute Function
 func main() {
     var flag = true
+    let userInput = bankManager.takeAnswer()
+
     while flag {
-        let userInput = bankManager.takeAnswer()
         switch userInput {
-        case BankMenu.open:
+        case BankMenu.openBank:
             bankManager.start()
+            main()
         case BankMenu.exit:
             bankManager.end()
             flag = false

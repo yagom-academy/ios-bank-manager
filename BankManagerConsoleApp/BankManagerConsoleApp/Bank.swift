@@ -7,27 +7,71 @@
 
 import Foundation
 
-struct Bank {
-    private var bankClerk = BankClerk()
-    private var waitingLine = Queue<Int>()
+class Bank {
+    //MARK: Properties
+    private var bankClerk: BankClerk
+    private var waitingLine = Queue<Customer>()
+    
+    init(bankClerk: BankClerk = BankClerk()) {
+        self.bankClerk = bankClerk
+    }
 }
 
+//MARK:- Bank Running Method
 extension Bank {
-    mutating func makeWaitingLine(from totalCustomerNumber: Int) {
+    func makeWaitingLine(from totalCustomerNumber: Int) {
         for i in 1...totalCustomerNumber {
-            waitingLine.enqueue(i)
+            waitingLine.enqueue(Customer(ticketNumber: i))
         }
     }
     
-    mutating func letClerkWork() {
+    func dequeueCustomer() -> Customer? {
+        return waitingLine.dequeue()
+    }
+    
+    func letClerkWork(_ loanWorkTime: Double, _ depositWorkTime: Double) {
+        let semaphore = DispatchSemaphore(value: 2)
+        let loanGroup = DispatchGroup()
+        let depositGroup = DispatchGroup()
+        let loanQueue = DispatchQueue(label: "loanQueue")
+        let depositQueue = DispatchQueue.global()
+        var loanCustomerNubmer = 0
+        var depositCustomerNumber = 0
+        
         while waitingLine.isEmpty() == false {
-            let currentCustomer = waitingLine.peek()
-            waitingLine.dequeue()
-            bankClerk.work(for: currentCustomer)
+            guard let currentCustomer = dequeueCustomer(),
+                  let customerBusiness = currentCustomer.business else {
+                return
+            }
+            
+            switch customerBusiness {
+            case "대출":
+                loanCustomerNubmer += 1
+                loanGroup.enter()
+                loanQueue.async {
+                    self.bankClerk.work(for: currentCustomer, during: loanWorkTime)
+                    loanGroup.leave()
+                }
+            case "예금":
+                depositCustomerNumber += 1
+                depositGroup.enter()
+                semaphore.wait()
+                depositQueue.async(group: depositGroup) {
+                    self.bankClerk.work(for: currentCustomer, during: depositWorkTime)
+                    semaphore.signal()
+                    depositGroup.leave()
+                }
+            default:
+                print("error")
+            }
+        }
+        
+        loanGroup.notify(queue: loanQueue) {
+            self.notifyClosing(totalCustomer: loanCustomerNubmer + depositCustomerNumber, totalTime: "10")
         }
     }
     
-    mutating func notifyClosing(totalCustomer: Int, totalTime: String) {
+    func notifyClosing(totalCustomer: Int, totalTime: String) {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 2

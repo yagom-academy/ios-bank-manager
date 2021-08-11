@@ -8,6 +8,12 @@
 import Foundation
 
 struct Customer {
-    var tiketNumber: Int
-    var business: String
+    //MARK: Properties
+    var ticketNumber: Int
+    var business: String?
+    
+    init(ticketNumber: Int) {
+        self.ticketNumber = ticketNumber
+        self.business = CustomerBusiness.allCases.randomElement()?.task
+    }
 }
