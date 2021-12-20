@@ -17,11 +17,11 @@ struct Queue<Element> {
     }
     
     func enqueue(data: Element) {
-        linkedList.enqueue(data: data)
+        linkedList.append(data: data)
     }
     
     func dequeue() -> Element? {
-        linkedList.dequeue()
+        linkedList.removeFirst()
     }
     
     func removeAll() {

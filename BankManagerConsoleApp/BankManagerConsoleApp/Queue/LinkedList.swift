@@ -16,7 +16,7 @@ class LinkedList<Element> {
         head == nil
     }
     
-    func enqueue(data: Element) {
+    func append(data: Element) {
         if head == nil {
             head = Node(data: data)
             return
@@ -30,7 +30,7 @@ class LinkedList<Element> {
         node?.next = Node(data: data)
     }
     
-    func dequeue() -> Element? {
+    func removeFirst() -> Element? {
         if head == nil {
             return nil
         }
