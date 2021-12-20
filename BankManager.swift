@@ -14,13 +14,17 @@ struct LinkedList<T> {
     var head: Node?
     var tail: Node?
     
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
     init() {
         self.head = nil
         self.tail = nil
     }
     
     mutating func append(item: T) {
-        let newNode = Node.init(data: item)
+        let newNode: Node = Node.init(data: item)
         if tail != nil {
             tail?.next = newNode
         }
@@ -28,6 +32,15 @@ struct LinkedList<T> {
         if head == nil {
             head = tail
         }
+    }
+    
+    func peek() -> T? {
+        guard isEmpty == false else {
+            return nil
+        }
+        let returnValue: T? = head?.data
+        
+        return returnValue
     }
 }
 
