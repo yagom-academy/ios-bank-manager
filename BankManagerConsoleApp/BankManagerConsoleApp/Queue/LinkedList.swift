@@ -23,4 +23,19 @@ class LinkedList<Element> {
         
         node?.next = Node(data: data)
     }
+    
+    func dequeue() -> Element? {
+        if head == nil {
+            return nil
+        }
+        
+        let firstElement = head?.data
+        head = head?.next
+        
+        return firstElement
+    }
+    
+    var first: Element? {
+        head?.data
+    }
 }
