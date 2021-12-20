@@ -39,4 +39,12 @@ struct LinkedList<Element> {
         head = nextNode
         tail = head
     }
+    
+    mutating func removeFirst() -> Element? {
+        guard isEmpty else {
+            head = head?.next
+            return head?.data
+        }
+        return nil
+    }
 }
