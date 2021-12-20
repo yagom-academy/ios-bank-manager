@@ -1,6 +1,5 @@
 import XCTest
 
-
 class CustomerQueueTest: XCTestCase {
     var sut: CustomerQueue<Int>!
     
@@ -57,5 +56,20 @@ class CustomerQueueTest: XCTestCase {
         let result = sut.isEmpty
         
         XCTAssertFalse(result)
+    }
+    
+    func test_queue가_비어있지않을때_peek호출시_첫번째값을_반환하는지() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(1, result)
+    }
+    
+    func test_queue가_비어있을때_peek호출시_nil을_반환하는지() {
+        let result = sut.peek()
+        
+        XCTAssertNil(result)
     }
 }

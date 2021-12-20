@@ -16,4 +16,8 @@ struct CustomerQueue<T> {
     mutating func clear() {
         linkedList.removeAll()
     }
+    
+    mutating func peek() -> T? {
+        return linkedList.first
+    }
 }

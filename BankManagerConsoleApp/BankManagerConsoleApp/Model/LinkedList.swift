@@ -2,7 +2,7 @@ class LinkedList<T> {
     var head: Node<T>?
     
     var first: T? {
-        return head?.data
+        return head != nil ? head?.data : nil
     }
     
     var isEmpty: Bool {
