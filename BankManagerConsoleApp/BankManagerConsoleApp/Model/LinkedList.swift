@@ -1,4 +1,4 @@
-class LinkedList<T> {
+final class LinkedList<T> {
     var head: Node<T>?
     
     var first: T? {

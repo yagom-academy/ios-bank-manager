@@ -1,5 +1,5 @@
-class Node<T> {
-    var data: T?
+final class Node<T> {
+    private(set) var data: T?
     var next: Node?
     
     init(data: T?, next: Node? = nil) {
