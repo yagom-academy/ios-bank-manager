@@ -42,6 +42,10 @@ class LinkedList<Element> {
         }
         return head.data
     }
+    
+    var isEmpty: Bool {
+        return head == nil && tail == nil
+    }
 
 }
 
