@@ -50,4 +50,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(secondResult, 1)
         XCTAssertNil(thirdResult)
     }
+    
+    func test_removeAll했을때_정상적으로되는지() {
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        sut.removeAll()
+        
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.head?.next)
+    }
 }
