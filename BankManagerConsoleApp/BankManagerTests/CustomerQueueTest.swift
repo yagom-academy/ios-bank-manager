@@ -1,19 +1,12 @@
-//
-//  CustomerQueueTest.swift
-//  CustomerQueueTest
-//
-//  Created by 임지성 on 2021/12/20.
-//
-
 import XCTest
 
 
 class CustomerQueueTest: XCTestCase {
-    var sut: CustomerQueue!
+    var sut: CustomerQueue<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CustomerQueue()
+        sut = CustomerQueue<Int>()
     }
 
     override func tearDownWithError() throws {
@@ -24,6 +17,8 @@ class CustomerQueueTest: XCTestCase {
     func test_enqueue시_element가_정상적으로_들어가는지() {
         sut.enqueue(1)
         
+        let dequeueResult = sut.dequeue()
         
+        XCTAssertEqual(1, dequeueResult)
     }
 }

@@ -6,4 +6,8 @@ struct CustomerQueue<T> {
     mutating func enqueue(_ element: T) {
         linkedList.append(element)
     }
+    
+    mutating func dequeue() -> T? {
+        linkedList.removeLast()
+    }
 }
