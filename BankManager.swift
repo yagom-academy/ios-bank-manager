@@ -34,6 +34,16 @@ struct LinkedList<T> {
         }
     }
     
+    mutating func remove() -> T? {
+        let returnValue: T? = peek()
+        if head?.next == nil {
+            head = nil
+        }
+        let newNode = head?.next
+        head = newNode
+        return returnValue
+    }
+    
     func peek() -> T? {
         guard isEmpty == false else {
             return nil
