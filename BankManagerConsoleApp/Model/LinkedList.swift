@@ -55,15 +55,15 @@ class LinkedList<Element> {
         head = nil
     }
     
-    func scanAllValues() -> [Element]? {
-        var scanResult: [Element]?
+    func scanAllValues() -> [Element] {
+        var scanResult: [Element] = []
         
-        guard var finderToTail = head else { return nil }
+        guard var finderToTail = head else { return scanResult }
 
-        scanResult?.append(finderToTail.value)
+        scanResult.append(finderToTail.value)
 
         while let nextNode = finderToTail.pointer {
-            scanResult?.append(nextNode.value)
+            scanResult.append(nextNode.value)
             finderToTail = nextNode
         }
         
