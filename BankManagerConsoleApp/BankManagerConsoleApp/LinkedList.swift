@@ -21,5 +21,25 @@ class LinkedList<Element> {
             tail = tail?.next
         }
     }
+    
+    func dequeue() throws -> Element {
+        guard let currentHead = head else {
+            throw LinkedListError.dequeueFail
+        }
+        let dequeuedData = currentHead.data
+        self.head = currentHead.next
+        return dequeuedData
+    }
 
+}
+
+enum LinkedListError: LocalizedError {
+    case dequeueFail
+    
+    var description: String {
+        switch self {
+        case .dequeueFail:
+            return "큐가 비어있습니다."
+        }
+    }
 }
