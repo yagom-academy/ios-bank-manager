@@ -15,6 +15,7 @@ class SinglyLinkedListNode<T> {
         self.value = value
     }
 }
+
 struct SinglyLinkedList<T> {
     
     var head: SinglyLinkedListNode<T>?
@@ -33,5 +34,19 @@ struct SinglyLinkedList<T> {
         }
         currentNode.next = SinglyLinkedListNode(value: value)
         self.tail = currentNode.next
+    }
+    
+    mutating func removeFirst() -> T? {
+        guard let head = self.head else {
+            return nil
+        }
+        let result = head.value
+        self.head = head.next
+        return result
+    }
+    
+    mutating func removeAll() {
+        self.head = nil
+        self.tail = nil
     }
 }
