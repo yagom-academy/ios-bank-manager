@@ -11,6 +11,10 @@ struct Queue<Element> {
         return items.isEmpty
     }
     
+    var peek: Element? {
+        return items.first
+    }
+    
     func enqueue(_ item: Element) {
         items.append(item)
     }
@@ -30,6 +34,14 @@ class QueueTests: XCTestCase {
     func test_Queue_Enqueue가_잘_되는지() {
         sut.enqueue(1)
         
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_Queue_peek() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        XCTAssertEqual(sut.peek, 1)
         XCTAssertFalse(sut.isEmpty)
     }
 
