@@ -11,6 +11,7 @@ final class LinkedList<Element> {
     }
     
     var head: Node<Element>?
+    var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
@@ -18,11 +19,13 @@ final class LinkedList<Element> {
     
     func append(_ value: Element) {
         let newNode = Node(value: value)
-        
-        if head == nil {
+
+        if isEmpty {
             head = newNode
+            tail = newNode
         } else {
-            head?.next = newNode
+            tail?.next = newNode
+            tail = newNode
         }
     }
     
@@ -74,5 +77,27 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 1)
         XCTAssertFalse(sut.isEmpty)
         XCTAssertEqual(sut.head?.value, 2)
+    }
+    
+    func test_LinkedList_append_3개() {
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        XCTAssertEqual(sut.head?.value, 1)
+        XCTAssertEqual(sut.tail?.value, 3)
+    }
+    
+    func test_LinkedList_연결이_잘되어있는지_확인() {
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        sut.append(4)
+
+        XCTAssertEqual(sut.head?.value, 1)
+        XCTAssertEqual(sut.head?.next?.value, 2)
+        XCTAssertEqual(sut.head?.next?.next?.value, 3)
+        XCTAssertEqual(sut.head?.next?.next?.next?.value, 4)
+        XCTAssertEqual(sut.tail?.value, 4)
     }
 }
