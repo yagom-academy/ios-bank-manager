@@ -17,7 +17,7 @@ struct Queue<T> {
             tail = node
         }
     }
-    
+
     mutating func dequeue() -> T? {
         if isEmpty {
             return nil
@@ -46,21 +46,5 @@ extension Queue {
             self.next = next
             self.value = value
         }
-    }
-}
-
-extension Queue {
-    var array: [T] {
-        var values: [T] = []
-        var node = head
-        
-        while node?.value != nil {
-            guard let data: T = node?.value else {
-                return []
-            }
-            values.append(data)
-            node = node?.next
-        }
-        return values
     }
 }
