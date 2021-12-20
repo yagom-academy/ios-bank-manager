@@ -20,4 +20,8 @@ struct Queue<Element> {
     mutating func enqueue(_ data: Element) {
         items.append(data: data)
     }
+    
+    mutating func dequeue() -> Element? {
+        return items.removeFirst()
+    }
 }
