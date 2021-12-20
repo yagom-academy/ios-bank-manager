@@ -27,6 +27,8 @@ struct LinkedList<Element> {
         return head?.data
     }
     
+    init() { }
+    
     init(data: Element?) {
         self.head = Node(data: data, next: nil)
         self.tail = head
