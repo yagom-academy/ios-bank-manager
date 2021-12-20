@@ -1,7 +1,9 @@
-import Foundation
-
 struct LinkedList<T> {
     var head: Node<T>?
+    
+    var first: T? {
+        return head?.data
+    }
     
     mutating func append(_ element: T) {
         guard head != nil else {

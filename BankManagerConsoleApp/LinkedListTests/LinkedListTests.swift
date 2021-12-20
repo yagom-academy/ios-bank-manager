@@ -61,4 +61,12 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
         XCTAssertNil(sut.head?.next)
     }
+    
+    func test_first프로퍼티가_첫번째노드의_data를반환하는지() {
+        sut.append(3)
+        
+        let result = sut.first
+        
+        XCTAssertEqual(result, 3)
+    }
 }
