@@ -26,6 +26,11 @@ class LinkedList<Element> {
         guard let currentHead = head else {
             throw LinkedListError.dataDoesNotExist
         }
+        
+        if head === tail {
+            self.tail = nil
+        }
+        
         let firstData = currentHead.data
         self.head = currentHead.next
         return firstData
