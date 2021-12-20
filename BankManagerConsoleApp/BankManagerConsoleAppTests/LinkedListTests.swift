@@ -25,6 +25,16 @@ final class LinkedList<Element> {
             head?.next = newNode
         }
     }
+    
+    func removeFirst() -> Element? {
+        guard isEmpty == false else {
+            return nil
+        }
+        let result = head?.value
+        head = head?.next
+        
+        return result
+    }
 }
 
 class LinkedListTests: XCTestCase {
@@ -44,5 +54,25 @@ class LinkedListTests: XCTestCase {
         XCTAssertFalse(sut.isEmpty)
         XCTAssertEqual(sut.head?.value, 1)
         XCTAssertNil(sut.head?.next)
+    }
+    
+    func test_LinkedList_removeFirst() {
+        sut.append(1)
+        
+        let result = sut.removeFirst()
+        
+        XCTAssertEqual(result, 1)
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_LinkedList_append_두개의_요소_추가하고_removeFirst() {
+        sut.append(1)
+        sut.append(2)
+        
+        let result = sut.removeFirst()
+        
+        XCTAssertEqual(result, 1)
+        XCTAssertFalse(sut.isEmpty)
+        XCTAssertEqual(sut.head?.value, 2)
     }
 }
