@@ -31,6 +31,7 @@ class BanckManagerConsoleAppTests: XCTestCase {
     
     func test_head가_비어있을때_dequeue를하면_nil을반환하는지() {
         let dequeueElement = sut.removeFirst()
+        
         XCTAssertNil(dequeueElement)
     }
     
