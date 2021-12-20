@@ -8,7 +8,7 @@
 import Foundation
 
 class LinkedList<Element> {
-    var head: Node<Element>?
+    private var head: Node<Element>?
     var first: Element? {
         head?.data
     }
