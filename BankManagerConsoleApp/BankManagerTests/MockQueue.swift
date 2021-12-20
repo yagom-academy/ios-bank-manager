@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Queue<Element> {
+struct MockQueue<Element> {
     
     var list: LinkedList<Element> = LinkedList()
     var isEmpty: Bool {
