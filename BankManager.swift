@@ -1,5 +1,26 @@
 import Foundation
 
+struct LinkedList<T> {
+    class Node {
+        var data: T
+        var next: Node?
+        
+        init(data: T, next: Node? = nil) {
+            self.data = data
+            self.next = next
+        }
+    }
+    
+    var head: Node?
+    var tail: Node?
+    
+    init() {
+        self.head = nil
+        self.tail = nil
+    }
+    
+}
+
 struct Queue<T> {
     typealias LinkedList = Array
     
