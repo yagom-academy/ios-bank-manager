@@ -30,6 +30,13 @@ class LinkedList<Element> {
         self.head = currentHead.next
         return firstData
     }
+    
+    func firstData() throws -> Element {
+        guard let head = head else {
+            throw LinkedListError.dataDoesNotExist
+        }
+        return head.data
+    }
 
 }
 
