@@ -32,4 +32,30 @@ class CustomerQueueTest: XCTestCase {
         XCTAssertEqual(1, firstDequeueResult)
         XCTAssertEqual(2, secondDequeueResult)
     }
+    
+    func test_clear시_queue가_정상적으로_비워지는지() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        sut.clear()
+        
+        let result = sut.dequeue()
+        
+        XCTAssertNil(result)
+    }
+
+    func test_queue가_비었을때_isEmpty가_true를_반환하는지() {
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_queue가_안비었을때_isEmpty가_false를_반환하는지() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        let result = sut.isEmpty
+        
+        XCTAssertFalse(result)
+    }
 }

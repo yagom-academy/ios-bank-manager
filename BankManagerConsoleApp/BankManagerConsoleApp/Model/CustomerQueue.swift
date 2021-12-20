@@ -1,6 +1,10 @@
 struct CustomerQueue<T> {
     var linkedList: LinkedList = LinkedList<T>()
     
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
+    
     mutating func enqueue(_ element: T) {
         linkedList.append(element)
     }
