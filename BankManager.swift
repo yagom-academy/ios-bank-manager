@@ -19,6 +19,16 @@ struct LinkedList<T> {
         self.tail = nil
     }
     
+    mutating func append(item: T) {
+        let newNode = Node.init(data: item)
+        if tail != nil {
+            tail?.next = newNode
+        }
+        tail = newNode
+        if head == nil {
+            head = tail
+        }
+    }
 }
 
 struct Queue<T> {
