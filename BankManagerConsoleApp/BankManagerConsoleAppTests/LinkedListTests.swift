@@ -38,6 +38,11 @@ final class LinkedList<Element> {
         
         return result
     }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
 
 class LinkedListTests: XCTestCase {
@@ -99,5 +104,17 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.head?.next?.next?.value, 3)
         XCTAssertEqual(sut.head?.next?.next?.next?.value, 4)
         XCTAssertEqual(sut.tail?.value, 4)
+    }
+    
+    func test_LinkedList_removeAll() {
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        sut.removeAll()
+        
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
 }
