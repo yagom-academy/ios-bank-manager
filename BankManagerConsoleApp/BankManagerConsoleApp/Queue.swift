@@ -28,4 +28,8 @@ struct Queue<Element> {
     func peek() -> Element? {
         return items.first
     }
+    
+    mutating func clear() {
+        items.removeAll()
+    }
 }
