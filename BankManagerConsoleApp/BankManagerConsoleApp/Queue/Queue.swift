@@ -8,7 +8,7 @@
 import Foundation
 
 struct Queue<Element> {
-    var linkedList = LinkedList<Element>()
+    private var linkedList = LinkedList<Element>()
     var first: Element? {
         linkedList.first
     }
