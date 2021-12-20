@@ -16,4 +16,8 @@ struct Queue<Element> {
     init() {
         self.items = LinkedList()
     }
+    
+    mutating func enqueue(_ data: Element) {
+        items.append(data: data)
+    }
 }
