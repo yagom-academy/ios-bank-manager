@@ -1,5 +1,3 @@
-import Foundation
-
 struct CustomerQueue<T> {
     var linkedList: LinkedList = LinkedList<T>()
     
@@ -8,6 +6,10 @@ struct CustomerQueue<T> {
     }
     
     mutating func dequeue() -> T? {
-        linkedList.removeLast()
+        linkedList.removeFirst()
+    }
+    
+    mutating func clear() {
+        linkedList.removeAll()
     }
 }

@@ -21,4 +21,15 @@ class CustomerQueueTest: XCTestCase {
         
         XCTAssertEqual(1, dequeueResult)
     }
+    
+    func test_dequeue시_element가_정상적으로_반환되는지() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        let firstDequeueResult = sut.dequeue()
+        let secondDequeueResult = sut.dequeue()
+        
+        XCTAssertEqual(1, firstDequeueResult)
+        XCTAssertEqual(2, secondDequeueResult)
+    }
 }

@@ -32,22 +32,22 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(headNextResult, 2)
     }
     
-    func test_linkedList에_head가_없을때_removeLast가_nil을반환하는지() {
-        let result = sut.removeLast()
+    func test_linkedList에_head가_없을때_removeFirst가_nil을반환하는지() {
+        let result = sut.removeFirst()
         
         XCTAssertNil(result)
     }
     
-    func test_linkedList에_head가_있을때_removeLast가_정상적으로되는지() {
+    func test_linkedList에_head가_있을때_removeFirst가_정상적으로되는지() {
         sut.append(1)
         sut.append(2)
         
-        let firstResult = sut.removeLast()
-        let secondResult = sut.removeLast()
-        let thirdResult = sut.removeLast()
+        let firstResult = sut.removeFirst()
+        let secondResult = sut.removeFirst()
+        let thirdResult = sut.removeFirst()
         
-        XCTAssertEqual(firstResult, 2)
-        XCTAssertEqual(secondResult, 1)
+        XCTAssertEqual(firstResult, 1)
+        XCTAssertEqual(secondResult, 2)
         XCTAssertNil(thirdResult)
     }
     

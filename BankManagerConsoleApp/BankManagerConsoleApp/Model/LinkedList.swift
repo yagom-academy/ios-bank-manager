@@ -1,4 +1,4 @@
-struct LinkedList<T> {
+class LinkedList<T> {
     var head: Node<T>?
     
     var first: T? {
@@ -9,7 +9,7 @@ struct LinkedList<T> {
         return head == nil
     }
     
-    mutating func append(_ element: T) {
+    func append(_ element: T) {
         guard head != nil else {
             head = Node(data: element)
             return
@@ -22,29 +22,23 @@ struct LinkedList<T> {
         node?.next = Node(data: element)
     }
     
-    mutating func removeLast() -> T? {
+    func removeFirst() -> T? {
         guard head != nil else {
             return nil
         }
         
-        if head?.next == nil {
-            let data = head?.data
+        let data = head?.data
+        
+        if head?.next != nil {
+            head = head?.next
+        } else {
             head = nil
-            return data
         }
-        
-        var node = head
-        while node?.next?.next != nil {
-            node = node?.next
-        }
-        
-        let data = node?.next?.data
-        node?.next = node?.next?.next
         
         return data
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
     }
 }
