@@ -20,6 +20,9 @@ class Node<Element> {
 struct LinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>?
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     init(data: Element?){
         self.head = Node(data: data, next: nil)
@@ -28,7 +31,12 @@ struct LinkedList<Element> {
     
     mutating func append(data: Element) {
         let nextNode = Node(data: data, next: nil)
-        tail?.next = nextNode
-        tail = tail?.next
+        guard isEmpty else {
+            tail?.next = nextNode
+            tail = tail?.next
+            return
+        }
+        head = nextNode
+        tail = head
     }
 }
