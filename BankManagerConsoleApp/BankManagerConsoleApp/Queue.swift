@@ -48,3 +48,19 @@ extension Queue {
         }
     }
 }
+
+extension Queue {
+    var array: [T] {
+        var values: [T] = []
+        var node = head
+        
+        while node?.value != nil {
+            guard let data: T = node?.value else {
+                return []
+            }
+            values.append(data)
+            node = node?.next
+        }
+        return values
+    }
+}
