@@ -13,6 +13,10 @@ final class LinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>?
     
+    var first: Element? {
+        return head?.value
+    }
+    
     var isEmpty: Bool {
         return head == nil
     }
@@ -116,5 +120,14 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
         XCTAssertNil(sut.head)
         XCTAssertNil(sut.tail)
+    }
+    
+    func test_LinkedList_첫번째요소가_잘나오는지_확인() {
+        sut.append(1)
+        sut.append(2)
+        
+        let result = sut.first
+        
+        XCTAssertEqual(result, 1)
     }
 }
