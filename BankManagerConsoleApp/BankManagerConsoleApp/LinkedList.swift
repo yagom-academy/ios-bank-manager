@@ -16,3 +16,28 @@ class Node<Element> {
         self.next = next
     }
 }
+
+struct LinkedList<Element> {
+    var head: Node<Element>?
+    var tail: Node<Element>?
+    
+    mutating func addNode(_ value: Element) {
+        let node = Node(value: value)
+        
+        if head == nil {
+            head = node
+            tail = head
+        } else if head === tail {
+            head?.next = node
+            tail = node
+        } else {
+            tail?.next = node
+            tail = node
+        }
+    }
+    
+    mutating func deleteFirstNode() {
+        head = head?.next
+    }
+    
+}
