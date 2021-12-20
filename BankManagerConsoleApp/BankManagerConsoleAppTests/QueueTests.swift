@@ -18,6 +18,11 @@ struct Queue<Element> {
     func enqueue(_ item: Element) {
         items.append(item)
     }
+    
+    @discardableResult
+    func dequeue() -> Element? {
+        return items.removeFirst()
+    }
 }
 
 class QueueTests: XCTestCase {
@@ -44,5 +49,26 @@ class QueueTests: XCTestCase {
         XCTAssertEqual(sut.peek, 1)
         XCTAssertFalse(sut.isEmpty)
     }
+    
+    func test_Queue_Dequeue_한번() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, 1)
+        XCTAssertFalse(sut.isEmpty)
+    }
 
+    func test_Queue_Dequeue_두번() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        let result1 = sut.dequeue()
+        let result2 = sut.dequeue()
+        
+        XCTAssertEqual(result1, 1)
+        XCTAssertEqual(result2, 2)
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
