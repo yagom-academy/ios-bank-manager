@@ -23,6 +23,9 @@ struct LinkedList<Element> {
     var isEmpty: Bool {
         return head == nil
     }
+    var first: Element? {
+        return head?.data
+    }
     
     init(data: Element?) {
         self.head = Node(data: data, next: nil)
