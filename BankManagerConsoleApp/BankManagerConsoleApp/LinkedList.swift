@@ -33,7 +33,7 @@ struct LinkedList<Element> {
         let nextNode = Node(data: data, next: nil)
         guard isEmpty else {
             tail?.next = nextNode
-            tail = tail?.next
+            tail = nextNode
             return
         }
         head = nextNode
