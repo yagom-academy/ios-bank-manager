@@ -5,6 +5,10 @@ struct Queue<T> {
     
     private var items: LinkedList<T>
     
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+    
     init() {
         items = LinkedList<T>.init()
     }
@@ -14,10 +18,14 @@ struct Queue<T> {
     }
     
     mutating func dequeue() -> T {
-        items.removeFirst()
+        return items.removeFirst()
     }
     
     mutating func clear() {
         items = LinkedList<T>.init()
+    }
+    
+    func peek() -> T? {
+        return items.first
     }
 }
