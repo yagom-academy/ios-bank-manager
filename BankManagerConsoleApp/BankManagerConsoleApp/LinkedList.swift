@@ -15,4 +15,26 @@ struct LinkedList<T> {
         }
         node?.next = Node(data: element)
     }
+    
+    mutating func removeLast() -> T? {
+        guard head != nil else {
+            return nil
+        }
+        
+        if head?.next == nil {
+            let data = head?.data
+            head = nil
+            return data
+        }
+        
+        var node = head
+        while node?.next?.next != nil {
+            node = node?.next
+        }
+        
+        let data = node?.next?.data
+        node?.next = node?.next?.next
+        
+        return data
+    }
 }
