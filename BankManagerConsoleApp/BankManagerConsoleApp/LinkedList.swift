@@ -12,7 +12,7 @@ class LinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>?
     
-    func enqueue(data: Element) {
+    func append(data: Element) {
         if head == nil {
             head = Node(data: data, next: nil)
             tail = head
@@ -22,24 +22,24 @@ class LinkedList<Element> {
         }
     }
     
-    func dequeue() throws -> Element {
+    func removeFirst() throws -> Element {
         guard let currentHead = head else {
-            throw LinkedListError.dequeueFail
+            throw LinkedListError.dataDoesNotExist
         }
-        let dequeuedData = currentHead.data
+        let firstData = currentHead.data
         self.head = currentHead.next
-        return dequeuedData
+        return firstData
     }
 
 }
 
 enum LinkedListError: LocalizedError {
-    case dequeueFail
+    case dataDoesNotExist
     
     var description: String {
         switch self {
-        case .dequeueFail:
-            return "큐가 비어있습니다."
+        case .dataDoesNotExist:
+            return "데이터가 존재하지 않습니다."
         }
     }
 }
