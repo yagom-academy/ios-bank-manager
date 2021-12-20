@@ -1,6 +1,6 @@
 struct Queue<T> {
     private var head: Node<T>?
-    private var tail: Node<T>?
+    private weak var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -17,10 +17,28 @@ struct Queue<T> {
             tail = node
         }
     }
+    
+    mutating func dequeue() -> T? {
+        if isEmpty {
+            return nil
+        }
+        
+        let value = head?.value
+        head = head?.next
+        return value
+    }
+    
+    mutating func clear() {
+        head = nil
+    }
+    
+    func peek() -> T? {
+        return head?.value
+    }
 }
 
 extension Queue {
-    class Node<S> {
+    private class Node<S> {
         var value: S
         var next: Node?
         
