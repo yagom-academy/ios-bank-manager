@@ -5,6 +5,10 @@ struct LinkedList<T> {
         return head?.data
     }
     
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
     mutating func append(_ element: T) {
         guard head != nil else {
             head = Node(data: element)
