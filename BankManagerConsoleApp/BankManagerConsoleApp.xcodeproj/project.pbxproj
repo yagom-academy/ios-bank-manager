@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0DB9BA142770B4B1003F7B21 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA132770B4B1003F7B21 /* Queue.swift */; };
+		0DB9BA162770BBF2003F7B21 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA152770BBF2003F7B21 /* QueueTests.swift */; };
+		0DB9BA172770BCC0003F7B21 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA132770B4B1003F7B21 /* Queue.swift */; };
 		3BE4CC662770707B00178845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC652770707B00178845 /* LinkedList.swift */; };
 		3BE4CC682770708100178845 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC672770708100178845 /* Node.swift */; };
 		3BE4CC702770902600178845 /* BanckManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC6F2770902600178845 /* BanckManagerConsoleAppTests.swift */; };
@@ -31,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		0DB9BA132770B4B1003F7B21 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		0DB9BA152770BBF2003F7B21 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		3BE4CC652770707B00178845 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		3BE4CC672770708100178845 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		3BE4CC6D2770902600178845 /* BanckManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BanckManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				3BE4CC6F2770902600178845 /* BanckManagerConsoleAppTests.swift */,
+				0DB9BA152770BBF2003F7B21 /* QueueTests.swift */,
 			);
 			path = BanckManagerConsoleAppTests;
 			sourceTree = "<group>";
@@ -192,9 +196,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DB9BA172770BCC0003F7B21 /* Queue.swift in Sources */,
 				3BE4CC75277092A900178845 /* Node.swift in Sources */,
 				3BE4CC742770927B00178845 /* LinkedList.swift in Sources */,
 				3BE4CC702770902600178845 /* BanckManagerConsoleAppTests.swift in Sources */,
+				0DB9BA162770BBF2003F7B21 /* QueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
