@@ -9,6 +9,12 @@ import Foundation
 
 class LinkedList<Element> {
     var head: Node<Element>?
+    var first: Element? {
+        head?.data
+    }
+    var isEmpty: Bool {
+        head == nil
+    }
     
     func enqueue(data: Element) {
         if head == nil {
@@ -20,7 +26,7 @@ class LinkedList<Element> {
         while node?.next != nil  {
             node = node?.next
         }
-        
+
         node?.next = Node(data: data)
     }
     
@@ -35,7 +41,7 @@ class LinkedList<Element> {
         return firstElement
     }
     
-    var first: Element? {
-        head?.data
+    func removeAll() {
+        head = nil
     }
 }
