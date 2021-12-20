@@ -23,6 +23,10 @@ struct Queue<Element> {
     func dequeue() -> Element? {
         return items.removeFirst()
     }
+    
+    func clear() {
+        items.removeAll()
+    }
 }
 
 class QueueTests: XCTestCase {
@@ -70,5 +74,15 @@ class QueueTests: XCTestCase {
         XCTAssertEqual(result1, 1)
         XCTAssertEqual(result2, 2)
         XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_Queue_clear() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        sut.clear()
+
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.peek)
     }
 }
