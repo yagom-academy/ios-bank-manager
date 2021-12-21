@@ -37,21 +37,13 @@ class LinkedList<Element> {
     }
     
     func removeFirst() -> Element? {
-        if isEmpty {
-            return nil
-        } else {
-            let firstNode = head
-            head = head?.next
-            return firstNode?.value
-        }
+        let firstNode = head
+        head = head?.next
+        return firstNode?.value
     }
     
     func retrieveFirst() -> Element? {
-        if isEmpty {
-            return nil
-        } else {
-            return head?.value
-        }
+        return head?.value
     }
     
     func removeAll() {
