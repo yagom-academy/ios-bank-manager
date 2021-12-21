@@ -23,7 +23,7 @@ struct LinkedList<T> {
         self.tail = nil
     }
     
-    mutating func append(item: T) {
+    mutating func append(_ item: T) {
         let newNode: Node = Node.init(data: item)
         if tail != nil {
             tail?.next = newNode
@@ -52,8 +52,6 @@ struct LinkedList<T> {
 }
 
 struct Queue<T> {
-    typealias LinkedList = Array
-    
     private var items: LinkedList<T>
     
     var isEmpty: Bool {
@@ -68,8 +66,8 @@ struct Queue<T> {
         items.append(item)
     }
     
-    mutating func dequeue() -> T {
-        return items.removeFirst()
+    mutating func dequeue() -> T? {
+        return items.remove()
     }
     
     mutating func clear() {
@@ -77,6 +75,6 @@ struct Queue<T> {
     }
     
     func peek() -> T? {
-        return items.first
+        return items.peek()
     }
 }
