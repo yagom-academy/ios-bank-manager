@@ -50,7 +50,7 @@
 		C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerUIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +78,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53B6C0D727716C8C0040CD4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		53B6C0D827716CA50040CD4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E40259C3E9F0053667F /* Main.storyboard */,
+				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		53B6C0D927716CAC0040CD4F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3E259C3E9F0053667F /* ViewController.swift */,
+				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
+				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
+				53B6C0D827716CA50040CD4F /* View */,
+				53B6C0D727716C8C0040CD4F /* Model */,
+				53B6C0D927716CAC0040CD4F /* Controller */,
 				C7694E39259C3E9F0053667F /* BankManagerUIApp */,
 				C7694E50259C3EA20053667F /* BankManagerUIAppTests */,
 				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
@@ -101,13 +131,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
-				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
-				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				C7694E3E259C3E9F0053667F /* ViewController.swift */,
-				C7694E40259C3E9F0053667F /* Main.storyboard */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
-				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C7694E48259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIApp;
