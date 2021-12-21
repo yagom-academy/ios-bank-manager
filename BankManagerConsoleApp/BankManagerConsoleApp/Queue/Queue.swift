@@ -20,6 +20,7 @@ struct Queue<Element> {
         linkedList.append(data: data)
     }
     
+    @discardableResult
     mutating func dequeue() -> Element? {
         linkedList.removeFirst()
     }

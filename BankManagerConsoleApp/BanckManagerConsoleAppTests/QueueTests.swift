@@ -44,6 +44,29 @@ class QueueTests: XCTestCase {
         XCTAssertEqual(dequeueElement, 1)
     }
     
+    func test_enqueue를_여러번했을때_first가_nil이아닌지() {
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 1)
+        
+        XCTAssertNotNil(sut.first)
+    }
+    
+    func test_enqueue와_dequeue를반복했을때_first가예상한값인지() {
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        sut.dequeue()
+        sut.enqueue(data: 3)
+        sut.enqueue(data: 4)
+        sut.dequeue()
+        sut.dequeue()
+        sut.enqueue(data: 5)
+        sut.dequeue()
+        
+        XCTAssertEqual(sut.first, 5)
+    }
+    
     func test_removeAll로_요소를모두지우면_isEmpty가_true인지() {
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
