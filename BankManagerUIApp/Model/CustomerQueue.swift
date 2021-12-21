@@ -17,4 +17,10 @@ struct CustomerQueue<T> {
     mutating func enqueue(_ item: T) {
         list.append(data: item)
     }
+    
+    mutating func dequeue() -> T? {
+        let firstItem = list.removeFirst()
+        
+        return firstItem
+    }
 }
