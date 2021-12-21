@@ -28,16 +28,14 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_append_와_remove_두번() {
+    func test_append_와_remove_두번씩_실행() {
         sut.append(1)
         sut.append(2)
 
-        let resultFirst = sut.remove()
-        let resultSecond = sut.remove()
-
-        XCTAssertEqual(resultFirst, 1)
-        XCTAssertEqual(resultSecond, 2)
+        XCTAssertEqual(sut.remove(), 1)
+        XCTAssertFalse(sut.isEmpty)
         
+        XCTAssertEqual(sut.remove(), 2)
         XCTAssertTrue(sut.isEmpty)
     }
 }
