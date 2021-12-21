@@ -46,6 +46,19 @@ class LinkedListTests: XCTestCase {
         }
     }
     
+    func test_11을_append_한_후에_removeFirst_하면_비어있어야한다() throws {
+        sutLinkedList.append(data: 11)
+        
+        do {
+            let _ = try sutLinkedList.removeFirst()
+        } catch LinkedListError.dataDoesNotExist {
+            XCTFail()
+        }
+        
+        let result = sutLinkedList.isEmpty
+        XCTAssertTrue(result)
+    }
+    
     func test_7_8_9_append_한_후에_firstData를_호출하면_7을_반환해야한다() throws {
         sutLinkedList.append(data: 7)
         sutLinkedList.append(data: 8)
