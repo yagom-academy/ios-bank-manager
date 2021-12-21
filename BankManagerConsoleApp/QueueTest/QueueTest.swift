@@ -34,5 +34,44 @@ class QueueTest: XCTestCase {
         
         XCTAssertEqual(1, queue.dequeue())
     }
+    
+    func test_1_2_3이_있는_큐에_dequeue_하면_head는_2_tail은_3인지() {
+        var queue = Queue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.dequeue()
+        
+        XCTAssertEqual(2, queue.linkedList.head?.value)
+        XCTAssertEqual(3, queue.linkedList.tail?.value)
+    }
+    
+    func test_비어있는_큐에_isEmpty를_실행하면_true가_반환되는지() {
+        let queue = Queue<Int>()
+        
+        XCTAssertTrue(queue.isEmpty())
+    }
+    
+    func test_빈큐에_1_2를_enqueue하고_1_2를_dequeue하면_isEmpty가_true를_반환하는지() {
+        var queue = Queue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.dequeue()
+        queue.dequeue()
+        
+        XCTAssertTrue(queue.isEmpty())
+    }
+    
+    func test_1_2가_있는_큐에_clear_하면_빈_큐가_되는지() {
+        var queue = Queue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.clear()
+        
+        XCTAssertTrue(queue.isEmpty())
+    }
+    
+    
+    
 
 }
