@@ -57,4 +57,21 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertNil(sut.peek())
     }
+    
+    func test_비어있는_LinkedList에서_isEmpty_프로퍼티() {
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_값이_있는_LinkedList에서_isEmpty_프로퍼티() {
+        // given
+        let item = 7
+        sut.append(item)
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
 }
