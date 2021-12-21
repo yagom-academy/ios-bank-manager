@@ -23,55 +23,54 @@ class LinkedListTest: XCTestCase {
     }
 
     func test_isEmpty_shouldReturnExactBooleanType() throws {
-        sut?.head = Node(data: 1)
-        let result = try XCTUnwrap(sut)
+        var linkedList = try XCTUnwrap(sut)
+        linkedList.enqueue(1)
 
-        XCTAssertFalse(result.isEmpty)
+        XCTAssertFalse(linkedList.isEmpty)
     }
 
     func test_peek_shouldReturnHeadData() throws {
-        sut?.head = Node(data: 1)
-        let result = try XCTUnwrap(sut)
+        var linkedList = try XCTUnwrap(sut)
+        linkedList.enqueue(1)
 
-        XCTAssertEqual(result.peek(), 1)
+        XCTAssertEqual(linkedList.peek(), 1)
     }
 
     func test_clear_shouldRemoveAll() throws {
-        sut?.head = Node(data: 1)
-        sut?.head?.next = Node(data: 2)
-        sut?.head?.next?.next = Node(data: 3)
-        var result = try XCTUnwrap(sut)
+        var linkedList = try XCTUnwrap(sut)
+        linkedList.enqueue(1)
+        linkedList.enqueue(2)
+        linkedList.enqueue(3)
+        linkedList.clear()
         
-        result.clear()
-        
-        XCTAssertNil(result.head)
+        XCTAssertNil(linkedList.head)
     }
     
     func test_enqueue_shouldAddNode() throws {
-        sut?.enqueue(1)
-        sut?.enqueue(2)
-        sut?.enqueue(3)
-        let result = try XCTUnwrap(sut)
+        var linkedList = try XCTUnwrap(sut)
+        linkedList.enqueue(1)
+        linkedList.enqueue(2)
+        linkedList.enqueue(3)
         
-        XCTAssertEqual(result.head?.data, 1)
-        XCTAssertEqual(result.tail?.data, 3)
+        XCTAssertEqual(linkedList.head?.data, 1)
+        XCTAssertEqual(linkedList.tail?.data, 3)
     }
     
     func test_dequeue_shouldRemoveFirstNode() throws {
-        var result = try XCTUnwrap(sut)
-        result.enqueue(1)
-        result.enqueue(2)
-        result.enqueue(3)
-        result.dequeue()
+        var linkedList = try XCTUnwrap(sut)
+        linkedList.enqueue(1)
+        linkedList.enqueue(2)
+        linkedList.enqueue(3)
+        linkedList.dequeue()
         
-        XCTAssertEqual(result.head?.data, 2)
+        XCTAssertEqual(linkedList.head?.data, 2)
     }
     
     func test_dequeue_withEmptyLinkedList_shouldReturnNil() throws {
-        var result = try XCTUnwrap(sut)
-        result.dequeue()
+        var linkedList = try XCTUnwrap(sut)
+        linkedList.dequeue()
         
-        XCTAssertNil(result.head)
-        XCTAssertNil(result.tail)
+        XCTAssertNil(linkedList.head)
+        XCTAssertNil(linkedList.tail)
     }
 }
