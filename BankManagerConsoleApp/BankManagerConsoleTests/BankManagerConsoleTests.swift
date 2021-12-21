@@ -14,24 +14,24 @@ class BankManagerConsoleTests: XCTestCase {
      queue = Queue<Int>()
     }
 
-    func test_shoud_isEmptyisFalse_When_enqueue3AsParam() {
+    func test_Should_isEmptyIsFalse_When_enqueue3() {
         queue.enqueue(3)
         XCTAssertFalse(queue.isEmpty)
     }
     
-    func test_should_returnValueis1_When_dequeue() {
+    func test_Should_returnValueIs1_When_dequeue() {
         queue.enqueue(1)
         let returnValue = queue.dequeue()
         XCTAssertEqual(returnValue, 1)
     }
     
-    func test_should_returnValueIs1_When_peek() {
+    func test_Should_returnValueIs1_When_peek() {
         queue.enqueue(1)
         let returnValue = queue.peek()
         XCTAssertEqual(returnValue, 1)
     }
     
-    func test_should_isEmptyIsTrue_When_clear() {
+    func test_Should_isEmptyIsTrue_When_clear() {
         queue.enqueue(1)
         queue.enqueue(2)
         queue.enqueue(3)
