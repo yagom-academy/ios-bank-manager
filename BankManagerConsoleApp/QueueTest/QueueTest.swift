@@ -23,8 +23,16 @@ class QueueTest: XCTestCase {
         var queue = Queue<Int>()
         queue.enqueue(1)
         queue.enqueue(2)
+        
         XCTAssertEqual(1, queue.linkedList.head?.value)
         XCTAssertEqual(2, queue.linkedList.tail?.value)
+    }
+    
+    func test_1만_존재하는_큐에서_dequeue하면_head값이_반환되는지() {
+        var queue = Queue<Int>()
+        queue.enqueue(1)
+        
+        XCTAssertEqual(1, queue.dequeue())
     }
 
 }
