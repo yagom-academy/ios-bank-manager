@@ -8,7 +8,6 @@
 import XCTest
 
 class WaitingQueueTests: XCTestCase {
-    
     var sut: WaitingQueue<Any>!
     
     override func setUpWithError() throws {
@@ -36,6 +35,25 @@ class WaitingQueueTests: XCTestCase {
             return
         }
 
+        XCTAssertEqual(testData, resultData)
+    }
+    
+    func test_1_부터_4까지의_정수_데이터를_enqueue했을_때_반환값이_1_2_3_4이다() {
+        let testData = [1, 2, 3, 4]
+        var resultData: [Int] = []
+        
+        for data in testData {
+            sut.enqueue(data)
+        }
+        
+        while !sut.isEmpty {
+            guard let dequeuedData = sut.dequeue() as? Int else {
+                return
+            }
+            
+            resultData.append(dequeuedData)
+        }
+        
         XCTAssertEqual(testData, resultData)
     }
 
