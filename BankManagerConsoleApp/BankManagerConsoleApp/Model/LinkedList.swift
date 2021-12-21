@@ -29,13 +29,13 @@ struct LinkedList<Element> {
     
     mutating func append(data: Element) {
         let nextNode = Node(data: data, next: nil)
-        guard isEmpty else {
-            tail?.next = nextNode
-            tail = nextNode
+        if isEmpty {
+            head = nextNode
+            tail = head
             return
         }
-        head = nextNode
-        tail = head
+        tail?.next = nextNode
+        tail = nextNode
     }
     
     mutating func removeFirst() -> Element? {
