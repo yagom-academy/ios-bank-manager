@@ -37,6 +37,10 @@ struct LinkedList<Type> {
         
         tail = newNode
     }
+    
+    mutating func dequeue() {
+        head = head?.next
+    }
 }
 
 class Node<Type> {

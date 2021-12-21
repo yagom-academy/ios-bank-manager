@@ -56,4 +56,22 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result.head?.data, 1)
         XCTAssertEqual(result.tail?.data, 3)
     }
+    
+    func test_dequeue_shouldRemoveFirstNode() throws {
+        var result = try XCTUnwrap(sut)
+        result.enqueue(1)
+        result.enqueue(2)
+        result.enqueue(3)
+        result.dequeue()
+        
+        XCTAssertEqual(result.head?.data, 2)
+    }
+    
+    func test_dequeue_withEmptyLinkedList_shouldReturnNil() throws {
+        var result = try XCTUnwrap(sut)
+        result.dequeue()
+        
+        XCTAssertNil(result.head)
+        XCTAssertNil(result.tail)
+    }
 }
