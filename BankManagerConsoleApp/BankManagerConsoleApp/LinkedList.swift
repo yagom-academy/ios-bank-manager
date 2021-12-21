@@ -7,6 +7,15 @@
 
 import Foundation
 
+class Node<Type> {
+    var data: Type
+    var next: Node<Type>?
+    
+    init(data: Type) {
+        self.data = data
+    }
+}
+
 struct LinkedList<Type> {
     var head: Node<Type>?
     var tail: Node<Type>?
@@ -32,21 +41,10 @@ struct LinkedList<Type> {
         } else {
             head = newNode
         }
-        
         tail = newNode
     }
     
     mutating func dequeue() {
         head = head?.next
-    }
-}
-
-class Node<Type> {
-    var data: Type
-    var next: Node<Type>?
-    
-    init(data: Type, next: Node<Type>? = nil) {
-        self.data = data
-        self.next = next
     }
 }
