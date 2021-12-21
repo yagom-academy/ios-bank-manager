@@ -46,4 +46,24 @@ class CustomerQueueTests: XCTestCase {
         }
     }
     
+    func test_CustomerQueue가_비어있을때_dequeue_하면_오류를_던져야한다() throws {
+        XCTAssertThrowsError(try sutCustomerQueue.dequeue())
+    }
+    
+    func test_9_10_11을_enqueue_한_후에_peek하면_9를_반환해야한다() throws {
+        sutCustomerQueue.enqueue(data: 9)
+        sutCustomerQueue.enqueue(data: 10)
+        sutCustomerQueue.enqueue(data: 11)
+        
+        do {
+            let result = try sutCustomerQueue.peek()
+            XCTAssertEqual(result, 9)
+        } catch LinkedListError.dataDoesNotExist {
+            XCTFail()
+        }
+    }
+    
+    func test_CustomerQueue가_비어있을때_peek하면_오류를_던져야한다() throws {
+        XCTAssertThrowsError(try sutCustomerQueue.peek())
+    }
 }
