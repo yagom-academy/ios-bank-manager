@@ -25,6 +25,18 @@ struct LinkedList<Type> {
             head = head?.next
         }
     }
+    
+    mutating func enqueue(_ data: Type) {
+        let newNode = Node(data: data)
+        
+        if let lastNode = tail {
+            lastNode.next = newNode
+        } else {
+            head = newNode
+        }
+        
+        tail = newNode
+    }
 }
 
 class Node<Type> {

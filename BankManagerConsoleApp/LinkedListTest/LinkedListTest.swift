@@ -46,4 +46,14 @@ class LinkedListTest: XCTestCase {
         
         XCTAssertNil(result.head)
     }
+    
+    func test_enqueue_shouldAddNode() throws {
+        sut?.enqueue(1)
+        sut?.enqueue(2)
+        sut?.enqueue(3)
+        let result = try XCTUnwrap(sut)
+        
+        XCTAssertEqual(result.head?.data, 1)
+        XCTAssertEqual(result.tail?.data, 3)
+    }
 }
