@@ -38,7 +38,7 @@ class WaitingQueueTests: XCTestCase {
         XCTAssertEqual(testData, resultData)
     }
     
-    func test_1_부터_4까지의_정수_데이터를_enqueue했을_때_반환값이_1_2_3_4이다() {
+    func test_1부터_4까지의_정수_데이터를_enqueue했을_때_반환값이_1_2_3_4이다() {
         let testData = [1, 2, 3, 4]
         var resultData: [Int] = []
         
@@ -55,6 +55,18 @@ class WaitingQueueTests: XCTestCase {
         }
         
         XCTAssertEqual(testData, resultData)
+    }
+    
+    func test_a부터_d까지의_문자_데이터를_enqueue를_한_후_clear를_했을_때_WaitingQueue가_비어있다() {
+        let testData = ["a", "b", "c", "d"]
+        
+        for data in testData {
+            sut.enqueue(data)
+        }
+        
+        sut.clear()
+        
+        XCTAssertTrue(sut.isEmpty)
     }
 
 }
