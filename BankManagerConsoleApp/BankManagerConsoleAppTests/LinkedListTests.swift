@@ -11,15 +11,15 @@ class LinkedListTests: XCTestCase {
     
     var sutLinkedList: LinkedList<Int>!
 
-    override func setUpWithError() throws {
+    override func setUp() {
         sutLinkedList = LinkedList()
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         sutLinkedList = nil
     }
 
-    func test_1_2_3을_append_한_후에_removeFirst_하면_1을_반환해야한다() throws {
+    func test_1_2_3을_append_한_후에_removeFirst_하면_1을_반환해야한다() {
         sutLinkedList.append(data: 1)
         sutLinkedList.append(data: 2)
         sutLinkedList.append(data: 3)
@@ -29,10 +29,12 @@ class LinkedListTests: XCTestCase {
             XCTAssertEqual(result, 1)
         } catch LinkedListError.dataDoesNotExist {
             XCTFail()
+        } catch {
+            XCTFail()
         }
     }
     
-    func test_4_5_6을_append_한_후에_removeFirst_두번_하면_5를_반환해야한다() throws {
+    func test_4_5_6을_append_한_후에_removeFirst_두번_하면_5를_반환해야한다() {
         sutLinkedList.append(data: 4)
         sutLinkedList.append(data: 5)
         sutLinkedList.append(data: 6)
@@ -43,15 +45,19 @@ class LinkedListTests: XCTestCase {
             XCTAssertEqual(secondResult, 5)
         } catch LinkedListError.dataDoesNotExist {
             XCTFail()
+        } catch {
+            XCTFail()
         }
     }
     
-    func test_11을_append_한_후에_removeFirst_하면_비어있어야한다() throws {
+    func test_11을_append_한_후에_removeFirst_하면_비어있어야한다() {
         sutLinkedList.append(data: 11)
         
         do {
             let _ = try sutLinkedList.removeFirst()
         } catch LinkedListError.dataDoesNotExist {
+            XCTFail()
+        } catch {
             XCTFail()
         }
         
@@ -59,7 +65,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_7_8_9_append_한_후에_firstData를_호출하면_7을_반환해야한다() throws {
+    func test_7_8_9_append_한_후에_firstData를_호출하면_7을_반환해야한다() {
         sutLinkedList.append(data: 7)
         sutLinkedList.append(data: 8)
         sutLinkedList.append(data: 9)
@@ -69,6 +75,8 @@ class LinkedListTests: XCTestCase {
             XCTAssertEqual(firstData, 7)
         } catch LinkedListError.dataDoesNotExist {
             XCTFail()
+        } catch {
+            XCTFail()
         }
     }
     
@@ -77,9 +85,8 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(isEmpty)
     }
     
-    func test_LinkedList가_비어있을때_dequeue_하면_오류를_반환해야한다() throws {
+    func test_LinkedList가_비어있을때_dequeue_하면_오류를_반환해야한다() {
         XCTAssertThrowsError(try sutLinkedList.removeFirst())
     }
-    
     
 }
