@@ -11,10 +11,8 @@
 		0DB9BA162770BBF2003F7B21 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA152770BBF2003F7B21 /* QueueTests.swift */; };
 		0DB9BA172770BCC0003F7B21 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA132770B4B1003F7B21 /* Queue.swift */; };
 		3BE4CC662770707B00178845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC652770707B00178845 /* LinkedList.swift */; };
-		3BE4CC682770708100178845 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC672770708100178845 /* Node.swift */; };
 		3BE4CC702770902600178845 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC6F2770902600178845 /* LinkedListTests.swift */; };
 		3BE4CC742770927B00178845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC652770707B00178845 /* LinkedList.swift */; };
-		3BE4CC75277092A900178845 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC672770708100178845 /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +33,6 @@
 		0DB9BA132770B4B1003F7B21 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0DB9BA152770BBF2003F7B21 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		3BE4CC652770707B00178845 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		3BE4CC672770708100178845 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		3BE4CC6D2770902600178845 /* BanckManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BanckManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE4CC6F2770902600178845 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +62,6 @@
 			isa = PBXGroup;
 			children = (
 				3BE4CC652770707B00178845 /* LinkedList.swift */,
-				3BE4CC672770708100178845 /* Node.swift */,
 				0DB9BA132770B4B1003F7B21 /* Queue.swift */,
 			);
 			path = Queue;
@@ -197,7 +193,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DB9BA172770BCC0003F7B21 /* Queue.swift in Sources */,
-				3BE4CC75277092A900178845 /* Node.swift in Sources */,
 				3BE4CC742770927B00178845 /* LinkedList.swift in Sources */,
 				3BE4CC702770902600178845 /* LinkedListTests.swift in Sources */,
 				0DB9BA162770BBF2003F7B21 /* QueueTests.swift in Sources */,
@@ -212,7 +207,6 @@
 				3BE4CC662770707B00178845 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
-				3BE4CC682770708100178845 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +220,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UKU2UB96JP;
+				DEVELOPMENT_TEAM = N39ZQUNZ5Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -249,7 +243,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UKU2UB96JP;
+				DEVELOPMENT_TEAM = N39ZQUNZ5Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

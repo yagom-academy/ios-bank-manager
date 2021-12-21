@@ -7,6 +7,15 @@
 
 import Foundation
 
+final private class Node<Element> {
+    var data: Element
+    var next: Node?
+    
+    init(data: Element) {
+        self.data = data
+    }
+}
+
 struct LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
