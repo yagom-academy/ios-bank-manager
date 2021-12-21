@@ -12,11 +12,7 @@ class QueueTest: XCTestCase {
         var queue = Queue<Int>()
         queue.enqueue(1)
         
-        guard let head = queue.peek() else {
-            return
-        }
-        
-        XCTAssertEqual(1, head)
+        XCTAssertEqual(1, queue.linkedList.head?.value)
     }
     
     func test_1이_있는_큐에_2를_enqueue하면_head는_1_tail은_2인지() {
@@ -40,7 +36,7 @@ class QueueTest: XCTestCase {
         queue.enqueue(1)
         queue.enqueue(2)
         queue.enqueue(3)
-        queue.dequeue()
+        let _ = queue.dequeue()
         
         XCTAssertEqual(2, queue.linkedList.head?.value)
         XCTAssertEqual(3, queue.linkedList.tail?.value)
@@ -56,8 +52,8 @@ class QueueTest: XCTestCase {
         var queue = Queue<Int>()
         queue.enqueue(1)
         queue.enqueue(2)
-        queue.dequeue()
-        queue.dequeue()
+        let _ = queue.dequeue()
+        let _ = queue.dequeue()
         
         XCTAssertTrue(queue.isEmpty())
     }
@@ -70,8 +66,4 @@ class QueueTest: XCTestCase {
         
         XCTAssertTrue(queue.isEmpty())
     }
-    
-    
-    
-
 }

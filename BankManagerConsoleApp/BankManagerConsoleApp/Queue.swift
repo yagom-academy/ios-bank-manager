@@ -8,7 +8,7 @@
 import Foundation
 
 struct Queue<Element> {
-    var linkedList = LinkedList<Element>()
+    private(set) var linkedList = LinkedList<Element>()
     
     mutating func enqueue(_ value: Element) {
         linkedList.addNode(value)
@@ -22,8 +22,7 @@ struct Queue<Element> {
     }
     
     mutating func clear() {
-        linkedList.head = nil
-        linkedList.tail = nil
+        linkedList.clear()
     }
     
     mutating func peek() -> Element? {

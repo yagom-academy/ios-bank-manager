@@ -18,8 +18,8 @@ class Node<Element> {
 }
 
 struct LinkedList<Element> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     
     mutating func addNode(_ value: Element) {
         let node = Node(value: value)
@@ -40,4 +40,8 @@ struct LinkedList<Element> {
         head = head?.next
     }
     
+    mutating func clear() {
+        head = nil
+        tail = nil
+    }
 }
