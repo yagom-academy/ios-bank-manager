@@ -1,16 +1,16 @@
 import Foundation
 
-class Node<Element> {
-    var data: Element?
-    var next: Node?
-    
-    init(data: Element?, next: Node? = nil) {
-        self.data = data
-        self.next = next
-    }
-}
-
 struct LinkedList<Element> {
+    class Node<Element> {
+        var data: Element?
+        var next: Node?
+        
+        init(data: Element?, next: Node? = nil) {
+            self.data = data
+            self.next = next
+        }
+    }
+    
     private var head: Node<Element>?
     private var tail: Node<Element>?
     var isEmpty: Bool {
