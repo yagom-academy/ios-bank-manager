@@ -56,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		331FA61F2771D5A600EFFFBD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				33B3602E2770850400EE24A6 /* Queue.swift */,
+				63C112ED27705B6600BB79CF /* LinkedList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6309E23C277176AF00ECCD50 /* BankManagerConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,10 +94,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				331FA61F2771D5A600EFFFBD /* Model */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				63C112ED27705B6600BB79CF /* LinkedList.swift */,
-				33B3602E2770850400EE24A6 /* Queue.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
