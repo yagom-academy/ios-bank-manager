@@ -15,11 +15,6 @@ class LinkedListTests: XCTestCase {
         sut = LinkedList()
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
-    
     func test_append메서드로_1_2_3을넣었을때_first가_1인지() {
         sut.append(data: 1)
         sut.append(data: 2)

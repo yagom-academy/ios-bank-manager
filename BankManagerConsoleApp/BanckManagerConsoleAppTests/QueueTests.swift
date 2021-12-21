@@ -14,11 +14,6 @@ class QueueTests: XCTestCase {
         try super.setUpWithError()
         sut = Queue()
     }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
     
     func test_enqueue로_1_2_3을넣으면_first가_1을반환하는지() {
         sut.enqueue(data: 1)
