@@ -2,8 +2,8 @@ import Foundation
 
 class LinkedList<Element> {
     class ListNode<Element> {
-        var value: Element
-        var pointer: ListNode?
+        private(set) var value: Element
+        var next: ListNode?
         
         init(value: Element) {
             self.value = value
@@ -16,7 +16,7 @@ class LinkedList<Element> {
     var tail: Node? {
         var finderToTail: Node? = head
         
-        while let nextNode = finderToTail?.pointer {
+        while let nextNode = finderToTail?.next {
             finderToTail = nextNode
         }
         
@@ -38,7 +38,7 @@ class LinkedList<Element> {
         if isEmpty {
             head = newNode
         } else {
-            tail?.pointer = newNode
+            tail?.next = newNode
         }
     }
     
@@ -46,7 +46,7 @@ class LinkedList<Element> {
         if isEmpty { return nil }
         
         let valueToRemove = head?.value
-        head = head?.pointer
+        head = head?.next
         
         return valueToRemove
     }
@@ -62,7 +62,7 @@ class LinkedList<Element> {
 
         scanResult.append(finderToTail.value)
 
-        while let nextNode = finderToTail.pointer {
+        while let nextNode = finderToTail.next {
             scanResult.append(nextNode.value)
             finderToTail = nextNode
         }

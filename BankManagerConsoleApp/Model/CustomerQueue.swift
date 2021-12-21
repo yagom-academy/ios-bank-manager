@@ -5,6 +5,9 @@ struct CustomerQueue<Element> {
     var isEmpty: Bool {
         return customers.isEmpty
     }
+    var peek: Element? {
+        return customers.head?.value
+    }
     
     func enqueue(value: Element) {
         customers.append(value: value)
@@ -16,13 +19,5 @@ struct CustomerQueue<Element> {
     
     func clear() {
         customers.removeAll()
-    }
-    
-    func peek() -> Element? {
-        if isEmpty {
-            return nil
-        } else {
-            return customers.head?.value
-        }
     }
 }

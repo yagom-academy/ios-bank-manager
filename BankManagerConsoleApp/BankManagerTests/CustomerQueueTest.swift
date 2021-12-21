@@ -1,7 +1,6 @@
 import XCTest
-@testable import BankManagerConsoleApp
 
-class CustomQueueTest: XCTestCase {
+class CustomerQueueTest: XCTestCase {
     var sut: CustomerQueue<Int>!
 
     override func setUpWithError() throws {
