@@ -18,5 +18,13 @@ class QueueTest: XCTestCase {
         
         XCTAssertEqual(1, head)
     }
+    
+    func test_1이_있는_큐에_2를_enqueue하면_head는_1_tail은_2인지() {
+        var queue = Queue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        XCTAssertEqual(1, queue.linkedList.head?.value)
+        XCTAssertEqual(2, queue.linkedList.tail?.value)
+    }
 
 }
