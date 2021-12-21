@@ -15,3 +15,16 @@ class Node<T> {
         self.data = data
     }
 }
+
+struct LinkedList<T> {
+    private var head: Node<T>?
+    
+    var firstNode: Node<T>? {
+        return head
+    }
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
+}
+
