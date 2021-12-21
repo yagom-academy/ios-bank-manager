@@ -7,7 +7,7 @@
 
 import XCTest
 
-class BankManagerConsoleTests: XCTestCase {
+class QueueTests: XCTestCase {
     var queue: Queue<Int> = Queue<Int>()
 
     override func tearDownWithError() throws {
