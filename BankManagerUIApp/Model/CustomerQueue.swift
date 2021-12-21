@@ -13,6 +13,8 @@ struct CustomerQueue<T> {
     var isEmpty: Bool {
         return list.isEmpty
     }
+    
+    mutating func enqueue(_ item: T) {
+        list.append(data: item)
+    }
 }
-
-
