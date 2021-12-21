@@ -42,10 +42,10 @@ class WaitingQueueTests: XCTestCase {
         let testData = [1, 2, 3, 4]
         var resultData: [Int] = []
         
-        for data in testData {
+        testData.forEach { (data: Int) in
             sut.enqueue(data)
         }
-        
+
         while !sut.isEmpty {
             guard let dequeuedData = sut.dequeue() as? Int else {
                 return
@@ -60,7 +60,7 @@ class WaitingQueueTests: XCTestCase {
     func test_a부터_d까지의_문자_데이터를_enqueue를_한_후_clear를_했을_때_WaitingQueue가_비어있다() {
         let testData = ["a", "b", "c", "d"]
         
-        for data in testData {
+        testData.forEach { (data: String) in
             sut.enqueue(data)
         }
         
@@ -72,7 +72,7 @@ class WaitingQueueTests: XCTestCase {
     func test_a부터_d까지의_문자_데이터를_enqueue를_한_후_peek을_했을_때_반환값이_a_이다() {
         let testData = ["a", "b", "c", "d"]
         
-        for data in testData {
+        testData.forEach { (data: String) in
             sut.enqueue(data)
         }
         
