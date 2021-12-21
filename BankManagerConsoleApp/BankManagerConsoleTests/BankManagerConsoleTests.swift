@@ -30,4 +30,13 @@ class BankManagerConsoleTests: XCTestCase {
         let returnValue = queue.peek()
         XCTAssertEqual(returnValue, 1)
     }
+    
+    func test_should_isEmptyIsTrue_When_clear() {
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.enqueue(4)
+        queue.clear()
+        XCTAssertTrue(queue.isEmpty)
+    }
 }
