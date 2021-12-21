@@ -1,7 +1,7 @@
 import Foundation
 
-class LinkedList<Element> {
-    class ListNode<Element> {
+final class LinkedList<Element> {
+    final class ListNode<Element> {
         private(set) var value: Element
         var next: ListNode?
         
@@ -12,7 +12,7 @@ class LinkedList<Element> {
     
     typealias Node = ListNode<Element>
     
-    var head: Node?
+    private(set) var head: Node?
     var tail: Node? {
         var finderToTail: Node? = head
         
@@ -53,21 +53,6 @@ class LinkedList<Element> {
     
     func removeAll() {
         head = nil
-    }
-    
-    func scanAllValues() -> [Element] {
-        var scanResult: [Element] = []
-        
-        guard var finderToTail = head else { return scanResult }
-
-        scanResult.append(finderToTail.value)
-
-        while let nextNode = finderToTail.next {
-            scanResult.append(nextNode.value)
-            finderToTail = nextNode
-        }
-        
-        return scanResult
     }
 }
 
