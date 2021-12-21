@@ -33,6 +33,7 @@ final class LinkedList<Element> {
         }
     }
     
+    @discardableResult
     func removeFirst() -> Element? {
         guard isEmpty == false else {
             return nil
