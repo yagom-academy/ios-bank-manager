@@ -8,7 +8,8 @@
 import Foundation
 
 struct CustomerQueue<Element> {
-    var linkedList = LinkedList<Element>()
+    
+    private var linkedList = LinkedList<Element>()
     
     func enqueue(data: Element) {
         linkedList.append(data: data)

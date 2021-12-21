@@ -9,8 +9,8 @@ import Foundation
 
 class LinkedList<Element> {
     
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     func append(data: Element) {
         if head == nil {
