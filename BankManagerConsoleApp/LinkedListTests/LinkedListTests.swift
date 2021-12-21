@@ -20,7 +20,7 @@ class LinkedListTests: XCTestCase {
     }
 
     func test_1_2_3을_append_한_후에_removeFirst_하면_1을_반환해야한다() throws {
-        sutLinkedList.append(data: 1)removeFirst
+        sutLinkedList.append(data: 1)
         sutLinkedList.append(data: 2)
         sutLinkedList.append(data: 3)
         
@@ -38,7 +38,7 @@ class LinkedListTests: XCTestCase {
         sutLinkedList.append(data: 6)
         
         do {
-            let firstResult = try sutLinkedList.removeFirst()
+            let _ = try sutLinkedList.removeFirst()
             let secondResult = try sutLinkedList.removeFirst()
             XCTAssertEqual(secondResult, 5)
         } catch LinkedListError.dataDoesNotExist {
