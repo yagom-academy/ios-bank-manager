@@ -13,4 +13,9 @@ struct CustomerQueue<Element> {
     func enqueue(data: Element) {
         linkedList.append(data: data)
     }
+    
+    func dequeue() throws -> Element {
+        let dequeuedData = try linkedList.removeFirst()
+        return dequeuedData
+    }
 }
