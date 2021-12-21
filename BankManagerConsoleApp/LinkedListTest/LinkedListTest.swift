@@ -28,4 +28,11 @@ class LinkedListTest: XCTestCase {
         
         XCTAssertFalse(sut.isEmpty)
     }
+    
+    func test_peek_shouldReturnHeadData() throws {
+        sut?.head = Node(data: 1)
+        let sut = try XCTUnwrap(sut)
+        
+        XCTAssertEqual(sut.peek(), 1)
+    }
 }

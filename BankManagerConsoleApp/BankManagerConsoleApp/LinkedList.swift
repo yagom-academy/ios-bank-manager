@@ -14,6 +14,10 @@ struct LinkedList<Type> {
     var isEmpty: Bool {
         head == nil
     }
+    
+    func peek() -> Type? {
+        return head?.data
+    }
 }
 
 class Node<Type> {
