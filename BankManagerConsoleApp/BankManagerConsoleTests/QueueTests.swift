@@ -1,10 +1,3 @@
-//
-//  BankManagerConsoleTests.swift
-//  BankManagerConsoleTests
-//
-//  Created by 1 on 2021/12/21.
-//
-
 import XCTest
 
 class QueueTests: XCTestCase {

@@ -1,10 +1,3 @@
-//
-//  LinkedList.swift
-//  BankManagerConsoleApp
-//
-//  Created by 1 on 2021/12/20.
-//
-
 import Foundation
 
 class Node<Element> {
