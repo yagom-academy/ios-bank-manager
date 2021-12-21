@@ -16,6 +16,7 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		ED8E958427716E1800FA4ABD /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8E958327716E1800FA4ABD /* LinkedList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
+		ED8E958327716E1800FA4ABD /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
+				ED8E958327716E1800FA4ABD /* LinkedList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				ED8E958427716E1800FA4ABD /* LinkedList.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
 			);
