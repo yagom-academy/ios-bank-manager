@@ -18,6 +18,7 @@ class Node<T> {
 
 struct LinkedList<T> {
     private var head: Node<T>?
+    private var tail: Node<T>?
     
     var firstNode: Node<T>? {
         return head
@@ -26,5 +27,15 @@ struct LinkedList<T> {
     var isEmpty: Bool {
         return head == nil
     }
+    
+    mutating func append(data: T) {
+        let newNode = Node(data: data)
+        
+        if isEmpty {
+            head = newNode
+        } else {
+            tail?.next = newNode
+        }
+        tail = newNode
+    }
 }
-
