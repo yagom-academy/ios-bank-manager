@@ -48,14 +48,3 @@ class LinkedList<Element> {
     }
 
 }
-
-enum LinkedListError: LocalizedError {
-    case dataDoesNotExist
-    
-    var description: String {
-        switch self {
-        case .dataDoesNotExist:
-            return "데이터가 존재하지 않습니다."
-        }
-    }
-}

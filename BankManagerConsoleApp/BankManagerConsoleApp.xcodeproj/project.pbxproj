@@ -16,6 +16,8 @@
 		4788F79827716F9F0067596D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF74277062E20054DE4B /* Node.swift */; };
 		C132FF75277062E20054DE4B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF74277062E20054DE4B /* Node.swift */; };
 		C168CF7B277166490055560E /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7A277166490055560E /* CustomerQueue.swift */; };
+		C168CF7E277174AB0055560E /* LinkedListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7D277174AB0055560E /* LinkedListError.swift */; };
+		C168CF7F277174B40055560E /* LinkedListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7D277174AB0055560E /* LinkedListError.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,7 @@
 		C132FF74277062E20054DE4B /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C132FF7C2770702D0054DE4B /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		C168CF7A277166490055560E /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
+		C168CF7D277174AB0055560E /* LinkedListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListError.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -71,6 +74,16 @@
 			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
 		};
+		C168CF7C2771747D0055560E /* LinkedList */ = {
+			isa = PBXGroup;
+			children = (
+				C132FF74277062E20054DE4B /* Node.swift */,
+				4788F784277066120067596D /* LinkedList.swift */,
+				C168CF7D277174AB0055560E /* LinkedListError.swift */,
+			);
+			path = LinkedList;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -93,10 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				C132FF74277062E20054DE4B /* Node.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				4788F784277066120067596D /* LinkedList.swift */,
 				C168CF7A277166490055560E /* CustomerQueue.swift */,
+				C168CF7C2771747D0055560E /* LinkedList */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -192,6 +204,7 @@
 				4788F79427716F8E0067596D /* LinkedListTests.swift in Sources */,
 				4788F79727716F9D0067596D /* main.swift in Sources */,
 				4788F79027716F840067596D /* CustomerQueueTests.swift in Sources */,
+				C168CF7F277174B40055560E /* LinkedListError.swift in Sources */,
 				4788F79827716F9F0067596D /* Node.swift in Sources */,
 				4788F79627716F9A0067596D /* LinkedList.swift in Sources */,
 				4788F79527716F980067596D /* CustomerQueue.swift in Sources */,
@@ -207,6 +220,7 @@
 				C168CF7B277166490055560E /* CustomerQueue.swift in Sources */,
 				4788F785277066120067596D /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				C168CF7E277174AB0055560E /* LinkedListError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
