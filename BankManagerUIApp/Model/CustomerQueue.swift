@@ -27,4 +27,10 @@ struct CustomerQueue<T> {
     mutating func clear() {
         list.removeAll()
     }
+    
+    func peek() -> T? {
+        let firstNode = list.firstNode
+        
+        return firstNode?.data
+    }
 }
