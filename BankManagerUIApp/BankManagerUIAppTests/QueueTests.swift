@@ -44,4 +44,23 @@ class QueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, item)
     }
+    
+    func test_비어있는_큐에서_clear_실행() {
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_비어있지않은_큐에서_clear_실행() {
+        // given
+        sut.enqueue(5)
+        
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
