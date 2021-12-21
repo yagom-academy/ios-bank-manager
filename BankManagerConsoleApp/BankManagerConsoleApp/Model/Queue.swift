@@ -11,7 +11,7 @@ struct Queue<Element> {
     }
     
     mutating func enqueue(_ data: Element) {
-        items.append(data: data)
+        items.append(data)
     }
     
     mutating func dequeue() -> Element? {

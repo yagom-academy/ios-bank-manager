@@ -27,7 +27,7 @@ struct LinkedList<Element> {
         self.tail = head
     }
     
-    mutating func append(data: Element) {
+    mutating func append(_ data: Element) {
         let nextNode = Node(data: data, next: nil)
         if isEmpty {
             head = nextNode
