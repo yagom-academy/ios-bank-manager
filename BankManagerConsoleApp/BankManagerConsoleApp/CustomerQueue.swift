@@ -28,4 +28,8 @@ struct CustomerQueue<Element> {
         linkedList = LinkedList<Element>()
     }
     
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
+    
 }
