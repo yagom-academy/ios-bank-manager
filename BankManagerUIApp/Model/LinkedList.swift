@@ -38,4 +38,11 @@ struct LinkedList<T> {
         }
         tail = newNode
     }
+    
+    mutating func removeFirst() -> T? {
+        let node = head
+        head = node?.next
+
+        return node?.data
+    }
 }
