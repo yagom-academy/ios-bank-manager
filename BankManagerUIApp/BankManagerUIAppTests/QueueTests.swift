@@ -63,4 +63,23 @@ class QueueTests: XCTestCase {
         // then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_비어있는_큐에서_peek_실행() {
+        // then
+        XCTAssertNil(sut.peek())
+    }
+    
+    func test_비어있지않은_큐에서_peek_실행() {
+        // given
+        let firstItem = 36
+        let secondItem = 64
+        sut.enqueue(firstItem)
+        sut.enqueue(secondItem)
+        
+        // when
+        let result = sut.peek()
+        
+        // then
+        XCTAssertEqual(result, firstItem)
+    }
 }
