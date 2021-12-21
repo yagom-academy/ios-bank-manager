@@ -8,11 +8,15 @@ import XCTest
 @testable import BankManagerUIApp
 
 class QueueTests: XCTestCase {
-    var sut: Queue<Int>!
+    typealias QueueType = Int
+    
+    var sut: Queue<QueueType>!
+    
+    let items = [1,2]
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Queue<Int>.init()
+        sut = Queue<QueueType>.init()
     }
 
     override func tearDownWithError() throws {
@@ -22,7 +26,8 @@ class QueueTests: XCTestCase {
     
     func test_enqueue_실행() {
         // when
-        sut.enqueue(1)
+        let item = items[0]
+        sut.enqueue(item)
         
         // then
         XCTAssertFalse(sut.isEmpty)
@@ -35,7 +40,7 @@ class QueueTests: XCTestCase {
     
     func test_비어있지않은_큐에서_dequeue_실행() {
         // given
-        let item = 4
+        let item = items[0]
         sut.enqueue(item)
         
         // when
@@ -55,7 +60,8 @@ class QueueTests: XCTestCase {
     
     func test_비어있지않은_큐에서_clear_실행() {
         // given
-        sut.enqueue(5)
+        let item = items[0]
+        sut.enqueue(item)
         
         // when
         sut.clear()
@@ -71,8 +77,8 @@ class QueueTests: XCTestCase {
     
     func test_비어있지않은_큐에서_peek_실행() {
         // given
-        let firstItem = 36
-        let secondItem = 64
+        let firstItem = items[0]
+        let secondItem = items[1]
         sut.enqueue(firstItem)
         sut.enqueue(secondItem)
         
@@ -90,7 +96,8 @@ class QueueTests: XCTestCase {
     
     func test_비어있지않은_큐에서_isEmpty_확인() {
         // given
-        sut.enqueue(30)
+        let item = items[0]
+        sut.enqueue(item)
         
         // when
         let result = sut.isEmpty

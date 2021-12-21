@@ -3,7 +3,11 @@ import XCTest
 
 class LinkedListTests: XCTestCase {
 
-    var sut: LinkedList<Int>!
+    typealias LinkedListType = Int
+    
+    var sut: LinkedList<LinkedListType>!
+    
+    let items = [10,20]
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -25,32 +29,35 @@ class LinkedListTests: XCTestCase {
     
     func test_append_와_remove_실행() {
         // given
-        sut.append(1)
+        let item = items[0]
+        sut.append(item)
         
         // when
         let result = sut.remove()
 
         // then
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(result, item)
         XCTAssertTrue(sut.isEmpty)
     }
     
     func test_append_와_remove_두번씩_실행() {
         // given
-        sut.append(1)
-        sut.append(2)
+        let firstItem = items[0]
+        let secondItem = items[1]
+        sut.append(firstItem)
+        sut.append(secondItem)
 
         // then
-        XCTAssertEqual(sut.remove(), 1)
+        XCTAssertEqual(sut.remove(), firstItem)
         XCTAssertFalse(sut.isEmpty)
         
-        XCTAssertEqual(sut.remove(), 2)
+        XCTAssertEqual(sut.remove(), secondItem)
         XCTAssertTrue(sut.isEmpty)
     }
     
     func test_append_후에_peek_실행() {
         // given
-        let item = 6
+        let item = items[0]
         
         // when
         sut.append(item)
@@ -72,7 +79,7 @@ class LinkedListTests: XCTestCase {
     
     func test_값이_있는_LinkedList에서_isEmpty_값_확인() {
         // given
-        let item = 7
+        let item = items[0]
         sut.append(item)
         
         // when
