@@ -23,4 +23,9 @@ struct CustomerQueue<Element> {
         let firstData = try linkedList.firstData()
         return firstData
     }
+    
+    func clear() {
+        linkedList = LinkedList<Element>()
+    }
+    
 }
