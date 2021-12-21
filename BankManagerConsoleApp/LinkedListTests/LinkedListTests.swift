@@ -19,20 +19,54 @@ class LinkedListTests: XCTestCase {
         sutLinkedList = nil
     }
 
-    func test_1_2_3을_enqueue_한_후에_dequeue_하면_1을_반환해야한다() throws {
-        sutLinkedList.enqueue(data: 1)
-        sutLinkedList.enqueue(data: 2)
-        sutLinkedList.enqueue(data: 3)
+    func test_1_2_3을_append_한_후에_removeFirst_하면_1을_반환해야한다() throws {
+        sutLinkedList.append(data: 1)removeFirst
+        sutLinkedList.append(data: 2)
+        sutLinkedList.append(data: 3)
         
         do {
-            let result = try sutLinkedList.dequeue()
+            let result = try sutLinkedList.removeFirst()
             XCTAssertEqual(result, 1)
-        } catch LinkedListError.dequeueFail {
+        } catch LinkedListError.dataDoesNotExist {
             XCTFail()
         }
     }
     
-    func test_LinkedList가_비어있을때_dequeue_하면_오류를_반환해야한다() throws {
-        XCTAssertThrowsError(try sutLinkedList.dequeue())
+    func test_4_5_6을_append_한_후에_removeFirst_두번_하면_5를_반환해야한다() throws {
+        sutLinkedList.append(data: 4)
+        sutLinkedList.append(data: 5)
+        sutLinkedList.append(data: 6)
+        
+        do {
+            let firstResult = try sutLinkedList.removeFirst()
+            let secondResult = try sutLinkedList.removeFirst()
+            XCTAssertEqual(secondResult, 5)
+        } catch LinkedListError.dataDoesNotExist {
+            XCTFail()
+        }
     }
+    
+    func test_7_8_9_append_한_후에_firstData를_호출하면_7을_반환해야한다() throws {
+        sutLinkedList.append(data: 7)
+        sutLinkedList.append(data: 8)
+        sutLinkedList.append(data: 9)
+        
+        do {
+            let firstData = try sutLinkedList.firstData()
+            XCTAssertEqual(firstData, 7)
+        } catch LinkedListError.dataDoesNotExist {
+            XCTFail()
+        }
+    }
+    
+    func test_LinkedList가_비어있을때_isEmpty는_true를_반환해야한다() {
+        let isEmpty = sutLinkedList.isEmpty
+        XCTAssertTrue(isEmpty)
+    }
+    
+    func test_LinkedList가_비어있을때_dequeue_하면_오류를_반환해야한다() throws {
+        XCTAssertThrowsError(try sutLinkedList.removeFirst())
+    }
+    
+    
 }
