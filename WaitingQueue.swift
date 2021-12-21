@@ -1,5 +1,5 @@
 //
-//  CustomerQueue.swift
+//  WaitingQueue.swift
 //  BankManagerUIApp
 //
 //  Created by Sunwoo on 2021/12/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CustomerQueue<T> {
+struct WaitingQueue<T> {
     private var list = LinkedList<T>()
     
     var isEmpty: Bool {
@@ -15,7 +15,7 @@ struct CustomerQueue<T> {
     }
     
     mutating func enqueue(_ item: T) {
-        list.append(data: item)
+        list.append(item)
     }
     
     mutating func dequeue() -> T? {
