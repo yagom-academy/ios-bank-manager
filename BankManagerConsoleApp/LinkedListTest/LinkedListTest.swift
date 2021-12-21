@@ -44,6 +44,7 @@ class LinkedListTest: XCTestCase {
         linkedList.clear()
         
         XCTAssertNil(linkedList.head)
+        XCTAssertNil(linkedList.tail)
     }
     
     func test_enqueue_shouldAddNode() throws {

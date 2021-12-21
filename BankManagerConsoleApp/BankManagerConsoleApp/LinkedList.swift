@@ -20,10 +20,8 @@ struct LinkedList<Type> {
     }
     
     mutating func clear() {
-        while head != nil {
-            head = nil
-            head = head?.next
-        }
+        head = nil
+        tail = nil
     }
     
     mutating func enqueue(_ data: Type) {
