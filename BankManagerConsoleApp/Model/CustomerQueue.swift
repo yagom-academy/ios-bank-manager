@@ -1,7 +1,7 @@
 import Foundation
 
 struct CustomerQueue<Element> {
-    var customers: LinkedList<Element> = LinkedList<Element>(value: nil)
+    var customers: LinkedList<Element> = LinkedList<Element>(nil)
     var isEmpty: Bool {
         return customers.isEmpty
     }

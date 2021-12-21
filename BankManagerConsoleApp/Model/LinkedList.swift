@@ -25,8 +25,20 @@ final class LinkedList<Element> {
     var isEmpty: Bool {
         return head == nil
     }
+    var count: Int {
+        var numberOfNode: Int = 0
+        guard var finderToTail = head else { return numberOfNode }
+        numberOfNode += 1
+        
+        while let nextNode = finderToTail.next {
+            numberOfNode += 1
+            finderToTail = nextNode
+        }
+        
+        return numberOfNode
+    }
     
-    init(value: Element?) {
+    init(_ value: Element?) {
         if let value = value {
             self.head = Node(value: value)
         }
@@ -42,6 +54,29 @@ final class LinkedList<Element> {
         }
     }
     
+    func insert(_ value: Element, at index: Int) throws {
+        guard index <= count else {
+            throw LinkedListError.invalidIndex
+        }
+        
+        let newNode = Node(value: value)
+        
+        if index == 0 {
+            newNode.next = head
+            head = newNode
+            return
+        }
+        
+        var temp = head
+        
+        for _ in 0..<index-1 {
+            temp = temp?.next
+        }
+        
+        newNode.next = temp?.next
+        temp?.next = newNode
+    }
+    
     func removeFirst() -> Element? {
         if isEmpty { return nil }
         
@@ -49,6 +84,25 @@ final class LinkedList<Element> {
         head = head?.next
         
         return valueToRemove
+    }
+    
+    func remove(at index: Int) throws {
+        guard index < count else {
+            throw LinkedListError.invalidIndex
+        }
+                
+        if index == 0 {
+            head = head?.next
+            return
+        }
+        
+        var temp = head
+        
+        for _ in 0..<index-1 {
+            temp = temp?.next
+        }
+        
+        temp?.next = temp?.next?.next
     }
     
     func removeAll() {
