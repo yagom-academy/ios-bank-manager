@@ -23,4 +23,8 @@ struct CustomerQueue<T> {
         
         return firstItem
     }
+    
+    mutating func clear() {
+        list.removeAll()
+    }
 }
