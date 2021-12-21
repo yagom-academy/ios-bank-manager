@@ -50,6 +50,21 @@ class CustomerQueueTests: XCTestCase {
         }
     }
     
+    func test_11을_enqueue_한_후에_dequeue_하면_비어있어야한다() {
+        sutCustomerQueue.enqueue(data: 11)
+        
+        do {
+            let _ = try sutCustomerQueue.dequeue()
+        } catch LinkedListError.dataDoesNotExist {
+            XCTFail()
+        } catch {
+            XCTFail()
+        }
+        
+        let result = sutCustomerQueue.isEmpty
+        XCTAssertTrue(result)
+    }
+    
     func test_CustomerQueue가_비어있을때_dequeue_하면_오류를_던져야한다() {
         XCTAssertThrowsError(try sutCustomerQueue.dequeue())
     }
