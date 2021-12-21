@@ -22,6 +22,7 @@ final class LinkedList<T> {
         }
     }
     
+    @discardableResult
     func removeFirst() -> T? {
         guard head != nil else {
             return nil

@@ -63,6 +63,22 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(thirdResult)
     }
     
+    func test_노드가3개있을때_removeFirst호출시_head_tail이_정상적으로반환되는지() {
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        sut.removeFirst()
+
+        XCTAssertEqual(sut.head?.data, 2)
+        XCTAssertEqual(sut.tail?.data, 3)
+        
+        sut.removeFirst()
+        
+        XCTAssertEqual(sut.head?.data, 3)
+        XCTAssertEqual(sut.tail?.data, 3)
+    }
+    
     func test_removeAll했을때_정상적으로되는지() {
         sut.append(1)
         sut.append(2)
