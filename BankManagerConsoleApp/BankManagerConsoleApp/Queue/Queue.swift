@@ -16,15 +16,15 @@ struct Queue<Element> {
         linkedList.isEmpty
     }
     
-    func enqueue(data: Element) {
+    mutating func enqueue(data: Element) {
         linkedList.append(data: data)
     }
     
-    func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         linkedList.removeFirst()
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         linkedList.removeAll()
     }
 }
