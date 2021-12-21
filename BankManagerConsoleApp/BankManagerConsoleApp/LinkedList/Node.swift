@@ -15,4 +15,8 @@ class Node<Element> {
         self.data = data
         self.next = next
     }
+    
+    convenience init(data: Element) {
+        self.init(data: data, next: nil)
+    }
 }

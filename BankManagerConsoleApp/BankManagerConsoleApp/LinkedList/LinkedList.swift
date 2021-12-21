@@ -14,10 +14,10 @@ class LinkedList<Element> {
     
     func append(data: Element) {
         if head == nil {
-            head = Node(data: data, next: nil)
+            head = Node(data: data)
             tail = head
         } else {
-            tail?.next = Node(data: data, next: nil)
+            tail?.next = Node(data: data)
             tail = tail?.next
         }
     }
