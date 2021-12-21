@@ -24,15 +24,26 @@ class LinkedListTest: XCTestCase {
 
     func test_isEmpty_shouldReturnExactBooleanType() throws {
         sut?.head = Node(data: 1)
-        let sut = try XCTUnwrap(sut)
-        
-        XCTAssertFalse(sut.isEmpty)
+        let result = try XCTUnwrap(sut)
+
+        XCTAssertFalse(result.isEmpty)
     }
-    
+
     func test_peek_shouldReturnHeadData() throws {
         sut?.head = Node(data: 1)
-        let sut = try XCTUnwrap(sut)
+        let result = try XCTUnwrap(sut)
+
+        XCTAssertEqual(result.peek(), 1)
+    }
+
+    func test_clear_shouldRemoveAll() throws {
+        sut?.head = Node(data: 1)
+        sut?.head?.next = Node(data: 2)
+        sut?.head?.next?.next = Node(data: 3)
+        var result = try XCTUnwrap(sut)
         
-        XCTAssertEqual(sut.peek(), 1)
+        result.clear()
+        
+        XCTAssertNil(result.head)
     }
 }

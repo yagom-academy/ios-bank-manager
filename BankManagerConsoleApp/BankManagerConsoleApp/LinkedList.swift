@@ -18,6 +18,13 @@ struct LinkedList<Type> {
     func peek() -> Type? {
         return head?.data
     }
+    
+    mutating func clear() {
+        while head != nil {
+            head = nil
+            head = head?.next
+        }
+    }
 }
 
 class Node<Type> {
