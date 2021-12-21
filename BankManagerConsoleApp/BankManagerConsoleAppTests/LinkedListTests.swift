@@ -85,6 +85,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(isEmpty)
     }
     
+    func test_LinkedList가_비어있지않을때_isEmpty는_false를_반환해야한다() {
+        sutLinkedList.append(data: 7)
+        sutLinkedList.append(data: 8)
+        sutLinkedList.append(data: 9)
+        
+        let isEmpty = sutLinkedList.isEmpty
+        XCTAssertFalse(isEmpty)
+    }
+    
     func test_LinkedList가_비어있을때_dequeue_하면_오류를_반환해야한다() {
         XCTAssertThrowsError(try sutLinkedList.removeFirst())
     }
