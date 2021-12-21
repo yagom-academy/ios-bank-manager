@@ -9,6 +9,7 @@ import Foundation
 
 struct LinkedList<Element> {
     private var head: Node<Element>?
+    private var tail: Node<Element>?
     var first: Element? {
         head?.data
     }
@@ -17,17 +18,15 @@ struct LinkedList<Element> {
     }
     
     mutating func append(data: Element) {
-        if head == nil {
-            head = Node(data: data)
-            return
+        let newNode = Node(data: data)
+        
+        if let node = tail {
+            node.next = newNode
+        } else {
+            head = newNode
         }
         
-        var node = head
-        while node?.next != nil  {
-            node = node?.next
-        }
-
-        node?.next = Node(data: data)
+        tail = newNode
     }
     
     mutating func removeFirst() -> Element? {
