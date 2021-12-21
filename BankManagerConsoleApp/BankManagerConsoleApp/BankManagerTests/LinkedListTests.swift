@@ -16,9 +16,11 @@ class LinkedListTests: XCTestCase {
     func test_linkedList에_head가_없을때_append가_정상적으로되는지() {
         sut.append(1)
         
-        let result = sut.head?.data
+        let headResult = sut.head?.data
+        let tailResult = sut.tail?.data
         
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(headResult, 1)
+        XCTAssertEqual(headResult, tailResult)
     }
     
     func test_linkedList에_head가_있을때_append가_정상적으로되는지() {
@@ -26,10 +28,20 @@ class LinkedListTests: XCTestCase {
         sut.append(2)
         
         let headResult = sut.head?.data
-        let headNextResult = sut.head?.next?.data
+        let tailResult = sut.tail?.data
         
         XCTAssertEqual(headResult, 1)
-        XCTAssertEqual(headNextResult, 2)
+        XCTAssertEqual(tailResult, 2)
+    }
+    
+    func test_linkedList에_node가_여러개있을때_tail의data가_정상적으로반환되는지() {
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        let tailResult = sut.tail?.data
+        
+        XCTAssertEqual(tailResult, 3)
     }
     
     func test_linkedList에_head가_없을때_removeFirst가_nil을반환하는지() {

@@ -1,5 +1,6 @@
 final class LinkedList<T> {
     var head: Node<T>?
+    var tail: Node<T>?
     
     var first: T? {
         return head != nil ? head?.data : nil
@@ -10,16 +11,15 @@ final class LinkedList<T> {
     }
     
     func append(_ element: T) {
-        guard head != nil else {
+        if isEmpty {
             head = Node(data: element)
-            return
+            tail = head
+        } else {
+            let newNode = Node(data: element)
+            tail?.next = newNode
+            newNode.prev = tail
+            tail = newNode
         }
-        
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: element)
     }
     
     func removeFirst() -> T? {
