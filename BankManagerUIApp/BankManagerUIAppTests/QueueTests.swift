@@ -20,8 +20,28 @@ class QueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue_메서드() {
+    func test_enqueue_실행() {
+        // when
         sut.enqueue(1)
+        
+        // then
         XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_비어있는_큐에서_dequeue_실행() {
+        // then
+        XCTAssertNil(sut.dequeue())
+    }
+    
+    func test_비어있지않은_큐에서_dequeue_실행() {
+        // given
+        let item = 4
+        sut.enqueue(item)
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, item)
     }
 }
