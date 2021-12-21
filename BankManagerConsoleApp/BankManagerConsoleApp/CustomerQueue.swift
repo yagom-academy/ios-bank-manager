@@ -18,4 +18,9 @@ struct CustomerQueue<Element> {
         let dequeuedData = try linkedList.removeFirst()
         return dequeuedData
     }
+    
+    func peek() throws -> Element {
+        let firstData = try linkedList.firstData()
+        return firstData
+    }
 }
