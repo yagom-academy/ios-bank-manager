@@ -20,7 +20,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_append_와_remove_메서드() {
-        sut.append(item: 1)
+        sut.append(1)
         
         let result = sut.remove()
 
@@ -29,8 +29,8 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_append_와_remove_두번() {
-        sut.append(item: 1)
-        sut.append(item: 2)
+        sut.append(1)
+        sut.append(2)
 
         let resultFirst = sut.remove()
         let resultSecond = sut.remove()
