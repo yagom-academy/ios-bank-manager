@@ -7,14 +7,16 @@
 import XCTest
 @testable import BankManagerUIApp
 
-class BankManagerUIAppTests: XCTestCase {
+class QueueTests: XCTestCase {
     var sut: Queue<Int>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = Queue<Int>.init()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
