@@ -47,6 +47,11 @@ class LinkedList<Element> {
     }
     
     func removeAll() {
+        while let next = head?.next {
+            head = nil
+            head = next
+        }
+        
         head = nil
         tail = nil
     }
