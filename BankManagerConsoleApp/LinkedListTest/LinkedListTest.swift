@@ -24,50 +24,50 @@ class LinkedListTest: XCTestCase {
 
     func test_isEmpty_shouldReturnExactBooleanType() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.enqueue(1)
+        linkedList.append(1)
 
         XCTAssertFalse(linkedList.isEmpty)
     }
 
     func test_peek_shouldReturnHeadData() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.enqueue(1)
+        linkedList.append(1)
 
         XCTAssertEqual(linkedList.peek(), 1)
     }
 
     func test_clear_shouldRemoveAll() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.enqueue(1)
-        linkedList.enqueue(2)
-        linkedList.enqueue(3)
-        linkedList.clear()
+        linkedList.append(1)
+        linkedList.append(2)
+        linkedList.append(3)
+        linkedList.removeAll()
         
         XCTAssertTrue(linkedList.isEmpty)
     }
     
     func test_enqueue_shouldAddNode() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.enqueue(1)
-        linkedList.enqueue(2)
-        linkedList.enqueue(3)
+        linkedList.append(1)
+        linkedList.append(2)
+        linkedList.append(3)
 
         XCTAssertEqual(linkedList.peek(), 1)
     }
     
     func test_dequeue_shouldRemoveFirstNode() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.enqueue(1)
-        linkedList.enqueue(2)
-        linkedList.enqueue(3)
-        linkedList.dequeue()
+        linkedList.append(1)
+        linkedList.append(2)
+        linkedList.append(3)
+        linkedList.removeFirst()
         
         XCTAssertEqual(linkedList.peek(), 2)
     }
     
     func test_dequeue_withEmptyLinkedList_shouldReturnNil() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.dequeue()
+        linkedList.removeFirst()
         
         XCTAssertTrue(linkedList.isEmpty)
     }

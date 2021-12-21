@@ -29,12 +29,12 @@ struct LinkedList<Type> {
         return head?.data
     }
     
-    mutating func clear() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }
     
-    mutating func enqueue(_ data: Type) {
+    mutating func append(_ data: Type) {
         let newNode = Node(data: data)
         
         if let lastNode = tail {
@@ -45,7 +45,7 @@ struct LinkedList<Type> {
         tail = newNode
     }
     
-    mutating func dequeue() {
+    mutating func removeFirst() {
         head = head?.next
     }
 }

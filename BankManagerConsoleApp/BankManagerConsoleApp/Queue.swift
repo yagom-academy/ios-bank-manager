@@ -19,14 +19,14 @@ struct Queue<Type> {
     }
     
     func clear() {
-        queue.clear()
+        queue.removeAll()
     }
     
     func enqueue(_ data: Type) {
-        queue.enqueue(data)
+        queue.append(data)
     }
     
     func dequeue() {
-        queue.dequeue()
+        queue.removeFirst()
     }
 }
