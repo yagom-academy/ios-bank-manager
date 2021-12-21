@@ -66,4 +66,28 @@ class CustomerQueueTests: XCTestCase {
     func test_CustomerQueue가_비어있을때_peek하면_오류를_던져야한다() throws {
         XCTAssertThrowsError(try sutCustomerQueue.peek())
     }
+    
+    func test_CustomerQueue가_비어있을때_isEmpty는_true를_반환해야한다() {
+        let result = sutCustomerQueue.isEmpty
+        XCTAssertTrue(result)
+    }
+    
+    func test_CustomerQueue가_비어있지않을때_isEmpty는_false를_반환해야한다() {
+        sutCustomerQueue.enqueue(data: 9)
+        sutCustomerQueue.enqueue(data: 10)
+        sutCustomerQueue.enqueue(data: 11)
+        
+        let result = sutCustomerQueue.isEmpty
+        XCTAssertFalse(result)
+    }
+    
+    func test_CustomerQueue에_clear하면_빈_queue가_되어야한다() {
+        sutCustomerQueue.enqueue(data: 9)
+        sutCustomerQueue.enqueue(data: 10)
+        sutCustomerQueue.enqueue(data: 11)
+        sutCustomerQueue.clear()
+        
+        let result = sutCustomerQueue.isEmpty
+        XCTAssertTrue(result)
+    }
 }
