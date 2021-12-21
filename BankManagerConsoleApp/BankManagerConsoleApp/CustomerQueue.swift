@@ -24,7 +24,7 @@ struct CustomerQueue<Element> {
         return firstData
     }
     
-    func clear() {
+    mutating func clear() {
         linkedList = LinkedList<Element>()
     }
     

@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4788F785277066120067596D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788F784277066120067596D /* LinkedList.swift */; };
+		4788F79027716F840067596D /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788F78F27716F840067596D /* CustomerQueueTests.swift */; };
+		4788F79427716F8E0067596D /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF7C2770702D0054DE4B /* LinkedListTests.swift */; };
+		4788F79527716F980067596D /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7A277166490055560E /* CustomerQueue.swift */; };
+		4788F79627716F9A0067596D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788F784277066120067596D /* LinkedList.swift */; };
+		4788F79727716F9D0067596D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
+		4788F79827716F9F0067596D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF74277062E20054DE4B /* Node.swift */; };
 		C132FF75277062E20054DE4B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF74277062E20054DE4B /* Node.swift */; };
-		C132FF7D2770702D0054DE4B /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF7C2770702D0054DE4B /* LinkedListTests.swift */; };
-		C132FF81277070540054DE4B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788F784277066120067596D /* LinkedList.swift */; };
-		C132FF822770705E0054DE4B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF74277062E20054DE4B /* Node.swift */; };
 		C168CF7B277166490055560E /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7A277166490055560E /* CustomerQueue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -31,8 +34,9 @@
 
 /* Begin PBXFileReference section */
 		4788F784277066120067596D /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		4788F78D27716F840067596D /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4788F78F27716F840067596D /* CustomerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTests.swift; sourceTree = "<group>"; };
 		C132FF74277062E20054DE4B /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		C132FF7A2770702D0054DE4B /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C132FF7C2770702D0054DE4B /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		C168CF7A277166490055560E /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +45,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C132FF772770702D0054DE4B /* Frameworks */ = {
+		4788F78A27716F840067596D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -58,19 +62,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C132FF7B2770702D0054DE4B /* LinkedListTests */ = {
+		4788F78E27716F840067596D /* BankManagerConsoleAppTests */ = {
 			isa = PBXGroup;
 			children = (
 				C132FF7C2770702D0054DE4B /* LinkedListTests.swift */,
+				4788F78F27716F840067596D /* CustomerQueueTests.swift */,
 			);
-			path = LinkedListTests;
+			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				C132FF7B2770702D0054DE4B /* LinkedListTests */,
+				4788F78E27716F840067596D /* BankManagerConsoleAppTests */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
-				C132FF7A2770702D0054DE4B /* LinkedListTests.xctest */,
+				4788F78D27716F840067596D /* BankManagerConsoleAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,21 +104,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C132FF792770702D0054DE4B /* LinkedListTests */ = {
+		4788F78C27716F840067596D /* BankManagerConsoleAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C132FF802770702D0054DE4B /* Build configuration list for PBXNativeTarget "LinkedListTests" */;
+			buildConfigurationList = 4788F79127716F840067596D /* Build configuration list for PBXNativeTarget "BankManagerConsoleAppTests" */;
 			buildPhases = (
-				C132FF762770702D0054DE4B /* Sources */,
-				C132FF772770702D0054DE4B /* Frameworks */,
-				C132FF782770702D0054DE4B /* Resources */,
+				4788F78927716F840067596D /* Sources */,
+				4788F78A27716F840067596D /* Frameworks */,
+				4788F78B27716F840067596D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LinkedListTests;
-			productName = LinkedListTests;
-			productReference = C132FF7A2770702D0054DE4B /* LinkedListTests.xctest */;
+			name = BankManagerConsoleAppTests;
+			productName = BankManagerConsoleAppTests;
+			productReference = 4788F78D27716F840067596D /* BankManagerConsoleAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C7694E75259C3EC00053667F /* BankManagerConsoleApp */ = {
@@ -142,7 +147,7 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
-					C132FF792770702D0054DE4B = {
+					4788F78C27716F840067596D = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
 					C7694E75259C3EC00053667F = {
@@ -164,13 +169,13 @@
 			projectRoot = "";
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
-				C132FF792770702D0054DE4B /* LinkedListTests */,
+				4788F78C27716F840067596D /* BankManagerConsoleAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C132FF782770702D0054DE4B /* Resources */ = {
+		4788F78B27716F840067596D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -180,13 +185,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C132FF762770702D0054DE4B /* Sources */ = {
+		4788F78927716F840067596D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C132FF822770705E0054DE4B /* Node.swift in Sources */,
-				C132FF81277070540054DE4B /* LinkedList.swift in Sources */,
-				C132FF7D2770702D0054DE4B /* LinkedListTests.swift in Sources */,
+				4788F79427716F8E0067596D /* LinkedListTests.swift in Sources */,
+				4788F79727716F9D0067596D /* main.swift in Sources */,
+				4788F79027716F840067596D /* CustomerQueueTests.swift in Sources */,
+				4788F79827716F9F0067596D /* Node.swift in Sources */,
+				4788F79627716F9A0067596D /* LinkedList.swift in Sources */,
+				4788F79527716F980067596D /* CustomerQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,34 +213,34 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C132FF7E2770702D0054DE4B /* Debug */ = {
+		4788F79227716F840067596D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MLY2NY4CXP;
+				DEVELOPMENT_TEAM = 3P8RM8472L;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.singularis7.LinkedListTests;
+				PRODUCT_BUNDLE_IDENTIFIER = seul.BankManagerConsoleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		C132FF7F2770702D0054DE4B /* Release */ = {
+		4788F79327716F840067596D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MLY2NY4CXP;
+				DEVELOPMENT_TEAM = 3P8RM8472L;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.singularis7.LinkedListTests;
+				PRODUCT_BUNDLE_IDENTIFIER = seul.BankManagerConsoleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -375,11 +383,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C132FF802770702D0054DE4B /* Build configuration list for PBXNativeTarget "LinkedListTests" */ = {
+		4788F79127716F840067596D /* Build configuration list for PBXNativeTarget "BankManagerConsoleAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C132FF7E2770702D0054DE4B /* Debug */,
-				C132FF7F2770702D0054DE4B /* Release */,
+				4788F79227716F840067596D /* Debug */,
+				4788F79327716F840067596D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
