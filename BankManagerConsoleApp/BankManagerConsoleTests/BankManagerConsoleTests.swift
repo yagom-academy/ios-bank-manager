@@ -24,4 +24,10 @@ class BankManagerConsoleTests: XCTestCase {
         let returnValue = queue.dequeue()
         XCTAssertEqual(returnValue, 1)
     }
+    
+    func test_should_returnValueIs1_When_peek() {
+        queue.enqueue(1)
+        let returnValue = queue.peek()
+        XCTAssertEqual(returnValue, 1)
+    }
 }
