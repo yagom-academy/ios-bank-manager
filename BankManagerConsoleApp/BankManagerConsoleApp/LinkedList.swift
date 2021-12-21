@@ -47,8 +47,9 @@ struct LinkedList<Element> {
     
     mutating func removeFirst() -> Element? {
         guard isEmpty else {
+            let first = head?.data
             head = head?.next
-            return head?.data
+            return first
         }
         return nil
     }

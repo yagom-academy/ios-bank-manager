@@ -18,4 +18,10 @@ class BankManagerConsoleTests: XCTestCase {
         queue.enqueue(3)
         XCTAssertFalse(queue.isEmpty)
     }
+    
+    func test_should_returnValueis1_When_dequeue() {
+        queue.enqueue(1)
+        let returnValue = queue.dequeue()
+        XCTAssertEqual(returnValue, 1)
+    }
 }
