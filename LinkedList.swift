@@ -11,8 +11,8 @@ struct LinkedList<T> {
         }
     }
     
-    var head: Node?
-    var tail: Node?
+    private var head: Node?
+    private var tail: Node?
     
     var isEmpty: Bool {
         return head == nil
