@@ -1,10 +1,10 @@
 import XCTest
 
 class QueueTests: XCTestCase {
-    var queue: Queue<Int> = Queue<Int>()
+    var queue: Queue<Int>!
 
-    override func tearDownWithError() throws {
-     queue = Queue<Int>()
+    override func setUpWithError() throws {
+        queue = Queue<Int>()
     }
 
     func test_Should_isEmptyIsFalse_When_enqueue3() {
