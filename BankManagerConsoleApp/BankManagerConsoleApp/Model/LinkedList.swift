@@ -24,7 +24,7 @@ final class LinkedList<T> {
     
     @discardableResult
     func removeFirst() -> T? {
-        guard head != nil else {
+        guard isEmpty == false else {
             return nil
         }
         
@@ -41,5 +41,6 @@ final class LinkedList<T> {
     
     func removeAll() {
         head = nil
+        tail = nil
     }
 }
