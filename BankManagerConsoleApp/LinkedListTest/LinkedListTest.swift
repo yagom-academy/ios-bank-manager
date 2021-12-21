@@ -43,8 +43,7 @@ class LinkedListTest: XCTestCase {
         linkedList.enqueue(3)
         linkedList.clear()
         
-        XCTAssertNil(linkedList.head)
-        XCTAssertNil(linkedList.tail)
+        XCTAssertTrue(linkedList.isEmpty)
     }
     
     func test_enqueue_shouldAddNode() throws {
@@ -52,9 +51,8 @@ class LinkedListTest: XCTestCase {
         linkedList.enqueue(1)
         linkedList.enqueue(2)
         linkedList.enqueue(3)
-        
-        XCTAssertEqual(linkedList.head?.data, 1)
-        XCTAssertEqual(linkedList.tail?.data, 3)
+
+        XCTAssertEqual(linkedList.peek(), 1)
     }
     
     func test_dequeue_shouldRemoveFirstNode() throws {
@@ -64,14 +62,13 @@ class LinkedListTest: XCTestCase {
         linkedList.enqueue(3)
         linkedList.dequeue()
         
-        XCTAssertEqual(linkedList.head?.data, 2)
+        XCTAssertEqual(linkedList.peek(), 2)
     }
     
     func test_dequeue_withEmptyLinkedList_shouldReturnNil() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.dequeue()
         
-        XCTAssertNil(linkedList.head)
-        XCTAssertNil(linkedList.tail)
+        XCTAssertTrue(linkedList.isEmpty)
     }
 }

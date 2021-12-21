@@ -7,18 +7,19 @@
 
 import Foundation
 
-class Node<Type> {
-    var data: Type
-    var next: Node<Type>?
-    
-    init(data: Type) {
-        self.data = data
-    }
-}
-
 struct LinkedList<Type> {
-    var head: Node<Type>?
-    var tail: Node<Type>?
+
+    private class Node<Type> {
+        var data: Type
+        var next: Node<Type>?
+        
+        init(data: Type) {
+            self.data = data
+        }
+    }
+    
+    private var head: Node<Type>?
+    private var tail: Node<Type>?
     
     var isEmpty: Bool {
         head == nil
