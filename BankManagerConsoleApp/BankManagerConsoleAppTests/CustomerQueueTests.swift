@@ -11,15 +11,15 @@ class CustomerQueueTests: XCTestCase {
     
     var sutCustomerQueue: CustomerQueue<Int>!
 
-    override func setUpWithError() throws {
+    override func setUp() {
         sutCustomerQueue = CustomerQueue<Int>()
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         sutCustomerQueue = nil
     }
     
-    func test_1_2_3을_enqueue_한_후에_dequeue_하면_1을_반환해야한다() throws {
+    func test_1_2_3을_enqueue_한_후에_dequeue_하면_1을_반환해야한다() {
         sutCustomerQueue.enqueue(data: 1)
         sutCustomerQueue.enqueue(data: 2)
         sutCustomerQueue.enqueue(data: 3)
@@ -29,10 +29,12 @@ class CustomerQueueTests: XCTestCase {
             XCTAssertEqual(result, 1)
         } catch LinkedListError.dataDoesNotExist {
             XCTFail()
+        } catch {
+            XCTFail()
         }
     }
     
-    func test_9_10_11을_enqueue_한_후에_dequeue_두번_하면_10을_반환해야한다() throws {
+    func test_9_10_11을_enqueue_한_후에_dequeue_두번_하면_10을_반환해야한다() {
         sutCustomerQueue.enqueue(data: 9)
         sutCustomerQueue.enqueue(data: 10)
         sutCustomerQueue.enqueue(data: 11)
@@ -43,14 +45,16 @@ class CustomerQueueTests: XCTestCase {
             XCTAssertEqual(result, 10)
         } catch LinkedListError.dataDoesNotExist {
             XCTFail()
+        } catch {
+            XCTFail()
         }
     }
     
-    func test_CustomerQueue가_비어있을때_dequeue_하면_오류를_던져야한다() throws {
+    func test_CustomerQueue가_비어있을때_dequeue_하면_오류를_던져야한다() {
         XCTAssertThrowsError(try sutCustomerQueue.dequeue())
     }
     
-    func test_9_10_11을_enqueue_한_후에_peek하면_9를_반환해야한다() throws {
+    func test_9_10_11을_enqueue_한_후에_peek하면_9를_반환해야한다() {
         sutCustomerQueue.enqueue(data: 9)
         sutCustomerQueue.enqueue(data: 10)
         sutCustomerQueue.enqueue(data: 11)
@@ -60,10 +64,12 @@ class CustomerQueueTests: XCTestCase {
             XCTAssertEqual(result, 9)
         } catch LinkedListError.dataDoesNotExist {
             XCTFail()
+        } catch {
+            XCTFail()
         }
     }
     
-    func test_CustomerQueue가_비어있을때_peek하면_오류를_던져야한다() throws {
+    func test_CustomerQueue가_비어있을때_peek하면_오류를_던져야한다() {
         XCTAssertThrowsError(try sutCustomerQueue.peek())
     }
     
