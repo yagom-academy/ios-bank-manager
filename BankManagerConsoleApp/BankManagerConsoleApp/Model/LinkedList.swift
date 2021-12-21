@@ -1,6 +1,6 @@
 final class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     var first: T? {
         return head != nil ? head?.data : nil
