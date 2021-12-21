@@ -1,5 +1,5 @@
 struct CustomerQueue<T> {
-    var linkedList: LinkedList = LinkedList<T>()
+    private var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {
         return linkedList.isEmpty
@@ -9,6 +9,7 @@ struct CustomerQueue<T> {
         linkedList.append(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         linkedList.removeFirst()
     }
