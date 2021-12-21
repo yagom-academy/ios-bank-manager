@@ -68,5 +68,18 @@ class WaitingQueueTests: XCTestCase {
         
         XCTAssertTrue(sut.isEmpty)
     }
-
+    
+    func test_a부터_d까지의_문자_데이터를_enqueue를_한_후_peek을_했을_때_반환값이_a_이다() {
+        let testData = ["a", "b", "c", "d"]
+        
+        for data in testData {
+            sut.enqueue(data)
+        }
+        
+        guard let resultData = sut.peek() as? String else {
+            return
+        }
+        
+        XCTAssertEqual(testData[0], resultData)
+    }
 }
