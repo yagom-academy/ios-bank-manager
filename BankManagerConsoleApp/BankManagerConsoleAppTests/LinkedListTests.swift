@@ -39,7 +39,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.first, 2)
     }
     
-    func test_LinkedList_append_3개() {
+    func test_LinkedList_연결이_잘_되어있는지_확인() {
         sut.append(1)
         sut.append(2)
         sut.append(3)
