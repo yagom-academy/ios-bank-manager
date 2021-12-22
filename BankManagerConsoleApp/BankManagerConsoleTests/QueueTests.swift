@@ -71,4 +71,28 @@ class QueueTests: XCTestCase {
         queue.enqueue(0.0)
         XCTAssertEqual(queue.dequeue(), .zero)
     }
+    
+    func test_Should_returnElementAtFirst_When_removeAtFirstAfterinsertAtFirst() {
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.insert(5, at: 0)
+        XCTAssertEqual(queue.remove(at: 0), 5)
+    }
+    
+    func test_Should_returnElementAtLast_When_removeAtLastAfterinsertAtLast() {
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.insert(5, at: 3)
+        XCTAssertEqual(queue.remove(at: 3), 5)
+    }
+    
+    func test_Should_returnElementAt1_When_removeAt1AfterinsertAt1() {
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.insert(5, at: 1)
+        XCTAssertEqual(queue.remove(at: 1), 5)
+    }
 }
