@@ -16,7 +16,7 @@ class QueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Queue<Value>.init()
+        sut = Queue<Value>()
     }
 
     override func tearDownWithError() throws {

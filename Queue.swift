@@ -8,7 +8,7 @@ struct Queue<T> {
     }
     
     init() {
-        items = LinkedList<T>.init()
+        items = LinkedList<T>()
     }
     
     mutating func enqueue(_ item: T) {
@@ -20,7 +20,7 @@ struct Queue<T> {
     }
     
     mutating func clear() {
-        items = LinkedList<T>.init()
+        items = LinkedList<T>()
     }
     
     func peek() -> T? {
