@@ -9,12 +9,12 @@ import Foundation
 
 struct LinkedList<Element> {
     
-    private class Node<Value> {
+    private final class Node<Value> {
         
         var value: Value
         var next: Node<Value>?
         
-        init(value: Value) {
+        init(_ value: Value) {
             self.value = value
         }
     }
@@ -28,13 +28,13 @@ struct LinkedList<Element> {
         return head?.value
     }
     
-    mutating func append(value: Element) {
+    mutating func append(_ value: Element) {
         guard !isEmpty else {
-            head = Node(value: value)
+            head = Node(value)
             tail = head
             return
         }
-        tail?.next = Node(value: value)
+        tail?.next = Node(value)
         tail = tail?.next
     }
     

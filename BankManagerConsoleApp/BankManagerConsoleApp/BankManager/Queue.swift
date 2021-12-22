@@ -9,13 +9,13 @@ import Foundation
 
 struct Queue<Element> {
     
-    private var list: LinkedList<Element> = LinkedList()
+    private var list = LinkedList<Element>()
     var isEmpty: Bool {
         return list.isEmpty
     }
     
-    mutating func enqueue(element: Element) {
-        list.append(value: element)
+    mutating func enqueue(_ element: Element) {
+        list.append(element)
     }
     
     mutating func dequeue() -> Element? {
