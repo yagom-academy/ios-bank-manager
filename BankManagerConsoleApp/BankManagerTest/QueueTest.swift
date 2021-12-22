@@ -11,13 +11,7 @@ class QueueTest: XCTestCase {
     var sut: Queue<Int>!
 
     override func setUpWithError() throws {
-        try super.setUpWithError()
         sut = Queue<Int>()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
     }
     
     func test_큐가_비어있을때_true를_반환하는지() {
@@ -71,5 +65,4 @@ class QueueTest: XCTestCase {
         let firstResult = sut.dequeue()
         XCTAssertEqual(3, firstResult)
     }
-
 }
