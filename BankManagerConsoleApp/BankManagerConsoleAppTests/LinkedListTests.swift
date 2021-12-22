@@ -4,10 +4,12 @@ class LinkedListTests: XCTestCase {
     var sut: MockLinkedList<Int>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = MockLinkedList()
     }
     
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
