@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Queue<Element> {
+class Queue<Element> {
     private var items = LinkedList<Element>()
     
     var isEmpty: Bool {
