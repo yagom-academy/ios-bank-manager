@@ -16,7 +16,7 @@ struct Queue<T> {
     }
     
     mutating func dequeue() -> T? {
-        return items.remove()
+        return items.removeFirst()
     }
     
     mutating func clear() {

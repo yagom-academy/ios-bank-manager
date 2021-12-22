@@ -34,7 +34,7 @@ struct LinkedList<T> {
         }
     }
     
-    mutating func remove() -> T? {
+    mutating func removeFirst() -> T? {
         let returnValue: T? = peek()
         head = head?.next
         
