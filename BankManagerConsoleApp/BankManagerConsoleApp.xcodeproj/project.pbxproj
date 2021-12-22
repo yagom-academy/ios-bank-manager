@@ -30,7 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		25CB74EB2772F55F00A9BB49 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Client.swift; path = ../../../../../Downloads/Client.swift; sourceTree = "<group>"; };
+		25CB74EB2772F55F00A9BB49 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		25CB74ED2772F56E00A9BB49 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
 		6058124E2770598C00DEFBEF /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		608A94D32770790C00C7E1A2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
