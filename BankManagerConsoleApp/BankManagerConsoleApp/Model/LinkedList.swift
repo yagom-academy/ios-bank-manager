@@ -63,8 +63,9 @@ struct LinkedList<Element> {
     
     mutating func remove(at index: Int) -> Element? {
         if index == 0 {
+            let presentNode = head
             head = head?.next
-            return head?.data
+            return presentNode?.data
         }
         let previousNode = node(at: index - 1)
         let presentNode = previousNode?.next
