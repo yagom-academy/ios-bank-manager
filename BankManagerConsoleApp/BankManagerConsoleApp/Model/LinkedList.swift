@@ -61,6 +61,20 @@ struct LinkedList<Element> {
         newNode.next = nextNode
     }
     
+    mutating func remove(at index: Int) {
+        if index == 0 {
+            head = head?.next
+            return
+        }
+        let previousNode = node(at: index - 1)
+        guard let nextNode = previousNode?.next?.next else {
+            previousNode?.next = nil
+            tail = previousNode
+            return
+        }
+        previousNode?.next = nextNode
+    }
+    
     mutating func append(_ data: Element) {
         let nextNode = Node(data: data, next: nil)
         if isEmpty {

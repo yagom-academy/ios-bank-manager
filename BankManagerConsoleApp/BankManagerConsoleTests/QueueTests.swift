@@ -32,16 +32,4 @@ class QueueTests: XCTestCase {
         queue.clear()
         XCTAssertTrue(queue.isEmpty)
     }
-    
-    func test_Should() {
-        queue.enqueue(1)
-        queue.enqueue(2)
-        queue.enqueue(3)
-        queue.enqueue(4)
-        queue.insert(5, at: 0)
-    
-        while !queue.isEmpty {
-            print(queue.dequeue())
-        }
-    }
 }
