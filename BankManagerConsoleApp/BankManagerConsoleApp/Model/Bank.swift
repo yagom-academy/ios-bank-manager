@@ -1,8 +1,8 @@
 import Foundation
 
 struct Bank {
-    var waitingLine = Queue<Customer>()
-    var bankClerk = BankClerk()
+    private var waitingLine = Queue<Customer>()
+    private var bankClerk = BankClerk()
     
     mutating func setWaitingLine(with numberOfCustomer: () -> Int) {
         let totalNumber = numberOfCustomer()
@@ -11,13 +11,14 @@ struct Bank {
         }
     }
     
-    mutating func dequeueWaitingLine() -> Customer {
+    private mutating func dequeueWaitingLine() -> Customer {
         guard let customer = waitingLine.dequeue() else {
             fatalError("unknown error")
         }
         
         return customer
     }
+
     
     mutating func letClerkWork() {
         while waitingLine.isEmpty == false {

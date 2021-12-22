@@ -6,9 +6,9 @@ enum Menu {
 }
 
 struct BankManager {
-    var bank = Bank()
+    private var bank = Bank()
 
-    func showMenu() {
+    private func showMenu() {
         print("1: 은행개점")
         print("2: 종료")
         print("입력: ",terminator: "")
@@ -30,7 +30,7 @@ struct BankManager {
         return 
     }
     
-    func generateNumberOfCustomer() -> Int {
+    private func generateNumberOfCustomer() -> Int {
         let range: ClosedRange<Int> = 10...30
         let numberOfCustomer = Int.random(in: range)
         
