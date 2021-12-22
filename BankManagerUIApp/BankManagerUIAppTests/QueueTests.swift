@@ -8,15 +8,15 @@ import XCTest
 @testable import BankManagerUIApp
 
 class QueueTests: XCTestCase {
-    typealias QueueType = Int
+    typealias Value = Int
     
-    var sut: Queue<QueueType>!
+    var sut: Queue<Value>!
     
     let items = [1,2]
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Queue<QueueType>.init()
+        sut = Queue<Value>.init()
     }
 
     override func tearDownWithError() throws {

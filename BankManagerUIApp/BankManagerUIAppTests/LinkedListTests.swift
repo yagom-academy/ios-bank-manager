@@ -3,15 +3,15 @@ import XCTest
 
 class LinkedListTests: XCTestCase {
 
-    typealias LinkedListType = Int
+    typealias Value = Int
     
-    var sut: LinkedList<LinkedListType>!
+    var sut: LinkedList<Value>!
     
     let items = [10,20]
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList<Int>.init()
+        sut = LinkedList<Value>.init()
     }
 
     override func tearDownWithError() throws {
