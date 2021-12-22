@@ -24,7 +24,7 @@ struct LinkedList<T> {
     }
     
     mutating func append(_ item: T) {
-        let newNode: Node = Node.init(data: item)
+        let newNode: Node = Node(data: item)
         if tail != nil {
             tail?.next = newNode
         }
