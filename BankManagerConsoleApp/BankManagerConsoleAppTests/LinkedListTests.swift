@@ -28,9 +28,9 @@ class LinkedListTests: XCTestCase {
             let result = try sutLinkedList.removeFirst()
             XCTAssertEqual(result, 1)
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -44,9 +44,9 @@ class LinkedListTests: XCTestCase {
             let secondResult = try sutLinkedList.removeFirst()
             XCTAssertEqual(secondResult, 5)
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -56,9 +56,9 @@ class LinkedListTests: XCTestCase {
         do {
             let _ = try sutLinkedList.removeFirst()
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
         
         let result = sutLinkedList.isEmpty
@@ -74,9 +74,9 @@ class LinkedListTests: XCTestCase {
             let firstData = try sutLinkedList.firstData()
             XCTAssertEqual(firstData, 7)
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
     }
     

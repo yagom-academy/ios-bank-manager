@@ -28,9 +28,9 @@ class CustomerQueueTests: XCTestCase {
             let result = try sutCustomerQueue.dequeue()
             XCTAssertEqual(result, 1)
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -44,9 +44,9 @@ class CustomerQueueTests: XCTestCase {
             let result = try sutCustomerQueue.dequeue()
             XCTAssertEqual(result, 10)
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -56,9 +56,9 @@ class CustomerQueueTests: XCTestCase {
         do {
             let _ = try sutCustomerQueue.dequeue()
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
         
         let result = sutCustomerQueue.isEmpty
@@ -78,9 +78,9 @@ class CustomerQueueTests: XCTestCase {
             let result = try sutCustomerQueue.peek()
             XCTAssertEqual(result, 9)
         } catch LinkedListError.dataDoesNotExist {
-            XCTFail()
+            XCTFail(LinkedListError.dataDoesNotExist.description)
         } catch {
-            XCTFail()
+            XCTFail(error.localizedDescription)
         }
     }
     
