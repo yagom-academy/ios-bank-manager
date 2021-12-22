@@ -26,8 +26,8 @@ struct Queue<Element> {
         items.insert(data, at: index)
     }
     
-    mutating func remove(at index: Int) {
-        items.remove(at: index)
+    mutating func remove(at index: Int) -> Element? {
+        return items.remove(at: index)
     }
     
     mutating func clear() {
