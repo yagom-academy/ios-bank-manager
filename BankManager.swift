@@ -5,3 +5,7 @@
 //
 
 import Foundation
+
+struct BankManager {
+    
+}
