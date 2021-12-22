@@ -11,9 +11,18 @@ struct Bank {
         }
     }
     
+    mutating func dequeueWaitingLine() -> Customer {
+        guard let customer = waitingLine.dequeue() else {
+            fatalError("unknown error")
+        }
+        
+        return customer
+    }
+    
     mutating func letClerkWork() {
         while waitingLine.isEmpty == false {
-            bankClerk.work(&waitingLine)
+            let customer = dequeueWaitingLine()
+            bankClerk.handleTask(of: customer)
         }
     }
 }
