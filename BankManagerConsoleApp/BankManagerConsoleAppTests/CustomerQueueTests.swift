@@ -19,10 +19,12 @@ class CustomerQueueTests: XCTestCase {
         sutCustomerQueue = nil
     }
     
+    func enqueueTestElements(_ elements: [Int]) {
+        elements.forEach{ sutCustomerQueue.enqueue(data: $0) }
+    }
+    
     func test_1_2_3을_enqueue_한_후에_dequeue_하면_1을_반환해야한다() {
-        sutCustomerQueue.enqueue(data: 1)
-        sutCustomerQueue.enqueue(data: 2)
-        sutCustomerQueue.enqueue(data: 3)
+        enqueueTestElements([1, 2, 3])
         
         do {
             let result = try sutCustomerQueue.dequeue()
@@ -35,9 +37,7 @@ class CustomerQueueTests: XCTestCase {
     }
     
     func test_9_10_11을_enqueue_한_후에_dequeue_두번_하면_10을_반환해야한다() {
-        sutCustomerQueue.enqueue(data: 9)
-        sutCustomerQueue.enqueue(data: 10)
-        sutCustomerQueue.enqueue(data: 11)
+        enqueueTestElements([9, 10, 11])
         
         do {
             let _ = try sutCustomerQueue.dequeue()
@@ -51,7 +51,7 @@ class CustomerQueueTests: XCTestCase {
     }
     
     func test_11을_enqueue_한_후에_dequeue_하면_비어있어야한다() {
-        sutCustomerQueue.enqueue(data: 11)
+        enqueueTestElements([11])
         
         do {
             let _ = try sutCustomerQueue.dequeue()
@@ -70,9 +70,7 @@ class CustomerQueueTests: XCTestCase {
     }
     
     func test_9_10_11을_enqueue_한_후에_peek하면_9를_반환해야한다() {
-        sutCustomerQueue.enqueue(data: 9)
-        sutCustomerQueue.enqueue(data: 10)
-        sutCustomerQueue.enqueue(data: 11)
+        enqueueTestElements([9, 10, 11])
         
         do {
             let result = try sutCustomerQueue.peek()
@@ -94,18 +92,14 @@ class CustomerQueueTests: XCTestCase {
     }
     
     func test_CustomerQueue가_비어있지않을때_isEmpty는_false를_반환해야한다() {
-        sutCustomerQueue.enqueue(data: 9)
-        sutCustomerQueue.enqueue(data: 10)
-        sutCustomerQueue.enqueue(data: 11)
+        enqueueTestElements([9, 10, 11])
         
         let result = sutCustomerQueue.isEmpty
         XCTAssertFalse(result)
     }
     
     func test_CustomerQueue에_clear하면_빈_queue가_되어야한다() {
-        sutCustomerQueue.enqueue(data: 9)
-        sutCustomerQueue.enqueue(data: 10)
-        sutCustomerQueue.enqueue(data: 11)
+        enqueueTestElements([9, 10, 11])
         sutCustomerQueue.clear()
         
         let result = sutCustomerQueue.isEmpty

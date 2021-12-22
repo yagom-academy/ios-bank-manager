@@ -18,11 +18,13 @@ class LinkedListTests: XCTestCase {
     override func tearDown() {
         sutLinkedList = nil
     }
+    
+    func appendTestElements(_ elements: [Int]) {
+        elements.forEach{ sutLinkedList.append(data: $0) }
+    }
 
     func test_1_2_3을_append_한_후에_removeFirst_하면_1을_반환해야한다() {
-        sutLinkedList.append(data: 1)
-        sutLinkedList.append(data: 2)
-        sutLinkedList.append(data: 3)
+        appendTestElements([1, 2, 3])
         
         do {
             let result = try sutLinkedList.removeFirst()
@@ -35,9 +37,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_4_5_6을_append_한_후에_removeFirst_두번_하면_5를_반환해야한다() {
-        sutLinkedList.append(data: 4)
-        sutLinkedList.append(data: 5)
-        sutLinkedList.append(data: 6)
+        appendTestElements([4, 5, 6])
         
         do {
             let _ = try sutLinkedList.removeFirst()
@@ -51,7 +51,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_11을_append_한_후에_removeFirst_하면_비어있어야한다() {
-        sutLinkedList.append(data: 11)
+        appendTestElements([11])
         
         do {
             let _ = try sutLinkedList.removeFirst()
@@ -66,9 +66,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_7_8_9_append_한_후에_firstData를_호출하면_7을_반환해야한다() {
-        sutLinkedList.append(data: 7)
-        sutLinkedList.append(data: 8)
-        sutLinkedList.append(data: 9)
+        appendTestElements([7, 8, 9])
         
         do {
             let firstData = try sutLinkedList.firstData()
@@ -86,9 +84,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_LinkedList가_비어있지않을때_isEmpty는_false를_반환해야한다() {
-        sutLinkedList.append(data: 7)
-        sutLinkedList.append(data: 8)
-        sutLinkedList.append(data: 9)
+        appendTestElements([7, 8, 9])
         
         let isEmpty = sutLinkedList.isEmpty
         XCTAssertFalse(isEmpty)
