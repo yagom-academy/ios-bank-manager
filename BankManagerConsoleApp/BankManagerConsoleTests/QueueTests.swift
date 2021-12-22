@@ -6,7 +6,7 @@ class QueueTests: XCTestCase {
     override func setUpWithError() throws {
         queue = Queue<Int>()
     }
-
+    
     func test_Should_isEmptyIsFalse_When_enqueue3() {
         queue.enqueue(3)
         XCTAssertFalse(queue.isEmpty)
@@ -58,5 +58,17 @@ class QueueTests: XCTestCase {
         queue.enqueue(4)
         let returnValue = queue.remove(at: 2)
         XCTAssertEqual(returnValue, 3)
+    }
+    
+    func test_Should_returnValueIsStringA_When_dequeue() {
+        var queue: Queue<String> = Queue<String>()
+        queue.enqueue("A")
+        XCTAssertEqual(queue.dequeue(), "A")
+    }
+    
+    func test_Should_returnValueIsDoubleZero_When_dequeue() {
+        var queue: Queue<Double> = Queue<Double>()
+        queue.enqueue(0.0)
+        XCTAssertEqual(queue.dequeue(), .zero)
     }
 }
