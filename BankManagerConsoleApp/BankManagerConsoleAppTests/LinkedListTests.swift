@@ -1,11 +1,11 @@
 import XCTest
 
 class LinkedListTests: XCTestCase {
-    var sut: MockLinkedList<Int>!
+    var sut: LinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = MockLinkedList()
+        sut = LinkedList()
     }
     
     override func tearDownWithError() throws {
@@ -13,12 +13,10 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_LinkedList_append_한개의요소() {
+    func test_LinkedList_append_한개의요소를_넣었을_때_isEmpty가_false인가() {
         sut.append(1)
-        
+                
         XCTAssertFalse(sut.isEmpty)
-        XCTAssertEqual(sut.head?.value, 1)
-        XCTAssertNil(sut.head?.next)
     }
     
     func test_LinkedList_removeFirst() {
@@ -38,7 +36,7 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(result, 1)
         XCTAssertFalse(sut.isEmpty)
-        XCTAssertEqual(sut.head?.value, 2)
+        XCTAssertEqual(sut.first, 2)
     }
     
     func test_LinkedList_append_3개() {
@@ -46,21 +44,13 @@ class LinkedListTests: XCTestCase {
         sut.append(2)
         sut.append(3)
         
-        XCTAssertEqual(sut.head?.value, 1)
-        XCTAssertEqual(sut.tail?.value, 3)
-    }
-    
-    func test_LinkedList_연결이_잘되어있는지_확인() {
-        sut.append(1)
-        sut.append(2)
-        sut.append(3)
-        sut.append(4)
-
-        XCTAssertEqual(sut.head?.value, 1)
-        XCTAssertEqual(sut.head?.next?.value, 2)
-        XCTAssertEqual(sut.head?.next?.next?.value, 3)
-        XCTAssertEqual(sut.head?.next?.next?.next?.value, 4)
-        XCTAssertEqual(sut.tail?.value, 4)
+        let result1 = sut.removeFirst()
+        let result2 = sut.removeFirst()
+        let result3 = sut.removeFirst()
+        
+        XCTAssertEqual(result1, 1)
+        XCTAssertEqual(result2, 2)
+        XCTAssertEqual(result3, 3)
     }
     
     func test_LinkedList_removeAll() {
@@ -71,8 +61,6 @@ class LinkedListTests: XCTestCase {
         sut.removeAll()
         
         XCTAssertTrue(sut.isEmpty)
-        XCTAssertNil(sut.head)
-        XCTAssertNil(sut.tail)
     }
     
     func test_LinkedList_첫번째요소가_잘나오는지_확인() {

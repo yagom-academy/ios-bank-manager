@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08BCF51827707A5300CF04B9 /* MockLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51727707A5300CF04B9 /* MockLinkedList.swift */; };
 		08BCF51A27709A6900CF04B9 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51927709A6900CF04B9 /* QueueTests.swift */; };
 		08BCF51C2770A02300CF04B9 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51B2770A02300CF04B9 /* Queue.swift */; };
 		08BCF51E2770A04300CF04B9 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51B2770A02300CF04B9 /* Queue.swift */; };
@@ -31,7 +30,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08BCF51727707A5300CF04B9 /* MockLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLinkedList.swift; sourceTree = "<group>"; };
 		08BCF51927709A6900CF04B9 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		08BCF51B2770A02300CF04B9 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		9A1FD40A2770545B003EE34C /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -60,14 +58,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08BCF51627707A3C00CF04B9 /* MockModel */ = {
-			isa = PBXGroup;
-			children = (
-				08BCF51727707A5300CF04B9 /* MockLinkedList.swift */,
-			);
-			path = MockModel;
-			sourceTree = "<group>";
-		};
 		9A1FD40927705445003EE34C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +71,6 @@
 		9A1FD4112770549D003EE34C /* BankManagerConsoleAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				08BCF51627707A3C00CF04B9 /* MockModel */,
 				9A1FD4122770549D003EE34C /* LinkedListTests.swift */,
 				08BCF51927709A6900CF04B9 /* QueueTests.swift */,
 			);
@@ -206,7 +195,6 @@
 				08BCF51E2770A04300CF04B9 /* Queue.swift in Sources */,
 				9A1FD41727705513003EE34C /* LinkedList.swift in Sources */,
 				9A1FD4132770549D003EE34C /* LinkedListTests.swift in Sources */,
-				08BCF51827707A5300CF04B9 /* MockLinkedList.swift in Sources */,
 				08BCF51A27709A6900CF04B9 /* QueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
