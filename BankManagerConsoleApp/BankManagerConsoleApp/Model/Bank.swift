@@ -5,8 +5,8 @@ struct Bank {
     
     mutating func setWaitingLine(with numberOfCustomer: () -> Int) {
         let totalNumber = numberOfCustomer()
-        for _ in 1...totalNumber {
-            waitingLine.enqueue(Customer())
+        for number in 1...totalNumber {
+            waitingLine.enqueue(Customer(waitingNumber: number))
         }
     }
     
