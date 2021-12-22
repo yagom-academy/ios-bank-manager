@@ -64,10 +64,9 @@ class CustomerQueueTest: XCTestCase {
 
     func test_0이_있는_큐에_1을_index1에_insert하면_0과1이_남는다() {
         sut.enqueue(value: 0)
-        XCTAssertEqual(sut.customers.head?.value, 0)
         XCTAssertNoThrow(try sut.customers.insert(1, at: 1))
-        XCTAssertEqual(try sut.customers.head?.value, 0)
-        XCTAssertEqual(try sut.customers.head?.next?.value, 1)
+        XCTAssertEqual(sut.customers.head?.value, 0)
+        XCTAssertEqual(sut.customers.head?.next?.value, 1)
     }
 
     func test_0과1과2가_있는_큐에_3을_index2에_insert하면_0과1과3과2가_남는다() {
@@ -79,6 +78,15 @@ class CustomerQueueTest: XCTestCase {
         XCTAssertEqual(sut.customers.head?.next?.value, 1)
         XCTAssertEqual(sut.customers.head?.next?.next?.value, 3)
         XCTAssertEqual(sut.customers.head?.next?.next?.next?.value, 2)
+    }
+    
+    func test_0이_있는_큐에_1을_index1에_insert하면_tail이_1이_된다() {
+        sut.enqueue(value: 0)
+        XCTAssertEqual(sut.customers.head?.value, 0)
+        XCTAssertNoThrow(try sut.customers.insert(1, at: 1))
+        XCTAssertEqual(sut.customers.head?.value, 0)
+        XCTAssertEqual(sut.customers.head?.next?.value, 1)
+        XCTAssertEqual(sut.customers.tail?.value, 1)
     }
     
     func test_빈_큐에_index0을_remove하면_nil을_반환한다() {
@@ -95,6 +103,12 @@ class CustomerQueueTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
+    func test_0이_있는_큐에_index0을_remove하면_tail이_nil이_된다() {
+        sut.enqueue(value: 0)
+        XCTAssertNoThrow(try sut.customers.remove(at: 0))
+        XCTAssertNil(sut.customers.tail)
+    }
+    
     func test_0이_있는_큐에_index1을_remove하면_에러가_발생한다() {
         sut.enqueue(value: 0)
         XCTAssertThrowsError(try sut.customers.remove(at: 1))
@@ -104,8 +118,8 @@ class CustomerQueueTest: XCTestCase {
         sut.enqueue(value: 0)
         sut.enqueue(value: 1)
         XCTAssertEqual(try sut.customers.remove(at: 1), 1)
-        XCTAssertEqual(try sut.customers.head?.value, 0)
-        XCTAssertNil(try sut.customers.head?.next)
+        XCTAssertEqual(sut.customers.head?.value, 0)
+        XCTAssertNil(sut.customers.head?.next)
     }
     
     func test_0과1과2가_있는_큐에_index0을_remove하면_0을_반환하고_1과2가_남는다() {
@@ -113,9 +127,9 @@ class CustomerQueueTest: XCTestCase {
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
         XCTAssertEqual(try sut.customers.remove(at: 0), 0)
-        XCTAssertEqual(try sut.customers.head?.value, 1)
-        XCTAssertEqual(try sut.customers.head?.next?.value, 2)
-        XCTAssertNil(try sut.customers.head?.next?.next)
+        XCTAssertEqual(sut.customers.head?.value, 1)
+        XCTAssertEqual(sut.customers.head?.next?.value, 2)
+        XCTAssertNil(sut.customers.head?.next?.next)
     }
 
     func test_0과1과2가_있는_큐에_index1을_remove하면_1을_반환하고_0과2가_남는다() {
@@ -123,9 +137,9 @@ class CustomerQueueTest: XCTestCase {
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
         XCTAssertEqual(try sut.customers.remove(at: 1), 1)
-        XCTAssertEqual(try sut.customers.head?.value, 0)
-        XCTAssertEqual(try sut.customers.head?.next?.value, 2)
-        XCTAssertNil(try sut.customers.head?.next?.next)
+        XCTAssertEqual(sut.customers.head?.value, 0)
+        XCTAssertEqual(sut.customers.head?.next?.value, 2)
+        XCTAssertNil(sut.customers.head?.next?.next)
     }
     
     func test_0과1과2가_있는_큐에_index2를_remove하면_2를_반환하고_0과1이_남는다() {
@@ -133,8 +147,16 @@ class CustomerQueueTest: XCTestCase {
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
         XCTAssertEqual(try sut.customers.remove(at: 2), 2)
-        XCTAssertEqual(try sut.customers.head?.value, 0)
-        XCTAssertEqual(try sut.customers.head?.next?.value, 1)
-        XCTAssertNil(try sut.customers.head?.next?.next)
+        XCTAssertEqual(sut.customers.head?.value, 0)
+        XCTAssertEqual(sut.customers.head?.next?.value, 1)
+        XCTAssertNil(sut.customers.head?.next?.next)
+    }
+    
+    func test_0과1과2가_있는_큐에_index2를_remove하면_tail이_1이_된다() {
+        sut.enqueue(value: 0)
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        XCTAssertEqual(try sut.customers.remove(at: 2), 2)
+        XCTAssertEqual(sut.customers.tail?.value, 1)
     }
 }

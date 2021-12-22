@@ -1,6 +1,7 @@
 import Foundation
 
 struct CustomerQueue<Element> {
+    // MARK: - Properties
     var customers = LinkedList<Element>()
     
     var isEmpty: Bool {
@@ -10,6 +11,7 @@ struct CustomerQueue<Element> {
         return customers.head?.value
     }
     
+    // MARK: - Methods
     func enqueue(value: Element) {
         customers.append(value: value)
     }

@@ -1,6 +1,7 @@
 import Foundation
 
 final class LinkedList<Element> {
+    // MARK: - ListNode Class
     final class ListNode<Element> {
         private(set) var value: Element
         var next: ListNode?
@@ -11,18 +12,11 @@ final class LinkedList<Element> {
     }
     
     typealias Node = ListNode<Element>
-    
+
+    // MARK: - Properties
     private(set) var head: Node?
-    
-    var tail: Node? {
-        var finderToTail: Node? = head
-        
-        while let nextNode = finderToTail?.next {
-            finderToTail = nextNode
-        }
-        
-        return finderToTail
-    }
+    private(set) var tail: Node?
+
     var isEmpty: Bool {
         return head == nil
     }
@@ -39,6 +33,7 @@ final class LinkedList<Element> {
         return numberOfNode
     }
 
+    // MARK: - Methods
     func append(value: Element) {
         let newNode = Node(value: value)
         
@@ -47,14 +42,21 @@ final class LinkedList<Element> {
         } else {
             tail?.next = newNode
         }
+        tail = newNode
     }
     
     func insert(_ value: Element, at index: Int) throws {
+        let newNode = Node(value: value)
+        
+        if isEmpty && index == 0 {
+            head = newNode
+            tail = newNode
+            return
+        }
+        
         guard index <= count else {
             throw LinkedListError.invalidIndex
         }
-        
-        let newNode = Node(value: value)
         
         if index == 0 {
             newNode.next = head
@@ -70,6 +72,10 @@ final class LinkedList<Element> {
         
         newNode.next = indexNodeFinder?.next
         indexNodeFinder?.next = newNode
+        
+        if newNode.next == nil {
+            tail = newNode
+        }
     }
     
     @discardableResult
@@ -80,12 +86,13 @@ final class LinkedList<Element> {
             throw LinkedListError.invalidIndex
         }
         
-        var valueToRemove: Element?
+        var removedValue: Element?
         
         if index == 0 {
-            valueToRemove = head?.value
+            count == 1 ? tail = nil : nil  // false 이면 그냥 넘어감
+            removedValue = head?.value
             head = head?.next
-            return valueToRemove
+            return removedValue
         }
         
         var indexNodeFinder = head
@@ -94,10 +101,14 @@ final class LinkedList<Element> {
             indexNodeFinder = indexNodeFinder?.next
         }
         
-        valueToRemove = indexNodeFinder?.next?.value
+        removedValue = indexNodeFinder?.next?.value
         indexNodeFinder?.next = indexNodeFinder?.next?.next
         
-        return valueToRemove
+        if indexNodeFinder?.next?.next == nil {
+            tail = indexNodeFinder
+        }
+        
+        return removedValue
     }
     
     func removeAll() {
