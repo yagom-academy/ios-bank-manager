@@ -22,16 +22,14 @@ class CustomerQueueTest: XCTestCase {
     }
     
     func test_빈_큐를_dequeue하면_nil이_반환된다() {
-        let valueToRemove = sut.dequeue()
+        XCTAssertNil(try sut.dequeue())
         XCTAssertTrue(sut.isEmpty)
-        XCTAssertNil(valueToRemove)
     }
     
     func test_1이_있는_큐를_dequeue하면_빈큐가되고_1을_반환된다() {
         sut.enqueue(value: 1)
-        let ValueToRemove = sut.dequeue()
+        XCTAssertEqual(try sut.dequeue(), 1)
         XCTAssertTrue(sut.isEmpty)
-        XCTAssertEqual(ValueToRemove, 1)
     }
     
     func test_1과2가_들어간_큐를_clear하면_빈큐가_된다() {
@@ -83,8 +81,8 @@ class CustomerQueueTest: XCTestCase {
         XCTAssertEqual(sut.customers.head?.next?.next?.next?.value, 2)
     }
     
-    func test_빈_큐에_index0을_remove하면_에러가_발생한다() {
-        XCTAssertThrowsError(try sut.customers.remove(at: 0))
+    func test_빈_큐에_index0을_remove하면_nil을_반환한다() {
+        XCTAssertNil(try sut.customers.remove(at: 0))
     }
     
     func test_빈_큐에_index1을_remove하면_에러가_발생한다() {
@@ -102,39 +100,39 @@ class CustomerQueueTest: XCTestCase {
         XCTAssertThrowsError(try sut.customers.remove(at: 1))
     }
 
-    func test_0과1이_있는_큐에_index1을_remove하면_0이_남는다() {
+    func test_0과1이_있는_큐에_index1을_remove하면_1을_반환하고_0이_남는다() {
         sut.enqueue(value: 0)
         sut.enqueue(value: 1)
-        XCTAssertNoThrow(try sut.customers.remove(at: 1))
+        XCTAssertEqual(try sut.customers.remove(at: 1), 1)
         XCTAssertEqual(try sut.customers.head?.value, 0)
         XCTAssertNil(try sut.customers.head?.next)
     }
     
-    func test_0과1과2가_있는_큐에_index0을_remove하면_1과2가_남는다() {
+    func test_0과1과2가_있는_큐에_index0을_remove하면_0을_반환하고_1과2가_남는다() {
         sut.enqueue(value: 0)
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
-        XCTAssertNoThrow(try sut.customers.remove(at: 0))
+        XCTAssertEqual(try sut.customers.remove(at: 0), 0)
         XCTAssertEqual(try sut.customers.head?.value, 1)
         XCTAssertEqual(try sut.customers.head?.next?.value, 2)
         XCTAssertNil(try sut.customers.head?.next?.next)
     }
 
-    func test_0과1과2가_있는_큐에_index1을_remove하면_0과2가_남는다() {
+    func test_0과1과2가_있는_큐에_index1을_remove하면_1을_반환하고_0과2가_남는다() {
         sut.enqueue(value: 0)
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
-        XCTAssertNoThrow(try sut.customers.remove(at: 1))
+        XCTAssertEqual(try sut.customers.remove(at: 1), 1)
         XCTAssertEqual(try sut.customers.head?.value, 0)
         XCTAssertEqual(try sut.customers.head?.next?.value, 2)
         XCTAssertNil(try sut.customers.head?.next?.next)
     }
     
-    func test_0과1과2가_있는_큐에_index2를_remove하면_0과1이_남는다() {
+    func test_0과1과2가_있는_큐에_index2를_remove하면_2를_반환하고_0과1이_남는다() {
         sut.enqueue(value: 0)
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
-        XCTAssertNoThrow(try sut.customers.remove(at: 2))
+        XCTAssertEqual(try sut.customers.remove(at: 2), 2)
         XCTAssertEqual(try sut.customers.head?.value, 0)
         XCTAssertEqual(try sut.customers.head?.next?.value, 1)
         XCTAssertNil(try sut.customers.head?.next?.next)

@@ -13,6 +13,7 @@ final class LinkedList<Element> {
     typealias Node = ListNode<Element>
     
     private(set) var head: Node?
+    
     var tail: Node? {
         var finderToTail: Node? = head
         
@@ -37,13 +38,7 @@ final class LinkedList<Element> {
         
         return numberOfNode
     }
-    
-    init(_ value: Element?) {
-        if let value = value {
-            self.head = Node(value: value)
-        }
-    }
-    
+
     func append(value: Element) {
         let newNode = Node(value: value)
         
@@ -67,42 +62,42 @@ final class LinkedList<Element> {
             return
         }
         
-        var temp = head
+        var indexNodeFinder = head
         
         for _ in 0..<index-1 {
-            temp = temp?.next
+            indexNodeFinder = indexNodeFinder?.next
         }
         
-        newNode.next = temp?.next
-        temp?.next = newNode
+        newNode.next = indexNodeFinder?.next
+        indexNodeFinder?.next = newNode
     }
     
-    func removeFirst() -> Element? {
-        if isEmpty { return nil }
+    @discardableResult
+    func remove(at index: Int) throws -> Element? {
+        if isEmpty && index == 0 { return nil }
         
-        let valueToRemove = head?.value
-        head = head?.next
-        
-        return valueToRemove
-    }
-    
-    func remove(at index: Int) throws {
         guard index < count else {
             throw LinkedListError.invalidIndex
         }
-                
+        
+        var valueToRemove: Element?
+        
         if index == 0 {
+            valueToRemove = head?.value
             head = head?.next
-            return
+            return valueToRemove
         }
         
-        var temp = head
+        var indexNodeFinder = head
         
         for _ in 0..<index-1 {
-            temp = temp?.next
+            indexNodeFinder = indexNodeFinder?.next
         }
         
-        temp?.next = temp?.next?.next
+        valueToRemove = indexNodeFinder?.next?.value
+        indexNodeFinder?.next = indexNodeFinder?.next?.next
+        
+        return valueToRemove
     }
     
     func removeAll() {

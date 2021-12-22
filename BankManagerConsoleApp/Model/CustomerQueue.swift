@@ -1,7 +1,8 @@
 import Foundation
 
 struct CustomerQueue<Element> {
-    var customers: LinkedList<Element> = LinkedList<Element>(nil)
+    var customers = LinkedList<Element>()
+    
     var isEmpty: Bool {
         return customers.isEmpty
     }
@@ -13,8 +14,9 @@ struct CustomerQueue<Element> {
         customers.append(value: value)
     }
     
-    func dequeue() -> Element? {
-        return customers.removeFirst()
+    func dequeue() throws -> Element? {
+        let headIndex = 0
+        return try customers.remove(at: headIndex)
     }
     
     func clear() {
