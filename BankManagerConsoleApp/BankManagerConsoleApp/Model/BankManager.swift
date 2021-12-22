@@ -28,4 +28,11 @@ struct BankManager {
     func closeBank() {
         return 
     }
+    
+    func generateNumberOfCustomer() -> Int {
+        let range: ClosedRange<Int> = 10...30
+        let numberOfCustomer = Int.random(in: range)
+        
+        return numberOfCustomer
+    }
 }
