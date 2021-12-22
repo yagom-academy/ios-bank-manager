@@ -13,7 +13,7 @@
 		E93F668F277087D8001158D8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F668E277087D7001158D8 /* LinkedList.swift */; };
 		E93F669A2770AC4E001158D8 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F66992770AC4E001158D8 /* QueueTests.swift */; };
 		E93F66B02770AD3D001158D8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F668E277087D7001158D8 /* LinkedList.swift */; };
-		E93F66B42770AE5E001158D8 /* MockQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F66B32770AE5E001158D8 /* MockQueue.swift */; };
+		E93F66BD27734110001158D8 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA37FA27709E1C007C07F2 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +37,6 @@
 		E93F66972770AC4E001158D8 /* BankManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93F66992770AC4E001158D8 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		E93F669B2770AC4E001158D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E93F66B32770AE5E001158D8 /* MockQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				E93F66992770AC4E001158D8 /* QueueTests.swift */,
-				E93F66B32770AE5E001158D8 /* MockQueue.swift */,
 				E93F669B2770AC4E001158D8 /* Info.plist */,
 			);
 			path = BankManagerTests;
@@ -206,7 +204,7 @@
 			files = (
 				E93F66B02770AD3D001158D8 /* LinkedList.swift in Sources */,
 				E93F669A2770AC4E001158D8 /* QueueTests.swift in Sources */,
-				E93F66B42770AE5E001158D8 /* MockQueue.swift in Sources */,
+				E93F66BD27734110001158D8 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

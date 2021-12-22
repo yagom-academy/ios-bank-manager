@@ -9,11 +9,11 @@ import XCTest
 
 class QueueTests: XCTestCase {
     
-    var sut: MockQueue<String>!
+    var sut: Queue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = MockQueue()
+        sut = Queue()
     }
 
     override func tearDownWithError() throws {
@@ -21,11 +21,11 @@ class QueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_Queue타입을_초기화하면_list의_first가_nil인지() {
+    func test_Queue타입을_초기화하면_peek가_nil인지() {
         // given
         
         // when
-        let result = sut.list.first
+        let result = sut.peek()
         
         // then
         XCTAssertNil(result)
@@ -44,7 +44,7 @@ class QueueTests: XCTestCase {
     func test_enqueue호출시_가나다를전달했을때_peek가_가나다인지() {
         // given
         let input = "가나다"
-        sut.enqueue(element: input)
+        sut.enqueue(input)
         
         // when
         let result = sut.peek()
@@ -57,7 +57,7 @@ class QueueTests: XCTestCase {
     func test_가나다가있는Queue에서_dequeue호출시_가나다가_반환되는지() {
         // given
         let input = "가나다"
-        sut.enqueue(element: input)
+        sut.enqueue(input)
         
         // when
         let result = sut.dequeue()
@@ -67,15 +67,15 @@ class QueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_원소3개있는Queue에서_clear호출시_first가_nil인지() {
+    func test_원소3개있는Queue에서_clear호출시_peek가_nil인지() {
         // given
-        sut.enqueue(element: "가")
-        sut.enqueue(element: "나")
-        sut.enqueue(element: "다")
+        sut.enqueue("가")
+        sut.enqueue("나")
+        sut.enqueue("다")
         sut.clear()
         
         // when
-        let result = sut.list.first
+        let result = sut.peek()
         
         // then
         XCTAssertNil(result)
