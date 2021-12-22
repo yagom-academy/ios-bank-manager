@@ -27,9 +27,6 @@ struct LinkedList<Element> {
     if head == nil {
       head = node
       tail = head
-    } else if head === tail {
-      head?.next = node
-      tail = node
     } else {
       tail?.next = node
       tail = node
