@@ -23,6 +23,7 @@ struct BankManager {
     
     mutating func openBank() {
         bank.setWaitingLine(with: generateNumberOfCustomer)
+        bank.letClerkWork()
     }
     
     func closeBank() {

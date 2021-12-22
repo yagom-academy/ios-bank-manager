@@ -2,6 +2,7 @@ import Foundation
 
 struct Bank {
     var waitingLine = Queue<Customer>()
+    var bankClerk = BankClerk()
     
     mutating func setWaitingLine(with numberOfCustomer: () -> Int) {
         let totalNumber = numberOfCustomer()
@@ -10,4 +11,9 @@ struct Bank {
         }
     }
     
+    mutating func letClerkWork() {
+        while waitingLine.isEmpty == false {
+            bankClerk.work(&waitingLine)
+        }
+    }
 }
