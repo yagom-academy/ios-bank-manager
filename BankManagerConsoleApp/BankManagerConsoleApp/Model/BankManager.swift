@@ -6,7 +6,7 @@ enum Menu {
 }
 
 struct BankManager {
-    let bank = Bank()
+    var bank = Bank()
 
     func showMenu() {
         print("1: 은행개점")
@@ -21,8 +21,8 @@ struct BankManager {
         return selectedMenu
     }
     
-    func openBank() {
-        print("일 시작")
+    mutating func openBank() {
+        bank.setWaitingLine(with: generateNumberOfCustomer)
     }
     
     func closeBank() {

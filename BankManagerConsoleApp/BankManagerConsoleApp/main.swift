@@ -1,7 +1,7 @@
 import Foundation
 
 func run() {
-    let bankManager = BankManager()
+    var bankManager = BankManager()
     var flag = true
     
     while flag {
@@ -20,3 +20,4 @@ func run() {
 }
 
 run()
+
