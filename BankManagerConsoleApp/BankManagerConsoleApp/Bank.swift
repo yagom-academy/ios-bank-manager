@@ -25,6 +25,7 @@ class Bank {
     }
     
     func startBusiness() {
+        let startTime = Date()
         let group = DispatchGroup()
         while let client = clients.dequeue() {
             DispatchQueue.global().async(group: group) {
@@ -34,6 +35,7 @@ class Bank {
             }
         }
         group.wait()
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients) 명입니다")
+        let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients) 명이며, 총 업무시간은 \(elapsedTime)초입니다.")
     }
 }
