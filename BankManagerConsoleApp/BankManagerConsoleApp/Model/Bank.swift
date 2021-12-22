@@ -1,7 +1,7 @@
 import Foundation
 
 struct Bank {
-    var waitingLine = CustomerQueue<Customer>()
+    var waitingLine = Queue<Customer>()
     
     mutating func setWaitingLine(with numberOfCustomer: () -> Int) {
         let totalNumber = numberOfCustomer()
