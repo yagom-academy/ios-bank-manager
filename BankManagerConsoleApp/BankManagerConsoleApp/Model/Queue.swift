@@ -15,7 +15,7 @@ struct Queue<Element> {
     }
     
     mutating func dequeue() -> Element? {
-        return items.removeFirst()
+        return items.remove(at: 0)
     }
     
     func peek() -> Element? {

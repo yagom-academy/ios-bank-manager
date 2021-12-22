@@ -89,15 +89,6 @@ struct LinkedList<Element> {
         tail = nextNode
     }
     
-    mutating func removeFirst() -> Element? {
-        guard isEmpty else {
-            let first = head?.data
-            head = head?.next
-            return first
-        }
-        return nil
-    }
-    
     mutating func removeAll() {
         head = nil
         tail = nil
