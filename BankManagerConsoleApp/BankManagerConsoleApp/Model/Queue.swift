@@ -22,6 +22,10 @@ struct Queue<Element> {
         return items.first
     }
     
+    mutating func insert(_ data: Element, at index: Int) {
+        items.insert(data, at: index)
+    }
+    
     mutating func clear() {
         items.removeAll()
     }

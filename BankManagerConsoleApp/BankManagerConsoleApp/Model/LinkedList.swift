@@ -41,6 +41,25 @@ struct LinkedList<Element> {
             return node
         }
     }
+   
+    mutating func insert(_ newNodeData: Element, at index: Int) {
+        if index == 0 {
+            let newNode = Node(data: newNodeData, next: nil)
+            newNode.next = head
+            head = newNode
+            return
+        }
+        let previousNode = node(at: index - 1)
+        let newNode = Node(data: newNodeData, next: nil)
+        
+        guard let nextNode = previousNode?.next else {
+            previousNode?.next = newNode
+            tail = newNode
+            return
+        }
+        previousNode?.next = newNode
+        newNode.next = nextNode
+    }
     
     mutating func append(_ data: Element) {
         let nextNode = Node(data: data, next: nil)
