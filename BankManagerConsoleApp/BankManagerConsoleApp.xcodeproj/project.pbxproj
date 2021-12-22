@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		25CB74EC2772F55F00A9BB49 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CB74EB2772F55F00A9BB49 /* Client.swift */; };
-		25CB74EE2772F56E00A9BB49 /* BankTeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CB74ED2772F56E00A9BB49 /* BankTeller.swift */; };
 		3AF03F3C2772F92B00A7B702 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF03F3B2772F92B00A7B702 /* Bank.swift */; };
 		6058124F2770598C00DEFBEF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058124E2770598C00DEFBEF /* Queue.swift */; };
 		608A94D62770790C00C7E1A2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A94D52770790C00C7E1A2 /* Tests.swift */; };
@@ -32,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		25CB74EB2772F55F00A9BB49 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		25CB74ED2772F56E00A9BB49 /* BankTeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTeller.swift; sourceTree = "<group>"; };
 		3AF03F3B2772F92B00A7B702 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		6058124E2770598C00DEFBEF /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		608A94D32770790C00C7E1A2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +93,6 @@
 				6058124E2770598C00DEFBEF /* Queue.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				25CB74EB2772F55F00A9BB49 /* Client.swift */,
-				25CB74ED2772F56E00A9BB49 /* BankTeller.swift */,
 				3AF03F3B2772F92B00A7B702 /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -203,7 +200,6 @@
 				6058124F2770598C00DEFBEF /* Queue.swift in Sources */,
 				25CB74EC2772F55F00A9BB49 /* Client.swift in Sources */,
 				3AF03F3C2772F92B00A7B702 /* Bank.swift in Sources */,
-				25CB74EE2772F56E00A9BB49 /* BankTeller.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

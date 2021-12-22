@@ -4,4 +4,4 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+Bank(numberOfClients: 10, numberOfBankTellers: 2).startBusiness()
