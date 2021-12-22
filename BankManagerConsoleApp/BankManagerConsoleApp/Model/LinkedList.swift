@@ -1,7 +1,7 @@
 import Foundation
 
 struct LinkedList<Element> {
-    class Node<Element> {
+    final class Node<Element> {
         var data: Element?
         var next: Node?
         
