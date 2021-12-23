@@ -49,3 +49,14 @@ func operateMenu(input menu: BankMenu?) {
         print("다시 입력")
     }
 }
+
+func run() {
+    var menu: BankMenu?
+    repeat {
+        printMenu()
+        menu = inputMenu()
+        operateMenu(input: menu)
+    } while menu != .exitProgram
+}
+
+run()
