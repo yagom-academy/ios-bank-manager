@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct Banker() {
+struct Banker {
   func doTask(clientSequence: Int) {
     print("\(clientSequence)번 고객 업무 시작")
+    
     DispatchQueue.global().sync {
-      sleep(0.7)
+      sleep(UInt32(0.7))
     }
+    
     print("\(clientSequence)번 고객 업무 완료")
   }
 }
