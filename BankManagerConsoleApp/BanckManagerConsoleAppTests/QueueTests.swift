@@ -11,7 +11,6 @@ class QueueTests: XCTestCase {
     var sut: Queue<Int>!
     
     override func setUpWithError() throws {
-        try super.setUpWithError()
         sut = Queue()
     }
     
