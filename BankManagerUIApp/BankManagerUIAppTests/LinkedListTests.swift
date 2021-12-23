@@ -21,7 +21,7 @@ class LinkedListTests: XCTestCase {
     
     func test_빈값에_remove_실행() {
         // when
-        let result = sut.remove()
+        let result = sut.removeFirst()
         
         // then
         XCTAssertNil(result)
@@ -33,7 +33,7 @@ class LinkedListTests: XCTestCase {
         sut.append(item)
         
         // when
-        let result = sut.remove()
+        let result = sut.removeFirst()
 
         // then
         XCTAssertEqual(result, item)
@@ -48,10 +48,10 @@ class LinkedListTests: XCTestCase {
         sut.append(secondItem)
 
         // then
-        XCTAssertEqual(sut.remove(), firstItem)
+        XCTAssertEqual(sut.removeFirst(), firstItem)
         XCTAssertFalse(sut.isEmpty)
         
-        XCTAssertEqual(sut.remove(), secondItem)
+        XCTAssertEqual(sut.removeFirst(), secondItem)
         XCTAssertTrue(sut.isEmpty)
     }
     
