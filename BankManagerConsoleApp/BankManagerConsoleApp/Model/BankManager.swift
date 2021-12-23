@@ -1,5 +1,10 @@
 import Foundation
 
+enum Menu {
+    static let open = "1"
+    static let close = "2"
+}
+
 struct BankManager {
     private let bank: Bank
     
@@ -9,29 +14,25 @@ struct BankManager {
     
     func receiveUserInput() -> Bool {
         guard let input = readLine(), input.isEmpty == false else {
-            print("잘못된 입력입니다. 다시 확인해주세요.")
+            print(Message.wrongInput)
             return true
         }
         
         switch input {
-        case "1":
+        case Menu.open:
             getterCustomers()
             bank.openBank()
             return true
-        case "2":
+        case Menu.close:
             return false
         default:
-            print("잘못된 입력입니다. 다시 확인해주세요.")
+            print(Message.wrongInput)
             return true
         }
     }
     
     func showMenu() {
-        print("""
-        1 : 은행 개점
-        2 : 종료
-        입력 :
-        """, terminator: "")
+        print(Message.menuList, terminator: "")
     }
     
     private func getterCustomers(to range: ClosedRange<Int> = 10...30) {
