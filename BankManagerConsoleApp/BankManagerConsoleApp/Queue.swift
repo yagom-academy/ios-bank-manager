@@ -14,19 +14,19 @@ struct Queue<Type> {
         queue.isEmpty
     }
     
-    func peek() -> Type {
+    func peek() -> Type? {
         queue.peek()
     }
     
-    func clear() {
+    mutating func clear() {
         queue.removeAll()
     }
     
-    func enqueue(_ data: Type) {
+    mutating func enqueue(_ data: Type) {
         queue.append(data)
     }
     
-    func dequeue() {
+    mutating func dequeue() {
         queue.removeFirst()
     }
 }
