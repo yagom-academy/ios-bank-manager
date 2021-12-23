@@ -5,17 +5,12 @@
 //
 
 struct BankManager {
-    func runConsoleApp() {
-        let menu = """
-                   1 : 은행 개점
-                   2 : 종료
-                   입력 :
-                   """
+    static func runConsoleApp() {
         while true {
-            print(menu, terminator: " ")
-            let randomNumber = Int.random(in: 10...30)
+            Self.printMenu()
             switch readLine() {
             case "1":
+                let randomNumber = Int.random(in: 10...30)
                 Bank(numberOfClients: randomNumber, numberOfBankTellers: 1).startBusiness()
             case "2":
                 return
@@ -23,5 +18,14 @@ struct BankManager {
                 continue
             }
         }
+    }
+    
+    private static func printMenu() {
+        let menu = """
+                   1 : 은행 개점
+                   2 : 종료
+                   입력 :
+                   """
+        print(menu, terminator: " ")
     }
 }
