@@ -37,11 +37,13 @@ struct LinkedList<Type> {
     mutating func append(_ data: Type) {
         let newNode = Node(data: data)
         
-        if let lastNode = tail {
-            lastNode.next = newNode
-        } else {
+        guard let lastNode = tail else {
             head = newNode
+            tail = newNode
+            return
         }
+        
+        lastNode.next = newNode
         tail = newNode
     }
     
