@@ -25,7 +25,7 @@ struct Bank {
         
         while waitingLine.isEmpty == false {
             let customer = dequeueWaitingLine()
-            bankClerk.handleTask(of: customer)
+            bankClerk.handleTask(of: customer, until: taskTime)
             numberOfCustomer += 1
         }
         noticeCloseDown(totalCustomer: numberOfCustomer, taskTime: taskTime)

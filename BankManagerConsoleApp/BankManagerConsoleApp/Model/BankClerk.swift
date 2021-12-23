@@ -1,11 +1,9 @@
 import Foundation
 
 struct BankClerk {
-    private let handleTaskTime = 0.7
-    
-    func handleTask(of customer: Customer) {
+    func handleTask(of customer: Customer, until taskTime: Double) {
         print("\(customer.waitingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: handleTaskTime)
+        Thread.sleep(forTimeInterval: taskTime)
         print("\(customer.waitingNumber)번 고객 업무 종료")
     }
 }
