@@ -13,12 +13,28 @@ struct BankManager {
         return Int.random(in: 10...30)
     }
     
-    func openBank() {
+    private func openBank() {
         let clientCount = randomClientNumber
         for order in 1...clientCount {
             let client = Client(waitingNumber: order, task: .deposit)
             bank.lineUp(client)
         }
         bank.start()
+    }
+    
+    func showMenu() {
+        print(ConsoleMessage.menu, terminator: String.empty)
+        let input = readLine() ?? String.empty
+        
+        switch input {
+        case ConsoleMessage.open.input:
+            openBank()
+            showMenu()
+        case ConsoleMessage.exit.input:
+            return
+        default:
+            print(ConsoleMessage.invalidInput)
+            showMenu()
+        }
     }
 }
