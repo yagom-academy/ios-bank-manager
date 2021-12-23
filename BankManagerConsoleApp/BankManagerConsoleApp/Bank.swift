@@ -9,4 +9,14 @@ import Foundation
 
 class Bank {
     var customerQueue: Queue<Customer> = Queue<Customer>()
+    var bankClerk: BankClerk
+    
+    init(bankClerk: BankClerk) {
+        self.bankClerk = bankClerk
+        self.bankClerk.bank = self
+    }
+    
+    func open() {
+        bankClerk.startWork()
+    }
 }
