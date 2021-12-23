@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4747860F2774594D005DF6C4 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747860E2774594D005DF6C4 /* Bank.swift */; };
 		4788F785277066120067596D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788F784277066120067596D /* LinkedList.swift */; };
 		4788F79027716F840067596D /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788F78F27716F840067596D /* CustomerQueueTests.swift */; };
 		4788F79427716F8E0067596D /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132FF7C2770702D0054DE4B /* LinkedListTests.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4747860E2774594D005DF6C4 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		4788F784277066120067596D /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		4788F78D27716F840067596D /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4788F78F27716F840067596D /* CustomerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTests.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				4747860E2774594D005DF6C4 /* Bank.swift */,
 				C1E99DB72774580A00ADF963 /* Customer.swift */,
 				C168CF7A277166490055560E /* CustomerQueue.swift */,
 				C168CF7C2771747D0055560E /* LinkedList */,
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C132FF75277062E20054DE4B /* Node.swift in Sources */,
+				4747860F2774594D005DF6C4 /* Bank.swift in Sources */,
 				C1E99DB82774580A00ADF963 /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C168CF7B277166490055560E /* CustomerQueue.swift in Sources */,
