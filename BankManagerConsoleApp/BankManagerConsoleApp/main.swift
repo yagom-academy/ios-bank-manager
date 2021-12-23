@@ -1,13 +1,10 @@
 import Foundation
 
-let bank = BankManager()
-
 func run() {
-    var flag = true
-
-    while flag {
-        bank.showMenu()
-        flag = bank.receiveUserInput()
+    let bankManagerViewController = BankManagerViewController()
+    while bankManagerViewController.isFlag {
+        bankManagerViewController.showMenu()
+        bankManagerViewController.receiveUserInput()
     }
 }
 

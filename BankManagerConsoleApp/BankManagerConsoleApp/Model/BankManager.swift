@@ -7,32 +7,23 @@ enum Menu {
 
 struct BankManager {
     private let bank: Bank
+    var delegate: BankManagerDelegate?
     
-    init(bank: Bank = Bank()){
+    init(bank: Bank = Bank()) {
         self.bank = bank
     }
     
-    func receiveUserInput() -> Bool {
-        guard let input = readLine(), input.isEmpty == false else {
-            print(Message.wrongInput)
-            return true
-        }
-        
+    mutating func receivedUserInput(_ input: String) {
         switch input {
         case Menu.open:
             getterCustomers()
             bank.openBank()
-            return true
         case Menu.close:
-            return false
+            delegate?.bankManagerDidFinish()
+            return
         default:
-            print(Message.wrongInput)
-            return true
+            delegate?.bankManagerDidInvalidInput()
         }
-    }
-    
-    func showMenu() {
-        print(Message.menuList, terminator: "")
     }
     
     private func getterCustomers(to range: ClosedRange<Int> = 10...30) {
