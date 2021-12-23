@@ -1,7 +1,7 @@
 import Foundation
 
 class Bank {
-    private var clients = Queue<Client>()
+    private let clients = Queue<Client>()
     private let numberOfClients: Int
     private let semaphore: DispatchSemaphore
     

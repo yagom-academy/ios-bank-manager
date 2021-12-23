@@ -4,4 +4,4 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-BankManager().runConsoleApp()
+BankManager.runConsoleApp()
