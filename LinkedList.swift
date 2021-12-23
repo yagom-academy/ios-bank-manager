@@ -1,6 +1,6 @@
 import Foundation
 
-struct LinkedList<T> {
+class LinkedList<T> {
     private class Node {
         var data: T
         var next: Node?
@@ -23,7 +23,7 @@ struct LinkedList<T> {
         self.tail = nil
     }
     
-    mutating func append(_ item: T) {
+    func append(_ item: T) {
         let newNode: Node = Node(data: item)
         if tail != nil {
             tail?.next = newNode
@@ -34,7 +34,7 @@ struct LinkedList<T> {
         }
     }
     
-    mutating func removeFirst() -> T? {
+    func removeFirst() -> T? {
         let returnValue: T? = peek()
         head = head?.next
         

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Queue<T> {
+class Queue<T> {
     private var items: LinkedList<T>
     
     var isEmpty: Bool {
@@ -11,15 +11,15 @@ struct Queue<T> {
         items = LinkedList<T>()
     }
     
-    mutating func enqueue(_ item: T) {
+    func enqueue(_ item: T) {
         items.append(item)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         return items.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         items = LinkedList<T>()
     }
     
