@@ -11,7 +11,7 @@ class Bank {
     
     private var clientQueue = Queue<Client>()
     
-    func lineUp(client: Client) {
+    func lineUp(_ client: Client) {
         clientQueue.enqueue(client)
     }
     
@@ -20,7 +20,7 @@ class Bank {
         var workingDuration: Double = .zero
         while true {
             guard let client = clientQueue.dequeue() else {
-                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(workingDuration)초입니다.")
+                print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(workingDuration.roundedOff)초입니다.")
                 return
             }
             service(client)
