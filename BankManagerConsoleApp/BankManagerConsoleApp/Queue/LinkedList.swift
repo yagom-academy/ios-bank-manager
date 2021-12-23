@@ -7,7 +7,7 @@
 
 import Foundation
 
-final private class Node<Element> {
+private final class Node<Element> {
     var data: Element
     var next: Node?
     
