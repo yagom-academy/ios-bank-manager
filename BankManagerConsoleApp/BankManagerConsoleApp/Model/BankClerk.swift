@@ -1,15 +1,16 @@
 import Foundation
 
-struct BankClerk {
+final class BankClerk {
     private let workSpeed: TimeInterval
+    var delegate: BankClerkDelegate?
     
     init(workSpeed: TimeInterval = 0.7) {
         self.workSpeed = workSpeed
     }
     
     func work(for customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        delegate?.bankClerk(DidStartWork: customer.waitingNumber)
         Thread.sleep(forTimeInterval: workSpeed)
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        delegate?.bankClerk(DidFinishWork: customer.waitingNumber)
     }
 }

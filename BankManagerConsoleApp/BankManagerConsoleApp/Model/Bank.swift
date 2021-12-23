@@ -5,7 +5,7 @@ final class Bank {
     private var customerQueue = Queue<Customer>()
     var delegate: BankDelegate?
     
-    init(bankClerk: BankClerk = BankClerk()) {
+    init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
     }
     
