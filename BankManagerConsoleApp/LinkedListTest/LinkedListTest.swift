@@ -22,21 +22,28 @@ class LinkedListTest: XCTestCase {
         sut = nil
     }
 
-    func test_isEmpty_shouldReturnExactBooleanType() throws {
+    func test_isEmpty_withEmptyLinkedList_shouldReturnTrue() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.append(1)
+        linkedList.removeFirst()
 
-        XCTAssertFalse(linkedList.isEmpty)
+        XCTAssertTrue(linkedList.isEmpty)
     }
 
-    func test_peek_shouldReturnHeadData() throws {
+    func test_peek_withEmptyLinkedList_shouldReturnNil() throws {
+        let linkedList = try XCTUnwrap(sut)
+
+        XCTAssertNil(linkedList.peek())
+    }
+    
+    func test_peek_withLinkedListHavingNumberOne_shouldReturnNumberOne() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.append(1)
-
+        
         XCTAssertEqual(linkedList.peek(), 1)
     }
 
-    func test_clear_shouldRemoveAll() throws {
+    func test_removeAll_shouldRemoveAll() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.append(1)
         linkedList.append(2)
@@ -46,7 +53,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertTrue(linkedList.isEmpty)
     }
     
-    func test_enqueue_shouldAddNode() throws {
+    func test_append_shouldAddNode() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.append(1)
         linkedList.append(2)
@@ -55,7 +62,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(linkedList.peek(), 1)
     }
     
-    func test_dequeue_shouldRemoveFirstNode() throws {
+    func test_removeFirst_shouldRemoveFirstNode() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.append(1)
         linkedList.append(2)
@@ -65,7 +72,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(linkedList.peek(), 2)
     }
     
-    func test_dequeue_withEmptyLinkedList_shouldReturnNil() throws {
+    func test_removeFirst_withEmptyLinkedList_shouldReturnNil() throws {
         var linkedList = try XCTUnwrap(sut)
         linkedList.removeFirst()
         
