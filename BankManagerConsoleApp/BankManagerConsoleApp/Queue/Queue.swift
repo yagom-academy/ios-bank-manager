@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Queue<Element> {
+class Queue<Element> {
     private var linkedList = LinkedList<Element>()
     var first: Element? {
         linkedList.first
@@ -16,16 +16,16 @@ struct Queue<Element> {
         linkedList.isEmpty
     }
     
-    mutating func enqueue(data: Element) {
+    func enqueue(data: Element) {
         linkedList.append(data: data)
     }
     
     @discardableResult
-    mutating func dequeue() -> Element? {
+    func dequeue() -> Element? {
         linkedList.removeFirst()
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         linkedList.removeAll()
     }
 }
