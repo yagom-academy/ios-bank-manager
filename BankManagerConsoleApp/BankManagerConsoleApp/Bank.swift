@@ -46,4 +46,13 @@ struct Bank {
             print(error.localizedDescription)
         }
     }
+    
+    func operateTask() {
+        let bankTaskQueue = DispatchQueue(label: "Bank")
+        for _ in numberOfCustomerRange {
+            bankTaskQueue.sync {
+                takeTask()
+            }
+        }
+    }
 }
