@@ -55,4 +55,16 @@ struct Bank {
             }
         }
     }
+    
+    func printTaskEndMessage() {
+        let totalTaskTIme = taskTime * Double(numberOfCustomer)
+        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalTaskTIme)초입니다."
+        print(message)
+    }
+    
+    func open() {
+        enqueueCustomer()
+        operateTask()
+        printTaskEndMessage()
+    }
 }
