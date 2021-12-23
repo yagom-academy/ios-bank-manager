@@ -10,22 +10,23 @@ import Foundation
 class BankClerk {
     var bank: Bank?
     
-    func startWork() {
+    func work() {
         var customerCount: Int = 0
         var totalProcessingTime: Double = 0
-        while true {
-            guard let customer = bank?.customerQueue.dequeue() else {
-                bank?.close(totalCustomerCount: customerCount, totalProcessingTime: totalProcessingTime)
-                break
-            }
-            
-            print("\(customer.turn)번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: TimeInterval(customer.processingTime))
-            print("\(customer.turn)번 고객 업무 완료")
+        
+        while let customer = bank?.customerQueue.dequeue() {
+            printProcess(of: customer)
             customerCount += 1
             totalProcessingTime += customer.processingTime
         }
+        
+        bank?.close(totalCustomers: customerCount, totalProcessingTime: totalProcessingTime)
     }
     
-
+    func printProcess(of customer: Customer) {
+        print("\(customer.turn)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: TimeInterval(customer.processingTime))
+        print("\(customer.turn)번 고객 업무 완료")
+    }
 }
+    
