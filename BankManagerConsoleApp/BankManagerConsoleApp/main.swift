@@ -5,3 +5,7 @@
 // 
 
 import Foundation
+
+var bankManger = BankManager()
+
+bankManger.runBankManager()

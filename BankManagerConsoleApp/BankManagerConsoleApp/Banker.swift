@@ -8,13 +8,13 @@
 import Foundation
 
 struct Banker {
-  func doTask(clientSequence: Int) {
-    print("\(clientSequence)번 고객 업무 시작")
-    
-    DispatchQueue.global().sync {
-      sleep(UInt32(0.7))
-    }
-    
-    print("\(clientSequence)번 고객 업무 완료")
+  private let task = DispatchWorkItem {
+    Thread.sleep(forTimeInterval: 0.7)
+  }
+  
+  func doTask(client: Client) {
+    print("\(client.sequence)번 고객 업무 시작")
+    DispatchQueue.global().sync(execute: task)
+    print("\(client.sequence)번 고객 업무 완료")
   }
 }
