@@ -8,5 +8,6 @@
 import Foundation
 
 struct Customer {
+    var turn: Int
     var processingTime: Double = 0.7
 }
