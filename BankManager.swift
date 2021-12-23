@@ -8,7 +8,7 @@ struct BankManager {
             printMenu()
             switch receiveInput() {
             case "1":
-                let bank = Bank(clientQueue: Queue<Client>(), bankClerks: [], numberOfBanker: numberOfBankClerk)
+                let bank = Bank(numberOfBankClerk: numberOfBankClerk)
                 bank.open()
             case "2":
                 return
