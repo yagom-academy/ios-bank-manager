@@ -8,12 +8,20 @@
 import Foundation
 
 enum Task {
+    
     case deposit
+    
+    var duration: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        }
+    }
     
     func work() {
         switch self {
         case .deposit:
-            Thread.sleep(forTimeInterval: 0.7)
+            Thread.sleep(forTimeInterval: Task.deposit.duration)
         }
     }
 }
