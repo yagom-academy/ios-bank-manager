@@ -9,5 +9,4 @@ import Foundation
 
 enum StarterError: Error {
     case wrongInput
-    case outOfInput
 }
