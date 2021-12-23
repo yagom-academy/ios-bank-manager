@@ -13,4 +13,9 @@ struct Bank {
     let numberOfCustomer: Int
     let taskTime: Double
     
+    init(numberOfCustomerRange: ClosedRange<Int> = 10...30, taskTime: Double = 0.7) {
+        self.customerQueue = CustomerQueue()
+        self.numberOfCustomer = Int.random(in: numberOfCustomerRange)
+        self.taskTime = taskTime
+    }
 }
