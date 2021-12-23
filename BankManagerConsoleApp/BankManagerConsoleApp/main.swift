@@ -25,14 +25,27 @@ enum BankMenu: String {
                       """
 }
 
+let bank = Bank()
+
 func printMenu() {
     print(BankMenu.main, terminator: " ")
 }
 
-func inputMenu() throws -> BankMenu {
+func inputMenu() -> BankMenu? {
     guard let input = readLine(),
          let selectedMenu = BankMenu(number: input) else {
-             throw fatalError()
+             return nil
     }
     return selectedMenu
+}
+
+func operateMenu(input menu: BankMenu?) {
+    switch menu {
+    case .openBank:
+        bank.open()
+    case .exitProgram:
+        print("종료")
+    default:
+        print("다시 입력")
+    }
 }
