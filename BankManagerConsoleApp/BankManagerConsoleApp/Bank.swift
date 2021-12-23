@@ -35,4 +35,15 @@ struct Bank {
         Thread.sleep(forTimeInterval: taskTime)
         print("\(turn)번 고객 업무 완료")
     }
+    
+    func takeTask() {
+        do {
+            let customer = try customerQueue.dequeue()
+            task(of: customer)
+        } catch LinkedListError.dataDoesNotExist {
+            print(LinkedListError.dataDoesNotExist.description)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
