@@ -15,6 +15,7 @@
 		E93F669A2770AC4E001158D8 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F66992770AC4E001158D8 /* QueueTests.swift */; };
 		E93F66B02770AD3D001158D8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F668E277087D7001158D8 /* LinkedList.swift */; };
 		E93F66BD27734110001158D8 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA37FA27709E1C007C07F2 /* Queue.swift */; };
+		E93F66D9277458E8001158D8 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F66D8277458E8001158D8 /* Client.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		E93F66972770AC4E001158D8 /* BankManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93F66992770AC4E001158D8 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		E93F669B2770AC4E001158D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E93F66D8277458E8001158D8 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				E93F668E277087D7001158D8 /* LinkedList.swift */,
 				C1AA37FA27709E1C007C07F2 /* Queue.swift */,
+				E93F66D8277458E8001158D8 /* Client.swift */,
 				C13FC5742774575800369FAB /* Task.swift */,
 			);
 			path = BankManager;
@@ -196,6 +199,7 @@
 			files = (
 				E93F668F277087D8001158D8 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				E93F66D9277458E8001158D8 /* Client.swift in Sources */,
 				C13FC5752774575800369FAB /* Task.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				C1AA37FB27709E1C007C07F2 /* Queue.swift in Sources */,
