@@ -1,11 +1,18 @@
 import Foundation
 
 struct Bank {
-    var queue: Queue<Customer>
-    var bankName: String
+    private var queue: Queue<Customer>
     
-    init(bankName: String) {
+    init() {
         queue = Queue<Customer>()
-        self.bankName = bankName
+    }
+    
+    func open() {
+        let customerCount = Int.random(in: 1...10)
+        
+        (1...customerCount).forEach {
+            let customer = Customer(customerNumber: $0)
+            queue.enqueue(customer)
+        }
     }
 }
