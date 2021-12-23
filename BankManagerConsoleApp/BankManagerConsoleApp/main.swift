@@ -10,6 +10,10 @@ enum BankMenu: String {
     case openBank = "1"
     case exitProgram = "2"
     
+    init?(number: String) {
+        self.init(rawValue: number)
+    }
+    
     var menuNumber: String {
         return self.rawValue
     }
@@ -23,4 +27,12 @@ enum BankMenu: String {
 
 func printMenu() {
     print(BankMenu.main, terminator: " ")
+}
+
+func inputMenu() throws -> BankMenu {
+    guard let input = readLine(),
+         let selectedMenu = BankMenu(number: input) else {
+             throw fatalError()
+    }
+    return selectedMenu
 }
