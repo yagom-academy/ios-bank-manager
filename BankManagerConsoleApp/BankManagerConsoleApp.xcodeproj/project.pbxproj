@@ -20,6 +20,7 @@
 		E93F66BD27734110001158D8 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA37FA27709E1C007C07F2 /* Queue.swift */; };
 		E93F66D9277458E8001158D8 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F66D8277458E8001158D8 /* Client.swift */; };
 		E93F66E227746F2F001158D8 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93F66E127746F2F001158D8 /* Double+Extension.swift */; };
+		E9EF7C762774A11C00068B96 /* BankDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EF7C752774A11C00068B96 /* BankDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		E93F669B2770AC4E001158D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E93F66D8277458E8001158D8 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		E93F66E127746F2F001158D8 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		E9EF7C752774A11C00068B96 /* BankDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				E93F66E027746F08001158D8 /* Extension */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C13FC57627745A3A00369FAB /* Bank.swift */,
+				E9EF7C752774A11C00068B96 /* BankDelegate.swift */,
 				E93F66D8277458E8001158D8 /* Client.swift */,
 				C13FC5742774575800369FAB /* Task.swift */,
 				C1AA37FA27709E1C007C07F2 /* Queue.swift */,
@@ -223,6 +226,7 @@
 				E93F66D9277458E8001158D8 /* Client.swift in Sources */,
 				C13FC5752774575800369FAB /* Task.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				E9EF7C762774A11C00068B96 /* BankDelegate.swift in Sources */,
 				C1AA37FB27709E1C007C07F2 /* Queue.swift in Sources */,
 				E93F66E227746F2F001158D8 /* Double+Extension.swift in Sources */,
 				C13FC57B27748CE700369FAB /* ConsoleMessage.swift in Sources */,
