@@ -18,6 +18,7 @@
 		C168CF7B277166490055560E /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7A277166490055560E /* CustomerQueue.swift */; };
 		C168CF7E277174AB0055560E /* LinkedListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7D277174AB0055560E /* LinkedListError.swift */; };
 		C168CF7F277174B40055560E /* LinkedListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C168CF7D277174AB0055560E /* LinkedListError.swift */; };
+		C1E99DB82774580A00ADF963 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E99DB72774580A00ADF963 /* Customer.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		C132FF7C2770702D0054DE4B /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		C168CF7A277166490055560E /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		C168CF7D277174AB0055560E /* LinkedListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListError.swift; sourceTree = "<group>"; };
+		C1E99DB72774580A00ADF963 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				C1E99DB72774580A00ADF963 /* Customer.swift */,
 				C168CF7A277166490055560E /* CustomerQueue.swift */,
 				C168CF7C2771747D0055560E /* LinkedList */,
 			);
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C132FF75277062E20054DE4B /* Node.swift in Sources */,
+				C1E99DB82774580A00ADF963 /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C168CF7B277166490055560E /* CustomerQueue.swift in Sources */,
 				4788F785277066120067596D /* LinkedList.swift in Sources */,
