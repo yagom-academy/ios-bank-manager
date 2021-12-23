@@ -1,8 +1,20 @@
 import Foundation
 
+runBankManagerConsole()
+
 func runBankManagerConsole() {
     while true {
+        printMenu()
+        let inputValue = input(with: "입력 : ", useTrim: true)
         
+        switch inputValue {
+        case "1":
+            print("은행 개점하였습니다.")
+        case "2":
+            return
+        default:
+            print("입력값이 잘못되었습니다.")
+        }
     }
 }
 
@@ -14,11 +26,14 @@ func printMenu() {
     print(message)
 }
 
-func input(with message: String = "") -> String {
+func input(with message: String = "", useTrim: Bool = false) -> String {
     let emptyString = ""
     print(message, separator: emptyString, terminator: emptyString)
-    guard let inputValue = readLine() else {
+    guard var inputValue = readLine() else {
         fatalError()
     }
-    return inputValue.trimmingCharacters(in: .whitespacesAndNewlines)
+    if useTrim == true {
+        inputValue = inputValue.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    return inputValue
 }
