@@ -3,7 +3,7 @@ import Foundation
 struct BankClerk {
     private let workSpeed: TimeInterval
     
-    init(workSpeed: TimeInterval) {
+    init(workSpeed: TimeInterval = 0.7) {
         self.workSpeed = workSpeed
     }
     

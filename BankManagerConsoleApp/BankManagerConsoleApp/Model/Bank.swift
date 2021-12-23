@@ -4,7 +4,7 @@ struct Bank {
     private let bankClerk: BankClerk
     private var customerQueue = Queue<Customer>()
     
-    init(bankClerk: BankClerk) {
+    init(bankClerk: BankClerk = BankClerk()) {
         self.bankClerk = bankClerk
     }
     

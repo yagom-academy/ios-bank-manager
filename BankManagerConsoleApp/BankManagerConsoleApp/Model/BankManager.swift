@@ -1,7 +1,11 @@
 import Foundation
 
 struct BankManager {
-    private let bank = Bank(bankClerk: BankClerk(workSpeed: 0.7))
+    private let bank: Bank
+    
+    init(bank: Bank = Bank()){
+        self.bank = bank
+    }
     
     func receiveUserInput() -> Bool {
         guard let input = readLine(), input.isEmpty == false else {
@@ -11,6 +15,7 @@ struct BankManager {
         
         switch input {
         case "1":
+            getterCustomers()
             bank.openBank()
             return true
         case "2":
@@ -29,7 +34,7 @@ struct BankManager {
         """, terminator: "")
     }
     
-    func getterCustomers(to range: ClosedRange<Int> = 10...30) {
+    private func getterCustomers(to range: ClosedRange<Int> = 10...30) {
         let numberOfCustomers = Int.random(in: range)
         bank.handOutWaitingNumber(from: numberOfCustomers)
     }
