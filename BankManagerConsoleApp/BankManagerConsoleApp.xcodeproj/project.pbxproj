@@ -91,7 +91,6 @@
 				08BF9F272772FB6A00B0D371 /* BankClerk.swift */,
 				9AC7C46A2772FDA200559E56 /* Bank.swift */,
 				9A3DC9DB277456B40082C8D6 /* DecimalNumberFormatter.swift */,
-				9ACF1A112774861800691421 /* BankClerkViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,6 +117,7 @@
 		9A3DC9E8277477FD0082C8D6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9ACF1A112774861800691421 /* BankClerkViewController.swift */,
 				9A3DC9E9277478100082C8D6 /* BankManagerViewController.swift */,
 				081B8D1E277479F500DD0E35 /* BankViewController.swift */,
 			);
