@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B9CA80D27746F890040E797 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9CA80B27746F890040E797 /* Bank.swift */; };
+		6B9CA80E27746F890040E797 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9CA80C27746F890040E797 /* Customer.swift */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
 		C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3C259C3E9F0053667F /* SceneDelegate.swift */; };
 		C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3E259C3E9F0053667F /* ViewController.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B9CA80B27746F890040E797 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = ../../Bank.swift; sourceTree = "<group>"; };
+		6B9CA80C27746F890040E797 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Customer.swift; path = ../../Customer.swift; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E3A259C3E9F0053667F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7694E3C259C3E9F0053667F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				F31D715B27717A6500766815 /* LinkedList.swift */,
+				6B9CA80B27746F890040E797 /* Bank.swift */,
+				6B9CA80C27746F890040E797 /* Customer.swift */,
 				F31D715A27717A6500766815 /* Queue.swift */,
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
@@ -273,9 +279,11 @@
 				F31D715D27717A6500766815 /* LinkedList.swift in Sources */,
 				F31D715C27717A6500766815 /* Queue.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				6B9CA80E27746F890040E797 /* Customer.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
+				6B9CA80D27746F890040E797 /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
