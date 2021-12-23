@@ -22,7 +22,7 @@ struct LinkedList<Type> {
     private var tail: Node<Type>?
     
     var isEmpty: Bool {
-        head == nil
+        return head == nil
     }
     
     func peek() -> Type? {

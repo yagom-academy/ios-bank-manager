@@ -11,11 +11,11 @@ struct Queue<Type> {
     var queue: LinkedList<Type>
     
     var isEmpty: Bool {
-        queue.isEmpty
+        return queue.isEmpty
     }
     
     func peek() -> Type? {
-        queue.peek()
+        return queue.peek()
     }
     
     mutating func clear() {
