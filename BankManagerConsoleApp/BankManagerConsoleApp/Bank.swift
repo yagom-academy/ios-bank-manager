@@ -9,8 +9,8 @@ import Foundation
 
 struct Bank {
     
-    let customerQueue: CustomerQueue<Customer>
-    let numberOfCustomer: Int
+    var customerQueue: CustomerQueue<Customer>
+    var numberOfCustomer: Int
     let taskTime: TimeInterval
     var numberOfCustomerRange: ClosedRange<Int> {
         return 1...numberOfCustomer
@@ -62,9 +62,15 @@ struct Bank {
         print(message)
     }
     
-    func open() {
+    mutating func resetBank() {
+        numberOfCustomer = Int.random(in: 10...30)
+        customerQueue.clear()
+    }
+    
+    mutating func open() {
         enqueueCustomer()
         operateTask()
         printTaskEndMessage()
+        resetBank()
     }
 }

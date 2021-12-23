@@ -25,7 +25,7 @@ enum BankMenu: String {
                       """
 }
 
-let bank = Bank()
+var bank = Bank()
 
 func printMenu() {
     print(BankMenu.main, terminator: " ")
