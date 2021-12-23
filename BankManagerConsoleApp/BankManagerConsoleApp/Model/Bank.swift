@@ -1,8 +1,9 @@
 import Foundation
 
-struct Bank {
+final class Bank {
     private let bankClerk: BankClerk
     private var customerQueue = Queue<Customer>()
+    var delegate: BankDelegate?
     
     init(bankClerk: BankClerk = BankClerk()) {
         self.bankClerk = bankClerk
@@ -37,7 +38,7 @@ struct Bank {
         guard let totalWorkTime = DecimalNumberFormatter.string(for: durationTime) else {
             fatalError()
         }
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(totalWorkTime)초 입니다.")
+        delegate?.bank(didFinish: numberOfCustomers, durationTime: totalWorkTime)
     }
 
 }

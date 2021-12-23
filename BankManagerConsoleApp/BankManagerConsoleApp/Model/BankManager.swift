@@ -9,7 +9,7 @@ struct BankManager {
     private let bank: Bank
     var delegate: BankManagerDelegate?
     
-    init(bank: Bank = Bank()) {
+    init(bank: Bank) {
         self.bank = bank
     }
     

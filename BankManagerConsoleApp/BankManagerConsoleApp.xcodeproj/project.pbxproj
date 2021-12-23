@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081B8D1D277479BF00DD0E35 /* BankDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B8D1C277479BF00DD0E35 /* BankDelegate.swift */; };
+		081B8D1F277479F500DD0E35 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B8D1E277479F500DD0E35 /* BankViewController.swift */; };
 		08BCF51A27709A6900CF04B9 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51927709A6900CF04B9 /* QueueTests.swift */; };
 		08BCF51C2770A02300CF04B9 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51B2770A02300CF04B9 /* Queue.swift */; };
 		08BCF51E2770A04300CF04B9 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCF51B2770A02300CF04B9 /* Queue.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		081B8D1C277479BF00DD0E35 /* BankDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDelegate.swift; sourceTree = "<group>"; };
+		081B8D1E277479F500DD0E35 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		08BCF51927709A6900CF04B9 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		08BCF51B2770A02300CF04B9 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		08BF9F272772FB6A00B0D371 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				9A3DC9E6277477D00082C8D6 /* BankManagerDelegate.swift */,
+				081B8D1C277479BF00DD0E35 /* BankDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				9A3DC9E9277478100082C8D6 /* BankManagerViewController.swift */,
+				081B8D1E277479F500DD0E35 /* BankViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -240,7 +246,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				081B8D1D277479BF00DD0E35 /* BankDelegate.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				081B8D1F277479F500DD0E35 /* BankViewController.swift in Sources */,
 				08BF9F282772FB6A00B0D371 /* BankClerk.swift in Sources */,
 				9AC7C4692772F99700559E56 /* Customer.swift in Sources */,
 				9A3DC9DE27745B840082C8D6 /* Message.swift in Sources */,

@@ -1,11 +1,12 @@
 import Foundation
 
 class BankManagerViewController {
-    private var bankManager = BankManager()
+    private var bankManager: BankManager
     private(set) var isFlag = true
     
-    init() {
-        bankManager.delegate = self
+    init(bankManager: BankManager) {
+        self.bankManager = bankManager
+        self.bankManager.delegate = self
     }
     
     func showInvalidInput() {
