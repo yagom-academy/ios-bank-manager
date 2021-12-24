@@ -31,7 +31,7 @@ class Bank: WaitingLineManageable {
     func startWork() {
         while waitingLine.isEmpty == false {
             employee.doJob()
-            employee.f
+            employee.finishJob()
         }
     }
     
