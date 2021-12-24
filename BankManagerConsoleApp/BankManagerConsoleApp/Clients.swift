@@ -1,5 +1,5 @@
 //
-//  Client.swift
+//  Clients.swift
 //  BankManagerConsoleApp
 //
 //  Created by yeha on 2021/12/24.

@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager: Managable {
     var waitingLine = Queue<Int>()
-    let numberOfClients = Client().countTotalNumberOfClients()
+    let numberOfClients = Clients().countTotalNumberOfClients()
     let clerk = BankClerk()
     let clerkNumber: Int
     var duration: CFAbsoluteTime = .zero
