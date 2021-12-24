@@ -1,7 +1,7 @@
 import Foundation
 
 protocol BankDelegate {
-    func checkTime()
+    mutating func checkTime()
 }
 
 struct Bank {
@@ -15,7 +15,7 @@ struct Bank {
         
         init() {}
         
-        private func task() {
+        private mutating func task() {
             guard let customer = customer else {
                 return
             }
@@ -62,7 +62,7 @@ struct Bank {
 }
 
 extension Bank: BankDelegate {
-    func checkTime() {
+    mutating func checkTime() {
         totalTime += 0.7
     }
 }
