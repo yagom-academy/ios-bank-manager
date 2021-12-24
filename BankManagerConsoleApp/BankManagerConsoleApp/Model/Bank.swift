@@ -33,7 +33,7 @@ final class Bank {
         closeBank(numberOfCustomers, from: openTime)
     }
     
-    func closeBank(_ numberOfCustomers: Int, from openTime: CFAbsoluteTime) {
+    private func closeBank(_ numberOfCustomers: Int, from openTime: CFAbsoluteTime) {
         let durationTime = CFAbsoluteTimeGetCurrent() - openTime
         guard let totalWorkTime = DecimalNumberFormatter.string(for: durationTime) else {
             fatalError()
