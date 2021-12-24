@@ -7,9 +7,38 @@
 
 import Foundation
 
+struct Client {
+    let clientNumber: Int
+    
+    init(_ clientNumber: Int = 0) {
+        self.clientNumber = clientNumber
+    }
+}
+
 struct Clients {
-    func countTotalNumberOfClients() -> Int {
-        let numberOfClients = Int.random(in: 10...30)
-        return numberOfClients
+    private var waitingLine = Queue<Client>()
+    
+    mutating func makeWaitingLine() -> Int {
+        let totalNumberOfClients = Int.random(in: 10...30)
+        
+        (1...totalNumberOfClients).forEach { clientNumber in
+            let client = Client(clientNumber)
+            
+            waitingLine.enqueue(client)
+        }
+        
+        return totalNumberOfClients
+    }
+    
+    func startTask() -> Int {
+        guard let client = waitingLine.peek() else {
+            return Bank.emptyWaitingLine
+        }
+        
+        return client.clientNumber
+    }
+    
+    mutating func completeTask() {
+        waitingLine.dequeue()
     }
 }

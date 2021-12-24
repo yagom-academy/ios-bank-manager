@@ -26,6 +26,7 @@ struct Queue<Type> {
         queue.append(data)
     }
     
+    @discardableResult
     mutating func dequeue() -> Type? {
         return queue.removeFirst()
     }
