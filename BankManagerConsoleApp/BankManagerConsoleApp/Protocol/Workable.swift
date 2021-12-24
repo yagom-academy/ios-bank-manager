@@ -8,11 +8,13 @@
 import Foundation
 
 protocol Workable {
-    func startWork(by clerkNumber: Int) -> DispatchQueue
+    func work(for client: Int)
 }
 
 extension Workable {
-    func startWork(by clerkNumber: Int) -> DispatchQueue {
-        return DispatchQueue(label: "clerk\(clerkNumber)")
+    func work(for client: Int) {
+        print("\(client)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: 0.7)
+        print("\(client)번 고객 업무 완료")
     }
 }
