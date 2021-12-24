@@ -9,38 +9,47 @@ import Foundation
 
 struct Bank {
     
-    var customerQueue: CustomerQueue<Customer>
-    var numberOfCustomer: Int
-    let taskTime: TimeInterval
+    private var customerQueue: CustomerQueue<Customer>
+    private var numberOfCustomer: Int
+    private let taskTime: TimeInterval
     
-    var numberOfCustomerRange: ClosedRange<Int> {
+    private var numberOfCustomerRange: ClosedRange<Int> {
         return 1...numberOfCustomer
     }
-    var totalTaskTime: Decimal {
+    private var totalTaskTime: Decimal {
         return Decimal(taskTime) * Decimal(numberOfCustomer)
     }
     
-    init(numberOfCustomerRange: ClosedRange<Int> = 10...30, taskTime: TimeInterval = 0.7) {
+    init(numberOfCustomerRange: ClosedRange<Int> = DefaultValue.numberOfCustomerRange, taskTime: TimeInterval = DefaultValue.taskTimeInterval) {
         self.customerQueue = CustomerQueue()
         self.numberOfCustomer = Int.random(in: numberOfCustomerRange)
         self.taskTime = taskTime
     }
     
-    func enqueueCustomer() {
+    mutating func open() {
+        enqueueCustomer()
+        operateTask()
+        printTaskEndMessage()
+        resetBank()
+    }
+    
+    private func enqueueCustomer() {
         for count in numberOfCustomerRange {
             let customer = Customer(turn: count)
             customerQueue.enqueue(data: customer)
         }
     }
     
-    func task(of customer: Customer) {
-        let number = customer.turn
-        print(Message.taskStart(turn: number).description)
-        Thread.sleep(forTimeInterval: taskTime)
-        print(Message.taskEnd(turn: number).description)
+    private func operateTask() {
+        let bankTaskQueue = DispatchQueue(label: "Bank")
+        for _ in numberOfCustomerRange {
+            bankTaskQueue.sync {
+                takeTask()
+            }
+        }
     }
     
-    func takeTask() {
+    private func takeTask() {
         do {
             let customer = try customerQueue.dequeue()
             task(of: customer)
@@ -51,33 +60,25 @@ struct Bank {
         }
     }
     
-    func operateTask() {
-        let bankTaskQueue = DispatchQueue(label: "Bank")
-        for _ in numberOfCustomerRange {
-            bankTaskQueue.sync {
-                takeTask()
-            }
-        }
+    private func task(of customer: Customer) {
+        let number = customer.turn
+        print(Message.taskStart(turn: number).description)
+        Thread.sleep(forTimeInterval: taskTime)
+        print(Message.taskEnd(turn: number).description)
     }
     
-    func printTaskEndMessage() {
+    private func printTaskEndMessage() {
         print(Message.totalTaskEnd(count: numberOfCustomer, time: totalTaskTime).description)
     }
     
-    mutating func resetBank() {
-        numberOfCustomer = Int.random(in: 10...30)
+    private mutating func resetBank() {
+        numberOfCustomer = Int.random(in: DefaultValue.numberOfCustomerRange)
         customerQueue.clear()
     }
     
-    mutating func open() {
-        enqueueCustomer()
-        operateTask()
-        printTaskEndMessage()
-        resetBank()
-    }
 }
 
-extension Bank {
+private extension Bank {
     
     enum Message {
         case taskStart(turn: Int)
@@ -95,4 +96,10 @@ extension Bank {
             }
         }
     }
+    
+    struct DefaultValue {
+        static let numberOfCustomerRange = 10...30
+        static let taskTimeInterval = 0.7
+    }
+    
 }
