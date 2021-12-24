@@ -9,7 +9,7 @@ struct Bank {
     
     init(numberOfBankClerk: Int, numberOfCustomer: Int) {
         for index in 0..<numberOfCustomer {
-            let customer = Customer(number: index)
+            let customer = Customer(number: (index + 1))
             customers.enqueue(value: customer)
         }
         
