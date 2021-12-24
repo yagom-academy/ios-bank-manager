@@ -7,12 +7,17 @@
 
 import Foundation
 
+struct Ticket {
+    let number: Int
+}
+
 struct Client {
-    
+    let orderTicket: Ticket
+    let taskDuration = 0.7
 }
 
 struct BankClerk {
-    
+    var isAvailable = true
 }
 
 struct Bank {
