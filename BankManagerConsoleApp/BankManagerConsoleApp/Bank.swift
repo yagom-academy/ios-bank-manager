@@ -28,14 +28,14 @@ struct Bank {
   }
   
   private mutating func clientLineUp() {
-    for sequence in 1...numberOfClients {
+    for sequence in 0..<numberOfClients {
       clientQueue.enqueue(Client(sequence: sequence))
     }
   }
   
   private mutating func doWork() {
     for bankerNumber in 0..<bankers.count {
-      (1...numberOfClients).forEach() { _ in
+      (0..<numberOfClients).forEach() { _ in
         guard let dequeueClient = clientQueue.dequeue() else {
           return
         }

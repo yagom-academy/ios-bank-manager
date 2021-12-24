@@ -13,8 +13,9 @@ struct Banker {
   }
   
   func doTask(client: Client) {
-    print("\(client.sequence)번 고객 업무 시작")
+    let clientNumber = client.sequence + 1
+    print("\(clientNumber)번 고객 업무 시작")
     DispatchQueue.global().sync(execute: task)
-    print("\(client.sequence)번 고객 업무 완료")
+    print("\(clientNumber)번 고객 업무 완료")
   }
 }
