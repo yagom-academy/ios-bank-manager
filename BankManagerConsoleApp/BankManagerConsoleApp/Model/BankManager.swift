@@ -16,17 +16,17 @@ struct BankManager {
     mutating func receivedUserInput(_ input: String) {
         switch input {
         case Menu.open:
-            getterCustomers()
+            setUpBankCustomers()
             bank.openBank()
         case Menu.close:
-            delegate?.bankManagerDidFinish()
+            delegate?.bankManagerDidClose()
             return
         default:
-            delegate?.bankManagerDidInvalidInput()
+            delegate?.bankManagerDidReceiveInvalidInput()
         }
     }
     
-    private func getterCustomers(to range: ClosedRange<Int> = 10...30) {
+    private func setUpBankCustomers(to range: ClosedRange<Int> = 10...30) {
         let numberOfCustomers = Int.random(in: range)
         bank.handOutWaitingNumber(from: numberOfCustomers)
     }

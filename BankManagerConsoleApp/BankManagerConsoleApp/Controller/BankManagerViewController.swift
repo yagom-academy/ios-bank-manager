@@ -30,11 +30,11 @@ class BankManagerViewController {
 }
 
 extension BankManagerViewController: BankManagerDelegate {
-    func bankManagerDidInvalidInput() {
+    func bankManagerDidReceiveInvalidInput() {
         showInvalidInput()
     }
     
-    func bankManagerDidFinish() {
+    func bankManagerDidClose() {
         exit()
     }
 }
