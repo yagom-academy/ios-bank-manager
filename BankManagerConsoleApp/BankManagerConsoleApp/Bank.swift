@@ -32,5 +32,11 @@ struct Bank {
             clerkQueue.enqueue(clerk)
         }
     }
+    
+    mutating func receive(clients: [Client]) {
+        clients.forEach { client in
+            clientQueue.enqueue(client)
+        }
+    }
 }
 
