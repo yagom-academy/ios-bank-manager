@@ -14,22 +14,24 @@ protocol WaitingLineManageable {
 class Bank: WaitingLineManageable  {
     var waitingLine = Queue<Customer>()
     var employee: Employee
+    let randomNumber = Int.random(in: 10...30)
     
     func open() {
-        let randomNumber = Int.random(in: 10...30)
-        
         let openTime = CFAbsoluteTimeGetCurrent()
         
+        lineUp()
+        startWork()
+        
+        let closeTime = CFAbsoluteTimeGetCurrent()
+        employee.calculate(from: openTime, to: closeTime)
+    }
+    
+    private func lineUp() {
         for number in 1...randomNumber {
             let customer = Customer(waitingNumber: number)
             
             waitingLine.enqueue(customer)
         }
-        
-        startWork()
-        
-        let closeTime = CFAbsoluteTimeGetCurrent()
-        employee.calculate(from: openTime, to: closeTime)
     }
     
     private func startWork() {

@@ -43,7 +43,7 @@ extension Employee {
     }
     
     func downToDecimalTwo(time: CFAbsoluteTime) -> CFAbsoluteTime {
-        let a: Double = Double(time * 100)
-        return floor(a) / 100
+        let timeMultiplied = Double(time * 100)
+        return floor(timeMultiplied) / 100
     }
 }
