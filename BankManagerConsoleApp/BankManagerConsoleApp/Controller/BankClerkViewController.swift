@@ -7,6 +7,7 @@ class BankClerkViewController {
         self.bankClerk = bankClerk
         self.bankClerk.delegate = self
     }
+    
     func showCustomerStart(for customerNumber: Int) {
         print("\(customerNumber)번 고객 업무 시작")
     }
