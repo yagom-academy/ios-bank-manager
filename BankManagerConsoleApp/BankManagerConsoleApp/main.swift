@@ -26,7 +26,7 @@ func runProgram() {
         
         switch userInput {
         case "1":
-            bankManager.bank.open()
+            bankManager.openBank()
         case "2":
             return
         default:

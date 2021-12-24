@@ -16,7 +16,7 @@ class BankClerk {
         var totalProcessingTime: Double = 0
         
         while let customer = bank?.customerQueue.dequeue() {
-            printProcess(of: customer)
+            processWork(of: customer)
             customerCount += 1
             totalProcessingTime += customer.processingTime
         }
@@ -24,7 +24,7 @@ class BankClerk {
         bank?.close(totalCustomers: customerCount, totalProcessingTime: totalProcessingTime)
     }
     
-    func printProcess(of customer: Customer) {
+    private func processWork(of customer: Customer) {
         delegate?.printBeginWorkMessage(of: customer)
         Thread.sleep(forTimeInterval: TimeInterval(customer.processingTime))
         delegate?.printFinishWorkMessage(of: customer)
