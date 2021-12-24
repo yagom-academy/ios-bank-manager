@@ -25,15 +25,16 @@ struct BankManager {
     return input
   }
   
-  mutating func runBankManager() {
+  mutating func runBankManager(numberOfBankers: Int) {
     var isExit: Bool = false
-
+    
     while isExit == false {
       let choiceMenu = self.chooseMenu()
       
       switch choiceMenu {
       case Menu.openBank.rawValue :
-        var bank: Bank = Bank(numberOfBankers: 1)
+        let bankers = prepareBanker(numberOfBankers: numberOfBankers)
+        var bank: Bank = Bank(bankers: bankers)
         bank.doBanking()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.numberOfClients)명이며,"
               + "총 업무시간은 \(bank.workingTime())초입니다.")
@@ -44,4 +45,15 @@ struct BankManager {
       }
     }
   }
+  
+  mutating func prepareBanker(numberOfBankers: Int) -> [Banker] {
+    var bankers: [Banker] = []
+    
+    for _ in 0..<numberOfBankers {
+      let banker = Banker()
+      bankers.append(banker)
+    }
+    return bankers
+  }
 }
+                              

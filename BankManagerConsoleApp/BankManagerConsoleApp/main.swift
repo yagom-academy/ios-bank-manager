@@ -8,4 +8,4 @@ import Foundation
 
 var bankManger = BankManager()
 
-bankManger.runBankManager()
+bankManger.runBankManager(numberOfBankers: 1)
