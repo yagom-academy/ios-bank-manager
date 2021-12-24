@@ -48,8 +48,8 @@ struct BankManager {
   
   mutating func prepareBanker(numberOfBankers: Int) -> [Banker] {
     var bankers: [Banker] = []
-    
-    for _ in 0..<numberOfBankers {
+
+    (0..<numberOfBankers).forEach {_ in
       let banker = Banker()
       bankers.append(banker)
     }

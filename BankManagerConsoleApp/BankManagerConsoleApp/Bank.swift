@@ -44,7 +44,7 @@ struct Bank {
   
   private mutating func doWork() {
     for bankerNumber in 0..<bankers.count {
-      for _ in 1...numberOfClients {
+      (1...numberOfClients).forEach { _ in
         guard let dequeueClient = clientQueue.dequeue() else {
           return
         }
