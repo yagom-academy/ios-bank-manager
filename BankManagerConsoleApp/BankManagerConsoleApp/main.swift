@@ -7,7 +7,8 @@
 import Foundation
 
 class BankManagerConsole {
-    enum BankMenu: String {
+    
+    enum Menu: String {
         case openBank = "1"
         case exitProgram = "2"
         
@@ -19,40 +20,46 @@ class BankManagerConsole {
             return self.rawValue
         }
         
+    }
+    
+    struct MenuMessage {
         static let main = """
                       1 : 은행 개점
                       2 : 종료
                       입력 :
                       """
+        static let exit = "종료되었습니다."
+        static let wrongInput = "입력이 잘못되었습니다. 다시 입력해주세요"
+        static let spaceString = " "
     }
     
     var bank = Bank()
     
     func printMenu() {
-        print(BankMenu.main, terminator: " ")
+        print(MenuMessage.main, terminator: MenuMessage.spaceString)
     }
     
-    func inputMenu() -> BankMenu? {
+    func inputMenu() -> Menu? {
         guard let input = readLine(),
-              let selectedMenu = BankMenu(number: input) else {
+              let selectedMenu = Menu(number: input) else {
                   return nil
               }
         return selectedMenu
     }
     
-    func operateMenu(input menu: BankMenu?) {
+    func operateMenu(input menu: Menu?) {
         switch menu {
         case .openBank:
             bank.open()
         case .exitProgram:
-            print("종료")
+            print(MenuMessage.exit)
         default:
-            print("다시 입력")
+            print(MenuMessage.wrongInput)
         }
     }
     
     func run() {
-        var menu: BankMenu?
+        var menu: Menu?
         repeat {
             printMenu()
             menu = inputMenu()
