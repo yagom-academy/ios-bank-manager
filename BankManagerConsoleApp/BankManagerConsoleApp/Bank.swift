@@ -12,8 +12,12 @@ struct Bank {
     var customerQueue: CustomerQueue<Customer>
     var numberOfCustomer: Int
     let taskTime: TimeInterval
+    
     var numberOfCustomerRange: ClosedRange<Int> {
         return 1...numberOfCustomer
+    }
+    var totalTaskTime: Decimal {
+        return Decimal(taskTime) * Decimal(numberOfCustomer)
     }
     
     init(numberOfCustomerRange: ClosedRange<Int> = 10...30, taskTime: TimeInterval = 0.7) {
@@ -57,8 +61,7 @@ struct Bank {
     }
     
     func printTaskEndMessage() {
-        let totalTaskTIme = taskTime * Double(numberOfCustomer)
-        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalTaskTIme)초입니다."
+        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalTaskTime)초입니다."
         print(message)
     }
     
