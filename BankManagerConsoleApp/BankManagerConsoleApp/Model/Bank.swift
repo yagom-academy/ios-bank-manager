@@ -1,5 +1,4 @@
 import Foundation
-import CloudKit
 
 class Bank {
     var clientQueue: Queue<Client> = Queue<Client>()
@@ -23,7 +22,10 @@ class Bank {
         }
         group.wait()
         let finishTime = CFAbsoluteTimeGetCurrent()
-        let duration = finishTime - startTime
+        guard let duration = NumberFormatter.centisecond.string(
+            for: finishTime - startTime) else {
+            return
+            }
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedClientCount)명이며, 총 업무시간은 \(duration)초입니다.")
     }
     
