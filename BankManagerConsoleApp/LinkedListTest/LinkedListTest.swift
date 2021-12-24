@@ -23,9 +23,7 @@ class LinkedListTest: XCTestCase {
     }
 
     func test_isEmpty_withEmptyLinkedList_shouldReturnTrue() throws {
-        var linkedList = try XCTUnwrap(sut)
-        linkedList.append(1)
-        linkedList.removeFirst()
+        let linkedList = try XCTUnwrap(sut)
 
         XCTAssertTrue(linkedList.isEmpty)
     }
@@ -67,15 +65,13 @@ class LinkedListTest: XCTestCase {
         linkedList.append(1)
         linkedList.append(2)
         linkedList.append(3)
-        linkedList.removeFirst()
         
-        XCTAssertEqual(linkedList.peek(), 2)
+        XCTAssertEqual(linkedList.removeFirst(), 1)
     }
     
     func test_removeFirst_withEmptyLinkedList_shouldReturnNil() throws {
         var linkedList = try XCTUnwrap(sut)
-        linkedList.removeFirst()
         
-        XCTAssertTrue(linkedList.isEmpty)
+        XCTAssertNil(linkedList.removeFirst())
     }
 }
