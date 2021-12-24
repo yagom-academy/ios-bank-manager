@@ -1,7 +1,6 @@
 import Foundation
 
 struct MenuHandler {
-    
     enum Menu: String {
         case one = "1"
         case two = "2"
@@ -30,12 +29,16 @@ struct MenuHandler {
         }
     }
     
-    func setBankWithRandomCustomer() {
+    private func setBankWithRandomCustomer() {
         let randomNumberOfCustomer = Int.random(in: 10...30)
         var bank = Bank(numberOfBankClerk: 1, numberOfCustomer: randomNumberOfCustomer)
         bank.openBank()
     }
 }
 
-var menuHandler = MenuHandler()
-menuHandler.startToReceiveInput()
+func startBankManager() {
+    let menuHandler = MenuHandler()
+    menuHandler.startToReceiveInput()
+}
+
+startBankManager()
