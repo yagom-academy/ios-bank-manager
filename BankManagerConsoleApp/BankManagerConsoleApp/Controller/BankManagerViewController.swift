@@ -9,14 +9,6 @@ class BankManagerViewController {
         self.bankManager.delegate = self
     }
     
-    func showInvalidInput() {
-        print(Message.wrongInput)
-    }
-    
-    func exit() {
-        isFlag = false
-    }
-    
     func showMenu() {
         print(Message.menuList, terminator: "")
     }
@@ -26,6 +18,14 @@ class BankManagerViewController {
             return
         }
         bankManager.receivedUserInput(input)
+    }
+    
+    private func showInvalidInput() {
+        print(Message.wrongInput)
+    }
+    
+    private func exit() {
+        isFlag = false
     }
 }
 
