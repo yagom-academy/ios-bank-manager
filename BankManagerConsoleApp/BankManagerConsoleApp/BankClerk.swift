@@ -8,7 +8,8 @@
 import Foundation
 
 class BankClerk {
-    var bank: Bank?
+    weak var bank: Bank?
+    var delegate: BankClerkDelegate?
     
     func work() {
         var customerCount: Int = 0
@@ -24,9 +25,9 @@ class BankClerk {
     }
     
     func printProcess(of customer: Customer) {
-        print("\(customer.turn)번 고객 업무 시작")
+        delegate?.printBeginWorkMessage(of: customer)
         Thread.sleep(forTimeInterval: TimeInterval(customer.processingTime))
-        print("\(customer.turn)번 고객 업무 완료")
+        delegate?.printFinishWorkMessage(of: customer)
     }
 }
     

@@ -10,6 +10,7 @@ import Foundation
 class Bank {
     var customerQueue: Queue<Customer> = Queue<Customer>()
     var bankClerk: BankClerk
+    var delegate: BankDelegate?
     
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
@@ -21,6 +22,6 @@ class Bank {
     }
     
     func close(totalCustomers: Int, totalProcessingTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomers)명이며, 총 업무시간은 \(totalProcessingTime.formatted)초입니다.")
+        delegate?.printClosingMessage(customers: totalCustomers, processingTime: totalProcessingTime)
     }
 }
