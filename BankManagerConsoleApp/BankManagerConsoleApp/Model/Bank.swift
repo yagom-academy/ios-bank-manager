@@ -3,7 +3,7 @@ import Foundation
 final class Bank {
     private let bankClerk: BankClerk
     private var customerQueue = Queue<Customer>()
-    weak var delegate: BankDelegate?
+    var delegate: BankDelegate?
     
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
