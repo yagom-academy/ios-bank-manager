@@ -8,11 +8,11 @@ class BankClerkViewController {
         self.bankClerk.delegate = self
     }
     
-    func showCustomerStart(for customerNumber: Int) {
+    private func showCustomerStart(for customerNumber: Int) {
         print("\(customerNumber)번 고객 업무 시작")
     }
     
-    func showCustomerEnd(for customerNumber: Int) {
+    private func showCustomerEnd(for customerNumber: Int) {
         print("\(customerNumber)번 고객 업무 완료")
     }
 }
