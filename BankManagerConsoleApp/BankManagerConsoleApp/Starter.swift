@@ -8,12 +8,13 @@
 import Foundation
 
 struct Starter {
-    var shouldContinue: Bool = true
-    func printStartMessage() {
+    private var shouldContinue: Bool = true
+    
+    private func printStartMessage() {
         print(StarterMessage.open.description, terminator: "")
     }
     
-    func receiveInput() throws -> String {
+    private func receiveInput() throws -> String {
         guard let input = readLine() else {
             throw StarterError.endOfFile
         }
@@ -35,20 +36,18 @@ struct Starter {
         }
     }
     
-    mutating func checkInput() throws {
-        do {
-            let input = try receiveInput()
-            
-            switch input {
-            case "1":
-                let employee = Employee()
-                let bank = Bank(employee: employee)
-                bank.open()
-            case "2":
-                shouldContinue = false
-            default :
-                throw StarterError.wrongInput
-            }
+    private mutating func checkInput() throws {
+        let input = try receiveInput()
+        
+        switch input {
+        case "1":
+            let employee = Employee()
+            let bank = Bank(employee: employee)
+            bank.open()
+        case "2":
+            shouldContinue = false
+        default :
+            throw StarterError.wrongInput
         }
     }
 }

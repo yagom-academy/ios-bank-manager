@@ -13,8 +13,13 @@ protocol WaitingLineManageable {
 
 class Bank: WaitingLineManageable  {
     var waitingLine = Queue<Customer>()
-    var employee: Employee
-    let randomNumber = Int.random(in: 10...30)
+    private var employee: Employee
+    private let randomNumber = Int.random(in: 10...30)
+    
+    init(employee: Employee) {
+        self.employee = employee
+        self.employee.bank = self
+    }
     
     func open() {
         let openTime = CFAbsoluteTimeGetCurrent()
@@ -25,7 +30,11 @@ class Bank: WaitingLineManageable  {
         let closeTime = CFAbsoluteTimeGetCurrent()
         employee.calculate(from: openTime, to: closeTime)
     }
-    
+}
+
+//MARK: - Private Methods
+
+extension Bank {
     private func lineUp() {
         for number in 1...randomNumber {
             let customer = Customer(waitingNumber: number)
@@ -39,10 +48,5 @@ class Bank: WaitingLineManageable  {
             employee.doJob()
             employee.finishJob()
         }
-    }
-    
-    init(employee: Employee) {
-        self.employee = employee
-        self.employee.bank = self
     }
 }

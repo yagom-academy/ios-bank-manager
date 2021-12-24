@@ -42,7 +42,7 @@ extension Employee {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workTime)초입니다.")
     }
     
-    func downToDecimalTwo(time: CFAbsoluteTime) -> CFAbsoluteTime {
+    private func downToDecimalTwo(time: CFAbsoluteTime) -> CFAbsoluteTime {
         let timeMultiplied = Double(time * 100)
         return floor(timeMultiplied) / 100
     }
