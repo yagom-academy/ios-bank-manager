@@ -11,7 +11,7 @@ func runBankManagerConsole() {
             switch inputValue {
             case "1":
                 print("은행 개점하였습니다.")
-                let bank = Bank()
+                var bank = Bank()
                 bank.open()
             case "2":
                 return
