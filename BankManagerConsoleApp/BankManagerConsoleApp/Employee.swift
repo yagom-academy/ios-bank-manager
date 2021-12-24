@@ -37,6 +37,13 @@ struct Employee {
 extension Employee {
     func calculate(from openTime: CFAbsoluteTime, to closeTime: CFAbsoluteTime) {
         let duration = closeTime - openTime
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(duration)초입니다.")
+        
+        let workTime = downToDecimalTwo(time: duration)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workTime)초입니다.")
+    }
+    
+    func downToDecimalTwo(time: CFAbsoluteTime) -> CFAbsoluteTime {
+        let a: Double = Double(time * 100)
+        return floor(a) / 100
     }
 }
