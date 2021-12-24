@@ -9,9 +9,9 @@ import Foundation
 
 struct Bank {
   private var bankers: [Banker]
-  let numberOfClients = Int.random(in: 10...30)
+  private let numberOfClients = Int.random(in: 10...30)
   private var clientQueue = Queue<Client>()
-  var operatingTimeManager: OperatingTimeManager
+  private var operatingTimeManager: OperatingTimeManager
   
   init(bankers: [Banker], operatingTimeManager: OperatingTimeManager) {
     self.bankers = bankers

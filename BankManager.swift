@@ -41,13 +41,13 @@ struct BankManager {
     
   }
   
-  mutating func operateBank (numberOfBankers: Int) {
+  private mutating func operateBank (numberOfBankers: Int) {
     let bankers = prepareBanker(numberOfBankers: numberOfBankers)
     var bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
     bank.doBanking()
   }
   
-  mutating func prepareBanker(numberOfBankers: Int) -> [Banker] {
+  private mutating func prepareBanker(numberOfBankers: Int) -> [Banker] {
     var bankers: [Banker] = []
 
     (0..<numberOfBankers).forEach {_ in
