@@ -21,7 +21,16 @@ struct BankClerk {
 }
 
 struct Bank {
-    private var clientQueue: WaitingQueue<Client>
-    private var clerkQueue: WaitingQueue<BankClerk>
-    private var totalWorkingTime: Double
+    private var clientQueue = WaitingQueue<Client>()
+    private var clerkQueue = WaitingQueue<BankClerk>()
+    private var totalClientCount: Int = 0
+    private var totalWorkingTime: Double = 0
+    
+    init(numberOfClerks: Int) {
+        (0..<numberOfClerks).forEach { _ in
+            let clerk = BankClerk(isAvailable: true)
+            clerkQueue.enqueue(clerk)
+        }
+    }
 }
+
