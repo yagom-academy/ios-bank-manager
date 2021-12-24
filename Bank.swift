@@ -5,7 +5,7 @@ protocol BankDelegate {
     mutating func checkCustomer()
 }
 
-struct Bank {
+class Bank {
     private struct Banker {
         var delegate: BankDelegate?
         var customer: Customer? {
@@ -41,7 +41,7 @@ struct Bank {
         banker.delegate = self
     }
     
-    mutating func run() {
+    func run() {
         let customerCount = Int.random(in: 1...10)
         
         (1...customerCount).forEach {
@@ -57,7 +57,7 @@ struct Bank {
     }
     
     private func close() {
-        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTime)초입니다.")
     }
     
     private func assign(customer: Customer, to banker: inout Banker) {
@@ -66,11 +66,11 @@ struct Bank {
 }
 
 extension Bank: BankDelegate {
-    mutating func checkCustomer() {
+    func checkCustomer() {
         totalCustomer += 1
     }
     
-    mutating func checkTime() {
+    func checkTime() {
         totalTime += 0.7
     }
 }
