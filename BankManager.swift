@@ -34,10 +34,8 @@ struct BankManager {
       switch choiceMenu {
       case Menu.openBank.rawValue :
         let bankers = prepareBanker(numberOfBankers: numberOfBankers)
-        var bank: Bank = Bank(bankers: bankers)
+        var bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
         bank.doBanking()
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.numberOfClients)명이며,"
-              + "총 업무시간은 \(bank.workingTime())초입니다.")
       case Menu.exit.rawValue :
         isExit = true
       default :

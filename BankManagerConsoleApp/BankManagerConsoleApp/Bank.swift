@@ -11,29 +11,20 @@ struct Bank {
   private var bankers: [Banker]
   let numberOfClients = Int.random(in: 10...30)
   private var clientQueue = Queue<Client>()
-  private var openTime = CFAbsoluteTime()
-  private var closeTime = CFAbsoluteTime()
+  var operatingTimeManager: OperatingTimeManager
   
-  init(bankers: [Banker]) {
+  init(bankers: [Banker], operatingTimeManager: OperatingTimeManager) {
     self.bankers = bankers
+    self.operatingTimeManager = operatingTimeManager
   }
   
   mutating func doBanking() {
-    openTime = CFAbsoluteTimeGetCurrent()
+    operatingTimeManager.openTime = CFAbsoluteTimeGetCurrent()
     clientLineUp()
     doWork()
-    closeTime = CFAbsoluteTimeGetCurrent()
-  }
-  
-  func workingTime() -> String {
-    let timeInterval = closeTime - openTime
-    
-    let numberFormatter = NumberFormatter()
-    numberFormatter.roundingMode = .floor
-    numberFormatter.maximumSignificantDigits = 3
-    
-    let workingTime = numberFormatter.string(for: Double(timeInterval)) ?? ""
-    return workingTime
+    operatingTimeManager.closeTime = CFAbsoluteTimeGetCurrent()
+    print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며,"
+          + "총 업무시간은 \(operatingTimeManager.workingTime())초입니다.")
   }
   
   private mutating func clientLineUp() {
@@ -44,7 +35,7 @@ struct Bank {
   
   private mutating func doWork() {
     for bankerNumber in 0..<bankers.count {
-      (1...numberOfClients).forEach { _ in
+      (1...numberOfClients).forEach() { _ in
         guard let dequeueClient = clientQueue.dequeue() else {
           return
         }
