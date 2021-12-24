@@ -21,4 +21,9 @@ struct BankManager {
         
         return clients
     }
+    
+    mutating func supplyClientsToBank() {
+        let clients = generateClients()
+        bank.receive(clients: clients)
+    }
 }
