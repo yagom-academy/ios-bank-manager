@@ -8,7 +8,7 @@
 import Foundation
 
 struct Client {
-    var totalNumber: Int {
+    func countTotalNumberOfClients() -> Int {
         let numberOfClients = Int.random(in: 10...30)
         return numberOfClients
     }

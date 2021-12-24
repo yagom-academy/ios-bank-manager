@@ -8,24 +8,41 @@ import Foundation
 
 struct BankManager: Managable {
     var waitingLine = Queue<Int>()
+    let numberOfClients = Client().countTotalNumberOfClients()
     let clerk = BankClerk()
     let clerkNumber: Int
-
-    mutating func makeWaitingLine(by numberOfClients: Int) {
+    var duration: CFAbsoluteTime = .zero
+    
+    mutating func operateBankSystem() {
+        makeWaitingLine()
+        dequeueWaitingLine()
+        announceClose()
+    }
+    
+    mutating private func makeWaitingLine() {
         (1...numberOfClients).forEach { client in
             waitingLine.enqueue(client)
         }
     }
     
-    func manageClerk(_ clerkNumber: Int, for client: Int) {
+    private func manageClerk(_ clerkNumber: Int, for client: Int) {
         giveWork(to: clerkNumber).sync {
             clerk.work(for: client)
         }
     }
     
-    mutating func dequeueWaitingLine() {
+    mutating private func dequeueWaitingLine() {
+        let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
+        
         while let client = waitingLine.dequeue() {
             manageClerk(clerkNumber, for: client)
         }
+        
+        let endTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
+        duration = endTime - startTime
+    }
+    
+    private func announceClose() {
+        Bank.announceClose(numberOfClients: numberOfClients, duration: duration)
     }
 }
