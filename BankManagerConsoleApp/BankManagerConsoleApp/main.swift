@@ -19,9 +19,12 @@ fileprivate func receiveInput() -> String {
 }
 
 fileprivate func runMenu(with input: String) {
+    let clients = Client()
+    var bank = Bank()
+    
     switch input {
     case Menu.Option.open:
-        print("1번")
+        bank.makeWaitingLine(by: clients.totalNumber)
     case Menu.Option.close:
         print("2번")
     default:
