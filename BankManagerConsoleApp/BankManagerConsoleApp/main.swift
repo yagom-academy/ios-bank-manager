@@ -6,10 +6,6 @@
 
 import Foundation
 
-let bankClerk = BankClerk()
-let bank = Bank(bankClerk: bankClerk)
-let bankManager = BankManager(bank: bank)
-
 func printMenu() {
     let menu = """
           1 : 은행개점
@@ -20,6 +16,10 @@ func printMenu() {
 }
 
 func runProgram() {
+    let bankClerk = BankClerk()
+    let bank = Bank(bankClerk: bankClerk)
+    let bankManager = BankManager(bank: bank)
+    
     while true {
         printMenu()
         let userInput = readLine()
