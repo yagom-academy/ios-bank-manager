@@ -17,15 +17,15 @@
 <br>
 
 ## 🏷 타입 개요
-- `Bank`: 가장 핵심이 되는 타입으로, 고객 대기열 `clientQueue`의 고객이 갖고있는 `task`를 처리하는 역할을 담당합니다.
-- `BankManager`: Console을 제어하며(사용자 입출력), `Bank` 객체의 시작을 관리합니다.
-- `BankDelegate`: `Bank`가 `BankManager`에게 보낼 메세지를 정의합니다.
-- `Client`: `Bank`의 `clientQueue`에 들어갈 고객 타입입니다. 대기번호(`waitingNumber`), 업무(`task`)를 상태값으로 가집니다.
-- `Task`: 고객의 은행업무를 정의한 타입입니다.
-- `Queue`: `Bank`의 `clientQueue`를 위해 구현한 큐 타입입니다.
-- `LinkedList`: `Queue` 타입을 위해 구현한 단일연결리스트 타입입니다.
-- `Node`: `LinkedList` 타입을 위해 구현한 Node 타입입니다.
-- `ConsoleMessage`: 콘솔에서 사용자에게 입출력될 string literal을 정의한 타입입니다.
+- `Bank` -> 가장 핵심이 되는 타입으로, 고객 대기열 `clientQueue`의 고객이 갖고있는 `task`를 처리하는 역할을 담당합니다.
+- `BankManager` -> Console을 제어하며(사용자 입출력), `Bank` 객체의 시작을 관리합니다.
+- `BankDelegate` -> `Bank`가 `BankManager`에게 보낼 메세지를 정의합니다.
+- `Client` -> `Bank`의 `clientQueue`에 들어갈 고객 타입입니다. 대기번호(`waitingNumber`), 업무(`task`)를 상태값으로 가집니다.
+- `Task` -> 고객의 은행업무를 정의한 타입입니다.
+- `Queue` -> `Bank`의 `clientQueue`를 위해 구현한 큐 타입입니다.
+- `LinkedList` -> `Queue` 타입을 위해 구현한 단일연결리스트 타입입니다.
+- `Node` -> `LinkedList` 타입을 위해 구현한 Node 타입입니다.
+- `ConsoleMessage` -> 콘솔에서 사용자에게 입출력될 string literal을 정의한 타입입니다.
 
 <br>
 
