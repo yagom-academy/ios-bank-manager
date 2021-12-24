@@ -8,13 +8,12 @@
 import Foundation
 
 protocol WaitingLineManageable {
-    var waitingLine: Queue<Customer> { get set }
-    var employee: Workable { get set }
+    var waitingLine: Queue<Customer> { get }
 }
 
-class Bank: WaitingLineManageable {
+class Bank: WaitingLineManageable  {
     var waitingLine = Queue<Customer>()
-    var employee: Workable
+    var employee: Employee
     
     func open() {
         let randomNumber = Int.random(in: 10...30)
@@ -28,16 +27,15 @@ class Bank: WaitingLineManageable {
         startWork()
     }
     
-    func startWork() {
+    private func startWork() {
         while waitingLine.isEmpty == false {
             employee.doJob()
             employee.finishJob()
         }
     }
     
-    init(employee: Workable) {
+    init(employee: Employee) {
         self.employee = employee
-        
         self.employee.bank = self
     }
 }

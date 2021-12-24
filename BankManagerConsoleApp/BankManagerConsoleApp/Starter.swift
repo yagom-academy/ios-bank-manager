@@ -9,7 +9,6 @@ import Foundation
 
 struct Starter {
     var shouldContinue: Bool = true
-    
     func printStartMessage() {
         print(StarterMessage.open.description, terminator: "")
     }
@@ -41,9 +40,14 @@ struct Starter {
             let input = try receiveInput()
             
             switch input {
-            case "1": print("은행 열린다!!")
-            case "2": shouldContinue = false
-            default : throw StarterError.wrongInput
+            case "1":
+                let employee = Employee()
+                let bank = Bank(employee: employee)
+                bank.open()
+            case "2":
+                shouldContinue = false
+            default :
+                throw StarterError.wrongInput
             }
         }
     }

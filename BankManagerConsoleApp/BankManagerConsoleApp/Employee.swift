@@ -7,32 +7,22 @@
 
 import Foundation
 
-protocol Workable {
-    var bank: WaitingLineManageable { get set }
-    func doJob()
-    func finishJob()
-}
-
-struct Employee: Workable {
-    var bank: WaitingLineManageable
-    
-    init(bank: WaitingLineManageable) {
-        self.bank = bank
-        
-        self.bank.employee = self
-    }
+struct Employee {
+    var bank: WaitingLineManageable?
     
     func doJob() {
-        guard let customer = bank.waitingLine.first else {
+        guard let customer = bank?.waitingLine.first else {
             return
         }
+        
         print("\(customer.waitingNumber)번 고객 업무 시작")
     }
     
     func finishJob() {
-        guard let customer = bank.waitingLine.dequeue() else {
+        guard let customer = bank?.waitingLine.dequeue() else {
             return
         }
+        
         print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }

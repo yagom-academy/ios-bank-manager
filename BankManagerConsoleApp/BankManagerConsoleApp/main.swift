@@ -6,6 +6,5 @@
 
 import Foundation
 
-
-var a = Starter()
-a.start()
+var starter = Starter()
+starter.start()
