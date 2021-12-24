@@ -14,8 +14,10 @@ struct Starter {
         print(StarterMessage.open.description, terminator: "")
     }
     
-    func receiveInput() -> String {
-        let input = readLine() ?? ""
+    func receiveInput() throws -> String {
+        guard let input = readLine() else {
+            throw StarterError.endOfFile
+        }
         return input
     }
     
@@ -24,19 +26,25 @@ struct Starter {
             printStartMessage()
             do {
                 try checkInput()
+            } catch StarterError.wrongInput {
+                print(StarterError.wrongInput)
+            } catch StarterError.endOfFile {
+                print(StarterError.endOfFile)
             } catch {
-                print(StarterMessage.wrongInput)
+                print(StarterError.unknownError)
             }
         }
     }
     
     mutating func checkInput() throws {
-        let input = receiveInput()
-        
-        switch input {
-        case "1": print("은행 열린다!!")
-        case "2": shouldContinue = false
-        default : throw StarterError.wrongInput
+        do {
+            let input = try receiveInput()
+            
+            switch input {
+            case "1": print("은행 열린다!!")
+            case "2": shouldContinue = false
+            default : throw StarterError.wrongInput
+            }
         }
     }
 }

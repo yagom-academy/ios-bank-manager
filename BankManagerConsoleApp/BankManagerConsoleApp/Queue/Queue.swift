@@ -16,7 +16,7 @@ class Queue<Element> {
         linkedList.isEmpty
     }
     
-    func enqueue(data: Element) {
+    func enqueue(_ data: Element) {
         linkedList.append(data: data)
     }
     

@@ -16,7 +16,7 @@ class Bank {
         for number in 1...randomNumber {
             let customer = Customer(waitingNumber: number)
             
-            waitingLine.enqueue(data: customer)
+            waitingLine.enqueue(customer)
         }
     }
 }
