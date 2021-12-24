@@ -15,19 +15,21 @@ struct BankManager {
     }
     
     func startConsole() {
-        print(ConsoleMessage.menu, terminator: String.empty)
-        let input = readLine() ?? String.empty
-        
-        switch input {
+        let choice = askMenu()
+        switch choice {
         case ConsoleMessage.open.input:
             openBank()
             startConsole()
         case ConsoleMessage.exit.input:
             return
         default:
-            print(ConsoleMessage.invalidInput)
-            startConsole()
+            restartConsole()
         }
+    }
+    
+    private func askMenu() -> String {
+        print(ConsoleMessage.menu, terminator: String.empty)
+        return readLine() ?? String.empty
     }
     
     private func openBank() {
@@ -38,6 +40,11 @@ struct BankManager {
             bank.lineUp(client)
         }
         bank.start()
+    }
+    
+    private func restartConsole() {
+        print(ConsoleMessage.invalidInput)
+        startConsole()
     }
 }
 
