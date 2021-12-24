@@ -3,6 +3,7 @@ import CloudKit
 
 class Bank {
     var clientQueue: Queue<Client> = Queue<Client>()
+    var completedClientCount: Int = 0
     var bankClerks: [BankClerk] = []
     var numberOfBankClerk: Int?
     let semaphore = DispatchSemaphore(value: 1)
@@ -23,7 +24,7 @@ class Bank {
         group.wait()
         let finishTime = CFAbsoluteTimeGetCurrent()
         let duration = finishTime - startTime
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 명이며, 총 업무시간은 \(duration)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedClientCount)명이며, 총 업무시간은 \(duration)초입니다.")
     }
     
     private func dispatchWork(bankClerk: BankClerk) {
@@ -32,6 +33,7 @@ class Bank {
             if let client = self.clientQueue.dequeue() {
                 semaphore.signal()
                 bankClerk.work(for: client)
+                completedClientCount += 1
             }
         }
     }
