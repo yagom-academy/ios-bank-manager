@@ -38,7 +38,6 @@ struct BankManager {
         print("잘못된 입력입니다. 확인해주세요.")
       }
     }
-    
   }
   
   private mutating func operateBank (numberOfBankers: Int) {
