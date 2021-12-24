@@ -26,22 +26,25 @@ struct BankManager {
   }
   
   mutating func runBankManager(numberOfBankers: Int) {
-    var isExit: Bool = false
-    
-    while isExit == false {
+    while true {
       let choiceMenu = self.chooseMenu()
       
       switch choiceMenu {
       case Menu.openBank.rawValue :
-        let bankers = prepareBanker(numberOfBankers: numberOfBankers)
-        var bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
-        bank.doBanking()
+        operateBank(numberOfBankers: numberOfBankers)
       case Menu.exit.rawValue :
-        isExit = true
+        return
       default :
         print("잘못된 입력입니다. 확인해주세요.")
       }
     }
+    
+  }
+  
+  mutating func operateBank (numberOfBankers: Int) {
+    let bankers = prepareBanker(numberOfBankers: numberOfBankers)
+    var bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
+    bank.doBanking()
   }
   
   mutating func prepareBanker(numberOfBankers: Int) -> [Banker] {
