@@ -16,6 +16,7 @@ struct CustomerQueue<Element> {
         customers.append(value: value)
     }
     
+    @discardableResult
     func dequeue() throws -> Element? {
         let headIndex = 0
         return try customers.remove(at: headIndex)
