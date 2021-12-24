@@ -1,10 +1,11 @@
 import Foundation
 import CloudKit
 
-struct Bank {
+class Bank {
     var clientQueue: Queue<Client> = Queue<Client>()
     var bankClerks: [BankClerk] = []
     var numberOfBankClerk: Int?
+    let semaphore = DispatchSemaphore(value: 1)
     
     init(numberOfBankClerk: Int) {
         self.makeBankClerk(for: numberOfBankClerk)
@@ -12,26 +13,30 @@ struct Bank {
     }
     
     func open() {
-        var queue = clientQueue
-        let semaphore = DispatchSemaphore(value: 1)
+        let group = DispatchGroup()
+        let startTime = CFAbsoluteTimeGetCurrent()
         for bankClerk in bankClerks {
-            DispatchQueue.global().async {
-                while !queue.isEmpty {
-                    semaphore.wait()
-                    if let client = queue.dequeue() {
-                        semaphore.signal()
-                        bankClerk.work(for: client)
-                    }
-                }
+            DispatchQueue.global().async(group: group) {
+                self.dispatchWork(bankClerk: bankClerk)
+            }
+        }
+        group.wait()
+        let finishTime = CFAbsoluteTimeGetCurrent()
+        let duration = finishTime - startTime
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 명이며, 총 업무시간은 \(duration)초입니다.")
+    }
+    
+    private func dispatchWork(bankClerk: BankClerk) {
+        while !self.clientQueue.isEmpty {
+            semaphore.wait()
+            if let client = self.clientQueue.dequeue() {
+                semaphore.signal()
+                bankClerk.work(for: client)
             }
         }
     }
     
-    func close() {
-        
-    }
-    
-    private mutating func receiveClient() {
+    private func receiveClient() {
         let numberOfClient = Int.random(in: 10...30)
         for number in 1...numberOfClient {
             let client = Client(number: number)
@@ -39,9 +44,9 @@ struct Bank {
         }
     }
     
-    private mutating func makeBankClerk(for number: Int) {
+    private func makeBankClerk(for number: Int) {
         for i in 1...number {
-            let bankClerk = BankClerk(identity: i)
+            let bankClerk = BankClerk()
             bankClerks.append(bankClerk)
         }
     }
