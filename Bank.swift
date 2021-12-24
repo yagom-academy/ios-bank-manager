@@ -42,7 +42,8 @@ class Bank {
     }
     
     func run() {
-        let customerCount = Int.random(in: 1...10)
+        let range = 10...30
+        let customerCount = Int.random(in: range)
         
         (1...customerCount).forEach {
             let customer = Customer(customerNumber: $0)
@@ -57,7 +58,8 @@ class Bank {
     }
     
     private func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTime)초입니다.")
+        let totalTimeText: String = String(format: "%.2f", totalTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTimeText)초입니다.")
     }
     
     private func assign(customer: Customer, to banker: inout Banker) {

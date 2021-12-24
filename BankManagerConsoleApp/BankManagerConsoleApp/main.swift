@@ -10,7 +10,6 @@ func runBankManagerConsole() {
             
             switch inputValue {
             case "1":
-                print("은행 개점하였습니다.")
                 var bank = Bank()
                 bank.run()
             case "2":
