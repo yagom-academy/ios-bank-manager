@@ -8,6 +8,44 @@ import Foundation
 
 class BankManagerConsole {
     
+    var bank = Bank()
+    
+    func run() {
+        var menu: Menu?
+        repeat {
+            printMenu()
+            menu = inputMenu()
+            operateMenu(input: menu)
+        } while menu != .exitProgram
+    }
+    
+    func printMenu() {
+        print(MenuMessage.main, terminator: MenuMessage.spaceString)
+    }
+    
+    func inputMenu() -> Menu? {
+        guard let input = readLine(),
+              let selectedMenu = Menu(number: input) else {
+                  return nil
+              }
+        return selectedMenu
+    }
+    
+    func operateMenu(input menu: Menu?) {
+        switch menu {
+        case .openBank:
+            bank.open()
+        case .exitProgram:
+            print(MenuMessage.exit)
+        default:
+            print(MenuMessage.wrongInput)
+        }
+    }
+    
+}
+
+extension BankManagerConsole {
+    
     enum Menu: String {
         case openBank = "1"
         case exitProgram = "2"
@@ -33,39 +71,6 @@ class BankManagerConsole {
         static let spaceString = " "
     }
     
-    var bank = Bank()
-    
-    func printMenu() {
-        print(MenuMessage.main, terminator: MenuMessage.spaceString)
-    }
-    
-    func inputMenu() -> Menu? {
-        guard let input = readLine(),
-              let selectedMenu = Menu(number: input) else {
-                  return nil
-              }
-        return selectedMenu
-    }
-    
-    func operateMenu(input menu: Menu?) {
-        switch menu {
-        case .openBank:
-            bank.open()
-        case .exitProgram:
-            print(MenuMessage.exit)
-        default:
-            print(MenuMessage.wrongInput)
-        }
-    }
-    
-    func run() {
-        var menu: Menu?
-        repeat {
-            printMenu()
-            menu = inputMenu()
-            operateMenu(input: menu)
-        } while menu != .exitProgram
-    }
 }
 
 let bankManagerConsole = BankManagerConsole()
