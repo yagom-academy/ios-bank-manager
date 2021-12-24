@@ -18,6 +18,8 @@ class Bank: WaitingLineManageable  {
     func open() {
         let randomNumber = Int.random(in: 10...30)
         
+        let openTime = CFAbsoluteTimeGetCurrent()
+        
         for number in 1...randomNumber {
             let customer = Customer(waitingNumber: number)
             
@@ -25,6 +27,9 @@ class Bank: WaitingLineManageable  {
         }
         
         startWork()
+        
+        let closeTime = CFAbsoluteTimeGetCurrent()
+        employee.calculate(from: openTime, to: closeTime)
     }
     
     private func startWork() {

@@ -9,6 +9,8 @@ import Foundation
 
 struct Employee {
     var bank: WaitingLineManageable?
+    private let seconds = 0.7
+    private var customerCount = 0
     
     func doJob() {
         guard let customer = bank?.waitingLine.first else {
@@ -18,11 +20,23 @@ struct Employee {
         print("\(customer.waitingNumber)번 고객 업무 시작")
     }
     
-    func finishJob() {
+    mutating func finishJob() {
         guard let customer = bank?.waitingLine.dequeue() else {
             return
         }
         
+        Thread.sleep(forTimeInterval: seconds)
+        customerCount += 1
+        
         print("\(customer.waitingNumber)번 고객 업무 완료")
+    }
+}
+
+// MARK: - WorkTimer
+
+extension Employee {
+    func calculate(from openTime: CFAbsoluteTime, to closeTime: CFAbsoluteTime) {
+        let duration = closeTime - openTime
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(duration)초입니다.")
     }
 }
