@@ -7,8 +7,14 @@
 
 import Foundation
 
-class Bank {
+protocol WaitingLineManageable {
+    var waitingLine: Queue<Customer> { get set }
+    var employee: Workable { get set }
+}
+
+class Bank: WaitingLineManageable {
     var waitingLine = Queue<Customer>()
+    var employee: Workable
     
     func open() {
         let randomNumber = Int.random(in: 10...30)
@@ -18,5 +24,19 @@ class Bank {
             
             waitingLine.enqueue(customer)
         }
+        
+        startWork()
+    }
+    
+    func startWork() {
+        while waitingLine.isEmpty == false {
+            
+        }
+    }
+    
+    init(employee: Workable) {
+        self.employee = employee
+        
+        self.employee.bank = self
     }
 }
