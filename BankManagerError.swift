@@ -10,3 +10,14 @@ enum InputError: LocalizedError {
         }
     }
 }
+
+enum CustomerError: LocalizedError {
+    case notExistCustomer
+    
+    var errorDescription: String? {
+        switch self {
+        case .notExistCustomer:
+            return "customer가 존재하지 않습니다."
+        }
+    }
+}

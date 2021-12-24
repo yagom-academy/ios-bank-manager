@@ -17,8 +17,16 @@ class Bank {
         init() {}
         
         private func task() {
+            do {
+                try taskWithError()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        private func taskWithError() throws {
             guard let customer = customer else {
-                return
+                throw CustomerError.notExistCustomer
             }
 
             print("\(customer.customerNumber)번 고객 업무 시작")
@@ -32,7 +40,7 @@ class Bank {
     private var queue: Queue<Customer>
     private var totalTime: TimeInterval
     private var totalCustomer: Int
-    
+   
     init() {
         queue = Queue<Customer>()
         banker = Banker()
@@ -40,7 +48,11 @@ class Bank {
         totalCustomer = 0
         banker.delegate = self
     }
-    
+}
+
+// MARK: - method
+
+extension Bank {
     func run() {
         let range = 10...30
         let customerCount = Int.random(in: range)
@@ -66,6 +78,8 @@ class Bank {
         banker.customer = customer
     }
 }
+
+// MARK: - BankDelegate
 
 extension Bank: BankDelegate {
     func checkCustomer() {

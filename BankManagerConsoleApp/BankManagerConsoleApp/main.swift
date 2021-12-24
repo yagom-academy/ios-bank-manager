@@ -1,7 +1,5 @@
 import Foundation
 
-runBankManagerConsole()
-
 func runBankManagerConsole() {
     while true {
         printMenu()
@@ -42,3 +40,5 @@ func input(with message: String = "", useTrim: Bool = false) throws -> String {
     }
     return inputValue
 }
+
+runBankManagerConsole()
