@@ -36,7 +36,7 @@ struct BankManager {
         let clientCount = Int.random(in: 10...30)
         
         for order in 1...clientCount {
-            let client = Client(waitingNumber: order, task: .deposit)
+            let client = Client(waitingNumber: order, task: Task.random)
             bank.lineUp(client)
         }
         bank.start()

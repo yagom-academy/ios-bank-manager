@@ -7,9 +7,13 @@
 
 import Foundation
 
-enum Task {
+enum Task: CaseIterable {
     
     case deposit
+    
+    static var random: Self {
+        Self.allCases.randomElement() ?? .deposit
+    }
     
     var duration: Double {
         switch self {

@@ -18,16 +18,17 @@ class Bank {
     
     func start() {
         var clientCount: Int = .zero
-        var workingDuration: Double = .zero
+        let startTime = CFAbsoluteTimeGetCurrent()
         while true {
             guard let client = clientQueue.dequeue() else {
+                let endTime = CFAbsoluteTimeGetCurrent()
+                let workingDuration = endTime - startTime
                 delegate?.bankDidClose(totalClient: clientCount,
                                        for: workingDuration.roundedOff)
                 return
             }
             service(client)
             clientCount += 1
-            workingDuration += Task.deposit.duration
         }
     }
     
