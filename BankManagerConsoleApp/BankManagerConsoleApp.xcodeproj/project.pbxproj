@@ -17,6 +17,8 @@
 		369125522771B120002304D4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBF1632770610600C8E2C4 /* LinkedList.swift */; };
 		3691255527720797002304D4 /* LinkedListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3691255427720797002304D4 /* LinkedListError.swift */; };
 		3691255627720910002304D4 /* LinkedListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3691255427720797002304D4 /* LinkedListError.swift */; };
+		3691256B27733F56002304D4 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3691256A27733F56002304D4 /* Customer.swift */; };
+		3691256C27733F56002304D4 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3691256A27733F56002304D4 /* Customer.swift */; };
 		36DBF166277078B100C8E2C4 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBF165277078B100C8E2C4 /* CustomerQueue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -39,6 +41,7 @@
 		18A0736B2770951300182025 /* CustomerQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTest.swift; sourceTree = "<group>"; };
 		18A07374277312DC00182025 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		3691255427720797002304D4 /* LinkedListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListError.swift; sourceTree = "<group>"; };
+		3691256A27733F56002304D4 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		36DBF1632770610600C8E2C4 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		36DBF165277078B100C8E2C4 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +89,7 @@
 				36DBF1632770610600C8E2C4 /* LinkedList.swift */,
 				36DBF165277078B100C8E2C4 /* CustomerQueue.swift */,
 				18A07374277312DC00182025 /* Bank.swift */,
+				3691256A27733F56002304D4 /* Customer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -210,6 +214,7 @@
 				18A073732770967300182025 /* main.swift in Sources */,
 				18A0736C2770951300182025 /* CustomerQueueTest.swift in Sources */,
 				369125522771B120002304D4 /* LinkedList.swift in Sources */,
+				3691256C27733F56002304D4 /* Customer.swift in Sources */,
 				18A073712770966B00182025 /* CustomerQueue.swift in Sources */,
 				18A073722770967000182025 /* BankManager.swift in Sources */,
 				3691255627720910002304D4 /* LinkedListError.swift in Sources */,
@@ -222,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36DBF166277078B100C8E2C4 /* CustomerQueue.swift in Sources */,
+				3691256B27733F56002304D4 /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				369125512771B0F7002304D4 /* LinkedList.swift in Sources */,
 				18A07375277312DC00182025 /* Bank.swift in Sources */,
