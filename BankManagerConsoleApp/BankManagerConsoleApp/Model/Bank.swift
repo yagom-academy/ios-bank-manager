@@ -1,8 +1,9 @@
 import Foundation
+import CloudKit
 
 struct Bank {
     var clientQueue: Queue<Client> = Queue<Client>()
-    var bankClerks: [BankClerk]?
+    var bankClerks: [BankClerk] = []
     var numberOfBankClerk: Int?
     
     init(numberOfBankClerk: Int) {
@@ -11,9 +12,21 @@ struct Bank {
     }
     
     func open() {
-        
+        var queue = clientQueue
+        let semaphore = DispatchSemaphore(value: 1)
+        for bankClerk in bankClerks {
+            DispatchQueue.global().async {
+                while !queue.isEmpty {
+                    semaphore.wait()
+                    if let client = queue.dequeue() {
+                        semaphore.signal()
+                        bankClerk.work(for: client)
+                    }
+                }
+            }
+        }
     }
-  
+    
     func close() {
         
     }
@@ -27,9 +40,10 @@ struct Bank {
     }
     
     private mutating func makeBankClerk(for number: Int) {
-        for _ in 1...number {
-            let bankClerk = BankClerk()
-            bankClerks?.append(bankClerk)
+        for i in 1...number {
+            let bankClerk = BankClerk(identity: i)
+            bankClerks.append(bankClerk)
         }
     }
 }
+
