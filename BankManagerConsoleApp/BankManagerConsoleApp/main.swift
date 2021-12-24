@@ -12,7 +12,7 @@ func runBankManagerConsole() {
             case "1":
                 print("은행 개점하였습니다.")
                 var bank = Bank()
-                bank.open()
+                bank.run()
             case "2":
                 return
             default:
