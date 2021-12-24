@@ -36,6 +36,7 @@ class LinkedListTest: XCTestCase {
     
     func test_peek_withLinkedListHavingNumberOne_shouldReturnNumberOne() throws {
         var linkedList = try XCTUnwrap(sut)
+        
         linkedList.append(1)
         
         XCTAssertEqual(linkedList.peek(), 1)
@@ -43,6 +44,7 @@ class LinkedListTest: XCTestCase {
 
     func test_removeAll_shouldRemoveAll() throws {
         var linkedList = try XCTUnwrap(sut)
+        
         linkedList.append(1)
         linkedList.append(2)
         linkedList.append(3)
@@ -53,6 +55,7 @@ class LinkedListTest: XCTestCase {
     
     func test_append_shouldAddNode() throws {
         var linkedList = try XCTUnwrap(sut)
+        
         linkedList.append(1)
         linkedList.append(2)
         linkedList.append(3)
@@ -62,6 +65,7 @@ class LinkedListTest: XCTestCase {
     
     func test_removeFirst_shouldRemoveFirstNode() throws {
         var linkedList = try XCTUnwrap(sut)
+        
         linkedList.append(1)
         linkedList.append(2)
         linkedList.append(3)
