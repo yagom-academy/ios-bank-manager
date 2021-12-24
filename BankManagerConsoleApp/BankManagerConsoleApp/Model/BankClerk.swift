@@ -2,7 +2,7 @@ import Foundation
 
 final class BankClerk {
     private let workSpeed: TimeInterval
-    var delegate: BankClerkDelegate?
+    weak var delegate: BankClerkDelegate?
     
     init(workSpeed: TimeInterval = 0.7) {
         self.workSpeed = workSpeed
