@@ -47,10 +47,9 @@ class Bank {
     }
     
     private func makeBankClerk(for number: Int) {
-        for i in 1...number {
+        for _ in 1...number {
             let bankClerk = BankClerk()
             bankClerks.append(bankClerk)
         }
     }
 }
-
