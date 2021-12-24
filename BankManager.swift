@@ -43,6 +43,6 @@ struct BankManager: Managable {
     }
     
     private func announceClose() {
-        Bank.announceClose(numberOfClients: numberOfClients, duration: duration)
+        Bank.announceClose(numberOfClients: numberOfClients, duration: duration.formatted)
     }
 }

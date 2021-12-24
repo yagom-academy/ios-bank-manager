@@ -8,7 +8,7 @@
 import Foundation
 
 enum Bank {
-    static func announceClose(numberOfClients: Int, duration: CFAbsoluteTime) {
+    static func announceClose(numberOfClients: Int, duration: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무시간은 \(duration)초입니다.")
     }
 }

@@ -20,6 +20,7 @@
 		DEC35F762775689000F20D47 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC35F752775689000F20D47 /* Menu.swift */; };
 		DEC35F78277569CB00F20D47 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE234FD42771BC01000F253F /* Queue.swift */; };
 		DEC35F7A2775B36100F20D47 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC35F792775B36100F20D47 /* BankClerk.swift */; };
+		DEC35F7E2775D37B00F20D47 /* Double + NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC35F7D2775D37B00F20D47 /* Double + NumberFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,7 @@
 		DE234FD42771BC01000F253F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DEC35F752775689000F20D47 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		DEC35F792775B36100F20D47 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
+		DEC35F7D2775D37B00F20D47 /* Double + NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + NumberFormatter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				DEC35F7C2775D35F00F20D47 /* Extension */,
 				84C503A927759E980085E327 /* Protocol */,
 				DEC35F77277569AC00F20D47 /* DataStructure */,
 				DEC35F742775687500F20D47 /* Namespace */,
@@ -133,6 +136,14 @@
 				DE234FD42771BC01000F253F /* Queue.swift */,
 			);
 			path = DataStructure;
+			sourceTree = "<group>";
+		};
+		DEC35F7C2775D35F00F20D47 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DEC35F7D2775D37B00F20D47 /* Double + NumberFormatter.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +243,7 @@
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				84A568162775C3C9007D8411 /* Bank.swift in Sources */,
 				DE234FD52771BC01000F253F /* Queue.swift in Sources */,
+				DEC35F7E2775D37B00F20D47 /* Double + NumberFormatter.swift in Sources */,
 				DEC35F762775689000F20D47 /* Menu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
