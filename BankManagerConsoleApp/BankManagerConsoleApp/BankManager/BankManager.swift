@@ -34,8 +34,9 @@ struct BankManager {
     
     private func openBank() {
         let clientCount = Int.random(in: 10...30)
+        let firstNumber = 1
         
-        for order in 1...clientCount {
+        for order in firstNumber...clientCount {
             let client = Client(waitingNumber: order, task: Task.random)
             bank.lineUp(client)
         }
