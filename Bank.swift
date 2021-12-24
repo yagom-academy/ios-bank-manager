@@ -2,6 +2,7 @@ import Foundation
 
 protocol BankDelegate {
     mutating func checkTime()
+    mutating func checkCustomer()
 }
 
 struct Bank {
@@ -23,17 +24,20 @@ struct Bank {
             print("\(customer.customerNumber)번 고객 업무 시작")
             delegate?.checkTime()
             print("\(customer.customerNumber)번 고객 업무 완료")
+            delegate?.checkCustomer()
         }
     }
     
     private var banker: Banker
     private var queue: Queue<Customer>
     private var totalTime: TimeInterval
+    private var totalCustomer: Int
     
     init() {
         queue = Queue<Customer>()
         banker = Banker()
         totalTime = 0
+        totalCustomer = 0
         banker.delegate = self
     }
     
@@ -62,6 +66,10 @@ struct Bank {
 }
 
 extension Bank: BankDelegate {
+    mutating func checkCustomer() {
+        totalCustomer += 1
+    }
+    
     mutating func checkTime() {
         totalTime += 0.7
     }
