@@ -44,8 +44,8 @@ class Bank {
     init() {
         queue = Queue<Customer>()
         banker = Banker()
-        totalTime = 0
-        totalCustomer = 0
+        totalTime = .zero
+        totalCustomer = .zero
         banker.delegate = self
     }
 }
@@ -83,10 +83,12 @@ extension Bank {
 
 extension Bank: BankDelegate {
     func checkCustomer() {
-        totalCustomer += 1
+        let customerCountAtOnce = 1
+        totalCustomer += customerCountAtOnce
     }
     
     func checkTime() {
-        totalTime += 0.7
+        let secondsAtOnce: TimeInterval = 0.7
+        totalTime += secondsAtOnce
     }
 }
