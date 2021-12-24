@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8459F65827707148001C2851 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459F65727707148001C2851 /* LinkedList.swift */; };
+		84C5039E27757EC80085E327 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5039D27757EC80085E327 /* Client.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		DE234FCF27716CC2000F253F /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE234FCE27716CC2000F253F /* LinkedListTest.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		8459F65727707148001C2851 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		84C5039D27757EC80085E327 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				DEC35F742775687500F20D47 /* Namespace */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				84C5039D27757EC80085E327 /* Client.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			files = (
 				8459F65827707148001C2851 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				84C5039E27757EC80085E327 /* Client.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				DE234FD52771BC01000F253F /* Queue.swift in Sources */,
 				DEC35F762775689000F20D47 /* Menu.swift in Sources */,
