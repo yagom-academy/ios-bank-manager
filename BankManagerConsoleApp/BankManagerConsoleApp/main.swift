@@ -10,7 +10,7 @@ func runBankManagerConsole() {
             
             switch inputValue {
             case "1":
-                var bank = Bank()
+                let bank = Bank()
                 bank.run()
             case "2":
                 return

@@ -1,8 +1,8 @@
 import Foundation
 
 protocol BankDelegate {
-    mutating func checkTime()
-    mutating func checkCustomer()
+    func checkTime()
+    func checkCustomer()
 }
 
 class Bank {
@@ -16,7 +16,7 @@ class Bank {
         
         init() {}
         
-        private mutating func task() {
+        private func task() {
             guard let customer = customer else {
                 return
             }
