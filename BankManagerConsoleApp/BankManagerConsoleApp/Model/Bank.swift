@@ -25,7 +25,7 @@ final class Bank {
     
     func openBank() {
         var numberOfCustomers = 0
-        let openTime = CFAbsoluteTimeGetCurrent()
+        let openTime = Date()
         while customerQueue.isEmpty == false {
             respondToCustomer()
             numberOfCustomers += 1
@@ -33,8 +33,8 @@ final class Bank {
         closeBank(numberOfCustomers, from: openTime)
     }
     
-    private func closeBank(_ numberOfCustomers: Int, from openTime: CFAbsoluteTime) {
-        let durationTime = CFAbsoluteTimeGetCurrent() - openTime
+    private func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
+        let durationTime = -openTime.timeIntervalSinceNow
         delegate?.bank(didFinish: numberOfCustomers, durationTime: durationTime.roundedOffDescription(for: 2))
     }
 
