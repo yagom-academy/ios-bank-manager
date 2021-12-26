@@ -10,7 +10,7 @@ class BankManagerViewController {
     }
     
     func showMenu() {
-        print(Message.menuList, terminator: "")
+        print(BankManagerMessage.menuList, terminator: "")
     }
     
     func receiveUserInput() {
@@ -21,7 +21,7 @@ class BankManagerViewController {
     }
     
     private func showInvalidInput() {
-        print(Message.wrongInput)
+        print(BankManagerMessage.wrongInput)
     }
     
     private func exit() {
