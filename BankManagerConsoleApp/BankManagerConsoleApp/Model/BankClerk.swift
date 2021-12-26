@@ -9,8 +9,8 @@ final class BankClerk {
     }
     
     func work(for customer: Customer) {
-        delegate?.bankClerk(DidStartWork: customer.waitingNumber)
+        delegate?.bankClerk(didStartWork: customer.waitingNumber)
         Thread.sleep(forTimeInterval: workSpeed)
-        delegate?.bankClerk(DidFinishWork: customer.waitingNumber)
+        delegate?.bankClerk(didFinishWork: customer.waitingNumber)
     }
 }

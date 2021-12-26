@@ -1,6 +1,6 @@
 import Foundation
 
 protocol BankClerkDelegate {
-    func bankClerk(DidStartWork customerNumber: Int)
-    func bankClerk(DidFinishWork customerNumber: Int)
+    func bankClerk(didStartWork customerNumber: Int)
+    func bankClerk(didFinishWork customerNumber: Int)
 }

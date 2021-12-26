@@ -18,11 +18,11 @@ class BankClerkViewController {
 }
 
 extension BankClerkViewController: BankClerkDelegate {
-    func bankClerk(DidStartWork customerNumber: Int) {
+    func bankClerk(didStartWork customerNumber: Int) {
         showCustomerStart(for: customerNumber)
     }
     
-    func bankClerk(DidFinishWork customerNumber: Int) {
+    func bankClerk(didFinishWork customerNumber: Int) {
         showCustomerEnd(for: customerNumber)
     }
 }
