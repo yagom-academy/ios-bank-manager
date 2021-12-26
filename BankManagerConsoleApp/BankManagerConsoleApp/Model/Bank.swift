@@ -3,7 +3,6 @@ import Foundation
 final class Bank {
     private let bankClerk: BankClerk
     private var customerQueue = Queue<Customer>()
-    var delegate: BankDelegate?
     
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
@@ -35,7 +34,7 @@ final class Bank {
     
     private func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
         let durationTime = -openTime.timeIntervalSinceNow
-        delegate?.bank(didFinish: numberOfCustomers, durationTime: durationTime.roundedOffDescription(for: 2))
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(durationTime.roundedOffDescription(for: 2))초 입니다.")
     }
 
 }
