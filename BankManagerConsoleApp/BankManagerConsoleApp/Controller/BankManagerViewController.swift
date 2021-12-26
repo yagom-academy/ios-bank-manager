@@ -2,7 +2,7 @@ import Foundation
 
 class BankManagerViewController {
     private var bankManager: BankManager
-    private(set) var isFlag = true
+    private(set) var isRunning = true
     
     init(bankManager: BankManager) {
         self.bankManager = bankManager
@@ -25,7 +25,7 @@ class BankManagerViewController {
     }
     
     private func exit() {
-        isFlag = false
+        isRunning = false
     }
 }
 

@@ -7,7 +7,7 @@ func run() {
     let _ = BankClerkViewController(bankClerk: bankClerk)
     let _ = BankViewController(bank: bank)
     let bankManagerViewController = BankManagerViewController(bankManager: bankManager)
-    while bankManagerViewController.isFlag {
+    while bankManagerViewController.isRunning {
         bankManagerViewController.showMenu()
         bankManagerViewController.receiveUserInput()
     }
