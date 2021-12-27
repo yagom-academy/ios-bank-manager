@@ -72,7 +72,7 @@ struct Bank {
     }
     
     private func showClosingMessage(with totalClientCount: Int, and processTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClientCount)명이며, 총 업무시간은 \(processTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClientCount)명이며, 총 업무시간은 \(processTime.secondDecimalFormat)초입니다.")
     }
 }
 
