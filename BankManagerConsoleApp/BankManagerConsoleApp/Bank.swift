@@ -25,7 +25,7 @@ class Bank: WaitingLineManageable  {
         let openTime = CFAbsoluteTimeGetCurrent()
         
         lineUp()
-        startWork()
+        assignWork()
         
         let closeTime = CFAbsoluteTimeGetCurrent()
         employee.calculate(from: openTime, to: closeTime)
@@ -43,9 +43,9 @@ extension Bank {
         }
     }
     
-    private func startWork() {
+    private func assignWork() {
         while waitingLine.isEmpty == false {
-            employee.doJob()
+            employee.startJob()
             employee.finishJob()
         }
     }

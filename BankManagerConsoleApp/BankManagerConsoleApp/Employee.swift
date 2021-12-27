@@ -12,7 +12,7 @@ struct Employee {
     private let seconds = 0.7
     private var customerCount = 0
     
-    func doJob() {
+    func startJob() {
         guard let customer = bank?.waitingLine.first else {
             return
         }
