@@ -28,10 +28,10 @@ struct Bank {
             bankClerk.handleTask(of: customer, until: taskTime)
             numberOfCustomer += 1
         }
-        noticeCloseDown(totalCustomer: numberOfCustomer, taskTime: taskTime)
+        close(totalCustomer: numberOfCustomer, taskTime: taskTime)
     }
     
-    func noticeCloseDown(totalCustomer: Int, taskTime: Double) {
+    private func close(totalCustomer: Int, taskTime: Double) {
         let totalTime = taskTime * Double(totalCustomer)
         
         let numberFormatter = NumberFormatter()
