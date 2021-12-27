@@ -14,7 +14,7 @@ struct Bank {
 
     init(bankerCount: Int) {
         var bankerQueue:[Banker] = []
-        for _ in 0...bankerCount {
+        for _ in 0..<bankerCount {
             bankerQueue.append(GeneralBanker())
         }
         self.init(bankers: bankerQueue)
