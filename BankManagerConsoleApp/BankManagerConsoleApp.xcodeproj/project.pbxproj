@@ -74,6 +74,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B62088D2779E6DE0071E623 /* Starter */ = {
+			isa = PBXGroup;
+			children = (
+				0D4FA85C2774BA6C00577BB1 /* Starter.swift */,
+				0D4FA85E2774BAA200577BB1 /* StarterMessage.swift */,
+				0D4FA8602774BC3700577BB1 /* StarterError.swift */,
+			);
+			path = Starter;
+			sourceTree = "<group>";
+		};
+		3B62088E2779E73B0071E623 /* Funtional Type */ = {
+			isa = PBXGroup;
+			children = (
+				0D693F1B2779A84000736D4C /* Speaker.swift */,
+				3B62088B2779BDBF0071E623 /* Calculator.swift */,
+			);
+			path = "Funtional Type";
+			sourceTree = "<group>";
+		};
 		3BE4CC642770705700178845 /* Queue */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,16 +133,13 @@
 			isa = PBXGroup;
 			children = (
 				3BE4CC642770705700178845 /* Queue */,
+				3B62088D2779E6DE0071E623 /* Starter */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				0D4FA8622775550A00577BB1 /* Bank.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				0D4FA85C2774BA6C00577BB1 /* Starter.swift */,
-				0D4FA85E2774BAA200577BB1 /* StarterMessage.swift */,
-				0D4FA8602774BC3700577BB1 /* StarterError.swift */,
 				0D4FA8642775563A00577BB1 /* Customer.swift */,
 				0D4FA8662775624D00577BB1 /* Employee.swift */,
-				0D693F1B2779A84000736D4C /* Speaker.swift */,
-				3B62088B2779BDBF0071E623 /* Calculator.swift */,
+				3B62088E2779E73B0071E623 /* Funtional Type */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
