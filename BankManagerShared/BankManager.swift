@@ -7,6 +7,9 @@ class BankManager {
         return instance
     }()
     
+    var totalTime: TimeInterval = 0
+    var totalCustomer: Int = 0
+    
     func lineUpCustomers() -> Queue<Customer> {
         let range = 0...10
         let customerCount = Int.random(in: range)
@@ -19,13 +22,15 @@ class BankManager {
         return customerQueue
     }
     
-    var totalTime: TimeInterval = 0
-    
     func startTimeCheck() {
         totalTime -= Date().timeIntervalSinceReferenceDate
     }
     
     func endTimeCheck() {
         totalTime += Date().timeIntervalSinceReferenceDate
+    }
+    
+    func increaseTotalCustomer() {
+        self.totalCustomer += 1
     }
 }

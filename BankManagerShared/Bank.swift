@@ -45,7 +45,8 @@ extension Bank {
     
     private func close() {
         let totalTimeText: String = String(format: "%.2f", BankManager.shared.totalTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \()명이며, 총 업무시간은 \(totalTimeText)초입니다.")
+        let totalCustomer: Int = BankManager.shared.totalCustomer
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTimeText)초입니다.")
     }
     
     private func assign(customer: Customer, to banker: Banker) {
