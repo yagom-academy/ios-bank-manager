@@ -16,8 +16,8 @@ class Bank {
         
         let group = DispatchGroup()
         while let client = clients.dequeue() {
+            semaphore.wait()
             DispatchQueue.global().async(group: group) {
-                self.semaphore.wait()
                 self.respond(to: client)
                 self.semaphore.signal()
             }
