@@ -24,7 +24,7 @@ struct Bank {
 // MARK: - method
 
 extension Bank {
-    mutating func run() {
+    mutating func operate() {
         receiveCustomerQueue()
         BankManager.shared.startTimeCheck()
         open()

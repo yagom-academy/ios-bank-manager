@@ -3,10 +3,8 @@ import Foundation
 
 class ConsoleApp {
     func run() {
-        while true {
-            printMenu()
-            determineBankOpen()
-        }
+        printMenu()
+        determineBankOpen()
     }
 
     private func printMenu() {
@@ -23,16 +21,22 @@ class ConsoleApp {
             
             switch inputValue {
             case "1":
-                var bank = Bank()
-                bank.run()
+                openBank()
+                run()
             case "2":
-                return
+                return 
             default:
                 print("입력값이 잘못되었습니다.")
+                run()
             }
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    private func openBank() {
+        var bank = Bank()
+        bank.operate()
     }
 
     private func input(with message: String = "", useTrim: Bool = false) throws -> String {
