@@ -26,7 +26,7 @@ struct Starter {
     }
     
     private func printStartMessage() {
-        print(StarterMessage.open.description, terminator: "")
+        print(StarterMessage.open, terminator: "")
     }
     
     private func receiveInput() throws -> String {
