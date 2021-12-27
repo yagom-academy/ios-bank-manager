@@ -1,6 +1,6 @@
 import Foundation
 
-class Bank {
+struct Bank {
     private let bankers: [Banker]
     private var customerQueue: Queue<Customer>?
     private var totalTime: TimeInterval
@@ -12,11 +12,11 @@ class Bank {
         self.totalCustomer = .zero
     }
     
-    convenience init(banker: Banker) {
+    init(banker: Banker) {
         self.init(bankers: [banker])
     }
     
-    convenience init() {
+    init() {
         let banker = Banker()
         self.init(banker: banker)
     }
@@ -25,12 +25,12 @@ class Bank {
 // MARK: - method
 
 extension Bank {
-    func run() {
+    mutating func run() {
         close()
         assignQueue()
     }
     
-    func assignQueue() {
+    private mutating func assignQueue() {
         customerQueue = BankManager.shared.lineUpCustomers()
     }
     
