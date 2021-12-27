@@ -14,6 +14,24 @@ struct BankManager {
     
     var bank = Bank(numberOfClerks: 1)
     
+    mutating func startConsoleProgram() {
+        do {
+            while true {
+                showMenu()
+                let userInput = try userInput()
+                switch userInput {
+                case .openBank:
+                    supplyClientsToBank()
+                    bank.openBank()
+                case .exit:
+                    return
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func showMenu() {
         let menu = """
             1 : 은행개점

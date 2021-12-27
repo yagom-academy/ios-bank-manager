@@ -6,3 +6,7 @@
 
 import Foundation
 
+var bank = Bank(numberOfClerks: 1)
+var bankManager = BankManager(bank: bank)
+
+bankManager.startConsoleProgram()
