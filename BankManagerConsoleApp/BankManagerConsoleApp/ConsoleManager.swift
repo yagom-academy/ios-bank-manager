@@ -16,11 +16,11 @@ struct ConsoleManager {
         }
     }
     
-    static func printMenu() {
+    private static func printMenu() {
         print(ConsoleBundle.Menu.explainMessage)
     }
     
-    static func receiveInput() -> String {
+    private static func receiveInput() -> String {
         print(ConsoleBundle.Menu.inputMessage, terminator: "")
         guard let input = readLine() else {
             return ""
