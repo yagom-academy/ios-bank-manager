@@ -1,4 +1,4 @@
-struct CustomerQueue<T> {
+struct Queue<T> {
     private var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {
