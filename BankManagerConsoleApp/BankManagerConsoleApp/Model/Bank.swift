@@ -11,38 +11,37 @@ class Bank {
         }
     }
     
-    private  func dequeueWaitingLine() -> Customer? {
+    private func dequeueWaitingLine() -> Customer? {
         return waitingLine.dequeue()
     }
     
     func startWork() {
-        var taskTime = 0.0
-        var numberOfCustomer = 0
         let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
         let loanQueue = DispatchQueue(label: "loanQueue")
         let workGroup = DispatchGroup()
-        
         let semaphore = DispatchSemaphore(value: 2)
+        
+        var numberOfCustomer = 0
+        
+        let date = Date()
         
         while waitingLine.isEmpty == false {
             guard let customer = dequeueWaitingLine() else {
                 fatalError("unknown error")
             }
             
-            switch customer.task {  // TO DO (Semaphore)
+            switch customer.task {
             case .deposit:
                 depositQueue.async(group: workGroup) {
                     semaphore.wait()
-                    taskTime = BankTask.deposit.processingTime
-                    self.bankClerk.handleTask(of: customer, until: taskTime)
+                    self.bankClerk.handleTask(of: customer, until: BankTask.deposit.processingTime)
                     numberOfCustomer += 1
                     semaphore.signal()
                 }
                 
             case .loan:
                 loanQueue.async(group: workGroup) {
-                    taskTime = BankTask.loan.processingTime
-                    self.bankClerk.handleTask(of: customer, until: taskTime)
+                    self.bankClerk.handleTask(of: customer, until: BankTask.loan.processingTime)
                     numberOfCustomer += 1
                 }
             default:
@@ -50,12 +49,13 @@ class Bank {
             }
         }
         workGroup.wait()
+        
+        let taskTime = abs(date.timeIntervalSinceNow)
         close(totalCustomer: numberOfCustomer, taskTime: taskTime)
     }
     
     private func close(totalCustomer: Int, taskTime: Double) {
-        let totalTime = taskTime * Double(totalCustomer)
-        
+        let totalTime = taskTime
         let numberFormatter = NumberFormatter()
         numberFormatter.roundingMode = .up
         numberFormatter.minimumFractionDigits = 2
