@@ -19,7 +19,7 @@ struct Calculator {
 //MARK: - CFAbsoluteTime Extension
 
 extension CFAbsoluteTime {
-    var toDecimal: String? {
+    fileprivate var toDecimal: String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 2

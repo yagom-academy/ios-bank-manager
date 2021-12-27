@@ -24,6 +24,6 @@ class Bank: WaitingLineManageable  {
     }
     
     func open() {
-        bankManager.open()
+        bankManager.work()
     }
 }
