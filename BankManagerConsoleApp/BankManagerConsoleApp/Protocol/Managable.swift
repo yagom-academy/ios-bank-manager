@@ -8,11 +8,11 @@
 import Foundation
 
 protocol Managable {
-    func giveWork(to clerkNumber: Int) -> DispatchQueue
+    func giveWork(to clerkIdentifier: Int) -> DispatchQueue
 }
 
 extension Managable {
-    func giveWork(to clerkNumber: Int) -> DispatchQueue {
-        return DispatchQueue(label: "clerk\(clerkNumber)")
+    func giveWork(to clerkIdentifier: Int) -> DispatchQueue {
+        return DispatchQueue(label: "clerk\(clerkIdentifier)")
     }
 }
