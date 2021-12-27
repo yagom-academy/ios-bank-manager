@@ -22,7 +22,8 @@ struct BankManager {
     }
     
     mutating func openBank() {
-        bank.setWaitingLine(with: generateNumberOfCustomer)
+        let numberOfCustomer = generateNumberOfCustomer()
+        bank.setWaitingLine(with: numberOfCustomer)
         bank.letClerkWork()
     }
     
