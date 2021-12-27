@@ -10,7 +10,7 @@
 		C13FC5752774575800369FAB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13FC5742774575800369FAB /* Task.swift */; };
 		C13FC57727745A3A00369FAB /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13FC57627745A3A00369FAB /* Bank.swift */; };
 		C13FC57927748A2400369FAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13FC57827748A2400369FAB /* String+Extension.swift */; };
-		C13FC57B27748CE700369FAB /* ConsoleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13FC57A27748CE700369FAB /* ConsoleMessage.swift */; };
+		C13FC57B27748CE700369FAB /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13FC57A27748CE700369FAB /* Console.swift */; };
 		C1AA37FB27709E1C007C07F2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AA37FA27709E1C007C07F2 /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -39,7 +39,7 @@
 		C13FC5742774575800369FAB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C13FC57627745A3A00369FAB /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C13FC57827748A2400369FAB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		C13FC57A27748CE700369FAB /* ConsoleMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleMessage.swift; sourceTree = "<group>"; };
+		C13FC57A27748CE700369FAB /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		C1AA37FA27709E1C007C07F2 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 				C13FC5742774575800369FAB /* Task.swift */,
 				C1AA37FA27709E1C007C07F2 /* Queue.swift */,
 				E93F668E277087D7001158D8 /* LinkedList.swift */,
-				C13FC57A27748CE700369FAB /* ConsoleMessage.swift */,
+				C13FC57A27748CE700369FAB /* Console.swift */,
 			);
 			path = BankManager;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 				E9EF7C762774A11C00068B96 /* BankMessagePresenter.swift in Sources */,
 				C1AA37FB27709E1C007C07F2 /* Queue.swift in Sources */,
 				E93F66E227746F2F001158D8 /* Double+Extension.swift in Sources */,
-				C13FC57B27748CE700369FAB /* ConsoleMessage.swift in Sources */,
+				C13FC57B27748CE700369FAB /* Console.swift in Sources */,
 				C13FC57727745A3A00369FAB /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

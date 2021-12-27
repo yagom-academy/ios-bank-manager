@@ -17,10 +17,10 @@ class BankManager {
     func startConsole() {
         let choice = askMenu()
         switch choice {
-        case ConsoleMessage.open.input:
+            case Console.Input.open.rawValue:
             openBank()
             startConsole()
-        case ConsoleMessage.exit.input:
+            case Console.Input.exit.rawValue:
             return
         default:
             restartConsole()
@@ -28,7 +28,7 @@ class BankManager {
     }
     
     private func askMenu() -> String {
-        print(ConsoleMessage.menu, terminator: String.empty)
+        print(Console.Message.menu.rawValue, terminator: String.empty)
         return readLine() ?? String.empty
     }
     
@@ -44,21 +44,22 @@ class BankManager {
     }
     
     private func restartConsole() {
-        print(ConsoleMessage.invalidInput)
+        print(Console.Message.invalidInput.rawValue)
         startConsole()
     }
 }
 
 extension BankManager: BankMessagePresenter {
+    
     func bankDidClose(totalClient: Int, for duration: String) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient)명이며, 총 업무시간은 \(duration)초입니다.")
+        print(Console.Message.closeBank(totalClient, duration))
     }
     
-    func bank(willBeginServiceFor number: Int) {
-        print("\(number)번 고객 업무 시작")
+    func bank(willBeginServiceFor clientNumber: Int) {
+        print(Console.Message.beginService(of: clientNumber))
     }
     
-    func bank(didEndServiceFor number: Int) {
-        print("\(number)번 고객 업무 완료")
+    func bank(didEndServiceFor clientNumber: Int) {
+        print(Console.Message.endService(of: clientNumber))
     }
 }
