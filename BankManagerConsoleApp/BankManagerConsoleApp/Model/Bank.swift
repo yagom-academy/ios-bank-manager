@@ -21,11 +21,12 @@ protocol BankTransactionable: AnyObject {
 class Bank: BankTransactionable {
     private let customerQueue: Queue<Customer> = Queue<Customer>()
     private var bankClerk: BankClerk
-    weak var delegate: BankDelegate?
+    private weak var delegate: BankDelegate?
     
-    init(bankClerk: BankClerk) {
+    init(bankClerk: BankClerk, delegatee: BankDelegate) {
         self.bankClerk = bankClerk
-        self.bankClerk.bank = self
+        self.bankClerk.setBank(bank: self)
+        self.delegate = delegatee
         setupCustomerQueue()
     }
     

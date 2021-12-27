@@ -13,8 +13,16 @@ protocol BankClerkDelegate: AnyObject {
 }
 
 class BankClerk {
-    weak var bank: BankTransactionable?
-    weak var delegate: BankClerkDelegate?
+    private weak var bank: BankTransactionable?
+    private weak var delegate: BankClerkDelegate?
+    
+    init(delegatee: BankClerkDelegate) {        
+        self.delegate = delegatee
+    }
+    
+    func setBank(bank: BankTransactionable) {
+        self.bank = bank
+    }
     
     func work() {
         let bankWorkGroup = DispatchGroup()
