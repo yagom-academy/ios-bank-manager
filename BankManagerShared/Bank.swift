@@ -30,6 +30,7 @@ extension Bank {
         open()
         BankManager.shared.endTimeCheck()
         close()
+        BankManager.shared.clearTotalValues()
     }
     
     private mutating func receiveCustomerQueue() {

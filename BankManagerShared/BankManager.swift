@@ -33,4 +33,9 @@ class BankManager {
     func increaseTotalCustomer() {
         self.totalCustomer += 1
     }
+    
+    func clearTotalValues() {
+        self.totalTime = 0
+        self.totalCustomer = 0
+    }
 }
