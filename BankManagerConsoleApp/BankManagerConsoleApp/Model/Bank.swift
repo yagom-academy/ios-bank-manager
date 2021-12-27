@@ -16,15 +16,25 @@ struct Bank {
     }
     
     mutating func letClerkWork() {
-        let taskTime = 0.7
+        var taskTime = 0.0
         var numberOfCustomer = 0
         
         while waitingLine.isEmpty == false {
             guard let customer = dequeueWaitingLine() else {
                 fatalError("unknown error")
             }
-            bankClerk.handleTask(of: customer, until: taskTime)
-            numberOfCustomer += 1
+            
+            switch customer.task {  // TO DO (Refactor)
+            case .deposit:
+                taskTime = BankTask.deposit.processingTime
+                bankClerk.handleTask(of: customer, until: taskTime)
+                numberOfCustomer += 1
+            case .loan:
+                taskTime = BankTask.loan.processingTime
+                bankClerk.handleTask(of: customer, until: taskTime)
+                numberOfCustomer += 1
+            default: return
+            }
         }
         close(totalCustomer: numberOfCustomer, taskTime: taskTime)
     }
