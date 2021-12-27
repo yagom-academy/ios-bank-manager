@@ -9,6 +9,15 @@ import Foundation
 struct BankManager {
     var bank = Bank(numberOfClerks: 1)
     
+    func showMenu() {
+        let menu = """
+            1 : 은행개점
+            2 : 종료
+            입력 :
+            """
+        print(menu, terminator: " ")
+    }
+    
     private func generateClients() -> [Client] {
         let clientNumber = Int.random(in: 10...30)
         var clients: [Client] = []
