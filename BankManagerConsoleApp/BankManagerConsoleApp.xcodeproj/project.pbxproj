@@ -99,8 +99,6 @@
 				ED8E95952771D32C00FA4ABD /* Model */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				EDC966F52775974C00D70C2D /* Bank.swift */,
-				53941F7C2779C1280040567E /* Client.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -118,6 +116,8 @@
 			children = (
 				ED8E95962771D34000FA4ABD /* LinkedList.swift */,
 				ED8E95982771D34E00FA4ABD /* WaitingQueue.swift */,
+				EDC966F52775974C00D70C2D /* Bank.swift */,
+				53941F7C2779C1280040567E /* Client.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

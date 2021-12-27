@@ -8,9 +8,11 @@
 import Foundation
 
 struct Bank {
+    //MARK: - 저장 속성
     private var clientQueue = WaitingQueue<Client>()
     private var clerkQueue = WaitingQueue<BankClerk>()
     
+    //MARK: - 생성자
     init(numberOfClerks: Int) {
         (0..<numberOfClerks).forEach { _ in
             let clerk = BankClerk(isAvailable: true)
@@ -18,6 +20,7 @@ struct Bank {
         }
     }
     
+    // MARK: - Internal 메서드
     mutating func receive(clients: [Client]) {
         clients.forEach { client in
             clientQueue.enqueue(client)
@@ -32,7 +35,8 @@ struct Bank {
         showClosingMessage(with: totalClientCount, and: processTime)
     }
     
-    mutating private func handleBankWork() -> Int {
+    //MARK: - Private 메서드
+    private mutating func handleBankWork() -> Int {
         var totalClientCount: Int = 0
         
         while let client = clientQueue.dequeue(),
@@ -52,8 +56,9 @@ struct Bank {
     }
 }
 
+//MARK: - 중첩타입
 extension Bank {
-    struct BankClerk {
+    private struct BankClerk {
         var isAvailable = true
         
         mutating func work(for client: Client) {

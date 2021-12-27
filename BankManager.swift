@@ -7,13 +7,17 @@
 import Foundation
 
 struct BankManager {
-    enum MenuOption: String {
+    
+    //MARK: - 중첩 타입
+    private enum MenuOption: String {
         case openBank = "1"
         case exit = "2"
     }
     
-    var bank = Bank(numberOfClerks: 1)
+    //MARK: - 저장 속성
+    private var bank = Bank(numberOfClerks: 1)
     
+    //MARK: - Internal 메서드
     mutating func startConsoleProgram() {
         while true {
             do {
@@ -36,7 +40,8 @@ struct BankManager {
         }
     }
     
-    func showMenu() {
+    //MARK: - Private 메서드
+    private func showMenu() {
         let menu = """
             1 : 은행개점
             2 : 종료
@@ -45,7 +50,7 @@ struct BankManager {
         print(menu, terminator: " ")
     }
     
-    func userInput() throws -> MenuOption {
+    private func userInput() throws -> MenuOption {
         guard let input = readLine(),
               let menuOption = MenuOption(rawValue: input) else {
             throw BankManagerError.invalidUserInput
@@ -67,7 +72,7 @@ struct BankManager {
         return clients
     }
     
-    mutating func supplyClientsToBank() {
+    private mutating func supplyClientsToBank() {
         let clients = generateClients()
         bank.receive(clients: clients)
     }
