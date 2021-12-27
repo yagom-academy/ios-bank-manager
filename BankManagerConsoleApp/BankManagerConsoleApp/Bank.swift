@@ -12,7 +12,7 @@ protocol WaitingLineManageable {
 }
 
 class Bank: WaitingLineManageable  {
-    var waitingLine = Queue<Customer>()
+    let waitingLine = Queue<Customer>()
     private var employee: Employee
     private let randomNumber = Int.random(in: 10...30)
     
