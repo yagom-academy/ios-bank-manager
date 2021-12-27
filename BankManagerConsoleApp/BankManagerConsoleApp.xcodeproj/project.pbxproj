@@ -17,6 +17,7 @@
 		0DB9BA142770B4B1003F7B21 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA132770B4B1003F7B21 /* Queue.swift */; };
 		0DB9BA162770BBF2003F7B21 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA152770BBF2003F7B21 /* QueueTests.swift */; };
 		0DB9BA172770BCC0003F7B21 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9BA132770B4B1003F7B21 /* Queue.swift */; };
+		3B62088C2779BDBF0071E623 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B62088B2779BDBF0071E623 /* Calculator.swift */; };
 		3BE4CC662770707B00178845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC652770707B00178845 /* LinkedList.swift */; };
 		3BE4CC702770902600178845 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC6F2770902600178845 /* LinkedListTests.swift */; };
 		3BE4CC742770927B00178845 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4CC652770707B00178845 /* LinkedList.swift */; };
@@ -46,6 +47,7 @@
 		0D693F1B2779A84000736D4C /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		0DB9BA132770B4B1003F7B21 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0DB9BA152770BBF2003F7B21 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		3B62088B2779BDBF0071E623 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		3BE4CC652770707B00178845 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		3BE4CC6D2770902600178845 /* BanckManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BanckManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE4CC6F2770902600178845 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				0D4FA8642775563A00577BB1 /* Customer.swift */,
 				0D4FA8662775624D00577BB1 /* Employee.swift */,
 				0D693F1B2779A84000736D4C /* Speaker.swift */,
+				3B62088B2779BDBF0071E623 /* Calculator.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				3BE4CC662770707B00178845 /* LinkedList.swift in Sources */,
 				0D4FA8672775624D00577BB1 /* Employee.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				3B62088C2779BDBF0071E623 /* Calculator.swift in Sources */,
 				0D693F1C2779A84000736D4C /* Speaker.swift in Sources */,
 				0D4FA85F2774BAA200577BB1 /* StarterMessage.swift in Sources */,
 				0D4FA85D2774BA6C00577BB1 /* Starter.swift in Sources */,
