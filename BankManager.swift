@@ -7,6 +7,11 @@
 import Foundation
 
 struct BankManager {
+    enum MenuOption: String {
+        case openBank = "1"
+        case exit = "2"
+    }
+    
     var bank = Bank(numberOfClerks: 1)
     
     func showMenu() {
@@ -16,6 +21,15 @@ struct BankManager {
             입력 :
             """
         print(menu, terminator: " ")
+    }
+    
+    func userInput() throws -> MenuOption {
+        guard let input = readLine(),
+              let menuOption = MenuOption(rawValue: input) else {
+            throw BankManagerError.invalidUserInput
+        }
+        
+        return menuOption
     }
     
     private func generateClients() -> [Client] {
