@@ -12,8 +12,8 @@ class BankManager {
         let customerCount = Int.random(in: range)
         let customerQueue: Queue<Customer> = Queue<Customer>()
         
-        (1...customerCount).forEach {
-            let customer = Customer(customerNumber: $0)
+        (0..<customerCount).forEach {
+            let customer = Customer(customerNumber: $0 + 1)
             customerQueue.enqueue(customer)
         }
         return customerQueue

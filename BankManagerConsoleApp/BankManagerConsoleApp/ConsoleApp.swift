@@ -23,7 +23,7 @@ class ConsoleApp {
             
             switch inputValue {
             case "1":
-                let bank = Bank()
+                var bank = Bank()
                 bank.run()
             case "2":
                 return
