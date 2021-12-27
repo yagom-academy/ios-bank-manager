@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Speaker {
+enum Speaker {
     enum Situation {
         case start
         case finish
         case close(time: String)
     }
     
-    func speak(when situation: Situation, number: Int) {
+    static func speak(when situation: Situation, number: Int) {
         switch situation {
         case .start:
             print("\(number) 번 고객 업무 시작")

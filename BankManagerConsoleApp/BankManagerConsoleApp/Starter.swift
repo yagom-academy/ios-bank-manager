@@ -51,7 +51,8 @@ struct Starter {
     
     private func runBankProgram() {
         let employee = Employee()
-        let bank = Bank(employee: employee)
+        let bankManager = BankManager(employee: employee)
+        let bank = Bank(employee: employee, bankManager: bankManager)
         bank.open()
     }
 }
