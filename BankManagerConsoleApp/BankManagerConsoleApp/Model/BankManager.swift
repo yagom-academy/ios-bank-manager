@@ -9,9 +9,9 @@ struct BankManager {
     private var bank = Bank()
 
     private func showMenu() {
-        print("1: 은행개점")
-        print("2: 종료")
-        print("입력: ",terminator: "")
+        print("1 : 은행개점")
+        print("2 : 종료")
+        print("입력 : ",terminator: "")
     }
     
     func selectMenu() -> String? {
