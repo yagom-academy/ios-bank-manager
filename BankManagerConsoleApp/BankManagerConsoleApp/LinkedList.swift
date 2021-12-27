@@ -1,17 +1,15 @@
 import Foundation
 
 final class LinkedList<Element> {
-    // MARK: - ListNode Class
-    final class ListNode<Element> {
+    // MARK: - Node Class
+    final class Node {
         private(set) var value: Element
-        var next: ListNode?
+        var next: Node?
         
         init(value: Element) {
             self.value = value
         }
     }
-    
-    typealias Node = ListNode<Element>
 
     // MARK: - Properties
     private(set) var head: Node?
@@ -43,6 +41,10 @@ final class LinkedList<Element> {
             tail?.next = newNode
         }
         tail = newNode
+    }
+    
+    func returnHead() -> Element? {
+        return head?.value
     }
     
     func insert(_ value: Element, at index: Int) throws {
@@ -113,6 +115,7 @@ final class LinkedList<Element> {
     
     func removeAll() {
         head = nil
+        tail = nil
     }
 }
 
