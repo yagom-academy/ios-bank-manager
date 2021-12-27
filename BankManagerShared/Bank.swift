@@ -1,11 +1,6 @@
 import Foundation
 
-protocol BankDelegate {
-    func checkTime()
-    func checkCustomer()
-}
-
-class Bank {    
+class Bank {
     private let bankers: [Banker]
     private var customerQueue: Queue<Customer>?
     private var totalTime: TimeInterval
@@ -46,19 +41,5 @@ extension Bank {
     
     private func assign(customer: Customer, to banker: inout Banker) {
         banker.customer = customer
-    }
-}
-
-// MARK: - BankDelegate
-
-extension Bank: BankDelegate {
-    func checkCustomer() {
-        let customerCountAtOnce = 1
-        totalCustomer += customerCountAtOnce
-    }
-    
-    func checkTime() {
-        let secondsAtOnce: TimeInterval = 0.7
-        totalTime += secondsAtOnce
     }
 }

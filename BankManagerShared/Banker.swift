@@ -1,7 +1,6 @@
 import Foundation
 
 struct Banker {
-    var delegate: BankDelegate?
     var customer: Customer? {
         didSet {
             task()
@@ -24,8 +23,6 @@ struct Banker {
         }
 
         print("\(customer.customerNumber)번 고객 업무 시작")
-        delegate?.checkTime()
         print("\(customer.customerNumber)번 고객 업무 완료")
-        delegate?.checkCustomer()
     }
 }
