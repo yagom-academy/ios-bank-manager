@@ -24,7 +24,7 @@ class Bank {
                 let endTime = CFAbsoluteTimeGetCurrent()
                 let workingDuration = endTime - startTime
                 delegate?.bankDidClose(totalClient: clientCount,
-                                       for: workingDuration.roundedOff)
+                                       for: workingDuration.roundOff())
                 return
             }
             service(for: client)

@@ -8,7 +8,13 @@
 import Foundation
 
 extension Double {
-    var roundedOff: String {
-        String(format: "%.2f", self)
+    private static let numberFormatter = NumberFormatter()
+    
+    func roundOff(fractionDigits: Int = 2) -> String {
+        Double.numberFormatter.roundingMode = .floor
+        Double.numberFormatter.maximumFractionDigits = fractionDigits
+        Double.numberFormatter.minimumFractionDigits = fractionDigits
+        
+        return Double.numberFormatter.string(for: self) ?? String.empty
     }
 }
