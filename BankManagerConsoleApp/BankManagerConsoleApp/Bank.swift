@@ -8,23 +8,42 @@ class Bank {
     
     private let clients = Queue<Client>()
     private let numberOfClients: Int
-    private let semaphore: DispatchSemaphore
+    private let depositSemaphore: DispatchSemaphore
+    private let loanSemaphore: DispatchSemaphore
     
-    init(numberOfClients: Int, numberOfBankTellers: Int) {
+    init(numberOfClients: Int, numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
         self.numberOfClients = numberOfClients
-        self.semaphore = DispatchSemaphore(value: numberOfBankTellers)
+        self.depositSemaphore = DispatchSemaphore(value: numberOfDepositBankTellers)
+        self.loanSemaphore = DispatchSemaphore(value: numberOfLoanBankTellers)
         addClientsToQueue(by: numberOfClients)
     }
     
     func startBankingService() {
         let startTime = Date()
+        let depositDispatchQueue = DispatchQueue(label: "deposit")
+        let loanDispatchQueue = DispatchQueue(label: "loan")
         
         let group = DispatchGroup()
         while let client = clients.dequeue() {
-            semaphore.wait()
-            DispatchQueue.global().async(group: group) {
-                self.respond(to: client)
-                self.semaphore.signal()
+            switch client.business {
+            case .deposit:
+                depositDispatchQueue.async(group: group) {
+                    self.depositSemaphore.wait()
+                    DispatchQueue.global().async(group: group) {
+                        self.respondDepositBusiness(to: client)
+                        self.depositSemaphore.signal()
+                    }
+                }
+            case .loan:
+                loanDispatchQueue.async(group: group) {
+                    self.loanSemaphore.wait()
+                    DispatchQueue.global().async(group: group) {
+                        self.respondLoanBusiness(to: client)
+                        self.loanSemaphore.signal()
+                    }
+                }
+            case nil:
+                print("업무가 지정되지 않았습니다.")
             }
         }
         group.wait()
@@ -40,9 +59,15 @@ class Bank {
         }
     }
 
-    private func respond(to client: Client) {
-        print("\(client.waitingNumber)번 고객 업무 시작")
+    private func respondDepositBusiness(to client: Client) {
+        print("\(client.waitingNumber)번 고객 예금업무 시작")
         Thread.sleep(forTimeInterval: 0.7)
-        print("\(client.waitingNumber)번 고객 업무 완료")
+        print("\(client.waitingNumber)번 고객 예금업무 완료")
+    }
+    
+    private func respondLoanBusiness(to client: Client) {
+        print("\(client.waitingNumber)번 고객 대출업무 시작")
+        Thread.sleep(forTimeInterval: 1.1)
+        print("\(client.waitingNumber)번 고객 대출업무 완료")
     }
 }

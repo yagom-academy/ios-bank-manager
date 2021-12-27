@@ -15,10 +15,15 @@ struct BankManager {
             printMenu()
             let userInput = readLine() ?? ""
             let menuOption = MenuOption(rawValue: userInput)
+            
             switch menuOption {
             case .startBusiness:
                 let randomNumber = Int.random(in: 10...30)
-                Bank(numberOfClients: randomNumber, numberOfBankTellers: 1).startBankingService()
+                Bank(
+                    numberOfClients: randomNumber,
+                    numberOfDepositBankTellers: 2,
+                    numberOfLoanBankTellers: 1
+                ).startBankingService()
             case .exit:
                 return
             case nil:
