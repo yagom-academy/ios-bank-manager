@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol BankClerkDelegate {
+protocol BankClerkDelegate: AnyObject {
     func printBeginWorkMessage(of customer: Customer)
     func printFinishWorkMessage(of customer: Customer)
 }
 
 class BankClerk {
     weak var bank: Transactionable?
-    var delegate: BankClerkDelegate?
+    weak var delegate: BankClerkDelegate?
     
     func work() {
         let bankWorkGroup = DispatchGroup()

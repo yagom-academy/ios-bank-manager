@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BankDelegate {
+protocol BankDelegate: AnyObject {
     func printClosingMessage(customers: Int, processingTime: Double)
 }
 
@@ -20,7 +20,7 @@ protocol Transactionable: AnyObject {
 class Bank: Transactionable {
     let customerQueue: Queue<Customer> = Queue<Customer>()
     var bankClerk: BankClerk
-    var delegate: BankDelegate?
+    weak var delegate: BankDelegate?
     
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk

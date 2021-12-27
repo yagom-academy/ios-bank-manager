@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct BankPrinter { }
+class BankPrinter { }
 
 extension BankPrinter: BankDelegate {
     func printClosingMessage(customers: Int, processingTime: Double) {
