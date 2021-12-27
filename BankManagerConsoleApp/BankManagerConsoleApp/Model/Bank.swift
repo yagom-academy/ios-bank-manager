@@ -22,6 +22,8 @@ class Bank {
         let loanQueue = DispatchQueue(label: "loanQueue")
         let workGroup = DispatchGroup()
         
+        let semaphore = DispatchSemaphore(value: 2)
+        
         while waitingLine.isEmpty == false {
             guard let customer = dequeueWaitingLine() else {
                 fatalError("unknown error")
@@ -30,9 +32,11 @@ class Bank {
             switch customer.task {  // TO DO (Semaphore)
             case .deposit:
                 depositQueue.async(group: workGroup) {
+                    semaphore.wait()
                     taskTime = BankTask.deposit.processingTime
                     self.bankClerk.handleTask(of: customer, until: taskTime)
                     numberOfCustomer += 1
+                    semaphore.signal()
                 }
                 
             case .loan:
