@@ -29,12 +29,20 @@ struct Bank {
 
 extension Bank {
     mutating func run() {
+        receiveCustomerQueue()
+        open()
         close()
-        assignQueue()
     }
     
-    private mutating func assignQueue() {
+    private mutating func receiveCustomerQueue() {
         customerQueue = BankManager.shared.lineUpCustomers()
+    }
+    
+    private func open() {
+        guard let banker = bankers.first else { return }
+        while let customer = customerQueue?.dequeue() {
+            assign(customer: customer, to: banker)
+        }
     }
     
     private func close() {
