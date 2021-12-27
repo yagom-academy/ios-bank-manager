@@ -9,7 +9,7 @@ import Foundation
 
 class Bank {
     
-    var delegate: BankDelegate?
+    weak var delegate: BankMessagePresenter?
     private var clientQueue = Queue<Client>()
     
     func lineUp(_ client: Client) {
