@@ -7,4 +7,6 @@
 
 import Foundation
 
-struct BankClerk: bankingWorkable { }
+struct BankClerk: BankingWorkable {
+    var identifier: Int = 0
+}

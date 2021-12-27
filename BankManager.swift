@@ -9,7 +9,7 @@ import Foundation
 struct BankManager: Managable {
     var clients = Clients()
     let clerk = BankClerk()
-    let clerkIdentifier: Int
+    let totalClerkCount: Int
     var totalWorkingTime: CFAbsoluteTime = .zero
     
     mutating func operateBankSystem() {
@@ -29,7 +29,7 @@ struct BankManager: Managable {
         let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
         
         while clients.startTask() > Bank.emptyWaitingLine {
-            manageClerk(clerkIdentifier, for: clients.startTask())
+            manageClerk(clerk.identifier, for: clients.startTask())
             clients.completeTask()
         }
         
