@@ -11,13 +11,14 @@ struct Employee {
     var bank: WaitingLineManageable?
     private let seconds = 0.7
     private var customerCount = 0
+    var speaker = Speaker()
     
     func startJob() {
         guard let customer = bank?.waitingLine.first else {
             return
         }
         
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        speaker.speak(when: .start, number: customer.waitingNumber)
     }
     
     mutating func finishJob() {
@@ -28,7 +29,7 @@ struct Employee {
         Thread.sleep(forTimeInterval: seconds)
         customerCount += 1
         
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        speaker.speak(when: .finish, number: customer.waitingNumber)
     }
     
     func calculate(from openTime: CFAbsoluteTime, to closeTime: CFAbsoluteTime) {
@@ -38,7 +39,8 @@ struct Employee {
             return
         }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workTime)초입니다.")
+        let close = Speaker.Situation.close(time: workTime)
+        speaker.speak(when: close, number: customerCount)
     }
 }
 
