@@ -19,7 +19,9 @@ fileprivate func receiveInput() -> String {
 }
 
 fileprivate func runMenu(with input: String) {
-    var bankManager = BankManager(totalClerkCount: 1)
+    var bankManager = BankManager(clients: Clients(),
+                                  clerk: BankClerk(),
+                                  totalClerkCount: 1)
 
     switch input {
     case Menu.Option.bankOpen:

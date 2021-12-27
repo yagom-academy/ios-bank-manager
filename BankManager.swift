@@ -7,8 +7,8 @@
 import Foundation
 
 struct BankManager: Managable {
-    var clients = Clients()
-    let clerk = BankClerk()
+    var clients: Clients
+    let clerk: BankClerk
     let totalClerkCount: Int
     var totalWorkingTime: CFAbsoluteTime = .zero
     
