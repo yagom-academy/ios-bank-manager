@@ -19,16 +19,25 @@ class Bank {
     func start() {
         var clientCount: Int = .zero
         let startTime = CFAbsoluteTimeGetCurrent()
+        let semaphore = DispatchSemaphore(value: 3)
+        let group = DispatchGroup()
+        
         while true {
             guard let client = clientQueue.dequeue() else {
+                group.wait()
                 let endTime = CFAbsoluteTimeGetCurrent()
                 let workingDuration = endTime - startTime
                 delegate?.bankDidClose(totalClient: clientCount,
                                        for: workingDuration.roundOff())
                 return
             }
-            service(for: client)
-            clientCount += 1
+            
+            DispatchQueue.global().async(group: group) {
+                semaphore.wait()
+                self.service(for: client)
+                clientCount += 1
+                semaphore.signal()
+            }
         }
     }
     
