@@ -6,17 +6,25 @@ protocol BankDelegate {
 }
 
 class Bank {    
-    private var banker: Banker
+    private var bankers: [Banker]
     private var queue: Queue<Customer>
     private var totalTime: TimeInterval
     private var totalCustomer: Int
    
-    init() {
-        queue = Queue<Customer>()
-        banker = Banker()
-        totalTime = .zero
-        totalCustomer = .zero
-        banker.delegate = self
+    init(bankers: [Banker]) {
+        self.queue = Queue<Customer>()
+        self.bankers = bankers
+        self.totalTime = .zero
+        self.totalCustomer = .zero
+    }
+    
+    convenience init(banker: Banker) {
+        self.init(bankers: [banker])
+    }
+    
+    convenience init() {
+        let banker = Banker()
+        self.init(banker: banker)
     }
 }
 
