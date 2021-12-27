@@ -15,7 +15,7 @@ class Bank {
         return waitingLine.dequeue()
     }
     
-    func letClerkWork() {
+    func startWork() {
         var taskTime = 0.0
         var numberOfCustomer = 0
         let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
