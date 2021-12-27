@@ -9,12 +9,12 @@ struct Bank {
     
     // MARK: - Initalizer
     init(numberOfBankClerk: Int, numberOfCustomer: Int) {
-        instantiateCustomers(of: numberOfCustomer)
+        setupCustomers(of: numberOfCustomer)
         self.numberOfCustomer = numberOfCustomer
     }
     
     // MARK: - Methods
-    private func instantiateCustomers(of number: Int) {
+    private func setupCustomers(of number: Int) {
          for index in 0..<number {
              let customer = Customer(number: (index + 1))
              customers.enqueue(value: customer)
@@ -34,9 +34,9 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         taskFunction()
         let totalTime = CFAbsoluteTimeGetCurrent() - startTime
-        let totalTimeInString: String = String(format: "%.2f", totalTime)
+        let totalTimeText: String = totalTime.formattedToTwoDecimalPoint
 
-        return totalTimeInString
+        return totalTimeText
     }
     
     private func handleTaskOfAllCustomers() {
@@ -72,6 +72,6 @@ struct Bank {
     }
     
     private func notifyBankClosing(with totalTime: String) {
-        print("업무가 마감되었습니다, 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalTime)초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalTime)초 입니다.")
     }
 }
