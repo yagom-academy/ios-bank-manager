@@ -11,7 +11,13 @@ protocol BankDelegate {
     func printClosingMessage(customers: Int, processingTime: Double)
 }
 
-class Bank {
+protocol Transactionable: AnyObject {
+    var customerQueue: Queue<Customer> { get }
+    func open()
+    func close(totalCustomers: Int, totalProcessingTime: Double)
+}
+
+class Bank: Transactionable {
     let customerQueue: Queue<Customer> = Queue<Customer>()
     var bankClerk: BankClerk
     var delegate: BankDelegate?

@@ -13,7 +13,7 @@ protocol BankClerkDelegate {
 }
 
 class BankClerk {
-    weak var bank: Bank?
+    weak var bank: Transactionable?
     var delegate: BankClerkDelegate?
     
     func work() {
