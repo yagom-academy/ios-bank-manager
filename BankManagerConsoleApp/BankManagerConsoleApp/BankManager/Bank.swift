@@ -19,26 +19,40 @@ class Bank {
     func start() {
         var clientCount: Int = .zero
         let startTime = CFAbsoluteTimeGetCurrent()
-        let semaphore = DispatchSemaphore(value: 3)
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
         let group = DispatchGroup()
         
         while true {
             guard let client = clientQueue.dequeue() else {
                 group.wait()
-                let endTime = CFAbsoluteTimeGetCurrent()
-                let workingDuration = endTime - startTime
-                delegate?.bankDidClose(totalClient: clientCount,
-                                       for: workingDuration.roundOff())
+                workDone(startTime: startTime, clientCount: clientCount)
                 return
             }
+            clientCount += 1
             
-            DispatchQueue.global().async(group: group) {
-                semaphore.wait()
-                self.service(for: client)
-                clientCount += 1
-                semaphore.signal()
+            switch client.task {
+            case .deposit:
+                DispatchQueue.global().async(group: group) {
+                    depositSemaphore.wait()
+                    self.service(for: client)
+                    depositSemaphore.signal()
+                }
+            case .loan:
+                DispatchQueue.global().async(group: group) {
+                    loanSemaphore.wait()
+                    self.service(for: client)
+                    loanSemaphore.signal()
+                }
             }
         }
+    }
+    
+    private func workDone(startTime: CFAbsoluteTime, clientCount: Int) {
+        let endTime = CFAbsoluteTimeGetCurrent()
+        let workingDuration = endTime - startTime
+        delegate?.bankDidClose(totalClient: clientCount,
+                               for: workingDuration.roundOff())
     }
     
     private func service(for client: Client) {
