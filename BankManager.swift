@@ -42,7 +42,7 @@ struct BankManager {
   
   private mutating func operateBank (numberOfBankers: Int) {
     let bankers = prepareBanker(numberOfBankers: numberOfBankers)
-    var bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
+    let bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
     bank.doBanking()
   }
   
