@@ -30,20 +30,25 @@ struct Employee {
         
         print("\(customer.waitingNumber)번 고객 업무 완료")
     }
-}
-
-// MARK: - WorkTimer
-
-extension Employee {
+    
     func calculate(from openTime: CFAbsoluteTime, to closeTime: CFAbsoluteTime) {
         let duration = closeTime - openTime
         
-        let workTime = downToDecimalTwo(time: duration)
+        guard let workTime = duration.toDecimal else {
+            return
+        }
+        
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workTime)초입니다.")
     }
-    
-    private func downToDecimalTwo(time: CFAbsoluteTime) -> CFAbsoluteTime {
-        let timeMultiplied = Double(time * 100)
-        return floor(timeMultiplied) / 100
+}
+
+// MARK : - CFAbsoluteTime Extension
+
+extension CFAbsoluteTime {
+    var toDecimal: String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 2
+        return numberFormatter.string(for: self)
     }
 }
