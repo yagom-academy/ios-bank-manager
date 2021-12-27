@@ -34,8 +34,6 @@ struct BankClerk {
 struct Bank {
     private var clientQueue = WaitingQueue<Client>()
     private var clerkQueue = WaitingQueue<BankClerk>()
-    private var totalClientCount: Int = 0
-    private var totalWorkingTime: Double = 0
     
     init(numberOfClerks: Int) {
         (0..<numberOfClerks).forEach { _ in
@@ -52,6 +50,14 @@ struct Bank {
     
     mutating func openBank() {
         let startTime = CFAbsoluteTimeGetCurrent()
+        let totalClientCount = handleBankWork()
+        let processTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        showClosingMessage(with: totalClientCount, and: processTime)
+    }
+    
+    mutating private func handleBankWork() -> Int {
+        var totalClientCount: Int = 0
         
         while let client = clientQueue.dequeue(),
               var clerk = clerkQueue.dequeue() {
@@ -62,8 +68,7 @@ struct Bank {
             clerkQueue.enqueue(clerk)
         }
         
-        let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        showClosingMessage(with: totalClientCount, and: processTime)
+        return totalClientCount
     }
     
     private func showClosingMessage(with totalClientCount: Int, and processTime: Double) {
