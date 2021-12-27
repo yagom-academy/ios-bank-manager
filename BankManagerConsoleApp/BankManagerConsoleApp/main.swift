@@ -16,12 +16,8 @@ func printMenu() {
 }
 
 func runProgram() {
-    let bankClerk = BankClerk()
-    let bank = Bank(bankClerk: bankClerk)
     let bankPrinter = BankPrinter()
-    
-    bank.delegate = bankPrinter
-    bankClerk.delegate = bankPrinter
+    let bank = BankFactory.createBank(with: bankPrinter)
     
     while true {
         printMenu()

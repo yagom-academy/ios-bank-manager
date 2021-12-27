@@ -19,6 +19,7 @@
 		EA5DE366277456AD00DE4B2A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE365277456AD00DE4B2A /* Bank.swift */; };
 		EA5DE367277456AD00DE4B2A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE365277456AD00DE4B2A /* Bank.swift */; };
 		EA5DE36F2775A2F300DE4B2A /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741C277474D200D15158 /* BankClerk.swift */; };
+		EA5DE3A72779E9EA00DE4B2A /* BankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE3A62779E9EA00DE4B2A /* BankFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,7 @@
 		EA5DE3332771670600DE4B2A /* BankManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA5DE3352771670600DE4B2A /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
 		EA5DE365277456AD00DE4B2A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		EA5DE3A62779E9EA00DE4B2A /* BankFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				C9CF741A277452D800D15158 /* Customer.swift */,
+				EA5DE3A62779E9EA00DE4B2A /* BankFactory.swift */,
 				EA5DE365277456AD00DE4B2A /* Bank.swift */,
 				C9CF741C277474D200D15158 /* BankClerk.swift */,
 				C7D65D1A259C8190005510E0 /* BankPrinter.swift */,
@@ -200,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5DE3A72779E9EA00DE4B2A /* BankFactory.swift in Sources */,
 				C96C94BA2770A9020024CA10 /* LinkedList.swift in Sources */,
 				C9CF741D277474D200D15158 /* BankClerk.swift in Sources */,
 				C9CF741B277452D800D15158 /* Customer.swift in Sources */,
