@@ -11,15 +11,16 @@ protocol BankDelegate: AnyObject {
     func printClosingMessage(customers: Int, processingTime: Double)
 }
 
-protocol Transactionable: AnyObject {
-    var customerQueue: Queue<Customer> { get }
+protocol BankTransactionable: AnyObject {
+    func dequeue() -> Customer?
+    func isCustomerQueueEmpty() -> Bool
     func open()
     func close(totalCustomers: Int, totalProcessingTime: Double)
 }
 
-class Bank: Transactionable {
-    let customerQueue: Queue<Customer> = Queue<Customer>()
-    var bankClerk: BankClerk
+class Bank: BankTransactionable {
+    private let customerQueue: Queue<Customer> = Queue<Customer>()
+    private var bankClerk: BankClerk
     weak var delegate: BankDelegate?
     
     init(bankClerk: BankClerk) {
@@ -34,6 +35,14 @@ class Bank: Transactionable {
         (1...randomCustomerCount).forEach { number in
             customerQueue.enqueue(value: Customer(turn: number))
         }
+    }
+    
+    func dequeue() -> Customer? {
+        return customerQueue.dequeue()
+    }
+    
+    func isCustomerQueueEmpty() -> Bool {
+        return customerQueue.isEmpty
     }
     
     func open() {

@@ -13,7 +13,7 @@ protocol BankClerkDelegate: AnyObject {
 }
 
 class BankClerk {
-    weak var bank: Transactionable?
+    weak var bank: BankTransactionable?
     weak var delegate: BankClerkDelegate?
     
     func work() {
@@ -24,7 +24,7 @@ class BankClerk {
         var totalProcessingTime: Double = 0
         
         let bankWorkItem = DispatchWorkItem {
-            guard let customer = self.bank?.customerQueue.dequeue() else {
+            guard let customer = self.bank?.dequeue() else {
                 return
             }
             
@@ -33,7 +33,7 @@ class BankClerk {
             totalProcessingTime += customer.processingTime
         }
         
-        while bank?.customerQueue.isEmpty == false {
+        while bank?.isCustomerQueueEmpty() == false {
             bankWorkQueue.async(group: bankWorkGroup, execute: bankWorkItem)
         }
         
