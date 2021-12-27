@@ -22,6 +22,7 @@
 		F380CFB52775AA790058ACC7 /* BankManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380CFB02775AA790058ACC7 /* BankManagerError.swift */; };
 		F380CFB62775AA790058ACC7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380CFB12775AA790058ACC7 /* LinkedList.swift */; };
 		F380CFBA2775AAB70058ACC7 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380CFB92775AAB70058ACC7 /* Banker.swift */; };
+		F380D010277990B40058ACC7 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380D00F277990B40058ACC7 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		F380CFB02775AA790058ACC7 /* BankManagerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManagerError.swift; sourceTree = "<group>"; };
 		F380CFB12775AA790058ACC7 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F380CFB92775AAB70058ACC7 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
+		F380D00F277990B40058ACC7 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				F380CFAE2775AA790058ACC7 /* Bank.swift */,
 				F380CFAF2775AA790058ACC7 /* Queue.swift */,
 				F380CFB02775AA790058ACC7 /* BankManagerError.swift */,
+				F380D00F277990B40058ACC7 /* BankManager.swift */,
 				F380CFB12775AA790058ACC7 /* LinkedList.swift */,
 			);
 			name = BankManagerShared;
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				F380D010277990B40058ACC7 /* BankManager.swift in Sources */,
 				F380CFB42775AA790058ACC7 /* Queue.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				F380CFB22775AA790058ACC7 /* Customer.swift in Sources */,

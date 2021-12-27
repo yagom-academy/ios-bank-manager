@@ -6,13 +6,12 @@ protocol BankDelegate {
 }
 
 class Bank {    
-    private var bankers: [Banker]
-    private var queue: Queue<Customer>
+    private let bankers: [Banker]
+    private var customerQueue: Queue<Customer>?
     private var totalTime: TimeInterval
     private var totalCustomer: Int
    
     init(bankers: [Banker]) {
-        self.queue = Queue<Customer>()
         self.bankers = bankers
         self.totalTime = .zero
         self.totalCustomer = .zero
@@ -32,19 +31,12 @@ class Bank {
 
 extension Bank {
     func run() {
-        let range = 10...30
-        let customerCount = Int.random(in: range)
-        
-        (1...customerCount).forEach {
-            let customer = Customer(customerNumber: $0)
-            queue.enqueue(customer)
-        }
-        
-        while let customer = queue.dequeue() {
-            assign(customer: customer, to: &banker)
-        }
-        
         close()
+        assignQueue()
+    }
+    
+    func assignQueue() {
+        customerQueue = BankManager.shared.lineUpCustomers()
     }
     
     private func close() {
