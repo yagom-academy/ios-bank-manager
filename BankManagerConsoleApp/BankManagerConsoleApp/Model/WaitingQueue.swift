@@ -29,8 +29,8 @@ struct WaitingQueue<T> {
     }
     
     func peek() -> T? {
-        let firstNode = list.firstNode
+        let peekedNode = list.firstNode
         
-        return firstNode?.data
+        return peekedNode?.data
     }
 }
