@@ -55,14 +55,8 @@ class Bank {
     }
     
     private func close(totalCustomer: Int, taskTime: Double) {
-        let totalTime = taskTime
-        let numberFormatter = NumberFormatter()
-        numberFormatter.roundingMode = .up
-        numberFormatter.minimumFractionDigits = 2
-        guard let convertedTotalTime = numberFormatter.string(for: totalTime) else {
-            return
-        }
+        let totalTime = String(format: "%.2f", taskTime)
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(convertedTotalTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTime)초입니다.")
     }
 }
