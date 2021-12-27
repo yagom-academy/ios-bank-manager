@@ -1,7 +1,7 @@
 
 import Foundation
 
-class ConsoleApp {
+struct ConsoleApp {
     func run() {
         printMenu()
         determineBankOpen()
