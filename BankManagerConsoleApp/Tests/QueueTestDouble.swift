@@ -1,4 +1,4 @@
-struct QueueTestDouble<T> {
+class QueueTestDouble<T> {
     var head: Node<T>?
     weak var tail: Node<T>?
     
@@ -6,7 +6,7 @@ struct QueueTestDouble<T> {
         return head == nil
     }
     
-    mutating func enqueue(_ value: T) {
+    func enqueue(_ value: T) {
         let node = Node(value)
         if isEmpty {
             head = node
@@ -16,13 +16,13 @@ struct QueueTestDouble<T> {
         tail = node
     }
 
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         let value = head?.value
         head = head?.next
         return value
     }
     
-    mutating func clear() {
+    func clear() {
         head = nil
     }
     
