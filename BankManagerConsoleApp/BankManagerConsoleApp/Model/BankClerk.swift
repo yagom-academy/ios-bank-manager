@@ -17,21 +17,34 @@ class BankClerk {
     var delegate: BankClerkDelegate?
     
     func work() {
+        let bankWorkGroup = DispatchGroup()
+        let bankWorkQueue = DispatchQueue(label: "BankWork")
+        
         var customerCount: Int = 0
         var totalProcessingTime: Double = 0
         
-        while let customer = bank?.customerQueue.dequeue() {
-            processWork(of: customer)
+        let bankWorkItem = DispatchWorkItem {
+            guard let customer = self.bank?.customerQueue.dequeue() else {
+                return
+            }
+            
+            self.processWork(of: customer, group: bankWorkGroup)
             customerCount += 1
             totalProcessingTime += customer.processingTime
         }
         
+        while bank?.customerQueue.isEmpty == false {
+            bankWorkQueue.async(group: bankWorkGroup, execute: bankWorkItem)
+        }
+        
+        bankWorkGroup.wait()
+        
         bank?.close(totalCustomers: customerCount, totalProcessingTime: totalProcessingTime)
     }
     
-    private func processWork(of customer: Customer) {
+    private func processWork(of customer: Customer, group: DispatchGroup) {
         delegate?.printBeginWorkMessage(of: customer)
-        Thread.sleep(forTimeInterval: TimeInterval(customer.processingTime))
+        group.wait(timeout: .now() + customer.processingTime)
         delegate?.printFinishWorkMessage(of: customer)
     }
 }
