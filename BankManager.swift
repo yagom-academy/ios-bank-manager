@@ -7,10 +7,10 @@ struct BankManager {
         while true {
             printMenu()
             switch receiveInput() {
-            case "1":
+            case ConsoleBundle.Menu.open:
                 let bank = Bank(numberOfBankClerk: numberOfBankClerk)
                 bank.open()
-            case "2":
+            case ConsoleBundle.Menu.exit:
                 return
             default:
                 continue
@@ -19,11 +19,11 @@ struct BankManager {
     }
     
     func printMenu() {
-        print("1 : 은행개점\n2 : 종료")
+        print(ConsoleBundle.Menu.explainMessage)
     }
     
     func receiveInput() -> String {
-        print("입력 : ", terminator: "")
+        print(ConsoleBundle.Menu.inputMessage, terminator: "")
         guard let input = readLine() else {
             return ""
         }

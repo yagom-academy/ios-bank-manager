@@ -11,6 +11,7 @@
 		3358D76F27746F4F004A442D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358D76E27746F4F004A442D /* Client.swift */; };
 		3358D77127746F59004A442D /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358D77027746F59004A442D /* BankClerk.swift */; };
 		33B3602F2770850400EE24A6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B3602E2770850400EE24A6 /* Queue.swift */; };
+		33B70F482779A66A005459ED /* ConsoleBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B70F472779A66A005459ED /* ConsoleBundle.swift */; };
 		6309E23E277176AF00ECCD50 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6309E23D277176AF00ECCD50 /* QueueTests.swift */; };
 		6309E242277176B400ECCD50 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C112ED27705B6600BB79CF /* LinkedList.swift */; };
 		6309E243277176B700ECCD50 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B3602E2770850400EE24A6 /* Queue.swift */; };
@@ -37,6 +38,7 @@
 		3358D76E27746F4F004A442D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		3358D77027746F59004A442D /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		33B3602E2770850400EE24A6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		33B70F472779A66A005459ED /* ConsoleBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleBundle.swift; sourceTree = "<group>"; };
 		6309E23B277176AF00ECCD50 /* BankManagerConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6309E23D277176AF00ECCD50 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		637F51B82775BA32009DD2F7 /* NumberFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extension.swift"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				3358D76C27746F49004A442D /* Bank.swift */,
 				3358D76E27746F4F004A442D /* Client.swift */,
 				3358D77027746F59004A442D /* BankClerk.swift */,
+				33B70F472779A66A005459ED /* ConsoleBundle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				33B3602F2770850400EE24A6 /* Queue.swift in Sources */,
 				637F51B92775BA32009DD2F7 /* NumberFormatter+Extension.swift in Sources */,
+				33B70F482779A66A005459ED /* ConsoleBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
