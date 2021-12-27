@@ -18,7 +18,10 @@ func printMenu() {
 func runProgram() {
     let bankClerk = BankClerk()
     let bank = Bank(bankClerk: bankClerk)
-    let bankManager = BankManager(bank: bank)
+    let bankPrinter = BankPrinter()
+    
+    bank.delegate = bankPrinter
+    bankClerk.delegate = bankPrinter
     
     while true {
         printMenu()
@@ -26,7 +29,7 @@ func runProgram() {
         
         switch userInput {
         case "1":
-            bankManager.openBank()
+            bank.open()
         case "2":
             return
         default:

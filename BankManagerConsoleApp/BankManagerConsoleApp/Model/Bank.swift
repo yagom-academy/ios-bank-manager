@@ -8,13 +8,22 @@
 import Foundation
 
 class Bank {
-    var customerQueue: Queue<Customer> = Queue<Customer>()
+    let customerQueue: Queue<Customer> = Queue<Customer>()
     var bankClerk: BankClerk
     var delegate: BankDelegate?
     
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
         self.bankClerk.bank = self
+        setupCustomerQueue()
+    }
+    
+    private func setupCustomerQueue() {
+        let randomCustomerCount: Int = Int.random(in: 10...30)
+        
+        (1...randomCustomerCount).forEach { number in
+            customerQueue.enqueue(value: Customer(turn: number))
+        }
     }
     
     func open() {
