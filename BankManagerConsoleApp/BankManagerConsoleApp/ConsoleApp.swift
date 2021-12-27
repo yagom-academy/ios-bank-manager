@@ -24,7 +24,7 @@ class ConsoleApp {
                 openBank()
                 run()
             case "2":
-                return 
+                return
             default:
                 print("입력값이 잘못되었습니다.")
                 run()
