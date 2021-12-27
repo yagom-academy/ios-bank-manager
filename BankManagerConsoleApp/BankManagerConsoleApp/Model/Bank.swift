@@ -20,30 +20,32 @@ class Bank {
         var numberOfCustomer = 0
         let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
         let loanQueue = DispatchQueue(label: "loanQueue")
+        let workGroup = DispatchGroup()
         
         while waitingLine.isEmpty == false {
             guard let customer = dequeueWaitingLine() else {
                 fatalError("unknown error")
             }
             
-            switch customer.task {  // TO DO (Refactor)
+            switch customer.task {  // TO DO (Semaphore)
             case .deposit:
-                depositQueue.async {
+                depositQueue.async(group: workGroup) {
                     taskTime = BankTask.deposit.processingTime
                     self.bankClerk.handleTask(of: customer, until: taskTime)
                     numberOfCustomer += 1
                 }
                 
             case .loan:
-                loanQueue.async {
+                loanQueue.async(group: workGroup) {
                     taskTime = BankTask.loan.processingTime
                     self.bankClerk.handleTask(of: customer, until: taskTime)
                     numberOfCustomer += 1
                 }
-                
-            default: return
+            default:
+                return
             }
         }
+        workGroup.wait()
         close(totalCustomer: numberOfCustomer, taskTime: taskTime)
     }
     
