@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		C7D65D1B259C8190005510E0 /* BankPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankPrinter.swift */; };
 		C96C94BA2770A9020024CA10 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94B92770A9020024CA10 /* LinkedList.swift */; };
 		C96C94BC277160240024CA10 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94BB277160240024CA10 /* Queue.swift */; };
+		C9CF741B277452D800D15158 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741A277452D800D15158 /* Customer.swift */; };
+		C9CF741D277474D200D15158 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741C277474D200D15158 /* BankClerk.swift */; };
 		EA5DE3362771670600DE4B2A /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE3352771670600DE4B2A /* QueueTest.swift */; };
 		EA5DE33A2771678B00DE4B2A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94BB277160240024CA10 /* Queue.swift */; };
 		EA5DE33B2771678E00DE4B2A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94B92770A9020024CA10 /* LinkedList.swift */; };
+		EA5DE366277456AD00DE4B2A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE365277456AD00DE4B2A /* Bank.swift */; };
+		EA5DE367277456AD00DE4B2A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE365277456AD00DE4B2A /* Bank.swift */; };
+		EA5DE36F2775A2F300DE4B2A /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741C277474D200D15158 /* BankClerk.swift */; };
+		EA5DE3A72779E9EA00DE4B2A /* BankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE3A62779E9EA00DE4B2A /* BankFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,11 +37,15 @@
 /* Begin PBXFileReference section */
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankPrinter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankPrinter.swift; sourceTree = "<group>"; };
 		C96C94B92770A9020024CA10 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		C96C94BB277160240024CA10 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		C9CF741A277452D800D15158 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		C9CF741C277474D200D15158 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		EA5DE3332771670600DE4B2A /* BankManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA5DE3352771670600DE4B2A /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
+		EA5DE365277456AD00DE4B2A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		EA5DE3A62779E9EA00DE4B2A /* BankFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +87,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				C96C94B92770A9020024CA10 /* LinkedList.swift */,
-				C96C94BB277160240024CA10 /* Queue.swift */,
+				EA5DE36E2775A2EB00DE4B2A /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -91,6 +99,20 @@
 				EA5DE3352771670600DE4B2A /* QueueTest.swift */,
 			);
 			path = BankManagerTest;
+			sourceTree = "<group>";
+		};
+		EA5DE36E2775A2EB00DE4B2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9CF741A277452D800D15158 /* Customer.swift */,
+				EA5DE3A62779E9EA00DE4B2A /* BankFactory.swift */,
+				EA5DE365277456AD00DE4B2A /* Bank.swift */,
+				C9CF741C277474D200D15158 /* BankClerk.swift */,
+				C7D65D1A259C8190005510E0 /* BankPrinter.swift */,
+				C96C94BB277160240024CA10 /* Queue.swift */,
+				C96C94B92770A9020024CA10 /* LinkedList.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,9 +203,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5DE3A72779E9EA00DE4B2A /* BankFactory.swift in Sources */,
 				C96C94BA2770A9020024CA10 /* LinkedList.swift in Sources */,
+				C9CF741D277474D200D15158 /* BankClerk.swift in Sources */,
+				C9CF741B277452D800D15158 /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				EA5DE366277456AD00DE4B2A /* Bank.swift in Sources */,
+				C7D65D1B259C8190005510E0 /* BankPrinter.swift in Sources */,
 				C96C94BC277160240024CA10 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,8 +219,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA5DE33B2771678E00DE4B2A /* LinkedList.swift in Sources */,
+				EA5DE367277456AD00DE4B2A /* Bank.swift in Sources */,
 				EA5DE3362771670600DE4B2A /* QueueTest.swift in Sources */,
 				EA5DE33A2771678B00DE4B2A /* Queue.swift in Sources */,
+				EA5DE36F2775A2F300DE4B2A /* BankClerk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
