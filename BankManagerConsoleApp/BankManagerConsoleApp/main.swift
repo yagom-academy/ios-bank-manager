@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+let bankManagerConsole = BankManagerConsole()
+bankManagerConsole.run()
