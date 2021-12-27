@@ -1,11 +1,12 @@
 import Foundation
+import AppKit
 
 class Bank {
-    var clientQueue: Queue<Client> = Queue<Client>()
-    var completedClientCount: Int = 0
-    var bankClerks: [BankClerk] = []
-    var numberOfBankClerk: Int?
-    let semaphore = DispatchSemaphore(value: 1)
+    private var clientQueue: Queue<Client> = Queue<Client>()
+    private var completedClientCount: Int = 0
+    private var bankClerks: [BankClerk] = []
+    private var numberOfBankClerk: Int?
+    private let semaphore = DispatchSemaphore(value: 1)
     
     init(numberOfBankClerk: Int) {
         self.makeBankClerk(for: numberOfBankClerk)
@@ -13,24 +14,33 @@ class Bank {
     }
     
     func open() {
-        let group = DispatchGroup()
+        let workHours = measureTime() {
+            makeBankClerksWork()
+        }
+        close(duration: workHours)
+    }
+    
+    private func measureTime(task: () -> Void) -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
+        task()
+        let totalTime = CFAbsoluteTimeGetCurrent() - startTime
+        guard let duration = NumberFormatter.centisecond.string(for: totalTime) else {
+                return ""
+            }
+        return duration
+    }
+    
+    private func makeBankClerksWork() {
+        let group = DispatchGroup()
         for bankClerk in bankClerks {
             DispatchQueue.global().async(group: group) {
-                self.dispatchWork(bankClerk: bankClerk)
+                self.distributeClient(to: bankClerk)
             }
         }
         group.wait()
-        let finishTime = CFAbsoluteTimeGetCurrent()
-        guard let duration = NumberFormatter.centisecond.string(
-            for: finishTime - startTime) else {
-            return
-            }
-        print(ConsoleBundle.TaskMessage.closeMessage(count: completedClientCount,
-                                                      duration: duration))
     }
     
-    private func dispatchWork(bankClerk: BankClerk) {
+    private func distributeClient(to bankClerk: BankClerk) {
         while !self.clientQueue.isEmpty {
             semaphore.wait()
             if let client = self.clientQueue.dequeue() {
@@ -39,6 +49,11 @@ class Bank {
                 completedClientCount += 1
             }
         }
+    }
+    
+    private func close(duration: String) {
+        print(ConsoleBundle.TaskMessage.closeMessage(count: completedClientCount,
+                                                      duration: duration))
     }
     
     private func receiveClient() {
