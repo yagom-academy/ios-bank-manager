@@ -13,14 +13,11 @@
 		C96C94BC277160240024CA10 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94BB277160240024CA10 /* Queue.swift */; };
 		C9CF741B277452D800D15158 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741A277452D800D15158 /* Customer.swift */; };
 		C9CF741D277474D200D15158 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741C277474D200D15158 /* BankClerk.swift */; };
-		C9CF741F2774B1E800D15158 /* Double+format.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741E2774B1E700D15158 /* Double+format.swift */; };
 		EA5DE3362771670600DE4B2A /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE3352771670600DE4B2A /* QueueTest.swift */; };
 		EA5DE33A2771678B00DE4B2A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94BB277160240024CA10 /* Queue.swift */; };
 		EA5DE33B2771678E00DE4B2A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C94B92770A9020024CA10 /* LinkedList.swift */; };
 		EA5DE366277456AD00DE4B2A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE365277456AD00DE4B2A /* Bank.swift */; };
 		EA5DE367277456AD00DE4B2A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE365277456AD00DE4B2A /* Bank.swift */; };
-		EA5DE36927758C8700DE4B2A /* BankClerkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE36827758C8700DE4B2A /* BankClerkDelegate.swift */; };
-		EA5DE36B27758F9300DE4B2A /* BankDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE36A27758F9300DE4B2A /* BankDelegate.swift */; };
 		EA5DE36F2775A2F300DE4B2A /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CF741C277474D200D15158 /* BankClerk.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,12 +41,9 @@
 		C96C94BB277160240024CA10 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C9CF741A277452D800D15158 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		C9CF741C277474D200D15158 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
-		C9CF741E2774B1E700D15158 /* Double+format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+format.swift"; sourceTree = "<group>"; };
 		EA5DE3332771670600DE4B2A /* BankManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA5DE3352771670600DE4B2A /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
 		EA5DE365277456AD00DE4B2A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
-		EA5DE36827758C8700DE4B2A /* BankClerkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerkDelegate.swift; sourceTree = "<group>"; };
-		EA5DE36A27758F9300DE4B2A /* BankDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +85,6 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				EA5DE36C2775A2B400DE4B2A /* Protocol */,
-				EA5DE36D2775A2D200DE4B2A /* Extension */,
 				EA5DE36E2775A2EB00DE4B2A /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
@@ -105,23 +97,6 @@
 				EA5DE3352771670600DE4B2A /* QueueTest.swift */,
 			);
 			path = BankManagerTest;
-			sourceTree = "<group>";
-		};
-		EA5DE36C2775A2B400DE4B2A /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				EA5DE36A27758F9300DE4B2A /* BankDelegate.swift */,
-				EA5DE36827758C8700DE4B2A /* BankClerkDelegate.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		EA5DE36D2775A2D200DE4B2A /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				C9CF741E2774B1E700D15158 /* Double+format.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		EA5DE36E2775A2EB00DE4B2A /* Model */ = {
@@ -225,14 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA5DE36B27758F9300DE4B2A /* BankDelegate.swift in Sources */,
 				C96C94BA2770A9020024CA10 /* LinkedList.swift in Sources */,
 				C9CF741D277474D200D15158 /* BankClerk.swift in Sources */,
 				C9CF741B277452D800D15158 /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				EA5DE366277456AD00DE4B2A /* Bank.swift in Sources */,
-				C9CF741F2774B1E800D15158 /* Double+format.swift in Sources */,
-				EA5DE36927758C8700DE4B2A /* BankClerkDelegate.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankPrinter.swift in Sources */,
 				C96C94BC277160240024CA10 /* Queue.swift in Sources */,
 			);

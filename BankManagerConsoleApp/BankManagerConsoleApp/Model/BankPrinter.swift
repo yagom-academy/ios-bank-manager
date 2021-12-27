@@ -23,3 +23,9 @@ extension BankPrinter: BankClerkDelegate {
         print("\(customer.turn)번 고객 업무 완료")
     }
 }
+
+private extension Double {
+    var formatted : String {
+        return String(format: "%.2f", self)
+    }
+}

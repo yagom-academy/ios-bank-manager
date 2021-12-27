@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol BankClerkDelegate {
+    func printBeginWorkMessage(of customer: Customer)
+    func printFinishWorkMessage(of customer: Customer)
+}
+
 class BankClerk {
     weak var bank: Bank?
     var delegate: BankClerkDelegate?

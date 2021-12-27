@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol BankDelegate {
+    func printClosingMessage(customers: Int, processingTime: Double)
+}
+
 class Bank {
     let customerQueue: Queue<Customer> = Queue<Customer>()
     var bankClerk: BankClerk
