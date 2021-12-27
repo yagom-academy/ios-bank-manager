@@ -5,20 +5,23 @@ struct Bank {
     private var customerQueue: Queue<Customer>?
     private var totalTime: TimeInterval
     private var totalCustomer: Int
-   
-    init(bankers: [Banker]) {
-        self.bankers = bankers
-        self.totalTime = .zero
-        self.totalCustomer = .zero
-    }
     
-    init(banker: Banker) {
-        self.init(bankers: [banker])
+    private init(bankers : [Banker]) {
+        self.bankers = bankers
+        self.totalTime = 0
+        self.totalCustomer = 0
     }
     
     init() {
-        let banker = Banker()
-        self.init(banker: banker)
+        self.init(bankers: [GeneralBanker()])
+    }
+
+    init(bankerCount: Int) {
+        var bankerQueue:[Banker] = []
+        for _ in 0...bankerCount {
+            bankerQueue.append(GeneralBanker())
+        }
+        self.init(bankers: bankerQueue)
     }
 }
 
