@@ -36,17 +36,18 @@ class Bank {
 
   private func doWork() {
     let doWorkDispatchgroup = DispatchGroup()
-
+    
     for bankerNumber in 0..<bankers.count {
       DispatchQueue.global().async(group: doWorkDispatchgroup) {
-        (0..<self.numberOfClients).forEach() { _ in
-          self.semaphore.wait()
-          guard let dequeueClient = self.clientQueue.dequeue() else {
-            self.semaphore.signal()
-            return
+        while !self.clientQueue.isEmpty() {
+          if self.clientQueue.peek()?.requiredBankingType == self.bankers[bankerNumber].assignedTask {
+            self.semaphore.wait()
+            guard let dequeueClient = self.clientQueue.dequeue() else {
+              return
+            }
+            self.bankers[bankerNumber].doTask(client: dequeueClient)
           }
           self.semaphore.signal()
-          self.bankers[bankerNumber].doTask(client: dequeueClient)
         }
       }
     }

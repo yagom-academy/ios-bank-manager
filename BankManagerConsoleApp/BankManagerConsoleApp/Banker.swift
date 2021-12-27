@@ -8,14 +8,24 @@
 import Foundation
 
 struct Banker {
-  private let task = DispatchWorkItem {
-    Thread.sleep(forTimeInterval: 0.7)
+  let assignedTask: BankingType
+  private let task: DispatchWorkItem
+  
+  init(assignedTask: BankingType) {
+    self.assignedTask = assignedTask
+    task = DispatchWorkItem {
+      Thread.sleep(forTimeInterval: assignedTask.requiredTime)
+    }
   }
   
   func doTask(client: Client) {
     let clientNumber = client.sequence + 1
-    print("\(clientNumber)번 고객 업무 시작")
+    guard let requiredBankingType = client.requiredBankingType?.rawValue else {
+      return
+    }
+    
+    print("\(clientNumber)번 고객 \(requiredBankingType)업무 시작")
     DispatchQueue.global().sync(execute: task)
-    print("\(clientNumber)번 고객 업무 완료")
+    print("\(clientNumber)번 고객 \(requiredBankingType)업무 완료")
   }
 }
