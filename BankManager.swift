@@ -15,10 +15,11 @@ struct BankManager {
     var bank = Bank(numberOfClerks: 1)
     
     mutating func startConsoleProgram() {
-        do {
-            while true {
+        while true {
+            do {
                 showMenu()
                 let userInput = try userInput()
+                
                 switch userInput {
                 case .openBank:
                     supplyClientsToBank()
@@ -26,9 +27,12 @@ struct BankManager {
                 case .exit:
                     return
                 }
+            } catch BankManagerError.invalidUserInput {
+                print(BankManagerError.invalidUserInput.description)
+                print("다시 입력해주십시오.\n")
+            } catch {
+                print(error)
             }
-        } catch {
-            print(error)
         }
     }
     
