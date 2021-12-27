@@ -1,5 +1,3 @@
 import Foundation
 
-let bankManager = BankManager()
-
-bankManager.run()
+ConsoleManager.run()

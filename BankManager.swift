@@ -1,32 +1,13 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank?
+    static private var bank: Bank?
     
-    func run(numberOfBankClerk: Int = 1) {
-        while true {
-            printMenu()
-            switch receiveInput() {
-            case ConsoleBundle.Menu.open:
-                let bank = Bank(numberOfBankClerk: numberOfBankClerk)
-                bank.open()
-            case ConsoleBundle.Menu.exit:
-                return
-            default:
-                continue
-            }
-        }
+    static func createBank() {
+        self.bank = Bank(numberOfBankClerk: 1)
     }
     
-    func printMenu() {
-        print(ConsoleBundle.Menu.explainMessage)
-    }
-    
-    func receiveInput() -> String {
-        print(ConsoleBundle.Menu.inputMessage, terminator: "")
-        guard let input = readLine() else {
-            return ""
-        }
-        return input
+    static func openBank() {
+        bank?.open()
     }
 }
