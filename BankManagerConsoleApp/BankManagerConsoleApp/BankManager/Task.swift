@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum Task: CaseIterable {
+enum Task: String, CaseIterable {
     
-    case deposit
+    case deposit = "예금"
+    case loan = "대출"
     
     static var random: Self {
         Self.allCases.randomElement() ?? .deposit
@@ -19,6 +20,8 @@ enum Task: CaseIterable {
         switch self {
         case .deposit:
             return 0.7
+        case .loan:
+            return 1.1
         }
     }
     
@@ -26,6 +29,8 @@ enum Task: CaseIterable {
         switch self {
         case .deposit:
             Thread.sleep(forTimeInterval: Task.deposit.duration)
+        case .loan:
+            Thread.sleep(forTimeInterval: Task.loan.duration)
         }
     }
 }

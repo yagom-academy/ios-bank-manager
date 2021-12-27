@@ -18,12 +18,12 @@ enum Console {
         case invalidInput = "입력이 잘못되었습니다. 다시 입력해주세요."
         case menu = "1 : 은행개점\n2 : 종료\n입력 : "
         
-        static func beginService(of clientNumber: Int) -> String {
-            return "\(clientNumber)번 고객 업무 시작"
+        static func beginService(of clientNumber: Int, task: String) -> String {
+            return "\(clientNumber)번 고객 \(task)업무 시작"
         }
         
-        static func endService(of clientNumber: Int) -> String {
-            return "\(clientNumber)번 고객 업무 완료"
+        static func endService(of clientNumber: Int, task: String) -> String {
+            return "\(clientNumber)번 고객 \(task)업무 완료"
         }
         
         static func closeBank(_ totalClient: Int, _ duration: String) -> String {

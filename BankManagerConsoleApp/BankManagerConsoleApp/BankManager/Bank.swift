@@ -33,8 +33,8 @@ class Bank {
     }
     
     private func service(for client: Client) {
-        delegate?.bank(willBeginServiceFor: client.waitingNumber)
+        delegate?.bank(willBeginServiceFor: client.waitingNumber, task: client.task.rawValue)
         client.task.work()
-        delegate?.bank(didEndServiceFor: client.waitingNumber)
+        delegate?.bank(didEndServiceFor: client.waitingNumber, task: client.task.rawValue)
     }
 }

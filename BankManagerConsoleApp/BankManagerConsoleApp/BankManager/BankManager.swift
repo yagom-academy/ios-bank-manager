@@ -55,11 +55,11 @@ extension BankManager: BankMessagePresenter {
         print(Console.Message.closeBank(totalClient, duration))
     }
     
-    func bank(willBeginServiceFor clientNumber: Int) {
-        print(Console.Message.beginService(of: clientNumber))
+    func bank(willBeginServiceFor clientNumber: Int, task: String) {
+        print(Console.Message.beginService(of: clientNumber, task: task))
     }
     
-    func bank(didEndServiceFor clientNumber: Int) {
-        print(Console.Message.endService(of: clientNumber))
+    func bank(didEndServiceFor clientNumber: Int, task: String) {
+        print(Console.Message.endService(of: clientNumber, task: task))
     }
 }
