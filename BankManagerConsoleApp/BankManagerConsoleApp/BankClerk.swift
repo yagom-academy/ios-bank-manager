@@ -7,4 +7,4 @@
 
 import Foundation
 
-struct BankClerk: Workable { }
+struct BankClerk: bankingWorkable { }

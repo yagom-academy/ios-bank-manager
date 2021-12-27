@@ -15,8 +15,8 @@ enum Menu {
         """
     
     enum Option {
-        static let open = "1"
-        static let close = "2"
+        static let bankOpen = "1"
+        static let bankclosed = "2"
         static let invalidInput = ""
     }
     

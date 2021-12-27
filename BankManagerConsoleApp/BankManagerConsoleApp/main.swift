@@ -19,14 +19,14 @@ fileprivate func receiveInput() -> String {
 }
 
 fileprivate func runMenu(with input: String) {
-    var bankManager = BankManager(clerkNumber: 1)
+    var bankManager = BankManager(clerkIdentifier: 1)
 
     switch input {
-    case Menu.Option.open:
+    case Menu.Option.bankOpen:
         bankManager.operateBankSystem()
         printMenu()
         runMenu(with: receiveInput())
-    case Menu.Option.close:
+    case Menu.Option.bankclosed:
         return
     default:
         print(Menu.Error.wrongInput)

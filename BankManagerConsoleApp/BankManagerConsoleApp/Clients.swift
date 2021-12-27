@@ -8,10 +8,10 @@
 import Foundation
 
 struct Client {
-    let clientNumber: Int
+    let identifier: Int
     
-    init(_ clientNumber: Int = 0) {
-        self.clientNumber = clientNumber
+    init(identifier: Int = 0) {
+        self.identifier = identifier
     }
 }
 
@@ -19,15 +19,15 @@ struct Clients {
     private var waitingLine = Queue<Client>()
     
     mutating func makeWaitingLine() -> Int {
-        let totalNumberOfClients = Int.random(in: 10...30)
+        let totalClientCount = Int.random(in: 10...30)
         
-        (1...totalNumberOfClients).forEach { clientNumber in
-            let client = Client(clientNumber)
+        (1...totalClientCount).forEach { identifier in
+            let client = Client(identifier: identifier)
             
             waitingLine.enqueue(client)
         }
         
-        return totalNumberOfClients
+        return totalClientCount
     }
     
     func startTask() -> Int {
@@ -35,7 +35,7 @@ struct Clients {
             return Bank.emptyWaitingLine
         }
         
-        return client.clientNumber
+        return client.identifier
     }
     
     mutating func completeTask() {
