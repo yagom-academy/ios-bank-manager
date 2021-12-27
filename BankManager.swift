@@ -18,7 +18,7 @@ struct BankManager {
             switch menuOption {
             case .startBusiness:
                 let randomNumber = Int.random(in: 10...30)
-                Bank(numberOfClients: randomNumber, numberOfBankTellers: 1).startBusiness()
+                Bank(numberOfClients: randomNumber, numberOfBankTellers: 1).startBankingService()
             case .exit:
                 return
             case nil:

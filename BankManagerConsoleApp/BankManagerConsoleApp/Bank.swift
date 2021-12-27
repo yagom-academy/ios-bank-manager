@@ -1,6 +1,11 @@
 import Foundation
 
 class Bank {
+    enum Business: CaseIterable {
+        case deposit
+        case loan
+    }
+    
     private let clients = Queue<Client>()
     private let numberOfClients: Int
     private let semaphore: DispatchSemaphore
@@ -11,7 +16,7 @@ class Bank {
         addClientsToQueue(by: numberOfClients)
     }
     
-    func startBusiness() {
+    func startBankingService() {
         let startTime = Date()
         
         let group = DispatchGroup()
