@@ -8,9 +8,11 @@ import Foundation
 
 class BankManager {
     
-    private let bank = Bank()
+    private let bank: Bank
     
-    init() {
+    init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+        self.bank = Bank(numberOfDepositBankers: numberOfDepositBankers,
+                         numberOfLoanBankers: numberOfLoanBankers)
         bank.delegate = self
     }
     

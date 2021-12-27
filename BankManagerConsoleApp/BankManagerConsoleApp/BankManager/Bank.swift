@@ -9,8 +9,15 @@ import Foundation
 
 class Bank {
     
-    weak var delegate: BankMessagePresenter?
+    private var numberOfDepositBankers: Int
+    private var numberOfLoanBankers: Int
     private var clientQueue = Queue<Client>()
+    weak var delegate: BankMessagePresenter?
+    
+    init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+        self.numberOfDepositBankers = numberOfDepositBankers
+        self.numberOfLoanBankers = numberOfLoanBankers
+    }
     
     func lineUp(_ client: Client) {
         clientQueue.enqueue(client)
@@ -19,8 +26,8 @@ class Bank {
     func start() {
         var clientCount: Int = .zero
         let startTime = CFAbsoluteTimeGetCurrent()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depositSemaphore = DispatchSemaphore(value: numberOfDepositBankers)
+        let loanSemaphore = DispatchSemaphore(value: numberOfLoanBankers)
         let group = DispatchGroup()
         
         while true {
