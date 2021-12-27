@@ -25,6 +25,12 @@
     + [의문점](#1-2-의문점)
     + [Trouble Shooting](#1-3-Trouble-Shooting)
     + [배운 개념](#1-4-배운-개념)
+    + [PR 후 개선사항](#1-5-PR-후-개선사항)
+- [STEP 2 : 타입 구현 및 콘솔앱 구현](#STEP-2--타입-구현-및-콘솔앱-구현)
+    + [고민했던 것](#2-1-고민했던-것)
+    + [의문점](#2-2-의문점)
+    + [Trouble Shooting](#2-3-Trouble-Shooting)
+    + [배운 개념](#2-4-배운-개념)
 
 # 키워드
 
@@ -32,6 +38,11 @@
 - `Queue`
     - `LinkedList`
 - `Generic`
+- `Protocol`
+- `Delegate Pattern`
+- `SOLID : SRP`
+- `Wildcard Pattern`
+- `Strong Reference Cycle`
 
 # STEP 1 : 큐 타입 구현
 
@@ -46,7 +57,7 @@
     - 테스트 진행시 `Node`, LinkedList의 `head`, `tail`의 요소를 접근하여 테스트 결과를 확인했다.
     - 해당 요소들은 외부에서 접근하면 안된다는 판단이 들어서 따로 MockLinkedList를 만들어주어 원활한 테스트를 할 수 있도록 구현하였다.
 - attribute를 활용
-    - 반환 값을 유의미하게 사용하지 않고 버려도되는 remove 관련 메소드에 속성 **`@discardableResult`**을 부여하여 컴파일러 경고가 발생하지 않도록 하였다.
+    - 반환 값을 유의미하게 사용하지 않고 버려도되는 remove 관련 메소드에 속성 `@discardableResult`을 부여하여 컴파일러 경고가 발생하지 않도록 하였다.
 
 ## 1-2 의문점
 
@@ -113,5 +124,99 @@
 
 - Linked-list 자료구조의 이해
 - Queue 자료구조의 이해
+
+## 1-5 PR 후 개선사항
+
+- 테스트 코드 내부에서 override한 메소드 내부에 super 메소드를 호출하도록 수정
+- LinkedList를 테스트하기 위한 Mock 객체 삭제
+    - LinkedList 타입에서 접근할 수 있는 프로퍼티, 메소드를 활용하여 테스트를 하도록 리팩토링
+- 테스트 메소드 이름을 적절하게 수정
+- QueueTests에서 `setUp()` 메소드를 활용하도록 수정
+
+
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#은행-창구-매니저-프로젝트)
+
+---
+
+# STEP 2 : 타입 구현 및 콘솔앱 구현
+
+은행과 고객의 타입을 구현하고 콘솔앱을 구현한다.
+
+## 2-1 고민했던 것
+
+- 구현한 타입들 각각 하나의 책임만 갖도록 고민해보았다.
+    - `출력문`까지도 은행원, 은행이 해야할 일이 아니라고 판단되었기 때문에 따로 출력만 하는 타입(ViewController)을 만들어 `Delegate 패턴`을 활용하여 분리해주었다.
+    - 요구사항 예시에 맞춰 출력을 해주기 위해 NumberFormatter를 활용하는 부분이 필요했는데, 이 부분은 은행에서 직접 처리하는 건 적합하지 않다는 생각이 들었다. 따라서 따로 타입으로 빼주어 static 메소드로 구현해주었다.
+- 순환참조
+    - `Delegate 패턴`을 사용하기 위해서 `모델 타입` 별로 `viewController`를 만들어주었다.
+    - `모델 타입`은 `delegate`로 `viewController`를 가지고 있고 `viewController`은 자기 자신을 `delegate`로 넘겨주기 위해 `모델 타입`을 가지고 있어 `순환 참조`가 발생한다.
+    - `모델 타입`의 `delegate`를 weak 키워드(약한 참조)를 사용해 `순환참조`를 해결할 수 있다.
+- Delegate 패턴 작성시 네이밍에 대한 고민을 해보았다.
+    - 구글의 [Swift Style Guide](https://google.github.io/swift/#delegate-methods)를 참고하여 네이밍을 하였다.
+        
+        > The term “delegate’s source object” refers to the object that invokes methods on the delegate. For example, a `UITableView` is the source object that invokes methods on the `UITableViewDelegate` that is set as the view’s `delegate` property.
+        > 
+
+## 2-2 의문점
+
+- Delegate 패턴 구현을 위해 기존 모델 타입에 변경사항이 생겼는데 이게 올바른 것인지 잘 판단이 서질 않는다.
+    - 기존 구조체였던 타입들을 `class`로 변경해준 부분이 추후 retain count 추적 비용이 발생할 것이라는 우려가 생겼다.
+- Delegate 패턴 사용시 강한 순환 참조 발생을 예방하기 위해 weak 키워드를 사용해주었더니 와일드카드 패턴으로 생성한 인스턴스가 생성과 동시에 해제가 되었다.
+    - 인스턴스를 생성한 후 참조를 하지 않는다면 weak 키워드 보다는 와일드카드 패턴을 사용하는 것이 적합한 것일까?
+- 단일 책임 원칙에 맞게 역할을 Delegate 패턴을 활용하여 분리해주었다. 하지만 확장성을 고려했을 때 이게 올바르게 설계한 것이 맞는지 너무 오버 엔지리어닝한 부분은 아닌지 판단이 어렵다.
+
+## 2-3 Trouble Shooting
+
+### [1] 와일드카드 패턴으로 생성한 인스턴스의 참조 카운트
+
+- `상황` 기존에 와일드카드 패턴으로 인스턴스 생성한 타입이 Delegate를 채택하고 있던 형태였다. 이후 순환참조 문제가 우려되어 각 타입들마다 delegate 프로퍼티에 weak 키워드를 붙여주었다.
+    
+    ```swift
+    final class Bank {
+        private let bankClerk: BankClerk
+        private var customerQueue = Queue<Customer>()
+        weak var delegate: BankDelegate?
+    ...
+    }
+    
+    func run() {
+        let bankClerk = BankClerk()
+        let bank = Bank(bankClerk: bankClerk)
+        let bankManager = BankManager(bank: bank)
+        let _ = BankClerkViewController(bankClerk: bankClerk)
+        let _ = BankViewController(bank: bank) // 
+    ...
+    }
+    ```
+    
+- `이유` 그런데 weak키워드를 붙여주니 해당 타입에서 출력해주었던 메소드가 실행되지 않았다. init과 deinit을 통해 디버깅을 해보니 와일드카드 패턴으로 생성한 인스턴스가 생성과 동시에 해제되는 것을 확인할 수 있었다. `와일드카드 패턴`은 값을 해체하거나 무시하는 패턴중 하나이므로 `weak 키워드`가 추가됨과 동시에 retain count가 올라가지 않기 때문에 생성과 동시에 해제되는 것이였다.
+- `해결` 사용하지 않는 viewController(은행원, 은행)를 상수에 담으면 xcode에서 고메세지가 출력된다. 와일드 카드 패턴을 사용해서 순환참조 문제를 해결할 수 있다고 판단되어 weak 키워드를 제거하고 와일드카드 패턴을 사용하기로 결정했다.
+    
+    ```swift
+    final class Bank {
+        private let bankClerk: BankClerk
+        private var customerQueue = Queue<Customer>()
+        var delegate: BankDelegate?
+    ...
+    }
+    
+    func run() {
+        let bankClerk = BankClerk()
+        let bank = Bank(bankClerk: bankClerk)
+        let bankManager = BankManager(bank: bank)
+        let _ = BankClerkViewController(bankClerk: bankClerk)
+        let _ = BankViewController(bank: bank) 
+    ...
+    }
+    ```
+    
+
+## 2-4 배운 개념
+
+- 타입 추상화 및 일반화
+- Delegate 패턴 활용
+- SOLID의 단일 책임 원칙
+- 와일드카드 패턴과 weak 키워드의 관계
+
 
 [![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#은행-창구-매니저-프로젝트)
