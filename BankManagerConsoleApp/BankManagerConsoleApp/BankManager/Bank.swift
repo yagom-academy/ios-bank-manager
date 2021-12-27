@@ -27,12 +27,12 @@ class Bank {
                                        for: workingDuration.roundedOff)
                 return
             }
-            service(client)
+            service(for: client)
             clientCount += 1
         }
     }
     
-    private func service(_ client: Client) {
+    private func service(for client: Client) {
         delegate?.bank(willBeginServiceFor: client.waitingNumber)
         client.task.work()
         delegate?.bank(didEndServiceFor: client.waitingNumber)

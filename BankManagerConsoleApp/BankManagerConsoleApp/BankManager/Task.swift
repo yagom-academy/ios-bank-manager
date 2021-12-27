@@ -15,7 +15,7 @@ enum Task: CaseIterable {
         Self.allCases.randomElement() ?? .deposit
     }
     
-    var duration: Double {
+    private var duration: Double {
         switch self {
         case .deposit:
             return 0.7
