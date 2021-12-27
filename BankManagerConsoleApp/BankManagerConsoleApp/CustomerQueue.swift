@@ -8,7 +8,7 @@ struct CustomerQueue<Element> {
         return customers.isEmpty
     }
     var peek: Element? {
-        return customers.head?.value
+        return customers.returnHead()
     }
     
     // MARK: - Methods
