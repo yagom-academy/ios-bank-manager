@@ -7,30 +7,6 @@
 
 import Foundation
 
-struct Ticket {
-    let number: Int
-}
-
-struct Client {
-    let orderTicket: Ticket
-    let taskDuration = 0.7
-}
-
-struct BankClerk {
-    var isAvailable = true
-    
-    mutating func work(for client: Client) {
-        let clientOrderNumber = client.orderTicket.number
-        let duration = client.taskDuration
-        
-        isAvailable = false
-        print("\(clientOrderNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: duration)
-        print("\(clientOrderNumber)번 고객 업무 완료")
-        isAvailable = true
-    }
-}
-
 struct Bank {
     private var clientQueue = WaitingQueue<Client>()
     private var clerkQueue = WaitingQueue<BankClerk>()
@@ -76,3 +52,19 @@ struct Bank {
     }
 }
 
+extension Bank {
+    struct BankClerk {
+        var isAvailable = true
+        
+        mutating func work(for client: Client) {
+            let clientOrderNumber = client.orderTicket.number
+            let duration = client.taskDuration
+            
+            isAvailable = false
+            print("\(clientOrderNumber)번 고객 업무 시작")
+            Thread.sleep(forTimeInterval: duration)
+            print("\(clientOrderNumber)번 고객 업무 완료")
+            isAvailable = true
+        }
+    }
+}
