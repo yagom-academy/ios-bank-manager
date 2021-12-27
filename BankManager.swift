@@ -7,7 +7,6 @@
 import Foundation
 
 struct BankManager {
-    
     //MARK: - 중첩 타입
     private enum MenuOption: String {
         case openBank = "1"
