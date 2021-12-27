@@ -117,9 +117,9 @@
 				36DBF1632770610600C8E2C4 /* LinkedList.swift */,
 				36DBF165277078B100C8E2C4 /* CustomerQueue.swift */,
 				18A07374277312DC00182025 /* Bank.swift */,
-				18A073D02779994700182025 /* Extension */,
 				3691256A27733F56002304D4 /* Customer.swift */,
 				369126022779970D002304D4 /* BankingProgramHandler.swift */,
+				18A073D02779994700182025 /* Extension */,
 				3691255327720783002304D4 /* Error */,
 			);
 			path = BankManagerConsoleApp;
