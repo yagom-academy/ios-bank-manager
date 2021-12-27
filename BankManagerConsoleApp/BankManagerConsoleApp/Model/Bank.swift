@@ -1,23 +1,25 @@
 import Foundation
 
-struct Bank {
+class Bank {
     private var waitingLine = Queue<Customer>()
     private var bankClerk = BankClerk()
     
-    mutating func setWaitingLine(with numberOfCustomer: Int) {
+    func setWaitingLine(with numberOfCustomer: Int) {
         let totalNumber = numberOfCustomer
         for number in 1...totalNumber {
             waitingLine.enqueue(Customer(waitingNumber: number))
         }
     }
     
-    private mutating func dequeueWaitingLine() -> Customer? {
+    private  func dequeueWaitingLine() -> Customer? {
         return waitingLine.dequeue()
     }
     
-    mutating func letClerkWork() {
+    func letClerkWork() {
         var taskTime = 0.0
         var numberOfCustomer = 0
+        let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
+        let loanQueue = DispatchQueue(label: "loanQueue")
         
         while waitingLine.isEmpty == false {
             guard let customer = dequeueWaitingLine() else {
@@ -26,13 +28,19 @@ struct Bank {
             
             switch customer.task {  // TO DO (Refactor)
             case .deposit:
-                taskTime = BankTask.deposit.processingTime
-                bankClerk.handleTask(of: customer, until: taskTime)
-                numberOfCustomer += 1
+                depositQueue.async {
+                    taskTime = BankTask.deposit.processingTime
+                    self.bankClerk.handleTask(of: customer, until: taskTime)
+                    numberOfCustomer += 1
+                }
+                
             case .loan:
-                taskTime = BankTask.loan.processingTime
-                bankClerk.handleTask(of: customer, until: taskTime)
-                numberOfCustomer += 1
+                loanQueue.async {
+                    taskTime = BankTask.loan.processingTime
+                    self.bankClerk.handleTask(of: customer, until: taskTime)
+                    numberOfCustomer += 1
+                }
+                
             default: return
             }
         }
