@@ -19,10 +19,10 @@ class BankManager {
     func startConsole() {
         let choice = askMenu()
         switch choice {
-            case Console.Input.open.rawValue:
+        case Console.Input.open.rawValue:
             openBank()
             startConsole()
-            case Console.Input.exit.rawValue:
+        case Console.Input.exit.rawValue:
             return
         default:
             restartConsole()

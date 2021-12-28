@@ -12,6 +12,9 @@ class Bank {
     private var numberOfDepositBankers: Int
     private var numberOfLoanBankers: Int
     private var clientQueue = Queue<Client>()
+    private var depositQueue = Queue<Client>()
+    private var loanQueue = Queue<Client>()
+    private var clientCount: Int = .zero
     weak var delegate: BankMessagePresenter?
     
     init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
@@ -20,35 +23,48 @@ class Bank {
     }
     
     func lineUp(_ client: Client) {
-        clientQueue.enqueue(client)
+        clientCount += 1
+        switch client.task {
+        case .deposit:
+            depositQueue.enqueue(client)
+        case .loan:
+            loanQueue.enqueue(client)
+        }
     }
     
     func start() {
-        var clientCount: Int = .zero
         let startTime = CFAbsoluteTimeGetCurrent()
-        let depositSemaphore = DispatchSemaphore(value: numberOfDepositBankers)
-        let loanSemaphore = DispatchSemaphore(value: numberOfLoanBankers)
-        let group = DispatchGroup()
-        
-        while true {
-            guard let client = clientQueue.dequeue() else {
-                group.wait()
-                workDone(startTime: startTime, clientCount: clientCount)
-                return
+        let dispatchGroup = DispatchGroup()
+        for _ in 1...numberOfDepositBankers {
+            serviceForDepositClients(in: dispatchGroup)
+        }
+        for _ in 1...numberOfLoanBankers {
+            serviceForLoanClients(in: dispatchGroup)
+        }
+        dispatchGroup.wait()
+        workDone(startTime: startTime, clientCount: clientCount)
+    }
+    
+    private func serviceForDepositClients(in dispatchGroup: DispatchGroup) {
+        let depositSemaphore = DispatchSemaphore(value: 1)
+        DispatchQueue.global().async(group: dispatchGroup) {
+            while self.depositQueue.isEmpty == false {
+                depositSemaphore.wait()
+                guard let client = self.depositQueue.dequeue() else { break }
+                depositSemaphore.signal()
+                self.service(for: client)
             }
-            clientCount += 1
-            
-            DispatchQueue.global().async(group: group) {
-                switch client.task {
-                case .deposit:
-                    depositSemaphore.wait()
-                    self.service(for: client)
-                    depositSemaphore.signal()
-                case .loan:
-                    loanSemaphore.wait()
-                    self.service(for: client)
-                    loanSemaphore.signal()
-                }
+        }
+    }
+    
+    private func serviceForLoanClients(in dispatchGroup: DispatchGroup) {
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        DispatchQueue.global().async(group: dispatchGroup) {
+            while self.loanQueue.isEmpty == false {
+                loanSemaphore.wait()
+                guard let client = self.loanQueue.dequeue() else { break }
+                loanSemaphore.signal()
+                self.service(for: client)
             }
         }
     }
