@@ -1,8 +1,7 @@
 import Foundation
 
 func run() {
-    let bank = Bank()
-    var bankManager = BankManager(bank: bank)
+    var bankManager = BankManager()
     var isRunning = true
     while isRunning {
         bankManager.showMenu()

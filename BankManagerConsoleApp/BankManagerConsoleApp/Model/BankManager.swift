@@ -8,7 +8,7 @@ enum Menu {
 struct BankManager {
     private let bank: Bank
     
-    init(bank: Bank) {
+    init(bank: Bank = Bank()) {
         self.bank = bank
     }
     
