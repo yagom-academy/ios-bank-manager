@@ -4,20 +4,8 @@ struct Bank {
     private let bankers: [Banker]
     private var customerQueue: Queue<Customer>?
     
-    private init(bankers : [Banker]) {
+    init(bankers : [Banker]) {
         self.bankers = bankers
-    }
-    
-    init() {
-        self.init(bankers: [GeneralBanker()])
-    }
-
-    init(bankerCount: Int) {
-        var bankerQueue:[Banker] = []
-        for _ in 0..<bankerCount {
-            bankerQueue.append(GeneralBanker())
-        }
-        self.init(bankers: bankerQueue)
     }
 }
 

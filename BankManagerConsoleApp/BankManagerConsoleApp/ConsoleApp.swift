@@ -35,7 +35,7 @@ struct ConsoleApp {
     }
     
     private func openBank() {
-        var bank = Bank()
+        var bank = Bank(bankers: [GeneralBanker()])
         bank.operate()
     }
 
