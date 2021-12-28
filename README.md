@@ -8,6 +8,113 @@
 
 <br>
 
+# Step2 - 은행, 고객 타입 구현
+
+## 📍 Class Diagram
+
+![image](https://user-images.githubusercontent.com/71127966/147312742-3d865633-022a-4411-9728-ae07f9e48e54.png)
+
+<br>
+
+## 🏷 타입 개요
+- `Bank` -> 가장 핵심이 되는 타입으로, 고객 대기열 `clientQueue`의 고객이 갖고있는 `task`를 처리하는 역할을 담당합니다.
+- `BankManager` -> Console을 제어하며(사용자 입출력), `Bank` 객체의 시작을 관리합니다.
+- `BankDelegate` -> `Bank`가 `BankManager`에게 보낼 메세지를 정의합니다.
+- `Client` -> `Bank`의 `clientQueue`에 들어갈 고객 타입입니다. 대기번호(`waitingNumber`), 업무(`task`)를 상태값으로 가집니다.
+- `Task` -> 고객의 은행업무를 정의한 타입입니다.
+- `Queue` -> `Bank`의 `clientQueue`를 위해 구현한 큐 타입입니다.
+- `LinkedList` -> `Queue` 타입을 위해 구현한 단일연결리스트 타입입니다.
+- `Node` -> `LinkedList` 타입을 위해 구현한 Node 타입입니다.
+- `ConsoleMessage` -> 콘솔에서 사용자에게 입출력될 string literal을 정의한 타입입니다.
+
+<br>
+
+## 고민한 점
+
+### ☑️ 1. Delegation Pattern을 활용한 객체간 역할 분리
+추후 이 프로젝트는 Console 앱 -> UI 앱 으로 전환될 예정입니다. 
+MVC 패턴에 기반하여 객체의 역할을 분리해야 할 것을 생각하면, 현재 Console 기반 앱에서도 View와 관련된 기능인 `print` 메서드가 객체 여기저기서 쓰이면 안됩니다. 
+View 관련 기능만 담당할 객체(현 `BankManager`, 추후 `ViewController`)에만 해당 역할이 할당되어야 한다고 생각했습니다. 
+그래서 Console에 보여질 것을 관리하는 `BankManager`에서 모든 `print`를 수행하도록 설계하고 싶었습니다.
+
+이를 위해, `Bank`와 `BankManager` 간에 `BankDelegate` 프로토콜을 통하여 Delegation Pattern을 구현해 보았습니다. 
+`Bank`에서는 은행업무의 상태를 알릴 필요가 있을 때 `delegate`를 통해 `BankManager`에게 메시지를 보내고, `BankManager`는 프로토콜 요구사항으로 구현한 메서드 내부에서 `print`를 수행하도록 했습니다.
+
+결과적으로, 추후 UI 앱으로 전환 시 `ViewController`에 `BankDelegate`를 채택하여 요구 메서드만 구현하면 쉽게 유지보수가 이루어질 수 있게 되었다고 생각합니다.
+
+<br>
+
+### ☑️ 2. Task 열거형의 결합도를 낮게 유지
+저희는 고객의 업무를 정의하는 Task 열거형의 케이스가 다음 STEP에서 추가되는 상황을 예상했습니다.
+지금은 업무 종류가 `예금(deposit)` 하나뿐이지만, 추후 업무의 종류(케이스)가 늘어나는 경우가 생기더라도, 열거형의 코드만 변경하면 되는 안정적인 코드를 만들고 싶었습니다.
+(응집도는 높이고 결합도는 낮춘다.)
+
+그래서 열거형에 `CaseIterable` 프로토콜을 채택시키고 고객의 업무를 랜덤하게 생성해주는 연산 프로퍼티를 미리 구현했습니다.
+
+<p align="center"><img src="https://i.imgur.com/k3tkMmD.png" width="30%"></p>
+
+<br>
+ 
+## 🤔 궁금한 점
+
+### ❓ 1. 저희가 적용한 Delegation Pattern 이 올바르게 적용된 것일까요?
+🙋🏻‍♂️ 저희가 만든 코드를 `구조적인 측면`에서 어떻게 생각하시는지, 피드백을 받아보고 싶습니다! 🥺
+
+<br>
+
+### ❓ 2. NumberFormatter 인스턴스 생성 비용이 꽤 크다고 들어서, 다른 방식을 사용했는데 괜찮은 걸까요?
+```swift
+let numberFormatter = NumberFormatter()
+```
+위와 같이 NumberFormatter 인스턴스 생성하는 경우의 비용이 크다는 말을 들은 적이 있습니다. :sweat_smile: 
+다른 리뷰어 분들 중에서도 그렇게 말씀해주시는 분이 있었고 관련 스택오버플로우 링크도 찾아봤습니다. (좀 오래된 자료이긴 합니다.)
+- ["Why is allocating or initializing NSDateFormatter considered "expensive"?"](https://stackoverflow.com/questions/8832768/why-is-allocating-or-initializing-nsdateformatter-considered-expensive)
+
+이번 프로젝트에서는 은행 업무에 소요된 시간을 `소수점 아래 2번째 자리까지만` 보여주면 되는 것이라서, 저희는 numberFormatter 를 사용하지 않고 Double 타입의 extension 으로 아래와 같은 연산 프로퍼티를 구현했는데요!
+
+```swift
+extension Double {
+    var roundedOff: String {
+        String(format: "%.2f", self)
+    }
+}
+```
+
+🙋🏻‍♂️ NumberFormatter 를 반드시 사용해야 하는 게 아니라면, 이런 식으로 대체할 수 있는 포맷터를 사용하는 방식이 괜찮은 걸까요?
+
+<br>
+
+## 알게된 점
+
+### ✅ 1. CFAbsoluteTime 타입 == Double 타입
+업무에 소요된 시간을 계산하기 위해, 시스템의 현재 시간을 반환해주는 `CFAbsoluteTimeGetCurrent()` 메서드를 사용했습니다.
+이 메서드는 `CFAbsoluteTime` 타입을 반환하는데요, 저희는 소수점 아래 2번째 자리까지만 보여주는 연산 프로퍼티를 `Double` 타입의 extension 으로 구현해놨음에도 컴파일 에러가 나지 않았습니다.
+
+그래서 `CFAbsoluteTime` 타입의 정의를 확인해보니, `typealias` 가 2번 걸려서, 결국 `Double` 타입이었다는 걸 알 수 있었습니다.
+
+```swift
+// CFAbsoluteTime
+typealias CFAbsoluteTime = CFTimeInterval
+
+// CFTimeInterval
+typealias CFTimeInterval = Double
+```
+
+<br>
+
+### ✅ 2. 특정 소수점 자리 이하로 '버리는' String 이니셜라이저
+Double 타입의 숫자 self 에서 소수점 아래 2자리 미만을 버리고 싶을 때 `"%.2f"`를 전달인자로 넣어주면 결국 String 타입으로 반환시켜주는 이니셜라이저를 활용했습니다.
+
+```swift
+String(format: "%.2f", self)
+
+// 예시
+// 2.34567 -> 2.34
+```
+---
+
+<br>
+
 # STEP 1 - Queue 타입 구현
 
 ## 고민한 점
