@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Starter {
+final class Starter {
     private var shouldContinue: Bool = true
     
-    mutating func start() {
+    func start() {
         while shouldContinue {
             printStartMessage()
             do {
@@ -36,7 +36,7 @@ struct Starter {
         return input
     }
     
-    private mutating func checkInput() throws {
+    private func checkInput() throws {
         let input = try receiveInput()
         
         switch input {
