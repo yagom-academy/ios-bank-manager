@@ -11,6 +11,7 @@ struct ConsoleManager {
             case ConsoleBundle.Menu.exit:
                 return
             default:
+                print(ConsoleBundle.Menu.errorMessage)
                 continue
             }
         }

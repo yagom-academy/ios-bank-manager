@@ -6,6 +6,7 @@ enum ConsoleBundle {
         static let exit: String = "2"
         static let explainMessage: String = "\(open) : 은행개점\n\(exit) : 종료"
         static let inputMessage: String = "입력 : "
+        static let errorMessage: String = "잘못된 입력입니다. 입력 형식을 확인해 주세요. 🤨"
     }
     
     enum TaskMessage {
