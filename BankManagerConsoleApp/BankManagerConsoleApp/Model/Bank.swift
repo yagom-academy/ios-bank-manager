@@ -67,7 +67,7 @@ class Bank {
     private func receiveClient() {
         let numberOfClient = Int.random(in: 10...30)
         for number in 1...numberOfClient {
-            let client = Client(number: number)
+            let client = Client(waitingNumber: number)
             clientQueue.enqueue(client)
         }
     }

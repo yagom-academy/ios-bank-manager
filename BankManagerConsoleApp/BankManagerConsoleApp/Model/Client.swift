@@ -1,5 +1,5 @@
 import Foundation
 
 struct Client {
-    var number: Int
+    var waitingNumber: Int
 }
