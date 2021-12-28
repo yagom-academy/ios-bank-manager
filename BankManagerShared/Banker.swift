@@ -11,7 +11,6 @@ extension Banker {
         print("\(customer.customerNumber)번 고객 \(taskType)업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
         print("\(customer.customerNumber)번 고객 \(taskType)업무 완료")
-        BankManager.shared.increaseTotalCustomer()
     }
 }
 
