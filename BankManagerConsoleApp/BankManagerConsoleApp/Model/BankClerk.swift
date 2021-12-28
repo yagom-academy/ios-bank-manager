@@ -13,15 +13,10 @@ protocol BankClerkDelegate: AnyObject {
 }
 
 class BankClerk {
-    private weak var bank: BankTransactionable?
     private weak var delegate: BankClerkDelegate?
     
     init(delegatee: BankClerkDelegate) {
         self.delegate = delegatee
-    }
-    
-    func setBank(bank: BankTransactionable) {
-        self.bank = bank
     }
     
     func work(with customer: Customer) {
