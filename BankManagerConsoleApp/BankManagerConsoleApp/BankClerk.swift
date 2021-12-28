@@ -14,6 +14,13 @@ struct BankClerk {
     private var depositClerkNumber: Int
     private var loanClerkNumber: Int
     
+    init(depositClerkCount: Int, loanClerkCount: Int) {
+        self.depositDepartment = BankClerk.setDepartment(count: depositClerkCount, department: "deposit")
+        self.loanDepartment = BankClerk.setDepartment(count: loanClerkCount, department: "loan")
+        self.depositClerkNumber = 0
+        self.loanClerkNumber = 0
+    }
+    
     private static func setDepartment(count: Int, department: String) -> [DispatchQueue] {
         var clerkQueue: [DispatchQueue] = []
         for number in 1...count {
