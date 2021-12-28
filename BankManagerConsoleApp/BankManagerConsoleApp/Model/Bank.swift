@@ -20,6 +20,7 @@ class Bank {
         let loanQueue = DispatchQueue(label: "loanQueue")
         let workGroup = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 2)
+        let sequenceQueue = DispatchQueue(label: "sequenceQueue")
         
         var numberOfCustomer = 0
         
@@ -32,13 +33,14 @@ class Bank {
             
             switch customer.task {
             case .deposit:
-                depositQueue.async(group: workGroup) {
-                    semaphore.wait()
-                    self.bankClerk.handleTask(of: customer, until: BankTask.deposit.processingTime)
-                    numberOfCustomer += 1
-                    semaphore.signal()
+                sequenceQueue.async {
+                    depositQueue.async(group: workGroup) {
+                        semaphore.wait()
+                        self.bankClerk.handleTask(of: customer, until: BankTask.deposit.processingTime)
+                        numberOfCustomer += 1
+                        semaphore.signal()
+                    }
                 }
-                
             case .loan:
                 loanQueue.async(group: workGroup) {
                     self.bankClerk.handleTask(of: customer, until: BankTask.loan.processingTime)
@@ -51,7 +53,7 @@ class Bank {
         workGroup.wait()
         
         let taskTime = abs(date.timeIntervalSinceNow)
-        close(totalCustomer: numberOfCustomer, taskTime: taskTime)
+        self.close(totalCustomer: numberOfCustomer, taskTime: taskTime)
     }
     
     private func close(totalCustomer: Int, taskTime: Double) {
