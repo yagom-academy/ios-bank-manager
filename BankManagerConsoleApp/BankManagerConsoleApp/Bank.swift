@@ -12,6 +12,7 @@ struct Bank {
     private var customerQueue: CustomerQueue<Customer>
     private var numberOfCustomer: Int
     private var clerk: BankClerk
+    private let taskGroup: DispatchGroup
     
     private var numberOfCustomerRange: ClosedRange<Int> {
         return 1...numberOfCustomer
@@ -21,6 +22,7 @@ struct Bank {
         self.customerQueue = CustomerQueue()
         self.numberOfCustomer = Int.random(in: numberOfCustomerRange)
         self.clerk = BankClerk(depositClerkCount: 2, loanClerkCount: 1)
+        self.taskGroup = DispatchGroup()
     }
     
     mutating func open() {
@@ -54,6 +56,13 @@ struct Bank {
             print(LinkedListError.dataDoesNotExist.description)
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    private mutating func enqueueTask(of customer: Customer) {
+        let clerk = clerk.assignClerk(of: customer.task)
+        clerk.async(group: taskGroup) { [self] in
+            self.task(of: customer)
         }
     }
     
