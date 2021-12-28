@@ -9,13 +9,11 @@ import Foundation
 class BankManager {
     var clients: Clients
     let clerk: BankClerk
-    let totalClerkCount: Int
     let dispatchGroup = DispatchGroup()
 
-    init(clients: Clients, clerk: BankClerk, totalClerkCount: Int) {
+    init(clients: Clients, clerk: BankClerk) {
         self.clients = clients
         self.clerk = clerk
-        self.totalClerkCount = totalClerkCount
     }
     
     func operateBankSystem() {
@@ -23,39 +21,31 @@ class BankManager {
         let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
         
         dequeueWaitingLine()
+        dispatchGroup.wait()
         
         let endTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
         let totalWorkingTime: CFAbsoluteTime = endTime - startTime
-        
-        dispatchGroup.wait()
+
         announceClose(with: totalClientCount, during: totalWorkingTime)
     }
-    
-    private func manageClerk(clientIdentifier: Int, taskType: Bank.Task) {
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
-        
-        switch taskType {
-        case .deposit:
-            depositSemaphore.wait()
-            clerk.work(for: clientIdentifier, task: taskType)
-            depositSemaphore.signal()
-        case .loan:
-            loanSemaphore.wait()
-            clerk.work(for: clientIdentifier, task: taskType)
-            loanSemaphore.signal()
-        }
-    }
-    
+
     private func dequeueWaitingLine() {
-        let semaphore = DispatchSemaphore(value: 3)
+        let depositSemaphore = DispatchSemaphore(value: Bank.depositClerkCount)
+        let loanSemaphore = DispatchSemaphore(value: Bank.loanClerkCount)
         
         while let taskType = clients.informTaskType(),
               let clientIdentifier = clients.startTask() {
             DispatchQueue.global().async(group: dispatchGroup) {
-                semaphore.wait()
-                self.manageClerk(clientIdentifier: clientIdentifier, taskType: taskType)
-                semaphore.signal()
+                switch taskType {
+                case .deposit:
+                    depositSemaphore.wait()
+                    self.clerk.work(for: clientIdentifier, task: taskType)
+                    depositSemaphore.signal()
+                case .loan:
+                    loanSemaphore.wait()
+                    self.clerk.work(for: clientIdentifier, task: taskType)
+                    loanSemaphore.signal()
+                }
             }
         }
     }

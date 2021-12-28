@@ -22,8 +22,7 @@ fileprivate func runMenu(with input: String) {
     let clients = Clients()
     let clerk = BankClerk()
     let bankManager = BankManager(clients: clients,
-                                  clerk: clerk,
-                                  totalClerkCount: 1)
+                                  clerk: clerk)
 
     switch input {
     case Menu.Option.bankOpen:
