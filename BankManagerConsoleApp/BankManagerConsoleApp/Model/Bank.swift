@@ -33,7 +33,7 @@ class Bank {
     
     private func makeBankClerksWork() {
         let group = DispatchGroup()
-        for bankClerk in bankClerks { // 예금예금예금....예금 29번. 대출
+        for bankClerk in bankClerks {
             DispatchQueue.global().async(group: group) {
                 self.distributeClient(to: bankClerk)
             }
