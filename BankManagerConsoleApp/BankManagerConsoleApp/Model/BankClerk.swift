@@ -16,7 +16,7 @@ class BankClerk {
     private weak var bank: BankTransactionable?
     private weak var delegate: BankClerkDelegate?
     
-    init(delegatee: BankClerkDelegate) {        
+    init(delegatee: BankClerkDelegate) {
         self.delegate = delegatee
     }
     
@@ -24,30 +24,14 @@ class BankClerk {
         self.bank = bank
     }
     
-    func work() {
-        let bankWorkGroup = DispatchGroup()
-        let bankWorkQueue = DispatchQueue(label: "BankWork")
+    func work(with customer: Customer) {
+        let workGroup = DispatchGroup()
         
-        var customerCount: Int = 0
-        var totalProcessingTime: Double = 0
+        workGroup.enter()
+        self.processWork(of: customer, group: workGroup)
+        workGroup.leave()
         
-        let bankWorkItem = DispatchWorkItem {
-            guard let customer = self.bank?.dequeue() else {
-                return
-            }
-            
-            self.processWork(of: customer, group: bankWorkGroup)
-            customerCount += 1
-            totalProcessingTime += customer.task.processingTime
-        }
-        
-        while bank?.isCustomerQueueEmpty() == false {
-            bankWorkQueue.async(group: bankWorkGroup, execute: bankWorkItem)
-        }
-        
-        bankWorkGroup.wait()
-        
-        bank?.close(totalCustomers: customerCount, totalProcessingTime: totalProcessingTime)
+        workGroup.wait()
     }
     
     private func processWork(of customer: Customer, group: DispatchGroup) {
@@ -56,4 +40,3 @@ class BankClerk {
         delegate?.printFinishWorkMessage(of: customer)
     }
 }
-    
