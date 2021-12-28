@@ -27,7 +27,9 @@ struct Bank {
     
     mutating func open() {
         enqueueCustomer()
+        let startTime = Date()
         operateTask()
+        let totalTime = checkTotalTime(from: startTime)
         printTaskEndMessage()
         resetBank()
     }
@@ -37,6 +39,12 @@ struct Bank {
             let customer = Customer(turn: count)
             customerQueue.enqueue(data: customer)
         }
+    }
+    
+    private func checkTotalTime(from startTime: Date) -> String {
+        let totalTime = abs(startTime.timeIntervalSinceNow)
+        let timeDescription = String(format: "%.2f", totalTime)
+        return timeDescription
     }
     
     private mutating func operateTask() {
