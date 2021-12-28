@@ -6,17 +6,19 @@ class Bank {
     private var bankClerks: [BankClerk] = []
     private var numberOfBankClerk: Int?
     private let semaphore = DispatchSemaphore(value: 1)
+    var delegate: BankDelegate?
     
-    init(numberOfBankClerk: Int) {
+    init(numberOfBankClerk: Int, delegate: BankDelegate) {
         self.makeBankClerk(for: numberOfBankClerk)
         self.receiveClient()
+        self.delegate = delegate
     }
     
     func open() {
         let workHours = measureTime() {
             makeBankClerksWork()
         }
-        close(duration: workHours)
+        delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
     }
     
     private func measureTime(task: () -> Void) -> String {
@@ -31,7 +33,7 @@ class Bank {
     
     private func makeBankClerksWork() {
         let group = DispatchGroup()
-        for bankClerk in bankClerks {
+        for bankClerk in bankClerks { // 예금예금예금....예금 29번. 대출
             DispatchQueue.global().async(group: group) {
                 self.distributeClient(to: bankClerk)
             }
@@ -44,17 +46,12 @@ class Bank {
             semaphore.wait()
             if let client = self.clientQueue.dequeue() {
                 semaphore.signal()
+                delegate?.startWork(for: client)
                 bankClerk.work(for: client)
+                delegate?.finishWork(for: client)
                 completedClientCount += 1
             }
         }
-    }
-    
-    private func close(duration: String) {
-        print(ConsoleBundle.TaskMessage.closeMessage(
-            count: completedClientCount,
-            duration: duration)
-        )
     }
     
     private func makeBankClerk(for number: Int) {

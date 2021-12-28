@@ -6,7 +6,7 @@ struct ConsoleManager {
             printMenu()
             switch receiveInput() {
             case ConsoleBundle.Menu.open:
-                BankManager.createBank()
+                BankManager.createBank(delegate: ConsoleManager())
                 BankManager.openBank()
             case ConsoleBundle.Menu.exit:
                 return
@@ -27,5 +27,21 @@ struct ConsoleManager {
             return ""
         }
         return input
+    }
+}
+
+extension ConsoleManager: BankDelegate {
+    func closeBusiness(by completedClientCount: Int, workHours: String) {
+        print(ConsoleBundle.TaskMessage.closeMessage(
+            count: completedClientCount,
+            duration: workHours))
+    }
+    
+    func startWork(for client: Client) {
+        print(ConsoleBundle.TaskMessage.startMessage(clientNumber: client.waitingNumber))        
+    }
+    
+    func finishWork(for client: Client) {
+        print(ConsoleBundle.TaskMessage.completeMessage(clientNumber: client.waitingNumber))
     }
 }
