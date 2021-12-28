@@ -8,7 +8,7 @@
 import Foundation
 
 struct Queue<Type> {
-    var queue: LinkedList<Type>
+    var queue = LinkedList<Type>()
     
     var isEmpty: Bool {
         return queue.isEmpty
@@ -26,7 +26,8 @@ struct Queue<Type> {
         queue.append(data)
     }
     
-    mutating func dequeue() {
-        queue.removeFirst()
+    @discardableResult
+    mutating func dequeue() -> Type? {
+        return queue.removeFirst()
     }
 }

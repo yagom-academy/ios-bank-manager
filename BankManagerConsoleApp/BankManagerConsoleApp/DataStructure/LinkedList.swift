@@ -47,7 +47,10 @@ struct LinkedList<Type> {
         tail = newNode
     }
     
-    mutating func removeFirst() {
+    mutating func removeFirst() -> Type? {
+        let firstNodeData = head?.data
         head = head?.next
+        
+        return firstNodeData
     }
 }
