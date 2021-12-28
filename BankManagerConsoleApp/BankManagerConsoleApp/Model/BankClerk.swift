@@ -38,7 +38,7 @@ class BankClerk {
             
             self.processWork(of: customer, group: bankWorkGroup)
             customerCount += 1
-            totalProcessingTime += customer.processingTime
+            totalProcessingTime += customer.task.processingTime
         }
         
         while bank?.isCustomerQueueEmpty() == false {
@@ -52,7 +52,7 @@ class BankClerk {
     
     private func processWork(of customer: Customer, group: DispatchGroup) {
         delegate?.printBeginWorkMessage(of: customer)
-        group.wait(timeout: .now() + customer.processingTime)
+        group.wait(timeout: .now() + customer.task.processingTime)
         delegate?.printFinishWorkMessage(of: customer)
     }
 }
