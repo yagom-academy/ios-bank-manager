@@ -10,13 +10,17 @@ struct BankManager: Managable {
     var clients: Clients
     let clerk: BankClerk
     let totalClerkCount: Int
-    var totalWorkingTime: CFAbsoluteTime = .zero
     
     mutating func operateBankSystem() {
         let totalClientCount = clients.makeWaitingLine()
-        
+        let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
+
         dequeueWaitingLine()
-        announceClose(with: totalClientCount)
+        
+        let endTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
+        let totalWorkingTime: CFAbsoluteTime = endTime - startTime
+        
+        announceClose(with: totalClientCount, during: totalWorkingTime)
     }
     
     private func manageClerk(_ clerkIdentifier: Int, for clientIdentifier: Int) {
@@ -26,18 +30,14 @@ struct BankManager: Managable {
     }
     
     mutating private func dequeueWaitingLine() {
-        let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
-        
         while clients.startTask() > Bank.emptyWaitingLine {
             manageClerk(clerk.identifier, for: clients.startTask())
             clients.completeTask()
         }
-        
-        let endTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
-        totalWorkingTime = endTime - startTime
     }
     
-    private func announceClose(with totalClientCount: Int) {
-        Bank.printClosingMessage(totalClientCount: totalClientCount, totalWorkingTime: totalWorkingTime.formatted)
+    private func announceClose(with totalClientCount: Int, during totalWorkingTime: CFAbsoluteTime) {
+        Bank.printClosingMessage(totalClientCount: totalClientCount,
+                                 totalWorkingTime: totalWorkingTime.formatted)
     }
 }
