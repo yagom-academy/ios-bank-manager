@@ -8,7 +8,6 @@
 import Foundation
 
 protocol BankingWorkable {
-    var identifier: Int { get set }
     func work(for clientIdentifier: Int, task: Bank.Task)
 }
 

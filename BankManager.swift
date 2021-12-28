@@ -6,7 +6,7 @@
 
 import Foundation
 
-class BankManager: Managable {
+class BankManager {
     var clients: Clients
     let clerk: BankClerk
     let totalClerkCount: Int
