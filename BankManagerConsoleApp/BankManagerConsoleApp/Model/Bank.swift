@@ -1,5 +1,4 @@
 import Foundation
-import AppKit
 
 class Bank {
     private var clientQueue: Queue<Client> = Queue<Client>()
