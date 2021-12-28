@@ -9,10 +9,7 @@ import Foundation
 
 struct Client {
     let identifier: Int
-    
-    init(identifier: Int = 0) {
-        self.identifier = identifier
-    }
+    let taskType: Bank.Task
 }
 
 struct Clients {
@@ -20,9 +17,12 @@ struct Clients {
     
     mutating func makeWaitingLine() -> Int {
         let totalClientCount = Int.random(in: 10...30)
+        guard let taskType = Bank.Task.allCases.randomElement() else {
+            return Bank.noTaskType
+        }
         
         (1...totalClientCount).forEach { identifier in
-            let client = Client(identifier: identifier)
+            let client = Client(identifier: identifier, taskType: taskType)
             
             waitingLine.enqueue(client)
         }
@@ -36,6 +36,14 @@ struct Clients {
         }
         
         return client.identifier
+    }
+    
+    func informTaskType() -> Bank.Task {
+        guard let client = waitingLine.peek() else {
+            return Bank.Task.empty
+        }
+        
+        return client.taskType
     }
     
     mutating func completeTask() {

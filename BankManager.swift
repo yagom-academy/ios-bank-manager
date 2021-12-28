@@ -23,15 +23,17 @@ struct BankManager: Managable {
         announceClose(with: totalClientCount, during: totalWorkingTime)
     }
     
-    private func manageClerk(_ clerkIdentifier: Int, for clientIdentifier: Int) {
+    private func manageClerk(_ clerkIdentifier: Int, for clientIdentifier: Int, task: Bank.Task) {
         giveWork(to: clerkIdentifier).sync {
-            clerk.work(for: clientIdentifier)
+            clerk.work(for: clientIdentifier, task: task)
         }
     }
     
     mutating private func dequeueWaitingLine() {
+        let taskType = clients.informTaskType()
+        
         while clients.startTask() > Bank.emptyWaitingLine {
-            manageClerk(clerk.identifier, for: clients.startTask())
+            manageClerk(clerk.identifier, for: clients.startTask(), task: taskType)
             clients.completeTask()
         }
     }

@@ -9,13 +9,13 @@ import Foundation
 
 protocol BankingWorkable {
     var identifier: Int { get set }
-    func work(for clientIdentifier: Int)
+    func work(for clientIdentifier: Int, task: Bank.Task)
 }
 
 extension BankingWorkable {
-    func work(for clientIdentifier: Int) {
-        print("\(clientIdentifier)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
-        print("\(clientIdentifier)번 고객 업무 완료")
+    func work(for clientIdentifier: Int, task: Bank.Task) {
+        print("\(clientIdentifier)번 고객 \(task.name)업무 시작")
+        Thread.sleep(forTimeInterval: task.time)
+        print("\(clientIdentifier)번 고객 \(task.name)업무 완료")
     }
 }
