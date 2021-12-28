@@ -12,6 +12,24 @@ enum BankService: CaseIterable {
     case deposit
     case loan
     
+    var processingTime: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
+    
+    var koreanDescription: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
+    
     static func selectRandom() -> BankService {
         let serviceIndex = Int.random(in: BankService.allCases.indices)
         let service = BankService.allCases[serviceIndex]
