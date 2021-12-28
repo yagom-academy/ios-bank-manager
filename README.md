@@ -8,6 +8,105 @@
 
 <br>
 
+# Step3 - 다중 처리 구현
+
+## 고민한 점
+
+### ☑️ 1. 다중 처리 로직
+여러 은행원이 동시에 `client`의 업무를 처리하되, 한 번에 일하는 은행원의 수를 제한하여 다중 처리하는 방식을 어떻게 구현할지 고민하였습니다.
+커스텀 시리얼 큐를 3개 만드는 방법, 3개의 `global().async` 블록 내부에서 각각 while 반복문으로 `client`를 `dequeue`하는 방법 등등을 고민해 보았습니다.
+결과적으로, 하나의 while문 내부에서 `dequeue`한 후, `global().async`로 작업을 보내되, 작업에 동시에 접근할 수 있는 thread 갯수를 `semaphore`로 제한하는 방법을 사용하여 구현했습니다.
+
+<br>
+
+### ☑️ 2. 여러 개의 세마포어로 업무별 담당 은행원 숫자를 관리하는 방법
+다중 처리를 하되, 업무(예금, 대출)마다 담당하는 은행원을 고정하는 로직을 고민했습니다.
+요구사항에서는 예금 업무를 담당하는 은행원 2명, 대출 업무를 담당하는 은행원 1명으로 제시되어 있는데요.
+while문 내부에서 `client`를 `dequeue`한 후 조건문으로 `client.task`를 검사하여 각각 다른 블록으로 분기하되, 각 예금 블록에서는 value가 2인 semaphore, 대출 블록에서는 value가 1인 semaphore로 제어되도록 구현했습니다.
+내부적으로는 thread가 `client` 수만큼 많이 만들어지겠지만, 실제로 동시에 일하는 thread는 예금 2, 대출 1명으로 총 3개가 되어, 현실 세계에서 은행원 3명이 담당업무를 처리하는 것처럼 동작합니다.
+
+<br>
+
+### ☑️ 3. 세마포어 숫자 하드코딩하지 않고 main.swift 에서 선언할 때 파라미터로 받을 수 있게 설계
+`DispatchSemaphore`의 `value`를 통해 은행원 숫자를 제어하기에, 업무별 은행원 수를 타입 초기화 시 지정할 수 있게 되었습니다.
+이를 통해 매직넘버 하드코딩을 피할 수도 있고, 추후 기능 수정에도 대응할 수 있게 되었습니다.
+
+<br>
+
+### ☑️ 4. delegate 으로 구조체가 아닌 클래스 타입을 사용
+기존 `BankManager`가 `BankDelegate`를 채택하지만, `struct`로 구현되어 있었습니다.
+현 코드 상태에서는 `class`이든 `struct`이든 상관없지만, 추후 `BankManager`에 저장 프로퍼티가 추가되고, 이를 변경하는 `mutating func`가 구현된다면 인스턴스를 추적할 수 없기 때문에 의도하지 않은 동작이 발생할 수 있습니다.
+이에 대비하기 위해 `BankManager`를 `class`로, `BankDelegate`는 `AnyObject` 제약을 걸었습니다. 또한, `Bank.delegate`는 순환 참조를 막기 위해 `weak`로 선언했습니다.
+
+📝 [관련 이슈 링크](https://github.com/Jager-yoo/ios-bank-manager/issues/2#issue-1089006729)
+
+<br>
+
+### ☑️ 5. NumberFormatter 변경
+기존 업무 시간(`CFAbsoluteTime`)을 표시하기 위해 `String`으로 변환 및 소수점 2자리 미만을 버리는 로직에서 결함이 발견되었습니다.
+의도는 `버림`이었지만, 사용한 `String(format:"%.2f")`은 `반올림`을 하기에, 로직을 수정했습니다.
+`String(format:)` 대신 `NumberFormatter`를 사용하고, `roundingMode`를 `.floor`로, `fractionDigit`을 2로 제한하여 해결했습니다.
+
+📝 [관련 이슈 링크](https://github.com/Jager-yoo/ios-bank-manager/issues/3#issue-1089059165)
+
+<br>
+
+## 🤔 궁금한 점
+
+### ❓ 고객의 수 만큼 thread 를 만들고 semaphore 사용하는 구조가 괜찮을까요?
+
+은행원이 담당하는 업무는 예금(deposit)과 대출(loan)이 존재합니다.
+요구사항에 따라, 2명의 은행원은 예금 업무만, 1명은 대출 업무만 처리해야 하는데요.
+
+💡 `한 개의 활성화된 thread == 한 명의 은행원`
+
+일을 할 수 있는(활성화된) Thread 개수와 은행원의 숫자를 동기화하기 위해, 저희는 `2개의 semaphore` 를 생성했습니다.
+서로 다른 thread 의 업무 종료 시점을 트래킹하기 위해 `DispatchGroup` 또한 사용했습니다.
+
+```swift
+// Bank 클래스
+let depositSemaphore = DispatchSemaphore(value: numberOfDepositBankers)
+let loanSemaphore = DispatchSemaphore(value: numberOfLoanBankers)
+let group = DispatchGroup()
+// numberOf~Bankers 는 Bank 클래스의 인스턴스 프로퍼티입니다.
+```
+
+그리고 아래 코드와 같이, `DispatchQueue.global().async`를 구현하고 내부에 `switch문`을 넣어 업무의 종류에 따라 각기 다른 `semaphore`에 제한이 걸리는 구조를 만들었습니다.
+
+```swift
+DispatchQueue.global().async(group: group) {
+    switch client.task {
+    case .deposit:
+        depositSemaphore.wait()
+        self.service(for: client)
+        depositSemaphore.signal()
+    case .loan:
+        loanSemaphore.wait()
+        self.service(for: client)
+        loanSemaphore.signal()
+    }
+}
+```
+
+저희가 은행원 마다 하나의 thread 를 사용하는 컨셉으로 코드를 만들긴 했으나, 실제 thread 개수는 while문을 돌면서 `고객의 수 만큼 생성`됩니다.
+그 이후에 주어진 semaphore 제한을 받으면서 업무를 처리하게 되는데요!
+
+🙋🏻‍♂️ 이렇게 thread 를 고객의 수 만큼 만들어두고 semaphore 로 제한을 거는 구조는 비효율적인 것일까요?
+
+차라리 Custom Serial Queue 를 은행원의 수 만큼 만들고 `단일 thread`에서만 업무를 하게 만드는 게 컨셉도 지키고 thread 생성 비용을 아낄 수 있는 방법일까요? 🤔
+
+<br>
+
+## 알게된 점
+
+### 학습 키워드
+- 동시성 프로그래밍 개념의 이해
+- 동기(Synchronous)와 비동기(Asynchronous)의 이해
+- 스레드(Thread) 개념에 대한 이해
+- GCD를 활용한 동시성 프로그래밍 구현 (DispatchSemaphore, DispatchGroup)
+
+<br>
+
 # Step2 - 은행, 고객 타입 구현
 
 ## 📍 Class Diagram
