@@ -26,19 +26,8 @@ class Employee {
             return
         }
         
-        waitForFinish()
         customerCount += 1
         
         speaker.speakFinish(for: customer.waitingNumber)
-    }
-}
-
-//MARK: - Private Method
-
-extension Employee {
-    private func waitForFinish() {
-        DispatchQueue.global().sync {
-            Thread.sleep(forTimeInterval: seconds)
-        }
     }
 }

@@ -39,11 +39,25 @@ extension BankManager {
             bank?.waitingLine.enqueue(customer)
         }
     }
-    
+
     private func assignWork() {
-        while bank?.waitingLine.isEmpty == false {
-            employee.startJob()
-            employee.finishJob()
+        let bankManagerQueue = DispatchQueue(label: "BankManagerQueue")
+        let dispatchGroup = DispatchGroup()
+        
+        let start = DispatchWorkItem {
+            self.employee.startJob()
+        }
+        let finish = DispatchWorkItem {
+            self.employee.finishJob()
+            dispatchGroup.leave()
+        }
+        
+        while self.bank?.waitingLine.isEmpty == false {
+            dispatchGroup.enter()
+            bankManagerQueue.async(execute: start)
+            bankManagerQueue.asyncAfter(deadline: .now() + 0.7, execute: finish)
+            
+            dispatchGroup.wait()
         }
     }
     
