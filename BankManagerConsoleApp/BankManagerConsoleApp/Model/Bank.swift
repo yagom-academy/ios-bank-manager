@@ -52,8 +52,10 @@ class Bank {
     }
     
     private func close(duration: String) {
-        print(ConsoleBundle.TaskMessage.closeMessage(count: completedClientCount,
-                                                      duration: duration))
+        print(ConsoleBundle.TaskMessage.closeMessage(
+            count: completedClientCount,
+            duration: duration)
+        )
     }
     
     private func receiveClient() {
