@@ -11,19 +11,16 @@ struct Bank {
     
     private var customerQueue: CustomerQueue<Customer>
     private var numberOfCustomer: Int
-    private let taskTime: TimeInterval
+    private var clerk: BankClerk
     
     private var numberOfCustomerRange: ClosedRange<Int> {
         return 1...numberOfCustomer
     }
-    private var totalTaskTime: Decimal {
-        return Decimal(taskTime) * Decimal(numberOfCustomer)
-    }
     
-    init(numberOfCustomerRange: ClosedRange<Int> = DefaultValue.numberOfCustomerRange, taskTime: TimeInterval = DefaultValue.taskTimeInterval) {
+    init(numberOfCustomerRange: ClosedRange<Int> = DefaultValue.numberOfCustomerRange) {
         self.customerQueue = CustomerQueue()
         self.numberOfCustomer = Int.random(in: numberOfCustomerRange)
-        self.taskTime = taskTime
+        self.clerk = BankClerk(depositClerkCount: 2, loanClerkCount: 1)
     }
     
     mutating func open() {
@@ -63,12 +60,12 @@ struct Bank {
     private func task(of customer: Customer) {
         let number = customer.turn
         print(Message.taskStart(turn: number).description)
-        Thread.sleep(forTimeInterval: taskTime)
+        Thread.sleep(forTimeInterval: DefaultValue.taskTimeInterval)
         print(Message.taskEnd(turn: number).description)
     }
     
     private func printTaskEndMessage() {
-        print(Message.totalTaskEnd(count: numberOfCustomer, time: totalTaskTime).description)
+        print(Message.totalTaskEnd(count: numberOfCustomer, time: 10))
     }
     
     private mutating func resetBank() {
