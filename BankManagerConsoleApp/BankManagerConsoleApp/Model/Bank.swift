@@ -27,7 +27,7 @@ struct Bank {
         }
     }
     
-    mutating func openBank() {
+    mutating func work() {
         let startTime = CFAbsoluteTimeGetCurrent()
         let totalClientCount = handleBankWork()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime

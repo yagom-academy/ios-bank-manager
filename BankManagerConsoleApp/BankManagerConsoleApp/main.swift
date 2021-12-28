@@ -39,7 +39,6 @@ fileprivate func runProgram() {
             
             switch userInput {
             case .openBank:
-                bankManager.supplyClientsToBank()
                 bankManager.openBank()
             case .exit:
                 return
@@ -53,6 +52,7 @@ fileprivate func runProgram() {
     }
 }
 
-var bankManager = BankManager()
+var bank = Bank(numberOfClerks: 1)
+var bankManager = BankManager(bank: bank)
 
 runProgram()

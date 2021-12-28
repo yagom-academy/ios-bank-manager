@@ -8,10 +8,10 @@ import Foundation
 
 struct BankManager {
     //MARK: - 저장 속성
-    private var bank = Bank(numberOfClerks: 1)
+    private var bank: Bank
     
-    mutating func openBank() {
-        bank.openBank()
+    init(bank: Bank) {
+        self.bank = bank
     }
     
     func generateClients() -> [Client] {
@@ -27,8 +27,9 @@ struct BankManager {
         return clients
     }
     
-    mutating func supplyClientsToBank() {
+    mutating func openBank() {
         let clients = generateClients()
         bank.receive(clients: clients)
+        bank.work()
     }
 }
