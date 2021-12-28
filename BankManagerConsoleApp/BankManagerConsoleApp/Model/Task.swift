@@ -33,7 +33,7 @@ enum Task: CustomStringConvertible {
 extension Task: CaseIterable {
     static func createRandomTask() -> Self {
         guard let task = Self.allCases.randomElement() else {
-            fatalError()
+            fatalError("랜덤한 Task를 생성할 수 없습니다.")
         }
         return task
     }
