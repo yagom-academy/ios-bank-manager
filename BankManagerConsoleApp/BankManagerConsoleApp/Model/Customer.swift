@@ -17,9 +17,18 @@ struct Customer {
     }
 }
 
-enum Task: CaseIterable {
+enum Task: CustomStringConvertible {
     case deposit
     case loan
+    
+    var description: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
     
     var processingTime: Double {
         switch self {
@@ -29,7 +38,9 @@ enum Task: CaseIterable {
             return 0.7
         }
     }
-    
+}
+
+extension Task: CaseIterable {
     static func createRandomTask() -> Self {
         guard let task = Self.allCases.randomElement() else {
             fatalError()

@@ -16,11 +16,11 @@ extension BankPrinter: BankDelegate {
 
 extension BankPrinter: BankClerkDelegate {
     func printBeginWorkMessage(of customer: Customer) {
-        print("\(customer.turn)번 고객 업무 시작")
+        print("\(customer.turn)번 고객 \(customer.task.description)업무 시작")
     }
     
     func printFinishWorkMessage(of customer: Customer) {
-        print("\(customer.turn)번 고객 업무 완료")
+        print("\(customer.turn)번 고객 \(customer.task.description)업무 완료")
     }
 }
 
