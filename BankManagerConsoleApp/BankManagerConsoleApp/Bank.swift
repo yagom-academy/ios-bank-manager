@@ -7,6 +7,10 @@ struct Bank {
     private var numberOfCustomer: Int = 0
     private let dispatchGroup = DispatchGroup()
     
+//    let manager1 = BankManager(assignedTask: .deposit)
+//    let manager2 = BankManager(assignedTask: .deposit)
+//    let manager3 = BankManager(assignedTask: .loan)
+    
     // MARK: - Initalizer
     init(numberOfBankClerk: Int, numberOfCustomer: Int) {
         setupCustomers(of: numberOfCustomer)
@@ -16,7 +20,8 @@ struct Bank {
     // MARK: - Methods
     private func setupCustomers(of number: Int) {
          for index in 0..<number {
-             let customer = Customer(number: (index + 1))
+             guard let randomTask = BankTask.allCases.randomElement() else { return }
+             let customer = Customer(number: (index + 1), task: randomTask)
              customers.enqueue(value: customer)
          }
      }
