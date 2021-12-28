@@ -1,8 +1,8 @@
 import Foundation
 
-enum Banking: CaseIterable {
-    case loan
-    case deposit
+enum Banking: String, CaseIterable {
+    case loan = "대출"
+    case deposit = "예금"
     
     static var random: Banking {
         return .allCases.randomElement() ?? .loan
@@ -15,6 +15,10 @@ enum Banking: CaseIterable {
         case .deposit:
             return 0.7
         }
+    }
+    
+    var description: String {
+        return self.rawValue
     }
 }
 
