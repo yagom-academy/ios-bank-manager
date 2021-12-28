@@ -47,7 +47,7 @@ final class Bank {
     
     private func workBanker(customers: Queue<Customer>, group: DispatchGroup) {
         let banker = Banker()
-        let workItem = DispatchWorkItem {
+        DispatchQueue.global().async(group: group) {
             while customers.isEmpty == false {
                 guard let customer = customers.dequeue() else {
                     continue
@@ -55,10 +55,7 @@ final class Bank {
                 self.numberOfCustomers += 1
                 banker.work(for: customer)
             }
-            group.leave()
         }
-        group.enter()
-        DispatchQueue.global().async(execute: workItem)
     }
     
     private func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
