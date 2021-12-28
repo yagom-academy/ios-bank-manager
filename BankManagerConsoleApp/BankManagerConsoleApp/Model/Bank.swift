@@ -25,8 +25,8 @@ class Bank {
         task()
         let totalTime = CFAbsoluteTimeGetCurrent() - startTime
         guard let duration = NumberFormatter.centisecond.string(for: totalTime) else {
-                return ""
-            }
+            return ""
+        }
         return duration
     }
     
