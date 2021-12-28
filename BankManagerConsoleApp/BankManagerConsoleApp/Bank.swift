@@ -12,18 +12,18 @@ protocol WaitingLineManageable {
 }
 
 class Bank: WaitingLineManageable  {
-    private var employee: Employee
-    private var bankManager: BankManager
+    private weak var employee: Employee?
+    private weak var bankManager: BankManager?
     let waitingLine = Queue<Customer>()
 
     init(employee: Employee, bankManager: BankManager) {
         self.employee = employee
         self.bankManager = bankManager
-        self.employee.bank = self
-        self.bankManager.bank = self
+        self.employee?.bank = self
+        self.bankManager?.bank = self
     }
     
     func open() {
-        bankManager.work()
+        bankManager?.work()
     }
 }
