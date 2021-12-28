@@ -61,7 +61,7 @@ struct Bank {
         let number = customer.turn
         let task = customer.task.koreanDescription
         print(Message.taskStart(turn: number, service: task).description)
-        Thread.sleep(forTimeInterval: DefaultValue.taskTimeInterval)
+        Thread.sleep(forTimeInterval: customer.task.processingTime)
         print(Message.taskEnd(turn: number, service: task).description)
     }
     
@@ -97,7 +97,6 @@ private extension Bank {
     
     struct DefaultValue {
         static let numberOfCustomerRange = 10...30
-        static let taskTimeInterval = 0.7
     }
     
 }
