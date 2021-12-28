@@ -59,13 +59,14 @@ struct Bank {
     
     private func task(of customer: Customer) {
         let number = customer.turn
-        print(Message.taskStart(turn: number).description)
+        let task = customer.task.koreanDescription
+        print(Message.taskStart(turn: number, service: task).description)
         Thread.sleep(forTimeInterval: DefaultValue.taskTimeInterval)
-        print(Message.taskEnd(turn: number).description)
+        print(Message.taskEnd(turn: number, service: task).description)
     }
     
     private func printTaskEndMessage() {
-        print(Message.totalTaskEnd(count: numberOfCustomer, time: 10))
+        print(Message.totalTaskEnd(count: numberOfCustomer, time: "10"))
     }
     
     private mutating func resetBank() {
@@ -78,16 +79,16 @@ struct Bank {
 private extension Bank {
     
     enum Message {
-        case taskStart(turn: Int)
-        case taskEnd(turn: Int)
-        case totalTaskEnd(count: Int, time: Decimal)
+        case taskStart(turn: Int, service: String)
+        case taskEnd(turn: Int, service: String)
+        case totalTaskEnd(count: Int, time: String)
         
         var description: String {
             switch self {
-            case .taskStart(let turn):
-                return "\(turn)번 고객 업무 시작"
-            case .taskEnd(let turn):
-                return "\(turn)번 고객 업무 완료"
+            case .taskStart(let turn, let service):
+                return "\(turn)번 고객 \(service)업무 시작"
+            case .taskEnd(let turn, let service):
+                return "\(turn)번 고객 \(service)업무 완료"
             case .totalTaskEnd(let count, let time):
                 return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무시간은 \(time)초입니다."
             }
