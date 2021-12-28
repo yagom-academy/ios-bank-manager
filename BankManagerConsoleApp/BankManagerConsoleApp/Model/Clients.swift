@@ -31,7 +31,7 @@ struct Clients {
         return totalClientCount
     }
     
-    mutating func startTask() -> Int? {
+    mutating func dequeueWaitingLine() -> Int? {
         guard let client = waitingLine.dequeue() else {
             return nil
         }
@@ -45,9 +45,5 @@ struct Clients {
         }
         
         return client.taskType
-    }
-    
-    mutating func completeTask() {
-        waitingLine.dequeue()
     }
 }

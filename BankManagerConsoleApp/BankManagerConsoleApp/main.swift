@@ -21,9 +21,8 @@ fileprivate func receiveInput() -> String {
 fileprivate func runMenu(with input: String) {
     let clients = Clients()
     let clerk = BankClerk()
-    let bankManager = BankManager(clients: clients,
-                                  clerk: clerk)
-
+    let bankManager = BankManager(clients: clients, clerk: clerk)
+    
     switch input {
     case Menu.Option.bankOpen:
         bankManager.operateBankSystem()

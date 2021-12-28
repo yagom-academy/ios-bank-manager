@@ -10,7 +10,7 @@ class BankManager {
     var clients: Clients
     let clerk: BankClerk
     let dispatchGroup = DispatchGroup()
-
+    
     init(clients: Clients, clerk: BankClerk) {
         self.clients = clients
         self.clerk = clerk
@@ -20,21 +20,21 @@ class BankManager {
         let totalClientCount = clients.makeWaitingLine()
         let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
         
-        dequeueWaitingLine()
+        startBankTask()
         dispatchGroup.wait()
         
         let endTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
         let totalWorkingTime: CFAbsoluteTime = endTime - startTime
-
+        
         announceClose(with: totalClientCount, during: totalWorkingTime)
     }
-
-    private func dequeueWaitingLine() {
+    
+    private func startBankTask() {
         let depositSemaphore = DispatchSemaphore(value: Bank.depositClerkCount)
         let loanSemaphore = DispatchSemaphore(value: Bank.loanClerkCount)
         
         while let taskType = clients.informTaskType(),
-              let clientIdentifier = clients.startTask() {
+              let clientIdentifier = clients.dequeueWaitingLine() {
             DispatchQueue.global().async(group: dispatchGroup) {
                 switch taskType {
                 case .deposit:
