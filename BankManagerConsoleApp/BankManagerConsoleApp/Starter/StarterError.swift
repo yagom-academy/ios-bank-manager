@@ -7,19 +7,19 @@
 
 import Foundation
 
-enum StarterError: Error, CustomStringConvertible {
+enum StarterError: Error {
     case wrongInput
     case endOfFile
     case unknownError
     
-    var description: String {
+    func printDescription() {
         switch self {
         case .wrongInput:
-            return "잘못된 입력입니다. 다시 입력해주세요."
+            print("잘못된 입력입니다. 다시 입력해주세요.")
         case .endOfFile:
-            return "End Of File에 도달했습니다."
+            print("End Of File에 도달했습니다.")
         case .unknownError:
-            return "알 수 없는 에러가 발생했습니다."
+            print("알 수 없는 에러가 발생했습니다.")
         }
     }
 }

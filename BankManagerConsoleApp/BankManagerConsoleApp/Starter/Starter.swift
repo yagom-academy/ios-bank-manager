@@ -15,12 +15,10 @@ final class Starter {
             printStartMessage()
             do {
                 try checkInput()
-            } catch StarterError.wrongInput {
-                print(StarterError.wrongInput)
-            } catch StarterError.endOfFile {
-                print(StarterError.endOfFile)
             } catch {
-                print(StarterError.unknownError)
+                if let error = error as? StarterError {
+                    error.printDescription()
+                }
             }
         }
     }
