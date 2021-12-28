@@ -50,7 +50,7 @@ final class Bank {
         DispatchQueue.global().async(group: group) {
             while customers.isEmpty == false {
                 guard let customer = customers.dequeue() else {
-                    continue
+                    fatalError()
                 }
                 self.numberOfCustomers += 1
                 banker.work(for: customer)
