@@ -9,6 +9,7 @@ import Foundation
 class BankManager {
     var employee: Employee
     var bank: WaitingLineManageable?
+    private let speaker = Speaker()
     private let calculator = Calculator()
     private let randomNumber = Int.random(in: 10...30)
     
@@ -51,8 +52,6 @@ extension BankManager {
             return
         }
         
-        let close = Speaker.Situation.close(time: calculateResult)
-        
-        Speaker.speak(when: close, number: randomNumber)
+        speaker.speakClose(number: randomNumber, time: calculateResult)
     }
 }

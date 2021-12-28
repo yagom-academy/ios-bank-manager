@@ -9,6 +9,7 @@ import Foundation
 
 class Employee {
     var bank: WaitingLineManageable?
+    let speaker = Speaker()
     private let seconds = 0.7
     private var customerCount = 0
     
@@ -17,7 +18,7 @@ class Employee {
             return
         }
         
-        Speaker.speak(when: .start, number: customer.waitingNumber)
+        speaker.speakStart(for: customer.waitingNumber)
     }
     
     func finishJob() {
@@ -28,7 +29,7 @@ class Employee {
         waitForFinish()
         customerCount += 1
         
-        Speaker.speak(when: .finish, number: customer.waitingNumber)
+        speaker.speakFinish(for: customer.waitingNumber)
     }
 }
 
