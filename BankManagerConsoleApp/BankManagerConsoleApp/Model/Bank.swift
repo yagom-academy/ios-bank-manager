@@ -21,9 +21,9 @@ class Bank {
     }
     
     private func measureTime(task: () -> Void) -> String {
-        let startTime = CFAbsoluteTimeGetCurrent()
+        let startTime = Date()
         task()
-        let totalTime = CFAbsoluteTimeGetCurrent() - startTime
+        let totalTime = Date().timeIntervalSince(startTime)
         guard let duration = NumberFormatter.centisecond.string(for: totalTime) else {
             return ""
         }
