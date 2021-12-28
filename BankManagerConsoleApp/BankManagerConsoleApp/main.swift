@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+var starter = Starter()
+starter.start()
