@@ -38,15 +38,13 @@ class Bank {
             }
             clientCount += 1
             
-            switch client.task {
-            case .deposit:
-                DispatchQueue.global().async(group: group) {
+            DispatchQueue.global().async(group: group) {
+                switch client.task {
+                case .deposit:
                     depositSemaphore.wait()
                     self.service(for: client)
                     depositSemaphore.signal()
-                }
-            case .loan:
-                DispatchQueue.global().async(group: group) {
+                case .loan:
                     loanSemaphore.wait()
                     self.service(for: client)
                     loanSemaphore.signal()

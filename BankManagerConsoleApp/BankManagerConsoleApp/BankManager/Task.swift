@@ -26,11 +26,6 @@ enum Task: String, CaseIterable {
     }
     
     func work() {
-        switch self {
-        case .deposit:
-            Thread.sleep(forTimeInterval: Task.deposit.duration)
-        case .loan:
-            Thread.sleep(forTimeInterval: Task.loan.duration)
-        }
+        Thread.sleep(forTimeInterval: self.duration)
     }
 }
