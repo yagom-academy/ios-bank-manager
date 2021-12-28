@@ -7,9 +7,14 @@
 
 import Foundation
 
-enum BankService {
+enum BankService: CaseIterable {
     
     case deposit
     case loan
     
+    static func selectRandom() -> BankService {
+        let serviceIndex = Int.random(in: BankService.allCases.indices)
+        let service = BankService.allCases[serviceIndex]
+        return service
+    }
 }
