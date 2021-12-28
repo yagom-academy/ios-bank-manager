@@ -1,10 +1,10 @@
 import Foundation
 
 final class Bank {
-    private let bankClerk: BankClerk
+    private let bankClerk: Banker
     private var customerQueue = Queue<Customer>()
     
-    init(bankClerk: BankClerk) {
+    init(bankClerk: Banker) {
         self.bankClerk = bankClerk
     }
     

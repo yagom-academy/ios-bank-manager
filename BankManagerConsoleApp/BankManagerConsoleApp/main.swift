@@ -1,7 +1,7 @@
 import Foundation
 
 func run() {
-    let bankClerk = BankClerk(workSpeed: 0.7)
+    let bankClerk = Banker()
     let bank = Bank(bankClerk: bankClerk)
     var bankManager = BankManager(bank: bank)
     var isRunning = true
