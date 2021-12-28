@@ -30,7 +30,7 @@ struct Bank {
         let startTime = Date()
         operateTask()
         let totalTime = checkTotalTime(from: startTime)
-        printTaskEndMessage()
+        printTaskEndMessage(time: totalTime)
         resetBank()
     }
     
@@ -80,8 +80,8 @@ struct Bank {
         print(Message.taskEnd(turn: number, service: task).description)
     }
     
-    private func printTaskEndMessage() {
-        print(Message.totalTaskEnd(count: numberOfCustomer, time: "10"))
+    private func printTaskEndMessage(time: String) {
+        print(Message.totalTaskEnd(count: numberOfCustomer, time: time).description)
     }
     
     private mutating func resetBank() {
