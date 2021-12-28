@@ -10,10 +10,12 @@ struct BankManager {
     //MARK: - 저장 속성
     private var bank: Bank
     
+    //MARK: - 생성자
     init(bank: Bank) {
         self.bank = bank
     }
     
+    //MARK: - 메서드
     func generateClients() -> [Client] {
         let clientNumber = Int.random(in: 10...30)
         var clients: [Client] = []
@@ -29,7 +31,8 @@ struct BankManager {
     
     mutating func openBank() {
         let clients = generateClients()
+        
         bank.receive(clients: clients)
-        bank.work()
+        bank.executeBusiness()
     }
 }
