@@ -7,10 +7,13 @@
 
 import Foundation
 
-enum StarterMessage: String, CustomStringConvertible {
-    case open = "1 : 은행 개점\n2 : 종료\n입력 : "
+enum StarterMessage: CustomStringConvertible {
+    case open
     
     var description: String {
-        self.rawValue
+        switch self {
+        case .open:
+            return "1 : 은행 개점\n2 : 종료\n입력 : "
+        }
     }
 }
