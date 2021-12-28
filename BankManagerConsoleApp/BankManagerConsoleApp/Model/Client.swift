@@ -11,7 +11,22 @@ struct Ticket {
     let number: Int
 }
 
+enum Task {
+    case financialBusiness
+    
+    var duration: Double {
+        switch self {
+        default:
+            return 0.7
+        }
+    }
+}
+
 struct Client {
     let orderTicket: Ticket
-    let taskDuration = 0.7
+    private let task = Task.financialBusiness
+    
+    var taskDuration: Double {
+        return task.duration
+    }
 }
