@@ -14,7 +14,7 @@ enum BankTask: CaseIterable {
     }
     
     var taskHandlingTime: Double {
-        switch self.assignedTask {
+        switch self {
         case .deposit:
             return 0.7
         case .loan:
