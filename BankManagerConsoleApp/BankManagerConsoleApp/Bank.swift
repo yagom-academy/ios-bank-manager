@@ -39,19 +39,17 @@ struct Bank {
         }
     }
     
-    private func operateTask() {
-        let bankTaskQueue = DispatchQueue(label: "Bank")
+    private mutating func operateTask() {
         for _ in numberOfCustomerRange {
-            bankTaskQueue.sync {
-                takeTask()
-            }
+            takeTask()
         }
+        taskGroup.wait()
     }
     
-    private func takeTask() {
+    private mutating func takeTask() {
         do {
             let customer = try customerQueue.dequeue()
-            task(of: customer)
+            enqueueTask(of: customer)
         } catch LinkedListError.dataDoesNotExist {
             print(LinkedListError.dataDoesNotExist.description)
         } catch {
