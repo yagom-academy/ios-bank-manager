@@ -30,4 +30,17 @@ struct BankClerk {
         return clerkQueue
     }
     
+    mutating func assignClerk(of department: BankService) -> DispatchQueue {
+        switch department {
+        case .deposit:
+            let clerk = depositDepartment[depositClerkNumber]
+            depositClerkNumber = (depositClerkNumber + 1) % depositDepartment.count
+            return clerk
+        case .loan:
+            let clerk = loanDepartment[loanClerkNumber]
+            loanClerkNumber = (loanClerkNumber + 1) % loanDepartment.count
+            return clerk
+        }
+    }
+    
 }
