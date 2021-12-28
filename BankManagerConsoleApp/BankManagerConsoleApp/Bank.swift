@@ -2,69 +2,94 @@ import Foundation
 
 struct Bank {
     // MARK: - Properties
-    private var bankClerk: DispatchQueue = DispatchQueue(label: "customSerial")
+    private var bankManager: DispatchQueue = DispatchQueue(label: "customSerial")
     private var customers: CustomerQueue = CustomerQueue<Customer>()
     private var numberOfCustomer: Int = 0
     private let dispatchGroup = DispatchGroup()
-    
-//    let manager1 = BankManager(assignedTask: .deposit)
-//    let manager2 = BankManager(assignedTask: .deposit)
-//    let manager3 = BankManager(assignedTask: .loan)
-    
+    private let numberOfBankManagerForDeposit: Int
+    private let numberOfBankManagerForLoan: Int
+    private var depositSemaphore: DispatchSemaphore
+    private var loanSemaphore: DispatchSemaphore
     // MARK: - Initalizer
-    init(numberOfBankClerk: Int, numberOfCustomer: Int) {
-        setupCustomers(of: numberOfCustomer)
+    init(numberOfBankClerkForDeposit: Int, numberOfBankClerkForLoan:Int, numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
+        self.numberOfBankManagerForDeposit = numberOfBankClerkForDeposit
+        self.numberOfBankManagerForLoan = numberOfBankClerkForLoan
+        setupSemaphore(deposit: numberOfBankClerkForDeposit, loan: numberOfBankClerkForLoan)
+        setupCustomers(of: numberOfCustomer)
+        
     }
     
     // MARK: - Methods
     private func setupCustomers(of number: Int) {
          for index in 0..<number {
-             guard let randomTask = BankTask.allCases.randomElement() else { return }
-             let customer = Customer(number: (index + 1), task: randomTask)
+             let customer = Customer(number: (index + 1), task: BankTask)
              customers.enqueue(value: customer)
          }
      }
     
+    private mutating func setupSemaphore(deposit: Int, loan: Int) {
+          depositSemaphore = DispatchSemaphore(value: deposit)
+          loanSemaphore = DispatchSemaphore(value: loan)
+    }
+    
     func openBank() {
-        dispatchGroup.enter()
         let totalTime = checkTotalTime(of: handleTaskOfAllCustomers)
-        dispatchGroup.leave()
-        
-        dispatchGroup.wait()
         notifyBankClosing(with: totalTime)
     }
     
-    private func checkTotalTime(of taskFunction: () -> Void) -> String {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        taskFunction()
-        let totalTime = CFAbsoluteTimeGetCurrent() - startTime
-        let totalTimeText: String = totalTime.formattedToTwoDecimalPoint
+    private func checkTotalTime(of taskFunction: () throws -> Void) -> String {
+            let startTime = CFAbsoluteTimeGetCurrent()
 
-        return totalTimeText
-    }
+            dispatchGroup.enter()  // 수정 후
+            do {
+                try taskFunction()
+            } catch {
+                print(error)
+
+            }
+            dispatchGroup.leave()
+
+            while customers.isEmpty == false {  // 고객 업무가 모두 끝났는지 체크
+                continue
+            }
+            dispatchGroup.wait() // dispatchGroup의 일이 종료됐다고 판단하고 소요시간을 계산
+
+            let totalTime = CFAbsoluteTimeGetCurrent() - startTime
+
+            let totalTimeText: String = totalTime.formattedToTwoDecimalPoint
+
+            return totalTimeText
+        }
     
-    private func handleTaskOfAllCustomers() {
-        let taskItem = DispatchWorkItem {
-            if let currentCustomer = customers.peek {
-                workOnTask(of: currentCustomer)
+    private func handleTaskOfAllCustomers() throws {
+        while let nextTurnCustomer = try customers.dequeue() {
+            DispatchQueue.global().async(group: dispatchGroup) { [self] in
+                switch nextTurnCustomer.bankTask {
+                case .deposit:
+                    self.depositSemaphore.wait()
+                    self.workOnTask(of: nextTurnCustomer)
+                case .loan:
+                    self.loanSemaphore.wait()
+                    self.workOnTask(of: nextTurnCustomer)
+                }
             }
         }
-        
-        for _ in 0..<numberOfCustomer {
-            bankClerk.sync(execute: taskItem)
-        }
     }
-    
+
     private func workOnTask(of customer: Customer) {
         notifyStartingTask(of: customer)
-        customer.task()
+        
+        Thread.sleep(forTimeInterval: customer.bankTask.taskHandlingTime)
+        
         notifyFinisingTask(of: customer)
         
-        do {
-            try customers.dequeue()
-        } catch {
-            print(error)
+        switch customer.bankTask {
+            depositSemaphore.signal()
+        case .loan:
+            loanSemaphore.signal()
+        case .deposit:
+            nil
         }
     }
     

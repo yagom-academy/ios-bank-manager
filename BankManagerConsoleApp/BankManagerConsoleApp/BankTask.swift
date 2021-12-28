@@ -12,4 +12,13 @@ enum BankTask: CaseIterable {
             return "대출"
         }
     }
+    
+    var taskHandlingTime: Double {
+        switch self.assignedTask {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
 }

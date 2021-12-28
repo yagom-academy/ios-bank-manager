@@ -2,5 +2,5 @@ import Foundation
 
 struct Customer {
     let number: Int
-    let task: BankTask 
+    let bankTask: BankTask 
 }
