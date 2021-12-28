@@ -21,7 +21,7 @@ fileprivate func receiveInput() -> String {
 fileprivate func runMenu(with input: String) {
     let clients = Clients()
     let clerk = BankClerk()
-    var bankManager = BankManager(clients: clients,
+    let bankManager = BankManager(clients: clients,
                                   clerk: clerk,
                                   totalClerkCount: 1)
 
