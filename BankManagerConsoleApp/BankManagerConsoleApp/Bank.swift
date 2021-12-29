@@ -4,18 +4,22 @@ struct Bank {
     // MARK: - Properties
     private var customers: CustomerQueue = CustomerQueue<Customer>()
     private var numberOfCustomer: Int = 0
-    private let numberOfBankManagerForDeposit: Int
-    private let numberOfBankManagerForLoan: Int
+    private let numberOfDepositManager: Int
+    private let numberOfLoanManager: Int
     private let dispatchGroup = DispatchGroup()
     private var depositSemaphore: DispatchSemaphore
     private var loanSemaphore: DispatchSemaphore
     
     // MARK: - Initalizer
-    init(numberOfBankClerkForDeposit: Int, numberOfBankClerkForLoan:Int, numberOfCustomer: Int) {
-        self.numberOfBankManagerForDeposit = numberOfBankClerkForDeposit
-        self.numberOfBankManagerForLoan = numberOfBankClerkForLoan
-        depositSemaphore = DispatchSemaphore(value: numberOfBankClerkForDeposit)
-        loanSemaphore = DispatchSemaphore(value: numberOfBankClerkForLoan)
+    init(
+        numberOfDepositManager: Int,
+        numberOfLoanManager:Int,
+        numberOfCustomer: Int
+    ) {
+        self.numberOfDepositManager = numberOfDepositManager
+        self.numberOfLoanManager = numberOfLoanManager
+        depositSemaphore = DispatchSemaphore(value: numberOfDepositManager)
+        loanSemaphore = DispatchSemaphore(value: numberOfLoanManager)
         
         self.numberOfCustomer = numberOfCustomer
         setupCustomers(of: numberOfCustomer)
