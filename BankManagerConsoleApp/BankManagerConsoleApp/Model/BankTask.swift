@@ -1,6 +1,6 @@
 import Foundation
 
-enum BankTask {
+enum BankTask: CaseIterable {
     case deposit
     case loan
     
