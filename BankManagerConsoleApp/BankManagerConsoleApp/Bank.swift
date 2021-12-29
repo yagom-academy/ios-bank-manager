@@ -1,9 +1,18 @@
 import Foundation
 
 class Bank {
-    enum Service: CaseIterable {
+    enum Service: String, CaseIterable {
         case deposit
         case loan
+        
+        var processingTime: Double {
+            switch self {
+            case .deposit:
+                return 0.7
+            case .loan:
+                return 1.1
+            }
+        }
     }
     
     private let clients = Queue<Client>()
@@ -26,8 +35,8 @@ class Bank {
     }
     
     private func processAllServices() {
-        let depositDispatchQueue = DispatchQueue(label: "deposit")
-        let loanDispatchQueue = DispatchQueue(label: "loan")
+        let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
+        let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
         let group = DispatchGroup()
         
         while let client = clients.dequeue() {
@@ -42,8 +51,6 @@ class Bank {
                     self.loanSemaphore.wait()
                     self.processLoanService(to: client, group: group)
                 }
-            case nil:
-                print("업무가 지정되지 않았습니다.")
             }
         }
         group.wait()
@@ -59,7 +66,7 @@ class Bank {
     private func processDepositService(to client: Client, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
             print("\(client.waitingNumber)번 고객 예금업무 시작")
-            Thread.sleep(forTimeInterval: 0.7)
+            Thread.sleep(forTimeInterval: Service.deposit.processingTime)
             print("\(client.waitingNumber)번 고객 예금업무 완료")
             self.depositSemaphore.signal()
         }
@@ -68,7 +75,7 @@ class Bank {
     private func processLoanService(to client: Client, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
             print("\(client.waitingNumber)번 고객 대출업무 시작")
-            Thread.sleep(forTimeInterval: 1.1)
+            Thread.sleep(forTimeInterval: Service.loan.processingTime)
             print("\(client.waitingNumber)번 고객 대출업무 완료")
             self.loanSemaphore.signal()
         }
