@@ -74,6 +74,7 @@ class Bank {
         let workingDuration = endTime - startTime
         delegate?.bankDidClose(totalClient: clientCount,
                                for: workingDuration.roundOff())
+        self.clientCount = .zero
     }
     
     private func service(for client: Client) {
