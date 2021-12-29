@@ -1,6 +1,6 @@
 import Foundation
 
-final class Bank {
+struct Bank {
     private var loanCustomerQueue = Queue<Customer>()
     private var depositCustomerQueue = Queue<Customer>()
     private let loanBankersCount: Int
@@ -12,7 +12,8 @@ final class Bank {
         self.depositBankersCount = depositBankersCount
     }
     
-    func handOutWaitingNumber(from customerNumber: Int) {
+    mutating func handOutWaitingNumber(from customerNumber: Int) {
+        numberOfCustomers = customerNumber
         for number in 1...customerNumber {
             let customer = Customer(waitingNumber: number)
             customerQueue(customer.banking).enqueue(customer)
@@ -28,7 +29,7 @@ final class Bank {
         }
     }
     
-    func openBank() {
+    mutating func openBank() {
         let bankGroup = DispatchGroup()
         let openTime = Date()
         
@@ -52,13 +53,12 @@ final class Bank {
                 guard let customer = customers.dequeue() else {
                     fatalError()
                 }
-                self.numberOfCustomers += 1
                 banker.work(for: customer)
             }
         }
     }
     
-    private func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
+    private mutating func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
         let durationTime = -openTime.timeIntervalSinceNow
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(durationTime.roundedOffDescription(for: 2))초 입니다.")
         self.numberOfCustomers = 0
