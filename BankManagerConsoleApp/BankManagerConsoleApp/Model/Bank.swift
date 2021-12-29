@@ -13,9 +13,17 @@ class Bank {
         self.delegate = delegate
     }
     
+    private func receiveClient() {
+        let numberOfClient = Int.random(in: 10...30)
+        for number in 1...numberOfClient {
+            let client = Client(waitingNumber: number)
+            clientQueue.enqueue(client)
+        }
+    }
+    
     func open() {
         let workHours = measureTime() {
-            self.makeWork()
+            self.distributeWork(numberOfBankClerkForDeposit: 2, numberOfBankClerkForLoan: 1)
         }
         delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
     }
@@ -30,16 +38,9 @@ class Bank {
         return duration
     }
     
-    private func work(for client: Client) {
-        self.delegate?.startWork(for: client)
-        Thread.sleep(forTimeInterval: client.bankTask.requiredTime)
-        completedClientCount += 1
-        self.delegate?.finishWork(for: client)
-    }
-    
-    private func makeWork() {
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
+    private func distributeWork(numberOfBankClerkForDeposit: Int, numberOfBankClerkForLoan: Int) {
+        let depositSemaphore = DispatchSemaphore(value: numberOfBankClerkForDeposit)
+        let loanSemaphore = DispatchSemaphore(value: numberOfBankClerkForLoan)
         let group = DispatchGroup()
         
         while let client = self.clientQueue.dequeue() {
@@ -47,11 +48,11 @@ class Bank {
                 switch client.bankTask {
                 case .deposit:
                     depositSemaphore.wait()
-                    self.work(for: client)
+                    self.makeBankClerkWork(for: client)
                     depositSemaphore.signal()
                 case .loan:
                     loanSemaphore.wait()
-                    self.work(for: client)
+                    self.makeBankClerkWork(for: client)
                     loanSemaphore.signal()
                 }
             }
@@ -59,11 +60,10 @@ class Bank {
         group.wait()
     }
     
-    private func receiveClient() {
-        let numberOfClient = Int.random(in: 10...30)
-        for number in 1...numberOfClient {
-            let client = Client(waitingNumber: number)
-            clientQueue.enqueue(client)
-        }
+    private func makeBankClerkWork(for client: Client) {
+        self.delegate?.startWork(for: client)
+        Thread.sleep(forTimeInterval: client.bankTask.requiredTime)
+        completedClientCount += 1
+        self.delegate?.finishWork(for: client)
     }
 }
