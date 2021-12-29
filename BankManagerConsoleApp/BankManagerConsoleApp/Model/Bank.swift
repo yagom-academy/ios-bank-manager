@@ -49,10 +49,7 @@ struct Bank {
     private func workBanker(customers: Queue<Customer>, group: DispatchGroup) {
         let banker = Banker()
         DispatchQueue.global().async(group: group) {
-            while customers.isEmpty == false {
-                guard let customer = customers.dequeue() else {
-                    fatalError()
-                }
+            while let customer = customers.dequeue() {
                 banker.work(for: customer)
             }
         }
