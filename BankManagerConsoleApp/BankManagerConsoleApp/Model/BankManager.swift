@@ -6,9 +6,9 @@ enum Menu {
 }
 
 struct BankManager {
-    private let bank: Bank
+    private var bank: Bank
     
-    init(bank: Bank) {
+    init(bank: Bank = Bank()) {
         self.bank = bank
     }
     
@@ -30,7 +30,7 @@ struct BankManager {
         }
     }
     
-    private func setUpBankCustomers(to range: ClosedRange<Int> = 10...30) {
+    private mutating func setUpBankCustomers(to range: ClosedRange<Int> = 10...30) {
         let numberOfCustomers = Int.random(in: range)
         bank.handOutWaitingNumber(from: numberOfCustomers)
     }

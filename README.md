@@ -31,6 +31,12 @@
     + [의문점](#2-2-의문점)
     + [Trouble Shooting](#2-3-Trouble-Shooting)
     + [배운 개념](#2-4-배운-개념)
+    + [PR 후 개선사항](#2-5-PR-후-개선사항)
+- [STEP 3 : 다중 처리](#STEP-3--다중-처리)
+    + [고민했던 것](#3-1-고민했던-것)
+    + [의문점](#3-2-의문점)
+    + [Trouble Shooting](#3-3-Trouble-Shooting)
+    + [배운 개념](#3-4-배운-개념)
 
 # 키워드
 
@@ -43,6 +49,14 @@
 - `SOLID : SRP`
 - `Wildcard Pattern`
 - `Strong Reference Cycle`
+- `Core Foundation` vs `Foundation`
+- `CFAbsoluteTime` `Date`
+- `GCD`
+    - `DispatchQueue`
+    - `Semaphore`
+    - `DispatchGroup`
+    - `async` `sync`
+    - `Serial` `Concurrent`
 
 # STEP 1 : 큐 타입 구현
 
@@ -218,5 +232,100 @@
 - SOLID의 단일 책임 원칙
 - 와일드카드 패턴과 weak 키워드의 관계
 
+## 2-5 PR 후 개선사항
+
+- 개발할 때 염두해야할 것
+    - 기능을 선택할 때에는 비슷한 기능은 무엇이 있는지 탐색하기.
+    - 선택한 기능이 다른 기능보다 나은점은 뭐가 있는지 생각해보기
+    - 기능을 찾아 사용할 때 선택한 이유를 생각해보기
+- `CFAbsoluteTime` 타입 대신에 Date 타입을 활용하여 연산시간 측정하도록 수정
+    - `Core Foundation` 내장함수보다 `Foundation`에 있는 기능을 활용하려는 의도
+        - Core Foundation vs Foundation
+            - 코어 파운데이션에 있는 기능은 Foundation에서 래핑하여 구현되어져있다.
+            - 보통 앱개발을 할 때에는 Foundation의 기능 없이 개발하기에는 어려움이 있기 때문에, Core Foundation에 내장되어있는 기능보다는 Foundation에 내장되어있는 기능을 사용하는 것을 선호하는 편이다.
+- `Delegate` 패턴과 `ViewController` 타입 모두 삭제
+    - 다음 STEP를 지레짐작하지 말고 현재 STEP에 충실하자.
+    - 시도하고 실패하고 돌아가는 과정을 반복하며 개선해나가는 방향으로 진행하자.
+- `Message`의 네이밍을 명확하게 개선
+    - Menu의 프로퍼티를 활용하여 `menuList`의 프로퍼티 내부 하드코딩을 개선
+- `NumberFormatter`를 활용하였던 부분을 Double을 확장하여 개선
+    - `String(format:)`을 활용하여 description을 반환하도록 구성
+
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#은행-창구-매니저-프로젝트)
+
+---
+
+# STEP 3 : 다중 처리
+
+은행원 여러명이 업무를 처리할 수 있도록 구현합니다.
+
+## 3-1 고민했던 것
+
+### 1. 다중 처리
+
+- 여러 은행원이 동시에 고객의 일을 처리하는 로직을 고민했다.
+1. `global() 큐`에 은행원의 수 만큼 `task`를 만들고 각각의 `task`에서 고객을 `dequeue`해서 처리하는 방식
+2. 하나의 while 구문에서 dequeue 해주고 고객의 은행 업무에 따라 예금 고객은 `DispatchQueue.global()`에 세마포어를 이용해 `은행원 수 == 접근 가능한 스레드 수`  만드는 방식
+    - `DispatchSemaphore`의 `value`를 1이 아닌 2나 3으로 줄 경우 `Race Condition`이 발생할 수 있다는 가능성이 존재하기 때문에 해당 방법은 적절하지 못하다는 생각이 들었다.
+    - `Banker`가 가지고 있는 `work()` 메소드는 현재 공유자원에 접근하고 있지 않지만, 추후 해당 메소드가 공유자원에 접근하지 않을거라는 보장이 없다라는 생각이 들었다.
+- 추후 은행원의 수가 변경되더라도 대응할 수 있도록 은행원 수 만큼 `DispatchQueue.global()`에 `task`를 만드는 `1번 방식`으로 구현했다.
+    - `은행원 수` == `DispatchQueue의 수`
+
+### 2. 대기번호 오름차순으로 업무를 할 수 있도록 처리
+
+- 프로젝트 실행예시에는 대기번호 순으로 실행되고 있지 않은 점을 발견하게 되었다.
+    - 이 부분을 야곰에게 질문해보았고, 순차적으로 업무를 할 수 있도록 구현해보라고 하셔서 고민하게 되었다.
+- 고민한 결과, 대기번호 순으로 `차례대로 업무가 처리되야 된다고 생각`했기 때문에 대출업무와 예금업무를 보는 고객들을 `두개의 고객큐`로 나누어 관리하도록 구현했다.
+
+### 3. CustomStringConvertible을 사용하지 않고 연산프로퍼티를 사용
+
+- `Banking`의 경우 `rawValue`를 `String`으로 가지고 있는 형태인데, 이 부분을 은행원이 어떤 업무를 처리했는지 알려주기 위해 사용하려는 의도로 구현하게 되었다. `프로토콜 채택`과 `연산프로퍼티` 중에 어떤 방식으로 활용할 지 고민해보았다.
+    - `CustomStringConvertible`의 경우 인스턴스를 원하는 형태의 문자열로 반환하고 싶을 때 채택하여 사용하는 프로토콜로 우리가 활용하고자 하였던 부분이랑은 적합하지 않다는 생각이 들었다.
+    - 따라서 description이라는 연산프로퍼티를 활용하여 rawValue를 반환하도록 구현해주었다.
+
+## 3-2 의문점
+
+### DispatchSemaphore의 value가 1 이상이라면 Race Condition이 무조건 발생할까?
+
+- 처음에 while문 안에 `DispatchQueue`를 호출하고 `DispatchSemaphore`의 `value`를 `3`으로 주어 3개의 스레드만 접근할 수 있도록 설정해주었다. 그런데 여러번 돌려도 Race Condition이 발생하지 않았다.
+- 은행원의 수(`DispatchSemaphore value`)와 고객의 수를 늘려주고 테스트를 해보았더니 Race Condition이 발생하였다.
+    - 테스트를 하면서 알게된 부분은 `Banker`의 `work()` 메소드가 공유자원에 접근하지 않기 때문에 발생하지 않았던 것이였다. 프로퍼티 `count`를 만들어주고 그 count에 접근하도록 구현해주었더니 Race Condition이 발생하는 상황을 확인할 수 있었다.
+- 이 의문점을 풀면서 결국 `Semaphore의 value를 여러개 주는 것`은 공유자원에 접근할 수 있는 상황이라면 `Thread-safe하지 않은 것`이고, 따라서 은행원의 수를 `DispatchSemaphore`의 `value`에 맞춰 설계를 하는 것은 적절하지 못하다는 결론이 났다.
+
+## 3-3 Truoble Shooting
+
+### 구조체 프로퍼티는 클로저 내부에서 왜 변경할 수 없는가?
+
+- `상황` 프로젝트에서  `Bank 타입`은 `구조체`이고, `numberOfCustomers 프로퍼티`를 가지고 있다. 은행원이 일을 할 때, 처리한 고객의 수를 `Dispatch.global().async` 클로저 내에서 카운트(`numberOfCustomers`) 해주도록 하려고 했으나 위와 같은 에러가 발생하였다.
+- `이유`  `Escaping closure`의 경우 구조체에서는 캡쳐가 불가능하기 때문에, 프로퍼티를 변경하려고 하면 위와 같은 에러가 발생한다.
+
+```swift
+// 간단한 코드 예시
+struct SomeStruct {
+    var num = 0
+    
+    private mutating func test() {
+        let closure = { // Escaping closure captures mutating 'self' parameter
+            self.num += 1
+        }
+        closure()
+    }
+}
+```
+
+- `Escaping closure`의 경우 구조체에서는 캡쳐가 불가능하기 때문에, 프로퍼티를 변경하려고 하면 위와 같은 에러가 발생한다.
+    
+    > class와 같은 참조 타입이 아닌 Struct, enum과 같은 값타입에서는 mutating reference의 캡쳐를 허용하지 않기 때문에 self 사용이 불가능 하다.
+    > 
+- `해결` `Bank 타입`을 `클래스`로 바꿔주었다.
+
+## 3-4 배운 개념
+
+- 동기(Synchronous)와 비동기(Asynchronous)의 이해
+- 동시성 프로그래밍 개념의 이해
+- 동시성 프로그래밍을 위한 기반기술(GCD, Operation) 등의 이해
+- 스레드(Thread) 개념에 대한 이해
+- GCD를 활용한 동시성 프로그래밍 구현
+- 동기(Synchronous)와 비동기(Asynchronous) 동작의 구현 및 적용
 
 [![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#은행-창구-매니저-프로젝트)

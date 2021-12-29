@@ -12,6 +12,7 @@ final class LinkedList<Element> {
     
     private var head: Node<Element>?
     private var tail: Node<Element>?
+    private let serialQueue = DispatchQueue(label: "LinkedListDispatchQueue")
     
     var first: Element? {
         return head?.value
@@ -35,12 +36,14 @@ final class LinkedList<Element> {
     
     @discardableResult
     func removeFirst() -> Element? {
-        guard isEmpty == false else {
-            return nil
+        var result: Element?
+        serialQueue.sync {
+            guard isEmpty == false else {
+                return
+            }
+            result = head?.value
+            head = head?.next
         }
-        let result = head?.value
-        head = head?.next
-        
         return result
     }
     
