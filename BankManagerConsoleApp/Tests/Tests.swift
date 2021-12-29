@@ -84,3 +84,17 @@ extension Tests {
         XCTAssertNil(queue.tail)
     }
 }
+
+extension Tests {
+    func test_allValues프로퍼티_테스트() {
+        //given
+        let queue = Queue<Int>()
+
+        //when
+        queue.enqueue(1)
+        queue.enqueue(2)
+
+        //then
+        XCTAssertEqual(queue.allValues, [1,2])
+    }
+}
