@@ -10,24 +10,37 @@ import Foundation
 class Employee {
     var bank: WaitingLineManageable?
     let speaker = Speaker()
-    private let seconds = 0.7
-    private var customerCount = 0
+    var customerCount = 0
     
-    func startJob() {
-        guard let customer = bank?.waitingLine.first else {
+    func startLoanJob() {
+        guard let customer = bank?.loanWaitingLine.first else {
             return
         }
-        
-        speaker.speakStart(for: customer.waitingNumber)
+                
+        speaker.speakStart(for: customer.waitingNumber, workType: customer.requestedWork)
     }
     
-    func finishJob() {
-        guard let customer = bank?.waitingLine.dequeue() else {
+    func finishLoanJob() {
+        guard let customer = bank?.loanWaitingLine.dequeue() else {
             return
         }
         
         customerCount += 1
-        
-        speaker.speakFinish(for: customer.waitingNumber)
+
+        speaker.speakFinish(for: customer.waitingNumber, workType: customer.requestedWork)
+    }
+    
+    func startDepositJob() {
+        guard let customer = bank?.depositWaitingLine.first else {
+            return
+        }
+                
+        speaker.speakStart(for: customer.waitingNumber, workType: customer.requestedWork)
+    }
+    
+    func finishDepositJob(customer: Customer) {
+        customerCount += 1
+
+        speaker.speakFinish(for: customer.waitingNumber, workType: customer.requestedWork)
     }
 }

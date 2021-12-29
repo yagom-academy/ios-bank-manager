@@ -9,7 +9,5 @@ import Foundation
 
 struct Customer {
     var waitingNumber: Int
-    var requestedWork: BankWork {
-        BankWork.allCases.randomElement()!
-    }
+    var requestedWork: BankWork
 }

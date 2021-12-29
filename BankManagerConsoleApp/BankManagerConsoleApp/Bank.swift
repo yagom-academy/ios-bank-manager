@@ -8,13 +8,15 @@
 import Foundation
 
 protocol WaitingLineManageable {
-    var waitingLine: Queue<Customer> { get }
+    var depositWaitingLine: Queue<Customer> { get }
+    var loanWaitingLine: Queue<Customer> { get }
 }
-
+    
 class Bank: WaitingLineManageable  {
     private weak var employee: Employee?
     private weak var bankManager: BankManager?
-    let waitingLine = Queue<Customer>()
+    let depositWaitingLine = Queue<Customer>()
+    let loanWaitingLine = Queue<Customer>()
 
     init(employee: Employee, bankManager: BankManager) {
         self.employee = employee
