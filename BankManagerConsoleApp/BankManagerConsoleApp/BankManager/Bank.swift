@@ -36,26 +36,18 @@ class Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         let dispatchGroup = DispatchGroup()
         for _ in 1...numberOfDepositBankers {
-            serviceForDepositClients(in: dispatchGroup)
+            serviceForClients(queue: depositQueue, in: dispatchGroup)
         }
         for _ in 1...numberOfLoanBankers {
-            serviceForLoanClients(in: dispatchGroup)
+            serviceForClients(queue: loanQueue, in: dispatchGroup)
         }
         dispatchGroup.wait()
         workDone(startTime: startTime, clientCount: clientCount)
     }
     
-    private func serviceForDepositClients(in dispatchGroup: DispatchGroup) {
+    private func serviceForClients(queue: Queue<Client>, in dispatchGroup: DispatchGroup) {
         DispatchQueue.global().async(group: dispatchGroup) {
-            while let client = self.depositQueue.dequeue() {
-                self.service(for: client)
-            }
-        }
-    }
-    
-    private func serviceForLoanClients(in dispatchGroup: DispatchGroup) {
-        DispatchQueue.global().async(group: dispatchGroup) {
-            while let client = self.loanQueue.dequeue() {
+            while let client = queue.dequeue() {
                 self.service(for: client)
             }
         }

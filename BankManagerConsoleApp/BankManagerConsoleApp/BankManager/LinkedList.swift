@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct LinkedList<Element> {
+final class LinkedList<Element> {
     
-    let linkedListSerialQueue = DispatchQueue(label: "linkedListSerialQueue")
     private final class Node<Value> {
         
         var value: Value
@@ -20,6 +19,7 @@ struct LinkedList<Element> {
         }
     }
     
+    private let linkedListSerialQueue = DispatchQueue(label: "linkedListSerialQueue")
     private var head: Node<Element>?
     private var tail: Node<Element>?
     var isEmpty: Bool {
@@ -29,8 +29,8 @@ struct LinkedList<Element> {
         return head?.value
     }
     
-    mutating func append(_ value: Element) {
-        guard !isEmpty else {
+    func append(_ value: Element) {
+        guard isEmpty == false else {
             head = Node(value)
             tail = head
             return
@@ -39,7 +39,7 @@ struct LinkedList<Element> {
         tail = tail?.next
     }
     
-    mutating func removeFirst() -> Element? {
+    func removeFirst() -> Element? {
         var result: Element?
         linkedListSerialQueue.sync {
             guard let firstNode = head else {
@@ -51,7 +51,7 @@ struct LinkedList<Element> {
         return result
     } 
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
         tail = nil
     }
