@@ -80,7 +80,7 @@ class BankManagerView: UIView {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
-        stackView.alignment = .center
+        stackView.distribution = .fillEqually
         return stackView
     }()
     let waitingQueueStackView: UIStackView = {

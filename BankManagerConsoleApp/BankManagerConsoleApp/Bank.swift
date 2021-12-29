@@ -1,7 +1,7 @@
 import Foundation
 
 class Bank {
-    enum Service: String, CaseIterable {
+    enum Service: String, CaseIterable, CustomStringConvertible {
         case deposit
         case loan
         
@@ -11,6 +11,15 @@ class Bank {
                 return 0.7
             case .loan:
                 return 1.1
+            }
+        }
+        
+        var description: String {
+            switch self {
+            case .deposit:
+                return "예금"
+            case .loan:
+                return "대출"
             }
         }
     }
