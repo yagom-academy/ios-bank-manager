@@ -45,8 +45,14 @@ struct BankingProgramHandler {
     }
     
     private func setBankWithRandomCustomer() {
-        let randomNumberOfCustomer = Int.random(in: 10...30)
-        let bank = Bank(numberOfBankClerk: 1, numberOfCustomer: randomNumberOfCustomer)
+        let randomNumber = Int.random(in: 10...30)
+        let numberOfDepositManager = 2
+        let numberOfLoanManager = 1
+        
+        let bank = Bank(numberOfDepositManager: numberOfDepositManager,
+                        numberOfLoanManager: numberOfLoanManager,
+                        numberOfCustomer: randomNumber
+                        )
         bank.openBank()
     }
 }

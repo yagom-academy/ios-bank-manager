@@ -2,73 +2,94 @@ import Foundation
 
 struct Bank {
     // MARK: - Properties
-    private var bankClerk: DispatchQueue = DispatchQueue(label: "customSerial")
     private var customers: CustomerQueue = CustomerQueue<Customer>()
     private var numberOfCustomer: Int = 0
+    private let numberOfDepositManager: Int
+    private let numberOfLoanManager: Int
     private let dispatchGroup = DispatchGroup()
+    private var depositSemaphore: DispatchSemaphore
+    private var loanSemaphore: DispatchSemaphore
     
     // MARK: - Initalizer
-    init(numberOfBankClerk: Int, numberOfCustomer: Int) {
-        setupCustomers(of: numberOfCustomer)
+    init(
+        numberOfDepositManager: Int,
+        numberOfLoanManager:Int,
+        numberOfCustomer: Int
+    ) {
+        self.numberOfDepositManager = numberOfDepositManager
+        self.numberOfLoanManager = numberOfLoanManager
+        depositSemaphore = DispatchSemaphore(value: numberOfDepositManager)
+        loanSemaphore = DispatchSemaphore(value: numberOfLoanManager)
+        
         self.numberOfCustomer = numberOfCustomer
+        setupCustomers(of: numberOfCustomer)
     }
     
     // MARK: - Methods
     private func setupCustomers(of number: Int) {
-         for index in 0..<number {
-             let customer = Customer(number: (index + 1))
-             customers.enqueue(value: customer)
-         }
-     }
+        for index in 0..<number {
+            guard let randomTask: BankTask = BankTask.allCases.randomElement() else { return }
+            let customer = Customer(number: (index + 1), bankTask: randomTask)
+            customers.enqueue(value: customer)
+        }
+    }
     
     func openBank() {
-        dispatchGroup.enter()
         let totalTime = checkTotalTime(of: handleTaskOfAllCustomers)
-        dispatchGroup.leave()
-        
-        dispatchGroup.wait()
         notifyBankClosing(with: totalTime)
     }
     
-    private func checkTotalTime(of taskFunction: () -> Void) -> String {
+    private func checkTotalTime(of taskFunction: () throws -> Void) -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
-        taskFunction()
+        
+        do {
+            try taskFunction()
+        } catch {
+            print(error)
+        }
+
+        dispatchGroup.wait()
+        
         let totalTime = CFAbsoluteTimeGetCurrent() - startTime
         let totalTimeText: String = totalTime.formattedToTwoDecimalPoint
-
+        
         return totalTimeText
     }
     
-    private func handleTaskOfAllCustomers() {
-        let taskItem = DispatchWorkItem {
-            if let currentCustomer = customers.peek {
-                workOnTask(of: currentCustomer)
+    private func handleTaskOfAllCustomers() throws {
+        while let nextTurnCustomer = try customers.dequeue() {
+            DispatchQueue.global().async(group: dispatchGroup) {
+                switch nextTurnCustomer.bankTask {
+                case .deposit:
+                   depositSemaphore.wait()
+                   workOnTask(of: nextTurnCustomer)
+                case .loan:
+                   loanSemaphore.wait()
+                   workOnTask(of: nextTurnCustomer)
+                }
             }
-        }
-        
-        for _ in 0..<numberOfCustomer {
-            bankClerk.sync(execute: taskItem)
         }
     }
     
     private func workOnTask(of customer: Customer) {
         notifyStartingTask(of: customer)
-        customer.task()
+        Thread.sleep(forTimeInterval: customer.bankTask.taskHandlingTime)
         notifyFinisingTask(of: customer)
         
-        do {
-            try customers.dequeue()
-        } catch {
-            print(error)
+        switch customer.bankTask {
+        case .deposit:
+            depositSemaphore.signal()
+        case .loan:
+            loanSemaphore.signal()
         }
     }
     
     private func notifyStartingTask(of customer: Customer) {
-        print("\(customer.number)번 고객 업무 시작")
+        print("\(customer.number)번 고객 \(customer.bankTask.description)업무 시작")
     }
     
     private func notifyFinisingTask(of customer: Customer) {
-        print("\(customer.number)번 고객 업무 완료")
+        print("\(customer.number)번 고객 \(customer.bankTask.description)업무 완료")
     }
     
     private func notifyBankClosing(with totalTime: String) {
