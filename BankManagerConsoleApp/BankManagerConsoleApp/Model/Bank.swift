@@ -9,14 +9,13 @@ class Bank {
     var delegate: BankDelegate?
     
     init(numberOfBankClerk: Int, delegate: BankDelegate) {
-        self.makeBankClerk(for: numberOfBankClerk)
         self.receiveClient()
         self.delegate = delegate
     }
     
     func open() {
         let workHours = measureTime() {
-            makeBankClerksWork()
+            self.makeWork()
         }
         delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
     }
@@ -31,34 +30,33 @@ class Bank {
         return duration
     }
     
-    private func makeBankClerksWork() {
+    private func work(for client: Client) {
+        self.delegate?.startWork(for: client)
+        Thread.sleep(forTimeInterval: client.bankTask.requiredTime)
+        completedClientCount += 1
+        self.delegate?.finishWork(for: client)
+    }
+    
+    private func makeWork() {
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
         let group = DispatchGroup()
-        for bankClerk in bankClerks {
+        
+        while let client = self.clientQueue.dequeue() {
             DispatchQueue.global().async(group: group) {
-                self.distributeClient(to: bankClerk)
+                switch client.bankTask {
+                case .deposit:
+                    depositSemaphore.wait()
+                    self.work(for: client)
+                    depositSemaphore.signal()
+                case .loan:
+                    loanSemaphore.wait()
+                    self.work(for: client)
+                    loanSemaphore.signal()
+                }
             }
         }
         group.wait()
-    }
-    
-    private func distributeClient(to bankClerk: BankClerk) {
-        while !self.clientQueue.isEmpty {
-            semaphore.wait()
-            if let client = self.clientQueue.dequeue() {
-                semaphore.signal()
-                delegate?.startWork(for: client)
-                bankClerk.work(for: client)
-                delegate?.finishWork(for: client)
-                completedClientCount += 1
-            }
-        }
-    }
-    
-    private func makeBankClerk(for number: Int) {
-        for _ in 1...number {
-            let bankClerk = BankClerk()
-            bankClerks.append(bankClerk)
-        }
     }
     
     private func receiveClient() {
