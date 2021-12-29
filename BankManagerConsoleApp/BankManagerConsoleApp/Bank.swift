@@ -38,17 +38,12 @@ struct Bank {
     private func checkTotalTime(of taskFunction: () throws -> Void) -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
         
-        dispatchGroup.enter()
         do {
             try taskFunction()
         } catch {
             print(error)
         }
-        dispatchGroup.leave()
-        
-        while customers.isEmpty == false {
-            continue
-        }
+
         dispatchGroup.wait()
         
         let totalTime = CFAbsoluteTimeGetCurrent() - startTime
@@ -59,14 +54,14 @@ struct Bank {
     
     private func handleTaskOfAllCustomers() throws {
         while let nextTurnCustomer = try customers.dequeue() {
-            DispatchQueue.global().async(group: dispatchGroup) { [self] in
+            DispatchQueue.global().async(group: dispatchGroup) {
                 switch nextTurnCustomer.bankTask {
                 case .deposit:
-                    self.depositSemaphore.wait()
-                    self.workOnTask(of: nextTurnCustomer)
+                   depositSemaphore.wait()
+                   workOnTask(of: nextTurnCustomer)
                 case .loan:
-                    self.loanSemaphore.wait()
-                    self.workOnTask(of: nextTurnCustomer)
+                   loanSemaphore.wait()
+                   workOnTask(of: nextTurnCustomer)
                 }
             }
         }
