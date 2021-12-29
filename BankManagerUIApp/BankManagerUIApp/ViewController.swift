@@ -10,6 +10,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initAllUIComponents()
+        
+        view = BankManagerView(frame: view.frame)
     }
 }
