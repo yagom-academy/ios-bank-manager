@@ -30,23 +30,19 @@ class BankManager {
     }
     
     private func startBankTask() {
-        let depositSemaphore = DispatchSemaphore(value: Bank.depositClerkCount)
-        let loanSemaphore = DispatchSemaphore(value: Bank.loanClerkCount)
-        
         while let taskType = clients.informTaskType(),
               let clientIdentifier = clients.dequeueWaitingLine() {
-            DispatchQueue.global().async(group: dispatchGroup) {
-                switch taskType {
-                case .deposit:
-                    depositSemaphore.wait()
-                    self.clerk.work(for: clientIdentifier, task: taskType)
-                    depositSemaphore.signal()
-                case .loan:
-                    loanSemaphore.wait()
-                    self.clerk.work(for: clientIdentifier, task: taskType)
-                    loanSemaphore.signal()
-                }
-            }
+            giveTask(of: taskType, for: clientIdentifier)
+        }
+    }
+    
+    func giveTask(of taskType: Bank.Task, for clientIdentifier: Int) {
+        let semaphore = taskType.semaphore
+        
+        DispatchQueue.global().async(group: dispatchGroup) {
+            semaphore.wait()
+            self.clerk.work(for: clientIdentifier, task: taskType)
+            semaphore.signal()
         }
     }
     

@@ -14,7 +14,10 @@ enum Bank {
         case deposit
         case loan
         
-        var name: String {
+        static let depositSemaphore = DispatchSemaphore(value: Bank.depositClerkCount)
+        static let loanSemaphore = DispatchSemaphore(value: Bank.loanClerkCount)
+        
+        var koreanName: String {
             switch self {
             case .deposit:
                 return "예금"
@@ -22,12 +25,21 @@ enum Bank {
                 return "대출"
             }
         }
-        var time: Double {
+        var timeNeeded: Double {
             switch self {
             case .deposit:
                 return 0.7
             case .loan:
                 return 1.1
+            }
+        }
+        var semaphore: DispatchSemaphore {
+            switch self {
+            case .deposit:
+                return Bank.Task.depositSemaphore
+            case .loan:
+                return Bank.Task.loanSemaphore
+                
             }
         }
     }
