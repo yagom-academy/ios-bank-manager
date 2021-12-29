@@ -10,7 +10,7 @@ class BankPrinter { }
 
 extension BankPrinter: BankDelegate {
     func printClosingMessage(customers: Int, processingTime: Double) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(processingTime.formatted)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(processingTime.formattedToSecond)초입니다.")
     }
 }
 
@@ -25,7 +25,8 @@ extension BankPrinter: BankClerkDelegate {
 }
 
 private extension Double {
-    var formatted : String {
-        return String(format: "%.2f", self)
+    var formattedToSecond : String {
+        let second = self / 1000000000
+        return String(format: "%.2f", second)
     }
 }

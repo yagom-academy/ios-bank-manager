@@ -37,7 +37,7 @@ class Bank {
         let bankGroup = DispatchGroup()
         
         var processedCustomers = 0
-        let startTime = CFAbsoluteTimeGetCurrent()
+        let startTime = DispatchTime.now()
         
         while let customer = customerQueue.dequeue() {
             switch customer.task {
@@ -57,8 +57,9 @@ class Bank {
         
         bankGroup.wait()
         
-        let endTime = CFAbsoluteTimeGetCurrent()
-        let totalProcessingTime = endTime - startTime
+        let endTime = DispatchTime.now()
+        
+        let totalProcessingTime = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds)
         close(totalCustomers: processedCustomers, totalProcessingTime: totalProcessingTime)
     }
     
