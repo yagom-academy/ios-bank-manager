@@ -3,13 +3,13 @@ import Foundation
 final class Bank {
     private var loanCustomerQueue = Queue<Customer>()
     private var depositCustomerQueue = Queue<Customer>()
-    private let loanBankersNumber: Int
-    private let depositBankersNumber: Int
+    private let loanBankersCount: Int
+    private let depositBankersCount: Int
     private var numberOfCustomers = 0
     
     init(loanBankersCount: Int = 1, depositBankersCount: Int = 2) {
-        self.loanBankersNumber = loanBankersCount
-        self.depositBankersNumber = depositBankersCount
+        self.loanBankersCount = loanBankersCount
+        self.depositBankersCount = depositBankersCount
     }
     
     func handOutWaitingNumber(from customerNumber: Int) {
@@ -32,8 +32,8 @@ final class Bank {
         let bankGroup = DispatchGroup()
         let openTime = Date()
         
-        workBankers(loanBankersNumber, customers: loanCustomerQueue, group: bankGroup)
-        workBankers(depositBankersNumber, customers: depositCustomerQueue, group: bankGroup)
+        workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
+        workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
         
         bankGroup.wait()
         closeBank(numberOfCustomers, from: openTime)
