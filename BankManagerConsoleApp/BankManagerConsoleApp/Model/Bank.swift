@@ -1,9 +1,11 @@
 import Foundation
 
 class Bank {
+    private var delegate: BankDelegate?
     private var clientQueue: Queue<Client> = Queue<Client>()
     private var completedClientCount: Int = 0
-    var delegate: BankDelegate?
+    private let numberOfBankClerkForDeposit = 2
+    private let numberOfBankClerkForLoan = 1
     
     init(delegate: BankDelegate) {
         self.receiveClient()
@@ -20,7 +22,10 @@ class Bank {
     
     func open() {
         let workHours = measureTime() {
-            self.distributeWork(numberOfBankClerkForDeposit: 2, numberOfBankClerkForLoan: 1)
+            self.distributeWork(
+                inChargeOfDeposits: numberOfBankClerkForDeposit,
+                inChargeOfLoan: numberOfBankClerkForLoan
+            )
         }
         delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
     }
@@ -35,9 +40,9 @@ class Bank {
         return duration
     }
     
-    private func distributeWork(numberOfBankClerkForDeposit: Int, numberOfBankClerkForLoan: Int) {
-        let depositSemaphore = DispatchSemaphore(value: numberOfBankClerkForDeposit)
-        let loanSemaphore = DispatchSemaphore(value: numberOfBankClerkForLoan)
+    private func distributeWork(inChargeOfDeposits: Int, inChargeOfLoan: Int) {
+        let depositSemaphore = DispatchSemaphore(value: inChargeOfDeposits)
+        let loanSemaphore = DispatchSemaphore(value: inChargeOfLoan)
         let group = DispatchGroup()
         
         while let client = self.clientQueue.dequeue() {
