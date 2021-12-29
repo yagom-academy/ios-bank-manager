@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3358D76D27746F49004A442D /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358D76C27746F49004A442D /* Bank.swift */; };
 		3358D76F27746F4F004A442D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358D76E27746F4F004A442D /* Client.swift */; };
-		3358D77127746F59004A442D /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358D77027746F59004A442D /* BankClerk.swift */; };
 		335998B5277AEA8100573933 /* BankDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335998B4277AEA8100573933 /* BankDelegate.swift */; };
 		33B3602F2770850400EE24A6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B3602E2770850400EE24A6 /* Queue.swift */; };
 		33B70F482779A66A005459ED /* ConsoleBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B70F472779A66A005459ED /* ConsoleBundle.swift */; };
@@ -39,7 +38,6 @@
 /* Begin PBXFileReference section */
 		3358D76C27746F49004A442D /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		3358D76E27746F4F004A442D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		3358D77027746F59004A442D /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		335998B4277AEA8100573933 /* BankDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDelegate.swift; sourceTree = "<group>"; };
 		33B3602E2770850400EE24A6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		33B70F472779A66A005459ED /* ConsoleBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleBundle.swift; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 				63C112ED27705B6600BB79CF /* LinkedList.swift */,
 				3358D76C27746F49004A442D /* Bank.swift */,
 				3358D76E27746F4F004A442D /* Client.swift */,
-				3358D77027746F59004A442D /* BankClerk.swift */,
 				33B70F472779A66A005459ED /* ConsoleBundle.swift */,
 				63BF0E8B277C44BF002AE5FA /* BankTask.swift */,
 			);
@@ -232,7 +229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63BF0E8C277C44BF002AE5FA /* BankTask.swift in Sources */,
-				3358D77127746F59004A442D /* BankClerk.swift in Sources */,
 				63C112EE27705B6700BB79CF /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				3358D76F27746F4F004A442D /* Client.swift in Sources */,

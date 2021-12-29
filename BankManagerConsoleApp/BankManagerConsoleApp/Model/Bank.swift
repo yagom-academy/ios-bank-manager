@@ -3,12 +3,9 @@ import Foundation
 class Bank {
     private var clientQueue: Queue<Client> = Queue<Client>()
     private var completedClientCount: Int = 0
-    private var bankClerks: [BankClerk] = []
-    private var numberOfBankClerk: Int?
-    private let semaphore = DispatchSemaphore(value: 1)
     var delegate: BankDelegate?
     
-    init(numberOfBankClerk: Int, delegate: BankDelegate) {
+    init(delegate: BankDelegate) {
         self.receiveClient()
         self.delegate = delegate
     }
