@@ -9,6 +9,7 @@ import Foundation
 
 struct LinkedList<Element> {
     
+    let linkedListSerialQueue = DispatchQueue(label: "linkedListSerialQueue")
     private final class Node<Value> {
         
         var value: Value
@@ -39,13 +40,16 @@ struct LinkedList<Element> {
     }
     
     mutating func removeFirst() -> Element? {
-        guard let firstNode = head else {
-            return nil
+        var result: Element?
+        linkedListSerialQueue.sync {
+            guard let firstNode = head else {
+                return
+            }
+            result = firstNode.value
+            head = firstNode.next
         }
-        let result = firstNode.value
-        head = firstNode.next
         return result
-    }
+    } 
     
     mutating func removeAll() {
         head = nil

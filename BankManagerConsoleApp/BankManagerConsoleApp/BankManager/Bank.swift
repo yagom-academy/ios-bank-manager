@@ -46,24 +46,16 @@ class Bank {
     }
     
     private func serviceForDepositClients(in dispatchGroup: DispatchGroup) {
-        let depositSemaphore = DispatchSemaphore(value: 1)
         DispatchQueue.global().async(group: dispatchGroup) {
-            while self.depositQueue.isEmpty == false {
-                depositSemaphore.wait()
-                guard let client = self.depositQueue.dequeue() else { break }
-                depositSemaphore.signal()
+            while let client = self.depositQueue.dequeue() {
                 self.service(for: client)
             }
         }
     }
     
     private func serviceForLoanClients(in dispatchGroup: DispatchGroup) {
-        let loanSemaphore = DispatchSemaphore(value: 1)
         DispatchQueue.global().async(group: dispatchGroup) {
-            while self.loanQueue.isEmpty == false {
-                loanSemaphore.wait()
-                guard let client = self.loanQueue.dequeue() else { break }
-                loanSemaphore.signal()
+            while let client = self.loanQueue.dequeue() {
                 self.service(for: client)
             }
         }
