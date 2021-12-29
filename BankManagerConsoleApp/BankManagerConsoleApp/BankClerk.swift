@@ -15,8 +15,14 @@ struct BankClerk {
     private var loanClerkNumber: Int
     
     init(depositClerkCount: Int, loanClerkCount: Int) {
-        self.depositDepartment = BankClerk.setDepartment(count: depositClerkCount, department: "deposit")
-        self.loanDepartment = BankClerk.setDepartment(count: loanClerkCount, department: "loan")
+        self.depositDepartment = BankClerk.setDepartment(
+            count: depositClerkCount,
+            department: BankService.deposit.englishDescription
+        )
+        self.loanDepartment = BankClerk.setDepartment(
+            count: loanClerkCount,
+            department: BankService.loan.englishDescription
+        )
         self.depositClerkNumber = 0
         self.loanClerkNumber = 0
     }
