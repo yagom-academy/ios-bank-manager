@@ -17,9 +17,9 @@ func printMenu() {
 
 func runProgram() {
     let bankPrinter = BankPrinter()
-    let bank = BankFactory.createBank(with: bankPrinter)
     
     while true {
+        let bank = BankFactory.createBank(with: bankPrinter)
         printMenu()
         let userInput = readLine()
         
