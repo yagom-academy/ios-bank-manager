@@ -63,4 +63,22 @@ class CustomerListStackView: UIStackView {
     func addCustomerLabel(_ label: UILabel) {
         listStackView.addArrangedSubview(label)
     }
+    
+    func removeLabel(at waitingNumber: Int) -> UILabel {
+        guard let customerLabel = listStackView.arrangedSubviews
+                                               .compactMap({ $0 as? CustomerLabel })
+                                               .filter({ $0.waitingNumber == waitingNumber })
+                                               .first else {
+            fatalError()
+        }
+        customerLabel.removeFromSuperview()
+
+        return customerLabel
+    }
+    
+    func clear() {
+        listStackView.arrangedSubviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
+    }
 }

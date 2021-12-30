@@ -48,6 +48,7 @@ extension ViewController {
         resetButton.setTitle("초기화", for: .normal)
         resetButton.tintColor = .red
         resetButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        resetButton.addTarget(self, action: #selector(touchUpResetButton), for: .touchUpInside)
         
         buttonStackView.addArrangedSubview(addCustomerButton)
         buttonStackView.addArrangedSubview(resetButton)
@@ -95,6 +96,12 @@ extension ViewController {
 extension ViewController {
     @objc private func touchUpAddCustomer() {
         bankManager?.setUpBankCustomers()
+    }
+    
+    @objc private func touchUpResetButton() {
+        waitingListStackView.clear()
+        workingListStackView.clear()
+        bank?.close()
     }
 }
 

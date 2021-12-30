@@ -39,13 +39,11 @@ final class Bank {
     
     func openBank() {
         let bankGroup = DispatchGroup()
-        let openTime = Date()
         
         workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
         workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
         
         bankGroup.wait()
-        closeBank(numberOfCustomers, from: openTime)
     }
     
     private func workBankers(_ number: Int, customers: Queue<Customer>, group: DispatchGroup) {
@@ -63,9 +61,7 @@ final class Bank {
         }
     }
     
-    private func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
-        let durationTime = -openTime.timeIntervalSinceNow
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(durationTime.roundedOffDescription(for: 2))초 입니다.")
+    func close() {
         self.numberOfCustomers = 0
     }
 }

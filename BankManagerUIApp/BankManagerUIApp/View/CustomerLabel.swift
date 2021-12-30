@@ -1,6 +1,8 @@
 import UIKit
 
 class CustomerLabel: UILabel {
+    private(set) var waitingNumber: Int = 0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -11,6 +13,7 @@ class CustomerLabel: UILabel {
     
     convenience init(_ number: Int, _ banking: String) {
         self.init()
+        self.waitingNumber = number
         setUp()
         setUpText(number, banking)
     }
