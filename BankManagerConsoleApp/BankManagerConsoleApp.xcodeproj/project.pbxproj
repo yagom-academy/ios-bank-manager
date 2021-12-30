@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481E82172779B20400C8BB4E /* BankingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E82162779B20400C8BB4E /* BankingType.swift */; };
 		4843121E277461A0003423B6 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4843121D277461A0003423B6 /* Banker.swift */; };
 		48BED40C277055F70088A04C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED40B277055F70088A04C /* LinkedList.swift */; };
 		48BED40E2770630A0088A04C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED40D2770630A0088A04C /* Queue.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		481E82162779B20400C8BB4E /* BankingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingType.swift; sourceTree = "<group>"; };
 		4843121D277461A0003423B6 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		48BED40B277055F70088A04C /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		48BED40D2770630A0088A04C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				897A370A277466E600431A6A /* Bank.swift */,
 				89A9F1BC277588430045E5BC /* OperatingTimeManager.swift */,
 				897A370C2774675700431A6A /* Client.swift */,
+				481E82162779B20400C8BB4E /* BankingType.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -149,7 +152,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					89F1689C27716AFC00F12029 = {
 						CreatedOnToolsVersion = 13.1;
@@ -208,6 +211,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				897A370D2774675700431A6A /* Client.swift in Sources */,
 				4843121E277461A0003423B6 /* Banker.swift in Sources */,
+				481E82172779B20400C8BB4E /* BankingType.swift in Sources */,
 				897A370B277466E600431A6A /* Bank.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				48BED40E2770630A0088A04C /* Queue.swift in Sources */,
@@ -379,6 +383,7 @@
 		C7694E7E259C3EC00053667F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -388,6 +393,7 @@
 		C7694E7F259C3EC00053667F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

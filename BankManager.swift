@@ -25,13 +25,14 @@ struct BankManager {
     return input
   }
   
-  mutating func runBankManager(numberOfBankers: Int) {
+  mutating func runBankManager(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
     while true {
       let choiceMenu = self.chooseMenu()
       
       switch choiceMenu {
       case Menu.openBank.rawValue :
-        operateBank(numberOfBankers: numberOfBankers)
+        operateBank(numberOfDepositBankers: numberOfDepositBankers,
+                    numberOfLoanBankers: numberOfLoanBankers)
       case Menu.exit.rawValue :
         return
       default :
@@ -40,20 +41,31 @@ struct BankManager {
     }
   }
   
-  private mutating func operateBank (numberOfBankers: Int) {
-    let bankers = prepareBanker(numberOfBankers: numberOfBankers)
-    var bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
+  private mutating func operateBank (numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+    let numberOfClients = Int.random(in: 10...30)
+    let bankers = prepareBanker(numberOfDepositBankers: numberOfDepositBankers,
+                                numberOfLoanBankers: numberOfLoanBankers)
+    let clients = clientLineUp(numberOfClients: numberOfClients)
+    let bank = Bank(numberOfClients: numberOfClients, bankers: bankers, clientQueue: clients,  operatingTimeManager: OperatingTimeManager())
     bank.doBanking()
   }
   
-  private mutating func prepareBanker(numberOfBankers: Int) -> [Banker] {
-    var bankers: [Banker] = []
-
-    (0..<numberOfBankers).forEach {_ in
-      let banker = Banker()
-      bankers.append(banker)
+  private mutating func prepareBanker(numberOfDepositBankers: Int,
+                                      numberOfLoanBankers: Int) -> [Banker] {
+    let depositeBankers = Array.init(repeating: Banker(assignedTask: .deposit),
+                                     count: numberOfDepositBankers)
+    let loanBankers = Array.init(repeating: Banker(assignedTask: .loan),
+                                 count: numberOfLoanBankers)
+    return depositeBankers + loanBankers
+  }
+  
+  private func clientLineUp(numberOfClients: Int) -> Queue<Client> {
+    let numberOfClients = numberOfClients
+    var clientQueue = Queue<Client>()
+    for sequence in 0..<numberOfClients {
+      clientQueue.enqueue(Client(sequence: sequence))
     }
-    return bankers
+    return clientQueue
   }
 }
                               
