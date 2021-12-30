@@ -3,8 +3,8 @@ import Foundation
 struct Bank {
     private var customerQueue: Queue<Customer>
     private let bankManager: BankManager
-    private var depositBankerCount: Int
-    private var loanBankerCount: Int
+    private let depositBankerCount: Int
+    private let loanBankerCount: Int
     
     init(depositBankerCount: Int, loanBankerCount: Int, customerQueue: Queue<Customer>, bankManager: BankManager) {
         self.depositBankerCount = depositBankerCount
@@ -22,7 +22,6 @@ extension Bank {
         open()
         bankManager.endTimeCheck()
         close()
-        bankManager.clearTotalValues()
     }
     
     private mutating func open() {

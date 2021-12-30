@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6B867BF1277D8CFB00FC3F55 /* Error in Resources */ = {isa = PBXBuildFile; fileRef = 6B867BED277D8CFB00FC3F55 /* Error */; };
-		6B867BF2277D8CFB00FC3F55 /* Extension in Resources */ = {isa = PBXBuildFile; fileRef = 6B867BEE277D8CFB00FC3F55 /* Extension */; };
 		6B867BF3277D8CFB00FC3F55 /* Model in Resources */ = {isa = PBXBuildFile; fileRef = 6B867BEF277D8CFB00FC3F55 /* Model */; };
 		6B867BF4277D8CFB00FC3F55 /* DataStructure in Resources */ = {isa = PBXBuildFile; fileRef = 6B867BF0277D8CFB00FC3F55 /* DataStructure */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
@@ -41,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		6B867BED277D8CFB00FC3F55 /* Error */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Error; sourceTree = "<group>"; };
-		6B867BEE277D8CFB00FC3F55 /* Extension */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extension; sourceTree = "<group>"; };
 		6B867BEF277D8CFB00FC3F55 /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
 		6B867BF0277D8CFB00FC3F55 /* DataStructure */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DataStructure; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +144,6 @@
 				6B867BEF277D8CFB00FC3F55 /* Model */,
 				6B867BF0277D8CFB00FC3F55 /* DataStructure */,
 				6B867BED277D8CFB00FC3F55 /* Error */,
-				6B867BEE277D8CFB00FC3F55 /* Extension */,
 			);
 			name = BankManagerShared;
 			path = ../../BankManagerShared;
@@ -261,7 +258,6 @@
 				C7694E42259C3E9F0053667F /* Main.storyboard in Resources */,
 				6B867BF4277D8CFB00FC3F55 /* DataStructure in Resources */,
 				6B867BF1277D8CFB00FC3F55 /* Error in Resources */,
-				6B867BF2277D8CFB00FC3F55 /* Extension in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
