@@ -9,6 +9,7 @@ class ViewController: UIViewController {
         setUPButtonStackView()
         setUPTimerStackView()
         setUPNotifyStackView()
+        setUpCustomerListStackView()
     }
 }
 
@@ -89,5 +90,65 @@ extension ViewController {
         
         notifyStackView.addArrangedSubview(waitingLabel)
         notifyStackView.addArrangedSubview(workingLabel)
+    }
+    
+    private func setUpCustomerListStackView() {
+        let customerListStackView = UIStackView()
+        customerListStackView.backgroundColor = .red
+        customerListStackView.axis = .horizontal
+        customerListStackView.distribution = .fillEqually
+        backgroundStackView.addArrangedSubview(customerListStackView)
+        
+        let waitingScrollView = UIScrollView()
+        waitingScrollView.backgroundColor = .yellow
+        customerListStackView.addArrangedSubview(waitingScrollView)
+        
+        let waitingStackView = UIStackView()
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        waitingStackView.axis = .vertical
+        waitingStackView.backgroundColor = .cyan
+        waitingScrollView.addSubview(waitingStackView)
+                
+        waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor).isActive = true
+        waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor).isActive = true
+        waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor).isActive = true
+        waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor).isActive = true
+        waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor).isActive = true
+        let waitingStackViewHeight = waitingStackView.heightAnchor.constraint(equalTo: waitingScrollView.heightAnchor)
+        waitingStackViewHeight.priority = .defaultLow
+        waitingStackViewHeight.isActive = true
+        
+        let test = UILabel()
+        test.text = "asdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\n"
+        test.numberOfLines = 0
+        test.font = .preferredFont(forTextStyle: .largeTitle)
+        waitingStackView.addArrangedSubview(test)
+        
+        
+        
+        let workingScrollView = UIScrollView()
+        workingScrollView.backgroundColor = .brown
+        customerListStackView.addArrangedSubview(workingScrollView)
+        
+        let workingStackView = UIStackView()
+        workingStackView.translatesAutoresizingMaskIntoConstraints = false
+        workingStackView.axis = .vertical
+        workingStackView.backgroundColor = .gray
+        workingScrollView.addSubview(workingStackView)
+        
+        workingStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor).isActive = true
+        workingStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor).isActive = true
+        workingStackView.leadingAnchor.constraint(equalTo: workingScrollView.leadingAnchor).isActive = true
+        workingStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        workingStackView.widthAnchor.constraint(equalTo: workingScrollView.widthAnchor).isActive = true
+        let workingStackViewHeight = workingStackView.heightAnchor.constraint(equalTo: workingScrollView.heightAnchor)
+        workingStackViewHeight.priority = .defaultLow
+        workingStackViewHeight.isActive = true
+        
+        let test2 = UILabel()
+        test2.text = "asdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\nasdfasdfasdfasf\n"
+        test2.numberOfLines = 0
+        test2.font = .preferredFont(forTextStyle: .largeTitle)
+        workingStackView.addArrangedSubview(test2)
     }
 }
