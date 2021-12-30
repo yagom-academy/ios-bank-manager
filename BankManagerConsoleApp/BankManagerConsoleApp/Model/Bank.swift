@@ -4,12 +4,18 @@ class Bank {
     private var delegate: BankDelegate?
     private var clientQueue: Queue<Client> = Queue<Client>()
     private var completedClientCount: Int = 0
-    private let numberOfBankClerkForDeposit = 2
-    private let numberOfBankClerkForLoan = 1
+    private let numberOfBankClerkForDeposit: Int
+    private let numberOfBankClerkForLoan: Int
     
-    init(delegate: BankDelegate) {
-        self.receiveClient()
+    init(
+        delegate: BankDelegate,
+        numberOfBankClerkForDeposit: Int,
+        numberOfBankClerkForLoan: Int
+    ) {
         self.delegate = delegate
+        self.numberOfBankClerkForDeposit = numberOfBankClerkForDeposit
+        self.numberOfBankClerkForLoan = numberOfBankClerkForLoan
+        self.receiveClient()
     }
     
     private func receiveClient() {

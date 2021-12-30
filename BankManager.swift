@@ -4,7 +4,11 @@ struct BankManager {
     static private var bank: Bank?
     
     static func createBank(delegate: BankDelegate) {
-        self.bank = Bank(delegate: delegate)
+        self.bank = Bank(
+            delegate: delegate,
+            numberOfBankClerkForDeposit: 1,
+            numberOfBankClerkForLoan: 2
+        )
     }
     
     static func openBank() {
