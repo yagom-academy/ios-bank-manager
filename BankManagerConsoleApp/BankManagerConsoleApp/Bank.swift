@@ -68,11 +68,11 @@ struct Bank {
     private mutating func enqueueTask(of customer: Customer) {
         let clerk = clerks.assignClerk(of: customer.task)
         clerk.async(group: taskGroup) { [self] in
-            self.task(of: customer)
+            self.executeTask(of: customer)
         }
     }
     
-    private func task(of customer: Customer) {
+    private func executeTask(of customer: Customer) {
         printTaskStartMessage(of: customer)
         Thread.sleep(forTimeInterval: customer.task.processingTime)
         printTaskEndMessage(of: customer)
