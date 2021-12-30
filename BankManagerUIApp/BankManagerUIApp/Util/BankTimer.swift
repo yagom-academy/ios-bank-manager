@@ -8,8 +8,9 @@
 import Foundation
 
 class BankTimer {
-    var startime = Date()
-    var timer: Timer?
+    private var startime = Date()
+    private var timer: Timer?
+    private weak var delegate: TimerDelegate?
     
     func start() {
         startime = Date()
@@ -20,7 +21,8 @@ class BankTimer {
         let timeInterval = Date().timeIntervalSince(startime)
         let second = Int(fmod(timeInterval, 60))
         let miliSecond = Int((timeInterval - floor(timeInterval))*100)
-        let nanoSecond = floor(Double(timeInterval)*100000) - floor(Double(timeInterval)*100)*1000
+        let nanoSecond = Int(floor(Double(timeInterval)*100000) - floor(Double(timeInterval)*100)*1000)
+        delegate?.setupLabel(second: second, milisecond: miliSecond, nanoSecond: nanoSecond)
     }
     
     func stop() {
