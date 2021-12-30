@@ -15,19 +15,22 @@ class Bank {
     private let customerQueue: Queue<Customer> = Queue<Customer>()
     private var bankClerk: BankClerk
     private weak var delegate: BankDelegate?
-    
+    private let randomCount = Int.random(in: 10...30)
+
     init(bankClerk: BankClerk, delegatee: BankDelegate) {
         self.bankClerk = bankClerk
         self.delegate = delegatee
-        setupCustomerQueue()
+        setupCustomerQueue(with: randomCount)
     }
     
-    private func setupCustomerQueue() {
-        let randomCustomerCount: Int = Int.random(in: 10...30)
-        
-        (1...randomCustomerCount).forEach { number in
+    func setupCustomerQueue(with amount: Int) {
+        (1...amount).forEach { number in
             customerQueue.enqueue(value: Customer(turn: number))
         }
+    }
+    
+    func resetCustomerQueue() {
+        customerQueue.clear()
     }
     
     func open() {
