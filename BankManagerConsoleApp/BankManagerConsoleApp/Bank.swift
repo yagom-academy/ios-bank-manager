@@ -46,8 +46,8 @@ class Bank {
   }
   
   private func provideService(bankerNumber: Int) {
-    while !self.clientQueue.isEmpty() {
-      if self.clientQueue.peek()?.requiredBankingType == self.bankers[bankerNumber].assignedTask {
+    while let firstClient = clientQueue.peek() {
+      if firstClient.requiredBankingType == self.bankers[bankerNumber].assignedTask {
         self.semaphore.wait()
         guard let dequeueClient = self.clientQueue.dequeue() else {
           return
