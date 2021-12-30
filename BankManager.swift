@@ -44,7 +44,7 @@ struct BankManager {
   private mutating func operateBank (numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
     let bankers = prepareBanker(numberOfDepositBankers: numberOfDepositBankers,
                                 numberOfLoanBankers: numberOfLoanBankers)
-    let bank: Bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
+    let bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
     bank.doBanking()
   }
   
