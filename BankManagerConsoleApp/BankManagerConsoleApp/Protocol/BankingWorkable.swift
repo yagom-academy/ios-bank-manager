@@ -13,8 +13,8 @@ protocol BankingWorkable {
 
 extension BankingWorkable {
     func work(for clientIdentifier: Int, task: Bank.Task) {
-        print("\(clientIdentifier)번 고객 \(task.name)업무 시작")
-        Thread.sleep(forTimeInterval: task.time)
-        print("\(clientIdentifier)번 고객 \(task.name)업무 완료")
+        print("\(clientIdentifier)번 고객 \(task.koreanName)업무 시작")
+        Thread.sleep(forTimeInterval: task.timeNeeded)
+        print("\(clientIdentifier)번 고객 \(task.koreanName)업무 완료")
     }
 }

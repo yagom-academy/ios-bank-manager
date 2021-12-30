@@ -39,7 +39,6 @@ enum Bank {
                 return Bank.Task.depositSemaphore
             case .loan:
                 return Bank.Task.loanSemaphore
-                
             }
         }
     }

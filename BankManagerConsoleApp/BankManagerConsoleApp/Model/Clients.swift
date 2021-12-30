@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Client {
+private struct Client {
     let identifier: Int
     let taskType: Bank.Task
 }

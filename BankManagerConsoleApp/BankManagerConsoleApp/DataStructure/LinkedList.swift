@@ -51,6 +51,10 @@ struct LinkedList<Type> {
         let firstNodeData = head?.data
         head = head?.next
         
+        if head == nil {
+            tail = nil
+        }
+        
         return firstNodeData
     }
 }

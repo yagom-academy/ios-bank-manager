@@ -36,7 +36,7 @@ class BankManager {
         }
     }
     
-    func giveTask(of taskType: Bank.Task, for clientIdentifier: Int) {
+    private func giveTask(of taskType: Bank.Task, for clientIdentifier: Int) {
         let semaphore = taskType.semaphore
         
         DispatchQueue.global().async(group: dispatchGroup) {

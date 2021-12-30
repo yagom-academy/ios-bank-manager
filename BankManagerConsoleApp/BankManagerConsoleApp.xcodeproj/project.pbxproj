@@ -20,6 +20,7 @@
 		DEC35F78277569CB00F20D47 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE234FD42771BC01000F253F /* Queue.swift */; };
 		DEC35F7A2775B36100F20D47 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC35F792775B36100F20D47 /* BankClerk.swift */; };
 		DEC35F7E2775D37B00F20D47 /* Double + NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC35F7D2775D37B00F20D47 /* Double + NumberFormatter.swift */; };
+		DEE9D6AE277D8073002337AD /* MenuOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE9D6AD277D8073002337AD /* MenuOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,7 @@
 		DEC35F752775689000F20D47 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		DEC35F792775B36100F20D47 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		DEC35F7D2775D37B00F20D47 /* Double + NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + NumberFormatter.swift"; sourceTree = "<group>"; };
+		DEE9D6AD277D8073002337AD /* MenuOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				DEC35F77277569AC00F20D47 /* DataStructure */,
 				DEC35F742775687500F20D47 /* Namespace */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				DEE9D6AD277D8073002337AD /* MenuOperation.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				84C503A227759E240085E327 /* BankingWorkable.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				84C5039E27757EC80085E327 /* Clients.swift in Sources */,
+				DEE9D6AE277D8073002337AD /* MenuOperation.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				84A568162775C3C9007D8411 /* Bank.swift in Sources */,
 				DE234FD52771BC01000F253F /* Queue.swift in Sources */,
