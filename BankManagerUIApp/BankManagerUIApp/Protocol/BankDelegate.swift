@@ -3,4 +3,5 @@ protocol BankDelegate: AnyObject {
     func addProcessingClient(client: Client)
     func removeWaitingClient(client: Client)
     func removeProcessingClient(client: Client)
+    func updateServiceTimeLabel(serviceTime: Double)
 }

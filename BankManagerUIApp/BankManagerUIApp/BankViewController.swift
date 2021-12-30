@@ -17,7 +17,11 @@ class BankViewController: UIViewController {
         
         view = BankManagerView()
         let bankView = view as? BankManagerView
-        bankView?.addClientsButton.addTarget(self, action: #selector(addClients), for: .touchUpInside)
+        bankView?.addClientsButton.addTarget(
+            self,
+            action: #selector(addClients),
+            for: .touchUpInside
+        )
     }
     
     @objc func addClients() {
@@ -27,6 +31,19 @@ class BankViewController: UIViewController {
 }
 
 extension BankViewController: BankDelegate {
+    func updateServiceTimeLabel(serviceTime: Double) {
+        let view = view as? BankManagerView
+        let timeString = secondsToTimeString(serviceTime: serviceTime)
+        view?.serviceTimeLabel.text = "업무시간 - \(timeString)"
+    }
+    
+    func secondsToTimeString (serviceTime: Double) -> String {
+        let minute = Int(serviceTime / 60)
+        let second = Int(serviceTime) % 60
+        let milisecond = Int((serviceTime - Double(Int(serviceTime))) * 1000)
+        return String(format: "%.2d:%.2d:%.3d", minute, second, milisecond)
+    }
+    
     func addWaitingClient(client: Client) {
         let view = view as? BankManagerView
         let label = ClientLabel(client: client)

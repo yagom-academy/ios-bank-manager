@@ -35,6 +35,9 @@ class Bank {
     private let group = DispatchGroup()
     private var isProcessing = false
     
+    var serviceTime = 0.0
+    var timer: Timer?
+    
     init(numberOfClients: Int, numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
         self.numberOfClients = numberOfClients
         self.depositSemaphore = DispatchSemaphore(value: numberOfDepositBankTellers)
@@ -52,13 +55,20 @@ class Bank {
         }
         
         isProcessing = true
-        let startTime = Date()
+        timer = Timer(timeInterval: 0.001, repeats: true) { _ in
+            self.serviceTime += 0.001
+            self.delegate?.updateServiceTimeLabel(serviceTime: self.serviceTime)
+        }
+        guard let timer = timer else {
+            return
+        }
+
+        RunLoop.current.add(timer, forMode: .common)
 
         processAllServices()
         group.notify(queue: DispatchQueue.global()) {
             self.isProcessing = false
-            let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients)명이며, 총 업무시간은 \(elapsedTime)초입니다.")
+            self.timer?.invalidate()
         }
     }
     
