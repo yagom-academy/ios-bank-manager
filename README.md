@@ -10,6 +10,46 @@
 
 # Step3 - 다중 처리 구현
 
+## ❣️ Step3 추가 개선
+
+### 1. ☑️ thread 개수가 고객의 수만큼 생성되는 게 아니라, 은행원의 수만큼만 생성되도록 수정
+
+`while문`을 돌면서 `global().async`를 호출하게 되면, while문이 도는 횟수 만큼 `thread` 가 생성되고 `semaphore`의 wait() 앞에서 대기하는 것을 확인했습니다.
+지금은 고객이 10~30명 수준이지만, 만약 고객이 10,000명으로 커진다면, thread 또한 10,000개가 생성되는 게 좋은 구조는 아니라고 생각했어요. 😅
+
+먼저, 고객이 줄을 설 때, 하나의 큐가 아니라 업무에 따라서 별도에 큐에 들어가도록 `switch문`을 통해 구현했습니다.
+그 후, 업무를 담당하는 은행원의 숫자 만큼 `for문`을 돌리고, 그 횟수 만큼만 `thread` 가 생성되도록 구현했습니다.
+
+```swift
+func start(with totalClients: Int) {
+    ...
+    for _ in 1...numberOfDepositBankers {
+        serviceForClients(queue: depositQueue, in: dispatchGroup)
+    }
+    for _ in 1...numberOfLoanBankers {
+        serviceForClients(queue: loanQueue, in: dispatchGroup)
+    }
+    dispatchGroup.wait()
+    ...
+}
+
+private func serviceForClients(queue: Queue<Client>, in dispatchGroup: DispatchGroup) {
+    DispatchQueue.global().async(group: dispatchGroup) {
+        while let client = queue.dequeue() {
+            self.service(for: client)
+        }
+    }
+}
+```
+
+### 2. ☑️ Race Condition 발생하지 않도록 Thread-Safe한 모델 메서드 구현
+
+기초가 되는 메서드 자체를 `Thread-Safe`하게 만듦으로써 불필요한 `semaphore` 생성을 줄이고, 상위 메서드에서 코드 로직도 심플하게 리팩토링했습니다.
+
+📝 [관련 이슈 링크](https://github.com/Jager-yoo/ios-bank-manager/issues/4)
+
+<br>
+
 ## 고민한 점
 
 ### ☑️ 1. 다중 처리 로직
@@ -24,6 +64,7 @@
 요구사항에서는 예금 업무를 담당하는 은행원 2명, 대출 업무를 담당하는 은행원 1명으로 제시되어 있는데요.
 while문 내부에서 `client`를 `dequeue`한 후 조건문으로 `client.task`를 검사하여 각각 다른 블록으로 분기하되, 각 예금 블록에서는 value가 2인 semaphore, 대출 블록에서는 value가 1인 semaphore로 제어되도록 구현했습니다.
 내부적으로는 thread가 `client` 수만큼 많이 만들어지겠지만, 실제로 동시에 일하는 thread는 예금 2, 대출 1명으로 총 3개가 되어, 현실 세계에서 은행원 3명이 담당업무를 처리하는 것처럼 동작합니다.
+
 
 <br>
 
