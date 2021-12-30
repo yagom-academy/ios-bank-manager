@@ -7,6 +7,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setUpBackgroundStackView()
         setUPButtonStackView()
+        setUPTimerStackView()
     }
 }
 
@@ -29,7 +30,6 @@ extension ViewController {
         buttonStackView.backgroundColor = .yellow
         buttonStackView.axis = .horizontal
         buttonStackView.distribution = .fillEqually
-        buttonStackView.alignment = .top
         backgroundStackView.addArrangedSubview(buttonStackView)
         
         let addCustomerButton = UIButton(type: .system)
@@ -43,5 +43,25 @@ extension ViewController {
         
         buttonStackView.addArrangedSubview(addCustomerButton)
         buttonStackView.addArrangedSubview(resetButton)
+    }
+    
+    private func setUPTimerStackView() {
+        let timerStackView = UIStackView()
+        timerStackView.backgroundColor = .blue
+        timerStackView.axis = .horizontal
+        timerStackView.distribution = .fillEqually
+        backgroundStackView.addArrangedSubview(timerStackView)
+        
+        let workingTimeLabel = UILabel()
+        workingTimeLabel.text = "업무시간 - "
+        workingTimeLabel.font = .preferredFont(forTextStyle: .title3)
+        workingTimeLabel.textAlignment = .right
+        
+        let timerLabel = UILabel()
+        timerLabel.text = "00:00:000"
+        timerLabel.font = .preferredFont(forTextStyle: .title3)
+        
+        timerStackView.addArrangedSubview(workingTimeLabel)
+        timerStackView.addArrangedSubview(timerLabel)
     }
 }
