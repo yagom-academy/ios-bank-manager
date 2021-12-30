@@ -1,31 +1,59 @@
 import Foundation
 
 class Bank {
+    enum Service: String, CaseIterable {
+        case deposit
+        case loan
+        
+        var processingTime: Double {
+            switch self {
+            case .deposit:
+                return 0.7
+            case .loan:
+                return 1.1
+            }
+        }
+    }
+    
     private let clients = Queue<Client>()
     private let numberOfClients: Int
-    private let semaphore: DispatchSemaphore
+    private let depositSemaphore: DispatchSemaphore
+    private let loanSemaphore: DispatchSemaphore
     
-    init(numberOfClients: Int, numberOfBankTellers: Int) {
+    init(numberOfClients: Int, numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
         self.numberOfClients = numberOfClients
-        self.semaphore = DispatchSemaphore(value: numberOfBankTellers)
+        self.depositSemaphore = DispatchSemaphore(value: numberOfDepositBankTellers)
+        self.loanSemaphore = DispatchSemaphore(value: numberOfLoanBankTellers)
         addClientsToQueue(by: numberOfClients)
     }
     
-    func startBusiness() {
+    func startBankingService() {
         let startTime = Date()
-        
+        processAllServices()
+        let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients)명이며, 총 업무시간은 \(elapsedTime)초입니다.")
+    }
+    
+    private func processAllServices() {
+        let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
+        let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
         let group = DispatchGroup()
+        
         while let client = clients.dequeue() {
-            semaphore.wait()
-            DispatchQueue.global().async(group: group) {
-                self.respond(to: client)
-                self.semaphore.signal()
+            switch client.business {
+            case .deposit:
+                depositDispatchQueue.async(group: group) {
+                    self.depositSemaphore.wait()
+                    self.processDepositService(to: client, group: group)
+                }
+            case .loan:
+                loanDispatchQueue.async(group: group) {
+                    self.loanSemaphore.wait()
+                    self.processLoanService(to: client, group: group)
+                }
             }
         }
         group.wait()
-        
-        let elapsedTime = String(format: "%.2f", Date().timeIntervalSince(startTime))
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfClients)명이며, 총 업무시간은 \(elapsedTime)초입니다.")
     }
     
     private func addClientsToQueue(by numberOfClients: Int) {
@@ -35,9 +63,21 @@ class Bank {
         }
     }
 
-    private func respond(to client: Client) {
-        print("\(client.waitingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
-        print("\(client.waitingNumber)번 고객 업무 완료")
+    private func processDepositService(to client: Client, group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            print("\(client.waitingNumber)번 고객 예금업무 시작")
+            Thread.sleep(forTimeInterval: Service.deposit.processingTime)
+            print("\(client.waitingNumber)번 고객 예금업무 완료")
+            self.depositSemaphore.signal()
+        }
+    }
+    
+    private func processLoanService(to client: Client, group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            print("\(client.waitingNumber)번 고객 대출업무 시작")
+            Thread.sleep(forTimeInterval: Service.loan.processingTime)
+            print("\(client.waitingNumber)번 고객 대출업무 완료")
+            self.loanSemaphore.signal()
+        }
     }
 }
