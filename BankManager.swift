@@ -50,17 +50,11 @@ struct BankManager {
   
   private mutating func prepareBanker(numberOfDepositBankers: Int,
                                       numberOfLoanBankers: Int) -> [Banker] {
-    var bankers: [Banker] = []
-
-    (0..<numberOfDepositBankers).forEach {_ in
-      let banker = Banker(assignedTask: .deposit)
-      bankers.append(banker)
-    }
-    (0..<numberOfLoanBankers).forEach {_ in
-      let banker = Banker(assignedTask: .loan)
-      bankers.append(banker)
-    }
-    return bankers
+    let depositeBankers = Array.init(repeating: Banker(assignedTask: .deposit),
+                                     count: numberOfDepositBankers)
+    let loanBankers = Array.init(repeating: Banker(assignedTask: .loan),
+                                 count: numberOfLoanBankers)
+    return depositeBankers + loanBankers
   }
 }
                               
