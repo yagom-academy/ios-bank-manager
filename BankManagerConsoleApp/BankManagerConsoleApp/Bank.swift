@@ -30,7 +30,7 @@ struct Bank {
         let startTime = Date()
         operateTask()
         let totalTime = checkTotalTime(from: startTime)
-        printTaskEndMessage(time: totalTime)
+        printTotalTaskEndMessage(time: totalTime)
         resetBank()
     }
     
@@ -73,14 +73,22 @@ struct Bank {
     }
     
     private func task(of customer: Customer) {
-        let number = customer.turn
-        let task = customer.task.koreanDescription
-        print(Message.taskStart(turn: number, service: task).description)
+        printTaskStartMessage(of: customer)
         Thread.sleep(forTimeInterval: customer.task.processingTime)
-        print(Message.taskEnd(turn: number, service: task).description)
+        printTaskEndMessage(of: customer)
     }
     
-    private func printTaskEndMessage(time: String) {
+    private func printTaskStartMessage(of customer: Customer) {
+        let message = Message.taskStart(turn: customer.turn, service: customer.task)
+        print(message)
+    }
+    
+    private func printTaskEndMessage(of customer: Customer) {
+        let message = Message.taskEnd(turn: customer.turn, service: customer.task)
+        print(message)
+    }
+    
+    private func printTotalTaskEndMessage(time: String) {
         print(Message.totalTaskEnd(count: numberOfCustomer, time: time).description)
     }
     
@@ -93,17 +101,17 @@ struct Bank {
 
 private extension Bank {
     
-    enum Message {
-        case taskStart(turn: Int, service: String)
-        case taskEnd(turn: Int, service: String)
+    enum Message: CustomStringConvertible {
+        case taskStart(turn: Int, service: BankService)
+        case taskEnd(turn: Int, service: BankService)
         case totalTaskEnd(count: Int, time: String)
         
         var description: String {
             switch self {
             case .taskStart(let turn, let service):
-                return "\(turn)번 고객 \(service)업무 시작"
+                return "\(turn)번 고객 \(service.koreanDescription)업무 시작"
             case .taskEnd(let turn, let service):
-                return "\(turn)번 고객 \(service)업무 완료"
+                return "\(turn)번 고객 \(service.koreanDescription)업무 완료"
             case .totalTaskEnd(let count, let time):
                 return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무시간은 \(time)초입니다."
             }
