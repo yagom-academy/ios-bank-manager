@@ -33,6 +33,10 @@ class Bank {
         customerQueue.clear()
     }
     
+    func returnAllCustomers() -> [Customer] {
+        return customerQueue.returnAllElements()
+    }
+    
     func open() {
         let semaphore = DispatchSemaphore(value: 2)
         let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)

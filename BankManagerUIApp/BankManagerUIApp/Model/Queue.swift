@@ -29,4 +29,8 @@ class Queue<Element> {
     func peek() -> Element? {
         items.retrieveFirst()
     }
+    
+    func returnAllElements() -> [Element] {
+        items.returnAll()
+    }
 }

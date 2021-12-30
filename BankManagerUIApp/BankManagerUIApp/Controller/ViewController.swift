@@ -19,6 +19,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bank = BankFactory.createBank(with: bankPrinter)
+        setupUI()
+    }
+    
+    func setupUI() {
+        setupButtons()
+        setupCustomerView()
     }
     
     func setupButtons() {
@@ -34,6 +40,47 @@ class ViewController: UIViewController {
     
     @objc func setupCustomerQueue() {
         bank?.setupCustomerQueue(with: 10)
+    }
+    
+    func setupCustomerView() {
+        guard let customers = bank?.returnAllCustomers() else {
+            return
+        }
+        
+        let waitingCustomerScrollView = UIScrollView()
+        let waitingCustomerContentView = UIView()
+        let waitingCustomerStackView = CustomStackView(axis: .vertical, spacing: 5, distribution: .equalSpacing, alignment: .center)
+        
+        customers.forEach { customer in
+            let waitingCustomerLabel = CustomLabel(order: customer.turn, type: customer.task)
+            waitingCustomerStackView.addArrangedSubview(waitingCustomerLabel)
+        }
+        
+        self.view.addSubview(waitingCustomerScrollView)
+        waitingCustomerScrollView.addSubview(waitingCustomerContentView)
+        waitingCustomerContentView.addSubview(waitingCustomerStackView)
+        
+        [waitingCustomerScrollView, waitingCustomerContentView, waitingCustomerStackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
+            waitingCustomerScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 400),
+            waitingCustomerScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            waitingCustomerScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -self.view.frame.width / 2),
+            waitingCustomerScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            waitingCustomerContentView.topAnchor.constraint(equalTo: waitingCustomerScrollView.topAnchor),
+            waitingCustomerContentView.leadingAnchor.constraint(equalTo: waitingCustomerScrollView.leadingAnchor),
+            waitingCustomerContentView.trailingAnchor.constraint(equalTo: waitingCustomerScrollView.trailingAnchor),
+            waitingCustomerContentView.bottomAnchor.constraint(equalTo: waitingCustomerScrollView.bottomAnchor),
+            waitingCustomerContentView.widthAnchor.constraint(equalTo: waitingCustomerScrollView.widthAnchor),
+            
+            waitingCustomerStackView.topAnchor.constraint(equalTo: waitingCustomerContentView.topAnchor),
+            waitingCustomerStackView.leadingAnchor.constraint(equalTo: waitingCustomerContentView.leadingAnchor),
+            waitingCustomerStackView.trailingAnchor.constraint(equalTo: waitingCustomerContentView.trailingAnchor),
+            waitingCustomerStackView.bottomAnchor.constraint(equalTo: waitingCustomerContentView.bottomAnchor)
+        ])
     }
 }
 

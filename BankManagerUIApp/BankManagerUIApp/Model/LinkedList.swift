@@ -50,5 +50,16 @@ class LinkedList<Element> {
         head = nil
         tail = nil
     }
+    
+    func returnAll() -> [Element] {
+        var elements = [Element]()
+        
+        while let val = head?.value {
+            elements.append(val)
+            head = head?.next
+        }
+        
+        return elements
+    }
 }
 
