@@ -24,6 +24,7 @@ class Bank {
         }
     }
     
+    weak var delegate: BankDelegate?
     private let clients = Queue<Client>()
     private var numberOfClients: Int
     private let depositSemaphore: DispatchSemaphore
@@ -67,11 +68,19 @@ class Bank {
             case .deposit:
                 depositDispatchQueue.async(group: group) {
                     self.depositSemaphore.wait()
+                    DispatchQueue.main.sync {
+                        self.delegate?.addProcessingClient(client: client)
+                        self.delegate?.removeWaitingClient(client: client)
+                    }
                     self.processDepositService(to: client, group: self.group)
                 }
             case .loan:
                 loanDispatchQueue.async(group: group) {
                     self.loanSemaphore.wait()
+                    DispatchQueue.main.sync {
+                        self.delegate?.addProcessingClient(client: client)
+                        self.delegate?.removeWaitingClient(client: client)
+                    }
                     self.processLoanService(to: client, group: self.group)
                 }
             }
@@ -82,24 +91,27 @@ class Bank {
         (1...numberOfClients).forEach {
             let client = Client(waitingNumber: self.numberOfClients + $0)
             clients.enqueue(client)
+            delegate?.addWaitingClient(client: client)
         }
         self.numberOfClients += numberOfClients
     }
 
     private func processDepositService(to client: Client, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
-            print("\(client.waitingNumber)번 고객 예금업무 시작")
             Thread.sleep(forTimeInterval: Service.deposit.processingTime)
-            print("\(client.waitingNumber)번 고객 예금업무 완료")
+            DispatchQueue.main.sync {
+                self.delegate?.removeProcessingClient(client: client)
+            }
             self.depositSemaphore.signal()
         }
     }
     
     private func processLoanService(to client: Client, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
-            print("\(client.waitingNumber)번 고객 대출업무 시작")
             Thread.sleep(forTimeInterval: Service.loan.processingTime)
-            print("\(client.waitingNumber)번 고객 대출업무 완료")
+            DispatchQueue.main.sync {
+                self.delegate?.removeProcessingClient(client: client)
+            }
             self.loanSemaphore.signal()
         }
     }

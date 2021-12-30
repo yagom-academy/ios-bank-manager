@@ -1,7 +1,6 @@
 import UIKit
 
 class ClientLabel: UILabel {
-
     init(client: Client) {
         super.init(frame: CGRect())
         text = "\(client.waitingNumber) - \(client.business)"
