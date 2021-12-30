@@ -1,44 +1,68 @@
 import Foundation
 
-struct Bank {
+class Bank {
     private var waitingLine = Queue<Customer>()
     private var bankClerk = BankClerk()
     
-    mutating func setWaitingLine(with numberOfCustomer: Int) {
+    weak var delegate: BankDelegate?
+
+    private let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
+    private let loanQueue = DispatchQueue(label: "loanQueue")
+    private let sequenceQueue = DispatchQueue(label: "sequenceQueue")
+    
+    private var totalCustomer = 0
+    
+    func setWaitingLine(with numberOfCustomer: Int) {
         let totalNumber = numberOfCustomer
         for number in 1...totalNumber {
             waitingLine.enqueue(Customer(waitingNumber: number))
         }
     }
     
-    private mutating func dequeueWaitingLine() -> Customer? {
+    private func dequeueWaitingLine() -> Customer? {
         return waitingLine.dequeue()
     }
     
-    mutating func letClerkWork() {
-        let taskTime = 0.7
-        var numberOfCustomer = 0
+    func start() {
+        let date = Date()
+        work()
+        let taskTime = abs(date.timeIntervalSinceNow)
+        finishWork(workingTime: taskTime)
+    }
+    
+    private func work() {
+        let workGroup = DispatchGroup()
+        let semaphore = DispatchSemaphore(value: 2)
         
         while waitingLine.isEmpty == false {
             guard let customer = dequeueWaitingLine() else {
                 fatalError("unknown error")
             }
-            bankClerk.handleTask(of: customer, until: taskTime)
-            numberOfCustomer += 1
+            
+            switch customer.task {
+            case .deposit:
+                sequenceQueue.async { [self] in
+                    depositQueue.async(group: workGroup) {
+                        semaphore.wait()
+                        bankClerk.handleTask(of: customer)
+                        totalCustomer += 1
+                        semaphore.signal()
+                    }
+                }
+            case .loan:
+                loanQueue.async(group: workGroup) { [self] in
+                    bankClerk.handleTask(of: customer)
+                    totalCustomer += 1
+                }
+            default:
+                return
+            }
         }
-        close(totalCustomer: numberOfCustomer, taskTime: taskTime)
+        workGroup.wait()
     }
     
-    private func close(totalCustomer: Int, taskTime: Double) {
-        let totalTime = taskTime * Double(totalCustomer)
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.roundingMode = .up
-        numberFormatter.minimumFractionDigits = 2
-        guard let convertedTotalTime = numberFormatter.string(for: totalTime) else {
-            return
-        }
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(convertedTotalTime)초입니다.")
+    private func finishWork(workingTime: Double) {
+        delegate?.didFinishWork(totalCustomer: totalCustomer, workingTime: workingTime)
+        totalCustomer = 0
     }
 }
