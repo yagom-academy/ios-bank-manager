@@ -36,22 +36,19 @@ extension Bank {
         let loanSemaphore = DispatchSemaphore(value: loanBankerCount)
         let depositSemaphore = DispatchSemaphore(value: depositBankerCount)
         
-        let loanDispatchQueue = DispatchQueue.global()
-        let depositDispatchQueue = DispatchQueue.global()
-        
         while let customer = customerQueue.dequeue() {
             switch customer.taskType {
             case .deposit:
-                assign(dispatchQueue: depositDispatchQueue, semaphore: depositSemaphore, group: bankerGroup, customer: customer, banker: DepositBanker())
+                assign(semaphore: depositSemaphore, group: bankerGroup, customer: customer, banker: DepositBanker())
             case .loan:
-                assign(dispatchQueue: loanDispatchQueue, semaphore: loanSemaphore, group: bankerGroup, customer: customer, banker: LoanBanker())
+                assign(semaphore: loanSemaphore, group: bankerGroup, customer: customer, banker: LoanBanker())
             }
         }
         bankerGroup.wait()
     }
     
-    private func assign(dispatchQueue: DispatchQueue, semaphore: DispatchSemaphore, group: DispatchGroup, customer: Customer, banker: Banker) {
-        dispatchQueue.async(group: group) {
+    private func assign(semaphore: DispatchSemaphore, group: DispatchGroup, customer: Customer, banker: Banker) {
+        DispatchQueue.global().async(group: group) {
             semaphore.wait()
             banker.task(of: customer)
             bankManager.increaseTotalCustomer()
