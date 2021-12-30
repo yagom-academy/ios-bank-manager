@@ -42,7 +42,7 @@ class BankManager {
             let client = Client(waitingNumber: order, task: Task.random)
             bank.lineUp(client)
         }
-        bank.start()
+        bank.start(with: clientCount)
     }
     
     private func restartConsole() {
