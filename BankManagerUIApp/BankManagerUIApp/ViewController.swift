@@ -1,6 +1,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var bank: Bank?
+    private var bankManager: BankManager?
     var backgroundStackView = UIStackView()
     let waitingListStackView = CustomerListStackView(title: "대기중", color: .systemGreen)
     let workingListStackView = CustomerListStackView(title: "업무중", color: .systemIndigo)
@@ -11,12 +13,9 @@ class ViewController: UIViewController {
         setUPButtonStackView()
         setUPTimerStackView()
         setUpCustomerListStackViews()
-        
-        // Test Code
-        for i in 1...100 {
-            let customer = Customer(waitingNumber: i)
-            addCustomerLabel(customer: customer)
-        }
+        bank = Bank()
+        bank?.delegate = self
+        bankManager = BankManager(bank: bank)
     }
 }
 
@@ -43,6 +42,7 @@ extension ViewController {
         let addCustomerButton = UIButton(type: .system)
         addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
         addCustomerButton.setTitle("고객 10명 추가", for: .normal)
+        addCustomerButton.addTarget(self, action: #selector(touchUpAddCustomer), for: .touchUpInside)
         
         let resetButton = UIButton(type: .system)
         resetButton.setTitle("초기화", for: .normal)
@@ -89,5 +89,17 @@ extension ViewController {
         let customerLable = CustomerLabel(number, banking)
         
         waitingListStackView.addCustomerLabel(customerLable)
+    }
+}
+
+extension ViewController {
+    @objc private func touchUpAddCustomer() {
+        bankManager?.setUpBankCustomers()
+    }
+}
+
+extension ViewController: BankDelegate {
+    func bank(DidEnqueueCustomer customer: Customer) {
+        addCustomerLabel(customer: customer)
     }
 }

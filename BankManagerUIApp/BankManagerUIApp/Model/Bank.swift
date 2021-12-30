@@ -1,23 +1,31 @@
 import Foundation
 
-struct Bank {
+protocol BankDelegate {
+    func bank(DidEnqueueCustomer customer: Customer)
+}
+
+final class Bank {
     private var loanCustomerQueue = Queue<Customer>()
     private var depositCustomerQueue = Queue<Customer>()
     private let loanBankersCount: Int
     private let depositBankersCount: Int
     private var numberOfCustomers = 0
+    var delegate: BankDelegate?
     
     init(loanBankersCount: Int = 1, depositBankersCount: Int = 2) {
         self.loanBankersCount = loanBankersCount
         self.depositBankersCount = depositBankersCount
     }
     
-    mutating func handOutWaitingNumber(from customerNumber: Int) {
-        numberOfCustomers = customerNumber
-        for number in 1...customerNumber {
-            let customer = Customer(waitingNumber: number)
+    func handOutWaitingNumber(from customerCount: Int) {
+        let maxCount = numberOfCustomers + customerCount
+        let waitingNumbers = numberOfCustomers..<maxCount
+        for number in waitingNumbers {
+            let customer = Customer(waitingNumber: number + 1)
             customerQueue(customer.banking).enqueue(customer)
+            delegate?.bank(DidEnqueueCustomer: customer)
         }
+        numberOfCustomers = maxCount
     }
     
     private func customerQueue(_ banking: Banking) -> Queue<Customer> {
@@ -29,7 +37,7 @@ struct Bank {
         }
     }
     
-    mutating func openBank() {
+    func openBank() {
         let bankGroup = DispatchGroup()
         let openTime = Date()
         
@@ -55,7 +63,7 @@ struct Bank {
         }
     }
     
-    private mutating func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
+    private func closeBank(_ numberOfCustomers: Int, from openTime: Date) {
         let durationTime = -openTime.timeIntervalSinceNow
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomers)명이며, 총 업무시간은 \(durationTime.roundedOffDescription(for: 2))초 입니다.")
         self.numberOfCustomers = 0

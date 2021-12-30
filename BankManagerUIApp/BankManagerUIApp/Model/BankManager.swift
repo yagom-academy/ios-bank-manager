@@ -6,9 +6,9 @@ enum Menu {
 }
 
 struct BankManager {
-    private var bank: Bank
+    private var bank: Bank?
     
-    init(bank: Bank = Bank()) {
+    init(bank: Bank?) {
         self.bank = bank
     }
     
@@ -20,7 +20,7 @@ struct BankManager {
         switch input {
         case Menu.open:
             setUpBankCustomers()
-            bank.openBank()
+            bank?.openBank()
             return true
         case Menu.close:
             return false
@@ -30,9 +30,9 @@ struct BankManager {
         }
     }
     
-    private mutating func setUpBankCustomers(to range: ClosedRange<Int> = 10...30) {
+    mutating func setUpBankCustomers(to range: ClosedRange<Int> = 10...10) {
         let numberOfCustomers = Int.random(in: range)
-        bank.handOutWaitingNumber(from: numberOfCustomers)
+        bank?.handOutWaitingNumber(from: numberOfCustomers)
     }
     
     func showMenu() {
