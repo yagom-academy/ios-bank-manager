@@ -1,7 +1,7 @@
 import Foundation
 
 func run() {
-    var bankManager = BankManager()
+    let bankManager = BankManager()
     var flag = true
     
     while flag {
@@ -10,9 +10,9 @@ func run() {
         switch selectedMenu {
         case Menu.bankOpen:
             bankManager.openBank()
-        case Menu.bankClose:
+        case Menu.exit:
             flag = false
-            bankManager.closeBank()
+            bankManager.exit()
         default:
             print("잘못된 입력입니다. 다시 입력해주세요.")
         }

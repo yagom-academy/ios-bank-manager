@@ -3,6 +3,8 @@ import Foundation
 class Bank {
     private var waitingLine = Queue<Customer>()
     private var bankClerk = BankClerk()
+    
+    weak var delegate: BankDelegate?
 
     private let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
     private let loanQueue = DispatchQueue(label: "loanQueue")
@@ -21,11 +23,9 @@ class Bank {
         return waitingLine.dequeue()
     }
     
-    func startWork() {
+    func start() {
         let date = Date()
-        
         work()
-        
         let taskTime = abs(date.timeIntervalSinceNow)
         finishWork(workingTime: taskTime)
     }
@@ -62,9 +62,7 @@ class Bank {
     }
     
     private func finishWork(workingTime: Double) {
-        let totalTime = String(format: "%.2f", workingTime)
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTime)초입니다.")
+        delegate?.didFinishWork(totalCustomer: totalCustomer, workingTime: workingTime)
         totalCustomer = 0
     }
 }
