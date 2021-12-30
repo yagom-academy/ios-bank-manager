@@ -19,7 +19,9 @@ struct Clients {
         let totalClientCount = Int.random(in: 10...30)
         
         (1...totalClientCount).forEach { identifier in
-            guard let taskType = Bank.Task.allCases.randomElement() else {
+            let randomTask = Bank.Task.allCases.randomElement()
+            
+            guard let taskType = randomTask else {
                 return
             }
             
@@ -31,19 +33,17 @@ struct Clients {
         return totalClientCount
     }
     
-    mutating func dequeueWaitingLine() -> Int? {
-        guard let client = waitingLine.dequeue() else {
-            return nil
-        }
+    mutating func takeTurn() -> Int? {
+        let recentClient = waitingLine.dequeue()
+        let clientIdentifier = recentClient?.identifier
         
-        return client.identifier
+        return clientIdentifier
     }
     
     func informTaskType() -> Bank.Task? {
-        guard let client = waitingLine.peek() else {
-            return nil
-        }
+        let recentClient = waitingLine.peek()
+        let clientTaskType = recentClient?.taskType
         
-        return client.taskType
+        return clientTaskType
     }
 }
