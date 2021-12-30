@@ -27,7 +27,7 @@ class Bank {
         let workHours = measureTime() {
             self.allocateClientToBankClerk(
                 inChargeOfDeposits: numberOfBankClerkForDeposit,
-                inChargeOfLoan: numberOfBankClerkForLoan
+                inChargeOfLoans: numberOfBankClerkForLoan
             )
         }
         delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
@@ -43,9 +43,9 @@ class Bank {
         return duration
     }
     
-    private func allocateClientToBankClerk(inChargeOfDeposits: Int, inChargeOfLoan: Int) {
+    private func allocateClientToBankClerk(inChargeOfDeposits: Int, inChargeOfLoans: Int) {
         let depositSemaphore = DispatchSemaphore(value: inChargeOfDeposits)
-        let loanSemaphore = DispatchSemaphore(value: inChargeOfLoan)
+        let loanSemaphore = DispatchSemaphore(value: inChargeOfLoans)
         let group = DispatchGroup()
         
         while let client = self.clientQueue.dequeue() {
