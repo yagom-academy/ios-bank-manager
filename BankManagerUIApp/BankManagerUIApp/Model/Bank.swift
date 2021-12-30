@@ -21,7 +21,7 @@ final class Bank {
         let maxCount = numberOfCustomers + customerCount
         let waitingNumbers = numberOfCustomers..<maxCount
         for number in waitingNumbers {
-            let customer = Customer(waitingNumber: number + 1)
+            let customer = Customer(waitingNumber: number)
             customerQueue(customer.banking).enqueue(customer)
             delegate?.bank(DidEnqueueCustomer: customer)
         }

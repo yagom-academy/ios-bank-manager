@@ -84,7 +84,7 @@ extension ViewController {
     }
     
     private func addCustomerLabel(customer: Customer) {
-        let number = customer.waitingNumber.description
+        let number = customer.waitingNumber
         let banking = customer.banking.description
         let customerLable = CustomerLabel(number, banking)
         

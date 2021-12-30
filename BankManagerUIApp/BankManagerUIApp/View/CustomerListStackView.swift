@@ -45,6 +45,7 @@ class CustomerListStackView: UIStackView {
     
     private func setUpListStackView() {
         listStackView.axis = .vertical
+        listStackView.spacing = 8
         listStackView.translatesAutoresizingMaskIntoConstraints = false
     }
     
