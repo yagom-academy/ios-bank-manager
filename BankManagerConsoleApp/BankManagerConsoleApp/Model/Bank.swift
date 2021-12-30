@@ -36,14 +36,14 @@ class Bank {
                 sequenceQueue.async {
                     depositQueue.async(group: workGroup) {
                         semaphore.wait()
-                        self.bankClerk.handleTask(of: customer, until: BankTask.deposit.processingTime)
+                        self.bankClerk.handleTask(of: customer)
                         numberOfCustomer += 1
                         semaphore.signal()
                     }
                 }
             case .loan:
                 loanQueue.async(group: workGroup) {
-                    self.bankClerk.handleTask(of: customer, until: BankTask.loan.processingTime)
+                    self.bankClerk.handleTask(of: customer)
                     numberOfCustomer += 1
                 }
             default:

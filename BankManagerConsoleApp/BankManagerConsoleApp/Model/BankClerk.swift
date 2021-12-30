@@ -1,8 +1,8 @@
 import Foundation
 
 struct BankClerk {
-    func handleTask(of customer: Customer, until taskTime: Double) {
-        guard let task = customer.task?.name else {
+    func handleTask(of customer: Customer) {
+        guard let task = customer.task?.name, let taskTime = customer.task?.processingTime else {
             return
         }
         
