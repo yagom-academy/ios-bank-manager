@@ -24,9 +24,38 @@ extension Bank {
     }
     
     private mutating func open() {
-        guard let banker = bankers.first else { return }
+        let loanBankerCount = bankers
+                                .filter{ $0.taskType == .loan }
+                                .count
+        let depositBankerCount = bankers
+                                .filter { $0.taskType == .deposit }
+                                .count
+        
+        let bankerGroup = DispatchGroup()
+        
+        let loanSemaphore = DispatchSemaphore(value: loanBankerCount)
+        let depositSemaphore = DispatchSemaphore(value: depositBankerCount)
+        
+        let loanDispatchQueue = DispatchQueue.global()
+        let depositDispatchQueue = DispatchQueue.global()
+        
         while let customer = customerQueue.dequeue() {
-            assign(customer: customer, to: banker)
+            switch customer.taskType {
+            case .deposit:
+                assign(dispatchQueue: depositDispatchQueue, semaphore: depositSemaphore, group: bankerGroup, customer: customer, banker: DepositBanker())
+            case .loan:
+                assign(dispatchQueue: loanDispatchQueue, semaphore: loanSemaphore, group: bankerGroup, customer: customer, banker: LoanBanker())
+            }
+        }
+        bankerGroup.wait()
+    }
+    
+    private func assign(dispatchQueue: DispatchQueue, semaphore: DispatchSemaphore, group: DispatchGroup, customer: Customer, banker: Banker) {
+        dispatchQueue.async(group: group) {
+            semaphore.wait()
+            banker.task(of: customer)
+            bankManager.increaseTotalCustomer()
+            semaphore.signal()
         }
     }
     
@@ -34,10 +63,5 @@ extension Bank {
         let totalTimeText: String = String(format: "%.2f", bankManager.totalTime)
         let totalCustomer: Int = bankManager.totalCustomer
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTimeText)초입니다.")
-    }
-    
-    private func assign(customer: Customer, to banker: Banker) {
-        banker.task(of: customer)
-        bankManager.increaseTotalCustomer()
     }
 }

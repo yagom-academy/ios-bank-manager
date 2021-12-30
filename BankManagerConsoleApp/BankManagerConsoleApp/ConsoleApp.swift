@@ -37,7 +37,7 @@ struct ConsoleApp {
     private func openBank() {
         let customerQueue = lineUpCustomers()
         let bankManager = BankManager()
-        let bankers = [GeneralBanker()]
+        let bankers: [Banker] = [DepositBanker(), DepositBanker(), LoanBanker()]
         
         var bank = Bank(bankers: bankers, customerQueue: customerQueue, bankManager: bankManager)
         bank.operate()
