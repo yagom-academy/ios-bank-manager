@@ -16,22 +16,7 @@ struct BankManager {
     }
     
     //MARK: - 메서드
-    func generateClients() -> [Client] {
-        let clientNumber = Int.random(in: 10...30)
-        var clients: [Client] = []
-        
-        (1...clientNumber).forEach { number in
-            let orderTicket = Ticket(number: number)
-            let client = Client(orderTicket: orderTicket)
-            clients.append(client)
-        }
-        
-        return clients
-    }
-    
-    mutating func openBank() {
-        let clients = generateClients()
-        
+    mutating func openBank(for clients: [Client]) {
         bank.receive(clients: clients)
         bank.executeBusiness()
     }
