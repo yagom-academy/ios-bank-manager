@@ -8,6 +8,7 @@ class ViewController: UIViewController {
         setUpBackgroundStackView()
         setUPButtonStackView()
         setUPTimerStackView()
+        setUPNotifyStackView()
     }
 }
 
@@ -63,5 +64,30 @@ extension ViewController {
         
         timerStackView.addArrangedSubview(workingTimeLabel)
         timerStackView.addArrangedSubview(timerLabel)
+    }
+    
+    private func setUPNotifyStackView() {
+        let notifyStackView = UIStackView()
+        notifyStackView.backgroundColor = .blue
+        notifyStackView.axis = .horizontal
+        notifyStackView.distribution = .fillEqually
+        backgroundStackView.addArrangedSubview(notifyStackView)
+        
+        let waitingLabel = UILabel()
+        waitingLabel.text = "대기중"
+        waitingLabel.font = .preferredFont(forTextStyle: .title2) 
+        waitingLabel.textAlignment = .center
+        waitingLabel.textColor = .white
+        waitingLabel.backgroundColor = .systemGreen
+        
+        let workingLabel = UILabel()
+        workingLabel.text = "업무중"
+        workingLabel.font = .preferredFont(forTextStyle: .title2) 
+        workingLabel.textAlignment = .center
+        workingLabel.textColor = .white
+        workingLabel.backgroundColor = .systemPurple
+        
+        notifyStackView.addArrangedSubview(waitingLabel)
+        notifyStackView.addArrangedSubview(workingLabel)
     }
 }
