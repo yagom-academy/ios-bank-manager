@@ -25,7 +25,7 @@ class Bank {
     
     func open() {
         let workHours = measureTime() {
-            self.distributeWork(
+            self.allocateClientToBankClerk(
                 inChargeOfDeposits: numberOfBankClerkForDeposit,
                 inChargeOfLoan: numberOfBankClerkForLoan
             )
@@ -43,7 +43,7 @@ class Bank {
         return duration
     }
     
-    private func distributeWork(inChargeOfDeposits: Int, inChargeOfLoan: Int) {
+    private func allocateClientToBankClerk(inChargeOfDeposits: Int, inChargeOfLoan: Int) {
         let depositSemaphore = DispatchSemaphore(value: inChargeOfDeposits)
         let loanSemaphore = DispatchSemaphore(value: inChargeOfLoan)
         let group = DispatchGroup()
