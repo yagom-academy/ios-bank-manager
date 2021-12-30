@@ -68,7 +68,7 @@ fileprivate func runProgram() {
     }
 }
 
-var bank = Bank(numberOfClerks: 1)
+var bank = Bank(numberOfClerksForLoans: 1, numberOfClerksForDeposits: 2)
 var bankManager = BankManager(bank: bank)
 
 runProgram()

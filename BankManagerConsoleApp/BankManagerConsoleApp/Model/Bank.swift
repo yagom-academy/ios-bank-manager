@@ -9,21 +9,33 @@ import Foundation
 
 struct Bank {
     //MARK: - 저장 속성
-    private var clientQueue = WaitingQueue<Client>()
-    private var clerkQueue = WaitingQueue<BankClerk>()
+    private var loanClientQueue = WaitingQueue<Client>()
+    private var depositClientQueue = WaitingQueue<Client>()
+    private var loanClerkQueue = WaitingQueue<BankClerk>()
+    private var depositClerkQueue = WaitingQueue<BankClerk>()
     
     //MARK: - 생성자
-    init(numberOfClerks: Int) {
-        (0..<numberOfClerks).forEach { _ in
-            let clerk = BankClerk(isAvailable: true)
-            clerkQueue.enqueue(clerk)
+    init(numberOfClerksForLoans: Int, numberOfClerksForDeposits: Int) {
+        (0..<numberOfClerksForLoans).forEach { _ in
+            let clerk = BankClerk(taskResponsibility: .loan)
+            loanClerkQueue.enqueue(clerk)
+        }
+        
+        (0..<numberOfClerksForDeposits).forEach { _ in
+            let clerk = BankClerk(taskResponsibility: .deposit)
+            depositClerkQueue.enqueue(clerk)
         }
     }
     
     // MARK: - Internal 메서드
     mutating func receive(clients: [Client]) {
         clients.forEach { client in
-            clientQueue.enqueue(client)
+            switch client.task {
+            case .loan:
+                loanClientQueue.enqueue(client)
+            case .deposit:
+                depositClientQueue.enqueue(client)
+            }
         }
     }
     
@@ -39,14 +51,14 @@ struct Bank {
     private mutating func handleClients() -> Int {
         var totalHandledClientCount: Int = 0
         
-        while let client = clientQueue.dequeue(),
-              var clerk = clerkQueue.dequeue() {
-            if clerk.isAvailable {
-                clerk.work(for: client)
-                totalHandledClientCount += 1
-            }
-            clerkQueue.enqueue(clerk)
-        }
+//        while let client = clientQueue.dequeue(),
+//              var clerk = clerkQueue.dequeue() {
+//            if clerk.isAvailable {
+//                clerk.work(for: client)
+//                totalHandledClientCount += 1
+//            }
+//            clerkQueue.enqueue(clerk)
+//        }
         
         return totalHandledClientCount
     }
@@ -60,6 +72,7 @@ struct Bank {
 extension Bank {
     private struct BankClerk {
         var isAvailable = true
+        let taskResponsibility: Task
         
         mutating func work(for client: Client) {
             let clientOrderNumber = client.orderTicket.number
