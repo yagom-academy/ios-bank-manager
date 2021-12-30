@@ -69,16 +69,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6434510277D9BA000442CE8 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				FBC13CB9277D93620089435B /* BankDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		A6E6BEC027709E6A005AC5EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				A6E6BED02772F3DA005AC5EA /* Queue */,
-				A690253F2770534400192751 /* BankManager.swift */,
+				A6434510277D9BA000442CE8 /* Protocol */,
 				A6E6BED12772F40D005AC5EA /* Bank.swift */,
+				A690253F2770534400192751 /* BankManager.swift */,
 				A6E6BED527732652005AC5EA /* Customer.swift */,
 				A6E6BED727734C94005AC5EA /* BankClerk.swift */,
 				A6E6BF072779B34A005AC5EA /* BankTask.swift */,
-				FBC13CB9277D93620089435B /* BankDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
