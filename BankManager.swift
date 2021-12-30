@@ -11,7 +11,6 @@ class BankManager {
     var bank: WaitingLineManageable?
     private let speaker = Speaker()
     private let calculator = Calculator()
-    private var randomNumber = 0
     private let employeeGroup = DispatchGroup()
     private let depositSemaphore = DispatchSemaphore(value: 2)
     private let loanSemaphore = DispatchSemaphore(value: 1)
@@ -38,7 +37,7 @@ class BankManager {
 
 extension BankManager {
     private func lineUp() {
-        self.randomNumber = Int.random(in: 10...30)
+        let randomNumber = Int.random(in: 10...30)
         for number in 1...randomNumber {
             let bankWork = BankWork.allCases.randomElement()!
             let customer = Customer(waitingNumber: number, requestedWork: bankWork)
