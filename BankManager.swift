@@ -27,6 +27,7 @@ class BankManager {
         assignWork()
         
         employeeGroup.wait()
+        
         let closeTime = CFAbsoluteTimeGetCurrent()
         
         reportResult(from: openTime, to: closeTime)
@@ -37,10 +38,11 @@ class BankManager {
 
 extension BankManager {
     private func lineUp() {
-        self.randomNumber = Int.random(in: 10...15)
+        self.randomNumber = Int.random(in: 10...30)
         for number in 1...randomNumber {
             let bankWork = BankWork.allCases.randomElement()!
             let customer = Customer(waitingNumber: number, requestedWork: bankWork)
+            
             bank?.waitingLine.enqueue(customer)
         }
     }
@@ -48,7 +50,6 @@ extension BankManager {
     private func assignWork() {
         while let customer = bank?.waitingLine.dequeue() {
             switch customer.requestedWork {
-                
             case .deposit:
                 DispatchQueue.global().async(group: employeeGroup) {
                     self.depositSemaphore.wait()
@@ -64,7 +65,6 @@ extension BankManager {
             }
         }
     }
-    
     
     private func reportResult(from openTime: CFAbsoluteTime, to closeTime: CFAbsoluteTime) {
         guard let calculateResult = calculator.calculate(from: openTime, to: closeTime) else {

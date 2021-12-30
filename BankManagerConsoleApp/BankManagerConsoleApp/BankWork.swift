@@ -19,4 +19,13 @@ enum BankWork: CaseIterable {
             return "대출"
         }
     }
+    
+    var requiredTime: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
 }

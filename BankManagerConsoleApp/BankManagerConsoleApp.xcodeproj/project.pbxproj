@@ -137,10 +137,10 @@
 				3BE4CC642770705700178845 /* Queue */,
 				3B62088D2779E6DE0071E623 /* Starter */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				0D4FA8622775550A00577BB1 /* Bank.swift */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				3B1F20B1277C3F5000E4C2FC /* BankWork.swift */,
 				0D4FA8642775563A00577BB1 /* Customer.swift */,
+				0D4FA8622775550A00577BB1 /* Bank.swift */,
+				3B1F20B1277C3F5000E4C2FC /* BankWork.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				0D4FA8662775624D00577BB1 /* Employee.swift */,
 				3B62088E2779E73B0071E623 /* Funtional Type */,
 			);
