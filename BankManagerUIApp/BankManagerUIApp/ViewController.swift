@@ -2,6 +2,8 @@ import UIKit
 
 class ViewController: UIViewController {
     var backgroundStackView = UIStackView()
+    let waitingListStackView = CustomerListStackView(title: "대기중", color: .systemGreen)
+    let workingListStackView = CustomerListStackView(title: "업무중", color: .systemIndigo)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -9,6 +11,12 @@ class ViewController: UIViewController {
         setUPButtonStackView()
         setUPTimerStackView()
         setUpCustomerListStackViews()
+        
+        // Test Code
+        for i in 1...100 {
+            let customer = Customer(waitingNumber: i)
+            addCustomerLabel(customer: customer)
+        }
     }
 }
 
@@ -71,10 +79,15 @@ extension ViewController {
         customersBackgroundStackView.translatesAutoresizingMaskIntoConstraints = false
         backgroundStackView.addArrangedSubview(customersBackgroundStackView)
         
-        let waitingListStackView = CustomerListStackView(title: "대기중", color: .systemGreen)
         customersBackgroundStackView.addArrangedSubview(waitingListStackView)
-        
-        let workingListStackView = CustomerListStackView(title: "업무중", color: .systemIndigo)
         customersBackgroundStackView.addArrangedSubview(workingListStackView)
+    }
+    
+    private func addCustomerLabel(customer: Customer) {
+        let number = customer.waitingNumber.description
+        let banking = customer.banking.description
+        let customerLable = CustomerLabel(number, banking)
+        
+        waitingListStackView.addCustomerLabel(customerLable)
     }
 }

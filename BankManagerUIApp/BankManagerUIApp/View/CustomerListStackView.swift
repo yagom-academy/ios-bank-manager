@@ -15,7 +15,7 @@ class CustomerListStackView: UIStackView {
     }
     
     convenience init(title: String, color: UIColor) {
-        self.init(frame: CGRect.zero)
+        self.init()
         setUp()
         notifyLabel.text = title
         notifyLabel.backgroundColor = color
@@ -59,7 +59,7 @@ class CustomerListStackView: UIStackView {
         listStackViewHeight.isActive = true
     }
     
-    func addCustomerLabel(label: UILabel) {
+    func addCustomerLabel(_ label: UILabel) {
         listStackView.addArrangedSubview(label)
     }
 }
