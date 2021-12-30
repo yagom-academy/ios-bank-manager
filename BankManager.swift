@@ -42,9 +42,11 @@ struct BankManager {
   }
   
   private mutating func operateBank (numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+    let numberOfClients = Int.random(in: 10...30)
     let bankers = prepareBanker(numberOfDepositBankers: numberOfDepositBankers,
                                 numberOfLoanBankers: numberOfLoanBankers)
-    let bank = Bank(bankers: bankers, operatingTimeManager: OperatingTimeManager())
+    let clients = clientLineUp(numberOfClients: numberOfClients)
+    let bank = Bank(numberOfClients: numberOfClients, bankers: bankers, clientQueue: clients,  operatingTimeManager: OperatingTimeManager())
     bank.doBanking()
   }
   
@@ -55,6 +57,15 @@ struct BankManager {
     let loanBankers = Array.init(repeating: Banker(assignedTask: .loan),
                                  count: numberOfLoanBankers)
     return depositeBankers + loanBankers
+  }
+  
+  private func clientLineUp(numberOfClients: Int) -> Queue<Client> {
+    let numberOfClients = numberOfClients
+    var clientQueue = Queue<Client>()
+    for sequence in 0..<numberOfClients {
+      clientQueue.enqueue(Client(sequence: sequence))
+    }
+    return clientQueue
   }
 }
                               
