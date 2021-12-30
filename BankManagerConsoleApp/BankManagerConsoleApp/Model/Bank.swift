@@ -66,9 +66,9 @@ extension Bank {
             let duration = client.taskDuration
             
             isAvailable = false
-            print("\(clientOrderNumber)번 고객 업무 시작")
+            print("\(clientOrderNumber)번 고객 \(client.task)업무 시작")
             Thread.sleep(forTimeInterval: duration)
-            print("\(clientOrderNumber)번 고객 업무 완료")
+            print("\(clientOrderNumber)번 고객 \(client.task)업무 완료")
             isAvailable = true
         }
     }

@@ -37,7 +37,9 @@ fileprivate func generateClients() -> [Client] {
     
     (1...clientNumber).forEach { number in
         let orderTicket = Ticket(number: number)
-        let client = Client(orderTicket: orderTicket)
+        let randomTaskIndex = Int.random(in: 0..<Task.allCases.count)
+        let randomTask = Task.allCases[randomTaskIndex]
+        let client = Client(orderTicket: orderTicket, task: randomTask)
         clients.append(client)
     }
     

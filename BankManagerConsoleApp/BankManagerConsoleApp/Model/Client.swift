@@ -11,12 +11,24 @@ struct Ticket {
     let number: Int
 }
 
-enum Task {
-    case financialBusiness
+enum Task: CaseIterable, CustomStringConvertible {
+    case loan
+    case deposit
+    
+    var description: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
     
     var duration: Double {
         switch self {
-        default:
+        case .loan:
+            return 1.1
+        case .deposit:
             return 0.7
         }
     }
@@ -24,7 +36,7 @@ enum Task {
 
 struct Client {
     let orderTicket: Ticket
-    private let task = Task.financialBusiness
+    let task: Task
     
     var taskDuration: Double {
         return task.duration
