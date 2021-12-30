@@ -2,7 +2,7 @@ import Foundation
 
 protocol Banker {
     func task(of customer: Customer)
-    var taskType: String { get }
+    var taskType: TaskType { get }
     var taskTime: TimeInterval { get }
 }
 
@@ -15,6 +15,6 @@ extension Banker {
 }
 
 struct GeneralBanker: Banker {
-    let taskType = ""
+    let taskType = TaskType.deposit
     let taskTime = 0.7
 }

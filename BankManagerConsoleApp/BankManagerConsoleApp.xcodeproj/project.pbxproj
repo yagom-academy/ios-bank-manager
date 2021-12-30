@@ -16,6 +16,7 @@
 		F31D716127717A7900766815 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31D715F27717A7900766815 /* Queue.swift */; };
 		F380CFB82775AAAA0058ACC7 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380CFB72775AAAA0058ACC7 /* Banker.swift */; };
 		F380D00E277990730058ACC7 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380D00D277990720058ACC7 /* BankManager.swift */; };
+		F39BD71D277D7B0300D4B32D /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BD71C277D7B0300D4B32D /* TaskType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		F31D715F27717A7900766815 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		F380CFB72775AAAA0058ACC7 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F380D00D277990720058ACC7 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
+		F39BD71C277D7B0300D4B32D /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				6B9CA80827746F6A0040E797 /* Customer.swift */,
 				6B9CA80F277498BE0040E797 /* BankManagerError.swift */,
 				F380D00D277990720058ACC7 /* BankManager.swift */,
+				F39BD71C277D7B0300D4B32D /* TaskType.swift */,
 			);
 			name = BankManagerShared;
 			path = ../../BankManagerShared;
@@ -154,6 +157,7 @@
 			files = (
 				F380CFB82775AAAA0058ACC7 /* Banker.swift in Sources */,
 				F31D716027717A7900766815 /* LinkedList.swift in Sources */,
+				F39BD71D277D7B0300D4B32D /* TaskType.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				F380D00E277990730058ACC7 /* BankManager.swift in Sources */,
 				6B9CA80927746F6A0040E797 /* Bank.swift in Sources */,
