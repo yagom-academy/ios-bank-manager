@@ -4,9 +4,8 @@ struct Client {
     let waitingNumber: Int
     let bankTask: BankTask
     
-    init(waitingNumber: Int) {
+    init(waitingNumber: Int, bankTask: BankTask) {
         self.waitingNumber = waitingNumber
-        let task: BankTask! = BankTask.allCases.randomElement()
-        self.bankTask = task
+        self.bankTask = bankTask
     }
 }

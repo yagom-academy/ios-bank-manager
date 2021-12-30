@@ -15,7 +15,10 @@ class Bank {
     private func receiveClient() {
         let numberOfClient = Int.random(in: 10...30)
         for number in 1...numberOfClient {
-            let client = Client(waitingNumber: number)
+            guard let bankTask = BankTask.allCases.randomElement() else {
+                return
+            }
+            let client = Client(waitingNumber: number, bankTask: bankTask)
             clientQueue.enqueue(client)
         }
     }
