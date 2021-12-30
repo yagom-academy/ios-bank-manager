@@ -17,6 +17,7 @@
 		F380CFB82775AAAA0058ACC7 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380CFB72775AAAA0058ACC7 /* Banker.swift */; };
 		F380D00E277990730058ACC7 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380D00D277990720058ACC7 /* BankManager.swift */; };
 		F39BD71D277D7B0300D4B32D /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BD71C277D7B0300D4B32D /* TaskType.swift */; };
+		F39BD721277D8B6500D4B32D /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BD720277D8B6500D4B32D /* Array+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		F380CFB72775AAAA0058ACC7 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F380D00D277990720058ACC7 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		F39BD71C277D7B0300D4B32D /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
+		F39BD720277D8B6500D4B32D /* Array+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				6B9CA80F277498BE0040E797 /* BankManagerError.swift */,
 				F380D00D277990720058ACC7 /* BankManager.swift */,
 				F39BD71C277D7B0300D4B32D /* TaskType.swift */,
+				F39BD720277D8B6500D4B32D /* Array+extension.swift */,
 			);
 			name = BankManagerShared;
 			path = ../../BankManagerShared;
@@ -165,6 +168,7 @@
 				6B9CA80A27746F6A0040E797 /* Customer.swift in Sources */,
 				6B9CA810277498BE0040E797 /* BankManagerError.swift in Sources */,
 				F31D716127717A7900766815 /* Queue.swift in Sources */,
+				F39BD721277D8B6500D4B32D /* Array+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

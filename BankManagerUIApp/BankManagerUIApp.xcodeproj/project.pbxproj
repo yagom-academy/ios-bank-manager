@@ -24,6 +24,7 @@
 		F380CFBA2775AAB70058ACC7 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380CFB92775AAB70058ACC7 /* Banker.swift */; };
 		F380D010277990B40058ACC7 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380D00F277990B40058ACC7 /* BankManager.swift */; };
 		F39BD71F277D7B2600D4B32D /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BD71E277D7B2500D4B32D /* TaskType.swift */; };
+		F39BD723277D8B8400D4B32D /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39BD722277D8B8400D4B32D /* Array+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		F380CFB92775AAB70058ACC7 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		F380D00F277990B40058ACC7 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		F39BD71E277D7B2500D4B32D /* TaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
+		F39BD722277D8B8400D4B32D /* Array+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		F380CFAC2775AA790058ACC7 /* BankManagerShared */ = {
 			isa = PBXGroup;
 			children = (
+				F39BD722277D8B8400D4B32D /* Array+extension.swift */,
 				F39BD71E277D7B2500D4B32D /* TaskType.swift */,
 				F380CFAD2775AA790058ACC7 /* Customer.swift */,
 				F380CFB92775AAB70058ACC7 /* Banker.swift */,
@@ -297,6 +300,7 @@
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				F380D010277990B40058ACC7 /* BankManager.swift in Sources */,
 				F380CFB42775AA790058ACC7 /* Queue.swift in Sources */,
+				F39BD723277D8B8400D4B32D /* Array+extension.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				F380CFB22775AA790058ACC7 /* Customer.swift in Sources */,
 				F380CFB32775AA790058ACC7 /* Bank.swift in Sources */,

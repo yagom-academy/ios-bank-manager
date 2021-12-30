@@ -23,8 +23,3 @@ struct DepositBanker: Banker {
      let taskType = TaskType.loan
      let taskTime = 1.1
 }
-
-struct GeneralBanker: Banker {
-    let taskType = TaskType.deposit
-    let taskTime = 0.7
-}

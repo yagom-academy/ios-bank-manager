@@ -37,13 +37,22 @@ struct ConsoleApp {
     private func openBank() {
         let customerQueue = lineUpCustomers()
         let bankManager = BankManager()
-        let bankers: [Banker] = [DepositBanker(), DepositBanker(), LoanBanker()]
-        
+        let bankers: [Banker] = assignTaskOfBanker(depositCount: 2, loanCount: 1)
         var bank = Bank(bankers: bankers, customerQueue: customerQueue, bankManager: bankManager)
+        
         bank.operate()
     }
     
-    func lineUpCustomers() -> Queue<Customer> {
+    private func assignTaskOfBanker(depositCount: Int, loanCount: Int) -> [Banker] {
+        var bankerQueue: [Banker] = []
+        
+        bankerQueue.append(BankerType: DepositBanker(), count: depositCount)
+        bankerQueue.append(BankerType: LoanBanker(), count: loanCount)
+        
+        return bankerQueue
+    }
+    
+    private func lineUpCustomers() -> Queue<Customer> {
         let range = 10...30
         let customerCount = Int.random(in: range)
         let customerQueue: Queue<Customer> = Queue<Customer>()
