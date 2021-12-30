@@ -1,5 +1,11 @@
 import Foundation
 
 struct Client {
-    var waitingNumber: Int
+    let waitingNumber: Int
+    let bankTask: BankTask
+    
+    init(waitingNumber: Int, bankTask: BankTask) {
+        self.waitingNumber = waitingNumber
+        self.bankTask = bankTask
+    }
 }

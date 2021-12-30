@@ -11,13 +11,14 @@
 - `LinkedList`
 - `Queue` 
 - `UnitTest` 
-2. Step2
+2. Step2, Step3
 - `Concurrency Programming`
 - `Dispatch Group`
 - `Dispatch Semaphore`
 - `Class versus Struct`
 - `Closure`
 - `CFAbsoluteTimeGetCurrent`
+
 
 # STEP1 
 
@@ -124,6 +125,75 @@ struct ConsoleManager {
 
 프로그램의 주축이 되는 인스턴스를 초기화하는 작업을 보통 어떻게 구현하시는지 궁금합니다!
 <br>   
+
+
+# STEP3
+
+## 고민한 점
+**1. BankClerk 타입의 사용**
+- 시도했던 방법
+`distributeClient`메서드에서는 BankClerk객체가 클라이언트 Queue를 순회하며 BankClerk이 가지고 있는 `workType`과 Client의 `workType`이 동일할때만 `remove`메서드를 사용하여 꺼내옵니다. BankClerk 객체를 순회하며 서로 다른 쓰레드에서 비동기적으로 `distributeClient`메서드를 수행하도록 시키는 방법으로 구현했습니다. "예금-예금-예금-대출" 이런 순서로 고객이 존재할때 대출 담당 은행원이 놀고있는 시간을 방지하기 위해서 이렇게 구현하였는데, 고객의 수가 많아지는 경우 탐색 시간이 길어져 불완전한 설계라고 판단하였습니다.(고객이 5만명 정도를 넘어가면 유의미하게 실행시간이 길어지는 것을 확인하였습니다.) 
+
+```swift=
+     private func makeBankClerksWork() {
+        let group = DispatchGroup()
+        for bankClerk in bankClerks {
+            DispatchQueue.global().async(group: group) {
+                self.distributeClient(to: bankClerk)
+            }
+        }
+        group.wait()
+    }
+
+    private func distributeClient(to bankClerk: BankClerk) {
+        while !self.clientQueue.isEmpty {
+            semaphore.wait()
+            var i = 0
+            while let client = self.clientQueue.peek(i) {
+                if client.workType == bankClerk.workType {
+                    break
+                }
+                i += 1
+            }
+            if let client = self.clientQueue.remove(at: i) {
+                semaphore.signal()
+                bankClerk.work(for: client)
+                semaphore.wait()
+                completedClientCount += 1
+                semaphore.signal()
+            } else {
+            semaphore.signal()
+            }
+        }
+    }
+
+```
+
+- 결정한 방법
+DispatchSemaphore의 value를 해당 업무를 할 수 있는 은행원의 수라고 정의하고 아래와 같이 구현했습니다. 각각의 업무마다 DispatchSemaphore를 생성하여 배정된 은행원의 수 만큼 value를 부여했습니다.
+```swift
+let depositSemaphore = DispatchSemaphore(value: inChargeOfDeposits)
+let loanSemaphore = DispatchSemaphore(value: inChargeOfLoan)
+let group = DispatchGroup()
+        
+while let client = self.clientQueue.dequeue() {
+    DispatchQueue.global().async(group: group) {
+        switch client.bankTask {
+        case .deposit:
+            depositSemaphore.wait()
+            self.makeBankClerkWork(for: client)
+            depositSemaphore.signal()
+        case .loan:
+            loanSemaphore.wait()
+            self.makeBankClerkWork(for: client)
+            loanSemaphore.signal()
+            }
+        }
+    }
+group.wait()
+}
+```
+위와 같은 구현을 통해 기존 방법에서 겪었던 문제는 해결이 되는데, BankClerk타입을 살리면서 위와 같은 구현을 유지하는 방법을 찾는데 실패했습니다. 
 
 
 

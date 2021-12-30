@@ -38,10 +38,10 @@ extension ConsoleManager: BankDelegate {
     }
     
     func startWork(for client: Client) {
-        print(ConsoleBundle.TaskMessage.startMessage(clientNumber: client.waitingNumber))        
+        print(ConsoleBundle.TaskMessage.startMessage(client: client))
     }
     
     func finishWork(for client: Client) {
-        print(ConsoleBundle.TaskMessage.completeMessage(clientNumber: client.waitingNumber))
+        print(ConsoleBundle.TaskMessage.completeMessage(client: client))
     }
 }

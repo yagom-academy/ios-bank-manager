@@ -1,22 +1,40 @@
 import Foundation
 
 class Bank {
+    private var delegate: BankDelegate?
     private var clientQueue: Queue<Client> = Queue<Client>()
     private var completedClientCount: Int = 0
-    private var bankClerks: [BankClerk] = []
-    private var numberOfBankClerk: Int?
-    private let semaphore = DispatchSemaphore(value: 1)
-    var delegate: BankDelegate?
+    private let numberOfBankClerkForDeposit: Int
+    private let numberOfBankClerkForLoan: Int
     
-    init(numberOfBankClerk: Int, delegate: BankDelegate) {
-        self.makeBankClerk(for: numberOfBankClerk)
-        self.receiveClient()
+    init(
+        delegate: BankDelegate,
+        numberOfBankClerkForDeposit: Int,
+        numberOfBankClerkForLoan: Int
+    ) {
         self.delegate = delegate
+        self.numberOfBankClerkForDeposit = numberOfBankClerkForDeposit
+        self.numberOfBankClerkForLoan = numberOfBankClerkForLoan
+        self.receiveClient()
+    }
+    
+    private func receiveClient() {
+        let numberOfClient = Int.random(in: 10...30)
+        for number in 1...numberOfClient {
+            guard let bankTask = BankTask.allCases.randomElement() else {
+                return
+            }
+            let client = Client(waitingNumber: number, bankTask: bankTask)
+            clientQueue.enqueue(client)
+        }
     }
     
     func open() {
         let workHours = measureTime() {
-            makeBankClerksWork()
+            self.allocateClientToBankClerk(
+                inChargeOfDeposits: numberOfBankClerkForDeposit,
+                inChargeOfLoans: numberOfBankClerkForLoan
+            )
         }
         delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
     }
@@ -31,41 +49,32 @@ class Bank {
         return duration
     }
     
-    private func makeBankClerksWork() {
+    private func allocateClientToBankClerk(inChargeOfDeposits: Int, inChargeOfLoans: Int) {
+        let depositSemaphore = DispatchSemaphore(value: inChargeOfDeposits)
+        let loanSemaphore = DispatchSemaphore(value: inChargeOfLoans)
         let group = DispatchGroup()
-        for bankClerk in bankClerks {
+        
+        while let client = self.clientQueue.dequeue() {
             DispatchQueue.global().async(group: group) {
-                self.distributeClient(to: bankClerk)
+                switch client.bankTask {
+                case .deposit:
+                    depositSemaphore.wait()
+                    self.makeBankClerkWork(for: client)
+                    depositSemaphore.signal()
+                case .loan:
+                    loanSemaphore.wait()
+                    self.makeBankClerkWork(for: client)
+                    loanSemaphore.signal()
+                }
             }
         }
         group.wait()
     }
     
-    private func distributeClient(to bankClerk: BankClerk) {
-        while !self.clientQueue.isEmpty {
-            semaphore.wait()
-            if let client = self.clientQueue.dequeue() {
-                semaphore.signal()
-                delegate?.startWork(for: client)
-                bankClerk.work(for: client)
-                delegate?.finishWork(for: client)
-                completedClientCount += 1
-            }
-        }
-    }
-    
-    private func makeBankClerk(for number: Int) {
-        for _ in 1...number {
-            let bankClerk = BankClerk()
-            bankClerks.append(bankClerk)
-        }
-    }
-    
-    private func receiveClient() {
-        let numberOfClient = Int.random(in: 10...30)
-        for number in 1...numberOfClient {
-            let client = Client(waitingNumber: number)
-            clientQueue.enqueue(client)
-        }
+    private func makeBankClerkWork(for client: Client) {
+        self.delegate?.startWork(for: client)
+        Thread.sleep(forTimeInterval: client.bankTask.requiredTime)
+        completedClientCount += 1
+        self.delegate?.finishWork(for: client)
     }
 }
