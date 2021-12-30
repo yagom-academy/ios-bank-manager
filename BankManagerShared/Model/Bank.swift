@@ -1,12 +1,14 @@
 import Foundation
 
 struct Bank {
-    private let bankers: [Banker]
     private var customerQueue: Queue<Customer>
     private let bankManager: BankManager
+    private var depositBankerCount: Int
+    private var loanBankerCount: Int
     
-    init(bankers : [Banker], customerQueue: Queue<Customer>, bankManager: BankManager) {
-        self.bankers = bankers
+    init(depositBankerCount: Int, loanBankerCount: Int, customerQueue: Queue<Customer>, bankManager: BankManager) {
+        self.depositBankerCount = depositBankerCount
+        self.loanBankerCount = loanBankerCount
         self.customerQueue = customerQueue
         self.bankManager = bankManager
     }
@@ -24,13 +26,6 @@ extension Bank {
     }
     
     private mutating func open() {
-        let loanBankerCount = bankers
-                                .filter{ $0.taskType == .loan }
-                                .count
-        let depositBankerCount = bankers
-                                .filter { $0.taskType == .deposit }
-                                .count
-        
         let bankerGroup = DispatchGroup()
         
         let loanSemaphore = DispatchSemaphore(value: loanBankerCount)
@@ -39,15 +34,15 @@ extension Bank {
         while let customer = customerQueue.dequeue() {
             switch customer.taskType {
             case .deposit:
-                assign(semaphore: depositSemaphore, group: bankerGroup, customer: customer, banker: DepositBanker())
+                assign(semaphore: depositSemaphore, group: bankerGroup, customer: customer, banker: DepositBanker.self)
             case .loan:
-                assign(semaphore: loanSemaphore, group: bankerGroup, customer: customer, banker: LoanBanker())
+                assign(semaphore: loanSemaphore, group: bankerGroup, customer: customer, banker: LoanBanker.self)
             }
         }
         bankerGroup.wait()
     }
     
-    private func assign(semaphore: DispatchSemaphore, group: DispatchGroup, customer: Customer, banker: Banker) {
+    private func assign(semaphore: DispatchSemaphore, group: DispatchGroup, customer: Customer, banker: Banker.Type) {
         DispatchQueue.global().async(group: group) {
             semaphore.wait()
             banker.task(of: customer)
