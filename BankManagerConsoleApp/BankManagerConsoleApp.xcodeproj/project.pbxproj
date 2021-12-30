@@ -58,6 +58,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B867BE1277D8C5500FC3F55 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B9CA80727746F6A0040E797 /* Bank.swift */,
+				F380CFB72775AAAA0058ACC7 /* Banker.swift */,
+				F380D00D277990720058ACC7 /* BankManager.swift */,
+				6B9CA80827746F6A0040E797 /* Customer.swift */,
+				F39BD71C277D7B0300D4B32D /* TaskType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B867BE2277D8C5F00FC3F55 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				6B9CA80F277498BE0040E797 /* BankManagerError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		6B867BE3277D8C7700FC3F55 /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				F31D715E27717A7900766815 /* LinkedList.swift */,
+				F31D715F27717A7900766815 /* Queue.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
+		6B867BE4277D8C9300FC3F55 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F39BD720277D8B6500D4B32D /* Array+extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -87,15 +124,10 @@
 		F380CFAB2775AA5E0058ACC7 /* BankManagerShared */ = {
 			isa = PBXGroup;
 			children = (
-				F31D715E27717A7900766815 /* LinkedList.swift */,
-				F31D715F27717A7900766815 /* Queue.swift */,
-				6B9CA80727746F6A0040E797 /* Bank.swift */,
-				F380CFB72775AAAA0058ACC7 /* Banker.swift */,
-				6B9CA80827746F6A0040E797 /* Customer.swift */,
-				6B9CA80F277498BE0040E797 /* BankManagerError.swift */,
-				F380D00D277990720058ACC7 /* BankManager.swift */,
-				F39BD71C277D7B0300D4B32D /* TaskType.swift */,
-				F39BD720277D8B6500D4B32D /* Array+extension.swift */,
+				6B867BE1277D8C5500FC3F55 /* Model */,
+				6B867BE3277D8C7700FC3F55 /* DataStructure */,
+				6B867BE2277D8C5F00FC3F55 /* Error */,
+				6B867BE4277D8C9300FC3F55 /* Extension */,
 			);
 			name = BankManagerShared;
 			path = ../../BankManagerShared;
