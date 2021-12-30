@@ -9,10 +9,10 @@ import Foundation
 
 struct Client {
   let sequence: Int
-  let requiredBankingType: BankingType?
+  let requiredBankingType: BankingType
   
   init(sequence: Int) {
     self.sequence = sequence
-    self.requiredBankingType = BankingType.allCases.randomElement()
+    self.requiredBankingType = BankingType.allCases.randomElement() ?? .deposit
   }
 }

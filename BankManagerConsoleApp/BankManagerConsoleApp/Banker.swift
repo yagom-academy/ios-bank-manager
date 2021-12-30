@@ -20,9 +20,7 @@ struct Banker {
   
   func doTask(client: Client) {
     let clientNumber = client.sequence + 1
-    guard let requiredBankingType = client.requiredBankingType?.rawValue else {
-      return
-    }
+    let requiredBankingType = client.requiredBankingType.rawValue
     
     print("\(clientNumber)번 고객 \(requiredBankingType)업무 시작")
     DispatchQueue.global().sync(execute: task)
