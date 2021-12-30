@@ -1,10 +1,3 @@
-//
-//  ClientView.swift
-//  BankManagerUIApp
-//
-//  Created by 박병호 on 2021/12/29.
-//
-
 import UIKit
 
 class ClientLabel: UILabel {

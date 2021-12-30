@@ -59,7 +59,7 @@ class BankManagerView: UIView {
         let stackView = UIStackView()
         
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 10.0
         return stackView
     }()
     let buttonStackView: UIStackView = {
@@ -87,7 +87,7 @@ class BankManagerView: UIView {
         let stackView = UIStackView()
         
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 10.0
         stackView.alignment = .center
         return stackView
     }()
@@ -95,7 +95,7 @@ class BankManagerView: UIView {
         let stackView = UIStackView()
         
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 10.0
         stackView.alignment = .center
         return stackView
     }()

@@ -11,6 +11,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view = BankManagerView(frame: view.frame)
+        view = BankManagerView()
     }
 }
