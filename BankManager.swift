@@ -11,8 +11,11 @@ class BankManager {
     var bank: WaitingLineManageable?
     private let speaker = Speaker()
     private let calculator = Calculator()
-    private let randomNumber = Int.random(in: 10...30)
-    
+    private let employeeGroup = DispatchGroup()
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private var customerCount = 0
+
     init(employee: Employee) {
         self.employee = employee
     }
@@ -22,6 +25,8 @@ class BankManager {
         
         lineUp()
         assignWork()
+        
+        employeeGroup.wait()
         
         let closeTime = CFAbsoluteTimeGetCurrent()
         
@@ -33,31 +38,33 @@ class BankManager {
 
 extension BankManager {
     private func lineUp() {
+        let randomNumber = Int.random(in: 10...30)
         for number in 1...randomNumber {
-            let customer = Customer(waitingNumber: number)
+            let bankWork = BankWork.allCases.randomElement()!
+            let customer = Customer(waitingNumber: number, requestedWork: bankWork)
             
             bank?.waitingLine.enqueue(customer)
         }
     }
-
+    
     private func assignWork() {
-        let bankManagerQueue = DispatchQueue(label: "BankManagerQueue")
-        let dispatchGroup = DispatchGroup()
-        
-        let start = DispatchWorkItem {
-            self.employee.startJob()
-        }
-        let finish = DispatchWorkItem {
-            self.employee.finishJob()
-            dispatchGroup.leave()
-        }
-        
-        while self.bank?.waitingLine.isEmpty == false {
-            dispatchGroup.enter()
-            bankManagerQueue.async(execute: start)
-            bankManagerQueue.asyncAfter(deadline: .now() + 0.7, execute: finish)
-            
-            dispatchGroup.wait()
+        while let customer = bank?.waitingLine.dequeue() {
+            switch customer.requestedWork {
+            case .deposit:
+                DispatchQueue.global().async(group: employeeGroup) {
+                    self.depositSemaphore.wait()
+                    self.employee.work(for: customer)
+                    self.customerCount += 1
+                    self.depositSemaphore.signal()
+                }
+            case .loan:
+                DispatchQueue.global().async(group: employeeGroup) {
+                    self.loanSemaphore.wait()
+                    self.employee.work(for: customer)
+                    self.customerCount += 1
+                    self.loanSemaphore.signal()
+                }
+            }
         }
     }
     
@@ -66,6 +73,6 @@ extension BankManager {
             return
         }
         
-        speaker.speakClose(number: randomNumber, time: calculateResult)
+        speaker.speakClose(number: self.customerCount, time: calculateResult)
     }
 }

@@ -8,12 +8,12 @@
 import Foundation
 
 struct Speaker {
-    func speakStart(for number: Int) {
-        print("\(number) 번 고객 업무 시작")
+    func speakStart(for number: Int, workType: BankWork) {
+        print("\(number) 번 고객 \(workType.koreanDescription)업무 시작")
     }
     
-    func speakFinish(for number: Int) {
-        print("\(number) 번 고객 업무 완료")
+    func speakFinish(for number: Int, workType: BankWork) {
+        print("\(number) 번 고객 \(workType.koreanDescription)업무 완료")
     }
     
     func speakClose(number: Int, time: String) {

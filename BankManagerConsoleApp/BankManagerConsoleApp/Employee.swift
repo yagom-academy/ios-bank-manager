@@ -8,26 +8,13 @@
 import Foundation
 
 class Employee {
-    var bank: WaitingLineManageable?
-    let speaker = Speaker()
-    private let seconds = 0.7
-    private var customerCount = 0
+    private let speaker = Speaker()
     
-    func startJob() {
-        guard let customer = bank?.waitingLine.first else {
-            return
+    func work(for customer: Customer) {
+            speaker.speakStart(for: customer.waitingNumber, workType: customer.requestedWork)
+            
+            Thread.sleep(forTimeInterval: customer.requestedWork.requiredTime)
+            
+            speaker.speakFinish(for: customer.waitingNumber, workType: customer.requestedWork)
         }
-        
-        speaker.speakStart(for: customer.waitingNumber)
-    }
-    
-    func finishJob() {
-        guard let customer = bank?.waitingLine.dequeue() else {
-            return
-        }
-        
-        customerCount += 1
-        
-        speaker.speakFinish(for: customer.waitingNumber)
-    }
 }

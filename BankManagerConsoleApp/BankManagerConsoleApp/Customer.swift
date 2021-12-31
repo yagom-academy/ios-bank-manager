@@ -9,4 +9,5 @@ import Foundation
 
 struct Customer {
     var waitingNumber: Int
+    var requestedWork: BankWork
 }
