@@ -32,7 +32,7 @@ class Bank {
         }
     }
     
-    func start(with totalClients: Int) {
+    func start() {
         let startTime = CFAbsoluteTimeGetCurrent()
         let dispatchGroup = DispatchGroup()
         for _ in 1...numberOfDepositBankers {

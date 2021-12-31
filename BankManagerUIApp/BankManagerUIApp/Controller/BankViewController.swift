@@ -30,6 +30,7 @@ class BankViewController: UIViewController {
             bank.lineUp(Client(waitingNumber: totalClient + number, task: Task.random))
         }
         totalClient += 10
+        bank.start()
     }
 }
 
@@ -150,7 +151,13 @@ extension BankViewController {
 extension BankViewController: BankStateDisplayer {
 
     func bank(willBeginServiceFor number: Int, task: String) {
-        
+        DispatchQueue.main.async {
+            guard let upcomingClientLabel = self.waitingStackView.subviews.filter({ label in
+                label.tag == number
+            }).first else { return }
+            upcomingClientLabel.removeFromSuperview()
+            self.workingStackView.addArrangedSubview(upcomingClientLabel)
+        }
     }
     
     func bank(didEndServiceFor number: Int, task: String) {
@@ -159,11 +166,13 @@ extension BankViewController: BankStateDisplayer {
     
     func bank(didReceiveDepositClientOf number: Int) {
         let depositClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.deposit.rawValue)", textStyle: .title3)
+        depositClientLabel.tag = number
         waitingStackView.addArrangedSubview(depositClientLabel)
     }
     
     func bank(didReceiveLoanClientOf number: Int) {
         let loanClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.loan.rawValue)", textStyle: .title3, textColor: .systemPurple)
+        loanClientLabel.tag = number
         waitingStackView.addArrangedSubview(loanClientLabel)
     }
 }
