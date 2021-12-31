@@ -17,6 +17,19 @@ class BankViewController: UIViewController {
         initializeView()
     }
     
+    @objc private func addClients() {
+        bank?.addClientsToQueue(by: 10)
+        bank?.startBankingService()
+    }
+    
+    @objc private func resetAll() {
+        bank?.invalidateTimer()
+        bank?.delegate = nil
+        bank = Bank()
+        bank?.delegate = self
+        initializeView()
+    }
+    
     private func initializeView() {
         view = BankManagerView()
         let bankView = view as? BankManagerView
@@ -32,17 +45,22 @@ class BankViewController: UIViewController {
         )
     }
     
-    @objc func addClients() {
-        bank?.addClientsToQueue(by: 10)
-        bank?.startBankingService()
+    private func secondsToTimeString (serviceTime: Double) -> String {
+        let minute = Int(serviceTime / 60)
+        let second = Int(serviceTime) % 60
+        let milisecond = Int((serviceTime - Double(Int(serviceTime))) * 1000)
+        return String(format: "%.2d:%.2d:%.3d", minute, second, milisecond)
     }
     
-    @objc func resetAll() {
-        bank?.initializeTimer()
-        bank?.delegate = nil
-        bank = Bank()
-        bank?.delegate = self
-        initializeView()
+    private func removeLabel(client: Client, from stackSubviews: [UIView]) {
+        for label in stackSubviews {
+            let label = label as? ClientLabel
+            let clientText = "\(client.waitingNumber) - \(client.business)"
+            if label?.text == clientText {
+                label?.removeFromSuperview()
+                return
+            }
+        }
     }
 }
 
@@ -51,13 +69,6 @@ extension BankViewController: BankDelegate {
         let view = view as? BankManagerView
         let timeString = secondsToTimeString(serviceTime: serviceTime)
         view?.serviceTimeLabel.text = "업무시간 - \(timeString)"
-    }
-    
-    func secondsToTimeString (serviceTime: Double) -> String {
-        let minute = Int(serviceTime / 60)
-        let second = Int(serviceTime) % 60
-        let milisecond = Int((serviceTime - Double(Int(serviceTime))) * 1000)
-        return String(format: "%.2d:%.2d:%.3d", minute, second, milisecond)
     }
     
     func addWaitingClient(client: Client) {
@@ -76,29 +87,15 @@ extension BankViewController: BankDelegate {
         guard let view = view as? BankManagerView else {
             return
         }
-        
-        for label in view.waitingQueueStackView.arrangedSubviews {
-            let label = label as? ClientLabel
-            let clientText = "\(client.waitingNumber) - \(client.business)"
-            if label?.text == clientText {
-                label?.removeFromSuperview()
-                return
-            }
-        }
+        let stackSubviews =  view.waitingQueueStackView.arrangedSubviews
+        removeLabel(client: client, from: stackSubviews)
     }
     
     func removeProcessingClient(client: Client) {
         guard let view = view as? BankManagerView else {
             return
         }
-        
-        for label in view.processingQueueStackView.arrangedSubviews {
-            let label = label as? ClientLabel
-            let clientText = "\(client.waitingNumber) - \(client.business)"
-            if label?.text == clientText {
-                label?.removeFromSuperview()
-                return
-            }
-        }
+        let stackSubviews =  view.processingQueueStackView.arrangedSubviews
+        removeLabel(client: client, from: stackSubviews)
     }
 }

@@ -26,26 +26,24 @@ class Bank {
     
     weak var delegate: BankDelegate?
     private let clients = Queue<Client>()
-    private var numberOfClients: Int
+    private var numberOfClients = 0
+    private var isProcessing = false
+    private var elapsedServiceTime = 0.0
+    private var timer: Timer?
+    
     private let depositSemaphore: DispatchSemaphore
     private let loanSemaphore: DispatchSemaphore
-    
     private let depositDispatchQueue = DispatchQueue(label: Service.deposit.rawValue)
     private let loanDispatchQueue = DispatchQueue(label: Service.loan.rawValue)
     private let group = DispatchGroup()
-    private var isProcessing = false
     
-    private var serviceTime = 0.0
-    private var timer: Timer?
-    
-    init(numberOfClients: Int, numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
-        self.numberOfClients = numberOfClients
+    init(numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
         self.depositSemaphore = DispatchSemaphore(value: numberOfDepositBankTellers)
         self.loanSemaphore = DispatchSemaphore(value: numberOfLoanBankTellers)
     }
     
     convenience init() {
-        self.init(numberOfClients: 0, numberOfDepositBankTellers: 2, numberOfLoanBankTellers: 1)
+        self.init(numberOfDepositBankTellers: 2, numberOfLoanBankTellers: 1)
     }
     
     func startBankingService() {
@@ -53,23 +51,35 @@ class Bank {
             processAllServices()
             return
         }
-        
         isProcessing = true
+        
         timer = Timer(timeInterval: 0.001, repeats: true) { _ in
-            self.serviceTime += 0.001
-            self.delegate?.updateServiceTimeLabel(serviceTime: self.serviceTime)
+            self.elapsedServiceTime += 0.001
+            self.delegate?.updateServiceTimeLabel(serviceTime: self.elapsedServiceTime)
         }
         guard let timer = timer else {
             return
         }
-
         RunLoop.current.add(timer, forMode: .common)
-
+        
         processAllServices()
         group.notify(queue: DispatchQueue.global()) {
             self.isProcessing = false
             self.timer?.invalidate()
         }
+    }
+    
+    func addClientsToQueue(by numberOfClients: Int) {
+        (1...numberOfClients).forEach {
+            let client = Client(waitingNumber: self.numberOfClients + $0)
+            clients.enqueue(client)
+            delegate?.addWaitingClient(client: client)
+        }
+        self.numberOfClients += numberOfClients
+    }
+    
+    func invalidateTimer() {
+        timer?.invalidate()
     }
     
     private func processAllServices() {
@@ -96,15 +106,6 @@ class Bank {
             }
         }
     }
-    
-    func addClientsToQueue(by numberOfClients: Int) {
-        (1...numberOfClients).forEach {
-            let client = Client(waitingNumber: self.numberOfClients + $0)
-            clients.enqueue(client)
-            delegate?.addWaitingClient(client: client)
-        }
-        self.numberOfClients += numberOfClients
-    }
 
     private func processDepositService(to client: Client, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
@@ -124,9 +125,5 @@ class Bank {
             }
             self.loanSemaphore.signal()
         }
-    }
-    
-    func initializeTimer() {
-        timer?.invalidate()
     }
 }
