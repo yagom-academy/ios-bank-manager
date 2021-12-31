@@ -50,9 +50,7 @@ struct ConsoleApp {
         let customerQueue: Queue<Customer> = Queue<Customer>()
         
         (0..<customerCount).forEach {
-            guard let randomTask = TaskType.randomElement() else {
-                return
-            }
+            let randomTask = TaskType.randomElement()
             let customer = Customer(indexNumber: $0, taskType: randomTask)
             customerQueue.enqueue(customer)
         }
