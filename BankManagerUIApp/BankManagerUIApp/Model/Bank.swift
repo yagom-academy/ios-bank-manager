@@ -1,6 +1,6 @@
 import Foundation
 
-protocol BankDelegate {
+protocol BankDelegate: AnyObject {
     func bank(DidEnqueueCustomer customer: Customer)
 }
 
@@ -10,7 +10,7 @@ final class Bank {
     private let loanBankersCount: Int
     private let depositBankersCount: Int
     private var numberOfCustomers = 0
-    var delegate: BankDelegate?
+    weak var delegate: BankDelegate?
     
     init(loanBankersCount: Int = 1, depositBankersCount: Int = 2) {
         self.loanBankersCount = loanBankersCount
@@ -42,8 +42,6 @@ final class Bank {
         
         workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
         workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
-        
-        bankGroup.wait()
     }
     
     private func workBankers(_ number: Int, customers: Queue<Customer>, group: DispatchGroup) {
@@ -54,6 +52,7 @@ final class Bank {
     
     private func workBanker(customers: Queue<Customer>, group: DispatchGroup) {
         let banker = Banker()
+        banker.delegate = delegate as? BankerDelegate
         DispatchQueue.global().async(group: group) {
             while let customer = customers.dequeue() {
                 banker.work(for: customer)

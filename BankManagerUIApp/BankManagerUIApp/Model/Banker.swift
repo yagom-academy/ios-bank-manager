@@ -1,10 +1,17 @@
 import Foundation
 
-struct Banker {
+protocol BankerDelegate: AnyObject {
+    func banker(DidStartWork waitingNumber: Int)
+    func banker(DidFinishWork waitingNumber: Int)
+}
+
+final class Banker {
+    weak var delegate: BankerDelegate?
+    
     func work(for customer: Customer) {
         let banking = customer.banking
-        print("\(customer.waitingNumber)번 고객 \(banking.description)업무 시작")
+        delegate?.banker(DidStartWork: customer.waitingNumber)
         Thread.sleep(forTimeInterval: banking.speed)
-        print("\(customer.waitingNumber)번 고객 \(banking.description)업무 완료")
+        delegate?.banker(DidFinishWork: customer.waitingNumber)
     }
 }

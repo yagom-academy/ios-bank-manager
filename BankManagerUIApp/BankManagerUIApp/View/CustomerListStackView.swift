@@ -64,6 +64,7 @@ class CustomerListStackView: UIStackView {
         listStackView.addArrangedSubview(label)
     }
     
+    @discardableResult
     func removeLabel(at waitingNumber: Int) -> UILabel {
         guard let customerLabel = listStackView.arrangedSubviews
                                                .compactMap({ $0 as? CustomerLabel })

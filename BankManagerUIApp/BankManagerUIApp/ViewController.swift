@@ -96,6 +96,7 @@ extension ViewController {
 extension ViewController {
     @objc private func touchUpAddCustomer() {
         bankManager?.setUpBankCustomers()
+        bank?.openBank()
     }
     
     @objc private func touchUpResetButton() {
@@ -107,6 +108,21 @@ extension ViewController {
 
 extension ViewController: BankDelegate {
     func bank(DidEnqueueCustomer customer: Customer) {
-        addCustomerLabel(customer: customer)
+        self.addCustomerLabel(customer: customer)
+    }
+}
+
+extension ViewController: BankerDelegate {
+    func banker(DidStartWork waitingNumber: Int) {
+        DispatchQueue.main.async {
+            let customerLabel = self.waitingListStackView.removeLabel(at: waitingNumber)
+            self.workingListStackView.addCustomerLabel(customerLabel)
+        }
+    }
+    
+    func banker(DidFinishWork waitingNumber: Int) {
+        DispatchQueue.main.async {
+            self.workingListStackView.removeLabel(at: waitingNumber)
+        }
     }
 }
