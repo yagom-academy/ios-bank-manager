@@ -151,7 +151,7 @@ extension BankViewController {
 extension BankViewController: BankStateDisplayer {
 
     func bank(willBeginServiceFor number: Int, task: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.sync {
             guard let upcomingClientLabel = self.waitingStackView.subviews.filter({ label in
                 label.tag == number
             }).first else { return }
@@ -161,7 +161,12 @@ extension BankViewController: BankStateDisplayer {
     }
     
     func bank(didEndServiceFor number: Int, task: String) {
-        
+        DispatchQueue.main.sync {
+            guard let exitingClientLabel = self.workingStackView.subviews.filter({ label in
+                label.tag == number
+            }).first else { return }
+            exitingClientLabel.removeFromSuperview()
+        }
     }
     
     func bank(didReceiveDepositClientOf number: Int) {

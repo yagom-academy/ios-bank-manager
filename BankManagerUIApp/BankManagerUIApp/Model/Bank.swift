@@ -14,11 +14,21 @@ class Bank {
     private var clientQueue = Queue<Client>()
     private var depositQueue = Queue<Client>()
     private var loanQueue = Queue<Client>()
+    private var bankers: [DispatchQueue]?
     weak var delegate: BankStateDisplayer?
     
     init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
         self.numberOfDepositBankers = numberOfDepositBankers
         self.numberOfLoanBankers = numberOfLoanBankers
+        self.bankers = configureBankers()
+    }
+    
+    private func configureBankers() -> [DispatchQueue] {
+        var bankers = [DispatchQueue]()
+        (1...numberOfDepositBankers + numberOfLoanBankers).forEach { number in
+            bankers.append(DispatchQueue(label: "\(number)"))
+        }
+        return bankers
     }
     
     func lineUp(_ client: Client) {
@@ -34,18 +44,18 @@ class Bank {
     
     func start() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        let dispatchGroup = DispatchGroup()
-        for _ in 1...numberOfDepositBankers {
-            serviceForClients(queue: depositQueue, in: dispatchGroup)
+        for number in 1...numberOfDepositBankers {
+            serviceForClients(queue: depositQueue, bankerNumber: number)
         }
-        for _ in 1...numberOfLoanBankers {
-            serviceForClients(queue: loanQueue, in: dispatchGroup)
+        for number in numberOfDepositBankers + 1...numberOfDepositBankers + numberOfLoanBankers {
+            serviceForClients(queue: loanQueue, bankerNumber: number)
         }
-        dispatchGroup.wait()
     }
     
-    private func serviceForClients(queue: Queue<Client>, in dispatchGroup: DispatchGroup) {
-        DispatchQueue.global().async(group: dispatchGroup) {
+    private func serviceForClients(queue: Queue<Client>, bankerNumber: Int) {
+        guard let banker = bankers?[bankerNumber - 1] else { return }
+        
+        banker.async {
             while let client = queue.dequeue() {
                 self.service(for: client)
             }

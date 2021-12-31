@@ -157,8 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				E941BCAF277D903000B99281 /* DataStructure */,
-				E941BCB2277D903000B99281 /* Client.swift */,
 				E941BCB3277D903000B99281 /* Bank.swift */,
+				E941BCB2277D903000B99281 /* Client.swift */,
 				E941BCB4277D903000B99281 /* Task.swift */,
 			);
 			path = Model;
