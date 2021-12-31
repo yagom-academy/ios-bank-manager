@@ -14,7 +14,10 @@ class BankViewController: UIViewController {
         
         bank = Bank()
         bank?.delegate = self
-        
+        initializeView()
+    }
+    
+    private func initializeView() {
         view = BankManagerView()
         let bankView = view as? BankManagerView
         bankView?.addClientsButton.addTarget(
@@ -22,11 +25,24 @@ class BankViewController: UIViewController {
             action: #selector(addClients),
             for: .touchUpInside
         )
+        bankView?.resetButton.addTarget(
+            self,
+            action: #selector(resetAll),
+            for: .touchUpInside
+        )
     }
     
     @objc func addClients() {
         bank?.addClientsToQueue(by: 10)
         bank?.startBankingService()
+    }
+    
+    @objc func resetAll() {
+        bank?.initializeTimer()
+        bank?.delegate = nil
+        bank = Bank()
+        bank?.delegate = self
+        initializeView()
     }
 }
 

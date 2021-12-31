@@ -35,8 +35,8 @@ class Bank {
     private let group = DispatchGroup()
     private var isProcessing = false
     
-    var serviceTime = 0.0
-    var timer: Timer?
+    private var serviceTime = 0.0
+    private var timer: Timer?
     
     init(numberOfClients: Int, numberOfDepositBankTellers: Int, numberOfLoanBankTellers: Int) {
         self.numberOfClients = numberOfClients
@@ -124,5 +124,9 @@ class Bank {
             }
             self.loanSemaphore.signal()
         }
+    }
+    
+    func initializeTimer() {
+        timer?.invalidate()
     }
 }

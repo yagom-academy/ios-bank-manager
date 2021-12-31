@@ -11,7 +11,7 @@ class BankManagerView: UIView {
         button.titleLabel?.numberOfLines = 0
         return button
     }()
-    let initializeButton: UIButton = {
+    let resetButton: UIButton = {
         let button = UIButton(type: .system)
         
         button.setTitle("초기화", for: .normal)
@@ -24,7 +24,7 @@ class BankManagerView: UIView {
     let serviceTimeLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "업무시간"
+        label.text = "업무시간 - 00:00:000"
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
@@ -113,7 +113,7 @@ class BankManagerView: UIView {
         mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         buttonStackView.addArrangedSubview(addClientsButton)
-        buttonStackView.addArrangedSubview(initializeButton)
+        buttonStackView.addArrangedSubview(resetButton)
         mainStackView.addArrangedSubview(buttonStackView)
         
         mainStackView.addArrangedSubview(serviceTimeLabel)
