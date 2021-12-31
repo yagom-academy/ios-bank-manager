@@ -16,9 +16,11 @@ class BankViewController: UIViewController {
     let workingScrollView = UIScrollView()
     let waitingStackView = UIStackView()
     let workingStackView = UIStackView()
+    let bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bank.delegate = self
         configureBankView()
     }
     
@@ -126,5 +128,26 @@ class BankViewController: UIViewController {
             workingStackView.widthAnchor.constraint(equalTo: workingScrollView.widthAnchor)
         ])
         scrollsStackView.addArrangedSubview(workingScrollView)
+    }
+}
+
+extension BankViewController: BankStateDisplayer {
+
+    func bank(willBeginServiceFor number: Int, task: String) {
+        
+    }
+    
+    func bank(didEndServiceFor number: Int, task: String) {
+        
+    }
+    
+    func bank(didReceiveDepositClientOf number: Int) {
+        let depositClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.deposit.rawValue)", textStyle: .title3)
+        waitingStackView.addArrangedSubview(depositClientLabel)
+    }
+    
+    func bank(didReceiveLoanClientOf number: Int) {
+        let loanClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.loan.rawValue)", textStyle: .title3)
+        workingStackView.addArrangedSubview(loanClientLabel)
     }
 }

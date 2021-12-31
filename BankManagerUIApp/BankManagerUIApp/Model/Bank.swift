@@ -14,7 +14,7 @@ class Bank {
     private var clientQueue = Queue<Client>()
     private var depositQueue = Queue<Client>()
     private var loanQueue = Queue<Client>()
-    weak var delegate: BankMessagePresenter?
+    weak var delegate: BankStateDisplayer?
     
     init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
         self.numberOfDepositBankers = numberOfDepositBankers
@@ -25,8 +25,10 @@ class Bank {
         switch client.task {
         case .deposit:
             depositQueue.enqueue(client)
+            delegate?.bank(didReceiveDepositClientOf: client.waitingNumber)
         case .loan:
             loanQueue.enqueue(client)
+            delegate?.bank(didReceiveLoanClientOf: client.waitingNumber)
         }
     }
     
@@ -40,7 +42,6 @@ class Bank {
             serviceForClients(queue: loanQueue, in: dispatchGroup)
         }
         dispatchGroup.wait()
-        notifyWorkDone(startTime: startTime, clientCount: totalClients)
     }
     
     private func serviceForClients(queue: Queue<Client>, in dispatchGroup: DispatchGroup) {
@@ -49,13 +50,6 @@ class Bank {
                 self.service(for: client)
             }
         }
-    }
-    
-    private func notifyWorkDone(startTime: CFAbsoluteTime, clientCount: Int) {
-        let endTime = CFAbsoluteTimeGetCurrent()
-        let workingDuration = endTime - startTime
-        delegate?.bankDidClose(totalClient: clientCount,
-                               for: workingDuration.roundOff())
     }
     
     private func service(for client: Client) {
