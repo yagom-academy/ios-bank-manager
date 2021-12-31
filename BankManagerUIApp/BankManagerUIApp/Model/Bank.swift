@@ -78,5 +78,7 @@ final class Bank {
         self.numberOfCustomers = 0
         timer?.invalidate()
         workTime = 0
+        loanCustomerQueue.clear()
+        depositCustomerQueue.clear()
     }
 }

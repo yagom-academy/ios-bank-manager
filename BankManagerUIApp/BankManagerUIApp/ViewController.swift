@@ -100,9 +100,9 @@ extension ViewController {
     }
     
     @objc private func touchUpResetButton() {
+        bank?.close()
         waitingListStackView.clear()
         workingListStackView.clear()
-        bank?.close()
     }
 }
 

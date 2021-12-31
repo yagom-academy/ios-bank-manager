@@ -60,17 +60,20 @@ class CustomerListStackView: UIStackView {
         listStackViewHeight.isActive = true
     }
     
-    func addCustomerLabel(_ label: UILabel) {
-        listStackView.addArrangedSubview(label)
+    func addCustomerLabel(_ label: UILabel?) {
+        guard let customerLabel = label else {
+            return
+        }
+        listStackView.addArrangedSubview(customerLabel)
     }
     
     @discardableResult
-    func removeLabel(at waitingNumber: Int) -> UILabel {
+    func removeLabel(at waitingNumber: Int) -> UILabel? {
         guard let customerLabel = listStackView.arrangedSubviews
                                                .compactMap({ $0 as? CustomerLabel })
                                                .filter({ $0.waitingNumber == waitingNumber })
                                                .first else {
-            fatalError()
+            return nil
         }
         customerLabel.removeFromSuperview()
 
