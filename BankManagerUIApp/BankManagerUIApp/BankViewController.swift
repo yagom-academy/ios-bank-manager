@@ -54,7 +54,7 @@ class BankViewController: UIViewController {
     
     private func removeLabel(client: Client, from stackSubviews: [UIView]) {
         for label in stackSubviews {
-            let label = label as? ClientLabel
+            let label = label as? UILabel
             let clientText = "\(client.waitingNumber) - \(client.business)"
             if label?.text == clientText {
                 label?.removeFromSuperview()
@@ -73,13 +73,13 @@ extension BankViewController: BankDelegate {
     
     func addWaitingClient(client: Client) {
         let view = view as? BankManagerView
-        let label = ClientLabel(client: client)
+        let label = UILabel(client: client)
         view?.waitingQueueStackView.addArrangedSubview(label)
     }
     
     func addProcessingClient(client: Client) {
         let view = view as? BankManagerView
-        let label = ClientLabel(client: client)
+        let label = UILabel(client: client)
         view?.processingQueueStackView.addArrangedSubview(label)
     }
     
@@ -97,5 +97,16 @@ extension BankViewController: BankDelegate {
         }
         let stackSubviews =  view.processingQueueStackView.arrangedSubviews
         removeLabel(client: client, from: stackSubviews)
+    }
+}
+
+fileprivate extension UILabel {
+    convenience init(client: Client) {
+        self.init()
+        text = "\(client.waitingNumber) - \(client.business)"
+        
+        if client.business == .loan {
+            textColor = .systemPurple
+        }
     }
 }

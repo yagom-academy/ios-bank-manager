@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2552CE88277C5A9100EAF827 /* ClientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552CE87277C5A9100EAF827 /* ClientLabel.swift */; };
 		3A61C47B277DA749002EE3FB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61C478277DA749002EE3FB /* Queue.swift */; };
 		3A61C47C277DA749002EE3FB /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61C479277DA749002EE3FB /* Bank.swift */; };
 		3A61C47D277DA749002EE3FB /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61C47A277DA749002EE3FB /* Client.swift */; };
@@ -41,7 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2552CE87277C5A9100EAF827 /* ClientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLabel.swift; sourceTree = "<group>"; };
 		3A61C478277DA749002EE3FB /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		3A61C479277DA749002EE3FB /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		3A61C47A277DA749002EE3FB /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				3A817152277C4A3900FBD9C8 /* BankManagerView.swift */,
-				2552CE87277C5A9100EAF827 /* ClientLabel.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -305,7 +302,6 @@
 				605A7287277DCB3300134F99 /* BankDelegate.swift in Sources */,
 				3A817153277C4A3900FBD9C8 /* BankManagerView.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
-				2552CE88277C5A9100EAF827 /* ClientLabel.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				3A61C47D277DA749002EE3FB /* Client.swift in Sources */,
 				3A61C47C277DA749002EE3FB /* Bank.swift in Sources */,
