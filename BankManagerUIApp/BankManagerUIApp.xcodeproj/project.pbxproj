@@ -10,7 +10,6 @@
 		08142088277DA98F00C6B159 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08142087277DA98F00C6B159 /* CustomerLabel.swift */; };
 		9ACA21E9277C2C2A00231D32 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E2277C2C2A00231D32 /* Banker.swift */; };
 		9ACA21EA277C2C2A00231D32 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E3277C2C2A00231D32 /* Customer.swift */; };
-		9ACA21EC277C2C2A00231D32 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E5277C2C2A00231D32 /* BankManager.swift */; };
 		9ACA21ED277C2C2A00231D32 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E6277C2C2A00231D32 /* Bank.swift */; };
 		9ACA21EE277C2C2A00231D32 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E7277C2C2A00231D32 /* Queue.swift */; };
 		9ACA21EF277C2C2A00231D32 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E8277C2C2A00231D32 /* LinkedList.swift */; };
@@ -47,7 +46,6 @@
 		08142087277DA98F00C6B159 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
 		9ACA21E2277C2C2A00231D32 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		9ACA21E3277C2C2A00231D32 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		9ACA21E5277C2C2A00231D32 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		9ACA21E6277C2C2A00231D32 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		9ACA21E7277C2C2A00231D32 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		9ACA21E8277C2C2A00231D32 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			children = (
 				9ACA21E2277C2C2A00231D32 /* Banker.swift */,
 				9ACA21E3277C2C2A00231D32 /* Customer.swift */,
-				9ACA21E5277C2C2A00231D32 /* BankManager.swift */,
 				9ACA21E6277C2C2A00231D32 /* Bank.swift */,
 				9ACA21E7277C2C2A00231D32 /* Queue.swift */,
 				9ACA21E8277C2C2A00231D32 /* LinkedList.swift */,
@@ -311,7 +308,6 @@
 			files = (
 				9ACA21E9277C2C2A00231D32 /* Banker.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankViewController.swift in Sources */,
-				9ACA21EC277C2C2A00231D32 /* BankManager.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				9ACA21F5277D9D2900231D32 /* CustomerListStackView.swift in Sources */,
 				9ACA21EE277C2C2A00231D32 /* Queue.swift in Sources */,

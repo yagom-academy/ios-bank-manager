@@ -33,7 +33,7 @@ final class Bank {
         self.depositBankersCount = depositBankersCount
     }
     
-    func handOutWaitingNumber(from customerCount: Int) {
+    func handOutWaitingNumber(from customerCount: Int = 10) {
         var loanQueue = Queue<Customer>()
         var depositQueue = Queue<Customer>()
         let maxCount = numberOfCustomers + customerCount

@@ -2,11 +2,10 @@ import UIKit
 
 class BankViewController: UIViewController {
     private var bank: Bank?
-    private var bankManager: BankManager?
-    let backgroundStackView = UIStackView()
-    let timerLabel = UILabel()
-    let waitingListStackView = CustomerListStackView(title: "대기중", color: .systemGreen)
-    let workingListStackView = CustomerListStackView(title: "업무중", color: .systemIndigo)
+    private let backgroundStackView = UIStackView()
+    private let timerLabel = UILabel()
+    private let waitingListStackView = CustomerListStackView(title: "대기중", color: .systemGreen)
+    private let workingListStackView = CustomerListStackView(title: "업무중", color: .systemIndigo)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +15,6 @@ class BankViewController: UIViewController {
         setUpCustomerListStackViews()
         bank = Bank()
         bank?.delegate = self
-        bankManager = BankManager(bank: bank)
     }
 }
 
@@ -24,11 +22,12 @@ class BankViewController: UIViewController {
 
 extension BankViewController {
     @objc private func touchUpAddCustomer() {
-        bankManager?.openBank()
+        bank?.handOutWaitingNumber()
+        bank?.open()
     }
     
     @objc private func touchUpResetButton() {
-        bankManager?.closeBank()
+        bank?.close()
         waitingListStackView.clear()
         workingListStackView.clear()
     }
