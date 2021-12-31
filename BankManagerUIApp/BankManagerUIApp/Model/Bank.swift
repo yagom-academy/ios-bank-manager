@@ -38,10 +38,8 @@ class Bank {
     }
     
     func open(timer: BankTimer) {
-        DispatchQueue.main.async {
-            timer.start()
-        }
-        
+        timer.start()
+
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 2)
         let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
