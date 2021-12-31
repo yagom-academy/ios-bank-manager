@@ -6,4 +6,4 @@
 
 import Foundation
 
-BankManager().startConsole()
+BankManager(numberOfDepositBankers: 2, numberOfLoanBankers: 1).startConsole()

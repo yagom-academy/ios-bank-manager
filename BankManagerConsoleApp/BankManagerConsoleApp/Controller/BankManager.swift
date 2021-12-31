@@ -8,19 +8,21 @@ import Foundation
 
 class BankManager {
     
-    private let bank = Bank()
+    private let bank: Bank
     
-    init() {
+    init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+        self.bank = Bank(numberOfDepositBankers: numberOfDepositBankers,
+                         numberOfLoanBankers: numberOfLoanBankers)
         bank.delegate = self
     }
     
     func startConsole() {
         let choice = askMenu()
         switch choice {
-            case Console.Input.open.rawValue:
+        case Console.Input.open.rawValue:
             openBank()
             startConsole()
-            case Console.Input.exit.rawValue:
+        case Console.Input.exit.rawValue:
             return
         default:
             restartConsole()
@@ -40,7 +42,7 @@ class BankManager {
             let client = Client(waitingNumber: order, task: Task.random)
             bank.lineUp(client)
         }
-        bank.start()
+        bank.start(with: clientCount)
     }
     
     private func restartConsole() {
@@ -55,11 +57,11 @@ extension BankManager: BankMessagePresenter {
         print(Console.Message.closeBank(totalClient, duration))
     }
     
-    func bank(willBeginServiceFor clientNumber: Int) {
-        print(Console.Message.beginService(of: clientNumber))
+    func bank(willBeginServiceFor clientNumber: Int, task: String) {
+        print(Console.Message.beginService(of: clientNumber, task: task))
     }
     
-    func bank(didEndServiceFor clientNumber: Int) {
-        print(Console.Message.endService(of: clientNumber))
+    func bank(didEndServiceFor clientNumber: Int, task: String) {
+        print(Console.Message.endService(of: clientNumber, task: task))
     }
 }
