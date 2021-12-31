@@ -16,7 +16,7 @@ class Node<Element> {
     }
 }
 
-struct LinkedList<Element> {
+class LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
@@ -28,7 +28,7 @@ struct LinkedList<Element> {
         return head == nil
     }
     
-    mutating func append(_ data: Element) {
+    func append(_ data: Element) {
         let newNode = Node(data: data)
         
         if isEmpty {
@@ -39,14 +39,14 @@ struct LinkedList<Element> {
         tail = newNode
     }
     
-    mutating func removeFirst() -> Element? {
+    func removeFirst() -> Element? {
         let node = head
         head = node?.next
 
         return node?.data
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
     }
 }

@@ -9,10 +9,10 @@ import Foundation
 
 struct Bank {
     //MARK: - 저장 속성
-    private var loanClientQueue = WaitingQueue<Client>()
-    private var depositClientQueue = WaitingQueue<Client>()
-    private var loanClerkQueue = WaitingQueue<BankClerk>()
-    private var depositClerkQueue = WaitingQueue<BankClerk>()
+    private let loanClientQueue = WaitingQueue<Client>()
+    private let depositClientQueue = WaitingQueue<Client>()
+    private let loanClerkQueue = WaitingQueue<BankClerk>()
+    private let depositClerkQueue = WaitingQueue<BankClerk>()
     
     //MARK: - 생성자
     init(numberOfClerksForLoans: Int, numberOfClerksForDeposits: Int) {
