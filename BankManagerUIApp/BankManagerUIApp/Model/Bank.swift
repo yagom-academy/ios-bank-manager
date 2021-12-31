@@ -1,7 +1,8 @@
 import Foundation
 
 protocol BankDelegate: AnyObject {
-    func bank(DidEnqueueCustomer customer: Customer)
+    func bank(didEnqueueCustomer customer: Customer)
+    func bank(didChangeWorkTime workTime: Double)
 }
 
 final class Bank {
@@ -11,6 +12,12 @@ final class Bank {
     private let depositBankersCount: Int
     private var numberOfCustomers = 0
     weak var delegate: BankDelegate?
+    private var timer: Timer?
+    private var workTime = 0.0 {
+        didSet {
+            delegate?.bank(didChangeWorkTime: workTime)
+        }
+    }
     
     init(loanBankersCount: Int = 1, depositBankersCount: Int = 2) {
         self.loanBankersCount = loanBankersCount
@@ -23,7 +30,7 @@ final class Bank {
         for number in waitingNumbers {
             let customer = Customer(waitingNumber: number)
             customerQueue(customer.banking).enqueue(customer)
-            delegate?.bank(DidEnqueueCustomer: customer)
+            delegate?.bank(didEnqueueCustomer: customer)
         }
         numberOfCustomers = maxCount
     }
@@ -38,10 +45,17 @@ final class Bank {
     }
     
     func openBank() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
+            self.workTime += 0.001
+        }
         let bankGroup = DispatchGroup()
         
         workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
         workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
+        
+        bankGroup.notify(queue: DispatchQueue.global()) {
+            self.timer?.invalidate()
+        }
     }
     
     private func workBankers(_ number: Int, customers: Queue<Customer>, group: DispatchGroup) {
@@ -62,5 +76,7 @@ final class Bank {
     
     func close() {
         self.numberOfCustomers = 0
+        timer?.invalidate()
+        workTime = 0
     }
 }

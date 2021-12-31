@@ -3,7 +3,8 @@ import UIKit
 class ViewController: UIViewController {
     private var bank: Bank?
     private var bankManager: BankManager?
-    var backgroundStackView = UIStackView()
+    let backgroundStackView = UIStackView()
+    let timerLabel = UILabel()
     let waitingListStackView = CustomerListStackView(title: "대기중", color: .systemGreen)
     let workingListStackView = CustomerListStackView(title: "업무중", color: .systemIndigo)
     
@@ -65,7 +66,6 @@ extension ViewController {
         workingTimeLabel.font = .preferredFont(forTextStyle: .title3)
         workingTimeLabel.textAlignment = .right
         
-        let timerLabel = UILabel()
         timerLabel.text = "00:00:000"
         timerLabel.font = .preferredFont(forTextStyle: .title3)
         
@@ -107,8 +107,13 @@ extension ViewController {
 }
 
 extension ViewController: BankDelegate {
-    func bank(DidEnqueueCustomer customer: Customer) {
-        self.addCustomerLabel(customer: customer)
+    func bank(didEnqueueCustomer customer: Customer) {
+        addCustomerLabel(customer: customer)
+    }
+    
+    func bank(didChangeWorkTime workTime: Double) {
+        timerLabel.text = workTime.convertTime
+        
     }
 }
 
