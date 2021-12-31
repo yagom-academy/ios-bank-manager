@@ -14,7 +14,8 @@ class BankManager {
     private let employeeGroup = DispatchGroup()
     private let depositSemaphore = DispatchSemaphore(value: 2)
     private let loanSemaphore = DispatchSemaphore(value: 1)
-    
+    private var customerCount = 0
+
     init(employee: Employee) {
         self.employee = employee
     }
@@ -53,12 +54,14 @@ extension BankManager {
                 DispatchQueue.global().async(group: employeeGroup) {
                     self.depositSemaphore.wait()
                     self.employee.work(for: customer)
+                    self.customerCount += 1
                     self.depositSemaphore.signal()
                 }
             case .loan:
                 DispatchQueue.global().async(group: employeeGroup) {
                     self.loanSemaphore.wait()
                     self.employee.work(for: customer)
+                    self.customerCount += 1
                     self.loanSemaphore.signal()
                 }
             }
@@ -70,6 +73,6 @@ extension BankManager {
             return
         }
         
-        speaker.speakClose(number: employee.customerCount, time: calculateResult)
+        speaker.speakClose(number: self.customerCount, time: calculateResult)
     }
 }
