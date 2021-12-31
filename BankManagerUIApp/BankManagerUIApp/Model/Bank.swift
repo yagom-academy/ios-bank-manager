@@ -45,14 +45,14 @@ final class Bank {
     }
     
     func open() {
-        guard timer == nil else {
+        let isNotWorking = timer == nil
+        guard isNotWorking else {
             return
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
-            self.workTime += 0.001
-        }
-        let bankGroup = DispatchGroup()
+        startTimer()
         
+        let bankGroup = DispatchGroup()
+
         workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
         workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
         
@@ -75,6 +75,12 @@ final class Bank {
             while let customer = customers.dequeue() {
                 banker.work(for: customer)
             }
+        }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
+            self.workTime += 0.001
         }
     }
     

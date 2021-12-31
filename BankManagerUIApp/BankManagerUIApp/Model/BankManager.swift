@@ -12,8 +12,13 @@ struct BankManager {
         self.bank = bank
     }
     
-    mutating func setUpBankCustomers(to range: ClosedRange<Int> = 10...10) {
+    mutating func openBank(to range: ClosedRange<Int> = 10...10) {
         let numberOfCustomers = Int.random(in: range)
         bank?.handOutWaitingNumber(from: numberOfCustomers)
+        bank?.open()
+    }
+    
+    func closeBank() {
+        bank?.close()
     }
 }

@@ -95,12 +95,11 @@ extension ViewController {
 
 extension ViewController {
     @objc private func touchUpAddCustomer() {
-        bankManager?.setUpBankCustomers()
-        bank?.open()
+        bankManager?.openBank()
     }
     
     @objc private func touchUpResetButton() {
-        bank?.close()
+        bankManager?.closeBank()
         waitingListStackView.clear()
         workingListStackView.clear()
     }
