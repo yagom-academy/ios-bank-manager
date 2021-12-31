@@ -5,16 +5,7 @@ class Queue<T> {
     var isEmpty: Bool {
         return head == nil
     }
-    var allValues: [T] {
-        var result = [T]()
-        var node = head
-        while let value = node?.value {
-            result.append(value)
-            node = node?.next
-        }
-        return result
-    }
-    
+
     func enqueue(_ value: T) {
         let node = Node(value)
         if isEmpty {
