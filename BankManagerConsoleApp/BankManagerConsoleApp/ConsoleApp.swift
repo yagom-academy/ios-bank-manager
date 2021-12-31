@@ -53,7 +53,7 @@ struct ConsoleApp {
             guard let randomTask = TaskType.randomElement() else {
                 return
             }
-            let customer = Customer(customerNumber: $0 + 1, taskType: randomTask)
+            let customer = Customer(indexNumber: $0, taskType: randomTask)
             customerQueue.enqueue(customer)
         }
         return customerQueue
