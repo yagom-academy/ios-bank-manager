@@ -7,17 +7,17 @@
 import UIKit
 
 class BankViewController: UIViewController {
-    let baseVerticalStackView = UIStackView()
-    let buttonsStackView = UIStackView()
-    let timerStackView = UIStackView()
-    let bankStatusStackView = UIStackView()
-    let scrollsStackView = UIStackView()
-    let waitingScrollView = UIScrollView()
-    let workingScrollView = UIScrollView()
-    let waitingStackView = UIStackView()
-    let workingStackView = UIStackView()
-    let bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
-    var totalClient: Int = .zero
+    private let baseVerticalStackView = UIStackView()
+    private let buttonsStackView = UIStackView()
+    private let timerStackView = UIStackView()
+    private let bankStatusStackView = UIStackView()
+    private let scrollsStackView = UIStackView()
+    private let waitingScrollView = UIScrollView()
+    private let workingScrollView = UIScrollView()
+    private let waitingStackView = UIStackView()
+    private let workingStackView = UIStackView()
+    private let bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
+    private var totalClient: Int = .zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
