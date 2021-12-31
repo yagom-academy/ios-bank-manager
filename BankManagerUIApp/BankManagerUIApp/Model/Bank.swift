@@ -53,8 +53,8 @@ class Bank {
         }
         isProcessing = true
         
-        timer = Timer(timeInterval: 0.001, repeats: true) { _ in
-            self.elapsedServiceTime += 0.001
+        timer = Timer(timeInterval: 0.003, repeats: true) { _ in
+            self.elapsedServiceTime += 0.003
             self.delegate?.updateServiceTimeLabel(serviceTime: self.elapsedServiceTime)
         }
         guard let timer = timer else {
