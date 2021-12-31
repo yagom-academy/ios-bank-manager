@@ -7,7 +7,7 @@
 import UIKit
 
 protocol TimerDelegate: AnyObject {
-    func setupLabel(second: Int, milisecond: Int, nanoSecond: Int)
+    func setupTimeLabel(second: Int, milisecond: Int, nanoSecond: Int)
 }
 
 class ViewController: UIViewController {
@@ -16,12 +16,14 @@ class ViewController: UIViewController {
     private let processingCustomerStackView = CustomStackView(axis: .vertical, spacing: 5, distribution: .equalSpacing, alignment: .center)
     private var processingTimeLabel = UILabel()
     
+    private var bankTimer = BankTimer()
     private let bankPrinter = BankPrinter()
     private var bank: Bank?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bank = BankFactory.createBank(with: bankPrinter)
+        bankTimer.delegate = self
         setupUI()
     }
     
@@ -83,6 +85,8 @@ class ViewController: UIViewController {
         processingCustomerStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
+        
+        bankTimer.stop()
     }
     
     func setupProcessingTimeLabel() {
@@ -150,9 +154,11 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: TimerDelegate {
-    func setupLabel(second: Int, milisecond: Int, nanoSecond: Int) {
+    func setupTimeLabel(second: Int, milisecond: Int, nanoSecond: Int) {
         let formattedSecond = second < 10 ? "0\(second)" : "\(second)"
-        processingTimeLabel.text = "업무시간 - \(formattedSecond):\(milisecond):\(nanoSecond)"
+        let formattedMilisecond = milisecond == 0 ? "00" : "\(milisecond)"
+        let formattedNanoSecond = nanoSecond == 0 ? "000" : "\(nanoSecond)"
+        processingTimeLabel.text = "업무시간 - \(formattedSecond):\(formattedMilisecond):\(formattedNanoSecond)"
     }
 }
 
