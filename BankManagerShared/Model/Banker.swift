@@ -8,9 +8,9 @@ protocol Banker {
 
 extension Banker {
     static func task(of customer: Customer) {
-        print("\(customer.customerNumber)번 고객 \(taskType)업무 시작")
+        print("\(customer.customerNumber)번 고객 \(taskType.rawValue)업무 시작")
         Thread.sleep(forTimeInterval: taskTime)
-        print("\(customer.customerNumber)번 고객 \(taskType)업무 완료")
+        print("\(customer.customerNumber)번 고객 \(taskType.rawValue)업무 완료")
     }
 }
 

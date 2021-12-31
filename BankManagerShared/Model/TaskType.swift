@@ -1,19 +1,10 @@
 import Foundation
 
-enum TaskType: CaseIterable, CustomStringConvertible {
-    case deposit
-    case loan
+enum TaskType: String, CaseIterable {
+    case deposit = "예금"
+    case loan = "대출"
 
     static func randomElement() -> TaskType? {
-        return TaskType.allCases.randomElement()
-    }
-
-    var description: String {
-        switch self {
-        case .deposit:
-            return "예금"
-        case .loan:
-            return "대출"
-        }
+        return TaskType.allCases.randomElement() ?? .deposit
     }
 }
