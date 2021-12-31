@@ -1,8 +1,7 @@
 import Foundation
 
-class BankManager {
+class TimeManager {
     var totalTime: TimeInterval = 0
-    var totalCustomer: Int = 0
     
     func startTimeCheck() {
         totalTime -= Date().timeIntervalSinceReferenceDate
@@ -10,9 +9,5 @@ class BankManager {
     
     func endTimeCheck() {
         totalTime += Date().timeIntervalSinceReferenceDate
-    }
-    
-    func increaseTotalCustomer() {
-        self.totalCustomer += 1
     }
 }

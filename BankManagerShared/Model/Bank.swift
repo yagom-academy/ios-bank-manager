@@ -2,15 +2,16 @@ import Foundation
 
 struct Bank {
     private var customerQueue: Queue<Customer>
-    private let bankManager: BankManager
+    private let timeManager: TimeManager
     private let depositBankerCount: Int
     private let loanBankerCount: Int
+    private var customerCount: Int = 0
     
-    init(depositBankerCount: Int, loanBankerCount: Int, customerQueue: Queue<Customer>, bankManager: BankManager) {
+    init(depositBankerCount: Int, loanBankerCount: Int, customerQueue: Queue<Customer>, timeManager: TimeManager) {
         self.depositBankerCount = depositBankerCount
         self.loanBankerCount = loanBankerCount
         self.customerQueue = customerQueue
-        self.bankManager = bankManager
+        self.timeManager = timeManager
     }
 }
 
@@ -18,9 +19,9 @@ struct Bank {
 
 extension Bank {
     mutating func operate() {
-        bankManager.startTimeCheck()
+        timeManager.startTimeCheck()
         open()
-        bankManager.endTimeCheck()
+        timeManager.endTimeCheck()
         close()
     }
     
@@ -37,6 +38,7 @@ extension Bank {
             case .loan:
                 assign(semaphore: loanSemaphore, group: bankerGroup, customer: customer, banker: LoanBanker.self)
             }
+            customerCount += 1
         }
         bankerGroup.wait()
     }
@@ -45,14 +47,12 @@ extension Bank {
         DispatchQueue.global().async(group: group) {
             semaphore.wait()
             banker.task(of: customer)
-            bankManager.increaseTotalCustomer()
             semaphore.signal()
         }
     }
     
     private func close() {
-        let totalTimeText: String = String(format: "%.2f", bankManager.totalTime)
-        let totalCustomer: Int = bankManager.totalCustomer
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalTimeText)초입니다.")
+        let totalTimeText: String = String(format: "%.2f", timeManager.totalTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalTimeText)초입니다.")
     }
 }
