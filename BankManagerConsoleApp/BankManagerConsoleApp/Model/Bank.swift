@@ -41,11 +41,11 @@ class Bank {
     
     //MARK: - Private 메서드
     private func handleClients() -> Int {
-        let loanWindow = BankWindow(task: .loan, for: loanClientQueue, with: numberOfClerksForLoans)
-        let depositWindow = BankWindow(task: .deposit, for: depositClientQueue, with: numberOfClerksForDeposits)
+        let loanWindow = BankWindow(task: .loan, with: numberOfClerksForLoans)
+        let depositWindow = BankWindow(task: .deposit, with: numberOfClerksForDeposits)
         
-        let loanClientCount = loanWindow.startWork()
-        let depositClientCount = depositWindow.startWork()
+        let loanClientCount = loanWindow.handle(clients: loanClientQueue)
+        let depositClientCount = depositWindow.handle(clients: depositClientQueue)
         let totalHandledClientCount = loanClientCount + depositClientCount
         
         return totalHandledClientCount
@@ -60,23 +60,21 @@ class Bank {
 extension Bank {
     private class BankWindow {
         let task: Task
-        let queue: WaitingQueue<Client>
         let numberOfClerks: Int
         
-        init(task: Task, for queue: WaitingQueue<Client>, with numberOfClerks: Int) {
+        init(task: Task, with numberOfClerks: Int) {
             self.task = task
-            self.queue = queue
             self.numberOfClerks = numberOfClerks
         }
         
-        func startWork() -> Int {
+        func handle(clients queue: WaitingQueue<Client>) -> Int {
             var totalHandledClientCount = 0
             let clientCountingSemaphore = DispatchSemaphore(value: 1)
             let semaphore = DispatchSemaphore(value: numberOfClerks)
             let group = DispatchGroup()
             
             DispatchQueue.global().async(group: group) {
-                while let loanClient = self.queue.dequeue() {
+                while let loanClient = queue.dequeue() {
                     DispatchQueue.global().async(group: group) {
                         semaphore.wait()
                         self.work(for: loanClient)
