@@ -17,6 +17,7 @@ class BankViewController: UIViewController {
     let waitingStackView = UIStackView()
     let workingStackView = UIStackView()
     let bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
+    var totalClient: Int = .zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,18 @@ class BankViewController: UIViewController {
         configureBankView()
     }
     
-    func configureBankView() {
+    @objc func addClientButtonDidTap() {
+        (1...10).forEach { number in
+            bank.lineUp(Client(waitingNumber: totalClient + number, task: Task.random))
+        }
+        totalClient += 10
+    }
+}
+
+//MARK: - View Configuration
+
+extension BankViewController {
+    private func configureBankView() {
         view.backgroundColor = .white
         configureBaseVerticalStackView()
         configureButtonsStackview()
@@ -52,9 +64,11 @@ class BankViewController: UIViewController {
     private func configureButtonsStackview() {
         buttonsStackView.axis = .horizontal
         buttonsStackView.distribution = .fillEqually
-    
+        
         let addClientsButton = BankUIComponent.makeButton(text: "고객 10명 추가",
                                                           textColor: .systemBlue)
+        addClientsButton.addTarget(self, action: #selector(addClientButtonDidTap), for: .touchUpInside)
+        
         let resetButton = BankUIComponent.makeButton(text: "초기화",
                                                      textColor: .systemRed)
         buttonsStackView.addArrangedSubview(addClientsButton)
@@ -131,6 +145,8 @@ class BankViewController: UIViewController {
     }
 }
 
+//MARK: - BankStateDisplayer Requirement
+
 extension BankViewController: BankStateDisplayer {
 
     func bank(willBeginServiceFor number: Int, task: String) {
@@ -147,7 +163,7 @@ extension BankViewController: BankStateDisplayer {
     }
     
     func bank(didReceiveLoanClientOf number: Int) {
-        let loanClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.loan.rawValue)", textStyle: .title3)
-        workingStackView.addArrangedSubview(loanClientLabel)
+        let loanClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.loan.rawValue)", textStyle: .title3, textColor: .systemPurple)
+        waitingStackView.addArrangedSubview(loanClientLabel)
     }
 }
