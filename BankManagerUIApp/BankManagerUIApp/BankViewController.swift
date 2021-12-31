@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class BankViewController: UIViewController {
     private var bank: Bank?
     private var bankManager: BankManager?
     let backgroundStackView = UIStackView()
@@ -20,7 +20,51 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+// MARK: - Button Event
+
+extension BankViewController {
+    @objc private func touchUpAddCustomer() {
+        bankManager?.openBank()
+    }
+    
+    @objc private func touchUpResetButton() {
+        bankManager?.closeBank()
+        waitingListStackView.clear()
+        workingListStackView.clear()
+    }
+}
+
+// MARK: - Delegate
+
+extension BankViewController: BankDelegate {
+    func bank(didEnqueueCustomer customer: Customer) {
+        addCustomerLabel(customer: customer)
+    }
+    
+    func bank(didChangeWorkTime workTime: Double) {
+        timerLabel.text = workTime.convertTime
+        
+    }
+}
+
+extension BankViewController: BankerDelegate {
+    func banker(DidStartWork waitingNumber: Int) {
+        DispatchQueue.main.async {
+            let customerLabel = self.waitingListStackView.removeLabel(at: waitingNumber)
+            self.workingListStackView.addCustomerLabel(customerLabel)
+        }
+    }
+    
+    func banker(DidFinishWork waitingNumber: Int) {
+        DispatchQueue.main.async {
+            self.workingListStackView.removeLabel(at: waitingNumber)
+        }
+    }
+}
+
+// MARK: - View
+
+extension BankViewController {
     private func setUpBackgroundStackView() {
         view.addSubview(backgroundStackView)
         backgroundStackView.axis = .vertical
@@ -41,14 +85,14 @@ extension ViewController {
         backgroundStackView.addArrangedSubview(buttonStackView)
         
         let addCustomerButton = UIButton(type: .system)
-        addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
         addCustomerButton.setTitle("고객 10명 추가", for: .normal)
+        addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
         addCustomerButton.addTarget(self, action: #selector(touchUpAddCustomer), for: .touchUpInside)
         
         let resetButton = UIButton(type: .system)
         resetButton.setTitle("초기화", for: .normal)
-        resetButton.tintColor = .red
         resetButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        resetButton.tintColor = .red
         resetButton.addTarget(self, action: #selector(touchUpResetButton), for: .touchUpInside)
         
         buttonStackView.addArrangedSubview(addCustomerButton)
@@ -57,9 +101,10 @@ extension ViewController {
     
     private func setUPTimerStackView() {
         let timerStackView = UIStackView()
-        timerStackView.spacing = 4
+        timerStackView.translatesAutoresizingMaskIntoConstraints = false
         timerStackView.axis = .horizontal
         timerStackView.distribution = .fillEqually
+        timerStackView.spacing = 4
         backgroundStackView.addArrangedSubview(timerStackView)
         
         let workingTimeLabel = UILabel()
@@ -76,9 +121,9 @@ extension ViewController {
     
     private func setUpCustomerListStackViews() {
         let customersBackgroundStackView = UIStackView()
+        customersBackgroundStackView.translatesAutoresizingMaskIntoConstraints = false
         customersBackgroundStackView.axis = .horizontal
         customersBackgroundStackView.distribution = .fillEqually
-        customersBackgroundStackView.translatesAutoresizingMaskIntoConstraints = false
         backgroundStackView.addArrangedSubview(customersBackgroundStackView)
         
         customersBackgroundStackView.addArrangedSubview(waitingListStackView)
@@ -91,43 +136,5 @@ extension ViewController {
         let customerLable = CustomerLabel(number, banking)
         
         waitingListStackView.addCustomerLabel(customerLable)
-    }
-}
-
-extension ViewController {
-    @objc private func touchUpAddCustomer() {
-        bankManager?.openBank()
-    }
-    
-    @objc private func touchUpResetButton() {
-        bankManager?.closeBank()
-        waitingListStackView.clear()
-        workingListStackView.clear()
-    }
-}
-
-extension ViewController: BankDelegate {
-    func bank(didEnqueueCustomer customer: Customer) {
-        addCustomerLabel(customer: customer)
-    }
-    
-    func bank(didChangeWorkTime workTime: Double) {
-        timerLabel.text = workTime.convertTime
-        
-    }
-}
-
-extension ViewController: BankerDelegate {
-    func banker(DidStartWork waitingNumber: Int) {
-        DispatchQueue.main.async {
-            let customerLabel = self.waitingListStackView.removeLabel(at: waitingNumber)
-            self.workingListStackView.addCustomerLabel(customerLabel)
-        }
-    }
-    
-    func banker(DidFinishWork waitingNumber: Int) {
-        DispatchQueue.main.async {
-            self.workingListStackView.removeLabel(at: waitingNumber)
-        }
     }
 }
