@@ -44,7 +44,10 @@ final class Bank {
         }
     }
     
-    func openBank() {
+    func open() {
+        guard timer == nil else {
+            return
+        }
         timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
             self.workTime += 0.001
         }
@@ -55,6 +58,7 @@ final class Bank {
         
         bankGroup.notify(queue: DispatchQueue.global()) {
             self.timer?.invalidate()
+            self.timer = nil
         }
     }
     

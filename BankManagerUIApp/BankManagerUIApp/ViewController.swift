@@ -96,7 +96,7 @@ extension ViewController {
 extension ViewController {
     @objc private func touchUpAddCustomer() {
         bankManager?.setUpBankCustomers()
-        bank?.openBank()
+        bank?.open()
     }
     
     @objc private func touchUpResetButton() {
