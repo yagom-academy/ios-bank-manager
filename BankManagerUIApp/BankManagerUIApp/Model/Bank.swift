@@ -6,18 +6,27 @@ protocol BankDelegate: AnyObject {
 }
 
 final class Bank {
-    private var loanCustomerQueue = Queue<Customer>()
-    private var depositCustomerQueue = Queue<Customer>()
+    private var loanCustomerQueue = Queue<Customer>() {
+        didSet {
+            workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
+        }
+    }
+    private var depositCustomerQueue = Queue<Customer>() {
+        didSet {
+            workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
+        }
+    }
     private let loanBankersCount: Int
     private let depositBankersCount: Int
     private var numberOfCustomers = 0
-    weak var delegate: BankDelegate?
     private var timer: Timer?
+    private let bankGroup = DispatchGroup()
     private var workTime = 0.0 {
         didSet {
             delegate?.bank(didChangeWorkTime: workTime)
         }
     }
+    weak var delegate: BankDelegate?
     
     init(loanBankersCount: Int = 1, depositBankersCount: Int = 2) {
         self.loanBankersCount = loanBankersCount
@@ -25,22 +34,42 @@ final class Bank {
     }
     
     func handOutWaitingNumber(from customerCount: Int) {
+        var loanQueue = Queue<Customer>()
+        var depositQueue = Queue<Customer>()
         let maxCount = numberOfCustomers + customerCount
         let waitingNumbers = numberOfCustomers..<maxCount
         for number in waitingNumbers {
             let customer = Customer(waitingNumber: number)
-            customerQueue(customer.banking).enqueue(customer)
+            separate(with: customer, &loanQueue, &depositQueue)
             delegate?.bank(didEnqueueCustomer: customer)
         }
         numberOfCustomers = maxCount
+        overwrite(loanQueue, depositQueue)
     }
     
-    private func customerQueue(_ banking: Banking) -> Queue<Customer> {
-        switch banking {
+    private func separate(with customer: Customer, _ loanQueue: inout Queue<Customer>, _ depositQueue: inout Queue<Customer>) {
+        switch customer.banking {
         case .loan:
-            return loanCustomerQueue
+            if loanCustomerQueue.isEmpty {
+                loanQueue.enqueue(customer)
+            } else {
+                loanCustomerQueue.enqueue(customer)
+            }
         case .deposit:
-            return depositCustomerQueue
+            if depositCustomerQueue.isEmpty {
+                depositQueue.enqueue(customer)
+            } else {
+                depositCustomerQueue.enqueue(customer)
+            }
+        }
+    }
+    
+    private func overwrite(_ loanQueue: Queue<Customer>, _ depositQueue: Queue<Customer>) {
+        if loanCustomerQueue.isEmpty {
+            loanCustomerQueue = loanQueue
+        }
+        if depositCustomerQueue.isEmpty {
+            depositCustomerQueue = depositQueue
         }
     }
     
@@ -50,11 +79,6 @@ final class Bank {
             return
         }
         startTimer()
-        
-        let bankGroup = DispatchGroup()
-
-        workBankers(loanBankersCount, customers: loanCustomerQueue, group: bankGroup)
-        workBankers(depositBankersCount, customers: depositCustomerQueue, group: bankGroup)
         
         bankGroup.notify(queue: DispatchQueue.global()) {
             self.timer?.invalidate()
@@ -87,6 +111,7 @@ final class Bank {
     func close() {
         self.numberOfCustomers = 0
         timer?.invalidate()
+        timer = nil
         workTime = 0
         loanCustomerQueue.clear()
         depositCustomerQueue.clear()

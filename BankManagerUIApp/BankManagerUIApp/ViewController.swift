@@ -57,6 +57,7 @@ extension ViewController {
     
     private func setUPTimerStackView() {
         let timerStackView = UIStackView()
+        timerStackView.spacing = 4
         timerStackView.axis = .horizontal
         timerStackView.distribution = .fillEqually
         backgroundStackView.addArrangedSubview(timerStackView)
