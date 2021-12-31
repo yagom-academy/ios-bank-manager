@@ -12,7 +12,10 @@ class StackViewController: UIViewController {
     let addClientButton = UIButton()
     let resetButton = UIButton()
     let buttonHorizontalStackView = UIStackView()
+    let labelHorizontalStackView = UIStackView()
     let workingTimeLabel = UILabel()
+    let waitingLabel = UILabel()
+    let workingLabel = UILabel()
     var count: Int = 0
     
     //MARK: - View Life Cycle
@@ -21,8 +24,12 @@ class StackViewController: UIViewController {
         setupUIStackView(stackView: buttonHorizontalStackView, axis: .horizontal)
         setupUIButton(button: addClientButton, title: Button.addClientButtonTitle, color: .systemBlue)
         setupUIButton(button: resetButton, title: Button.resetButton, color: .systemRed)
+        setupLabel(label: waitingLabel, backgroundColor: .systemGreen, text: Label.waiting)
+        setupLabel(label: workingLabel, backgroundColor: .systemIndigo, text: Label.working)
         setupButtonHorizontalStackViewAutoLayout()
         setupWorkingTimeLabel()
+        setupUIStackView(stackView: labelHorizontalStackView, axis: .horizontal)
+        setupLabelHorizontalStackViewConstraint()
         addClientButton.addTarget(self, action: #selector(self.touchUpAddClientButton(_:)), for: .touchUpInside)
     }
     
@@ -30,7 +37,17 @@ class StackViewController: UIViewController {
     func setupUIButton(button: UIButton, title: String, color: UIColor) {
         button.setTitle(title, for: .normal)
         button.setTitleColor(color, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .caption1)
         buttonHorizontalStackView.addArrangedSubview(button)
+    }
+    
+    func setupLabel(label: UILabel, backgroundColor: UIColor, text: String) {
+        label.backgroundColor = backgroundColor
+        label.text = text
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title1)
+        labelHorizontalStackView.addArrangedSubview(label)
     }
     
     func setupButtonHorizontalStackViewAutoLayout() {
@@ -40,9 +57,16 @@ class StackViewController: UIViewController {
         buttonHorizontalStackView.distribution = .fillEqually
     }
     
+    func setupLabelHorizontalStackViewConstraint() {
+        labelHorizontalStackView.topAnchor.constraint(equalTo: workingTimeLabel.bottomAnchor, constant: 10).isActive = true
+        labelHorizontalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        labelHorizontalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        labelHorizontalStackView.distribution = .fillEqually
+    }
+    
     func setupUIStackView(stackView: UIStackView , axis: NSLayoutConstraint.Axis) {
-        buttonHorizontalStackView.axis = axis
-        buttonHorizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = axis
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
     }
     
