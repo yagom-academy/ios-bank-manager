@@ -11,6 +11,10 @@ class CustomView: UIView {
     let clientIdentifierLabel = UILabel()
     let taskTypeLabel = UILabel()
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 150, height: 20)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initializeView()
@@ -19,10 +23,6 @@ class CustomView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.initializeView()
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: 150, height: 20)
     }
     
     func initializeView() {

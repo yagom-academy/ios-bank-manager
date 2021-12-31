@@ -25,20 +25,10 @@ class StackViewController: UIViewController {
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUIStackView(stackView: buttonHorizontalStackView, axis: .horizontal)
-        setupUIButton(button: addClientButton, title: Button.addClientButtonTitle, color: .systemBlue)
-        setupUIButton(button: resetButton, title: Button.resetButton, color: .systemRed)
-        setupLabel(label: waitingLabel, backgroundColor: .systemGreen, text: Label.waiting)
-        setupLabel(label: workingLabel, backgroundColor: .systemIndigo, text: Label.working)
-        setupButtonHorizontalStackViewAutoLayout()
+        setupbuttonHorizontalStackView()
         setupWorkingTimeLabel()
-        setupUIStackView(stackView: labelHorizontalStackView, axis: .horizontal)
-        setupLabelHorizontalStackViewConstraint()
-        setupUIStackView(stackView: waitingListVerticalStackView, axis: .vertical)
-        setupUIStackView(stackView: workingListVerticalStackView, axis: .vertical)
-        setupWaitingListVerticalStackViewConstraint()
-        setupWorkingListVerticalStackViewConstraint()
-        addClientButton.addTarget(self, action: #selector(self.touchUpAddClientButton(_:)), for: .touchUpInside)
+        setupLabeeHorizontalStackView()
+        setupVerticalStackView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +39,45 @@ class StackViewController: UIViewController {
     }
     
     //MARK: - Method
-    func setupUIButton(button: UIButton, title: String, color: UIColor) {
+    func presentWaitingList(totalClientCount: Int) {
+        for clientNumber in 1...totalClientCount {
+            let recentClientTaskType = clients.informTaskType()
+            guard let taskType = recentClientTaskType else {
+                return
+            }
+
+            let clientInformationView = CustomView()
+            clientInformationView.setupLabelText(clientNumber: clientNumber.description, taskType: taskType.koreanName)
+            waitingListVerticalStackView.addArrangedSubview(clientInformationView)
+        }
+    }
+    
+    func setupbuttonHorizontalStackView() {
+        setupStackView(stackView: buttonHorizontalStackView, axis: .horizontal)
+        setupButton(button: addClientButton, title: Button.addClientButtonTitle, color: .systemBlue)
+        setupButton(button: resetButton, title: Button.resetButton, color: .systemRed)
+        setupButtonHorizontalStackViewAutoLayout()
+        addClientButton.addTarget(self, action: #selector(self.touchUpAddClientButton(_:)), for: .touchUpInside)
+    }
+    
+    func setupLabeeHorizontalStackView() {
+        setupLabel(label: waitingLabel, backgroundColor: .systemGreen, text: Label.waiting)
+        setupLabel(label: workingLabel, backgroundColor: .systemIndigo, text: Label.working)
+        setupStackView(stackView: labelHorizontalStackView, axis: .horizontal)
+        setupLabelHorizontalStackViewConstraint()
+    }
+    
+    func setupVerticalStackView() {
+        setupStackView(stackView: waitingListVerticalStackView, axis: .vertical)
+        setupStackView(stackView: workingListVerticalStackView, axis: .vertical)
+        setupWaitingListVerticalStackViewConstraint()
+        setupWorkingListVerticalStackViewConstraint()
+    }
+}
+
+//MARK: - UIMethod
+extension StackViewController {
+    func setupButton(button: UIButton, title: String, color: UIColor) {
         button.setTitle(title, for: .normal)
         button.setTitleColor(color, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .caption1)
@@ -95,7 +123,7 @@ class StackViewController: UIViewController {
         workingListVerticalStackView.spacing = 7
     }
     
-    func setupUIStackView(stackView: UIStackView , axis: NSLayoutConstraint.Axis) {
+    func setupStackView(stackView: UIStackView , axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
@@ -111,19 +139,6 @@ class StackViewController: UIViewController {
         workingTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         workingTimeLabel.textAlignment = .center
         workingTimeLabel.text = "\(Label.workingTime)\(initialTime)"
-    }
-    
-    func presentWaitingList(totalClientCount: Int) {
-        for clientNumber in 1...totalClientCount {
-            let recentClientTaskType = clients.informTaskType()
-            guard let taskType = recentClientTaskType else {
-                return
-            }
-
-            let clientInformationView = CustomView()
-            clientInformationView.setupLabelText(clientNumber: clientNumber.description, taskType: taskType.koreanName)
-            waitingListVerticalStackView.addArrangedSubview(clientInformationView)
-        }
     }
 }
 
