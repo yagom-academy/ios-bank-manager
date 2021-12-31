@@ -41,7 +41,7 @@ class Bank {
         return customerQueue.returnAllElements()
     }
     
-    func open() {
+    @objc func open() {
         let semaphore = DispatchSemaphore(value: 2)
         let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
         let loanQueue = DispatchQueue(label: "loan")

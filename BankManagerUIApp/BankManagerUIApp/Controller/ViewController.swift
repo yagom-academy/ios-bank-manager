@@ -49,7 +49,9 @@ class ViewController: UIViewController {
         let buttonStackView = CustomStackView(axis: .horizontal, spacing: .zero, distribution: .fillEqually, alignment: .center)
         let addCustomerButton = CustomButton(title: "고객 10명 추가", textColor: .blue)
         let resetButton = CustomButton(title: "초기화", textColor: .red)
+        
         addCustomerButton.addTarget(self, action: #selector(setupTenCustomerQueue), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(reset), for: .touchUpInside)
         
         [addCustomerButton, resetButton].forEach {
             buttonStackView.addArrangedSubview($0)
@@ -70,6 +72,16 @@ class ViewController: UIViewController {
         
         customers[count-amount..<count].forEach { customer in
             waitingCustomerStackView.addArrangedSubview(CustomerLabel(order: customer.turn, type: customer.task))
+        }
+    }
+    
+    @objc func reset() {
+        bank?.resetCustomerQueue()
+        waitingCustomerStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        processingCustomerStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
         }
     }
     
