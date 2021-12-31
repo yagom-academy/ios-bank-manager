@@ -8,8 +8,8 @@
 import Foundation
 
 protocol BankClerkDelegate: AnyObject {
-    func printBeginWorkMessage(of customer: Customer)
-    func printFinishWorkMessage(of customer: Customer)
+    func moveToProcessingState(of customer: Customer)
+    func moveToCompletionState(of customer: Customer)
 }
 
 class BankClerk {
@@ -30,8 +30,8 @@ class BankClerk {
     }
     
     private func processWork(of customer: Customer, group: DispatchGroup) {
-        delegate?.printBeginWorkMessage(of: customer)
+        delegate?.moveToProcessingState(of: customer)
         group.wait(timeout: .now() + customer.task.processingTime)
-        delegate?.printFinishWorkMessage(of: customer)
+        delegate?.moveToCompletionState(of: customer)
     }
 }

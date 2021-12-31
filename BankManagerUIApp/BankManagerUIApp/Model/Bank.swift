@@ -7,19 +7,15 @@
 
 import Foundation
 
-protocol BankDelegate: AnyObject {
-    func printClosingMessage(customers: Int, processingTime: Double)
-}
+
 
 class Bank {
     private let customerQueue: Queue<Customer> = Queue<Customer>()
     private var bankClerk: BankClerk
-    private weak var delegate: BankDelegate?
     private let randomCount = Int.random(in: 10...30)
 
-    init(bankClerk: BankClerk, delegatee: BankDelegate) {
+    init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
-        self.delegate = delegatee
         setupCustomerQueue(with: randomCount)
     }
     
@@ -46,10 +42,7 @@ class Bank {
         let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
         let loanQueue = DispatchQueue(label: "loan")
         let bankGroup = DispatchGroup()
-        
-        var processedCustomers = 0
-        let startTime = DispatchTime.now()
-        
+
         while let customer = customerQueue.dequeue() {
             switch customer.task {
             case .deposit:
@@ -63,18 +56,8 @@ class Bank {
                     self.bankClerk.work(with: customer)
                 }
             }
-            processedCustomers += 1
         }
         
         bankGroup.wait()
-        
-        let endTime = DispatchTime.now()
-        
-        let totalProcessingTime = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds)
-        close(totalCustomers: processedCustomers, totalProcessingTime: totalProcessingTime)
-    }
-    
-    func close(totalCustomers: Int, totalProcessingTime: Double) {
-        delegate?.printClosingMessage(customers: totalCustomers, processingTime: totalProcessingTime)
     }
 }

@@ -17,14 +17,14 @@ class ViewController: UIViewController {
     private var processingTimeLabel = UILabel()
     
     private var bankTimer = BankTimer()
-    private let bankPrinter = BankPrinter()
     private var bank: Bank?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bank = BankFactory.createBank(with: bankPrinter)
+        bank = BankFactory.createBank(with: self)
         bankTimer.delegate = self
         setupUI()
+        bank?.open()
     }
     
     func setupUI() {
@@ -162,4 +162,28 @@ extension ViewController: TimerDelegate {
     }
 }
 
-
+extension ViewController: BankClerkDelegate {
+    func moveToProcessingState(of customer: Customer) {
+        DispatchQueue.main.async {
+            for label in self.waitingCustomerStackView.arrangedSubviews {
+                guard let waitingCustomerLabel = label as? CustomerLabel else {
+                    return
+                }
+                guard let waitingCustomer = waitingCustomerLabel.text?.components(separatedBy: " - ") else {
+                    return
+                }
+                
+                let processingCustomer = [String(customer.turn), customer.task.description]
+                if waitingCustomer == processingCustomer {
+                    label.removeFromSuperview()
+                    self.processingCustomerStackView.addArrangedSubview(label)
+                    
+                }
+            }
+        }
+    }
+    
+    func moveToCompletionState(of customer: Customer) {
+        
+    }
+}
