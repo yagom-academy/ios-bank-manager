@@ -97,6 +97,7 @@ class BankViewController: UIViewController {
     }
     
     private func configureWaitingScrollView() {
+        waitingScrollView.showsHorizontalScrollIndicator = false
         waitingScrollView.translatesAutoresizingMaskIntoConstraints = false
         waitingStackView.translatesAutoresizingMaskIntoConstraints = false
         waitingStackView.axis = .vertical
@@ -112,6 +113,7 @@ class BankViewController: UIViewController {
     }
     
     private func configureWorkingScrollView() {
+        workingScrollView.showsHorizontalScrollIndicator = false
         workingScrollView.translatesAutoresizingMaskIntoConstraints = false
         workingStackView.translatesAutoresizingMaskIntoConstraints = false
         workingStackView.axis = .vertical
