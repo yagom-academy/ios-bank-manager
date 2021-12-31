@@ -11,20 +11,12 @@ class Bank {
     //MARK: - 저장 속성
     private let loanClientQueue = WaitingQueue<Client>()
     private let depositClientQueue = WaitingQueue<Client>()
-    private let loanClerkQueue = WaitingQueue<BankClerk>()
-    private let depositClerkQueue = WaitingQueue<BankClerk>()
+    private let numberOfClerksForLoans: Int
+    private let numberOfClerksForDeposits: Int
     
-    //MARK: - 생성자
     init(numberOfClerksForLoans: Int, numberOfClerksForDeposits: Int) {
-        (0..<numberOfClerksForLoans).forEach { _ in
-            let clerk = BankClerk(taskResponsibility: .loan)
-            loanClerkQueue.enqueue(clerk)
-        }
-        
-        (0..<numberOfClerksForDeposits).forEach { _ in
-            let clerk = BankClerk(taskResponsibility: .deposit)
-            depositClerkQueue.enqueue(clerk)
-        }
+        self.numberOfClerksForLoans = numberOfClerksForLoans
+        self.numberOfClerksForDeposits = numberOfClerksForDeposits
     }
     
     // MARK: - Internal 메서드
@@ -51,17 +43,17 @@ class Bank {
     private func handleClients() -> Int {
         var totalHandledClientCount: Int = 0
         let clientCountingSemaphore = DispatchSemaphore(value: 1)
-        let loanSemaphore = DispatchSemaphore(value: 1)
-        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: numberOfClerksForLoans)
+        let depositSemaphore = DispatchSemaphore(value: numberOfClerksForDeposits)
         let group = DispatchGroup()
+        let loanWindow = BankWindow(taskResponsibility: .loan)
+        let depositWindow = BankWindow(taskResponsibility: .deposit)
         
         DispatchQueue.global().async(group: group) {
             while let loanClient = self.loanClientQueue.dequeue() {
                 DispatchQueue.global().async(group: group) {
                     loanSemaphore.wait()
-                    print("\(loanClient.orderTicket.number)번 고객 \(loanClient.task)업무 시작")
-                    Thread.sleep(forTimeInterval: loanClient.taskDuration)
-                    print("\(loanClient.orderTicket.number)번 고객 \(loanClient.task)업무 완료")
+                    loanWindow.work(for: loanClient)
                     loanSemaphore.signal()
                     
                     clientCountingSemaphore.wait()
@@ -75,9 +67,7 @@ class Bank {
             while let depositClient = self.depositClientQueue.dequeue() {
                 DispatchQueue.global().async(group: group) {
                     depositSemaphore.wait()
-                    print("\(depositClient.orderTicket.number)번 고객 \(depositClient.task)업무 시작")
-                    Thread.sleep(forTimeInterval: depositClient.taskDuration)
-                    print("\(depositClient.orderTicket.number)번 고객 \(depositClient.task)업무 완료")
+                    depositWindow.work(for: depositClient)
                     depositSemaphore.signal()
                     
                     clientCountingSemaphore.wait()
@@ -98,19 +88,16 @@ class Bank {
 
 //MARK: - 중첩타입
 extension Bank {
-    private struct BankClerk {
-        var isAvailable = true
+    private struct BankWindow {
         let taskResponsibility: Task
         
-        mutating func work(for client: Client) {
+        func work(for client: Client) {
             let clientOrderNumber = client.orderTicket.number
             let duration = client.taskDuration
             
-            isAvailable = false
-            print("\(clientOrderNumber)번 고객 \(client.task)업무 시작")
+            print("\(clientOrderNumber)번 고객 \(taskResponsibility)업무 시작")
             Thread.sleep(forTimeInterval: duration)
-            print("\(clientOrderNumber)번 고객 \(client.task)업무 완료")
-            isAvailable = true
+            print("\(clientOrderNumber)번 고객 \(taskResponsibility)업무 완료")
         }
     }
 }
