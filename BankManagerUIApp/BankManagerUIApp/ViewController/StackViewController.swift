@@ -13,6 +13,7 @@ class StackViewController: UIViewController {
     let resetButton = UIButton()
     let buttonHorizontalStackView = UIStackView()
     let labelHorizontalStackView = UIStackView()
+    let clientInformationView = CustomView()
     let workingTimeLabel = UILabel()
     let waitingLabel = UILabel()
     let workingLabel = UILabel()
