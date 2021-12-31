@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Node<Element> {
+final class Node<Element> {
     var data: Element
     var next: Node?
     
@@ -16,7 +16,7 @@ class Node<Element> {
     }
 }
 
-class LinkedList<Element> {
+final class LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     

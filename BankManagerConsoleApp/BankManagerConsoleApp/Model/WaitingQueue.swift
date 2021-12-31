@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WaitingQueue<Element> {
+final class WaitingQueue<Element> {
     private let list = LinkedList<Element>()
     
     var isEmpty: Bool {

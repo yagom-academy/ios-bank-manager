@@ -7,13 +7,14 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
     //MARK: - 저장 속성
     private let loanClientQueue = WaitingQueue<Client>()
     private let depositClientQueue = WaitingQueue<Client>()
     private let numberOfClerksForLoans: Int
     private let numberOfClerksForDeposits: Int
     
+    //MARK: - 생성자
     init(numberOfClerksForLoans: Int, numberOfClerksForDeposits: Int) {
         self.numberOfClerksForLoans = numberOfClerksForLoans
         self.numberOfClerksForDeposits = numberOfClerksForDeposits
@@ -58,7 +59,7 @@ class Bank {
 
 //MARK: - 중첩타입
 extension Bank {
-    private class BankWindow {
+    private final class BankWindow {
         let task: Task
         let numberOfClerks: Int
         
