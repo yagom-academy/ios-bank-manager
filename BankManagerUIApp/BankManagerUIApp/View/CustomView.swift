@@ -21,10 +21,16 @@ class CustomView: UIView {
         self.initializeView()
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 150, height: 20)
+    }
+    
     func initializeView() {
-        setupLabel(label: clientIdentifierLabel, text: "고객번호 - ")
-        setupLabel(label: taskTypeLabel, text: "업무타입")
+        setupLabel(label: clientIdentifierLabel, text: "0 - ")
+        setupLabel(label: taskTypeLabel, text: " 대출")
         setupLabelConstraint()
+        clientIdentifierLabel.textAlignment = .right
+        taskTypeLabel.textAlignment = .left
     }
     
     func setupLabel(label: UILabel, text: String) {
@@ -35,11 +41,12 @@ class CustomView: UIView {
     }
     
     func setupLabelConstraint() {
+        clientIdentifierLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
         clientIdentifierLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        clientIdentifierLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         clientIdentifierLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         clientIdentifierLabel.trailingAnchor.constraint(equalTo: taskTypeLabel.leadingAnchor).isActive = true
         taskTypeLabel.topAnchor.constraint(equalTo: clientIdentifierLabel.topAnchor).isActive = true
         taskTypeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        taskTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
     }
 }

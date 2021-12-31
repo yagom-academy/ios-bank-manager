@@ -8,6 +8,7 @@
 import Foundation
 
 enum Button {
-    static let addClientButtonTitle = "고객 10명 추가"
+    static let addedNumber = 10
+    static let addClientButtonTitle = "고객 \(addedNumber)명 추가"
     static let resetButton = "초기화"
 }

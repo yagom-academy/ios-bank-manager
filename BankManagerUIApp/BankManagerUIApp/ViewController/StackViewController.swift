@@ -13,7 +13,8 @@ class StackViewController: UIViewController {
     let resetButton = UIButton()
     let buttonHorizontalStackView = UIStackView()
     let labelHorizontalStackView = UIStackView()
-    let clientInformationView = CustomView()
+    let waitingListVerticalStackView = UIStackView()
+    let workingListVerticalStackView = UIStackView()
     let workingTimeLabel = UILabel()
     let waitingLabel = UILabel()
     let workingLabel = UILabel()
@@ -31,6 +32,10 @@ class StackViewController: UIViewController {
         setupWorkingTimeLabel()
         setupUIStackView(stackView: labelHorizontalStackView, axis: .horizontal)
         setupLabelHorizontalStackViewConstraint()
+        setupUIStackView(stackView: waitingListVerticalStackView, axis: .vertical)
+        setupUIStackView(stackView: workingListVerticalStackView, axis: .vertical)
+        setupWaitingListVerticalStackViewConstraint()
+        setupWorkingListVerticalStackViewConstraint()
         addClientButton.addTarget(self, action: #selector(self.touchUpAddClientButton(_:)), for: .touchUpInside)
     }
     
@@ -65,6 +70,22 @@ class StackViewController: UIViewController {
         labelHorizontalStackView.distribution = .fillEqually
     }
     
+    func setupWaitingListVerticalStackViewConstraint() {
+        waitingListVerticalStackView.topAnchor.constraint(equalTo: labelHorizontalStackView.bottomAnchor, constant: 5).isActive = true
+        waitingListVerticalStackView.leadingAnchor.constraint(equalTo: waitingLabel.leadingAnchor).isActive = true
+        waitingListVerticalStackView.trailingAnchor.constraint(equalTo: waitingLabel.trailingAnchor).isActive = true
+        waitingListVerticalStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor).isActive = true
+    }
+    
+    func setupWorkingListVerticalStackViewConstraint() {
+        workingListVerticalStackView.topAnchor.constraint(equalTo: labelHorizontalStackView.bottomAnchor, constant: 5).isActive = true
+        workingListVerticalStackView.leadingAnchor.constraint(equalTo: workingLabel.leadingAnchor).isActive = true
+        workingListVerticalStackView.trailingAnchor.constraint(equalTo: workingLabel.trailingAnchor).isActive = true
+        workingListVerticalStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor).isActive = true
+        workingListVerticalStackView.distribution = .fillEqually
+        workingListVerticalStackView.spacing = 7
+    }
+    
     func setupUIStackView(stackView: UIStackView , axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +98,7 @@ class StackViewController: UIViewController {
         workingTimeLabel.topAnchor.constraint(equalTo: buttonHorizontalStackView.bottomAnchor, constant: 10).isActive = true
         workingTimeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         workingTimeLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        workingTimeLabel.heightAnchor.constraint(equalTo: buttonHorizontalStackView.heightAnchor).isActive = true
         workingTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         workingTimeLabel.textAlignment = .center
         workingTimeLabel.text = "\(Label.workingTime)\(initialTime)"
@@ -87,6 +109,11 @@ class StackViewController: UIViewController {
 extension StackViewController {
     @IBAction func touchUpAddClientButton(_ sender: UIButton) {
         Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timeCounter), userInfo: nil, repeats: true)
+        
+        (1...Button.addedNumber).forEach { clientIdentifier in
+            let clientInformationView = CustomView()
+            waitingListVerticalStackView.addArrangedSubview(clientInformationView)
+        }
     }
 }
 
