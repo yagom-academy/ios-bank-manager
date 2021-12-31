@@ -12,10 +12,10 @@ private struct Client {
     let taskType: Bank.Task
 }
 
-struct Clients {
+class Clients {
     private var waitingLine = Queue<Client>()
     
-    mutating func makeWaitingLine() -> Int {
+    func makeWaitingLine() -> Int {
         let totalClientCount = Int.random(in: 10...30)
         
         (1...totalClientCount).forEach { identifier in
@@ -33,7 +33,7 @@ struct Clients {
         return totalClientCount
     }
     
-    mutating func takeTurn() -> Int? {
+    func takeTurn() -> Int? {
         let recentClient = waitingLine.dequeue()
         let clientIdentifier = recentClient?.identifier
         

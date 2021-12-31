@@ -19,6 +19,8 @@ class StackViewController: UIViewController {
     let waitingLabel = UILabel()
     let workingLabel = UILabel()
     var count: Int = 0
+    let clients = Clients()
+    let clerk = BankClerk()
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -37,6 +39,13 @@ class StackViewController: UIViewController {
         setupWaitingListVerticalStackViewConstraint()
         setupWorkingListVerticalStackViewConstraint()
         addClientButton.addTarget(self, action: #selector(self.touchUpAddClientButton(_:)), for: .touchUpInside)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let bankManager = BankManager(clients: clients, clerk: clerk)
+        let totalClientCount = bankManager.operateBankSystem()
+        
+        presentWaitingList(totalClientCount: totalClientCount)
     }
     
     //MARK: - Method
@@ -103,6 +112,19 @@ class StackViewController: UIViewController {
         workingTimeLabel.textAlignment = .center
         workingTimeLabel.text = "\(Label.workingTime)\(initialTime)"
     }
+    
+    func presentWaitingList(totalClientCount: Int) {
+        for clientNumber in 1...totalClientCount {
+            let recentClientTaskType = clients.informTaskType()
+            guard let taskType = recentClientTaskType else {
+                return
+            }
+
+            let clientInformationView = CustomView()
+            clientInformationView.setupLabelText(clientNumber: clientNumber.description, taskType: taskType.koreanName)
+            waitingListVerticalStackView.addArrangedSubview(clientInformationView)
+        }
+    }
 }
 
 //MARK: - IBAction
@@ -112,6 +134,7 @@ extension StackViewController {
         
         (1...Button.addedNumber).forEach { clientIdentifier in
             let clientInformationView = CustomView()
+            clientInformationView.setupLabelText(clientNumber: clientIdentifier.description, taskType: "타입")
             waitingListVerticalStackView.addArrangedSubview(clientInformationView)
         }
     }

@@ -16,20 +16,13 @@ class BankManager {
         self.clerk = clerk
     }
     
-    func operateBankSystem() {
+    func operateBankSystem() -> Int {
         let totalClientCount = clients.makeWaitingLine()
-        let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
         
-        startBankTask()
-        dispatchGroup.wait()
-        
-        let endTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
-        let totalWorkingTime: CFAbsoluteTime = endTime - startTime
-        
-        announceClose(with: totalClientCount, during: totalWorkingTime)
+        return totalClientCount
     }
     
-    private func startBankTask() {
+    func startBankTask() {
         while let taskType = clients.informTaskType(),
               let clientIdentifier = clients.takeTurn() {
             giveTask(of: taskType, for: clientIdentifier)

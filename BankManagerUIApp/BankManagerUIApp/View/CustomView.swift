@@ -26,18 +26,21 @@ class CustomView: UIView {
     }
     
     func initializeView() {
-        setupLabel(label: clientIdentifierLabel, text: "0 - ")
-        setupLabel(label: taskTypeLabel, text: " 대출")
+        setupLabel(label: clientIdentifierLabel)
+        setupLabel(label: taskTypeLabel)
         setupLabelConstraint()
         clientIdentifierLabel.textAlignment = .right
         taskTypeLabel.textAlignment = .left
     }
-    
-    func setupLabel(label: UILabel, text: String) {
-        self.addSubview(label)
         
+    func setupLabel(label: UILabel) {
+        self.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = text
+    }
+    
+    func setupLabelText(clientNumber: String, taskType: String) {
+        clientIdentifierLabel.text = "\(clientNumber) -"
+        taskTypeLabel.text = " \(taskType)"
     }
     
     func setupLabelConstraint() {
