@@ -7,83 +7,122 @@
 import UIKit
 
 class BankViewController: UIViewController {
-
+    let baseVerticalStackView = UIStackView()
+    let buttonsStackView = UIStackView()
+    let timerStackView = UIStackView()
+    let bankStatusStackView = UIStackView()
+    let scrollsStackView = UIStackView()
+    let waitingScrollView = UIScrollView()
+    let workingScrollView = UIScrollView()
+    let waitingStackView = UIStackView()
+    let workingStackView = UIStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBankView()
     }
-
+    
     func configureBankView() {
         view.backgroundColor = .white
+        configureBaseVerticalStackView()
+        configureButtonsStackview()
+        configureTimerStackView()
+        configureBankStatusStackView()
+        configureScrollsStackView()
+    }
+    
+    private func configureBaseVerticalStackView() {
         let safeArea = view.safeAreaLayoutGuide
         
-        let baseVerticalStackView = UIStackView()
         baseVerticalStackView.axis = .vertical
         baseVerticalStackView.spacing = 15
         baseVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(baseVerticalStackView)
-        baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-        baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
-        baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
         
-        let buttonsStackView = UIStackView()
+        NSLayoutConstraint.activate([
+            baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            baseVerticalStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func configureButtonsStackview() {
         buttonsStackView.axis = .horizontal
         buttonsStackView.distribution = .fillEqually
-        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let addClientsButton = UIButton()
-        addClientsButton.setTitle("고객 10명 추가", for: .normal)
-        addClientsButton.setTitleColor(.systemBlue, for: .normal)
-        addClientsButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        addClientsButton.titleLabel?.adjustsFontForContentSizeCategory = true
+    
+        let addClientsButton = BankUIComponent.makeButton(text: "고객 10명 추가",
+                                                          textColor: .systemBlue)
+        let resetButton = BankUIComponent.makeButton(text: "초기화",
+                                                     textColor: .systemRed)
         buttonsStackView.addArrangedSubview(addClientsButton)
-        
-        let resetButton = UIButton()
-        resetButton.setTitle("초기화", for: .normal)
-        resetButton.setTitleColor(.systemRed, for: .normal)
-        resetButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        resetButton.titleLabel?.adjustsFontForContentSizeCategory = true
         buttonsStackView.addArrangedSubview(resetButton)
-        
         baseVerticalStackView.addArrangedSubview(buttonsStackView)
-        
-        let timerStackView = UIStackView()
+    }
+    
+    private func configureTimerStackView() {
         timerStackView.axis = .horizontal
         timerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let timerLabel = UILabel()
-        timerLabel.text = "업무 시간 - 00:00:000"
-        timerLabel.font = .preferredFont(forTextStyle: .title2)
-        timerLabel.textAlignment = .center
-        timerLabel.adjustsFontForContentSizeCategory = true
+        let timerLabel = BankUIComponent.makeLabel(text: "업무 시간 - 00:00:000",
+                                                   textStyle: .title2)
         timerStackView.addArrangedSubview(timerLabel)
-        
         baseVerticalStackView.addArrangedSubview(timerStackView)
-        
-        let bankStatusStackView = UIStackView()
+    }
+    
+    private func configureBankStatusStackView() {
         bankStatusStackView.axis = .horizontal
         bankStatusStackView.distribution = .fillEqually
         bankStatusStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let waitingLabel = UILabel()
-        waitingLabel.text = "대기중"
-        waitingLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        waitingLabel.textAlignment = .center
-        waitingLabel.adjustsFontForContentSizeCategory = true
-        waitingLabel.textColor = .white
-        waitingLabel.backgroundColor = .systemGreen
+        let waitingLabel = BankUIComponent.makeLabel(text: "대기중",
+                                                     textStyle: .largeTitle,
+                                                     textColor: .white,
+                                                     backgroundColor: .systemGreen)
+        let workingLabel = BankUIComponent.makeLabel(text: "업무중",
+                                                     textStyle: .largeTitle,
+                                                     textColor: .white,
+                                                     backgroundColor: .systemIndigo)
         bankStatusStackView.addArrangedSubview(waitingLabel)
-        
-        let workingLabel = UILabel()
-        workingLabel.text = "업무중"
-        workingLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        workingLabel.textAlignment = .center
-        workingLabel.adjustsFontForContentSizeCategory = true
-        workingLabel.textColor = .white
-        workingLabel.backgroundColor = .systemIndigo
         bankStatusStackView.addArrangedSubview(workingLabel)
-        
         baseVerticalStackView.addArrangedSubview(bankStatusStackView)
     }
+    
+    private func configureScrollsStackView() {
+        scrollsStackView.axis = .horizontal
+        scrollsStackView.distribution = .fillEqually
+        configureWaitingScrollView()
+        configureWorkingScrollView()
+        baseVerticalStackView.addArrangedSubview(scrollsStackView)
+    }
+    
+    private func configureWaitingScrollView() {
+        waitingScrollView.translatesAutoresizingMaskIntoConstraints = false
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        waitingStackView.axis = .vertical
+        waitingStackView.spacing = 10
+        waitingScrollView.addSubview(waitingStackView)
+        
+        NSLayoutConstraint.activate([
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.contentLayoutGuide.topAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.contentLayoutGuide.bottomAnchor),
+            waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor)
+        ])
+        scrollsStackView.addArrangedSubview(waitingScrollView)
+    }
+    
+    private func configureWorkingScrollView() {
+        workingScrollView.translatesAutoresizingMaskIntoConstraints = false
+        workingStackView.translatesAutoresizingMaskIntoConstraints = false
+        workingStackView.axis = .vertical
+        workingStackView.spacing = 10
+        workingScrollView.addSubview(workingStackView)
+        
+        NSLayoutConstraint.activate([
+            workingStackView.topAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.topAnchor),
+            workingStackView.bottomAnchor.constraint(equalTo: workingScrollView.contentLayoutGuide.bottomAnchor),
+            workingStackView.widthAnchor.constraint(equalTo: workingScrollView.widthAnchor)
+        ])
+        scrollsStackView.addArrangedSubview(workingScrollView)
+    }
 }
-
