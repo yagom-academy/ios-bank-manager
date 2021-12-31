@@ -1,10 +1,5 @@
 import Foundation
 
-enum Menu {
-    static let open = "1"
-    static let close = "2"
-}
-
 struct BankManager {
     private var bank: Bank?
     
