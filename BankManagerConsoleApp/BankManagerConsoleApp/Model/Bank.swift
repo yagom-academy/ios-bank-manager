@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+class Bank {
     //MARK: - 저장 속성
     private let loanClientQueue = WaitingQueue<Client>()
     private let depositClientQueue = WaitingQueue<Client>()
@@ -28,7 +28,7 @@ struct Bank {
     }
     
     // MARK: - Internal 메서드
-    mutating func receive(clients: [Client]) {
+    func receive(clients: [Client]) {
         clients.forEach { client in
             switch client.task {
             case .loan:
@@ -39,7 +39,7 @@ struct Bank {
         }
     }
     
-    mutating func executeBusiness() {
+    func executeBusiness() {
         let startTime = CFAbsoluteTimeGetCurrent()
         let totalClientCount = handleClients()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
@@ -48,18 +48,46 @@ struct Bank {
     }
     
     //MARK: - Private 메서드
-    private mutating func handleClients() -> Int {
+    private func handleClients() -> Int {
         var totalHandledClientCount: Int = 0
+        let clientCountingSemaphore = DispatchSemaphore(value: 1)
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let group = DispatchGroup()
         
-//        while let client = clientQueue.dequeue(),
-//              var clerk = clerkQueue.dequeue() {
-//            if clerk.isAvailable {
-//                clerk.work(for: client)
-//                totalHandledClientCount += 1
-//            }
-//            clerkQueue.enqueue(clerk)
-//        }
+        DispatchQueue.global().async(group: group) {
+            while let loanClient = self.loanClientQueue.dequeue() {
+                DispatchQueue.global().async(group: group) {
+                    loanSemaphore.wait()
+                    print("\(loanClient.orderTicket.number)번 고객 \(loanClient.task)업무 시작")
+                    Thread.sleep(forTimeInterval: loanClient.taskDuration)
+                    print("\(loanClient.orderTicket.number)번 고객 \(loanClient.task)업무 완료")
+                    loanSemaphore.signal()
+                    
+                    clientCountingSemaphore.wait()
+                    totalHandledClientCount += 1
+                    clientCountingSemaphore.signal()
+                }
+            }
+        }
         
+        DispatchQueue.global().async(group: group) {
+            while let depositClient = self.depositClientQueue.dequeue() {
+                DispatchQueue.global().async(group: group) {
+                    depositSemaphore.wait()
+                    print("\(depositClient.orderTicket.number)번 고객 \(depositClient.task)업무 시작")
+                    Thread.sleep(forTimeInterval: depositClient.taskDuration)
+                    print("\(depositClient.orderTicket.number)번 고객 \(depositClient.task)업무 완료")
+                    depositSemaphore.signal()
+                    
+                    clientCountingSemaphore.wait()
+                    totalHandledClientCount += 1
+                    clientCountingSemaphore.signal()
+                }
+            }
+        }
+        
+        group.wait()
         return totalHandledClientCount
     }
     

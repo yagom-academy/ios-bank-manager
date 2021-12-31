@@ -8,7 +8,7 @@ import Foundation
 
 struct BankManager {
     //MARK: - 저장 속성
-    private var bank: Bank
+    private let bank: Bank
     
     //MARK: - 생성자
     init(bank: Bank) {
