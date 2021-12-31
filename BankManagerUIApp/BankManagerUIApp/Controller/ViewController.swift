@@ -70,55 +70,58 @@ class ViewController: UIViewController {
         guard let customers = bank?.returnAllCustomers() else {
             return
         }
-        
-        let customerStackView = CustomStackView(axis: .vertical, spacing: 10, distribution: .equalSpacing, alignment: .fill)
-        
-        let waitingLabel = UILabel()
-        waitingLabel.text = "대기중"
-        waitingLabel.textColor = .white
-        waitingLabel.textAlignment = .center
-        waitingLabel.backgroundColor = .systemGreen
-        
-        let waitingCustomerScrollView = UIScrollView()
-        let waitingCustomerContentView = UIView()
-        
-        customers.forEach { customer in
-            let waitingCustomerLabel = CustomLabel(order: customer.turn, type: customer.task)
-            waitingCustomerStackView.addArrangedSubview(waitingCustomerLabel)
+        let waitingAndProcessingStackView = CustomStackView(axis: .horizontal, spacing: 0, distribution: .fillEqually, alignment: .fill)
+        [waitingCustomerStackView, processingCustomerStackView].forEach { stackView in
+            let customerStackView = CustomStackView(axis: .vertical, spacing: 10, distribution: .equalSpacing, alignment: .fill)
+            
+            let waitingLabel = UILabel()
+            waitingLabel.text = "대기중"
+            waitingLabel.textColor = .white
+            waitingLabel.textAlignment = .center
+            waitingLabel.backgroundColor = .systemGreen
+            
+            let waitingCustomerScrollView = UIScrollView()
+            let waitingCustomerContentView = UIView()
+            
+            customers.forEach { customer in
+                let waitingCustomerLabel = CustomLabel(order: customer.turn, type: customer.task)
+                stackView.addArrangedSubview(waitingCustomerLabel)
+            }
+            
+            waitingAndProcessingStackView.addArrangedSubview(customerStackView)
+            customerStackView.addArrangedSubview(waitingLabel)
+            customerStackView.addArrangedSubview(waitingCustomerScrollView)
+            
+            waitingCustomerScrollView.addSubview(waitingCustomerContentView)
+            waitingCustomerContentView.addSubview(stackView)
+            
+            [customerStackView, waitingCustomerScrollView, waitingCustomerContentView, stackView].forEach {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
+            
+            NSLayoutConstraint.activate([
+                customerStackView.bottomAnchor.constraint(equalTo: waitingAndProcessingStackView.bottomAnchor),
+                
+                waitingCustomerScrollView.topAnchor.constraint(equalTo: waitingLabel.bottomAnchor, constant: 15),
+                waitingCustomerScrollView.leadingAnchor.constraint(equalTo: customerStackView.leadingAnchor),
+                waitingCustomerScrollView.trailingAnchor.constraint(equalTo: customerStackView.trailingAnchor),
+                waitingCustomerScrollView.bottomAnchor.constraint(equalTo: customerStackView.bottomAnchor),
+                
+                waitingCustomerContentView.topAnchor.constraint(equalTo: waitingCustomerScrollView.topAnchor),
+                waitingCustomerContentView.leadingAnchor.constraint(equalTo: waitingCustomerScrollView.leadingAnchor),
+                waitingCustomerContentView.trailingAnchor.constraint(equalTo: waitingCustomerScrollView.trailingAnchor),
+                waitingCustomerContentView.bottomAnchor.constraint(equalTo: waitingCustomerScrollView.bottomAnchor),
+                waitingCustomerContentView.widthAnchor.constraint(equalTo: waitingCustomerScrollView.widthAnchor),
+                
+                stackView.topAnchor.constraint(equalTo: waitingCustomerContentView.topAnchor),
+                stackView.leadingAnchor.constraint(equalTo: waitingCustomerContentView.leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: waitingCustomerContentView.trailingAnchor),
+                stackView.bottomAnchor.constraint(equalTo: waitingCustomerContentView.bottomAnchor)
+            ])
         }
         
-        bankStackView.addArrangedSubview(customerStackView)
-        customerStackView.addArrangedSubview(waitingLabel)
-        customerStackView.addArrangedSubview(waitingCustomerScrollView)
+        bankStackView.addArrangedSubview(waitingAndProcessingStackView)
         
-        waitingCustomerScrollView.addSubview(waitingCustomerContentView)
-        waitingCustomerContentView.addSubview(waitingCustomerStackView)
-        
-        [customerStackView, waitingCustomerScrollView, waitingCustomerContentView, waitingCustomerStackView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        NSLayoutConstraint.activate([
-            customerStackView.leadingAnchor.constraint(equalTo: bankStackView.leadingAnchor),
-            customerStackView.trailingAnchor.constraint(equalTo: bankStackView.trailingAnchor),
-            customerStackView.bottomAnchor.constraint(equalTo: bankStackView.bottomAnchor),
-            
-            waitingCustomerScrollView.topAnchor.constraint(equalTo: waitingLabel.bottomAnchor, constant: 15),
-            waitingCustomerScrollView.leadingAnchor.constraint(equalTo: customerStackView.leadingAnchor),
-            waitingCustomerScrollView.trailingAnchor.constraint(equalTo: customerStackView.trailingAnchor),
-            waitingCustomerScrollView.bottomAnchor.constraint(equalTo: customerStackView.bottomAnchor),
-            
-            waitingCustomerContentView.topAnchor.constraint(equalTo: waitingCustomerScrollView.topAnchor),
-            waitingCustomerContentView.leadingAnchor.constraint(equalTo: waitingCustomerScrollView.leadingAnchor),
-            waitingCustomerContentView.trailingAnchor.constraint(equalTo: waitingCustomerScrollView.trailingAnchor),
-            waitingCustomerContentView.bottomAnchor.constraint(equalTo: waitingCustomerScrollView.bottomAnchor),
-            waitingCustomerContentView.widthAnchor.constraint(equalTo: waitingCustomerScrollView.widthAnchor),
-            
-            waitingCustomerStackView.topAnchor.constraint(equalTo: waitingCustomerContentView.topAnchor),
-            waitingCustomerStackView.leadingAnchor.constraint(equalTo: waitingCustomerContentView.leadingAnchor),
-            waitingCustomerStackView.trailingAnchor.constraint(equalTo: waitingCustomerContentView.trailingAnchor),
-            waitingCustomerStackView.bottomAnchor.constraint(equalTo: waitingCustomerContentView.bottomAnchor)
-        ])
     }
 }
 
