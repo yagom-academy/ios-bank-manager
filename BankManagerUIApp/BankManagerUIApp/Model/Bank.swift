@@ -37,7 +37,12 @@ class Bank {
         return customerQueue.returnAllElements()
     }
     
-    @objc func open() {
+    func open(timer: BankTimer) {
+        DispatchQueue.main.async {
+            timer.start()
+        }
+        
+        let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 2)
         let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
         let loanQueue = DispatchQueue(label: "loan")
@@ -46,18 +51,20 @@ class Bank {
         while let customer = customerQueue.dequeue() {
             switch customer.task {
             case .deposit:
-                depositQueue.async(group: bankGroup) {
+                depositQueue.async(group: group) {
                     semaphore.wait()
                     self.bankClerk.work(with: customer)
                     semaphore.signal()
                 }
             case .loan:
-                loanQueue.async(group: bankGroup) {
+                loanQueue.async(group: group) {
                     self.bankClerk.work(with: customer)
                 }
             }
         }
         
-        bankGroup.wait()
+        group.notify(queue: DispatchQueue.main) {
+            timer.stop()
+        }
     }
 }

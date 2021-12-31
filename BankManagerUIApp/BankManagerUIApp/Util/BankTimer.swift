@@ -12,10 +12,6 @@ class BankTimer {
     private var timer: Timer?
     weak var delegate: TimerDelegate?
     
-//    init(delegate: TimerDelegate) {
-//        self.delegate = delegate
-//    }
-    
     func start() {
         startime = Date()
         timer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(timeUp), userInfo: nil, repeats: true)
@@ -30,6 +26,11 @@ class BankTimer {
     }
     
     func stop() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func reset() {
         delegate?.setupTimeLabel(second: 0, milisecond: 0, nanoSecond: 0)
         timer?.invalidate()
         timer = nil

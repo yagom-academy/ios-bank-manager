@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         bank = BankFactory.createBank(with: self)
         bankTimer.delegate = self
         setupUI()
-        bank?.open()
+        bank?.open(timer: bankTimer)
     }
     
     func setupUI() {
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
             view.removeFromSuperview()
         }
         
-        bankTimer.stop()
+        bankTimer.reset()
     }
     
     func setupProcessingTimeLabel() {
@@ -149,7 +149,30 @@ class ViewController: UIViewController {
         }
         
         bankStackView.addArrangedSubview(waitingAndProcessingStackView)
+    }
+    
+    @discardableResult
+    func removeCustomerFromStackView(from stackView: UIStackView, customer: Customer) -> CustomerLabel? {
+        var targetCustomLabel: CustomerLabel?
         
+        for label in stackView.arrangedSubviews {
+            guard let waitingCustomerLabel = label as? CustomerLabel else {
+                break
+            }
+            
+            guard let waitingCustomer = waitingCustomerLabel.text?.components(separatedBy: " - ") else {
+                break
+            }
+            
+            let processingCustomer = [String(customer.turn), customer.task.description]
+            if waitingCustomer == processingCustomer {
+                waitingCustomerLabel.removeFromSuperview()
+                targetCustomLabel = waitingCustomerLabel
+                break
+            }
+        }
+                
+        return targetCustomLabel
     }
 }
 
@@ -165,25 +188,16 @@ extension ViewController: TimerDelegate {
 extension ViewController: BankClerkDelegate {
     func moveToProcessingState(of customer: Customer) {
         DispatchQueue.main.async {
-            for label in self.waitingCustomerStackView.arrangedSubviews {
-                guard let waitingCustomerLabel = label as? CustomerLabel else {
-                    return
-                }
-                guard let waitingCustomer = waitingCustomerLabel.text?.components(separatedBy: " - ") else {
-                    return
-                }
-                
-                let processingCustomer = [String(customer.turn), customer.task.description]
-                if waitingCustomer == processingCustomer {
-                    label.removeFromSuperview()
-                    self.processingCustomerStackView.addArrangedSubview(label)
-                    
-                }
+            guard let customerLabel = self.removeCustomerFromStackView(from: self.waitingCustomerStackView, customer: customer) else {
+                 return
             }
+            self.processingCustomerStackView.addArrangedSubview(customerLabel)
         }
     }
     
     func moveToCompletionState(of customer: Customer) {
-        
+        DispatchQueue.main.async {
+            self.removeCustomerFromStackView(from: self.processingCustomerStackView, customer: customer)
+        }
     }
 }
