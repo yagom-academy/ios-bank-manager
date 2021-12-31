@@ -75,10 +75,10 @@ extension Bank {
             let group = DispatchGroup()
             
             DispatchQueue.global().async(group: group) {
-                while let loanClient = queue.dequeue() {
+                while let client = queue.dequeue() {
                     DispatchQueue.global().async(group: group) {
                         semaphore.wait()
-                        self.work(for: loanClient)
+                        self.work(for: client)
                         semaphore.signal()
 
                         clientCountingSemaphore.wait()
