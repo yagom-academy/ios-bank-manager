@@ -37,6 +37,12 @@
     + [의문점](#3-2-의문점)
     + [Trouble Shooting](#3-3-Trouble-Shooting)
     + [배운 개념](#3-4-배운-개념)
+- [STEP 4 : UI 구현](#STEP-4--UI-구현)
+    + [고민했던 것](#4-1-고민했던-것)
+    + [의문점](#4-2-의문점)
+    + [Trouble Shooting](#4-3-Trouble-Shooting)
+    + [배운 개념](#4-4-배운-개념)
+    + [PR 후 개선사항](#4-5-PR-후-개선사항)
 
 # 키워드
 
@@ -57,6 +63,10 @@
     - `DispatchGroup`
     - `async` `sync`
     - `Serial` `Concurrent`
+- `UI 구성 (only Code)`
+- `Timer` `RunLoop`
+- `Custom View`
+- `Auto Layout`
 
 # STEP 1 : 큐 타입 구현
 
@@ -327,5 +337,112 @@ struct SomeStruct {
 - 스레드(Thread) 개념에 대한 이해
 - GCD를 활용한 동시성 프로그래밍 구현
 - 동기(Synchronous)와 비동기(Asynchronous) 동작의 구현 및 적용
+
+## 3-5 PR 후 개선사항
+
+- Bank 타입 리팩토링
+    - 은행원 수를 나타내는 프로퍼티명 number를 count로 수정
+    - Bank타입을 class가 아닌 struct로 수정
+    - `workBanker()` 메소드 내부에 while문을 while let으로 수정
+- Banker 타입의 `workSpeed()` 메소드를 제거
+- LinketList의 `removeFirst()` 메소드 내부를 Thread-Safe하게 개선
+    - Thread Safe
+        - 기존 로직은 은행원 수만큼 global() 큐에 Task를 만드는 방식이여서 하나의 고객 큐에 여러 스레드가 접근해 `Race Condition`이 발생할 가능성이 있음.
+        - 여러 스레드가 하나의 고객 큐에 접근해도 LinkedList에서 첫 번째 요소를 반환하는 메서드를 하나의 스레드에서만 접근할 수 있도록 `SerialQueue.sync`를 활용하여 `Race Condition`을 해결
+
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#은행-창구-매니저-프로젝트)
+
+---
+
+# STEP 4 : UI **구현**
+
+콘솔앱을 UI앱으로 구현합니다.
+
+### UI 구성 설계
+
+![](https://i.imgur.com/r9Gxh6p.png)
+
+
+## 4-1 고민했던 것
+
+- 화면 전체를 스택뷰로 구성할 수 있도록 고민해보았다.
+- 동일한 구성을 가지고 있는 뷰를 Custom View로 분리할 수 있도록 고민해보았다.
+    - 동일한 요소가 있는 뷰를 커스텀하여 재사용할 수 있도록 구현
+- 뷰를 그릴 때 main Thread에서 바로 처리할 수 있는 방법을 고민해보았다.
+    - delegate를 활용하여 ViewController가 뷰를 그리는 시점에 DispatchQueue.main.async를 활용하여 비동기적으로 뷰를 그릴 수 있도록 구현
+- 각종 예외사항에 대해 대처할 수 있도록 어떤 로직을 추가해야하는지 고민해보았다.
+    - 고객 10명 추가 버튼을 클릭시 은행이 일을 하고 있다면 고객만 추가할 수 있도록 로직 추가
+    - 고객을 추가할 때 먼저 일이 끝나서 사라진 Thread(은행원)가 있는 경우 다시 일을 할 수 있도록 DispatchQueue를 추가하는 로직 추가 (프로퍼티 옵저버 활용)
+
+## 4-2 의문점
+
+- Bool 타입 네이밍을 할때 부정문을 사용해도 될까?
+    - Bool 타입 변수를 만들 때 부정문을 사용할 경우 아래 guard 구문을 한국말로 표현하면 `타이머 인스턴스가 존재하지 않지 않는다면 함수를 종료 시켜라` 라고 표현할 수 있다.
+        - 다시 말해  `타이머 인스턴스가 존재한다면 함수를 종료시켜라`로 다시 한번 생각해야한다.
+    - 하지만 코드는 간결하게 작성할 수 있다.
+        
+        ```swift
+        // 타이머의 인스턴스가 존재할 경우 guard 구문에서 함수를 종료함.
+        func open() {
+            let isNotWorking = timer == nil
+            guard isNotWorking else {
+                return
+            }
+            startTimer()
+            
+            // ... 
+        }
+        ```
+        
+    - Bool 타입 변수를 만들 때 부정문을 사용하지 않는 경우 뒤에 false 구문이 추가된다.
+        
+        ```swift
+        // 타이머의 인스턴스가 존재할 경우 guard 구문에서 함수를 종료함.
+        func open() {
+            let isWorking = timer != nil
+            guard isWorking == false else {
+                return
+            }
+            startTimer()
+            
+            // ... 
+        }
+        ```
+        
+    - 프로퍼티로 한번에 깔끔하게 만드는 것이 좋은건지 아니면 false문이라도 추가하여 읽기 수월하도록 구성해주어야 하는게 맞는건지 의문이다.
+    
+- DispatchQueue는 작업하고 있는 것을 중간에 중지시킬 수 있을까?
+    - cancel 메서드를 호출하더라도 작업이 작업 중이라면 중지시킬 수 없다.
+    - 우회하는 방법이 존재하지만 GCD가 작업을 취소하거나 하는 것은 할 수는 없다.
+    - Operation Queue를 사용하면 작업 중인 작업을 중지 할 수 있다. [[참고 링크]](https://developer.apple.com/documentation/foundation/operationqueue/1417849-cancelalloperations)
+- Custom View 클래스 내부에 프로퍼티를 가져도 되는가?
+    - 필요하다면 사용해도 무관하다.
+    - 특정 뷰를 찾을 때 Int, String처럼 중복된 값이 들어올 경우 여러 뷰를 찾아올 수도 있다.
+    - UUID를 활용하는 활용하면 고유한 값을 가질 수 있다.
+
+## 4-3 Trouble Shooting
+
+### 1. 뷰의 요소를 비동기적으로 업데이트 하기
+
+- `상황` UIButton에 View의 요소를 업데이트 하도록 기능을 추가하고 테스트 해보았으나, 버튼이 클릭됨가 동시에 화면이 멈추고 에러가 나면서 뷰가 업데이트 되지 않는 상황을 마주했다.
+* ![](https://i.imgur.com/0S10HBs.png)
+- `이유` 비동기 프로그래밍시 뷰를 그리는 작업은 main thread에서 처리해주어야 하는데, 따로 처리해주지 않아서 해당 에러가 발생했던 것 같다.
+- `해결` 뷰를 그리는 작업을 main thread에서 처리하도록 DispatchQueue.main.async 클로저 구문안에 넣어주었다.
+
+### 2. 멈추지 않는 타이머
+
+- `상황` 고객 추가버튼을 여러번 클릭하고 초기화를 누르게 되면 타이머가 멈추지 않았다.
+* ![https://i.imgur.com/fvZWEq1.gif](https://i.imgur.com/fvZWEq1.gif)
+- `이유` 타이머가 추가버튼 클릭시 계속 추가되면서 추가된 타이머가 끝나지 않고 계속 실행되는 듯 했다.
+- `해결` 초기화 버튼을 클릭할 때, 대기중인 고객이 없을 때 타이머를 멈추면서 타이머에 nil을 대입해주었고, 타이머가 작동중에는 타이머를 추가하지 않도록 하는 로직을 추가해주니 해결되었다.
+* ![https://i.imgur.com/VsvkGMM.gif](https://i.imgur.com/VsvkGMM.gif)
+
+## 4-4 배운 개념
+
+- 동시성 프로그래밍 중 UI 요소 업데이트의 주의점 이해
+- 커스텀 뷰 구현
+- 스택뷰 활용
+- 코드로 UI 구성(오토레이아웃)
+- 타이머 활용방법과 Run Loop
 
 [![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#은행-창구-매니저-프로젝트)
