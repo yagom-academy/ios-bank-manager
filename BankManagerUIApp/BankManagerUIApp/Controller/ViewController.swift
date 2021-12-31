@@ -11,8 +11,9 @@ protocol TimerDelegate: AnyObject {
 }
 
 class ViewController: UIViewController {
-    private var buttonStackView: CustomStackView?
-    private var processingTimeLabel: UILabel?
+    private let bankStackView = CustomStackView(axis: .vertical, spacing: 5, distribution: .fillEqually, alignment: .fill)
+    private var processingTimeLabel = UILabel()
+    private let waitingCustomerStackView = CustomStackView(axis: .vertical, spacing: 5, distribution: .equalSpacing, alignment: .center)
     private let bankPrinter = BankPrinter()
     private var bank: Bank?
     
@@ -23,23 +24,42 @@ class ViewController: UIViewController {
     }
     
     func setupUI() {
+        setupBankStackView()
         setupButtons()
-        setupCustomerView()
+        setupProcessingTimeLabel()
+    }
+    
+    func setupBankStackView() {
+        self.view.addSubview(bankStackView)
+        bankStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bankStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            bankStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            bankStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+        ])
     }
     
     func setupButtons() {
-        buttonStackView = CustomStackView(axis: .horizontal, spacing: .zero, distribution: .fillEqually, alignment: .center)
+        let buttonStackView = CustomStackView(axis: .horizontal, spacing: .zero, distribution: .fillEqually, alignment: .center)
         let addCustomerButton = CustomButton(title: "고객 10명 추가", textColor: .blue)
         let resetButton = CustomButton(title: "초기화", textColor: .red)
         addCustomerButton.addTarget(self, action: #selector(setupCustomerQueue), for: .touchUpInside)
         
         [addCustomerButton, resetButton].forEach {
-            buttonStackView?.addArrangedSubview($0)
+            buttonStackView.addArrangedSubview($0)
         }
+        
+        bankStackView.addArrangedSubview(buttonStackView)
     }
     
     @objc func setupCustomerQueue() {
         bank?.setupCustomerQueue(with: 10)
+    }
+    
+    func setupProcessingTimeLabel() {
+        processingTimeLabel.text = "업무시간 - 00:00:000"
+        processingTimeLabel.textAlignment = .center
+        bankStackView.addArrangedSubview(processingTimeLabel)
     }
     
     func setupCustomerView() {
@@ -49,7 +69,6 @@ class ViewController: UIViewController {
         
         let waitingCustomerScrollView = UIScrollView()
         let waitingCustomerContentView = UIView()
-        let waitingCustomerStackView = CustomStackView(axis: .vertical, spacing: 5, distribution: .equalSpacing, alignment: .center)
         
         customers.forEach { customer in
             let waitingCustomerLabel = CustomLabel(order: customer.turn, type: customer.task)
@@ -87,7 +106,7 @@ class ViewController: UIViewController {
 extension ViewController: TimerDelegate {
     func setupLabel(second: Int, milisecond: Int, nanoSecond: Int) {
         let formattedSecond = second < 10 ? "0\(second)" : "\(second)"
-        processingTimeLabel?.text = "업무시간 - \(formattedSecond):\(milisecond):\(nanoSecond)"
+        processingTimeLabel.text = "업무시간 - \(formattedSecond):\(milisecond):\(nanoSecond)"
     }
 }
 
