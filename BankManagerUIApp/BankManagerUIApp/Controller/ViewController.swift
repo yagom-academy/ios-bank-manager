@@ -30,11 +30,13 @@ class ViewController: UIViewController {
         setupButtons()
         setupProcessingTimeLabel()
         setupCustomerView()
+        setupInitialCustomers()
     }
     
     func setupBankStackView() {
         self.view.addSubview(bankStackView)
         bankStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             bankStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             bankStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -47,7 +49,7 @@ class ViewController: UIViewController {
         let buttonStackView = CustomStackView(axis: .horizontal, spacing: .zero, distribution: .fillEqually, alignment: .center)
         let addCustomerButton = CustomButton(title: "고객 10명 추가", textColor: .blue)
         let resetButton = CustomButton(title: "초기화", textColor: .red)
-        addCustomerButton.addTarget(self, action: #selector(setupCustomerQueue), for: .touchUpInside)
+        addCustomerButton.addTarget(self, action: #selector(setupTenCustomerQueue), for: .touchUpInside)
         
         [addCustomerButton, resetButton].forEach {
             buttonStackView.addArrangedSubview($0)
@@ -56,8 +58,19 @@ class ViewController: UIViewController {
         bankStackView.addArrangedSubview(buttonStackView)
     }
     
-    @objc func setupCustomerQueue() {
-        bank?.setupCustomerQueue(with: 10)
+    @objc func setupTenCustomerQueue() {
+        let amount = 10
+        bank?.setupCustomerQueue(with: amount)
+        
+        guard let customers = bank?.returnAllCustomers() else {
+            return
+        }
+        
+        let count = customers.count
+        
+        customers[count-amount..<count].forEach { customer in
+            waitingCustomerStackView.addArrangedSubview(CustomerLabel(order: customer.turn, type: customer.task))
+        }
     }
     
     func setupProcessingTimeLabel() {
@@ -66,27 +79,28 @@ class ViewController: UIViewController {
         bankStackView.addArrangedSubview(processingTimeLabel)
     }
     
-    func setupCustomerView() {
+    func setupInitialCustomers() {
         guard let customers = bank?.returnAllCustomers() else {
             return
         }
+        
+        customers.forEach { customer in
+            let waitingCustomerLabel = CustomerLabel(order: customer.turn, type: customer.task)
+            waitingCustomerStackView.addArrangedSubview(waitingCustomerLabel)
+        }
+    }
+    
+    func setupCustomerView() {
         let waitingAndProcessingStackView = CustomStackView(axis: .horizontal, spacing: 0, distribution: .fillEqually, alignment: .fill)
         [waitingCustomerStackView, processingCustomerStackView].forEach { stackView in
             let customerStackView = CustomStackView(axis: .vertical, spacing: 10, distribution: .equalSpacing, alignment: .fill)
             
-            let waitingLabel = UILabel()
-            waitingLabel.text = "대기중"
-            waitingLabel.textColor = .white
-            waitingLabel.textAlignment = .center
-            waitingLabel.backgroundColor = .systemGreen
+            let waitingLabel = stackView == waitingCustomerStackView ? StateLabel(text: "대기중") : StateLabel(text: "업무중")
             
             let waitingCustomerScrollView = UIScrollView()
             let waitingCustomerContentView = UIView()
             
-            customers.forEach { customer in
-                let waitingCustomerLabel = CustomLabel(order: customer.turn, type: customer.task)
-                stackView.addArrangedSubview(waitingCustomerLabel)
-            }
+            waitingCustomerScrollView.showsVerticalScrollIndicator = false
             
             waitingAndProcessingStackView.addArrangedSubview(customerStackView)
             customerStackView.addArrangedSubview(waitingLabel)
@@ -100,8 +114,6 @@ class ViewController: UIViewController {
             }
             
             NSLayoutConstraint.activate([
-                customerStackView.bottomAnchor.constraint(equalTo: waitingAndProcessingStackView.bottomAnchor),
-                
                 waitingCustomerScrollView.topAnchor.constraint(equalTo: waitingLabel.bottomAnchor, constant: 15),
                 waitingCustomerScrollView.leadingAnchor.constraint(equalTo: customerStackView.leadingAnchor),
                 waitingCustomerScrollView.trailingAnchor.constraint(equalTo: customerStackView.trailingAnchor),

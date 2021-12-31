@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomLabel: UILabel {
+class CustomerLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -15,7 +15,7 @@ class CustomLabel: UILabel {
     init(order: Int, type: Task) {
         super.init(frame: CGRect.zero)
         self.text = "\(order) - \(type)"
-        self.textColor = type == .deposit ? .black : .purple
+        self.textColor = type == .deposit ? .black : .systemPurple
     }
     
     required init?(coder: NSCoder) {

@@ -15,6 +15,7 @@
 		C7694E47259C3EA20053667F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7694E45259C3EA20053667F /* LaunchScreen.storyboard */; };
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
+		C997D321277EDB5800FF3398 /* StateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C997D320277EDB5800FF3398 /* StateLabel.swift */; };
 		C9A44185277DAF1100CE60B7 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4417D277DAF1100CE60B7 /* BankClerk.swift */; };
 		C9A44186277DAF1100CE60B7 /* BankFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4417E277DAF1100CE60B7 /* BankFactory.swift */; };
 		C9A44187277DAF1100CE60B7 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4417F277DAF1100CE60B7 /* Customer.swift */; };
@@ -25,7 +26,7 @@
 		C9A4418C277DAF1200CE60B7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A44184277DAF1100CE60B7 /* LinkedList.swift */; };
 		C9A44190277DDFA100CE60B7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4418F277DDFA100CE60B7 /* CustomButton.swift */; };
 		C9A44192277DDFE500CE60B7 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A44191277DDFE500CE60B7 /* CustomStackView.swift */; };
-		C9A44194277DE0B700CE60B7 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A44193277DE0B700CE60B7 /* CustomLabel.swift */; };
+		C9A44194277DE0B700CE60B7 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A44193277DE0B700CE60B7 /* CustomerLabel.swift */; };
 		EA5DE3DF277DB0B400DE4B2A /* BankTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DE3DE277DB0B400DE4B2A /* BankTimer.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerUIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C997D320277EDB5800FF3398 /* StateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLabel.swift; sourceTree = "<group>"; };
 		C9A4417D277DAF1100CE60B7 /* BankClerk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		C9A4417E277DAF1100CE60B7 /* BankFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankFactory.swift; sourceTree = "<group>"; };
 		C9A4417F277DAF1100CE60B7 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		C9A44184277DAF1100CE60B7 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		C9A4418F277DDFA100CE60B7 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C9A44191277DDFE500CE60B7 /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
-		C9A44193277DE0B700CE60B7 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		C9A44193277DE0B700CE60B7 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
 		EA5DE3DE277DB0B400DE4B2A /* BankTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,7 +177,8 @@
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C9A4418F277DDFA100CE60B7 /* CustomButton.swift */,
 				C9A44191277DDFE500CE60B7 /* CustomStackView.swift */,
-				C9A44193277DE0B700CE60B7 /* CustomLabel.swift */,
+				C9A44193277DE0B700CE60B7 /* CustomerLabel.swift */,
+				C997D320277EDB5800FF3398 /* StateLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9A44190277DDFA100CE60B7 /* CustomButton.swift in Sources */,
-				C9A44194277DE0B700CE60B7 /* CustomLabel.swift in Sources */,
+				C9A44194277DE0B700CE60B7 /* CustomerLabel.swift in Sources */,
 				C9A44186277DAF1100CE60B7 /* BankFactory.swift in Sources */,
 				C9A44187277DAF1100CE60B7 /* Customer.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
@@ -338,6 +341,7 @@
 				C9A44188277DAF1200CE60B7 /* BankPrinter.swift in Sources */,
 				C9A4418C277DAF1200CE60B7 /* LinkedList.swift in Sources */,
 				C9A4418A277DAF1200CE60B7 /* Queue.swift in Sources */,
+				C997D321277EDB5800FF3398 /* StateLabel.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				C9A44189277DAF1200CE60B7 /* Bank.swift in Sources */,
 				C9A44185277DAF1100CE60B7 /* BankClerk.swift in Sources */,

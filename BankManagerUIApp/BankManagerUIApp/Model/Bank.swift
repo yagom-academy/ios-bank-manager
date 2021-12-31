@@ -24,8 +24,12 @@ class Bank {
     }
     
     func setupCustomerQueue(with amount: Int) {
-        (1...amount).forEach { number in
-            customerQueue.enqueue(value: Customer(turn: number))
+        (1...amount).forEach { _ in
+            guard let lastCustomer = customerQueue.returnAllElements().last else {
+                customerQueue.enqueue(value: Customer(turn: 1))
+                return
+            }
+            customerQueue.enqueue(value: Customer(turn: lastCustomer.turn + 1))
         }
     }
     

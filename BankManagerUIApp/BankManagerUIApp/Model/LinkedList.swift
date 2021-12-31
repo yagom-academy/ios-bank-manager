@@ -53,10 +53,11 @@ class LinkedList<Element> {
     
     func returnAll() -> [Element] {
         var elements = [Element]()
+        var newHead = head
         
-        while let val = head?.value {
+        while let val = newHead?.value {
             elements.append(val)
-            head = head?.next
+            newHead = newHead?.next
         }
         
         return elements
