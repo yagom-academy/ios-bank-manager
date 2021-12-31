@@ -41,43 +41,13 @@ class Bank {
     
     //MARK: - Private 메서드
     private func handleClients() -> Int {
-        var totalHandledClientCount: Int = 0
-        let clientCountingSemaphore = DispatchSemaphore(value: 1)
-        let loanSemaphore = DispatchSemaphore(value: numberOfClerksForLoans)
-        let depositSemaphore = DispatchSemaphore(value: numberOfClerksForDeposits)
-        let group = DispatchGroup()
-        let loanWindow = BankWindow(taskResponsibility: .loan)
-        let depositWindow = BankWindow(taskResponsibility: .deposit)
+        let loanWindow = BankWindow(task: .loan, for: loanClientQueue, with: numberOfClerksForLoans)
+        let depositWindow = BankWindow(task: .deposit, for: depositClientQueue, with: numberOfClerksForDeposits)
         
-        DispatchQueue.global().async(group: group) {
-            while let loanClient = self.loanClientQueue.dequeue() {
-                DispatchQueue.global().async(group: group) {
-                    loanSemaphore.wait()
-                    loanWindow.work(for: loanClient)
-                    loanSemaphore.signal()
-                    
-                    clientCountingSemaphore.wait()
-                    totalHandledClientCount += 1
-                    clientCountingSemaphore.signal()
-                }
-            }
-        }
+        let loanClientCount = loanWindow.startWork()
+        let depositClientCount = depositWindow.startWork()
+        let totalHandledClientCount = loanClientCount + depositClientCount
         
-        DispatchQueue.global().async(group: group) {
-            while let depositClient = self.depositClientQueue.dequeue() {
-                DispatchQueue.global().async(group: group) {
-                    depositSemaphore.wait()
-                    depositWindow.work(for: depositClient)
-                    depositSemaphore.signal()
-                    
-                    clientCountingSemaphore.wait()
-                    totalHandledClientCount += 1
-                    clientCountingSemaphore.signal()
-                }
-            }
-        }
-        
-        group.wait()
         return totalHandledClientCount
     }
     
@@ -88,16 +58,48 @@ class Bank {
 
 //MARK: - 중첩타입
 extension Bank {
-    private struct BankWindow {
-        let taskResponsibility: Task
+    private class BankWindow {
+        let task: Task
+        let queue: WaitingQueue<Client>
+        let numberOfClerks: Int
         
-        func work(for client: Client) {
+        init(task: Task, for queue: WaitingQueue<Client>, with numberOfClerks: Int) {
+            self.task = task
+            self.queue = queue
+            self.numberOfClerks = numberOfClerks
+        }
+        
+        func startWork() -> Int {
+            var totalHandledClientCount = 0
+            let clientCountingSemaphore = DispatchSemaphore(value: 1)
+            let semaphore = DispatchSemaphore(value: numberOfClerks)
+            let group = DispatchGroup()
+            
+            DispatchQueue.global().async(group: group) {
+                while let loanClient = self.queue.dequeue() {
+                    DispatchQueue.global().async(group: group) {
+                        semaphore.wait()
+                        self.work(for: loanClient)
+                        semaphore.signal()
+
+                        clientCountingSemaphore.wait()
+                        totalHandledClientCount += 1
+                        clientCountingSemaphore.signal()
+                    }
+                }
+            }
+            group.wait()
+            
+            return totalHandledClientCount
+        }
+        
+        private func work(for client: Client) {
             let clientOrderNumber = client.orderTicket.number
             let duration = client.taskDuration
             
-            print("\(clientOrderNumber)번 고객 \(taskResponsibility)업무 시작")
+            print("\(clientOrderNumber)번 고객 \(task)업무 시작")
             Thread.sleep(forTimeInterval: duration)
-            print("\(clientOrderNumber)번 고객 \(taskResponsibility)업무 완료")
+            print("\(clientOrderNumber)번 고객 \(task)업무 완료")
         }
     }
 }
