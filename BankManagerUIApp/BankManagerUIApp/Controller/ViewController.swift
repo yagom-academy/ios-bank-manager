@@ -5,6 +5,7 @@ class ViewController: UIViewController {
     let buttonStackView: UIStackView = UIStackView()
     let addClientButton = UIButton()
     let initializationButton = UIButton()
+    let timerLabel: TimerLabel = TimerLabel()
     
     override func loadView() {
         view = .init()
@@ -18,11 +19,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainStackView.addArrangedSubview(timerLabel)
     }
     
     private func configureMainStackView() {
         mainStackView.axis = .vertical
-        mainStackView.distribution = .fill
+        mainStackView.distribution = .fillEqually
         mainStackView.alignment = .fill
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = view.safeAreaLayoutGuide
