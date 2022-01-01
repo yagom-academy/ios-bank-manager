@@ -3,6 +3,7 @@ import UIKit
 class ViewController: UIViewController {
     let mainStackView: UIStackView = UIStackView()
     let buttonStackView: UIStackView = UIStackView()
+    let labelStackView: UIStackView = UIStackView()
     let addClientButton = UIButton()
     let initializationButton = UIButton()
     let timerLabel: TimerLabel = TimerLabel()
@@ -15,11 +16,14 @@ class ViewController: UIViewController {
         mainStackView.addArrangedSubview(buttonStackView)
         configureButtonStackView()
         configureButtons()
+        mainStackView.addArrangedSubview(timerLabel)
+        mainStackView.addArrangedSubview(labelStackView)
+        configureLabelStackView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainStackView.addArrangedSubview(timerLabel)
+        
     }
     
     private func configureMainStackView() {
@@ -52,5 +56,26 @@ class ViewController: UIViewController {
         initializationButton.setTitle("초기화", for: .normal)
         initializationButton.setTitleColor(.systemRed, for: .normal)
         initializationButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+    }
+    
+    private func configureLabelStackView() {
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.alignment = .leading
+        labelStackView.translatesAutoresizingMaskIntoConstraints = false
+        let watingLabel = UILabel()
+        watingLabel.text = "대기중"
+        watingLabel.font = .preferredFont(forTextStyle: .title1)
+        watingLabel.textColor = .white
+        watingLabel.backgroundColor = .systemGreen
+        watingLabel.textAlignment = .center
+        let workingLabel = UILabel()
+        workingLabel.text = "업무중"
+        workingLabel.font = .preferredFont(forTextStyle: .title1)
+        workingLabel.textColor = .white
+        workingLabel.backgroundColor = .systemIndigo
+        workingLabel.textAlignment = .center
+        labelStackView.addArrangedSubview(watingLabel)
+        labelStackView.addArrangedSubview(workingLabel)
     }
 }
