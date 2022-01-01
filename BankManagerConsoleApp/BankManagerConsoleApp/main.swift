@@ -31,6 +31,21 @@ fileprivate func getUserInput() throws -> MenuOption {
     return menuOption
 }
 
+fileprivate func generateClients() -> [Client] {
+    let clientNumber = Int.random(in: 10...30)
+    var clients: [Client] = []
+    
+    (1...clientNumber).forEach { number in
+        let orderTicket = Ticket(number: number)
+        let randomTaskIndex = Int.random(in: 0..<Task.allCases.count)
+        let randomTask = Task.allCases[randomTaskIndex]
+        let client = Client(orderTicket: orderTicket, task: randomTask)
+        clients.append(client)
+    }
+    
+    return clients
+}
+
 fileprivate func runProgram() {
     while true {
         do {
@@ -39,7 +54,8 @@ fileprivate func runProgram() {
             
             switch userInput {
             case .openBank:
-                bankManager.openBank()
+                let clients = generateClients()
+                bankManager.openBank(for: clients)
             case .exit:
                 return
             }
@@ -52,7 +68,7 @@ fileprivate func runProgram() {
     }
 }
 
-var bank = Bank(numberOfClerks: 1)
+let bank = Bank(numberOfClerksForLoans: 1, numberOfClerksForDeposits: 2)
 var bankManager = BankManager(bank: bank)
 
 runProgram()

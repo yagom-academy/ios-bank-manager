@@ -7,27 +7,32 @@
 
 import Foundation
 
-struct Bank {
+final class Bank {
     //MARK: - 저장 속성
-    private var clientQueue = WaitingQueue<Client>()
-    private var clerkQueue = WaitingQueue<BankClerk>()
+    private let loanClientQueue = WaitingQueue<Client>()
+    private let depositClientQueue = WaitingQueue<Client>()
+    private let numberOfClerksForLoans: Int
+    private let numberOfClerksForDeposits: Int
     
     //MARK: - 생성자
-    init(numberOfClerks: Int) {
-        (0..<numberOfClerks).forEach { _ in
-            let clerk = BankClerk(isAvailable: true)
-            clerkQueue.enqueue(clerk)
-        }
+    init(numberOfClerksForLoans: Int, numberOfClerksForDeposits: Int) {
+        self.numberOfClerksForLoans = numberOfClerksForLoans
+        self.numberOfClerksForDeposits = numberOfClerksForDeposits
     }
     
     // MARK: - Internal 메서드
-    mutating func receive(clients: [Client]) {
+    func receive(clients: [Client]) {
         clients.forEach { client in
-            clientQueue.enqueue(client)
+            switch client.task {
+            case .loan:
+                loanClientQueue.enqueue(client)
+            case .deposit:
+                depositClientQueue.enqueue(client)
+            }
         }
     }
     
-    mutating func executeBusiness() {
+    func executeBusiness() {
         let startTime = CFAbsoluteTimeGetCurrent()
         let totalClientCount = handleClients()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
@@ -36,17 +41,13 @@ struct Bank {
     }
     
     //MARK: - Private 메서드
-    private mutating func handleClients() -> Int {
-        var totalHandledClientCount: Int = 0
+    private func handleClients() -> Int {
+        let loanWindow = BankWindow(task: .loan, with: numberOfClerksForLoans)
+        let depositWindow = BankWindow(task: .deposit, with: numberOfClerksForDeposits)
         
-        while let client = clientQueue.dequeue(),
-              var clerk = clerkQueue.dequeue() {
-            if clerk.isAvailable {
-                clerk.work(for: client)
-                totalHandledClientCount += 1
-            }
-            clerkQueue.enqueue(clerk)
-        }
+        let loanClientCount = loanWindow.handle(clients: loanClientQueue)
+        let depositClientCount = depositWindow.handle(clients: depositClientQueue)
+        let totalHandledClientCount = loanClientCount + depositClientCount
         
         return totalHandledClientCount
     }
@@ -58,18 +59,46 @@ struct Bank {
 
 //MARK: - 중첩타입
 extension Bank {
-    private struct BankClerk {
-        var isAvailable = true
+    private final class BankWindow {
+        let task: Task
+        let numberOfClerks: Int
         
-        mutating func work(for client: Client) {
+        init(task: Task, with numberOfClerks: Int) {
+            self.task = task
+            self.numberOfClerks = numberOfClerks
+        }
+        
+        func handle(clients queue: WaitingQueue<Client>) -> Int {
+            var totalHandledClientCount = 0
+            let clientCountingSemaphore = DispatchSemaphore(value: 1)
+            let semaphore = DispatchSemaphore(value: numberOfClerks)
+            let group = DispatchGroup()
+            
+            DispatchQueue.global().async(group: group) {
+                while let client = queue.dequeue() {
+                    DispatchQueue.global().async(group: group) {
+                        semaphore.wait()
+                        self.work(for: client)
+                        semaphore.signal()
+
+                        clientCountingSemaphore.wait()
+                        totalHandledClientCount += 1
+                        clientCountingSemaphore.signal()
+                    }
+                }
+            }
+            group.wait()
+            
+            return totalHandledClientCount
+        }
+        
+        private func work(for client: Client) {
             let clientOrderNumber = client.orderTicket.number
             let duration = client.taskDuration
             
-            isAvailable = false
-            print("\(clientOrderNumber)번 고객 업무 시작")
+            print("\(clientOrderNumber)번 고객 \(task)업무 시작")
             Thread.sleep(forTimeInterval: duration)
-            print("\(clientOrderNumber)번 고객 업무 완료")
-            isAvailable = true
+            print("\(clientOrderNumber)번 고객 \(task)업무 완료")
         }
     }
 }

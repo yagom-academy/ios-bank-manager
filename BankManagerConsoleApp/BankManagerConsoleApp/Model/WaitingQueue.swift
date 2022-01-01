@@ -7,28 +7,28 @@
 
 import Foundation
 
-struct WaitingQueue<T> {
-    private var list = LinkedList<T>()
+final class WaitingQueue<Element> {
+    private let list = LinkedList<Element>()
     
     var isEmpty: Bool {
         return list.isEmpty
     }
     
-    mutating func enqueue(_ item: T) {
+    func enqueue(_ item: Element) {
         list.append(item)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> Element? {
         let firstItem = list.removeFirst()
         
         return firstItem
     }
     
-    mutating func clear() {
+    func clear() {
         list.removeAll()
     }
     
-    func peek() -> T? {
+    func peek() -> Element? {
         let peekedNode = list.firstNode
         
         return peekedNode?.data
