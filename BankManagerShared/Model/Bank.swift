@@ -6,6 +6,7 @@ class Bank {
     private var completedClientCount: Int = 0
     private let numberOfBankClerkForDeposit: Int
     private let numberOfBankClerkForLoan: Int
+    private var isOpen: Bool = false
     
     init(
         delegate: BankDelegate,
@@ -15,7 +16,6 @@ class Bank {
         self.delegate = delegate
         self.numberOfBankClerkForDeposit = numberOfBankClerkForDeposit
         self.numberOfBankClerkForLoan = numberOfBankClerkForLoan
-        self.receiveClient()
     }
     
     private func receiveClient() {
@@ -29,7 +29,20 @@ class Bank {
         }
     }
     
+    private func receiveClient(of number: Int) {
+        let numberOfClient = number
+        for number in 1...numberOfClient {
+            guard let bankTask = BankTask.allCases.randomElement() else {
+                return
+            }
+            let client = Client(waitingNumber: number, bankTask: bankTask)
+            clientQueue.enqueue(client)
+        }
+    }
+    
     func open() {
+        isOpen = true
+        self.receiveClient()
         let workHours = measureTime() {
             self.allocateClientToBankClerk(
                 inChargeOfDeposits: numberOfBankClerkForDeposit,
@@ -37,6 +50,14 @@ class Bank {
             )
         }
         delegate?.closeBusiness(by: completedClientCount, workHours: workHours)
+        isOpen = false
+    }
+    
+    func openForUI() {
+        receiveClient(of: 10)
+        if isOpen == false {
+            allocateClientToBankClerk(inChargeOfDeposits: 2, inChargeOfLoans: 1)
+        }
     }
     
     private func measureTime(task: () -> Void) -> String {
