@@ -4,6 +4,9 @@ class ViewController: UIViewController {
     let mainStackView: UIStackView = UIStackView()
     let buttonStackView: UIStackView = UIStackView()
     let labelStackView: UIStackView = UIStackView()
+    let scrollStackView: UIStackView = UIStackView()
+    let leftScrollView: UIScrollView = UIScrollView()
+    let rightScrollView: UIScrollView = UIScrollView()
     let addClientButton = UIButton()
     let initializationButton = UIButton()
     let timerLabel: TimerLabel = TimerLabel()
@@ -19,6 +22,8 @@ class ViewController: UIViewController {
         mainStackView.addArrangedSubview(timerLabel)
         mainStackView.addArrangedSubview(labelStackView)
         configureLabelStackView()
+        configureScrollStackView()
+        mainStackView.addArrangedSubview(scrollStackView)
     }
 
     override func viewDidLoad() {
@@ -28,7 +33,7 @@ class ViewController: UIViewController {
     
     private func configureMainStackView() {
         mainStackView.axis = .vertical
-        mainStackView.distribution = .fillEqually
+        mainStackView.distribution = .fill
         mainStackView.alignment = .fill
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = view.safeAreaLayoutGuide
@@ -77,5 +82,14 @@ class ViewController: UIViewController {
         workingLabel.textAlignment = .center
         labelStackView.addArrangedSubview(watingLabel)
         labelStackView.addArrangedSubview(workingLabel)
+    }
+    
+    private func configureScrollStackView() {
+        scrollStackView.axis = .horizontal
+        scrollStackView.distribution = .fillEqually
+        scrollStackView.alignment = .fill
+        scrollStackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollStackView.addArrangedSubview(leftScrollView)
+        scrollStackView.addArrangedSubview(rightScrollView)
     }
 }
