@@ -55,8 +55,13 @@ class Bank {
     
     func openForUI() {
         receiveClient(of: 10)
-        if isOpen == false {
-            allocateClientToBankClerk(inChargeOfDeposits: 2, inChargeOfLoans: 1)
+        DispatchQueue.global().async {
+            if self.isOpen == false {
+                self.isOpen = true
+                self.allocateClientToBankClerk(inChargeOfDeposits: 2, inChargeOfLoans: 1)
+                self.delegate?.closeBusiness(by: self.completedClientCount, workHours: "1")
+                self.isOpen = false
+            }
         }
     }
     

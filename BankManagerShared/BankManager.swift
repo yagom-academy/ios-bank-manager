@@ -9,6 +9,7 @@ struct BankManager {
             numberOfBankClerkForDeposit: 1,
             numberOfBankClerkForLoan: 2
         )
+        print(Unmanaged.passUnretained(self.bank!).toOpaque())
     }
     
     static func openBank() {

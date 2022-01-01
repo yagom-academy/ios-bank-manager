@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        BankManager.createBank(delegate: self)
     }
     
     private func configureMainStackView() {
@@ -64,9 +64,16 @@ class ViewController: UIViewController {
         addClientButton.setTitle("고객 10명 추가", for: .normal)
         addClientButton.setTitleColor(.systemBlue, for: .normal)
         addClientButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        addClientButton.addTarget(self, action: #selector(openBusiness), for: .touchUpInside)
         initializationButton.setTitle("초기화", for: .normal)
         initializationButton.setTitleColor(.systemRed, for: .normal)
         initializationButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+    }
+    
+    @objc func openBusiness() {
+        
+        BankManager.openBankForUI()
+        timerLabel.startTimer()
     }
     
     private func configureLabelStackView() {
@@ -133,5 +140,27 @@ class ViewController: UIViewController {
                 equalTo: rightScrollView.contentLayoutGuide.rightAnchor),
             workingStackView.widthAnchor.constraint(equalTo: rightScrollView.widthAnchor)
         ])
+    }
+    
+    private func setClientLabelToWatingStackView(client: Client) {
+        let clientLabel = ClientInformationLabel(watingNumber: client.waitingNumber, bankTask: client.bankTask)
+        self.waitingStackView.addArrangedSubview(clientLabel)
+    }
+}
+
+extension ViewController: BankDelegate {
+    func closeBusiness(by completedClientCount: Int, workHours: String) {
+        DispatchQueue.main.async {
+            self.timerLabel.stop()
+        }
+    }
+    
+    func startWork(for client: Client) {
+        DispatchQueue.main.async {
+            self.setClientLabelToWatingStackView(client: client)
+        }
+    }
+    
+    func finishWork(for client: Client) {
     }
 }
