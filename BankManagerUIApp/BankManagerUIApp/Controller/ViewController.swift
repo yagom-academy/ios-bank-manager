@@ -7,6 +7,8 @@ class ViewController: UIViewController {
     let scrollStackView: UIStackView = UIStackView()
     let leftScrollView: UIScrollView = UIScrollView()
     let rightScrollView: UIScrollView = UIScrollView()
+    let waitingStackView: UIStackView = UIStackView()
+    let workingStackView: UIStackView = UIStackView()
     let addClientButton = UIButton()
     let initializationButton = UIButton()
     let timerLabel: TimerLabel = TimerLabel()
@@ -24,6 +26,10 @@ class ViewController: UIViewController {
         configureLabelStackView()
         configureScrollStackView()
         mainStackView.addArrangedSubview(scrollStackView)
+        leftScrollView.addSubview(waitingStackView)
+        rightScrollView.addSubview(workingStackView)
+        configureWatingStackView()
+        configureWorkingStackView()
     }
 
     override func viewDidLoad() {
@@ -91,5 +97,41 @@ class ViewController: UIViewController {
         scrollStackView.translatesAutoresizingMaskIntoConstraints = false
         scrollStackView.addArrangedSubview(leftScrollView)
         scrollStackView.addArrangedSubview(rightScrollView)
+    }
+    
+    private func configureWatingStackView() {
+        waitingStackView.axis = .vertical
+        waitingStackView.distribution = .fill
+        waitingStackView.alignment = .fill
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            waitingStackView.topAnchor.constraint(
+                equalTo: leftScrollView.contentLayoutGuide.topAnchor),
+            waitingStackView.bottomAnchor.constraint(
+                equalTo: leftScrollView.contentLayoutGuide.bottomAnchor),
+            waitingStackView.leftAnchor.constraint(
+                equalTo: leftScrollView.contentLayoutGuide.leftAnchor),
+            waitingStackView.rightAnchor.constraint(
+                equalTo: leftScrollView.contentLayoutGuide.rightAnchor),
+            waitingStackView.widthAnchor.constraint(equalTo: leftScrollView.widthAnchor)
+        ])
+    }
+    
+    private func configureWorkingStackView() {
+        workingStackView.axis = .vertical
+        workingStackView.distribution = .fill
+        workingStackView.alignment = .fill
+        workingStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            workingStackView.topAnchor.constraint(
+                equalTo: rightScrollView.contentLayoutGuide.topAnchor),
+            workingStackView.bottomAnchor.constraint(
+                equalTo: rightScrollView.contentLayoutGuide.bottomAnchor),
+            workingStackView.leftAnchor.constraint(
+                equalTo: rightScrollView.contentLayoutGuide.leftAnchor),
+            workingStackView.rightAnchor.constraint(
+                equalTo: rightScrollView.contentLayoutGuide.rightAnchor),
+            workingStackView.widthAnchor.constraint(equalTo: rightScrollView.widthAnchor)
+        ])
     }
 }
