@@ -7,12 +7,15 @@
 
 import Foundation
 
-
-
 class Bank {
     private let customerQueue: Queue<Customer> = Queue<Customer>()
     private var bankClerk: BankClerk
     private let randomCount = Int.random(in: 10...30)
+    
+    private let bankGroup = DispatchGroup()
+    private let semaphore = DispatchSemaphore(value: 2)
+    private let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
+    private let loanQueue = DispatchQueue(label: "loan")
 
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
@@ -40,28 +43,22 @@ class Bank {
     func open(timer: BankTimer) {
         timer.start()
 
-        let group = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: 2)
-        let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
-        let loanQueue = DispatchQueue(label: "loan")
-        let bankGroup = DispatchGroup()
-
         while let customer = customerQueue.dequeue() {
             switch customer.task {
             case .deposit:
-                depositQueue.async(group: group) {
-                    semaphore.wait()
+                depositQueue.async(group: bankGroup) {
+                    self.semaphore.wait()
                     self.bankClerk.work(with: customer)
-                    semaphore.signal()
+                    self.semaphore.signal()
                 }
             case .loan:
-                loanQueue.async(group: group) {
+                loanQueue.async(group: bankGroup) {
                     self.bankClerk.work(with: customer)
                 }
             }
         }
         
-        group.notify(queue: DispatchQueue.main) {
+        bankGroup.notify(queue: DispatchQueue.main) {
             timer.stop()
         }
     }
