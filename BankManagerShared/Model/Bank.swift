@@ -7,6 +7,7 @@ class Bank {
     private let numberOfBankClerkForDeposit: Int
     private let numberOfBankClerkForLoan: Int
     private var isOpen: Bool = false
+    private var totalNumberOfClient: Int = 0
     
     init(
         delegate: BankDelegate,
@@ -30,15 +31,15 @@ class Bank {
     }
     
     private func receiveClient(of number: Int) {
-        let numberOfClient = number
-        for number in 1...numberOfClient {
+        for number in 1...number {
             guard let bankTask = BankTask.allCases.randomElement() else {
                 return
             }
-            let client = Client(waitingNumber: number, bankTask: bankTask)
+            let client = Client(waitingNumber: number + totalNumberOfClient, bankTask: bankTask)
             clientQueue.enqueue(client)
             self.delegate?.lineUp(client: client)
         }
+        totalNumberOfClient += number
     }
     
     func open() {
