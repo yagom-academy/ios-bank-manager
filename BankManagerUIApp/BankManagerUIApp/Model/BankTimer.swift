@@ -10,7 +10,7 @@ import Foundation
 class BankTimer {
     private var timer: Timer?
     private var elapsedMilisec: Int = .zero
-    var bank: Bank?
+    weak var bank: Bank?
     
     func activate() {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerShouldUpdate), userInfo: nil, repeats: true)
