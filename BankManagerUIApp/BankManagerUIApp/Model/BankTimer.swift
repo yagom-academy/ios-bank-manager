@@ -14,6 +14,7 @@ class BankTimer {
     
     func activate() {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerShouldUpdate), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer ?? Timer(), forMode: .common)
     }
     
     func pause() {
