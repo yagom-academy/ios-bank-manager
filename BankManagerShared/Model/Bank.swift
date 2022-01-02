@@ -8,6 +8,8 @@ class Bank {
     private let numberOfBankClerkForLoan: Int
     private var isOpen: Bool = false
     private var totalNumberOfClient: Int = 0
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
     
     init(
         delegate: BankDelegate,
@@ -58,11 +60,9 @@ class Bank {
     func openForUI() {
         receiveClient(of: 10)
         DispatchQueue.global().async {
-            if self.isOpen == false {
-                self.isOpen = true
                 self.allocateClientToBankClerk(inChargeOfDeposits: 2, inChargeOfLoans: 1)
+            if self.totalNumberOfClient == self.completedClientCount {
                 self.delegate?.closeBusiness(by: self.completedClientCount, workHours: "1")
-                self.isOpen = false
             }
         }
     }
@@ -76,23 +76,21 @@ class Bank {
         }
         return duration
     }
-    
+
     private func allocateClientToBankClerk(inChargeOfDeposits: Int, inChargeOfLoans: Int) {
-        let depositSemaphore = DispatchSemaphore(value: inChargeOfDeposits)
-        let loanSemaphore = DispatchSemaphore(value: inChargeOfLoans)
         let group = DispatchGroup()
         
         while let client = self.clientQueue.dequeue() {
             DispatchQueue.global().async(group: group) {
                 switch client.bankTask {
                 case .deposit:
-                    depositSemaphore.wait()
+                    self.depositSemaphore.wait()
                     self.makeBankClerkWork(for: client)
-                    depositSemaphore.signal()
+                    self.depositSemaphore.signal()
                 case .loan:
-                    loanSemaphore.wait()
+                    self.loanSemaphore.wait()
                     self.makeBankClerkWork(for: client)
-                    loanSemaphore.signal()
+                    self.loanSemaphore.signal()
                 }
             }
         }

@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         configureButtonStackView()
         configureButtons()
         mainStackView.addArrangedSubview(timerLabel)
+        configureTimerLabel()
         mainStackView.addArrangedSubview(labelStackView)
         configureLabelStackView()
         configureScrollStackView()
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
         mainStackView.axis = .vertical
         mainStackView.distribution = .fill
         mainStackView.alignment = .fill
+        mainStackView.spacing = 10
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -70,10 +72,23 @@ class ViewController: UIViewController {
         initializationButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
     }
     
+    private func configureTimerLabel() {
+        timerLabel.leftAnchor.constraint(
+            equalTo: mainStackView.leftAnchor,
+            constant: 110).isActive = true
+    }
+    
     @objc func openBusiness() {
-        
         BankManager.openBankForUI()
-        timerLabel.startTimer()
+        guard let timer = timerLabel.timer else {
+            timerLabel.startTimer()
+            return
+        }
+        if timer.isValid {
+            return
+        } else {
+            timerLabel.startTimer()
+        }
     }
     
     private func configureLabelStackView() {

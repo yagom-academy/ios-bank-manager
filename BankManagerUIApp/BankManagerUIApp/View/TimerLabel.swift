@@ -7,8 +7,8 @@ class TimerLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        text = "00:00:000"
-        self.textAlignment = .center
+        text = "업무시간 - 00:00:000"
+        self.font = .preferredFont(forTextStyle: .title3)
     }
 
     required init?(coder: NSCoder) {
@@ -29,7 +29,7 @@ class TimerLabel: UILabel {
         let minute = Int(count / 60)
         let second = Int(count) % 60
         let milliSecond = Int((count - floor(count)) * 1000)
-        return String(format: "%02d", minute) + ":" + String(format: "%02d", second) + ":" + String(format: "%03d", milliSecond)
+        return "업무시간 - " + String(format: "%02d", minute) + ":" + String(format: "%02d", second) + ":" + String(format: "%03d", milliSecond)
     }
     
     func stop() {
