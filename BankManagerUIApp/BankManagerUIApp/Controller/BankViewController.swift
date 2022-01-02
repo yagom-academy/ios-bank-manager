@@ -10,6 +10,7 @@ class BankViewController: UIViewController {
     private let baseVerticalStackView = UIStackView()
     private let buttonsStackView = UIStackView()
     private let timerStackView = UIStackView()
+    private var timerRightLabel = UILabel()
     private let bankStatusStackView = UIStackView()
     private let scrollsStackView = UIStackView()
     private let waitingScrollView = UIScrollView()
@@ -84,7 +85,7 @@ extension BankViewController {
         timerStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let timerLeftLabel = BankUIComponent.makeLabel(text: "업무 시간 -", textStyle: .title2)
-        let timerRightLabel = BankUIComponent.makeLabel(text: "00:00:000", textStyle: .title2)
+        timerRightLabel = BankUIComponent.makeLabel(text: "00:00:000", textStyle: .title2)
         timerLeftLabel.textAlignment = .right
         timerRightLabel.textAlignment = .left
         timerStackView.addArrangedSubview(timerLeftLabel)
@@ -184,5 +185,9 @@ extension BankViewController: BankStateDisplayer {
         let loanClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.loan.rawValue)", textStyle: .title3, textColor: .systemPurple)
         loanClientLabel.tag = number
         waitingStackView.addArrangedSubview(loanClientLabel)
+    }
+    
+    func bank(didUpdateTimer time: String) {
+        timerRightLabel.text = time
     }
 }

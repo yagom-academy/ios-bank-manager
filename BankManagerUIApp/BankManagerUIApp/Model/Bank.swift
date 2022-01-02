@@ -15,12 +15,23 @@ class Bank {
     private var depositQueue = Queue<Client>()
     private var loanQueue = Queue<Client>()
     private var bankers: [DispatchQueue]?
+    private var timer = BankTimer()
+    private var currentTotalClients: Int = .zero {
+        didSet {
+            if oldValue == .zero && currentTotalClients != .zero {
+                timer.activate()
+            } else if oldValue != .zero && currentTotalClients == .zero {
+                timer.pause()
+            }
+        }
+    }
     weak var delegate: BankStateDisplayer?
     
     init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
         self.numberOfDepositBankers = numberOfDepositBankers
         self.numberOfLoanBankers = numberOfLoanBankers
         self.bankers = configureBankers()
+        self.timer.bank = self
     }
     
     private func configureBankers() -> [DispatchQueue] {
@@ -40,10 +51,10 @@ class Bank {
             loanQueue.enqueue(client)
             delegate?.bank(didReceiveLoanClientOf: client.waitingNumber)
         }
+        currentTotalClients += 1
     }
     
     func start() {
-        let startTime = CFAbsoluteTimeGetCurrent()
         for number in 1...numberOfDepositBankers {
             serviceForClients(queue: depositQueue, bankerNumber: number)
         }
@@ -66,5 +77,6 @@ class Bank {
         delegate?.bank(willBeginServiceFor: client.waitingNumber, task: client.task.rawValue)
         client.task.work()
         delegate?.bank(didEndServiceFor: client.waitingNumber, task: client.task.rawValue)
+        currentTotalClients -= 1
     }
 }
