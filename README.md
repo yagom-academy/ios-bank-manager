@@ -324,9 +324,8 @@ mutating func clear() {
 
 - 모두 구조체 타입으로 만들어서 진행하다가 startBankTask 메서드에서 `Escaping closure captures mutating 'self' parameter` 에러가 발생했습니다.
     
-    > If `self` is an instance of a structure or an enumeration, you can always refer to `self` implicitly. However, an escaping closure can’t capture a mutable reference to `self` when `self` is an instance of a structure or an enumeration. Structures and enumerations don’t allow shared mutability, as discussed in [Structures and Enumerations Are Value Types](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html#ID88).
-
-    > (출처: [https://docs.swift.org/swift-book/LanguageGuide/Closures.html](https://docs.swift.org/swift-book/LanguageGuide/Closures.html))
+    > If `self` is an instance of a structure or an enumeration, you can always refer to `self` implicitly. However, an escaping closure can’t capture a mutable reference to `self` when `self` is an instance of a structure or an enumeration. Structures and enumerations don’t allow shared mutability, as discussed in [Structures and Enumerations Are Value Types](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html#ID88). <br> (출처: [https://docs.swift.org/swift-book/LanguageGuide/Closures.html](https://docs.swift.org/swift-book/LanguageGuide/Closures.html))
+    > 
     
 - 에러를 해결하던 중 값 타입의 struct로는 진행할 수 없다는 것을 배우게 되어 `BankManager` 를 클래스로 바꾸어주었습니다.
 
