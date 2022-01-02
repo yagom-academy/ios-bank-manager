@@ -36,20 +36,22 @@ struct ConsoleApp {
     
     private func openBank() {
         let customerQueue = lineUpCustomers()
-        let bankManager = BankManager()
-        let bankers = [GeneralBanker()]
-        
-        var bank = Bank(bankers: bankers, customerQueue: customerQueue, bankManager: bankManager)
+        let timeManager = TimeManager()
+        var bank = Bank(depositBankerCount: 2,
+                        loanBankerCount: 1,
+                        customerQueue: customerQueue,
+                        timeManager: timeManager)
         bank.operate()
     }
     
-    func lineUpCustomers() -> Queue<Customer> {
+    private func lineUpCustomers() -> Queue<Customer> {
         let range = 10...30
         let customerCount = Int.random(in: range)
         let customerQueue: Queue<Customer> = Queue<Customer>()
         
         (0..<customerCount).forEach {
-            let customer = Customer(customerNumber: $0 + 1)
+            let randomTask = TaskType.randomElement()
+            let customer = Customer(indexNumber: $0, taskType: randomTask)
             customerQueue.enqueue(customer)
         }
         return customerQueue
