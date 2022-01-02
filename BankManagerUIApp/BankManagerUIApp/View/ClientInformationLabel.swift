@@ -2,14 +2,13 @@ import UIKit
 
 class ClientInformationLabel: UILabel {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+    let waitingNumber: Int
     
-    init(watingNumber: Int, bankTask: BankTask) {
+    init(waitingNumber: Int, bankTask: BankTask) {
+        self.waitingNumber = waitingNumber
         super.init(frame: CGRect.zero)
         self.textAlignment = .center
-        self.text = "\(watingNumber) - \(bankTask)"
+        self.text = "\(waitingNumber) - \(bankTask)"
         switch bankTask {
         case .deposit:
             self.textColor = .black
@@ -19,6 +18,6 @@ class ClientInformationLabel: UILabel {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError()
     }
 }

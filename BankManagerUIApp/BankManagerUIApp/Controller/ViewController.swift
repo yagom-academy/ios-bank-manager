@@ -145,14 +145,24 @@ class ViewController: UIViewController {
     }
     
     private func setClientLabelToWatingStackView(client: Client) {
-        let clientLabel = ClientInformationLabel(watingNumber: client.waitingNumber, bankTask: client.bankTask)
+        let clientLabel = ClientInformationLabel(waitingNumber: client.waitingNumber, bankTask: client.bankTask)
         self.workingStackView.addArrangedSubview(clientLabel)
+    }
+    
+    private func removeClientLabel(from stackView: UIStackView, client: Client) {
+        let watingNumber = client.waitingNumber
+        stackView.arrangedSubviews.forEach {
+            let clientLabel = $0 as? ClientInformationLabel
+            if clientLabel?.waitingNumber == watingNumber {
+                clientLabel?.removeFromSuperview()
+            }
+        }
     }
 }
 
 extension ViewController: BankDelegate {
     func lineUp(client: Client) {
-        let clientInformtionLabel = ClientInformationLabel(watingNumber: client.waitingNumber, bankTask: client.bankTask)
+        let clientInformtionLabel = ClientInformationLabel(waitingNumber: client.waitingNumber, bankTask: client.bankTask)
         waitingStackView.addArrangedSubview(clientInformtionLabel)
     }
     
@@ -164,10 +174,14 @@ extension ViewController: BankDelegate {
     
     func startWork(for client: Client) {
         DispatchQueue.main.async {
+            self.removeClientLabel(from: self.waitingStackView, client: client)
             self.setClientLabelToWatingStackView(client: client)
         }
     }
     
     func finishWork(for client: Client) {
+        DispatchQueue.main.async {
+            self.removeClientLabel(from: self.workingStackView, client: client)
+        }
     }
 }
