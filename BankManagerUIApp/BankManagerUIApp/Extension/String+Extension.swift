@@ -9,4 +9,5 @@ import Foundation
 
 extension String {
     static let empty = ""
+    static let defaultTime = "00:00:000"
 }

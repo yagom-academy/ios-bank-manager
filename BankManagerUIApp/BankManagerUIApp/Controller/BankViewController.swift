@@ -17,7 +17,7 @@ class BankViewController: UIViewController {
     private let workingScrollView = UIScrollView()
     private let waitingStackView = UIStackView()
     private let workingStackView = UIStackView()
-    private let bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
+    private var bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
     private var totalClient: Int = .zero
     
     override func viewDidLoad() {
@@ -26,12 +26,29 @@ class BankViewController: UIViewController {
         configureBankView()
     }
     
-    @objc func addClientButtonDidTap() {
+    @objc
+    func addClientButtonDidTap() {
         (1...10).forEach { number in
             bank.lineUp(Client(waitingNumber: totalClient + number, task: Task.random))
         }
         totalClient += 10
         bank.start()
+    }
+    
+    @objc
+    func resetButtonDidTap() {
+        bank.reset()
+        bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
+        timerRightLabel.text = String.defaultTime
+        totalClient = .zero
+        bank.delegate = self
+        
+        waitingStackView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
+        workingStackView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
     }
 }
 
@@ -73,6 +90,7 @@ extension BankViewController {
         
         let resetButton = BankUIComponent.makeButton(text: "초기화",
                                                      textColor: .systemRed)
+        resetButton.addTarget(self, action: #selector(resetButtonDidTap), for: .touchUpInside)
         buttonsStackView.addArrangedSubview(addClientsButton)
         buttonsStackView.addArrangedSubview(resetButton)
         baseVerticalStackView.addArrangedSubview(buttonsStackView)
@@ -85,7 +103,7 @@ extension BankViewController {
         timerStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let timerLeftLabel = BankUIComponent.makeLabel(text: "업무 시간 -", textStyle: .title2)
-        timerRightLabel = BankUIComponent.makeLabel(text: "00:00:000", textStyle: .title2)
+        timerRightLabel = BankUIComponent.makeLabel(text: String.defaultTime, textStyle: .title2)
         timerLeftLabel.textAlignment = .right
         timerRightLabel.textAlignment = .left
         timerStackView.addArrangedSubview(timerLeftLabel)

@@ -12,17 +12,14 @@ class BankTimer {
     private var elapsedMilisec: Int = .zero
     var bank: Bank?
     
-    // 타이머 시작 & 재시작
     func activate() {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerShouldUpdate), userInfo: nil, repeats: true)
     }
     
-    // 타이머 일시정지
     func pause() {
         timer?.invalidate()
     }
     
-    // 타이머 초기화
     func reset() {
         timer?.invalidate()
         timer = nil

@@ -79,4 +79,9 @@ class Bank {
         delegate?.bank(didEndServiceFor: client.waitingNumber, task: client.task.rawValue)
         currentTotalClients -= 1
     }
+    
+    func reset() {
+        timer.reset()
+        delegate = nil
+    }
 }
