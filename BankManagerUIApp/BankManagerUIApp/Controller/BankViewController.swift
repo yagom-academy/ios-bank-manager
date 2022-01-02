@@ -10,6 +10,16 @@ protocol TimerDelegate: AnyObject {
     func setupTimeLabel(second: Int, milisecond: Int, nanoSecond: Int)
 }
 
+private enum CustomTitle {
+    static let addTenCustomer = "고객 10명 추가"
+    static let reset = "초기화"
+    static let timerDefaultText = "업무시간 - 00:00:000"
+}
+
+private enum CustomNumber {
+    static let numberOfCustomers = 10
+}
+
 class ViewController: UIViewController {
     private let bankStackView = CustomStackView(axis: .vertical, spacing: 10, distribution: .fill, alignment: .fill)
     private let waitingCustomerStackView = CustomStackView(axis: .vertical, spacing: 5, distribution: .equalSpacing, alignment: .center)
@@ -27,7 +37,7 @@ class ViewController: UIViewController {
         bank?.open(timer: bankTimer)
     }
     
-    func setupUI() {
+    private func setupUI() {
         setupBankStackView()
         setupButtons()
         setupProcessingTimeLabel()
@@ -35,7 +45,7 @@ class ViewController: UIViewController {
         setupInitialCustomers()
     }
     
-    func setupBankStackView() {
+    private func setupBankStackView() {
         self.view.addSubview(bankStackView)
         bankStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -47,10 +57,10 @@ class ViewController: UIViewController {
         ])
     }
     
-    func setupButtons() {
+    private func setupButtons() {
         let buttonStackView = CustomStackView(axis: .horizontal, spacing: .zero, distribution: .fillEqually, alignment: .center)
-        let addCustomerButton = CustomButton(title: "고객 10명 추가", textColor: .blue)
-        let resetButton = CustomButton(title: "초기화", textColor: .red)
+        let addCustomerButton = CustomButton(title: CustomTitle.addTenCustomer, textColor: .blue)
+        let resetButton = CustomButton(title: CustomTitle.reset, textColor: .red)
         
         addCustomerButton.addTarget(self, action: #selector(setupTenCustomerQueue), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(reset), for: .touchUpInside)
@@ -63,7 +73,7 @@ class ViewController: UIViewController {
     }
     
     @objc func setupTenCustomerQueue() {
-        let amount = 10
+        let amount = CustomNumber.numberOfCustomers
         bank?.setupCustomerQueue(with: amount)
         
         guard let customers = bank?.returnAllCustomers() else {
@@ -89,13 +99,13 @@ class ViewController: UIViewController {
         bankTimer.reset()
     }
     
-    func setupProcessingTimeLabel() {
-        processingTimeLabel.text = "업무시간 - 00:00:000"
+    private func setupProcessingTimeLabel() {
+        processingTimeLabel.text = CustomTitle.timerDefaultText
         processingTimeLabel.textAlignment = .center
         bankStackView.addArrangedSubview(processingTimeLabel)
     }
     
-    func setupInitialCustomers() {
+    private func setupInitialCustomers() {
         guard let customers = bank?.returnAllCustomers() else {
             return
         }
@@ -106,12 +116,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func setupCustomerView() {
+    private func setupCustomerView() {
         let waitingAndProcessingStackView = CustomStackView(axis: .horizontal, spacing: 0, distribution: .fillEqually, alignment: .fill)
         [waitingCustomerStackView, processingCustomerStackView].forEach { stackView in
             let customerStackView = CustomStackView(axis: .vertical, spacing: 10, distribution: .equalSpacing, alignment: .fill)
             
-            let waitingLabel = stackView == waitingCustomerStackView ? StateLabel(text: "대기중") : StateLabel(text: "업무중")
+            let waitingLabel = stackView == waitingCustomerStackView ? StateLabel(state: .waiting) : StateLabel(state: .processing)
             
             let waitingCustomerScrollView = UIScrollView()
             let waitingCustomerContentView = UIView()
@@ -152,7 +162,7 @@ class ViewController: UIViewController {
     }
     
     @discardableResult
-    func removeCustomerFromStackView(from stackView: UIStackView, customer: Customer) -> CustomerLabel? {
+    private func removeCustomerFromStackView(from stackView: UIStackView, customer: Customer) -> CustomerLabel? {
         var targetCustomLabel: CustomerLabel?
         
         for label in stackView.arrangedSubviews {
