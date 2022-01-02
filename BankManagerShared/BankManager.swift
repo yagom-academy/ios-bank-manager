@@ -18,4 +18,8 @@ struct BankManager {
     static func openBankForUI() {
         bank?.openForUI()
     }
+    
+    static func resetBankForUI() {
+        bank?.reset()
+    }
 }

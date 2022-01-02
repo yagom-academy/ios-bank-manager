@@ -38,7 +38,7 @@ class TimerLabel: UILabel {
     
     func reset() {
         stop()
-        text = "00:00:000"
+        text = "업무시간 - 00:00:000"
         count = 0
     }
 

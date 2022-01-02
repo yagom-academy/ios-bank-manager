@@ -70,6 +70,7 @@ class ViewController: UIViewController {
         initializationButton.setTitle("초기화", for: .normal)
         initializationButton.setTitleColor(.systemRed, for: .normal)
         initializationButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        initializationButton.addTarget(self, action: #selector(initializeBusiness), for: .touchUpInside)
     }
     
     private func configureTimerLabel() {
@@ -89,6 +90,11 @@ class ViewController: UIViewController {
         } else {
             timerLabel.startTimer()
         }
+    }
+    
+    @objc func initializeBusiness() {
+        BankManager.resetBankForUI()
+        timerLabel.reset()
     }
     
     private func configureLabelStackView() {
@@ -197,6 +203,15 @@ extension ViewController: BankDelegate {
     func finishWork(for client: Client) {
         DispatchQueue.main.async {
             self.removeClientLabel(from: self.workingStackView, client: client)
+        }
+    }
+    
+    func reset() {
+        waitingStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        workingStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
         }
     }
 }
