@@ -110,10 +110,11 @@ class ViewController: UIViewController {
         waitingStackView.axis = .vertical
         waitingStackView.distribution = .fill
         waitingStackView.alignment = .fill
+        waitingStackView.spacing = 5
         waitingStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             waitingStackView.topAnchor.constraint(
-                equalTo: leftScrollView.contentLayoutGuide.topAnchor),
+                equalTo: leftScrollView.contentLayoutGuide.topAnchor, constant: 5),
             waitingStackView.bottomAnchor.constraint(
                 equalTo: leftScrollView.contentLayoutGuide.bottomAnchor),
             waitingStackView.leftAnchor.constraint(
@@ -128,10 +129,11 @@ class ViewController: UIViewController {
         workingStackView.axis = .vertical
         workingStackView.distribution = .fill
         workingStackView.alignment = .fill
+        workingStackView.spacing = 5
         workingStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             workingStackView.topAnchor.constraint(
-                equalTo: rightScrollView.contentLayoutGuide.topAnchor),
+                equalTo: rightScrollView.contentLayoutGuide.topAnchor, constant: 5),
             workingStackView.bottomAnchor.constraint(
                 equalTo: rightScrollView.contentLayoutGuide.bottomAnchor),
             workingStackView.leftAnchor.constraint(
@@ -144,11 +146,16 @@ class ViewController: UIViewController {
     
     private func setClientLabelToWatingStackView(client: Client) {
         let clientLabel = ClientInformationLabel(watingNumber: client.waitingNumber, bankTask: client.bankTask)
-        self.waitingStackView.addArrangedSubview(clientLabel)
+        self.workingStackView.addArrangedSubview(clientLabel)
     }
 }
 
 extension ViewController: BankDelegate {
+    func lineUp(client: Client) {
+        let clientInformtionLabel = ClientInformationLabel(watingNumber: client.waitingNumber, bankTask: client.bankTask)
+        waitingStackView.addArrangedSubview(clientInformtionLabel)
+    }
+    
     func closeBusiness(by completedClientCount: Int, workHours: String) {
         DispatchQueue.main.async {
             self.timerLabel.stop()

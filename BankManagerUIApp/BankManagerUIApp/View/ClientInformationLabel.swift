@@ -8,6 +8,7 @@ class ClientInformationLabel: UILabel {
     
     init(watingNumber: Int, bankTask: BankTask) {
         super.init(frame: CGRect.zero)
+        self.textAlignment = .center
         self.text = "\(watingNumber) - \(bankTask)"
         switch bankTask {
         case .deposit:

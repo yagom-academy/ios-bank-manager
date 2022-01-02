@@ -37,6 +37,7 @@ class Bank {
             }
             let client = Client(waitingNumber: number, bankTask: bankTask)
             clientQueue.enqueue(client)
+            self.delegate?.lineUp(client: client)
         }
     }
     
