@@ -79,11 +79,16 @@ extension BankViewController {
     
     private func configureTimerStackView() {
         timerStackView.axis = .horizontal
+        timerStackView.distribution = .fillEqually
+        timerStackView.spacing = 5
         timerStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let timerLabel = BankUIComponent.makeLabel(text: "업무 시간 - 00:00:000",
-                                                   textStyle: .title2)
-        timerStackView.addArrangedSubview(timerLabel)
+        let timerLeftLabel = BankUIComponent.makeLabel(text: "업무 시간 -", textStyle: .title2)
+        let timerRightLabel = BankUIComponent.makeLabel(text: "00:00:000", textStyle: .title2)
+        timerLeftLabel.textAlignment = .right
+        timerRightLabel.textAlignment = .left
+        timerStackView.addArrangedSubview(timerLeftLabel)
+        timerStackView.addArrangedSubview(timerRightLabel)
         baseVerticalStackView.addArrangedSubview(timerStackView)
     }
     
