@@ -18,6 +18,7 @@ class TimerLabel: UILabel {
 
     func startTimer() {
         self.timer = .scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        RunLoop.main.add(self.timer, forMode: .tracking)
     }
 
     @objc func updateTime() {
