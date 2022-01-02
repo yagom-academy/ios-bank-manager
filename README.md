@@ -195,7 +195,51 @@ group.wait()
 ```
 위와 같은 구현을 통해 기존 방법에서 겪었던 문제는 해결이 되는데, BankClerk타입을 살리면서 위와 같은 구현을 유지하는 방법을 찾는데 실패했습니다. 
 
+# STEP4
 
+## 구현
+**Console App과 UIApp의 open해주는 메서드를 각각 만들어주었습니다.**
+- 기존 `open()`메서드의 구현내용은 UI에서 필요없는 로직이라 `openForUI()`를 만들어 ViewController의 버튼 selecotr메서드와 연결시켜주었습니다.
+- 고객을 추가하는 로직 또한 각 앱이 달라 `receiveClient()` 와 `receiveClient(of number: Int)`를 각각 구현해주었습니다.
+<br>
 
+## 고민한 점
+**1. `global().async`의 실행 블록내 에서 `global().async`를 할 때 client 순서대로 실행되는 이유**
+```swift=
+func openForUI() {
+        receiveClient(of: 10)
+        DispatchQueue.global().async {
+                self.allocateClientToBankClerk(inChargeOfDeposits: 2, inChargeOfLoans: 1)
+            if self.totalNumberOfClient == self.completedClientCount {
+                self.delegate?.closeBusiness(by: self.completedClientCount, workHours: "1")
+            }
+        }
+    }
 
+private func allocateClientToBankClerk(inChargeOfDeposits: Int, inChargeOfLoans: Int) {
+        let group = DispatchGroup()
+        
+        while let client = self.clientQueue.dequeue() {
+            DispatchQueue.global().async(group: group) {
+                switch client.bankTask {
+                case .deposit:
+                    self.depositSemaphore.wait()
+                    self.makeBankClerkWork(for: client)
+                    self.depositSemaphore.signal()
+                case .loan:
+                    self.loanSemaphore.wait()
+                    self.makeBankClerkWork(for: client)
+                    self.loanSemaphore.signal()
+                }
+            }
+        }
+        group.wait()
+    }
+```
+`고객10명 추가`버튼에 연결될 `openForUI()`에서 `global().async`로 `allocateClientToBank`를 호출해주었습니다. 이 경우 `고객 10명 추가`를 연달아 누를 경우, `allocateClientToBank`가 비동기적으로 다중스레드에서 실행될 것이기 때문에 client를 dequeue해주는 동작이나 while문 안의 global().async도 다중 스레드에서 동시적으로 실행되어 결론적으로는 client 순서대로 처리되지 않을 것이라 예상했습니다. 즉, 새치기가 발생하는 것이죠. 그런데 예상과 달리 순서대로 client를 처리해주어서 의문점이 들었습니다. 
 
+**2. 같은 파일을 서로다른 프로젝트에서 공유하는 방법**
+
+콘솔 앱과 UI앱에서 같은 파일을 공유하기 위해서 최상단 디렉토리에 BankManagerShared라는 폴더를 만들고 그 안에 공유하고자 하는 파일을 모두 넣었습니다. 그리고 해당 폴더를 각 프로젝트에 Group 가상 폴더(not reference) 방식으로 추가 해 주었습니다.
+
+<br>
