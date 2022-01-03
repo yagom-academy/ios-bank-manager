@@ -11,25 +11,26 @@ struct Bank {
     
     private var customerQueue: CustomerQueue<Customer>
     private var numberOfCustomer: Int
-    private let taskTime: TimeInterval
+    private var clerks: BankClerk
+    private let taskGroup: DispatchGroup
     
     private var numberOfCustomerRange: ClosedRange<Int> {
         return 1...numberOfCustomer
     }
-    private var totalTaskTime: Decimal {
-        return Decimal(taskTime) * Decimal(numberOfCustomer)
-    }
     
-    init(numberOfCustomerRange: ClosedRange<Int> = DefaultValue.numberOfCustomerRange, taskTime: TimeInterval = DefaultValue.taskTimeInterval) {
+    init(numberOfCustomerRange: ClosedRange<Int> = DefaultValue.numberOfCustomerRange) {
         self.customerQueue = CustomerQueue()
         self.numberOfCustomer = Int.random(in: numberOfCustomerRange)
-        self.taskTime = taskTime
+        self.clerks = BankClerk(depositClerkCount: 2, loanClerkCount: 1)
+        self.taskGroup = DispatchGroup()
     }
     
     mutating func open() {
         enqueueCustomer()
+        let startTime = Date()
         operateTask()
-        printTaskEndMessage()
+        let totalTime = checkTotalTime(from: startTime)
+        printTotalTaskEndMessage(time: totalTime)
         resetBank()
     }
     
@@ -40,19 +41,23 @@ struct Bank {
         }
     }
     
-    private func operateTask() {
-        let bankTaskQueue = DispatchQueue(label: "Bank")
-        for _ in numberOfCustomerRange {
-            bankTaskQueue.sync {
-                takeTask()
-            }
-        }
+    private func checkTotalTime(from startTime: Date) -> String {
+        let totalTime = abs(startTime.timeIntervalSinceNow)
+        let timeDescription = String(format: "%.2f", totalTime)
+        return timeDescription
     }
     
-    private func takeTask() {
+    private mutating func operateTask() {
+        for _ in numberOfCustomerRange {
+            takeTask()
+        }
+        taskGroup.wait()
+    }
+    
+    private mutating func takeTask() {
         do {
             let customer = try customerQueue.dequeue()
-            task(of: customer)
+            enqueueTask(of: customer)
         } catch LinkedListError.dataDoesNotExist {
             print(LinkedListError.dataDoesNotExist.description)
         } catch {
@@ -60,15 +65,31 @@ struct Bank {
         }
     }
     
-    private func task(of customer: Customer) {
-        let number = customer.turn
-        print(Message.taskStart(turn: number).description)
-        Thread.sleep(forTimeInterval: taskTime)
-        print(Message.taskEnd(turn: number).description)
+    private mutating func enqueueTask(of customer: Customer) {
+        let clerk = clerks.assignClerk(of: customer.task)
+        clerk.async(group: taskGroup) { [self] in
+            self.executeTask(of: customer)
+        }
     }
     
-    private func printTaskEndMessage() {
-        print(Message.totalTaskEnd(count: numberOfCustomer, time: totalTaskTime).description)
+    private func executeTask(of customer: Customer) {
+        printTaskStartMessage(of: customer)
+        Thread.sleep(forTimeInterval: customer.task.processingTime)
+        printTaskEndMessage(of: customer)
+    }
+    
+    private func printTaskStartMessage(of customer: Customer) {
+        let message = Message.taskStart(turn: customer.turn, service: customer.task)
+        print(message)
+    }
+    
+    private func printTaskEndMessage(of customer: Customer) {
+        let message = Message.taskEnd(turn: customer.turn, service: customer.task)
+        print(message)
+    }
+    
+    private func printTotalTaskEndMessage(time: String) {
+        print(Message.totalTaskEnd(count: numberOfCustomer, time: time).description)
     }
     
     private mutating func resetBank() {
@@ -80,17 +101,17 @@ struct Bank {
 
 private extension Bank {
     
-    enum Message {
-        case taskStart(turn: Int)
-        case taskEnd(turn: Int)
-        case totalTaskEnd(count: Int, time: Decimal)
+    enum Message: CustomStringConvertible {
+        case taskStart(turn: Int, service: BankService)
+        case taskEnd(turn: Int, service: BankService)
+        case totalTaskEnd(count: Int, time: String)
         
         var description: String {
             switch self {
-            case .taskStart(let turn):
-                return "\(turn)번 고객 업무 시작"
-            case .taskEnd(let turn):
-                return "\(turn)번 고객 업무 완료"
+            case .taskStart(let turn, let service):
+                return "\(turn)번 고객 \(service.koreanDescription)업무 시작"
+            case .taskEnd(let turn, let service):
+                return "\(turn)번 고객 \(service.koreanDescription)업무 완료"
             case .totalTaskEnd(let count, let time):
                 return "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무시간은 \(time)초입니다."
             }
@@ -99,7 +120,6 @@ private extension Bank {
     
     struct DefaultValue {
         static let numberOfCustomerRange = 10...30
-        static let taskTimeInterval = 0.7
     }
     
 }

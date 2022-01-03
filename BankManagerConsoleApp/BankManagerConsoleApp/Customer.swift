@@ -10,5 +10,10 @@ import Foundation
 struct Customer {
     
     let turn: Int
+    let task: BankService
     
+    init(turn: Int) {
+        self.turn = turn
+        self.task = BankService.selectRandom()
+    }
 }
