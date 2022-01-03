@@ -8,9 +8,9 @@
 import Foundation
 
 struct BankFactory {
-    static func createBank(with delegatee: BankPrinter) -> Bank {
+    static func createBank(with delegatee: BankClerkDelegate) -> Bank {
         let bankClerk = BankClerk(delegatee: delegatee)
-        let bank = Bank(bankClerk: bankClerk, delegatee: delegatee)
+        let bank = Bank(bankClerk: bankClerk)
         
         return bank
     }

@@ -1,5 +1,6 @@
 # 🏦 은행 매니저 프로젝트 저장소
 
+
 ---
 ## 목차 
 - [STEP 1](#step-1)
@@ -8,6 +9,10 @@
 - [STEP 2](#step-2) 
   - [구현 흐름(UML)](#구현-흐름-uml) 
   - [구현 내용](#구현-내용)
+- [STEP 3](#step-3) 
+  - [고민했던 부분](#고민했던-부분)
+- [STEP 4](#step-4) 
+  - [고민했던 부분](#고민했던-부분)
 ---
 
 ## STEP 1
@@ -190,3 +195,158 @@ override를 하는 경우에 하위 클래스가 상위 클래스에서 지원�
 `Bank`와 `BankClerk`가 서로 참조하고 있는 구조가 되어 순환 참조가 발생하여 메모리 누수가 발생할 수 있을거라 생각했습니다. 
 
 이에 `BankClerk`가 가지는 `bank`를 `weak`로 구현하여 메모리 누수를 방지해주었습니다.
+
+
+
+## STEP 3
+
+### 고민했던 부분
+
+1. 동시성 프로그래밍
+
+은행원의 수를 쓰레드라고 생각하였고, 고객의 업무 종류에 따라 depositQueue, loanQueue를 만들어주었습니다.
+depositQueue는 concurrent하게 loanQueue는 serial하게 만들었습니다.
+
+while문의 조건으로 customerQueue에서 customer을 dequeue하는 것을 설정하여 공유자원에는 한 번씩만 접근하도록 설계하였습니다.
+
+deposit 케이스에서는 비동기적으로 동작하는 concurrent 큐에서
+semaphore를 사용하여 동시에 접근가능한 스레드의 수를 2로 두어서 deposit을 처리하는 은행원이 동시에 두명이 되도록 구현하였습니다.
+
+반면에 loan 케이스에서는 일을 처리하는 은행원이 한 명이기때문에 비동기적으로 동작하는 serial큐를 사용하였습니다.
+
+2. fatalError를 사용한 이유
+
+```swift
+static func createRandomTask() -> Self {
+    guard let task = Self.allCases.randomElement() else {
+        fatalError("랜덤한 Task를 생성할 수 없습니다.")
+    }
+    return task
+}
+```
+`Task` enum내에 랜덤한 task를 열거형의 모든 case에서 골라서 리턴해주는 메서드에서 fatalError()을 사용하였는데요, 처음에는 error enum을 따로 만들어줘서 에러처리를 해주려고 했지만, 로직상 절대 발생할 수 없는 에러라고 판단하여 fatalError로 구현하였습니다. (apple이 검증한 메서드라고 생각했습니다.)
+
+3. BankClerk의 역할
+
+앞서 고민했던 부분에 따라 구현하다 보니 BankClerk가 delegate 패턴을 통해 Bank를 알게하는 방식이 필요없게 되었습니다. 이에 이 관계를 제거해주었고, 기존 customer queue에서 dequeue하던 부분을 Bank가 하도록 이전하였습니다.
+
+4. 총 업무 시간 측정하는 방식
+
+기존에는 BankClerk가 처리하는 고객의 소요 시간을 일일이 합하여 이를 계산했었는데, 시스템 시간을 활용하여 개선하였습니다. `CFAbsoluteTimeGetCurrent()` 메서드를 사용하여 시작/끝 시간을 기록하고 이 시간들의 차를 총 업무시간으로 하였습니다. 그러나, 시스템 시간은 외부 시간 참조와의 동기화 또는 사용자가 시스템 시간을 변경하는 경우 감소할 수 있기때문에 `DispatchTime` 방식을 사용하여 개선하였습니다. 
+
+```swift
+// 기존 방식
+let startTime = CFAbsoluteTimeGetCurrent()
+let endTime = CFAbsoluteTimeGetCurrent()
+
+let totalProcessingTime = endTime - startTime
+        
+```
+
+```swift
+// 개선 방식
+let startTime = DispatchTime.now()
+let endTime = DispatchTime.now()
+
+let totalProcessingTime = Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds)
+```
+
+5. Bank 타입의 open 메서드 구현 방식 
+
+Queue에서 맨 처음 요소를 제거하진 않고 확인만 하는 `peek()`를 통해 customer의 task를 확인하고 각각의 queue에 할당 한 후 각 쓰레드 내에서 customerQueue에 접근하여 dequeue하는 방식으로 구현해보려 시도했습니다.
+
+그러다가 while문이 비정상적으로 많이 돌며 프로그램이 제대로 작동하지 않아서, 각 queue에서 customerQueue에 동시에 접근하는 상황이 아예 생겨나지 않도록 `customerQueue.dequeue()` 로 리턴한 요소를 바로 사용하는 로직으로 개선하였습니다. 
+
+#### 개선 전 
+```swift
+func open() {
+    let group = DispatchGroup()
+    let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
+    let loanQueue = DispatchQueue(label: "loan")
+    let semaphore = DispatchSemaphore(value: 2)
+
+    while !customerQueue.isEmpty {
+        switch customerQueue.peek()?.task {
+        case .deposit:
+            depositQueue.async(group: group) {
+                semaphore.wait()
+                self.bankClerk.work() //여기서 dequeue를 한다.
+                semaphore.signal()
+            }
+        case .loan:
+            loanQueue.async {
+                self.bankClerk.work() //여기서 dequeue를 한다.
+            }
+
+        default:
+            return
+        }
+    }
+
+    group.wait()
+}
+```
+
+#### 개선 후 
+```swift
+func open(timer: BankTimer) {
+    timer.start()
+
+    let group = DispatchGroup()
+    let semaphore = DispatchSemaphore(value: 2)
+    let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
+    let loanQueue = DispatchQueue(label: "loan")
+    let bankGroup = DispatchGroup()
+
+    while let customer = customerQueue.dequeue() {
+        switch customer.task {
+        case .deposit:
+            depositQueue.async(group: group) {
+                semaphore.wait()
+                self.bankClerk.work(with: customer)
+                semaphore.signal()
+            }
+        case .loan:
+            loanQueue.async(group: group) {
+                self.bankClerk.work(with: customer)
+            }
+        }
+    }
+
+    group.notify(queue: DispatchQueue.main) {
+        timer.stop()
+    }
+}
+```
+
+## STEP 4
+
+### 고민했던 부분
+
+1. UI 업데이트
+
+UI를 업데이트 하는 코드들은 모두 main 쓰레드 내에서 진행해주었습니다. 이에 문제없이 작동하는 점 확인했습니다. 기본적으로 은행 업무가 진행되는 쓰레드는 custom queue(serial/concurrent)이기에 UI의 경우 다른 쓰레드인 메인 쓰레드에서 정상적으로 업데이트 하도록 구현했습니다. 
+
+2. CustomView의 활용
+
+자주 쓰이는 `UIStackView`나 `UILabel`, `UIButton`들을 커스텀 뷰로 구현하여 사용했습니다. 커스텀 뷰를 만들 때 필요한 속성을 이니셜라이저를 통해 간단하게 생성할 수 있도록 했습니다.
+추가적인 피드백을 통해 커스텀 뷰를 만들기 보다는 클로저 방식으로 UI인스턴스를 만들어주는 방식이 더 효율적이라는 것을 확인하고 추후 반영해보려고 합니다. 
+
+
+3. `wait()` 과 `notify()`
+
+Bank 타입의 `open()` 메서드에서 DispatchGroup을 사용하여 group안에 들어간 작업들이 모두 끝날 때 비동기적으로 timer의 stop 메서드가 호출되도록 구현하였습니다.
+
+처음에는 Bank의 `open()` 메서드에서 마지막 라인에 `group.wait()` 를 사용하여 메인 쓰레드를 블록했었는데, 이 때문에 모든 작업이 완료되고 나서야 UI가 한꺼번에 업데이트 되는 상황이 발생하였습니다. 이에 동시에 UI 또한 업데이트를 시켜주기 위해, 작업을 동기적으로 기다리지 않고 비동기적으로 기다려주도록 수정했습니다.
+
+이 때 dispatchGroup에서 `wait()`는 synchronous 하게 동작하고, `notify()`의 경우 asynchronous 하게 동작한다는 것을 이용하여 `notify()`로 변경했습니다.
+
+```swift
+group.notify(queue: DispatchQueue.main) {
+    timer.stop()
+}
+```
+
+4. UIStackView 활용
+
+코드로 화면을 그릴 때 최대한 stackView를 활용하여 구성해보려고 노력했습니다. 이 덕분에 개별 UI요소에 auto layout을 적용하는 것보다 공수가 덜 들게 된 것 같아 이점을 취했다고 생각했습니다! 추가 피드백을 통해 `UIStackView`, Auto layout의 성능을 확인했으며 체계적으로 잘 사용해야겠다고 생각했습니다. 
