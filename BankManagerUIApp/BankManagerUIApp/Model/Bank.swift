@@ -11,7 +11,7 @@ class Bank {
     
     private var numberOfDepositBankers: Int
     private var numberOfLoanBankers: Int
-    private var totalBankers: Int {
+    private var totalNumberOfBankers: Int {
         return numberOfDepositBankers + numberOfLoanBankers
     }
     private var clientQueue = Queue<Client>()
@@ -39,7 +39,7 @@ class Bank {
     
     private func configureBankers() -> [DispatchQueue] {
         var bankers = [DispatchQueue]()
-        (1...totalBankers).forEach { number in
+        (1...totalNumberOfBankers).forEach { number in
             bankers.append(DispatchQueue(label: "\(number)"))
         }
         return bankers
@@ -61,7 +61,7 @@ class Bank {
         for number in 1...numberOfDepositBankers {
             serviceForClients(queue: depositQueue, bankerNumber: number)
         }
-        for number in numberOfDepositBankers + 1...numberOfDepositBankers + numberOfLoanBankers {
+        for number in (numberOfDepositBankers + 1)...totalNumberOfBankers {
             serviceForClients(queue: loanQueue, bankerNumber: number)
         }
     }
