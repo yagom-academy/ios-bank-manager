@@ -10,6 +10,15 @@ import Foundation
 class BankTimer {
     private var timer: Timer?
     private var elapsedMilisec: Int = .zero
+    private var formattedMilisec: String {
+        var converted = ((elapsedMilisec / 60000 * 100000) + (elapsedMilisec % 60000)).description
+        while converted.count <= 6 {
+            converted.insert(.zero, at: converted.startIndex)
+        }
+        converted.insert(.colon, at: converted.index(converted.endIndex, offsetBy: -3))
+        converted.insert(.colon, at: converted.index(converted.endIndex, offsetBy: -6))
+        return converted
+    }
     weak var bank: Bank?
     
     func activate() {
@@ -29,16 +38,6 @@ class BankTimer {
     @objc
     private func timerShouldUpdate() {
         elapsedMilisec += 1
-        bank?.delegate?.bank(didUpdateTimer: formatMilisecToString())
-    }
-    
-    private func formatMilisecToString() -> String {
-        var converted = ((elapsedMilisec / 60000 * 100000) + (elapsedMilisec % 60000)).description
-        while converted.count <= 6 {
-            converted.insert(.zero, at: converted.startIndex)
-        }
-        converted.insert(.colon, at: converted.index(converted.endIndex, offsetBy: -3))
-        converted.insert(.colon, at: converted.index(converted.endIndex, offsetBy: -6))
-        return converted
+        bank?.delegate?.bank(didUpdateTimer: formattedMilisec)
     }
 }
