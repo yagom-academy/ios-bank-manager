@@ -19,7 +19,7 @@ class BankTimer {
         converted.insert(.colon, at: converted.index(converted.endIndex, offsetBy: -6))
         return converted
     }
-    weak var bank: Bank?
+    weak var delegate: BankTimerDisplayer?
     
     func activate() {
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerShouldUpdate), userInfo: nil, repeats: true)
@@ -36,8 +36,8 @@ class BankTimer {
     }
     
     @objc
-    private func timerShouldUpdate() {
+    func timerShouldUpdate() {
         elapsedMilisec += 1
-        bank?.delegate?.bank(didUpdateTimer: formattedMilisec)
+        delegate?.bank(didUpdateTimer: formattedMilisec)
     }
 }

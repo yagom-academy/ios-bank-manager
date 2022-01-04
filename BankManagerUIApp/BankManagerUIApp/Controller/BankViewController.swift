@@ -23,6 +23,7 @@ class BankViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bank.delegate = self
+        bank.timer.delegate = self
         configureBankView()
     }
     
@@ -204,7 +205,9 @@ extension BankViewController: BankStateDisplayer {
         loanClientLabel.tag = number
         waitingStackView.addArrangedSubview(loanClientLabel)
     }
-    
+}
+
+extension BankViewController: BankTimerDisplayer {
     func bank(didUpdateTimer time: String) {
         timerRightLabel.text = time
     }

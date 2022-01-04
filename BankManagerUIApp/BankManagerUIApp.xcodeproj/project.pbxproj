@@ -25,6 +25,7 @@
 		E941BCC1277D903100B99281 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = E941BCB3277D903000B99281 /* Bank.swift */; };
 		E941BCC2277D903100B99281 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E941BCB4277D903000B99281 /* Task.swift */; };
 		E941BCC4277D903100B99281 /* BankStateDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E941BCB8277D903100B99281 /* BankStateDisplayer.swift */; };
+		E9FDEA2827849C4200B12770 /* BankTimerDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FDEA2727849C4200B12770 /* BankTimerDisplayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E941BCB3277D903000B99281 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		E941BCB4277D903000B99281 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E941BCB8277D903100B99281 /* BankStateDisplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankStateDisplayer.swift; sourceTree = "<group>"; };
+		E9FDEA2727849C4200B12770 /* BankTimerDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTimerDisplayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				E941BCB8277D903100B99281 /* BankStateDisplayer.swift */,
+				E9FDEA2727849C4200B12770 /* BankTimerDisplayer.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				C1606082278164FC00988D84 /* Character+Extension.swift in Sources */,
 				E941BCBD277D903100B99281 /* String+Extension.swift in Sources */,
 				E941BCC4277D903100B99281 /* BankStateDisplayer.swift in Sources */,
+				E9FDEA2827849C4200B12770 /* BankTimerDisplayer.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				E941BCC1277D903100B99281 /* Bank.swift in Sources */,
 				E9039199277E1CA300D10BB7 /* BankUIComponent.swift in Sources */,

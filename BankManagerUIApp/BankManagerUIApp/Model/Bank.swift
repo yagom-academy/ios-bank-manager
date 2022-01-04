@@ -18,7 +18,6 @@ class Bank {
     private var depositQueue = Queue<Client>()
     private var loanQueue = Queue<Client>()
     private var bankers: [DispatchQueue]?
-    private var timer = BankTimer()
     private var currentTotalClients: Int = .zero {
         didSet {
             if oldValue == .zero && currentTotalClients != .zero {
@@ -28,13 +27,13 @@ class Bank {
             }
         }
     }
+    var timer = BankTimer()
     weak var delegate: BankStateDisplayer?
     
     init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
         self.numberOfDepositBankers = numberOfDepositBankers
         self.numberOfLoanBankers = numberOfLoanBankers
         self.bankers = configureBankers()
-        self.timer.bank = self
     }
     
     private func configureBankers() -> [DispatchQueue] {

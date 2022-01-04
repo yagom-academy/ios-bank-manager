@@ -12,5 +12,4 @@ protocol BankStateDisplayer: AnyObject {
     func bank(didEndServiceFor number: Int, task: String)
     func bank(didReceiveDepositClientOf number: Int)
     func bank(didReceiveLoanClientOf number: Int)
-    func bank(didUpdateTimer time: String)
 }
