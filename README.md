@@ -8,6 +8,75 @@
 
 <br>
 
+# Step4 - UI앱 구현
+## 📱 작동 영상
+https://user-images.githubusercontent.com/72993238/147869467-e7fff187-e684-4a06-a628-926155817366.mov
+
+#### 고객 추가 기능 -> 다이나믹 타입 조정 -> 고객이 없으면 타이머 정지 -> 추가 버튼 탭하면 재시작 -> 초기화 버튼 작동 
+순서로 시연했습니다.
+
+<br>
+
+## 고민한 점
+
+### 1. ☑️ 코드로 스크롤뷰 constraint를 잡는 방식
+`가로 스택뷰` 내부에 `스크롤뷰` 2개가 들어가고, 각 스크롤뷰 안에 `세로 스택뷰`가 하나씩 들어가도록 설계했습니다. 내부 `가로 스택뷰`에 Label이 추가 및 제거되며 그에 따라 `스크롤뷰`의 `ContentLayoutGuide`의 topAnchor, bottomAnchor가 변경되도록 구성했습니다.
+
+<p align="center"><img src="https://i.imgur.com/csfiClB.png" width="25%"></p>
+
+`스크롤뷰`의 `Frame Layout Guide`는 상위 `가로 StackView`의 `distribution - fillEqually`를 통해 자동으로 고정됩니다. 그렇기에 내부 `세로 StackView`의 `width`를 고정시켜주고, 위와 아래(`topAnchor`, `bottomAnchor`)는 유동적으로 변하도록 설정해 줬습니다.
+
+```swift
+NSLayoutConstraint.activate([
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor)
+        ])
+```
+<br>
+
+### 2. ☑️ 초기화 기능 구현 방식
+- GCD의 특성 상 DispatchQueue에 올라간 작업을 취소할 수 없습니다. 그렇기 때문에, 초기화 시 이전 작업이 다시 뷰에 표시될 수밖에 없습니다. Operation을 사용하지 않으면 이 부분을 직접적으로 해결하긴 힘들 것 같은데요. 저희는 이 부분을 `Bank`객체가 `BankViewController` 에게 더이상 메시지를 보내지 못하도록 Bank의 delegate에 nil을 할당하여 관계를 끊어버리는 방법으로 구현했습니다.
+- View는 별도로 내부의 Label들을 removeFromSuperView하고, Timer도 00:00:000 로 리셋해주도록 구현했습니다.
+
+<br>
+
+## 알게 된 점
+### ✅ Timer.ScheduledTimer
+Timer.ScheduledTimer는 timeInterval에서 설정한 시간마다 반복되어 selector의 메서드를 실행합니다.
+특징적인 점은, Timer가 인스턴스를 생성하자 마자 바로 시작된다는 점입니다.
+```swift=
+timer = Timer.scheduledTimer(timeInterval: 0.001,
+                             target: self,
+                             selector: #selector(timerShouldUpdate),
+                             userInfo: nil,
+                             repeats: true)
+```
+Timer를 멈추기 위해서는 `timer.invalidate()` 메서드를 호출하면 됩니다.
+
+<br>
+
+## 트러블 슈팅
+### ⏱ 스크롤 시 타이머가 멈추는 문제 - Runloop
+
+대기중인 고객이 한 화면에 담기지 않을 만큼 많아지면, `스크롤 뷰`가 활성화됩니다.
+이때 스크롤을 위해 스크롤 뷰 영역을 `터치(클릭)`하는 순간, 작동 중인 타이머가 일시 정지되는 문제가 있었습니다.
+
+저희가 생각해본 `원인`은 스크롤 뷰를 움직일 때 화면의 UI가 새로 그려지는 일과, 타이머가 0.001초 간격으로 업데이트 되는 일이 모두 `RunLoop`가 동작하고 있는 `Main Thread`에서 처리되고 있기 때문이라고 생각했습니다.
+
+스크롤 뷰를 움직이는 이벤트는 `RunLoop`를 `event tracking mode`로 만들고 이때 스크롤 애니메이션을 부드럽게 만들어주기 위해, 시스템은 우선순위가 낮은 UI 업데이트의 동작을 일시 정지시키게 됩니다. [참고 블로그](http://bynomial.com/blog/?p=67)
+
+저희가 만든 타이머의 `RunLoop.Mode`가 `default`이기 때문에 가장 낮은 우선순위로 취급되고 있는데요, 이때 타이머의 `RunLoop.Mode`를 `common`으로 설정해서, 스크롤 뷰를 움직일 때에도 타이머가 일시 정지되지 않도록 만들어서 문제를 해결했습니다.
+
+```swift
+func activate() {
+    timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerShouldUpdate), userInfo: nil, repeats: true)
+    RunLoop.current.add(timer ?? Timer(), forMode: .common)
+}
+```
+
+<br>
+
 # Step3 - 다중 처리 구현
 
 ## ❣️ Step3 추가 개선
