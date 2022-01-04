@@ -11,6 +11,9 @@ class Bank {
     
     private var numberOfDepositBankers: Int
     private var numberOfLoanBankers: Int
+    private var totalBankers: Int {
+        return numberOfDepositBankers + numberOfLoanBankers
+    }
     private var clientQueue = Queue<Client>()
     private var depositQueue = Queue<Client>()
     private var loanQueue = Queue<Client>()
@@ -36,7 +39,7 @@ class Bank {
     
     private func configureBankers() -> [DispatchQueue] {
         var bankers = [DispatchQueue]()
-        (1...numberOfDepositBankers + numberOfLoanBankers).forEach { number in
+        (1...totalBankers).forEach { number in
             bankers.append(DispatchQueue(label: "\(number)"))
         }
         return bankers
