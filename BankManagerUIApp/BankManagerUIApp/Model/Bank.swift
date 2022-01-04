@@ -38,11 +38,7 @@ class Bank {
     }
     
     private func configureBankers() -> [DispatchQueue] {
-        var bankers = [DispatchQueue]()
-        (1...totalNumberOfBankers).forEach { number in
-            bankers.append(DispatchQueue(label: "\(number)"))
-        }
-        return bankers
+        return (1...totalNumberOfBankers).map { DispatchQueue(label: "\($0)") }
     }
     
     func lineUp(_ client: Client) {
