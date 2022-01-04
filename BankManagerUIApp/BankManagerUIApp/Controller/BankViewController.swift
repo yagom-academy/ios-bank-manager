@@ -43,6 +43,7 @@ class BankViewController: UIViewController {
         timerRightLabel.text = String.defaultTime
         totalClient = .zero
         bank.delegate = self
+        bank.timer.delegate = self
         
         waitingStackView.subviews.forEach { subview in
             subview.removeFromSuperview()

@@ -31,6 +31,9 @@ class Bank {
     weak var delegate: BankStateDisplayer?
     
     init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+        guard numberOfDepositBankers >= 1, numberOfLoanBankers >= 1 else {
+            fatalError("각 업무를 담당하는 은행원은 최소 1명 이상 필요합니다.")
+        }
         self.numberOfDepositBankers = numberOfDepositBankers
         self.numberOfLoanBankers = numberOfLoanBankers
         self.bankers = configureBankers()
@@ -62,7 +65,8 @@ class Bank {
     }
     
     private func serviceForClients(queue: Queue<Client>, bankerNumber: Int) {
-        guard let banker = bankers?[bankerNumber - 1] else { return }
+        guard bankers?.count ?? .zero >= bankerNumber,
+              let banker = bankers?[bankerNumber - 1] else { return }
         
         banker.async {
             while let client = queue.dequeue() {
