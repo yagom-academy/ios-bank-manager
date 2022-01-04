@@ -195,16 +195,11 @@ extension BankViewController: BankStateDisplayer {
         }
     }
     
-    func bank(didReceiveDepositClientOf number: Int) {
-        let depositClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.deposit.rawValue)", textStyle: .title3)
-        depositClientLabel.tag = number
-        waitingStackView.addArrangedSubview(depositClientLabel)
-    }
-    
-    func bank(didReceiveLoanClientOf number: Int) {
-        let loanClientLabel = BankUIComponent.makeLabel(text: "\(number) - \(Task.loan.rawValue)", textStyle: .title3, textColor: .systemPurple)
-        loanClientLabel.tag = number
-        waitingStackView.addArrangedSubview(loanClientLabel)
+    func bank(didReceiveClientOfNumber number: Int, task: Task) {
+        let clientLabel = BankUIComponent.makeLabel(text: "\(number) - \(task.rawValue)", textStyle: .title3)
+        clientLabel.tag = number
+        task == .loan ? clientLabel.textColor = .systemPurple : ()
+        waitingStackView.addArrangedSubview(clientLabel)
     }
 }
 

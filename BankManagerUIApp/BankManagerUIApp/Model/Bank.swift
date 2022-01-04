@@ -44,14 +44,8 @@ class Bank {
     }
     
     func lineUp(_ client: Client) {
-        switch client.task {
-        case .deposit:
-            depositQueue.enqueue(client)
-            delegate?.bank(didReceiveDepositClientOf: client.waitingNumber)
-        case .loan:
-            loanQueue.enqueue(client)
-            delegate?.bank(didReceiveLoanClientOf: client.waitingNumber)
-        }
+        client.task == .deposit ? depositQueue.enqueue(client) : loanQueue.enqueue(client)
+        delegate?.bank(didReceiveClientOfNumber: client.waitingNumber, task: client.task)
         currentTotalClients += 1
     }
     
