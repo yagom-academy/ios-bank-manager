@@ -1,8 +1,8 @@
 import Foundation
 
 protocol BankerDelegate: AnyObject {
-    func banker(DidStartWork waitingNumber: Int)
-    func banker(DidFinishWork waitingNumber: Int)
+    func banker(didStartWork waitingNumber: Int)
+    func banker(didFinishWork waitingNumber: Int)
 }
 
 final class Banker {
@@ -10,8 +10,8 @@ final class Banker {
     
     func work(for customer: Customer) {
         let banking = customer.banking
-        delegate?.banker(DidStartWork: customer.waitingNumber)
+        delegate?.banker(didStartWork: customer.waitingNumber)
         Thread.sleep(forTimeInterval: banking.speed)
-        delegate?.banker(DidFinishWork: customer.waitingNumber)
+        delegate?.banker(didFinishWork: customer.waitingNumber)
     }
 }

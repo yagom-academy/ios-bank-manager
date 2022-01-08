@@ -47,14 +47,14 @@ extension BankViewController: BankDelegate {
 }
 
 extension BankViewController: BankerDelegate {
-    func banker(DidStartWork waitingNumber: Int) {
+    func banker(didStartWork waitingNumber: Int) {
         DispatchQueue.main.async {
             let customerLabel = self.waitingListStackView.removeLabel(at: waitingNumber)
             self.workingListStackView.addCustomerLabel(customerLabel)
         }
     }
     
-    func banker(DidFinishWork waitingNumber: Int) {
+    func banker(didFinishWork waitingNumber: Int) {
         DispatchQueue.main.async {
             self.workingListStackView.removeLabel(at: waitingNumber)
         }
