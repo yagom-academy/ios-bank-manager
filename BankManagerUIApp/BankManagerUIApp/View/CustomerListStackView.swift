@@ -17,18 +17,16 @@ class CustomerListStackView: UIStackView {
     convenience init(title: String, color: UIColor) {
         self.init()
         setUp()
-        notifyLabel.text = title
-        notifyLabel.backgroundColor = color
+        setUpNotifyLabel(title, color)
+        setUpListStackView()
+        addSubviews()
+        setUpLayout()
     }
     
     private func setUp() {
         axis = .vertical
         spacing = 12
         translatesAutoresizingMaskIntoConstraints = false
-        setUpNotifyLabel()
-        setUpListStackView()
-        addSubviews()
-        setUpLayout()
     }
     
     private func addSubviews() {
@@ -37,7 +35,9 @@ class CustomerListStackView: UIStackView {
         listScrollView.addSubview(listStackView)
     }
     
-    private func setUpNotifyLabel() {
+    private func setUpNotifyLabel(_ title: String, _ color: UIColor) {
+        notifyLabel.text = title
+        notifyLabel.backgroundColor = color
         notifyLabel.font = .preferredFont(forTextStyle: .title1)
         notifyLabel.textColor = .white
         notifyLabel.textAlignment = .center
