@@ -2,9 +2,9 @@ import UIKit
 
 class CustomerListStackView: UIStackView {
     
-    var notifyLabel = UILabel()
-    var listScrollView = UIScrollView()
-    var listStackView = UIStackView()
+    private var notifyLabel = UILabel()
+    private var listScrollView = UIScrollView()
+    private var listStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
