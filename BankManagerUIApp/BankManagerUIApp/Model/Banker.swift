@@ -1,12 +1,9 @@
 import Foundation
 
-protocol BankerDelegate: AnyObject {
-    func banker(didStartWork waitingNumber: Int)
-    func banker(didFinishWork waitingNumber: Int)
-}
+protocol BankerDelegate: BankProtocol { }
 
 final class Banker {
-    weak var delegate: BankerDelegate?
+    weak var delegate: BankProtocol?
     
     func work(for customer: Customer) {
         let banking = customer.banking

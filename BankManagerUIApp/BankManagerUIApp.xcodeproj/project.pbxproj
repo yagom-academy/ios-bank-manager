@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08142088277DA98F00C6B159 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08142087277DA98F00C6B159 /* CustomerLabel.swift */; };
+		08A9DE8F278942F800260771 /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9DE8E278942F800260771 /* BankProtocol.swift */; };
 		9ACA21E9277C2C2A00231D32 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E2277C2C2A00231D32 /* Banker.swift */; };
 		9ACA21EA277C2C2A00231D32 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E3277C2C2A00231D32 /* Customer.swift */; };
 		9ACA21ED277C2C2A00231D32 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACA21E6277C2C2A00231D32 /* Bank.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		08142087277DA98F00C6B159 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
+		08A9DE8E278942F800260771 /* BankProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankProtocol.swift; sourceTree = "<group>"; };
 		9ACA21E2277C2C2A00231D32 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		9ACA21E3277C2C2A00231D32 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		9ACA21E6277C2C2A00231D32 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08A9DE90278943C700260771 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				08A9DE8E278942F800260771 /* BankProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		9ACA21E1277C2C2A00231D32 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				08A9DE90278943C700260771 /* Protocol */,
 				9ACA21F0277C2C3000231D32 /* Extension */,
 				9ACA21E1277C2C2A00231D32 /* Model */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
@@ -317,6 +328,7 @@
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				9ACA21EF277C2C2A00231D32 /* LinkedList.swift in Sources */,
 				08142088277DA98F00C6B159 /* CustomerLabel.swift in Sources */,
+				08A9DE8F278942F800260771 /* BankProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
