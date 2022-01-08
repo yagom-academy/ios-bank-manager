@@ -1,7 +1,7 @@
 import Foundation
 
 extension Double {
-    var convertTime: String {
+    var convertedTime: String {
         var time = self
         let minute = Int(time / 60)
         time -= Double(minute * 60)

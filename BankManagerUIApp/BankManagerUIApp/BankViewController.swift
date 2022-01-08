@@ -41,7 +41,7 @@ extension BankViewController: BankDelegate {
     }
     
     func bank(didChangeWorkTime workTime: Double) {
-        timerLabel.text = workTime.convertTime
+        timerLabel.text = workTime.convertedTime
         
     }
 }
