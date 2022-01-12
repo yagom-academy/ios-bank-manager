@@ -36,15 +36,15 @@ struct LinkedList<Type> {
     
     mutating func append(_ data: Type) {
         let newNode = Node(data: data)
+        let currentTail = tail
+        tail = newNode
         
-        guard let lastNode = tail else {
+        guard head != nil else {
             head = newNode
-            tail = newNode
             return
         }
         
-        lastNode.next = newNode
-        tail = newNode
+        currentTail?.next = newNode
     }
     
     mutating func removeFirst() -> Type? {
