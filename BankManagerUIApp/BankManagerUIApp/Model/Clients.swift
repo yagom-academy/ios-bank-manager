@@ -18,11 +18,11 @@ class Clients {
     func makeWaitingLine() -> Int {
         let totalClientCount = Int.random(in: 10...30)
         
-        (1...totalClientCount).forEach { identifier in
+        for identifier in 1...totalClientCount {
             let randomTask = Bank.Task.allCases.randomElement()
             
             guard let taskType = randomTask else {
-                return
+                return .zero
             }
             
             let client = Client(identifier: identifier, taskType: taskType)

@@ -23,8 +23,7 @@ class BankManager {
     }
     
     func startBankTask() {
-        while let taskType = clients.informTaskType(),
-              let clientIdentifier = clients.takeTurn() {
+        while let taskType = clients.informTaskType(), let clientIdentifier = clients.takeTurn() {
             giveTask(of: taskType, for: clientIdentifier)
         }
     }
