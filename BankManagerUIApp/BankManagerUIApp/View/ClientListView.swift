@@ -1,5 +1,5 @@
 //
-//  CustomView.swift
+//  ClientListView.swift
 //  BankManagerUIApp
 //
 //  Created by yeha on 2021/12/31.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomView: UIView {
+class ClientListView: UIView {
     let clientIdentifierLabel = UILabel()
     let taskTypeLabel = UILabel()
     

@@ -16,7 +16,7 @@ class BankManager {
         self.clerk = clerk
     }
     
-    func operateBankSystem() -> Int {
+    func countClients() -> Int {
         let totalClientCount = clients.makeWaitingLine()
         
         return totalClientCount

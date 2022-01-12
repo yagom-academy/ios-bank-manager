@@ -10,5 +10,5 @@ import Foundation
 enum Button {
     static let addedNumber = 10
     static let addClientButtonTitle = "고객 \(addedNumber)명 추가"
-    static let resetButton = "초기화"
+    static let resetClientListButtonTitle = "초기화"
 }

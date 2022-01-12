@@ -33,7 +33,7 @@ class StackViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         let bankManager = BankManager(clients: clients, clerk: clerk)
-        let totalClientCount = bankManager.operateBankSystem()
+        let totalClientCount = bankManager.countClients()
         
         presentWaitingList(totalClientCount: totalClientCount)
     }
@@ -46,7 +46,7 @@ class StackViewController: UIViewController {
                 return
             }
 
-            let clientInformationView = CustomView()
+            let clientInformationView = ClientListView()
             clientInformationView.setupLabelText(clientNumber: clientNumber.description, taskType: taskType.koreanName)
             waitingListVerticalStackView.addArrangedSubview(clientInformationView)
         }
@@ -55,14 +55,14 @@ class StackViewController: UIViewController {
     func setupbuttonHorizontalStackView() {
         setupStackView(stackView: buttonHorizontalStackView, axis: .horizontal)
         setupButton(button: addClientButton, title: Button.addClientButtonTitle, color: .systemBlue)
-        setupButton(button: resetButton, title: Button.resetButton, color: .systemRed)
+        setupButton(button: resetButton, title: Button.resetClientListButtonTitle, color: .systemRed)
         setupButtonHorizontalStackViewAutoLayout()
         addClientButton.addTarget(self, action: #selector(self.touchUpAddClientButton(_:)), for: .touchUpInside)
     }
     
     func setupLabeeHorizontalStackView() {
-        setupLabel(label: waitingLabel, backgroundColor: .systemGreen, text: Label.waiting)
-        setupLabel(label: workingLabel, backgroundColor: .systemIndigo, text: Label.working)
+        setupLabel(label: waitingLabel, backgroundColor: .systemGreen, text: BankLabelText.waiting)
+        setupLabel(label: workingLabel, backgroundColor: .systemIndigo, text: BankLabelText.working)
         setupStackView(stackView: labelHorizontalStackView, axis: .horizontal)
         setupLabelHorizontalStackViewConstraint()
     }
@@ -138,7 +138,7 @@ extension StackViewController {
         workingTimeLabel.heightAnchor.constraint(equalTo: buttonHorizontalStackView.heightAnchor).isActive = true
         workingTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         workingTimeLabel.textAlignment = .center
-        workingTimeLabel.text = "\(Label.workingTime)\(initialTime)"
+        workingTimeLabel.text = "\(BankLabelText.workingTime)\(initialTime)"
     }
 }
 
@@ -148,7 +148,7 @@ extension StackViewController {
         Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timeCounter), userInfo: nil, repeats: true)
         
         (1...Button.addedNumber).forEach { clientIdentifier in
-            let clientInformationView = CustomView()
+            let clientInformationView = ClientListView()
             clientInformationView.setupLabelText(clientNumber: clientIdentifier.description, taskType: "타입")
             waitingListVerticalStackView.addArrangedSubview(clientInformationView)
         }
@@ -161,7 +161,7 @@ extension StackViewController {
         count += 1
         let (minute, second, millisecond) = convertTime(milliseconds: count)
         let formattedTime = makeFormattedTime(minute: minute, second: second, millisecond: millisecond)
-        workingTimeLabel.text = "\(Label.workingTime)\(formattedTime)"
+        workingTimeLabel.text = "\(BankLabelText.workingTime)\(formattedTime)"
     }
     
     func convertTime(milliseconds: Int) -> (Int, Int, Int) {
