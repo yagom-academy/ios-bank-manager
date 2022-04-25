@@ -10,7 +10,7 @@
 		A0A96B9BE1A572BD58BA5A8D /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBACD17D142BCB79950C789 /* Pods_BankManagerConsoleApp.framework */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
-		DA69565F2816FA10000C1164 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69565E2816FA10000C1164 /* LinkedListTests.swift */; };
+		DA69565F2816FA10000C1164 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69565E2816FA10000C1164 /* QueueTests.swift */; };
 		DA6956632816FD85000C1164 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA6956642816FDA3000C1164 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
 		DA75447A2816E67F00A36211 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
@@ -39,7 +39,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		DA69565C2816FA10000C1164 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA69565E2816FA10000C1164 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
+		DA69565E2816FA10000C1164 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		DA7544792816E67F00A36211 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DA7544892817058800A36211 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DA912A852816E36A00CD671D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		DA69565D2816FA10000C1164 /* LinkedListTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA69565E2816FA10000C1164 /* LinkedListTests.swift */,
+				DA69565E2816FA10000C1164 /* QueueTests.swift */,
 			);
 			path = LinkedListTests;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 			files = (
 				DA6956642816FDA3000C1164 /* Node.swift in Sources */,
 				DA6956632816FD85000C1164 /* LinkedList.swift in Sources */,
-				DA69565F2816FA10000C1164 /* LinkedListTests.swift in Sources */,
+				DA69565F2816FA10000C1164 /* QueueTests.swift in Sources */,
 				DA75448B2817058800A36211 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
