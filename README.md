@@ -17,7 +17,7 @@
 
 ## UML
 
-![](https://i.imgur.com/ssSDcmM.png)
+![](https://i.imgur.com/pcNnJFe.png)
 
 
 ## 개발환경 및 라이브러리
@@ -26,12 +26,17 @@
 ![iOS](https://img.shields.io/badge/iOS-14.0-yellow)
 
 ## 키워드
-`git flow` `Queue`, `LinkedList`
+
+`git flow` `Queue` `LinkedList` `TDD`
 
 ## 고민한점
 
+#### test 코드와 실제 코드의 커밋 단위
+
+#### 이미 검증된 매서드를 다른 매서드의 테스트에서 사용하는것
 
 ### 자세한 고민 보기
 
+#### [STEP1](https://github.com/yagom-academy/ios-bank-manager/pull/144)
 
 ## 배운개념
