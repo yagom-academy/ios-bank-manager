@@ -35,6 +35,7 @@ final class LinkedList<Element>: Listable {
         return head == nil
     }
     
+    @discardableResult
     func removeFirst() -> Element? {
         if isEmpty {
             return nil
