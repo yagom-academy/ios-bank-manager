@@ -29,8 +29,7 @@ struct BankList<T> {
       return nil
     } else if head?.next == nil {
       let headNode = head
-      head = nil
-      tail = nil
+      clear()
       return headNode?.data
     } else {
       let headNode = head
