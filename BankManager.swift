@@ -1,7 +1,6 @@
 //
 //  BankManager.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
-//
+//  Created by 우롱차, Minseong
 
 import Foundation
+
