@@ -10,11 +10,11 @@ import Foundation
 struct BankList<T> {
   private var head: BankNode<T>?
   private var tail: BankNode<T>?
-  
+
   var isEmpty: Bool {
     return head == nil
   }
-  
+
   var first: T? {
     return head?.data
   }
