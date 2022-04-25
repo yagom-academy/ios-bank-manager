@@ -22,6 +22,7 @@ struct Queue<Element> {
         items.append(data)
     }
     
+    @discardableResult
     func dequeue() -> Element? {
         return items.removeFirst()
     }
