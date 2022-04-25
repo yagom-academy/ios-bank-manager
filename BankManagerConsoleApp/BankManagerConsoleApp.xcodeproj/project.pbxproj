@@ -12,6 +12,11 @@
 		9BB2B8E72816D34C003D6212 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8E02816D1CF003D6212 /* LinkedListTest.swift */; };
 		9BB2B8E82816D3CC003D6212 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A022816B72A0031964E /* LinkedList.swift */; };
 		9BB2B8E92816D3CE003D6212 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		9BB2B8EB2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */; };
+		9BB2B8EC2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */; };
+		9BB2B8EE2816DF65003D6212 /* MockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8ED2816DF65003D6212 /* MockList.swift */; };
+		9BB2B8EF2816DF65003D6212 /* MockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8ED2816DF65003D6212 /* MockList.swift */; };
+		9BB2B8F02816E175003D6212 /* BankWaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A042816DB570031964E /* BankWaitingQueue.swift */; };
 		9C8E5A032816B72B0031964E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A022816B72A0031964E /* LinkedList.swift */; };
 		9C8E5A052816DB570031964E /* BankWaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A042816DB570031964E /* BankWaitingQueue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -36,6 +41,8 @@
 		9B266C4B2816BC9A0009AC4E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9BB2B8DE2816D1CF003D6212 /* LinkedListTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB2B8E02816D1CF003D6212 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
+		9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWaitingQueueTest.swift; sourceTree = "<group>"; };
+		9BB2B8ED2816DF65003D6212 /* MockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockList.swift; sourceTree = "<group>"; };
 		9C8E5A022816B72A0031964E /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		9C8E5A042816DB570031964E /* BankWaitingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWaitingQueue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,12 +79,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9BB2B8DF2816D1CF003D6212 /* LinkedListTest */ = {
+		9BB2B8DF2816D1CF003D6212 /* BankManagerConsoleAppTest */ = {
 			isa = PBXGroup;
 			children = (
 				9BB2B8E02816D1CF003D6212 /* LinkedListTest.swift */,
+				9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */,
+				9BB2B8ED2816DF65003D6212 /* MockList.swift */,
 			);
-			path = LinkedListTest;
+			path = BankManagerConsoleAppTest;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {
@@ -85,7 +94,7 @@
 			children = (
 				9B266C4B2816BC9A0009AC4E /* .swiftlint.yml */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				9BB2B8DF2816D1CF003D6212 /* LinkedListTest */,
+				9BB2B8DF2816D1CF003D6212 /* BankManagerConsoleAppTest */,
 				C7694E77259C3EC00053667F /* Products */,
 				541CEBFB63614228B755B719 /* Pods */,
 				D784B631B9C31F87C75872B4 /* Frameworks */,
@@ -253,8 +262,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB2B8E82816D3CC003D6212 /* LinkedList.swift in Sources */,
+				9BB2B8EF2816DF65003D6212 /* MockList.swift in Sources */,
+				9BB2B8EC2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */,
 				9BB2B8E72816D34C003D6212 /* LinkedListTest.swift in Sources */,
 				9BB2B8E92816D3CE003D6212 /* BankManager.swift in Sources */,
+				9BB2B8F02816E175003D6212 /* BankWaitingQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,10 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C8E5A032816B72B0031964E /* LinkedList.swift in Sources */,
+				9BB2B8EE2816DF65003D6212 /* MockList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				9BB2B8E62816D2ED003D6212 /* LinkedListTest.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				9C8E5A052816DB570031964E /* BankWaitingQueue.swift in Sources */,
+				9BB2B8EB2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
