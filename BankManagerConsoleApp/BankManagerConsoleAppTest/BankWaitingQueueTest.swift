@@ -17,5 +17,4 @@ class BankWaitingQueueTest: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-    
 }

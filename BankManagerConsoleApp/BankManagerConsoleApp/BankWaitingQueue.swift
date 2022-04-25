@@ -28,7 +28,7 @@ struct BankWaitingQueue<T: Listable> {
     
     @discardableResult
     func dequeue() -> T.Element? {
-        return list.removeFirst
+        return list.removeFirst()
     }
     
     func clear() {

@@ -2,7 +2,7 @@
 //  MockList.swift
 //  BankManagerConsoleApp
 //
-//  Created by 이시원 on 2022/04/25.
+//  Created by Donnie, Safari on 2022/04/25.
 //
 
 import Foundation
