@@ -10,6 +10,10 @@ import Foundation
 struct BankQueue<T> {
   private var list = BankList<T>()
 
+  var isEmpty: Bool {
+    return list.isEmpty
+  }
+
   mutating func enqueue(_ data: T?) {
     list.append(data)
   }
