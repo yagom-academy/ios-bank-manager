@@ -16,7 +16,7 @@ final class Node<T> {
 final class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
-    var count = 0
+    var count = Int.zero
     
     var isEmpty: Bool {
         if head == nil {
@@ -42,6 +42,11 @@ final class LinkedList<T> {
         guard isEmpty == false else {
             return nil
         }
+        
+        if count == 1 {
+            tail = nil
+        }
+        
         count -= 1
         let data = head?.data
         head = head?.next
@@ -51,7 +56,7 @@ final class LinkedList<T> {
     func clear() {
         head = nil
         tail = nil
-        count = 0
+        count = Int.zero
     }
     
     func peek() -> T? {
