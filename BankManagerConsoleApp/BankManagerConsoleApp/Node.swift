@@ -9,7 +9,7 @@ import Foundation
 
 class Node<T> {
     var value: T
-    var previous: Node?
+    weak var previous: Node?
     var next: Node?
     
     init(value: T, previous: Node? = nil, next: Node? = nil) {
