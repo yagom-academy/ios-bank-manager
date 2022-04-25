@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct BankList<T> {
+  private var head: BankNode<T>?
+  private var tail: BankNode<T>?
+}
