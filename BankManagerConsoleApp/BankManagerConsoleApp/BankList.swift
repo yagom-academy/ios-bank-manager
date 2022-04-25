@@ -10,6 +10,9 @@ import Foundation
 struct BankList<T> {
   private var head: BankNode<T>?
   private var tail: BankNode<T>?
+  var isEmpty: Bool {
+    head == nil
+  }
 
   mutating func append(_ data: T?) {
     let newNode = BankNode(data)
