@@ -5,8 +5,6 @@
 //  Created by OneTool, Red on 2022/04/25.
 //
 
-import Foundation
-
 class Node<T> {
     var data: T
     var previous: Node?

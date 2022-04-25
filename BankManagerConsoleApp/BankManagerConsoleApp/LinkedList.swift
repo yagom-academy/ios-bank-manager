@@ -5,8 +5,6 @@
 //  Created by OneTool, Red on 2022/04/25.
 //
 
-import Foundation
-
 struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
