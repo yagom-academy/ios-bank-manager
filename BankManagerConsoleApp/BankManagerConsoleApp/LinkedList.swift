@@ -18,3 +18,13 @@ final class Node<T> {
         self.previous = previous
     }
 }
+
+protocol Listable {
+    associatedtype Element
+    var isEmpty: Bool { get }
+    
+    func removeFirst() -> Element?
+    func append()
+    func removeAll()
+    func peek() -> Element?
+}

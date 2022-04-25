@@ -28,6 +28,7 @@
 /* Begin PBXFileReference section */
 		0D9D00BDD3848931DF5F878F /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		6E7097DC3CDD48F8E7E0F721 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9B266C4B2816BC9A0009AC4E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9C8E5A022816B72A0031964E /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				9B266C4B2816BC9A0009AC4E /* .swiftlint.yml */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				C7694E77259C3EC00053667F /* Products */,
 				541CEBFB63614228B755B719 /* Pods */,
