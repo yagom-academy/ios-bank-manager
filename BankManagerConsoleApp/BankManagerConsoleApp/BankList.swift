@@ -23,4 +23,19 @@ struct BankList<T> {
     }
     self.tail = newNode
   }
+
+  mutating func removeFirst() -> T? {
+    if isEmpty {
+      return nil
+    } else if head?.next == nil {
+      let headNode = head
+      head = nil
+      tail = nil
+      return headNode?.data
+    } else {
+      let headNode = head
+      head = head?.next
+      return headNode?.data
+    }
+  }
 }
