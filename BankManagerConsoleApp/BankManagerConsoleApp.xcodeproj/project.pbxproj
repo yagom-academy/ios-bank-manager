@@ -85,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				DA69565D2816FA10000C1164 /* LinkedListTests */,
+				DA69565D2816FA10000C1164 /* QueueTests */,
 				C7694E77259C3EC00053667F /* Products */,
 				719B4824676F4472997671F3 /* Pods */,
 				1C12B85BC67CEF37018A99BF /* Frameworks */,
@@ -113,12 +113,12 @@
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
-		DA69565D2816FA10000C1164 /* LinkedListTests */ = {
+		DA69565D2816FA10000C1164 /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
 				DA69565E2816FA10000C1164 /* QueueTests.swift */,
 			);
-			path = LinkedListTests;
+			path = QueueTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -6,9 +6,9 @@
 //
 
 final class Node<T> {
-    private var data: T
-    private var previous: Node?
-    private var next: Node?
+    var data: T
+    var previous: Node?
+    var next: Node?
 
     init(data: T) {
         self.data = data
