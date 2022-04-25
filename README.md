@@ -5,7 +5,7 @@
 - [실행화면](#실행화면)
 - [UML](#uml)
 - [STEP 1 기능 구현](#step-1-기능-구현)
-    + [고민했던 것들](#고민했던-것들)
+    + [고민한 점(트러블 슈팅)](#고민한-점트러블-슈팅)
     + [배운 개념](#배운-개념)
     + [PR 후 개선사항](#pr-후-개선사항)
 - [Ground Rules](#ground-rules)
@@ -22,13 +22,81 @@
 ---
 
 ## STEP 1 기능 구현
+### 고민한 점(트러블 슈팅)
+1️⃣ Node와 DoubleLinkedList의 의존도를 낮출순 없을까?
+- protocol 을 활용해 의존도를 낮춰보려고 고민했다.
+- 아래의 예시 코드처럼 Node 가 Connectable 프로토콜을 채택한후
+- DoubleLinkedList 에서 head 와 tail 이 Node 타입이 아닌 Connectable 프로토콜 타입으로 정의해 사용할순 없을까 고민했다.
+```swift
+protocol Connectable {
+    associatedType T
+    func getValue() -> T {}
+    func getPrevious() -> Node<T> {}
+}
 
-### 고민했던 것들
+class Node<T>: Connectable {
+    var value: T
+    weak var previous: Node?
+    var next: Node?
+    
+    init(value: T, previous: Node? = nil, next: Node? = nil) {
+        self.value = value
+        self.previous = previous
+        self.next = next
+    }
+}
+
+struct DoubleLinkedList<T> {
+    private var head: Connectable?
+    private var tail: Connectable?
+    
+    var isEmpty: Bool {
+        if head == nil {
+            return true
+        }
+        return false
+    }
+    
+    var peek: T? {
+        let head = head as? Node<T>
+        return head?.value
+    }
+    
+    mutating func enqueue(value: T) {
+        if isEmpty {
+            head = Node(value: value)
+            tail = head
+            return
+        }
+        let oldTail = tail as? Node<T>
+        let newNode = Node(value: value, previous: oldTail)
+        oldTail?.next = newNode
+        tail = newNode
+    }
+}
+```
+- 하지만 위 코드의 문제점은 다운캐스팅을 하는 과정에서 다시 의존도가 높아진다는 것이다.
+- 그렇다면 head 혹은 tail 이 Node 로 다운캐스팅 성공해야만 enqueue, dequeue 등의 기능을 사용할 수 있게 된다.
+
+2️⃣ DoubleLinkedList의 타입은? class vs struct
+- 🤔 DoubleLinkedList는 상속도 참조도 필요없다. 때문에 class를 사용할 이유가 없다.
+- struct를 사용하기 때문에 프로퍼티 값의 변경을 주는 메서드에는 필연적으로 mutating이 쓰인다.
+- mutating을 사용한 메서드는 COW 방식으로 메모리에서 값이 변하고 때문에 전체값을 복사하는 비용이 발생한다. 
+- 이때, 과연 class의 RC보다 비용이 더 적게 들지, 많이 들지 예상할 수 없다.
+
+
+3️⃣ 순환 참조
+- Node 의 next 와 previous 가 var 로 선언된다면 Node 가 여러개 있을때 next 의 Node 와 previous의 Node 가 서로 강한 순한 참조를 하게되어 Node 를 제거해도 메모리에서 해제되지 않는다.
+- 이를 해결하기 위해 previous 에 weak 키워드를 사용하여 RC 카운트가 올라가지 않도록 하여 강한 순환 참조를 해결했다.
+
+### 질문사항
+- 
 
 ### 배운 개념
+- LinkedList
+- associatedtype 
 
 ### PR 후 개선사항
-
 ---
 
 ## Ground Rules
