@@ -16,12 +16,12 @@ struct BankList<T> {
 
   mutating func append(_ data: T?) {
     let newNode = BankNode(data)
-    if self.head == nil {
-      self.head = newNode
+    if head == nil {
+      head = newNode
     } else {
-      self.tail?.next = newNode
+      tail?.next = newNode
     }
-    self.tail = newNode
+    tail = newNode
   }
 
   mutating func removeFirst() -> T? {
