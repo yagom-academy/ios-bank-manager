@@ -1,6 +1,6 @@
 //
 //  BankManager.swift
-//  Created by yagom.
+//  Created by Taeangel, Tiana.
 //  Copyright © yagom academy. All rights reserved.
 //
 
