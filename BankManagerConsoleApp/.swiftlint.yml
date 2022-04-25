@@ -1,5 +1,6 @@
 disabled_rules:
 - void_return
+- vertical_parameter_alignment
 
 excluded:
 - Pods
