@@ -11,4 +11,20 @@ struct Queue<T> {
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
+    
+    func enqueue(data: T) {
+        return linkedList.append(node: Node<T>(data: data))
+    }
+    
+    func dequeue() -> T? {
+        return linkedList.removeFirst()
+    }
+    
+    func peek() -> T? {
+        return linkedList.peek()
+    }
+    
+    func clear() {
+        linkedList.clear()
+    }
 }
