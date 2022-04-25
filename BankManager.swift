@@ -1,6 +1,6 @@
 //
 //  BankManager.swift
-//  Created by yagom.
+//  Created by Lingo, cathy.
 //  Copyright © yagom academy. All rights reserved.
 //
 
