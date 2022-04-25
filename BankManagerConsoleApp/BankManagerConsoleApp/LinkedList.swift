@@ -26,7 +26,7 @@ class LinkedList<T> {
     }
     
     func append(node: Node<T>) {
-        guard let _ = tail else {
+        guard isEmpty == false else {
             head = node
             tail = node
             count += 1
@@ -34,5 +34,15 @@ class LinkedList<T> {
         }
         tail?.next = node
         count += 1
+    }
+    
+    func removeFirst() -> T? {
+        guard isEmpty == false else {
+            return nil
+        }
+        count -= 1
+        let data = head?.data
+        head = head?.next
+        return data
     }
 }
