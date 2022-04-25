@@ -22,7 +22,7 @@ struct LinkedList<T> {
         tail = nil
     }
 
-    mutating func enQueue(data: T) {
+    mutating func append(data: T) {
         let node = Node(data: data)
         if head == nil {
             head = node
