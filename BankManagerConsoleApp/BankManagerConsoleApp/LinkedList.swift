@@ -33,8 +33,9 @@ struct LinkedList<T> {
             tail = node
         }
     }
-    mutating func deQueue() -> T? {
-        if head == nil {
+
+    mutating func pop() -> T? {
+        guard head != nil else {
             return nil
         }
         if head?.next == nil {
