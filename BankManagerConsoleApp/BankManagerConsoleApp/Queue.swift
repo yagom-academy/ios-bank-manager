@@ -5,8 +5,8 @@
 //  Created by OneTool, Red on 2022/04/26.
 //
 
-struct Queue<T> {
-    var linkedList = LinkedList<T>()
+final class Queue<T> {
+    private var linkedList = LinkedList<T>()
 
     var isEmpty: Bool {
         return linkedList.isEmpty
@@ -16,15 +16,15 @@ struct Queue<T> {
         return linkedList.peek
     }
 
-    mutating func clear() {
+    func clear() {
         return linkedList.removeAll()
     }
 
-    mutating func enQueue(data: T) {
+    func enQueue(data: T) {
         return linkedList.append(data: data)
     }
 
-    mutating func deQueue() -> T? {
+    func deQueue() -> T? {
         return linkedList.pop()
     }
 }

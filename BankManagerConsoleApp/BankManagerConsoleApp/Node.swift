@@ -5,10 +5,10 @@
 //  Created by OneTool, Red on 2022/04/25.
 //
 
-class Node<T> {
-    var data: T
-    var previous: Node?
-    var next: Node?
+final class Node<T> {
+    private var data: T
+    private var previous: Node?
+    private var next: Node?
 
     init(data: T) {
         self.data = data

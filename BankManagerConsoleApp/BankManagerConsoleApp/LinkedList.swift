@@ -5,9 +5,9 @@
 //  Created by OneTool, Red on 2022/04/25.
 //
 
-struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+final class LinkedList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
 
     var isEmpty: Bool {
         return head == nil
@@ -17,12 +17,12 @@ struct LinkedList<T> {
         return head?.data
     }
 
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
         tail = nil
     }
 
-    mutating func append(data: T) {
+    func append(data: T) {
         let node = Node(data: data)
         if head == nil {
             head = node
@@ -34,7 +34,7 @@ struct LinkedList<T> {
         }
     }
 
-    mutating func pop() -> T? {
+    func pop() -> T? {
         guard head != nil else {
             return nil
         }
