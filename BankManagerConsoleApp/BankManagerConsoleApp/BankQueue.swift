@@ -14,6 +14,10 @@ struct BankQueue<T> {
     return list.isEmpty
   }
 
+  var peek: T? {
+    return list.first
+  }
+
   mutating func enqueue(_ data: T?) {
     list.append(data)
   }
