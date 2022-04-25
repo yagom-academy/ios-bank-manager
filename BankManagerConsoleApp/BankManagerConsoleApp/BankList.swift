@@ -37,7 +37,7 @@ struct BankList<T> {
       return headNode?.data
     }
   }
-  
+
   mutating func clear() {
     head = nil
     tail = nil
