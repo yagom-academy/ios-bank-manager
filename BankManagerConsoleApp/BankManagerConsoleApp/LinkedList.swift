@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LinkedList<Element> {
+final class LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
 
@@ -21,7 +21,7 @@ class LinkedList<Element> {
 
     func append(_ data: Element) {
         let newNode = Node(data: data)
-      
+
         if head == nil {
             head = newNode
             tail = head
