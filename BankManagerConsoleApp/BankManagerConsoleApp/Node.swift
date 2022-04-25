@@ -7,8 +7,8 @@
 
 class Node<Element> {
     let data: Element
-    var next: Node<Element>? = nil
-    
+    var next: Node<Element>?
+
     init(data: Element) {
         self.data = data
     }
