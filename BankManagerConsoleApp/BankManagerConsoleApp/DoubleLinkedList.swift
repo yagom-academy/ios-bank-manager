@@ -11,8 +11,6 @@ struct DoubleLinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
-    var count = 0
-    
     var isEmpty: Bool {
         if head == nil {
             return true
@@ -44,5 +42,10 @@ struct DoubleLinkedList<T> {
         let dequeueValue = head?.value
         head = head?.next
         return dequeueValue
+    }
+    
+    mutating func clear() {
+        head = nil
+        tail = nil
     }
 }
