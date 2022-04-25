@@ -17,13 +17,9 @@ struct LinkedList<T> {
         return head?.data
     }
 
-    mutating func clear() {
-        if head == nil {
-            return
-        }
-        while head == nil {
-            _ = deQueue()
-        }
+    mutating func removeAll() {
+        head = nil
+        tail = nil
     }
 
     mutating func enQueue(data: T) {
