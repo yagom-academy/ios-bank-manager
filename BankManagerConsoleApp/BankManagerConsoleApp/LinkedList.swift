@@ -45,4 +45,10 @@ class LinkedList<T> {
         head = head?.next
         return data
     }
+    
+    func clear() {
+        head = nil
+        tail = nil
+        count = 0
+    }
 }
