@@ -13,4 +13,8 @@ struct BankQueue<T> {
   mutating func enqueue(_ data: T?) {
     list.append(data)
   }
+
+  mutating func clear() {
+    list.clear()
+  }
 }
