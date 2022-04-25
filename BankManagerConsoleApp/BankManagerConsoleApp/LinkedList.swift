@@ -10,12 +10,10 @@ import Foundation
 final class Node<T> {
     var value: T
     var next: Node?
-    var previous: Node?
+    weak var previous: Node?
     
     init(value: T, next: Node? = nil, previous: Node? = nil) {
         self.value = value
-        self.next = next
-        self.previous = previous
     }
 }
 
@@ -24,7 +22,39 @@ protocol Listable {
     var isEmpty: Bool { get }
     
     func removeFirst() -> Element?
-    func append()
+    func append(_ value: Element)
     func removeAll()
     func peek() -> Element?
+}
+
+final class LinkedList<Element>: Listable {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
+    
+    var isEmpty: Bool
+    
+    func removeFirst() -> Element? {
+        <#code#>
+    }
+    
+    func append(_ value: Element) {
+        let newNode = Node(value: value)
+        
+        if isEmpty {
+            head = newNode
+            tail = newNode
+            return
+        }
+        newNode.previous = tail
+        tail?.next = newNode
+        tail = newNode
+    }
+    
+    func removeAll() {
+        <#code#>
+    }
+    
+    func peek() -> Element? {
+        <#code#>
+    }
 }
