@@ -51,4 +51,8 @@ class LinkedList<T> {
         tail = nil
         count = 0
     }
+    
+    func peek() -> T? {
+        return head?.data
+    }
 }
