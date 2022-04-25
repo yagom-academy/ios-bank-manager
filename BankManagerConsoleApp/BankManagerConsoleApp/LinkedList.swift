@@ -7,6 +7,16 @@
 
 import Foundation
 
+protocol Listable {
+    associatedtype Element
+    var isEmpty: Bool { get }
+    var peek: Element? { get }
+    
+    func append(_ value: Element)
+    func removeFirst() -> Element?
+    func removeAll()
+}
+
 final class Node<T> {
     var value: T
     var next: Node?
@@ -17,22 +27,29 @@ final class Node<T> {
     }
 }
 
-protocol Listable {
-    associatedtype Element
-    var isEmpty: Bool { get }
-    
-    func removeFirst() -> Element?
-    func append(_ value: Element)
-    func removeAll()
-    func peek() -> Element?
-}
-
 final class LinkedList<Element>: Listable {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
+    }
+    
+    var peek: Element? {
+        return head?.value
+    }
+    
+    func append(_ value: Element) {
+        let newNode = Node(value: value)
+        
+        if isEmpty {
+            head = newNode
+            tail = newNode
+            return
+        }
+        newNode.previous = tail
+        tail?.next = newNode
+        tail = newNode
     }
     
     @discardableResult
@@ -50,25 +67,8 @@ final class LinkedList<Element>: Listable {
         return firstValue
     }
     
-    func append(_ value: Element) {
-        let newNode = Node(value: value)
-        
-        if isEmpty {
-            head = newNode
-            tail = newNode
-            return
-        }
-        newNode.previous = tail
-        tail?.next = newNode
-        tail = newNode
-    }
-    
     func removeAll() {
         head = nil
         tail = nil
-    }
-    
-    func peek() -> Element? {
-        return head?.value
     }
 }

@@ -46,7 +46,7 @@ class LinkedListTest: XCTestCase {
         sut.removeFirst()
         
         //when
-        let result = sut.peek()
+        let result = sut.peek
         
         //then
         XCTAssertNil(result)
