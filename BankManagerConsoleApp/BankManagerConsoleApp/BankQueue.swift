@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct BankQueue<T> {
+  private var list = BankList<T>()
+}
