@@ -13,6 +13,10 @@ struct BankList<T> {
   var isEmpty: Bool {
     head == nil
   }
+  
+  var first: T? {
+    return head?.data
+  }
 
   mutating func append(_ data: T?) {
     let newNode = BankNode(data)
