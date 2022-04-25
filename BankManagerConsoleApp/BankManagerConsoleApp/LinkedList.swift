@@ -5,10 +5,23 @@
 // 
 
 final class Node<T> {
-  let data: T
-  var next: Node?
+    let data: T
+    var next: Node?
   
-  init(data: T) {
-    self.data = data
-  }
+    init(data: T) {
+        self.data = data
+    }
+}
+
+class LinkedList<T> {
+    var head: Node<T>?
+    var tail: Node<T>?
+    var count = 0
+    
+    var isEmpty: Bool {
+        if head == nil {
+            return true
+        }
+        return false
+    }
 }
