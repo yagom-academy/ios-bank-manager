@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		674062252816D35E0032A2AE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674062242816D35E0032A2AE /* Queue.swift */; };
 		8F7AA10C2EEA2D8C4F0D041F /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01399AF8D34DF0DC9FE39F30 /* Pods_BankManagerConsoleApp.framework */; };
 		A11246A32816CDFD00292332 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11246A22816CDFD00292332 /* LinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		01399AF8D34DF0DC9FE39F30 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		674062242816D35E0032A2AE /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		95AD8DBBC12BC705E7135A00 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A11246A22816CDFD00292332 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		A11246A42816D15600292332 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				A11246A22816CDFD00292332 /* LinkedList.swift */,
+				674062242816D35E0032A2AE /* Queue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				A11246A32816CDFD00292332 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				674062252816D35E0032A2AE /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
