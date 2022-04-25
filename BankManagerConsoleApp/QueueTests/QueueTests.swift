@@ -2,13 +2,13 @@
 //  QueueTests.swift
 //  QueueTests
 //
-//  Created by song on 2022/04/25.
+//  Created by Taeangel, Tiana 2022/04/25.
 //
 
 import XCTest
 
-class QueueTests: XCTestCase {
-    var sut: Queue<Int>!
+final class QueueTests: XCTestCase {
+    private var sut: Queue<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()

@@ -13,7 +13,7 @@ final class Node<T> {
     }
 }
 
-class LinkedList<T> {
+final class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     var count = 0
@@ -22,6 +22,7 @@ class LinkedList<T> {
         if head == nil {
             return true
         }
+        
         return false
     }
     
@@ -32,6 +33,7 @@ class LinkedList<T> {
             count += 1
             return
         }
+        
         tail?.next = node
         count += 1
     }
