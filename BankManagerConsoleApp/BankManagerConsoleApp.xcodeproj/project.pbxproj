@@ -69,6 +69,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B0DB89A62816E51700B13C93 /* BankQueue */ = {
+			isa = PBXGroup;
+			children = (
+				AE639D062816DF7800FD5D09 /* BankQueue.swift */,
+				AE639D042816CC1D00FD5D09 /* BankList.swift */,
+				B010446E2816C9D500A01E5B /* BankNode.swift */,
+			);
+			path = BankQueue;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -91,11 +101,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				B0DB89A62816E51700B13C93 /* BankQueue */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				B010446E2816C9D500A01E5B /* BankNode.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				AE639D042816CC1D00FD5D09 /* BankList.swift */,
-				AE639D062816DF7800FD5D09 /* BankQueue.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
