@@ -9,4 +9,8 @@ import Foundation
 
 struct BankQueue<T> {
   private var list = BankList<T>()
+
+  mutating func enqueue(_ data: T?) {
+    list.append(data)
+  }
 }
