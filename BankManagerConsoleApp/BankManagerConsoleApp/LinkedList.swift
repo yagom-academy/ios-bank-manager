@@ -31,10 +31,22 @@ final class LinkedList<Element>: Listable {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
-    var isEmpty: Bool
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     func removeFirst() -> Element? {
-        <#code#>
+        if isEmpty {
+            return nil
+        }
+        let firstValue = head?.value
+        
+        if head?.next == nil {
+            removeAll()
+            return firstValue
+        }
+        head = head?.next
+        return firstValue
     }
     
     func append(_ value: Element) {
@@ -51,10 +63,10 @@ final class LinkedList<Element>: Listable {
     }
     
     func removeAll() {
-        <#code#>
+        return
     }
     
     func peek() -> Element? {
-        <#code#>
+        return nil
     }
 }
