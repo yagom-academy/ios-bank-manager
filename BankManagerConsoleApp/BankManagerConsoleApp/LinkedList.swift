@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  BankManagerConsoleApp
 //
-//  Created by SeoDongyeon on 2022/04/25.
+//  Created by Donnie, Safari on 2022/04/25.
 //
 
 import Foundation
@@ -63,10 +63,11 @@ final class LinkedList<Element>: Listable {
     }
     
     func removeAll() {
-        return
+        head = nil
+        tail = nil
     }
     
     func peek() -> Element? {
-        return nil
+        return head?.value
     }
 }
