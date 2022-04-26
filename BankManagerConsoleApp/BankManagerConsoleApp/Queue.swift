@@ -25,7 +25,11 @@ struct Queue<T> {
     }
     
     mutating func dequeue() -> T? {
-        count -= 1
+        if isEmpty {
+            count = 0
+        } else {
+            count -= 1
+        }
         return list.removeFirst()
     }
     
