@@ -21,11 +21,11 @@ final class Queue<List: Listable> {
     }
 
     func clear() {
-        return list.removeAll()
+        list.removeAll()
     }
 
     func enQueue(data: List.Element) {
-        return list.append(value: data)
+        list.append(value: data)
     }
 
     func deQueue() -> List.Element? {

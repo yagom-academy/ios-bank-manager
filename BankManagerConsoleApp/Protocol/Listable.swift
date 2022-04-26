@@ -9,7 +9,6 @@ protocol Listable {
     associatedtype Element
     var isEmpty: Bool { get }
     var first: Element? { get }
-    var last: Element? { get }
 
     func append(value: Element)
     func removeAll()

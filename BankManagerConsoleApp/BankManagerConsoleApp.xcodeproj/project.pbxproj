@@ -105,8 +105,7 @@
 				DA69566928184984000C1164 /* Protocol */,
 				DA6956682818493D000C1164 /* Utils */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				DA69565D2816FA10000C1164 /* QueueTests */,
-				DA69566F28184CB3000C1164 /* DoubleStackTests */,
+				DA7544AF281855EB00A36211 /* Tests */,
 				C7694E77259C3EC00053667F /* Products */,
 				719B4824676F4472997671F3 /* Pods */,
 				1C12B85BC67CEF37018A99BF /* Frameworks */,
@@ -165,6 +164,15 @@
 				DA69567028184CB3000C1164 /* DoubleStackTests.swift */,
 			);
 			path = DoubleStackTests;
+			sourceTree = "<group>";
+		};
+		DA7544AF281855EB00A36211 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DA69566F28184CB3000C1164 /* DoubleStackTests */,
+				DA69565D2816FA10000C1164 /* QueueTests */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

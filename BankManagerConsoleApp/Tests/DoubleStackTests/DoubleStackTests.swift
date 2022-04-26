@@ -17,7 +17,7 @@ class DoubleStackTests: XCTestCase {
     override func tearDown() {
         self.sut = nil
     }
-    
+
     func test_append_3번_후에_isEmpty호출_removeAll호출_결과가_true인지() {
         sut.append(value: 1)
         sut.append(value: 2)
