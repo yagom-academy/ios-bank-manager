@@ -12,7 +12,6 @@ class DoubleLinkedListTests: XCTestCase {
     
     var sut: DoubleLinkedList<Int>!
     
-
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = DoubleLinkedList<Int>()
@@ -24,69 +23,69 @@ class DoubleLinkedListTests: XCTestCase {
     }
 
     func test_enqueue를_한번_호출했을때_sut의_count가_1이된다() {
-        //given
+        // given
         sut.enqueue(value: 3)
         
-        //when
+        // when
         let result = sut?.count
         
-        //then
+        // then
         XCTAssertEqual(result, 1)
     }
  
     func test_enqueue_한번_호출했을때_sut의_count가_1이된다() {
-        //given
+        // given
         sut.enqueue(value: 3)
         
-        //when
+        // when
         let result = sut.dequeue()
         
-        //then
+        // then
         XCTAssertEqual(result, 3)
     }
     
     func test_() {
-        //when
+        // when
         let result = sut.dequeue()
         
-        //then
+        // then
         XCTAssertNil(result)
     }
 
     func test_enqueue를_호출한후_dequeue를_호출하면_isEmpty가_true가된다() {
-        //given
+        // given
         sut.enqueue(value: 3)
         _ = sut.dequeue()
 
-        //when
+        // when
         let result = sut.isEmpty
         
-        //then
+        // then
         XCTAssertTrue(result)
     }
 
     func test_enqueue를_2번_호출한후_clearAll_호출하면_isEmpty가_true가된다() {
-        //given
+        // given
         sut.enqueue(value: 3)
         sut.enqueue(value: 2)
         sut.clearAll()
 
-        //when
+        // when
         let isEmpty = sut.isEmpty
 
-        //then
+        // then
         XCTAssertTrue(isEmpty)
     }
     
     func test_enqueue를_2번_호출한면_peek의_값이_3이된다() {
-        //given
+        // given
         sut.enqueue(value: 3)
         sut.enqueue(value: 2)
         
-        //when
+        // when
         let result = sut.peek
         
-        //then
+        // then
         XCTAssertEqual(result, 3)
     }
 }

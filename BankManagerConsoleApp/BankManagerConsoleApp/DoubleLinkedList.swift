@@ -10,7 +10,6 @@ import Foundation
 struct DoubleLinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    
     private(set) var count = 0
     
     var isEmpty: Bool {
