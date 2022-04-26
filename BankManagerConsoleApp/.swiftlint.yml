@@ -1,0 +1,4 @@
+disabled_rules: # Default Rules에서 비활성화할 규칙
+    
+    - trailing_whitespace
+    - comment_spacing
