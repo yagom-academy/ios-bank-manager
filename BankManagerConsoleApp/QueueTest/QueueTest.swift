@@ -32,7 +32,7 @@ class QueueTest: XCTestCase {
         queue?.enqueue(element: 1)
         queue?.enqueue(element: 2)
         queue?.enqueue(element: 3)
-        let _ = queue?.dequeue()
+        _ = queue?.dequeue()
         
         // when
         let value = queue?.dequeue()
