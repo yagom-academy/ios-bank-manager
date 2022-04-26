@@ -18,7 +18,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DA69565B2816FA10000C1164"
                BuildableName = "LinkedListTests.xctest"
-               BlueprintName = "LinkedListTests"
+               BlueprintName = "QueueTests"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
