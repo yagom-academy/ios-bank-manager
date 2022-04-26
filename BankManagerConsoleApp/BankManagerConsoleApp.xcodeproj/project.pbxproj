@@ -24,6 +24,9 @@
 		DA75448B2817058800A36211 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544892817058800A36211 /* Queue.swift */; };
 		DA7544AD2818421300A36211 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
 		DA7544AE2818421400A36211 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
+		DA7544B128185E5000A36211 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA7544B028185E5000A36211 /* .swiftlint.yml */; };
+		DA7544B228185E5000A36211 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA7544B028185E5000A36211 /* .swiftlint.yml */; };
+		DA7544B328185E5000A36211 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA7544B028185E5000A36211 /* .swiftlint.yml */; };
 		DA912A862816E36A00CD671D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,7 @@
 		DA7544792816E67F00A36211 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DA7544892817058800A36211 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DA7544AC2818421300A36211 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
+		DA7544B028185E5000A36211 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DA912A852816E36A00CD671D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +116,7 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				DA7544B028185E5000A36211 /* .swiftlint.yml */,
 				DA69566928184984000C1164 /* Protocol */,
 				DA6956682818493D000C1164 /* Utils */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
@@ -317,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7544B128185E5000A36211 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7544B228185E5000A36211 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7544B328185E5000A36211 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
