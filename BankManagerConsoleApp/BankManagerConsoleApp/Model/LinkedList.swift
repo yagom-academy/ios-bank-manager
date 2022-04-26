@@ -18,4 +18,17 @@ final class LinkedList<Element> {
             tail = newNode
         }
     }
+    
+    func removeFirst() -> Element? {
+        guard head != nil else { return nil }
+
+        let data = head?.data
+        if head?.next == nil {
+            head = nil
+            tail = nil
+        } else {
+            head = head?.next
+        }
+        return data
+    }
 }
