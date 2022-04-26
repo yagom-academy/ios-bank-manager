@@ -2,7 +2,7 @@
 //  DoubleStackTests.swift
 //  DoubleStackTests
 //
-//  Created by 김태훈 on 2022/04/27.
+//  Created by OneTool, Red on 2022/04/27.
 //
 
 import XCTest
