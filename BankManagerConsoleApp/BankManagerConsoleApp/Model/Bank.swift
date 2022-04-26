@@ -8,4 +8,9 @@
 final class Bank {
     var clerks: [BankClerk] = []
     var clients: Queue<Client> = Queue()
+    var clientCount: Int
+    
+    init(clientCount: Int) {
+        self.clientCount = clientCount
+    }
 }
