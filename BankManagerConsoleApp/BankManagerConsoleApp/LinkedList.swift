@@ -32,7 +32,7 @@ final class LinkedList<Element> {
     }
 
     func removeFirst() -> Element? {
-        if head == nil {
+        guard head != nil else {
             return nil
         }
 
