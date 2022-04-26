@@ -14,9 +14,9 @@ final class Node<T> {
 }
 
 final class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    var count = Int.zero
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    private var count = Int.zero
     
     var isEmpty: Bool {
         if head == nil {
