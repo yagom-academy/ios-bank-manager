@@ -5,8 +5,6 @@
 //  Created by 허윤영 on 25/04/2022.
 //
 
-import Foundation
-
 struct Queue<Element> {
     private var items = LinkedList<Element>()
     

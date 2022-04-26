@@ -5,15 +5,13 @@
 //  Created by 조민호 on 2022/04/25.
 //
 
-import Foundation
-
 final public class LinkedList<Element> {
     final private class Node {
-        var data: Element
+        var element: Element
         var next: Node?
 
-        init(data: Element) {
-            self.data = data
+        init(element: Element) {
+            self.element = element
         }
     }
     
@@ -25,11 +23,11 @@ final public class LinkedList<Element> {
     }
     
     var first: Element? {
-        return head?.data
+        return head?.element
     }
     
-    func append(_ data: Element) {
-        let newNode = Node(data: data)
+    func append(_ element: Element) {
+        let newNode = Node(element: element)
         
         if isEmpty {
             head = newNode
@@ -47,7 +45,7 @@ final public class LinkedList<Element> {
         
         let removedNode = head
         head = removedNode?.next
-        return removedNode?.data
+        return removedNode?.element
     }
     
     func removeAll() {
@@ -55,5 +53,3 @@ final public class LinkedList<Element> {
         tail = nil
     }
 }
-
-
