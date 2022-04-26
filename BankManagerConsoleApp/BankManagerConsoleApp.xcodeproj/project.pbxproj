@@ -13,6 +13,8 @@
 		DA69565F2816FA10000C1164 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69565E2816FA10000C1164 /* QueueTests.swift */; };
 		DA6956632816FD85000C1164 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA6956642816FDA3000C1164 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
+		DA695666281831FE000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
+		DA695667281831FE000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
 		DA75447A2816E67F00A36211 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA75448A2817058800A36211 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544892817058800A36211 /* Queue.swift */; };
 		DA75448B2817058800A36211 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544892817058800A36211 /* Queue.swift */; };
@@ -40,6 +42,7 @@
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		DA69565C2816FA10000C1164 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA69565E2816FA10000C1164 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		DA695665281831FE000C1164 /* DoubleStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStack.swift; sourceTree = "<group>"; };
 		DA7544792816E67F00A36211 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DA7544892817058800A36211 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DA912A852816E36A00CD671D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 				DA912A852816E36A00CD671D /* Node.swift */,
 				DA7544792816E67F00A36211 /* LinkedList.swift */,
 				DA7544892817058800A36211 /* Queue.swift */,
+				DA695665281831FE000C1164 /* DoubleStack.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -254,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA75448A2817058800A36211 /* Queue.swift in Sources */,
+				DA695666281831FE000C1164 /* DoubleStack.swift in Sources */,
 				DA912A862816E36A00CD671D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				DA75447A2816E67F00A36211 /* LinkedList.swift in Sources */,
@@ -266,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA6956642816FDA3000C1164 /* Node.swift in Sources */,
+				DA695667281831FE000C1164 /* DoubleStack.swift in Sources */,
 				DA6956632816FD85000C1164 /* LinkedList.swift in Sources */,
 				DA69565F2816FA10000C1164 /* QueueTests.swift in Sources */,
 				DA75448B2817058800A36211 /* Queue.swift in Sources */,
