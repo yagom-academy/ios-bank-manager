@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import BankManagerConsoleApp
 
 final class MockList<T>: Listable {
     var mockData: [T] = []

@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		14D0F9681A09263B50297123 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9629AF7EB7297E02AEEF0F0 /* Pods_BankManagerConsoleApp.framework */; };
-		9BB2B8E62816D2ED003D6212 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8E02816D1CF003D6212 /* LinkedListTest.swift */; };
 		9BB2B8E72816D34C003D6212 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8E02816D1CF003D6212 /* LinkedListTest.swift */; };
 		9BB2B8E82816D3CC003D6212 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A022816B72A0031964E /* LinkedList.swift */; };
 		9BB2B8E92816D3CE003D6212 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
-		9BB2B8EB2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */; };
 		9BB2B8EC2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */; };
-		9BB2B8EE2816DF65003D6212 /* MockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8ED2816DF65003D6212 /* MockList.swift */; };
 		9BB2B8EF2816DF65003D6212 /* MockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8ED2816DF65003D6212 /* MockList.swift */; };
 		9BB2B8F02816E175003D6212 /* BankWaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A042816DB570031964E /* BankWaitingQueue.swift */; };
 		9C8E5A032816B72B0031964E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A022816B72A0031964E /* LinkedList.swift */; };
@@ -275,12 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C8E5A032816B72B0031964E /* LinkedList.swift in Sources */,
-				9BB2B8EE2816DF65003D6212 /* MockList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				9BB2B8E62816D2ED003D6212 /* LinkedListTest.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				9C8E5A052816DB570031964E /* BankWaitingQueue.swift in Sources */,
-				9BB2B8EB2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

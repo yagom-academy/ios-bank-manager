@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import BankManagerConsoleApp
 
 class BankWaitingQueueTest: XCTestCase {
     var sut: BankWaitingQueue<MockList<Int>>!
