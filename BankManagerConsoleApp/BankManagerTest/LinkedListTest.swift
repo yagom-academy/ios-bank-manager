@@ -8,31 +8,27 @@
 import XCTest
 
 class LinkedListTest: XCTestCase {
-
-    var sut: LinkedList<Int>!
-
-    override func setUpWithError() throws {
-        sut = LinkedList<Int>()
-    }
-
-    override func tearDownWithError() throws {
-        sut = nil
-    }
+    let sut: LinkedList<Int> = LinkedList<Int>()
 
     func test_처음생성했을때_LinkedList가_isEmpty여야한다() {
         XCTAssertTrue(sut.isEmpty)
     }
 
-    func test_LinkedList에_값들을_append했을때_가장처음값이_peek의_값과_같아야한다() {
+    func test_LinkedList에_값들을_append했을때_peek을_두번호출해도_값변경없이_동일한값이_나온다() {
         // given
         sut.append(10)
         sut.append(20)
 
         // when
-        let data = sut.peek
+        let firstData = sut.peek
+        let secondData = sut.peek
 
         // then
-        XCTAssertEqual(data, 10)
+        XCTAssertEqual(firstData, secondData)
+    }
+
+    func test_LinkedList가_비어있을때_peek를_호출하면_nil를_반환해야한다() {
+        XCTAssertNil(sut.peek)
     }
 
     func test_LinkedList에_append를했을때_isEmpty가_false여야한다() {
@@ -54,6 +50,21 @@ class LinkedListTest: XCTestCase {
 
         // then
         XCTAssertEqual(data, 10)
+    }
+
+    func test_LinkedList가_비어있을때_removeFirst를_호출하면_nil를_반환해야한다() {
+        XCTAssertNil(sut.removeFirst())
+    }
+
+    func test_LinkedList에_한번_append하고_removeFirst를_호출하면_isEmpty가_나온다() {
+        // given
+        sut.append(10)
+
+        // when
+        _ = sut.removeFirst()
+
+        // then
+        XCTAssertTrue(sut.isEmpty)
     }
 
     func test_LinkedList에_값들을_append하고_clear했을때_isEmpty가_true여야한다() {
