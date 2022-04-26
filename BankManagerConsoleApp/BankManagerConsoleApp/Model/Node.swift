@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Node<Element> {
-    let data: Element
+final class Node<Element> {
+    private let data: Element
     var next: Node?
     
     init(date: Element) {
