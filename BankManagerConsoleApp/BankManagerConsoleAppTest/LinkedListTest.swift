@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
+@testable import Pods_BankManagerConsoleApp
 
 class LinkedListTest: XCTestCase {
     var sut: LinkedList<Int>!

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import BankManagerConsoleApp
+@testable import Pods_BankManagerConsoleApp
 
 final class MockList<T>: Listable {
     var mockData: [T] = []
