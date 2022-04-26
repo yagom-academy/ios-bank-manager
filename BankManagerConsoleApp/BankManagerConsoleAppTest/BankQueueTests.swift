@@ -69,4 +69,21 @@ final class BankQueueTests: XCTestCase {
     // then
     XCTAssertEqual(output, false)
   }
+
+  func testDequeue_WhenQueueIsEmpty_ShouldReturnNil() {
+    // given when
+    let output = self.sut?.dequeue()
+    // then
+    XCTAssertEqual(output, nil)
+  }
+
+  func testDequeue_WhenQueueIsNotEmpty_ShouldReturnFirstElement() {
+    // given
+    self.sut?.enqueue(1)
+    // when
+    let input = self.sut?.peek
+    let output = self.sut?.dequeue()
+    // then
+    XCTAssertEqual(output, input)
+  }
 }
