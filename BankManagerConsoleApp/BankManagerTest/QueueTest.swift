@@ -8,16 +8,7 @@
 import XCTest
 
 class QueueTest: XCTestCase {
-    var sut: Queue<Int>!
-
-    override func setUpWithError() throws {
-        let list = LinkedList<Int>()
-        sut = Queue<Int>(list: list)
-    }
-
-    override func tearDownWithError() throws {
-        sut = nil
-    }
+    let sut = Queue<Int>()
 
     func test_Queue에_enqueue하면_isEmpty가_false로_나온다() {
         // when
@@ -36,6 +27,23 @@ class QueueTest: XCTestCase {
 
         // then
         XCTAssertEqual(data, 10)
+    }
+
+    func test_Queue가_비어있을때_dequeue하면_nil이나온다() {
+        XCTAssertNil(sut.dequeue())
+    }
+
+    func test_Queue에_값들을_enqueue하고_dequeue를_했을때_값이_두번쨰_enqueue한값과_달라야한다() {
+        // given
+        sut.enqueue(10)
+        sut.enqueue(20)
+        sut.enqueue(30)
+
+        // when
+        let data = sut.dequeue()
+
+        // then
+        XCTAssertNotEqual(data, 20)
     }
 
     func test_Queue에_enqueue_2번하고_clear하면_isEmpty가_true로_나온다() {
@@ -60,5 +68,22 @@ class QueueTest: XCTestCase {
 
         // then
         XCTAssertEqual(data, 10)
+    }
+
+    func test_Queue가_비어있을때_peek을_호출하면_nil이나온다() {
+        XCTAssertNil(sut.peek)
+    }
+
+    func test_Queue에_값들을_enqueue했을때_peek을_두번호출해도_값변경없이_동일한값이_나온다() {
+        // given
+        sut.enqueue(10)
+        sut.enqueue(20)
+
+        // when
+        let firstData = sut.peek
+        let secondData = sut.peek
+
+        // then
+        XCTAssertEqual(firstData, secondData)
     }
 }
