@@ -6,14 +6,14 @@
 //
 
 final class Queue<T> {
-    private var linkedList = LinkedList<T>()
+    var linkedList = LinkedList<T>()
 
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
 
     var peek: T? {
-        return linkedList.peek
+        return linkedList.first
     }
 
     func clear() {
@@ -25,6 +25,6 @@ final class Queue<T> {
     }
 
     func deQueue() -> T? {
-        return linkedList.pop()
+        return linkedList.last
     }
 }

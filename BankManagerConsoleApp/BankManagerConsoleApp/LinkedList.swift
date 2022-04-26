@@ -13,13 +13,12 @@ final class LinkedList<T> {
         return head == nil
     }
 
-    var peek: T? {
+    var first: T? {
         return head?.data
     }
-
-    func removeAll() {
-        head = nil
-        tail = nil
+    
+    var last: T? {
+        return tail?.data
     }
 
     func append(data: T) {
@@ -34,7 +33,12 @@ final class LinkedList<T> {
         }
     }
 
-    func pop() -> T? {
+    func removeAll() {
+        head = nil
+        tail = nil
+    }
+
+    func removeFirst() -> T? {
         guard head != nil else {
             return nil
         }
