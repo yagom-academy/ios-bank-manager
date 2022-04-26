@@ -8,7 +8,15 @@
 import XCTest
 
 class QueueTests: XCTestCase {
-    var sut = Queue<Int>()
+    var sut: Queue<LinkedList<Int>>!
+    
+    override func setUp() {
+       sut = Queue(listType: LinkedList<Int>())
+    }
+
+    override func tearDown() {
+        self.sut = nil
+    }
 
     func test_isEmpty() {
         sut.enQueue(data: 1)
