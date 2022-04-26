@@ -12,6 +12,10 @@ final class LinkedList<Element> {
         return head == nil
     }
     
+    var first: Element? {
+        return head?.data
+    }
+    
     func append(data: Element) {
         let newNode = Node(date: data)
         if head == nil {
