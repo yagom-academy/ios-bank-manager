@@ -20,6 +20,12 @@ struct Bank {
         return String(format: "%.2f", flooredDifference)
     }
 
+    mutating func open() {
+        makeCustomers()
+        sendCustomerToClerk()
+        printBankResult()
+    }
+
     private func makeCustomers() {
         let customerCount = Int.random(in: 10...30)
         for number in 1...customerCount {
