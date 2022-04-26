@@ -8,11 +8,7 @@
 import Foundation
 
 final class Queue<Element> {
-    let list: LinkedList<Element>
-
-    init(list: LinkedList<Element>) {
-        self.list = list
-    }
+    private let list = LinkedList<Element>()
 
     var isEmpty: Bool {
         return list.isEmpty
