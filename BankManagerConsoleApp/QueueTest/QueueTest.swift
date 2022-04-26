@@ -49,7 +49,6 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(sut.peek, "b")
     }
 
-
     func test_enqueue진행후_clear호출시_isEmpty가true를반환하는지() {
         sut.enqueue(data: "a")
         sut.enqueue(data: "b")
