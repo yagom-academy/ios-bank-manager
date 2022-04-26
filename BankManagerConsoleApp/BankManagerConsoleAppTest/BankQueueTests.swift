@@ -86,4 +86,14 @@ final class BankQueueTests: XCTestCase {
     // then
     XCTAssertEqual(output, input)
   }
+
+  func testClear_WhenQueueIsNotEmpty_IsEmptyShouldReturnTrue() {
+    // given
+    self.sut?.enqueue(1)
+    // when
+    self.sut?.clear()
+    let output = self.sut?.isEmpty
+    // then
+    XCTAssertEqual(output, true)
+  }
 }
