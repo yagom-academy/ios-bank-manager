@@ -31,4 +31,9 @@ final class LinkedList<Element> {
         }
         return data
     }
+    
+    func clear() {
+        head = nil
+        tail = nil
+    }
 }
