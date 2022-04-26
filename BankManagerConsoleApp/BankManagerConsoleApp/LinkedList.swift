@@ -5,23 +5,23 @@
 //  Created by OneTool, Red on 2022/04/25.
 //
 
-final class LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+final class LinkedList<Element>: Listable {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
 
     var isEmpty: Bool {
         return head == nil
     }
 
-    var first: T? {
+    var first: Element? {
         return head?.data
     }
-    
-    var last: T? {
+
+    var last: Element? {
         return tail?.data
     }
 
-    func append(data: T) {
+    func append(value data: Element) {
         let node = Node(data: data)
         if head == nil {
             head = node
@@ -38,7 +38,7 @@ final class LinkedList<T> {
         tail = nil
     }
 
-    func removeFirst() -> T? {
+    func removeFirst() -> Element? {
         guard head != nil else {
             return nil
         }

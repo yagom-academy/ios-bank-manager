@@ -5,26 +5,30 @@
 //  Created by OneTool, Red on 2022/04/26.
 //
 
-final class Queue<T> {
-    var linkedList = LinkedList<T>()
+final class Queue<List: Listable> {
+    let list: List
 
-    var isEmpty: Bool {
-        return linkedList.isEmpty
+    init(listType: List) {
+        self.list = listType
     }
 
-    var peek: T? {
-        return linkedList.first
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+
+    var peek: List.Element? {
+        return list.first
     }
 
     func clear() {
-        return linkedList.removeAll()
+        return list.removeAll()
     }
 
-    func enQueue(data: T) {
-        return linkedList.append(data: data)
+    func enQueue(data: List.Element) {
+        return list.append(value: data)
     }
 
-    func deQueue() -> T? {
-        return linkedList.last
+    func deQueue() -> List.Element? {
+        return list.removeFirst()
     }
 }
