@@ -41,7 +41,7 @@ class QueueTest: XCTestCase {
     
     func test_enqueue를두번하고_dequeue를두번했을때_isEmpty가_true를_반환해야한다() {
         // given
-        let input = [1,2]
+        let input = [1, 2]
 
         // when
         input.forEach {
@@ -67,7 +67,7 @@ class QueueTest: XCTestCase {
 
     func test_clear를했을때_isEmpty는_true이여야한다() {
         // given
-        let input = [1,2]
+        let input = [1, 2]
 
         // when
         input.forEach {
