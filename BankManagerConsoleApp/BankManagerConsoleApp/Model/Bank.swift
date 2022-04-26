@@ -13,4 +13,10 @@ final class Bank {
     init(clientCount: Int) {
         self.clientCount = clientCount
     }
+    
+    func configureClient() {
+        for number in 0..<clientCount {
+            clients.enqueue(data: Client(number: number))
+        }
+    }
 }
