@@ -18,7 +18,7 @@ struct LinkedList<T> {
         }
     }
     
-    mutating func setIfIsNil(node: Node<T>) -> Bool {
+    mutating private func setIfIsNil(node: Node<T>) -> Bool {
         if isNil {
             head = node
             tail = node
