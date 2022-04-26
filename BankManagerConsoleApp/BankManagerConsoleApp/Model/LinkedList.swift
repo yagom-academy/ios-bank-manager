@@ -27,17 +27,15 @@ final class LinkedList<Element> {
         }
     }
     
-    func removeFirst() -> Element? {
-        guard head != nil else { return nil }
+    func removeFirst() {
+        guard head != nil else { return }
 
-        let data = head?.data
         if head?.next == nil {
             head = nil
             tail = nil
         } else {
             head = head?.next
         }
-        return data
     }
     
     func clear() {
