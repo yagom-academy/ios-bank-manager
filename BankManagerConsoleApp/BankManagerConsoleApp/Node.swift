@@ -12,9 +12,7 @@ final class Node<T> {
     weak var previous: Node?
     var next: Node?
     
-    init(value: T, previous: Node? = nil, next: Node? = nil) {
+    init(value: T) {
         self.value = value
-        self.previous = previous
-        self.next = next
     }
 }
