@@ -9,7 +9,7 @@ import Foundation
 
 struct Queue<T> {
     private var list = LinkedList<T>()
-    private(set) var count = 0
+    private(set) var count: Int = 0
     
     var isEmpty: Bool {
         return list.isEmpty
