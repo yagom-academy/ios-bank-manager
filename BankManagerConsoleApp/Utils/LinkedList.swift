@@ -21,8 +21,8 @@ final class LinkedList<Element>: Listable {
         return tail?.data
     }
 
-    func append(value data: Element) {
-        let node = Node(data: data)
+    func append(value: Element) {
+        let node = Node(data: value)
         if head == nil {
             head = node
             tail = node

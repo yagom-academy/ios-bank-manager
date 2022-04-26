@@ -15,11 +15,14 @@
 		DA6956642816FDA3000C1164 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
 		DA695666281831FE000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
 		DA695667281831FE000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
+		DA69567128184CB3000C1164 /* DoubleStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567028184CB3000C1164 /* DoubleStackTests.swift */; };
+		DA695675281850F5000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
+		DA69567628185132000C1164 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
 		DA75447A2816E67F00A36211 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA75448A2817058800A36211 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544892817058800A36211 /* Queue.swift */; };
 		DA75448B2817058800A36211 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544892817058800A36211 /* Queue.swift */; };
-		DA7544AD2818421300A36211 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* List.swift */; };
-		DA7544AE2818421400A36211 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* List.swift */; };
+		DA7544AD2818421300A36211 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
+		DA7544AE2818421400A36211 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
 		DA912A862816E36A00CD671D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,9 +48,11 @@
 		DA69565C2816FA10000C1164 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA69565E2816FA10000C1164 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		DA695665281831FE000C1164 /* DoubleStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStack.swift; sourceTree = "<group>"; };
+		DA69566E28184CB3000C1164 /* DoubleStackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoubleStackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA69567028184CB3000C1164 /* DoubleStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStackTests.swift; sourceTree = "<group>"; };
 		DA7544792816E67F00A36211 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DA7544892817058800A36211 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		DA7544AC2818421300A36211 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		DA7544AC2818421300A36211 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
 		DA912A852816E36A00CD671D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +66,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DA6956592816FA10000C1164 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA69566B28184CB3000C1164 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -90,8 +102,11 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				DA69566928184984000C1164 /* Protocol */,
+				DA6956682818493D000C1164 /* Utils */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				DA69565D2816FA10000C1164 /* QueueTests */,
+				DA69566F28184CB3000C1164 /* DoubleStackTests */,
 				C7694E77259C3EC00053667F /* Products */,
 				719B4824676F4472997671F3 /* Pods */,
 				1C12B85BC67CEF37018A99BF /* Frameworks */,
@@ -103,6 +118,7 @@
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
 				DA69565C2816FA10000C1164 /* LinkedListTests.xctest */,
+				DA69566E28184CB3000C1164 /* DoubleStackTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,11 +128,6 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				DA912A852816E36A00CD671D /* Node.swift */,
-				DA7544792816E67F00A36211 /* LinkedList.swift */,
-				DA7544892817058800A36211 /* Queue.swift */,
-				DA695665281831FE000C1164 /* DoubleStack.swift */,
-				DA7544AC2818421300A36211 /* List.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -127,6 +138,33 @@
 				DA69565E2816FA10000C1164 /* QueueTests.swift */,
 			);
 			path = QueueTests;
+			sourceTree = "<group>";
+		};
+		DA6956682818493D000C1164 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DA912A852816E36A00CD671D /* Node.swift */,
+				DA7544792816E67F00A36211 /* LinkedList.swift */,
+				DA7544892817058800A36211 /* Queue.swift */,
+				DA695665281831FE000C1164 /* DoubleStack.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		DA69566928184984000C1164 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				DA7544AC2818421300A36211 /* Listable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		DA69566F28184CB3000C1164 /* DoubleStackTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA69567028184CB3000C1164 /* DoubleStackTests.swift */,
+			);
+			path = DoubleStackTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +206,23 @@
 			productReference = DA69565C2816FA10000C1164 /* LinkedListTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DA69566D28184CB3000C1164 /* DoubleStackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA69567228184CB3000C1164 /* Build configuration list for PBXNativeTarget "DoubleStackTests" */;
+			buildPhases = (
+				DA69566A28184CB3000C1164 /* Sources */,
+				DA69566B28184CB3000C1164 /* Frameworks */,
+				DA69566C28184CB3000C1164 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DoubleStackTests;
+			productName = DoubleStackTests;
+			productReference = DA69566E28184CB3000C1164 /* DoubleStackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,6 +236,9 @@
 						CreatedOnToolsVersion = 12.1;
 					};
 					DA69565B2816FA10000C1164 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					DA69566D28184CB3000C1164 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
 				};
@@ -200,12 +258,20 @@
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
 				DA69565B2816FA10000C1164 /* LinkedListTests */,
+				DA69566D28184CB3000C1164 /* DoubleStackTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DA69565A2816FA10000C1164 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA69566C28184CB3000C1164 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,7 +329,7 @@
 			files = (
 				DA75448A2817058800A36211 /* Queue.swift in Sources */,
 				DA695666281831FE000C1164 /* DoubleStack.swift in Sources */,
-				DA7544AD2818421300A36211 /* List.swift in Sources */,
+				DA7544AD2818421300A36211 /* Listable.swift in Sources */,
 				DA912A862816E36A00CD671D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				DA75447A2816E67F00A36211 /* LinkedList.swift in Sources */,
@@ -280,7 +346,17 @@
 				DA6956632816FD85000C1164 /* LinkedList.swift in Sources */,
 				DA69565F2816FA10000C1164 /* QueueTests.swift in Sources */,
 				DA75448B2817058800A36211 /* Queue.swift in Sources */,
-				DA7544AE2818421400A36211 /* List.swift in Sources */,
+				DA7544AE2818421400A36211 /* Listable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA69566A28184CB3000C1164 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA69567128184CB3000C1164 /* DoubleStackTests.swift in Sources */,
+				DA69567628185132000C1164 /* Listable.swift in Sources */,
+				DA695675281850F5000C1164 /* DoubleStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +530,38 @@
 			};
 			name = Release;
 		};
+		DA69567328184CB3000C1164 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = onetool.net.DoubleStackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DA69567428184CB3000C1164 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = onetool.net.DoubleStackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -480,6 +588,15 @@
 			buildConfigurations = (
 				DA6956612816FA10000C1164 /* Debug */,
 				DA6956622816FA10000C1164 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA69567228184CB3000C1164 /* Build configuration list for PBXNativeTarget "DoubleStackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA69567328184CB3000C1164 /* Debug */,
+				DA69567428184CB3000C1164 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
