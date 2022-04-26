@@ -4,6 +4,8 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+import CoreFoundation
+
 struct BankManager {
     var bank: Bank?
     
@@ -48,5 +50,14 @@ struct BankManager {
         let randomClientNumber = Int.random(in: 10...30)
         let bank = Bank(clientCount: randomClientNumber)
         self.bank = bank
+        bank.configureClient()
+    }
+    
+    func checkTime(of method: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        method()
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        return Double(durationTime)
     }
 }
