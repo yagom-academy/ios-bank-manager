@@ -20,14 +20,14 @@ class QueueTest: XCTestCase {
         sut = nil
     }
     
-    func test_queue가_비어있을때_isEmpty가_true를_반환해야한다() {
+    func test_queue가_비어있을때_isEmpty가_true를_반환() {
         // given
         // when
         // then
         XCTAssertTrue(sut.isEmpty)
     }
 
-    func test_enqueue를_한번했을때_peek값은_enqueue한값과_같아야한다() {
+    func test_enqueue를_한번했을때_peek값은_enqueue한값과_같다() {
         // given
         let input = 1
         
@@ -39,7 +39,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(input, result)
     }
     
-    func test_enqueue를두번하고_dequeue를두번했을때_isEmpty가_true를_반환해야한다() {
+    func test_enqueue를두번하고_dequeue를두번했을때_isEmpty가_true를_반환() {
         // given
         let input = [1, 2]
 
@@ -57,7 +57,7 @@ class QueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_queue가비어있을때_dequeue를하면_nil을반환해야한다() {
+    func test_queue가비어있을때_dequeue를하면_nil을_반환() {
         // given
         // when
         // then
@@ -65,7 +65,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(nil, result)
     }
 
-    func test_clear를했을때_isEmpty는_true이여야한다() {
+    func test_clear를했을때_isEmpty는_true를_반환() {
         // given
         let input = [1, 2]
 
