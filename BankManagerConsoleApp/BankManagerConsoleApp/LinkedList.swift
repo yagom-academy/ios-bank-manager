@@ -23,13 +23,14 @@ struct LinkedList<T> {
     }
     
     mutating func append(value: T) {
+        let newNode = Node(value: value)
         if isEmpty {
-            head = Node(value: value)
+            head = newNode
             tail = head
             return
         }
         
-        let newNode = Node(value: value, previous: tail)
+        newNode.previous = tail
         tail?.next = newNode
         tail = newNode
     }
