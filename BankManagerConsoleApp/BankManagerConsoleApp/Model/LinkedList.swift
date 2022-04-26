@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class LinkedList<Element> {
-    final class Node {
+final public class LinkedList<Element> {
+    final private class Node {
         var data: Element
         var next: Node?
 
