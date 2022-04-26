@@ -6,15 +6,17 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
 
 final class BankQueueTests: XCTestCase {
-  
+  private var sut: BankQueue<Int>?
+
   override func setUpWithError() throws {
     try super.setUpWithError()
+    self.sut = BankQueue<Int>()
   }
-  
+
   override func tearDownWithError() throws {
     try super.tearDownWithError()
+    self.sut = nil
   }
 }
