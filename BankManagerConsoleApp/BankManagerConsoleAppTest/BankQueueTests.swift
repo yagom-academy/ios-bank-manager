@@ -35,4 +35,30 @@ final class BankQueueTests: XCTestCase {
     // then
     XCTAssertEqual(output, false)
   }
+
+  func testPeek_WhenQueueIsEmpty_ShouldReturnNil() {
+    // given when
+    let output = self.sut?.peek
+    // then
+    XCTAssertEqual(output, nil)
+  }
+
+  func testPeek_WhenQueueEnqueueOne_ShouldReturnOne() {
+    // given
+    self.sut?.enqueue(1)
+    // when
+    let output = self.sut?.peek
+    // then
+    XCTAssertEqual(output, 1)
+  }
+
+  func testPeek_WhenQueueEnqueueOneTwo_ShouldReturnOne() {
+    // given
+    self.sut?.enqueue(1)
+    self.sut?.enqueue(2)
+    // when
+    let output = self.sut?.peek
+    // then
+    XCTAssertEqual(output, 1)
+  }
 }
