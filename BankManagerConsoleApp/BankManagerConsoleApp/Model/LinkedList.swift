@@ -18,7 +18,7 @@ final class LinkedList<Element> {
     
     func append(data: Element) {
         let newNode = Node(date: data)
-        if head == nil {
+        if isEmpty {
             head = newNode
             tail = newNode
         } else {
@@ -28,7 +28,7 @@ final class LinkedList<Element> {
     }
     
     func removeFirst() {
-        guard head != nil else { return }
+        guard !isEmpty else { return }
 
         if head?.next == nil {
             head = nil
