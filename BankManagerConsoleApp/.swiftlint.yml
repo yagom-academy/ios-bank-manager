@@ -2,3 +2,4 @@ disabled_rules:
     - trailing_whitespace
     - comment_spacing
     - redundant_discardable_let
+    - nesting
