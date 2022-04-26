@@ -1,5 +1,5 @@
 //
-//  DoubleLinkedList.swift
+//  LinkedList.swift
 //  BankManagerConsoleApp
 //
 //  Created by mmim, malrang.
@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct DoubleLinkedList<T> {
+struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    private(set) var count = 0
     
     var isEmpty: Bool {
         if head == nil {
@@ -19,38 +18,34 @@ struct DoubleLinkedList<T> {
         return false
     }
     
-    var peek: T? {
+    var first: T? {
         return head?.value
     }
     
-    mutating func enqueue(value: T) {
+    mutating func append(value: T) {
         if isEmpty {
             head = Node(value: value)
             tail = head
-            count += 1
             return
         }
         
         let newNode = Node(value: value, previous: tail)
         tail?.next = newNode
         tail = newNode
-        count += 1
     }
     
-    mutating func dequeue() -> T? {
+    mutating func removeFirst() -> T? {
         if isEmpty {
             return nil
         }
         
         let dequeueValue = head?.value
         head = head?.next
-        count -= 1
         return dequeueValue
     }
     
-    mutating func clearAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
-        count = 0
     }
 }
