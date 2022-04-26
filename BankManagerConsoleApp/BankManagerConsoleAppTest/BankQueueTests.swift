@@ -19,20 +19,20 @@ final class BankQueueTests: XCTestCase {
     try super.tearDownWithError()
     self.sut = nil
   }
-  
+
   func testIsEmpty_WhenQueueIsEmpty_ShouldReturnTrue() {
-    //given when
+    // given when
     let output = self.sut?.isEmpty
-    //then
+    // then
     XCTAssertEqual(output, true)
   }
-  
+
   func testIsEmpty_WhenQueueIsNotEmpty_ShouldReturnFalse() {
-    //given
+    // given
     self.sut?.enqueue(1)
-    //when
+    // when
     let output = self.sut?.isEmpty
-    //then
+    // then
     XCTAssertEqual(output, false)
   }
 }
