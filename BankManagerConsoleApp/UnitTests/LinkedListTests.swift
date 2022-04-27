@@ -129,4 +129,18 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, 10)
     }
+    
+    func test_linkedList_첫번째에_값을_삽입하면_그다음값이_이전_첫번째_값이어야한다() {
+        // given
+        sut.append(value: 1)
+        sut.append(value: 2)
+        sut.append(value: 3)
+        sut.insert(value: 10, at: 0)
+        
+        // when
+        let result = sut.index(at: 1)?.value
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
 }
