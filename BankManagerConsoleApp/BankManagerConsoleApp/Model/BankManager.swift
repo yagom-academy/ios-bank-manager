@@ -7,7 +7,7 @@
 import CoreFoundation
 
 struct BankManager {
-    var bank: Bank = Bank()
+    private var bank: Bank = Bank()
     
     enum Constant {
         enum MenuSelect: String {
