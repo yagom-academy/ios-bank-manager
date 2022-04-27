@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		67251F1E281912B700069BBA /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67251F1D281912B700069BBA /* Bank.swift */; };
+		67251F2128195AAE00069BBA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67251F2028195AAE00069BBA /* Constants.swift */; };
 		674062252816D35E0032A2AE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674062242816D35E0032A2AE /* Queue.swift */; };
 		A11246A32816CDFD00292332 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11246A22816CDFD00292332 /* LinkedList.swift */; };
 		A11246BB2816DBB300292332 /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11246BA2816DBB300292332 /* QueueTest.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		0205DF7F705BF47F057A0DEB /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		67251F1D281912B700069BBA /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		67251F2028195AAE00069BBA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		674062242816D35E0032A2AE /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		9E7AA34411D40488271CC611 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		A11246A22816CDFD00292332 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 				9E7AA34411D40488271CC611 /* Pods-BankManagerConsoleApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		67251F1F28195A9500069BBA /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				67251F2028195AAE00069BBA /* Constants.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		A11246A12816CDEF00292332 /* Model */ = {
@@ -129,6 +139,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				67251F1F28195A9500069BBA /* Util */,
 				A11246A12816CDEF00292332 /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				A11246A42816D15600292332 /* .swiftlint.yml */,
@@ -283,6 +294,7 @@
 				A1E557C3281916BC008870CC /* BankClerk.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				67251F1E281912B700069BBA /* Bank.swift in Sources */,
+				67251F2128195AAE00069BBA /* Constants.swift in Sources */,
 				A1E557C12819113E008870CC /* Client.swift in Sources */,
 				674062252816D35E0032A2AE /* Queue.swift in Sources */,
 			);

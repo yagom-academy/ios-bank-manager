@@ -4,9 +4,20 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+fileprivate extension Constants {
+    static let bankOpen = "1"
+    static let exit = "2"
+    static let menu = """
+    1 : 은행개점
+    2 : 종료
+    입력 :
+    """
+    static let whiteSpace = " "
+}
+
 func startProgram() {
     // TODO: 매직넘버, 매직스트링 커버, 은행 생성, 에러처리
-    let bankClerk = BankClerk(name: "은행원1")
+    let bankClerk = BankClerk(name: "임시")
     let bank = Bank(bankClerk: bankClerk)
     
     while true {
@@ -14,9 +25,9 @@ func startProgram() {
         let userInput = receivedUserInput()
         
         switch userInput {
-        case "1":
+        case Constants.bankOpen:
             bank.open()
-        case "2":
+        case Constants.exit:
             return
         default:
             continue
@@ -25,12 +36,8 @@ func startProgram() {
 }
 
 fileprivate func printMenu() {
-    let menu = """
-    1 : 은행개점
-    2 : 종료
-    입력 :
-    """
-    print(menu, terminator: " ")
+    let menu = Constants.menu
+    print(menu, terminator: Constants.whiteSpace)
 }
 
 fileprivate func receivedUserInput() -> String {
