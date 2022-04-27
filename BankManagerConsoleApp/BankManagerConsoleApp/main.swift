@@ -5,6 +5,7 @@
 //
 
 func startProgram() {
+    // TODO: 매직넘버, 매직스트링 커버, 은행 생성, 에러처리
     while true {
         printMenu()
         let userInput = receivedUserInput()
