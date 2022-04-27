@@ -5,17 +5,21 @@
 //  Created by 허윤영 on 27/04/2022.
 //
 
-final class Bank {
+protocol BankDelegate: AnyObject {
+    func close()
+}
+
+final class Bank: BankDelegate {
     private let clientQueue = Queue<Client>()
     private let bankClerk: BankClerk
+    private let clientCount = Int.random(in: 10 ... 30)
     
     init(bankClerk: BankClerk) {
         self.bankClerk = bankClerk
+        bankClerk.setDelegate(delegate: self)
     }
     
     private func receiveClients() {
-        let clientCount = Int.random(in: 10 ... 30)
-        
         for order in 1 ... clientCount {
             clientQueue.enqueue(Client(waitingNumber: order))
         }
@@ -24,5 +28,9 @@ final class Bank {
     func open() {
         receiveClients()
         bankClerk.work(clientQueue)
+    }
+    
+    func close() {
+        print("업무가 마감되었습니다.")
     }
 }

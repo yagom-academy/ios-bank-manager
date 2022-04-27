@@ -10,13 +10,17 @@ import Foundation
 final class BankClerk {
     private let workSpeed: Double = 0.7
     private let name: String
+    weak var delegate: BankDelegate?
     
     init(name: String) {
         self.name = name
     }
     
+    func setDelegate(delegate: BankDelegate) {
+        self.delegate = delegate
+    }
+    
     func work(_ queue: Queue<Client>) {
-        let workGroup = DispatchGroup()
         let workQueue = DispatchQueue(label: name)
         
         let workItem = DispatchWorkItem {
@@ -31,7 +35,13 @@ final class BankClerk {
         }
                 
         while queue.isEmpty == false {
-            workQueue.async(group: workGroup, execute: workItem)
+            workQueue.async(execute: workItem)
         }
+        
+        endWork()
+    }
+    
+    func endWork() {
+        delegate?.close()
     }
 }
