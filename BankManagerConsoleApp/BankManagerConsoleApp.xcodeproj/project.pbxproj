@@ -15,6 +15,7 @@
 		A11246C52816DEF600292332 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11246A22816CDFD00292332 /* LinkedList.swift */; };
 		A13BFFD928178CCD00B3A6C0 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A13BFFD828178CCD00B3A6C0 /* .swiftlint.yml */; };
 		A1E557C12819113E008870CC /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E557C02819113E008870CC /* Client.swift */; };
+		A1E557C3281916BC008870CC /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E557C2281916BC008870CC /* BankClerk.swift */; };
 		ACFC801545EAB83ED5A03CC3 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73E324EDE079A1E4E9B7760 /* Pods_BankManagerConsoleApp.framework */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		A11246BA2816DBB300292332 /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
 		A13BFFD828178CCD00B3A6C0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A1E557C02819113E008870CC /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		A1E557C2281916BC008870CC /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E73E324EDE079A1E4E9B7760 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				674062242816D35E0032A2AE /* Queue.swift */,
 				A1E557C02819113E008870CC /* Client.swift */,
 				67251F1D281912B700069BBA /* Bank.swift */,
+				A1E557C2281916BC008870CC /* BankClerk.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11246A32816CDFD00292332 /* LinkedList.swift in Sources */,
+				A1E557C3281916BC008870CC /* BankClerk.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				67251F1E281912B700069BBA /* Bank.swift in Sources */,
 				A1E557C12819113E008870CC /* Client.swift in Sources */,

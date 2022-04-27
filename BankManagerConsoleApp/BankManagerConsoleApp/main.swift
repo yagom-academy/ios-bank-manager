@@ -6,13 +6,16 @@
 
 func startProgram() {
     // TODO: 매직넘버, 매직스트링 커버, 은행 생성, 에러처리
+    let bankClerk = BankClerk(name: "은행원1")
+    let bank = Bank(bankClerk: bankClerk)
+    
     while true {
         printMenu()
         let userInput = receivedUserInput()
         
         switch userInput {
         case "1":
-            print("은행 개점")
+            bank.open()
         case "2":
             return
         default:
