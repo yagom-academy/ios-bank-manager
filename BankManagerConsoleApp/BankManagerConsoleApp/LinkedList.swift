@@ -11,12 +11,14 @@ final class LinkedList<T> {
     
     func append(_ data: T) {
         let newNode = Node(data)
+        
         if head == nil {
             head = newNode
         } else {
             newNode.prev = tail
             tail?.next = newNode
         }
+        
         count += 1
         tail = newNode
     }
