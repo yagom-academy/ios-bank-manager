@@ -31,8 +31,8 @@ final class LinkedList<T> {
             tail = node
             return
         }
-        tail = node
         tail?.next = node
+        tail = node
     }
     
     func removeFirst() -> T? {
