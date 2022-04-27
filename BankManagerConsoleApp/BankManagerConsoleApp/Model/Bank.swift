@@ -16,8 +16,7 @@ final class Bank {
     }
     
     private func generateClient() {
-        for number in 1..<clientCount {
-            
+        for number in 1...clientCount {
             clients.enqueue(data: Client(number: number))
         }
     }

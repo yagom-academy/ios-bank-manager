@@ -6,7 +6,6 @@
 import Foundation
 
 struct BankClerk {
-    
     func work(client: Client) {
         DispatchQueue.global().sync {
             print("\(client.number)번 고객 업무 시작")

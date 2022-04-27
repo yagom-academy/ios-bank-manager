@@ -60,11 +60,10 @@ struct BankManager {
         let totalClientCount = bank.clientCount
 
         let duration = checkTime {
-            guard let client = bank.clients.dequeue() else {
-                return
-            }
-            
             for _ in 0..<totalClientCount {
+                guard let client = bank.clients.dequeue() else {
+                    return
+                }
                 bank.clerks[0].work(client: client)
             }
         }
