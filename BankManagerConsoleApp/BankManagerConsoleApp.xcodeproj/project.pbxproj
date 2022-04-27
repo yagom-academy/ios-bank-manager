@@ -18,6 +18,7 @@
 		A13BFFD928178CCD00B3A6C0 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A13BFFD828178CCD00B3A6C0 /* .swiftlint.yml */; };
 		A1E557C12819113E008870CC /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E557C02819113E008870CC /* Client.swift */; };
 		A1E557C3281916BC008870CC /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E557C2281916BC008870CC /* BankClerk.swift */; };
+		A1E557CB28196578008870CC /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E557CA28196578008870CC /* Presentable.swift */; };
 		ACFC801545EAB83ED5A03CC3 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73E324EDE079A1E4E9B7760 /* Pods_BankManagerConsoleApp.framework */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		A13BFFD828178CCD00B3A6C0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A1E557C02819113E008870CC /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		A1E557C2281916BC008870CC /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
+		A1E557CA28196578008870CC /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E73E324EDE079A1E4E9B7760 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,14 @@
 			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
 		};
+		A1E557C92819654D008870CC /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				A1E557CA28196578008870CC /* Presentable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		B50A4892713E0517202336BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +152,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				A1E557C92819654D008870CC /* Protocol */,
 				67251F1F28195A9500069BBA /* Util */,
 				A11246A12816CDEF00292332 /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -301,6 +312,7 @@
 				67251F2128195AAE00069BBA /* Constants.swift in Sources */,
 				A1E557C12819113E008870CC /* Client.swift in Sources */,
 				674062252816D35E0032A2AE /* Queue.swift in Sources */,
+				A1E557CB28196578008870CC /* Presentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@
 
 fileprivate extension Constants {
     static let range: ClosedRange<Int> = 10 ... 30
-    static let workSpeed: Double = 700000
+    static let workSpeed: UInt32 = 700000
     static let bankOpen = "1"
     static let exit = "2"
     static let menu = """
@@ -15,10 +15,11 @@ fileprivate extension Constants {
     입력 :
     """
     static let whiteSpace = " "
+    static let temporaryName = "임시이름"
 }
 
 do {
-    let bankClerk = BankClerk(name: "임시", workSpeed: Constants.workSpeed)
+    let bankClerk = BankClerk(name: Constants.temporaryName, workSpeed: Constants.workSpeed)
     let bank = Bank(bankClerk: bankClerk, clientCount: Int.random(in: Constants.range))
     try startProgram(bank: bank, bankClerk: bankClerk)
 } catch {

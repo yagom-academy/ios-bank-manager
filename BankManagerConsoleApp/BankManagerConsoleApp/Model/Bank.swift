@@ -9,7 +9,7 @@ protocol BankDelegate: AnyObject {
     func close(totalWorkTime: String)
 }
 
-final class Bank: BankDelegate {
+final class Bank: BankDelegate, Presentable {
     private let clientQueue = Queue<Client>()
     private let bankClerk: BankClerk
     private let clientCount: Int
@@ -32,6 +32,6 @@ final class Bank: BankDelegate {
     }
     
     func close(totalWorkTime: String) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
+        printClosingMessage(clientCount: clientCount, totalWorkTime: totalWorkTime)
     }
 }

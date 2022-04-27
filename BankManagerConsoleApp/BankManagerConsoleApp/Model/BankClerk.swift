@@ -7,12 +7,16 @@
 
 import Foundation
 
-final class BankClerk {
+fileprivate extension Constants {
+    static let decimalPlace = "%.2f"
+}
+
+final class BankClerk: Presentable {
     private let name: String
-    private let workSpeed: Double
+    private let workSpeed: UInt32
     private weak var delegate: BankDelegate?
     
-    init(name: String, workSpeed: Double) {
+    init(name: String, workSpeed: UInt32) {
         self.name = name
         self.workSpeed = workSpeed
     }
@@ -28,9 +32,10 @@ final class BankClerk {
             guard let client = queue.peek else {
                 return
             }
-            print("\(client.waitingNumber)번 고객 업무 시작")
-            usleep(UInt32(self.workSpeed))
-            print("\(client.waitingNumber)번 고객 업무 완료")
+            
+            self.printStartTaskMessage(waitingNumber: client.waitingNumber)
+            usleep(self.workSpeed)
+            self.printFinishTaskMessage(waitingNumber: client.waitingNumber)
             
             queue.dequeue()
         }
@@ -38,8 +43,16 @@ final class BankClerk {
         while queue.isEmpty == false {
             workQueue.async(execute: workItem)
         }
+        
         let finishTime = CFAbsoluteTimeGetCurrent()
         let totalTime = finishTime - startTime
-        delegate?.close(totalWorkTime: String(format: "%.2f", totalTime))
+        
+        delegate?.close(totalWorkTime: totalTime.formatted)
+    }
+}
+
+fileprivate extension CFAbsoluteTime {
+    var formatted: String {
+        String(format: Constants.decimalPlace, self)
     }
 }
