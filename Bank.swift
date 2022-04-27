@@ -15,6 +15,7 @@ struct Bank {
     }
     
     func open() {
+        printMenu()
         guard let input = readLine() else { return }
         
         switch input {
@@ -28,7 +29,15 @@ struct Bank {
         }
     }
     
-    func startWork() {
+    private func printMenu() {
+        print("""
+                1 : 은행개점
+                2 : 종료
+                입력 :
+                """, terminator: " ")
+    }
+    
+    private func startWork() {
         let customers = Int.random(in: 10...30)
         
         for number in 1...customers {
@@ -48,5 +57,6 @@ struct Bank {
         }
         group.wait()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며,")
+        open()
     }
 }
