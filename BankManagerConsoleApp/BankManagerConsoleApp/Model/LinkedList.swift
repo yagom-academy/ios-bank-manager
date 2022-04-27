@@ -8,6 +8,15 @@ final class LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
+    private class Node<Element> {
+        let data: Element
+        var next: Node?
+        
+        init(date: Element) {
+            self.data = date
+        }
+    }
+    
     var isEmpty: Bool {
         return head == nil
     }
