@@ -28,40 +28,51 @@ struct BankManager {
     private var bank: Bank = Bank()
     
     mutating func start() {
-        print(Constant.Guide.menu.description)
-        print(Constant.Guide.input.description, terminator: "")
-        guard let input = readLine() else { return }
+        printDescription()
+        guard let input = readLine() else {
+            return
+        }
         switch input {
         case MenuSelect.open.rawValue:
             bank.open()
-            bank.close(totalDuration: work())
+            bank.close(totalDuration: measureTotalTime())
             start()
         case MenuSelect.close.rawValue:
             return
         default:
-            start()
+            restart()
         }
     }
     
-    func checkTime(of method: () -> Void) -> Double {
+    private func printDescription() {
+        print(Guide.menu.rawValue)
+        print(Guide.input.rawValue, terminator: Text.emptyString.rawValue)
+    }
+    
+    private mutating func restart() {
+        print(Guide.error.rawValue)
+        start()
+    }
+    
+    private func work() {
+        while let client = bank.clients.dequeue() {
+            bank.clerks[0].work(client: client)
+        }
+    }
+    
+    private func measureTotalTime() -> Double {
+        let duration = measureTime {
+            work()
+        }
+        
+        return duration
+    }
+    
+    private func measureTime(of task: () -> Void) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
-        method()
+        task()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         
         return Double(durationTime)
-    }
-    
-    func work() -> Double {
-        let totalClientCount = bank.clientCount
-
-        let duration = checkTime {
-            for _ in 0..<totalClientCount {
-                guard let client = bank.clients.dequeue() else {
-                    return
-                }
-                bank.clerks[0].work(client: client)
-            }
-        }
-        return duration
     }
 }
