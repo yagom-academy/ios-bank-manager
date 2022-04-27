@@ -72,19 +72,25 @@ struct LinkedList<T> {
     }
     
     mutating func insert(value: T, at inputIndex: Int) {
-        let newNode = Node(value: value)
-        if inputIndex == 0 {
-            head = newNode
-        }
-        guard let currentNode = index(at: inputIndex) else {
+        guard let pointingNode = index(at: inputIndex) else {
             return
         }
-        let previousNode = currentNode.previous
         
+        let newNode = Node(value: value)
+        
+        if inputIndex == 0 {
+            pointingNode.previous = newNode
+            newNode.next = pointingNode
+            head = newNode
+            count += 1
+            return
+        }
+        
+        let previousNode = pointingNode.previous
         newNode.previous = previousNode
         previousNode?.next = newNode
-        newNode.next = currentNode
-        currentNode.previous = newNode
+        newNode.next = pointingNode
+        pointingNode.previous = newNode
         count += 1
     }
 }
