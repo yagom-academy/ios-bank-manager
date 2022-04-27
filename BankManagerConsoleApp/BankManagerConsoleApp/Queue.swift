@@ -1,6 +1,6 @@
 import Foundation
 
-struct CustomerQueue<T> {
+struct Queue<T> {
     private let list = LinkedList<T>()
     var count: Int {
         return list.count
