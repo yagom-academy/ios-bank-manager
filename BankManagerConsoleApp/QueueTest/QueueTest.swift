@@ -15,9 +15,9 @@ class QueueTest: XCTestCase {
     
     func test_queue에_enqueue를3번했을때_count가_3이어야한다() {
         // given
-        queue?.enqueue(element: 1)
-        queue?.enqueue(element: 2)
-        queue?.enqueue(element: 3)
+        queue?.enqueue(1)
+        queue?.enqueue(2)
+        queue?.enqueue(3)
         
         // when
         let count = queue?.count
@@ -28,9 +28,9 @@ class QueueTest: XCTestCase {
     
     func test_queue에_dequeue를2번했을때_2를리턴하고_count가1이어야한다() {
         // given
-        queue?.enqueue(element: 1)
-        queue?.enqueue(element: 2)
-        queue?.enqueue(element: 3)
+        queue?.enqueue(1)
+        queue?.enqueue(2)
+        queue?.enqueue(3)
         _ = queue?.dequeue()
         
         // when
@@ -44,9 +44,9 @@ class QueueTest: XCTestCase {
     
     func test_queue를_clear하면_count가0이어야한다() {
         // given
-        queue?.enqueue(element: 1)
-        queue?.enqueue(element: 2)
-        queue?.enqueue(element: 3)
+        queue?.enqueue(1)
+        queue?.enqueue(2)
+        queue?.enqueue(3)
         
         // when
         queue?.clear()
@@ -58,7 +58,7 @@ class QueueTest: XCTestCase {
     
     func test_queue의head가1일때_peek했을때_1을리턴해야한다() {
         // given
-        queue?.enqueue(element: 1)
+        queue?.enqueue(1)
         
         // when
         let value = queue?.peek()

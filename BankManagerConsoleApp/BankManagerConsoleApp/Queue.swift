@@ -10,7 +10,7 @@ struct Queue<T> {
         return list.isEmpty
     }
 
-    func enqueue(element: T) {
+    func enqueue(_ element: T) {
         list.append(element)
     }
     
