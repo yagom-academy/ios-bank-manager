@@ -8,23 +8,11 @@
 import Foundation
 
 final class Node<T> {
-    private var element: T
-    private var nextNode: Node?
+    private(set) var data: T
+    var nextNode: Node?
 
-    init(element: T, nextNode: Node? = nil) {
-        self.element = element
+    init(data: T, nextNode: Node? = nil) {
+        self.data = data
         self.nextNode = nextNode
-    }
-
-    func data() -> T {
-        return element
-    }
-
-    func setNextNode(_ nextNode: Node) {
-        self.nextNode = nextNode
-    }
-
-    func next() -> Node? {
-        return nextNode
     }
 }
