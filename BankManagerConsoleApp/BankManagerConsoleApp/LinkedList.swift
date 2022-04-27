@@ -27,6 +27,10 @@ final class LinkedList<T> {
         }
         head = head?.next
         
+        if head == nil {
+            tail = nil
+        }
+        
         return data
     }
     
