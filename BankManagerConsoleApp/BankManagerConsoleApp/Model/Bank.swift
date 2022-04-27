@@ -6,7 +6,7 @@
 //
 
 protocol BankDelegate: AnyObject {
-    func close()
+    func close(totalWorkTime: String)
 }
 
 final class Bank: BankDelegate {
@@ -30,7 +30,7 @@ final class Bank: BankDelegate {
         bankClerk.work(clientQueue)
     }
     
-    func close() {
-        print("업무가 마감되었습니다.")
+    func close(totalWorkTime: String) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
 }

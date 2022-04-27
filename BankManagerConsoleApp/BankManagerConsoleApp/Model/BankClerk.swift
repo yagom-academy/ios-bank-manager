@@ -8,9 +8,9 @@
 import Foundation
 
 final class BankClerk {
-    private let workSpeed: Double = 0.7
+    private let workSpeed: Double = 700000
     private let name: String
-    weak var delegate: BankDelegate?
+    private weak var delegate: BankDelegate?
     
     init(name: String) {
         self.name = name
@@ -22,13 +22,13 @@ final class BankClerk {
     
     func work(_ queue: Queue<Client>) {
         let workQueue = DispatchQueue(label: name)
-        
+        let startTime = CFAbsoluteTimeGetCurrent()
         let workItem = DispatchWorkItem {
             guard let client = queue.peek else {
                 return
             }
             print("\(client.waitingNumber)번 고객 업무 시작")
-            sleep(UInt32(self.workSpeed))
+            usleep(UInt32(self.workSpeed))
             print("\(client.waitingNumber)번 고객 업무 완료")
             
             queue.dequeue()
@@ -37,11 +37,8 @@ final class BankClerk {
         while queue.isEmpty == false {
             workQueue.async(execute: workItem)
         }
-        
-        endWork()
-    }
-    
-    func endWork() {
-        delegate?.close()
+        let finishTime = CFAbsoluteTimeGetCurrent()
+        let totalTime = finishTime - startTime
+        delegate?.close(totalWorkTime: String(format: "%.2f", totalTime))
     }
 }
