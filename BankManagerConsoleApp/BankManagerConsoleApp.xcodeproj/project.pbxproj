@@ -14,6 +14,7 @@
 		9BB2B8EC2816DF16003D6212 /* BankWaitingQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */; };
 		9BB2B8EF2816DF65003D6212 /* MockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB2B8ED2816DF65003D6212 /* MockList.swift */; };
 		9BB2B8F02816E175003D6212 /* BankWaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A042816DB570031964E /* BankWaitingQueue.swift */; };
+		9BB5D8C4281928A2006ABFF2 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5D8C3281928A2006ABFF2 /* BankClerk.swift */; };
 		9C8E5A032816B72B0031964E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A022816B72A0031964E /* LinkedList.swift */; };
 		9C8E5A052816DB570031964E /* BankWaitingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8E5A042816DB570031964E /* BankWaitingQueue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -40,6 +41,7 @@
 		9BB2B8E02816D1CF003D6212 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
 		9BB2B8EA2816DF16003D6212 /* BankWaitingQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWaitingQueueTest.swift; sourceTree = "<group>"; };
 		9BB2B8ED2816DF65003D6212 /* MockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockList.swift; sourceTree = "<group>"; };
+		9BB5D8C3281928A2006ABFF2 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		9C8E5A022816B72A0031964E /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		9C8E5A042816DB570031964E /* BankWaitingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWaitingQueue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
+				9BB5D8C3281928A2006ABFF2 /* BankClerk.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				9C8E5A022816B72A0031964E /* LinkedList.swift */,
 				9C8E5A042816DB570031964E /* BankWaitingQueue.swift */,
@@ -275,6 +278,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				9C8E5A052816DB570031964E /* BankWaitingQueue.swift in Sources */,
+				9BB5D8C4281928A2006ABFF2 /* BankClerk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
