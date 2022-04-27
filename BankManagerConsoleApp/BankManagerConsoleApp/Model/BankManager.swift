@@ -58,10 +58,14 @@ struct BankManager {
     
     func work() -> Double {
         let totalClientCount = bank.clientCount
-        print(totalClientCount)
+
         let duration = checkTime {
+            guard let client = bank.clients.dequeue() else {
+                return
+            }
+            
             for _ in 0..<totalClientCount {
-                bank.clerks[0].work(bank: bank)
+                bank.clerks[0].work(client: client)
             }
         }
         return duration
