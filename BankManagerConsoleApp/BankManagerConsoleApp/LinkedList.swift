@@ -22,9 +22,10 @@ final class LinkedList<T> {
     }
     
     func removeFirst() -> T? {
-        guard let data = head?.data else {
+        guard let headNode = head else {
             return nil
         }
+        let data = headNode.data
         head = head?.next
         
         if head == nil {
