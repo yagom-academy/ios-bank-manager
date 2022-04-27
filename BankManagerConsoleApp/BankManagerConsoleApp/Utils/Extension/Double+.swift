@@ -5,7 +5,7 @@
 //  Created by Taeangel, Tiana 2022/04/27.
 //
 
-import Darwin
+import Foundation
 
 extension Double {
     var formatSecondDecimal: String {

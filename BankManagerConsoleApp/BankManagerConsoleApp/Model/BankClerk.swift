@@ -3,6 +3,7 @@
 //  BankManagerConsoleApp
 //
 //  Created by Taeangel, Tiana 2022/04/26.
+
 import Foundation
 
 struct BankClerk {
