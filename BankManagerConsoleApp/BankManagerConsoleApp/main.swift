@@ -17,13 +17,18 @@ fileprivate extension Constants {
     static let whiteSpace = " "
 }
 
-let bankClerk = BankClerk(name: "임시", workSpeed: Constants.workSpeed)
-let bank = Bank(bankClerk: bankClerk, clientCount: Int.random(in: Constants.range))
+do {
+    let bankClerk = BankClerk(name: "임시", workSpeed: Constants.workSpeed)
+    let bank = Bank(bankClerk: bankClerk, clientCount: Int.random(in: Constants.range))
+    try startProgram(bank: bank, bankClerk: bankClerk)
+} catch {
+    print(error.localizedDescription)
+}
 
-func startProgram(bank: Bank, bankClerk: BankClerk) {
+func startProgram(bank: Bank, bankClerk: BankClerk) throws {
     while true {
         printMenu()
-        let userInput = receivedUserInput()
+        let userInput = try receivedUserInput()
         
         switch userInput {
         case Constants.bankOpen:
@@ -41,12 +46,10 @@ fileprivate func printMenu() {
     print(menu, terminator: Constants.whiteSpace)
 }
 
-fileprivate func receivedUserInput() -> String {
+fileprivate func receivedUserInput() throws -> String {
     guard let userInput = readLine() else {
-        return ""
+        throw BankError.wrongInput
     }
     
     return userInput
 }
-
-startProgram(bank: bank, bankClerk: bankClerk)
