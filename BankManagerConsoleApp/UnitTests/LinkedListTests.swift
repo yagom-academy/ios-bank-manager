@@ -1,6 +1,6 @@
 //
 //  LinkedListTests.swift
-//  LinkedListTests
+//  UnitTests
 //
 //  Created by mmim, malrang.
 //
