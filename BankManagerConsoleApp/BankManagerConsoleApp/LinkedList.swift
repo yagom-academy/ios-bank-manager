@@ -21,7 +21,7 @@ final class LinkedList<T> {
         tail = newNode
     }
     
-    func removeHead() -> T? {
+    func removeFirst() -> T? {
         guard let data = head?.data else {
             return nil
         }

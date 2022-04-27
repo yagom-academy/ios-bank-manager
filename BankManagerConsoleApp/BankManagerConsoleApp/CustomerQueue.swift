@@ -1,7 +1,7 @@
 import Foundation
 
 struct CustomerQueue<T> {
-    private var list = LinkedList<T>()
+    private let list = LinkedList<T>()
     var count: Int {
         return list.count
     }
@@ -11,7 +11,7 @@ struct CustomerQueue<T> {
     }
     
     func dequeue() -> T? {
-        return list.removeHead()
+        return list.removeFirst()
     }
     
     func clear() {
