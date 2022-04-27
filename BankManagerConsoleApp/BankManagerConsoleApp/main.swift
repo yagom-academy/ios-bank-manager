@@ -5,6 +5,8 @@
 //
 
 fileprivate extension Constants {
+    static let range: ClosedRange<Int> = 10 ... 30
+    static let workSpeed: Double = 700000
     static let bankOpen = "1"
     static let exit = "2"
     static let menu = """
@@ -15,11 +17,10 @@ fileprivate extension Constants {
     static let whiteSpace = " "
 }
 
-func startProgram() {
-    // TODO: 매직넘버, 매직스트링 커버, 은행 생성, 에러처리
-    let bankClerk = BankClerk(name: "임시")
-    let bank = Bank(bankClerk: bankClerk)
-    
+let bankClerk = BankClerk(name: "임시", workSpeed: Constants.workSpeed)
+let bank = Bank(bankClerk: bankClerk, clientCount: Int.random(in: Constants.range))
+
+func startProgram(bank: Bank, bankClerk: BankClerk) {
     while true {
         printMenu()
         let userInput = receivedUserInput()
@@ -48,4 +49,4 @@ fileprivate func receivedUserInput() -> String {
     return userInput
 }
 
-startProgram()
+startProgram(bank: bank, bankClerk: bankClerk)

@@ -12,10 +12,11 @@ protocol BankDelegate: AnyObject {
 final class Bank: BankDelegate {
     private let clientQueue = Queue<Client>()
     private let bankClerk: BankClerk
-    private let clientCount = Int.random(in: 10 ... 30)
+    private let clientCount: Int
     
-    init(bankClerk: BankClerk) {
+    init(bankClerk: BankClerk, clientCount: Int) {
         self.bankClerk = bankClerk
+        self.clientCount = clientCount
         bankClerk.setDelegate(delegate: self)
     }
     

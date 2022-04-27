@@ -8,12 +8,13 @@
 import Foundation
 
 final class BankClerk {
-    private let workSpeed: Double = 700000
     private let name: String
+    private let workSpeed: Double
     private weak var delegate: BankDelegate?
     
-    init(name: String) {
+    init(name: String, workSpeed: Double) {
         self.name = name
+        self.workSpeed = workSpeed
     }
     
     func setDelegate(delegate: BankDelegate) {
