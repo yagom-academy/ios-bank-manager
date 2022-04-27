@@ -35,4 +35,8 @@ final class Bank {
         cofigureClients()
         configureClerks()
     }
+    
+    func close(totalDuration: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalDuration)초입니다.")
+    }
 }
