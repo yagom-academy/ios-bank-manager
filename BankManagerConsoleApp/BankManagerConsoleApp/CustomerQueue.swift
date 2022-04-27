@@ -5,7 +5,11 @@ struct CustomerQueue<T> {
     var count: Int {
         return list.count
     }
-    
+
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+
     func enqueue(element: T) {
         list.append(element)
     }
@@ -22,7 +26,4 @@ struct CustomerQueue<T> {
         return list.head?.data
     }
     
-    func isEmpty() -> Bool {
-        return list.isEmpty
-    }
 }

@@ -1,5 +1,4 @@
 import XCTest
-@testable import BankManagerConsoleApp
 
 class QueueTest: XCTestCase {
     var queue: CustomerQueue<Int>?
@@ -51,7 +50,7 @@ class QueueTest: XCTestCase {
         
         // when
         queue?.clear()
-        let result = queue?.isEmpty()
+        let result = queue?.isEmpty
         
         // then
         XCTAssertEqual(result, true)
