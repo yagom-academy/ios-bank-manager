@@ -14,7 +14,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
 
-    func test_LinkedList에_값들을_append했을때_peek을_두번호출해도_값변경없이_동일한값이_나온다() {
+    func test_LinkedList에_값들을_append했을때_peek을_호출하면_처음append한값이나오고_LinkedList의_데이터가_변하지않는다() {
         // given
         sut.append(10)
         sut.append(20)
@@ -24,6 +24,7 @@ class LinkedListTest: XCTestCase {
         let secondData = sut.peek
 
         // then
+        XCTAssertEqual(firstData, 10)
         XCTAssertEqual(firstData, secondData)
     }
 
@@ -61,9 +62,10 @@ class LinkedListTest: XCTestCase {
         sut.append(10)
 
         // when
-        _ = sut.removeFirst()
+        let data = sut.removeFirst()
 
         // then
+        XCTAssertEqual(data, 10)
         XCTAssertTrue(sut.isEmpty)
     }
 

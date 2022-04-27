@@ -43,6 +43,7 @@ class QueueTest: XCTestCase {
         let data = sut.dequeue()
 
         // then
+        XCTAssertEqual(data, 10)
         XCTAssertNotEqual(data, 20)
     }
 
@@ -74,7 +75,7 @@ class QueueTest: XCTestCase {
         XCTAssertNil(sut.peek)
     }
 
-    func test_Queue에_값들을_enqueue했을때_peek을_두번호출해도_값변경없이_동일한값이_나온다() {
+    func test_Queue에_값들을_enqueue했을때_peek을_호출하면_처음enqueue한값이나오고_Queue의_데이터가_변하지않는다() {
         // given
         sut.enqueue(10)
         sut.enqueue(20)
@@ -84,6 +85,7 @@ class QueueTest: XCTestCase {
         let secondData = sut.peek
 
         // then
+        XCTAssertEqual(firstData, 10)
         XCTAssertEqual(firstData, secondData)
     }
 }
