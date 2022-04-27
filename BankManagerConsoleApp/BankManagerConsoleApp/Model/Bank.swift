@@ -5,18 +5,28 @@
 //  Created by Taeangel, Tiana 2022/04/26.
 //
 
+private enum Range: Int {
+    case startRandomNumber = 10
+    case endRandomNumber = 30
+    case startClientNumber = 1
+}
+
+private enum DefaultNumber: Int {
+    case clientCount = 0
+}
+
 final class Bank {
     private(set) var clerks: [BankClerk] = []
     private(set) var clients: Queue<Client> = Queue()
-    private(set) var clientCount: Int = 0
+    private var clientCount: Int = DefaultNumber.clientCount.rawValue
     
     private func generateClientCount() {
-        let randomClientNumber = Int.random(in: 10...30)
+        let randomClientNumber = Int.random(in: Range.startRandomNumber.rawValue...Range.endRandomNumber.rawValue)
         clientCount = randomClientNumber
     }
     
     private func generateClient() {
-        for number in 1...clientCount {
+        for number in Range.startClientNumber.rawValue...clientCount {
             clients.enqueue(data: Client(number: number))
         }
     }

@@ -6,42 +6,37 @@
 
 import CoreFoundation
 
+private enum MenuSelect: String {
+    case open = "1"
+    case close = "2"
+}
+
+private enum Guide: String {
+    case menu = """
+    1 : 은행 개점
+    2 : 종료
+    """
+    case input = "입력: "
+    case error = "잘못 눌렀습니다."
+}
+
+private enum Text: String {
+    case emptyString = ""
+}
+
 struct BankManager {
     private var bank: Bank = Bank()
-    
-    enum Constant {
-        enum MenuSelect: String {
-            case open = "1"
-            case close = "2"
-            
-            var description: String {
-                return self.rawValue
-            }
-        }
-        
-        enum Guide: String {
-            case menu = """
-            1 : 은행 개점
-            2 : 종료
-            """
-            case input = "입력: "
-            
-            var description: String {
-                return self.rawValue
-            }
-        }
-    }
     
     mutating func start() {
         print(Constant.Guide.menu.description)
         print(Constant.Guide.input.description, terminator: "")
         guard let input = readLine() else { return }
         switch input {
-        case Constant.MenuSelect.open.description:
+        case MenuSelect.open.rawValue:
             bank.open()
             bank.close(totalDuration: work())
             start()
-        case Constant.MenuSelect.close.description:
+        case MenuSelect.close.rawValue:
             return
         default:
             start()
