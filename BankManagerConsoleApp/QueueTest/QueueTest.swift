@@ -62,11 +62,33 @@ class QueueTest: XCTestCase {
         queue.enqueue(expectedValue1)
         queue.enqueue(expectedValue2)
         let result = queue.peek()
-        _ = queue.dequeue()
+        queue.dequeue()
         let result2 = queue.peek()
-        _ = queue.dequeue()
+        queue.dequeue()
         // then
         XCTAssertEqual(expectedValue1, result)
         XCTAssertEqual(expectedValue2, result2)
+    }
+    
+    func test_clear_했을때_Queue가_비어있는가() {
+        // given
+        let expectedValue1 = 1
+        let expectedValue2 = 2
+        // when
+        queue.enqueue(expectedValue1)
+        queue.enqueue(expectedValue2)
+        queue.dequeue()
+        queue.clear()
+        // then
+        XCTAssertTrue(queue.isEmpty())
+    }
+    
+    func test_dequeue_빈queue일때_nil이_반환되는가(){
+        // given
+        let expectedValue:Int? = nil
+        // when
+        let result = queue.dequeue()
+        // then
+        XCTAssertEqual(result, expectedValue)
     }
 }
