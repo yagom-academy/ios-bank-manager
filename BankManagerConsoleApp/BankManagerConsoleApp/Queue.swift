@@ -21,5 +21,4 @@ struct Queue<T> {
     func peek() -> T? {
         return list.head?.data
     }
-    
 }
