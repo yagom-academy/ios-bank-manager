@@ -33,11 +33,13 @@ struct BankManager {
     }
     
     mutating func start() {
-        print(Constant.Guide.menu.description, terminator: "")
+        print(Constant.Guide.menu.description)
+        print(Constant.Guide.input.description, terminator: "")
         guard let input = readLine() else { return }
         switch input {
         case Constant.MenuSelect.open.description:
             bank.open()
+            bank.close(totalDuration: work())
             start()
         case Constant.MenuSelect.close.description:
             return
@@ -54,15 +56,12 @@ struct BankManager {
         return Double(durationTime)
     }
     
-    func work() -> Double? {
+    func work() -> Double {
         let totalClientCount = bank.clientCount
+        print(totalClientCount)
         let duration = checkTime {
             for _ in 0..<totalClientCount {
-                guard let client = bank.clients.dequeue() else {
-                    return
-                }
-                
-                bank.clerks[0].work(client: client)
+                bank.clerks[0].work(bank: bank)
             }
         }
         return duration
