@@ -13,20 +13,20 @@ class QueueTest: XCTestCase {
         queue = nil
     }
     
-    func test_queue에_enqueue를3번했을때_count가_3이어야한다() {
+    func test_queue에_enqueue를3번했을때_첫번째값이_1이어야한다() {
         // given
         queue?.enqueue(1)
         queue?.enqueue(2)
         queue?.enqueue(3)
         
         // when
-        let count = queue?.count
+        let value = queue?.dequeue()
         
         // then
-        XCTAssertEqual(count, 3)
+        XCTAssertEqual(value, 1)
     }
     
-    func test_queue에_dequeue를2번했을때_2를리턴하고_count가1이어야한다() {
+    func test_queue에_dequeue를2번했을때_2를리턴해야한다() {
         // given
         queue?.enqueue(1)
         queue?.enqueue(2)
@@ -35,14 +35,12 @@ class QueueTest: XCTestCase {
         
         // when
         let value = queue?.dequeue()
-        let count = queue?.count
         
         // then
         XCTAssertEqual(value, 2)
-        XCTAssertEqual(count, 1)
     }
     
-    func test_queue를_clear하면_count가0이어야한다() {
+    func test_queue를_clear하면_isEmpty가true이어야한다() {
         // given
         queue?.enqueue(1)
         queue?.enqueue(2)
@@ -62,10 +60,8 @@ class QueueTest: XCTestCase {
         
         // when
         let value = queue?.peek()
-        let count = queue?.count
         
         // then
         XCTAssertEqual(value, 1)
-        XCTAssertEqual(count, 1)
     }
 }
