@@ -3,7 +3,6 @@ import Foundation
 final class LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
-    private(set) var count: Int = 0
     
     var isEmpty: Bool {
         return head == nil
@@ -19,7 +18,6 @@ final class LinkedList<T> {
             tail?.next = newNode
         }
         
-        count += 1
         tail = newNode
     }
     
@@ -28,7 +26,6 @@ final class LinkedList<T> {
             return nil
         }
         head = head?.next
-        count -= 1
         
         return data
     }
@@ -36,6 +33,5 @@ final class LinkedList<T> {
     func clear() {
         head = nil
         tail = nil
-        count = 0
     }
 }
