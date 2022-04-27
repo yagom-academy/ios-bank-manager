@@ -8,7 +8,7 @@
 final class Bank {
     var clerks: [BankClerk] = []
     var clients: Queue<Client> = Queue()
-    private var clientCount: Int = 0
+    var clientCount: Int = 0
     
     private func generateClientCount() {
         let randomClientNumber = Int.random(in: 10...30)
