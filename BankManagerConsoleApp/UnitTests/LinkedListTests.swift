@@ -7,8 +7,8 @@
 
 import XCTest
 
-class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Int>!
+final class LinkedListTests: XCTestCase {
+    private var sut: LinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
