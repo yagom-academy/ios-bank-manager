@@ -11,10 +11,10 @@ struct Queue<T> {
     private var linkedList = LinkedList<T>()
 
     mutating func enqueue(_ element: T) {
-        linkedList.appendTail(element: element)
+        linkedList.appendTail(data: element)
     }
 
-    mutating func dequeue() -> T? {
+    @discardableResult mutating func dequeue() -> T? {
         return linkedList.removeFirst()
     }
 
@@ -23,10 +23,10 @@ struct Queue<T> {
     }
 
     func peek() -> T? {
-        return linkedList.headData()
+        return linkedList.data
     }
 
     func isEmpty() -> Bool {
-        return linkedList.isNil
+        return linkedList.isEmpty
     }
 }
