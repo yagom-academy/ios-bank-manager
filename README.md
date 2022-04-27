@@ -17,7 +17,7 @@
 
 ## UML
 
-![](https://i.imgur.com/pcNnJFe.png)
+![](https://i.imgur.com/f2zdiWu.png)
 
 
 ## 개발환경 및 라이브러리
@@ -35,8 +35,35 @@
 
 #### 이미 검증된 매서드를 다른 매서드의 테스트에서 사용하는것
 
+#### 구조체가 참조타입을 프로퍼티로 가지고 있는 경우
+
+#### 구조체의 mutating 키워드
+
+#### Thread.sleep()
+
+#### private 매서드 테스트 여부
+
+#### STEP2의 비지니스 로직 테스트 방법
+
+#### testcode 메서드 테스트 하는 단위
+
 ### 자세한 고민 보기
 
 #### [STEP1](https://github.com/yagom-academy/ios-bank-manager/pull/144)
+#### [STEP2](https://github.com/yagom-academy/ios-bank-manager/pull/154)
 
 ## 배운개념
+
+#### `CFAbsoluteTimeGetCurrent()` 을 사용해서 코드의 실행시간을 측정할 수 있는 법
+
+#### enum과 rawValue 활용한 유저 입력 처리
+
+#### 구조체 memberwise initializer 활용한 값 이용
+
+
+
+
+
+
+
+
