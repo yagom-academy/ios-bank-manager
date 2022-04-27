@@ -7,7 +7,7 @@
 import CoreFoundation
 
 struct BankManager {
-    var bank: Bank?
+    var bank: Bank = Bank()
     
     enum Constant {
         enum MenuSelect: String {
@@ -37,20 +37,13 @@ struct BankManager {
         guard let input = readLine() else { return }
         switch input {
         case Constant.MenuSelect.open.description:
-            generateClientNumber()
+            bank.open()
             start()
         case Constant.MenuSelect.close.description:
             return
         default:
             start()
         }
-    }
-    
-    mutating func generateClientNumber() {
-        let randomClientNumber = Int.random(in: 10...30)
-        let bank = Bank(clientCount: randomClientNumber)
-        self.bank = bank
-        bank.configureClient()
     }
     
     func checkTime(of method: () -> Void) -> Double {
