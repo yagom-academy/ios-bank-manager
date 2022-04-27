@@ -37,7 +37,7 @@ final class LinkedList<Element> {
     }
     
     func removeFirst() {
-        guard !isEmpty else { return }
+        if isEmpty { return }
 
         if head?.next == nil {
             head = nil
