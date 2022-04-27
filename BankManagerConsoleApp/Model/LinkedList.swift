@@ -17,7 +17,7 @@ struct LinkedList<T> {
             return false
         }
     }
-    
+
     mutating private func setIfIsNil(node: Node<T>) -> Bool {
         if isNil {
             head = node
@@ -26,32 +26,32 @@ struct LinkedList<T> {
         }
         return false
     }
-    
+
     mutating func appendTail(element: T) {
         let node = Node(element: element)
-        
+
         if setIfIsNil(node: node) {
             return
         }
-        
+
         tail?.setNextNode(node)
         tail = node
     }
-    
+
     mutating func removeFirst() -> T? {
         guard let data = head?.data() else {
             return nil
         }
-        
+
         head = head?.next()
         return data
     }
-    
+
     mutating func clear() {
         head = nil
         tail = nil
     }
-    
+
     func headData() -> T? {
         return head?.data()
     }
