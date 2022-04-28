@@ -5,6 +5,7 @@ struct Bank {
     let numberOfCustomer: Int
     let customerQueue: Queue = Queue<Customer>()
     let bankManager: BankManager = BankManager()
+    let workTime: Double = 0.7
     
     init(numberOfBankManager: Int, numberOfCustomer: Int) {
         self.numberOfBankManager = numberOfBankManager
@@ -24,9 +25,11 @@ struct Bank {
                 return
             }
             
-            bankManager.work(for: customer)
+            bankManager.work(for: customer, time: workTime)
         }
-        let workTime = Double(numberOfCustomer) * 0.7
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(String(format: "%.2f", workTime))")
+        
+        let totalWorkTime = String(format: "%.2f", Double(numberOfCustomer) * workTime)
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
 }
