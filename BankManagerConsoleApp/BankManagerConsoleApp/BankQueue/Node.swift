@@ -8,10 +8,15 @@
 import Foundation
 
 final class Node<T> {
-  var data: T?
-  var next: Node<T>?
+  private(set) var data: T?
+  private(set) var next: Node<T>?
 
-  init(_ data: T?) {
+  init(_ data: T?, _ next: Node<T>? = nil) {
     self.data = data
+    self.next = next
+  }
+
+  func setNext(_ next: Node<T>?) {
+    self.next = next
   }
 }

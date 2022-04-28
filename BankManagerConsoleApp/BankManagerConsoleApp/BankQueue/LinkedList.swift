@@ -24,7 +24,7 @@ struct LinkedList<T> {
     if head == nil {
       head = newNode
     } else {
-      tail?.next = newNode
+      tail?.setNext(newNode)
     }
     tail = newNode
   }
