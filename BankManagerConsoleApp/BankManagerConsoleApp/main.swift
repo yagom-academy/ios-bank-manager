@@ -27,3 +27,6 @@ func inputMenu() {
         inputMenu()
     }
 }
+
+printMenu()
+inputMenu()
