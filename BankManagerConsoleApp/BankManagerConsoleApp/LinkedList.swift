@@ -1,6 +1,6 @@
 import Foundation
 
-final class LinkedList<T> {
+final class LinkedList<T: Customer> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     
