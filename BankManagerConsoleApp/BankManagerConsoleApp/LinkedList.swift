@@ -25,8 +25,9 @@ final class LinkedList<T> {
         guard let headNode = head else {
             return nil
         }
+        
         let data = headNode.data
-        head = head?.next
+        head = headNode.next
         
         if head == nil {
             tail = nil
