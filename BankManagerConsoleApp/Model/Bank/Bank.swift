@@ -11,8 +11,8 @@ class Bank {
     private var clientQueue: Queue<Client>
     private let clerkCount: Int
     private let spendingTimeForAClient: Double
-    private var totalWorkingTime: Double = 0
-    private var finishedClientCount = 0
+    private(set) var totalWorkingTime: Double = 0
+    private(set) var finishedClientCount = 0
 
     private lazy var bankClerkQueue: Queue<BankClerk> = {
         var bankClerkQueue = Queue<BankClerk>()
