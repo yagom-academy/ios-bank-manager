@@ -17,4 +17,14 @@ struct Bank {
             customerQueue.enqueue(Customer(number: number))
         }
     }
+    
+    private func makeBankManagerWork() {
+        while !customerQueue.isEmpty {
+            guard let customer = customerQueue.dequeue() else {
+                return
+            }
+            
+            bankManager.work(for: customer)
+        }
+    }
 }
