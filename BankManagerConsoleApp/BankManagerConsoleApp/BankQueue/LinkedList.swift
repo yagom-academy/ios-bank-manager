@@ -1,5 +1,5 @@
 //
-//  BankList.swift
+//  LinkedList.swift
 //  BankManagerConsoleApp
 //
 //  Created by Lingo, Cathy on 2022/04/25.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct BankList<T> {
-  private var head: BankNode<T>?
-  private var tail: BankNode<T>?
+struct LinkedList<T> {
+  private var head: Node<T>?
+  private var tail: Node<T>?
 
   var isEmpty: Bool {
     return head == nil
@@ -20,7 +20,7 @@ struct BankList<T> {
   }
 
   mutating func append(_ data: T?) {
-    let newNode = BankNode(data)
+    let newNode = Node(data)
     if head == nil {
       head = newNode
     } else {

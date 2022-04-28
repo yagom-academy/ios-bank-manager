@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankQueue<T> {
-  private var list = BankList<T>()
+  private var list = LinkedList<T>()
 
   var isEmpty: Bool {
     return list.isEmpty
