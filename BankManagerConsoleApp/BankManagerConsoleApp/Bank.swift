@@ -18,7 +18,7 @@ struct Bank {
         }
     }
     
-    private func makeBankManagerWork() {
+    func makeBankManagerWork() {
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
