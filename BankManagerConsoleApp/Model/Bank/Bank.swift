@@ -8,7 +8,7 @@
 import Foundation
 
 class Bank {
-    private let clientQueue: Queue<Client>
+    private var clientQueue: Queue<Client>
     private let clerkCount: Int
     private let spendingTimeForAClient: Double
     private var totalWorkingTime: Double = 0
@@ -41,5 +41,9 @@ class Bank {
     func updateWorkData() {
         totalWorkingTime += spendingTimeForAClient
         finishedClientCount += 1
+    }
+    
+    func allocateCustomer() -> Client? {
+        return clientQueue.dequeue()
     }
 }
