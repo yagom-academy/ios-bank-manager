@@ -1,11 +1,11 @@
 import Foundation
 
 struct Bank {
-    let numberOfBankManager: Int
-    let numberOfCustomer: Int
-    let customerQueue: Queue = Queue<Customer>()
-    let bankManager: Teller = Teller()
-    let workTime: Double = 0.7
+    private let numberOfBankManager: Int
+    private let numberOfCustomer: Int
+    private let customerQueue: Queue = Queue<Customer>()
+    private let bankManager: Teller = Teller()
+    private let workTime: Double = 0.7
     
     init(numberOfBankManager: Int, numberOfCustomer: Int) {
         self.numberOfBankManager = numberOfBankManager
