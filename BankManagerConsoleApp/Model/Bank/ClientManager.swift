@@ -18,4 +18,12 @@ struct ClientManeger {
         self.minClientCount = minClientCount
         self.maxClientCount = maxClientCount
     }
+
+    mutating func makeClientQueue() -> Queue<Client> {
+        var queue = Queue<Client>()
+        for waitingNumber in 1...randomClientCount {
+            queue.enqueue(Client(WaitingNumber: waitingNumber))
+        }
+        return queue
+    }
 }
