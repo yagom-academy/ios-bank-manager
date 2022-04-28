@@ -16,3 +16,16 @@ struct BankManager {
     
     private let bank = Bank()
     
+    func start() {
+        printOption()
+        guard let selectedOption = SelectOption(rawValue: inputNumber()) else {
+            return start()
+        }
+        
+        switch selectedOption {
+        case .open:
+            return bank.executeBankWork()
+        case .close:
+            return
+        }
+    }
