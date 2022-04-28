@@ -4,7 +4,7 @@ struct Bank {
     let numberOfBankManager: Int
     let numberOfCustomer: Int
     let customerQueue: Queue = Queue<Customer>()
-    let bankManager: BankManager = BankManager()
+    let bankManager: Teller = Teller()
     let workTime: Double = 0.7
     
     init(numberOfBankManager: Int, numberOfCustomer: Int) {

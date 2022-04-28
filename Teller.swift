@@ -1,6 +1,6 @@
 import Foundation
 
-struct BankManager {
+struct Teller {
     func work(for customer: Customer, time: Double) {
         print("\(customer.number)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: time)
