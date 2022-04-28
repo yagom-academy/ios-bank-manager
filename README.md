@@ -6,7 +6,8 @@
 ## 목차
 
 - [프로젝트 소개 및 기능](#프로젝트-소개-및-기능)
-- [STEP 1](#step-1)
+- [STEP 2](#step-2)
+    + [기능설명](#기능설명)
     + [고민한점](#고민한점)
     + [배운개념](#배운개념)
 - [트러블슈팅](#트러블슈팅)
@@ -17,48 +18,38 @@
 [![swift](https://img.shields.io/badge/swift-5.0-orange)]()
 [![xcode](https://img.shields.io/badge/Xcode-13.0-blue)]()
 
-## [STEP 1]
+## [STEP 2]
+### 기능설명
+- `struct Teller`: 고객과 업무처리에 걸리는 시간을 파라미터로 받아 업무를 처리하는 은행원
+- `final class Customer`: 고객번호를 갖고있는 고객
+- `struct Bank`: 은행원에게 일을 시키고, 고객을 줄세우는 은행
+- `struct BankManager`: 콘솔앱을 작동시키기 위해 콘솔창에 메뉴를 출력하고 사용자에게 입력을 받는 구조체
+
+
 ### 고민한점
-#### 1. Node와 LinkedList, 그리고 CustomerQueue를 구현할 때 클래스와 구조체 중 어떤 타입을 사용해야 할까?
-- 클래스와 구조체를 선택할 때 여러 기준이 있지만 어떤 데이터를 포함하고 저장소의 역할을 한다면 클래스를, 틀의 기능을 한다면 구조체를 선택할 것 같습니다. Node와 Linked List는 자료구조의 역할을 하기 때문에 클래스로, CustomerQueue는 Linked List를 포함하고 이를 활용하는 특수한 큐라고 생각되어 구조체로 구현하였습니다.
-
-#### 2. Unit Test 실행시 발생하는 Undefined symbols for architecture arm 64를 어떻게 해결해야할까?
-- symbol을 찾을 수 없다는 내용의 오류가 발생해서 구글링해보니, Targets-Build Phases-Compile Sources에서 Test에서 사용할 함수가 포함된 파일이 리스트에 있는지 확인하고 추가를 해야한다는 내용이 있었습니다. 실제로 QueueTest 타겟의 Compile Sources에 QueueTest.swift 자기자신의 파일만 있어서, 테스트에 필요한 다른 파일들도 추가해주었더니 정상적으로 테스트가 실행되었습니다.
-
-#### 3. main.swift 파일이 없으면 왜 빌드가 안될까?
-- swiftlint 라이브러리를 이번 프로젝트에 포함시켜서, main.swift 파일에 swiftlint의 내용을 테스트하기 위한 코드만 작성을 했었습니다. 테스트를 해보고 나서 main.swift 파일을 삭제했는데 오류가 발생했었습니다. 그 이유를 찾아보니 프로그램은 Entry Point(프로그램의 시작 지점)을 찾아 그 곳에서부터 시작하고 애플 공식 문서에서는 `the main attribute, the NSApplicationMain attribute, the UIApplicationMain attribute, a main.swift file, or a file that contains top-level executable code.`이렇게 다섯 가지 경우 Top-Level Code인 Entry Point로 인식한다고 합니다. 콘솔 앱에서는 main.swift 파일이 Entry Point(프로그램의 시작 지점)의 역할을 하기 때문에 파일을 다시 생성하여 해결했습니다.
-
-#### 4. 외부에서 쓰이지 않는 데이터들의 접근 제어 수준 설정?
-- Node의 data, LinkedList의 head, tail, count들은 선언한 곳 외부에서는 읽어오기만 하면되고, 쓰일 필요는 없다고 생각했습니다. 그래서 이런 프로퍼티들은 private(set) var로 선언해주었습니다.
-
-#### 5. swiftlint 라이브러리의 규칙 중 사용하지 않고 싶은 규칙이 있을 때 어떻게 해야할까?
-- 스위프트 스타일과 컨벤션을 관리하는 swiftlint 라이브러리를 import했는데요, 메서드와 메서드 사이를 공백으로 구분해주고 싶은데 "Trailing Whitespace Violation" 경고가 떠서 swiftlint의 README파일에 있는 내용을 참고하여 아래와 같이 해당 규칙을 무효화하려고 했습니다.
+#### 1. Bank 인스턴스를 재사용할 수는 없을까?
+- 사용자의 입력으로 은행개점이 되었을 때, 현재 코드에서는 그 때 마다 `Bank` 인스턴스를 새로 생성하여 업무 처리를 진행하고 있습니다. `BankManager`가 `Bank`를 프로퍼티로 가지면서 필요할 때마다 값을 설정하여 사용하는 게 더 나은 방법인지 고민이 되었습니다. 
 ```swift=
-// swiftlint:disable:next trailing_whitespace
-var count: Int {
-    return list.count
+if input == bankOpenMenu {
+    let bank = Bank(numberOfTeller, randomNumber(in: customerRange))
+    ...
 }
-...
-// swiftlint:disable:previous trailing_whitespace
-```
-하지만 계속 경고가 뜨고 있어서, BankManagerConsolApp에 .swiftlint.yml에 무효화할 규칙으로 trailing_swhitespace를 추가하여 해결했습니다.
-```
-disabled_rules:
-    - trailing_whitespace
-opt_in_rules:
-included:
-excluded:
 ```
 
-첫번째에 시도했던 방법도 swiftlint의 README에 있었던 방법인데 왜 적용이 되지 않았을까요?🥲
+#### 2. Customer 타입은 struct로 해야할까 class로 해야할까?
+- Customer 타입을 struct로 할지 class로 할지 고민했습니다. 기능상 struct이어도 되지 않을까해서 처음에 struct으로 구현을했었는데, 제네릭에 쓰일 타입은 프로토콜이나 클래스로 제한된다는 내용을 공식문서에서 발견했습니다. Node와 Linked List, Queue의 제네릭에 Customer 타입만 받기 위해서 Customer 타입을 class로 구현했습니다.
 
- ![](https://i.imgur.com/qnPel61.png)
+#### 3. n명의 은행원이 근무한다는 조건을 어떻게 구현할 것인가?
+- 프로젝트의 요구사항에 은행 타입에는 n명의 은행원이 근무한다는 조건이 있지만, 은행원이 어떻게 고객의 업무처리를 돕는지에 대해서는 명시되어 있지 않습니다. 그래서 여러 가능성을 고민해봤지만 일단 콘솔 앱의 요구사항에 따라 단 한 명의 은행원이 근무한다고 가정했습니다. 결국 `numberOfTeller`로 은행원의 수를 관리하기는 하지만, Bank 타입에서는 하나의 `Teller` 인스턴스를 프로퍼티로 쓰고 있습니다.
+
+
 
 ### 배운개념
 - Linked List
 - Queue
-- 의존성 관리 도구 (CocoaPods, Carthage, SPM)
-
+- Generics
+- Thread.sleep
+- ClosedRange
 ---
 ## 트러블슈팅
 
@@ -68,18 +59,18 @@ excluded:
 
 ## 깃커밋 메세지
 
-[chore]: 코드 수정, 내부 파일 수정.<br>
-[feat]: 새로운 기능 구현.<br>
-[style]: 스타일 관련 기능.(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)<br>
-[add]: Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성 시.<br>
-[fix]: 버그, 오류 해결.<br>
-[del]: 쓸모없는 코드 삭제.<br>
-[docs]: README나 WIKI 등의 문서 개정.<br>
-[mod]: storyboard 파일,UI 수정한 경우.<br>
-[correct]: 주로 문법의 오류나 타입의 변경, 이름 변경 등에 사용합니다.<br>
-[move]: 프로젝트 내 파일이나 코드의 이동.<br>
-[rename]: 파일 이름 변경이 있을 때 사용합니다.<br>
-[improve]: 향상이 있을 때 사용합니다.<br>
-[refactor]: 전면 수정이 있을 때 사용합니다.<br>
+[chore]: 코드 수정, 내부 파일 수정.
+[feat]: 새로운 기능 구현.
+[style]: 스타일 관련 기능.(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
+[add]: Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성 시.
+[fix]: 버그, 오류 해결.
+[del]: 쓸모없는 코드 삭제.
+[docs]: README나 WIKI 등의 문서 개정.
+[mod]: storyboard 파일,UI 수정한 경우.
+[correct]: 주로 문법의 오류나 타입의 변경, 이름 변경 등에 사용합니다.
+[move]: 프로젝트 내 파일이나 코드의 이동.
+[rename]: 파일 이름 변경이 있을 때 사용합니다.
+[improve]: 향상이 있을 때 사용합니다.
+[refactor]: 전면 수정이 있을 때 사용합니다.
 [merge]: 다른브렌치를 merge 할 때 사용합니다.
 
