@@ -30,11 +30,16 @@ class Bank {
         self.clerkCount = clerkCount
         self.spendingTimeForAClient = spendingTimeForAClient
     }
-    
+
     func startWork() {
         while bankClerkQueue.isEmpty() == false {
             let bankClerk = bankClerkQueue.dequeue()
             bankClerk?.work()
         }
+    }
+
+    func updateWorkData() {
+        totalWorkingTime += spendingTimeForAClient
+        finishedClientCount += 1
     }
 }
