@@ -13,7 +13,7 @@ struct Queue<T> {
     }
     
     func enqueue(data: T) {
-        linkedList.append(node: Node<T>(data: data))
+        linkedList.append(data: data)
     }
     
     func dequeue() -> T? {
