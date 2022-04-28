@@ -18,7 +18,7 @@ class Bank {
         var bankClerkQueue = Queue<BankClerk>()
 
         for _ in 1...clerkCount {
-            let bankClerk = BankClerk(bank: self)
+            let bankClerk = BankClerk(bank: self, spendingTimeForAClient: spendingTimeForAClient)
             bankClerkQueue.enqueue(bankClerk)
         }
 
@@ -42,7 +42,7 @@ class Bank {
         totalWorkingTime += spendingTimeForAClient
         finishedClientCount += 1
     }
-    
+
     func allocateCustomer() -> Client? {
         return clientQueue.dequeue()
     }

@@ -9,10 +9,12 @@ import Foundation
 
 struct BankClerk {
     unowned private var bank: Bank
-    
-    init(bank: Bank) {
-        self.bank = bank
-    }
+    private let spendingTimeForAClient: Double
+
+    init(bank: Bank, spendingTimeForAClient: Double) {
+            self.bank = bank
+            self.spendingTimeForAClient = spendingTimeForAClient
+        }
     // 추후구현
     func work() {}
 }
