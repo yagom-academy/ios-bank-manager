@@ -29,7 +29,8 @@ final class BankQueueTests: XCTestCase {
 
   func testIsEmpty_WhenQueueIsNotEmpty_ShouldReturnFalse() {
     // given
-    self.sut?.enqueue(1)
+    let value = 1
+    self.sut?.enqueue(value)
     // when
     guard let output = self.sut?.isEmpty else { return XCTFail() }
     // then
@@ -45,26 +46,30 @@ final class BankQueueTests: XCTestCase {
 
   func testPeek_WhenQueueEnqueueOne_ShouldReturnOne() {
     // given
-    self.sut?.enqueue(1)
+    let value = 1
+    self.sut?.enqueue(value)
     // when
     let output = self.sut?.peek
     // then
-    XCTAssertEqual(output, 1)
+    XCTAssertEqual(output, value)
   }
 
   func testPeek_WhenQueueEnqueueOneTwo_ShouldReturnOne() {
     // given
-    self.sut?.enqueue(1)
-    self.sut?.enqueue(2)
+    let firstValue = 1
+    let secondValue = 2
+    self.sut?.enqueue(firstValue)
+    self.sut?.enqueue(secondValue)
     // when
     let output = self.sut?.peek
     // then
-    XCTAssertEqual(output, 1)
+    XCTAssertEqual(output, firstValue)
   }
 
   func testEnqueue_WhenQueueIsEmpty_IsEmptyShouldReturnFalse() {
     // given when
-    self.sut?.enqueue(1)
+    let value = 1
+    self.sut?.enqueue(value)
     guard let output = self.sut?.isEmpty else { return XCTFail() }
     // then
     XCTAssertFalse(output)
@@ -79,7 +84,8 @@ final class BankQueueTests: XCTestCase {
 
   func testDequeue_WhenQueueIsNotEmpty_ShouldReturnFirstElement() {
     // given
-    self.sut?.enqueue(1)
+    let value = 1
+    self.sut?.enqueue(value)
     // when
     let input = self.sut?.peek
     let output = self.sut?.dequeue()
@@ -89,7 +95,8 @@ final class BankQueueTests: XCTestCase {
 
   func testClear_WhenQueueIsNotEmpty_IsEmptyShouldReturnTrue() {
     // given
-    self.sut?.enqueue(1)
+    let value = 1
+    self.sut?.enqueue(value)
     // when
     self.sut?.clear()
     guard let output = self.sut?.isEmpty else { return XCTFail() }
