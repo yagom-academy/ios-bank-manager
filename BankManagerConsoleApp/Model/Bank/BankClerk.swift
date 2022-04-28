@@ -8,6 +8,11 @@
 import Foundation
 
 struct BankClerk {
+    unowned private var bank: Bank
+    
+    init(bank: Bank) {
+        self.bank = bank
+    }
     // 추후구현
     func work() {}
 }
