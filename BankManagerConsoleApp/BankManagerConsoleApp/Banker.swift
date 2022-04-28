@@ -15,9 +15,9 @@ class Banker {
             return
         }
         
-        print("\(customerNumberTicekt)번 고객 업무 시작")
-        usleep(700000)
-        print("\(customerNumberTicekt)번 고객 업무 종료")
+        print("\(customerNumberTicekt)" + Const.startWorking)
+        usleep(useconds_t(Const.workTimeForCustomer * Const.microsecond))
+        print("\(customerNumberTicekt)" + Const.endWorking)
         customer = nil
     }
 }

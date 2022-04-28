@@ -13,20 +13,20 @@ struct Customer {
 final class BankManager {
     private var bankers: [Banker] = []
     private var customers = Queue(listType: DoubleStack<Customer>())
-    private var numberOfCustomer: Int = 0
-    private var wholeWorkTime: Double = 0
+    private var numberOfCustomer: Int = Const.defaultCount
+    private var wholeWorkTime: Double = Double.zero
     
-    init(numberOfBanker: Int = 1) {
+    init(numberOfBanker: Int = Const.defaultBankerCount) {
         initialize(numberOfBanker: numberOfBanker)
     }
     
-    private func initialize(numberOfBanker: Int = 1) {
-        numberOfCustomer = Int.random(in: 10...30)
-        for numberTicekt in 1...numberOfCustomer {
+    private func initialize(numberOfBanker: Int = Const.defaultBankerCount) {
+        numberOfCustomer = Int.random(in: Const.customerRange)
+        for numberTicekt in Const.startCount...numberOfCustomer {
             customers.enQueue(data: Customer(numberTicekt: numberTicekt))
         }
         
-        for _ in 1...numberOfBanker {
+        for _ in Const.startCount...numberOfBanker {
             bankers.append(Banker())
         }
     }
@@ -38,22 +38,22 @@ final class BankManager {
     }
     
     private func openBank() -> Bool {
-        print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
+        print(Const.startBankSelect, terminator: Const.blank)
         guard let userChoice = readLine() else {
-            print("잘못된 입력 입니다.")
+            print(Const.wrongInput)
             return true
         }
         
         switch userChoice {
-        case "1":
+        case Const.OpeningInput:
             doWorking()
-            print("업무가 마감 되었습니다.")
-            print("오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: "%.2f", wholeWorkTime))초 입니다.")
-            wholeWorkTime = 0
-        case "2":
+            print(Const.finishWork)
+            print("오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: Const.twoDecimal, wholeWorkTime))초 입니다.")
+            wholeWorkTime = Double.zero
+        case Const.exitInput:
             return false
         default:
-            print("잘못된 입력 입니다.")
+            print(Const.wrongInput)
         }
         initialize()
         return true
@@ -72,7 +72,7 @@ final class BankManager {
                 let customer = customers.deQueue()
                 banker.customer = customer
                 banker.work()
-                wholeWorkTime += 0.7
+                wholeWorkTime += Const.workTimeForCustomer
             }
         }
     }
