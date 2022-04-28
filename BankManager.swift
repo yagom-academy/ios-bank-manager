@@ -13,9 +13,11 @@ struct Customer {
 struct BankManager {
     var bankers: [Banker] = []
     var customers = Queue(listType: DoubleStack<Customer>())
+    let numberOfCustomer: Int
+    var workTime: Double = 0
     
     init(numberOfBanker: Int = 1) {
-        let numberOfCustomer = Int.random(in: 10...30)
+        numberOfCustomer = Int.random(in: 10...30)
         
         for numberTicekt in 1...numberOfCustomer {
             customers.enQueue(data: Customer(numberTicekt: numberTicekt))
@@ -32,6 +34,7 @@ struct BankManager {
                 let customer = customers.deQueue()
                 banker.customer = customer
                 banker.work()
+                workTime += 0.7
             }
         }
     }
@@ -39,6 +42,26 @@ struct BankManager {
     mutating func startWork() {
         while customers.isEmpty == false {
             distributeCustomer()
+        }
+    }
+    
+    mutating func openBank() {
+        print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
+        let userChoice = readLine()!
+        guard let userNumber = Int(userChoice) else {
+            print("잘못된 입력 입니다.")
+            return
+        }
+        
+        switch userNumber {
+        case 1:
+            startWork()
+            print("업무가 마감 되었습니다.")
+            print("오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: "%.2f", workTime))초 입니다.")
+        case 2:
+            return
+        default:
+            print("잘못된 입력 입니다.")
         }
     }
 }

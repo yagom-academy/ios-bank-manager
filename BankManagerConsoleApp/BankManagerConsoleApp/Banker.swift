@@ -11,9 +11,13 @@ class Banker {
     var customer: Customer?
     
     func work() {
-        print("\(String(describing: customer?.numberTicekt))번 고객 업무 시작")
-        sleep(1)
-        print("\(String(describing: customer?.numberTicekt))번 고객 업무 종료")
+        guard let customerNumberTicekt = customer?.numberTicekt else {
+            return
+        }
+        
+        print("\(customerNumberTicekt)번 고객 업무 시작")
+        usleep(700000)
+        print("\(customerNumberTicekt)번 고객 업무 종료")
         customer = nil
     }
 }
