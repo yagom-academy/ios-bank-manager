@@ -1,8 +1,9 @@
 //
-//  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
-// 
+//  main.swift
+//  BankManagerConsoleApp
+//
+//  Created by OneTool, Red on 2022/04/28.
+//
 
 var bank = BankManager()
 
