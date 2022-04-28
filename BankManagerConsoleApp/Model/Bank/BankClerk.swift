@@ -14,23 +14,23 @@ struct BankClerk {
     }
     unowned private var bank: Bank
     private let spendingTimeForAClient: Double
-    
+
     init(bank: Bank, spendingTimeForAClient: Double) {
         self.bank = bank
         self.spendingTimeForAClient = spendingTimeForAClient
     }
-    
+
     func work() {
         while true {
             guard let client = bank.allocateCustomer() else {
                 return
             }
-            
-            print("\(client.waitingNumber) \(BankClerkMessage.startWorkMessage)")
+
+            print("\(client.waitingNumber) \(BankClerkConstant.startWorkMessage)")
             let usecondsTimeForAClient = useconds_t(spendingTimeForAClient * 1000000)
             usleep(usecondsTimeForAClient)
             bank.updateWorkData()
-            print("\(client.waitingNumber) \(BankClerkMessage.finishedWorkMessage)")
+            print("\(client.waitingNumber) \(BankClerkConstant.finishedWorkMessage)")
         }
     }
 }
