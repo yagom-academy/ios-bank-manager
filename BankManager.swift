@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct Customer {
-    let numberTicekt: Int
-}
-
 final class BankManager {
     private var bankers: [Banker] = []
     private var customers = Queue(listType: DoubleStack<Customer>())
@@ -56,6 +52,7 @@ final class BankManager {
         default:
             print(Const.wrongInput)
         }
+        
         initialize()
         return true
     }
