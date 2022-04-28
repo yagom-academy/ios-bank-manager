@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
     private var clientQueue: Queue<Client>
     private let clerkCount: Int
     private let spendingTimeForAClient: Double
