@@ -117,9 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				DA7544B028185E5000A36211 /* .swiftlint.yml */,
-				DA69566928184984000C1164 /* Protocol */,
 				DA6956682818493D000C1164 /* Utils */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
+				DA69566928184984000C1164 /* Protocol */,
 				DA7544AF281855EB00A36211 /* Tests */,
 				C7694E77259C3EC00053667F /* Products */,
 				719B4824676F4472997671F3 /* Pods */,
