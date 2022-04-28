@@ -7,8 +7,9 @@
 import Foundation
 
 struct Bank {
-    let bankClerkCount: Int
-    let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
+    private let bankClerkCount: Int
+    private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
+    private let bankClerk = BankClerk()
     
     init(bankClerkCount: Int) {
         self.bankClerkCount = bankClerkCount
@@ -51,7 +52,7 @@ struct Bank {
             guard let customer = bankWaitingQueue.dequeue() else { return }
             DispatchQueue.global().async(group: group) {
                 bankWindows.wait()
-                BankClerk().processTask(for: customer)
+                bankClerk.processTask(for: customer)
                 bankWindows.signal()
             }
         }
@@ -63,7 +64,7 @@ struct Bank {
         open()
     }
     
-    func finishWork(_ customers: Int, _ totalWorkTime: Double) {
+    private func finishWork(_ customers: Int, _ totalWorkTime: Double) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(totalWorkTime)초 입니다.")
     }
 }
