@@ -15,7 +15,7 @@
 		DA69567128184CB3000C1164 /* DoubleStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567028184CB3000C1164 /* DoubleStackTests.swift */; };
 		DA695675281850F5000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
 		DA69567628185132000C1164 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
-		DA69567E28185ABA000C1164 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567D28185ABA000C1164 /* LinkedListTest.swift */; };
+		DA69567E28185ABA000C1164 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567D28185ABA000C1164 /* LinkedListTests.swift */; };
 		DA69568328185BF5000C1164 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA69568428185C12000C1164 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA69568728185C58000C1164 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
@@ -57,7 +57,7 @@
 		DA69566E28184CB3000C1164 /* DoubleStackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoubleStackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA69567028184CB3000C1164 /* DoubleStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStackTests.swift; sourceTree = "<group>"; };
 		DA69567B28185ABA000C1164 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA69567D28185ABA000C1164 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
+		DA69567D28185ABA000C1164 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		DA7544792816E67F00A36211 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DA7544892817058800A36211 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DA7544AC2818421300A36211 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 		DA69567C28185ABA000C1164 /* LinkedListTest */ = {
 			isa = PBXGroup;
 			children = (
-				DA69567D28185ABA000C1164 /* LinkedListTest.swift */,
+				DA69567D28185ABA000C1164 /* LinkedListTests.swift */,
 			);
 			path = LinkedListTest;
 			sourceTree = "<group>";
@@ -444,7 +444,7 @@
 				DA69568728185C58000C1164 /* Node.swift in Sources */,
 				DA69568828185C67000C1164 /* Listable.swift in Sources */,
 				DA69568328185BF5000C1164 /* LinkedList.swift in Sources */,
-				DA69567E28185ABA000C1164 /* LinkedListTest.swift in Sources */,
+				DA69567E28185ABA000C1164 /* LinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
