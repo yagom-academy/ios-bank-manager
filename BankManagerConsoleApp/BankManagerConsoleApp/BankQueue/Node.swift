@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class BankNode<T> {
+final class Node<T> {
   var data: T?
-  var next: BankNode<T>?
+  var next: Node<T>?
 
   init(_ data: T?) {
     self.data = data
