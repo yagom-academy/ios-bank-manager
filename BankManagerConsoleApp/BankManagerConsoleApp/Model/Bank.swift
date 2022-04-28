@@ -6,6 +6,7 @@
 
 struct Bank {
     var customerQueue = Queue<Customer>()
+    var totalCustomerCount: Int
     
     mutating func receiveCustomer() {
         for number in 1...Int.random(in: 10...30) {
