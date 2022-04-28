@@ -41,7 +41,7 @@ final class BankClerk: Presentable {
         }
                 
         while queue.isEmpty == false {
-            workQueue.async(execute: workItem)
+            workQueue.sync(execute: workItem)
         }
         
         let finishTime = CFAbsoluteTimeGetCurrent()

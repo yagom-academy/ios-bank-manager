@@ -20,15 +20,15 @@ final class Bank: BankDelegate, Presentable {
         bankClerk.setDelegate(delegate: self)
     }
     
+    func open() {
+        receiveClients()
+        bankClerk.work(clientQueue)
+    }
+    
     private func receiveClients() {
         for order in 1 ... clientCount {
             clientQueue.enqueue(Client(waitingNumber: order))
         }
-    }
-    
-    func open() {
-        receiveClients()
-        bankClerk.work(clientQueue)
     }
     
     func close(totalWorkTime: String) {
