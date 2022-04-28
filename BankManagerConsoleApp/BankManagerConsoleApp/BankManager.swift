@@ -1,20 +1,20 @@
 import Foundation
 
 struct BankManager {
-    let customerRange: ClosedRange = 10...30
-    let menuString = """
+    private let customerRange: ClosedRange = 10...30
+    private let menuString = """
     1 : 은행개점
     2 : 종료
     입력 :
     """
-    let bankOpenMenu: String = "1"
-    let bankCloseMenu: String = "2"
+    private let bankOpenMenu: String = "1"
+    private let bankCloseMenu: String = "2"
 
-    func printMenu() {
+    private func printMenu() {
         print(menuString, terminator: " ")
     }
 
-    func inputMenu() {
+    private func inputMenu() {
         guard let input = readLine() else {
             return
         }
@@ -35,7 +35,7 @@ struct BankManager {
         inputMenu()
     }
 
-    func randomNumber(in range: ClosedRange<Int>) -> Int {
+    private func randomNumber(in range: ClosedRange<Int>) -> Int {
         return Int.random(in: range)
     }
 }
