@@ -29,3 +29,15 @@ struct BankManager {
             return
         }
     }
+    
+    func printOption() {
+        print(Constant.open)
+        print(Constant.close)
+        print(Constant.input, terminator: Constant.empty)
+    }
+    
+    func inputNumber() -> String {
+        let inputNumber = readLine() ?? Constant.empty
+        return inputNumber
+    }
+}
