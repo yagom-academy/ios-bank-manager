@@ -18,7 +18,7 @@ class Bank {
         var bankClerkQueue = Queue<BankClerk>()
 
         for _ in 1...clerkCount {
-            let bankClerk = BankClerk()
+            let bankClerk = BankClerk(bank: self)
             bankClerkQueue.enqueue(bankClerk)
         }
 
