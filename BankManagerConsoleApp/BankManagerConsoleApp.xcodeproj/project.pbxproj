@@ -13,6 +13,7 @@
 		E134DFFD281ABF1300A862EC /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134DFFB281ABF1300A862EC /* Bank.swift */; };
 		E134DFFF281ABFBD00A862EC /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134DFFE281ABFBD00A862EC /* BankClerk.swift */; };
 		E134E000281ABFBD00A862EC /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134DFFE281ABFBD00A862EC /* BankClerk.swift */; };
+		E134E002281ACDEE00A862EC /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134E001281ACDEE00A862EC /* Console.swift */; };
 		E1B16C1B2817A8D00032E19D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B16C1A2817A8D00032E19D /* Node.swift */; };
 		E1B16C1D2817B8780032E19D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B16C1C2817B8780032E19D /* Queue.swift */; };
 		E5059904281ABC0E009B6AB8 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5059903281ABC0E009B6AB8 /* Client.swift */; };
@@ -49,6 +50,7 @@
 		D19FE3514EDE771933140284 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E134DFFB281ABF1300A862EC /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		E134DFFE281ABFBD00A862EC /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
+		E134E001281ACDEE00A862EC /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		E1B16C1A2817A8D00032E19D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		E1B16C1C2817B8780032E19D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E5059903281ABC0E009B6AB8 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				E505990A281ACB46009B6AB8 /* BankProcess.swift */,
+				E134E001281ACDEE00A862EC /* Console.swift */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				E5059904281ABC0E009B6AB8 /* Client.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				E520EDFD2817AD7100E95F7C /* LinkedList.swift in Sources */,
+				E134E002281ACDEE00A862EC /* Console.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
