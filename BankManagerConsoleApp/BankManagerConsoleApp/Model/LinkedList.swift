@@ -7,11 +7,11 @@ final class LinkedList<Element> {
     private var tail: Node<Element>?
     
     private class Node<Element> {
-        let data: Element
+        let newElement: Element
         var next: Node?
         
-        init(date: Element) {
-            self.data = date
+        init(newElement: Element) {
+            self.newElement = newElement
         }
     }
     
@@ -20,11 +20,11 @@ final class LinkedList<Element> {
     }
     
     var first: Element? {
-        return head?.data
+        return head?.newElement
     }
     
-    func append(data: Element) {
-        let newNode = Node(date: data)
+    func append(newElement: Element) {
+        let newNode = Node(newElement: newElement)
         if isEmpty {
             head = newNode
             tail = newNode

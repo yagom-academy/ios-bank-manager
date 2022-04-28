@@ -16,8 +16,8 @@ struct Queue<Element> {
         return elements.first
     }
     
-    func enqueue(data: Element) {
-        elements.append(data: data)
+    func enqueue(newElement: Element) {
+        elements.append(newElement: newElement)
     }
 
     func dequeue() {
