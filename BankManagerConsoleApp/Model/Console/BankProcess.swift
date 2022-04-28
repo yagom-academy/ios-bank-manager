@@ -27,7 +27,7 @@ struct BankProcess {
                     spendingTimeForAClient: BankProcessConstant.spendingTimeForAClient)
     }
 
-    func processStart() {
+    func start() {
         bank.startWork()
         printBankFinish()
     }
