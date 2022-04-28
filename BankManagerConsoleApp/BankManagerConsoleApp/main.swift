@@ -1,5 +1,6 @@
 import Foundation
 
+let customerRange: ClosedRange = 10...30
 let menuString = """
 1 : 은행개점
 2 : 종료
@@ -16,7 +17,7 @@ func inputMenu() {
     }
     
     if input == "1" {
-        let bank = Bank(numberOfBankManager: 1, numberOfCustomer: Int.random(in: 10...30))
+        let bank = Bank(numberOfBankManager: 1, numberOfCustomer: randomNumber(in: customerRange))
         bank.makeBankManagerWork()
         printMenu()
         inputMenu()
@@ -26,6 +27,10 @@ func inputMenu() {
         printMenu()
         inputMenu()
     }
+}
+
+func randomNumber(in range: ClosedRange<Int>) -> Int {
+    return Int.random(in: range)
 }
 
 printMenu()
