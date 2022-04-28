@@ -21,19 +21,21 @@ func inputMenu() {
     if input == bankOpenMenu {
         let bank = Bank(numberOfBankManager: 1, numberOfCustomer: randomNumber(in: customerRange))
         bank.makeBankManagerWork()
-        printMenu()
-        inputMenu()
+        startBanking()
     } else if input == bankCloseMenu {
         return
     } else {
-        printMenu()
-        inputMenu()
+        startBanking()
     }
+}
+
+func startBanking() {
+    printMenu()
+    inputMenu()
 }
 
 func randomNumber(in range: ClosedRange<Int>) -> Int {
     return Int.random(in: range)
 }
 
-printMenu()
-inputMenu()
+startBanking()
