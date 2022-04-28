@@ -22,25 +22,25 @@ final class BankQueueTests: XCTestCase {
 
   func testIsEmpty_WhenQueueIsEmpty_ShouldReturnTrue() {
     // given when
-    let output = self.sut?.isEmpty
+    guard let output = self.sut?.isEmpty else { return XCTFail() }
     // then
-    XCTAssertEqual(output, true)
+    XCTAssertTrue(output)
   }
 
   func testIsEmpty_WhenQueueIsNotEmpty_ShouldReturnFalse() {
     // given
     self.sut?.enqueue(1)
     // when
-    let output = self.sut?.isEmpty
+    guard let output = self.sut?.isEmpty else { return XCTFail() }
     // then
-    XCTAssertEqual(output, false)
+    XCTAssertFalse(output)
   }
 
   func testPeek_WhenQueueIsEmpty_ShouldReturnNil() {
     // given when
     let output = self.sut?.peek
     // then
-    XCTAssertEqual(output, nil)
+    XCTAssertNil(output)
   }
 
   func testPeek_WhenQueueEnqueueOne_ShouldReturnOne() {
@@ -65,16 +65,16 @@ final class BankQueueTests: XCTestCase {
   func testEnqueue_WhenQueueIsEmpty_IsEmptyShouldReturnFalse() {
     // given when
     self.sut?.enqueue(1)
-    let output = self.sut?.isEmpty
+    guard let output = self.sut?.isEmpty else { return XCTFail() }
     // then
-    XCTAssertEqual(output, false)
+    XCTAssertFalse(output)
   }
 
   func testDequeue_WhenQueueIsEmpty_ShouldReturnNil() {
     // given when
     let output = self.sut?.dequeue()
     // then
-    XCTAssertEqual(output, nil)
+    XCTAssertNil(output)
   }
 
   func testDequeue_WhenQueueIsNotEmpty_ShouldReturnFirstElement() {
@@ -92,8 +92,8 @@ final class BankQueueTests: XCTestCase {
     self.sut?.enqueue(1)
     // when
     self.sut?.clear()
-    let output = self.sut?.isEmpty
+    guard let output = self.sut?.isEmpty else { return XCTFail() }
     // then
-    XCTAssertEqual(output, true)
+    XCTAssertTrue(output)
   }
 }
