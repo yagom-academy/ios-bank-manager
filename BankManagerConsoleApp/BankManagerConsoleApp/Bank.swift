@@ -20,6 +20,7 @@ struct Bank {
         let bankWindows = DispatchSemaphore(value: bankClerkCount)
         let group = DispatchGroup()
         let startWorkTime = CFAbsoluteTimeGetCurrent()
+        let customers = limitCustomerCount()
      
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return nil }
@@ -33,7 +34,7 @@ struct Bank {
         group.wait()
         let finishWorkTime = CFAbsoluteTimeGetCurrent() - startWorkTime
         
-        return (limitCustomerCount(), finishWorkTime.customFloor())
+        return (customers, finishWorkTime.customFloor())
     }
     
     private func limitCustomerCount() -> Int {
