@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class Node<T> {
-    var value: T
+final class Node<Element> {
+    var value: Element
     weak var previous: Node?
     var next: Node?
     
-    init(value: T) {
+    init(value: Element) {
         self.value = value
     }
 }
