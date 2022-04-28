@@ -16,15 +16,16 @@ struct Queue<Element> {
         return elements.first
     }
     
-    func enqueue(newElement: Element) {
+    mutating func enqueue(newElement: Element) {
         elements.append(newElement: newElement)
     }
+    
     @discardableResult
-    func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         return elements.removeFirst()
     }
     
-    func clear() {
+    mutating func clear() {
         elements.clear()
     }
 }

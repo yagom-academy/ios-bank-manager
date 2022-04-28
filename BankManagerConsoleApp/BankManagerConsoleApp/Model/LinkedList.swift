@@ -2,7 +2,7 @@
 //  BankManagerConsoleApp
 //   Created by 쿼카, 두기 on 2022/04/26
 
-final class LinkedList<Element> {
+struct LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
@@ -23,7 +23,7 @@ final class LinkedList<Element> {
         return head?.newElement
     }
     
-    func append(newElement: Element) {
+    mutating func append(newElement: Element) {
         let newNode = Node(newElement: newElement)
         if isEmpty {
             head = newNode
@@ -34,7 +34,7 @@ final class LinkedList<Element> {
         }
     }
     
-    func removeFirst() -> Element? {
+    mutating func removeFirst() -> Element? {
         if isEmpty { return nil }
         
         let element = head?.newElement
@@ -47,7 +47,7 @@ final class LinkedList<Element> {
         return element
     }
     
-    func clear() {
+    mutating func clear() {
         head = nil
         tail = nil
     }
