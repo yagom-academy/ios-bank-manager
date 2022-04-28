@@ -4,6 +4,5 @@
 //  Copyright © Donnie, Safari. All rights reserved.
 // 
 
-let bank = Bank(bankClerkCount: 1)
-
-bank.open()
+let bankManager = BankManager()
+bankManager.open()
