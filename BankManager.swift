@@ -1,7 +1,8 @@
 //
 //  BankManager.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
+//  BankManagerConsoleApp
+//
+//  Created by mmim, malrang.
 //
 
 import Foundation
