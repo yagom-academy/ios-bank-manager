@@ -7,7 +7,7 @@ struct Bank {
     private let teller: Teller = Teller()
     private let workTime: Double = 0.7
     
-    init(numberOfTeller: Int, numberOfCustomer: Int) {
+    init(_ numberOfTeller: Int, _ numberOfCustomer: Int) {
         self.numberOfTeller = numberOfTeller
         self.numberOfCustomer = numberOfCustomer
         makeCustomerInLine()

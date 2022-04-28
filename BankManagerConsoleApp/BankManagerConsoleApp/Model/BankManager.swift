@@ -26,7 +26,7 @@ struct BankManager {
         }
         
         if input == bankOpenMenu {
-            let bank = Bank(numberOfTeller: numberOfTeller, numberOfCustomer: randomNumber(in: customerRange))
+            let bank = Bank(numberOfTeller, randomNumber(in: customerRange))
             bank.makeTellerWork()
             startBanking()
         } else if input == bankCloseMenu {
