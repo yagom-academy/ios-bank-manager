@@ -49,7 +49,7 @@
 		B39CC5522816C36D00BEB462 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C0518E33260F8B7BABB69424 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7D65D1A259C8190005510E0 /* Teller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Teller.swift; path = ../../Teller.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* Teller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +78,27 @@
 				AAD68BF9D203697DF42AA264 /* Pods-BankManagerConsoleApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		4EC36E13281AC6AA00E523D5 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				B39CC5412816B19300BEB462 /* Node.swift */,
+				B39CC5432816B1CC00BEB462 /* LinkedList.swift */,
+				B39CC5452816B20700BEB462 /* Queue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		4EC36E14281AC6FF00E523D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1A259C8190005510E0 /* Teller.swift */,
+				B3847DA3281A9E32000DD9F5 /* Customer.swift */,
+				4EC36E11281AA33F00E523D5 /* Bank.swift */,
+				B380A202281AC20200FC5AEC /* BankManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7316F0E95BEB869CA44CEF7A /* Frameworks */ = {
@@ -119,14 +140,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* Teller.swift */,
-				B380A202281AC20200FC5AEC /* BankManager.swift */,
-				B39CC5412816B19300BEB462 /* Node.swift */,
-				B39CC5432816B1CC00BEB462 /* LinkedList.swift */,
-				B39CC5452816B20700BEB462 /* Queue.swift */,
+				4EC36E14281AC6FF00E523D5 /* Model */,
+				4EC36E13281AC6AA00E523D5 /* Queue */,
 				B39CC5522816C36D00BEB462 /* main.swift */,
-				B3847DA3281A9E32000DD9F5 /* Customer.swift */,
-				4EC36E11281AA33F00E523D5 /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
