@@ -9,3 +9,21 @@ let menuString = """
 func printMenu() {
     print(menuString, terminator: " ")
 }
+
+func inputMenu() {
+    guard let input = readLine() else {
+        return
+    }
+    
+    if input == "1" {
+        let bank = Bank(numberOfBankManager: 1, numberOfCustomer: Int.random(in: 10...30))
+        bank.makeBankManagerWork()
+        printMenu()
+        inputMenu()
+    } else if input == "2" {
+        return
+    } else {
+        printMenu()
+        inputMenu()
+    }
+}
