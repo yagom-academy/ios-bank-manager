@@ -6,6 +6,8 @@ let menuString = """
 2 : 종료
 입력 :
 """
+let bankOpenMenu: String = "1"
+let bankCloseMenu: String = "2"
 
 func printMenu() {
     print(menuString, terminator: " ")
@@ -16,12 +18,12 @@ func inputMenu() {
         return
     }
     
-    if input == "1" {
+    if input == bankOpenMenu {
         let bank = Bank(numberOfBankManager: 1, numberOfCustomer: randomNumber(in: customerRange))
         bank.makeBankManagerWork()
         printMenu()
         inputMenu()
-    } else if input == "2" {
+    } else if input == bankCloseMenu {
         return
     } else {
         printMenu()
