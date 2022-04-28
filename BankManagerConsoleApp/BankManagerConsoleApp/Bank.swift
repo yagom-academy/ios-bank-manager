@@ -16,14 +16,14 @@ struct Bank {
         self.bankClerkCount = bankClerkCount
     }
     
-    func startWork() {
-        let customers = limitCustomerCount()
+    func startWork() -> (Int, String)? {
         let bankWindows = DispatchSemaphore(value: bankClerkCount)
         let group = DispatchGroup()
-        let startTime = CFAbsoluteTimeGetCurrent()
+        let startWorkTime = CFAbsoluteTimeGetCurrent()
      
         while !bankWaitingQueue.isEmpty {
-            guard let customer = bankWaitingQueue.dequeue() else { return }
+            guard let customer = bankWaitingQueue.dequeue() else { return nil }
+            
             DispatchQueue.global().async(group: group) {
                 bankWindows.wait()
                 self.bankClerk.processTask(for: customer)
@@ -31,9 +31,9 @@ struct Bank {
             }
         }
         group.wait()
-        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        let finishWorkTime = CFAbsoluteTimeGetCurrent() - startWorkTime
         
-        finishWork(customers, durationTime.customFloor())
+        return (limitCustomerCount(), finishWorkTime.customFloor())
     }
     
     private func limitCustomerCount() -> Int {
@@ -43,10 +43,6 @@ struct Bank {
             bankWaitingQueue.enqueue(Customer(numberTicket: number))
         }
         return customers
-    }
-    
-    private func finishWork(_ customers: Int, _ totalWorkTime: String) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(totalWorkTime)초 입니다.")
     }
 }
 
