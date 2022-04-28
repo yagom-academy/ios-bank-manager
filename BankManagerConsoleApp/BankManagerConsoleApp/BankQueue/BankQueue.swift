@@ -12,10 +12,6 @@ struct BankQueue<T> {
   private var count: Int = .zero
   private let limit: Int
 
-  init(limit: Int) {
-    self.limit = limit
-  }
-
   var isFull: Bool {
     return limit == count
   }
@@ -26,6 +22,10 @@ struct BankQueue<T> {
 
   var peek: T? {
     return list.first
+  }
+
+  init(limit: Int) {
+    self.limit = limit
   }
 
   mutating func enqueue(_ data: T?) {
