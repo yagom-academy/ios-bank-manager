@@ -8,5 +8,6 @@
 import Foundation
 
 struct BankClerk {
-    
+    // 추후구현
+    func work() {}
 }
