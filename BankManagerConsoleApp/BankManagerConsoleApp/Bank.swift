@@ -1,14 +1,14 @@
 import Foundation
 
 struct Bank {
-    private let numberOfBankManager: Int
+    private let numberOfTeller: Int
     private let numberOfCustomer: Int
     private let customerQueue: Queue = Queue<Customer>()
-    private let bankManager: Teller = Teller()
+    private let teller: Teller = Teller()
     private let workTime: Double = 0.7
     
-    init(numberOfBankManager: Int, numberOfCustomer: Int) {
-        self.numberOfBankManager = numberOfBankManager
+    init(numberOfTeller: Int, numberOfCustomer: Int) {
+        self.numberOfTeller = numberOfTeller
         self.numberOfCustomer = numberOfCustomer
         makeCustomerInLine()
     }
@@ -19,13 +19,13 @@ struct Bank {
         }
     }
     
-    func makeBankManagerWork() {
+    func makeTellerWork() {
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            
-            bankManager.work(for: customer, time: workTime)
+
+            teller.work(for: customer, time: workTime)
         }
         
         let totalWorkTime = String(format: "%.2f", Double(numberOfCustomer) * workTime)

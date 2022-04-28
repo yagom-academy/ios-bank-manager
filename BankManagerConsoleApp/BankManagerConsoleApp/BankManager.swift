@@ -9,7 +9,8 @@ struct BankManager {
     """
     private let bankOpenMenu: String = "1"
     private let bankCloseMenu: String = "2"
-
+    private let numberOfTeller: Int = 1
+    
     private func printMenu() {
         print(menuString, terminator: " ")
     }
@@ -20,8 +21,8 @@ struct BankManager {
         }
         
         if input == bankOpenMenu {
-            let bank = Bank(numberOfBankManager: 1, numberOfCustomer: randomNumber(in: customerRange))
-            bank.makeBankManagerWork()
+            let bank = Bank(numberOfTeller: numberOfTeller, numberOfCustomer: randomNumber(in: customerRange))
+            bank.makeTellerWork()
             startBanking()
         } else if input == bankCloseMenu {
             return
