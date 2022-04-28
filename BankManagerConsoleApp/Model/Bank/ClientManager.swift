@@ -22,7 +22,7 @@ struct ClientManeger {
     mutating func makeClientQueue() -> Queue<Client> {
         var queue = Queue<Client>()
         for waitingNumber in 1...randomClientCount {
-            queue.enqueue(Client(WaitingNumber: waitingNumber))
+            queue.enqueue(Client(waitingNumber: waitingNumber))
         }
         return queue
     }

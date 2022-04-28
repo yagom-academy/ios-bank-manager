@@ -8,5 +8,5 @@
 import Foundation
 
 struct Client {
-    let WaitingNumber: Int
+    let waitingNumber: Int
 }
