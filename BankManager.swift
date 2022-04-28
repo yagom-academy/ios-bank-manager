@@ -31,22 +31,9 @@ final class BankManager {
         }
     }
     
-    mutating func distributeCustomer() {
-        _ = bankers.map { banker in
-            if customers.isEmpty == false {
-                let customer = customers.deQueue()
-                banker.customer = customer
-                banker.work()
-                workTime += 0.7
-            }
         }
     }
     
-    mutating func startWork() {
-        while customers.isEmpty == false {
-            distributeCustomer()
-        }
-    }
     
     mutating func openBank() {
         print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
