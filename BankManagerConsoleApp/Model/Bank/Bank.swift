@@ -14,6 +14,17 @@ class Bank {
     private let spendingTimeForAClient: Double
     private var totalWorkingTime: Double = 0
     private var finishedClientCount = 0
+    
+    private lazy var bankClerkQueue: Queue<BankClerk> = {
+        var bankClerkQueue = Queue<BankClerk>()
+        
+        for _ in 1...clerkCount {
+            let bankClerk = BankClerk()
+            bankClerkQueue.enqueue(bankClerk)
+        }
+        
+        return bankClerkQueue
+    }()
 
     init(clientQueue: Queue<Client>, clerkCount: Int, spendingTimeForAClient: Double) {
         self.clientQueue = clientQueue
