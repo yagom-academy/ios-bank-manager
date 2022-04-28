@@ -13,4 +13,8 @@ struct Bank {
             customerQueue.enqueue(newElement: Customer(number: number))
         }
     }
+    
+    func printCloseMessage() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무시간은 XX초입니다.")
+    }
 }
