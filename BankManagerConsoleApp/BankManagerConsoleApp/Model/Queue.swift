@@ -19,9 +19,9 @@ struct Queue<Element> {
     func enqueue(newElement: Element) {
         elements.append(newElement: newElement)
     }
-
-    func dequeue() {
-        elements.removeFirst()
+    @discardableResult
+    func dequeue() -> Element? {
+        return elements.removeFirst()
     }
     
     func clear() {
