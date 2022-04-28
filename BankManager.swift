@@ -37,25 +37,27 @@ final class BankManager {
         }
     }
     
-    
-    mutating func openBank() {
+    private func openBank() -> Bool {
         print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
-        let userChoice = readLine()!
-        guard let userNumber = Int(userChoice) else {
+        guard let userChoice = readLine() else {
             print("잘못된 입력 입니다.")
-            return
+            return true
         }
         
-        switch userNumber {
-        case 1:
-            startWork()
+        switch userChoice {
+        case "1":
+            doWorking()
             print("업무가 마감 되었습니다.")
-            print("오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: "%.2f", workTime))초 입니다.")
-        case 2:
-            return
+            print("오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: "%.2f", wholeWorkTime))초 입니다.")
+            wholeWorkTime = 0
+        case "2":
+            return false
         default:
             print("잘못된 입력 입니다.")
         }
+        initialize()
+        return true
+    }
     
     
     private func doWorking() {
