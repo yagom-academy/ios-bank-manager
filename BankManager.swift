@@ -6,45 +6,23 @@
 
 import Foundation
 
-struct Bank {
-    var customerQueue: Queue<DoubleStack<Int>>
-    var workTime: Double = 0
-    let numberOfCustomer = Int.random(in: 10...30)
-    
-    func printWorkStart(_ number: Int) {
-        print("\(number)번 고객 업무 시작")
-    }
+struct Customer {
+    let numberTicekt: Int
+}
 
-    func printWorkEnd(_ number: Int) {
-        print("\(number)번 고객 업무 종료")
-    }
-
-    mutating func work() {
-        for number in 1...numberOfCustomer {
-            printWorkStart(number)
-            usleep(7000)
-            printWorkEnd(number)
-            workTime += 0.7
-        }
-    }
+struct BankManager {
+    var bankers: [Banker] = []
+    var customers = Queue(listType: DoubleStack<Customer>())
     
-    mutating func openBank() {
-        print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
-        let userChoice = readLine()!
-        guard let userNumber = Int(userChoice) else {
-            print("잘못된 입력 입니다.")
-            return
+    init(numberOfBanker: Int) {
+        let numberOfCustomer = Int.random(in: 10...30)
+        
+        for numberTicekt in 1...numberOfCustomer {
+            customers.enQueue(data: Customer(numberTicekt: numberTicekt))
         }
         
-        switch userNumber {
-        case 1:
-            work()
-            print("업무가 마감 되었습니다.")
-            print("오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: "%.2f", workTime)) 입니다.")
-        case 2:
-            return
-        default:
-            print("잘못된 입력 입니다.")
+        for _ in 1...numberOfBanker {
+            bankers.append(Banker())
         }
     }
 }
