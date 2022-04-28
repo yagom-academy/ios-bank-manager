@@ -11,6 +11,11 @@ struct BankManager {
     private let bankCloseMenu: String = "2"
     private let numberOfTeller: Int = 1
     
+    func startBanking() {
+        printMenu()
+        inputMenu()
+    }
+    
     private func printMenu() {
         print(menuString, terminator: " ")
     }
@@ -29,11 +34,6 @@ struct BankManager {
         } else {
             startBanking()
         }
-    }
-
-    func startBanking() {
-        printMenu()
-        inputMenu()
     }
 
     private func randomNumber(in range: ClosedRange<Int>) -> Int {
