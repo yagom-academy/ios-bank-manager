@@ -3,5 +3,5 @@
 //  Created by yagom. 
 //  Copyright © yagom academy. All rights reserved.
 // 
-let bankManager = BankManager()
+var bankManager = BankManager()
 bankManager.selectMenu()
