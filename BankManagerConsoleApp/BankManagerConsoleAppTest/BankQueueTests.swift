@@ -12,7 +12,7 @@ final class BankQueueTests: XCTestCase {
 
   override func setUpWithError() throws {
     try super.setUpWithError()
-    self.sut = BankQueue<Int>()
+    self.sut = BankQueue<Int>(limit: 5)
   }
 
   override func tearDownWithError() throws {
@@ -104,6 +104,20 @@ final class BankQueueTests: XCTestCase {
     output = self.sut?.dequeue()
     // then
     XCTAssertEqual(output, secondValue)
+  }
+
+  func testDequeue_WhenQueueLimitIsOne_ShouldReturnNil() {
+    // given
+    self.sut = BankQueue(limit: 1)
+    let firstValue = 1
+    let secondValue = 2
+    self.sut?.enqueue(firstValue)
+    self.sut?.enqueue(secondValue)
+    // when
+    var output = self.sut?.dequeue()
+    output = self.sut?.dequeue()
+    // then
+    XCTAssertNil(output)
   }
 
   func testClear_WhenQueueIsNotEmpty_IsEmptyShouldReturnTrue() {
