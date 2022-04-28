@@ -6,4 +6,4 @@
 
 var bank = BankManager()
 
-bank.openBank()
+bank.decideOpenBank()
