@@ -14,10 +14,9 @@ struct BankManager {
         static let input = "입력 : "
         static let empty = ""
     }
+    private var bank = Bank()
     
-    private let bank = Bank()
-    
-    func start() {
+    mutating func start() {
         printOption()
         guard let selectedOption = SelectOption(rawValue: inputNumber()) else {
             return start()
@@ -31,14 +30,14 @@ struct BankManager {
         }
     }
     
-    func printOption() {
+    private func printOption() {
         print(Constant.open)
         print(Constant.close)
         print(Constant.input, terminator: Constant.empty)
     }
     
-    func inputNumber() -> String {
-        let inputNumber = readLine() ?? Constant.empty
-        return inputNumber
+    private func inputNumber() -> String {
+        let selectedNumber = readLine() ?? Constant.empty
+        return selectedNumber
     }
 }
