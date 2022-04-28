@@ -31,3 +31,12 @@ final class Bank {
         }
     }
     
+    func dealWithClient() {
+        guard let client = queue.dequeue() else {
+            return
+        }
+        print("\(client.orderNumber)번 고객 업무 시작")
+        usleep(700000)
+        print("\(client.orderNumber)번 고객 업무 종료")
+    }
+}
