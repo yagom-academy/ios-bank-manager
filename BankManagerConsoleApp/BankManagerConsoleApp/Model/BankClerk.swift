@@ -13,10 +13,10 @@ fileprivate extension Constants {
 
 final class BankClerk: Presentable {
     private let name: String
-    private let workSpeed: UInt32
+    private let workSpeed: Double
     private weak var delegate: BankDelegate?
     
-    init(name: String, workSpeed: UInt32) {
+    init(name: String, workSpeed: Double) {
         self.name = name
         self.workSpeed = workSpeed
     }
@@ -34,7 +34,7 @@ final class BankClerk: Presentable {
             }
             
             self.printStartTaskMessage(waitingNumber: client.waitingNumber)
-            usleep(self.workSpeed)
+            Thread.sleep(forTimeInterval: self.workSpeed)
             self.printFinishTaskMessage(waitingNumber: client.waitingNumber)
             
             queue.dequeue()
