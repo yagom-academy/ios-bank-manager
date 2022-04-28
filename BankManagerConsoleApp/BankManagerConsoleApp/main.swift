@@ -1,7 +1,6 @@
 //
-//  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
-// 
-
-import Foundation
+//  main.swift
+//  BankManagerConsoleApp
+//
+//  Created by Taeangel, Tiana 2022/04/25.
+//
