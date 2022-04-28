@@ -17,11 +17,7 @@ struct Bank {
     }
     
     func startWork() {
-        let customers = Int.random(in: 10...30)
-        for number in 1...customers {
-            bankWaitingQueue.enqueue(Customer(numberTicket: number))
-        }
-        
+        let customers = limitCustomerCount()
         let bankWindows = DispatchSemaphore(value: bankClerkCount)
         let group = DispatchGroup()
         let startTime = CFAbsoluteTimeGetCurrent()
@@ -38,6 +34,15 @@ struct Bank {
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         
         finishWork(customers, durationTime.customFloor())
+    }
+    
+    private func limitCustomerCount() -> Int {
+        let customers = Int.random(in: 10...30)
+        
+        for number in 1...customers {
+            bankWaitingQueue.enqueue(Customer(numberTicket: number))
+        }
+        return customers
     }
     
     private func finishWork(_ customers: Int, _ totalWorkTime: String) {
