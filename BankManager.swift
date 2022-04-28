@@ -31,6 +31,9 @@ final class BankManager {
         }
     }
     
+    func decideOpenBank() {
+        if openBank() == true {
+            decideOpenBank()
         }
     }
     
@@ -53,6 +56,22 @@ final class BankManager {
         default:
             print("잘못된 입력 입니다.")
         }
+    
+    
+    private func doWorking() {
+        while customers.isEmpty == false {
+            manageBankers()
+        }
+    }
+    
+    private func manageBankers() {
+        _ = bankers.map { banker in
+            if customers.isEmpty == false {
+                let customer = customers.deQueue()
+                banker.customer = customer
+                banker.work()
+                wholeWorkTime += 0.7
+            }
+        }
     }
 }
-
