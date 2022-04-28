@@ -36,12 +36,19 @@ struct Bank {
         }
         group.wait()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
-        let digit: Double = pow(10, 2)
         
-        finishWork(customers, round(durationTime * digit) / digit)
+        finishWork(customers, durationTime.customFloor())
     }
     
-    private func finishWork(_ customers: Int, _ totalWorkTime: Double) {
+    private func finishWork(_ customers: Int, _ totalWorkTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(totalWorkTime)초 입니다.")
+    }
+}
+
+// MARK: - Double extension
+private extension Double {
+    func customFloor() -> String {
+        let digit: Double = pow(10, 1)
+        return String(format: "%.2f", floor(self * digit) / digit)
     }
 }
