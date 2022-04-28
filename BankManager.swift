@@ -10,15 +10,18 @@ struct Customer {
     let numberTicekt: Int
 }
 
-struct BankManager {
-    var bankers: [Banker] = []
-    var customers = Queue(listType: DoubleStack<Customer>())
-    let numberOfCustomer: Int
-    var workTime: Double = 0
+final class BankManager {
+    private var bankers: [Banker] = []
+    private var customers = Queue(listType: DoubleStack<Customer>())
+    private var numberOfCustomer: Int = 0
+    private var wholeWorkTime: Double = 0
     
     init(numberOfBanker: Int = 1) {
+        initialize(numberOfBanker: numberOfBanker)
+    }
+    
+    private func initialize(numberOfBanker: Int = 1) {
         numberOfCustomer = Int.random(in: 10...30)
-        
         for numberTicekt in 1...numberOfCustomer {
             customers.enQueue(data: Customer(numberTicekt: numberTicekt))
         }
