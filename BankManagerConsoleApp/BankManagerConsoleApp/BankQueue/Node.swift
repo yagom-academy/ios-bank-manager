@@ -1,5 +1,5 @@
 //
-//  BankNode.swift
+//  Node.swift
 //  BankManagerConsoleApp
 //
 //  Created by Lingo, Cathy on 2022/04/25.
