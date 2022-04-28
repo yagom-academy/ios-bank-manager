@@ -25,3 +25,9 @@ final class Bank {
         }
     }
     
+    func serveClients() {
+        while !queue.isEmpty {
+            dealWithClient()
+        }
+    }
+    
