@@ -18,3 +18,10 @@ final class Bank {
         receiveClients()
         clerk.sync(execute: work)
     }
+    
+    func receiveClients() {
+        for order in 1...Int.random(in: 10...30) {
+            queue.enqueue(Client(order))
+        }
+    }
+    
