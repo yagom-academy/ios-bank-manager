@@ -45,7 +45,7 @@
 		AC3EDFA52817BE890021287F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +83,31 @@
 			path = QueueTest;
 			sourceTree = "<group>";
 		};
-		ACFAE5F8281781B5006F9BCF /* Model */ = {
+		AC3676BA281B9F540058CACB /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				AB58425D281785CB00699726 /* LinkedList.swift */,
 				AC3EDFA52817BE890021287F /* Queue.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AC3676BB281B9F630058CACB /* Bank */ = {
+			isa = PBXGroup;
+			children = (
 				AC156137281A90EC0013547D /* Customer.swift */,
 				AB5D9B1A281A93AB007538FE /* Bank.swift */,
 				ABB252B6281B7C1400A9A2D0 /* BankClerk.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
+		ACFAE5F8281781B5006F9BCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC3676BA281B9F540058CACB /* Data */,
+				AC3676BB281B9F630058CACB /* Bank */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				ACFAE5F8281781B5006F9BCF /* Model */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;

@@ -28,10 +28,6 @@ struct Bank {
         }
     }
     
-    func printCloseMessage() {
-        print("\(Constant.endWork+Constant.totalWorkTime)\(totalCustomerCount)\(Constant.numberOfPeople+Constant.totalWorkTime)\(workingTime)\(Constant.minutes)")
-    }
-    
     mutating func sendCustomerToClerk() {
         while customerQueue.isEmpty == false {
             guard let customer = customerQueue.dequeue() else {
@@ -41,6 +37,10 @@ struct Bank {
             bankClerk.work(customer: customer)
             totalCustomerCount += Constant.numberOne
         }
+    }
+    
+    func printCloseMessage() {
+        print("\(Constant.endWork+Constant.totalWorkTime)\(totalCustomerCount)\(Constant.numberOfPeople+Constant.totalWorkTime)\(workingTime)\(Constant.minutes)")
     }
     
     mutating func start() {
