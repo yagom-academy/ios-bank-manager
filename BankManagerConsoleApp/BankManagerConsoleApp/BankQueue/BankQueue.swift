@@ -9,7 +9,7 @@ import Foundation
 
 struct BankQueue<T> {
   private var list = LinkedList<T>()
-  private var count: Int = .zero
+  private(set) var count: Int = .zero
   private let limit: Int
 
   var isFull: Bool {
