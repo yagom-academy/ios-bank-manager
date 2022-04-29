@@ -5,3 +5,5 @@
 // 
 
 import Foundation
+
+BankManager().start()
