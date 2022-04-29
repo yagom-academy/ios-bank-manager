@@ -25,8 +25,8 @@ struct Bank {
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return nil }
             
+            bankWindows.wait()
             DispatchQueue.global().async(group: group) {
-                bankWindows.wait()
                 self.bankClerk.processTask(for: customer)
                 bankWindows.signal()
             }
