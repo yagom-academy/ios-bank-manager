@@ -9,9 +9,17 @@ private enum MenuOption: String {
     case exit = "2"
 }
 
-struct BankManager {
+protocol BankResultDelegate {
+    func printBankResult(count: Int, hour: String)
+}
+
+struct BankManager: BankResultDelegate {
     private let bank = Bank(window: BankCommonWindow())
 
+    init() {
+        bank.delegate = self
+    }
+    
     func start() {
         printMenu()
         
@@ -39,5 +47,8 @@ struct BankManager {
         
         return userSelection
     }
+    
+    func printBankResult(count : Int, hour: String) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무 시간은 \(hour)초입니다.")
+    }
 }
-

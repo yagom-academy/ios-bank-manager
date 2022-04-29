@@ -13,6 +13,7 @@ class Bank {
     private var handledCustomerCount = 0
     private var startTime = 0.0
     private var endTime = 0.0
+    var delegate: BankResultDelegate?
 
     private var businessHours: String {
         let difference = endTime - startTime
@@ -27,7 +28,8 @@ class Bank {
     func open() {
         makeCustomers()
         sendCustomerToClerk()
-        printBankResult()
+        delegate?.printBankResult(count: handledCustomerCount, hour: businessHours)
+        reset()
     }
 
     private func makeCustomers() {
@@ -49,8 +51,7 @@ class Bank {
         endTime = CFAbsoluteTimeGetCurrent()
     }
 
-    private func printBankResult() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(handledCustomerCount)명이며, 총 업무 시간은 \(businessHours)초입니다.")
+    private func reset() {
         handledCustomerCount = 0
     }
 }
