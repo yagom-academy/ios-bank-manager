@@ -15,7 +15,7 @@ struct Bank {
         static let totalWorkDoneCustomer = "오늘 업무를 처리한 고객은 총 "
         static let numberOfPeople = "명이며, "
         static let totalWorkTime = "총 업무시간은 "
-        static let minutes = "초입니다."
+        static let seconds = "초입니다."
     }
     let bankClerk = BankClerk()
     var customerQueue = Queue<Customer>()
@@ -40,7 +40,7 @@ struct Bank {
     }
     
     func printCloseMessage() {
-        print("\(Constant.endWork+Constant.totalWorkTime)\(totalCustomerCount)\(Constant.numberOfPeople+Constant.totalWorkTime)\(workingTime)\(Constant.minutes)")
+        print("\(Constant.endWork+Constant.totalWorkTime)\(totalCustomerCount)\(Constant.numberOfPeople+Constant.totalWorkTime)\(workingTime)\(Constant.seconds)")
     }
     
     mutating func start() {
