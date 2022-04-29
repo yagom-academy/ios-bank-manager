@@ -10,17 +10,17 @@ fileprivate extension Constants {
     static let temporaryName = "임시이름"
 }
 
-let bankClerk = BankClerk(
+private let bankClerk = BankClerk(
     name: Constants.temporaryName,
     workSpeed: Constants.workSpeed
 )
 
-let bank = Bank(
+private let bank = Bank(
     bankClerk: bankClerk,
     clientCount: Int.random(in: Constants.clientCountRange)
 )
 
-let bankManager = BankManager(
+private let bankManager = BankManager(
     bankClerk: bankClerk,
     bank: bank
 )
