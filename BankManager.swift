@@ -14,7 +14,7 @@ struct BankManager {
         static let input = "입력 : "
         static let empty = ""
     }
-    private var bank = Bank()
+    private var bank = Bank(with: BankClerk())
     
     mutating func start() {
         printOption()
