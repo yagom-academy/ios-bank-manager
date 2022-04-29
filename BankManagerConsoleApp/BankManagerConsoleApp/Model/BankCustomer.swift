@@ -5,6 +5,10 @@
 //  Created by Eddy, dudu on 2022/04/26.
 //
 
-struct Customer {
+protocol Customer {
+    var waitingNumber: Int { get }
+}
+
+struct BankCustomer: Customer {
     let waitingNumber: Int
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    private let waitingQueue = Queue<Customer>()
+    private let waitingQueue = Queue<BankCustomer>()
     private let window: BankWindow
     private var handledCustomerCount = 0
     private var startTime = 0.0
@@ -33,7 +33,7 @@ struct Bank {
     private func makeCustomers() {
         let customerCount = Int.random(in: 10...30)
         for number in 1...customerCount {
-            waitingQueue.enqueue(Customer(waitingNumber: number))
+            waitingQueue.enqueue(BankCustomer(waitingNumber: number))
         }
     }
 
