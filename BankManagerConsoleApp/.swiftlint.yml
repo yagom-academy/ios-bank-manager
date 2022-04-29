@@ -1,0 +1,15 @@
+disabled_rules:
+  - multiple_closures_with_trailing_closure
+
+excluded:
+  - Pods
+  
+opt_in_rules:
+  - closure_spacing
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - legacy_multiple
+  - operator_usage_whitespace
+
+line_length: 99
+indentation: 2
