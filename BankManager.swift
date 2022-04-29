@@ -4,21 +4,24 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 struct BankManager {
+    private enum Constant {
+        static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
+        static let one = "1"
+        static let two = "2"
+        static let empty = ""
+    }
     var bank = Bank()
-}
-// MARK: - BankManager extenstion
-extension BankManager {
+    var receivedInput: String {
+        return readLine() ?? Constant.empty
+    }
+    
     mutating func selectMenu() {
-        print("1 : 은행개점\n2 : 종료\n입력 : ", terminator: "")
+        print(Constant.menu, terminator: Constant.empty)
         
-        guard let input = readLine() else {
-            return
-        }
-        
-        switch input {
-        case "1":
+        switch receivedInput {
+        case Constant.one:
             bank.start()
-        case "2":
+        case Constant.two:
             return
         default:
             return selectMenu()
