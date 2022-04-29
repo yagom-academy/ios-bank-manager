@@ -10,14 +10,16 @@ import Foundation
 final class Bank {
   private enum Constants {
     static let closed = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
+    static let limit = 31
+    static let range = 10...30
   }
 
-  private var clientQueue: BankQueue<Client> = BankQueue(limit: 50)
+  private var clientQueue: BankQueue<Client> = BankQueue(limit: .zero)
   private var totalClientCount: Int = .zero
   private var totalExecuteTime: Double = .zero
 
   func open() {
-    clientQueue = createClients(limit: 50, range: 10...30)
+    clientQueue = createClients(limit: Constants.limit, range: Constants.range)
     totalClientCount = clientQueue.count
     execute()
     close()
