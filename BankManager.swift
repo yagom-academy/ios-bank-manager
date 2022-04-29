@@ -17,11 +17,12 @@ extension BankManager {
         
         switch input {
         case "1":
-            start()
+            bank.start()
         case "2":
             return
         default:
             return selectMenu()
         }
+        return selectMenu()
     }
 }
