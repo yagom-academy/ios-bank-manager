@@ -4,9 +4,9 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-private enum MenuOption: Int {
-    case bankOpen = 1
-    case exit
+private enum MenuOption: String {
+    case bankOpen = "1"
+    case exit = "2"
 }
 
 struct BankManager {
@@ -35,8 +35,7 @@ struct BankManager {
     
     private func inputUserOption() -> MenuOption? {
         guard let userInput = readLine()?.trimmingCharacters(in: .whitespaces),
-              let userNumber = Int(userInput),
-              let userSelection = MenuOption(rawValue: userNumber) else { return nil }
+              let userSelection = MenuOption(rawValue: userInput) else { return nil }
         
         return userSelection
     }
