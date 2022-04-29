@@ -8,13 +8,19 @@
 import Foundation
 
 struct BankTask {
+  private enum Constants {
+    static let time = 0.7
+    static let start = "%d번 고객 업무 시작"
+    static let finished = "%d번 고객 업무 완료"
+  }
+
   func execute(_ client: Client) -> Double {
     let clientNumber = client.waitingNumber
-    let time = 0.7
+    let time = Constants.time
 
-    print("\(clientNumber)번 고객 업무 시작")
+    print(String(format: Constants.start, clientNumber))
     Thread.sleep(forTimeInterval: time)
-    print("\(clientNumber)번 고객 업무 완료")
+    print(String(format: Constants.finished, clientNumber))
     return time
   }
 }
