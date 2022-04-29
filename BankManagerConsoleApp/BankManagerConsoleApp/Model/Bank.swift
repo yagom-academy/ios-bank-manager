@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Bank {
-    private let waitingQueue = Queue<BankCustomer>()
+class Bank {
+    private let waitingQueue = Queue<Customer>()
     private let window: BankWindow
     private var handledCustomerCount = 0
     private var startTime = 0.0
@@ -23,8 +23,8 @@ struct Bank {
     init(window: BankWindow) {
         self.window = window
     }
-    
-    mutating func open() {
+
+    func open() {
         makeCustomers()
         sendCustomerToClerk()
         printBankResult()
@@ -37,7 +37,7 @@ struct Bank {
         }
     }
 
-    private mutating func sendCustomerToClerk() {
+    private func sendCustomerToClerk() {
         startTime = CFAbsoluteTimeGetCurrent()
 
         while !waitingQueue.isEmpty {
@@ -49,7 +49,7 @@ struct Bank {
         endTime = CFAbsoluteTimeGetCurrent()
     }
 
-    private mutating func printBankResult() {
+    private func printBankResult() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(handledCustomerCount)명이며, 총 업무 시간은 \(businessHours)초입니다.")
         handledCustomerCount = 0
     }

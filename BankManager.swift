@@ -10,9 +10,9 @@ private enum MenuOption: String {
 }
 
 struct BankManager {
-    private var bank = Bank(window: BankCommonWindow())
-    
-    mutating func start() {
+    private let bank = Bank(window: BankCommonWindow())
+
+    func start() {
         printMenu()
         
         switch inputUserOption() {
