@@ -8,9 +8,13 @@
 import Foundation
 
 struct Bank {
-    private let clerk: Workable = BankClerk()
+    private let clerk: Workable
     private var queue = Queue(list: LinkedList<Client>())
     private var numberOfClients = 0
+    
+    init(with clerk: Workable) {
+        self.clerk = clerk
+    }
     
     mutating func executeBankWork() {
         let start = CFAbsoluteTimeGetCurrent()
