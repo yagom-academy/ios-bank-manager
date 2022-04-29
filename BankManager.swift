@@ -25,6 +25,7 @@ struct BankManager: BankResultDelegate {
         
         switch inputUserOption() {
         case .bankOpen:
+            bank.add(customers: BankCustomer.randomCustomers())
             bank.open()
             start()
         case .exit:

@@ -26,16 +26,14 @@ class Bank {
     }
 
     func open() {
-        makeCustomers()
         sendCustomerToClerk()
         delegate?.printBankResult(count: handledCustomerCount, hour: businessHours)
         reset()
     }
 
-    private func makeCustomers() {
-        let customerCount = Int.random(in: 10...30)
-        for number in 1...customerCount {
-            waitingQueue.enqueue(BankCustomer(waitingNumber: number))
+    func add(customers: [Customer]) {
+        customers.forEach { customer in
+            waitingQueue.enqueue(customer)
         }
     }
 
