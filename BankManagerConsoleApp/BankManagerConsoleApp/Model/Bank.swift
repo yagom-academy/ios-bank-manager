@@ -5,11 +5,13 @@
 //  Created by 허윤영 on 27/04/2022.
 //
 
-protocol BankDelegate: AnyObject {
-    func close(totalWorkTime: String)
+import Foundation
+
+fileprivate extension Constants {
+    static let decimalPlace = "%.2f"
 }
 
-final class Bank: BankDelegate, Presentable {
+final class Bank: Presentable {
     private let clientQueue = Queue<Client>()
     private let bankClerk: BankClerk
     private let clientCount: Int
@@ -17,12 +19,16 @@ final class Bank: BankDelegate, Presentable {
     init(bankClerk: BankClerk, clientCount: Int) {
         self.bankClerk = bankClerk
         self.clientCount = clientCount
-        bankClerk.setDelegate(delegate: self)
     }
     
     func open() {
         receiveClients()
-        bankClerk.work(clientQueue)
+        
+        let totalWorkTime = measureTotalWorkTime {
+            bankClerk.work(clientQueue)
+        }
+        
+        close(totalWorkTime: totalWorkTime)
     }
     
     private func receiveClients() {
@@ -31,7 +37,22 @@ final class Bank: BankDelegate, Presentable {
         }
     }
     
-    func close(totalWorkTime: String) {
+    private func measureTotalWorkTime(_ task: () -> Void) -> String {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        task()
+        let finishTime = CFAbsoluteTimeGetCurrent()
+        let totalTime = finishTime - startTime
+        
+        return totalTime.formatted
+    }
+    
+    private func close(totalWorkTime: String) {
         printClosingMessage(clientCount: clientCount, totalWorkTime: totalWorkTime)
+    }
+}
+
+fileprivate extension CFAbsoluteTime {
+    var formatted: String {
+        String(format: Constants.decimalPlace, self)
     }
 }
