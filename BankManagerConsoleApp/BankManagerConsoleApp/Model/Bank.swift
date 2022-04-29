@@ -30,4 +30,9 @@ struct Bank {
         }
     }
     
+    mutating func start() {
+        receiveCustomer()
+        sendCustomerToClerk()
+        printCloseMessage()
+    }
 }
