@@ -15,6 +15,12 @@ final class Bank {
   private var clientQueue: BankQueue<Client> = BankQueue(limit: 50)
   private var totalClientCount: Int = .zero
   private var totalExecuteTime: Double = .zero
+  
+  func open() {
+    clientQueue = createClients(limit: 50, range: 10...30)
+    execute()
+    close()
+  }
 
   private func createClients(limit: Int, range: ClosedRange<Int>) -> BankQueue<Client> {
     var clientQueue = BankQueue<Client>(limit: limit)
