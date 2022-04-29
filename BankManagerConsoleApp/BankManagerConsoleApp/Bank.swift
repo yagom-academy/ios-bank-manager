@@ -9,7 +9,7 @@ import Foundation
 
 struct Bank {
     private let clerk: Workable
-    private var queue = Queue(list: LinkedList<Client>())
+    private var clientQueue = Queue(list: LinkedList<Client>())
     private var numberOfClients = 0
     
     init(with clerk: Workable) {
@@ -31,14 +31,14 @@ struct Bank {
     
     private mutating func receiveClients() {
         for order in 1...Int.random(in: 10...30) {
-            queue.enqueue(Client(order))
+            clientQueue.enqueue(Client(order))
         }
-        numberOfClients = queue.count
+        numberOfClients = clientQueue.count
     }
     
     private mutating func serveClients() {
-        while !queue.isEmpty {
-            let client = queue.dequeue()
+        while !clientQueue.isEmpty {
+            let client = clientQueue.dequeue()
             clerk.deal(with: client)
         }
     }
