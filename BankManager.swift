@@ -10,7 +10,7 @@ private enum MenuOption: String {
 }
 
 struct BankManager {
-    private var bank = Bank()
+    private var bank = Bank(window: BankCommonWindow())
     
     mutating func start() {
         printMenu()

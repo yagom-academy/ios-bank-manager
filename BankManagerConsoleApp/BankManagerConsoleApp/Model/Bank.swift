@@ -9,7 +9,7 @@ import Foundation
 
 struct Bank {
     private let waitingQueue = Queue<Customer>()
-    private let clerk = BankClerk()
+    private let window: BankWindow
     private var handledCustomerCount = 0
     private var startTime = 0.0
     private var endTime = 0.0
@@ -20,6 +20,10 @@ struct Bank {
         return String(format: "%.2f", flooredDifference)
     }
 
+    init(window: BankWindow) {
+        self.window = window
+    }
+    
     mutating func open() {
         makeCustomers()
         sendCustomerToClerk()
@@ -39,7 +43,7 @@ struct Bank {
         while !waitingQueue.isEmpty {
             guard let customer = waitingQueue.dequeue() else { return }
             handledCustomerCount += 1
-            clerk.work(for: customer)
+            window.work(for: customer)
         }
 
         endTime = CFAbsoluteTimeGetCurrent()
