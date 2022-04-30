@@ -11,7 +11,7 @@ protocol BankDelegate: AnyObject {
     func bankWorkDidFinish(count: Int, hour: String)
 }
 
-class Bank {
+final class Bank {
     private let waitingQueue = Queue<Customer>()
     private let window: BankWindow
     private var handledCustomerCount = 0

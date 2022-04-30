@@ -9,7 +9,7 @@ private enum MenuOption: String {
     case exit = "2"
 }
 
-class BankManager {
+final class BankManager {
     private let bank = Bank(window: BankCommonWindow())
 
     init() {
