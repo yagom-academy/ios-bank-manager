@@ -7,9 +7,11 @@
 
 import Foundation
 
-protocol BankWindow { }
+protocol BankWindow {
+    func work(for customer: Customer)
+}
 
-extension BankWindow {
+struct BankCommonWindow: BankWindow {
     func work(for customer: Customer) {
         print("\(customer.waitingNumber)번 고객 업무 시작")
         DispatchQueue.global().sync {
@@ -18,5 +20,3 @@ extension BankWindow {
         print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }
-
-struct BankCommonWindow: BankWindow { }
