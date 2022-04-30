@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BankWindow {
-    func work(for customer: Customer)
+    func receive(_ customer: Customer)
 }
 
 protocol BankWindowDelegate: AnyObject {
@@ -19,11 +19,15 @@ protocol BankWindowDelegate: AnyObject {
 struct BankCommonWindow: BankWindow {
     weak var delegate: BankWindowDelegate?
 
-    func work(for customer: Customer) {
+    func receive(_ customer: Customer) {
         delegate?.customerWorkDidStart(customer: customer)
+        work()
+        delegate?.customerWorkDidFinish(customer: customer)
+    }
+
+    private func work() {
         DispatchQueue.global().sync {
             Thread.sleep(forTimeInterval: 0.7)
         }
-        delegate?.customerWorkDidFinish(customer: customer)
     }
 }

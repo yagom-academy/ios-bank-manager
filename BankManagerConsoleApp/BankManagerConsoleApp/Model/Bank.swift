@@ -47,7 +47,7 @@ final class Bank {
         while !waitingQueue.isEmpty {
             guard let customer = waitingQueue.dequeue() else { return }
             handledCustomerCount += 1
-            window.work(for: customer)
+            window.receive(customer)
         }
 
         endTime = CFAbsoluteTimeGetCurrent()
