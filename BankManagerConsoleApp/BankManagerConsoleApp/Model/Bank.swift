@@ -7,13 +7,17 @@
 
 import Foundation
 
+protocol BankDelegate: AnyObject {
+    func bankWorkDidFinish(count: Int, hour: String)
+}
+
 class Bank {
     private let waitingQueue = Queue<Customer>()
     private let window: BankWindow
     private var handledCustomerCount = 0
     private var startTime = 0.0
     private var endTime = 0.0
-    var delegate: BankResultDelegate?
+    weak var delegate: BankDelegate?
 
     private var businessHours: String {
         let difference = endTime - startTime
@@ -27,7 +31,7 @@ class Bank {
 
     func open() {
         sendCustomerToClerk()
-        delegate?.printBankResult(count: handledCustomerCount, hour: businessHours)
+        delegate?.bankWorkDidFinish(count: handledCustomerCount, hour: businessHours)
         reset()
     }
 
