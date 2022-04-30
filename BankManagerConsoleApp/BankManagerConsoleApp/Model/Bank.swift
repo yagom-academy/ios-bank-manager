@@ -45,13 +45,35 @@ final class Bank {
 
     private func sendCustomerToClerk() {
         startTime = CFAbsoluteTimeGetCurrent()
+        let group = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
 
         while !waitingQueue.isEmpty {
             guard let customer = waitingQueue.dequeue() else { return }
-            handledCustomerCount += 1
-            loanWindow.receive(customer)
-        }
 
+            switch customer.workType {
+            case .loan:
+                loanSemaphore.wait()
+            case .deposit:
+                depositSemaphore.wait()
+            }
+
+            DispatchQueue.global().async(group: group) {
+                switch customer.workType {
+                case .loan:
+                    self.loanWindow.receive(customer)
+                    loanSemaphore.signal()
+                case .deposit:
+                    self.depositWindow.receive(customer)
+                    depositSemaphore.signal()
+                }
+            }
+            
+            handledCustomerCount += 1
+        }
+        
+        group.wait()
         endTime = CFAbsoluteTimeGetCurrent()
     }
 
