@@ -11,10 +11,13 @@ private enum MenuOption: String {
 
 final class BankManager {
     private lazy var bank: Bank = {
-        var bankWindow = BankCommonWindow()
-        bankWindow.delegate = self
+        var loanWindow = BankLoanWindow()
+        loanWindow.delegate = self
         
-        let bank = Bank(window: bankWindow)
+        var depositWindow = BankDepositWindow()
+        depositWindow.delegate = self
+        
+        let bank = Bank(loanWindow: loanWindow, depositWindow: depositWindow)
         bank.delegate = self
         
         return bank
@@ -58,10 +61,10 @@ extension BankManager: BankDelegate {
 
 extension BankManager: BankWindowDelegate {
     func customerWorkDidStart(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        print("\(customer.waitingNumber)번 고객 \(customer.workType.name)업무 시작")
     }
     
     func customerWorkDidFinish(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        print("\(customer.waitingNumber)번 고객 \(customer.workType.name)업무 완료")
     }
 }

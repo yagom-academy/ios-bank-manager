@@ -13,7 +13,8 @@ protocol BankDelegate: AnyObject {
 
 final class Bank {
     private let waitingQueue = Queue<Customer>()
-    private let window: BankWindow
+    private let loanWindow: BankWindow
+    private let depositWindow: BankWindow
     private var handledCustomerCount = 0
     private var startTime = 0.0
     private var endTime = 0.0
@@ -25,8 +26,9 @@ final class Bank {
         return String(format: "%.2f", flooredDifference)
     }
 
-    init(window: BankWindow) {
-        self.window = window
+    init(loanWindow: BankWindow, depositWindow: BankWindow) {
+        self.loanWindow = loanWindow
+        self.depositWindow = depositWindow
     }
 
     func open() {
@@ -47,7 +49,7 @@ final class Bank {
         while !waitingQueue.isEmpty {
             guard let customer = waitingQueue.dequeue() else { return }
             handledCustomerCount += 1
-            window.receive(customer)
+            loanWindow.receive(customer)
         }
 
         endTime = CFAbsoluteTimeGetCurrent()
