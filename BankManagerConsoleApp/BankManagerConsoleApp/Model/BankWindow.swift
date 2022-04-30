@@ -11,12 +11,19 @@ protocol BankWindow {
     func work(for customer: Customer)
 }
 
+protocol BankWindowDelegate: AnyObject {
+    func customerWorkDidStart(customer: Customer)
+    func customerWorkDidFinish(customer: Customer)
+}
+
 struct BankCommonWindow: BankWindow {
+    weak var delegate: BankWindowDelegate?
+
     func work(for customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        delegate?.customerWorkDidStart(customer: customer)
         DispatchQueue.global().sync {
             Thread.sleep(forTimeInterval: 0.7)
         }
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        delegate?.customerWorkDidFinish(customer: customer)
     }
 }

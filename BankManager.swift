@@ -10,11 +10,15 @@ private enum MenuOption: String {
 }
 
 final class BankManager {
-    private let bank = Bank(window: BankCommonWindow())
-
-    init() {
+    private lazy var bank: Bank = {
+        var bankWindow = BankCommonWindow()
+        bankWindow.delegate = self
+        
+        let bank = Bank(window: bankWindow)
         bank.delegate = self
-    }
+        
+        return bank
+    }()
     
     func start() {
         printMenu()
@@ -49,5 +53,15 @@ final class BankManager {
 extension BankManager: BankDelegate {
     func bankWorkDidFinish(count : Int, hour: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무 시간은 \(hour)초입니다.")
+    }
+}
+
+extension BankManager: BankWindowDelegate {
+    func customerWorkDidStart(customer: Customer) {
+        print("\(customer.waitingNumber)번 고객 업무 시작")
+    }
+    
+    func customerWorkDidFinish(customer: Customer) {
+        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }
