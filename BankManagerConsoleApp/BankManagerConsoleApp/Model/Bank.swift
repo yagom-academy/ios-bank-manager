@@ -7,6 +7,13 @@
 
 import Foundation
 
+fileprivate extension Double {
+    var formattedTime: String {
+        let difference = floor(self * 10) / 10
+        return String(format: "%.2f", difference)
+    }
+}
+
 protocol BankDelegate: AnyObject {
     func bankWorkDidFinish(count: Int, hour: String)
 }
@@ -16,15 +23,7 @@ final class Bank {
     private let loanWindow: BankWindow
     private let depositWindow: BankWindow
     private var handledCustomerCount = 0
-    private var startTime = 0.0
-    private var endTime = 0.0
     weak var delegate: BankDelegate?
-
-    private var businessHours: String {
-        let difference = endTime - startTime
-        let flooredDifference = floor(difference * 10) / 10
-        return String(format: "%.2f", flooredDifference)
-    }
 
     init(loanWindow: BankWindow, depositWindow: BankWindow) {
         self.loanWindow = loanWindow
@@ -32,8 +31,8 @@ final class Bank {
     }
 
     func open() {
-        sendCustomerToClerk()
-        delegate?.bankWorkDidFinish(count: handledCustomerCount, hour: businessHours)
+        let duration = checkTime(target: sendCustomerToClerk)
+        delegate?.bankWorkDidFinish(count: handledCustomerCount, hour: duration.formattedTime)
         reset()
     }
 
@@ -43,8 +42,14 @@ final class Bank {
         }
     }
 
+    private func checkTime(target: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        target()
+        let endTime = CFAbsoluteTimeGetCurrent()
+        return (endTime - startTime)
+    }
+
     private func sendCustomerToClerk() {
-        startTime = CFAbsoluteTimeGetCurrent()
         let group = DispatchGroup()
         let depositSemaphore = DispatchSemaphore(value: 2)
         let loanSemaphore = DispatchSemaphore(value: 1)
@@ -69,12 +74,11 @@ final class Bank {
                     depositSemaphore.signal()
                 }
             }
-            
+
             handledCustomerCount += 1
         }
-        
+
         group.wait()
-        endTime = CFAbsoluteTimeGetCurrent()
     }
 
     private func reset() {

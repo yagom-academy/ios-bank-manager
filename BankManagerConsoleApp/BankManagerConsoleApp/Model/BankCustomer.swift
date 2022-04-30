@@ -47,7 +47,7 @@ extension Customer {
         return customers
     }
 
-    static private func makeCustomer(number: Int) -> Self {
+    private static func makeCustomer(number: Int) -> Self {
         let customerType = Banking.allCases.randomElement() ?? .deposit
         let customer = Self(waitingNumber: number, workType: customerType)
 
