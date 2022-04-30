@@ -5,8 +5,6 @@
 //  Created by Donnie, Safari on 2022/04/25.
 //
 
-import Foundation
-
 struct BankWaitingQueue<T: Listable> {
     private let list: T
     

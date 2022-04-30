@@ -1,8 +1,8 @@
 //
 //  BankManagerConsoleApp - main.swift
 //  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
+//  Copyright © Donnie, Safari. All rights reserved.
 // 
 
-import Foundation
-
+let bankManager = BankManager()
+bankManager.open()

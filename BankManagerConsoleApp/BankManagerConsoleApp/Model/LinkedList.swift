@@ -5,8 +5,6 @@
 //  Created by Donnie, Safari on 2022/04/25.
 //
 
-import Foundation
-
 protocol Listable {
     associatedtype Element
     var isEmpty: Bool { get }
