@@ -7,6 +7,7 @@
 private enum MenuOption: String {
     case bankOpen = "1"
     case exit = "2"
+    case invalidInput
 }
 
 final class BankManager {
@@ -33,7 +34,7 @@ final class BankManager {
             start()
         case .exit:
             break
-        case .none:
+        case .invalidInput:
             print("잘못 입력했습니다. 다시 입력해주세요")
             start()
         }
@@ -45,9 +46,9 @@ final class BankManager {
         print("입력 : ", terminator: "")
     }
     
-    private func inputUserOption() -> MenuOption? {
+    private func inputUserOption() -> MenuOption {
         guard let userInput = readLine()?.trimmingCharacters(in: .whitespaces),
-              let userSelection = MenuOption(rawValue: userInput) else { return nil }
+              let userSelection = MenuOption(rawValue: userInput) else { return .invalidInput }
         
         return userSelection
     }
