@@ -19,17 +19,25 @@ final class BankManager {
   }
 
   func start() {
-    print(Message.menu, terminator: Message.whiteSpace)
+    while selectMenu() {}
+  }
 
+  private func selectMenu() -> Bool {
+    displayMenu()
     guard let input = readLine(),
           let menu = Menu(rawValue: input)
-    else { return start() }
+    else { return true }
+
     switch menu {
     case .open:
       Bank().open()
-      return start()
+      return true
     case .exit:
-      return
+      return false
     }
+  }
+
+  private func displayMenu() {
+    print(Message.menu, terminator: Message.whiteSpace)
   }
 }
