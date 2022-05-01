@@ -22,22 +22,22 @@ final class Bank {
 
   func open() {
     totalClientCount = clientQueue.count
-    execute()
-    close()
+    executeBankTask()
+    displayCloseMessage()
   }
 
   func addClient(_ client: Client) {
     clientQueue.enqueue(client)
   }
 
-  private func execute() {
+  private func executeBankTask() {
     while !clientQueue.isEmpty, let client = clientQueue.dequeue() {
       let time = BankTask().execute(client)
       totalExecuteTime += time
     }
   }
 
-  private func close() {
+  private func displayCloseMessage() {
     print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
   }
 }
