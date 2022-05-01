@@ -8,6 +8,11 @@
 import Foundation
 
 final class BankManager {
+  private enum Constants {
+    static let limit = 31
+    static let range = 10...30
+  }
+
   private enum Message {
     static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
     static let whiteSpace = ""
@@ -30,7 +35,9 @@ final class BankManager {
 
     switch menu {
     case .open:
-      Bank().open()
+      let bank = Bank(limit: Constants.limit)
+      createClients().forEach { bank.addClient($0) }
+      bank.open()
       return true
     case .exit:
       return false
@@ -39,5 +46,14 @@ final class BankManager {
 
   private func displayMenu() {
     print(Message.menu, terminator: Message.whiteSpace)
+  }
+
+  private func createClients() -> [Client] {
+    var clients = [Client]()
+    for waitingNumber in 1...Int.random(in: Constants.range) {
+      let client = Client(waitingNumber: waitingNumber)
+      clients.append(client)
+    }
+    return clients
   }
 }

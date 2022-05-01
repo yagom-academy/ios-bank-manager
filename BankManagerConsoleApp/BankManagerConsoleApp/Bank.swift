@@ -10,28 +10,24 @@ import Foundation
 final class Bank {
   private enum Constants {
     static let closed = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
-    static let limit = 31
-    static let range = 10...30
   }
 
-  private var clientQueue: BankQueue<Client> = BankQueue(limit: .zero)
+  private var clientQueue: BankQueue<Client>
   private var totalClientCount: Int = .zero
   private var totalExecuteTime: Double = .zero
 
+  init(limit: Int) {
+    clientQueue = BankQueue(limit: limit)
+  }
+
   func open() {
-    clientQueue = createClients(limit: Constants.limit, range: Constants.range)
     totalClientCount = clientQueue.count
     execute()
     close()
   }
 
-  private func createClients(limit: Int, range: ClosedRange<Int>) -> BankQueue<Client> {
-    var clientQueue = BankQueue<Client>(limit: limit)
-    for waitingNumber in 1...Int.random(in: range) {
-      let client = Client(waitingNumber: waitingNumber)
-      clientQueue.enqueue(client)
-    }
-    return clientQueue
+  func addClient(_ client: Client) {
+    clientQueue.enqueue(client)
   }
 
   private func execute() {
