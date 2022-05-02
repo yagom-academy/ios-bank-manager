@@ -8,42 +8,45 @@
 import Foundation
 
 final class Bank {
+    private enum Constant {
+        static let clerkCount = 1
+        static let spendingTimeForAClient: Double = 0.7
+    }
+    
     private var clientQueue: Queue<Client>
-    private let clerkCount: Int
-    private let spendingTimeForAClient: Double
     private(set) var totalWorkingTime: Double = 0
     private(set) var finishedClientCount = 0
 
     private lazy var bankClerkQueue: Queue<BankClerk> = {
         var bankClerkQueue = Queue<BankClerk>()
 
-        for _ in 1...clerkCount {
-            let bankClerk = BankClerk(bank: self, spendingTimeForAClient: spendingTimeForAClient)
+        for _ in 1...Constant.clerkCount {
+            let bankClerk = BankClerk(bank: self, spendingTimeForAClient: Constant.spendingTimeForAClient)
             bankClerkQueue.enqueue(bankClerk)
         }
 
         return bankClerkQueue
     }()
 
-    init(clientQueue: Queue<Client>, clerkCount: Int, spendingTimeForAClient: Double) {
+    init(clientQueue: Queue<Client>) {
         self.clientQueue = clientQueue
-        self.clerkCount = clerkCount
-        self.spendingTimeForAClient = spendingTimeForAClient
     }
 
     func startWork() {
-        while bankClerkQueue.isEmpty() == false {
-            let bankClerk = bankClerkQueue.dequeue()
-            bankClerk?.work()
+        while clientQueue.isEmpty() == false {
+            guard let bankClerk = bankClerkQueue.dequeue(),
+                  let client = clientQueue.dequeue()
+            else {
+                return
+            }
+            
+            bankClerk.work(client: client)
+            bankClerkQueue.enqueue(bankClerk)
         }
     }
 
     func updateWorkData(spendedTime: Double) {
         totalWorkingTime += spendedTime
         finishedClientCount += 1
-    }
-
-    func allocateCustomer() -> Client? {
-        return clientQueue.dequeue()
     }
 }
