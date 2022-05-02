@@ -14,38 +14,34 @@ struct Menu {
         1 : 은행개점
         2 : 종료
         """
-        static let InputMessage = "입력: "
-        static let openBank = "1"
-        static let finsh = "2"
+        static let inputMessage = "입력: "
+        static let openBankInput = "1"
+        static let finshInput = "2"
+    }
+
+    private var readInput: String {
+        print(MenuContstant.inputMessage, terminator: "")
+        guard let input = readLine() else {
+            return ""
+        }
+        return input
     }
 
     func start() {
-        var inputValue: String
-
         print(MenuContstant.menual)
-        inputValue = readInput()
 
-        switch inputValue {
-        case MenuContstant.openBank:
-            startWorking()
+        switch readInput {
+        case MenuContstant.openBankInput:
+            startBankPorcess()
             start()
-        case MenuContstant.finsh:
+        case MenuContstant.finshInput:
             return
         default:
             start()
         }
     }
 
-    private func readInput() -> String {
-        print(MenuContstant.InputMessage, terminator: "")
-        guard let input = readLine() else {
-            return ""
-        }
-
-        return input
-    }
-
-    private func startWorking() {
+    private func startBankPorcess() {
         let bankProcess = BankProcess()
         bankProcess.start()
     }

@@ -6,25 +6,20 @@
 //
 
 import XCTest
+@testable import BankManagerConsoleApp
 
 class BankModuleTest: XCTestCase {
-
     var bank: Bank!
-    var clientManager: ClientManeger!
-
     var minClient = 10
     var maxClient = 10
     var clerkCount = 1
     var spendingTimeForAClient: Double = 2
 
     override func setUpWithError() throws {
-        clientManager = ClientManeger(minClientCount: minClient, maxClientCount: maxClient)
-
-        bank = Bank(clientQueue: clientManager.makeClientQueue(), clerkCount: clerkCount, spendingTimeForAClient: spendingTimeForAClient)
+        bank = Bank(clientQueue: <#T##Queue<Client>#>)
     }
 
     override func tearDownWithError() throws {
-        clientManager = nil
         bank = nil
     }
 

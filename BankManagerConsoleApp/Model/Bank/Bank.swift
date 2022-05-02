@@ -10,18 +10,18 @@ import Foundation
 final class Bank {
     private enum Constant {
         static let clerkCount = 1
-        static let spendingTimeForAClient: Double = 0.7
+        static let finishMessageFormat = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
     }
-    
+
     private var clientQueue: Queue<Client>
-    private(set) var totalWorkingTime: Double = 0
-    private(set) var finishedClientCount = 0
+    private var totalWorkingTime: Double = 0
+    private var finishedClientCount = 0
 
     private lazy var bankClerkQueue: Queue<BankClerk> = {
         var bankClerkQueue = Queue<BankClerk>()
 
         for _ in 1...Constant.clerkCount {
-            let bankClerk = BankClerk(bank: self, spendingTimeForAClient: Constant.spendingTimeForAClient)
+            let bankClerk = BankClerk()
             bankClerkQueue.enqueue(bankClerk)
         }
 
@@ -39,13 +39,16 @@ final class Bank {
             else {
                 return
             }
-            
+
             bankClerk.work(client: client)
+            updateWorkData(spendedTime: bankClerk.spendingTimeForClient)
             bankClerkQueue.enqueue(bankClerk)
         }
+
+        print(String(format: Constant.finishMessageFormat), finishedClientCount, totalWorkingTime)
     }
 
-    func updateWorkData(spendedTime: Double) {
+    private func updateWorkData(spendedTime: Double) {
         totalWorkingTime += spendedTime
         finishedClientCount += 1
     }

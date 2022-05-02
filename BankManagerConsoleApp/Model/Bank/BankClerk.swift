@@ -11,19 +11,18 @@ struct BankClerk {
     private enum Constant {
         static let startWorkMessage = "고객 업무 시작"
         static let finishedWorkMessage = "고객 업무 완료"
+        static let spendingTimeForClient: Double = 0.7
     }
-    
-    unowned private var bank: Bank
-    private let spendingTimeForAClient: Double
 
-    init(bank: Bank, spendingTimeForAClient: Double) {
-        self.bank = bank
-        self.spendingTimeForAClient = spendingTimeForAClient
+    let spendingTimeForClient: Double
+
+    init(spendingTimeForClient: Double = Constant.spendingTimeForClient) {
+        self.spendingTimeForClient = spendingTimeForClient
     }
 
     func work(client: Client) {
         print("\(client.waitingNumber) \(Constant.startWorkMessage)")
-        let usecondsTimeForAClient = useconds_t(spendingTimeForAClient * 1000000)
+        let usecondsTimeForAClient = useconds_t(spendingTimeForClient * 1000000)
         usleep(usecondsTimeForAClient)
         print("\(client.waitingNumber) \(Constant.finishedWorkMessage)")
     }
