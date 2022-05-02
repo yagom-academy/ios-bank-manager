@@ -12,9 +12,10 @@ fileprivate extension Constants {
 }
 
 final class Bank: Presentable {
-    private let clientQueue = Queue<Client>()
     private let bankClerks: [BankClerk]
     private let clientCount: Int
+    private let depositClientQueue = Queue<Client>()
+    private let loanClientQueue = Queue<Client>()
     
     init(bankClerks: [BankClerk], clientCount: Int) {
         self.bankClerks = bankClerks
@@ -25,15 +26,48 @@ final class Bank: Presentable {
         receiveClients()
         
         let totalWorkTime = measureTotalWorkTime {
-
+            assignClientToBankClerk()
         }
         
         close(totalWorkTime: totalWorkTime)
     }
     
+    private func assignClientToBankClerk() {
+        
+        let dispatchGroup = DispatchGroup()
+        
+        bankClerks.filter { $0.service == .deposit }.forEach { bankClerk in
+            DispatchQueue.global().async(group: dispatchGroup) {
+                while let client = self.depositClientQueue.dequeue() {
+                    bankClerk.work(client: client)
+                }
+            }
+        }
+        
+        bankClerks.filter { $0.service == .loan }.forEach { bankClerk in
+            DispatchQueue.global().async(group: dispatchGroup) {
+                while let client = self.loanClientQueue.dequeue() {
+                    bankClerk.work(client: client)
+                }
+            }
+        }
+        
+        dispatchGroup.wait()
+    }
+    
     private func receiveClients() {
         for order in 1 ... clientCount {
-            clientQueue.enqueue(Client(waitingNumber: order, bankService: .randomBankService))
+            classifyClients(waitingNumber: order)
+        }
+    }
+    
+    private func classifyClients(waitingNumber: Int) {
+        let client = Client(waitingNumber: waitingNumber, bankService: .randomBankService)
+        switch client.bankService {
+        case .deposit:
+            depositClientQueue.enqueue(client)
+        case .loan:
+            loanClientQueue.enqueue(client)
         }
     }
     

@@ -14,11 +14,11 @@ extension Presentable where Self: Bank {
 }
 
 extension Presentable where Self: BankClerk {
-    func printStartTaskMessage(waitingNumber: Int) {
-        print("\(waitingNumber)번 고객 업무 시작")
+    func printStartTaskMessage(client: Client) {
+        print("\(client.waitingNumber)번 고객 \(client.bankService)업무 시작")
     }
     
-    func printFinishTaskMessage(waitingNumber: Int) {
-        print("\(waitingNumber)번 고객 업무 완료")
+    func printFinishTaskMessage(client: Client) {
+        print("\(client.waitingNumber)번 고객 \(client.bankService)업무 완료")
     }
 }

@@ -12,7 +12,7 @@ enum BankService: CaseIterable {
     case loan
 }
 
-extension BankService {
+extension BankService: CustomStringConvertible {
     var description: String {
         switch self {
         case .deposit:
