@@ -1,5 +1,5 @@
 import Foundation
 
-let bankManager = BankManager()
+var bankManager = BankManager()
 
 bankManager.startBanking()
