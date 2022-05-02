@@ -7,6 +7,13 @@
 
 import Foundation
 
+extension Const {
+    static let defaultCount: Int = 0
+    static let defaultBankerCount: Int = 1
+    static let customerRange = 10...30
+    static let startCount: Int = 1
+}
+
 struct Bank {
     private var banker = Banker()
     var customers = Queue(listType: DoubleStack<Customer>())

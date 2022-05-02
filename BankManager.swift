@@ -7,6 +7,19 @@
 
 import Foundation
 
+extension Const {
+    static let bankersNumber = 3
+    static let workTimeForCustomer: Double = 0.7
+    
+    static let twoDecimal = "%.2f"
+    static let startBankSelect = "1 : 은행 개점\n2 : 종료\n입력 : "
+    static let blank = ""
+    static let wrongInput = "잘못된 입력 입니다."
+    static let finishWork = "업무가 마감 되었습니다."
+    static let OpeningInput = "1"
+    static let exitInput = "2"
+}
+
 final class BankManager {
     var bank: Bank = Bank(numberOfBankers: 3)
     

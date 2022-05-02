@@ -7,6 +7,11 @@
 
 import Foundation
 
+extension Const {
+    static let startWorking = "번 고객 업무 시작"
+    static let endWorking = "번 고객 업무 종료"
+}
+
 class Banker {
     func work(customer: Customer?) {
         guard let customerNumberTicekt = customer?.numberTicekt else {
