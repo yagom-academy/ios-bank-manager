@@ -10,7 +10,9 @@ import Foundation
 struct Bank {
     private let clerk: Workable
     private var clientQueue = Queue(list: LinkedList<Client>())
-    private var numberOfClients = 0
+    private var currentClientsCount: Int {
+        return clientQueue.count
+    }
     
     init(with clerk: Workable) {
         self.clerk = clerk
@@ -18,8 +20,8 @@ struct Bank {
     
     mutating func executeBankWork() {
         let start = CFAbsoluteTimeGetCurrent()
-
-        receiveClients()
+        let numberOfClients = receiveClients()
+        
         DispatchQueue.global().sync {
             serveClients()
         }
@@ -31,11 +33,11 @@ struct Bank {
         print(resultMessage)
     }
     
-    private mutating func receiveClients() {
+    private mutating func receiveClients() -> Int {
         for order in 1...Int.random(in: 10...30) {
             clientQueue.enqueue(Client(order))
         }
-        numberOfClients = clientQueue.count
+        return currentClientsCount
     }
     
     private mutating func serveClients() {
