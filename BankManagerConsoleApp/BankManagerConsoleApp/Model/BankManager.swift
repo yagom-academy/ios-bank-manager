@@ -67,8 +67,11 @@ struct BankManager {
     }
     
     private func work() {
+        guard let clerk = bank.clerks.first else {
+            return
+        }
         while let client = bank.clients.dequeue() {
-            bank.clerks[0].work(client: client)
+            clerk.work(client: client)
         }
     }
     
