@@ -8,9 +8,12 @@
 import Foundation
 
 struct BankClerk: Workable {
+    private enum Message {
+        static let start = "번 고객 업무 시작"
+        static let end = "번 고객 업무 종료"
+    }
+
     private enum Constant {
-        static let startMessage = "번 고객 업무 시작"
-        static let endMessage = "번 고객 업무 종료"
         static let workTime = 0.7
     }
     
@@ -18,8 +21,8 @@ struct BankClerk: Workable {
         guard let client = client else {
             return
         }
-        print("\(client.orderNumber)\(Constant.startMessage)")
+        print("\(client.orderNumber)\(Message.start)")
         Thread.sleep(forTimeInterval: Constant.workTime)
-        print("\(client.orderNumber)\(Constant.endMessage)")
+        print("\(client.orderNumber)\(Message.end)")
     }
 }

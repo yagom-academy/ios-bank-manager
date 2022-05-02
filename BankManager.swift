@@ -8,17 +8,18 @@
 import Foundation
 
 struct BankManager {
-    private enum Constant {
+    private enum Text {
         static let open = "1 : 은행개점"
         static let close = "2 : 종료"
         static let input = "입력 : "
         static let empty = ""
     }
+    
     private var bank = Bank(with: BankClerk())
     
     mutating func start() {
         printOption()
-        guard let selectedOption = SelectOption(rawValue: inputNumber()) else {
+        guard let selectedOption = SelectOptionType(rawValue: inputNumber()) else {
             return start()
         }
         
@@ -31,13 +32,13 @@ struct BankManager {
     }
     
     private func printOption() {
-        print(Constant.open)
-        print(Constant.close)
-        print(Constant.input, terminator: Constant.empty)
+        print(Text.open)
+        print(Text.close)
+        print(Text.input, terminator: Text.empty)
     }
     
     private func inputNumber() -> String {
-        let selectedNumber = readLine() ?? Constant.empty
+        let selectedNumber = readLine() ?? Text.empty
         return selectedNumber
     }
 }

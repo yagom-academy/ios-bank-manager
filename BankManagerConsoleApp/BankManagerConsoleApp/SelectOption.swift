@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SelectOption: String {
+enum SelectOptionType: String {
     case open = "1"
     case close = "2"
 }
