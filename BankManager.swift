@@ -23,7 +23,7 @@ struct BankManager {
         
         switch userSelect {
         case .bankOpen:
-            guard let (customers, totalWorkTime) = Bank(bankClerkCount: 1).startWork() else { return }
+            guard let (customers, totalWorkTime) = Bank(depositClerkCount: 2, loanClerkCount: 1).startWork() else { return }
             finishWork(customers, totalWorkTime)
             reopen()
         case .bankClose:

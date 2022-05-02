@@ -8,27 +8,40 @@
 import Foundation
 
 struct Bank {
-    private let bankClerkCount: Int
+    private let depositClerkCount: Int
+    private let loanClerkCount: Int
     private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
     private let bankClerk = BankClerk()
     
-    init(bankClerkCount: Int) {
-        self.bankClerkCount = bankClerkCount
+    init(depositClerkCount: Int, loanClerkCount: Int) {
+        self.depositClerkCount = depositClerkCount
+        self.loanClerkCount = loanClerkCount
     }
     
     func startWork() -> (Int, String)? {
-        let bankWindows = DispatchSemaphore(value: bankClerkCount)
+        let depositWindow = DispatchSemaphore(value: depositClerkCount)
+        let loanWindow = DispatchSemaphore(value: loanClerkCount)
         let group = DispatchGroup()
         let startWorkTime = CFAbsoluteTimeGetCurrent()
         let customers = limitCustomerCount()
      
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return nil }
+            guard let task = customer.task else { return nil }
             
-            bankWindows.wait()
-            DispatchQueue.global().async(group: group) {
-                self.bankClerk.processTask(for: customer)
-                bankWindows.signal()
+            switch task {
+            case .deposit:
+                depositWindow.wait()
+                DispatchQueue.global().async(group: group) {
+                    self.bankClerk.processTask(for: customer)
+                    depositWindow.signal()
+                }
+            case .loan:
+                loanWindow.wait()
+                DispatchQueue.global().async(group: group) {
+                    self.bankClerk.processTask(for: customer)
+                    loanWindow.signal()
+                }
             }
         }
         group.wait()
