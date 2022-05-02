@@ -8,16 +8,13 @@
 import Foundation
 
 class Banker {
-    var customer: Customer?
-    
-    func work() {
+    func work(customer: Customer?) {
         guard let customerNumberTicekt = customer?.numberTicekt else {
             return
         }
         
         print("\(customerNumberTicekt)" + Const.startWorking)
-        usleep(useconds_t(Const.workTimeForCustomer * Const.microsecond))
+        Thread.sleep(forTimeInterval: Const.workTimeForCustomer)
         print("\(customerNumberTicekt)" + Const.endWorking)
-        customer = nil
     }
 }

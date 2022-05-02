@@ -31,6 +31,7 @@
 		DA75C05C281ACC0800A60597 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75C05B281ACC0800A60597 /* Const.swift */; };
 		DA912A862816E36A00CD671D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
 		DADD0E79281AD7A200553EBF /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD0E78281AD7A200553EBF /* Customer.swift */; };
+		DAE5ED9A281FD6D60023A37A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5ED99281FD6D60023A37A /* Bank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +68,7 @@
 		DA75C05B281ACC0800A60597 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		DA912A852816E36A00CD671D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		DADD0E78281AD7A200553EBF /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		DAE5ED99281FD6D60023A37A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				DAE5ED99281FD6D60023A37A /* Bank.swift */,
 				DA75C058281A841B00A60597 /* Banker.swift */,
 				DADD0E78281AD7A200553EBF /* Customer.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -415,6 +418,7 @@
 				DA7544AD2818421300A36211 /* Listable.swift in Sources */,
 				DA912A862816E36A00CD671D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				DAE5ED9A281FD6D60023A37A /* Bank.swift in Sources */,
 				DA69568428185C12000C1164 /* LinkedList.swift in Sources */,
 				DA75C05C281ACC0800A60597 /* Const.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
