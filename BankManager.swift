@@ -20,14 +20,17 @@ struct BankManager {
     init(of bank: Bank) {
         self.bank = bank
     }
+    
+    mutating func taskStart() {
         printOption()
         guard let selectedOption = SelectOptionType(rawValue: inputNumber()) else {
-            return start()
+            return taskStart()
         }
         
         switch selectedOption {
         case .open:
-            return bank.executeBankWork()
+            bank.executeBankWork()
+            return taskStart()
         case .close:
             return
         }
