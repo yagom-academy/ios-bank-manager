@@ -1,6 +1,6 @@
 import Foundation
 
-struct Queue<T: Waitable> {
+struct Queue<T> {
     private let list = LinkedList<T>()
     var isEmpty: Bool {
         return list.isEmpty

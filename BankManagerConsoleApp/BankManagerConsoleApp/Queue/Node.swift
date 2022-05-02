@@ -1,6 +1,6 @@
 import Foundation
 
-final class Node<T: Waitable> {
+final class Node<T> {
     private(set) var data: T
     weak var prev: Node<T>?
     var next: Node<T>?

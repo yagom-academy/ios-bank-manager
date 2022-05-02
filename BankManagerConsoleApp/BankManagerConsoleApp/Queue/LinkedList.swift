@@ -1,6 +1,6 @@
 import Foundation
 
-final class LinkedList<T: Waitable> {
+final class LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     
