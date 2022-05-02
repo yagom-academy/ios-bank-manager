@@ -10,9 +10,6 @@ import Foundation
 struct Bank {
     private let clerk: Workable
     private var clientQueue = Queue(list: LinkedList<Client>())
-    private var currentClientsCount: Int {
-        return clientQueue.count
-    }
     
     init(with clerk: Workable) {
         self.clerk = clerk
@@ -33,11 +30,12 @@ struct Bank {
         print(resultMessage)
     }
     
+    @discardableResult
     private mutating func receiveClients() -> Int {
         for order in 1...Int.random(in: 10...30) {
             clientQueue.enqueue(Client(order))
         }
-        return currentClientsCount
+        return clientQueue.count
     }
     
     private mutating func serveClients() {
