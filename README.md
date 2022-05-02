@@ -7,8 +7,6 @@
 
 ## 🔎 프로젝트 소개
 
-
-
 ## 👀 PR
 [STEP 1](https://github.com/yagom-academy/ios-bank-manager/pull/148)
 
