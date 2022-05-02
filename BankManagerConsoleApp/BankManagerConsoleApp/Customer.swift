@@ -10,6 +10,15 @@ struct Customer {
     enum TaskList: CaseIterable {
         case deposit
         case loan
+        
+        var information: String {
+            switch self {
+            case .deposit:
+                return "예금"
+            case .loan:
+                return "대출"
+            }
+        }
     }
     
     let numberTicket: Int

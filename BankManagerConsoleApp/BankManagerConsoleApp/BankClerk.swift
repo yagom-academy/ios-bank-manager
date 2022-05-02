@@ -22,10 +22,12 @@ struct BankClerk {
     }
     
     private func startTask(_ customer: Customer) {
-        print("\(customer.numberTicket)번 고객 업무 시작")
+        guard let task = customer.task?.information else { return }
+        print("\(customer.numberTicket)번 고객 \(task)업무 시작")
     }
     
     private func finishTask(_ customer: Customer) {
-        print("\(customer.numberTicket)번 고객 업무 완료")
+        guard let task = customer.task?.information else { return }
+        print("\(customer.numberTicket)번 고객 \(task)업무 완료")
     }
 }
