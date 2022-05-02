@@ -6,9 +6,19 @@
 
 import CoreFoundation
 
+private enum Range: Int {
+    case startRandomNumber = 10
+    case endRandomNumber = 30
+    case startClientNumber = 1
+}
+
 private enum MenuSelect: String {
     case open = "1"
     case close = "2"
+}
+
+private enum DefaultNumber: Int {
+    case clientCount = 0
 }
 
 private enum Guide: String {
@@ -25,8 +35,8 @@ private enum Text: String {
 }
 
 struct BankManager {
-    private var bank: Bank = Bank()
-    
+    private var bank: Bank = Bank(clients: Queue())
+
     mutating func start() {
         printDescription()
         guard let input = readLine() else {
@@ -34,14 +44,20 @@ struct BankManager {
         }
         switch input {
         case MenuSelect.open.rawValue:
-            bank.open()
-            bank.close(totalDuration: measureTotalTime())
+            manageBank()
             start()
         case MenuSelect.close.rawValue:
             return
         default:
             restart()
         }
+    }
+    
+    private func manageBank() {
+        bank.open()
+        let clientCount = generateClientCount()
+        generateClient(clientCount: clientCount)
+        bank.close(totalDuration: measureTotalTime(), clientCount: clientCount)
     }
     
     private func printDescription() {
@@ -74,5 +90,17 @@ struct BankManager {
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         
         return Double(durationTime)
+    }
+}
+
+extension BankManager {
+    private func generateClientCount() -> Int {
+        return Int.random(in: Range.startRandomNumber.rawValue...Range.endRandomNumber.rawValue)
+    }
+    
+    private func generateClient(clientCount: Int) {
+        for number in Range.startClientNumber.rawValue...clientCount {
+            bank.clients.enqueue(data: Client(waitingNumber: number))
+        }
     }
 }
