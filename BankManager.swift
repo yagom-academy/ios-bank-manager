@@ -15,9 +15,11 @@ struct BankManager {
         static let empty = ""
     }
     
-    private var bank = Bank(with: BankClerk())
+    private var bank: Bank
     
-    mutating func start() {
+    init(of bank: Bank) {
+        self.bank = bank
+    }
         printOption()
         guard let selectedOption = SelectOptionType(rawValue: inputNumber()) else {
             return start()
