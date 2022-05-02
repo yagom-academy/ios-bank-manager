@@ -13,8 +13,9 @@ struct BankManager {
     입력 :
     """
     private let numberOfTeller: Int = 1
+    private var bank: Bank = Bank(0, 0)
     
-    func startBanking() {
+    mutating func startBanking() {
         printMenu()
         inputMenu()
     }
@@ -23,7 +24,7 @@ struct BankManager {
         print(menuString, terminator: " ")
     }
 
-    private func inputMenu() {
+    private mutating func inputMenu() {
         guard let input = readLine() else {
             return
         }
@@ -34,14 +35,15 @@ struct BankManager {
         }
         
         if menu == .open {
-            let bank = Bank(numberOfTeller, generateRandomNumber(in: customerRange))
+            bank.setUpTeller(number: numberOfTeller)
+            bank.setUpCustomer(number: generateRandomNumber(in: customerRange))
             bank.makeTellerWork()
             startBanking()
         } else if menu == .close {
             return
         }
     }
-
+    
     private func generateRandomNumber(in range: ClosedRange<Int>) -> Int {
         return Int.random(in: range)
     }
