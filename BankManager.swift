@@ -22,7 +22,7 @@ struct BankManager {
     }
     
     mutating func taskStart() {
-        printOption()
+        showMenuMessage()
         guard let selectedOption = SelectOptionType(rawValue: inputNumber()) else {
             return taskStart()
         }
@@ -36,7 +36,7 @@ struct BankManager {
         }
     }
     
-    private func printOption() {
+    private func showMenuMessage() {
         print(Text.open)
         print(Text.close)
         print(Text.input, terminator: Text.empty)
