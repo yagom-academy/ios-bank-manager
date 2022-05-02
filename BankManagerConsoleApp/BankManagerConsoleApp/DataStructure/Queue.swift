@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct Queue<T> {
-    private var list = LinkedList<T>()
+struct Queue<List: Listable> {
+    private var list: List
+    
+    init(list: List) {
+        self.list = list
+    }
     
     var count: Int {
         return list.count
@@ -18,15 +22,15 @@ struct Queue<T> {
         return list.isEmpty
     }
     
-    var peek: T? {
+    var peek: List.Element? {
         return list.first
     }
     
-    mutating func enqueue(_ value: T) {
+    mutating func enqueue(_ value: List.Element) {
         list.append(value: value)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> List.Element? {
         return list.removeFirst()
     }
     

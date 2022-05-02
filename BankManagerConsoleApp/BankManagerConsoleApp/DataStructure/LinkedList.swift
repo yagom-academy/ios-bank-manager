@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+struct LinkedList<Element>: Listable {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     private(set) var count = 0
     
@@ -20,11 +20,11 @@ struct LinkedList<T> {
         return false
     }
     
-    var first: T? {
+    var first: Element? {
         return head?.value
     }
     
-    mutating func append(value: T) {
+    mutating func append(value: Element) {
         let newNode = Node(value: value)
         if isEmpty {
             head = newNode
@@ -39,7 +39,7 @@ struct LinkedList<T> {
         count += 1
     }
     
-    mutating func removeFirst() -> T? {
+    mutating func removeFirst() -> Element? {
         if isEmpty {
             return nil
         }
@@ -56,7 +56,7 @@ struct LinkedList<T> {
         count = 0
     }
     
-    func index(at inputIndex: Int) -> Node<T>? {
+    func index(at inputIndex: Int) -> Node<Element>? {
         guard count > inputIndex, inputIndex >= 0 else {
             return nil
         }
@@ -71,7 +71,7 @@ struct LinkedList<T> {
         return indexPointer
     }
     
-    mutating func insert(value: T, at inputIndex: Int) {
+    mutating func insert(value: Element, at inputIndex: Int) {
         guard let pointingNode = index(at: inputIndex) else {
             return
         }

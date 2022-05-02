@@ -8,11 +8,12 @@
 import XCTest
 
 final class QueueTests: XCTestCase {
-    private var sut: Queue<Int>!
+    private var sut: Queue<LinkedList<Int>>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Queue<Int>()
+        let list = LinkedList<Int>()
+        sut = Queue(list: list)
     }
     
     override func tearDownWithError() throws {
