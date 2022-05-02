@@ -6,4 +6,6 @@
 //
 
 enum Const {
+    static let workTimeForCustomer: Double = 0.7
+    static let defaultBankerCount: Int = 1
 }

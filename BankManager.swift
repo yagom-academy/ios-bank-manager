@@ -7,10 +7,8 @@
 
 import Foundation
 
-extension Const {
+fileprivate extension Const {
     static let bankersNumber = 3
-    static let workTimeForCustomer: Double = 0.7
-    
     static let twoDecimal = "%.2f"
     static let startBankSelect = "1 : 은행 개점\n2 : 종료\n입력 : "
     static let blank = ""
@@ -26,45 +24,36 @@ fileprivate enum UserChoice: Int {
 }
 
 final class BankManager {
-    var bank: Bank = Bank(numberOfBankers: Const.bankersNumber)
-    
-    func manageBanker() {
-        let banker = Banker()
-        let workGroup = DispatchGroup()
-        for _ in 1...bank.numberOfCustomer {
-            bank.numberOfBankers.wait()
-            let custormer = bank.customers.deQueue()
-            DispatchQueue.global().async(group: workGroup) {
-                banker.work(customer: custormer)
-                self.bank.numberOfBankers.signal()
-            }
-            self.bank.wholeWorkTime += Const.workTimeForCustomer
-        }
-        workGroup.wait()
-    }
+    var bank: Bankable = Bank(numberOfBankers: Const.bankersNumber)
     
     func openBank() {
+        while workBank() == true {
+            _ = workBank()
+        }
+    }
+    
+    private func workBank() -> Bool {
         print(Const.startBankSelect, terminator: Const.blank)
         guard let userInput = readLine() else {
             print(Const.wrongInput)
-            return
+            return true
         }
         guard let chosenNumber = Int(userInput), let userChoice = UserChoice(rawValue: chosenNumber) else {
             print(Const.wrongInput)
-            return
+            return true
         }
-        selectMenu(by: userChoice)
+        return selectMenu(by: userChoice)
     }
     
-    private func selectMenu(by userChoice: UserChoice) {
+    private func selectMenu(by userChoice: UserChoice) -> Bool {
         switch userChoice {
         case UserChoice.start:
-            manageBanker()
+            bank.manageBanker()
             print(Const.finishWork)
-            print("오늘 업무를 처리한 고객은 총 \(bank.numberOfCustomer)명이며, 총 업무 시간은 \(String(format: Const.twoDecimal, bank.wholeWorkTime))초 입니다.")
-            bank.wholeWorkTime = Double.zero
+            print(bank.reportOfDay())
+            return true
         case UserChoice.exit:
-            return
+            return false
         }
     }
 }
