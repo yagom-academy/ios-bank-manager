@@ -1,6 +1,6 @@
 import Foundation
 
-struct Queue<T: Customer> {
+struct Queue<T: Waitable> {
     private let list = LinkedList<T>()
     var isEmpty: Bool {
         return list.isEmpty
