@@ -25,8 +25,10 @@ struct Bank {
         }
         
         let interval = CFAbsoluteTimeGetCurrent() - start
-        let totalTime = String(format: "%.2f", interval)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClients)명이며, 총 업무시간은 \(totalTime)입니다.")
+        let resultDescription = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f입니다."
+        let resultMessage = String(format: resultDescription, numberOfClients, interval)
+        
+        print(resultMessage)
     }
     
     private mutating func receiveClients() {
