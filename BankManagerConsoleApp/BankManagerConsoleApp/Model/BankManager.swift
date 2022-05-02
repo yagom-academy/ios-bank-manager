@@ -34,7 +34,7 @@ struct BankManager {
         }
         
         if menu == .open {
-            let bank = Bank(numberOfTeller, randomNumber(in: customerRange))
+            let bank = Bank(numberOfTeller, generateRandomNumber(in: customerRange))
             bank.makeTellerWork()
             startBanking()
         } else if menu == .close {
@@ -42,7 +42,7 @@ struct BankManager {
         }
     }
 
-    private func randomNumber(in range: ClosedRange<Int>) -> Int {
+    private func generateRandomNumber(in range: ClosedRange<Int>) -> Int {
         return Int.random(in: range)
     }
 }
