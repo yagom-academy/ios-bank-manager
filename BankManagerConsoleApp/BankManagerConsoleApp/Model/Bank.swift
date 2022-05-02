@@ -50,35 +50,32 @@ final class Bank {
     }
 
     private func sendCustomerToClerk() {
-        let group = DispatchGroup()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
+        let loanQueue = OperationQueue()
+        let depositQueue = OperationQueue()
+
+        loanQueue.maxConcurrentOperationCount = 1
+        depositQueue.maxConcurrentOperationCount = 2
 
         while !waitingQueue.isEmpty {
-            guard let customer = waitingQueue.dequeue() else { return }
+            guard let customer = waitingQueue.dequeue() else {
+                return
+            }
+            handledCustomerCount += 1
 
             switch customer.workType {
             case .loan:
-                loanSemaphore.wait()
-            case .deposit:
-                depositSemaphore.wait()
-            }
-
-            DispatchQueue.global().async(group: group) {
-                switch customer.workType {
-                case .loan:
+                loanQueue.addOperation {
                     self.loanWindow.receive(customer)
-                    loanSemaphore.signal()
-                case .deposit:
+                }
+            case .deposit:
+                depositQueue.addOperation {
                     self.depositWindow.receive(customer)
-                    depositSemaphore.signal()
                 }
             }
-
-            handledCustomerCount += 1
         }
 
-        group.wait()
+        loanQueue.waitUntilAllOperationsAreFinished()
+        depositQueue.waitUntilAllOperationsAreFinished()
     }
 
     private func reset() {
