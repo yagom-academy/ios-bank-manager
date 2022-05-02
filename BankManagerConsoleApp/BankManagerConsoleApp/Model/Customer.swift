@@ -1,6 +1,8 @@
 import Foundation
 
-struct Customer {
+protocol Waitable { }
+
+struct Customer: Waitable {
     let number: Int
     
     init(number: Int) {
