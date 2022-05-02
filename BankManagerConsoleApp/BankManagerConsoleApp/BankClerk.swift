@@ -21,8 +21,12 @@ struct BankClerk: Workable {
         guard let client = client else {
             return
         }
-        print("\(client.orderNumber)\(Message.start)")
+        
+        let workStartingMessage = String(format: "%d\(Message.start)", client.orderNumber)
+        let workEndingMessage = String(format: "%d\(Message.start)", client.orderNumber)
+        
+        print(workStartingMessage)
         Thread.sleep(forTimeInterval: Constant.workTime)
-        print("\(client.orderNumber)\(Message.end)")
+        print(workEndingMessage)
     }
 }
