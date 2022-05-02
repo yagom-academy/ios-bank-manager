@@ -54,13 +54,16 @@ struct Bank {
         }
         return customers
     }
-    
-    private func assignClerkCount(at deposit: OperationQueue, and loan: OperationQueue) {
+}
+
+// MARK: - OperationQueue Method
+private extension Bank {
+    func assignClerkCount(at deposit: OperationQueue, and loan: OperationQueue) {
         deposit.maxConcurrentOperationCount = depositClerkCount
         loan.maxConcurrentOperationCount = loanClerkCount
     }
     
-    private func waitTillOperationOver(at deposit: OperationQueue, and loan: OperationQueue) {
+    func waitTillOperationOver(at deposit: OperationQueue, and loan: OperationQueue) {
         deposit.waitUntilAllOperationsAreFinished()
         loan.waitUntilAllOperationsAreFinished()
     }

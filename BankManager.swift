@@ -8,11 +8,6 @@ import Foundation
 
 struct BankManager {
     
-    private enum UserOption: String {
-        case bankOpen = "1"
-        case bankClose = "2"
-    }
-    
     func open() {
         printMenu()
         guard let input = readLine() else { return }
@@ -31,7 +26,22 @@ struct BankManager {
         }
     }
     
-    private func printMenu() {
+    private func reopen() {
+        open()
+    }
+}
+
+// MARK: - User Select List
+private extension BankManager {
+    enum UserOption: String {
+        case bankOpen = "1"
+        case bankClose = "2"
+    }
+}
+
+// MARK: - Print Method
+private extension BankManager {
+    func printMenu() {
         print("""
               1 : 은행개점
               2 : 종료
@@ -39,16 +49,12 @@ struct BankManager {
               """, terminator: " ")
     }
  
-    private func selectWrong() {
+    func selectWrong() {
         print("잘못된 입력입니다.")
         reopen()
     }
     
-    private func finishWork(_ customers: Int, _ totalWorkTime: String) {
+    func finishWork(_ customers: Int, _ totalWorkTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(totalWorkTime)초 입니다.")
-    }
-    
-    private func reopen() {
-        open()
     }
 }
