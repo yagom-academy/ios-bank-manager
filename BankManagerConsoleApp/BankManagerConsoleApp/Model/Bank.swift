@@ -13,11 +13,11 @@ fileprivate extension Constants {
 
 final class Bank: Presentable {
     private let clientQueue = Queue<Client>()
-    private let bankClerk: BankClerk
+    private let bankClerks: [BankClerk]
     private let clientCount: Int
     
-    init(bankClerk: BankClerk, clientCount: Int) {
-        self.bankClerk = bankClerk
+    init(bankClerks: [BankClerk], clientCount: Int) {
+        self.bankClerks = bankClerks
         self.clientCount = clientCount
     }
     
@@ -25,7 +25,7 @@ final class Bank: Presentable {
         receiveClients()
         
         let totalWorkTime = measureTotalWorkTime {
-            bankClerk.work(clientQueue)
+
         }
         
         close(totalWorkTime: totalWorkTime)
@@ -33,7 +33,7 @@ final class Bank: Presentable {
     
     private func receiveClients() {
         for order in 1 ... clientCount {
-            clientQueue.enqueue(Client(waitingNumber: order))
+            clientQueue.enqueue(Client(waitingNumber: order, bankService: .randomBankService))
         }
     }
     

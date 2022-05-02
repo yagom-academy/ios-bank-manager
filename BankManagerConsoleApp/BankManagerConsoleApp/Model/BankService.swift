@@ -33,7 +33,7 @@ extension BankService {
 }
 
 extension BankService {
-    static var generateRandomBankService: BankService {
+    static var randomBankService: BankService {
         guard let bankService = self.allCases.randomElement() else {
             return .deposit
         }

@@ -9,11 +9,11 @@ import Foundation
 
 final class BankClerk: Presentable {
     private let name: String
-    private let workSpeed: Double
+    private let service: BankService
     
-    init(name: String, workSpeed: Double) {
+    init(name: String, service: BankService) {
         self.name = name
-        self.workSpeed = workSpeed
+        self.service = service
     }
     
     func work(_ queue: Queue<Client>) {
@@ -32,7 +32,7 @@ final class BankClerk: Presentable {
             }
             
             self.printStartTaskMessage(waitingNumber: client.waitingNumber)
-            Thread.sleep(forTimeInterval: self.workSpeed)
+            Thread.sleep(forTimeInterval: self.service.requiredTime)
             self.printFinishTaskMessage(waitingNumber: client.waitingNumber)
             
             queue.dequeue()
