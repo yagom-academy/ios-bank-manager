@@ -9,17 +9,14 @@ import Foundation
 
 fileprivate extension Const {
     static let defaultCount: Int = 0
+    static let startTime: Double = 0
     static let customerRange = 10...30
     static let startCount: Int = 1
+    
     static let twoDecimal = "%.2f"
 }
 
-protocol Bankable {
-    func manageBanker()
-    func reportOfDay() -> String
-}
-
-final class Bank: Bankable {
+final class Bank: Manageable {
     private var customers = Queue(listType: DoubleStack<Customer>())
     private var numberOfCustomer: Int = Const.defaultCount
     private var numberOfBankers: DispatchSemaphore
@@ -33,7 +30,7 @@ final class Bank: Bankable {
     func manageBanker() {
         let banker = Banker()
         let workGroup = DispatchGroup()
-        for _ in 1...numberOfCustomer {
+        for _ in Const.startCount...numberOfCustomer {
             numberOfBankers.wait()
             let custormer = customers.deQueue()
             DispatchQueue.global().async(group: workGroup) {
@@ -56,6 +53,6 @@ final class Bank: Bankable {
         for numberTicekt in Const.startCount...numberOfCustomer {
             customers.enQueue(data: Customer(numberTicekt: numberTicekt))
         }
-        wholeWorkTime = 0
+        wholeWorkTime = Const.startTime
     }
 }
