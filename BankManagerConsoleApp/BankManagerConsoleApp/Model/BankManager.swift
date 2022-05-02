@@ -1,14 +1,17 @@
 import Foundation
 
 struct BankManager {
+    private enum BankManagerMenu: String {
+        case open = "1"
+        case close = "2"
+    }
+    
     private let customerRange: ClosedRange = 10...30
     private let menuString = """
     1 : 은행개점
     2 : 종료
     입력 :
     """
-    private let bankOpenMenu: String = "1"
-    private let bankCloseMenu: String = "2"
     private let numberOfTeller: Int = 1
     
     func startBanking() {
@@ -25,14 +28,17 @@ struct BankManager {
             return
         }
         
-        if input == bankOpenMenu {
+        guard let menu: BankManagerMenu = BankManagerMenu(rawValue: input) else {
+            startBanking()
+            return
+        }
+        
+        if menu == .open {
             let bank = Bank(numberOfTeller, randomNumber(in: customerRange))
             bank.makeTellerWork()
             startBanking()
-        } else if input == bankCloseMenu {
+        } else if menu == .close {
             return
-        } else {
-            startBanking()
         }
     }
 
