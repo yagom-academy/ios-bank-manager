@@ -10,10 +10,10 @@ struct Bank {
     init(_ numberOfTeller: Int, _ numberOfCustomer: Int) {
         self.numberOfTeller = numberOfTeller
         self.numberOfCustomer = numberOfCustomer
-        makeCustomerInLine()
+        addCustomerInLine()
     }
     
-    private func makeCustomerInLine() {
+    private func addCustomerInLine() {
         for number in 1...numberOfCustomer {
             customerQueue.enqueue(Customer(number: number))
         }
