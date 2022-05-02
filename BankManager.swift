@@ -20,8 +20,13 @@ extension Const {
     static let exitInput = "2"
 }
 
+fileprivate enum UserChoice: Int {
+    case start = 1
+    case exit = 2
+}
+
 final class BankManager {
-    var bank: Bank = Bank(numberOfBankers: 3)
+    var bank: Bank = Bank(numberOfBankers: Const.bankersNumber)
     
     func manageBanker() {
         let banker = Banker()
@@ -40,24 +45,26 @@ final class BankManager {
     
     func openBank() {
         print(Const.startBankSelect, terminator: Const.blank)
-        guard let userChoice = readLine() else {
+        guard let userInput = readLine() else {
             print(Const.wrongInput)
             return
         }
-        choose(userChoice: userChoice)
+        guard let chosenNumber = Int(userInput), let userChoice = UserChoice(rawValue: chosenNumber) else {
+            print(Const.wrongInput)
+            return
+        }
+        selectMenu(by: userChoice)
     }
     
-    private func choose(userChoice: String) {
+    private func selectMenu(by userChoice: UserChoice) {
         switch userChoice {
-        case Const.OpeningInput:
+        case UserChoice.start:
             manageBanker()
             print(Const.finishWork)
             print("오늘 업무를 처리한 고객은 총 \(bank.numberOfCustomer)명이며, 총 업무 시간은 \(String(format: Const.twoDecimal, bank.wholeWorkTime))초 입니다.")
             bank.wholeWorkTime = Double.zero
-        case Const.exitInput:
+        case UserChoice.exit:
             return
-        default:
-            print(Const.wrongInput)
         }
     }
 }
