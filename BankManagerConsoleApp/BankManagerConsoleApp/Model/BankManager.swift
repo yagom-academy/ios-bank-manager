@@ -36,7 +36,7 @@ struct BankManager {
     init(bank: Bank) {
         self.bank = bank
     }
-
+    
     mutating func start() {
         printDescription()
         guard let input = readLine() else {
@@ -55,9 +55,9 @@ struct BankManager {
     
     private func manageBank() {
         bank.open()
-        let clientCount = generateClientCount()
-        generateClient(clientCount: clientCount)
-        bank.close(totalDuration: measureTotalTime(), clientCount: clientCount)
+        let totalClients = generateClientCount()
+        giveWaitingNumber(for: totalClients)
+        bank.close(totalDuration: measureTotalTime(), clientCount: totalClients)
     }
     
     private func printDescription() {
@@ -97,13 +97,14 @@ struct BankManager {
 }
 
 // MARK: clients 생성
+
 extension BankManager {
     private func generateClientCount() -> Int {
         return Int.random(in: Range.startRandomNumber.rawValue...Range.endRandomNumber.rawValue)
     }
     
-    private func generateClient(clientCount: Int) {
-        for number in Range.startClientNumber.rawValue...clientCount {
+    private func giveWaitingNumber(for clients: Int) {
+        for number in Range.startClientNumber.rawValue...clients {
             bank.clients.enqueue(data: Client(waitingNumber: number))
         }
     }
