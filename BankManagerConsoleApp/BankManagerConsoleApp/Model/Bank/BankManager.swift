@@ -20,7 +20,7 @@ struct BankManager {
         
         switch receivedInput {
         case Constant.one:
-            bank.start()
+            bank.openBank()
         case Constant.two:
             return
         default:
