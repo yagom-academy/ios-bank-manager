@@ -33,26 +33,29 @@ final class Bank: Presentable {
     }
     
     private func assignClientToBankClerk() {
-        
-        let dispatchGroup = DispatchGroup()
+        let group = DispatchGroup()
         
         bankClerks.filter { $0.service == .deposit }.forEach { bankClerk in
-            DispatchQueue.global().async(group: dispatchGroup) {
-                while let client = self.depositClientQueue.dequeue() {
-                    bankClerk.work(client: client)
-                }
-            }
+            assignWorkToBankClerk(group: group, queue: self.depositClientQueue, bankClerk: bankClerk)
         }
         
         bankClerks.filter { $0.service == .loan }.forEach { bankClerk in
-            DispatchQueue.global().async(group: dispatchGroup) {
-                while let client = self.loanClientQueue.dequeue() {
-                    bankClerk.work(client: client)
-                }
-            }
+            assignWorkToBankClerk(group: group, queue: self.loanClientQueue, bankClerk: bankClerk)
         }
         
-        dispatchGroup.wait()
+        group.wait()
+    }
+    
+    private func assignWorkToBankClerk(
+        group: DispatchGroup,
+        queue: Queue<Client>,
+        bankClerk: BankClerk
+    ) {
+        DispatchQueue.global().async(group: group) {
+            while let client = queue.dequeue() {
+                bankClerk.work(client: client)
+            }
+        }
     }
     
     private func receiveClients() {

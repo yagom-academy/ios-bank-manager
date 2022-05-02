@@ -11,6 +11,16 @@ fileprivate extension Constants {
     
 }
 
+private let bank = Bank(
+    bankClerks: createBankClerk(
+        Constants.numberOfDepositBankClerks,
+        Constants.numberOfLoanBankClerks
+    ),
+    clientCount: Int.random(in: Constants.clientCountRange)
+)
+
+private let bankManager = BankManager(bank: bank)
+
 private func createBankClerk(
     _ numberOfDepositBankClerks: Int,
     _ numberOfLoanBankClerks: Int
@@ -37,18 +47,6 @@ private func createBankClerk(
     
     return bankClerks
 }
-
-private let bank = Bank(
-    bankClerks: createBankClerk(
-        Constants.numberOfDepositBankClerks,
-        Constants.numberOfLoanBankClerks
-    ),
-    clientCount: Int.random(in: Constants.clientCountRange)
-)
-
-private let bankManager = BankManager(
-    bank: bank
-)
 
 do {
     try bankManager.startProgram()
