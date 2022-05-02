@@ -5,6 +5,6 @@
 //  Created by Taeangel, Tiana 2022/04/25.
 //
 
-var bankManager = BankManager()
+var bankManager = BankManager(bank: Bank(clients: Queue()))
 
 bankManager.start()

@@ -31,7 +31,11 @@ private enum Guide: String {
 }
 
 struct BankManager {
-    private var bank: Bank = Bank(clients: Queue())
+    private var bank: Bank
+    
+    init(bank: Bank) {
+        self.bank = bank
+    }
 
     mutating func start() {
         printDescription()
