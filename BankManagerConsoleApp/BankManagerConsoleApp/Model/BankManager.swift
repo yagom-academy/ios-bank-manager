@@ -35,13 +35,17 @@ struct BankManager {
         }
         
         if menu == .open {
-            bank.setUpTeller(number: numberOfTeller)
-            bank.setUpCustomer(number: generateRandomNumber(in: customerRange))
+            setUpBank()
             bank.makeTellerWork()
             startBanking()
         } else if menu == .close {
             return
         }
+    }
+
+    private mutating func setUpBank() {
+        bank.setUpTeller(number: numberOfTeller)
+        bank.setUpCustomer(number: generateRandomNumber(in: customerRange))
     }
     
     private func generateRandomNumber(in range: ClosedRange<Int>) -> Int {
