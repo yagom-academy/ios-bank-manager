@@ -19,11 +19,12 @@ struct Bank {
     }
     
     func startWork() -> (Int, String)? {
-        let depositWindow = DispatchSemaphore(value: depositClerkCount)
-        let loanWindow = DispatchSemaphore(value: loanClerkCount)
-        let group = DispatchGroup()
+        let depositWindowQueue = OperationQueue()
+        let loanWindowQueue = OperationQueue()
         let startWorkTime = CFAbsoluteTimeGetCurrent()
         let customers = limitCustomerCount()
+        
+        assignClerkCount(at: depositWindowQueue, and: loanWindowQueue)
      
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return nil }
@@ -31,22 +32,17 @@ struct Bank {
             
             switch task {
             case .deposit:
-                depositWindow.wait()
-                DispatchQueue.global().async(group: group) {
+                depositWindowQueue.addOperation {
                     self.bankClerk.processTask(for: customer)
-                    depositWindow.signal()
                 }
             case .loan:
-                loanWindow.wait()
-                DispatchQueue.global().async(group: group) {
+                loanWindowQueue.addOperation {
                     self.bankClerk.processTask(for: customer)
-                    loanWindow.signal()
                 }
             }
         }
-        group.wait()
+        waitTillOperationOver(at: depositWindowQueue, and: loanWindowQueue)
         let finishWorkTime = CFAbsoluteTimeGetCurrent() - startWorkTime
-        
         return (customers, finishWorkTime.customFloor())
     }
     
@@ -57,6 +53,16 @@ struct Bank {
             bankWaitingQueue.enqueue(Customer(numberTicket: number))
         }
         return customers
+    }
+    
+    private func assignClerkCount(at deposit: OperationQueue, and loan: OperationQueue) {
+        deposit.maxConcurrentOperationCount = depositClerkCount
+        loan.maxConcurrentOperationCount = loanClerkCount
+    }
+    
+    private func waitTillOperationOver(at deposit: OperationQueue, and loan: OperationQueue) {
+        deposit.waitUntilAllOperationsAreFinished()
+        loan.waitUntilAllOperationsAreFinished()
     }
 }
 

@@ -8,10 +8,10 @@
 import Foundation
 
 struct BankClerk {
-    let taskQueue = DispatchQueue(label: "taskQueue")
-    let taskGroup = DispatchGroup()
+    private let taskQueue = DispatchQueue(label: "taskQueue")
     
     func processTask(for customer: Customer) {
+        let taskGroup = DispatchGroup()
         guard let taskTime = sortTaskTime(customer) else { return }
         
         startTask(customer)
