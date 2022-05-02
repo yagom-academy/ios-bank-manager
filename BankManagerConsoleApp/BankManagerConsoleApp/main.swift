@@ -6,9 +6,6 @@
 
 fileprivate extension Constants {
     static let clientCountRange: ClosedRange<Int> = 10 ... 30
-    static let numberOfDepositBankClerks: Int = 2
-    static let numberOfLoanBankClerks: Int = 1
-    
 }
 
 private let bank = Bank(

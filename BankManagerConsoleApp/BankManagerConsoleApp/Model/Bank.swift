@@ -32,15 +32,42 @@ final class Bank: Presentable {
         close(totalWorkTime: totalWorkTime)
     }
     
+    private func receiveClients() {
+        for order in 1 ... clientCount {
+            classifyClients(waitingNumber: order)
+        }
+    }
+    
+    private func measureTotalWorkTime(_ task: () -> Void) -> String {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        task()
+        let finishTime = CFAbsoluteTimeGetCurrent()
+        let totalTime = finishTime - startTime
+        
+        return totalTime.formatted
+    }
+    
     private func assignClientToBankClerk() {
         let group = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: Constants.numberOfDepositBankClerks)
+        let loanSemaphore = DispatchSemaphore(value: Constants.numberOfLoanBankClerks)
         
         bankClerks.filter { $0.service == .deposit }.forEach { bankClerk in
-            assignWorkToBankClerk(group: group, queue: self.depositClientQueue, bankClerk: bankClerk)
+            assignWorkToBankClerk(
+                group: group,
+                queue: self.depositClientQueue,
+                bankClerk: bankClerk,
+                semaphore: depositSemaphore
+            )
         }
         
         bankClerks.filter { $0.service == .loan }.forEach { bankClerk in
-            assignWorkToBankClerk(group: group, queue: self.loanClientQueue, bankClerk: bankClerk)
+            assignWorkToBankClerk(
+                group: group,
+                queue: self.loanClientQueue,
+                bankClerk: bankClerk,
+                semaphore: loanSemaphore
+            )
         }
         
         group.wait()
@@ -49,18 +76,15 @@ final class Bank: Presentable {
     private func assignWorkToBankClerk(
         group: DispatchGroup,
         queue: Queue<Client>,
-        bankClerk: BankClerk
+        bankClerk: BankClerk,
+        semaphore: DispatchSemaphore
     ) {
         DispatchQueue.global().async(group: group) {
+            semaphore.wait()
             while let client = queue.dequeue() {
                 bankClerk.work(client: client)
             }
-        }
-    }
-    
-    private func receiveClients() {
-        for order in 1 ... clientCount {
-            classifyClients(waitingNumber: order)
+            semaphore.signal()
         }
     }
     
@@ -72,15 +96,6 @@ final class Bank: Presentable {
         case .loan:
             loanClientQueue.enqueue(client)
         }
-    }
-    
-    private func measureTotalWorkTime(_ task: () -> Void) -> String {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        task()
-        let finishTime = CFAbsoluteTimeGetCurrent()
-        let totalTime = finishTime - startTime
-        
-        return totalTime.formatted
     }
     
     private func close(totalWorkTime: String) {
