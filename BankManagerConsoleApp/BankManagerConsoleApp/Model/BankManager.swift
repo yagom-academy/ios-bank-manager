@@ -30,10 +30,6 @@ private enum Guide: String {
     case error = "잘못 눌렀습니다."
 }
 
-private enum Text: String {
-    case emptyString = ""
-}
-
 struct BankManager {
     private var bank: Bank = Bank(clients: Queue())
 
@@ -62,7 +58,7 @@ struct BankManager {
     
     private func printDescription() {
         print(Guide.menu.rawValue)
-        print(Guide.input.rawValue, terminator: Text.emptyString.rawValue)
+        print(Guide.input.rawValue, terminator: String.empty)
     }
     
     private mutating func restart() {
@@ -93,6 +89,7 @@ struct BankManager {
     }
 }
 
+// MARK: clients 생성
 extension BankManager {
     private func generateClientCount() -> Int {
         return Int.random(in: Range.startRandomNumber.rawValue...Range.endRandomNumber.rawValue)

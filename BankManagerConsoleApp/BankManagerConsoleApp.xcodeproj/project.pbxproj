@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0EFD2E852816A6630090880A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD2E842816A6630090880A /* main.swift */; };
+		864EE344281FD41000573488 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864EE343281FD41000573488 /* String+.swift */; };
 		8682B4F02818117100203106 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682B4EF2818117100203106 /* Client.swift */; };
 		8682B4F2281811C200203106 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682B4F1281811C200203106 /* BankClerk.swift */; };
 		8682B4F42818122700203106 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682B4F32818122700203106 /* Bank.swift */; };
@@ -38,6 +39,7 @@
 		0EFD2E8328169C5D0090880A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		0EFD2E842816A6630090880A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		83182557EF70659A5EBDE1E4 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		864EE343281FD41000573488 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		8682B4EF2818117100203106 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		8682B4F1281811C200203106 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		8682B4F32818122700203106 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				8682B4F6281923B800203106 /* Double+.swift */,
+				864EE343281FD41000573488 /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* LinkedList.swift in Sources */,
+				864EE344281FD41000573488 /* String+.swift in Sources */,
 				8682B4F42818122700203106 /* Bank.swift in Sources */,
 				8682B4F7281923B800203106 /* Double+.swift in Sources */,
 				8682B4F2281811C200203106 /* BankClerk.swift in Sources */,
