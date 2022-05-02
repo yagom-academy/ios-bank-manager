@@ -23,7 +23,7 @@ struct Bank {
     }
     
     private mutating func sendCustomerToClerk() {
-        while customerQueue.isEmpty == false {
+        while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }

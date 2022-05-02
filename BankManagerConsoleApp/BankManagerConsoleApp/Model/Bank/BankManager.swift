@@ -6,12 +6,11 @@
 struct BankManager {
     private enum Constant {
         static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
-        static let one = "1"
-        static let two = "2"
         static let empty = ""
     }
-    var bank = Bank()
-    var receivedInput: String {
+    
+    private var bank = Bank()
+    private var receivedInput: String {
         return readLine() ?? Constant.empty
     }
     
@@ -19,9 +18,9 @@ struct BankManager {
         print(Constant.menu, terminator: Constant.empty)
         
         switch receivedInput {
-        case Constant.one:
+        case "1":
             bank.openBank()
-        case Constant.two:
+        case "2":
             return
         default:
             return selectMenu()
