@@ -1,6 +1,6 @@
 //
 //  BankManager.swift
-//  Created by yagom.
+//  Created by Eddy, dudu.
 //  Copyright © yagom academy. All rights reserved.
 //
 
