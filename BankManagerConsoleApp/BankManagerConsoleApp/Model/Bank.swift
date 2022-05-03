@@ -24,18 +24,25 @@ struct Bank {
     func makeTellerWork() {
         let bankingGroup = DispatchGroup()
         
-        
-        
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
             
-            DispatchQueue.global().async(group: bankingGroup) {
-                teller.work(for: customer)
+            guard let task = customer.taskType else {
+                return
             }
             
-            
+            switch task {
+            case .deposit:
+                DispatchQueue.global().async(group: bankingGroup) {
+                    teller.work(for: customer)
+                }
+            case .loan:
+                DispatchQueue.global().async(group: bankingGroup) {
+                    teller.work(for: customer)
+                }
+            }
         }
         
         bankingGroup.wait()
