@@ -17,14 +17,15 @@ final class Banker {
         guard let customerNumberTicekt = customer?.numberTicekt else {
             return
         }
-        let runloop = RunLoop.current
-        
-        print("\(customerNumberTicekt)" + Const.startWorking)
-        
-        Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) {_ in
-            print("\(customerNumberTicekt)" + Const.endWorking)
+        let businessGroup = DispatchGroup()
+        businessGroup.enter()
+        DispatchQueue.global().async {
+            print("\(customerNumberTicekt)" + Const.startWorking)
         }
-        
-       runloop.run()
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.7) {
+            print("\(customerNumberTicekt)" + Const.endWorking)
+            businessGroup.leave()
+        }
+        businessGroup.wait()
     }
 }
