@@ -11,19 +11,20 @@ struct Bank {
     private let loanClerk: Workable
     private let depositClerk: Workable
     private var clientQueue = Queue(list: LinkedList<Client>())
+    private var semaphore: DispatchSemaphore
+    private let clerks = DispatchGroup()
     
     init(loanClerkCount: Int, depositClerkCount: Int) {
         self.loanClerk = BankClerk(workType: .loan, clerkCount: loanClerkCount)
         self.depositClerk = BankClerk(workType: .deposit, clerkCount: depositClerkCount)
+        self.semaphore = DispatchSemaphore(value: loanClerkCount + depositClerkCount)
     }
     
     mutating func executeBankWork() {
         let start = CFAbsoluteTimeGetCurrent()
         let numberOfClients = receiveClients()
         
-        DispatchQueue.global().sync {
-            serveClients()
-        }
+        serveClients()
         
         let interval = CFAbsoluteTimeGetCurrent() - start
         let resultDescription = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f입니다."
