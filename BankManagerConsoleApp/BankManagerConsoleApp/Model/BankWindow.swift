@@ -8,7 +8,6 @@
 import Foundation
 
 protocol BankWindow {
-    var workType: Banking { get }
     func receive(_ customer: Customer)
 }
 
