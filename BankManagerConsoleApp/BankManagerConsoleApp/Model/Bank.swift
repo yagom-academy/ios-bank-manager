@@ -13,9 +13,13 @@ private enum ClientCount: Int {
     case first = 1
 }
 
-struct Bank: Clerkalbe, Measurable {
-    var clients: Queue<Client>
+struct Bank: Measurable {
+    private var clients: Queue<Client>
     private let group = DispatchGroup()
+    
+    private var totalClients: Int {
+        return Int.random(in: ClientCount.minimum.rawValue...ClientCount.maximum.rawValue)
+    }
     
     init(clients: Queue<Client>) {
         self.clients = clients
@@ -23,25 +27,26 @@ struct Bank: Clerkalbe, Measurable {
     
     func measureWorkingHours() -> Double {
         let duration = measureTime {
-            work()
+            open()
             group.wait()
         }
         return duration
     }
     
-    private func work() {
+    private func open() {
         while let client = clients.dequeue() {
-            work(client: client, group: group)
+            BankClerk.work(client: client, group: group)
         }
     }
     
-    func countClients() -> Int {
-        return Int.random(in: ClientCount.minimum.rawValue...ClientCount.maximum.rawValue)
-    }
-    
-    func giveWaitingNumber(for totalClients: Int) {
+    func giveWaitingNumber() -> Int? {
+        let totalClients = totalClients
         for waitingNumber in ClientCount.first.rawValue...totalClients {
-            clients.enqueue(data: Client(waitingNumber: waitingNumber, task: Task.random))
+            guard let task = Task.random else {
+                return nil
+            }
+            clients.enqueue(data: Client(waitingNumber: waitingNumber, task: task))
         }
+        return totalClients
     }
 }
