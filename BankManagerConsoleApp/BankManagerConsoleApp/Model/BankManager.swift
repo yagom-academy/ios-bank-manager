@@ -26,7 +26,7 @@ private enum Guide: String {
     case error = "잘못 눌렀습니다."
 }
 
-struct BankManager {
+struct BankManager : Clerkalbe{
     private var bank: Bank
     private let group = DispatchGroup()
     
@@ -68,15 +68,7 @@ struct BankManager {
     
     private func work() {
         while let client = bank.clients.dequeue() {
-            let semaphore = client.task.clerk
-            
-            DispatchQueue.global().async(group: group) {
-                semaphore.wait()
-                print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 시작")
-                Thread.sleep(forTimeInterval: client.task.time)
-                print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 완료")
-                semaphore.signal()
-            }
+            work(client: client, group: group)
         }
     }
     
@@ -84,7 +76,6 @@ struct BankManager {
         let duration = measureTime {
             work()
         }
-        
         return duration
     }
     
