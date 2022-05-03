@@ -16,8 +16,8 @@ final class Bank {
   private var totalClientCount: Int = .zero
   private var totalExecuteTime: Double = .zero
 
-  init(limit: Int) {
-    clientQueue = BankQueue(limit: limit)
+  init(maxClient: Int) {
+    clientQueue = BankQueue(limit: maxClient)
   }
 
   func open() {

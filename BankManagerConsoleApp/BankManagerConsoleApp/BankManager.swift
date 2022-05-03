@@ -35,7 +35,7 @@ final class BankManager {
 
     switch menu {
     case .open:
-      let bank = Bank(limit: Constants.limit)
+      let bank = Bank(maxClient: Constants.limit)
       createClients().forEach { bank.addClient($0) }
       bank.open()
       return true
