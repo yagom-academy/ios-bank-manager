@@ -11,13 +11,13 @@ struct Bank {
     private let loanClerk: Workable
     private let depositClerk: Workable
     private var clientQueue = Queue(list: LinkedList<Client>())
-    private var semaphore: DispatchSemaphore
+    private var clerksCount: DispatchSemaphore
     private let clerks = DispatchGroup()
     
     init(loanClerkCount: Int, depositClerkCount: Int) {
         self.loanClerk = BankClerk(workType: .loan, clerkCount: loanClerkCount)
         self.depositClerk = BankClerk(workType: .deposit, clerkCount: depositClerkCount)
-        self.semaphore = DispatchSemaphore(value: loanClerkCount + depositClerkCount)
+        self.clerksCount = DispatchSemaphore(value: loanClerkCount + depositClerkCount)
     }
     
     mutating func executeBankWork() {
@@ -27,7 +27,7 @@ struct Bank {
         }
         
         let resultDescription = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f입니다."
-        let resultMessage = String(format: resultDescription, numberOfClients, interval)
+        let resultMessage = String(format: resultDescription, numberOfClients, totalWorkTime)
         
         print(resultMessage)
     }
@@ -49,13 +49,13 @@ struct Bank {
     
     private mutating func serveClients() {
         while let client = clientQueue.dequeue() {
-            excuteWork(of: client)
+            executeWork(of: client)
         }
         clerks.wait()
     }
     
-    private mutating func excuteWork(of client: Client) {
-        self.semaphore.wait()
+    private mutating func executeWork(of client: Client) {
+        self.clerksCount.wait()
         
         DispatchQueue.global().async(group: clerks) { [self] in
             if client.wantedWork == .loan {
@@ -64,7 +64,7 @@ struct Bank {
                 self.depositClerk.deal(with: client)
             }
             
-            self.semaphore.signal()
+            self.clerksCount.signal()
         }
     }
 }
