@@ -23,7 +23,7 @@ struct Bank {
         }
     }
     
-    func makeTellerWork() {
+    func work() {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         while !customerQueue.isEmpty {

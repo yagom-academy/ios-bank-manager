@@ -35,7 +35,7 @@ struct BankManager {
         
         if menu == .open {
             setUpBank()
-            bank.makeTellerWork()
+            bank.work()
             startBanking()
         } else if menu == .close {
             return
