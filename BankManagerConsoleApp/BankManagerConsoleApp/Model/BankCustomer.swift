@@ -7,21 +7,27 @@
 
 protocol Customer {
     var waitingNumber: Int { get }
-    init(waitingNumber: Int)
+    var workType: Banking { get }
+    init(waitingNumber: Int, workType: Banking)
 }
 
 extension Customer {
     static func randomCustomers() -> [Self] {
-        var customers = [Self]()
         let customerCount = Int.random(in: 10...30)
-        for number in 1...customerCount {
-            customers.append(Self(waitingNumber: number))
-        }
+        let customers = (1...customerCount).map(makeCustomer)
 
         return customers
+    }
+
+    private static func makeCustomer(number: Int) -> Self {
+        let customerType = Banking.allCases.randomElement() ?? .deposit
+        let customer = Self(waitingNumber: number, workType: customerType)
+
+        return customer
     }
 }
 
 struct BankCustomer: Customer {
     let waitingNumber: Int
+    let workType: Banking
 }

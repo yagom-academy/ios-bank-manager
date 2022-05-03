@@ -4,21 +4,32 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+import Foundation
+
+fileprivate extension Double {
+    var formattedTime: String {
+        let difference = floor(self * 10) / 10
+        return String(format: "%.2f", difference)
+    }
+}
+
 private enum MenuOption: String {
     case bankOpen = "1"
     case exit = "2"
+    case invalidInput
 }
 
-protocol BankResultDelegate {
-    func printBankResult(count: Int, hour: String)
-}
-
-struct BankManager: BankResultDelegate {
-    private let bank = Bank(window: BankCommonWindow())
-
-    init() {
+final class BankManager {
+    private lazy var bank: Bank = {
+        let loanWindow = BankLoanWindow()
+        
+        let depositWindow = BankDepositWindow()
+        
+        let bank = Bank(loanWindow: loanWindow, depositWindow: depositWindow)
         bank.delegate = self
-    }
+        
+        return bank
+    }()
     
     func start() {
         printMenu()
@@ -27,10 +38,11 @@ struct BankManager: BankResultDelegate {
         case .bankOpen:
             bank.add(customers: BankCustomer.randomCustomers())
             bank.open()
+            
             start()
         case .exit:
             break
-        case .none:
+        case .invalidInput:
             print("잘못 입력했습니다. 다시 입력해주세요")
             start()
         }
@@ -42,14 +54,24 @@ struct BankManager: BankResultDelegate {
         print("입력 : ", terminator: "")
     }
     
-    private func inputUserOption() -> MenuOption? {
+    private func inputUserOption() -> MenuOption {
         guard let userInput = readLine()?.trimmingCharacters(in: .whitespaces),
-              let userSelection = MenuOption(rawValue: userInput) else { return nil }
+              let userSelection = MenuOption(rawValue: userInput) else { return .invalidInput }
         
         return userSelection
     }
+}
+
+extension BankManager: BankDelegate {
+    func customerWorkDidStart(_ bank: Bank, waitingNumber: Int, workType: Banking) {
+        print("\(waitingNumber)번 고객 \(workType.name)업무 시작")
+    }
     
-    func printBankResult(count : Int, hour: String) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무 시간은 \(hour)초입니다.")
+    func customerWorkDidFinish(_ bank: Bank, waitingNumber: Int, workType: Banking) {
+        print("\(waitingNumber)번 고객 \(workType.name)업무 완료")
+    }
+    
+    func bankWorkDidFinish(_ bank: Bank) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무 시간은 \(bank.duration.formattedTime)초입니다.")
     }
 }

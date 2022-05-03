@@ -7,27 +7,31 @@
 
 import Foundation
 
-class Bank {
+protocol BankDelegate: AnyObject {
+    func bankWorkDidFinish(_ bank: Bank)
+    func customerWorkDidStart(_ bank: Bank, waitingNumber: Int, workType: Banking)
+    func customerWorkDidFinish(_ bank: Bank, waitingNumber: Int, workType: Banking)
+}
+
+final class Bank {
     private let waitingQueue = Queue<Customer>()
-    private let window: BankWindow
-    private var handledCustomerCount = 0
-    private var startTime = 0.0
-    private var endTime = 0.0
-    var delegate: BankResultDelegate?
+    private let loanWindow: BankWindow
+    private let depositWindow: BankWindow
+    private(set) var customerCount = 0
+    private(set) var duration = 0.0
+    weak var delegate: BankDelegate?
 
-    private var businessHours: String {
-        let difference = endTime - startTime
-        let flooredDifference = floor(difference * 10) / 10
-        return String(format: "%.2f", flooredDifference)
-    }
+    init(loanWindow: BankWindow, depositWindow: BankWindow) {
+        self.loanWindow = loanWindow
+        self.depositWindow = depositWindow
 
-    init(window: BankWindow) {
-        self.window = window
+        self.loanWindow.delegate = self
+        self.depositWindow.delegate = self
     }
 
     func open() {
-        sendCustomerToClerk()
-        delegate?.printBankResult(count: handledCustomerCount, hour: businessHours)
+        duration = checkTime(target: sendCustomerToClerk)
+        delegate?.bankWorkDidFinish(self)
         reset()
     }
 
@@ -37,19 +41,53 @@ class Bank {
         }
     }
 
-    private func sendCustomerToClerk() {
-        startTime = CFAbsoluteTimeGetCurrent()
+    private func checkTime(target: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        target()
+        let endTime = CFAbsoluteTimeGetCurrent()
+        return (endTime - startTime)
+    }
 
-        while !waitingQueue.isEmpty {
-            guard let customer = waitingQueue.dequeue() else { return }
-            handledCustomerCount += 1
-            window.work(for: customer)
+    private func sendCustomerToClerk() {
+        let loanQueue = OperationQueue()
+        let depositQueue = OperationQueue()
+
+        loanQueue.maxConcurrentOperationCount = 1
+        depositQueue.maxConcurrentOperationCount = 2
+
+        while let customer = waitingQueue.dequeue() {
+            customerCount += 1
+
+            switch customer.workType {
+            case .loan:
+                loanQueue.addOperation {
+                    self.loanWindow.receive(customer)
+                }
+            case .deposit:
+                depositQueue.addOperation {
+                    self.depositWindow.receive(customer)
+                }
+            }
         }
 
-        endTime = CFAbsoluteTimeGetCurrent()
+        DispatchQueue.global().sync {
+            loanQueue.waitUntilAllOperationsAreFinished()
+            depositQueue.waitUntilAllOperationsAreFinished()
+        }
     }
 
     private func reset() {
-        handledCustomerCount = 0
+        customerCount = 0
+        duration = 0.0
+    }
+}
+
+extension Bank: BankWindowDelegate {
+    func customerWorkDidStart(_ bankWindow: BankWindow, customer: Customer) {
+        delegate?.customerWorkDidStart(self, waitingNumber: customer.waitingNumber, workType: customer.workType)
+    }
+
+    func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer) {
+        delegate?.customerWorkDidFinish(self, waitingNumber: customer.waitingNumber, workType: customer.workType)
     }
 }

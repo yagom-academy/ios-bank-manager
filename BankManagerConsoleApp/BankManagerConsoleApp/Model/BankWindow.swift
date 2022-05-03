@@ -7,16 +7,46 @@
 
 import Foundation
 
-protocol BankWindow { }
+protocol BankWindow: AnyObject {
+    func receive(_ customer: Customer)
+    var delegate: BankWindowDelegate? { get set }
+}
 
-extension BankWindow {
-    func work(for customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+protocol BankWindowDelegate: AnyObject {
+    func customerWorkDidStart(_ bankWindow: BankWindow, customer: Customer)
+    func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer)
+}
+
+class BankLoanWindow: BankWindow {
+    weak var delegate: BankWindowDelegate?
+    let workType: Banking = .loan
+
+    func receive(_ customer: Customer) {
+        delegate?.customerWorkDidStart(self, customer: customer)
+        work()
+        delegate?.customerWorkDidFinish(self, customer: customer)
+    }
+
+    private func work() {
         DispatchQueue.global().sync {
-            Thread.sleep(forTimeInterval: 0.7)
+            Thread.sleep(forTimeInterval: workType.processTime)
         }
-        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }
 
-struct BankCommonWindow: BankWindow { }
+class BankDepositWindow: BankWindow {
+    weak var delegate: BankWindowDelegate?
+    let workType: Banking = .deposit
+
+    func receive(_ customer: Customer) {
+        delegate?.customerWorkDidStart(self, customer: customer)
+        work()
+        delegate?.customerWorkDidFinish(self, customer: customer)
+    }
+
+    private func work() {
+        DispatchQueue.global().sync {
+            Thread.sleep(forTimeInterval: workType.processTime)
+        }
+    }
+}
