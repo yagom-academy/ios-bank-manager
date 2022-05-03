@@ -9,8 +9,8 @@ import Foundation
 
 struct BankClerk: Workable {
     private enum Message {
-        static let start = "%d번 고객 %s업무 시작"
-        static let end = "%d번 고객 %s업무 종료"
+        static let start = "%d번 고객 %@업무 시작"
+        static let end = "%d번 고객 %@업무 종료"
     }
 
     private enum Constant {
