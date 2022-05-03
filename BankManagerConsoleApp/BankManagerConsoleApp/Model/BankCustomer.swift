@@ -38,11 +38,8 @@ protocol Customer {
 
 extension Customer {
     static func randomCustomers() -> [Self] {
-        var customers = [Self]()
         let customerCount = Int.random(in: 10...30)
-        for number in 1...customerCount {
-            customers.append(makeCustomer(number: number))
-        }
+        let customers = (1...customerCount).map(makeCustomer)
 
         return customers
     }
