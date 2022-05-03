@@ -8,11 +8,13 @@
 import Foundation
 
 struct Bank {
-    private let clerk: Workable
+    private let loanClerk: Workable
+    private let depositClerk: Workable
     private var clientQueue = Queue(list: LinkedList<Client>())
     
-    init(with clerk: Workable) {
-        self.clerk = clerk
+    init(loanClerkCount: Int, depositClerkCount: Int) {
+        self.loanClerk = BankClerk(workType: .loan, clerkCount: loanClerkCount)
+        self.depositClerk = BankClerk(workType: .deposit, clerkCount: depositClerkCount)
     }
     
     mutating func executeBankWork() {
