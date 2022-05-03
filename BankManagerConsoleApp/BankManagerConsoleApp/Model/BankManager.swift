@@ -32,6 +32,7 @@ private enum Guide: String {
 
 struct BankManager {
     private var bank: Bank
+    private let group = DispatchGroup()
     
     init(bank: Bank) {
         self.bank = bank
@@ -71,10 +72,13 @@ struct BankManager {
     
     private func work() {
         while let client = bank.clients.dequeue() {
-            DispatchQueue.global().sync {
+            let semaphore = client.task.clerk
+            DispatchQueue.global().async(group: group) {
+                semaphore.wait()
                 print("\(client.waitingNumber)번 고객 업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
                 print("\(client.waitingNumber)번 고객 업무 완료")
+                semaphore.signal()
             }
         }
     }
@@ -90,6 +94,7 @@ struct BankManager {
     private func measureTime(of task: () -> Void) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
         task()
+        group.wait()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         
         return Double(durationTime)
