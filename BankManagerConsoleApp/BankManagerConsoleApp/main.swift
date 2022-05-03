@@ -7,4 +7,4 @@
 
 var bankManager = BankManager(bank: Bank(clients: Queue()))
 
-bankManager.start()
+bankManager.openBank()
