@@ -17,10 +17,6 @@ private enum MenuSelect: String {
     case close = "2"
 }
 
-private enum DefaultNumber: Int {
-    case clientCount = 0
-}
-
 private enum Guide: String {
     case menu = """
     1 : 은행 개점
@@ -73,11 +69,12 @@ struct BankManager {
     private func work() {
         while let client = bank.clients.dequeue() {
             let semaphore = client.task.clerk
+            
             DispatchQueue.global().async(group: group) {
                 semaphore.wait()
-                print("\(client.waitingNumber)번 고객 업무 시작")
-                Thread.sleep(forTimeInterval: 0.7)
-                print("\(client.waitingNumber)번 고객 업무 완료")
+                print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 시작")
+                Thread.sleep(forTimeInterval: client.task.time)
+                print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 완료")
                 semaphore.signal()
             }
         }
