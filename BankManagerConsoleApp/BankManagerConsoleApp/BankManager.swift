@@ -47,8 +47,8 @@ final class BankManager {
 
   private func createClients() -> [Client] {
     var clients = [Client]()
-    for waitingNumber in 1...Int.random(in: Constants.range) {
-      let client = Client(waitingNumber: waitingNumber)
+    for number in 1...Int.random(in: Constants.range) {
+      let client = Client(waitingNumber: number)
       clients.append(client)
     }
     return clients
