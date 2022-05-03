@@ -26,6 +26,7 @@
 
 ## 자세한 고민 보기
 [STEP 1 PR](https://github.com/yagom-academy/ios-bank-manager/pull/145)
+[STEP 2 PR](https://github.com/yagom-academy/ios-bank-manager/pull/159)
 
 ## [STEP 1]
 
@@ -129,3 +130,152 @@ console 환경은 View 환경과 달리 테스트할 파일을 unit test 파일�
 |:---:|:--:|:--:|
 |연산 프로퍼티|메모리 count를 올리지 않고 접근이 가능|파라미터 사용 불가능| 
 |메서드|파라미터를 받을 수 있음|메모리 count가 올라감.|
+
+
+## [STEP 2]
+
+### 🚀 trouble shooting
+- 의존성과 protocol
+- 시간 복잡도가 높은 재귀 제거
+- Const 의 위치 
+- race condition (충돌)
+
+#### 의존성과 protocol
+```swift
+protocol Manageable {
+    func manageBanker()
+    func reportOfDay() -> String
+}
+```
+```swift
+private func selectMenu(by userChoice: UserChoice) -> Bool {
+        switch userChoice {
+        case UserChoice.start:
+            bank.manageBanker()
+            print(Const.finishWork)
+            print(bank.reportOfDay())
+            return true
+        case UserChoice.exit:
+            return false
+        }
+    }
+```
+처음에 코드를 작성했을 때, BankManager와 Bank의 의존성이 너무 높았습니다. 의존성을 떨어뜨려주어야 한다고 생각했고, 역할 분리의 중요성을 깨달았습니다. 역할에 맞는 메서드를 역할에 따라 명확히 정리해주었더니, Bank에서 사용되는 인스턴스들에 대해서 많은 캡슐화를 할 수 있게 되었고, BankManager에서 사용되는 Bank의 인스턴스들은 protocol로 전달해주어, 의존성을 더 낮춰주었습니다.
+
+#### 시간 복잡도가 높은 재귀 제거
+재귀 함수를 작성했을 때, 계속 재귀를 하였고 그로 인해서 스레드 안에 메서드가 계속해서 쌓였습니다. 작성했던 재귀 함수는 시간복잡도가 높으면서 동시에 공간 복잡도도 높았기에, 사용하면 안되는 알고리즘으로 인식하였고, 공간 복잡도를 낮춰주는 방향으로 코드를 다시 작성해주었습니다.
+
+
+#### Const 의 위치 
+`Const` 라는 `enum` 을 생성해 파일을 만들어 전역에서 접근할 수 있도록 하였습니다. 
+여러파일에서 `Const` 를 사용하다 보니, `Const.startWorking` 이런식으로 사용하게 되었을 때, 무슨 값이 들어있는지 확인하려면 구현부를 찾아가보아야 하는 문제점이 있었습니다. 
+
+그래서 전역`Const` 에는 여러개의 파일에서 접근할 수 있는 값만 넣어놓고, 각각 파일에서만 사용되는 값은 파일 상단에 아래와 같이 배치해 주었습니다. 
+```swift
+fileprivate extension Const {
+    static let startWorking = "번 고객 업무 시작"
+    static let endWorking = "번 고객 업무 종료"
+}
+```
+
+
+#### race condition (충돌)
+![](https://i.imgur.com/4scVqdo.png)
+`Banker` 객체에 있는 `customer` 란 프로퍼티에 여러개의 쓰레드에서 동시에 접근하려고 해서 race condition 이 일어났습니다.
+`customer` 란 프로퍼티을 제거하고, `work(customer: Customer)` 메서드의 파라미터로 넘겨주어 문제를 해결했습니다.
+
+### ✏️ 배운 개념
+- 시간 복잡도 계산법
+- dispatchQueue & dispatchSemaphore & dispatchGroup
+
+#### 시간 복잡도 계산법
+최선의 경우 (Best Case) - 빅 오메가 표기법 사용
+최악의 경우 (Worst Case) - 빅 오 표기법 사용
+평균적인 경우 (Average Case) - 빅 세타 표기법 사용
+
+최악의 경우의 시간 복잡도를 구하기 위해 빅오 표기법을 사용했습니다. 
+
+|종류|시간|설명|
+|:--:|:--:|:--:|
+|$O(1)$|상수 시간|어떤 조건이 있든 항상 일정한 단계를 가지는 알고리즘의 시간 복잡도를 나타낸다.
+|$O(n)$|로그 시간|데이터 원소의 개수가 N 개 일때, N 개의 단계를 가지는 알고리즘의 시간 복잡도를 나타낸다.
+|$O(logN)$|선형 시간|데이터가 2배로 증가할 때마다 한 단계씩 늘어나는 알고리즘의 시간 복잡도를 나타낸다.
+|$O(N²)$|2차 시간|데이터가 증가 할 때마다 N² 단계가 늘어나는 알고리즘의 시간 복잡도를 나타낸다.
+|$O(2^n)$|2차 시간|데이터가 증가 할 때마다 연산수가 2^n 단계가 늘어나는 알고리즘의 시간 복잡도를 나타낸다.
+
+![img](https://i.imgur.com/P6L4Iy6.jpg)
+
+
+
+$T(n) = n^2+2n+1 = O(n^2)$
+위 수식에서, 각 메서드가 동작하는 시간 복잡도가 $n^2$, $n$ ($n$ 앞의 상수는 무시) 이라고 했을 때 가장 시간 복잡도가 높은 메서드의 시간 복잡도를 Worst Case 시간 복잡도라고 하고, 결국 이 메서드의 전체 시간 복잡도는 $n^2$인 것이다.
+
+#### dispatchQueue & dispatchSemaphore & dispatchGroup
+dispatchQueue 는 swift 에서 동시성 프로그래밍을 구현하고 싶을 때 사용하는 GCD 의 기능 중 하나입니다.
+큐에 보내다라는 의미로 dispatchQueue 를 이용해서 작업들을 큐에 보내면 GCD가 알아서 쓰레드로 분배해 줍니다.
+
+**Serial Queue vs Concurrent Queue**
+Serial Queue는 하나의 thread 로만 작업을 보냅니다.
+Concurrent Queue 는 여러개의 thread 로 작업을 보냅니다.
+![Serial Queue vs Concurrent Queue](https://i.imgur.com/RiKc0wm.jpg)
+
+**sync vs async**
+작업들이 비동기적으로 일어나는지 (끝날 때까지 기다렸다가 일어남) 동기적으로 일어나는지를 나타냅니다 
+![sync vs async](https://i.imgur.com/u4HVvHz.jpg)
+
+**Semaphore**
+dispatchSemaphore는 공유 자원에 접근하는 작업의 수를 제한할 때 사용됩니다.
+```swift
+let semaphore = DispatchSemaphore(value: 3)
+// 한번에 실행 가능한 작업의 수는 3
+```
+```swift
+for i in 1...3 {
+    semaphore.wait() // semaphore 감소
+    DispatchQueue.global().async {
+        print("시작 \(i)")
+        sleep(2)
+        print("끝 \(i)")
+        semaphore.signal() // semaphore 증가
+    }
+}
+```
+semphore로 정한 구역의 한번에 몇개의 작업씩 이루어지게 할 것 인지를 정해주는 것입니다. wait(), signal() 선언으로 한번에 작업할 수를 유지 시켜준다고 보면 됩니다. 
+
+**dispatchGroup**
+Group 으로 코드들을 묶어 줄 수 있다.
+>여러 스레드로 분배된 작업들이 끝나는 시점을 각각 파악하는 것이 아니라, 하나로 그룹지어서 한번에 파악하고 싶을때 Dispatch Group을 사용, 즉, 그룹으로 묶인 작업의 마지막 시점을 파악하는 것
+
+```swift
+let group = DispatchGroup()
+
+// async로 그룹을 지정해주기
+DispatchQueue.global().async(group: group) {}
+
+// enter, leave를 사용해서 묶어 주기
+group.enter() // 그룹이 시작됨을 알림
+DispatchQueue.global().async {}
+group.leave() // 그룹이 시작됨을 알림
+```
+
+```swift
+group.wait()
+```
+```swift
+group.notify(queue: .main) {
+    print("모든 작업이 끝났습니다.")
+}
+```
+`wait()` : 그룹의 모든 작업이 끝날 때 까지 기다린 후 다음 줄을 실행합니다.
+`notify()` : 그룹으로 묶인 모든 작업이 끝났을때 실행될 작업을 넘겨줍니다.
+
+```swift
+let timeoutResult = group.wait(timeout: .now() + 60)
+switch timeoutResult {
+  case .success:
+    print("60초 안에 그룹 내 모든 task 끝냄")
+  case .timedOut:
+    print("60초 안에 그룹 내 모든 task 못끝냄")
+}
+```
+`wait(time: 시간)`: DispatchTimeoutResult 를 반환하는데 이 값을 통해 시간 내에 그룹 내 모든 task 가 완료되었는지 판단합니다.
