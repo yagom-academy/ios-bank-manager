@@ -12,14 +12,22 @@ fileprivate extension Const {
     static let endWorking = "번 고객 업무 종료"
 }
 
-class Banker {
+final class Banker {
     func work(customer: Customer?) {
         guard let customerNumberTicekt = customer?.numberTicekt else {
             return
         }
+        let noticeGroup = DispatchGroup()
+        noticeGroup.enter()
         
-        print("\(customerNumberTicekt)" + Const.startWorking)
-        Thread.sleep(forTimeInterval: Const.workTimeForCustomer)
-        print("\(customerNumberTicekt)" + Const.endWorking)
+        DispatchQueue(label: "startNotice").sync {
+            print("\(customerNumberTicekt)" + Const.startWorking)
+        }
+        
+        DispatchQueue(label: "endNotice").asyncAfter(deadline: .now() + 0.7) {
+            print("\(customerNumberTicekt)" + Const.endWorking)
+            noticeGroup.leave()
+        }
+        noticeGroup.wait()
     }
 }
