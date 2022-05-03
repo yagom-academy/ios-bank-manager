@@ -19,7 +19,7 @@ struct Bank {
     
     private func addCustomerInLine() {
         for number in 1...numberOfCustomer {
-            customerQueue.enqueue(Customer(number: number))
+            customerQueue.enqueue(Customer(number))
         }
     }
     
