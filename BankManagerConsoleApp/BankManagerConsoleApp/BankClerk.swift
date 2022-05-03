@@ -9,28 +9,36 @@ import Foundation
 
 struct BankClerk: Workable {
     private enum Message {
-        static let start = "번 고객 업무 시작"
-        static let end = "번 고객 업무 종료"
+        static let start = "%d번 고객 %s업무 시작"
+        static let end = "%d번 고객 %s업무 종료"
     }
 
     private enum Constant {
-        static let workTime = 0.7
+        static let loanWorkTime = 1.1
+        static let depositWorkTime = 0.7
     }
     
     private(set) var workType: WorkType
     
     private(set) var semaphore: DispatchSemaphore
     
+    init(workType: WorkType, clerkCount: Int) {
+        self.workType = workType
+        self.semaphore = DispatchSemaphore(value: clerkCount)
+    }
+    
     func deal(with client: Client?) {
         guard let client = client else {
             return
         }
         
-        let workStartingMessage = String(format: "%d\(Message.start)", client.orderNumber)
-        let workEndingMessage = String(format: "%d\(Message.start)", client.orderNumber)
+        let workTime = workType == .loan ? Constant.loanWorkTime : Constant.depositWorkTime
+        
+        let workStartingMessage = String(format: Message.start, client.orderNumber, workType.description)
+        let workEndingMessage = String(format: Message.end, client.orderNumber, workType.description)
         
         print(workStartingMessage)
-        Thread.sleep(forTimeInterval: Constant.workTime)
+        Thread.sleep(forTimeInterval: workTime)
         print(workEndingMessage)
     }
 }
