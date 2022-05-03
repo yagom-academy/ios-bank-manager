@@ -34,10 +34,7 @@ final class BankManager {
     var bank: Manageable = Bank(numberOfBankers: Const.bankersNumber)
     
     func openBank() {
-        var result = true
-        while result == true {
-            result = workBank()
-        }
+        while workBank() { }
     }
     
     private func workBank() -> Bool {
@@ -53,12 +50,12 @@ final class BankManager {
     
     private func selectMenu(by userChoice: UserChoice) -> Bool {
         switch userChoice {
-        case UserChoice.start:
+        case .start:
             bank.manageBanker()
             print(Const.finishWork)
             print(bank.reportOfDay())
             return true
-        case UserChoice.exit:
+        case .exit:
             return false
         }
     }
