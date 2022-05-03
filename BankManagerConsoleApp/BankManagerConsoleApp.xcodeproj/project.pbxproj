@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		030645682816CD7600A70C0E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030645672816CD7600A70C0E /* Node.swift */; };
 		038CC73E28184EB9008CE5C6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CC73D28184EB9008CE5C6 /* Queue.swift */; };
+		03AA3A992820BE3E00A5E2F5 /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA3A982820BE3E00A5E2F5 /* WorkType.swift */; };
 		03B6257B2819A9AE00403C66 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3064A8672816DFB900317449 /* LinkedList.swift */; };
 		03B6257C2819A9B500403C66 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030645672816CD7600A70C0E /* Node.swift */; };
 		03DAA7DF281AD2EF009BEF7A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAA7DE281AD2EF009BEF7A /* Bank.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		030645672816CD7600A70C0E /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		038CC73D28184EB9008CE5C6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		03AA3A982820BE3E00A5E2F5 /* WorkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkType.swift; sourceTree = "<group>"; };
 		03B625732819A97E00403C66 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B625752819A97E00403C66 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		03DAA7DE281AD2EF009BEF7A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				03DAA7DE281AD2EF009BEF7A /* Bank.swift */,
 				03DAA7E2281B1B8D009BEF7A /* Workable.swift */,
 				03DAA7E4281B1BCF009BEF7A /* BankClerk.swift */,
+				03AA3A982820BE3E00A5E2F5 /* WorkType.swift */,
 				03DAA7E0281AD33E009BEF7A /* Client.swift */,
 				30EB2350281AEAD1003840BC /* SelectOption.swift */,
 				03DAA7E6281B1CA2009BEF7A /* DataStructure */,
@@ -350,6 +353,7 @@
 			files = (
 				038CC73E28184EB9008CE5C6 /* Queue.swift in Sources */,
 				305C6F6B281A9E82000A2621 /* Listable.swift in Sources */,
+				03AA3A992820BE3E00A5E2F5 /* WorkType.swift in Sources */,
 				03DAA7E3281B1B8D009BEF7A /* Workable.swift in Sources */,
 				030645682816CD7600A70C0E /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
