@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol Clerkalbe {
-    func work(client: Client, group: DispatchGroup)
-}
+protocol Clerkalbe { }
 
 extension Clerkalbe {
     func work(client: Client, group: DispatchGroup) {
