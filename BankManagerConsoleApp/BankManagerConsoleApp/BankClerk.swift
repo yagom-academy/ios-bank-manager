@@ -20,28 +20,32 @@ struct BankClerk: Workable {
     
     private(set) var workType: WorkType
     
-    private(set) var semaphore: DispatchSemaphore
+    private(set) var clerksCountByWork: DispatchSemaphore
     
     init(workType: WorkType, clerkCount: Int) {
         self.workType = workType
-        self.semaphore = DispatchSemaphore(value: clerkCount)
+        self.clerksCountByWork = DispatchSemaphore(value: clerkCount)
     }
     
     func deal(with client: Client?) {
-        self.semaphore.wait()
+        self.clerksCountByWork.wait()
         
         guard let client = client else {
             return
         }
         
         let workTime = workType == .loan ? Constant.loanWorkTime : Constant.depositWorkTime
-        let workStartingMessage = String(format: Message.start, client.orderNumber, workType.description)
-        let workEndingMessage = String(format: Message.end, client.orderNumber, workType.description)
+        let workStartingMessage = String(format: Message.start,
+                                         client.orderNumber,
+                                         workType.description)
+        let workEndingMessage = String(format: Message.end,
+                                       client.orderNumber,
+                                       workType.description)
         
         print(workStartingMessage)
         Thread.sleep(forTimeInterval: workTime)
         print(workEndingMessage)
         
-        self.semaphore.signal()
+        self.clerksCountByWork.signal()
     }
 }
