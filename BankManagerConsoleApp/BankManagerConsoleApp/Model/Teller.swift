@@ -6,8 +6,8 @@ struct Teller {
             return
         }
         
-        print("\(customer.number)번 고객 \(task) 시작")
+        print("\(customer.number)번 고객 \(task.rawValue) 시작")
         Thread.sleep(forTimeInterval: task.workTime)
-        print("\(customer.number)번 고객 \(task) 완료")
+        print("\(customer.number)번 고객 \(task.rawValue) 완료")
     }
 }
