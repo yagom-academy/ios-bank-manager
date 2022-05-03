@@ -6,12 +6,12 @@
 
 import Foundation
 
-struct BankClerk {
-    func work(client: Client) {
-        DispatchQueue.global().sync {
-            print("\(client.waitingNumber)번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: 0.7)
-            print("\(client.waitingNumber)번 고객 업무 완료")
-        }
-    }
+enum ClerkCount {
+    static let deposit = 2
+    static let loan = 1
+}
+
+enum BankClerk {
+    static let deposit = DispatchSemaphore(value: ClerkCount.deposit)
+    static let loan = DispatchSemaphore(value: ClerkCount.loan)
 }

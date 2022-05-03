@@ -4,7 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-import CoreFoundation
+import Foundation
 
 private enum Range: Int {
     case startRandomNumber = 10
@@ -54,7 +54,6 @@ struct BankManager {
     }
     
     private func manageBank() {
-        bank.open()
         let totalClients = generateClientCount()
         giveWaitingNumber(for: totalClients)
         bank.close(totalDuration: measureTotalTime(), clientCount: totalClients)
@@ -71,11 +70,12 @@ struct BankManager {
     }
     
     private func work() {
-        guard let clerk = bank.clerks.first else {
-            return
-        }
         while let client = bank.clients.dequeue() {
-            clerk.work(client: client)
+            DispatchQueue.global().sync {
+                print("\(client.waitingNumber)번 고객 업무 시작")
+                Thread.sleep(forTimeInterval: 0.7)
+                print("\(client.waitingNumber)번 고객 업무 완료")
+            }
         }
     }
     

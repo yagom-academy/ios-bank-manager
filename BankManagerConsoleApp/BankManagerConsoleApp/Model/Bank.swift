@@ -6,20 +6,10 @@
 //
 
 final class Bank {
-    private(set) var clerks: [BankClerk] = []
     var clients: Queue<Client>
     
     init(clients: Queue<Client>) {
         self.clients = clients
-    }
-    
-    private func configureClerks() {
-        let clerk = BankClerk()
-        clerks.append(clerk)
-    }
-    
-    func open() {
-        configureClerks()
     }
     
     func close(totalDuration: Double, clientCount: Int) {
