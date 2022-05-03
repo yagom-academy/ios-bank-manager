@@ -11,8 +11,8 @@ enum Task: String, CaseIterable {
     case deposit = "예금"
     case loan = "대출"
     
-    static var random: Self {
-        return Self.allCases.randomElement() ?? .deposit
+    static var random: Self? {
+        return Self.allCases.randomElement()
     }
     
     var time: Double {

@@ -49,9 +49,10 @@ struct BankManager {
     }
     
     private func manageBank() {
-        let totalClients = bank.countClients()
-        bank.giveWaitingNumber(for: totalClients)
-        closeBank(totalDuration: bank.measureWorkingHours(), clientCount: totalClients)
+        guard let totalCount = bank.giveWaitingNumber() else {
+            return
+        }
+        closeBank(totalDuration: bank.measureWorkingHours(), clientCount: totalCount)
     }
     
     private mutating func reopenBank() {
