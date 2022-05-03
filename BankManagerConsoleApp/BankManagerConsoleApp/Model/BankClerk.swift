@@ -17,8 +17,8 @@ enum BankClerk {
     
     static func work(client: Client, group: DispatchGroup) {
         let semaphore = client.task.clerk
+        semaphore.wait()
         DispatchQueue.global().async(group: group) {
-            semaphore.wait()
             print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 시작")
             Thread.sleep(forTimeInterval: client.task.time)
             print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 완료")
