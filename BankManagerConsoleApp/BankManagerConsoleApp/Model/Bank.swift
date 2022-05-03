@@ -5,6 +5,8 @@ struct Bank {
     private let customerQueue: Queue = Queue<Customer>()
     private let teller: Teller = Teller()
     private let workTime: Double = 0.7
+    private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: 2)
+    private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: 1)
     
     init(_ numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
@@ -35,12 +37,16 @@ struct Bank {
             
             switch task {
             case .deposit:
+                depositWindow.wait()
                 DispatchQueue.global().async(group: bankingGroup) {
                     teller.work(for: customer)
+                    depositWindow.signal()
                 }
             case .loan:
+                loanWindow.wait()
                 DispatchQueue.global().async(group: bankingGroup) {
                     teller.work(for: customer)
+                    loanWindow.signal()
                 }
             }
         }
