@@ -19,7 +19,6 @@ struct BankClerk: Workable {
     }
     
     private(set) var workType: WorkType
-    
     private(set) var clerksCountByWork: DispatchSemaphore
     
     init(workType: WorkType, clerkCount: Int) {
