@@ -9,16 +9,16 @@ import Foundation
 
 final class BankClerk: Presentable {
     private let name: String
-    private(set) var service: BankService
+    private(set) var bankService: BankServiceType
     
-    init(name: String, service: BankService) {
+    init(name: String, service: BankServiceType) {
         self.name = name
-        self.service = service
+        self.bankService = service
     }
     
     func work(client: Client) {
         self.printStartTaskMessage(client: client)
-        Thread.sleep(forTimeInterval: self.service.requiredTime)
+        Thread.sleep(forTimeInterval: self.bankService.requiredTime)
         self.printFinishTaskMessage(client: client)
     }
 }

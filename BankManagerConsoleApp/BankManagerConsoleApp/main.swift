@@ -27,7 +27,7 @@ private func createBankClerk(
     for order in 1 ... numberOfDepositBankClerks {
         bankClerks.append(
             BankClerk(
-                name: "\(BankService.deposit)\(order)",
+                name: "\(BankServiceType.deposit)\(order)",
                 service: .deposit
             )
         )
@@ -36,7 +36,7 @@ private func createBankClerk(
     for order in 1 ... numberOfLoanBankClerks {
         bankClerks.append(
             BankClerk(
-                name: "\(BankService.loan)\(order)",
+                name: "\(BankServiceType.loan)\(order)",
                 service: .loan
             )
         )

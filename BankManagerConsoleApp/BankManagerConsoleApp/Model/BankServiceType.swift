@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum BankService: CaseIterable {
+enum BankServiceType: CaseIterable {
     case deposit
     case loan
 }
 
-extension BankService: CustomStringConvertible {
+extension BankServiceType: CustomStringConvertible {
     var description: String {
         switch self {
         case .deposit:
@@ -32,8 +32,8 @@ extension BankService: CustomStringConvertible {
     }
 }
 
-extension BankService {
-    static var randomBankService: BankService {
+extension BankServiceType {
+    static var randomBankService: BankServiceType {
         guard let bankService = self.allCases.randomElement() else {
             return .deposit
         }
