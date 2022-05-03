@@ -70,8 +70,10 @@ final class Bank {
             }
         }
 
-        loanQueue.waitUntilAllOperationsAreFinished()
-        depositQueue.waitUntilAllOperationsAreFinished()
+        DispatchQueue.global().sync {
+            loanQueue.waitUntilAllOperationsAreFinished()
+            depositQueue.waitUntilAllOperationsAreFinished()
+        }
     }
 
     private func reset() {
