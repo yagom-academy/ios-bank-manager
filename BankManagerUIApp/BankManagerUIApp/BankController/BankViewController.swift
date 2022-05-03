@@ -7,9 +7,11 @@
 import UIKit
 
 final class BankViewController: UIViewController {
-
+    private lazy var bankView = BankView(frame: view.bounds)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view = bankView
+        bankView.backgroundColor = .systemBackground
     }
 }
