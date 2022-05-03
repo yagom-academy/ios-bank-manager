@@ -50,7 +50,7 @@ final class Bank: Presentable {
     private func assignClientToBankClerk() {
         let group = DispatchGroup()
         
-        bankClerks.filter { $0.service == .deposit }.forEach { bankClerk in
+        bankClerks.filter { $0.bankService == .deposit }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
                 queue: self.depositClientQueue,
@@ -58,7 +58,7 @@ final class Bank: Presentable {
             )
         }
         
-        bankClerks.filter { $0.service == .loan }.forEach { bankClerk in
+        bankClerks.filter { $0.bankService == .loan }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
                 queue: self.loanClientQueue,

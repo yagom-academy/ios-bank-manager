@@ -11,9 +11,9 @@ final class BankClerk: Presentable {
     private let name: String
     private(set) var bankService: BankServiceType
     
-    init(name: String, service: BankServiceType) {
+    init(name: String, bankService: BankServiceType) {
         self.name = name
-        self.bankService = service
+        self.bankService = bankService
     }
     
     func work(client: Client) {

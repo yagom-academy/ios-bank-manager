@@ -28,7 +28,7 @@ private func createBankClerk(
         bankClerks.append(
             BankClerk(
                 name: "\(BankServiceType.deposit)\(order)",
-                service: .deposit
+                bankService: .deposit
             )
         )
     }
@@ -37,7 +37,7 @@ private func createBankClerk(
         bankClerks.append(
             BankClerk(
                 name: "\(BankServiceType.loan)\(order)",
-                service: .loan
+                bankService: .loan
             )
         )
     }
