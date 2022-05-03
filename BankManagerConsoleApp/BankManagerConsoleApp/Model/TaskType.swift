@@ -7,9 +7,9 @@ enum TaskType: String, CaseIterable {
     var workTime: Double {
         switch self {
         case .deposit:
-            return 0.7
+            return WorkTime.deposit
         case .loan:
-            return 1.1
+            return WorkTime.loan
         }
     }
 }
