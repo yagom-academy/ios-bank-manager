@@ -4,7 +4,6 @@ struct Bank {
     private var numberOfCustomer: Int
     private let customerQueue: Queue = Queue<Customer>()
     private let teller: Teller = Teller()
-    private let workTime: Double = 0.7
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: 2)
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: 1)
     private let bankingGroup = DispatchGroup()
