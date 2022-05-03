@@ -22,8 +22,9 @@ final class Bank {
 
   func open() {
     totalClientCount = clientQueue.count
+    
     executeBankTask()
-    displayCloseMessage()
+    print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
   }
 
   func addClient(_ client: Client) {
@@ -35,9 +36,5 @@ final class Bank {
       let time = BankTask().execute(client)
       totalExecuteTime += time
     }
-  }
-
-  private func displayCloseMessage() {
-    print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
   }
 }

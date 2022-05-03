@@ -28,7 +28,8 @@ final class BankManager {
   }
 
   private func selectMenu() -> Bool {
-    displayMenu()
+    print(Message.menu, terminator: Message.whiteSpace)
+    
     guard let input = readLine(),
           let menu = Menu(rawValue: input)
     else { return true }
@@ -42,10 +43,6 @@ final class BankManager {
     case .exit:
       return false
     }
-  }
-
-  private func displayMenu() {
-    print(Message.menu, terminator: Message.whiteSpace)
   }
 
   private func createClients() -> [Client] {
