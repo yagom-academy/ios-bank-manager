@@ -86,6 +86,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4E85A93F2821725600AE70B4 /* Namespace */ = {
+			isa = PBXGroup;
+			children = (
+				B3C6317428216DCB002845FA /* NumberOfTask.swift */,
+				4E85A93C2821712800AE70B4 /* WorkTime.swift */,
+			);
+			path = Namespace;
+			sourceTree = "<group>";
+		};
 		4EC36E13281AC6AA00E523D5 /* Queue */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +108,12 @@
 		4EC36E14281AC6FF00E523D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E85A93F2821725600AE70B4 /* Namespace */,
 				C7D65D1A259C8190005510E0 /* Teller.swift */,
 				B3847DA3281A9E32000DD9F5 /* Customer.swift */,
 				B3C6317228215AB0002845FA /* TaskType.swift */,
 				4EC36E11281AA33F00E523D5 /* Bank.swift */,
 				B380A202281AC20200FC5AEC /* BankManager.swift */,
-				B3C6317428216DCB002845FA /* NumberOfTask.swift */,
-				4E85A93C2821712800AE70B4 /* WorkTime.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
