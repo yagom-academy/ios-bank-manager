@@ -27,8 +27,10 @@ final class Bank {
     print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
   }
 
-  func addClient(_ client: Client) {
-    clientQueue.enqueue(client)
+  func addClients(_ clients: [Client]) {
+    for client in clients {
+      clientQueue.enqueue(client)
+    }
   }
 
   private func executeBankTask() {
