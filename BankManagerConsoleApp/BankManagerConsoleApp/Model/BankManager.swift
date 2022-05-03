@@ -12,7 +12,7 @@ struct BankManager {
     2 : 종료
     입력 :
     """
-    private var bank: Bank = Bank(0)
+    private var bank: Bank = Bank(numberOfCustomer: 0)
     
     mutating func startBanking() {
         printMenu()
