@@ -7,16 +7,10 @@
 import Foundation
 
 struct BankClerk {
-    private enum Constant {
-        static let workStartText = "번 고객 업무 시작"
-        static let workEndText = "번 고객 업무 시작"
-        static let workTime = 0.7
-    }
-    
     func work(customer: Customer) {
-        print("\(customer.number) \(Constant.workStartText)")
-        Thread.sleep(forTimeInterval: Constant.workTime)
-        print("\(customer.number) \(Constant.workEndText)")
+        print("\(customer.number) 번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: 0.7)
+        print("\(customer.number) 번 고객 업무 시작")
     }
 }
 
