@@ -56,10 +56,7 @@ final class Bank {
         loanQueue.maxConcurrentOperationCount = 1
         depositQueue.maxConcurrentOperationCount = 2
 
-        while !waitingQueue.isEmpty {
-            guard let customer = waitingQueue.dequeue() else {
-                return
-            }
+        while let customer = waitingQueue.dequeue() {
             handledCustomerCount += 1
 
             switch customer.workType {
