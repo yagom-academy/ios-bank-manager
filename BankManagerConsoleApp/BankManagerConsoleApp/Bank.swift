@@ -41,6 +41,13 @@ struct Bank {
         return clientQueue.count
     }
     
+    private func measureWorkTime(_ block: () -> Void) -> Double {
+        let start = CFAbsoluteTimeGetCurrent()
+        block()
+        let interval = CFAbsoluteTimeGetCurrent() - start
+        return interval
+    }
+    
     private mutating func serveClients() {
         while let client = clientQueue.dequeue() {
             excuteWork(of: client)
