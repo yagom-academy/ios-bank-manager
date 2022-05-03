@@ -5,7 +5,8 @@
 //
 struct BankManager {
     private enum Constant {
-        static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
+        static let menuList = "1 : 은행개점\n2 : 종료\n입력 : "
+        static let wrongSelectMessage = "잘못된 선택입니다."
         static let empty = ""
     }
     
@@ -15,7 +16,7 @@ struct BankManager {
     }
     
     mutating func selectMenu() {
-        print(Constant.menu, terminator: Constant.empty)
+        print(Constant.menuList, terminator: Constant.empty)
         
         switch receivedInput {
         case "1":
@@ -23,6 +24,7 @@ struct BankManager {
         case "2":
             return
         default:
+            print(Constant.wrongSelectMessage)
             return selectMenu()
         }
         return selectMenu()
