@@ -31,8 +31,7 @@ final class BankManager {
     print(Message.menu, terminator: Message.whiteSpace)
     
     guard let input = readLine(),
-          let menu = Menu(rawValue: input)
-    else { return true }
+          let menu = Menu(rawValue: input) else { return true }
 
     switch menu {
     case .open:
