@@ -14,12 +14,15 @@ fileprivate extension Constants {
 final class Bank: Presentable {
     private let bankClerks: [BankClerk]
     private let clientCount: Int
-    private let depositClientQueue = Queue<Client>()
-    private let loanClientQueue = Queue<Client>()
+    private let queueDictionary: [String: Queue<Client>]
     
-    init(bankClerks: [BankClerk], clientCount: Int) {
+    init(bankClerks: [BankClerk],
+         clientCount: Int,
+         queueDictionary: [String: Queue<Client>]
+    ) {
         self.bankClerks = bankClerks
         self.clientCount = clientCount
+        self.queueDictionary = queueDictionary
     }
     
     func open() {
@@ -53,7 +56,7 @@ final class Bank: Presentable {
         bankClerks.filter { $0.bankService == .deposit }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
-                queue: self.depositClientQueue,
+                queue: queueDictionary["예금"] ?? Queue<Client>(),
                 bankClerk: bankClerk
             )
         }
@@ -61,7 +64,7 @@ final class Bank: Presentable {
         bankClerks.filter { $0.bankService == .loan }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
-                queue: self.loanClientQueue,
+                queue: queueDictionary["대출"] ?? Queue<Client>(),
                 bankClerk: bankClerk
             )
         }
@@ -85,9 +88,9 @@ final class Bank: Presentable {
         let client = Client(waitingNumber: waitingNumber, bankService: .randomBankService)
         switch client.bankService {
         case .deposit:
-            depositClientQueue.enqueue(client)
+            queueDictionary["예금"]?.enqueue(client)
         case .loan:
-            loanClientQueue.enqueue(client)
+            queueDictionary["대출"]?.enqueue(client)
         }
     }
     
