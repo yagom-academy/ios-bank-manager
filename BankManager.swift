@@ -8,7 +8,7 @@
 import Foundation
 
 fileprivate extension Const {
-    static let bankersNumber = 1
+    static let bankersNumber = 3
     
     static let blank = ""
     static let OpeningInput = "1"
@@ -34,8 +34,9 @@ final class BankManager {
     var bank: Manageable = Bank(numberOfBankers: Const.bankersNumber)
     
     func openBank() {
-        while workBank() == true {
-            _ = workBank()
+        var result = true
+        while result == true {
+            result = workBank()
         }
     }
     
