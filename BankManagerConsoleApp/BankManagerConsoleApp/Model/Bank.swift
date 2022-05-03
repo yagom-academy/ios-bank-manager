@@ -4,11 +4,11 @@ struct Bank {
     private var numberOfCustomer: Int
     private let customerQueue: Queue = Queue<Customer>()
     private let teller: Teller = Teller()
-    private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: 2)
-    private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.deposit)
+    private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.loan)
     private let bankingGroup = DispatchGroup()
     
-    init(_ numberOfCustomer: Int) {
+    init(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
     }
     
