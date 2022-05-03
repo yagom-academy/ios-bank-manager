@@ -17,6 +17,10 @@ struct BankClerk: Workable {
         static let workTime = 0.7
     }
     
+    private(set) var workType: WorkType
+    
+    private(set) var semaphore: DispatchSemaphore
+    
     func deal(with client: Client?) {
         guard let client = client else {
             return
