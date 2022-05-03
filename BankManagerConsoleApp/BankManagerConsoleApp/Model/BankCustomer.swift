@@ -54,5 +54,5 @@ extension Customer {
 
 struct BankCustomer: Customer {
     let waitingNumber: Int
-    var workType: Banking
+    let workType: Banking
 }
