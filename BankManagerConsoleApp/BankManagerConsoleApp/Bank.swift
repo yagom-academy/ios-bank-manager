@@ -42,9 +42,14 @@ struct Bank {
     }
     
     private mutating func serveClients() {
-        while !clientQueue.isEmpty {
-            let client = clientQueue.dequeue()
-            clerk.deal(with: client)
+        while let client = clientQueue.dequeue() {
+            self.semaphore.wait()
+            
+            DispatchQueue.global().async(group: clerks) { [self] in
+                client.wantedWork == .loan ? self.loanClerk.deal(with: client) : self.depositClerk.deal(with: client)
+                self.semaphore.signal()
+            }
         }
+        clerks.wait()
     }
 }
