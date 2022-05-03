@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0B5D4D2820AB1100B475AE /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B5D4C2820AB1100B475AE /* Task.swift */; };
 		0EFD2E852816A6630090880A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD2E842816A6630090880A /* main.swift */; };
 		864EE344281FD41000573488 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864EE343281FD41000573488 /* String+.swift */; };
 		8682B4F02818117100203106 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8682B4EF2818117100203106 /* Client.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E0B5D4C2820AB1100B475AE /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0EFD2E8328169C5D0090880A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		0EFD2E842816A6630090880A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		83182557EF70659A5EBDE1E4 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 				8682B4F1281811C200203106 /* BankClerk.swift */,
 				8682B4F32818122700203106 /* Bank.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				0E0B5D4C2820AB1100B475AE /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			files = (
 				C7694E7A259C3EC00053667F /* LinkedList.swift in Sources */,
 				864EE344281FD41000573488 /* String+.swift in Sources */,
+				0E0B5D4D2820AB1100B475AE /* Task.swift in Sources */,
 				8682B4F42818122700203106 /* Bank.swift in Sources */,
 				8682B4F7281923B800203106 /* Double+.swift in Sources */,
 				8682B4F2281811C200203106 /* BankClerk.swift in Sources */,

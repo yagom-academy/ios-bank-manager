@@ -105,7 +105,7 @@ extension BankManager {
     
     private func giveWaitingNumber(for clients: Int) {
         for number in Range.startClientNumber.rawValue...clients {
-            bank.clients.enqueue(data: Client(waitingNumber: number))
+            bank.clients.enqueue(data: Client(waitingNumber: number, task: Task.random))
         }
     }
 }
