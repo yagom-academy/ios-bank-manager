@@ -17,17 +17,14 @@ final class Banker {
         guard let customerNumberTicekt = customer?.numberTicekt else {
             return
         }
-        let noticeGroup = DispatchGroup()
-        noticeGroup.enter()
+        let runloop = RunLoop.current
         
-        DispatchQueue(label: "startNotice").sync {
-            print("\(customerNumberTicekt)" + Const.startWorking)
-        }
+        print("\(customerNumberTicekt)" + Const.startWorking)
         
-        DispatchQueue(label: "endNotice").asyncAfter(deadline: .now() + 0.7) {
+        Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) {_ in
             print("\(customerNumberTicekt)" + Const.endWorking)
-            noticeGroup.leave()
         }
-        noticeGroup.wait()
+        
+       runloop.run()
     }
 }
