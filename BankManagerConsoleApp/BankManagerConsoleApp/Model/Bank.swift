@@ -1,24 +1,18 @@
 import Foundation
 
 struct Bank {
-    private var numberOfTeller: Int
     private var numberOfCustomer: Int
     private let customerQueue: Queue = Queue<Customer>()
     private let teller: Teller = Teller()
     private let workTime: Double = 0.7
     
-    init(_ numberOfTeller: Int, _ numberOfCustomer: Int) {
-        self.numberOfTeller = numberOfTeller
+    init(_ numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
     }
     
     mutating func setUpCustomer(number: Int) {
         self.numberOfCustomer = number
         addCustomerInLine()
-    }
-    
-    mutating func setUpTeller(number: Int) {
-        self.numberOfTeller = number
     }
     
     private func addCustomerInLine() {

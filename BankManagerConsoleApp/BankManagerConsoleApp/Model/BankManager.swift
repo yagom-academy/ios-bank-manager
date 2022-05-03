@@ -12,8 +12,7 @@ struct BankManager {
     2 : 종료
     입력 :
     """
-    private let numberOfTeller: Int = 1
-    private var bank: Bank = Bank(0, 0)
+    private var bank: Bank = Bank(0)
     
     mutating func startBanking() {
         printMenu()
@@ -44,7 +43,6 @@ struct BankManager {
     }
 
     private mutating func setUpBank() {
-        bank.setUpTeller(number: numberOfTeller)
         bank.setUpCustomer(number: generateRandomNumber(in: customerRange))
     }
     
