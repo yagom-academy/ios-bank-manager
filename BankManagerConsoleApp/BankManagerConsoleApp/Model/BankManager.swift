@@ -1,11 +1,6 @@
 import Foundation
 
 struct BankManager {
-    private enum BankManagerMenu: String {
-        case open = "1"
-        case close = "2"
-    }
-    
     private let customerRange: ClosedRange = 10...30
     private let menuString = """
     1 : 은행개점
@@ -48,5 +43,13 @@ struct BankManager {
     
     private func generateRandomNumber(in range: ClosedRange<Int>) -> Int {
         return Int.random(in: range)
+    }
+}
+
+// MARK: - BankManagerMenu
+extension BankManager {
+    private enum BankManagerMenu: String {
+        case open = "1"
+        case close = "2"
     }
 }
