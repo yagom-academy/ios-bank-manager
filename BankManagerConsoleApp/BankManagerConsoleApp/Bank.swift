@@ -21,12 +21,11 @@ struct Bank {
     }
     
     mutating func executeBankWork() {
-        let start = CFAbsoluteTimeGetCurrent()
         let numberOfClients = receiveClients()
+        let totalWorkTime = measureWorkTime {
+            serveClients()
+        }
         
-        serveClients()
-        
-        let interval = CFAbsoluteTimeGetCurrent() - start
         let resultDescription = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f입니다."
         let resultMessage = String(format: resultDescription, numberOfClients, interval)
         
