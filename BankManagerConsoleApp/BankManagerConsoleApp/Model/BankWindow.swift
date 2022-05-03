@@ -7,23 +7,24 @@
 
 import Foundation
 
-protocol BankWindow {
+protocol BankWindow: AnyObject {
     func receive(_ customer: Customer)
+    var delegate: BankWindowDelegate? { get set }
 }
 
 protocol BankWindowDelegate: AnyObject {
-    func customerWorkDidStart(customer: Customer)
-    func customerWorkDidFinish(customer: Customer)
+    func customerWorkDidStart(_ bankWindow: BankWindow, customer: Customer)
+    func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer)
 }
 
-struct BankLoanWindow: BankWindow {
+class BankLoanWindow: BankWindow {
     weak var delegate: BankWindowDelegate?
     let workType: Banking = .loan
 
     func receive(_ customer: Customer) {
-        delegate?.customerWorkDidStart(customer: customer)
+        delegate?.customerWorkDidStart(self, customer: customer)
         work()
-        delegate?.customerWorkDidFinish(customer: customer)
+        delegate?.customerWorkDidFinish(self, customer: customer)
     }
 
     private func work() {
@@ -33,14 +34,14 @@ struct BankLoanWindow: BankWindow {
     }
 }
 
-struct BankDepositWindow: BankWindow {
+class BankDepositWindow: BankWindow {
     weak var delegate: BankWindowDelegate?
     let workType: Banking = .deposit
 
     func receive(_ customer: Customer) {
-        delegate?.customerWorkDidStart(customer: customer)
+        delegate?.customerWorkDidStart(self, customer: customer)
         work()
-        delegate?.customerWorkDidFinish(customer: customer)
+        delegate?.customerWorkDidFinish(self, customer: customer)
     }
 
     private func work() {

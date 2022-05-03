@@ -4,6 +4,15 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+import Foundation
+
+fileprivate extension Double {
+    var formattedTime: String {
+        let difference = floor(self * 10) / 10
+        return String(format: "%.2f", difference)
+    }
+}
+
 private enum MenuOption: String {
     case bankOpen = "1"
     case exit = "2"
@@ -12,11 +21,9 @@ private enum MenuOption: String {
 
 final class BankManager {
     private lazy var bank: Bank = {
-        var loanWindow = BankLoanWindow()
-        loanWindow.delegate = self
+        let loanWindow = BankLoanWindow()
         
-        var depositWindow = BankDepositWindow()
-        depositWindow.delegate = self
+        let depositWindow = BankDepositWindow()
         
         let bank = Bank(loanWindow: loanWindow, depositWindow: depositWindow)
         bank.delegate = self
@@ -31,6 +38,7 @@ final class BankManager {
         case .bankOpen:
             bank.add(customers: BankCustomer.randomCustomers())
             bank.open()
+            
             start()
         case .exit:
             break
@@ -55,17 +63,15 @@ final class BankManager {
 }
 
 extension BankManager: BankDelegate {
-    func bankWorkDidFinish(count : Int, hour: String) {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무 시간은 \(hour)초입니다.")
-    }
-}
-
-extension BankManager: BankWindowDelegate {
-    func customerWorkDidStart(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer.workType.name)업무 시작")
+    func customerWorkDidStart(_ bank: Bank, waitingNumber: Int, workType: Banking) {
+        print("\(waitingNumber)번 고객 \(workType.name)업무 시작")
     }
     
-    func customerWorkDidFinish(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer.workType.name)업무 완료")
+    func customerWorkDidFinish(_ bank: Bank, waitingNumber: Int, workType: Banking) {
+        print("\(waitingNumber)번 고객 \(workType.name)업무 완료")
+    }
+    
+    func bankWorkDidFinish(_ bank: Bank) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무 시간은 \(bank.duration.formattedTime)초입니다.")
     }
 }

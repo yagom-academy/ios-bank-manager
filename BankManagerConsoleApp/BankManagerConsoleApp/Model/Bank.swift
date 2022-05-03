@@ -7,32 +7,31 @@
 
 import Foundation
 
-fileprivate extension Double {
-    var formattedTime: String {
-        let difference = floor(self * 10) / 10
-        return String(format: "%.2f", difference)
-    }
-}
-
 protocol BankDelegate: AnyObject {
-    func bankWorkDidFinish(count: Int, hour: String)
+    func bankWorkDidFinish(_ bank: Bank)
+    func customerWorkDidStart(_ bank: Bank, waitingNumber: Int, workType: Banking)
+    func customerWorkDidFinish(_ bank: Bank, waitingNumber: Int, workType: Banking)
 }
 
 final class Bank {
     private let waitingQueue = Queue<Customer>()
     private let loanWindow: BankWindow
     private let depositWindow: BankWindow
-    private var handledCustomerCount = 0
+    private(set) var customerCount = 0
+    private(set) var duration = 0.0
     weak var delegate: BankDelegate?
 
     init(loanWindow: BankWindow, depositWindow: BankWindow) {
         self.loanWindow = loanWindow
         self.depositWindow = depositWindow
+
+        self.loanWindow.delegate = self
+        self.depositWindow.delegate = self
     }
 
     func open() {
-        let duration = checkTime(target: sendCustomerToClerk)
-        delegate?.bankWorkDidFinish(count: handledCustomerCount, hour: duration.formattedTime)
+        duration = checkTime(target: sendCustomerToClerk)
+        delegate?.bankWorkDidFinish(self)
         reset()
     }
 
@@ -57,7 +56,7 @@ final class Bank {
         depositQueue.maxConcurrentOperationCount = 2
 
         while let customer = waitingQueue.dequeue() {
-            handledCustomerCount += 1
+            customerCount += 1
 
             switch customer.workType {
             case .loan:
@@ -76,6 +75,17 @@ final class Bank {
     }
 
     private func reset() {
-        handledCustomerCount = 0
+        customerCount = 0
+        duration = 0.0
+    }
+}
+
+extension Bank: BankWindowDelegate {
+    func customerWorkDidStart(_ bankWindow: BankWindow, customer: Customer) {
+        delegate?.customerWorkDidStart(self, waitingNumber: customer.waitingNumber, workType: customer.workType)
+    }
+
+    func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer) {
+        delegate?.customerWorkDidFinish(self, waitingNumber: customer.waitingNumber, workType: customer.workType)
     }
 }
