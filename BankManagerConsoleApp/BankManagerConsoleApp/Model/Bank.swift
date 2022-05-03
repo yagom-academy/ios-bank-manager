@@ -33,7 +33,7 @@ struct Bank {
                 return
             }
 
-            teller.work(for: customer, time: workTime)
+            teller.work(for: customer)
         }
         
         let totalWorkTime = String(format: "%.2f", Double(numberOfCustomer) * workTime)
