@@ -49,15 +49,12 @@ final class Bank: Presentable {
     
     private func assignClientToBankClerk() {
         let group = DispatchGroup()
-        let depositSemaphore = DispatchSemaphore(value: Constants.numberOfDepositBankClerks)
-        let loanSemaphore = DispatchSemaphore(value: Constants.numberOfLoanBankClerks)
         
         bankClerks.filter { $0.service == .deposit }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
                 queue: self.depositClientQueue,
-                bankClerk: bankClerk,
-                semaphore: depositSemaphore
+                bankClerk: bankClerk
             )
         }
         
@@ -65,8 +62,7 @@ final class Bank: Presentable {
             assignWorkToBankClerk(
                 group: group,
                 queue: self.loanClientQueue,
-                bankClerk: bankClerk,
-                semaphore: loanSemaphore
+                bankClerk: bankClerk
             )
         }
         
@@ -76,15 +72,12 @@ final class Bank: Presentable {
     private func assignWorkToBankClerk(
         group: DispatchGroup,
         queue: Queue<Client>,
-        bankClerk: BankClerk,
-        semaphore: DispatchSemaphore
+        bankClerk: BankClerk
     ) {
         DispatchQueue.global().async(group: group) {
-            semaphore.wait()
             while let client = queue.dequeue() {
                 bankClerk.work(client: client)
             }
-            semaphore.signal()
         }
     }
     
