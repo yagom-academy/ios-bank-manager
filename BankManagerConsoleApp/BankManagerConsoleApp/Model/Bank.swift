@@ -7,6 +7,7 @@ struct Bank {
     private let workTime: Double = 0.7
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: 2)
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private let bankingGroup = DispatchGroup()
     
     init(_ numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
@@ -24,37 +25,39 @@ struct Bank {
     }
     
     func makeTellerWork() {
-        let bankingGroup = DispatchGroup()
         let startTime = CFAbsoluteTimeGetCurrent()
         
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            
-            guard let task = customer.taskType else {
-                return
-            }
-            
-            switch task {
-            case .deposit:
-                depositWindow.wait()
-                DispatchQueue.global().async(group: bankingGroup) {
-                    teller.work(for: customer)
-                    depositWindow.signal()
-                }
-            case .loan:
-                loanWindow.wait()
-                DispatchQueue.global().async(group: bankingGroup) {
-                    teller.work(for: customer)
-                    loanWindow.signal()
-                }
-            }
+            makeTellerWorkByTask(for: customer)
         }
         
         bankingGroup.wait()
         let endTime = CFAbsoluteTimeGetCurrent()
         closeBanking(from: startTime, to: endTime)
+    }
+    
+    private func makeTellerWorkByTask(for customer: Customer) {
+        guard let task = customer.taskType else {
+            return
+        }
+        
+        switch task {
+        case .deposit:
+            depositWindow.wait()
+            DispatchQueue.global().async(group: bankingGroup) {
+                teller.work(for: customer)
+                depositWindow.signal()
+            }
+        case .loan:
+            loanWindow.wait()
+            DispatchQueue.global().async(group: bankingGroup) {
+                teller.work(for: customer)
+                loanWindow.signal()
+            }
+        }
     }
     
     private func closeBanking(from startTime: CFAbsoluteTime, to endTime: CFAbsoluteTime) {
