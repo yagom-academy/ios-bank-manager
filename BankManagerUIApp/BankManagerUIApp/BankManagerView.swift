@@ -13,9 +13,34 @@ final class BankManagerView: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = .white
+        configureMainStackViewLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    lazy var mainVerticalStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [])
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fill
+        view.spacing = 16
+        return view
+    }()
+}
+
+//MARK: - Auto Layout Methode
+private extension BankManagerView {
+    func configureMainStackViewLayout() {
+        self.addSubview(mainVerticalStackView)
+        
+        NSLayoutConstraint.activate([
+            mainVerticalStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            mainVerticalStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            mainVerticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            mainVerticalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        ])
     }
 }
