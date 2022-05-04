@@ -9,33 +9,16 @@ import Foundation
 
 final class BankClerk: Presentable {
     private let name: String
-    private let workSpeed: Double
+    private(set) var bankService: BankServiceType
     
-    init(name: String, workSpeed: Double) {
+    init(name: String, bankService: BankServiceType) {
         self.name = name
-        self.workSpeed = workSpeed
+        self.bankService = bankService
     }
     
-    func work(_ queue: Queue<Client>) {
-        let workQueue = DispatchQueue(label: name)
-        let workItem = createWorkItem(queue)
-        
-        while queue.isEmpty == false {
-            workQueue.sync(execute: workItem)
-        }
-    }
-    
-    private func createWorkItem(_ queue: Queue<Client>) -> DispatchWorkItem {
-        DispatchWorkItem {
-            guard let client = queue.peek else {
-                return
-            }
-            
-            self.printStartTaskMessage(waitingNumber: client.waitingNumber)
-            Thread.sleep(forTimeInterval: self.workSpeed)
-            self.printFinishTaskMessage(waitingNumber: client.waitingNumber)
-            
-            queue.dequeue()
-        }
+    func work(client: Client) {
+        self.printStartTaskMessage(client: client)
+        Thread.sleep(forTimeInterval: self.bankService.requiredTime)
+        self.printFinishTaskMessage(client: client)
     }
 }

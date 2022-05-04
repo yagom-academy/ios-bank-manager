@@ -12,20 +12,24 @@ fileprivate extension Constants {
 }
 
 final class Bank: Presentable {
-    private let clientQueue = Queue<Client>()
-    private let bankClerk: BankClerk
+    private let bankClerks: [BankClerk]
     private let clientCount: Int
+    private let queueDictionary: [String: Queue<Client>]
     
-    init(bankClerk: BankClerk, clientCount: Int) {
-        self.bankClerk = bankClerk
+    init(bankClerks: [BankClerk],
+         clientCount: Int,
+         queueDictionary: [String: Queue<Client>]
+    ) {
+        self.bankClerks = bankClerks
         self.clientCount = clientCount
+        self.queueDictionary = queueDictionary
     }
     
     func open() {
         receiveClients()
         
         let totalWorkTime = measureTotalWorkTime {
-            bankClerk.work(clientQueue)
+            assignClientToBankClerk()
         }
         
         close(totalWorkTime: totalWorkTime)
@@ -33,7 +37,17 @@ final class Bank: Presentable {
     
     private func receiveClients() {
         for order in 1 ... clientCount {
-            clientQueue.enqueue(Client(waitingNumber: order))
+            classifyClients(waitingNumber: order)
+        }
+    }
+    
+    private func classifyClients(waitingNumber: Int) {
+        let client = Client(waitingNumber: waitingNumber, bankService: .randomBankService)
+        switch client.bankService {
+        case .deposit:
+            queueDictionary[BankServiceType.deposit.description]?.enqueue(client)
+        case .loan:
+            queueDictionary[BankServiceType.loan.description]?.enqueue(client)
         }
     }
     
@@ -44,6 +58,40 @@ final class Bank: Presentable {
         let totalTime = finishTime - startTime
         
         return totalTime.formatted
+    }
+    
+    private func assignClientToBankClerk() {
+        let group = DispatchGroup()
+        
+        bankClerks.filter { $0.bankService == .deposit }.forEach { bankClerk in
+            assignWorkToBankClerk(
+                group: group,
+                queue: queueDictionary[BankServiceType.deposit.description] ?? Queue<Client>(),
+                bankClerk: bankClerk
+            )
+        }
+        
+        bankClerks.filter { $0.bankService == .loan }.forEach { bankClerk in
+            assignWorkToBankClerk(
+                group: group,
+                queue: queueDictionary[BankServiceType.loan.description] ?? Queue<Client>(),
+                bankClerk: bankClerk
+            )
+        }
+        
+        group.wait()
+    }
+    
+    private func assignWorkToBankClerk(
+        group: DispatchGroup,
+        queue: Queue<Client>,
+        bankClerk: BankClerk
+    ) {
+        DispatchQueue.global().async(group: group) {
+            while let client = queue.dequeue() {
+                bankClerk.work(client: client)
+            }
+        }
     }
     
     private func close(totalWorkTime: String) {

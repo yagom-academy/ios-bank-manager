@@ -17,15 +17,13 @@ fileprivate extension Constants {
 }
 
 struct BankManager {
-    private let bankClerk: BankClerk
     private let bank: Bank
     
-    init(bankClerk: BankClerk, bank: Bank) {
-        self.bankClerk = bankClerk
+    init(bank: Bank) {
         self.bank = bank
     }
     
-    func startProgram(bank: Bank, bankClerk: BankClerk) throws {
+    func startProgram() throws {
         while true {
             printMenu()
             let userInput = try receivedUserInput()

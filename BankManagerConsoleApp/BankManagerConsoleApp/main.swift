@@ -6,27 +6,60 @@
 
 fileprivate extension Constants {
     static let clientCountRange: ClosedRange<Int> = 10 ... 30
-    static let workSpeed: Double = 0.7
-    static let temporaryName = "임시이름"
 }
 
-private let bankClerk = BankClerk(
-    name: Constants.temporaryName,
-    workSpeed: Constants.workSpeed
-)
+typealias QueueDictionary = [String: Queue<Client>]
 
 private let bank = Bank(
-    bankClerk: bankClerk,
-    clientCount: Int.random(in: Constants.clientCountRange)
+    bankClerks: createBankClerk(
+        Constants.numberOfDepositBankClerks,
+        Constants.numberOfLoanBankClerks
+    ),
+    clientCount: Int.random(in: Constants.clientCountRange),
+    queueDictionary: createQueueDictionary()
 )
 
-private let bankManager = BankManager(
-    bankClerk: bankClerk,
-    bank: bank
-)
+private let bankManager = BankManager(bank: bank)
+
+private func createQueueDictionary() -> QueueDictionary {
+    var queueDictionary: QueueDictionary = [:]
+    
+    BankServiceType.allCases.forEach { bankService in
+        queueDictionary.updateValue(Queue<Client>(), forKey: bankService.description)
+    }
+    
+    return queueDictionary
+}
+
+private func createBankClerk(
+    _ numberOfDepositBankClerks: Int,
+    _ numberOfLoanBankClerks: Int
+) -> [BankClerk] {
+    var bankClerks: [BankClerk] = []
+    
+    for order in 1 ... numberOfDepositBankClerks {
+        bankClerks.append(
+            BankClerk(
+                name: "\(BankServiceType.deposit)\(order)",
+                bankService: .deposit
+            )
+        )
+    }
+    
+    for order in 1 ... numberOfLoanBankClerks {
+        bankClerks.append(
+            BankClerk(
+                name: "\(BankServiceType.loan)\(order)",
+                bankService: .loan
+            )
+        )
+    }
+    
+    return bankClerks
+}
 
 do {
-    try bankManager.startProgram(bank: bank, bankClerk: bankClerk)
+    try bankManager.startProgram()
 } catch {
     print(error.localizedDescription)
 }

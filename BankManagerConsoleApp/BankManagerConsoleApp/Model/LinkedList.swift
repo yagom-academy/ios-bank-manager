@@ -5,6 +5,8 @@
 //  Created by 조민호 on 2022/04/25.
 //
 
+import Foundation
+
 final public class LinkedList<Element> {
     final private class Node {
         var element: Element
@@ -17,6 +19,7 @@ final public class LinkedList<Element> {
     
     private var head: Node?
     private var tail: Node?
+    private let lockQueue = DispatchQueue(label: "lockQueue")
     
     var isEmpty: Bool {
         return head == nil
@@ -39,13 +42,17 @@ final public class LinkedList<Element> {
     }
     
     func removeFirst() -> Element? {
-        guard isEmpty == false else {
-            return nil
+        var element: Element?
+        
+        lockQueue.sync {
+            guard let removedNode = head else {
+                return
+            }
+            head = removedNode.next
+            element = removedNode.element
         }
         
-        let removedNode = head
-        head = removedNode?.next
-        return removedNode?.element
+        return element
     }
     
     func removeAll() {
