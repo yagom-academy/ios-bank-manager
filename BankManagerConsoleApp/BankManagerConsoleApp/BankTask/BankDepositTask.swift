@@ -10,8 +10,8 @@ import Foundation
 struct BankDepositTask: BankTaskType {
   private enum Constants {
     static let time = 0.7
-    static let start = "%d번 고객 업무 시작"
-    static let finished = "%d번 고객 업무 완료"
+    static let start = "%d번 고객 예금업무 시작"
+    static let finished = "%d번 고객 예금업무 완료"
   }
 
   private(set) var semaphore: DispatchSemaphore
