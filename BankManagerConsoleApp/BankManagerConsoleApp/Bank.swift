@@ -15,6 +15,10 @@ final class Bank {
     private(set) var loanClerksCount: Int
     private(set) var depositClerksCount: Int
     
+    init(loanClerksCount: Int, depositClerksCount: Int) {
+        self.loanClerksCount = loanClerksCount
+        self.depositClerksCount = depositClerksCount
+    }
         }
     }
     
