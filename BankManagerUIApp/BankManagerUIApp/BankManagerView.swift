@@ -21,7 +21,7 @@ final class BankManagerView: UIView {
     }
     
     lazy var mainVerticalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView])
+        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView, taskTimeLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         view.alignment = .fill
@@ -53,6 +53,15 @@ final class BankManagerView: UIView {
         view.distribution = .fillEqually
         return view
     }()
+    
+    lazy var taskTimeLabel: UILabel = {
+          let label = UILabel()
+          label.text = "업무시간 - 00:00:000"
+          label.font = .preferredFont(forTextStyle: .title2)
+          label.textAlignment = .center
+          return label
+      }()
+
 }
 
 //MARK: - Auto Layout Methode
