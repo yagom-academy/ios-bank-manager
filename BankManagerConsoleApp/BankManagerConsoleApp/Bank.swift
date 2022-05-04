@@ -22,7 +22,7 @@ final class Bank {
 
   func open() {
     totalClientCount = clientQueue.count
-    
+
     executeBankTask()
     print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
   }

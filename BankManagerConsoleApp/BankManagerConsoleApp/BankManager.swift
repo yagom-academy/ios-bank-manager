@@ -29,7 +29,7 @@ final class BankManager {
 
   private func selectMenu() -> Bool {
     print(Message.menu, terminator: Message.whiteSpace)
-    
+
     guard let input = readLine(),
           let menu = Menu(rawValue: input) else { return true }
 
