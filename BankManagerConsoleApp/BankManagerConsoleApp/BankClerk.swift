@@ -12,11 +12,6 @@ struct BankClerk: Workable {
         static let start = "%d번 고객 %@업무 시작"
         static let end = "%d번 고객 %@업무 종료"
     }
-
-    private enum Constant {
-        static let loanWorkTime = 1.1
-        static let depositWorkTime = 0.7
-    }
     
     private(set) var workType: WorkType
     private(set) var clerksCountByWork: DispatchSemaphore
@@ -33,7 +28,6 @@ struct BankClerk: Workable {
             return
         }
         
-        let workTime = workType == .loan ? Constant.loanWorkTime : Constant.depositWorkTime
         let workStartingMessage = String(format: Message.start,
                                          client.orderNumber,
                                          workType.description)
@@ -42,7 +36,7 @@ struct BankClerk: Workable {
                                        workType.description)
         
         print(workStartingMessage)
-        Thread.sleep(forTimeInterval: workTime)
+        Thread.sleep(forTimeInterval: workType.delayTime)
         print(workEndingMessage)
         
         self.clerksCountByWork.signal()
