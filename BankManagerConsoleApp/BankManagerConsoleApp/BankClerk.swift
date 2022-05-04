@@ -36,7 +36,7 @@ struct BankClerk: Workable {
                                        workType.description)
         
         print(workStartingMessage)
-        Thread.sleep(forTimeInterval: workType.delayTime)
+        Thread.sleep(forTimeInterval: workType.takenTime)
         print(workEndingMessage)
         
         self.clerksCountByWork.signal()

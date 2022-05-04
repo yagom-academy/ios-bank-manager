@@ -11,7 +11,7 @@ enum WorkType: String, CaseIterable {
     case loan = "대출"
     case deposit = "예금"
     
-    var delayTime: Double {
+    var takenTime: Double {
         switch self {
         case .loan:
             return 1.1
