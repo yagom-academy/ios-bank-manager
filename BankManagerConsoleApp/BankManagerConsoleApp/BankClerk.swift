@@ -21,11 +21,6 @@ final class BankClerk: Operation, Workable {
         self.clientQueue = queue
     }
     
-    func deal(with client: Client?) {
-        self.clerksCountByWork.wait()
-        
-        guard let client = client else {
-            return
     override func main() {
         serveClient()
     }
@@ -34,6 +29,9 @@ final class BankClerk: Operation, Workable {
         while let client = clientQueue.dequeue() {
             deal(with: client)
         }
+    }
+    
+    private func deal(with client: Client) {
         let workStartingMessage = String(format: Message.start,
                                          client.orderNumber,
                                          workType.description)
@@ -44,7 +42,5 @@ final class BankClerk: Operation, Workable {
         print(workStartingMessage)
         Thread.sleep(forTimeInterval: workType.takenTime)
         print(workEndingMessage)
-        
-        self.clerksCountByWork.signal()
     }
 }
