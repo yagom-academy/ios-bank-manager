@@ -13,12 +13,12 @@ final class BankClerk: Operation, Workable {
         static let end = "%d번 고객 %@업무 종료"
     }
     
+    private(set) var clientQueue: Queue<LinkedList<Client>>
     private(set) var workType: WorkType
-    private(set) var clerksCountByWork: DispatchSemaphore
     
-    init(workType: WorkType, clerkCount: Int) {
+    init(workType: WorkType, queue: Queue<LinkedList<Client>>) {
         self.workType = workType
-        self.clerksCountByWork = DispatchSemaphore(value: clerkCount)
+        self.clientQueue = queue
     }
     
     func deal(with client: Client?) {
