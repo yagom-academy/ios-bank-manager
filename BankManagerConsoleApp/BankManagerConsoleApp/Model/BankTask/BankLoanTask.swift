@@ -23,7 +23,9 @@ struct BankLoanTask: BankTaskType {
   func execute(_ client: Client) {
     let clientNumber = client.waitingNumber
     logger.log(.taskStart(number: clientNumber, taskName: Constants.taskName))
-    Thread.sleep(forTimeInterval: Constants.time)
-    logger.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
+    Timer.scheduledTimer(withTimeInterval: Constants.time, repeats: false) { _ in
+      logger.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
+    }
+    RunLoop.current.run()
   }
 }
