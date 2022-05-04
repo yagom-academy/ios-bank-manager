@@ -20,4 +20,10 @@ enum BankTask: String, CaseIterable {
 
 struct Customer {
     let numberTicekt: Int
+    let task: BankTask?
+    
+    init(numberTicekt: Int) {
+        self.numberTicekt = numberTicekt
+        self.task = BankTask.allCases.randomElement()
+    }
 }
