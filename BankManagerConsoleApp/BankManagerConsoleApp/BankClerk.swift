@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankClerk: Workable {
+final class BankClerk: Operation, Workable {
     private enum Message {
         static let start = "%d번 고객 %@업무 시작"
         static let end = "%d번 고객 %@업무 종료"
