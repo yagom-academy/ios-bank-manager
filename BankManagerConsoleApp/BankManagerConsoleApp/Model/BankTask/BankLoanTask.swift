@@ -10,11 +10,11 @@ import Foundation
 struct BankLoanTask: BankTaskType {
   private enum Constants {
     static let time = 1.1
-    static let start = "%d번 고객 대출업무 시작"
-    static let finished = "%d번 고객 대출업무 완료"
+    static let taskName = "대출"
   }
 
   private(set) var semaphore: DispatchSemaphore
+  private let logger = Logger()
 
   init(_ numberOfClerk: Int) {
     semaphore = DispatchSemaphore(value: numberOfClerk)
@@ -22,10 +22,8 @@ struct BankLoanTask: BankTaskType {
 
   func execute(_ client: Client) {
     let clientNumber = client.waitingNumber
-    let time = Constants.time
-
-    print(String(format: Constants.start, clientNumber))
-    Thread.sleep(forTimeInterval: time)
-    print(String(format: Constants.finished, clientNumber))
+    logger.log(.taskStart(number: clientNumber, taskName: Constants.taskName))
+    Thread.sleep(forTimeInterval: Constants.time)
+    logger.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
   }
 }

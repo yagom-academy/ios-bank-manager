@@ -11,10 +11,6 @@ final class BankManager {
   private enum Constants {
     static let limit = 31
     static let range = 10...30
-  }
-
-  private enum Message {
-    static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
     static let whiteSpace = ""
   }
 
@@ -23,12 +19,14 @@ final class BankManager {
     case exit = "2"
   }
 
+  private let logger = Logger()
+
   func start() {
     while selectMenu() {}
   }
 
   private func selectMenu() -> Bool {
-    print(Message.menu, terminator: Message.whiteSpace)
+    logger.log(.menu, terminator: Constants.whiteSpace)
 
     guard let input = readLine(),
           let menu = Menu(rawValue: input) else { return true }

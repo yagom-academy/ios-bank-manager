@@ -8,13 +8,10 @@
 import Foundation
 
 final class Bank {
-  private enum Constants {
-    static let closed = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
-  }
-
   private var clientQueue: BankQueue<Client>
   private var totalClientCount = Int.zero
   private var totalExecuteTime = Double.zero
+  private let logger = Logger()
 
   init(maxClient: Int) {
     clientQueue = BankQueue(limit: maxClient)
@@ -25,7 +22,7 @@ final class Bank {
     totalExecuteTime = measureTaskTime {
       executeBankTask()
     }
-    print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
+    logger.log(.closed(totalClientCount: totalClientCount, totalExecuteTime: totalExecuteTime))
   }
 
   func addClients(_ clients: [Client]) {
