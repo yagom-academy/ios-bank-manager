@@ -12,11 +12,8 @@ protocol Customer {
 }
 
 extension Customer {
-    static func randomCustomers() -> [Self] {
-        let customerCount = Int.random(in: 10...30)
-        let customers = (1...customerCount).map(makeCustomer)
-
-        return customers
+    static func make(numberOfCustomer: Int) -> [Self] {
+        return (1...10).map(makeCustomer)
     }
 
     private static func makeCustomer(number: Int) -> Self {

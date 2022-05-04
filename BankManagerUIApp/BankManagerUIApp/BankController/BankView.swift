@@ -28,7 +28,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    private lazy var addCustomerbutton: UIButton = {
+    lazy var addCustomerbutton: UIButton = {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -88,7 +88,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    private lazy var waitStackView: UIStackView = {
+    lazy var waitStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         

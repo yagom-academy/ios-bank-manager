@@ -12,7 +12,7 @@ final class CustomerView: UIView {
     
     init(customer: Customer) {
         self.customer = customer
-        super.init()
+        super.init(frame: .zero)
         layout()
     }
     

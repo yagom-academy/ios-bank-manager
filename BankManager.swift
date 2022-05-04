@@ -36,7 +36,7 @@ final class BankManager {
         
         switch inputUserOption() {
         case .bankOpen:
-            bank.add(customers: BankCustomer.randomCustomers())
+            bank.add(customers: BankCustomer.make(numberOfCustomer: 10))
             bank.open()
             
             start()

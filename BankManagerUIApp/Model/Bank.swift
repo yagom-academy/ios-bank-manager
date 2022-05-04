@@ -69,11 +69,6 @@ final class Bank {
                 }
             }
         }
-
-        DispatchQueue.global().sync {
-            loanQueue.waitUntilAllOperationsAreFinished()
-            depositQueue.waitUntilAllOperationsAreFinished()
-        }
     }
 
     private func reset() {
