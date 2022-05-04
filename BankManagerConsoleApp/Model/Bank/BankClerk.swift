@@ -8,12 +8,12 @@
 import Foundation
 
 protocol BankDelegate {
-    func updateWorkData(spendedTime: Double)
+    func updateWorkData()
 }
 
 private enum Constant {
-    static let startWorkMessage = "고객 업무 시작"
-    static let finishedWorkMessage = "고객 업무 완료"
+    static let startWorkMessageFormat = "%d번 고객 %@업무 시작"
+    static let finishedWorkMessageFormat = "%d번 고객 %@업무 완료"
 }
 
 protocol BankClerk {
@@ -24,10 +24,10 @@ protocol BankClerk {
 
 extension BankClerk {
     func work(client: Client, delegate: BankDelegate) {
-        print("\(client.waitingNumber) \(Constant.startWorkMessage)")
+        print(String(format: Constant.startWorkMessageFormat, client.waitingNumber, client.taskType.text))
         let usecondsTimeForAClient = useconds_t(spendingTimeForClient * 1000000)
         usleep(usecondsTimeForAClient)
-        delegate.updateWorkData(spendedTime: spendingTimeForClient)
-        print("\(client.waitingNumber) \(Constant.finishedWorkMessage)")
+        delegate.updateWorkData()
+        print(String(format: Constant.finishedWorkMessageFormat, client.waitingNumber, client.taskType.text))
     }
 }

@@ -10,4 +10,13 @@ import Foundation
 enum TaskType: CaseIterable {
     case deposit
     case loan
+
+    var text: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
 }
