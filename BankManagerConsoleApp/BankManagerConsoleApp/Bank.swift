@@ -42,6 +42,7 @@ final class Bank {
         let resultMessage = String(format: resultDescription, totalClientsCount, totalWorkTime)
         
         print(resultMessage)
+        clerks.removeAll()
     }
     
     private mutating func receiveClients() {
