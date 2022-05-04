@@ -9,6 +9,8 @@ import UIKit
 final class BankViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
     private let bank = Bank(loanWindow: BankLoanWindow(), depositWindow: BankDepositWindow())
+    private var timer: Timer?
+    private var seconds: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +39,29 @@ extension BankViewController {
         
         bank.add(customers: customers)
         bank.open()
+        
+        
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 0.003, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func startTimer() {
+        seconds += 0.003
+        
+        let minute = Int(seconds / 60)
+        let second = Int(seconds.truncatingRemainder(dividingBy: 60))
+        let miliSecond = seconds.truncatingRemainder(dividingBy: 1) * 1000
+            
+        bankView.businessHoursLabel.text = String(format: "업무시간 - %02d:%02d:%03.0f", minute, second, miliSecond )
     }
 }
 
 extension BankViewController: BankDelegate {
-    func bankWorkDidFinish(_ bank: Bank) { }
+    func bankWorkDidFinish(_ bank: Bank) {
+        timer?.invalidate()
+        timer = nil
+    }
     
     func customerWorkDidStart(_ bank: Bank, id: String) {
         DispatchQueue.main.async { [weak self] in

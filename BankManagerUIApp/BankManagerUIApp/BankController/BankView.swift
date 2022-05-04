@@ -47,7 +47,7 @@ final class BankView: UIView {
         return button
     }()
     
-    private lazy var businessHoursLabel: UILabel = {
+    lazy var businessHoursLabel: UILabel = {
         let label = UILabel()
         label.text = "업무시간 - 00:00:000"
         label.textAlignment = .center

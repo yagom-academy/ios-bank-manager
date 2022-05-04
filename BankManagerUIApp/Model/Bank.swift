@@ -22,6 +22,7 @@ final class Bank {
     private(set) var waitingNumber = 1
     private(set) var duration = 0.0
     weak var delegate: BankDelegate?
+    let group = DispatchGroup()
 
     init(loanWindow: BankWindow, depositWindow: BankWindow) {
         self.loanWindow = loanWindow
@@ -35,7 +36,6 @@ final class Bank {
 
     func open() {
         duration = checkTime(target: sendCustomerToClerk)
-        delegate?.bankWorkDidFinish(self)
         reset()
     }
 
@@ -55,20 +55,27 @@ final class Bank {
     }
 
     private func sendCustomerToClerk() {
-        
         while let customer = waitingQueue.dequeue() {
             waitingNumber += 1
-
+            
+            group.enter()
             switch customer.workType {
             case .loan:
                 loanQueue.addOperation {
                     self.loanWindow.receive(customer)
+                    self.group.leave()
                 }
             case .deposit:
                 depositQueue.addOperation {
                     self.depositWindow.receive(customer)
+                    self.group.leave()
                 }
             }
+            
+        }
+        
+        group.notify(queue: .main) {
+            self.delegate?.bankWorkDidFinish(self)
         }
     }
 
