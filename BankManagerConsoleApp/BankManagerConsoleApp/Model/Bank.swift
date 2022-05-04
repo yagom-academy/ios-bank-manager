@@ -15,7 +15,7 @@ private enum ClientCount: Int {
 
 struct Bank: Measurable {
     private var clients: Queue<Client>
-    private let group = DispatchGroup()
+    private let workGroup = DispatchGroup()
     
     private var totalClients: Int {
         return Int.random(in: ClientCount.minimum.rawValue...ClientCount.maximum.rawValue)
@@ -28,15 +28,15 @@ struct Bank: Measurable {
     func measureWorkingHours() -> Double {
         let duration = measureTime {
             open()
-            group.wait()
+            workGroup.wait()
         }
         return duration
     }
     
     private func open() {
         while let client = clients.dequeue() {
-            DispatchQueue.global().async(group: group) {
-                BankClerk.work(client: client, group: group)
+            DispatchQueue.global().async(group: workGroup) {
+                BankClerk.work(client: client, group: workGroup)
             }
         }
     }
