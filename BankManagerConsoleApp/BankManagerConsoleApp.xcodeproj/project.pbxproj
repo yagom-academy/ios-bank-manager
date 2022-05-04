@@ -15,7 +15,7 @@
 		DA69567128184CB3000C1164 /* DoubleStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567028184CB3000C1164 /* DoubleStackTests.swift */; };
 		DA695675281850F5000C1164 /* DoubleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA695665281831FE000C1164 /* DoubleStack.swift */; };
 		DA69567628185132000C1164 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544AC2818421300A36211 /* Listable.swift */; };
-		DA69567E28185ABA000C1164 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567D28185ABA000C1164 /* LinkedListTest.swift */; };
+		DA69567E28185ABA000C1164 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69567D28185ABA000C1164 /* LinkedListTests.swift */; };
 		DA69568328185BF5000C1164 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA69568428185C12000C1164 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7544792816E67F00A36211 /* LinkedList.swift */; };
 		DA69568728185C58000C1164 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
@@ -27,7 +27,11 @@
 		DA7544B128185E5000A36211 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA7544B028185E5000A36211 /* .swiftlint.yml */; };
 		DA7544B228185E5000A36211 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA7544B028185E5000A36211 /* .swiftlint.yml */; };
 		DA7544B328185E5000A36211 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA7544B028185E5000A36211 /* .swiftlint.yml */; };
+		DA75C059281A841B00A60597 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75C058281A841B00A60597 /* Banker.swift */; };
+		DA75C05C281ACC0800A60597 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75C05B281ACC0800A60597 /* Const.swift */; };
 		DA912A862816E36A00CD671D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA912A852816E36A00CD671D /* Node.swift */; };
+		DADD0E79281AD7A200553EBF /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD0E78281AD7A200553EBF /* Customer.swift */; };
+		DAE5ED9A281FD6D60023A37A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5ED99281FD6D60023A37A /* Bank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,12 +59,16 @@
 		DA69566E28184CB3000C1164 /* DoubleStackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoubleStackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA69567028184CB3000C1164 /* DoubleStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStackTests.swift; sourceTree = "<group>"; };
 		DA69567B28185ABA000C1164 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA69567D28185ABA000C1164 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
+		DA69567D28185ABA000C1164 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		DA7544792816E67F00A36211 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		DA7544892817058800A36211 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DA7544AC2818421300A36211 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
 		DA7544B028185E5000A36211 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		DA75C058281A841B00A60597 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
+		DA75C05B281ACC0800A60597 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		DA912A852816E36A00CD671D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		DADD0E78281AD7A200553EBF /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		DAE5ED99281FD6D60023A37A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,10 +124,11 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				DA75C05A281ACB6E00A60597 /* Enum */,
 				DA7544B028185E5000A36211 /* .swiftlint.yml */,
-				DA69566928184984000C1164 /* Protocol */,
 				DA6956682818493D000C1164 /* Utils */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
+				DA69566928184984000C1164 /* Protocol */,
 				DA7544AF281855EB00A36211 /* Tests */,
 				C7694E77259C3EC00053667F /* Products */,
 				719B4824676F4472997671F3 /* Pods */,
@@ -142,6 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				DAE5ED99281FD6D60023A37A /* Bank.swift */,
+				DA75C058281A841B00A60597 /* Banker.swift */,
+				DADD0E78281AD7A200553EBF /* Customer.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -185,7 +197,7 @@
 		DA69567C28185ABA000C1164 /* LinkedListTest */ = {
 			isa = PBXGroup;
 			children = (
-				DA69567D28185ABA000C1164 /* LinkedListTest.swift */,
+				DA69567D28185ABA000C1164 /* LinkedListTests.swift */,
 			);
 			path = LinkedListTest;
 			sourceTree = "<group>";
@@ -198,6 +210,14 @@
 				DA69565D2816FA10000C1164 /* QueueTests */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		DA75C05A281ACB6E00A60597 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				DA75C05B281ACC0800A60597 /* Const.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,11 +412,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA75448A2817058800A36211 /* Queue.swift in Sources */,
+				DADD0E79281AD7A200553EBF /* Customer.swift in Sources */,
 				DA695666281831FE000C1164 /* DoubleStack.swift in Sources */,
+				DA75C059281A841B00A60597 /* Banker.swift in Sources */,
 				DA7544AD2818421300A36211 /* Listable.swift in Sources */,
 				DA912A862816E36A00CD671D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				DAE5ED9A281FD6D60023A37A /* Bank.swift in Sources */,
 				DA69568428185C12000C1164 /* LinkedList.swift in Sources */,
+				DA75C05C281ACC0800A60597 /* Const.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,7 +452,7 @@
 				DA69568728185C58000C1164 /* Node.swift in Sources */,
 				DA69568828185C67000C1164 /* Listable.swift in Sources */,
 				DA69568328185BF5000C1164 /* LinkedList.swift in Sources */,
-				DA69567E28185ABA000C1164 /* LinkedListTest.swift in Sources */,
+				DA69567E28185ABA000C1164 /* LinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +516,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
@@ -535,6 +559,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -546,7 +571,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 			};
 			name = Release;
 		};
