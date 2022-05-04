@@ -8,32 +8,41 @@
 import Foundation
 
 struct Bank {
-    private let bankClerkCount: Int
+    private let depositClerkCount: Int
+    private let loanClerkCount: Int
     private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
     private let bankClerk = BankClerk()
     
-    init(bankClerkCount: Int) {
-        self.bankClerkCount = bankClerkCount
+    init(depositClerkCount: Int, loanClerkCount: Int) {
+        self.depositClerkCount = depositClerkCount
+        self.loanClerkCount = loanClerkCount
     }
     
     func startWork() -> (Int, String)? {
-        let bankWindows = DispatchSemaphore(value: bankClerkCount)
-        let group = DispatchGroup()
+        let depositWindowQueue = OperationQueue()
+        let loanWindowQueue = OperationQueue()
         let startWorkTime = CFAbsoluteTimeGetCurrent()
         let customers = limitCustomerCount()
+        
+        assignClerkCount(at: depositWindowQueue, and: loanWindowQueue)
      
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return nil }
+            guard let task = customer.task else { return nil }
             
-            bankWindows.wait()
-            DispatchQueue.global().async(group: group) {
-                self.bankClerk.processTask(for: customer)
-                bankWindows.signal()
+            switch task {
+            case .deposit:
+                depositWindowQueue.addOperation {
+                    self.bankClerk.processTask(for: customer)
+                }
+            case .loan:
+                loanWindowQueue.addOperation {
+                    self.bankClerk.processTask(for: customer)
+                }
             }
         }
-        group.wait()
+        waitTillOperationOver(at: depositWindowQueue, and: loanWindowQueue)
         let finishWorkTime = CFAbsoluteTimeGetCurrent() - startWorkTime
-        
         return (customers, finishWorkTime.customFloor())
     }
     
@@ -44,6 +53,19 @@ struct Bank {
             bankWaitingQueue.enqueue(Customer(numberTicket: number))
         }
         return customers
+    }
+}
+
+// MARK: - OperationQueue Method
+private extension Bank {
+    func assignClerkCount(at deposit: OperationQueue, and loan: OperationQueue) {
+        deposit.maxConcurrentOperationCount = depositClerkCount
+        loan.maxConcurrentOperationCount = loanClerkCount
+    }
+    
+    func waitTillOperationOver(at deposit: OperationQueue, and loan: OperationQueue) {
+        deposit.waitUntilAllOperationsAreFinished()
+        loan.waitUntilAllOperationsAreFinished()
     }
 }
 
