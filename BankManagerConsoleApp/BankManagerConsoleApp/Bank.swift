@@ -27,10 +27,15 @@ final class Bank: Manageable {
         reset(numberOfBankers: numberOfBankers)
     }
     
+    func recordTime(method: () -> Void) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        method()
+        wholeWorkTime = CFAbsoluteTimeGetCurrent() - startTime
+    }
+    
     func manageBanker() {
         let banker = Banker()
         let workGroup = DispatchGroup()
-        let startTime = CFAbsoluteTimeGetCurrent()
         for _ in Const.startCount...numberOfCustomer {
             numberOfBankers.wait()
             let custormer = customers.deQueue()
@@ -40,7 +45,6 @@ final class Bank: Manageable {
             }
         }
         workGroup.wait()
-        wholeWorkTime = CFAbsoluteTimeGetCurrent() - startTime
     }
     
     func reportOfDay() -> String {

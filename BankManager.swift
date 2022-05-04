@@ -28,6 +28,7 @@ fileprivate enum UserChoice: Int {
 protocol Manageable {
     func manageBanker()
     func reportOfDay() -> String
+    func recordTime(method: () -> Void)
 }
 
 final class BankManager {
@@ -51,7 +52,9 @@ final class BankManager {
     private func selectMenu(by userChoice: UserChoice) -> Bool {
         switch userChoice {
         case .start:
-            bank.manageBanker()
+            bank.recordTime {
+                bank.manageBanker()
+            }
             print(Const.finishWork)
             print(bank.reportOfDay())
             return true
