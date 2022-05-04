@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankTask {
+struct BankDepositTask {
   private enum Constants {
     static let time = 0.7
     static let start = "%d번 고객 업무 시작"

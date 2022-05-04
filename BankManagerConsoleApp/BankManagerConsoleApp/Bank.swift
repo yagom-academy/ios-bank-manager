@@ -35,8 +35,7 @@ final class Bank {
 
   private func executeBankTask() {
     while clientQueue.isEmpty == false, let client = clientQueue.dequeue() {
-      let time = BankTask().execute(client)
-      totalExecuteTime += time
+      let time = BankDepositTask().execute(client)
     }
   }
 }
