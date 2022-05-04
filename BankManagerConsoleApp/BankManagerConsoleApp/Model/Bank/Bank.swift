@@ -52,9 +52,17 @@ struct Bank {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            
-            BankClerk.startLoanWork(customer: customer)
+            matchToClerk(customer: customer)
             totalCustomerCount += 1
+        }
+    }
+    
+    private func matchToClerk(customer: Customer) {
+        switch customer.task {
+        case .deposit:
+            BankClerk.startDepositWork(customer: customer)
+        case .loan:
+            BankClerk.startLoanWork(customer: customer)
         }
     }
     
