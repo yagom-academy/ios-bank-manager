@@ -18,32 +18,31 @@ struct Bank {
         self.loanClerkCount = loanClerkCount
     }
     
-    func startWork() -> Int? {
+    private func startWork() {
         let depositWindowQueue = OperationQueue()
         let loanWindowQueue = OperationQueue()
-        let customers = addCustomers()
         
         assignClerkCount(at: depositWindowQueue, and: loanWindowQueue)
-     
+        
         while !bankWaitingQueue.isEmpty {
-            guard let customer = bankWaitingQueue.dequeue() else { return nil }
-            guard let task = customer.task else { return nil }
-            
-            task.start(deposit: depositWindowQueue, loan: loanWindowQueue).addOperation {
+            guard let customer = bankWaitingQueue.dequeue() else { return }
+            guard let task = customer.task else { return }
+            let operation = BlockOperation {
                 self.bankClerk.processTask(for: customer)
             }
+            
+            task.start(deposit: depositWindowQueue, loan: loanWindowQueue).addOperation(operation)
         }
         waitTillOperationOver(at: depositWindowQueue, and: loanWindowQueue)
-        return customers
     }
     
-    private func addCustomers() -> Int {
+    func addCustomers() {
         let customers = 10
         
         for number in 1...customers {
             bankWaitingQueue.enqueue(Customer(numberTicket: number))
         }
-        return customers
+        startWork()
     }
 }
 
