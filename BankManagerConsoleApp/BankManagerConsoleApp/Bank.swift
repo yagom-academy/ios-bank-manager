@@ -35,9 +35,15 @@ final class Bank {
   }
 
   private func executeBankTask() {
+    let group = DispatchGroup()
     while let client = clientQueue.dequeue() {
-      client.taskType.execute(client)
+      DispatchQueue.global().async(group: group) {
+        client.taskType.semaphore.wait()
+        client.taskType.execute(client)
+        client.taskType.semaphore.signal()
+      }
     }
+    group.wait()
   }
 
   private func measureTaskTime(_ block: () -> Void) -> Double {
