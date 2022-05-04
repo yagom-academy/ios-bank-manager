@@ -19,11 +19,9 @@ fileprivate extension Const {
 final class Bank: Manageable {
     private var customers = Queue(listType: DoubleStack<Customer>())
     private var numberOfCustomer: Int = Const.defaultCount
-    private var numberOfBankers: DispatchSemaphore
     private var wholeWorkTime: Double = Double.zero
     
     init(numberOfBankers: Int = Const.defaultBankerCount) {
-        self.numberOfBankers = DispatchSemaphore(value: numberOfBankers)
         reset(numberOfBankers: numberOfBankers)
     }
     
@@ -33,15 +31,26 @@ final class Bank: Manageable {
         wholeWorkTime = CFAbsoluteTimeGetCurrent() - startTime
     }
     
+    func makeSemaphore() -> [BankTask: DispatchSemaphore] {
+        var semaphores: [BankTask: DispatchSemaphore] = [:]
+        for task in BankTask.allCases {
+            semaphores[task] = .init(value: task.numberOfBankers)
+        }
+        return semaphores
+    }
+    
     func manageBanker() {
         let banker = Banker()
         let workGroup = DispatchGroup()
+        let semaphore = makeSemaphore()
         for _ in Const.startCount...numberOfCustomer {
-            numberOfBankers.wait()
-            let custormer = customers.deQueue()
+            guard let custormer = customers.deQueue(), let task = custormer.task else {
+                return
+            }
+            semaphore[task]?.wait()
             DispatchQueue.global().async(group: workGroup) {
                 banker.work(customer: custormer)
-                self.numberOfBankers.signal()
+                semaphore[task]?.signal()
             }
         }
         workGroup.wait()
