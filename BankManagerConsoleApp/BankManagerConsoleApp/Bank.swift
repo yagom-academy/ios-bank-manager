@@ -24,10 +24,11 @@ struct Bank {
         print(resultMessage)
     }
     
-    @discardableResult
-    private mutating func receiveClients() -> Int {
+    private mutating func receiveClients() {
         for order in 1...Int.random(in: 10...30) {
-            clientQueue.enqueue(Client(order))
+            arrangeByWorkType(Client(order))
+        }
+    }
     
     private mutating func arrangeByWorkType(_ client: Client) {
         switch client.requirementType {
