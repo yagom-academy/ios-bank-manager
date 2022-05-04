@@ -1,15 +1,22 @@
 //
 //  BankManagerUIApp - ViewController.swift
 //  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
+//  Copyright Donnie, Safari. All rights reserved.
 // 
 
 import UIKit
 
-class BankManagerViewController: UIViewController {
-
+final class BankManagerViewController: UIViewController {
+    private lazy var bankManagerView = BankManagerView.init(frame: self.view.bounds)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureView()
+    }
+    
+    private func configureView() {
+        self.view = bankManagerView
     }
 }
 
