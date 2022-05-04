@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankManager {
+final class BankManager {
     private enum Text {
         static let open = "1 : 은행개점"
         static let close = "2 : 종료"
