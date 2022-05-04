@@ -46,11 +46,13 @@ final class BankManager {
   }
 
   private func createClients() -> [Client] {
+    let tasks: [BankTaskType] = [BankDepositTask(2), BankLoanTask(1)]
     var clients = [Client]()
-    let task = BankDepositTask(1)
     for number in 1...Int.random(in: Constants.range) {
-      let client = Client(waitingNumber: number, taskType: task)
-      clients.append(client)
+      if let task = tasks.randomElement() {
+        let client = Client(waitingNumber: number, taskType: task)
+        clients.append(client)
+      }
     }
     return clients
   }
