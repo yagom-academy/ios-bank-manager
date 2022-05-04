@@ -11,6 +11,6 @@ struct DepositBankClerk: BankClerk {
     private enum Constant {
         static let spendingTimeForClient: Double = 0.7
     }
-
+    
     let spendingTimeForClient = Constant.spendingTimeForClient
 }
