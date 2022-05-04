@@ -28,8 +28,14 @@ struct Bank {
     private mutating func receiveClients() -> Int {
         for order in 1...Int.random(in: 10...30) {
             clientQueue.enqueue(Client(order))
+    
+    private mutating func arrangeByWorkType(_ client: Client) {
+        switch client.requirementType {
+        case .loan:
+            loanClientQueue.enqueue(client)
+        case .deposit:
+            depositClientQueue.enqueue(client)
         }
-        return clientQueue.count
     }
     
     private func measureWorkTime(_ block: () -> Void) -> Double {
