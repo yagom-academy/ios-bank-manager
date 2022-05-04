@@ -12,5 +12,6 @@ struct DepositBankClerk: BankClerk {
         static let spendingTimeForClient: Double = 0.7
     }
 
+    weak var delegate: BankDelegate?
     let spendingTimeForClient = Constant.spendingTimeForClient
 }

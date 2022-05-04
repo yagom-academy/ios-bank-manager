@@ -32,20 +32,20 @@ final class Bank {
             guard let client = clientQueue.dequeue() else {
                 return
             }
-            
+
             switch client.taskType {
             case .deposit:
                 DispatchQueue.global().async(group: group) {
                     self.depositSemaphore.wait()
-                    let depositBankClerk = DepositBankClerk()
-                    depositBankClerk.work(client: client, delegate: self)
+                    let depositBankClerk = DepositBankClerk(delegate: self)
+                    depositBankClerk.work(client: client)
                     self.depositSemaphore.signal()
                 }
             case .loan:
                 DispatchQueue.global().async(group: group) {
                     self.loanSemaphore.wait()
-                    let loanBankClerk = LoanBankClerk()
-                    loanBankClerk.work(client: client, delegate: self)
+                    let loanBankClerk = LoanBankClerk(delegate: self)
+                    loanBankClerk.work(client: client)
                     self.loanSemaphore.signal()
                 }
             }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BankDelegate {
+protocol BankDelegate: AnyObject {
     func updateWorkData()
 }
 
@@ -18,16 +18,17 @@ private enum Constant {
 
 protocol BankClerk {
     var spendingTimeForClient: Double { get }
+    var delegate: BankDelegate? { get set }
 
-    func work(client: Client, delegate: BankDelegate)
+    func work(client: Client)
 }
 
 extension BankClerk {
-    func work(client: Client, delegate: BankDelegate) {
+    func work(client: Client) {
         print(String(format: Constant.startWorkMessageFormat, client.waitingNumber, client.taskType.text))
         let usecondsTimeForAClient = useconds_t(spendingTimeForClient * 1000000)
         usleep(usecondsTimeForAClient)
-        delegate.updateWorkData()
+        delegate?.updateWorkData()
         print(String(format: Constant.finishedWorkMessageFormat, client.waitingNumber, client.taskType.text))
     }
 }
