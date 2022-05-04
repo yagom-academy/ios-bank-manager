@@ -95,7 +95,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    private lazy var workStackView: UIStackView = {
+    lazy var workStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         

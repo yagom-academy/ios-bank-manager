@@ -5,10 +5,13 @@
 //  Created by Eddy, dudu on 2022/04/26.
 //
 
+import Foundation
+
 protocol Customer {
     var waitingNumber: Int { get }
     var workType: Banking { get }
-    init(waitingNumber: Int, workType: Banking)
+    var id: String { get }
+    init(waitingNumber: Int, workType: Banking, id: String)
 }
 
 extension Customer {
@@ -18,7 +21,7 @@ extension Customer {
 
     private static func makeCustomer(number: Int) -> Self {
         let customerType = Banking.allCases.randomElement() ?? .deposit
-        let customer = Self(waitingNumber: number, workType: customerType)
+        let customer = Self(waitingNumber: number, workType: customerType, id: UUID().uuidString)
 
         return customer
     }
@@ -27,4 +30,5 @@ extension Customer {
 struct BankCustomer: Customer {
     let waitingNumber: Int
     let workType: Banking
+    let id: String
 }
