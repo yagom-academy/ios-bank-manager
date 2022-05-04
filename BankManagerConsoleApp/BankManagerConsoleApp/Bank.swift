@@ -15,14 +15,6 @@ final class Bank {
     private(set) var loanClerksCount: Int
     private(set) var depositClerksCount: Int
     
-    mutating func assignClerk(by workType: WorkType) {
-        switch workType {
-        case .loan:
-            let newClerk = BankClerk(workType: .loan, queue: loanClientQueue)
-            clerks.append(newClerk)
-        case .deposit:
-            let newClerk = BankClerk(workType: .deposit, queue: depositClientQueue)
-            clerks.append(newClerk)
         }
     }
     
