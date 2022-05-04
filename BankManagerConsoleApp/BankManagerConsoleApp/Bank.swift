@@ -13,8 +13,8 @@ final class Bank {
   }
 
   private var clientQueue: BankQueue<Client>
-  private var totalClientCount: Int = .zero
-  private var totalExecuteTime: Double = .zero
+  private var totalClientCount = Int.zero
+  private var totalExecuteTime = Double.zero
 
   init(maxClient: Int) {
     clientQueue = BankQueue(limit: maxClient)
