@@ -32,7 +32,6 @@ struct Bank {
         static let customerRange = 1...Int.random(in: 10...30)
         static let empty = ""
     }
-    
     private var customerQueue = Queue<Customer>()
     private var totalCustomerCount = Int.zero
     private var workingTime = Constant.empty
@@ -47,21 +46,27 @@ struct Bank {
     }
     
     private mutating func sendCustomerToClerk() {
+        let group = DispatchGroup()
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            matchToClerk(customer: customer)
+            matchToClerk(customer: customer, group: group)
             totalCustomerCount += 1
         }
+        group.wait()
     }
     
-    private func matchToClerk(customer: Customer) {
+    private func matchToClerk(customer: Customer, group: DispatchGroup) {
         switch customer.task {
         case .deposit:
-            BankClerk.startDepositWork(customer: customer)
+            DispatchQueue.global().async(group: group) {
+                BankClerk.startDepositWork(customer: customer)
+            }
         case .loan:
-            BankClerk.startLoanWork(customer: customer)
+            DispatchQueue.global().async(group: group) {
+                BankClerk.startLoanWork(customer: customer)
+            }
         }
     }
     
