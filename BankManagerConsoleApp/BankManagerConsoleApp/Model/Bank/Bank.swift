@@ -36,6 +36,9 @@ struct Bank {
     private var totalCustomerCount = Int.zero
     private var workingTime = Constant.empty
     
+    private let depositSemaphore = DispatchSemaphore(value: Task.deposit.clerkCount)
+    private let loanSemaphore = DispatchSemaphore(value: Task.loan.clerkCount)
+    
     private mutating func receiveCustomer() {
         for number in Constant.customerRange {
             guard let task = Task.allCases.randomElement() else {
@@ -61,11 +64,15 @@ struct Bank {
         switch customer.task {
         case .deposit:
             DispatchQueue.global().async(group: group) {
+                depositSemaphore.wait()
                 BankClerk.startDepositWork(customer: customer)
+                depositSemaphore.signal()
             }
         case .loan:
             DispatchQueue.global().async(group: group) {
+                loanSemaphore.wait()
                 BankClerk.startLoanWork(customer: customer)
+                loanSemaphore.signal()
             }
         }
     }
