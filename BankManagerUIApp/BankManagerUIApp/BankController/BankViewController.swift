@@ -28,6 +28,7 @@ extension BankViewController {
     private func bind() {
         view = bankView
         bankView.addCustomerbutton.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
+        bankView.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
     }
     
     @objc private func addCustomerButtonTapped() {
@@ -40,10 +41,24 @@ extension BankViewController {
         bank.add(customers: customers)
         bank.open()
         
-        
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: 0.003, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
         }
+    }
+    
+    @objc private func resetButtonTapped() {
+        timer?.invalidate()
+        timer = nil
+        bankView.businessHoursLabel.text = "업무시간 - 00:00:000"
+        
+        bankView.workStackView.arrangedSubviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
+        bankView.waitStackView.arrangedSubviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
+        
+        bank.reset()
     }
     
     @objc func startTimer() {
