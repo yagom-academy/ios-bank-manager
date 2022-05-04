@@ -39,13 +39,6 @@ struct Bank {
         return interval
     }
     
-    private mutating func serveClients() {
-        while let client = clientQueue.dequeue() {
-            executeWork(of: client)
-        }
-        clerks.wait()
-    }
-    
     private mutating func executeWork(of client: Client) {
         self.clerksCount.wait()
         
