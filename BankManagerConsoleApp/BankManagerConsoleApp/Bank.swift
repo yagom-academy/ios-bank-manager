@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+final class Bank {
     private var clerks: [Workable] = []
     private var loanClientQueue = Queue(list: LinkedList<Client>())
     private var depositClientQueue = Queue(list: LinkedList<Client>())
