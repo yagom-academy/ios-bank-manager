@@ -9,4 +9,10 @@ import Foundation
 
 struct Client {
     let waitingNumber: Int
+    let taskType: TaskType
+
+    init(waitingNumber: Int) {
+        self.waitingNumber = waitingNumber
+        self.taskType = TaskType.allCases.randomElement() ?? TaskType.deposit
+    }
 }
