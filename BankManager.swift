@@ -21,17 +21,6 @@ final class BankManager {
         self.bank = bank
     }
     
-    mutating func hireClerks(loanClerk: Int, depositClerk: Int) {
-        for _ in 0..<loanClerk {
-            bank.assignClerk(by: .loan)
-        }
-        
-        for _ in 0..<depositClerk {
-            bank.assignClerk(by: .deposit)
-        }
-    }
-    
-    mutating func taskStart() {
         showMenuMessage()
         guard let selectedOption = SelectOptionType(rawValue: inputNumber()) else {
             return taskStart()
