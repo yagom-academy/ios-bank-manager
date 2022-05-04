@@ -57,9 +57,9 @@ struct Bank {
         self.clerksCount.wait()
         
         DispatchQueue.global().async(group: clerks) { [self] in
-            if client.wantedWork == .loan {
+            if client.requirementType == .loan {
                 self.loanClerk.deal(with: client)
-            } else if client.wantedWork == .deposit {
+            } else if client.requirementType == .deposit {
                 self.depositClerk.deal(with: client)
             }
             
