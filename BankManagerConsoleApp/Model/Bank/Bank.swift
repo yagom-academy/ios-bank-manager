@@ -20,6 +20,7 @@ final class Bank {
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
     private let group = DispatchGroup()
+    private let bankUpdateDispatchQueue = DispatchQueue(label: "BankUpdate")
     var from: CFAbsoluteTime?
 
     init(clientQueue: Queue<Client>) {
@@ -57,7 +58,9 @@ final class Bank {
 
 extension Bank: BankDelegate {
     func updateWorkData() {
-        finishedClientCount += 1
+        bankUpdateDispatchQueue.async(group: group) {
+            self.finishedClientCount += 1
+        }
     }
 }
 extension Bank: Timer {
