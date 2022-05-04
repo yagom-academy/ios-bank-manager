@@ -13,6 +13,17 @@ struct Bank {
     private var depositClientQueue = Queue(list: LinkedList<Client>())
     private let operationQueue = OperationQueue()
     
+    mutating func assignClerk(by workType: WorkType) {
+        switch workType {
+        case .loan:
+            let newClerk = BankClerk(workType: .loan, queue: loanClientQueue)
+            clerks.append(newClerk)
+        case .deposit:
+            let newClerk = BankClerk(workType: .deposit, queue: depositClientQueue)
+            clerks.append(newClerk)
+        }
+    }
+    
     mutating func executeBankWork() {
         receiveClients()
         let totalClientsCount = loanClientQueue.count + depositClientQueue.count
