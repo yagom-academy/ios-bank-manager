@@ -13,6 +13,7 @@ class CustomerView: UIView {
     init(customer: Customer) {
         self.customer = customer
         super.init()
+        layout()
     }
     
     required init?(coder: NSCoder) {
