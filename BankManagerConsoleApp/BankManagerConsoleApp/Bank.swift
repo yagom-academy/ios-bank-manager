@@ -8,17 +8,10 @@
 import Foundation
 
 struct Bank {
-    private let loanClerk: Workable
-    private let depositClerk: Workable
-    private var clientQueue = Queue(list: LinkedList<Client>())
-    private var clerksCount: DispatchSemaphore
-    private let clerks = DispatchGroup()
-    
-    init(loanClerkCount: Int, depositClerkCount: Int) {
-        self.loanClerk = BankClerk(workType: .loan, clerkCount: loanClerkCount)
-        self.depositClerk = BankClerk(workType: .deposit, clerkCount: depositClerkCount)
-        self.clerksCount = DispatchSemaphore(value: loanClerkCount + depositClerkCount)
-    }
+    private var clerks: [Workable] = []
+    private var loanClientQueue = Queue(list: LinkedList<Client>())
+    private var depositClientQueue = Queue(list: LinkedList<Client>())
+    private let operationQueue = OperationQueue()
     
     mutating func executeBankWork() {
         let numberOfClients = receiveClients()
