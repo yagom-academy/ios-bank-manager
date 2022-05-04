@@ -39,17 +39,8 @@ struct Bank {
         return interval
     }
     
-    private mutating func executeWork(of client: Client) {
-        self.clerksCount.wait()
-        
-        DispatchQueue.global().async(group: clerks) { [self] in
-            if client.requirementType == .loan {
-                self.loanClerk.deal(with: client)
-            } else if client.requirementType == .deposit {
-                self.depositClerk.deal(with: client)
-            }
-            
-            self.clerksCount.signal()
-        }
+    private func executeWork() {
+        operationQueue.maxConcurrentOperationCount = clerks.count
+        operationQueue.addOperations(clerks, waitUntilFinished: true)
     }
 }
