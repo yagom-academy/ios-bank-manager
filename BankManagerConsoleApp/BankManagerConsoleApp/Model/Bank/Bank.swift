@@ -33,7 +33,6 @@ struct Bank {
         static let empty = ""
     }
     
-    private let bankClerk = BankClerk()
     private var customerQueue = Queue<Customer>()
     private var totalCustomerCount = Int.zero
     private var workingTime = Constant.empty
