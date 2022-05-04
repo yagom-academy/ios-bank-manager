@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomerView: UIView {
+final class CustomerView: UIView {
     let customer: Customer
     
     init(customer: Customer) {

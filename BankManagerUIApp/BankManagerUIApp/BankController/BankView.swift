@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BankView: UIView {
+final class BankView: UIView {
     private lazy var baseStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             buttonStackView,

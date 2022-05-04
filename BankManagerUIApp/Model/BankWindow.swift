@@ -17,9 +17,9 @@ protocol BankWindowDelegate: AnyObject {
     func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer)
 }
 
-class BankLoanWindow: BankWindow {
+final class BankLoanWindow: BankWindow {
     weak var delegate: BankWindowDelegate?
-    let workType: Banking = .loan
+    private let workType: Banking = .loan
 
     func receive(_ customer: Customer) {
         delegate?.customerWorkDidStart(self, customer: customer)
@@ -34,9 +34,9 @@ class BankLoanWindow: BankWindow {
     }
 }
 
-class BankDepositWindow: BankWindow {
+final class BankDepositWindow: BankWindow {
     weak var delegate: BankWindowDelegate?
-    let workType: Banking = .deposit
+    private let workType: Banking = .deposit
 
     func receive(_ customer: Customer) {
         delegate?.customerWorkDidStart(self, customer: customer)
