@@ -16,12 +16,16 @@ final class Banker {
             return
         }
         
+        guard let time = customer?.task?.time else {
+            return
+        }
+        
         let businessGroup = DispatchGroup()
         businessGroup.enter()
         DispatchQueue.global().async {
             print("\(numberTicekt)번 고객 \(task) 시작")
         }
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + time) {
             print("\(numberTicekt)번 고객 \(task) 종료")
             businessGroup.leave()
         }
