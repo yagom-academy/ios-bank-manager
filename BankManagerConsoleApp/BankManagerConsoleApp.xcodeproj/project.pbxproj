@@ -118,6 +118,17 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		B03E648C2822656800506C1B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B0DB89A62816E51700B13C93 /* BankQueue */,
+				B03E648828225D6900506C1B /* BankTask */,
+				B03C212D281C058700FF452F /* Bank.swift */,
+				AEF53512281C03F100522826 /* Client.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B0DB89A62816E51700B13C93 /* BankQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,12 +163,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				B0DB89A62816E51700B13C93 /* BankQueue */,
-				B03E648828225D6900506C1B /* BankTask */,
-				C7694E79259C3EC00053667F /* main.swift */,
-				AEF53512281C03F100522826 /* Client.swift */,
+				B03E648C2822656800506C1B /* Model */,
 				B03C2131281C14DB00FF452F /* BankManager.swift */,
-				B03C212D281C058700FF452F /* Bank.swift */,
+				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
