@@ -21,7 +21,10 @@ final class BankManagerView: UIView {
     }
     
     private lazy var mainVerticalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView, taskTimeLabel, labelHorizontalStackView])
+        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView,
+                                                  taskTimeLabel,
+                                                  labelHorizontalStackView,
+                                                  taskHorizontalStackView])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         view.alignment = .fill
@@ -47,7 +50,8 @@ final class BankManagerView: UIView {
     }()
     
     private lazy var buttonHorizontalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [addCustomersButton, resetButton])
+        let view = UIStackView(arrangedSubviews: [addCustomersButton,
+                                                  resetButton])
         view.axis = .horizontal
         view.alignment = .fill
         view.distribution = .fillEqually
@@ -55,12 +59,12 @@ final class BankManagerView: UIView {
     }()
     
     private lazy var taskTimeLabel: UILabel = {
-          let label = UILabel()
-          label.text = "업무시간 - 00:00:000"
-          label.font = .preferredFont(forTextStyle: .title2)
-          label.textAlignment = .center
-          return label
-      }()
+        let label = UILabel()
+        label.text = "업무시간 - 00:00:000"
+        label.font = .preferredFont(forTextStyle: .title2)
+        label.textAlignment = .center
+        return label
+    }()
     
     private lazy var waitingLabel: UILabel = {
         let label = UILabel()
@@ -83,12 +87,40 @@ final class BankManagerView: UIView {
     }()
     
     private lazy var labelHorizontalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [waitingLabel, workingLabel])
+        let view = UIStackView(arrangedSubviews: [waitingLabel,
+                                                  workingLabel])
         view.axis = .horizontal
         view.alignment = .fill
         view.distribution = .fillEqually
         return view
     }()
+    
+    private lazy var waitingVerticalStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
+        view.distribution = .fill
+        return view
+    }()
+    
+    private lazy var workingVerticalStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
+        view.distribution = .fill
+        return view
+    }()
+    
+    private lazy var taskHorizontalStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [waitingVerticalStackView,
+                                                  workingVerticalStackView])
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fillEqually
+        view.setContentHuggingPriority(.defaultLow, for: .vertical)
+        return view
+    }()
+    
 }
 
 //MARK: - Auto Layout Methode
