@@ -32,7 +32,7 @@ final class Bank {
         }
     }
     
-    mutating func executeBankWork() {
+    func executeBankWork() {
         receiveClients()
         let totalClientsCount = loanClientQueue.count + depositClientQueue.count
         let totalWorkTime = measureWorkTime {
