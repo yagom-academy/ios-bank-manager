@@ -7,22 +7,11 @@
 
 import UIKit
 
-final class MainView: UIView {
+final class MainView: BaseUIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
-        addSubviews()
-        setConstraints()
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError()
-    }
-
     // MARK: UIComponents - UIStackView
     
-    private lazy var baseVerticalStackView: UIStackView = {
+    private lazy var superStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +24,6 @@ final class MainView: UIView {
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
 
@@ -45,7 +33,6 @@ final class MainView: UIView {
     private lazy var workTimerStackView: UIStackView = {
         let stackView = UIStackView()
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
@@ -57,7 +44,6 @@ final class MainView: UIView {
     private lazy var statusStackView: UIStackView = {
         let stackView = UIStackView()
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         
@@ -119,6 +105,8 @@ final class MainView: UIView {
         
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor( .systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         
         return button
     }()
@@ -128,6 +116,8 @@ final class MainView: UIView {
         
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.red, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         
         return button
     }()
@@ -141,6 +131,8 @@ final class MainView: UIView {
         label.text = "업무시간 - "
         label.textColor = .black
         label.textAlignment = .right
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
         
         return label
     }()
@@ -151,6 +143,8 @@ final class MainView: UIView {
         label.text = "00:00:00"
         label.textColor = .black
         label.textAlignment = .left
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
         
         return label
     }()
@@ -161,6 +155,8 @@ final class MainView: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .green
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.adjustsFontForContentSizeCategory = true
         
         return label
     }()
@@ -171,14 +167,16 @@ final class MainView: UIView {
         label.backgroundColor = .blue
         label.textAlignment = .center
         label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.adjustsFontForContentSizeCategory = true
         
         return label
     }()
 
     // MARK: addSubViews
     
-    private func addSubviews() {
-        addSubview(baseVerticalStackView)
+    override func addSubviews() {
+        addSubview(superStackView)
         
         buttonStackView.addArrangedSubview(addClientButton)
         buttonStackView.addArrangedSubview(resetButton)
@@ -195,33 +193,33 @@ final class MainView: UIView {
         clientStackView.addArrangedSubview(waitingClientScrollView)
         clientStackView.addArrangedSubview(workingClientScrollView)
         
-        baseVerticalStackView.addArrangedSubview(buttonStackView)
-        baseVerticalStackView.addArrangedSubview(workTimerStackView)
-        baseVerticalStackView.addArrangedSubview(statusStackView)
-        baseVerticalStackView.addArrangedSubview(clientStackView)
+        superStackView.addArrangedSubview(buttonStackView)
+        superStackView.addArrangedSubview(workTimerStackView)
+        superStackView.addArrangedSubview(statusStackView)
+        superStackView.addArrangedSubview(clientStackView)
     }
     
     
     // MARK: constraints
     
-    private func setConstraints() { 
+    override func setConstraints() {
         NSLayoutConstraint.activate([
-            baseVerticalStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            baseVerticalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            baseVerticalStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            baseVerticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            superStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            superStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            superStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            superStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            waitingClientStackView.topAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.topAnchor, constant: 0),
-            waitingClientStackView.bottomAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.bottomAnchor, constant: 0),
-            waitingClientStackView.widthAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.widthAnchor, constant: 0)
+            waitingClientStackView.topAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.topAnchor),
+            waitingClientStackView.bottomAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.bottomAnchor),
+            waitingClientStackView.widthAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            workingClientStackView.topAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.topAnchor, constant: 0),
-            workingClientStackView.bottomAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.bottomAnchor, constant: 0),
-            workingClientStackView.widthAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.widthAnchor, constant: 0)
+            workingClientStackView.topAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.topAnchor),
+            workingClientStackView.bottomAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.bottomAnchor),
+            workingClientStackView.widthAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.widthAnchor)
         ])
     }
 

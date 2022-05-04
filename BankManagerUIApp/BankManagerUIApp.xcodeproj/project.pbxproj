@@ -16,6 +16,7 @@
 		A102AD4B2822AE9C0028053C /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD4A2822AE9C0028053C /* CompositionRoot.swift */; };
 		A102AD4D2822AEB10028053C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD4C2822AEB10028053C /* Client.swift */; };
 		A102AD522822B1220028053C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD512822B1220028053C /* Constants.swift */; };
+		A1CF4EF02822C969002789A9 /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF4EEF2822C969002789A9 /* BaseUIView.swift */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
 		C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3C259C3E9F0053667F /* SceneDelegate.swift */; };
 		C7694E3F259C3E9F0053667F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3E259C3E9F0053667F /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 		A102AD4A2822AE9C0028053C /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		A102AD4C2822AEB10028053C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		A102AD512822B1220028053C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A1CF4EEF2822C969002789A9 /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E3A259C3E9F0053667F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7694E3C259C3E9F0053667F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		A1CF4EEE2822C93E002789A9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A1CF4EEF2822C969002789A9 /* BaseUIView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +182,7 @@
 				A102AD3B2822ADCA0028053C /* View */,
 				A102AD3C2822ADCF0028053C /* Controller */,
 				A102AD3D2822ADD40028053C /* Util */,
+				A1CF4EEE2822C93E002789A9 /* Base */,
 				C7694E48259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIApp;
@@ -330,6 +341,7 @@
 				A102AD522822B1220028053C /* Constants.swift in Sources */,
 				A102AD432822ADFB0028053C /* Queue.swift in Sources */,
 				A102AD4B2822AE9C0028053C /* CompositionRoot.swift in Sources */,
+				A1CF4EF02822C969002789A9 /* BaseUIView.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				A102AD4D2822AEB10028053C /* Client.swift in Sources */,
 				A102AD422822ADFB0028053C /* LinkedList.swift in Sources */,
