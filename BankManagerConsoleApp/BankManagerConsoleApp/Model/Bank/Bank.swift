@@ -40,7 +40,10 @@ struct Bank {
     
     private mutating func receiveCustomer() {
         for number in Constant.customerRange {
-            customerQueue.enqueue(newElement: Customer(number: number))
+            guard let task = Task.allCases.randomElement() else {
+                return
+            }
+            customerQueue.enqueue(newElement: Customer(number: number, task: task))
         }
     }
     
