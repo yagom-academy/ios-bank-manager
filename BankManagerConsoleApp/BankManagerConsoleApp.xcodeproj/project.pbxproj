@@ -98,6 +98,23 @@
 			path = BankManagerConsoleAppTest;
 			sourceTree = "<group>";
 		};
+		B03E648828225D6900506C1B /* BankTask */ = {
+			isa = PBXGroup;
+			children = (
+				B03E648928225D8000506C1B /* Protocol */,
+				B03C212F281C0C2300FF452F /* BankDepositTask.swift */,
+			);
+			path = BankTask;
+			sourceTree = "<group>";
+		};
+		B03E648928225D8000506C1B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B03E648628223E7400506C1B /* BankTaskType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		B0DB89A62816E51700B13C93 /* BankQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,11 +150,10 @@
 			isa = PBXGroup;
 			children = (
 				B0DB89A62816E51700B13C93 /* BankQueue */,
+				B03E648828225D6900506C1B /* BankTask */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				AEF53512281C03F100522826 /* Client.swift */,
 				B03C2131281C14DB00FF452F /* BankManager.swift */,
-				B03C212F281C0C2300FF452F /* BankDepositTask.swift */,
-				B03E648628223E7400506C1B /* BankTaskType.swift */,
 				B03C212D281C058700FF452F /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
