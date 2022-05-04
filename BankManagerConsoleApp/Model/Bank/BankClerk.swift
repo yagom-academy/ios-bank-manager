@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol BankDelegate {
+    func updateWorkData(spendedTime: Double)
+}
+
 struct BankClerk {
     private enum Constant {
         static let startWorkMessage = "고객 업무 시작"
@@ -14,16 +18,17 @@ struct BankClerk {
         static let spendingTimeForClient: Double = 0.7
     }
 
-    let spendingTimeForClient: Double
+    private let spendingTimeForClient: Double
 
     init(spendingTimeForClient: Double = Constant.spendingTimeForClient) {
         self.spendingTimeForClient = spendingTimeForClient
     }
 
-    func work(client: Client) {
+    func work(client: Client, delegate: BankDelegate) {
         print("\(client.waitingNumber) \(Constant.startWorkMessage)")
         let usecondsTimeForAClient = useconds_t(spendingTimeForClient * 1000000)
         usleep(usecondsTimeForAClient)
+        delegate.updateWorkData(spendedTime: spendingTimeForClient)
         print("\(client.waitingNumber) \(Constant.finishedWorkMessage)")
     }
 }
