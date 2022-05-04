@@ -8,6 +8,7 @@
 import Foundation
 
 final class Bank {
+
     private enum Constant {
         static let finishMessageFormat = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
         static let loanBankClerkCount = 1
@@ -15,30 +16,52 @@ final class Bank {
     }
 
     private var clientQueue: Queue<Client>
-    private var totalWorkingTime: Double = 0
     private var finishedClientCount = 0
+    private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
+    private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
+    private let group = DispatchGroup()
+    var from: CFAbsoluteTime?
 
     init(clientQueue: Queue<Client>) {
         self.clientQueue = clientQueue
     }
 
     func startWork() {
+        setTimer()
         while clientQueue.isEmpty() == false {
             guard let client = clientQueue.dequeue() else {
                 return
             }
-
-            let bankClerk = DepositBankClerk()
-            bankClerk.work(client: client, delegate: self)
+            
+            switch client.taskType {
+            case .deposit:
+                DispatchQueue.global().async(group: group) {
+                    self.depositSemaphore.wait()
+                    let depositBankClerk = DepositBankClerk()
+                    depositBankClerk.work(client: client, delegate: self)
+                    self.depositSemaphore.signal()
+                }
+            case .loan:
+                DispatchQueue.global().async(group: group) {
+                    self.loanSemaphore.wait()
+                    let loanBankClerk = LoanBankClerk()
+                    loanBankClerk.work(client: client, delegate: self)
+                    self.loanSemaphore.signal()
+                }
+            }
         }
-
-        print(String(format: Constant.finishMessageFormat, finishedClientCount, totalWorkingTime))
+        group.wait()
+        print(String(format: Constant.finishMessageFormat, finishedClientCount, checkTime()))
     }
 }
 
 extension Bank: BankDelegate {
-    func updateWorkData(spendedTime: Double) {
-        totalWorkingTime += spendedTime
+    func updateWorkData() {
         finishedClientCount += 1
+    }
+}
+extension Bank: Timer {
+    func setTimer() {
+        from = CFAbsoluteTimeGetCurrent()
     }
 }
