@@ -41,6 +41,16 @@ final class Bank: Presentable {
         }
     }
     
+    private func classifyClients(waitingNumber: Int) {
+        let client = Client(waitingNumber: waitingNumber, bankService: .randomBankService)
+        switch client.bankService {
+        case .deposit:
+            queueDictionary[BankServiceType.deposit.description]?.enqueue(client)
+        case .loan:
+            queueDictionary[BankServiceType.loan.description]?.enqueue(client)
+        }
+    }
+    
     private func measureTotalWorkTime(_ task: () -> Void) -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
         task()
@@ -56,7 +66,7 @@ final class Bank: Presentable {
         bankClerks.filter { $0.bankService == .deposit }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
-                queue: queueDictionary["예금"] ?? Queue<Client>(),
+                queue: queueDictionary[BankServiceType.deposit.description] ?? Queue<Client>(),
                 bankClerk: bankClerk
             )
         }
@@ -64,7 +74,7 @@ final class Bank: Presentable {
         bankClerks.filter { $0.bankService == .loan }.forEach { bankClerk in
             assignWorkToBankClerk(
                 group: group,
-                queue: queueDictionary["대출"] ?? Queue<Client>(),
+                queue: queueDictionary[BankServiceType.loan.description] ?? Queue<Client>(),
                 bankClerk: bankClerk
             )
         }
@@ -81,16 +91,6 @@ final class Bank: Presentable {
             while let client = queue.dequeue() {
                 bankClerk.work(client: client)
             }
-        }
-    }
-    
-    private func classifyClients(waitingNumber: Int) {
-        let client = Client(waitingNumber: waitingNumber, bankService: .randomBankService)
-        switch client.bankService {
-        case .deposit:
-            queueDictionary["예금"]?.enqueue(client)
-        case .loan:
-            queueDictionary["대출"]?.enqueue(client)
         }
     }
     
