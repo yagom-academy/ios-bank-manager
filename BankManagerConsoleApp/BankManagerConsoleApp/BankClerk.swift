@@ -26,8 +26,14 @@ final class BankClerk: Operation, Workable {
         
         guard let client = client else {
             return
+    override func main() {
+        serveClient()
+    }
+    
+    private func serveClient() {
+        while let client = clientQueue.dequeue() {
+            deal(with: client)
         }
-        
         let workStartingMessage = String(format: Message.start,
                                          client.orderNumber,
                                          workType.description)
