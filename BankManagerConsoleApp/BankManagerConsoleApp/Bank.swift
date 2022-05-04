@@ -45,13 +45,13 @@ final class Bank {
         clerks.removeAll()
     }
     
-    private mutating func receiveClients() {
+    private func receiveClients() {
         for order in 1...Int.random(in: 10...30) {
             arrangeByWorkType(Client(order))
         }
     }
     
-    private mutating func arrangeByWorkType(_ client: Client) {
+    private func arrangeByWorkType(_ client: Client) {
         switch client.requirementType {
         case .loan:
             loanClientQueue.enqueue(client)
