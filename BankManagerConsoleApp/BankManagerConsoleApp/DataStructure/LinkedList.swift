@@ -4,7 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-final class Node<T> {
+private final class Node<T> {
     let data: T
     var next: Node?
     
@@ -18,14 +18,14 @@ final class LinkedList<T> {
     private var tail: Node<T>?
     
     var isEmpty: Bool {
-        if head == nil {
-            return true
+        guard head == nil else {
+            return false
         }
-        
-        return false
+        return true
     }
     
-    func append(node: Node<T>) {
+    func append(data: T) {
+        let node = Node<T>(data: data)
         guard isEmpty == false else {
             head = node
             tail = node
