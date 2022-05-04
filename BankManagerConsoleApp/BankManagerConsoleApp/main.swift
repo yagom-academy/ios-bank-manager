@@ -7,7 +7,6 @@
 
 import Foundation
 
-let someBank = Bank()
+let someBank = Bank(loanClerksCount: 1, depositClerksCount: 2)
 var m = BankManager(of: someBank)
-m.hireClerks(loanClerk: 1, depositClerk: 2)
 m.taskStart()
