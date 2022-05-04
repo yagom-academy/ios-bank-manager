@@ -21,7 +21,10 @@ final class BankManager {
         self.bank = bank
     }
     
+    func taskStart() {
+        bank.assignByWork(bank.loanClerksCount, bank.depositClerksCount)
         showMenuMessage()
+        
         guard let selectedOption = SelectOptionType(rawValue: inputNumber()) else {
             return taskStart()
         }
