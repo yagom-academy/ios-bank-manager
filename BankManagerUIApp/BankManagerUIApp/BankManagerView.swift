@@ -21,12 +21,36 @@ final class BankManagerView: UIView {
     }
     
     lazy var mainVerticalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [])
+        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         view.alignment = .fill
         view.distribution = .fill
         view.spacing = 16
+        return view
+    }()
+    
+    lazy var addCustomersButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        return button
+    }()
+    
+    lazy var resetButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("초기화", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        return button
+    }()
+    
+    lazy var buttonHorizontalStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [addCustomersButton, resetButton])
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fillEqually
         return view
     }()
 }
