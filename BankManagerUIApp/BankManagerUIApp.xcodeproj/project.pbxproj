@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67188F362822B1F8002F571F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67188F352822B1F8002F571F /* MainView.swift */; };
 		A102AD422822ADFB0028053C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD402822ADFB0028053C /* LinkedList.swift */; };
 		A102AD432822ADFB0028053C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD412822ADFB0028053C /* Queue.swift */; };
 		A102AD452822AE060028053C /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD442822AE060028053C /* Bank.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		67188F352822B1F8002F571F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A102AD402822ADFB0028053C /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkedList.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Model/LinkedList.swift; sourceTree = "<group>"; };
 		A102AD412822ADFB0028053C /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Model/Queue.swift; sourceTree = "<group>"; };
 		A102AD442822AE060028053C /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				C7694E40259C3E9F0053667F /* Main.storyboard */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+				67188F352822B1F8002F571F /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E3F259C3E9F0053667F /* MainViewController.swift in Sources */,
+				67188F362822B1F8002F571F /* MainView.swift in Sources */,
 				A102AD522822B1220028053C /* Constants.swift in Sources */,
 				A102AD432822ADFB0028053C /* Queue.swift in Sources */,
 				A102AD4B2822AE9C0028053C /* CompositionRoot.swift in Sources */,
