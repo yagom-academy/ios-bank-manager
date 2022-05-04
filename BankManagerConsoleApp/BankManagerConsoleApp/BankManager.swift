@@ -22,24 +22,21 @@ final class BankManager {
   private let logger = Logger()
 
   func start() {
-    while selectMenu() {}
-  }
+    while true {
+      logger.log(.menu, terminator: Constants.whiteSpace)
 
-  private func selectMenu() -> Bool {
-    logger.log(.menu, terminator: Constants.whiteSpace)
+      guard let input = readLine(),
+            let menu = Menu(rawValue: input) else { continue }
 
-    guard let input = readLine(),
-          let menu = Menu(rawValue: input) else { return true }
-
-    switch menu {
-    case .open:
-      let bank = Bank(maxClient: Constants.limit)
-      let clients = createClients()
-      bank.addClients(clients)
-      bank.open()
-      return true
-    case .exit:
-      return false
+      switch menu {
+      case .open:
+        let bank = Bank(maxClient: Constants.limit)
+        let clients = createClients()
+        bank.addClients(clients)
+        bank.open()
+      case .exit:
+        return
+      }
     }
   }
 
