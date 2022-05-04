@@ -11,9 +11,6 @@ fileprivate extension Const {
     static let bankersNumber = 3
     
     static let blank = ""
-    static let OpeningInput = "1"
-    static let exitInput = "2"
-    
     static let startBankSelect = "1 : 은행 개점\n2 : 종료\n입력 : "
     static let wrongInput = "잘못된 입력 입니다."
     static let finishWork = "업무가 마감 되었습니다."
