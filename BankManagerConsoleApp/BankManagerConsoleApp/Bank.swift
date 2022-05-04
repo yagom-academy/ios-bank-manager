@@ -19,6 +19,16 @@ final class Bank {
         self.loanClerksCount = loanClerksCount
         self.depositClerksCount = depositClerksCount
     }
+    
+    func assignByWork(_ loanClerksCount: Int, _ depositClerksCount: Int) {
+        for _ in 0..<loanClerksCount {
+            let loanClerk = BankClerk(workType: .loan, queue: loanClientQueue)
+            clerks.append(loanClerk)
+        }
+        
+        for _ in 0..<depositClerksCount {
+            let depositClerk = BankClerk(workType: .deposit, queue: depositClientQueue)
+            clerks.append(depositClerk)
         }
     }
     
