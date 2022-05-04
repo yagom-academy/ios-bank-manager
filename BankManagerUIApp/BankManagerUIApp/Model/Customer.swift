@@ -22,7 +22,7 @@ struct Customer {
             }
         }
         
-        var taskTime: Double {
+        var time: Double {
             switch self {
             case .deposit:
                 return 0.7
