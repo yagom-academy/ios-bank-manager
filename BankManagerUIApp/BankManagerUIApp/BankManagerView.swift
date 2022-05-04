@@ -20,8 +20,8 @@ final class BankManagerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var mainVerticalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView, taskTimeLabel])
+    private lazy var mainVerticalStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [buttonHorizontalStackView, taskTimeLabel, labelHorizontalStackView])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         view.alignment = .fill
@@ -30,7 +30,7 @@ final class BankManagerView: UIView {
         return view
     }()
     
-    lazy var addCustomersButton: UIButton = {
+    private lazy var addCustomersButton: UIButton = {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -38,7 +38,7 @@ final class BankManagerView: UIView {
         return button
     }()
     
-    lazy var resetButton: UIButton = {
+    private lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
@@ -46,7 +46,7 @@ final class BankManagerView: UIView {
         return button
     }()
     
-    lazy var buttonHorizontalStackView: UIStackView = {
+    private lazy var buttonHorizontalStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [addCustomersButton, resetButton])
         view.axis = .horizontal
         view.alignment = .fill
@@ -54,14 +54,41 @@ final class BankManagerView: UIView {
         return view
     }()
     
-    lazy var taskTimeLabel: UILabel = {
+    private lazy var taskTimeLabel: UILabel = {
           let label = UILabel()
           label.text = "업무시간 - 00:00:000"
           label.font = .preferredFont(forTextStyle: .title2)
           label.textAlignment = .center
           return label
       }()
-
+    
+    private lazy var waitingLabel: UILabel = {
+        let label = UILabel()
+        label.text = "대기중"
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.backgroundColor = .systemGreen
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var workingLabel: UILabel = {
+        let label = UILabel()
+        label.text = "업무중"
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.backgroundColor = .systemIndigo
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var labelHorizontalStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [waitingLabel, workingLabel])
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fillEqually
+        return view
+    }()
 }
 
 //MARK: - Auto Layout Methode
