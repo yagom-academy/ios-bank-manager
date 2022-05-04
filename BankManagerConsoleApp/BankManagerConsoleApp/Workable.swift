@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol Workable {
+protocol Workable: Operation {
     var workType: WorkType { get }
-    var clerksCountByWork: DispatchSemaphore { get }
-    
-    func deal(with client: Client?)
 }
