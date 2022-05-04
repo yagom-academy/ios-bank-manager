@@ -16,6 +16,7 @@
 		B03C2130281C0C2300FF452F /* BankDepositTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03C212F281C0C2300FF452F /* BankDepositTask.swift */; };
 		B03C2132281C14DB00FF452F /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03C2131281C14DB00FF452F /* BankManager.swift */; };
 		B03E648728223E7400506C1B /* BankTaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03E648628223E7400506C1B /* BankTaskType.swift */; };
+		B03E648B28225DE000506C1B /* BankLoanTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03E648A28225DE000506C1B /* BankLoanTask.swift */; };
 		B0C5861F2817C7AB00725F8E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = B010446E2816C9D500A01E5B /* Node.swift */; };
 		B0C586202817C7AB00725F8E /* BankQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE639D062816DF7800FD5D09 /* BankQueue.swift */; };
 		B0C586212817C7AB00725F8E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE639D042816CC1D00FD5D09 /* LinkedList.swift */; };
@@ -49,6 +50,7 @@
 		B03C212F281C0C2300FF452F /* BankDepositTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDepositTask.swift; sourceTree = "<group>"; };
 		B03C2131281C14DB00FF452F /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		B03E648628223E7400506C1B /* BankTaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTaskType.swift; sourceTree = "<group>"; };
+		B03E648A28225DE000506C1B /* BankLoanTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankLoanTask.swift; sourceTree = "<group>"; };
 		BED40EF195FFDC8ED00B5813 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				B03E648928225D8000506C1B /* Protocol */,
 				B03C212F281C0C2300FF452F /* BankDepositTask.swift */,
+				B03E648A28225DE000506C1B /* BankLoanTask.swift */,
 			);
 			path = BankTask;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				B03E648728223E7400506C1B /* BankTaskType.swift in Sources */,
 				B03C2132281C14DB00FF452F /* BankManager.swift in Sources */,
 				AE639D052816CC1D00FD5D09 /* LinkedList.swift in Sources */,
+				B03E648B28225DE000506C1B /* BankLoanTask.swift in Sources */,
 				B03C212E281C058700FF452F /* Bank.swift in Sources */,
 				AEF53513281C03F100522826 /* Client.swift in Sources */,
 				B010446F2816C9D500A01E5B /* Node.swift in Sources */,
