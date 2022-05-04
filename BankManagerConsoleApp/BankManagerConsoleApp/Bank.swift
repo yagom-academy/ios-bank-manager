@@ -22,8 +22,9 @@ final class Bank {
 
   func open() {
     totalClientCount = clientQueue.count
-
-    executeBankTask()
+    totalExecuteTime = measureTaskTime {
+      executeBankTask()
+    }
     print(String(format: Constants.closed, totalClientCount, totalExecuteTime))
   }
 
@@ -37,5 +38,12 @@ final class Bank {
     while clientQueue.isEmpty == false, let client = clientQueue.dequeue() {
       let time = BankDepositTask().execute(client)
     }
+  }
+
+  private func measureTaskTime(_ block: () -> Void) -> Double {
+    let start = CFAbsoluteTimeGetCurrent()
+    block()
+    let end = CFAbsoluteTimeGetCurrent()
+    return end - start
   }
 }
