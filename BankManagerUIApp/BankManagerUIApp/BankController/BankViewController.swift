@@ -29,7 +29,7 @@ extension BankViewController {
     }
     
     @objc private func addCustomerButtonTapped() {
-        let customers = BankCustomer.make(numberOfCustomer: 10)
+        let customers = BankCustomer.make(startNumber: bank.waitingNumber, count: 10)
         
         customers.forEach { customer in
             bankView.waitStackView.addArrangedSubview(CustomerView(customer: customer))

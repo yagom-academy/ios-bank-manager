@@ -15,8 +15,8 @@ protocol Customer {
 }
 
 extension Customer {
-    static func make(numberOfCustomer: Int) -> [Self] {
-        return (1...10).map(makeCustomer)
+    static func make(startNumber: Int, count: Int) -> [Self] {
+        return (startNumber..<startNumber + count).map(makeCustomer)
     }
 
     private static func makeCustomer(number: Int) -> Self {

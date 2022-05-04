@@ -14,7 +14,8 @@ final class BankView: UIView {
             businessHoursLabel,
             workStateStackView,
             customerStackView])
-            
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 15
         
@@ -32,6 +33,7 @@ final class BankView: UIView {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .caption2)
         
         return button
     }()
@@ -40,6 +42,7 @@ final class BankView: UIView {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .caption2)
         
         return button
     }()
@@ -83,21 +86,36 @@ final class BankView: UIView {
     }()
     
     private lazy var customerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [waitStackView, workStackView])
+        let stackView = UIStackView(arrangedSubviews: [waitScrollView, workScrollView])
+        stackView.distribution = .fillEqually
         
         return stackView
     }()
     
+    private lazy var waitScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    private lazy var workScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     lazy var waitStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        stackView.spacing = 8
         
         return stackView
     }()
     
     lazy var workStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        stackView.spacing = 8
         
         return stackView
     }()
@@ -116,8 +134,9 @@ final class BankView: UIView {
 
 extension BankView {
     private func layout() {
-        baseStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(baseStackView)
+        waitScrollView.addSubview(waitStackView)
+        workScrollView.addSubview(workStackView)
 
         // MARK: - baseStackView
         
@@ -126,6 +145,26 @@ extension BankView {
             baseStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             baseStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             baseStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        // MARK: - waitStackView
+        
+        NSLayoutConstraint.activate([
+            waitStackView.topAnchor.constraint(equalTo: waitScrollView.topAnchor),
+            waitStackView.bottomAnchor.constraint(equalTo: waitScrollView.bottomAnchor),
+            waitStackView.leadingAnchor.constraint(equalTo: waitScrollView.leadingAnchor),
+            waitStackView.trailingAnchor.constraint(equalTo: waitScrollView.trailingAnchor),
+            waitStackView.widthAnchor.constraint(equalTo: waitScrollView.widthAnchor)
+        ])
+        
+        // MARK: - workStackView
+        
+        NSLayoutConstraint.activate([
+            workStackView.topAnchor.constraint(equalTo: workScrollView.topAnchor),
+            workStackView.bottomAnchor.constraint(equalTo: workScrollView.bottomAnchor),
+            workStackView.leadingAnchor.constraint(equalTo: workScrollView.leadingAnchor),
+            workStackView.trailingAnchor.constraint(equalTo: workScrollView.trailingAnchor),
+            workStackView.widthAnchor.constraint(equalTo: workScrollView.widthAnchor)
         ])
     }
 }

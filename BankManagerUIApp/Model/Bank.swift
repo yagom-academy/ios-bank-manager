@@ -19,7 +19,7 @@ final class Bank {
     private let depositWindow: BankWindow
     private let loanQueue = OperationQueue()
     private let depositQueue = OperationQueue()
-    private(set) var customerCount = 0
+    private(set) var waitingNumber = 1
     private(set) var duration = 0.0
     weak var delegate: BankDelegate?
 
@@ -40,6 +40,8 @@ final class Bank {
     }
 
     func add(customers: [Customer]) {
+        waitingNumber += customers.count
+        
         customers.forEach { customer in
             waitingQueue.enqueue(customer)
         }
@@ -55,7 +57,7 @@ final class Bank {
     private func sendCustomerToClerk() {
         
         while let customer = waitingQueue.dequeue() {
-            customerCount += 1
+            waitingNumber += 1
 
             switch customer.workType {
             case .loan:
@@ -71,7 +73,6 @@ final class Bank {
     }
 
     private func reset() {
-        customerCount = 0
         duration = 0.0
     }
 }
