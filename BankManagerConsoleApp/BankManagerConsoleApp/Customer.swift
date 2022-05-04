@@ -16,6 +16,15 @@ enum BankTask: String, CaseIterable {
             return 1
         }
     }
+    
+    var time: Double {
+        switch self {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
 }
 
 struct Customer {

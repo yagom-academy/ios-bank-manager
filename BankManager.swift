@@ -8,7 +8,7 @@
 import Foundation
 
 fileprivate extension Const {
-    static let bankersNumber = 1
+    static let bankersNumber = 3
     
     static let blank = ""
     static let OpeningInput = "1"
