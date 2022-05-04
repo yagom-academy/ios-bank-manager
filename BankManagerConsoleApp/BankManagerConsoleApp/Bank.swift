@@ -12,6 +12,8 @@ final class Bank {
     private var loanClientQueue = Queue(list: LinkedList<Client>())
     private var depositClientQueue = Queue(list: LinkedList<Client>())
     private let operationQueue = OperationQueue()
+    private(set) var loanClerksCount: Int
+    private(set) var depositClerksCount: Int
     
     mutating func assignClerk(by workType: WorkType) {
         switch workType {
