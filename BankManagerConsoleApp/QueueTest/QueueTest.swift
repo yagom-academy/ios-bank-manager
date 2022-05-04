@@ -69,7 +69,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(expectedValue1, result)
         XCTAssertEqual(expectedValue2, result2)
     }
-    
+
     func test_clear_했을때_Queue가_비어있는가() {
         // given
         let expectedValue1 = 1
@@ -82,10 +82,10 @@ class QueueTest: XCTestCase {
         // then
         XCTAssertTrue(queue.isEmpty())
     }
-    
-    func test_dequeue_빈queue일때_nil이_반환되는가(){
+
+    func test_dequeue_빈queue일때_nil이_반환되는가() {
         // given
-        let expectedValue:Int? = nil
+        let expectedValue: Int? = nil
         // when
         let result = queue.dequeue()
         // then
