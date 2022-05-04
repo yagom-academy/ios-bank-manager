@@ -37,6 +37,79 @@ if isEmpty { return }
 그런데 이렇게 되면 노드의 값을 부를 때 `data`라고 부르는 사람이 있을 수 있고 `Element`타입의 요소니 `element`라고 부를 사람이 생겨 혼용 될 수 있을 수 있으니 `data`를 `element`로 변경 하기를 제안해 주셨다
 최종적으로, `Element`와 값의 구분을 위해 `data`를 `newElement`로 수정하게 되었다
 
+
+## STEP 2 기능 구현
+- 한 명의 은행원이 임의의 수만큼의 고객을 처리하는 기능 구현
+
+## 고민했던 것들
+#### 1. 매직넘버, 매직리터럴 처리
+매직넘버, 매직리터럴 처리를 해주려고 했던 이유는 가독성 향상과 수정에 용이하게 하기 위함이었다
+
+처리 전
+```swift
+func printCloseMessage() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(count)명이며, 총 업무시간은 \(seconds)초입니다.")
+}
+```
+
+처리 후
+```swift
+func printCloseMessage() {
+        print("\(Constant.endWork+Constant.totalWorkTime)\(totalCustomerCount)\(Constant.numberOfPeople+Constant.totalWorkTime)\(workingTime)\(Constant.seconds)")
+}
+```
+
+그런데 처리하다보니 위와같은 문제가 발생되었는데 이게 과연 가독성과 유지보수 측면에서 어떤 이득을 가져올 수 있을까...?
+라는 의문이 들었다
+
+결과적으로 매직넘버와 매직리터럴 처리에 너무 강박을 갖고 무조건적으로 처리를 해주는 것이 아닌 상황에 따라 유동적으로 처리하기로 하였으며 가독성이 좋다면 하드 코딩이 꼭 나쁜 것 만은 아니겠다는 결론을 내렸다
+
+#### 2. 메서드의 분리
+메서드의 기능별 분리는 항상 고민하고 해결해야하는 문제다
+
+수정 전
+```swift
+mutating func start() {
+    receiveCustomer()
+    let startTime = CFAbsoluteTimeGetCurrent()
+    sendCustomerToClerk()
+    let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+    workingTime = String(format: Constant.twoDecimalPlaces, durationTime)
+    printCloseMessage()
+    }
+```
+위 코드를 보면 `startTime`과 `durationTime`은 시간을 측정하기 위해 작성된 코드이다
+
+우리는 이 코드를 어떤 메서드의 시간을 측정하기 위한 메서드로 분리를 하기 원했고 아래와 같은 방법을 사용하였다
+
+```swift
+func timeCheck(_ block: () -> Void) -> String {
+    let startTime = CFAbsoluteTimeGetCurrent()
+    block()
+    let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+    return String(format: "%.2f", durationTime)
+    }
+    
+mutating func openBank() {
+    receiveCustomer()
+    workingTime = timeCheck {
+        sendCustomerToClerk()
+    }
+    printCloseMessage()
+}
+```
+
+() -> Void 형태의 클로저를 매개변수로 받아 걸린 시간을 string으로 반환해주는 `timeCheck`라는 메서드를 만들어 사용하게 되었다
+
+## 배운 개념
+- `string format`
+- `클로저를 매개변수로 받기`
+- 
+
+## PR 후 개선사항
+#### 어떤 생각에 너무 강박을 갖지 말자!
+- 그 동안 어떻게 처리해 왔고 어떻게 처리를 해왔고 어떻게 생각해왔고와는 별개로 지금 현재 코드 작성에 있어 어떤게 더 효율적인지를 고민하는 습관을 들이자(ex 매직넘버, 매직리터럴 처리와 같은...)
+
 ## 커밋 룰
 Commit message
 커밋 제목은 최대 50자 입력
@@ -58,4 +131,3 @@ Commit Body 규칙
 제목과 본문을 한 줄 띄워 분리하기
 본문은 “어떻게” 보다 “무엇을”, "왜"를 설명한다.
 본문에 여러줄의 메시지를 작성할 땐 "-"로 구분
-
