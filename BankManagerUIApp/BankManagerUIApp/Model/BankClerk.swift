@@ -1,8 +1,8 @@
 //
 //  BankClerk.swift
-//  BankManagerConsoleApp
+//  BankManagerUIApp
 //
-//  Created by Donnie, Safari on 2022/04/27.
+//  Created by Donnie, Safari on 2022/05/04.
 //
 
 import Foundation

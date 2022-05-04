@@ -120,10 +120,9 @@ final class BankManagerView: UIView {
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         return view
     }()
-    
 }
 
-//MARK: - Auto Layout Methode
+//MARK: - Auto Layout Method
 private extension BankManagerView {
     func configureMainStackViewLayout() {
         self.addSubview(mainVerticalStackView)
