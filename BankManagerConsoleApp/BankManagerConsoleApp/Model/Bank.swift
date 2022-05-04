@@ -22,7 +22,7 @@ final class Bank {
     totalExecuteTime = measureTaskTime {
       executeBankTask()
     }
-    logger.log(.closed(totalClientCount: totalClientCount, totalExecuteTime: totalExecuteTime))
+    logger.log(.closed(count: totalClientCount, time: totalExecuteTime))
   }
 
   func addClients(_ clients: [Client]) {

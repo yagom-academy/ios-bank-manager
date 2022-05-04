@@ -28,7 +28,7 @@ extension Logger {
   enum MessageType {
     case taskStart(number: Int, taskName: String)
     case taskFinish(number: Int, taskName: String)
-    case closed(totalClientCount: Int, totalExecuteTime: Double)
+    case closed(count: Int, time: Double)
     case menu
 
     var description: String {
