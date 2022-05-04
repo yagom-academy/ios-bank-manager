@@ -25,8 +25,8 @@ final class Bank {
             guard let client = clientQueue.dequeue() else {
                 return
             }
-            
-            let bankClerk = BankClerk()
+
+            let bankClerk = DepositBankClerk()
             bankClerk.work(client: client, delegate: self)
         }
 

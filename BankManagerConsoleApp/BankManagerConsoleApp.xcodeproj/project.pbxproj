@@ -30,6 +30,8 @@
 		E520EE092817BFEA00E95F7C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B16C1A2817A8D00032E19D /* Node.swift */; };
 		E520EE0A2817BFEE00E95F7C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EDFC2817AD7100E95F7C /* LinkedList.swift */; };
 		E520EE0B2817BFF100E95F7C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B16C1C2817B8780032E19D /* Queue.swift */; };
+		E55981AF28226B01005B2C7A /* DepositBankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55981AE28226B01005B2C7A /* DepositBankClerk.swift */; };
+		E55981B028226B01005B2C7A /* DepositBankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55981AE28226B01005B2C7A /* DepositBankClerk.swift */; };
 		E5B007752820086900773FAF /* BankModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134E014281AD00800A862EC /* BankModuleTest.swift */; };
 		EABCBD30B63BEACF39B94EE1 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3BD70509EF57663525E19C /* Pods_BankManagerConsoleApp.framework */; };
 /* End PBXBuildFile section */
@@ -66,6 +68,7 @@
 		E520EDFC2817AD7100E95F7C /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		E520EE022817BFB500E95F7C /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E520EE042817BFB500E95F7C /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
+		E55981AE28226B01005B2C7A /* DepositBankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositBankClerk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,7 @@
 				E5059903281ABC0E009B6AB8 /* Client.swift */,
 				E134DFFB281ABF1300A862EC /* Bank.swift */,
 				E134DFFE281ABFBD00A862EC /* BankClerk.swift */,
+				E55981AE28226B01005B2C7A /* DepositBankClerk.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -367,6 +371,7 @@
 				E5059904281ABC0E009B6AB8 /* Client.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				E520EDFD2817AD7100E95F7C /* LinkedList.swift in Sources */,
+				E55981AF28226B01005B2C7A /* DepositBankClerk.swift in Sources */,
 				E134E002281ACDEE00A862EC /* Menu.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
@@ -382,6 +387,7 @@
 				E5B007752820086900773FAF /* BankModuleTest.swift in Sources */,
 				E134E020281AD30700A862EC /* Node.swift in Sources */,
 				E134E01C281AD0E000A862EC /* BankClerk.swift in Sources */,
+				E55981B028226B01005B2C7A /* DepositBankClerk.swift in Sources */,
 				E134E01F281AD30400A862EC /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
