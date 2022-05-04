@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct BankClerk {
+enum BankClerk {
     static func startDepositWork(customer: Customer) {
         print("\(customer.number) 번 고객 \(customer.task.title)업무 시작")
         Thread.sleep(forTimeInterval: 0.7)
