@@ -32,6 +32,17 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    let labelHorizontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
     let addCustomerButton: UIButton = {
         let button = UIButton()
         
@@ -62,6 +73,30 @@ class ViewController: UIViewController {
         return label
     }()
     
+    let waitingLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "대기중"
+        label.textColor = .white
+        label.backgroundColor = .systemGreen
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    let workingLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "업무중"
+        label.textColor = .white
+        label.backgroundColor = .systemBlue
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,9 +106,12 @@ class ViewController: UIViewController {
         // Buttons
         buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
         buttonHorizontalStackView.addArrangedSubview(clearButton)
-        baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
+        labelHorizontalStackView.addArrangedSubview(waitingLabel)
+        labelHorizontalStackView.addArrangedSubview(workingLabel)
         
+        baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(workTimeLabel)
+        baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
         
         baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
