@@ -26,12 +26,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         self.view = mainView
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addSeperateCustomerLabel), name: .addCustomerAlram, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveCustomerLabel), name: .customerAlram, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(removeCustomerLabel), name: .removeCustomerAlram, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: .timer, object: nil)
+        
         bankManager = BankManager()
         createTimer()
         bankManager.openBank()
+    }
+    
+    @objc func addSeperateCustomerLabel(notification: Notification) {
+        guard let customer = notification.userInfo?["oneCustomer"] as? Customer else { return }
+        mainView.watingStackView.addArrangedSubview(mainView.createCustomerLabel(customer: customer))
     }
     
     @objc private func moveCustomerLabel(notification: Notification) {

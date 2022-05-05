@@ -112,19 +112,22 @@ class MainView: UIView {
         return stackView
     }()
     
-    func createCustomerLabel() -> UILabel {
-        let label = UILabel()
-        label.text = "5 - 예금"
-        label.textColor = .black
-        return label
-    }
+    func createCustomerLabel(customer: Customer) -> UILabel {
+            guard let task = customer.task else { return UILabel() }
+
+            let label = UILabel()
+            label.text = "\(customer.numberTicekt) - \(task.rawValue)"
+            if task == .deposit {
+                label.textColor = .black
+            } else {
+                label.textColor = .systemPurple
+            }
+            return label
+        }
     
     lazy var watingStackView: UIStackView = {
         let stackView = UIStackView()
-        
-        for _ in 1...50 {
-            stackView.addArrangedSubview(createCustomerLabel())
-        }
+
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -134,9 +137,7 @@ class MainView: UIView {
     
     lazy var workingStackView: UIStackView = {
         let stackView = UIStackView()
-        for _ in 1...50 {
-            stackView.addArrangedSubview(createCustomerLabel())
-        }
+ 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill

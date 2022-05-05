@@ -19,13 +19,12 @@ fileprivate extension Const {
 final class Bank: Manageable {
     private var customers = Queue(listType: DoubleStack<Customer>())
     private var numberOfCustomer: Int = Const.defaultCount
-//    private var wholeWorkTime: Double = Double.zero
     let workGroup = DispatchGroup()
     let depositQueue = OperationQueue()
     let loanQueue = OperationQueue()
     
-    init(numberOfBankers: Int = Const.defaultBankerCount) {
-        reset(numberOfBankers: numberOfBankers)
+    init() {
+        reset()
     }
     
     func manageBanker() {
@@ -66,10 +65,12 @@ final class Bank: Manageable {
         return semaphores
     }
     
-    private func reset(numberOfBankers: Int = Const.defaultBankerCount) {
+    private func reset() {
         numberOfCustomer = Int.random(in: Const.customerRange)
         for numberTicekt in Const.startCount...numberOfCustomer {
-            customers.enQueue(data: Customer(numberTicekt: numberTicekt))
+            let customer = Customer(numberTicekt: numberTicekt)
+            customers.enQueue(data: customer)
+            NotificationCenter.default.post(name: .addCustomerAlram, object: nil, userInfo: ["oneCustomer": customer])
         }
     }
 }
