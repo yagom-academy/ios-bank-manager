@@ -43,23 +43,24 @@ struct Bank {
             return
         }
         
-        DispatchQueue.global().async(group: bankingGroup) {
+        let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
+        
+        bankingQueue.async(group: bankingGroup) {
             switch task {
             case .deposit:
                 depositWindow.wait()
-                DispatchQueue.global().async(group: bankingGroup) {
+                bankingQueue.async(group: bankingGroup) {
                     teller.work(for: customer)
                     depositWindow.signal()
                 }
             case .loan:
                 loanWindow.wait()
-                DispatchQueue.global().async(group: bankingGroup) {
+                bankingQueue.async(group: bankingGroup) {
                     teller.work(for: customer)
                     loanWindow.signal()
                 }
             }
         }
-        
     }
     
     private func closeBanking(from startTime: CFAbsoluteTime, to endTime: CFAbsoluteTime) {
