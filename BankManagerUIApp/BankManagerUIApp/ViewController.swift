@@ -7,10 +7,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    lazy var bankView = BankView(frame: view.bounds)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = BankView()
+        view = bankView
     }
 }
 
