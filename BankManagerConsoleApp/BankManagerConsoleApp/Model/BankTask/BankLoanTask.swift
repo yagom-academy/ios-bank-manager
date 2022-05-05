@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankLoanTask: BankTaskType {
+final class BankLoanTask: BankTaskType {
   private enum Constants {
     static let time = 1.1
     static let taskName = "대출"
@@ -24,7 +24,7 @@ struct BankLoanTask: BankTaskType {
     let clientNumber = client.waitingNumber
     logger.log(.taskStart(number: clientNumber, taskName: Constants.taskName))
     Timer.scheduledTimer(withTimeInterval: Constants.time, repeats: false) { _ in
-      logger.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
+      self.logger.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
     }
     RunLoop.current.run()
   }
