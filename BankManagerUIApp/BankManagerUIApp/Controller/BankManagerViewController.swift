@@ -12,7 +12,8 @@ final class BankManagerViewController: UIViewController {
     private var timer: Timer?
     private var time: Int = 0 {
         didSet {
-            self.bankManagerView.taskTimeLabel.text = "업무시간 - \(time)"
+            let (minute, second, milliSecond) = translateTime(time)
+            self.bankManagerView.taskTimeLabel.text = "업무시간 - \(minute):\(second):\(milliSecond)"
         }
     }
     
@@ -35,15 +36,6 @@ final class BankManagerViewController: UIViewController {
                                                                                      number: customer.numberTicket,
                                                                                      task: information))
         }
-    }
-    
-    private func startTimer() {
-        guard self.timer == nil else { return }
-        self.timer = Timer.scheduledTimer(timeInterval: 0.001,
-                                     target: self,
-                                     selector: #selector(startTime),
-                                     userInfo: nil,
-                                     repeats: true)
     }
     
     private func configureView() {
@@ -77,9 +69,25 @@ extension BankManagerViewController: BankDelegate {
     }
 }
 
-
+// MARK: - Timer Method
 private extension BankManagerViewController {
-    @objc func startTime() {
-        time += 1
+    func startTimer() {
+        guard self.timer == nil else { return }
+        self.timer = Timer.scheduledTimer(timeInterval: 0.001,
+                                     target: self,
+                                     selector: #selector(timesUp),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    @objc func timesUp() {
+        self.time += 1
+    }
+    
+    func translateTime(_ time: Int) -> (String, String, String) {
+        let minute = String(format: "%02d", (time / (1000 * 60)) % 60)
+        let second = String(format: "%02d", ((time / 1000) % 60))
+        let milliSecond = String(format: "%03d", (time % 1000))
+        return (minute, second, milliSecond)
     }
 }
