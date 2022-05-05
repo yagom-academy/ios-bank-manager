@@ -20,7 +20,6 @@ struct Bank {
     private let teller: Teller = Teller()
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.deposit)
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.loan)
-    private let bankingGroup = DispatchGroup()
     private let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
     var delegate: SendDelegate?
     
@@ -43,20 +42,13 @@ struct Bank {
     }
 
     func work() {
-        let startTime = CFAbsoluteTimeGetCurrent()
 
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            
-            delegate?.addToWorkingList(customer)
             makeTellerWorkByTask(for: customer)
         }
-
-        bankingGroup.wait()
-        let endTime = CFAbsoluteTimeGetCurrent()
-        closeBanking(from: startTime, to: endTime)
     }
 
     private func makeTellerWorkByTask(for customer: Customer) {
@@ -81,9 +73,5 @@ struct Bank {
             }
             delegate?.removeFromWorkingList(customer)
         }
-    }
-
-    private func closeBanking(from startTime: CFAbsoluteTime, to endTime: CFAbsoluteTime) {
-        let totalWorkTime = String(format: "%.2f", endTime - startTime)
     }
 }
