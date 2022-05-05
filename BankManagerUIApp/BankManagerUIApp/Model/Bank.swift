@@ -12,6 +12,7 @@ struct Bank {
     private let loanClerkCount: Int
     private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
     private let bankClerk = BankClerk()
+    private var currentTicketNumber = 1
     
     init(depositClerkCount: Int, loanClerkCount: Int) {
         self.depositClerkCount = depositClerkCount
@@ -31,18 +32,26 @@ struct Bank {
                 self.bankClerk.processTask(for: customer)
             }
             
-            task.start(deposit: depositWindowQueue, loan: loanWindowQueue).addOperation(operation)
+            switch task {
+            case .deposit:
+                depositWindowQueue.addOperation(operation)
+            case .loan:
+                loanWindowQueue.addOperation(operation)
+            }
         }
-        waitTillOperationOver(at: depositWindowQueue, and: loanWindowQueue)
     }
     
-    func addCustomers() {
-        let customers = 10
+    mutating func addCustomers() -> [Customer] {
+        var customers: [Customer] = []
         
-        for number in 1...customers {
-            bankWaitingQueue.enqueue(Customer(numberTicket: number))
+        for number in currentTicketNumber..<currentTicketNumber + 10 {
+            let customer = Customer(numberTicket: number)
+            customers.append(customer)
+            bankWaitingQueue.enqueue(customer)
         }
+        self.currentTicketNumber += 10
         startWork()
+        return customers
     }
 }
 
@@ -51,10 +60,5 @@ private extension Bank {
     func assignClerkCount(at deposit: OperationQueue, and loan: OperationQueue) {
         deposit.maxConcurrentOperationCount = depositClerkCount
         loan.maxConcurrentOperationCount = loanClerkCount
-    }
-    
-    func waitTillOperationOver(at deposit: OperationQueue, and loan: OperationQueue) {
-        deposit.waitUntilAllOperationsAreFinished()
-        loan.waitUntilAllOperationsAreFinished()
     }
 }

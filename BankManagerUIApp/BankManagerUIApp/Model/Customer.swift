@@ -30,15 +30,6 @@ struct Customer {
                 return 1.1
             }
         }
-        
-        func start(deposit: OperationQueue, loan: OperationQueue) -> OperationQueue {
-            switch self {
-            case .deposit:
-                return deposit
-            case .loan:
-                return loan
-            }
-        }
     }
     
     let numberTicket: Int

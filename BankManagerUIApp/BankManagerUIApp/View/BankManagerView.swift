@@ -140,7 +140,7 @@ final class BankManagerView: UIView {
     }()
 }
 
-//MARK: - Auto Layout Method
+//MARK: - AutoLayout Method
 private extension BankManagerView {
     func configureMainStackViewLayout() {
         self.addSubview(mainVerticalStackView)
@@ -166,14 +166,14 @@ private extension BankManagerView {
     }
     
     func configureWorkingScrollViewLayout() {
-        workingLabel.addSubview(workingVerticalStackView)
+        workingScrollView.addSubview(workingVerticalStackView)
         
         NSLayoutConstraint.activate([
-            workingVerticalStackView.topAnchor.constraint(equalTo: workingLabel.topAnchor),
-            workingVerticalStackView.leadingAnchor.constraint(equalTo: workingLabel.leadingAnchor),
-            workingVerticalStackView.trailingAnchor.constraint(equalTo: workingLabel.trailingAnchor),
-            workingVerticalStackView.bottomAnchor.constraint(equalTo: workingLabel.bottomAnchor),
-            workingVerticalStackView.widthAnchor.constraint(equalTo: workingLabel.widthAnchor)
+            workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor),
+            workingVerticalStackView.leadingAnchor.constraint(equalTo: workingScrollView.leadingAnchor),
+            workingVerticalStackView.trailingAnchor.constraint(equalTo: workingScrollView.trailingAnchor),
+            workingVerticalStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor),
+            workingVerticalStackView.widthAnchor.constraint(equalTo: workingScrollView.widthAnchor)
         ])
     }
 }
