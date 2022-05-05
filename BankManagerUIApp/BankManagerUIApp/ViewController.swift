@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController, SendDelegate {
+
     var bankManager = BankManager()
     let baseVerticalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -142,10 +143,16 @@ class ViewController: UIViewController, SendDelegate {
     
     func addToWaitingList(_ customer: Customer) {
         DispatchQueue.main.async {
-            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: _ customer))
+            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
         }
     }
     
+    func addToWorkingList(_ customer: Customer) {
+        DispatchQueue.main.async {
+            self.workingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bankManager.bank.delegate = self

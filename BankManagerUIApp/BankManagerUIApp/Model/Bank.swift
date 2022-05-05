@@ -46,6 +46,7 @@ struct Bank {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
+            delegate?.addToWorkingList(customer)
             makeTellerWorkByTask(for: customer)
         }
 
