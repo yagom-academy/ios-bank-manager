@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BankView: UIView {
+final class BankView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,7 +20,7 @@ class BankView: UIView {
     }
     
     // MARK: - 추가 & 초기화 버튼
-    lazy var buttonStackView: UIStackView = {
+    private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -53,7 +53,7 @@ class BankView: UIView {
         return label
     }()
     // MARK: - 대기중 & 업무중 라벨
-    lazy var stateStackView: UIStackView = {
+    private lazy var stateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -62,7 +62,7 @@ class BankView: UIView {
         return stackView
     }()
     
-    lazy var waitingLabel: UILabel = {
+    private lazy var waitingLabel: UILabel = {
         let label = UILabel()
         label.text = "대기중"
         label.textColor = .white
@@ -72,7 +72,7 @@ class BankView: UIView {
         return label
     }()
     
-    lazy var taskingLabel: UILabel = {
+    private lazy var taskingLabel: UILabel = {
         let label = UILabel()
         label.text = "업무중"
         label.textColor = .white
@@ -83,7 +83,7 @@ class BankView: UIView {
     }()
     
     // MARK: - 고객리스트 라벨
-    lazy var customerListStackView: UIStackView = {
+    private lazy var customerListStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .top
@@ -105,7 +105,7 @@ class BankView: UIView {
         return stackView
     }()
     
-    lazy var mainStackView: UIStackView =  {
+    private lazy var mainStackView: UIStackView =  {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
