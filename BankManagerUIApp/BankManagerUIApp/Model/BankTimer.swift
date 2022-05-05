@@ -16,19 +16,29 @@ final class BankTimer {
     private var currentTime: Double = 0.0
     weak var delegate: TimerDelegate?
     
+    enum Status {
+        case running
+        case notRunning
+    }
+    
+    private(set) var currentStatus: Status = .running
+    
     deinit {
         stop()
     }
 
     func start() {
+        currentStatus = .running
         timer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(countUp), userInfo: nil, repeats: true)
     }
 
     func stop() {
+        currentStatus = .notRunning
         timer?.invalidate()
     }
 
     func reset() {
+        currentStatus = .notRunning
         timer?.invalidate()
         timer = nil
     }

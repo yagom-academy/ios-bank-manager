@@ -22,7 +22,7 @@ final class MainViewController: UIViewController {
     static func instance(bank: Bank) -> MainViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else {
+        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: identifier) as? MainViewController else {
             return MainViewController()
         }
         
@@ -100,11 +100,19 @@ extension MainViewController {
 extension MainViewController {
     private func setUpButtonAction() {
         mainView.addClientButton.addTarget(self, action: #selector(addClientToQueue), for: .touchUpInside)
-//        mainView.resetButton.addTarget(self, action: #selector(<#T##@objc method#>), for: .touchUpInside)
+        mainView.resetButton.addTarget(self, action: #selector(reset), for: .touchUpInside)
     }
     
     @objc private func addClientToQueue() {
-        bank?.receiveClients()
+        bank?.receiveTenMoreClients()
+    }
+    
+    @objc private func reset() {
+        bank?.reset()
+        mainView.workTimerLabel.text = "00:00:000"
+        mainView.waitingClientStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 }
 

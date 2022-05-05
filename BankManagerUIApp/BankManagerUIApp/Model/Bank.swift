@@ -10,7 +10,8 @@ import Foundation
 final class Bank {
     private let bankClerks: [BankClerk]
     private let clientCount: Int
-    private let queueDictionary: [String: Queue<Client>]
+    private var queueDictionary: [String: Queue<Client>]
+    private var totalClientCount: Int = 0
     let bankTimer = BankTimer()
     
     init(bankClerks: [BankClerk],
@@ -24,13 +25,28 @@ final class Bank {
     
     func open() {
         bankTimer.start()
-        receiveClients(clientCount: clientCount)
+        receiveClients()
         assignClientToBankClerk()
     }
-    
-    func receiveClients(clientCount: Int = 10) {
+
+    private func receiveClients() {
         for order in 1 ... clientCount {
             classifyClients(waitingNumber: order)
+            totalClientCount += 1
+        }
+    }
+    
+    func receiveTenMoreClients() {
+        for order in totalClientCount ... totalClientCount + 10 {
+            classifyClients(waitingNumber: order)
+            totalClientCount += 1
+        }
+        
+        if bankTimer.currentStatus == .notRunning {
+            assignClientToBankClerk()
+            bankTimer.start()
+        } else {
+            assignClientToBankClerk()
         }
     }
     
@@ -80,6 +96,13 @@ final class Bank {
                 bankClerk.work(client: client)
             }
         }
+    }
+    
+    func reset() {
+        queueDictionary[BankServiceType.deposit.description]?.clear()
+        queueDictionary[BankServiceType.loan.description]?.clear()
+        bankTimer.reset()
+        totalClientCount = .zero
     }
 }
 
