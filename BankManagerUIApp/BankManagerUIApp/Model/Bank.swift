@@ -12,9 +12,11 @@ struct Bank {
     private let loanClerkCount: Int
     private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
     private var currentTicketNumber = 1
-    var bankClerk = BankClerk()
     private let depositWindowQueue = OperationQueue()
     private let loanWindowQueue = OperationQueue()
+    private let operationGroup = DispatchGroup()
+    var bankClerk = BankClerk()
+    
     
     init(depositClerkCount: Int, loanClerkCount: Int) {
         self.depositClerkCount = depositClerkCount
@@ -27,16 +29,22 @@ struct Bank {
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return }
             guard let task = customer.task else { return }
+            
             let operation = BlockOperation {
                 self.bankClerk.processTask(for: customer)
+                operationGroup.leave()
             }
             
+            operationGroup.enter()
             switch task {
             case .deposit:
                 depositWindowQueue.addOperation(operation)
             case .loan:
                 loanWindowQueue.addOperation(operation)
             }
+        }
+        operationGroup.notify(queue: .main) {
+            bankClerk.delegate?.endTask()
         }
     }
     

@@ -70,12 +70,18 @@ private extension BankManagerViewController {
                                      selector: #selector(timesUp),
                                      userInfo: nil,
                                      repeats: true)
+        self.timer?.fire()
     }
     
     func resetTimer() {
         self.timer?.invalidate()
         self.timer = nil
         time = 0
+    }
+    
+    func stopTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
     }
 
     func translateTime(_ time: Int) -> (String, String, String) {
@@ -88,6 +94,10 @@ private extension BankManagerViewController {
 
 // MARK: - BankDelegate Method
 extension BankManagerViewController: BankDelegate {
+    func endTask() {
+        stopTimer()
+    }
+    
     func start(customer: Customer) {
         DispatchQueue.main.async {
             self.bankManagerView.waitingVerticalStackView.arrangedSubviews.forEach { view in

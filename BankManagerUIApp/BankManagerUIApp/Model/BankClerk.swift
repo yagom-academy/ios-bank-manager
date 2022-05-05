@@ -10,6 +10,7 @@ import Foundation
 protocol BankDelegate: AnyObject {
     func start(customer: Customer)
     func finish(customer: Customer)
+    func endTask()
 }
 
 struct BankClerk {
