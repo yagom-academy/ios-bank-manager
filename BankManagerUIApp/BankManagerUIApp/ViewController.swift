@@ -7,9 +7,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var bankManager = BankManager()
+    private lazy var mainView = MainView(frame: view.frame)
 
     override func viewDidLoad() {
-        self.view = MainView()
+        self.view = mainView
+        bankManager = BankManager()
     }
 }
 

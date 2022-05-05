@@ -18,7 +18,6 @@
 		DA4E2E08282402490073E4EF /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E07282402490073E4EF /* BankManager.swift */; };
 		DA4E2E0D282402710073E4EF /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E09282402700073E4EF /* Banker.swift */; };
 		DA4E2E0E282402710073E4EF /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E0A282402700073E4EF /* Bank.swift */; };
-		DA4E2E0F282402710073E4EF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E0B282402700073E4EF /* main.swift */; };
 		DA4E2E10282402710073E4EF /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E0C282402710073E4EF /* Customer.swift */; };
 		DA4E2E122824027C0073E4EF /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E112824027C0073E4EF /* Const.swift */; };
 		DA4E2E17282402880073E4EF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E2E13282402880073E4EF /* Node.swift */; };
@@ -63,7 +62,6 @@
 		DA4E2E07282402490073E4EF /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		DA4E2E09282402700073E4EF /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Banker.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Banker.swift; sourceTree = "<group>"; };
 		DA4E2E0A282402700073E4EF /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Bank.swift; sourceTree = "<group>"; };
-		DA4E2E0B282402700073E4EF /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/main.swift; sourceTree = "<group>"; };
 		DA4E2E0C282402710073E4EF /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Customer.swift; path = ../../BankManagerConsoleApp/BankManagerConsoleApp/Customer.swift; sourceTree = "<group>"; };
 		DA4E2E112824027C0073E4EF /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Const.swift; path = ../../BankManagerConsoleApp/Enum/Const.swift; sourceTree = "<group>"; };
 		DA4E2E13282402880073E4EF /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = ../../BankManagerConsoleApp/Utils/Node.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				DA4E2E0A282402700073E4EF /* Bank.swift */,
 				DA4E2E09282402700073E4EF /* Banker.swift */,
 				DA4E2E0C282402710073E4EF /* Customer.swift */,
-				DA4E2E0B282402700073E4EF /* main.swift */,
 				DA4E2E112824027C0073E4EF /* Const.swift */,
 				DA4E2E14282402880073E4EF /* DoubleStack.swift */,
 				DA4E2E16282402880073E4EF /* LinkedList.swift */,
@@ -302,7 +299,6 @@
 				DA4E2E1C282402910073E4EF /* Listable.swift in Sources */,
 				DA4E2E18282402880073E4EF /* DoubleStack.swift in Sources */,
 				DA4E2E08282402490073E4EF /* BankManager.swift in Sources */,
-				DA4E2E0F282402710073E4EF /* main.swift in Sources */,
 				DA4E2E19282402880073E4EF /* Queue.swift in Sources */,
 				DA4E2E17282402880073E4EF /* Node.swift in Sources */,
 				DA4E2E1A282402880073E4EF /* LinkedList.swift in Sources */,

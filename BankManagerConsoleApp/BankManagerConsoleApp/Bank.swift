@@ -19,37 +19,41 @@ fileprivate extension Const {
 final class Bank: Manageable {
     private var customers = Queue(listType: DoubleStack<Customer>())
     private var numberOfCustomer: Int = Const.defaultCount
-    private var wholeWorkTime: Double = Double.zero
+//    private var wholeWorkTime: Double = Double.zero
+    let workGroup = DispatchGroup()
+    let depositQueue = OperationQueue()
+    let loanQueue = OperationQueue()
     
     init(numberOfBankers: Int = Const.defaultBankerCount) {
         reset(numberOfBankers: numberOfBankers)
     }
     
-    func recordTime(method: () -> Void) {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        method()
-        wholeWorkTime = CFAbsoluteTimeGetCurrent() - startTime
-    }
-    
     func manageBanker() {
         let banker = Banker()
-        let workGroup = DispatchGroup()
-        let semaphores = makeSemaphore()
-        for _ in Const.startCount...numberOfCustomer {
+        while !customers.isEmpty {
             guard let custormer = customers.deQueue(), let task = custormer.task else {
                 return
             }
-            semaphores[task]?.wait()
-            DispatchQueue.global().async(group: workGroup) {
-                banker.work(customer: custormer)
-                semaphores[task]?.signal()
+            workGroup.enter()
+            switch task {
+            case .deposit:
+                depositQueue.addOperation {
+                    banker.work(customer: custormer)
+                    self.workGroup.leave()
+                }
+            case .loan:
+                loanQueue.addOperation {
+                    banker.work(customer: custormer)
+                    self.workGroup.leave()
+                }
             }
         }
-        workGroup.wait()
+        workGroup.notify(queue: .main) {
+        }
     }
     
     func reportOfDay() -> String {
-        let report = "오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 \(String(format: Const.twoDecimal, wholeWorkTime))초 입니다."
+        let report = "오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 초입니다."
         reset()
         return report
     }
@@ -67,6 +71,5 @@ final class Bank: Manageable {
         for numberTicekt in Const.startCount...numberOfCustomer {
             customers.enQueue(data: Customer(numberTicekt: numberTicekt))
         }
-        wholeWorkTime = Const.startTime
     }
 }
