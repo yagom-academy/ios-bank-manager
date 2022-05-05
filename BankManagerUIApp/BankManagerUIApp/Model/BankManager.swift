@@ -10,13 +10,25 @@ import Foundation
 struct BankManager {
     private let numberOfCustomer: Int = 10
     var bank: Bank = Bank(numberOfCustomer: 0)
+    var status: Status = .notRunning
 
     mutating func startBanking() {
+        
         setUpBank()
-        bank.work()
+        
+        if status == .notRunning {
+            bank.work()
+        }
     }
 
     private mutating func setUpBank() {
         bank.setUpCustomer(numberOfCustomer)
+    }
+}
+
+extension BankManager {
+    enum Status {
+        case running
+        case notRunning
     }
 }
