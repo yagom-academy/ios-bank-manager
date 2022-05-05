@@ -20,74 +20,87 @@ class BankView: UIView {
     }
     
     // MARK: - 추가 & 초기화 버튼
-    let buttonStackView: UIStackView = {
+    lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.addArrangedSubview(addCustomerButtom)
+        stackView.addArrangedSubview(resetButton)
         return stackView
     }()
     
-    let addCustomerButtom: UIButton = {
+    lazy var addCustomerButtom: UIButton = {
         let button = UIButton()
-        
+        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
-    let resetButton: UIButton = {
+    lazy var resetButton: UIButton = {
         let button = UIButton()
-        
+        button.setTitle("초기화", for: .normal)
+        button.setTitleColor(.red, for: .normal)
         return button
     }()
+    
     // MARK: - 타이머 라벨
-    let timerLabel: UILabel = {
+    lazy var timerLabel: UILabel = {
         let label = UILabel()
+        label.text = "업무시간 - 00:00:00"
+        label.textColor = .black
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textAlignment = .center
         return label
     }()
     // MARK: - 대기중 & 업무중 라벨
-    let stateStackView: UIStackView = {
+    lazy var stateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         return stackView
     }()
     
-    let waitingLabel: UILabel = {
+    lazy var waitingLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    let ingLabel: UILabel = {
+    lazy var ingLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
     // MARK: - 고객리스트 라벨
-    let customerListStackView: UIStackView = {
+    lazy var customerListStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         return stackView
     }()
     
-    let waitingStackView: UIStackView = {
+    lazy var waitingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
     }()
     
-    let ingStackView: UIStackView = {
+    lazy var ingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
     }()
     
-    let customerLabel: UILabel = {
+    lazy var customerLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    let mainStackView: UIStackView = {
+    lazy var mainStackView: UIStackView =  {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 15
+        stackView.addArrangedSubview(buttonStackView)
+        stackView.addArrangedSubview(timerLabel)
+        
         return stackView
     }()
 }
