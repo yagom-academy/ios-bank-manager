@@ -14,15 +14,10 @@
 		C7694E47259C3EA20053667F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7694E45259C3EA20053667F /* LaunchScreen.storyboard */; };
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
+		DA26A6D82823D60D000A13D1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA26A6D72823D60D000A13D1 /* MainView.swift */; };
 		DA6439522823BEB900C4733E /* BankManagerConsoleApp in Resources */ = {isa = PBXBuildFile; fileRef = DA6439512823BE9600C4733E /* BankManagerConsoleApp */; };
 		DA6439532823BEBA00C4733E /* BankManagerConsoleApp in Resources */ = {isa = PBXBuildFile; fileRef = DA6439512823BE9600C4733E /* BankManagerConsoleApp */; };
 		DA6439542823BEBA00C4733E /* BankManagerConsoleApp in Resources */ = {isa = PBXBuildFile; fileRef = DA6439512823BE9600C4733E /* BankManagerConsoleApp */; };
-		DA6439552823BEC500C4733E /* BankManagerUIAppUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */; };
-		DA6439562823BEC600C4733E /* BankManagerUIAppUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */; };
-		DA6439572823BEC600C4733E /* BankManagerUIAppUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */; };
-		DA6439582823BEC900C4733E /* BankManagerUIAppTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = C7694E4D259C3EA20053667F /* BankManagerUIAppTests.xctest */; };
-		DA6439592823BEC900C4733E /* BankManagerUIAppTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = C7694E4D259C3EA20053667F /* BankManagerUIAppTests.xctest */; };
-		DA64395A2823BECA00C4733E /* BankManagerUIAppTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = C7694E4D259C3EA20053667F /* BankManagerUIAppTests.xctest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +51,7 @@
 		C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerUIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA26A6D72823D60D000A13D1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DA6439512823BE9600C4733E /* BankManagerConsoleApp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BankManagerConsoleApp; path = ../BankManagerConsoleApp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +107,7 @@
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
+				DA26A6D72823D60D000A13D1 /* MainView.swift */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C7694E48259C3EA20053667F /* Info.plist */,
@@ -249,8 +246,6 @@
 			files = (
 				C7694E47259C3EA20053667F /* LaunchScreen.storyboard in Resources */,
 				C7694E44259C3EA20053667F /* Assets.xcassets in Resources */,
-				DA6439582823BEC900C4733E /* BankManagerUIAppTests.xctest in Resources */,
-				DA6439552823BEC500C4733E /* BankManagerUIAppUITests.xctest in Resources */,
 				DA6439522823BEB900C4733E /* BankManagerConsoleApp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +254,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA6439592823BEC900C4733E /* BankManagerUIAppTests.xctest in Resources */,
-				DA6439562823BEC600C4733E /* BankManagerUIAppUITests.xctest in Resources */,
 				DA6439532823BEBA00C4733E /* BankManagerConsoleApp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,8 +262,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA64395A2823BECA00C4733E /* BankManagerUIAppTests.xctest in Resources */,
-				DA6439572823BEC600C4733E /* BankManagerUIAppUITests.xctest in Resources */,
 				DA6439542823BEBA00C4733E /* BankManagerConsoleApp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				DA26A6D82823D60D000A13D1 /* MainView.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 			);
