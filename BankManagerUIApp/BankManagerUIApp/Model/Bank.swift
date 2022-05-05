@@ -11,8 +11,8 @@ struct Bank {
     private let depositClerkCount: Int
     private let loanClerkCount: Int
     private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
-    private let bankClerk = BankClerk()
     private var currentTicketNumber = 1
+    var bankClerk = BankClerk()
     
     init(depositClerkCount: Int, loanClerkCount: Int) {
         self.depositClerkCount = depositClerkCount

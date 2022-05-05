@@ -14,6 +14,7 @@ final class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         configureButtons()
         configureView()
+        bank.bankClerk.delegate = self
     }
     
     private func configureButtons() {
@@ -31,6 +32,17 @@ final class BankManagerViewController: UIViewController {
     
     private func configureView() {
         self.view = bankManagerView
+    }
+}
+
+// MARK: - BankDelegate Method
+extension BankManagerViewController: BankDelegate {
+    func start() {
+        
+    }
+    
+    func finish() {
+        
     }
 }
 
