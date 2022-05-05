@@ -8,8 +8,8 @@
 import Foundation
 
 enum BankingTask: String, CaseIterable {
-    case deposit = "예금업무"
-    case loan = "대출업무"
+    case deposit = "예금"
+    case loan = "대출"
 
     var workTime: Double {
         switch self {
