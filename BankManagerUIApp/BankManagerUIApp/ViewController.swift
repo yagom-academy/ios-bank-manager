@@ -33,6 +33,18 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
+    let timerHorizontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
+        
+        return stackView
+    }()
+    
     let labelHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         
@@ -98,15 +110,27 @@ class ViewController: UIViewController, SendDelegate {
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.setTitleColor(UIColor.systemRed, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
         return button
+    }()
+    
+    let workTimeTitleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "업무시간 - "
+        label.textAlignment = .right
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        
+        return label
     }()
     
     let workTimeLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "업무시간 - "
-        label.textAlignment = .center
+        label.text = "00:00:000"
+        label.textAlignment = .left
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         
         return label
@@ -188,12 +212,12 @@ class ViewController: UIViewController, SendDelegate {
         buttonHorizontalStackView.addArrangedSubview(clearButton)
         labelHorizontalStackView.addArrangedSubview(waitingLabel)
         labelHorizontalStackView.addArrangedSubview(workingLabel)
+        timerHorizontalStackView.addArrangedSubview(workTimeTitleLabel)
+        timerHorizontalStackView.addArrangedSubview(workTimeLabel)
         
         baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
-        baseVerticalStackView.addArrangedSubview(workTimeLabel)
+        baseVerticalStackView.addArrangedSubview(timerHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
-        
-        //
         
         waitingScrollView.addSubview(waitingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
