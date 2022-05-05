@@ -170,30 +170,32 @@ class ViewController: UIViewController {
         
         waitingScrollView.addSubview(waitingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
-
         
-        waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor).isActive = true
-        waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor).isActive = true
-        waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
-        waitingVerticalStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor).isActive = true
         
         workingVerticalStackView.addArrangedSubview(testLabel1)
         workingScrollView.addSubview(workingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
         
-        workingVerticalStackView.centerXAnchor.constraint(equalTo: workingScrollView.centerXAnchor).isActive = true
-        workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor).isActive = true
-        workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
-        workingVerticalStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor).isActive = true
-        
         baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
-        //
         
-        baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-        baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
-        baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
+        
+        NSLayoutConstraint.activate([
+            waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor),
+            waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
+            waitingVerticalStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            
+            workingVerticalStackView.centerXAnchor.constraint(equalTo: workingScrollView.centerXAnchor),
+            workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor),
+            workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
+            workingVerticalStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor),
+            
+            baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+        ])
     }
     
     func returnLabel() -> UILabel {
