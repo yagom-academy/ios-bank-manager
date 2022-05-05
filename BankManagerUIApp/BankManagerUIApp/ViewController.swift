@@ -196,6 +196,8 @@ class ViewController: UIViewController {
             baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
+        
+        addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
     }
     
     func returnLabel() -> UILabel {
@@ -204,6 +206,11 @@ class ViewController: UIViewController {
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         return label
+    }
+    
+    @objc func execution(_ sender: UIButton) {
+        var bankManager = BankManager()
+        bankManager.startBanking()
     }
 }
 
