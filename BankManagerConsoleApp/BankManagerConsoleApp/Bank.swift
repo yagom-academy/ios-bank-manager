@@ -66,6 +66,7 @@ final class Bank: Manageable {
             }
         }
         workGroup.notify(queue: .main) {
+            NotificationCenter.default.post(name: .timer, object: nil)
         }
     }
     

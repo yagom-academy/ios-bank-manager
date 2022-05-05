@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(removeCustomerLabel), name: .removeCustomerAlram, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: .timer, object: nil)
         
+        bind()
         bankManager = BankManager()
         createTimer()
         bankManager.openBank()
@@ -78,12 +79,6 @@ class ViewController: UIViewController {
         timer = nil
     }
     
-    private func createTimer() {
-        if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(addMilliseconds), userInfo: nil, repeats: true)
-        }
-    }
-    
     @objc func addCustomer() {
         bankManager.bank.addTenCustomer()
         createTimer()
@@ -97,7 +92,17 @@ class ViewController: UIViewController {
         time = 0
         timer = nil
         bankManager.bank.resetAll()
-        
+    }
+    
+    private func createTimer() {
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(addMilliseconds), userInfo: nil, repeats: true)
+        }
+    }
+    
+    private func bind() {
+        mainView.addTenCustomerButton.addTarget(self, action: #selector(addCustomer), for: .touchUpInside)
+        mainView.resetButton.addTarget(self, action: #selector(resetAll), for: .touchUpInside)
     }
 }
 

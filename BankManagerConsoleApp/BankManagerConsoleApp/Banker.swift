@@ -12,9 +12,6 @@ final class Banker {
         guard let numberTicekt = customer?.numberTicekt else {
             return
         }
-        guard let task = customer?.task?.rawValue else {
-            return
-        }
         
         guard let time = customer?.task?.time else {
             return
