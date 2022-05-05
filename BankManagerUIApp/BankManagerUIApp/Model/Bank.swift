@@ -83,6 +83,5 @@ struct Bank {
 
     private func closeBanking(from startTime: CFAbsoluteTime, to endTime: CFAbsoluteTime) {
         let totalWorkTime = String(format: "%.2f", endTime - startTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
 }
