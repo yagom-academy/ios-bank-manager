@@ -15,6 +15,7 @@ protocol SendDelegate {
 
 struct Bank {
     private var numberOfCustomer: Int
+    private var startNumber: Int = 1
     private let customerQueue: Queue = Queue<Customer>()
     private let teller: Teller = Teller()
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.deposit)
@@ -32,12 +33,13 @@ struct Bank {
         addCustomerInLine()
     }
 
-    private func addCustomerInLine() {
-        for number in 1...numberOfCustomer {
+    mutating private func addCustomerInLine() {
+        for number in startNumber...(startNumber + numberOfCustomer) {
             let customer = Customer(number)
             delegate?.addToWaitingList(customer)
             customerQueue.enqueue(customer)
         }
+        startNumber += numberOfCustomer
     }
 
     func work() {
