@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4AE90D747E1339B0AF410B7A /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8B7C9D2F1BD8495EF87A67 /* Pods_BankManagerConsoleApp.framework */; };
-		4E85A93D2821712800AE70B4 /* WorkTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E85A93C2821712800AE70B4 /* WorkTime.swift */; };
 		4EC36E12281AA33F00E523D5 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC36E11281AA33F00E523D5 /* Bank.swift */; };
 		B380A203281AC20200FC5AEC /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380A202281AC20200FC5AEC /* BankManager.swift */; };
 		B3847DA4281A9E32000DD9F5 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3847DA3281A9E32000DD9F5 /* Customer.swift */; };
@@ -39,7 +38,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4E85A93C2821712800AE70B4 /* WorkTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkTime.swift; sourceTree = "<group>"; };
 		4EC36E11281AA33F00E523D5 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		AAD68BF9D203697DF42AA264 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		AE8B7C9D2F1BD8495EF87A67 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				B3C6317428216DCB002845FA /* NumberOfTask.swift */,
-				4E85A93C2821712800AE70B4 /* WorkTime.swift */,
 			);
 			path = Namespace;
 			sourceTree = "<group>";
@@ -315,7 +312,6 @@
 				B3847DA4281A9E32000DD9F5 /* Customer.swift in Sources */,
 				B39CC5462816B20700BEB462 /* Queue.swift in Sources */,
 				B3C6317528216DCB002845FA /* NumberOfTask.swift in Sources */,
-				4E85A93D2821712800AE70B4 /* WorkTime.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* Teller.swift in Sources */,
 				B3C6317328215AB0002845FA /* BankingTask.swift in Sources */,
 				4EC36E12281AA33F00E523D5 /* Bank.swift in Sources */,
