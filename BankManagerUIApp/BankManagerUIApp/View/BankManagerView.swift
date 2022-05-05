@@ -63,7 +63,7 @@ final class BankManagerView: UIView {
     lazy var taskTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "업무시간 - 00:00:000"
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .monospacedDigitSystemFont(ofSize: 22, weight: .regular)
         label.textAlignment = .center
         return label
     }()
@@ -72,7 +72,7 @@ final class BankManagerView: UIView {
         let label = UILabel()
         label.text = "대기중"
         label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
         return label
@@ -82,7 +82,7 @@ final class BankManagerView: UIView {
         let label = UILabel()
         label.text = "업무중"
         label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         label.backgroundColor = .systemIndigo
         label.textAlignment = .center
         return label
