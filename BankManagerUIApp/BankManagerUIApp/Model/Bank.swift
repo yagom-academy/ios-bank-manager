@@ -37,7 +37,7 @@ struct Bank {
                 loanWindowQueue.addOperation(operation)
             }
         }
-        finishNotity()
+        finishNotify()
     }
     
     mutating func addCustomers() -> [Customer] {
@@ -70,7 +70,7 @@ extension Bank {
         loanWindowQueue.cancelAllOperations()
     }
     
-    func finishNotity() {
+    private func finishNotify() {
         depositWindowQueue.addBarrierBlock {
             self.loanWindowQueue.addBarrierBlock {
                 self.bankClerk.delegate?.endTask()

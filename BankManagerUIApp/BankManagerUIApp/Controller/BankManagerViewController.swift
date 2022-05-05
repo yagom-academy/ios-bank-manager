@@ -94,6 +94,7 @@ private extension BankManagerViewController {
 
 // MARK: - BankDelegate Method
 extension BankManagerViewController: BankDelegate {
+    
     func endTask() {
         stopTimer()
     }
