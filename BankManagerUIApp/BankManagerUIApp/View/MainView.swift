@@ -100,7 +100,7 @@ final class MainView: BaseUIView {
     
     // MARK: UIComponents - UIButton
     
-    private lazy var addClientButton: UIButton = {
+    lazy var addClientButton: UIButton = {
         let button = UIButton()
         
         button.setTitle("고객 10명 추가", for: .normal)
@@ -111,7 +111,7 @@ final class MainView: BaseUIView {
         return button
     }()
     
-    private lazy var resetButton: UIButton = {
+    lazy var resetButton: UIButton = {
         let button = UIButton()
         
         button.setTitle("초기화", for: .normal)
@@ -199,7 +199,6 @@ final class MainView: BaseUIView {
         superStackView.addArrangedSubview(clientStackView)
     }
     
-    
     // MARK: constraints
     
     override func setConstraints() {
@@ -213,15 +212,17 @@ final class MainView: BaseUIView {
         NSLayoutConstraint.activate([
             waitingClientStackView.topAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.topAnchor),
             waitingClientStackView.bottomAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.bottomAnchor),
-            waitingClientStackView.widthAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.widthAnchor)
+            waitingClientStackView.leadingAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.leadingAnchor),
+            waitingClientStackView.trailingAnchor.constraint(equalTo: waitingClientScrollView.contentLayoutGuide.trailingAnchor),
+            waitingClientStackView.widthAnchor.constraint(equalTo: waitingClientScrollView.frameLayoutGuide.widthAnchor),
         ])
         
         NSLayoutConstraint.activate([
             workingClientStackView.topAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.topAnchor),
             workingClientStackView.bottomAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.bottomAnchor),
+            workingClientStackView.leadingAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.leadingAnchor),
+            workingClientStackView.trailingAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.trailingAnchor),
             workingClientStackView.widthAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.widthAnchor)
         ])
     }
-
 }
-
