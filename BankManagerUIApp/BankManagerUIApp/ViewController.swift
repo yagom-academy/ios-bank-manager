@@ -6,8 +6,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, SendDelegate {
+    var bankManager = BankManager()
     let baseVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         
         return stackView
     }()
-
+    
     let addCustomerButton: UIButton = {
         let button = UIButton()
         
@@ -140,13 +140,18 @@ class ViewController: UIViewController {
     let waitingScrollView: UIScrollView = UIScrollView()
     let workingScrollView: UIScrollView = UIScrollView()
     
+    func send(customer: Customer) {
+        DispatchQueue.main.async {
+            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bankManager.bank.delegate = self
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(baseVerticalStackView)
         
-        // Buttons
         buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
         buttonHorizontalStackView.addArrangedSubview(clearButton)
         labelHorizontalStackView.addArrangedSubview(waitingLabel)
@@ -157,22 +162,10 @@ class ViewController: UIViewController {
         baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
         
         //
-        let testLabel1: UILabel = UILabel()
-        testLabel1.text = "1-대출"
-        let testLabel2: UILabel = UILabel()
-        testLabel2.text = "2-대출"
-        
-        waitingVerticalStackView.addArrangedSubview(testLabel2)
-        
-        for _ in 1...50 {
-            waitingVerticalStackView.addArrangedSubview(returnLabel())
-        }
         
         waitingScrollView.addSubview(waitingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
         
-        
-        workingVerticalStackView.addArrangedSubview(testLabel1)
         workingScrollView.addSubview(workingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
         
@@ -200,17 +193,31 @@ class ViewController: UIViewController {
         addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
     }
     
-    func returnLabel() -> UILabel {
+    @objc func execution(_ sender: UIButton) {
+        DispatchQueue.global().async {
+            self.bankManager.startBanking()
+        }
+    }
+
+    
+    func generateLabel(of customer: Customer) -> UILabel {
         let label = UILabel()
-        label.text = "테스트라벨"
+        guard let task = customer.bankingType else {
+            return UILabel()
+        }
+        
+        label.text = "\(customer.number)-\(task.rawValue)"
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .title2)
+        if task == .loan {
+            label.textColor = .systemPurple
+        }
+        
         return label
     }
     
-    @objc func execution(_ sender: UIButton) {
-        var bankManager = BankManager()
-        bankManager.startBanking()
+    func addLabelToWaitingQueue(of customer: Customer) {
+        waitingVerticalStackView.addArrangedSubview(generateLabel(of: customer))
     }
 }
 

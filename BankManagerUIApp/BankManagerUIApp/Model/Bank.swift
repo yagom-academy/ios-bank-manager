@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol SendDelegate {
+    func sendUpdate(customer: Customer)
+}
+
 struct Bank {
     private var numberOfCustomer: Int
     private let customerQueue: Queue = Queue<Customer>()
@@ -15,7 +19,8 @@ struct Bank {
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.loan)
     private let bankingGroup = DispatchGroup()
     private let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
-
+    var delegate: SendDelegate?
+    
     init(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
     }
@@ -27,7 +32,9 @@ struct Bank {
 
     private func addCustomerInLine() {
         for number in 1...numberOfCustomer {
-            customerQueue.enqueue(Customer(number))
+            let customer = Customer(number)
+            delegate?.send(customer: customer)
+            customerQueue.enqueue(customer)
         }
     }
 
