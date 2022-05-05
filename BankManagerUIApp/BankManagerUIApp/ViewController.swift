@@ -161,6 +161,11 @@ class ViewController: UIViewController {
         testLabel2.text = "2-대출"
         
         waitingVerticalStackView.addArrangedSubview(testLabel2)
+        
+        for _ in 1...50 {
+            waitingVerticalStackView.addArrangedSubview(returnLabel())
+        }
+        
         waitingScrollView.addSubview(waitingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
 
@@ -187,6 +192,14 @@ class ViewController: UIViewController {
         baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
+    }
+    
+    func returnLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "테스트라벨"
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        return label
     }
 }
 
