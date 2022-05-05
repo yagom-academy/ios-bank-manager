@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomerView: UIView {
+final class CustomerView: UIView {
     private let number: Int
     private let task: String
     

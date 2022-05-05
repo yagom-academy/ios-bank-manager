@@ -14,6 +14,8 @@ final class BankManagerView: UIView {
         
         self.backgroundColor = .white
         configureMainStackViewLayout()
+        configureWatingScrollViewLayout()
+        configureWorkingScrollViewLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -100,6 +102,7 @@ final class BankManagerView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .fill
+        view.spacing = 8
         return view
     }()
     
@@ -108,16 +111,31 @@ final class BankManagerView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .fill
+        view.spacing = 8
         return view
     }()
     
     private lazy var taskHorizontalStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [waitingVerticalStackView,
-                                                  workingVerticalStackView])
+        let view = UIStackView(arrangedSubviews: [waitingScrollView,
+                                                  workingScrollView])
         view.axis = .horizontal
         view.alignment = .fill
         view.distribution = .fillEqually
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
+        return view
+    }()
+    
+    private lazy var waitingScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.showsVerticalScrollIndicator = false
+        return view
+    }()
+    
+    private lazy var workingScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.showsVerticalScrollIndicator = false
         return view
     }()
 }
@@ -132,6 +150,30 @@ private extension BankManagerView {
             mainVerticalStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             mainVerticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             mainVerticalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        ])
+    }
+    
+    func configureWatingScrollViewLayout() {
+        waitingScrollView.addSubview(waitingVerticalStackView)
+        
+        NSLayoutConstraint.activate([
+            waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingVerticalStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
+            waitingVerticalStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
+            waitingVerticalStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            waitingVerticalStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor)
+        ])
+    }
+    
+    func configureWorkingScrollViewLayout() {
+        workingLabel.addSubview(workingVerticalStackView)
+        
+        NSLayoutConstraint.activate([
+            workingVerticalStackView.topAnchor.constraint(equalTo: workingLabel.topAnchor),
+            workingVerticalStackView.leadingAnchor.constraint(equalTo: workingLabel.leadingAnchor),
+            workingVerticalStackView.trailingAnchor.constraint(equalTo: workingLabel.trailingAnchor),
+            workingVerticalStackView.bottomAnchor.constraint(equalTo: workingLabel.bottomAnchor),
+            workingVerticalStackView.widthAnchor.constraint(equalTo: workingLabel.widthAnchor)
         ])
     }
 }
