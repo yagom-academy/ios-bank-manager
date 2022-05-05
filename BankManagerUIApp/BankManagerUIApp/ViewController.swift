@@ -149,6 +149,35 @@ class ViewController: UIViewController {
         baseVerticalStackView.addArrangedSubview(workTimeLabel)
         baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
         
+        //
+        let testLabel1: UILabel = UILabel()
+        testLabel1.text = "1-대출"
+        let testLabel2: UILabel = UILabel()
+        testLabel2.text = "2-대출"
+
+        
+        waitingVerticalStackView.addArrangedSubview(testLabel2)
+        waitingScrollView.addSubview(waitingVerticalStackView)
+        taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
+
+        
+        waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor).isActive = true
+        waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor).isActive = true
+        waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
+        waitingScrollView.bottomAnchor.constraint(equalTo: taskQueueHorizontalStackView.bottomAnchor).isActive = true
+        
+        workingVerticalStackView.addArrangedSubview(testLabel1)
+        workingScrollView.addSubview(workingVerticalStackView)
+        taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
+        
+        workingVerticalStackView.centerXAnchor.constraint(equalTo: workingScrollView.centerXAnchor).isActive = true
+        workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor).isActive = true
+        workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
+        workingScrollView.bottomAnchor.constraint(equalTo: taskQueueHorizontalStackView.bottomAnchor).isActive = true
+        
+        baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
+        //
+        
         baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
