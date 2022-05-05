@@ -2,10 +2,10 @@ import Foundation
 
 struct Customer {
     let number: Int
-    let taskType: TaskType?
+    let taskType: BankingTask?
     
     init(_ number: Int) {
         self.number = number
-        self.taskType = TaskType.allCases.randomElement()
+        self.taskType = BankingTask.allCases.randomElement()
     }
 }
