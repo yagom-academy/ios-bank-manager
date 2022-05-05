@@ -5,8 +5,8 @@
 //  Created by OneTool, Red on 2022/04/28.
 //
 enum BankTask: String, CaseIterable {
-    case deposit = "예금 업무"
-    case loan = "대출 업무"
+    case deposit = "예금"
+    case loan = "대출"
     
     var numberOfBankers: Int {
         switch self {

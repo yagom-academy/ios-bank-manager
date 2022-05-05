@@ -106,7 +106,7 @@ class MainView: UIView {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .fill
+        stackView.alignment = .top
         stackView.distribution = .fillEqually
         
         return stackView
@@ -130,8 +130,9 @@ class MainView: UIView {
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .fill
+        stackView.alignment = .center
         stackView.distribution = .fillEqually
+        stackView.spacing = 4
         return stackView
     }()
     
@@ -140,8 +141,9 @@ class MainView: UIView {
  
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .fill
+        stackView.alignment = .center
         stackView.distribution = .fillEqually
+        stackView.spacing = 4
         return stackView
     }()
     
@@ -165,7 +167,7 @@ class MainView: UIView {
         mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         
-        customerScrollView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor).isActive = true
+        customerScrollView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 20).isActive = true
         customerScrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         customerScrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         customerScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
