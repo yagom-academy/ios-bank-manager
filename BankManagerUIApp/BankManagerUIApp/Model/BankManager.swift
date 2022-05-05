@@ -13,10 +13,9 @@ struct BankManager {
     var status: Status = .notRunning
 
     mutating func startBanking() {
-        
         setUpBank()
-        
         if status == .notRunning {
+            status = .running
             bank.work()
         }
     }
