@@ -17,6 +17,6 @@ final class BankClerk {
     }
     
     func work(client: Client) {
-        
+        Thread.sleep(forTimeInterval: self.bankService.requiredTime)
     }
 }

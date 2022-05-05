@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		67188F362822B1F8002F571F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67188F352822B1F8002F571F /* MainView.swift */; };
+		67188F3828236A06002F571F /* BankTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67188F3728236A06002F571F /* BankTimer.swift */; };
 		A102AD422822ADFB0028053C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD402822ADFB0028053C /* LinkedList.swift */; };
 		A102AD432822ADFB0028053C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD412822ADFB0028053C /* Queue.swift */; };
 		A102AD452822AE060028053C /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD442822AE060028053C /* Bank.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		67188F352822B1F8002F571F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		67188F3728236A06002F571F /* BankTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTimer.swift; sourceTree = "<group>"; };
 		A102AD402822ADFB0028053C /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkedList.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Model/LinkedList.swift; sourceTree = "<group>"; };
 		A102AD412822ADFB0028053C /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = ../../../BankManagerConsoleApp/BankManagerConsoleApp/Model/Queue.swift; sourceTree = "<group>"; };
 		A102AD442822AE060028053C /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				A102AD462822AE180028053C /* BankClerk.swift */,
 				A102AD482822AE2A0028053C /* BankServiceType.swift */,
 				A102AD4C2822AEB10028053C /* Client.swift */,
+				67188F3728236A06002F571F /* BankTimer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				A102AD4B2822AE9C0028053C /* CompositionRoot.swift in Sources */,
 				A1CF4EF02822C969002789A9 /* BaseUIView.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				67188F3828236A06002F571F /* BankTimer.swift in Sources */,
 				A102AD4D2822AEB10028053C /* Client.swift in Sources */,
 				A102AD422822ADFB0028053C /* LinkedList.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,

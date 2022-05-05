@@ -7,14 +7,11 @@
 
 import Foundation
 
-fileprivate extension Constants {
-    static let decimalPlace = "%.2f"
-}
-
 final class Bank {
     private let bankClerks: [BankClerk]
     private let clientCount: Int
     private let queueDictionary: [String: Queue<Client>]
+    private let bankTimer = BankTimer()
     
     init(bankClerks: [BankClerk],
          clientCount: Int,
@@ -26,13 +23,9 @@ final class Bank {
     }
     
     func open() {
+        bankTimer.start()
         receiveClients()
-        
-        let totalWorkTime = measureTotalWorkTime {
-            assignClientToBankClerk()
-        }
-        
-        close(totalWorkTime: totalWorkTime)
+        assignClientToBankClerk()
     }
     
     private func receiveClients() {
@@ -49,15 +42,6 @@ final class Bank {
         case .loan:
             queueDictionary[BankServiceType.loan.description]?.enqueue(client)
         }
-    }
-    
-    private func measureTotalWorkTime(_ task: () -> Void) -> String {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        task()
-        let finishTime = CFAbsoluteTimeGetCurrent()
-        let totalTime = finishTime - startTime
-        
-        return totalTime.formatted
     }
     
     private func assignClientToBankClerk() {
@@ -79,7 +63,9 @@ final class Bank {
             )
         }
         
-        group.wait()
+        group.notify(queue: .main) {
+            self.bankTimer.stop()
+        }
     }
     
     private func assignWorkToBankClerk(
@@ -92,16 +78,6 @@ final class Bank {
                 bankClerk.work(client: client)
             }
         }
-    }
-    
-    private func close(totalWorkTime: String) {
-        
-    }
-}
-
-fileprivate extension CFAbsoluteTime {
-    var formatted: String {
-        String(format: Constants.decimalPlace, self)
     }
 }
 
