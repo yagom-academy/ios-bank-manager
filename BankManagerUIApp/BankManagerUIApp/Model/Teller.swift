@@ -13,9 +13,6 @@ struct Teller {
             return
         }
         
-        print("\(customer.number)번 고객 \(task.rawValue)업무 시작")
-        
         Thread.sleep(forTimeInterval: task.workTime)
-        print("\(customer.number)번 고객 \(task.rawValue)업무 완료")
     }
 }
