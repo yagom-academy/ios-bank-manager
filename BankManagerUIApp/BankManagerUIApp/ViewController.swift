@@ -43,6 +43,17 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    let taskQueueHorizontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }
+    
     let addCustomerButton: UIButton = {
         let button = UIButton()
         
