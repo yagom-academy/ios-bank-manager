@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController, SendDelegate {
-
+    
     var bankManager = BankManager()
     let baseVerticalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -148,11 +148,21 @@ class ViewController: UIViewController, SendDelegate {
     }
     
     func addToWorkingList(_ customer: Customer) {
+        let label = generateLabel(of: customer)
+        guard let waitinglabelArray = waitingVerticalStackView.subviews as? [UILabel] else {
+            return
+        }
+        
         DispatchQueue.main.async {
-            self.workingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+            for waitingLabel in waitinglabelArray {
+                if label.text == waitingLabel.text {
+                    waitingLabel.removeFromSuperview()
+                    self.workingVerticalStackView.addArrangedSubview(label)
+                }
+            }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bankManager.bank.delegate = self
@@ -205,7 +215,6 @@ class ViewController: UIViewController, SendDelegate {
             self.bankManager.startBanking()
         }
     }
-
     
     func generateLabel(of customer: Customer) -> UILabel {
         let label = UILabel()
