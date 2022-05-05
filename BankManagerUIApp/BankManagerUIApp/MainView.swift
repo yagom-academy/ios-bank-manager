@@ -21,7 +21,6 @@ class MainView: UIView {
     
     let workingTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간 - 03:00:00"
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .black

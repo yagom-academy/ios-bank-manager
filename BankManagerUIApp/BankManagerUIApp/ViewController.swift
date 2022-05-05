@@ -16,12 +16,15 @@ extension Notification.Name {
 class ViewController: UIViewController {
     var bankManager = BankManager()
     private lazy var mainView = MainView(frame: view.frame)
+    var dateFormatter = DateFormatter()
     var timer: Timer?
     var time: Double = 0 {
         didSet {
-            mainView.workingTimeLabel.text = String(time)
+            dateFormatter.dateFormat = "mm : ss : SSS"
+            mainView.workingTimeLabel.text = dateFormatter.string(from: changeTimeFormat())
         }
     }
+    
     
     override func viewDidLoad() {
         self.view = mainView
@@ -104,6 +107,18 @@ class ViewController: UIViewController {
         mainView.addTenCustomerButton.addTarget(self, action: #selector(addCustomer), for: .touchUpInside)
         mainView.resetButton.addTarget(self, action: #selector(resetAll), for: .touchUpInside)
     }
+    
+    private func changeTimeFormat() -> Date {
+        let miniute: Int = Int(time / 60)
+        let second: Int = miniute / 100
+        let nanosecond: Int = second / 1000
+        let date = DateComponents(minute: miniute, second: second, nanosecond: nanosecond)
+        guard let seperateTime = date.date else {
+            return Date()
+        }
+        return seperateTime
+    }
+    
 }
 
 
