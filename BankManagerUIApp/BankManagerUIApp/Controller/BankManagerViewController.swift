@@ -9,6 +9,12 @@ import UIKit
 final class BankManagerViewController: UIViewController {
     private lazy var bankManagerView = BankManagerView.init(frame: self.view.bounds)
     private var bank = Bank(depositClerkCount: 2, loanClerkCount: 1)
+    private var timer: Timer?
+    private var time: Int = 0 {
+        didSet {
+            self.bankManagerView.taskTimeLabel.text = "업무시간 - \(time)"
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +28,22 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func addCustomersButtonTapped() {
+        startTimer()
         bank.addCustomers().forEach { customer in
             guard let information = customer.task?.information else { return }
             bankManagerView.waitingVerticalStackView.addArrangedSubview(CustomerView(frame: .zero,
                                                                                      number: customer.numberTicket,
                                                                                      task: information))
         }
+    }
+    
+    private func startTimer() {
+        guard self.timer == nil else { return }
+        self.timer = Timer.scheduledTimer(timeInterval: 0.001,
+                                     target: self,
+                                     selector: #selector(startTime),
+                                     userInfo: nil,
+                                     repeats: true)
     }
     
     private func configureView() {
@@ -61,3 +77,9 @@ extension BankManagerViewController: BankDelegate {
     }
 }
 
+
+private extension BankManagerViewController {
+    @objc func startTime() {
+        time += 1
+    }
+}

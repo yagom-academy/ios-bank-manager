@@ -60,7 +60,7 @@ final class BankManagerView: UIView {
         return view
     }()
     
-    private lazy var taskTimeLabel: UILabel = {
+    lazy var taskTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "업무시간 - 00:00:000"
         label.font = .preferredFont(forTextStyle: .title2)
