@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SendDelegate {
-    func sendUpdate(customer: Customer)
+    func send(customer: Customer)
 }
 
 struct Bank {
