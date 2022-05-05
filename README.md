@@ -31,7 +31,7 @@
 ---
 
 ## UML
-![](https://i.imgur.com/F5c3zJt.png)
+![](https://i.imgur.com/PP9V2wZ.png)
 
 ---
 
