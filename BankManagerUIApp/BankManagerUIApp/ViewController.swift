@@ -99,6 +99,7 @@ class ViewController: UIViewController, SendDelegate {
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
         return button
     }()
     
@@ -188,7 +189,7 @@ class ViewController: UIViewController, SendDelegate {
         guard let task = customer.bankingType else {
             return
         }
-        let text = "\(customer.number)-\(task.rawValue)"
+        let text = "\(customer.number) - \(task.rawValue)"
         
         DispatchQueue.main.async {
             guard let labelArray = stackView.subviews as? [UILabel] else {
@@ -261,7 +262,7 @@ class ViewController: UIViewController, SendDelegate {
             return UILabel()
         }
         
-        label.text = "\(customer.number)-\(task.rawValue)"
+        label.text = "\(customer.number) - \(task.rawValue)"
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         if task == .loan {
