@@ -39,7 +39,7 @@ struct Bank {
     }
     
     private func makeTellerWorkByTask(for customer: Customer) {
-        guard let task = customer.taskType else {
+        guard let task = customer.bankingType else {
             return
         }
         

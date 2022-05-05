@@ -2,7 +2,7 @@ import Foundation
 
 struct Teller {
     func work(for customer: Customer) {
-        guard let task = customer.taskType else {
+        guard let task = customer.bankingType else {
             return
         }
         
