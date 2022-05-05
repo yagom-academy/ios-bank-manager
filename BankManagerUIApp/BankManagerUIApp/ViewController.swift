@@ -52,6 +52,16 @@ class ViewController: UIViewController {
         return button
     }()
     
+    let workTimeLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "업무시간 - "
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +72,8 @@ class ViewController: UIViewController {
         buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
         buttonHorizontalStackView.addArrangedSubview(clearButton)
         baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
+        
+        baseVerticalStackView.addArrangedSubview(workTimeLabel)
         
         baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
