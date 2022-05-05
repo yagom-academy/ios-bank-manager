@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankManager {
-    private let customerRange: ClosedRange = 10...30
+    private let customerRange: ClosedRange = 10...10
     private let menuString = """
     1 : 은행개점
     2 : 종료
@@ -17,8 +17,11 @@ struct BankManager {
     private var bank: Bank = Bank(numberOfCustomer: 0)
 
     mutating func startBanking() {
-        printMenu()
-        inputMenu()
+        //printMenu()
+        //inputMenu()
+        setUpBank()
+        bank.work()
+        
     }
 
     private func printMenu() {
@@ -38,7 +41,7 @@ struct BankManager {
         if menu == .open {
             setUpBank()
             bank.work()
-            startBanking()
+            //startBanking()
         } else if menu == .close {
             return
         }
