@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankManager {
-    private let customerRange: ClosedRange = 10...10
+    private let numberOfCustomer: Int = 10
     var bank: Bank = Bank(numberOfCustomer: 0)
 
     mutating func startBanking() {
@@ -17,10 +17,6 @@ struct BankManager {
     }
 
     private mutating func setUpBank() {
-        bank.setUpCustomer(number: generateRandomNumber(in: customerRange))
-    }
-
-    private func generateRandomNumber(in range: ClosedRange<Int>) -> Int {
-        return Int.random(in: range)
+        bank.setUpCustomer(numberOfCustomer)
     }
 }

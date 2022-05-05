@@ -27,7 +27,7 @@ struct Bank {
         self.numberOfCustomer = numberOfCustomer
     }
 
-    mutating func setUpCustomer(number: Int) {
+    mutating func setUpCustomer(_ number: Int) {
         self.numberOfCustomer = number
         addCustomerInLine()
     }
