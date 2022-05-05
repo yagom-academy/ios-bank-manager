@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct BankManager {
     private let customerRange: ClosedRange = 10...30
     private let menuString = """
