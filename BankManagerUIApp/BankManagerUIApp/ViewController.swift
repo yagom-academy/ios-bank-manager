@@ -20,6 +20,18 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    let buttonHorizontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        
+        return stackView
+    }()
+    
     let addCustomerButton: UIButton = {
         let button = UIButton()
         
@@ -45,6 +57,12 @@ class ViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(baseVerticalStackView)
+        
+        // Buttons
+        buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
+        buttonHorizontalStackView.addArrangedSubview(clearButton)
+        baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
+        
         baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
