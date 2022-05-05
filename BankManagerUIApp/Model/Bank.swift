@@ -82,5 +82,7 @@ final class Bank {
 
     func reset() {
         waitingNumber = 1
+        loanQueue.cancelAllOperations()
+        depositQueue.cancelAllOperations()
     }
 }
