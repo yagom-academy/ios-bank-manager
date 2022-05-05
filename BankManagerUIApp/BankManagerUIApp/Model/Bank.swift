@@ -14,9 +14,7 @@ struct Bank {
     private var currentTicketNumber = 1
     private let depositWindowQueue = OperationQueue()
     private let loanWindowQueue = OperationQueue()
-    private let operationGroup = DispatchGroup()
     var bankClerk = BankClerk()
-    
     
     init(depositClerkCount: Int, loanClerkCount: Int) {
         self.depositClerkCount = depositClerkCount
@@ -25,17 +23,13 @@ struct Bank {
     
     private func startWork() {
         assignClerkCount()
-        
         while !bankWaitingQueue.isEmpty {
             guard let customer = bankWaitingQueue.dequeue() else { return }
             guard let task = customer.task else { return }
-            
             let operation = BlockOperation {
                 self.bankClerk.processTask(for: customer)
-                operationGroup.leave()
             }
             
-            operationGroup.enter()
             switch task {
             case .deposit:
                 depositWindowQueue.addOperation(operation)
@@ -43,9 +37,7 @@ struct Bank {
                 loanWindowQueue.addOperation(operation)
             }
         }
-        operationGroup.notify(queue: .main) {
-            bankClerk.delegate?.endTask()
-        }
+        finishNotity()
     }
     
     mutating func addCustomers() -> [Customer] {
@@ -76,5 +68,13 @@ extension Bank {
     func stopOperation() {
         depositWindowQueue.cancelAllOperations()
         loanWindowQueue.cancelAllOperations()
+    }
+    
+    func finishNotity() {
+        depositWindowQueue.addBarrierBlock {
+            self.loanWindowQueue.addBarrierBlock {
+                self.bankClerk.delegate?.endTask()
+            }
+        }
     }
 }
