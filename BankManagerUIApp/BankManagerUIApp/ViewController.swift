@@ -148,16 +148,31 @@ class ViewController: UIViewController, SendDelegate {
     }
     
     func addToWorkingList(_ customer: Customer) {
-        let label = generateLabel(of: customer)
-        guard let waitinglabelArray = waitingVerticalStackView.subviews as? [UILabel] else {
+        DispatchQueue.main.async {
+            self.removeLabel(from: self.waitingVerticalStackView, customer)
+            self.workingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+        }
+    }
+    
+    func removeFromWorkingList(_ customer: Customer) {
+        DispatchQueue.main.async {
+            self.removeLabel(from: self.workingVerticalStackView, customer)
+        }
+    }
+    
+    private func removeLabel(from stackView: UIStackView, _ customer: Customer) {
+        guard let task = customer.bankingType else {
             return
         }
+        let text = "\(customer.number)-\(task.rawValue)"
         
         DispatchQueue.main.async {
-            for waitingLabel in waitinglabelArray {
-                if label.text == waitingLabel.text {
-                    waitingLabel.removeFromSuperview()
-                    self.workingVerticalStackView.addArrangedSubview(label)
+            guard let labelArray = stackView.subviews as? [UILabel] else {
+                return
+            }
+            for label in labelArray {
+                if text == label.text {
+                    label.removeFromSuperview()
                 }
             }
         }
