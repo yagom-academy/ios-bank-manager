@@ -1,19 +1,13 @@
 import Foundation
 
 struct BankManager {
-    private enum BankManagerMenu: String {
-        case open = "1"
-        case close = "2"
-    }
-    
     private let customerRange: ClosedRange = 10...30
     private let menuString = """
     1 : 은행개점
     2 : 종료
     입력 :
     """
-    private let numberOfTeller: Int = 1
-    private var bank: Bank = Bank(0, 0)
+    private var bank: Bank = Bank(numberOfCustomer: 0)
     
     mutating func startBanking() {
         printMenu()
@@ -36,7 +30,7 @@ struct BankManager {
         
         if menu == .open {
             setUpBank()
-            bank.makeTellerWork()
+            bank.work()
             startBanking()
         } else if menu == .close {
             return
@@ -44,11 +38,18 @@ struct BankManager {
     }
 
     private mutating func setUpBank() {
-        bank.setUpTeller(number: numberOfTeller)
         bank.setUpCustomer(number: generateRandomNumber(in: customerRange))
     }
     
     private func generateRandomNumber(in range: ClosedRange<Int>) -> Int {
         return Int.random(in: range)
+    }
+}
+
+// MARK: - BankManagerMenu
+extension BankManager {
+    private enum BankManagerMenu: String {
+        case open = "1"
+        case close = "2"
     }
 }
