@@ -34,7 +34,7 @@ struct Bank {
     }
 
     mutating private func addCustomerInLine() {
-        for number in startNumber...(startNumber + numberOfCustomer) {
+        for number in startNumber..<(startNumber + numberOfCustomer) {
             let customer = Customer(number)
             delegate?.addToWaitingList(customer)
             customerQueue.enqueue(customer)
