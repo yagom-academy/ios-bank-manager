@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 10
+        stackView.spacing = 15
         
         return stackView
     }()
@@ -81,6 +81,7 @@ class ViewController: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("고객 10명 추가", for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         return button
@@ -91,6 +92,7 @@ class ViewController: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("초기화", for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.setTitleColor(UIColor.systemRed, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         return button
@@ -102,6 +104,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "업무시간 - "
         label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
         
         return label
     }()
@@ -114,6 +117,7 @@ class ViewController: UIViewController {
         label.textColor = .white
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         
         return label
     }()
@@ -124,8 +128,9 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "업무중"
         label.textColor = .white
-        label.backgroundColor = .systemBlue
+        label.backgroundColor = .systemIndigo
         label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         
         return label
     }()
@@ -154,7 +159,6 @@ class ViewController: UIViewController {
         testLabel1.text = "1-대출"
         let testLabel2: UILabel = UILabel()
         testLabel2.text = "2-대출"
-
         
         waitingVerticalStackView.addArrangedSubview(testLabel2)
         waitingScrollView.addSubview(waitingVerticalStackView)
