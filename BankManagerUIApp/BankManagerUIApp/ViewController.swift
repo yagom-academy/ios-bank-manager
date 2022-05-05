@@ -20,6 +20,26 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    let addCustomerButton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        return button
+    }()
+    
+    let clearButton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("초기화", for: .normal)
+        button.setTitleColor(UIColor.systemRed, for: .normal)
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
