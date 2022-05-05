@@ -97,13 +97,14 @@ final class MainView: BaseUIView {
     
     // MARK: UIComponents - ScrollView
     
-    lazy var waitingClientScrollView: UIScrollView = {
+    private lazy var waitingClientScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
-    lazy var workingClientScrollView: UIScrollView = {
+    private lazy var workingClientScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
         return scrollView

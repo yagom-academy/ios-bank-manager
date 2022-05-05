@@ -30,6 +30,7 @@ final class BankTimer {
     func start() {
         currentStatus = .running
         timer = Timer.scheduledTimer(timeInterval: 0.003, target: self, selector: #selector(countUp), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer ?? Timer(), forMode: .common)
     }
 
     func stop() {
