@@ -86,6 +86,10 @@ class BankView: UIView {
     lazy var customerListStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.distribution = .fillEqually
+        stackView.addArrangedSubview(waitingStackView)
+        stackView.addArrangedSubview(taskingStackView)
         return stackView
     }()
     
@@ -95,15 +99,10 @@ class BankView: UIView {
         return stackView
     }()
     
-    lazy var ingStackView: UIStackView = {
+    lazy var taskingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
-    }()
-    
-    lazy var customerLabel: UILabel = {
-        let label = UILabel()
-        return label
     }()
     
     lazy var mainStackView: UIStackView =  {
@@ -114,6 +113,7 @@ class BankView: UIView {
         stackView.addArrangedSubview(buttonStackView)
         stackView.addArrangedSubview(timerLabel)
         stackView.addArrangedSubview(stateStackView)
+        stackView.addArrangedSubview(customerListStackView)
         return stackView
     }()
 }
