@@ -7,6 +7,7 @@ struct Bank {
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.deposit)
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.loan)
     private let bankingGroup = DispatchGroup()
+    private let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
     
     init(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
@@ -42,8 +43,6 @@ struct Bank {
         guard let task = customer.bankingType else {
             return
         }
-        
-        let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
         
         bankingQueue.async(group: bankingGroup) {
             switch task {
