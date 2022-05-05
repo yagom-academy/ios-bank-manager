@@ -8,23 +8,16 @@
 import Foundation
 
 protocol BankWindow: AnyObject {
-    func receive(_ customer: Customer)
-    var delegate: BankWindowDelegate? { get set }
-}
-
-protocol BankWindowDelegate: AnyObject {
-    func customerWorkDidStart(_ bankWindow: BankWindow, customer: Customer)
-    func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer)
+    func receive(start: () -> (), end: () -> ())
 }
 
 final class BankLoanWindow: BankWindow {
-    weak var delegate: BankWindowDelegate?
     private let workType: Banking = .loan
 
-    func receive(_ customer: Customer) {
-        delegate?.customerWorkDidStart(self, customer: customer)
+    func receive(start: () -> (), end: () -> ()) {
+        start()
         work()
-        delegate?.customerWorkDidFinish(self, customer: customer)
+        end()
     }
 
     private func work() {
@@ -35,13 +28,12 @@ final class BankLoanWindow: BankWindow {
 }
 
 final class BankDepositWindow: BankWindow {
-    weak var delegate: BankWindowDelegate?
     private let workType: Banking = .deposit
 
-    func receive(_ customer: Customer) {
-        delegate?.customerWorkDidStart(self, customer: customer)
+    func receive(start: () -> (), end: () -> ()) {
+        start()
         work()
-        delegate?.customerWorkDidFinish(self, customer: customer)
+        end()
     }
 
     private func work() {

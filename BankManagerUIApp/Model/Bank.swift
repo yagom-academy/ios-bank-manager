@@ -7,6 +7,11 @@
 
 import Foundation
 
+private enum Const {
+    static let numberOfDepositClerk = 2
+    static let numberOfLoanClerk = 1
+}
+
 protocol BankDelegate: AnyObject {
     func bankWorkDidFinish(_ bank: Bank)
     func customerWorkDidStart(_ bank: Bank, id: String)
@@ -26,15 +31,9 @@ final class Bank {
     init(loanWindow: BankWindow, depositWindow: BankWindow) {
         self.loanWindow = loanWindow
         self.depositWindow = depositWindow
-        self.loanWindow.delegate = self
-        self.depositWindow.delegate = self
         
-        loanQueue.maxConcurrentOperationCount = 1
-        depositQueue.maxConcurrentOperationCount = 2
-    }
-
-    func open() {
-        sendCustomerToClerk()
+        loanQueue.maxConcurrentOperationCount = Const.numberOfLoanClerk
+        depositQueue.maxConcurrentOperationCount = Const.numberOfDepositClerk
     }
 
     func add(customers: [Customer]) {
@@ -43,9 +42,11 @@ final class Bank {
         customers.forEach { customer in
             waitingQueue.enqueue(customer)
         }
+        
+        sendCustomerToWindow()
     }
 
-    private func sendCustomerToClerk() {
+    private func sendCustomerToWindow() {
         while let customer = waitingQueue.dequeue() {
             waitingNumber += 1
             
@@ -53,16 +54,25 @@ final class Bank {
             switch customer.workType {
             case .loan:
                 loanQueue.addOperation {
-                    self.loanWindow.receive(customer)
+                    self.loanWindow.receive {
+                        self.delegate?.customerWorkDidStart(self, id: customer.id)
+                    } end: {
+                        self.delegate?.customerWorkDidFinish(self, id: customer.id)
+                    }
+
                     self.group.leave()
                 }
             case .deposit:
                 depositQueue.addOperation {
-                    self.depositWindow.receive(customer)
+                    self.depositWindow.receive {
+                        self.delegate?.customerWorkDidStart(self, id: customer.id)
+                    } end: {
+                        self.delegate?.customerWorkDidFinish(self, id: customer.id)
+                    }
+
                     self.group.leave()
                 }
             }
-            
         }
         
         group.notify(queue: .main) {
@@ -72,15 +82,5 @@ final class Bank {
 
     func reset() {
         waitingNumber = 1
-    }
-}
-
-extension Bank: BankWindowDelegate {
-    func customerWorkDidStart(_ bankWindow: BankWindow, customer: Customer) {
-        delegate?.customerWorkDidStart(self, id: customer.id)
-    }
-
-    func customerWorkDidFinish(_ bankWindow: BankWindow, customer: Customer) {
-        delegate?.customerWorkDidFinish(self, id: customer.id)
     }
 }

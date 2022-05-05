@@ -7,17 +7,42 @@
 
 import UIKit
 
+private enum Const {
+    enum BaseStackView {
+        static let spacing: CGFloat = 15
+    }
+    
+    enum WaitStackView {
+        static let spacing: CGFloat = 8
+    }
+    
+    enum WorkStackView {
+        static let spacing: CGFloat = 8
+    }
+    
+    enum TimerStackView {
+        static let spacing: CGFloat = 8
+    }
+    
+    static let addButtonTitle = "고객 10명 추가"
+    static let resetButtonTitle = "초기화"
+    static let businessHourLabelText = "업무시간 -"
+    static let waitLabelText = "대기중"
+    static let workLabelText = "업무중"
+    static let timerLabelText = "00:00:000"
+}
+
 final class BankView: UIView {
     private lazy var baseStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             buttonStackView,
-            businessHoursLabel,
+            timerStackView,
             workStateStackView,
             customerStackView])
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 15
+        stackView.spacing = Const.BaseStackView.spacing
         
         return stackView
     }()
@@ -31,7 +56,7 @@ final class BankView: UIView {
     
     lazy var addCustomerbutton: UIButton = {
         let button = UIButton()
-        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitle(Const.addButtonTitle, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .caption2)
         
@@ -40,17 +65,34 @@ final class BankView: UIView {
     
     lazy var resetButton: UIButton = {
         let button = UIButton()
-        button.setTitle("초기화", for: .normal)
+        button.setTitle(Const.resetButtonTitle, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .caption2)
         
         return button
     }()
     
-    lazy var businessHoursLabel: UILabel = {
+    private lazy var timerStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [businessHourLabel, timerLabel])
+        stackView.distribution = .fillEqually
+        stackView.spacing = Const.TimerStackView.spacing
+        
+        return stackView
+    }()
+    
+    private lazy var businessHourLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간 - 00:00:000"
-        label.textAlignment = .center
+        label.text = Const.businessHourLabelText
+        label.textAlignment = .right
+        label.font = .preferredFont(forTextStyle: .title3)
+        
+        return label
+    }()
+    
+    lazy var timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = Const.timerLabelText
+        label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .title3)
         
         return label
@@ -65,7 +107,7 @@ final class BankView: UIView {
     
     private lazy var waitLabel: UILabel = {
         let label = UILabel()
-        label.text = "대기중"
+        label.text = Const.waitLabelText
         label.textAlignment = .center
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title1)
@@ -76,7 +118,7 @@ final class BankView: UIView {
     
     private lazy var workLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무중"
+        label.text = Const.workLabelText
         label.textAlignment = .center
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title1)
@@ -106,7 +148,7 @@ final class BankView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = Const.WaitStackView.spacing
         
         return stackView
     }()
@@ -115,7 +157,7 @@ final class BankView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = Const.WorkStackView.spacing
         
         return stackView
     }()

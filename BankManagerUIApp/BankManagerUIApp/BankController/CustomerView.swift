@@ -2,7 +2,7 @@
 //  CustomerView.swift
 //  BankManagerUIApp
 //
-//  Created by Eddy on 2022/05/03.
+//  Created by Eddy, dudu on 2022/05/03.
 //
 
 import UIKit
@@ -39,7 +39,6 @@ final class CustomerView: UIView {
 // MARK: - layout
 
 extension CustomerView {
-    
     private func layout() {
         addSubview(customerLabel)
         
