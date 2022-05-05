@@ -20,8 +20,10 @@ class ViewController: UIViewController {
     var timer: Timer?
     var time: Double = 0 {
         didSet {
-            dateFormatter.dateFormat = "mm : ss : SSS"
-            mainView.workingTimeLabel.text = dateFormatter.string(from: changeTimeFormat())
+            dateFormatter.dateFormat = "업무시간 - mm : ss : SSS"
+            guard let beginDate = dateFormatter.date(from: "업무시간 - 00 : 00 : 000") else { return }
+            let date = beginDate + time
+            mainView.workingTimeLabel.text = dateFormatter.string(from: date)
         }
     }
     
@@ -107,18 +109,6 @@ class ViewController: UIViewController {
         mainView.addTenCustomerButton.addTarget(self, action: #selector(addCustomer), for: .touchUpInside)
         mainView.resetButton.addTarget(self, action: #selector(resetAll), for: .touchUpInside)
     }
-    
-    private func changeTimeFormat() -> Date {
-        let miniute: Int = Int(time / 60)
-        let second: Int = miniute / 100
-        let nanosecond: Int = second / 1000
-        let date = DateComponents(minute: miniute, second: second, nanosecond: nanosecond)
-        guard let seperateTime = date.date else {
-            return Date()
-        }
-        return seperateTime
-    }
-    
 }
 
 

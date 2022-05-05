@@ -15,6 +15,7 @@ class MainView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
+        stackView.spacing = 12
         
         return stackView
     }()
@@ -22,7 +23,7 @@ class MainView: UIView {
     let workingTimeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .regular)
         label.textColor = .black
         return label
     }()
