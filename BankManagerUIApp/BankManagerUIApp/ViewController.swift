@@ -61,6 +61,7 @@ class ViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fillEqually
+        stackView.spacing = 10
         
         return stackView
     }()
@@ -72,6 +73,7 @@ class ViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fillEqually
+        stackView.spacing = 10
         
         return stackView
     }()
