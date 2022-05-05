@@ -44,7 +44,7 @@ struct Bank {
             return
         }
         
-        bankingQueue.async(group: bankingGroup) {
+        bankingQueue.sync {
             switch task {
             case .deposit:
                 depositWindow.wait()
