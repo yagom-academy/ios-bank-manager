@@ -43,20 +43,23 @@ struct Bank {
             return
         }
         
-        switch task {
-        case .deposit:
-            depositWindow.wait()
-            DispatchQueue.global().async(group: bankingGroup) {
-                teller.work(for: customer)
-                depositWindow.signal()
-            }
-        case .loan:
-            loanWindow.wait()
-            DispatchQueue.global().async(group: bankingGroup) {
-                teller.work(for: customer)
-                loanWindow.signal()
+        DispatchQueue.global().async(group: bankingGroup) {
+            switch task {
+            case .deposit:
+                depositWindow.wait()
+                DispatchQueue.global().async(group: bankingGroup) {
+                    teller.work(for: customer)
+                    depositWindow.signal()
+                }
+            case .loan:
+                loanWindow.wait()
+                DispatchQueue.global().async(group: bankingGroup) {
+                    teller.work(for: customer)
+                    loanWindow.signal()
+                }
             }
         }
+        
     }
     
     private func closeBanking(from startTime: CFAbsoluteTime, to endTime: CFAbsoluteTime) {
