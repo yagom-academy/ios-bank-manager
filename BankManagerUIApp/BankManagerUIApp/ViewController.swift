@@ -251,8 +251,12 @@ class ViewController: UIViewController, SendDelegate {
     }
     
     @objc func execution(_ sender: UIButton) {
-        DispatchQueue.global().async {
+        let group = DispatchGroup()
+        DispatchQueue.global().async(group: group) {
             self.bankManager.startBanking()
+        }
+        group.notify(queue: .main) {
+            self.bankManager.status = .notRunning
         }
     }
     
