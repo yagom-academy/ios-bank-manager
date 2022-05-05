@@ -35,7 +35,7 @@ final class BankManagerView: UIView {
         return view
     }()
     
-    private lazy var addCustomersButton: UIButton = {
+    lazy var addCustomersButton: UIButton = {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -97,11 +97,12 @@ final class BankManagerView: UIView {
         return view
     }()
     
-    private lazy var waitingVerticalStackView: UIStackView = {
+    lazy var waitingVerticalStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .fill
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.spacing = 8
         return view
     }()
@@ -111,6 +112,7 @@ final class BankManagerView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .fill
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.spacing = 8
         return view
     }()
