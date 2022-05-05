@@ -10,6 +10,7 @@ import Foundation
 protocol SendDelegate {
     func addToWaitingList(_ customer: Customer)
     func addToWorkingList(_ customer: Customer)
+    func removeFromWorkingList(_ customer: Customer)
 }
 
 struct Bank {
@@ -76,6 +77,7 @@ struct Bank {
                     loanWindow.signal()
                 }
             }
+            delegate?.removeFromWorkingList(customer)
         }
     }
 
