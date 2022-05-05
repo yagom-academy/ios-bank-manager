@@ -61,7 +61,7 @@ extension BankViewController {
     
     private func bind() {
         view = bankView
-        bankView.addCustomerbutton.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
+        bankView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonTapped), for: .touchUpInside)
         bankView.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
     }
     

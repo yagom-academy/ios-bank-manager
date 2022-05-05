@@ -48,13 +48,13 @@ final class BankView: UIView {
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [addCustomerbutton, resetButton])
+        let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
         stackView.distribution = .fillEqually
         
         return stackView
     }()
     
-    lazy var addCustomerbutton: UIButton = {
+    lazy var addCustomerButton: UIButton = {
         let button = UIButton()
         button.setTitle(Const.addButtonTitle, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
