@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class CustomerView: UIView {
-    private let number: Int
+    let number: Int
     private let task: String
     
     init(frame: CGRect, number: Int, task: String) {

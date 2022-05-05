@@ -8,8 +8,8 @@
 import Foundation
 
 protocol BankDelegate: AnyObject {
-    func start()
-    func finish()
+    func start(customer: Customer)
+    func finish(customer: Customer)
 }
 
 struct BankClerk {
@@ -20,10 +20,10 @@ struct BankClerk {
         let taskGroup = DispatchGroup()
         guard let taskTime = sortTaskTime(customer) else { return }
         
-        delegate?.start()
+        delegate?.start(customer: customer)
         taskGroup.enter()
         taskQueue.asyncAfter(deadline: .now() + taskTime) {
-            delegate?.finish()
+            delegate?.finish(customer: customer)
             taskGroup.leave()
         }
         taskGroup.wait()

@@ -37,12 +37,27 @@ final class BankManagerViewController: UIViewController {
 
 // MARK: - BankDelegate Method
 extension BankManagerViewController: BankDelegate {
-    func start() {
-        
+    func start(customer: Customer) {
+        DispatchQueue.main.async {
+            self.bankManagerView.waitingVerticalStackView.arrangedSubviews.forEach { view in
+                guard let customerView = view as? CustomerView else { return }
+                if customerView.number == customer.numberTicket {
+                    self.bankManagerView.waitingVerticalStackView.removeArrangedSubview(customerView)
+                    self.bankManagerView.workingVerticalStackView.addArrangedSubview(customerView)
+                }
+            }
+        }
     }
     
-    func finish() {
-        
+    func finish(customer: Customer) {
+        DispatchQueue.main.async {
+            self.bankManagerView.workingVerticalStackView.arrangedSubviews.forEach { view in
+                guard let customerView = view as? CustomerView else { return }
+                if customerView.number == customer.numberTicket {
+                    customerView.removeFromSuperview()
+                }
+            }
+        }
     }
 }
 

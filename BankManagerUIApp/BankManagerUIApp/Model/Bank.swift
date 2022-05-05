@@ -13,6 +13,8 @@ struct Bank {
     private let bankWaitingQueue = BankWaitingQueue.init(LinkedList<Customer>())
     private var currentTicketNumber = 1
     var bankClerk = BankClerk()
+    let depositWindowQueue = OperationQueue()
+    let loanWindowQueue = OperationQueue()
     
     init(depositClerkCount: Int, loanClerkCount: Int) {
         self.depositClerkCount = depositClerkCount
@@ -20,9 +22,6 @@ struct Bank {
     }
     
     private func startWork() {
-        let depositWindowQueue = OperationQueue()
-        let loanWindowQueue = OperationQueue()
-        
         assignClerkCount(at: depositWindowQueue, and: loanWindowQueue)
         
         while !bankWaitingQueue.isEmpty {

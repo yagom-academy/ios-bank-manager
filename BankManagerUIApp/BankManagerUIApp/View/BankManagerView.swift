@@ -107,7 +107,7 @@ final class BankManagerView: UIView {
         return view
     }()
     
-    private lazy var workingVerticalStackView: UIStackView = {
+    lazy var workingVerticalStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.alignment = .center
