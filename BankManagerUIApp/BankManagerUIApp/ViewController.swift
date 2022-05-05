@@ -175,7 +175,7 @@ class ViewController: UIViewController {
         waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor).isActive = true
         waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor).isActive = true
         waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
-        waitingScrollView.bottomAnchor.constraint(equalTo: taskQueueHorizontalStackView.bottomAnchor).isActive = true
+        waitingVerticalStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor).isActive = true
         
         workingVerticalStackView.addArrangedSubview(testLabel1)
         workingScrollView.addSubview(workingVerticalStackView)
@@ -184,7 +184,7 @@ class ViewController: UIViewController {
         workingVerticalStackView.centerXAnchor.constraint(equalTo: workingScrollView.centerXAnchor).isActive = true
         workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor).isActive = true
         workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
-        workingScrollView.bottomAnchor.constraint(equalTo: taskQueueHorizontalStackView.bottomAnchor).isActive = true
+        workingVerticalStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor).isActive = true
         
         baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
         //
