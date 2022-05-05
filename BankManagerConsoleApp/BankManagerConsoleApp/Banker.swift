@@ -23,10 +23,10 @@ final class Banker {
         let businessGroup = DispatchGroup()
         businessGroup.enter()
         DispatchQueue.global().async {
-            print("\(numberTicekt)번 고객 \(task) 시작")
+            NotificationCenter.default.post(name: .customerAlram, object: nil, userInfo: ["customerNumberTicekt": numberTicekt])
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + time) {
-            print("\(numberTicekt)번 고객 \(task) 종료")
+            NotificationCenter.default.post(name: .removeCustomerAlram, object: nil, userInfo: ["customerNumberTicekt": numberTicekt])
             businessGroup.leave()
         }
         businessGroup.wait()

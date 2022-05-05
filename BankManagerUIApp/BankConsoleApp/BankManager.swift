@@ -9,7 +9,8 @@ import Foundation
 
 protocol Manageable {
     func manageBanker()
-    func reportOfDay() -> String
+    func resetAll()
+    func addTenCustomer()
 }
 
 final class BankManager {

@@ -13,7 +13,6 @@ extension Notification.Name {
     static let timer = Notification.Name("timer")
 }
 
-
 class ViewController: UIViewController {
     var bankManager = BankManager()
     private lazy var mainView = MainView(frame: view.frame)
@@ -84,5 +83,22 @@ class ViewController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(addMilliseconds), userInfo: nil, repeats: true)
         }
     }
+    
+    @objc func addCustomer() {
+        bankManager.bank.addTenCustomer()
+        createTimer()
+    }
+    
+    @objc func resetAll() {
+        mainView.watingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        mainView.workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        timer?.invalidate()
+        time = 0
+        timer = nil
+        bankManager.bank.resetAll()
+        
+    }
 }
+
 

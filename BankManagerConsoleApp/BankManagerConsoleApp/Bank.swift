@@ -12,8 +12,6 @@ fileprivate extension Const {
     static let startTime: Double = 0
     static let customerRange = 10...30
     static let startCount: Int = 1
-    
-    static let twoDecimal = "%.2f"
 }
 
 final class Bank: Manageable {
@@ -25,6 +23,26 @@ final class Bank: Manageable {
     
     init() {
         reset()
+        depositQueue.maxConcurrentOperationCount = BankTask.deposit.numberOfBankers
+        loanQueue.maxConcurrentOperationCount = BankTask.loan.numberOfBankers
+    }
+    
+    func resetAll() {
+        depositQueue.cancelAllOperations()
+        loanQueue.cancelAllOperations()
+        numberOfCustomer = 0
+    }
+    
+    func addTenCustomer() {
+        let startNumberOfCumstomer = numberOfCustomer + 1
+        let newNumberOfCumstomer = numberOfCustomer + 10
+        for numberTicekt in startNumberOfCumstomer...newNumberOfCumstomer {
+            let customer = Customer(numberTicekt: numberTicekt)
+            customers.enQueue(data: customer)
+            NotificationCenter.default.post(name: .addCustomerAlram, object: nil, userInfo: ["oneCustomer": customer])
+        }
+        numberOfCustomer += 10
+        manageBanker()
     }
     
     func manageBanker() {
@@ -49,12 +67,6 @@ final class Bank: Manageable {
         }
         workGroup.notify(queue: .main) {
         }
-    }
-    
-    func reportOfDay() -> String {
-        let report = "오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무 시간은 초입니다."
-        reset()
-        return report
     }
     
     private func makeSemaphore() -> [BankTask: DispatchSemaphore] {
