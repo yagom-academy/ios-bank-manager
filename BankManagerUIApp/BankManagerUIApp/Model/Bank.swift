@@ -11,8 +11,10 @@ final class Bank {
     private let bankClerks: [BankClerk]
     private let clientCount: Int
     private var queueDictionary: [String: Queue<Client>]
-    private var totalClientCount: Int = 0
+    private var totalClientCount: Int = 1
     let bankTimer = BankTimer()
+    let depositOperationQueue = OperationQueue()
+    let loanOperationQueue = OperationQueue()
     
     init(bankClerks: [BankClerk],
          clientCount: Int,
@@ -37,7 +39,7 @@ final class Bank {
     }
     
     func receiveTenMoreClients() {
-        for order in totalClientCount ... totalClientCount + 10 {
+        for order in totalClientCount ... totalClientCount + 9 {
             classifyClients(waitingNumber: order)
             totalClientCount += 1
         }
@@ -91,9 +93,24 @@ final class Bank {
         queue: Queue<Client>,
         bankClerk: BankClerk
     ) {
-        DispatchQueue.global().async(group: group) {
-            while let client = queue.dequeue() {
-                bankClerk.work(client: client)
+        switch bankClerk.bankService {
+        case .deposit:
+            depositOperationQueue.maxConcurrentOperationCount = 2
+            group.enter()
+            depositOperationQueue.addOperation {
+                while let client = queue.dequeue() {
+                    bankClerk.work(client: client)
+                }
+                group.leave()
+            }
+        case .loan:
+            loanOperationQueue.maxConcurrentOperationCount = 1
+            group.enter()
+            loanOperationQueue.addOperation {
+                while let client = queue.dequeue() {
+                    bankClerk.work(client: client)
+                }
+                group.leave()
             }
         }
     }
@@ -102,7 +119,9 @@ final class Bank {
         queueDictionary[BankServiceType.deposit.description]?.clear()
         queueDictionary[BankServiceType.loan.description]?.clear()
         bankTimer.reset()
-        totalClientCount = .zero
+        depositOperationQueue.cancelAllOperations()
+        loanOperationQueue.cancelAllOperations()
+        totalClientCount = 1
     }
 }
 
