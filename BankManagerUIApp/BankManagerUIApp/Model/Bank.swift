@@ -55,22 +55,28 @@ struct Bank {
         guard let task = customer.bankingType else {
             return
         }
-                
+        
+        let group = DispatchGroup()
+        
         bankingQueue.sync {
             switch task {
             case .deposit:
                 depositWindow.wait()
-                bankingQueue.async(group: bankingGroup) {
+                bankingQueue.async(group: group) {
+                    delegate?.addToWorkingList(customer)
                     teller.work(for: customer)
                     depositWindow.signal()
                 }
             case .loan:
                 loanWindow.wait()
-                bankingQueue.async(group: bankingGroup) {
+                bankingQueue.async(group: group) {
+                    delegate?.addToWorkingList(customer)
                     teller.work(for: customer)
                     loanWindow.signal()
                 }
             }
+        }
+        group.notify(queue: .main) {
             delegate?.removeFromWorkingList(customer)
         }
     }
