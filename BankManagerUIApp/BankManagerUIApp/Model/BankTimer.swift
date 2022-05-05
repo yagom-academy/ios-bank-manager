@@ -24,7 +24,7 @@ final class BankTimer {
     private(set) var currentStatus: Status = .running
     
     deinit {
-        stop()
+        reset()
     }
 
     func start() {
@@ -40,15 +40,15 @@ final class BankTimer {
     func reset() {
         currentStatus = .notRunning
         timer?.invalidate()
-        currentTime = 0
+        currentTime = .zero
         timer = nil
     }
 
     @objc func countUp() {
         currentTime += 0.003
         let second = Int(fmod(currentTime, 60))
-        let milisecond = Int((currentTime - floor(currentTime))*100)
-        let nanosecond = Int(floor(Double(currentTime)*100000) - floor(Double(currentTime)*100)*1000)
+        let milisecond = Int((currentTime - floor(currentTime)) * 100)
+        let nanosecond = Int(floor(Double(currentTime) * 100000) - floor(Double(currentTime) * 100) * 1000)
         delegate?.applyTimerToLabel(second: second, milisecond: milisecond, nanosecond: nanosecond)
     }
 }

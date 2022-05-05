@@ -6,21 +6,16 @@
 
 import UIKit
 
+fileprivate extension Constants {
+    static let storyboardName = "Main"
+}
+
 final class MainViewController: UIViewController {
     private var bank: Bank?
     private lazy var mainView = MainView(frame: view.bounds)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view = mainView
-        setUpNotificationCenter()
-        setUpButtonAction()
-        bank?.bankTimer.delegate = self
-        bank?.open()
-    }
-    
     static func instance(bank: Bank) -> MainViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.storyboardName, bundle: nil)
         
         guard let mainViewController = storyboard.instantiateViewController(withIdentifier: identifier) as? MainViewController else {
             return MainViewController()
@@ -30,6 +25,15 @@ final class MainViewController: UIViewController {
         return mainViewController
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view = mainView
+        setUpNotificationCenter()
+        setUpButtonAction()
+        bank?.bankTimer.delegate = self
+        bank?.open()
+    }
+
     private func setUpNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(addClientToStackView), name: .didRecieveClient, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateClientStackView), name: .didAssignClientToBankClerk, object: nil)
@@ -62,11 +66,11 @@ extension MainViewController {
                     break
                 }
                 
-                guard let test = label.text?.waitingNumber else {
+                guard let waitingNumber = label.text?.waitingNumber else {
                     break
                 }
                                 
-                if String(client.waitingNumber) == test {
+                if String(client.waitingNumber) == waitingNumber {
                     label.removeFromSuperview()
                     self.mainView.workingClientStackView.addArrangedSubview(label)
                 }
@@ -85,11 +89,11 @@ extension MainViewController {
                     break
                 }
                 
-                guard let test = label.text?.waitingNumber else {
+                guard let waitingNumber = label.text?.waitingNumber else {
                     break
                 }
                 
-                if String(client.waitingNumber) == test {
+                if String(client.waitingNumber) == waitingNumber {
                     label.removeFromSuperview()
                 }
             }
@@ -109,7 +113,7 @@ extension MainViewController {
     
     @objc private func reset() {
         bank?.reset()
-        mainView.workTimerLabel.text = "00:00:000"
+        mainView.workTimerLabel.text = Constants.workTimerLabelTitle
         mainView.waitingClientStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }

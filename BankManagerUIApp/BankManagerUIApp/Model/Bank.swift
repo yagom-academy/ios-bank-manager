@@ -7,14 +7,18 @@
 
 import Foundation
 
+fileprivate extension Constants {
+    static let ten: Int = 10
+}
+
 final class Bank {
     private let bankClerks: [BankClerk]
     private let clientCount: Int
     private var queueDictionary: [String: Queue<Client>]
     private var totalClientCount: Int = 1
+    private let depositOperationQueue = OperationQueue()
+    private let loanOperationQueue = OperationQueue()
     let bankTimer = BankTimer()
-    let depositOperationQueue = OperationQueue()
-    let loanOperationQueue = OperationQueue()
     
     init(bankClerks: [BankClerk],
          clientCount: Int,
@@ -39,7 +43,7 @@ final class Bank {
     }
     
     func receiveTenMoreClients() {
-        for order in totalClientCount ... totalClientCount + 9 {
+        for order in totalClientCount ..< totalClientCount + Constants.ten {
             classifyClients(waitingNumber: order)
             totalClientCount += 1
         }
@@ -93,9 +97,10 @@ final class Bank {
         queue: Queue<Client>,
         bankClerk: BankClerk
     ) {
+        setUpOperationQueue()
+        
         switch bankClerk.bankService {
         case .deposit:
-            depositOperationQueue.maxConcurrentOperationCount = 2
             group.enter()
             depositOperationQueue.addOperation {
                 while let client = queue.dequeue() {
@@ -104,7 +109,6 @@ final class Bank {
                 group.leave()
             }
         case .loan:
-            loanOperationQueue.maxConcurrentOperationCount = 1
             group.enter()
             loanOperationQueue.addOperation {
                 while let client = queue.dequeue() {
@@ -113,6 +117,11 @@ final class Bank {
                 group.leave()
             }
         }
+    }
+    
+    private func setUpOperationQueue() {
+        depositOperationQueue.maxConcurrentOperationCount = Constants.numberOfDepositBankClerks
+        loanOperationQueue.maxConcurrentOperationCount = Constants.numberOfLoanBankClerks
     }
     
     func reset() {

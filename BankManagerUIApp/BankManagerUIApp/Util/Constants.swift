@@ -8,4 +8,6 @@
 enum Constants {
     static let numberOfDepositBankClerks: Int = 2
     static let numberOfLoanBankClerks: Int = 1
+    
+    static let workTimerLabelTitle = "00:00:000"
 }

@@ -7,6 +7,17 @@
 
 import UIKit
 
+fileprivate extension Constants {
+    static let spacing3: CGFloat = 3
+    static let spacing5: CGFloat = 5
+    static let spacing10: CGFloat = 10
+    static let addClientButtonTitle = "고객 10명 추가"
+    static let resetButtonTitle = "초기화"
+    static let workTimeLabelTitle = "업무시간 - "
+    static let waitingLabelTitle = "대기중"
+    static let workingLabelTitle = "업무중"
+}
+
 final class MainView: BaseUIView {
     
     // MARK: UIComponents - UIStackView
@@ -16,7 +27,7 @@ final class MainView: BaseUIView {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = Constants.spacing10
         
         return stackView
     }()
@@ -36,7 +47,7 @@ final class MainView: BaseUIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.spacing = 3
+        stackView.spacing = Constants.spacing3
         
         return stackView
     }()
@@ -67,7 +78,7 @@ final class MainView: BaseUIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 5
+        stackView.spacing = Constants.spacing5
         
         return stackView
     }()
@@ -79,7 +90,7 @@ final class MainView: BaseUIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 5
+        stackView.spacing = Constants.spacing5
         
         return stackView
     }()
@@ -103,7 +114,7 @@ final class MainView: BaseUIView {
     lazy var addClientButton: UIButton = {
         let button = UIButton()
         
-        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitle(Constants.addClientButtonTitle, for: .normal)
         button.setTitleColor( .systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -114,7 +125,7 @@ final class MainView: BaseUIView {
     lazy var resetButton: UIButton = {
         let button = UIButton()
         
-        button.setTitle("초기화", for: .normal)
+        button.setTitle(Constants.resetButtonTitle, for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -128,7 +139,7 @@ final class MainView: BaseUIView {
     private lazy var workTimeLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "업무시간 - "
+        label.text = Constants.workTimeLabelTitle
         label.textColor = .black
         label.textAlignment = .right
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -140,7 +151,7 @@ final class MainView: BaseUIView {
     lazy var workTimerLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "00:00:00"
+        label.text = Constants.workTimerLabelTitle
         label.textColor = .black
         label.textAlignment = .left
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -151,7 +162,7 @@ final class MainView: BaseUIView {
 
     private lazy var waitingLabel: UILabel = {
         let label = UILabel()
-        label.text = "대기중"
+        label.text = Constants.waitingLabelTitle
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .green
@@ -163,7 +174,7 @@ final class MainView: BaseUIView {
     
     private lazy var workingLabel: UILabel = {
        let label = UILabel()
-        label.text = "업무중"
+        label.text = Constants.workingLabelTitle
         label.backgroundColor = .blue
         label.textAlignment = .center
         label.textColor = .white

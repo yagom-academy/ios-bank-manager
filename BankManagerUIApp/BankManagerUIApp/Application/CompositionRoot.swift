@@ -68,19 +68,17 @@ final class CompositionRoot {
     ) -> [BankClerk] {
         var bankClerks: [BankClerk] = []
         
-        for order in 1 ... numberOfDepositBankClerks {
+        for _ in 1 ... numberOfDepositBankClerks {
             bankClerks.append(
                 BankClerk(
-                    name: "\(BankServiceType.deposit)\(order)",
                     bankService: .deposit
                 )
             )
         }
         
-        for order in 1 ... numberOfLoanBankClerks {
+        for _ in 1 ... numberOfLoanBankClerks {
             bankClerks.append(
                 BankClerk(
-                    name: "\(BankServiceType.loan)\(order)",
                     bankService: .loan
                 )
             )
