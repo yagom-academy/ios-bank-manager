@@ -24,12 +24,12 @@ class BankView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.addArrangedSubview(addCustomerButtom)
+        stackView.addArrangedSubview(addCustomerButton)
         stackView.addArrangedSubview(resetButton)
         return stackView
     }()
     
-    lazy var addCustomerButtom: UIButton = {
+    lazy var addCustomerButton: UIButton = {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -56,16 +56,29 @@ class BankView: UIView {
     lazy var stateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.addArrangedSubview(waitingLabel)
+        stackView.addArrangedSubview(taskingLabel)
         return stackView
     }()
     
     lazy var waitingLabel: UILabel = {
         let label = UILabel()
+        label.text = "대기중"
+        label.textColor = .white
+        label.backgroundColor = .systemGreen
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
-    lazy var ingLabel: UILabel = {
+    lazy var taskingLabel: UILabel = {
         let label = UILabel()
+        label.text = "업무중"
+        label.textColor = .white
+        label.backgroundColor = .systemBlue
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
@@ -100,7 +113,7 @@ class BankView: UIView {
         stackView.spacing = 15
         stackView.addArrangedSubview(buttonStackView)
         stackView.addArrangedSubview(timerLabel)
-        
+        stackView.addArrangedSubview(stateStackView)
         return stackView
     }()
 }
