@@ -130,6 +130,9 @@ class ViewController: UIViewController {
         return label
     }()
     
+    let waitingScrollView: UIScrollView = UIScrollView()
+    let workingScrollView: UIScrollView = UIScrollView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
