@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         stackView.distribution = .fillEqually
         
         return stackView
-    }
+    }()
     
     let addCustomerButton: UIButton = {
         let button = UIButton()
