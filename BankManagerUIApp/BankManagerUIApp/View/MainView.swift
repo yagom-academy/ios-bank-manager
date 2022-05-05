@@ -67,7 +67,7 @@ final class MainView: BaseUIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 3
+        stackView.spacing = 5
         
         return stackView
     }()
@@ -79,7 +79,7 @@ final class MainView: BaseUIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 3
+        stackView.spacing = 5
         
         return stackView
     }()
@@ -137,7 +137,7 @@ final class MainView: BaseUIView {
         return label
     }()
     
-    private lazy var workTimerLabel: UILabel = {
+    lazy var workTimerLabel: UILabel = {
         let label = UILabel()
         
         label.text = "00:00:00"
@@ -222,7 +222,7 @@ final class MainView: BaseUIView {
             workingClientStackView.bottomAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.bottomAnchor),
             workingClientStackView.leadingAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.leadingAnchor),
             workingClientStackView.trailingAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.trailingAnchor),
-            workingClientStackView.widthAnchor.constraint(equalTo: workingClientScrollView.contentLayoutGuide.widthAnchor)
+            workingClientStackView.widthAnchor.constraint(equalTo: workingClientScrollView.frameLayoutGuide.widthAnchor)
         ])
     }
 }

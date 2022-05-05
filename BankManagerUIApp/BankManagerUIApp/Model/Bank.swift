@@ -11,7 +11,7 @@ final class Bank {
     private let bankClerks: [BankClerk]
     private let clientCount: Int
     private let queueDictionary: [String: Queue<Client>]
-    private let bankTimer = BankTimer()
+    let bankTimer = BankTimer()
     
     init(bankClerks: [BankClerk],
          clientCount: Int,
@@ -24,11 +24,11 @@ final class Bank {
     
     func open() {
         bankTimer.start()
-        receiveClients()
+        receiveClients(clientCount: clientCount)
         assignClientToBankClerk()
     }
     
-    private func receiveClients() {
+    func receiveClients(clientCount: Int = 10) {
         for order in 1 ... clientCount {
             classifyClients(waitingNumber: order)
         }
@@ -39,8 +39,10 @@ final class Bank {
         switch client.bankService {
         case .deposit:
             queueDictionary[BankServiceType.deposit.description]?.enqueue(client)
+            NotificationCenter.default.post(name: .didRecieveClient, object: client)
         case .loan:
             queueDictionary[BankServiceType.loan.description]?.enqueue(client)
+            NotificationCenter.default.post(name: .didRecieveClient, object: client)
         }
     }
     
@@ -63,7 +65,7 @@ final class Bank {
             )
         }
         
-        group.notify(queue: .main) {
+        group.notify(queue: .global()) {
             self.bankTimer.stop()
         }
     }

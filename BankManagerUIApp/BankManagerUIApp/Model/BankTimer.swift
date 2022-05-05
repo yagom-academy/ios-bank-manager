@@ -7,10 +7,15 @@
 
 import Foundation
 
+protocol TimerDelegate: AnyObject {
+    func applyTimerToLabel(second: Int, milisecond: Int, nanosecond: Int)
+}
+
 final class BankTimer {
     private var timer: Timer?
-    private var startTime: Date = Date()
-
+    private var currentTime: Double = 0.0
+    weak var delegate: TimerDelegate?
+    
     deinit {
         stop()
     }
@@ -29,9 +34,10 @@ final class BankTimer {
     }
 
     @objc func countUp() {
-        let timeInterval = Date().timeIntervalSince(startTime)
-        let second = Int(fmod(timeInterval, 60))
-        let miliSecond = Int((timeInterval - floor(timeInterval))*100)
-        let nanoSecond = Int(floor(Double(timeInterval)*100000) - floor(Double(timeInterval)*100)*1000)
+        currentTime += 0.0001
+        let second = Int(fmod(currentTime, 60))
+        let milisecond = Int((currentTime - floor(currentTime))*100)
+        let nanosecond = Int(floor(Double(currentTime)*100000) - floor(Double(currentTime)*100)*1000)
+        delegate?.applyTimerToLabel(second: second, milisecond: milisecond, nanosecond: nanosecond)
     }
 }

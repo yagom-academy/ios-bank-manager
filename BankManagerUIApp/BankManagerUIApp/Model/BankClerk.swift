@@ -17,6 +17,10 @@ final class BankClerk {
     }
     
     func work(client: Client) {
+        print("\(client.bankService)\(client.waitingNumber)업무시작")
+        NotificationCenter.default.post(name: .didAssignClientToBankClerk, object: client)
         Thread.sleep(forTimeInterval: self.bankService.requiredTime)
+        NotificationCenter.default.post(name: .didFinishWork, object: client)
+        print("\(client.bankService)\(client.waitingNumber)업무종료")
     }
 }
