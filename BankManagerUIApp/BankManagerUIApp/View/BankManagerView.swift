@@ -43,7 +43,7 @@ final class BankManagerView: UIView {
         return button
     }()
     
-    private lazy var resetButton: UIButton = {
+    lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)

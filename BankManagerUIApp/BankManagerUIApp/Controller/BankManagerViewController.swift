@@ -26,6 +26,7 @@ final class BankManagerViewController: UIViewController {
     
     private func configureButtons() {
         bankManagerView.addCustomersButton.addTarget(self, action: #selector(addCustomersButtonTapped), for: .touchUpInside)
+        bankManagerView.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
     }
     
     @objc private func addCustomersButtonTapped() {
@@ -38,8 +39,50 @@ final class BankManagerViewController: UIViewController {
         }
     }
     
+    @objc private func resetButtonTapped() {
+        resetTimer()
+        bank.stopOperation()
+        bank.resetTicketNumber()
+        resetStack()
+    }
+    
+    func resetStack() {
+        bankManagerView.waitingVerticalStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+    }
+    
     private func configureView() {
         self.view = bankManagerView
+    }
+}
+
+// MARK: - Timer Method
+private extension BankManagerViewController {
+    @objc func timesUp() {
+        self.time += 1
+    }
+    
+    func startTimer() {
+        guard self.timer == nil else { return }
+        self.timer = Timer.scheduledTimer(timeInterval: 0.001,
+                                     target: self,
+                                     selector: #selector(timesUp),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    func resetTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
+        time = 0
+    }
+
+    func translateTime(_ time: Int) -> (String, String, String) {
+        let minute = String(format: "%02d", (time / (1000 * 60)) % 60)
+        let second = String(format: "%02d", ((time / 1000) % 60))
+        let milliSecond = String(format: "%03d", (time % 1000))
+        return (minute, second, milliSecond)
     }
 }
 
@@ -69,25 +112,3 @@ extension BankManagerViewController: BankDelegate {
     }
 }
 
-// MARK: - Timer Method
-private extension BankManagerViewController {
-    func startTimer() {
-        guard self.timer == nil else { return }
-        self.timer = Timer.scheduledTimer(timeInterval: 0.001,
-                                     target: self,
-                                     selector: #selector(timesUp),
-                                     userInfo: nil,
-                                     repeats: true)
-    }
-    
-    @objc func timesUp() {
-        self.time += 1
-    }
-    
-    func translateTime(_ time: Int) -> (String, String, String) {
-        let minute = String(format: "%02d", (time / (1000 * 60)) % 60)
-        let second = String(format: "%02d", ((time / 1000) % 60))
-        let milliSecond = String(format: "%03d", (time % 1000))
-        return (minute, second, milliSecond)
-    }
-}
