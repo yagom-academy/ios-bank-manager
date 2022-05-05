@@ -8,7 +8,8 @@
 import Foundation
 
 protocol SendDelegate {
-    func send(customer: Customer)
+    func addToWaitingList(_ customer: Customer)
+    func addToWorkingList(_ customer: Customer)
 }
 
 struct Bank {
@@ -33,7 +34,7 @@ struct Bank {
     private func addCustomerInLine() {
         for number in 1...numberOfCustomer {
             let customer = Customer(number)
-            delegate?.send(customer: customer)
+            delegate?.addToWaitingList(customer)
             customerQueue.enqueue(customer)
         }
     }

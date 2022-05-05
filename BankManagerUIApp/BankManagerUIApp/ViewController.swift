@@ -140,9 +140,9 @@ class ViewController: UIViewController, SendDelegate {
     let waitingScrollView: UIScrollView = UIScrollView()
     let workingScrollView: UIScrollView = UIScrollView()
     
-    func send(customer: Customer) {
+    func addToWaitingList(_ customer: Customer) {
         DispatchQueue.main.async {
-            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: _ customer))
         }
     }
     
