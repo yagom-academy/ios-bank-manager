@@ -12,24 +12,12 @@ class BankView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        addMainStackView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-//    func setLabelText() {
-//        self.addSubview(timerLabel)
-//        greetLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        greetLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-//    }
-    
-    let mainStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        
-        return stackView
-    }()
     
     // MARK: - 추가 & 초기화 버튼
     let buttonStackView: UIStackView = {
@@ -94,4 +82,24 @@ class BankView: UIView {
         let label = UILabel()
         return label
     }()
+    
+    let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        return stackView
+    }()
+}
+
+extension BankView {
+    private func addMainStackView() {
+        self.addSubview(mainStackView)
+        
+        NSLayoutConstraint.activate([
+            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
 }
