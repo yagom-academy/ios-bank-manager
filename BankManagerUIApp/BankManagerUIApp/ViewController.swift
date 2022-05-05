@@ -54,6 +54,28 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    let waitingVerticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    let workingVerticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+
     let addCustomerButton: UIButton = {
         let button = UIButton()
         
