@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Queue<List: Listable> {
+class Queue<List: Listable> {
     private var list: List
     
     init(list: List) {
@@ -26,15 +26,15 @@ struct Queue<List: Listable> {
         return list.first
     }
     
-    mutating func enqueue(_ value: List.Element) {
+    func enqueue(_ value: List.Element) {
         list.append(value: value)
     }
     
-    mutating func dequeue() -> List.Element? {
+    func dequeue() -> List.Element? {
         return list.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         list.removeAll()
     }
 }
