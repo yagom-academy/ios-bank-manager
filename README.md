@@ -4,7 +4,7 @@
 
 ## 구현 화면
 
-|Console|iOS|
+|Console[STEP1 ~ 3]|iOS[STEP4]|
 |:---:|:---:|
 |<img src="https://i.imgur.com/CGOX2dN.gif"/>|<img src="https://i.imgur.com/6b9oDjs.gif"/>|
 
@@ -24,7 +24,25 @@
 ---
 
 ## 키워드
-- 정리하기
+- `GCD`
+    - `DispatchGroup`
+    - `DispatchSemaphore`
+    - `DispatchQueue`
+- `OperationQueue`
+- `Race Condition` / `Data Race`
+- `RunLoop`
+- `Nested Types`
+- `Queue`
+- `LinkedList`
+- `Protocol`
+- `Generic`
+- `UnitTest`
+- `DI(Dependency Injection)` - `CompositionRoot`
+- `NotificationCenter`
+- `programmatic UI`
+- `Timer`
+- `Cocoapods`
+- `SwiftLint library`
 
 ---
 
@@ -230,33 +248,33 @@ func work(client: Client) {
 ---
 # 🪧파프리, 마이노팀 그라운드 룰
 ## ✏️ 스크럼
-스크럼은 딱딱한 분위기보단 자유롭고 부드러운 분위기로 😋
-매일 아침 10시 30분, 디스코드에서 진행
-어제의 활동 리뷰
-오늘 활동 예정 사항 / 목표
-자신의 부족한 부분 / 우리 팀이 아쉬운 부분 토론
-컨디션 공유 😰
-공유하고 싶은 이슈, 꿀팁 공유
-스크럼 진행시간은 최대 30분을 넘기지 않기 ⏱
-상황에 따라 조정 가능
+- 스크럼은 딱딱한 분위기보단 자유롭고 부드러운 분위기로 😋
+- 매일 아침 10시 30분, 디스코드에서 진행
+- 어제의 활동 리뷰
+- 오늘 활동 예정 사항 / 목표
+- 자신의 부족한 부분 / 우리 팀이 아쉬운 부분 토론
+- 컨디션 공유 😰
+- 공유하고 싶은 이슈, 꿀팁 공유
+- 스크럼 진행시간은 최대 30분을 넘기지 않기 ⏱
+- 상황에 따라 조정 가능
 
 ### 하루 일정
-데일리 스크럼
-점심시간: 12:00 ~ 14:00
-저녁시간: 18:00 ~ 20:00
-유동적
+- 데일리 스크럼
+- 점심시간: 12:00 ~ 14:00
+- 저녁시간: 18:00 ~ 20:00
+- 유동적
 
 ---
 
 ## 🪧 프로젝트
-프로젝트 협업 관련된 규칙 ( 지속적으로 업데이트 예정 ) / 야곰캠프에 있는 규칙을 기본으로 🤓
+- 프로젝트 협업 관련된 규칙 ( 지속적으로 업데이트 예정 ) / 야곰캠프에 있는 규칙을 기본으로 🤓
 
 ### 코딩 컨벤션
-SwiftLint의 Default Rule로 진행
+- SwiftLint의 Default Rule로 진행
 
 ### Commit 규칙
-커밋 제목은 최대 50자 입력
-본문은 한 줄 최대 72자 입력
+- 커밋 제목은 최대 50자 입력
+- 본문은 한 줄 최대 72자 입력
 
 ### Commit 제목 규칙
 - 기능(feat): 새로운 기능을 추가
@@ -268,10 +286,11 @@ SwiftLint의 Default Rule로 진행
 - 기타(chore): 빌드 업무 수정, 패키지 매니저 설정 등 위에 해당되지 않는 모든 변경(제품 코드 수정 없음)
 
 ### Commit Body 규칙
-제목 끝에 마침표(.) 금지
-한글로 작성
+- 끝에 마침표(.) 금지
+- 한글로 작성
 
 ### 브랜치 이름 규칙
-`STEP1`, `STEP2`, `STEP3`
+`STEP1`, `STEP2`, `STEP3`, `STEP4`
+
 
 
