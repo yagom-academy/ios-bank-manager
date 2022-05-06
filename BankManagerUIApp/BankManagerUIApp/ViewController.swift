@@ -8,7 +8,10 @@ import UIKit
 
 final class ViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
-    var bank = Bank()
+    private var bank = Bank()
+    private var timer = Timer()
+    private var counter = 0.001
+    private var isPlay = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,19 @@ final class ViewController: UIViewController {
     
     @objc private func setInitialState() {
         print("초기화됨")
+    }
+    
+    private func startTimer() {
+        if isPlay {
+            return
+        }
+        isPlay = true
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateTime() {
+        self.counter += 0.001
+        bankView.timerLabel.text = String(format: "%.3f", counter)
     }
 }
 
@@ -49,6 +65,7 @@ extension ViewController: BankDelegate {
     
     func sendTaskingCustomer(customer: Customer) {
         DispatchQueue.main.async {
+            self.startTimer()
             self.bankView.waitingStackView.arrangedSubviews.forEach {
                 let label = $0 as? UILabel
                 if label?.text == "\(customer.number) - \(customer.task.title)" {
