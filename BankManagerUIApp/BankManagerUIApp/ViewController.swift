@@ -48,7 +48,15 @@ extension ViewController: BankDelegate {
     }
     
     func sendTaskingCustomer(customer: Customer) {
-        //
+        DispatchQueue.main.async {
+            self.bankView.waitingStackView.arrangedSubviews.forEach {
+                let label = $0 as? UILabel
+                if label?.text == "\(customer.number) - \(customer.task.title)" {
+                    $0.removeFromSuperview()
+                    self.bankView.taskingStackView.addArrangedSubview($0)
+                }
+            }
+        }
     }
     
     func sendEndCustomer(customer: Customer) {
