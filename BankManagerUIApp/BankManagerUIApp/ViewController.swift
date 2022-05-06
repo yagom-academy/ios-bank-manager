@@ -73,7 +73,7 @@ final class ViewController: UIViewController {
 }
 
 extension ViewController: BankDelegate {
-    func customerLabel(customer: Customer) -> UILabel {
+    private func customerLabel(customer: Customer) -> UILabel {
         let label = UILabel()
          label.textAlignment = .center
          label.font = UIFont.preferredFont(forTextStyle: .title3)
