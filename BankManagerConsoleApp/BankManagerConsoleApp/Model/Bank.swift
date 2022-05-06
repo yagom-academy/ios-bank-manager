@@ -17,7 +17,7 @@ struct Bank: Measurable {
     private var clients: Queue<Client>
     private let workGroup = DispatchGroup()
     
-    private var totalClients: Int {
+    private var totalClientsCount: Int {
         return Int.random(in: ClientCount.minimum.rawValue...ClientCount.maximum.rawValue)
     }
     
@@ -42,7 +42,7 @@ struct Bank: Measurable {
     }
     
     func giveWaitingNumber() -> Int? {
-        let totalClients = totalClients
+        let totalClients = totalClientsCount
         for waitingNumber in ClientCount.first.rawValue...totalClients {
             guard let task = Task.random else {
                 return nil
