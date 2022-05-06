@@ -12,8 +12,10 @@ final class BankManager {
     static let limit = 31
     static let range = 10...30
     static let whiteSpace = ""
+    static let depositNumberOfClerk = 2
     static let depositTaskTime = 0.7
     static let depositTaskName = "예금"
+    static let loanNumberOfClerk = 1
     static let loanTaskTime = 1.1
     static let loanTaskName = "대출"
   }
@@ -32,7 +34,8 @@ final class BankManager {
 
       switch menu {
       case .open:
-        let bank = Bank(maxClient: Constants.limit)
+        let totalClerk = Constants.depositNumberOfClerk + Constants.loanNumberOfClerk
+        let bank = Bank(maxClient: Constants.limit, totalClerkCount: totalClerk)
         let clients = createClients()
         bank.addClients(clients)
         bank.open()
@@ -44,8 +47,16 @@ final class BankManager {
 
   private func createClients() -> [Client] {
     let tasks = [
-      BankTask(name: Constants.depositTaskName, time: Constants.depositTaskTime, numberOfClerk: 2),
-      BankTask(name: Constants.loanTaskName, time: Constants.loanTaskTime, numberOfClerk: 1)
+      BankTask(
+        name: Constants.depositTaskName,
+        time: Constants.depositTaskTime,
+        numberOfClerk: Constants.depositNumberOfClerk
+      ),
+      BankTask(
+        name: Constants.loanTaskName,
+        time: Constants.loanTaskTime,
+        numberOfClerk: Constants.loanNumberOfClerk
+      )
     ]
     var clients = [Client]()
     for number in 1...Int.random(in: Constants.range) {

@@ -9,11 +9,13 @@ import Foundation
 
 final class Bank {
   private var clientQueue: BankQueue<Client>
+  private var totalClerk: DispatchSemaphore
   private var totalClientCount = Int.zero
   private var totalExecuteTime = Double.zero
 
-  init(maxClient: Int) {
+  init(maxClient: Int, totalClerkCount: Int) {
     clientQueue = BankQueue(limit: maxClient)
+    totalClerk = DispatchSemaphore(value: totalClerkCount)
   }
 
   func open() {
@@ -33,10 +35,12 @@ final class Bank {
   private func executeBankTask() {
     let group = DispatchGroup()
     while let client = clientQueue.dequeue() {
+      totalClerk.wait()
       DispatchQueue.global().async(group: group) {
         client.taskType.semaphore.wait()
         client.taskType.execute(client)
         client.taskType.semaphore.signal()
+        self.totalClerk.signal()
       }
     }
     group.wait()
