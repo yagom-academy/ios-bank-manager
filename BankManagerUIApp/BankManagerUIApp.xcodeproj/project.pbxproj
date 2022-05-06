@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AC1D2DC52823A1E00075135E /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D2DBE2823A1DF0075135E /* BankClerk.swift */; };
 		AC1D2DC62823A1E00075135E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D2DBF2823A1DF0075135E /* Customer.swift */; };
-		AC1D2DC72823A1E00075135E /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D2DC02823A1DF0075135E /* BankManager.swift */; };
 		AC1D2DC82823A1E00075135E /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D2DC12823A1DF0075135E /* Bank.swift */; };
 		AC1D2DC92823A1E00075135E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D2DC32823A1DF0075135E /* Queue.swift */; };
 		AC1D2DCA2823A1E00075135E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D2DC42823A1DF0075135E /* LinkedList.swift */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		AC1D2DBE2823A1DF0075135E /* BankClerk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		AC1D2DBF2823A1DF0075135E /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		AC1D2DC02823A1DF0075135E /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		AC1D2DC12823A1DF0075135E /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		AC1D2DC32823A1DF0075135E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		AC1D2DC42823A1DF0075135E /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			children = (
 				AC1D2DBE2823A1DF0075135E /* BankClerk.swift */,
 				AC1D2DBF2823A1DF0075135E /* Customer.swift */,
-				AC1D2DC02823A1DF0075135E /* BankManager.swift */,
 				AC1D2DC12823A1DF0075135E /* Bank.swift */,
 			);
 			path = Bank;
@@ -303,7 +300,6 @@
 				AC51E6E32822669A00F320D2 /* BankView.swift in Sources */,
 				AC1D2DC82823A1E00075135E /* Bank.swift in Sources */,
 				AC1D2DCA2823A1E00075135E /* LinkedList.swift in Sources */,
-				AC1D2DC72823A1E00075135E /* BankManager.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				AC1D2DC62823A1E00075135E /* Customer.swift in Sources */,
