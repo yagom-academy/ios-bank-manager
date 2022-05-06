@@ -88,6 +88,7 @@ extension BankViewController {
     private func setTimer() {
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: Const.timeInterval, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer!, forMode: .common)
         }
     }
     
