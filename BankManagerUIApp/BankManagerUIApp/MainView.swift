@@ -108,8 +108,8 @@ class MainView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         constraintCustomView()
-        
         
         //bankProcess.setBank(delegate: self)
         //addButton.addTarget(self, action: #selector(addClients), for: .touchUpInside)
@@ -117,15 +117,16 @@ class MainView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        backgroundColor = .white
         constraintCustomView()
     }
     
     func constraintCustomView() {
         self.addSubview(mainVerticalStackView)
-        mainVerticalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        mainVerticalStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        mainVerticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        mainVerticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        mainVerticalStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        mainVerticalStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        mainVerticalStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        mainVerticalStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         mainVerticalStackView.addArrangedSubview(topButtonHorizontalStackView)
         topButtonHorizontalStackView.addArrangedSubview(addButton)
         topButtonHorizontalStackView.addArrangedSubview(resetButton)
@@ -138,8 +139,8 @@ class MainView: UIView {
         bottomHorizontalStackView.addArrangedSubview(waitingClientVerticalStackView)
         bottomHorizontalStackView.addArrangedSubview(workingClientVerticalStackView)
         
-        waitingClientVerticalStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7).isActive = true
-        workingClientVerticalStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7).isActive = true
+        waitingClientVerticalStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
+        workingClientVerticalStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
     }
 }
 
