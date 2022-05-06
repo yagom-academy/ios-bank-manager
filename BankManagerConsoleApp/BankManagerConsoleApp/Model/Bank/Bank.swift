@@ -5,6 +5,13 @@
 //  Created by 쿼카, 두기 on 2022/04/28.
 import Foundation
 
+protocol BankDelegate: AnyObject {
+    func sendAddedCustomer(customer: Customer)
+    func sendTaskingCustomer(customer: Customer)
+    func sendEndCustomer(customer: Customer)
+    func sendFinishWork()
+}
+
 struct Bank {
     enum Task: CaseIterable {
         case deposit
@@ -36,13 +43,17 @@ struct Bank {
     private let depositSemaphore = DispatchSemaphore(value: Task.deposit.clerkCount)
     private let loanSemaphore = DispatchSemaphore(value: Task.loan.clerkCount)
     
+    weak var delegate: BankDelegate?
+    
     private mutating func receiveCustomer() {
         for _ in 1...10 {
             guard let task = Task.allCases.randomElement() else {
                 return
             }
             totalCustomerCount += 1
-            customerQueue.enqueue(newElement: Customer(number: totalCustomerCount, task: task))
+            let customer = Customer(number: totalCustomerCount, task: task)
+            customerQueue.enqueue(newElement: customer)
+            delegate?.sendAddedCustomer(customer: customer)
         }
     }
     
@@ -55,8 +66,8 @@ struct Bank {
             }
             matchToClerk(customer: customer, group: group, dispatchQueue: workingQueue)
         }
-        group.notify(queue: workingQueue){
-            print("끝")
+        group.notify(queue: workingQueue) { [self] in
+            delegate?.sendFinishWork()
         }
     }
     
@@ -65,13 +76,17 @@ struct Bank {
         case .deposit:
             dispatchQueue.async(group: group) {
                 depositSemaphore.wait()
+                delegate?.sendTaskingCustomer(customer: customer)
                 BankClerk.startDepositWork(customer: customer)
+                delegate?.sendEndCustomer(customer: customer)
                 depositSemaphore.signal()
             }
         case .loan:
             dispatchQueue.async(group: group) {
                 loanSemaphore.wait()
+                delegate?.sendTaskingCustomer(customer: customer)
                 BankClerk.startLoanWork(customer: customer)
+                delegate?.sendEndCustomer(customer: customer)
                 loanSemaphore.signal()
             }
         }
