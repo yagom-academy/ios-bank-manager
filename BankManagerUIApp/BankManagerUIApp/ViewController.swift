@@ -10,14 +10,21 @@ final class ViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
     private var bank = Bank()
     private var timer = Timer()
-    private var counter = 0.000
+    private var counter = 0
+    private var seconds = 0
+    private var minutes = 0
     private var isPlay = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = bankView
+        updateTimeLabel()
         setButtons()
         bank.delegate = self
+    }
+    
+    private func updateTimeLabel() {
+        bankView.timerLabel.text = "업무시간 - \(String(format: "%.2d", minutes)):\(String(format: "%.2d", seconds)):\(String(format: "%.3d", counter))"
     }
     
     private func setButtons() {
@@ -37,8 +44,10 @@ final class ViewController: UIViewController {
     }
     
     private func resetTimer() {
-        counter = 0.000
-        bankView.timerLabel.text = "업무시간 - \(String(format: "%.3f", counter))"
+        counter = 0
+        seconds = 0
+        minutes = 0
+        updateTimeLabel()
         isPlay = false
         timer.invalidate()
     }
@@ -50,8 +59,16 @@ final class ViewController: UIViewController {
     }
     
     @objc private func updateTime() {
-        self.counter += 0.001
-        bankView.timerLabel.text = "업무시간 - \(String(format: "%.3f", counter))"
+        if counter == 1000 {
+            seconds += 1
+            counter = 0
+        }
+        if seconds == 60 {
+            minutes += 1
+            seconds = 0
+        }
+        self.counter += 1
+        updateTimeLabel()
     }
 }
 
