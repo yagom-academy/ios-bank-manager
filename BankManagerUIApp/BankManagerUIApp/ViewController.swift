@@ -10,7 +10,7 @@ final class ViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
     private var bank = Bank()
     private var timer = Timer()
-    private var counter = 0.001
+    private var counter = 0.000
     private var isPlay = false
     
     override func viewDidLoad() {
