@@ -115,6 +115,26 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		ACC8C5C728255C3D00CDACBB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E43259C3EA20053667F /* Assets.xcassets */,
+				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+				AC51E6E22822669A00F320D2 /* BankView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ACC8C5C828255C5300CDACBB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3E259C3E9F0053667F /* ViewController.swift */,
+				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
+				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
@@ -139,12 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				AC1D2DBC2823A1DF0075135E /* Model */,
-				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
-				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				C7694E3E259C3E9F0053667F /* ViewController.swift */,
-				AC51E6E22822669A00F320D2 /* BankView.swift */,
-				C7694E43259C3EA20053667F /* Assets.xcassets */,
-				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+				ACC8C5C728255C3D00CDACBB /* View */,
+				ACC8C5C828255C5300CDACBB /* Controller */,
 				C7694E48259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIApp;
