@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController, CustomerSendable {
+final class BankManagerViewController: UIViewController, CustomerSendable {
     
     private var bankManager = BankManager()
     
@@ -173,7 +173,7 @@ final class ViewController: UIViewController, CustomerSendable {
 }
 
 // MARK: - View Life Cycle
-extension ViewController {
+extension BankManagerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -186,7 +186,7 @@ extension ViewController {
 }
 
 // MARK: - Private Method
-extension ViewController {
+extension BankManagerViewController {
     private func configureViewStructure() {
         view.addSubview(baseVerticalStackView)
 
@@ -303,7 +303,7 @@ extension ViewController {
 }
 
 // MARK: - Delegate Method
-extension ViewController {
+extension BankManagerViewController {
     func addToWaitingList(_ customer: Customer) {
         DispatchQueue.main.async {
             self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
@@ -324,13 +324,13 @@ extension ViewController {
     }
 }
 
-extension ViewController {
+// MARK: - Timer
+extension BankManagerViewController {
     enum TimerState {
         case timerRunning
         case timerPaused
         case timerNotRunning
     }
-    
     
     private func startTimer() {
         startTime = Date()
