@@ -18,9 +18,6 @@
 		E1BC5D332825324C001F8052 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D272825324C001F8052 /* BankClerk.swift */; };
 		E1BC5D342825324C001F8052 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D272825324C001F8052 /* BankClerk.swift */; };
 		E1BC5D352825324C001F8052 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D272825324C001F8052 /* BankClerk.swift */; };
-		E1BC5D362825324C001F8052 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D282825324C001F8052 /* Timer.swift */; };
-		E1BC5D372825324C001F8052 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D282825324C001F8052 /* Timer.swift */; };
-		E1BC5D382825324C001F8052 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D282825324C001F8052 /* Timer.swift */; };
 		E1BC5D392825324C001F8052 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D292825324C001F8052 /* Client.swift */; };
 		E1BC5D3A2825324C001F8052 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D292825324C001F8052 /* Client.swift */; };
 		E1BC5D3B2825324C001F8052 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5D292825324C001F8052 /* Client.swift */; };
@@ -80,7 +77,6 @@
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		E1BC5D272825324C001F8052 /* BankClerk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
-		E1BC5D282825324C001F8052 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		E1BC5D292825324C001F8052 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		E1BC5D2A2825324C001F8052 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		E1BC5D2B2825324C001F8052 /* TaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
@@ -185,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				E1BC5D272825324C001F8052 /* BankClerk.swift */,
-				E1BC5D282825324C001F8052 /* Timer.swift */,
 				E1BC5D292825324C001F8052 /* Client.swift */,
 				E1BC5D2A2825324C001F8052 /* Bank.swift */,
 				E1BC5D2B2825324C001F8052 /* TaskType.swift */,
@@ -365,7 +360,6 @@
 				E1BC5D482825324C001F8052 /* LinkedList.swift in Sources */,
 				E1BC5D422825324C001F8052 /* Queue.swift in Sources */,
 				E1BC5D4B2825324C001F8052 /* BankProcess.swift in Sources */,
-				E1BC5D362825324C001F8052 /* Timer.swift in Sources */,
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
 				E1BC5D3F2825324C001F8052 /* TaskType.swift in Sources */,
 				E1BC5D522825330C001F8052 /* MainView.swift in Sources */,
@@ -379,7 +373,6 @@
 			files = (
 				E1BC5D492825324C001F8052 /* LinkedList.swift in Sources */,
 				E1BC5D532825330C001F8052 /* MainView.swift in Sources */,
-				E1BC5D372825324C001F8052 /* Timer.swift in Sources */,
 				E1BC5D432825324C001F8052 /* Queue.swift in Sources */,
 				C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */,
 				E1BC5D462825324C001F8052 /* Node.swift in Sources */,
@@ -397,7 +390,6 @@
 			files = (
 				E1BC5D4A2825324C001F8052 /* LinkedList.swift in Sources */,
 				E1BC5D542825330C001F8052 /* MainView.swift in Sources */,
-				E1BC5D382825324C001F8052 /* Timer.swift in Sources */,
 				E1BC5D442825324C001F8052 /* Queue.swift in Sources */,
 				C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */,
 				E1BC5D472825324C001F8052 /* Node.swift in Sources */,

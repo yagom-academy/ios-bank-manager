@@ -9,7 +9,6 @@ import Foundation
 
 final class Bank {
     private enum Constant {
-        static let finishMessageFormat = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
         static let loanBankClerkCount = 1
         static let depositBankClerkCount = 2
     }
@@ -18,7 +17,6 @@ final class Bank {
     private var finishedClientCount = 0
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
-    var from: CFAbsoluteTime?
 
     init(clientQueue: Queue<Client>) {
         self.clientQueue = clientQueue
@@ -49,11 +47,5 @@ final class Bank {
         case .loan:
             return loanSemaphore
         }
-    }
-}
-
-extension Bank: Timer {
-    func setTimer() {
-        from = CFAbsoluteTimeGetCurrent()
     }
 }
