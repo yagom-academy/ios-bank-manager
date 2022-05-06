@@ -6,20 +6,21 @@
 
 import Foundation
 
-private enum ClerkCount {
+private enum SemaphoreValue {
     static let deposit = 2
     static let loan = 1
 }
 
 enum BankClerk {
-    static let deposit = DispatchSemaphore(value: ClerkCount.deposit)
-    static let loan = DispatchSemaphore(value: ClerkCount.loan)
-    static let clerks = DispatchQueue(label: "clerks", attributes: .concurrent)
+    
+    static let depositClerks = DispatchSemaphore(value: SemaphoreValue.deposit)
+    static let loanClerks = DispatchSemaphore(value: SemaphoreValue.loan)
+    static let bankWindows = DispatchQueue(label: "bankWindows", attributes: .concurrent)
     
     static func work(client: Client, group: DispatchGroup) {
         let semaphore = client.task.clerk
         semaphore.wait()
-        clerks.async(group: group) {
+        bankWindows.async(group: group) {
             print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 시작")
             Thread.sleep(forTimeInterval: client.task.time)
             print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 완료")
