@@ -26,6 +26,8 @@ final class Bank {
     private let depositQueue = OperationQueue()
     private(set) var waitingNumber = 1
     weak var delegate: BankDelegate?
+    
+    private let endQueue = OperationQueue()
 
     init(loanWindow: BankWindow, depositWindow: BankWindow) {
         self.loanWindow = loanWindow
@@ -33,6 +35,7 @@ final class Bank {
         
         loanQueue.maxConcurrentOperationCount = Const.numberOfLoanClerk
         depositQueue.maxConcurrentOperationCount = Const.numberOfDepositClerk
+        endQueue.maxConcurrentOperationCount = 1
     }
 
     func add(customers: [Customer]) {
@@ -78,10 +81,12 @@ final class Bank {
     }
     
     private func sendNotification() {
-        depositQueue.addBarrierBlock {
-            self.loanQueue.addBarrierBlock {
-                self.delegate?.bankWorkDidFinish(self)
-            }
+        endQueue.cancelAllOperations()
+        
+        endQueue.addOperation {
+            self.depositQueue.waitUntilAllOperationsAreFinished()
+            self.loanQueue.waitUntilAllOperationsAreFinished()
+            self.delegate?.bankWorkDidFinish(self)
         }
     }
 }
