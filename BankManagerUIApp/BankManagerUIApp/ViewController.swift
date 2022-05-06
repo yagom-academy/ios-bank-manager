@@ -92,11 +92,10 @@ extension ViewController: BankDelegate {
                     $0.removeFromSuperview()
                 }
             }
+            if self.bankView.taskingStackView.arrangedSubviews.isEmpty {
+                self.isPlay = false
+                self.timer.invalidate()
+            }
         }
-    }
-    
-    func sendFinishWork() {
-        isPlay = false
-        timer.invalidate()
     }
 }
