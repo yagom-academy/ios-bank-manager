@@ -8,7 +8,6 @@
 import Foundation
 
 final class Bank {
-
     private enum Constant {
         static let finishMessageFormat = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
         static let loanBankClerkCount = 1
@@ -19,8 +18,7 @@ final class Bank {
     private var finishedClientCount = 0
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
-    private let group = DispatchGroup()
-    private let bankUpdateDispatchQueue = DispatchQueue(label: "BankUpdate")
+    private let bankGroup = DispatchGroup()
     var from: CFAbsoluteTime?
 
     init(clientQueue: Queue<Client>) {
@@ -33,36 +31,30 @@ final class Bank {
             guard let client = clientQueue.dequeue() else {
                 return
             }
-
-            switch client.taskType {
-            case .deposit:
-                DispatchQueue.global().async(group: group) {
-                    self.depositSemaphore.wait()
-                    let depositBankClerk = DepositBankClerk(delegate: self)
-                    depositBankClerk.work(client: client)
-                    self.depositSemaphore.signal()
+            DispatchQueue.global().async(group: bankGroup) {
+                let taskTypeSemphore = self.semaphore(taskType: client.taskType)
+                taskTypeSemphore.wait()
+                let bankClerk = BankClerk()
+                bankClerk.work(client: client) {
+                    self.finishedClientCount += 1
                 }
-            case .loan:
-                DispatchQueue.global().async(group: group) {
-                    self.loanSemaphore.wait()
-                    let loanBankClerk = LoanBankClerk(delegate: self)
-                    loanBankClerk.work(client: client)
-                    self.loanSemaphore.signal()
-                }
+                taskTypeSemphore.signal()
             }
         }
-        group.wait()
+        bankGroup.wait()
         print(String(format: Constant.finishMessageFormat, finishedClientCount, checkTime()))
     }
-}
 
-extension Bank: BankDelegate {
-    func updateWorkData() {
-        bankUpdateDispatchQueue.async(group: group) {
-            self.finishedClientCount += 1
+    private func semaphore(taskType: TaskType) -> DispatchSemaphore {
+        switch taskType {
+        case .deposit:
+            return depositSemaphore
+        case .loan:
+            return loanSemaphore
         }
     }
 }
+
 extension Bank: Timer {
     func setTimer() {
         from = CFAbsoluteTimeGetCurrent()
