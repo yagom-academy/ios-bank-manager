@@ -378,7 +378,6 @@ extension BankManagerViewController {
         let durationSeconds = durationTime + timeInterval
         let second = (Int)(fmod(durationSeconds, 60))
         let decimalValue = (Int)(floor((durationSeconds - floor(durationSeconds)) * 100000))
-        
         let milliSecond = (Int)(decimalValue / 1000)
         let microSecond = (Int)(decimalValue % 1000)
         self.workTimeLabel.text = "\(String(format: "%02d", second)):\(String(format: "%02d", milliSecond)):\(String(format:"%03d", microSecond))"
