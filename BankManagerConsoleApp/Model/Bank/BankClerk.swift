@@ -8,13 +8,11 @@
 import Foundation
 
 struct BankClerk {
-    let updateDispatchQueue = DispatchQueue(label: "update")
 
-    func work(client: Client, completion: @escaping () -> Void) {
+    func work(client: Client, ready: @escaping () -> Void, completion: @escaping () -> Void) {
         let usecondsTimeForAClient = useconds_t(client.taskType.spendingTime * 1000000)
+        ready()
         usleep(usecondsTimeForAClient)
-        updateDispatchQueue.async {
-            completion()
-        }
+        completion()
     }
 }

@@ -11,11 +11,15 @@ struct BankProcess {
     private enum Constant {
         static let clientCount = 10
     }
-
-    private var bank: Bank
+    
+    private var bank = Bank()
     private var currentNumber: Int = 1
     private var endNumber: Int {
         return currentNumber + Constant.clientCount
+    }
+    
+    init(bankDelegate: ViewControllerDelegate) {
+        bank.delegate = bankDelegate
     }
     
     mutating func addClientQueue() {

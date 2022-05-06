@@ -133,8 +133,8 @@ class MainView: UIView {
         mainVerticalStackView.addArrangedSubview(statusLabelHorizontalStackView)
         
         mainVerticalStackView.addArrangedSubview(bottomHorizontalStackView)
-        bottomHorizontalStackView.addArrangedSubview(waitingClientVerticalStackView)
         bottomHorizontalStackView.addArrangedSubview(workingClientVerticalStackView)
+        bottomHorizontalStackView.addArrangedSubview(waitingClientVerticalStackView)
         
         waitingClientVerticalStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
         workingClientVerticalStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true

@@ -5,7 +5,13 @@
 //  Created by 우롱차, 민성 on 2022/04/28.
 //
 
-import Foundation
+import UIKit
+
+protocol ViewControllerDelegate: AnyObject {
+    func addWaitingClientLabel(text: String, color: UIColor)
+    func addWorkingClientLabel(text: String, color: UIColor)
+    func removeWorkingClientLabel(text: String, color: UIColor)
+}
 
 final class Bank {
     private enum Constant {
@@ -13,14 +19,10 @@ final class Bank {
         static let depositBankClerkCount = 2
     }
 
-    private var clientQueue: Queue<Client>
     private var finishedClientCount = 0
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
-
-    init(clientQueue: Queue<Client>) {
-        self.clientQueue = clientQueue
-    }
+    weak var delegate: ViewControllerDelegate?
 
     func startWork(clientQueue: inout Queue<Client>) {
         while clientQueue.isEmpty() == false {
@@ -28,14 +30,34 @@ final class Bank {
                 return
             }
             
+            let clientTaskTypeText = client.taskType.text
+            let clientTextColor = client.taskType.color
+            
+            delegate?.addWaitingClientLabel(text: clientTaskTypeText,
+                                            color: clientTextColor)
+            
+            let taskTypeSemphore = self.semaphore(taskType: client.taskType)
+            
             DispatchQueue.global().async() {
-                let taskTypeSemphore = self.semaphore(taskType: client.taskType)
                 taskTypeSemphore.wait()
+                print(Thread.isMainThread)
                 let bankClerk = BankClerk()
-                bankClerk.work(client: client) {
+                bankClerk.work(client: client, ready: { ()-> Void in
+                    DispatchQueue.main.async {
+                        self.delegate?.addWorkingClientLabel(text: clientTaskTypeText,
+                                                        color: clientTextColor)
+                        print("\(client.waitingNumber)번 addworking")
+                    }
+                }) {
+                    DispatchQueue.main.async {
+                        self.delegate?.removeWorkingClientLabel(text: clientTaskTypeText,
+                                                                color: clientTextColor)
+                        print("\(client.waitingNumber)번 removeWork")
+                    }
                     self.finishedClientCount += 1
+                    taskTypeSemphore.signal()
+                    print("\(client.waitingNumber)번 haha")
                 }
-                taskTypeSemphore.signal()
             }
         }
     }
