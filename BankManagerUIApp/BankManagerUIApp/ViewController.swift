@@ -239,11 +239,7 @@ extension ViewController {
                 return
             }
             
-            for label in labelArray {
-                if text == label.text {
-                    label.removeFromSuperview()
-                }
-            }
+            labelArray.filter { $0.text == text }[0].removeFromSuperview()
         }
     }
     
