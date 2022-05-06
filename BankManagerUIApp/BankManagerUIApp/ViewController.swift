@@ -184,34 +184,40 @@ extension ViewController {
 extension ViewController {
     private func configureViewStructure() {
         view.addSubview(baseVerticalStackView)
-        buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
-        buttonHorizontalStackView.addArrangedSubview(clearButton)
-        labelHorizontalStackView.addArrangedSubview(waitingLabel)
-        labelHorizontalStackView.addArrangedSubview(workingLabel)
-        timerHorizontalStackView.addArrangedSubview(workTimeTitleLabel)
-        timerHorizontalStackView.addArrangedSubview(workTimeLabel)
+
         baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(timerHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
-        waitingScrollView.addSubview(waitingVerticalStackView)
-        taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
-        workingScrollView.addSubview(workingVerticalStackView)
-        taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
         baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
+
+        buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
+        buttonHorizontalStackView.addArrangedSubview(clearButton)
+        
+        labelHorizontalStackView.addArrangedSubview(waitingLabel)
+        labelHorizontalStackView.addArrangedSubview(workingLabel)
+        
+        timerHorizontalStackView.addArrangedSubview(workTimeTitleLabel)
+        timerHorizontalStackView.addArrangedSubview(workTimeLabel)
+        
+        waitingScrollView.addSubview(waitingVerticalStackView)
+        workingScrollView.addSubview(workingVerticalStackView)
+
+        taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
+        taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
     }
     
     private func configureConstraints() {
         let safeArea = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
+            waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
             waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor),
             waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
-            waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
             waitingVerticalStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
-            
+
+            workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
             workingVerticalStackView.centerXAnchor.constraint(equalTo: workingScrollView.centerXAnchor),
             workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor),
-            workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
             workingVerticalStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor),
             
             baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
