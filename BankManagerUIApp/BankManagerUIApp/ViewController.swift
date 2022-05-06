@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController, SendDelegate {
+final class ViewController: UIViewController, CustomerSendable {
     
     private var bankManager = BankManager()
     

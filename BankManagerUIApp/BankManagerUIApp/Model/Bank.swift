@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SendDelegate {
+protocol CustomerSendable {
     func addToWaitingList(_ customer: Customer)
     func addToWorkingList(_ customer: Customer)
     func removeFromWorkingList(_ customer: Customer)
@@ -21,7 +21,7 @@ struct Bank {
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.deposit)
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.loan)
     private let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
-    var delegate: SendDelegate?
+    var delegate: CustomerSendable?
     
     init(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
