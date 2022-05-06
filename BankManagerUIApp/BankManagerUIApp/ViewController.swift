@@ -264,13 +264,9 @@ extension ViewController {
     }
     
     @objc private func clear(_ sender: UIButton) {
-        // Model
-        // 고객 큐 초기화
-        // 현재 돌아가고 있는 쓰레드 작업 중지
         self.bankManager.bank.clearCustomerQueue()
-        
-        // View
-        // 대기중/업무중 Labels 삭제
+        self.bankManager.status = .notRunning
+
         guard let waitings = waitingVerticalStackView.subviews as? [UILabel] else {
             return
         }
@@ -285,8 +281,8 @@ extension ViewController {
                 $0.removeFromSuperview()
             })
         }
-
-        // 타이머 중지
+        
+        clearTimer()
     }
     
     private func generateLabel(of customer: Customer) -> UILabel {
