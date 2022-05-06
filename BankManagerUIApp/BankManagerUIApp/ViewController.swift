@@ -34,9 +34,7 @@ final class ViewController: UIViewController {
     }
     
     private func startTimer() {
-        if isPlay {
-            return
-        }
+        if isPlay { return }
         isPlay = true
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
@@ -88,6 +86,7 @@ extension ViewController: BankDelegate {
     }
     
     func sendFinishWork() {
-        //
+        isPlay = false
+        timer.invalidate()
     }
 }
