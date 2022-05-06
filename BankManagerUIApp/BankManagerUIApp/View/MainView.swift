@@ -110,9 +110,6 @@ class MainView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         constraintCustomView()
-        
-        //bankProcess.setBank(delegate: self)
-        //addButton.addTarget(self, action: #selector(addClients), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {

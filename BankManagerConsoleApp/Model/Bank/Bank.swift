@@ -18,20 +18,19 @@ final class Bank {
     private var finishedClientCount = 0
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
-    private let bankGroup = DispatchGroup()
     var from: CFAbsoluteTime?
 
     init(clientQueue: Queue<Client>) {
         self.clientQueue = clientQueue
     }
 
-    func startWork() {
-        setTimer()
+    func startWork(clientQueue: inout Queue<Client>) {
         while clientQueue.isEmpty() == false {
             guard let client = clientQueue.dequeue() else {
                 return
             }
-            DispatchQueue.global().async(group: bankGroup) {
+            
+            DispatchQueue.global().async() {
                 let taskTypeSemphore = self.semaphore(taskType: client.taskType)
                 taskTypeSemphore.wait()
                 let bankClerk = BankClerk()
@@ -41,8 +40,6 @@ final class Bank {
                 taskTypeSemphore.signal()
             }
         }
-        bankGroup.wait()
-        print(String(format: Constant.finishMessageFormat, finishedClientCount, checkTime()))
     }
 
     private func semaphore(taskType: TaskType) -> DispatchSemaphore {

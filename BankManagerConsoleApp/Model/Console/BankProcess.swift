@@ -9,24 +9,21 @@ import Foundation
 
 struct BankProcess {
     private enum Constant {
-        static let minClientCount = 10
-        static let maxClientCount = 30
+        static let clientCount = 10
     }
 
     private var bank: Bank
-
-    init() {
+    private var currentNumber: Int = 1
+    private var endNumber: Int {
+        return currentNumber + Constant.clientCount
+    }
+    
+    mutating func addClientQueue() {
         var clientQueue = Queue<Client>()
-        let randomClientCount = Int.random(in: Constant.minClientCount...Constant.maxClientCount)
-
-        for waitingNumber in 1...randomClientCount {
+        for waitingNumber in currentNumber..<endNumber {
             clientQueue.enqueue(Client(waitingNumber: waitingNumber))
         }
-
-        bank = Bank(clientQueue: clientQueue)
-    }
-
-    func start() {
-        bank.startWork()
+        currentNumber += Constant.clientCount
+        bank.startWork(clientQueue: &clientQueue)
     }
 }
