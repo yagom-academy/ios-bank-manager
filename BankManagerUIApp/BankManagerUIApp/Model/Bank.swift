@@ -80,4 +80,8 @@ struct Bank {
             delegate?.removeFromWorkingList(customer)
         }
     }
+    
+    func clearCustomerQueue() {
+        self.customerQueue.clear()
+    }
 }

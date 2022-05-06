@@ -258,7 +258,7 @@ extension ViewController {
         // Model
         // 고객 큐 초기화
         // 현재 돌아가고 있는 쓰레드 작업 중지
-        
+        self.bankManager.bank.clearCustomerQueue()
         
         // View
         // 대기중/업무중 Labels 삭제
