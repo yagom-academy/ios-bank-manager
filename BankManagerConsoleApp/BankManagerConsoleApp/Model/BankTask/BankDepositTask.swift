@@ -14,7 +14,6 @@ final class BankDepositTask: BankTaskType {
   }
 
   private(set) var semaphore: DispatchSemaphore
-  private let logger = Logger()
 
   init(_ numberOfClerk: Int) {
     semaphore = DispatchSemaphore(value: numberOfClerk)
@@ -22,9 +21,9 @@ final class BankDepositTask: BankTaskType {
 
   func execute(_ client: Client) {
     let clientNumber = client.waitingNumber
-    logger.log(.taskStart(number: clientNumber, taskName: Constants.taskName))
+    Logger.shared.log(.taskStart(number: clientNumber, taskName: Constants.taskName))
     Timer.scheduledTimer(withTimeInterval: Constants.time, repeats: false) { _ in
-      self.logger.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
+      Logger.shared.log(.taskFinish(number: clientNumber, taskName: Constants.taskName))
     }
     RunLoop.current.run()
   }

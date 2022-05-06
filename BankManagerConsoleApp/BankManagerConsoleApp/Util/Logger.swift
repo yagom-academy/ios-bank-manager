@@ -15,6 +15,9 @@ final class Logger {
     static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
   }
 
+  static let shared = Logger()
+  private init() {}
+
   func log(_ messageType: MessageType) {
     print(messageType.description)
   }

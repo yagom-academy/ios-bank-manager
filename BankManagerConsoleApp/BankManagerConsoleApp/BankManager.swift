@@ -19,11 +19,9 @@ final class BankManager {
     case exit = "2"
   }
 
-  private let logger = Logger()
-
   func start() {
     while true {
-      logger.log(.menu, terminator: Constants.whiteSpace)
+      Logger.shared.log(.menu, terminator: Constants.whiteSpace)
 
       guard let input = readLine(),
             let menu = Menu(rawValue: input) else { continue }

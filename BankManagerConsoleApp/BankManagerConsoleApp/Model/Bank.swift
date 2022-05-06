@@ -11,7 +11,6 @@ final class Bank {
   private var clientQueue: BankQueue<Client>
   private var totalClientCount = Int.zero
   private var totalExecuteTime = Double.zero
-  private let logger = Logger()
 
   init(maxClient: Int) {
     clientQueue = BankQueue(limit: maxClient)
@@ -22,7 +21,7 @@ final class Bank {
     totalExecuteTime = measureTaskTime {
       executeBankTask()
     }
-    logger.log(.closed(count: totalClientCount, time: totalExecuteTime))
+    Logger.shared.log(.closed(count: totalClientCount, time: totalExecuteTime))
   }
 
   func addClients(_ clients: [Client]) {
