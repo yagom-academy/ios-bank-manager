@@ -177,6 +177,7 @@ extension ViewController {
         configureViewStructure()
         configureConstraints()
         addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clear(_:)), for: .touchUpInside)
     }
 }
 
@@ -251,6 +252,32 @@ extension ViewController {
         group.notify(queue: .main) {
             self.bankManager.status = .notRunning
         }
+    }
+    
+    @objc private func clear(_ sender: UIButton) {
+        // Model
+        // 고객 큐 초기화
+        // 현재 돌아가고 있는 쓰레드 작업 중지
+        
+        
+        // View
+        // 대기중/업무중 Labels 삭제
+        guard let waitings = waitingVerticalStackView.subviews as? [UILabel] else {
+            return
+        }
+        guard let workings = workingVerticalStackView.subviews as? [UILabel] else {
+            return
+        }
+        DispatchQueue.main.async {
+            waitings.forEach({
+                $0.removeFromSuperview()
+            })
+            workings.forEach({
+                $0.removeFromSuperview()
+            })
+        }
+
+        // 타이머 중지
     }
     
     private func generateLabel(of customer: Customer) -> UILabel {
