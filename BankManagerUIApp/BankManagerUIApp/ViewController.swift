@@ -8,6 +8,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
+    var bank = Bank()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ final class ViewController: UIViewController {
     }
     
     @objc private func addCustomer() {
-        print("고객추가됨")
+        bank.openBank()
     }
     
     @objc private func setInitialState() {
