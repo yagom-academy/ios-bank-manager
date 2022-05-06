@@ -88,6 +88,12 @@ struct Bank {
             }
         }
     }
+    mutating func clearCustomerQueue() {
+        totalCustomerCount = 0
+        depositQueue.cancelAllOperations()
+        loanQueue.cancelAllOperations()
+        customerQueue.clear()
+    }
     
     mutating func openBank() {
         receiveCustomer()
