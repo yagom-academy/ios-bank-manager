@@ -28,7 +28,6 @@ struct Bank: Measurable {
     func measureWorkingHours() -> Double {
         let duration = measureTime {
             open()
-            workGroup.wait()
         }
         return duration
     }
@@ -39,6 +38,7 @@ struct Bank: Measurable {
                 BankClerk.work(client: client, group: workGroup)
             }
         }
+        workGroup.wait()
     }
     
     func giveWaitingNumber() -> Int? {
