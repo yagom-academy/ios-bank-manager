@@ -37,8 +37,8 @@ struct Bank {
 
     private var customerQueue = Queue<Customer>()
     private var totalCustomerCount = Int.zero
-    let depositQueue = OperationQueue()
-    let loanQueue = OperationQueue()
+    private let depositQueue = OperationQueue()
+    private let loanQueue = OperationQueue()
     
     weak var delegate: BankDelegate?
     
