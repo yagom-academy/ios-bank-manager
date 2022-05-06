@@ -166,6 +166,7 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
         
         return label
     }()
+    
     var startTime = Date()
     var durationTime: TimeInterval = 0
     var timer: DispatchSourceTimer?
@@ -237,6 +238,7 @@ extension BankManagerViewController {
         guard let task = customer.bankingType else {
             return
         }
+        
         let text = "\(customer.number) - \(task.rawValue)"
         
         DispatchQueue.main.async {
@@ -250,12 +252,14 @@ extension BankManagerViewController {
     
     @objc private func execution(_ sender: UIButton) {
         let group = DispatchGroup()
+        
         DispatchQueue.global().async(group: group) {
             if self.currentTimerState != .timerRunning {
                 self.startTimer()
             }
             self.bankManager.startBanking()
         }
+        
         group.notify(queue: .main) {
             if self.bankManager.status == .notRunning {
                 self.pauseTimer()
@@ -270,9 +274,11 @@ extension BankManagerViewController {
         guard let waitings = waitingVerticalStackView.subviews as? [UILabel] else {
             return
         }
+        
         guard let workings = workingVerticalStackView.subviews as? [UILabel] else {
             return
         }
+        
         DispatchQueue.main.async {
             waitings.forEach({
                 $0.removeFromSuperview()
@@ -341,6 +347,7 @@ extension BankManagerViewController {
                 self.updateWorkTimeLabel()
             })
         }
+        
         if currentTimerState != .timerRunning {
             currentTimerState = .timerRunning
             timer?.resume()
@@ -374,7 +381,6 @@ extension BankManagerViewController {
         
         let milliSecond = (Int)(decimalValue / 1000)
         let microSecond = (Int)(decimalValue % 1000)
-        print(durationSeconds)
         self.workTimeLabel.text = "\(String(format: "%02d", second)):\(String(format: "%02d", milliSecond)):\(String(format:"%03d", microSecond))"
     }
 }
