@@ -12,6 +12,10 @@ final class BankManager {
     static let limit = 31
     static let range = 10...30
     static let whiteSpace = ""
+    static let depositTaskTime = 0.7
+    static let depositTaskName = "예금"
+    static let loanTaskTime = 1.1
+    static let loanTaskName = "대출"
   }
 
   private enum Menu: String {
@@ -39,7 +43,10 @@ final class BankManager {
   }
 
   private func createClients() -> [Client] {
-    let tasks: [BankTaskType] = [BankDepositTask(2), BankLoanTask(1)]
+    let tasks = [
+      BankTask(name: Constants.depositTaskName, time: Constants.depositTaskTime, numberOfClerk: 2),
+      BankTask(name: Constants.loanTaskName, time: Constants.loanTaskTime, numberOfClerk: 1)
+    ]
     var clients = [Client]()
     for number in 1...Int.random(in: Constants.range) {
       if let task = tasks.randomElement() {

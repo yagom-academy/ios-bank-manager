@@ -9,5 +9,5 @@ import Foundation
 
 struct Client {
   var waitingNumber: Int
-  var taskType: BankTaskType
+  var taskType: BankTask
 }
