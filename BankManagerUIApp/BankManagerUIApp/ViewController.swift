@@ -251,10 +251,15 @@ extension ViewController {
     @objc private func execution(_ sender: UIButton) {
         let group = DispatchGroup()
         DispatchQueue.global().async(group: group) {
+            if self.currentTimerState != .timerRunning {
+                self.startTimer()
+            }
             self.bankManager.startBanking()
         }
         group.notify(queue: .main) {
-            self.bankManager.status = .notRunning
+            if self.bankManager.status == .notRunning {
+                self.pauseTimer()
+            }
         }
     }
     

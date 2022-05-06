@@ -17,6 +17,7 @@ struct BankManager {
         if status == .notRunning {
             status = .running
             bank.work()
+            status = .notRunning
         }
     }
 
