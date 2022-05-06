@@ -7,28 +7,28 @@
 
 import Foundation
 
-protocol BankDelegate {
-    func updateWorkData(spendedTime: Double)
+protocol BankDelegate: AnyObject {
+    func updateWorkData()
 }
 
-struct BankClerk {
-    private enum Constant {
-        static let startWorkMessage = "고객 업무 시작"
-        static let finishedWorkMessage = "고객 업무 완료"
-        static let spendingTimeForClient: Double = 0.7
-    }
+private enum Constant {
+    static let startWorkMessageFormat = "%d번 고객 %@업무 시작"
+    static let finishedWorkMessageFormat = "%d번 고객 %@업무 완료"
+}
 
-    private let spendingTimeForClient: Double
+protocol BankClerk {
+    var spendingTimeForClient: Double { get }
+    var delegate: BankDelegate? { get set }
 
-    init(spendingTimeForClient: Double = Constant.spendingTimeForClient) {
-        self.spendingTimeForClient = spendingTimeForClient
-    }
+    func work(client: Client)
+}
 
-    func work(client: Client, delegate: BankDelegate) {
-        print("\(client.waitingNumber) \(Constant.startWorkMessage)")
+extension BankClerk {
+    func work(client: Client) {
+        print(String(format: Constant.startWorkMessageFormat, client.waitingNumber, client.taskType.text))
         let usecondsTimeForAClient = useconds_t(spendingTimeForClient * 1000000)
         usleep(usecondsTimeForAClient)
-        delegate.updateWorkData(spendedTime: spendingTimeForClient)
-        print("\(client.waitingNumber) \(Constant.finishedWorkMessage)")
+        delegate?.updateWorkData()
+        print(String(format: Constant.finishedWorkMessageFormat, client.waitingNumber, client.taskType.text))
     }
 }
