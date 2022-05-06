@@ -30,7 +30,17 @@ final class ViewController: UIViewController {
     }
     
     @objc private func setInitialState() {
-        print("초기화됨")
+        bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankView.taskingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bank.clearCustomerQueue()
+        resetTimer()
+    }
+    
+    private func resetTimer() {
+        counter = 0.000
+        bankView.timerLabel.text = "업무시간 - \(String(format: "%.3f", counter))"
+        isPlay = false
+        timer.invalidate()
     }
     
     private func startTimer() {
@@ -41,7 +51,7 @@ final class ViewController: UIViewController {
     
     @objc private func updateTime() {
         self.counter += 0.001
-        bankView.timerLabel.text = String(format: "%.3f", counter)
+        bankView.timerLabel.text = "업무시간 - \(String(format: "%.3f", counter))"
     }
 }
 
