@@ -240,7 +240,7 @@ extension ViewController {
                 return
             }
             
-            labelArray.filter { $0.text == text }[0].removeFromSuperview()
+            labelArray.filter { $0.text == text }.first?.removeFromSuperview()
         }
     }
     
