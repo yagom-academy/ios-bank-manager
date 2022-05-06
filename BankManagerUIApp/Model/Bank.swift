@@ -68,6 +68,7 @@ final class Bank {
                 }
             }
         }
+        sendNotification()
     }
 
     func reset() {
@@ -76,7 +77,7 @@ final class Bank {
         depositQueue.cancelAllOperations()
     }
     
-    func sendNotification() {
+    private func sendNotification() {
         depositQueue.addBarrierBlock {
             self.loanQueue.addBarrierBlock {
                 self.delegate?.bankWorkDidFinish(self)
