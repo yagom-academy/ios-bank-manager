@@ -38,7 +38,6 @@ struct Bank {
 
     private var customerQueue = Queue<Customer>()
     private var totalCustomerCount = Int.zero
-    private var workingTime = ""
     
     private let depositSemaphore = DispatchSemaphore(value: Task.deposit.clerkCount)
     private let loanSemaphore = DispatchSemaphore(value: Task.loan.clerkCount)
@@ -92,23 +91,8 @@ struct Bank {
         }
     }
     
-    private mutating func printCloseMessage() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무시간은 \(workingTime)초입니다.")
-        totalCustomerCount = Int.zero
-    }
-    
-    func timeCheck(_ block: () -> Void) -> String {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        block()
-        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
-        return String(format: "%.2f", durationTime)
-    }
-    
     mutating func openBank() {
         receiveCustomer()
-        workingTime = timeCheck {
-            sendCustomerToClerk()
-        }
-        printCloseMessage()
+        sendCustomerToClerk()
     }
 }
