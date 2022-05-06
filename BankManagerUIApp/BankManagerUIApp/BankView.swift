@@ -46,9 +46,8 @@ final class BankView: UIView {
     // MARK: - 타이머 라벨
     lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간 - 00:00:00"
         label.textColor = .black
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
         return label
     }()
@@ -68,7 +67,7 @@ final class BankView: UIView {
         label.textColor = .white
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         return label
     }()
     
@@ -76,9 +75,9 @@ final class BankView: UIView {
         let label = UILabel()
         label.text = "업무중"
         label.textColor = .white
-        label.backgroundColor = .systemBlue
+        label.backgroundColor = .systemIndigo
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         return label
     }()
     
