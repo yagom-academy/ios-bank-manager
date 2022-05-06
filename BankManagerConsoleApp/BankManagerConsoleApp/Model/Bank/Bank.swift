@@ -38,9 +38,8 @@ struct Bank {
 
     private var customerQueue = Queue<Customer>()
     private var totalCustomerCount = Int.zero
-    
-    private let depositSemaphore = DispatchSemaphore(value: Task.deposit.clerkCount)
-    private let loanSemaphore = DispatchSemaphore(value: Task.loan.clerkCount)
+    let depositQueue = OperationQueue()
+    let loanQueue = OperationQueue()
     
     weak var delegate: BankDelegate?
     
@@ -57,36 +56,35 @@ struct Bank {
     }
     
     private mutating func sendCustomerToClerk() {
-        let group = DispatchGroup()
-        let workingQueue = DispatchQueue(label: "workingQueue", attributes: .concurrent)
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            matchToClerk(customer: customer, group: group, dispatchQueue: workingQueue)
+            matchToClerk(customer: customer)
         }
-        group.notify(queue: workingQueue) { [self] in
+        depositQueue.addBarrierBlock { [self] in
+            delegate?.sendFinishWork()
+        }
+        loanQueue.addBarrierBlock { [self] in
             delegate?.sendFinishWork()
         }
     }
     
-    private func matchToClerk(customer: Customer, group: DispatchGroup, dispatchQueue: DispatchQueue) {
+    private func matchToClerk(customer: Customer) {
         switch customer.task {
         case .deposit:
-            dispatchQueue.async(group: group) {
-                depositSemaphore.wait()
+            depositQueue.maxConcurrentOperationCount = Task.deposit.clerkCount
+            depositQueue.addOperation {
                 delegate?.sendTaskingCustomer(customer: customer)
                 BankClerk.startDepositWork(customer: customer)
                 delegate?.sendEndCustomer(customer: customer)
-                depositSemaphore.signal()
             }
         case .loan:
-            dispatchQueue.async(group: group) {
-                loanSemaphore.wait()
+            loanQueue.maxConcurrentOperationCount = Task.loan.clerkCount
+            loanQueue.addOperation {
                 delegate?.sendTaskingCustomer(customer: customer)
                 BankClerk.startLoanWork(customer: customer)
                 delegate?.sendEndCustomer(customer: customer)
-                loanSemaphore.signal()
             }
         }
     }
