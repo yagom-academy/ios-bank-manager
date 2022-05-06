@@ -18,15 +18,16 @@ class ViewController: UIViewController {
     private lazy var mainView = MainView(frame: view.frame)
     var dateFormatter = DateFormatter()
     var timer: Timer?
-    var time: Double = 0 {
+    var time: Double = Double.zero {
         didSet {
             dateFormatter.dateFormat = "업무시간 - mm : ss : SSS"
-            guard let beginDate = dateFormatter.date(from: "업무시간 - 00 : 00 : 000") else { return }
+            guard let beginDate = dateFormatter.date(from: "업무시간 - 00 : 00 : 000") else {
+                return
+            }
             let date = beginDate + time
             mainView.workingTimeLabel.text = dateFormatter.string(from: date)
         }
     }
-    
     
     override func viewDidLoad() {
         self.view = mainView
@@ -42,19 +43,30 @@ class ViewController: UIViewController {
         bankManager.openBank()
     }
     
+    // MARK: - NotificationCenter Function
     @objc func addSeperateCustomerLabel(notification: Notification) {
-        guard let customer = notification.userInfo?["oneCustomer"] as? Customer else { return }
+        guard let customer = notification.userInfo?["oneCustomer"] as? Customer else {
+            return
+        }
         mainView.watingStackView.addArrangedSubview(mainView.createCustomerLabel(customer: customer))
     }
     
     @objc private func moveCustomerLabel(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
-            guard let numberTicket = notification.userInfo?["customerNumberTicekt"] as? Int else { return }
-            guard let subviews = self?.mainView.watingStackView.arrangedSubviews as? [UILabel] else { return }
+            guard let numberTicket = notification.userInfo?["customerNumberTicekt"] as? Int else {
+                return
+            }
+            guard let subviews = self?.mainView.watingStackView.arrangedSubviews as? [UILabel] else {
+                return
+            }
             guard let targetLabel = subviews.filter({ label in
-                guard let labelText = label.text?.components(separatedBy: " ").first else { return false }
+                guard let labelText = label.text?.components(separatedBy: " ").first else {
+                    return false
+                }
                 return labelText == String(numberTicket)
-            }).first else { return }
+            }).first else {
+                return
+            }
             
             targetLabel.removeFromSuperview()
             
@@ -64,24 +76,32 @@ class ViewController: UIViewController {
     
     @objc private func removeCustomerLabel(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
-            guard let numberTicket = notification.userInfo?["customerNumberTicekt"] as? Int else { return }
-            guard let subviews = self?.mainView.workingStackView.arrangedSubviews as? [UILabel] else { return }
+            guard let numberTicket = notification.userInfo?["customerNumberTicekt"] as? Int else {
+                return
+            }
+            guard let subviews = self?.mainView.workingStackView.arrangedSubviews as? [UILabel] else {
+                return
+            }
             guard let targetLabel = subviews.filter({ label in
-                guard let labelText = label.text?.components(separatedBy: " ").first else { return false }
+                guard let labelText = label.text?.components(separatedBy: " ").first else {
+                    return false
+                }
                 return labelText == String(numberTicket)
-            }).first else { return }
+            }).first else {
+                return
+            }
             
             targetLabel.removeFromSuperview()
         }
     }
     
-    @objc private func addMilliseconds() {
-        time += 0.001
-    }
-    
     @objc private func stopTimer(notification: Notification) {
         timer?.invalidate()
         timer = nil
+    }
+    
+    @objc private func addMilliseconds() {
+        time += 0.001
     }
     
     @objc func addCustomer() {
@@ -99,6 +119,7 @@ class ViewController: UIViewController {
         bankManager.bank.resetAll()
     }
     
+    // MARK: - Function
     private func createTimer() {
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(addMilliseconds), userInfo: nil, repeats: true)
