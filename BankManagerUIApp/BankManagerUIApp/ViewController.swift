@@ -6,14 +6,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, SendDelegate {
+final class ViewController: UIViewController, SendDelegate {
     
-    var bankManager = BankManager()
+    private var bankManager = BankManager()
     
-    let waitingScrollView: UIScrollView = UIScrollView()
-    let workingScrollView: UIScrollView = UIScrollView()
+    private let waitingScrollView: UIScrollView = UIScrollView()
+    private let workingScrollView: UIScrollView = UIScrollView()
 
-    let baseVerticalStackView: UIStackView = {
+    private let baseVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +25,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let buttonHorizontalStackView: UIStackView = {
+    private let buttonHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let timerHorizontalStackView: UIStackView = {
+    private let timerHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let labelHorizontalStackView: UIStackView = {
+    private let labelHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let taskQueueHorizontalStackView: UIStackView = {
+    private let taskQueueHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +71,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let waitingVerticalStackView: UIStackView = {
+    private let waitingVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let workingVerticalStackView: UIStackView = {
+    private let workingVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,7 +95,7 @@ class ViewController: UIViewController, SendDelegate {
         return stackView
     }()
     
-    let addCustomerButton: UIButton = {
+    private let addCustomerButton: UIButton = {
         let button = UIButton()
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +107,7 @@ class ViewController: UIViewController, SendDelegate {
         return button
     }()
     
-    let clearButton: UIButton = {
+    private let clearButton: UIButton = {
         let button = UIButton()
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -119,7 +119,7 @@ class ViewController: UIViewController, SendDelegate {
         return button
     }()
     
-    let workTimeTitleLabel: UILabel = {
+    private let workTimeTitleLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +130,7 @@ class ViewController: UIViewController, SendDelegate {
         return label
     }()
     
-    let workTimeLabel: UILabel = {
+    private let workTimeLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -141,7 +141,7 @@ class ViewController: UIViewController, SendDelegate {
         return label
     }()
     
-    let waitingLabel: UILabel = {
+    private let waitingLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +154,7 @@ class ViewController: UIViewController, SendDelegate {
         return label
     }()
     
-    let workingLabel: UILabel = {
+    private let workingLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -182,7 +182,7 @@ extension ViewController {
 
 // MARK: - Private Method
 extension ViewController {
-    func configureViewStructure() {
+    private func configureViewStructure() {
         view.addSubview(baseVerticalStackView)
         buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
         buttonHorizontalStackView.addArrangedSubview(clearButton)
@@ -200,7 +200,7 @@ extension ViewController {
         baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
     }
     
-    func configureConstraints() {
+    private func configureConstraints() {
         let safeArea = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
@@ -243,7 +243,7 @@ extension ViewController {
         }
     }
     
-    @objc func execution(_ sender: UIButton) {
+    @objc private func execution(_ sender: UIButton) {
         let group = DispatchGroup()
         DispatchQueue.global().async(group: group) {
             self.bankManager.startBanking()
@@ -253,7 +253,7 @@ extension ViewController {
         }
     }
     
-    func generateLabel(of customer: Customer) -> UILabel {
+    private func generateLabel(of customer: Customer) -> UILabel {
         let label = UILabel()
         guard let task = customer.bankingType else {
             return UILabel()
@@ -272,10 +272,12 @@ extension ViewController {
 
 // MARK: - Delegate Method
 extension ViewController {
-    func addLabelToWaitingQueue(of customer: Customer) {
-        waitingVerticalStackView.addArrangedSubview(generateLabel(of: customer))
+    func addToWaitingList(_ customer: Customer) {
+        DispatchQueue.main.async {
+            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+        }
     }
-
+    
     func addToWorkingList(_ customer: Customer) {
         DispatchQueue.main.async {
             self.removeLabel(from: self.waitingVerticalStackView, customer)
