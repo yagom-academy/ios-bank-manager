@@ -222,12 +222,6 @@ extension ViewController {
         ])
     }
     
-    func addToWaitingList(_ customer: Customer) {
-        DispatchQueue.main.async {
-            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
-        }
-    }
-    
     private func removeLabel(from stackView: UIStackView, _ customer: Customer) {
         guard let task = customer.bankingType else {
             return
