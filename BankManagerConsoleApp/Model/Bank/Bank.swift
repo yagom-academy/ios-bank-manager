@@ -11,6 +11,8 @@ protocol ViewControllerDelegate: AnyObject {
     func addWaitingClientLabel(text: String, color: UIColor)
     func addWorkingClientLabel(text: String, color: UIColor)
     func removeWorkingClientLabel(text: String, color: UIColor)
+    func stopTimer()
+    func startTimer()
 }
 
 final class Bank {
@@ -22,15 +24,17 @@ final class Bank {
     private var finishedClientCount = 0
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
+    private let bankGroup = DispatchGroup()
     weak var delegate: ViewControllerDelegate?
 
     func startWork(clientQueue: inout Queue<Client>) {
+        delegate?.startTimer()
         while clientQueue.isEmpty() == false {
             guard let client = clientQueue.dequeue() else {
                 return
             }
             
-            let clientTaskTypeText = client.taskType.text
+            let clientTaskTypeText = "\(client.waitingNumber) - \(client.taskType.text)"
             let clientTextColor = client.taskType.color
             
             delegate?.addWaitingClientLabel(text: clientTaskTypeText,
@@ -38,7 +42,7 @@ final class Bank {
             
             let taskTypeSemphore = self.semaphore(taskType: client.taskType)
             
-            DispatchQueue.global().async() {
+            DispatchQueue.global().async(group: bankGroup) {
                 taskTypeSemphore.wait()
                 print(Thread.isMainThread)
                 let bankClerk = BankClerk()
@@ -58,6 +62,9 @@ final class Bank {
                     taskTypeSemphore.signal()
                     print("\(client.waitingNumber)번 haha")
                 }
+            }
+            bankGroup.notify(queue: .main){
+                self.delegate?.stopTimer()
             }
         }
     }

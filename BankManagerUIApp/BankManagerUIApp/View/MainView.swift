@@ -23,7 +23,7 @@ class MainView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         return stackView
     }()
     
@@ -63,7 +63,7 @@ class MainView: UIView {
     
     let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간 - 0000"
+        label.text = "업무시간 : 00:00"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -133,8 +133,8 @@ class MainView: UIView {
         mainVerticalStackView.addArrangedSubview(statusLabelHorizontalStackView)
         
         mainVerticalStackView.addArrangedSubview(bottomHorizontalStackView)
-        bottomHorizontalStackView.addArrangedSubview(workingClientVerticalStackView)
         bottomHorizontalStackView.addArrangedSubview(waitingClientVerticalStackView)
+        bottomHorizontalStackView.addArrangedSubview(workingClientVerticalStackView)
         
         waitingClientVerticalStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
         workingClientVerticalStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7).isActive = true
