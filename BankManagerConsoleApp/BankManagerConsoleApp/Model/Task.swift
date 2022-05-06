@@ -23,13 +23,4 @@ enum Task: String, CaseIterable {
             return 1.1
         }
     }
-    
-    var clerk: DispatchSemaphore {
-        switch self {
-        case .deposit:
-            return BankClerk.depositClerks
-        case .loan:
-            return BankClerk.loanClerks
-        }
-    }
 }
