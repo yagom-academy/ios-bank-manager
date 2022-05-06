@@ -14,15 +14,12 @@ private enum ClientCount: Int {
 }
 
 struct Bank: Measurable {
-    private var clients: Queue<Client>
+    private var clients = Queue<Client>()
     private let workGroup = DispatchGroup()
+    private var lastClientsNumber = 0
     
     private var totalClientsCount: Int {
         return Int.random(in: ClientCount.minimum.rawValue...ClientCount.maximum.rawValue)
-    }
-    
-    init(clients: Queue<Client>) {
-        self.clients = clients
     }
     
     func measureWorkingHours() -> Double {
