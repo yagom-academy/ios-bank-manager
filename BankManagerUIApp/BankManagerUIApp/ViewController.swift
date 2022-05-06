@@ -9,6 +9,10 @@ import UIKit
 class ViewController: UIViewController, SendDelegate {
     
     var bankManager = BankManager()
+    
+    let waitingScrollView: UIScrollView = UIScrollView()
+    let workingScrollView: UIScrollView = UIScrollView()
+
     let baseVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         
@@ -162,73 +166,43 @@ class ViewController: UIViewController, SendDelegate {
         
         return label
     }()
-    
-    let waitingScrollView: UIScrollView = UIScrollView()
-    let workingScrollView: UIScrollView = UIScrollView()
-    
-    func addToWaitingList(_ customer: Customer) {
-        DispatchQueue.main.async {
-            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
-        }
-    }
-    
-    func addToWorkingList(_ customer: Customer) {
-        DispatchQueue.main.async {
-            self.removeLabel(from: self.waitingVerticalStackView, customer)
-            self.workingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
-        }
-    }
-    
-    func removeFromWorkingList(_ customer: Customer) {
-        DispatchQueue.main.async {
-            self.removeLabel(from: self.workingVerticalStackView, customer)
-        }
-    }
-    
-    private func removeLabel(from stackView: UIStackView, _ customer: Customer) {
-        guard let task = customer.bankingType else {
-            return
-        }
-        let text = "\(customer.number) - \(task.rawValue)"
-        
-        DispatchQueue.main.async {
-            guard let labelArray = stackView.subviews as? [UILabel] else {
-                return
-            }
-            for label in labelArray {
-                if text == label.text {
-                    label.removeFromSuperview()
-                }
-            }
-        }
-    }
-    
+}
+
+// MARK: - View Life Cycle
+extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        bankManager.bank.delegate = self
-        let safeArea = view.safeAreaLayoutGuide
-        view.addSubview(baseVerticalStackView)
         
+        bankManager.bank.delegate = self
+        configureViewStructure()
+        configureConstraints()
+        addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
+    }
+}
+
+// MARK: - Private Method
+extension ViewController {
+    func configureViewStructure() {
+        view.addSubview(baseVerticalStackView)
         buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
         buttonHorizontalStackView.addArrangedSubview(clearButton)
         labelHorizontalStackView.addArrangedSubview(waitingLabel)
         labelHorizontalStackView.addArrangedSubview(workingLabel)
         timerHorizontalStackView.addArrangedSubview(workTimeTitleLabel)
         timerHorizontalStackView.addArrangedSubview(workTimeLabel)
-        
         baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(timerHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
-        
         waitingScrollView.addSubview(waitingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
-        
         workingScrollView.addSubview(workingVerticalStackView)
         taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
-        
         baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
-        
-        
+    }
+    
+    func configureConstraints() {
+        let safeArea = view.safeAreaLayoutGuide
+
         NSLayoutConstraint.activate([
             waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor),
             waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
@@ -246,8 +220,31 @@ class ViewController: UIViewController, SendDelegate {
             baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
+    }
+    
+    func addToWaitingList(_ customer: Customer) {
+        DispatchQueue.main.async {
+            self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+        }
+    }
+    
+    private func removeLabel(from stackView: UIStackView, _ customer: Customer) {
+        guard let task = customer.bankingType else {
+            return
+        }
+        let text = "\(customer.number) - \(task.rawValue)"
         
-        addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
+        DispatchQueue.main.async {
+            guard let labelArray = stackView.subviews as? [UILabel] else {
+                return
+            }
+            
+            for label in labelArray {
+                if text == label.text {
+                    label.removeFromSuperview()
+                }
+            }
+        }
     }
     
     @objc func execution(_ sender: UIButton) {
@@ -275,9 +272,24 @@ class ViewController: UIViewController, SendDelegate {
         
         return label
     }
-    
+}
+
+// MARK: - Delegate Method
+extension ViewController {
     func addLabelToWaitingQueue(of customer: Customer) {
         waitingVerticalStackView.addArrangedSubview(generateLabel(of: customer))
     }
-}
 
+    func addToWorkingList(_ customer: Customer) {
+        DispatchQueue.main.async {
+            self.removeLabel(from: self.waitingVerticalStackView, customer)
+            self.workingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
+        }
+    }
+    
+    func removeFromWorkingList(_ customer: Customer) {
+        DispatchQueue.main.async {
+            self.removeLabel(from: self.workingVerticalStackView, customer)
+        }
+    }
+}
