@@ -14,6 +14,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         view = bankView
         setButtons()
+        bank.delegate = self
     }
     
     private func setButtons() {
@@ -30,3 +31,31 @@ final class ViewController: UIViewController {
     }
 }
 
+extension ViewController: BankDelegate {
+    func customerLabel(customer: Customer) -> UILabel {
+        let label = UILabel()
+         label.textAlignment = .center
+         label.font = UIFont.preferredFont(forTextStyle: .title3)
+         if customer.task == .loan {
+             label.textColor = .systemPurple
+         }
+         label.text = "\(customer.number) - \(customer.task.title)"
+         return label
+    }
+    
+    func sendAddedCustomer(customer: Customer) {
+        bankView.waitingStackView.addArrangedSubview(customerLabel(customer: customer))
+    }
+    
+    func sendTaskingCustomer(customer: Customer) {
+        //
+    }
+    
+    func sendEndCustomer(customer: Customer) {
+        //
+    }
+    
+    func sendFinishWork() {
+        //
+    }
+}
