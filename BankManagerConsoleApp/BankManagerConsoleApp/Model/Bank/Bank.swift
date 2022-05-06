@@ -50,26 +50,29 @@ struct Bank {
     
     private mutating func sendCustomerToClerk() {
         let group = DispatchGroup()
+        let workingQueue = DispatchQueue(label: "workingQueue", attributes: .concurrent)
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
             }
-            matchToClerk(customer: customer, group: group)
+            matchToClerk(customer: customer, group: group, dispatchQueue: workingQueue)
             totalCustomerCount += 1
         }
-        group.wait()
+        group.notify(queue: workingQueue){
+            print("끝")
+        }
     }
     
-    private func matchToClerk(customer: Customer, group: DispatchGroup) {
+    private func matchToClerk(customer: Customer, group: DispatchGroup, dispatchQueue: DispatchQueue) {
         switch customer.task {
         case .deposit:
-            DispatchQueue.global().async(group: group) {
+            dispatchQueue.async(group: group) {
                 depositSemaphore.wait()
                 BankClerk.startDepositWork(customer: customer)
                 depositSemaphore.signal()
             }
         case .loan:
-            DispatchQueue.global().async(group: group) {
+            dispatchQueue.async(group: group) {
                 loanSemaphore.wait()
                 BankClerk.startLoanWork(customer: customer)
                 loanSemaphore.signal()
