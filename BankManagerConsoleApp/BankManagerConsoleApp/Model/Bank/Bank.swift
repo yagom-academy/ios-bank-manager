@@ -28,23 +28,21 @@ struct Bank {
             }
         }
     }
-    private enum Constant {
-        static let customerRange = 1...Int.random(in: 10...30)
-        static let empty = ""
-    }
+
     private var customerQueue = Queue<Customer>()
     private var totalCustomerCount = Int.zero
-    private var workingTime = Constant.empty
+    private var workingTime = ""
     
     private let depositSemaphore = DispatchSemaphore(value: Task.deposit.clerkCount)
     private let loanSemaphore = DispatchSemaphore(value: Task.loan.clerkCount)
     
     private mutating func receiveCustomer() {
-        for number in Constant.customerRange {
+        for _ in 1...10 {
             guard let task = Task.allCases.randomElement() else {
                 return
             }
-            customerQueue.enqueue(newElement: Customer(number: number, task: task))
+            totalCustomerCount += 1
+            customerQueue.enqueue(newElement: Customer(number: totalCustomerCount, task: task))
         }
     }
     
@@ -56,7 +54,6 @@ struct Bank {
                 return
             }
             matchToClerk(customer: customer, group: group, dispatchQueue: workingQueue)
-            totalCustomerCount += 1
         }
         group.notify(queue: workingQueue){
             print("끝")
