@@ -9,7 +9,6 @@ protocol BankDelegate: AnyObject {
     func sendAddedCustomer(customer: Customer)
     func sendTaskingCustomer(customer: Customer)
     func sendEndCustomer(customer: Customer)
-    func sendFinishWork()
 }
 
 struct Bank {
@@ -61,12 +60,6 @@ struct Bank {
                 return
             }
             matchToClerk(customer: customer)
-        }
-        depositQueue.addBarrierBlock { [self] in
-            delegate?.sendFinishWork()
-        }
-        loanQueue.addBarrierBlock { [self] in
-            delegate?.sendFinishWork()
         }
     }
     
