@@ -173,19 +173,14 @@ extension BankManagerViewController {
         self.bankManager.bank.clearCustomerQueue()
         self.bankManager.status = .notRunning
 
-        guard let waitings = waitingVerticalStackView.subviews as? [UILabel] else {
-            return
-        }
-        
-        guard let workings = workingVerticalStackView.subviews as? [UILabel] else {
-            return
-        }
+        let waitings = waitingVerticalStackView.subviews
+        let workings = workingVerticalStackView.subviews
         
         DispatchQueue.main.async {
-            waitings.forEach({
+            waitings.compactMap({ $0 as? UILabel }).forEach({
                 $0.removeFromSuperview()
             })
-            workings.forEach({
+            workings.compactMap({ $0 as? UILabel }).forEach({
                 $0.removeFromSuperview()
             })
         }
