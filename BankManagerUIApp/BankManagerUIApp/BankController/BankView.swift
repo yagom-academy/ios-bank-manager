@@ -134,16 +134,10 @@ final class BankView: UIView {
         return stackView
     }()
     
-    private lazy var waitScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        return scrollView
-    }()
+    private lazy var waitScrollView = UIScrollView()
+    private lazy var workScrollView = UIScrollView()
     
     private(set) lazy var waitStackView: UIStackView = {
-        let scrollView = UIScrollView()
-        return scrollView
-    }()
-    
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
