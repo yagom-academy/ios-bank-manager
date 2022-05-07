@@ -36,7 +36,6 @@ struct Bank {
     }
 
     func work() {
-
         while !customerQueue.isEmpty {
             guard let customer = customerQueue.dequeue() else {
                 return
