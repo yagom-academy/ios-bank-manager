@@ -9,31 +9,6 @@ import UIKit
 private enum Const {
     static let timeInterval = 0.003
     static let numberOfCusomter = 10
-    static let businessHoursFormat = "%02d:%02d:%03.0f"
-}
-
-private extension UIStackView {
-    func removeAllSubViews() {
-        arrangedSubviews.forEach { subView in
-            subView.removeFromSuperview()
-        }
-    }
-    
-    func addArrangedSubViews(_ views: [UIView]) {
-        views.forEach { view in
-            addArrangedSubview(view)
-        }
-    }
-}
-
-private extension Double {
-    var formattedTime: String {
-        let minute = Int(self / 60)
-        let second = Int(self.truncatingRemainder(dividingBy: 60))
-        let miliSecond = self.truncatingRemainder(dividingBy: 1) * 1000
-            
-        return String(format: Const.businessHoursFormat, minute, second, miliSecond)
-    }
 }
 
 final class BankViewController: UIViewController {
