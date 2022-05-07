@@ -8,16 +8,16 @@
 import Foundation
 
 protocol BankWindow: AnyObject {
-    func receive(start: () -> Void, end: () -> Void)
+    func receive(start: (() -> Void)?, end: (() -> Void)?)
 }
 
 final class BankLoanWindow: BankWindow {
     private let workType: Banking = .loan
 
-    func receive(start: () -> Void, end: () -> Void) {
-        start()
+    func receive(start: (() -> Void)? = nil, end: (() -> Void)? = nil) {
+        start?()
         work()
-        end()
+        end?()
     }
 
     private func work() {
@@ -30,10 +30,10 @@ final class BankLoanWindow: BankWindow {
 final class BankDepositWindow: BankWindow {
     private let workType: Banking = .deposit
 
-    func receive(start: () -> Void, end: () -> Void) {
-        start()
+    func receive(start: (() -> Void)? = nil, end: (() -> Void)? = nil) {
+        start?()
         work()
-        end()
+        end?()
     }
 
     private func work() {
