@@ -18,6 +18,7 @@
 		4EC2F7BC2823A75C009AB142 /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2F7BB2823A75C009AB142 /* Teller.swift */; };
 		4EC2F7BF2823A779009AB142 /* NumberOfTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2F7BE2823A779009AB142 /* NumberOfTask.swift */; };
 		6F805936F5EE5FDC97211FEA /* Pods_BankManagerUIApp_BankManagerUIAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B60C363DCB56509F05943E /* Pods_BankManagerUIApp_BankManagerUIAppUITests.framework */; };
+		B366BF112826BBFF00FA90B4 /* BankingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B366BF102826BBFF00FA90B4 /* BankingTimer.swift */; };
 		C5CE436BE4BA462C067614E9 /* Pods_BankManagerUIApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9D1F99F3CE7895C1B6E9E3 /* Pods_BankManagerUIApp.framework */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
 		C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3C259C3E9F0053667F /* SceneDelegate.swift */; };
@@ -62,6 +63,7 @@
 		84E1C8A43B2903A1B50C6AEF /* Pods-BankManagerUIApp-BankManagerUIAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerUIApp-BankManagerUIAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BankManagerUIApp-BankManagerUIAppUITests/Pods-BankManagerUIApp-BankManagerUIAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A3B60C363DCB56509F05943E /* Pods_BankManagerUIApp_BankManagerUIAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerUIApp_BankManagerUIAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2CA36623F2DD398574A6FAB /* Pods-BankManagerUIApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerUIApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerUIApp/Pods-BankManagerUIApp.release.xcconfig"; sourceTree = "<group>"; };
+		B366BF102826BBFF00FA90B4 /* BankingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingTimer.swift; sourceTree = "<group>"; };
 		B43B1D7247C2AEDA709FCF4D /* Pods_BankManagerUIAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerUIAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E3A259C3E9F0053667F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				4EC2F7B72823A749009AB142 /* BankManager.swift */,
 				4EC2F7B92823A755009AB142 /* Customer.swift */,
 				4EC2F7BB2823A75C009AB142 /* Teller.swift */,
+				B366BF102826BBFF00FA90B4 /* BankingTimer.swift */,
 				4EC2F7BD2823A763009AB142 /* Namespace */,
 				4EC2F7AC2823A6E6009AB142 /* Queue */,
 			);
@@ -443,6 +446,7 @@
 				4EC2F7B82823A749009AB142 /* BankManager.swift in Sources */,
 				4EC2F7B42823A726009AB142 /* Bank.swift in Sources */,
 				4EC2F7BF2823A779009AB142 /* NumberOfTask.swift in Sources */,
+				B366BF112826BBFF00FA90B4 /* BankingTimer.swift in Sources */,
 				4EC2F7B22823A70D009AB142 /* Queue.swift in Sources */,
 				4EC2F7B62823A737009AB142 /* BankingTask.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,

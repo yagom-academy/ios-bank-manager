@@ -26,11 +26,12 @@ struct BankingTimer {
         if timer == nil {
             timer = DispatchSource.makeTimerSource(flags: [], queue: .main)
             timer?.schedule(deadline: .now(), repeating: 0.01)
-            timer?.setEventHandler(handler: { [self] in
-                delegate?.updateWorkTime(startTime, durationTime)
-            })
         }
-        
+
+        timer?.setEventHandler(handler: { [self] in
+            delegate?.updateWorkTime(startTime, durationTime)
+        })
+
         if currentTimerState != .timerRunning {
             currentTimerState = .timerRunning
             timer?.resume()
