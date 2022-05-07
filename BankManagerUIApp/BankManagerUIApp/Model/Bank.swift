@@ -15,7 +15,7 @@ struct Bank {
     private let depositWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.deposit)
     private let loanWindow: DispatchSemaphore = DispatchSemaphore(value: NumberOfTask.loan)
     private let bankingQueue = DispatchQueue(label: "bankingQueue", attributes: .concurrent)
-    var delegate: CustomerSendable?
+    weak var delegate: CustomerSendable?
     
     init(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
