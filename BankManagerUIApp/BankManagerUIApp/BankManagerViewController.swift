@@ -12,7 +12,7 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
     
     private let waitingScrollView: UIScrollView = UIScrollView()
     private let workingScrollView: UIScrollView = UIScrollView()
-
+    
     private let baseVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         
@@ -299,6 +299,18 @@ extension BankManagerViewController {
         }
         
         return label
+    }
+    
+    private func makeStackView(axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = axis
+        stackView.alignment = alignment
+        stackView.distribution = distribution
+        stackView.spacing = spacing
+        
+        return stackView
     }
 }
 
