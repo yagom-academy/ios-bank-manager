@@ -18,8 +18,6 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
         stackView.spacing = 15
         
         return stackView
@@ -30,7 +28,6 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 10
         
@@ -42,7 +39,6 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 5
         
@@ -54,7 +50,6 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .fill
         stackView.distribution = .fillEqually
         
         return stackView
@@ -65,7 +60,6 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .fill
         stackView.distribution = .fillEqually
         
         return stackView
