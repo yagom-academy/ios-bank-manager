@@ -145,13 +145,11 @@ extension BankManagerViewController {
         
         let text = "\(customer.number) - \(task.rawValue)"
         
-        DispatchQueue.main.async {
-            guard let labelArray = stackView.subviews as? [UILabel] else {
-                return
-            }
-            
-            labelArray.filter { $0.text == text }.first?.removeFromSuperview()
+        guard let labelArray = stackView.subviews as? [UILabel] else {
+            return
         }
+        
+        labelArray.filter { $0.text == text }.first?.removeFromSuperview()
     }
     
     @objc private func execution(_ sender: UIButton) {
