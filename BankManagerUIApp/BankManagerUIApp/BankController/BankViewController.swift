@@ -87,9 +87,8 @@ extension BankViewController: BankDelegate {
         DispatchQueue.main.async {
             guard let customerViews = self.bankView.waitStackView.arrangedSubviews as? [CustomerView] else { return }
             
-            guard let targetView = customerViews.filter({ customerView in
-                customerView.customerId == id
-            }).first else { return }
+            guard let targetView = customerViews.first(where: {
+                $0.customerId == id }) else { return }
             
             targetView.removeFromSuperview()
             self.bankView.workStackView.addArrangedSubview(targetView)
@@ -100,9 +99,8 @@ extension BankViewController: BankDelegate {
         DispatchQueue.main.async {
             guard let customerViews = self.bankView.workStackView.arrangedSubviews as? [CustomerView] else { return }
             
-            guard let targetView = customerViews.filter({ customerView in
-                customerView.customer.id == id
-            }).first else { return }
+            guard let targetView = customerViews.first(where: {
+                $0.customerId == id }) else { return }
             
             targetView.removeFromSuperview()
         }
