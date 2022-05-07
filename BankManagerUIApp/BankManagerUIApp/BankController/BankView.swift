@@ -54,7 +54,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    lazy var addCustomerButton: UIButton = {
+    private(set) lazy var addCustomerButton: UIButton = {
         let button = UIButton()
         button.setTitle(Const.addButtonTitle, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -63,7 +63,7 @@ final class BankView: UIView {
         return button
     }()
     
-    lazy var resetButton: UIButton = {
+    private(set) lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle(Const.resetButtonTitle, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
@@ -89,7 +89,7 @@ final class BankView: UIView {
         return label
     }()
     
-    lazy var timerLabel: UILabel = {
+    private(set) lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = Const.timerLabelText
         label.textAlignment = .left
@@ -139,12 +139,11 @@ final class BankView: UIView {
         return scrollView
     }()
     
-    private lazy var workScrollView: UIScrollView = {
+    private(set) lazy var waitStackView: UIStackView = {
         let scrollView = UIScrollView()
         return scrollView
     }()
     
-    lazy var waitStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -153,7 +152,7 @@ final class BankView: UIView {
         return stackView
     }()
     
-    lazy var workStackView: UIStackView = {
+    private(set) lazy var workStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
