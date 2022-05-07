@@ -12,6 +12,10 @@ protocol CustomerSendable: NSObject {
     func removeFromWorkingList(_ customer: Customer)
 }
 
+protocol WorkTimeSendable: NSObject {
+    func updateWorkTime(_ startTime: Date, _ durationTime: TimeInterval)
+}
+
 final class BankManagerViewController: UIViewController {
     
     private var bankManager = BankManager()
