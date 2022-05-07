@@ -10,6 +10,10 @@ import UIKit
 final class CustomerView: UIView {
     let customer: Customer
     
+    var customerId: String {
+        return customer.id
+    }
+    
     private lazy var customerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

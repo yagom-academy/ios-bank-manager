@@ -112,7 +112,7 @@ extension BankViewController: BankDelegate {
             guard let customerViews = self.bankView.waitStackView.arrangedSubviews as? [CustomerView] else { return }
             
             guard let targetView = customerViews.filter({ customerView in
-                customerView.customer.id == id
+                customerView.customerId == id
             }).first else { return }
             
             targetView.removeFromSuperview()
