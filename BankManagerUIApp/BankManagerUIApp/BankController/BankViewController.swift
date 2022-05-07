@@ -48,13 +48,13 @@ final class BankViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        attribute()
+        configureAttribute()
         bind()
     }
 }
 
 extension BankViewController {
-    private func attribute() {
+    private func configureAttribute() {
         bankView.backgroundColor = .systemBackground
         bank.delegate = self
     }

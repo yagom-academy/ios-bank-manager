@@ -157,7 +157,7 @@ final class BankView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layout()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -168,7 +168,7 @@ final class BankView: UIView {
 // MARK: - layout
 
 extension BankView {
-    private func layout() {
+    private func configureLayout() {
         addSubview(baseStackView)
         waitScrollView.addSubview(waitStackView)
         workScrollView.addSubview(workStackView)
