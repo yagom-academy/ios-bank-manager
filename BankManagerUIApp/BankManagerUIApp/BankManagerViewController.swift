@@ -6,7 +6,7 @@
 
 import UIKit
 
-protocol CustomerSendable {
+protocol CustomerSendable: NSObject {
     func addToWaitingList(_ customer: Customer)
     func addToWorkingList(_ customer: Customer)
     func removeFromWorkingList(_ customer: Customer)
