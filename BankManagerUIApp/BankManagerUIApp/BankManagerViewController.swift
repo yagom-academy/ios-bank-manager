@@ -244,6 +244,18 @@ extension BankManagerViewController {
         
         return stackView
     }
+    
+    private func makeButton(title: String, font: UIFont, color: UIColor) -> UIButton {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = font
+        button.setTitleColor(color, for: .normal)
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        return button
+    }
 }
 
 // MARK: - Delegate Method
