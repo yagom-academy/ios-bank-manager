@@ -74,7 +74,16 @@ struct Bank {
         }
     }
     
-    func clearCustomerQueue() {
+    private func clearCustomerQueue() {
         self.customerQueue.clear()
+    }
+    
+    private mutating func clearCustomerNumber() {
+        self.startNumber = 1
+    }
+    
+    mutating func reset() {
+        clearCustomerQueue()
+        clearCustomerNumber()
     }
 }

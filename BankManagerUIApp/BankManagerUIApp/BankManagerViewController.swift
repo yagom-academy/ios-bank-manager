@@ -172,11 +172,12 @@ extension BankManagerViewController {
     }
     
     @objc private func clear(_ sender: UIButton) {
-        self.bankManager.bank.clearCustomerQueue()
         self.bankManager.status = .notRunning
+        workTimeLabel.text = "00:00:000"
 
+        bankManager.bank.reset()
         clearTaskQueueLabel()
-        clearTimer()
+        timer.clearTimer()
     }
     
     private func clearTaskQueueLabel() {
