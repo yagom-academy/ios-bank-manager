@@ -281,60 +281,6 @@ extension BankManagerViewController: CustomerSendable {
     }
 }
 
-// MARK: - Timer
-extension BankManagerViewController {
-    enum TimerState {
-        case timerRunning
-        case timerPaused
-        case timerNotRunning
-    }
-    
-    private func startTimer() {
-        startTime = Date()
-        if timer == nil {
-            timer = DispatchSource.makeTimerSource(flags: [], queue: .main)
-            timer?.schedule(deadline: .now(), repeating: 0.01)
-            timer?.setEventHandler(handler: {
-                self.updateWorkTimeLabel()
-            })
-        }
-        
-        if currentTimerState != .timerRunning {
-            currentTimerState = .timerRunning
-            timer?.resume()
-        }
-    }
-    
-    private func pauseTimer() {
-        currentTimerState = .timerPaused
-        timer?.suspend()
-        let timeInterval = Date().timeIntervalSince(self.startTime)
-        durationTime += timeInterval
-    }
-    
-    private func clearTimer() {
-        if currentTimerState != .timerRunning {
-            timer?.resume()
-        }
-        
-        timer?.cancel()
-        currentTimerState = .timerNotRunning
-        timer = nil
-        workTimeLabel.text = "00:00:000"
-        durationTime = 0
-    }
-    
-    private func updateWorkTimeLabel() {
-        let timeInterval = Date().timeIntervalSince(self.startTime)
-        let durationSeconds = durationTime + timeInterval
-        let second = (Int)(fmod(durationSeconds, 60))
-        let decimalValue = (Int)(floor((durationSeconds - floor(durationSeconds)) * 100000))
-        let milliSecond = (Int)(decimalValue / 1000)
-        let microSecond = (Int)(decimalValue % 1000)
-        self.workTimeLabel.text = "\(String(format: "%02d", second)):\(String(format: "%02d", milliSecond)):\(String(format:"%03d", microSecond))"
-    }
-}
-
 // MARK: - WorkTimeSendable Method
 extension BankManagerViewController: WorkTimeSendable {
     func updateWorkTime(_ startTime: Date, _ durationTime: TimeInterval) {
