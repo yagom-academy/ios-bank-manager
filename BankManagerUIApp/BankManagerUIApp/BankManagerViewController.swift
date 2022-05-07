@@ -20,30 +20,9 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
     private lazy var taskQueueHorizontalStackView: UIStackView = makeStackView(axis: .horizontal, alignment: .fill, distribution: .fillEqually, spacing: 0)
     private lazy var waitingVerticalStackView: UIStackView = makeStackView(axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 10)
     private lazy var workingVerticalStackView: UIStackView = makeStackView(axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 10)
-    
-    private let addCustomerButton: UIButton = {
-        let button = UIButton()
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("고객 10명 추가", for: .normal)
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        button.setTitleColor(UIColor.systemBlue, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        return button
-    }()
-    
-    private let clearButton: UIButton = {
-        let button = UIButton()
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("초기화", for: .normal)
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        button.setTitleColor(UIColor.systemRed, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        return button
-    }()
+    private lazy var addCustomerButton: UIButton = makeButton(title: "고객 10명 추가", font: .preferredFont(forTextStyle: .body), color: .systemBlue)
+    private lazy var clearButton: UIButton = makeButton(title: "초기화", font: .preferredFont(forTextStyle: .body), color: .systemRed)
+
     
     private let workTimeTitleLabel: UILabel = {
         let label = UILabel()
