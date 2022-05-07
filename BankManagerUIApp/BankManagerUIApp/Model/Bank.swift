@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol CustomerSendable {
-    func addToWaitingList(_ customer: Customer)
-    func addToWorkingList(_ customer: Customer)
-    func removeFromWorkingList(_ customer: Customer)
-}
-
 struct Bank {
     private var numberOfCustomer: Int
     private var startNumber: Int = 1

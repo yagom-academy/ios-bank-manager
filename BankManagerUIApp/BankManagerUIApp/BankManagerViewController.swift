@@ -6,7 +6,13 @@
 
 import UIKit
 
-final class BankManagerViewController: UIViewController, CustomerSendable {
+protocol CustomerSendable {
+    func addToWaitingList(_ customer: Customer)
+    func addToWorkingList(_ customer: Customer)
+    func removeFromWorkingList(_ customer: Customer)
+}
+
+final class BankManagerViewController: UIViewController {
     
     private var bankManager = BankManager()
     
@@ -219,7 +225,7 @@ extension BankManagerViewController {
 }
 
 // MARK: - Delegate Method
-extension BankManagerViewController {
+extension BankManagerViewController: CustomerSendable {
     func addToWaitingList(_ customer: Customer) {
         DispatchQueue.main.async {
             self.waitingVerticalStackView.addArrangedSubview(self.generateLabel(of: customer))
