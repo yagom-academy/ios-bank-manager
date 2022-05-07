@@ -46,7 +46,7 @@ extension BankManagerViewController {
         
         bankManager.bank.delegate = self
         configureView()
-        addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
+        addCustomerButton.addTarget(self, action: #selector(execute(_:)), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clear(_:)), for: .touchUpInside)
     }
 }
@@ -152,7 +152,7 @@ extension BankManagerViewController {
         labelArray.filter { $0.text == text }.first?.removeFromSuperview()
     }
     
-    @objc private func execution(_ sender: UIButton) {
+    @objc private func execute(_ sender: UIButton) {
         let group = DispatchGroup()
         
         DispatchQueue.global().async(group: group) {
