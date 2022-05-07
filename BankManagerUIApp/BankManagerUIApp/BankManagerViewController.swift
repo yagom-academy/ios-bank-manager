@@ -13,81 +13,13 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
     private let waitingScrollView: UIScrollView = UIScrollView()
     private let workingScrollView: UIScrollView = UIScrollView()
     
-    private let baseVerticalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 15
-        
-        return stackView
-    }()
-    
-    private let buttonHorizontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        
-        return stackView
-    }()
-    
-    private let timerHorizontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 5
-        
-        return stackView
-    }()
-    
-    private let labelHorizontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-    private let taskQueueHorizontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-    private let waitingVerticalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        
-        return stackView
-    }()
-    
-    private let workingVerticalStackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        
-        return stackView
-    }()
+    private lazy var baseVerticalStackView: UIStackView = makeStackView(axis: .vertical, alignment: .fill, distribution: .fill, spacing: 15)
+    private lazy var buttonHorizontalStackView: UIStackView = makeStackView(axis: .horizontal, alignment: .fill, distribution: .fillEqually, spacing: 10)
+    private lazy var timerHorizontalStackView: UIStackView = makeStackView(axis: .horizontal, alignment: .fill, distribution: .fillEqually, spacing: 5)
+    private lazy var labelHorizontalStackView: UIStackView = makeStackView(axis: .horizontal, alignment: .fill, distribution: .fillEqually, spacing: 0)
+    private lazy var taskQueueHorizontalStackView: UIStackView = makeStackView(axis: .horizontal, alignment: .fill, distribution: .fillEqually, spacing: 0)
+    private lazy var waitingVerticalStackView: UIStackView = makeStackView(axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 10)
+    private lazy var workingVerticalStackView: UIStackView = makeStackView(axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 10)
     
     private let addCustomerButton: UIButton = {
         let button = UIButton()
