@@ -235,6 +235,30 @@ extension BankManagerViewController {
         
         return button
     }
+    
+    private func makeLabel(text: String, alignment: NSTextAlignment, font: UIFont) -> UILabel {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = text
+        label.textAlignment = alignment
+        label.font = font
+        
+        return label
+    }
+    
+    private func makeLabel(text: String, alignment: NSTextAlignment, font: UIFont, textColor: UIColor, backgroundColor: UIColor) -> UILabel {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = text
+        label.textAlignment = alignment
+        label.font = font
+        label.textColor = textColor
+        label.backgroundColor = backgroundColor
+        
+        return label
+    }
 }
 
 // MARK: - Delegate Method
