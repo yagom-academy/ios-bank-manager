@@ -45,8 +45,7 @@ extension BankManagerViewController {
         super.viewDidLoad()
         
         bankManager.bank.delegate = self
-        configureViewStructure()
-        configureConstraints()
+        configureView()
         addCustomerButton.addTarget(self, action: #selector(execution(_:)), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clear(_:)), for: .touchUpInside)
     }
@@ -54,52 +53,88 @@ extension BankManagerViewController {
 
 // MARK: - Private Method
 extension BankManagerViewController {
-    private func configureViewStructure() {
+    private func configureView() {
         view.addSubview(baseVerticalStackView)
+
+        configureBaseVerticalStackView()
+        configureButtonHorizontalStackView()
+        configureLabelHorizontalStackView()
+        configureTimerHorizontalStackView()
+        configureTaskQueueHorizontalStackView()
+        configureWaitingScrollView()
+        configureWorkingScrollView()
+        configureWaitingVerticalStackView()
+        configureWorkingVerticalStackView()
+        configureButton()
+    }
+    
+    private func configureBaseVerticalStackView() {
+        let safeArea = view.safeAreaLayoutGuide
 
         baseVerticalStackView.addArrangedSubview(buttonHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(timerHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(labelHorizontalStackView)
         baseVerticalStackView.addArrangedSubview(taskQueueHorizontalStackView)
-
+        
+        NSLayoutConstraint.activate([
+        baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+        baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+        baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+        ])
+    }
+    
+    private func configureButtonHorizontalStackView() {
         buttonHorizontalStackView.addArrangedSubview(addCustomerButton)
         buttonHorizontalStackView.addArrangedSubview(clearButton)
-        
+    }
+    
+    private func configureLabelHorizontalStackView() {
         labelHorizontalStackView.addArrangedSubview(waitingLabel)
         labelHorizontalStackView.addArrangedSubview(workingLabel)
-        
+    }
+    
+    private func configureTimerHorizontalStackView() {
         timerHorizontalStackView.addArrangedSubview(workTimeTitleLabel)
         timerHorizontalStackView.addArrangedSubview(workTimeLabel)
-        
-        waitingScrollView.addSubview(waitingVerticalStackView)
-        workingScrollView.addSubview(workingVerticalStackView)
+    }
 
+    private func configureTaskQueueHorizontalStackView() {
         taskQueueHorizontalStackView.addArrangedSubview(waitingScrollView)
         taskQueueHorizontalStackView.addArrangedSubview(workingScrollView)
     }
     
-    private func configureConstraints() {
-        let safeArea = view.safeAreaLayoutGuide
-
+    private func configureWaitingScrollView() {
+        waitingScrollView.addSubview(waitingVerticalStackView)
+        waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
+    }
+    
+    private func configureWorkingScrollView() {
+        workingScrollView.addSubview(workingVerticalStackView)
+        workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor).isActive = true
+    }
+    
+    private func configureWaitingVerticalStackView() {
         NSLayoutConstraint.activate([
-            addCustomerButton.heightAnchor.constraint(equalToConstant: 30),
-            clearButton.heightAnchor.constraint(equalToConstant: 30),
-            
-            waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
             waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor),
             waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
             waitingVerticalStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
-
-            workingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
+        ])
+    }
+    
+    private func configureWorkingVerticalStackView() {
+        NSLayoutConstraint.activate([
             workingVerticalStackView.centerXAnchor.constraint(equalTo: workingScrollView.centerXAnchor),
             workingVerticalStackView.topAnchor.constraint(equalTo: workingScrollView.topAnchor),
             workingVerticalStackView.bottomAnchor.constraint(equalTo: workingScrollView.bottomAnchor),
-            
-            baseVerticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            baseVerticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            baseVerticalStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            baseVerticalStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            baseVerticalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+        ])
+    }
+    
+    private func configureButton() {
+        NSLayoutConstraint.activate([
+            addCustomerButton.heightAnchor.constraint(equalToConstant: 30),
+            clearButton.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
     
