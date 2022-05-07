@@ -76,6 +76,9 @@ extension BankManagerViewController {
         let safeArea = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
+            addCustomerButton.heightAnchor.constraint(equalToConstant: 30),
+            clearButton.heightAnchor.constraint(equalToConstant: 30),
+            
             waitingScrollView.topAnchor.constraint(equalTo: taskQueueHorizontalStackView.topAnchor),
             waitingVerticalStackView.centerXAnchor.constraint(equalTo: waitingScrollView.centerXAnchor),
             waitingVerticalStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
@@ -186,7 +189,6 @@ extension BankManagerViewController {
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = font
         button.setTitleColor(color, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         return button
     }
