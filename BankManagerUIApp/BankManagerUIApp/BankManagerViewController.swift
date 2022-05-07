@@ -22,55 +22,10 @@ final class BankManagerViewController: UIViewController, CustomerSendable {
     private lazy var workingVerticalStackView: UIStackView = makeStackView(axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 10)
     private lazy var addCustomerButton: UIButton = makeButton(title: "고객 10명 추가", font: .preferredFont(forTextStyle: .body), color: .systemBlue)
     private lazy var clearButton: UIButton = makeButton(title: "초기화", font: .preferredFont(forTextStyle: .body), color: .systemRed)
-
-    
-    private let workTimeTitleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "업무시간 - "
-        label.textAlignment = .right
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        
-        return label
-    }()
-    
-    private let workTimeLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "00:00:000"
-        label.textAlignment = .left
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        
-        return label
-    }()
-    
-    private let waitingLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "대기중"
-        label.textColor = .white
-        label.backgroundColor = .systemGreen
-        label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        
-        return label
-    }()
-    
-    private let workingLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "업무중"
-        label.textColor = .white
-        label.backgroundColor = .systemIndigo
-        label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        
-        return label
-    }()
+    private lazy var workTimeTitleLabel: UILabel = makeLabel(text: "업무시간 - ", alignment: .right, font: .preferredFont(forTextStyle: .title2))
+    private lazy var workTimeLabel: UILabel = makeLabel(text: "00:00:000", alignment: .left, font: .preferredFont(forTextStyle: .title2))
+    private lazy var waitingLabel: UILabel = makeLabel(text: "대기중", alignment: .center, font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemGreen)
+    private lazy var workingLabel: UILabel = makeLabel(text: "업무중", alignment: .center, font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemIndigo)
     
     var startTime = Date()
     var durationTime: TimeInterval = 0
