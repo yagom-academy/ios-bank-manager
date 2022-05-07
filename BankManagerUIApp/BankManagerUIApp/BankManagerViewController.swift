@@ -259,7 +259,7 @@ extension BankManagerViewController {
     }
 }
 
-// MARK: - Delegate Method
+// MARK: - CustomerSendable Method
 extension BankManagerViewController: CustomerSendable {
     func addToWaitingList(_ customer: Customer) {
         DispatchQueue.main.async {
@@ -326,6 +326,19 @@ extension BankManagerViewController {
     
     private func updateWorkTimeLabel() {
         let timeInterval = Date().timeIntervalSince(self.startTime)
+        let durationSeconds = durationTime + timeInterval
+        let second = (Int)(fmod(durationSeconds, 60))
+        let decimalValue = (Int)(floor((durationSeconds - floor(durationSeconds)) * 100000))
+        let milliSecond = (Int)(decimalValue / 1000)
+        let microSecond = (Int)(decimalValue % 1000)
+        self.workTimeLabel.text = "\(String(format: "%02d", second)):\(String(format: "%02d", milliSecond)):\(String(format:"%03d", microSecond))"
+    }
+}
+
+// MARK: - WorkTimeSendable Method
+extension BankManagerViewController: WorkTimeSendable {
+    func updateWorkTime(_ startTime: Date, _ durationTime: TimeInterval) {
+        let timeInterval = Date().timeIntervalSince(startTime)
         let durationSeconds = durationTime + timeInterval
         let second = (Int)(fmod(durationSeconds, 60))
         let decimalValue = (Int)(floor((durationSeconds - floor(durationSeconds)) * 100000))
