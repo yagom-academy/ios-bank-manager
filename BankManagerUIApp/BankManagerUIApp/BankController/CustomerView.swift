@@ -10,16 +10,6 @@ import UIKit
 final class CustomerView: UIView {
     let customer: Customer
     
-    init(customer: Customer) {
-        self.customer = customer
-        super.init(frame: .zero)
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private lazy var customerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +24,16 @@ final class CustomerView: UIView {
         
         return label
     }()
+    
+    init(customer: Customer) {
+        self.customer = customer
+        super.init(frame: .zero)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - layout
