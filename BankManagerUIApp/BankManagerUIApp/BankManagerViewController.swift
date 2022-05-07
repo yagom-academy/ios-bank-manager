@@ -37,10 +37,7 @@ final class BankManagerViewController: UIViewController {
     private lazy var waitingLabel: UILabel = makeLabel(text: "대기중", alignment: .center, font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemGreen)
     private lazy var workingLabel: UILabel = makeLabel(text: "업무중", alignment: .center, font: .preferredFont(forTextStyle: .largeTitle), textColor: .white, backgroundColor: .systemIndigo)
     
-    var startTime = Date()
-    var durationTime: TimeInterval = 0
-    var timer: DispatchSourceTimer?
-    var currentTimerState: TimerState = .timerNotRunning
+    var timer: BankingTimer = BankingTimer()
 }
 
 // MARK: - View Life Cycle
@@ -49,6 +46,7 @@ extension BankManagerViewController {
         super.viewDidLoad()
         
         bankManager.bank.delegate = self
+        timer.delegate = self
         configureView()
         addCustomerButton.addTarget(self, action: #selector(execute(_:)), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clear(_:)), for: .touchUpInside)
@@ -160,15 +158,15 @@ extension BankManagerViewController {
         let group = DispatchGroup()
         
         DispatchQueue.global().async(group: group) {
-            if self.currentTimerState != .timerRunning {
-                self.startTimer()
+            if self.timer.currentTimerState != .timerRunning {
+                self.timer.startTimer()
             }
             self.bankManager.startBanking()
         }
         
         group.notify(queue: .main) {
             if self.bankManager.status == .notRunning {
-                self.pauseTimer()
+                self.timer.pauseTimer()
             }
         }
     }
