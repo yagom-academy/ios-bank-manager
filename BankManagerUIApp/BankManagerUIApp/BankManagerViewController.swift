@@ -173,6 +173,11 @@ extension BankManagerViewController {
         self.bankManager.bank.clearCustomerQueue()
         self.bankManager.status = .notRunning
 
+        clearTaskQueueLabel()
+        clearTimer()
+    }
+    
+    private func clearTaskQueueLabel() {
         let waitings = waitingVerticalStackView.subviews
         let workings = workingVerticalStackView.subviews
         
@@ -184,8 +189,6 @@ extension BankManagerViewController {
                 $0.removeFromSuperview()
             })
         }
-        
-        clearTimer()
     }
     
     private func generateLabel(of customer: Customer) -> UILabel {
