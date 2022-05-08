@@ -13,7 +13,7 @@ fileprivate enum ClientCount: Int {
     case first = 1
 }
 
-struct Bank: Measurable {
+struct Bank {
     private var clients = Queue<Client>()
     private let workGroup = DispatchGroup()
     
@@ -26,6 +26,14 @@ struct Bank: Measurable {
             open()
         }
         return duration
+    }
+    
+    func measureTime(of task: () -> Void) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        task()
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        return Double(durationTime)
     }
     
     private func open() {
