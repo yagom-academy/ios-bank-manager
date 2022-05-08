@@ -21,25 +21,10 @@ struct Bank {
         return Int.random(in: ClientCount.minimum.rawValue...ClientCount.maximum.rawValue)
     }
     
-    func measureWorkingHours() -> Double {
-        let duration = measureTime {
-            open()
-        }
-        return duration
-    }
-    
-    func measureTime(of task: () -> Void) -> Double {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        task()
-        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
-        
-        return Double(durationTime)
-    }
-    
-    private func open() {
+    func open() {
         while let client = clients.dequeue() {
             DispatchQueue.global().async(group: workGroup) {
-                BankClerk.work(client: client)
+                BankClerk.work(client: client, group: workGroup)
             }
         }
         workGroup.wait()

@@ -96,13 +96,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		864EE36F2820B9DD00573488 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		8682B4EE2818001000203106 /* DataStructure */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +108,6 @@
 		8682B4FA2819364100203106 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				864EE36F2820B9DD00573488 /* Protocol */,
 				8682B4FB2819364900203106 /* Extension */,
 			);
 			path = Utils;

@@ -59,7 +59,12 @@ struct BankManager {
         guard let totalCount = bank.giveWaitingNumber() else {
             return
         }
-        closeBank(totalDuration: bank.measureWorkingHours(), clientCount: totalCount)
+        
+        let startTime = CFAbsoluteTimeGetCurrent()
+        bank.open()
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        closeBank(totalDuration: durationTime, clientCount: totalCount)
     }
     
     private mutating func reopenBank() {
@@ -70,4 +75,5 @@ struct BankManager {
     private func closeBank(totalDuration: Double, clientCount: Int) {
         Guide.closeDescription(totalDuration: totalDuration, clientCount: clientCount)
     }
+
 }

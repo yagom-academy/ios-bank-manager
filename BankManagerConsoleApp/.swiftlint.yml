@@ -3,3 +3,4 @@ disabled_rules:
     - comment_spacing
     - redundant_discardable_let
     - nesting
+    - private_over_fileprivate
