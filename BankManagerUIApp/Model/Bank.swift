@@ -13,9 +13,9 @@ private enum Const {
 }
 
 protocol BankDelegate: AnyObject {
-    func bankWorkDidFinish(_ bank: Bank)
     func customerWorkDidStart(_ bank: Bank, id: String)
     func customerWorkDidFinish(_ bank: Bank, id: String)
+    func secondsDidChange(_ bank: Bank, seconds: Double)
 }
 
 final class Bank {
@@ -24,10 +24,15 @@ final class Bank {
     private let depositWindow: BankWindow
     private let loanQueue = OperationQueue()
     private let depositQueue = OperationQueue()
+    private let endQueue = OperationQueue()
     private(set) var waitingNumber = 1
     weak var delegate: BankDelegate?
-    
-    private let endQueue = OperationQueue()
+    private var timer: Timer?
+    private var seconds: Double = 0.0 {
+        didSet {
+            delegate?.secondsDidChange(self, seconds: seconds)
+        }
+    }
 
     init(loanWindow: BankWindow, depositWindow: BankWindow) {
         self.loanWindow = loanWindow
@@ -45,6 +50,7 @@ final class Bank {
             waitingQueue.enqueue(customer)
         }
         
+        setTimer()
         sendCustomerToWindow()
     }
 
@@ -71,6 +77,7 @@ final class Bank {
                 }
             }
         }
+        
         sendNotification()
     }
 
@@ -78,6 +85,8 @@ final class Bank {
         waitingNumber = 1
         loanQueue.cancelAllOperations()
         depositQueue.cancelAllOperations()
+        seconds = 0.0
+        resetTimer()
     }
     
     private func sendNotification() {
@@ -86,7 +95,24 @@ final class Bank {
         endQueue.addOperation {
             self.depositQueue.waitUntilAllOperationsAreFinished()
             self.loanQueue.waitUntilAllOperationsAreFinished()
-            self.delegate?.bankWorkDidFinish(self)
+            self.resetTimer()
         }
+    }
+    
+    private func setTimer() {
+        if timer == nil {
+            let newTimer = Timer.scheduledTimer(timeInterval: 0.003, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+            timer = newTimer
+            RunLoop.main.add(newTimer, forMode: .common)
+        }
+    }
+    
+    private func resetTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc private func startTimer() {
+        seconds += 0.003
     }
 }
