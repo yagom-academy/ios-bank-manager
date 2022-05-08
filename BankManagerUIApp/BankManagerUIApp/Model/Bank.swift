@@ -11,14 +11,19 @@ fileprivate extension Constants {
     static let ten: Int = 10
 }
 
+protocol BankDelegate: AnyObject {
+    func addClientToStackView(client: Client)
+}
+
 final class Bank {
-    private let bankClerks: [BankClerk]
+    let bankClerks: [BankClerk]
     private let clientCount: Int
     private var queueDictionary: [String: Queue<Client>]
     private var totalClientCount: Int = 1
     private let depositOperationQueue = OperationQueue()
     private let loanOperationQueue = OperationQueue()
     let bankTimer = BankTimer()
+    weak var delegate: BankDelegate?
     
     init(bankClerks: [BankClerk],
          clientCount: Int,
@@ -61,10 +66,10 @@ final class Bank {
         switch client.bankService {
         case .deposit:
             queueDictionary[BankServiceType.deposit.description]?.enqueue(client)
-            NotificationCenter.default.post(name: .didRecieveClient, object: client)
+            delegate?.addClientToStackView(client: client)
         case .loan:
             queueDictionary[BankServiceType.loan.description]?.enqueue(client)
-            NotificationCenter.default.post(name: .didRecieveClient, object: client)
+            delegate?.addClientToStackView(client: client)
         }
     }
     
@@ -133,4 +138,3 @@ final class Bank {
         totalClientCount = 1
     }
 }
-

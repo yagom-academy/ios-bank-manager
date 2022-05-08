@@ -7,16 +7,22 @@
 
 import Foundation
 
+protocol BankClerkDelegate: AnyObject {
+    func updateClientStackView(client: Client)
+    func deleteClientStackView(client: Client)
+}
+
 final class BankClerk {
     private(set) var bankService: BankServiceType
+    weak var delegate: BankClerkDelegate?
     
     init(bankService: BankServiceType) {
         self.bankService = bankService
     }
     
     func work(client: Client) {
-        NotificationCenter.default.post(name: .didAssignClientToBankClerk, object: client)
+        delegate?.updateClientStackView(client: client)
         Thread.sleep(forTimeInterval: self.bankService.requiredTime)
-        NotificationCenter.default.post(name: .didFinishWork, object: client)
+        delegate?.deleteClientStackView(client: client)
     }
 }

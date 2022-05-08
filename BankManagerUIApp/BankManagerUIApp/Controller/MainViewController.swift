@@ -1,8 +1,8 @@
 //
 //  BankManagerUIApp - MainViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -28,38 +28,22 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
-        setUpNotificationCenter()
+        setUpDelegate()
         setUpButtonAction()
-        bank?.bankTimer.delegate = self
         bank?.open()
     }
-
-    private func setUpNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(addClientToStackView), name: .didRecieveClient, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateClientStackView), name: .didAssignClientToBankClerk, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteClientStackView), name: .didFinishWork, object: nil)
+    
+    private func setUpDelegate() {
+        bank?.bankTimer.delegate = self
+        bank?.delegate = self
+        bank?.bankClerks.forEach {
+            $0.delegate = self
+        }
     }
 }
 
-extension MainViewController {
-    @objc private func addClientToStackView(_ notification: Notification) {
-        guard let client: Client = notification.object as? Client else {
-            return
-        }
-        
-        DispatchQueue.main.async {
-            let clientLabel = UILabel()
-            clientLabel.text = "\(client.waitingNumber) - \(client.bankService)"
-            clientLabel.textColor = client.bankService == .loan ? .systemPurple : .black
-            self.mainView.waitingClientStackView.addArrangedSubview(clientLabel)
-        }
-    }
-    
-    @objc private func updateClientStackView(_ notification: Notification) {
-        guard let client: Client = notification.object as? Client else {
-            return
-        }
-        
+extension MainViewController: BankClerkDelegate {
+    func updateClientStackView(client: Client) {
         DispatchQueue.main.async {
             for label in self.mainView.waitingClientStackView.arrangedSubviews {
                 guard let label = label as? UILabel else {
@@ -78,11 +62,7 @@ extension MainViewController {
         }
     }
     
-    @objc private func deleteClientStackView(_ notification: Notification) {
-        guard let client: Client = notification.object as? Client else {
-            return
-        }
-        
+    func deleteClientStackView(client: Client) {
         DispatchQueue.main.async {
             for label in self.mainView.workingClientStackView.arrangedSubviews {
                 guard let label = label as? UILabel else {
@@ -97,6 +77,17 @@ extension MainViewController {
                     label.removeFromSuperview()
                 }
             }
+        }
+    }
+}
+
+extension MainViewController: BankDelegate {
+     func addClientToStackView(client: Client) {
+        DispatchQueue.main.async {
+            let clientLabel = UILabel()
+            clientLabel.text = "\(client.waitingNumber) - \(client.bankService)"
+            clientLabel.textColor = client.bankService == .loan ? .systemPurple : .black
+            self.mainView.waitingClientStackView.addArrangedSubview(clientLabel)
         }
     }
 }
