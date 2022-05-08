@@ -7,7 +7,7 @@
 
 import Foundation
 
-private enum ClientCount: Int {
+fileprivate enum ClientCount: Int {
     case minimum = 10
     case maximum = 30
     case first = 1

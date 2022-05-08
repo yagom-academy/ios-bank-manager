@@ -6,7 +6,7 @@
 
 import Foundation
 
-private enum SemaphoreValue {
+fileprivate enum SemaphoreValue {
     static let deposit = 2
     static let loan = 1
 }

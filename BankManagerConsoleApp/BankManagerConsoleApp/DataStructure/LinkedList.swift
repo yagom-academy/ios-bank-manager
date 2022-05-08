@@ -4,7 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-private final class Node<T> {
+fileprivate final class Node<T> {
     let data: T
     var next: Node?
     
