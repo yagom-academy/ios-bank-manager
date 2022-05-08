@@ -23,4 +23,13 @@ enum Task: String, CaseIterable {
             return 1.1
         }
     }
+    
+    var semaphoreValue: Int {
+        switch self {
+        case .deposit:
+            return 2
+        case .loan:
+            return 1
+        }
+    }
 }

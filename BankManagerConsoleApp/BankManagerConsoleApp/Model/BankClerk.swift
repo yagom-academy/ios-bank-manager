@@ -6,14 +6,9 @@
 
 import Foundation
 
-fileprivate enum SemaphoreValue {
-    static let deposit = 2
-    static let loan = 1
-}
-
 enum BankClerk {
-    static let depositClerks = DispatchSemaphore(value: SemaphoreValue.deposit)
-    static let loanClerks = DispatchSemaphore(value: SemaphoreValue.loan)
+    static let depositClerks = DispatchSemaphore(value: Task.deposit.semaphoreValue)
+    static let loanClerks = DispatchSemaphore(value: Task.loan.semaphoreValue)
     static let bankWindows = DispatchQueue(label: "bankWindows", attributes: .concurrent)
     
     static func work(client: Client, group: DispatchGroup) {
