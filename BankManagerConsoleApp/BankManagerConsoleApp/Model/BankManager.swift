@@ -34,23 +34,23 @@ struct BankManager {
         self.bank = bank
     }
     
-    mutating func openBank() {
-        guideBank()
+    mutating func start() {
+        printBankDescription()
         guard let input = readLine() else {
             return
         }
         switch input {
         case MenuSelect.open.rawValue:
             manageBank()
-            openBank()
+            start()
         case MenuSelect.close.rawValue:
             return
         default:
-            reopenBank()
+            restart()
         }
     }
     
-    private func guideBank() {
+    private func printBankDescription() {
         print(Guide.menu.rawValue)
         print(Guide.input.rawValue, terminator: String.empty)
     }
@@ -67,9 +67,9 @@ struct BankManager {
         closeBank(totalDuration: durationTime, clientCount: totalCount)
     }
     
-    private mutating func reopenBank() {
+    private mutating func restart() {
         print(Guide.error.rawValue)
-        openBank()
+        start()
     }
     
     private func closeBank(totalDuration: Double, clientCount: Int) {

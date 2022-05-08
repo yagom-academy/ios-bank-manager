@@ -12,7 +12,7 @@ enum BankClerk {
     static let bankWindows = DispatchQueue(label: "bankWindows", attributes: .concurrent)
     
     static func work(client: Client, group: DispatchGroup) {
-        let semaphore = findClerk(for: client)
+        let semaphore = findSemaphore(for: client)
         
         semaphore.wait()
         bankWindows.async(group: group) {
@@ -23,7 +23,7 @@ enum BankClerk {
         }
     }
     
-    static func findClerk(for client: Client) -> DispatchSemaphore {
+    static func findSemaphore(for client: Client) -> DispatchSemaphore {
         switch client.task {
         case .deposit:
             return depositClerks
