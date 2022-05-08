@@ -17,7 +17,6 @@
 		A102AD4B2822AE9C0028053C /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD4A2822AE9C0028053C /* CompositionRoot.swift */; };
 		A102AD4D2822AEB10028053C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD4C2822AEB10028053C /* Client.swift */; };
 		A102AD522822B1220028053C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102AD512822B1220028053C /* Constants.swift */; };
-		A19D407B282399C500978B04 /* NotificationCenter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19D407A282399C500978B04 /* NotificationCenter+Extension.swift */; };
 		A19D407D2823A90C00978B04 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19D407C2823A90C00978B04 /* String+Extension.swift */; };
 		A19D407F2823C73400978B04 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19D407E2823C73400978B04 /* UIViewController+Extension.swift */; };
 		A1CF4EF02822C969002789A9 /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF4EEF2822C969002789A9 /* BaseUIView.swift */; };
@@ -59,7 +58,6 @@
 		A102AD4A2822AE9C0028053C /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		A102AD4C2822AEB10028053C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		A102AD512822B1220028053C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A19D407A282399C500978B04 /* NotificationCenter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Extension.swift"; sourceTree = "<group>"; };
 		A19D407C2823A90C00978B04 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		A19D407E2823C73400978B04 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A1CF4EEF2822C969002789A9 /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 		A19D4079282399B200978B04 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				A19D407A282399C500978B04 /* NotificationCenter+Extension.swift */,
 				A19D407C2823A90C00978B04 /* String+Extension.swift */,
 				A19D407E2823C73400978B04 /* UIViewController+Extension.swift */,
 			);
@@ -359,7 +356,6 @@
 				A19D407D2823A90C00978B04 /* String+Extension.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* MainViewController.swift in Sources */,
 				67188F362822B1F8002F571F /* MainView.swift in Sources */,
-				A19D407B282399C500978B04 /* NotificationCenter+Extension.swift in Sources */,
 				A19D407F2823C73400978B04 /* UIViewController+Extension.swift in Sources */,
 				A102AD522822B1220028053C /* Constants.swift in Sources */,
 				A102AD432822ADFB0028053C /* Queue.swift in Sources */,
