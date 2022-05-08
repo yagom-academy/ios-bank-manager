@@ -31,7 +31,7 @@ struct Bank: Measurable {
     private func open() {
         while let client = clients.dequeue() {
             DispatchQueue.global().async(group: workGroup) {
-                BankClerk.work(client: client, group: workGroup)
+                BankClerk.work(client: client)
             }
         }
         workGroup.wait()

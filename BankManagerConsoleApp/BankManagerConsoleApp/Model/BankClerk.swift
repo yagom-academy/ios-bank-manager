@@ -16,11 +16,11 @@ enum BankClerk {
     static let loanClerks = DispatchSemaphore(value: SemaphoreValue.loan)
     static let bankWindows = DispatchQueue(label: "bankWindows", attributes: .concurrent)
     
-    static func work(client: Client, group: DispatchGroup) {
+    static func work(client: Client) {
         let semaphore = findClerk(for: client)
         
         semaphore.wait()
-        bankWindows.async(group: group) {
+        bankWindows.async {
             print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 시작")
             Thread.sleep(forTimeInterval: client.task.time)
             print("\(client.waitingNumber)번 고객 \(client.task.rawValue)업무 완료")
