@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ViewControllerDelegate: AnyObject {
+protocol BankViewDelegate: AnyObject {
     func addWaitingClientLabel(text: String, color: UIColor)
     func addWorkingClientLabel(text: String, color: UIColor)
     func removeWorkingClientLabel(text: String, color: UIColor)
@@ -25,7 +25,7 @@ final class Bank {
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
     private let bankGroup = DispatchGroup()
-    weak var delegate: ViewControllerDelegate?
+    weak var delegate: BankViewDelegate?
 
     func startWork(clientQueue: inout Queue<Client>) {
         delegate?.startTimer()
@@ -42,25 +42,22 @@ final class Bank {
             
             let taskTypeSemphore = self.semaphore(taskType: client.taskType)
             
-            DispatchQueue.global().async(group: bankGroup) {
+            DispatchQueue.global().async(group: bankGroup) { [weak self] in
                 taskTypeSemphore.wait()
                 print(Thread.isMainThread)
                 let bankClerk = BankClerk()
-                bankClerk.work(client: client, ready: { ()-> Void in
+                bankClerk.work(client: client, ready: {
                     DispatchQueue.main.async {
-                        self.delegate?.addWorkingClientLabel(text: clientTaskTypeText,
-                                                        color: clientTextColor)
-                        print("\(client.waitingNumber)번 addworking")
+                        self?.delegate?.addWorkingClientLabel(text: clientTaskTypeText,
+                                                             color: clientTextColor)
                     }
                 }) {
                     DispatchQueue.main.async {
-                        self.delegate?.removeWorkingClientLabel(text: clientTaskTypeText,
+                        self?.delegate?.removeWorkingClientLabel(text: clientTaskTypeText,
                                                                 color: clientTextColor)
-                        print("\(client.waitingNumber)번 removeWork")
                     }
-                    self.finishedClientCount += 1
+                    self?.finishedClientCount += 1
                     taskTypeSemphore.signal()
-                    print("\(client.waitingNumber)번 haha")
                 }
             }
             bankGroup.notify(queue: .main){

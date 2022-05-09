@@ -18,7 +18,7 @@ struct BankProcess {
         return currentNumber + Constant.clientCount
     }
     
-    init(bankDelegate: ViewControllerDelegate) {
+    init(bankDelegate: BankViewDelegate) {
         bank.delegate = bankDelegate
     }
     

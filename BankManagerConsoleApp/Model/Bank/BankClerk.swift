@@ -8,7 +8,6 @@
 import Foundation
 
 struct BankClerk {
-
     func work(client: Client, ready: @escaping () -> Void, completion: @escaping () -> Void) {
         let usecondsTimeForAClient = useconds_t(client.taskType.spendingTime * 1000000)
         ready()

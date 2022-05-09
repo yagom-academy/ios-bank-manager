@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainView: UIView {
+final class MainView: UIView {
 
     let waitingClientVerticalStackView: UIStackView = {
         let stackView = UIStackView()

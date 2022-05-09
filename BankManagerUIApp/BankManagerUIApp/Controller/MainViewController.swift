@@ -6,12 +6,13 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     private lazy var mainView = MainView(frame: self.view.frame)
     private lazy var bankProcess = BankProcess(bankDelegate: self)
     private var timer: Timer!
     private var isTimerOn = false
     private var checkTime: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -54,7 +55,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: ViewControllerDelegate {
+extension MainViewController: BankViewDelegate {
     func addWaitingClientLabel(text: String, color: UIColor) {
         let label = UILabel()
         label.textColor = color
