@@ -5,66 +5,73 @@
 //  Created by 우롱차, 민성 on 2022/04/28.
 //
 
-import Foundation
+import UIKit
+
+protocol BankViewDelegate: AnyObject {
+    func addWaitingClientLabel(text: String, color: UIColor)
+    func addWorkingClientLabel(text: String, color: UIColor)
+    func removeWorkingClientLabel(text: String, color: UIColor)
+    func stopTimer()
+    func startTimer()
+}
 
 final class Bank {
-
     private enum Constant {
-        static let finishMessageFormat = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
         static let loanBankClerkCount = 1
         static let depositBankClerkCount = 2
     }
 
-    private var clientQueue: Queue<Client>
     private var finishedClientCount = 0
     private let loanSemaphore = DispatchSemaphore(value: Constant.loanBankClerkCount)
     private let depositSemaphore = DispatchSemaphore(value: Constant.depositBankClerkCount)
-    private let group = DispatchGroup()
-    private let bankUpdateDispatchQueue = DispatchQueue(label: "BankUpdate")
-    var from: CFAbsoluteTime?
+    private let bankGroup = DispatchGroup()
+    weak var delegate: BankViewDelegate?
 
-    init(clientQueue: Queue<Client>) {
-        self.clientQueue = clientQueue
-    }
-
-    func startWork() {
-        setTimer()
+    func startWork(clientQueue: inout Queue<Client>) {
+        delegate?.startTimer()
         while clientQueue.isEmpty() == false {
             guard let client = clientQueue.dequeue() else {
                 return
             }
-
-            switch client.taskType {
-            case .deposit:
-                DispatchQueue.global().async(group: group) {
-                    self.depositSemaphore.wait()
-                    let depositBankClerk = DepositBankClerk(delegate: self)
-                    depositBankClerk.work(client: client)
-                    self.depositSemaphore.signal()
-                }
-            case .loan:
-                DispatchQueue.global().async(group: group) {
-                    self.loanSemaphore.wait()
-                    let loanBankClerk = LoanBankClerk(delegate: self)
-                    loanBankClerk.work(client: client)
-                    self.loanSemaphore.signal()
+            
+            let clientTaskTypeText = "\(client.waitingNumber) - \(client.taskType.text)"
+            let clientTextColor = client.taskType.color
+            
+            delegate?.addWaitingClientLabel(text: clientTaskTypeText,
+                                            color: clientTextColor)
+            
+            let taskTypeSemphore = self.semaphore(taskType: client.taskType)
+            
+            DispatchQueue.global().async(group: bankGroup) { [weak self] in
+                taskTypeSemphore.wait()
+                print(Thread.isMainThread)
+                let bankClerk = BankClerk()
+                bankClerk.work(client: client, ready: {
+                    DispatchQueue.main.async {
+                        self?.delegate?.addWorkingClientLabel(text: clientTaskTypeText,
+                                                             color: clientTextColor)
+                    }
+                }) {
+                    DispatchQueue.main.async {
+                        self?.delegate?.removeWorkingClientLabel(text: clientTaskTypeText,
+                                                                color: clientTextColor)
+                    }
+                    self?.finishedClientCount += 1
+                    taskTypeSemphore.signal()
                 }
             }
+            bankGroup.notify(queue: .main){
+                self.delegate?.stopTimer()
+            }
         }
-        group.wait()
-        print(String(format: Constant.finishMessageFormat, finishedClientCount, checkTime()))
     }
-}
 
-extension Bank: BankDelegate {
-    func updateWorkData() {
-        bankUpdateDispatchQueue.async(group: group) {
-            self.finishedClientCount += 1
+    private func semaphore(taskType: TaskType) -> DispatchSemaphore {
+        switch taskType {
+        case .deposit:
+            return depositSemaphore
+        case .loan:
+            return loanSemaphore
         }
-    }
-}
-extension Bank: Timer {
-    func setTimer() {
-        from = CFAbsoluteTimeGetCurrent()
     }
 }
