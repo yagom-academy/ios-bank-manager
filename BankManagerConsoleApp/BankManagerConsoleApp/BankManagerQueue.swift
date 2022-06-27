@@ -19,7 +19,11 @@ struct BankManagerQueue<T> {
     mutating func dequeue() -> T? {
         list.removeFirst()
     }
-
+    
+    mutating func peek() -> T? {
+        return list.peek
+    }
+    
     mutating func clear() {
         list.removeAll()
     }

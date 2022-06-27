@@ -12,6 +12,10 @@ struct Linkedlist<T> {
         return head == nil
     }
     
+    var peek: T? {
+        return head?.data
+    }
+    
     mutating func append(data: T) {
         if head == nil {
             head = Node(data: data)
