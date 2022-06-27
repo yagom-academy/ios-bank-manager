@@ -46,7 +46,7 @@ class BankManagerQueueTest: XCTestCase {
         XCTAssertEqual(firstElement, 1)
     }
     
-    func test_1_2_3을_입력_후_removeAll을_하면_isEmpty값이_true여야한다() {
+    func test_1_2_3을_입력_후_clear_하면_isEmpty값이_true여야한다() {
         //given
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
