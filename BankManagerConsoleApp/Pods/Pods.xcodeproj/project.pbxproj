@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = SwiftLint;
+			productName = SwiftLint;
 		};
 /* End PBXAggregateTarget section */
 
@@ -37,7 +38,7 @@
 /* Begin PBXFileReference section */
 		04C4F79EDE057AABA265557D8A156D56 /* Pods-BankManagerConsoleApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BankManagerConsoleApp-dummy.m"; sourceTree = "<group>"; };
 		2B55AE17853892619B8F418CD18A8F80 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
-		3D4B5F043387587A011C17E99C142A80 /* Pods-BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-BankManagerConsoleApp"; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D4B5F043387587A011C17E99C142A80 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
 		5FC8998BD30A6E73A30DB40AAE2D7C7B /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		616969D477625A9B7F19459BE65067E2 /* Pods-BankManagerConsoleApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BankManagerConsoleApp.modulemap"; sourceTree = "<group>"; };
@@ -45,7 +46,7 @@
 		7CEDD4CE6542936F0A14C08C753CDD0A /* Pods-BankManagerConsoleApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BankManagerConsoleApp-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
 		8F480A25914524A43FF97634FA26163E /* Pods-BankManagerConsoleApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BankManagerConsoleApp-umbrella.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C1430F003D39D9906881A6AC724B7931 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		C5096E91B57DDCA493CCFA3F4713FA30 /* Pods-BankManagerConsoleApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BankManagerConsoleApp-acknowledgements.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +121,6 @@
 			children = (
 				7FDA596DBE0337ACDFE55A210D54EF26 /* Support Files */,
 			);
-			name = SwiftLint;
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
@@ -135,7 +135,7 @@
 		E12D24698CA76CF93EDFDA291004B639 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3D4B5F043387587A011C17E99C142A80 /* Pods-BankManagerConsoleApp */,
+				3D4B5F043387587A011C17E99C142A80 /* Pods_BankManagerConsoleApp.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 			);
 			name = "Pods-BankManagerConsoleApp";
 			productName = Pods_BankManagerConsoleApp;
-			productReference = 3D4B5F043387587A011C17E99C142A80 /* Pods-BankManagerConsoleApp */;
+			productReference = 3D4B5F043387587A011C17E99C142A80 /* Pods_BankManagerConsoleApp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -188,7 +188,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1340;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -306,7 +306,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -324,7 +323,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -343,7 +341,6 @@
 			baseConfigurationReference = 2B55AE17853892619B8F418CD18A8F80 /* Pods-BankManagerConsoleApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -381,7 +378,6 @@
 			baseConfigurationReference = 5FC8998BD30A6E73A30DB40AAE2D7C7B /* Pods-BankManagerConsoleApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
