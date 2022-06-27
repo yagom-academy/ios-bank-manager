@@ -1,0 +1,17 @@
+//
+//  Queue.swift
+//  BankManagerConsoleApp
+//
+//  Created by minsson, Derrick on 2022/06/27.
+//
+
+protocol Queue {
+    associatedtype Element
+    
+    var peek: Element? { get }
+    
+    mutating func enqueue(_ data: Element)
+    mutating func dequeue() -> Node<Element>?
+    func isEmpty() -> Bool
+    func clear()
+}
