@@ -1,6 +1,14 @@
 final class CustomerQueue<T> {
     private var linkedList = LinkedList<T>()
 
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
+    
+    var peek: T? {
+        return linkedList.peek
+    }
+    
     func enqueue(data: T) {
         linkedList.append(data: data)
     }
@@ -11,13 +19,5 @@ final class CustomerQueue<T> {
 
     func clear() {
         linkedList.removeAll()
-    }
-
-    func peek() -> T? {
-        return linkedList.peek()
-    }
-
-    func isEmpty() -> Bool {
-        return linkedList.isEmpty()
     }
 }

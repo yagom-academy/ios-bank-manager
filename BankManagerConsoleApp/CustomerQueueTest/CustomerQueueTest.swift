@@ -1,14 +1,8 @@
-//
-//  CustomerQueueTest.swift
-//  CustomerQueueTest
-//
-//  Created by seohyeon park on 2022/06/27.
-//
-
 import XCTest
 
 class CustomerQueueTest: XCTestCase {
     var sut: CustomerQueue<Int>!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CustomerQueue()
@@ -23,7 +17,7 @@ class CustomerQueueTest: XCTestCase {
         // given
         sut.enqueue(data: 1)
         // when
-        let result = sut.peek()
+        let result = sut.peek
         // then
         XCTAssertEqual(result, 1)
     }
@@ -64,7 +58,7 @@ class CustomerQueueTest: XCTestCase {
         // when
         sut.clear()
         // then
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         XCTAssertEqual(result, true)
     }
 }

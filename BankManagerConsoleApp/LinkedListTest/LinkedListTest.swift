@@ -2,6 +2,7 @@ import XCTest
 
 class LinkedListTest: XCTestCase {
     var sut: LinkedList<Int>!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = LinkedList()
@@ -17,7 +18,7 @@ class LinkedListTest: XCTestCase {
         sut.append(data: 1)
         sut.append(data: 2)
         // when
-        let result = sut.peek()
+        let result = sut.peek
         // then
         XCTAssertEqual(result, 1)
     }
@@ -28,7 +29,7 @@ class LinkedListTest: XCTestCase {
         sut.append(data: 2)
         // when
         sut.removeAll()
-        let result = sut.peek()
+        let result = sut.peek
         // then
         XCTAssertEqual(result, nil)
     }
@@ -61,14 +62,14 @@ class LinkedListTest: XCTestCase {
         sut.append(data: 1)
         sut.append(data: 2)
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         // then
         XCTAssertEqual(result, false)
     }
 
     func test_linkedList_isEmpty가_정상적으로_true를_반환하는지() {
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         // then
         XCTAssertEqual(result, true)
     }

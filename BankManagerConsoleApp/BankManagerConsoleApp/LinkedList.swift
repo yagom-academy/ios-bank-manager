@@ -2,6 +2,14 @@ final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
 
+    var isEmpty: Bool {
+        return head == nil ? true : false
+    }
+
+    var peek: T? {
+        return head?.data
+    }
+
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
         self.tail = tail
@@ -19,10 +27,6 @@ final class LinkedList<T> {
         tail = node
     }
 
-    func peek() -> T? {
-        return head?.data
-    }
-
     func remove() -> T? {
         let current = head?.next
         let data = head?.data
@@ -32,9 +36,5 @@ final class LinkedList<T> {
 
     func removeAll() {
         head = nil
-    }
-
-    func isEmpty() -> Bool {
-        return head == nil ? true : false
     }
 }
