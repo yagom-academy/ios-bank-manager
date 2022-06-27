@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  BankManagerConsoleApp
 //
-//  Created by Baek on 2022/06/27.
+//  Created by Baek, unchain on 2022/06/27.
 //
 
 import Foundation
