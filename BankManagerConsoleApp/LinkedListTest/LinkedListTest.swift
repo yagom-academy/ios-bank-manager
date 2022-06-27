@@ -49,4 +49,36 @@ class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(input[0], result)
     }
+    
+    func test_clear() {
+        // given
+        let input = [1,2,3,4,5]
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        
+        // when
+        sut?.clear()
+        let result = true
+        
+        //then
+        XCTAssertEqual(result, sut?.isEmpty)
+    }
+    
+    func test_enqueue() {
+        // given
+        let input = [1,2,3,4,5]
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        
+        // when
+        let result = 1
+        
+        //then
+        XCTAssertEqual(result, sut?.peek)
+        
+    }
 }
