@@ -12,7 +12,7 @@ class Queue<T> {
         return list.isEmpty
     }
     
-    public var firstValue: T? {
+    public var peek: T? {
         return list.returnFirst()?.value
     }
     
@@ -24,7 +24,7 @@ class Queue<T> {
         return isEmpty ? nil : list.removeHead()?.value
     }
     
-    public func removeAll() {
+    public func clear() {
         list.removeAll()
     }
 }

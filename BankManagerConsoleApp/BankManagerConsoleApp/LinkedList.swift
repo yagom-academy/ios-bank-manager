@@ -10,7 +10,7 @@ class LinkedList<T> {
     private var tail: Node<T>?
 
     var isEmpty: Bool {
-        return self.head == nil
+        return head == nil
     }
 
     func returnFirst() -> Node<T>? {
@@ -33,23 +33,29 @@ class LinkedList<T> {
     }
 
     func removeHead() -> Node<T>? {
-        if let node = head {
-            self.head = head?.next
-            return node
-        } else {
-            self.head = nil
-            self.tail = nil
-            return self.head
+        guard let node = head else {
+            head = nil
+            tail = nil
+            return head
         }
+        
+        if let next = head?.next {
+            head = next
+        } else {
+            head = nil
+            tail = nil
+        }
+        
+        return node
     }
 
     func removeAll() {
-        while self.head?.next == self.tail {
-            let next = self.head?.next
-            self.head = nil
-            self.head = next
+        while head?.next == tail {
+            let next = head?.next
+            head = nil
+            head = next
         }
-        self.head = nil
-        self.tail = nil
+        head = nil
+        tail = nil
     }
 }
