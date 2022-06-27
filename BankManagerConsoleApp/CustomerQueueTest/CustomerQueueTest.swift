@@ -13,12 +13,12 @@ class CustomerQueueTest: XCTestCase {
         try super.setUpWithError()
         sut = CustomerQueue()
     }
-    
+
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
-    
+
     func test_enqueue가_잘되는지() {
         // given
         sut.enqueue(data: 1)
@@ -27,7 +27,7 @@ class CustomerQueueTest: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
-    
+
     func test_dequeue가_잘되는지() {
         // given
         sut.enqueue(data: 1)
@@ -38,14 +38,14 @@ class CustomerQueueTest: XCTestCase {
         // then
         XCTAssertEqual(result, 2)
     }
-    
+
     func test_dequeue가_잘되는지1() {
         // when
         let result = sut.dequeue()
         // then
         XCTAssertEqual(result, nil)
     }
-    
+
     func test_clear가_잘되는지() {
         // given
         sut.enqueue(data: 1)
@@ -56,7 +56,7 @@ class CustomerQueueTest: XCTestCase {
         let result: Int? = nil
         XCTAssertEqual(result, nil)
     }
-    
+
     func test_isEmpty가_잘되는지() {
         // given
         sut.enqueue(data: 1)
