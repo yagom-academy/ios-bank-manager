@@ -18,6 +18,7 @@ struct LinkedList<T> {
     var peek: Node<T>? {
         return head
     }
+    
     mutating func append(data: T?) {
         let newValue = Node(data: data)
         
@@ -35,3 +36,9 @@ struct LinkedList<T> {
         head = head?.next
         return removeElement
     }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
+}
