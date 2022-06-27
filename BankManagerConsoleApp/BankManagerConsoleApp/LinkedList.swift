@@ -9,7 +9,7 @@ final class LinkedList<T> {
 
     func append(data: T) {
         if head == nil {
-            head?.data = data
+            head = Node(data: data)
             head?.next = tail
         }
 
