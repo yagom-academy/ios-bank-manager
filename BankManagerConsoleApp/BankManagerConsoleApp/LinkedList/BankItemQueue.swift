@@ -21,4 +21,8 @@ struct BankItemQueue<T> {
     mutating func enQueue(_ data: T) {
         linkedList.append(data: data)
     }
+    
+    mutating func deQueue() -> T? {
+        return linkedList.removeFirst()
+    }
 }
