@@ -18,3 +18,14 @@ struct LinkedList<T> {
     var peek: Node<T>? {
         return head
     }
+    mutating func append(data: T?) {
+        let newValue = Node(data: data)
+        
+        if head == nil {
+            head = newValue
+            tail = head
+        } else {
+            tail?.next = newValue
+            tail = newValue
+        }
+    }
