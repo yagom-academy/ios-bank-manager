@@ -19,7 +19,18 @@ class LinkedListTest: XCTestCase {
         sut = nil
     }
 
-    func testExample() throws {
-        print("테스트 성공")
+    func test_enqueue함수가_잘돌아가는지() {
+        // given
+        let input = [1,2,3,4,5]
+        // when
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        // then
+        print(sut?.head?.data)
+        print(sut?.head?.next?.data)
+        print(sut?.head?.next?.next?.data)
+        print(sut?.head?.next?.next?.next?.data)
     }
 }
