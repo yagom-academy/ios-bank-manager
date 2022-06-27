@@ -55,4 +55,21 @@ class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, 3)
     }
+
+    func test_linkedList_isEmpty가_정상적으로_false를_반환하는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        // when
+        let result = sut.isEmpty()
+        // then
+        XCTAssertEqual(result, false)
+    }
+
+    func test_linkedList_isEmpty가_정상적으로_true를_반환하는지() {
+        // when
+        let result = sut.isEmpty()
+        // then
+        XCTAssertEqual(result, true)
+    }
 }

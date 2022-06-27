@@ -33,4 +33,8 @@ final class LinkedList<T> {
     func removeAll() {
         head = nil
     }
+
+    func isEmpty() -> Bool {
+        return head == nil ? true : false
+    }
 }
