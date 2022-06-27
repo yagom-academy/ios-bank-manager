@@ -21,4 +21,8 @@ final class LinkedList<T> {
     func peak() -> T? {
         return head?.data
     }
+    
+    func removeAll() {
+        head = nil
+    }
 }
