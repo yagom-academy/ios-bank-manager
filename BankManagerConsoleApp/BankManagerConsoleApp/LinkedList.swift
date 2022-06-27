@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct LinkedList<T> {
+final class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     
     
-    mutating func enqueue(data: T) {
-        var node = Node<T>(data: data)
+    func enqueue(data: T) {
+        let node = Node<T>(data: data)
         
         if head == nil {
             head = node
@@ -23,5 +23,15 @@ struct LinkedList<T> {
             node.previous = tail
             tail = node
         }
+    }
+    
+    func dequeue() -> T? {
+        
+        let returnData = head?.data
+        
+        head?.next?.previous = nil
+        head = head?.next
+        
+        return returnData
     }
 }
