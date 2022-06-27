@@ -13,7 +13,7 @@ class Queue<T> {
     }
     
     public var peek: T? {
-        return list.returnFirst()?.value
+        return list.firstNode?.value
     }
     
     public func enqueue(_ element: T) {

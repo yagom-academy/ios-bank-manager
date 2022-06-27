@@ -13,11 +13,8 @@ class LinkedList<T> {
         return head == nil
     }
 
-    func returnFirst() -> Node<T>? {
-        if let node = head {
-            return node
-        }
-        return nil
+    var firstNode: Node<T>? {
+        return head
     }
 
     func append(_ value: T) {
