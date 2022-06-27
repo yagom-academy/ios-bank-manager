@@ -20,6 +20,20 @@
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0574148F2869ADCB0075BF7D"
+               BuildableName = "CustomerQueueTest.xctest"
+               BlueprintName = "CustomerQueueTest"
+               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
