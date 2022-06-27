@@ -16,4 +16,11 @@ class CustomerQueue<T> {
     func peek() -> T? {
         return linkedList?.peek()
     }
+    
+    func isEmpty() -> Bool {
+        guard let linkedList = linkedList else {
+            return true
+        }
+        return linkedList.isEmpty()
+    }
 }
