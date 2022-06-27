@@ -17,19 +17,42 @@ class LinkedListTest: XCTestCase {
         sut.append(data: 1)
         sut.append(data: 2)
         // when
-        let result = sut.peak()
+        let result = sut.peek()
         // then
         XCTAssertEqual(result, 1)
     }
-    
+
     func test_linkedList_removeAll이_잘되는지() {
         // given
         sut.append(data: 1)
         sut.append(data: 2)
         // when
         sut.removeAll()
-        let result = sut.peak()
+        let result = sut.peek()
         // then
         XCTAssertEqual(result, nil)
+    }
+
+    func test_linkedList_remove가_잘되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        // when
+        let result = sut.remove()
+        // then
+        XCTAssertEqual(result, 1)
+    }
+
+    func test_linkedList_remove가_잘되는지2() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // when
+        _ = sut.remove()
+        _ = sut.remove()
+        let result = sut.remove()
+        // then
+        XCTAssertEqual(result, 3)
     }
 }
