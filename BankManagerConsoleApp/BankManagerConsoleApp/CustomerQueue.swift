@@ -30,4 +30,39 @@ class CustomerQueue<T> {
         tail?.nextNode = inputNode
         tail = inputNode
     }
+    
+    func dequeue() -> Node<T>? {
+        var firstNode: Node<T>?
+        guard !isEmpty() else {
+            return firstNode
+        }
+        if head?.nextNode == nil {
+            firstNode = head
+            head = nil
+            tail = nil
+        } else {
+            head = head?.nextNode
+            head?.previousNode?.nextNode = nil
+            firstNode = head?.previousNode
+            head?.previousNode = nil
+        }
+        return firstNode
+    }
+    
+    func peek() -> Node<T>? {
+        guard !isEmpty() else {
+            return nil
+        }
+        return head
+    }
+    
+    func clear() {
+        while head?.nextNode != nil {
+            head = head?.nextNode
+            head?.previousNode?.nextNode = nil
+            head?.previousNode = nil
+        }
+        head = nil
+        tail = nil
+    }
 }
