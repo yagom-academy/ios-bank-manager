@@ -19,7 +19,7 @@ class LinkedListTest: XCTestCase {
         sut = nil
     }
 
-    func test_enqueue함수가_잘돌아가는지() {
+    func test_enqueue함수에데이터를넣으면_배열에순서대로잘들어가는지() {
         // given
         let input = [1,2,3,4,5]
         
@@ -35,7 +35,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(data, result[0])
     }
     
-    func test_dequeue함수가_데이터를잘뽑는지() {
+    func test_dequeue함수가_배열의마지막숫자를잘반환하는지() {
         // given
         let input = [1,2,3,4,5]
         sut?.enqueue(data: input[0])
@@ -60,25 +60,9 @@ class LinkedListTest: XCTestCase {
         
         // when
         sut?.clear()
-        let result = true
+        let result = 0
         
         //then
-        XCTAssertEqual(result, sut?.isEmpty)
-    }
-    
-    func test_enqueue() {
-        // given
-        let input = [1,2,3,4,5]
-        sut?.enqueue(data: input[0])
-        sut?.enqueue(data: input[1])
-        sut?.enqueue(data: input[2])
-        sut?.enqueue(data: input[3])
-        
-        // when
-        let result = 1
-        
-        //then
-        XCTAssertEqual(result, sut?.peek)
-        
+        XCTAssertEqual(result, sut?.nodeCount)
     }
 }

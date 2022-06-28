@@ -5,20 +5,13 @@
 //  Created by LeeChiheon on 2022/06/27.
 //
 
-import Foundation
-
-final class LinkedList<T> {
+struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     var nodeCount: Int = 0
-    var isEmpty: Bool {
-        nodeCount == 0 ? true : false
-    }
-    var peek: T? {
-        head?.data
-    }
+    lazy var currentNode:Node<T>? = head
     
-    func enqueue(data: T) {
+    mutating func enqueue(data: T) {
         let node = Node<T>(data: data)
         nodeCount += 1
         if head == nil {
@@ -31,7 +24,7 @@ final class LinkedList<T> {
         }
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         nodeCount -= 1
         let returnData = head?.data
         
@@ -41,7 +34,7 @@ final class LinkedList<T> {
         return returnData
     }
     
-    func clear() {
+    mutating func clear() {
         while nodeCount != 0 {
             head = head?.next
             head?.previous?.next = nil
@@ -51,5 +44,34 @@ final class LinkedList<T> {
         
         head = nil
         tail = nil
+    }
+}
+
+extension LinkedList: Sequence, IteratorProtocol {
+    mutating func next() -> T? {
+        defer { currentNode = currentNode?.next }
+        
+        return currentNode?.data
+    }
+}
+
+extension LinkedList: CustomStringConvertible, CustomDebugStringConvertible {
+    var description: String {
+        let stringArray = self.map { "\($0)" }
+        let returnArrray = stringArray.joined(separator: ", ")
+        return "[\(returnArrray)]"
+    }
+    
+    var debugDescription: String {
+        let stringArray = self.map { "\($0)" }
+        let returnArrray = stringArray.joined(separator: ", ")
+        return "[\(returnArrray)]"
+    }
+}
+
+extension LinkedList: ExpressibleByArrayLiteral {
+    init(arrayLiteral elements: T...) {
+        self.init()
+        elements.forEach { self.enqueue(data: $0) }
     }
 }

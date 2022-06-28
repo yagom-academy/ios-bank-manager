@@ -5,28 +5,51 @@
 //  Created by LeeChiheon on 2022/06/27.
 //
 
-import Foundation
-
-class Queue<T> {
+struct Queue<T> {
     private var linkedList = LinkedList<T>()
-    
     var isEmpty: Bool {
-        linkedList.isEmpty
+        linkedList.nodeCount == 0 ? true : false
     }
-    
     var peek: T? {
-        linkedList.peek
+        linkedList.head?.data
     }
     
-    func enqueue(data: T) {
+    mutating func enqueue(data: T) {
         linkedList.enqueue(data: data)
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         return linkedList.dequeue()
     }
     
-    func clear() {
+    mutating func clear() {
         linkedList.clear()
+    }
+}
+
+extension Queue: Sequence, IteratorProtocol {
+    mutating func next() -> T? {
+        return linkedList.next()
+    }
+}
+
+extension Queue: CustomStringConvertible, CustomDebugStringConvertible {
+    var description: String {
+        let stringArray = self.map { "\($0)" }
+        let returnArrray = stringArray.joined(separator: ", ")
+        return "[\(returnArrray)]"
+    }
+    
+    var debugDescription: String {
+        let stringArray = self.map { "\($0)" }
+        let returnArrray = stringArray.joined(separator: ", ")
+        return "[\(returnArrray)]"
+    }
+}
+
+extension Queue: ExpressibleByArrayLiteral {
+    init(arrayLiteral elements: T...) {
+        self.init()
+        elements.forEach { self.enqueue(data: $0) }
     }
 }
