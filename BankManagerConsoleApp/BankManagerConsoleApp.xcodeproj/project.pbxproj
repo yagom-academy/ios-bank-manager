@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20792C0A286A8E4B00BE6E93 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20792C09286A8E4B00BE6E93 /* LinkedList.swift */; };
 		6E9BCBDF5ED066C1578BA84B /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80F2D562C0C6522B17248C2 /* Pods_BankManagerConsoleApp.framework */; };
 		A3023D8C286A8CAA001FCD3B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3023D8B286A8CAA001FCD3B /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		20792C082869FDFA00BE6E93 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		20792C09286A8E4B00BE6E93 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		9030D124F26EB54F00D55C9C /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		A3023D8B286A8CAA001FCD3B /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		A80F2D562C0C6522B17248C2 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				A3023D8B286A8CAA001FCD3B /* Node.swift */,
+				20792C09286A8E4B00BE6E93 /* LinkedList.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			files = (
 				A3023D8C286A8CAA001FCD3B /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				20792C0A286A8E4B00BE6E93 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
