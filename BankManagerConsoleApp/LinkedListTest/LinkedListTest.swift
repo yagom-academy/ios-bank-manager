@@ -88,7 +88,7 @@ class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
-    
+
     func test_linkedList_비어있을경우_removeAt이_잘되는지() {
         // when
         let result = sut.removeAt(index: 0)

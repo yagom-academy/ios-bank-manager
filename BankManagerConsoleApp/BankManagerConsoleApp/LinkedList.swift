@@ -38,7 +38,7 @@ final class LinkedList<T> {
         index -= 1
         return data
     }
-    
+
     func removeAt(index: Int) -> T? {
         guard !isEmpty else { return nil }
         guard index >= self.index else {

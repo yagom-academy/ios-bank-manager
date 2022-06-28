@@ -5,16 +5,22 @@ final class CustomerQueue<T> {
         linkedList.isEmpty
     }
 
-    var peek: T? {
-        linkedList.peek
+    func peek() throws -> T {
+        guard let data = linkedList.peek else {
+            throw QueueError.notExistingData
+        }
+        return data
     }
 
     func enqueue(data: T) {
         linkedList.append(data: data)
     }
 
-    func dequeue() -> T? {
-        return linkedList.remove()
+    func dequeue() throws -> T {
+        guard let data = linkedList.remove() else {
+            throw QueueError.notExistingData
+        }
+        return data
     }
 
     func clear() {
