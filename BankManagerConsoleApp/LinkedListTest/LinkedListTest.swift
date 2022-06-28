@@ -121,4 +121,25 @@ class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, 9)
     }
+
+    func test_linkedList가_비어있을때_insert가_잘_추가_되는지() {
+        // given
+        sut.insert(data: 1, index: 0)
+        // when
+        let result = sut.peek
+        // then
+        XCTAssertEqual(result, 1)
+    }
+
+    func test_linkedList_serchNode가_잘되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+
+        // when
+        let result = sut.searchNode(index: 1)
+        // then
+        XCTAssertEqual(result?.data, 2)
+    }
 }

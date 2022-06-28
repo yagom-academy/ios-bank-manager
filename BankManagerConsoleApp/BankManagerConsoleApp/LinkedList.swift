@@ -45,36 +45,40 @@ final class LinkedList<T> {
     }
 
     func insert(data: T, index: Int) {
-        var count = 0
-        var previousNode = head
-        var indexNode = head
+        var previousNode: Node<T>?
+        var indexNode: Node<T>?
         let newNode = Node<T>(data: data)
-        
-        if index == self.index {
+
+        if index > self.index || isEmpty {
+            append(data: data)
+            return
+        } else if index == self.index {
             previousNode = tail?.previous
             indexNode = Node<T>(data: data)
             previousNode?.next = indexNode
             indexNode?.next = tail
-        } else if index > self.index{
-            append(data: data)
         } else if index == 0 {
             head?.previous = newNode
             newNode.next = head
             head = newNode
         } else {
-            while count < index {
-                indexNode = indexNode?.next
-                previousNode = indexNode?.previous
-                previousNode?.next = indexNode
-                count += 1
-            }
-            
+            indexNode = searchNode(index: index)
+            previousNode = indexNode?.previous
             previousNode?.next = newNode
             newNode.previous = previousNode
             newNode.next = indexNode
             indexNode?.previous = newNode
         }
-        
+
         self.index += 1
+    }
+
+    func searchNode(index: Int) -> Node<T>? {
+        var indexNode = head
+
+        for _ in 0..<index {
+            indexNode = indexNode?.next
+        }
+        return indexNode
     }
 }
