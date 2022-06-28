@@ -2,7 +2,7 @@
 //  Node.swift
 //  BankManagerConsoleApp
 //
-//  Created by 김동용 on 2022/06/27.
+//  Created by finnn, bard on 2022/06/27.
 //
 
 class Node<T> {

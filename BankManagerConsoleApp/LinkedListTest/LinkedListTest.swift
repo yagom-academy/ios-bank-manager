@@ -2,7 +2,7 @@
 //  LinkedListTest.swift
 //  LinkedListTest
 //
-//  Created by LeeChiheon on 2022/06/27.
+//  Created by finnn, bard on 2022/06/27.
 //
 
 import XCTest
