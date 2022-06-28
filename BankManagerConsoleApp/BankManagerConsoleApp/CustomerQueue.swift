@@ -1,5 +1,9 @@
 final class CustomerQueue<T> {
-    private var linkedList = LinkedList<T>()
+    private var linkedList: LinkedList<T>
+
+    init(linkedList: LinkedList<T>) {
+        self.linkedList = linkedList
+    }
 
     var isEmpty: Bool {
         linkedList.isEmpty
