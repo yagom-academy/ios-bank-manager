@@ -4,6 +4,7 @@
 //
 //  Created by 수꿍, 브래드 on 2022/06/28.
 //
+
 struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?

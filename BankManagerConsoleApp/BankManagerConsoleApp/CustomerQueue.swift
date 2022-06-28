@@ -5,12 +5,14 @@
 //  Created by 수꿍, 브래드 on 2022/06/28.
 //
 
-import Foundation
-
 struct CustomerQueue<T> {
-    var linkedList: LinkedList<T>
-    var peek: T?
-    var isEmpty: Bool
+    var linkedList = LinkedList<T>()
+    var peek: T? {
+        return linkedList.peek
+    }
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
     
     mutating func enqueue(data: T) {
         linkedList.append(data: data)
