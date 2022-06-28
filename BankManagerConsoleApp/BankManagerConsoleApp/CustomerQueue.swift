@@ -4,16 +4,16 @@
 //
 //  Created by 보리, 휴 on 2022/06/28.
 //
-class CustomerQueue<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+final class CustomerQueue<T> {
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
         self.tail = tail
     }
     
-    func isEmpty() -> Bool {
+    private func isEmpty() -> Bool {
         if head == nil {
             return true
         }
