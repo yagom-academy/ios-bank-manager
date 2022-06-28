@@ -73,4 +73,52 @@ class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, true)
     }
+
+    func test_linkedList_insert가_처음에_잘_추가_되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        sut.append(data: 4)
+        sut.append(data: 5)
+        sut.insert(data: 9, index: 0)
+        // when
+        let result = sut.peek
+        // then
+        XCTAssertEqual(result, 9)
+    }
+
+    func test_linkedList_insert가_중간에_잘_추가_되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        sut.append(data: 4)
+        sut.append(data: 5)
+        sut.insert(data: 9, index: 2)
+        // when
+        _ = sut.remove()
+        _ = sut.remove()
+        let result = sut.peek
+        // then
+        XCTAssertEqual(result, 9)
+    }
+
+    func test_linkedList_insert가_마지막에_잘_추가_되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        sut.append(data: 4)
+        sut.append(data: 5)
+        sut.insert(data: 9, index: 4)
+        // when
+        _ = sut.remove()
+        _ = sut.remove()
+        _ = sut.remove()
+        _ = sut.remove()
+        let result = sut.peek
+        // then
+        XCTAssertEqual(result, 9)
+    }
 }
