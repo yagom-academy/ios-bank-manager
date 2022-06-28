@@ -1,0 +1,31 @@
+disabled_rules:
+ - trailing_whitespace
+ 
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - colon
+  - comma
+  
+included:
+  - BankManagerConsoleApp
+  - Source
+  
+excluded:
+  - Carthage
+  - Pods
+  - Source/ExcludedFolder
+  - Source/ExcludedFile.swift
+  - Source/*/ExcludedFile.swift
+  
+analyzer_rules:
+  - explicit_self
+
+force_cast: warning
+force_try:
+  severity: warning
+
+line_length: 100
+
+
+

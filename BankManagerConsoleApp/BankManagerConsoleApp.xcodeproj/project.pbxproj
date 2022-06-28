@@ -57,6 +57,7 @@
 		D762D05D2869B13600E8235F /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		D7BE3A66286A9D9000CED030 /* LinkedList+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinkedList+extension.swift"; sourceTree = "<group>"; };
 		D7BE3A68286A9D9B00CED030 /* Queue+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Queue+extension.swift"; sourceTree = "<group>"; };
+		D7BE3A6D286AEB7D00CED030 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +105,7 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				D7BE3A6D286AEB7D00CED030 /* .swiftlint.yml */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				B47641CD2869A6CE00EE924C /* LinkedListTest */,
 				B49E5518286A97700001E4B4 /* QueueTest */,
@@ -291,7 +293,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		E5589D14F0B1120AFD5882B5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

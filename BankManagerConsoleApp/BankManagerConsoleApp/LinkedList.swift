@@ -9,7 +9,7 @@ struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     var nodeCount: Int = 0
-    lazy var currentNode:Node<T>? = head
+    lazy var currentNode: Node<T>? = head
     
     mutating func enqueue(data: T) {
         let node = Node<T>(data: data)

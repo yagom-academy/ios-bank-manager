@@ -33,4 +33,3 @@ extension LinkedList: ExpressibleByArrayLiteral {
         elements.forEach { self.enqueue(data: $0) }
     }
 }
-
