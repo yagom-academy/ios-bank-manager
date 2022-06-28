@@ -10,7 +10,7 @@ class CustomerQueue<T> {
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
-        self.tail = head
+        self.tail = tail
     }
     
     func isEmpty() -> Bool {
