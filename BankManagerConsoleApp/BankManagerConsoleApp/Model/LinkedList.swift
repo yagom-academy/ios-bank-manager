@@ -9,8 +9,17 @@ import Foundation
 
 class LinkedList<T> {
     var head: Node<T>?
+    var isEmpty: Bool {
+        if head != nil {
+            return false
+        }
+        return true
+    }
+    var peek: T? {
+        return head?.data
+    }
     
-    func enqueue(data: T) {
+    func append(data: T) {
         if head == nil {
             head = Node(data)
             return
@@ -23,7 +32,8 @@ class LinkedList<T> {
         node?.next = Node(data)
     }
     
-    func dequeue() -> T? {
+    @discardableResult
+    func removeFirst() -> T? {
         if head == nil {
             return nil
         }
@@ -36,16 +46,5 @@ class LinkedList<T> {
     
     func clear() {
         head = nil
-    }
-    
-    func peek() -> T? {
-        return head?.data
-    }
-    
-    func isEmpty() -> Bool {
-        if head != nil {
-            return false
-        }
-        return true
     }
 }

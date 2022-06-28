@@ -8,8 +8,8 @@
 import Foundation
 
 class Node<T> {
-    var next: Node<T>?
     var data: T
+    var next: Node<T>?
     
     init(_ data: T) {
         self.data = data
