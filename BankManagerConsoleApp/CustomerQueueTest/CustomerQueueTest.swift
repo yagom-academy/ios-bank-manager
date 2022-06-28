@@ -2,7 +2,7 @@ import XCTest
 
 class CustomerQueueTest: XCTestCase {
     var sut: CustomerQueue<Int>!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CustomerQueue()
