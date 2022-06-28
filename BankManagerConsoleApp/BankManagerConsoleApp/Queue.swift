@@ -8,7 +8,7 @@
 struct Queue<T: Equatable> {
     private var linkedList = LinkedList<T>()
     var isEmpty: Bool {
-        linkedList.nodeCount == 0 ? true : false
+        linkedList.nodeCount == 0
     }
     var peek: T? {
         linkedList.head?.data
