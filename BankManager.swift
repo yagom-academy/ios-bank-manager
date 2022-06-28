@@ -1,7 +1,5 @@
 //
 //  BankManager.swift
-//  Created by yagom.
+//  Created by finnn, bard.
 //  Copyright © yagom academy. All rights reserved.
 //
-
-import Foundation
