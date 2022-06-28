@@ -3,11 +3,11 @@ final class LinkedList<T> {
     private var tail: Node<T>?
 
     var isEmpty: Bool {
-        return head == nil ? true : false
+        head == nil
     }
 
     var peek: T? {
-        return head?.data
+        head?.data
     }
 
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
