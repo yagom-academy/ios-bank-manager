@@ -17,12 +17,12 @@ struct LinkedList<T> {
     
     mutating func append(data: T?) {
         if isEmpty {
-            head = Node(data: data, next: nil, prev: nil)
+            head = Node(data: data)
             tail = head
             return
         }
         
-        let lastNode = Node(data: data, next: nil, prev: nil)
+        let lastNode = Node(data: data)
         tail?.next = lastNode
         lastNode.prev = tail
         tail = lastNode

@@ -19,8 +19,8 @@ class CustomQueueTests: XCTestCase {
         // when
         sut.enqueue(data: input1)
         sut.enqueue(data: input2)
-        let result1 = sut.peek
-        let result2 = sut.linkedList.tail?.data
+        let result1 = sut.dequeue()
+        let result2 = sut.dequeue()
         
         // then
         XCTAssertEqual(result1, input1)
@@ -72,8 +72,8 @@ class CustomQueueTests: XCTestCase {
         // when
         stringSut.enqueue(data: input1)
         stringSut.enqueue(data: input2)
-        let result1 = stringSut.peek
-        let result2 = stringSut.linkedList.tail?.data
+        let result1 = stringSut.dequeue()
+        let result2 = stringSut.dequeue()
         
         // then
         XCTAssertEqual(result1, input1)

@@ -6,7 +6,7 @@
 //
 
 struct CustomerQueue<T> {
-    var linkedList = LinkedList<T>()
+    private var linkedList = LinkedList<T>()
     var peek: T? {
         return linkedList.peek
     }
