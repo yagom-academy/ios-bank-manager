@@ -33,6 +33,26 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "426108DF2869943F00756C00"
+               BuildableName = "CustomerQueueTests.xctest"
+               BlueprintName = "CustomerQueueTests"
+               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AFF806A42869A54400FCD395"
+               BuildableName = "NodeTests.xctest"
+               BlueprintName = "NodeTests"
+               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AF3D274B286A8F2300D50AAF"
                BuildableName = "LinkedListTests.xctest"
                BlueprintName = "LinkedListTests"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
