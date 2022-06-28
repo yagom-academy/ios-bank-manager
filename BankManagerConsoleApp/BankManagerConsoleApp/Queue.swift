@@ -5,7 +5,7 @@
 //  Created by LeeChiheon on 2022/06/27.
 //
 
-struct Queue<T> {
+struct Queue<T: Equatable> {
     private var linkedList = LinkedList<T>()
     var isEmpty: Bool {
         linkedList.nodeCount == 0 ? true : false
@@ -51,5 +51,17 @@ extension Queue: ExpressibleByArrayLiteral {
     init(arrayLiteral elements: T...) {
         self.init()
         elements.forEach { self.enqueue(data: $0) }
+    }
+}
+
+extension Queue: Equatable {
+    static func == (lhs: Queue<T>, rhs: Queue<T>) -> Bool {
+        guard lhs.linkedList.nodeCount == rhs.linkedList.nodeCount else { return false }
+        
+        for (lhsElement, rhsElement) in zip(lhs, rhs) {
+            guard lhsElement == rhsElement else { return false }
+        }
+        
+        return true
     }
 }
