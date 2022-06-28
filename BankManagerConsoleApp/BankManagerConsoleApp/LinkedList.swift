@@ -38,6 +38,23 @@ final class LinkedList<T> {
         index -= 1
         return data
     }
+    
+    func removeAt(index: Int) -> T? {
+        guard !isEmpty else { return nil }
+        guard index >= self.index else {
+            let indexNode = searchNode(index: index)
+            indexNode?.previous?.next = indexNode?.next
+            indexNode?.next?.previous = indexNode?.previous
+            return indexNode?.data
+        }
+        guard index != self.index else {
+            let data = tail?.data
+            tail?.previous?.next = nil
+            tail = tail?.previous
+            return data
+        }
+        return nil
+    }
 
     func removeAll() {
         head = nil

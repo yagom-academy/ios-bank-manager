@@ -57,6 +57,45 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 3)
     }
 
+    func test_linkedList_removeAt이_잘되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // when
+        let result = sut.removeAt(index: 1)
+        // then
+        XCTAssertEqual(result, 2)
+    }
+
+    func test_linkedList_removeAt이_잘되는지2() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        sut.append(data: 4)
+        // when
+        let result = sut.removeAt(index: 2)
+        // then
+        XCTAssertEqual(result, 3)
+    }
+
+    func test_linkedList_매개변수와_index가_같을_경우_removeAt이_잘되는지() {
+        // given
+        sut.append(data: 1)
+        // when
+        let result = sut.removeAt(index: 0)
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_linkedList_비어있을경우_removeAt이_잘되는지() {
+        // when
+        let result = sut.removeAt(index: 0)
+        // then
+        XCTAssertEqual(result, nil)
+    }
+
     func test_linkedList_isEmpty가_정상적으로_false를_반환하는지() {
         // given
         sut.append(data: 1)
