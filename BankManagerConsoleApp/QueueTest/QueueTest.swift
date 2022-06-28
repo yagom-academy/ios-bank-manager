@@ -64,7 +64,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(input[0], result)
     }
     
-    func test_clear() {
+    func test_clear함수를실행하면큐내부가비어있는지() {
         // given
         let input = [1,2,3,4,5]
         sut?.enqueue(data: input[0])
@@ -95,7 +95,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(sut?.peek, result)
     }
     
-    func test_isEmpty잘_동작하는지_확인() {
+    func test_clear함수를실행하고_isEmpty가true를반환하는지() {
         // given
         let input = [1,2,3,4,5]
         sut?.enqueue(data: input[0])
