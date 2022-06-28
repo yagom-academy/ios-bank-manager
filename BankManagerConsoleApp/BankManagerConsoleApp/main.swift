@@ -5,5 +5,3 @@
 // 
 
 import Foundation
-
-let test:Int=3
