@@ -35,7 +35,7 @@ class QueueTests: XCTestCase {
         
         // when
         sut.enqueue(input)
-        let result = sut.peek
+        let result = try! sut.peek()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -48,7 +48,7 @@ class QueueTests: XCTestCase {
         
         // when
         sut.enqueue(input)
-        let result = sut.dequeue()
+        let result = try! sut.dequeue()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -76,12 +76,22 @@ class QueueTests: XCTestCase {
         
         // when
         sut.enqueue(input[0])
-        _ = sut.dequeue()
+        _ = try! sut.dequeue()
         sut.enqueue(input[1])
         sut.enqueue(input[2])
-        let result = sut.peek
+        let result = try! sut.peek()
         
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_peek_값이없을때peek하면_에러를던지는지() {
+        // then
+        XCTAssertThrowsError(try sut.peek())
+    }
+    
+    func test_dequeue_값이없을때dequeue하면_에러를던지는지() {
+        // then
+        XCTAssertThrowsError(try sut.dequeue())
     }
 }

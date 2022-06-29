@@ -12,20 +12,19 @@ class Queue<T> {
         return list.isEmpty
     }
     
-    public var peek: T? {
-        return list.firstNode?.value
+    func peek() throws -> T {
+        return try list.firstNode().value
     }
     
     public func enqueue(_ element: T) {
         list.append(element)
     }
     
-    public func dequeue() -> T? {
-        return isEmpty ? nil : list.removeHead()?.value
+    public func dequeue() throws -> T {
+        return try list.removeHead().value
     }
     
     public func clear() {
         list.removeAll()
     }
 }
-
