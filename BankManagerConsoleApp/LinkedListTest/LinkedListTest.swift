@@ -35,7 +35,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(data, result[0])
     }
     
-    func test_dequeue함수가_배열의마지막숫자를잘반환하는지() {
+    func test_dequeue함수가_배열의첫번째숫자를잘반환하는지() {
         // given
         let input = [1,2,3,4,5]
         sut?.add(node: Node<Int>(data: input[0]))
