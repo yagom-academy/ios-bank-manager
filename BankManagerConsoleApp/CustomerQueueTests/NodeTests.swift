@@ -20,7 +20,7 @@ class NodeTests: XCTestCase {
         sut = nil
     }
 
-    func test_Node에_데이터값을입력하면_값이초기화가되는지() {
+    func test_Node에_초기화구문을이용해서_값을입력하면_data가_해당값으로초기화가되는지() {
         // given
         let value = 10
         // when
@@ -30,7 +30,7 @@ class NodeTests: XCTestCase {
         XCTAssertEqual(result, value)
     }
     
-    func test_Node에_처음데이터값을입력하면_next값이nil로초기화되는지() {
+    func test_Node에_초기화구문을이용해서_값을입력하면_next값이_nil로초기화되는지() {
         // given
         let value = 10
         // when

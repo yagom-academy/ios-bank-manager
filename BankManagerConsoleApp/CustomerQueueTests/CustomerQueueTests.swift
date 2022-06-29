@@ -20,16 +20,16 @@ class CustomerQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_초기상태일때_isEmpty의반환값이true인지() {
+    func test_큐의요소가비어있을때_빈값으로확인이되는지() {
         // given
-        
+
         // when
         let result = sut.isEmpty
         // then
         XCTAssertTrue(result)
     }
     
-    func test_초기상태일때_dequeue를하면_nil이반환되는지() {
+    func test_큐의요소가비어있을때_dequeue를하면_nil이반환되는지() {
         // given
         
         // when
@@ -38,18 +38,20 @@ class CustomerQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_3과7과5를넣었을때_dequeue의반환값이3인지() {
+    func test_큐에값을3개넣어줄때_dequeue를하면_첫번째값이_제거되고반환되는지() {
         // given
-        let expectation = 3
+        let expectation1 = 3
+        let expectation2 = 2
         sut = CustomerQueue(elements: [3, 5, 7])
-        
         // when
-        let result = sut.dequeue()
+        let firstItem = sut.dequeue()
+        let count = sut.count
         // then
-        XCTAssertEqual(expectation, result)
+        XCTAssertEqual(expectation1, firstItem)
+        XCTAssertEqual(expectation2, count)
     }
-    
-    func test_enqueue로3과7을넣었을때_peek이3인지() {
+
+    func test_큐에값을2개넣어줄때_peek을하면_첫번째값이반환되는지() {
         // given
         let expectation = 3
         sut = CustomerQueue(elements: [3, 7])
@@ -59,7 +61,7 @@ class CustomerQueueTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_enqueue로3과7을넣었을때_peek을여러번해도_똑같은값이_나오는지() {
+    func test_큐에값을2개넣어줄때_peek을여러번해도_똑같은값이_반환되는지() {
         // given
         sut = CustomerQueue(elements: [3, 7])
         // when
@@ -69,25 +71,13 @@ class CustomerQueueTests: XCTestCase {
         XCTAssertEqual(result, result2)
     }
     
-    func test_3과7과5를넣었을때_clear후peek이nil인지() {
+    func test_큐에값을3개넣어줄때_clear를하면_빈큐가되는지() {
         // given
         sut = CustomerQueue(elements: [3, 7, 5])
         sut.clear()
         // when
-        let result = sut.peek
-        // then
-        XCTAssertEqual(result, nil)
-    }
-    
-    func test_3과7과5를넣었을때_dequeue3번후isEmpty가true인지() {
-        // given
-        sut = CustomerQueue(elements: [3, 7, 5])
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        // when
         let result = sut.isEmpty
         // then
-        XCTAssertEqual(result, true)
+        XCTAssertTrue(result)
     }
 }
