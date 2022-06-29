@@ -5,8 +5,8 @@
 //  Created by bonf, judy on 2022/06/27.
 //
 
-class Queue<T> {
-    private var list = LinkedList<T>()
+final class Queue<T> {
+    private let list = LinkedList<T>()
     
     public var isEmpty: Bool {
         return list.isEmpty

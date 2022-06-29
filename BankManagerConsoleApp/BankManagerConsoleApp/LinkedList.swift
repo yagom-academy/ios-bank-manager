@@ -5,7 +5,7 @@
 //  Created by bonf, judy on 2022/06/27.
 //
 
-class LinkedList<T> {
+final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
 
