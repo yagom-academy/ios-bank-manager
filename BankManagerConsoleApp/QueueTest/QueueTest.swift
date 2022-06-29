@@ -49,7 +49,22 @@ class QueueTest: XCTestCase {
         XCTAssertFalse(sut == result)
     }
     
-    func test_enqueue를했을때_debugDescription이enqueu한값을잘반환하는지() {
+    func test_enqueue함수에데이터를넣으면_배열에순서대로잘들어가는지3() {
+        // given
+        let input = [1,2,3,4,5]
+        
+        // when
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        let result: Queue<Int> = [1, 2, 3]
+        
+        // then
+        XCTAssertFalse(sut == result)
+    }
+    
+    func test_enqueue를했을때_debugDescription이enqueu한값을잘반환하는지1() {
         // given
         let input = [1,2,3,4,5]
         
@@ -62,6 +77,21 @@ class QueueTest: XCTestCase {
         
         // then
         XCTAssertTrue(sut?.debugDescription == result)
+    }
+    
+    func test_enqueue를했을때_debugDescription이enqueu한값을잘반환하는지2() {
+        // given
+        let input = [1,2,3,4,5]
+        
+        // when
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        let result: String = "\([1, 2, 3])"
+        
+        // then
+        XCTAssertFalse(sut?.debugDescription == result)
     }
     
     func test_dequeue함수가_배열의첫번째숫자를잘반환하는지() {
@@ -92,10 +122,10 @@ class QueueTest: XCTestCase {
         let result = true
         
         //then
-        XCTAssertEqual(result, sut?.isEmpty)
+        XCTAssertEqual(sut?.isEmpty, result)
     }
     
-    func test_peek잘_동작하는지_확인() {
+    func test_peek잘_동작하는지_확인1() {
         // given
         let input = [1,2,3,4,5]
         sut?.enqueue(data: input[0])
@@ -105,6 +135,39 @@ class QueueTest: XCTestCase {
         
         // when
         let result = 1
+        
+        // then
+        XCTAssertEqual(sut?.peek, result)
+    }
+    
+    func test_peek잘_동작하는지_확인2() {
+        // given
+        let input = [1,2,3,4,5]
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        let dequeuedData = sut?.dequeue()
+        
+        // when
+        let result = 2
+        
+        // then
+        XCTAssertEqual(sut?.peek, result)
+    }
+    
+    func test_peek잘_동작하는지_확인() {
+        // given
+        let input = [1,2,3,4,5]
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        let dequeuedData1 = sut?.dequeue()
+        let dequeuedData2 = sut?.dequeue()
+        
+        // when
+        let result = 3
         
         // then
         XCTAssertEqual(sut?.peek, result)
