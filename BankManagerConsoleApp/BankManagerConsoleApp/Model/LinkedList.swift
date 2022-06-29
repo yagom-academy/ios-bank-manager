@@ -10,31 +10,48 @@ import Foundation
 final class LinkedList<T> {
     private var head: Node<T>?
     var isEmpty: Bool {
-        if head != nil {
-            return false
-        }
-        return true
+        head == nil
     }
     var peek: T? {
-        return head?.data
+        head?.data
+    }
+    var count: Int {
+        if head == nil {
+            return 0
+        }
+        
+        var node = head
+        var count = 1
+        
+        while node?.next != nil {
+            node = node?.next
+            count += 1
+        }
+        return count
+    }
+    
+    init(elements: [T] = []) {
+        elements.forEach {
+            append(data: $0)
+        }
     }
     
     func append(data: T) {
         if head == nil {
             head = Node(data)
-            return
+        } else {
+            var node = head
+            
+            while node?.next != nil {
+                node = node?.next
+            }
+            node?.next = Node(data)
         }
-        
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data)
     }
     
     @discardableResult
     func removeFirst() -> T? {
-        if head == nil {
+        guard head != nil else {
             return nil
         }
         
@@ -46,9 +63,5 @@ final class LinkedList<T> {
     
     func clear() {
         head = nil
-    }
-    
-    init(elements: [T] = []) {
-        elements.forEach { append(data: $0) }
     }
 }

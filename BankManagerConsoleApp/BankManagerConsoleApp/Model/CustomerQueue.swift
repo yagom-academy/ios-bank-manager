@@ -10,10 +10,13 @@ import Foundation
 struct CustomerQueue<T> {
     private(set) var queue: LinkedList<T>
     var isEmpty: Bool {
-        return queue.isEmpty
+        queue.isEmpty
     }
     var peek: T? {
-        return queue.peek
+        queue.peek
+    }
+    var count: Int {
+        queue.count
     }
     
     func enqueue(data: T) {
@@ -22,7 +25,7 @@ struct CustomerQueue<T> {
     
     @discardableResult
     func dequeue() -> T? {
-        return queue.removeFirst()
+        queue.removeFirst()
     }
     
     func clear() {
@@ -31,6 +34,8 @@ struct CustomerQueue<T> {
     
     init(elements: [T] = []) {
         queue = LinkedList()
-        elements.forEach { enqueue(data: $0) }
+        elements.forEach {
+            enqueue(data: $0)
+        }
     }
 }
