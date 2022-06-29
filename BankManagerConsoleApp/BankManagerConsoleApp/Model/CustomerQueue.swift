@@ -8,7 +8,7 @@
 import Foundation
 
 struct CustomerQueue<T> {
-    var queue: LinkedList<T>
+    private(set) var queue: LinkedList<T>
     var isEmpty: Bool {
         return queue.isEmpty
     }

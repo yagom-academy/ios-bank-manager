@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Node<T> {
-    var data: T
+final class Node<T> {
+    private(set) var data: T
     var next: Node<T>?
     
     init(_ data: T) {

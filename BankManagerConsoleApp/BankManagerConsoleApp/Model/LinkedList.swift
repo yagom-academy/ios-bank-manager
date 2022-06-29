@@ -7,8 +7,8 @@
 
 import Foundation
 
-class LinkedList<T> {
-    var head: Node<T>?
+final class LinkedList<T> {
+    private var head: Node<T>?
     var isEmpty: Bool {
         if head != nil {
             return false
