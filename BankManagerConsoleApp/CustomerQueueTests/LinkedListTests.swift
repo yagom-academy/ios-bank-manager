@@ -41,9 +41,7 @@ class LinkedListTests: XCTestCase {
     func test_3과7과5를넣었을때_removeFirst의반환값이3인지() {
         // given
         let expectation = 3
-        sut.append(data: 3)
-        sut.append(data: 7)
-        sut.append(data: 5)
+        sut = LinkedList(elements: [3, 7, 5])
         // when
         let result = sut.removeFirst()
         // then
@@ -53,8 +51,7 @@ class LinkedListTests: XCTestCase {
     func test_append로3과7을넣었을때_peek이3인지() {
         // given
         let expectation = 3
-        sut.append(data: 3)
-        sut.append(data: 7)
+        sut = LinkedList(elements: [3, 7])
         // when
         let result = sut.peek
         // then
@@ -63,9 +60,7 @@ class LinkedListTests: XCTestCase {
     
     func test_3과7과5를넣었을때_clear후peek이nil인지() {
         // given
-        sut.append(data: 3)
-        sut.append(data: 7)
-        sut.append(data: 5)
+        sut = LinkedList(elements: [3, 7, 5])
         sut.clear()
         // when
         let result = sut.peek
@@ -75,9 +70,7 @@ class LinkedListTests: XCTestCase {
     
     func test_3과7과5를넣었을때_removeFirst3번후_isEmpty가true인지() {
         // given
-        sut.append(data: 3)
-        sut.append(data: 7)
-        sut.append(data: 5)
+        sut = LinkedList(elements: [3, 7, 5])
         sut.removeFirst()
         sut.removeFirst()
         sut.removeFirst()

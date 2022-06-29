@@ -12,7 +12,7 @@ class CustomerQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CustomerQueue(queue: LinkedList())
+        sut = CustomerQueue()
     }
 
     override func tearDownWithError() throws {
@@ -41,9 +41,8 @@ class CustomerQueueTests: XCTestCase {
     func test_3과7과5를넣었을때_dequeue의반환값이3인지() {
         // given
         let expectation = 3
-        sut.enqueue(data: 3)
-        sut.enqueue(data: 7)
-        sut.enqueue(data: 5)
+        sut = CustomerQueue(elements: [3, 5, 7])
+        
         // when
         let result = sut.dequeue()
         // then
@@ -53,8 +52,7 @@ class CustomerQueueTests: XCTestCase {
     func test_enqueue로3과7을넣었을때_peek이3인지() {
         // given
         let expectation = 3
-        sut.enqueue(data: 3)
-        sut.enqueue(data: 7)
+        sut = CustomerQueue(elements: [3, 7])
         // when
         let result = sut.peek
         // then
@@ -63,8 +61,7 @@ class CustomerQueueTests: XCTestCase {
     
     func test_enqueue로3과7을넣었을때_peek을여러번해도_똑같은값이_나오는지() {
         // given
-        sut.enqueue(data: 3)
-        sut.enqueue(data: 7)
+        sut = CustomerQueue(elements: [3, 7])
         // when
         let result = sut.peek
         let result2 = sut.peek
@@ -74,9 +71,7 @@ class CustomerQueueTests: XCTestCase {
     
     func test_3과7과5를넣었을때_clear후peek이nil인지() {
         // given
-        sut.enqueue(data: 3)
-        sut.enqueue(data: 7)
-        sut.enqueue(data: 5)
+        sut = CustomerQueue(elements: [3, 7, 5])
         sut.clear()
         // when
         let result = sut.peek
@@ -86,9 +81,7 @@ class CustomerQueueTests: XCTestCase {
     
     func test_3과7과5를넣었을때_dequeue3번후isEmpty가true인지() {
         // given
-        sut.enqueue(data: 3)
-        sut.enqueue(data: 7)
-        sut.enqueue(data: 5)
+        sut = CustomerQueue(elements: [3, 7, 5])
         sut.dequeue()
         sut.dequeue()
         sut.dequeue()
