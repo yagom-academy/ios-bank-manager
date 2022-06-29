@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4509684286BDE6C00412206 /* LinkedList+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BE3A66286A9D9000CED030 /* LinkedList+extension.swift */; };
+		B4509685286BDE6C00412206 /* LinkedList+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BE3A66286A9D9000CED030 /* LinkedList+extension.swift */; };
+		B4509687286BDE7700412206 /* Queue+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BE3A68286A9D9B00CED030 /* Queue+extension.swift */; };
+		B4509688286BDE7700412206 /* Queue+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BE3A68286A9D9B00CED030 /* Queue+extension.swift */; };
 		B47038152869E3C800DB790C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47038142869E3C800DB790C /* Queue.swift */; };
 		B47038162869E3C800DB790C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47038142869E3C800DB790C /* Queue.swift */; };
 		B47641C72869A6BC00EE924C /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47641C62869A6BC00EE924C /* LinkedList.swift */; };
@@ -327,7 +331,9 @@
 				B47641D32869A6D700EE924C /* LinkedList.swift in Sources */,
 				B47038162869E3C800DB790C /* Queue.swift in Sources */,
 				D762D0602869B22C00E8235F /* Node.swift in Sources */,
+				B4509684286BDE6C00412206 /* LinkedList+extension.swift in Sources */,
 				D762D05B2869B12E00E8235F /* main.swift in Sources */,
+				B4509687286BDE7700412206 /* Queue+extension.swift in Sources */,
 				D762D05C2869B13100E8235F /* BankManager.swift in Sources */,
 				B49AECE62869B83000E22E19 /* LinkedListTest.swift in Sources */,
 			);
@@ -340,7 +346,9 @@
 				B49E551F286A97840001E4B4 /* LinkedList.swift in Sources */,
 				B49E5521286A97890001E4B4 /* Node.swift in Sources */,
 				B49E551A286A97700001E4B4 /* QueueTest.swift in Sources */,
+				B4509685286BDE6C00412206 /* LinkedList+extension.swift in Sources */,
 				B49E5520286A97860001E4B4 /* main.swift in Sources */,
+				B4509688286BDE7700412206 /* Queue+extension.swift in Sources */,
 				B49E551E286A97820001E4B4 /* Queue.swift in Sources */,
 				B49E5522286A978C0001E4B4 /* BankManager.swift in Sources */,
 			);

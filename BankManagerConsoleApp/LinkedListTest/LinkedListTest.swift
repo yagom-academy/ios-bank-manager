@@ -24,10 +24,10 @@ class LinkedListTest: XCTestCase {
         let input = [1,2,3,4,5]
         
         // when
-        sut?.enqueue(data: input[0])
-        sut?.enqueue(data: input[1])
-        sut?.enqueue(data: input[2])
-        sut?.enqueue(data: input[3])
+        sut?.add(node: Node<Int>(data: input[0]))
+        sut?.add(node: Node<Int>(data: input[1]))
+        sut?.add(node: Node<Int>(data: input[2]))
+        sut?.add(node: Node<Int>(data: input[3]))
         let result = [1, 2, 3, 4]
         guard let data = sut?.head?.data else { return }
         
@@ -35,16 +35,16 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(data, result[0])
     }
     
-    func test_dequeue함수가_배열의마지막숫자를잘반환하는지() {
+    func test_dequeue함수가_배열의첫번째숫자를잘반환하는지() {
         // given
         let input = [1,2,3,4,5]
-        sut?.enqueue(data: input[0])
-        sut?.enqueue(data: input[1])
-        sut?.enqueue(data: input[2])
-        sut?.enqueue(data: input[3])
-        
+        sut?.add(node: Node<Int>(data: input[0]))
+        sut?.add(node: Node<Int>(data: input[1]))
+        sut?.add(node: Node<Int>(data: input[2]))
+        sut?.add(node: Node<Int>(data: input[3]))
+
         // when
-        let result = sut?.dequeue()
+        let result = sut?.removeFirst()?.data
         
         // then
         XCTAssertEqual(input[0], result)
@@ -53,10 +53,10 @@ class LinkedListTest: XCTestCase {
     func test_clear() {
         // given
         let input = [1,2,3,4,5]
-        sut?.enqueue(data: input[0])
-        sut?.enqueue(data: input[1])
-        sut?.enqueue(data: input[2])
-        sut?.enqueue(data: input[3])
+        sut?.add(node: Node<Int>(data: input[0]))
+        sut?.add(node: Node<Int>(data: input[1]))
+        sut?.add(node: Node<Int>(data: input[2]))
+        sut?.add(node: Node<Int>(data: input[3]))
         
         // when
         sut?.clear()
