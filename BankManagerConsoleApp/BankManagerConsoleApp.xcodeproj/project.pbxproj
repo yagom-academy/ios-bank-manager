@@ -18,7 +18,6 @@
 		7E2D07C7286B024A007ED9C2 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D07B7286AF341007ED9C2 /* CustomerQueue.swift */; };
 		7E2D07C8286B024D007ED9C2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D07B5286AE5C2007ED9C2 /* Node.swift */; };
 		7E2D07C9286B024F007ED9C2 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7A6774286AE77C0087EE4F /* LinkedList.swift */; };
-		7E2D07CA286B0253007ED9C2 /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D07BF286B011C007ED9C2 /* CustomerQueueTests.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -207,7 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				7E2D07CA286B0253007ED9C2 /* CustomerQueueTests.swift in Sources */,
 				4F7A6773286AE4FF0087EE4F /* Queue.swift in Sources */,
 				4F7A6775286AE77C0087EE4F /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
