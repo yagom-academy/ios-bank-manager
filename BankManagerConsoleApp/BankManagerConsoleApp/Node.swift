@@ -11,7 +11,7 @@ class Node<T> {
     let value: T
     var next: Node<T>?
     
-    init(value: T, next: Node? = nil) {
+    init(value: T, next: Node<T>? = nil) {
         self.value = value
         self.next = next
     }

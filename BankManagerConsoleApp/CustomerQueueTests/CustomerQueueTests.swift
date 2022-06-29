@@ -13,7 +13,7 @@ class CustomerQueueTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = CustomerQueue<Int>(list: LinkedList<Int>())
+        sut = CustomerQueue<Int>()
     }
     
     override func tearDownWithError() throws {
