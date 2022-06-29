@@ -15,11 +15,11 @@ struct Queue<T: Equatable> {
     }
     
     mutating func enqueue(data: T) {
-        linkedList.enqueue(data: data)
+        linkedList.add(node: Node<T>(data: data))
     }
     
     mutating func dequeue() -> T? {
-        return linkedList.dequeue()
+        return linkedList.removeFirst()?.data
     }
     
     mutating func clear() {

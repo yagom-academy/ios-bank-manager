@@ -30,6 +30,6 @@ extension LinkedList: CustomStringConvertible, CustomDebugStringConvertible {
 extension LinkedList: ExpressibleByArrayLiteral {
     init(arrayLiteral elements: T...) {
         self.init()
-        elements.forEach { self.enqueue(data: $0) }
+        elements.forEach { self.add(node: Node<T>(data: $0)) }
     }
 }
