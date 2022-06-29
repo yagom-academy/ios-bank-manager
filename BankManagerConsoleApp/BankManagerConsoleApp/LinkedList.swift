@@ -97,7 +97,7 @@ final class LinkedList<T> {
        count += 1
     }
 
-    func searchNode(index: Int) -> Node<T>? {
+    private func searchNode(index: Int) -> Node<T>? {
         var indexNode = head
 
         for _ in 0..<index {
