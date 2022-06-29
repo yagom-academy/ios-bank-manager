@@ -1,4 +1,4 @@
 struct Bank {
     let banker = Banker()
-    let customer = Queue<Customer>()
+    let customer: Queue<Customer>
 }
