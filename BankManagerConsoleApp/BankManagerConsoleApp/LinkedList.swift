@@ -6,6 +6,10 @@ final class LinkedList<T> {
     var isEmpty: Bool {
         head == nil
     }
+    
+    var isNotEmpty: Bool {
+        head != nil
+    }
 
     var peek: T? {
         head?.data
@@ -32,6 +36,8 @@ final class LinkedList<T> {
     }
 
     func remove() -> T? {
+        guard isNotEmpty else { return nil }
+        
         let current = head?.next
         let data = head?.data
         head = current
@@ -40,7 +46,7 @@ final class LinkedList<T> {
     }
 
     func removeAt(index: Int) -> T? {
-        guard !isEmpty else { return nil }
+        guard isNotEmpty else { return nil }
         guard index >= self.index else {
             let indexNode = searchNode(index: index)
             indexNode?.previous?.next = indexNode?.next
