@@ -1,0 +1,8 @@
+disabled_rules:
+- line_length
+- trailing_whitespace
+included:
+excluded:
+- Pods
+- SignUp/AppDelegate.swift
+- SignUp/SceneDelegate.swift
