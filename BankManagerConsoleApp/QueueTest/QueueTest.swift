@@ -28,10 +28,10 @@ class QueueTest: XCTestCase {
         sut?.enqueue(data: input[1])
         sut?.enqueue(data: input[2])
         sut?.enqueue(data: input[3])
-        let result: Queue<Int> = [1, 2, 3, 4]
+        let result: String = "\([1, 2, 3, 4])"
         
         // then
-        XCTAssertEqual(sut, result)
+        XCTAssertEqual(sut?.debugDescription, result)
     }
     
     func test_enqueue함수에데이터를넣으면_배열에순서대로잘들어가는지2() {
@@ -49,7 +49,22 @@ class QueueTest: XCTestCase {
         XCTAssertFalse(sut == result)
     }
     
-    func test_dequeue함수가_배열의마지막숫자를잘반환하는지() {
+    func test_enqueue를했을때_debugDescription이enqueu한값을잘반환하는지() {
+        // given
+        let input = [1,2,3,4,5]
+        
+        // when
+        sut?.enqueue(data: input[0])
+        sut?.enqueue(data: input[1])
+        sut?.enqueue(data: input[2])
+        sut?.enqueue(data: input[3])
+        let result: String = "\([1, 2, 3, 4])"
+        
+        // then
+        XCTAssertTrue(sut?.debugDescription == result)
+    }
+    
+    func test_dequeue함수가_배열의첫번째숫자를잘반환하는지() {
         // given
         let input = [1,2,3,4,5]
         sut?.enqueue(data: input[0])
@@ -95,7 +110,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(sut?.peek, result)
     }
     
-    func test_clear함수를실행하고_isEmpty가true를반환하는지() {
+    func test_clear함수를실행하고_배열과_비교해서_true와_false를_잘_반환하는지() {
         // given
         let input = [1,2,3,4,5]
         sut?.enqueue(data: input[0])
@@ -108,6 +123,10 @@ class QueueTest: XCTestCase {
         guard let result = sut?.isEmpty else { return }
         
         // then
-        XCTAssertTrue(result)
+        if result  {
+            XCTAssertTrue(result)
+        } else {
+            XCTAssertFalse(result)
+        }
     }
 }
