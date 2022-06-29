@@ -1,10 +1,3 @@
-//
-//  QueueTests.swift
-//  QueueTests
-//
-//  Created by bonf, judy on 2022/06/27.
-//
-
 import XCTest
 
 class QueueTests: XCTestCase {

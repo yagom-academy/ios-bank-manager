@@ -1,10 +1,3 @@
-//
-//  LinkedList.swift
-//  BankManagerConsoleApp
-//
-//  Created by bonf, judy on 2022/06/27.
-//
-
 final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?

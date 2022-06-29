@@ -1,10 +1,3 @@
-//
-//  Queue.swift
-//  BankManagerConsoleApp
-//
-//  Created by bonf, judy on 2022/06/27.
-//
-
 final class Queue<T> {
     private let list = LinkedList<T>()
     
