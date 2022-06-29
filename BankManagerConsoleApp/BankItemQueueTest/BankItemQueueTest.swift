@@ -45,13 +45,13 @@ class BankItemQueueTest: XCTestCase {
         sut.enQueue("1")
         sut.enQueue("2")
         sut.enQueue("3")
-        let testNumber = "1"
+        let expectedNumber = "1"
         
         //when
         let peekGetNumber = sut.peek?.data
 
         //then
-        XCTAssertEqual(testNumber, peekGetNumber)
+        XCTAssertEqual(expectedNumber, peekGetNumber)
     }
     
     func test_deQueue_리스트에아무것도없을때_nil반환하는지() {
@@ -62,18 +62,33 @@ class BankItemQueueTest: XCTestCase {
         XCTAssertNil(result)
     }
 
-    func test_deQueue_리스트에서_맨앞에_갚을제거하는지() {
+    func test_deQueue_리스트에서_맨앞에_값을제거하고_반환하는지() {
         //given
         sut.enQueue("1")
         sut.enQueue("2")
         sut.enQueue("3")
-        let testNumber = "1"
+        let expectedNumber = "1"
 
         //when
         let result = sut.deQueue()
 
         //then
-        XCTAssertEqual(testNumber, result)
+        XCTAssertEqual(expectedNumber, result)
+    }
+    
+    func test_deQueue_리스트에서_head의_데이터가_다음값으로_변경되는지() {
+        //given
+        sut.enQueue("1")
+        sut.enQueue("2")
+        sut.enQueue("3")
+        let expectedNumber = "2"
+
+        //when
+        sut.deQueue()
+        let result = sut.peek?.data
+        
+        //then
+        XCTAssertEqual(expectedNumber, result)
     }
     
     func test_clear_로_리스트모든값제거() {
