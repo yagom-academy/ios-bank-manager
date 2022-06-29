@@ -14,12 +14,14 @@
 		057414992869AE310075BF7D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F3E932869882400614FB4 /* LinkedList.swift */; };
 		0574149A2869AE340075BF7D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371283342869772B00871886 /* Node.swift */; };
 		058F3E942869882400614FB4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F3E932869882400614FB4 /* LinkedList.swift */; };
+		0594129B286C3812005E10FD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
+		0594129C286C381A005E10FD /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37618390286B1B5F0028A509 /* QueueError.swift */; };
+		0594129D286C381B005E10FD /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37618390286B1B5F0028A509 /* QueueError.swift */; };
 		371283352869772B00871886 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371283342869772B00871886 /* Node.swift */; };
 		371283B12869982900871886 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371283B02869982900871886 /* LinkedListTest.swift */; };
 		371283B52869983800871886 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371283342869772B00871886 /* Node.swift */; };
 		371283B62869983C00871886 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F3E932869882400614FB4 /* LinkedList.swift */; };
 		37618391286B1B5F0028A509 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37618390286B1B5F0028A509 /* QueueError.swift */; };
-		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				057414992869AE310075BF7D /* LinkedList.swift in Sources */,
+				0594129D286C381B005E10FD /* QueueError.swift in Sources */,
 				057414932869ADCB0075BF7D /* CustomerQueueTest.swift in Sources */,
 				057414972869AE000075BF7D /* CustomerQueue.swift in Sources */,
 				0574149A2869AE340075BF7D /* Node.swift in Sources */,
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371283B62869983C00871886 /* LinkedList.swift in Sources */,
+				0594129C286C381A005E10FD /* QueueError.swift in Sources */,
 				057414982869AE260075BF7D /* CustomerQueue.swift in Sources */,
 				371283B12869982900871886 /* LinkedListTest.swift in Sources */,
 				371283B52869983800871886 /* Node.swift in Sources */,
@@ -284,8 +288,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				371283352869772B00871886 /* Node.swift in Sources */,
-				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				0574148B2869A9800075BF7D /* CustomerQueue.swift in Sources */,
+				0594129B286C3812005E10FD /* main.swift in Sources */,
 				058F3E942869882400614FB4 /* LinkedList.swift in Sources */,
 				37618391286B1B5F0028A509 /* QueueError.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
