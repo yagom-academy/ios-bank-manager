@@ -29,7 +29,7 @@ class BankItemQueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_isEmpty호출시_비어있지않으면_False반환하는지() {
+    func test_isEmpty호출시_비어있지않으면_false반환하는지() {
         //given
         sut.enQueue("1")
 
