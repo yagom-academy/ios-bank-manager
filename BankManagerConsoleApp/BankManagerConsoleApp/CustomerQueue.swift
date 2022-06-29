@@ -9,6 +9,10 @@ import Foundation
 
 struct CustomerQueue<T> {
     private var list: LinkedList<T>
+    
+    init(list: LinkedList<T>) {
+        self.list = list
+    }
 }
 
 extension CustomerQueue: Queue {
