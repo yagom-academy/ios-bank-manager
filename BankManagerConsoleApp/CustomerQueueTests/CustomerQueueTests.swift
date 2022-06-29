@@ -8,8 +8,22 @@
 import XCTest
 
 class CustomerQueueTests: XCTestCase {
-    var sut = CustomerQueue<Int>()
-    var stringSut = CustomerQueue<String>()
+    var sut: CustomerQueue<Int>!
+    var stringSut: CustomerQueue<String>!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        
+        sut = CustomerQueue<Int>()
+        stringSut =  CustomerQueue<String>()
+    }
+
+    override func tearDownWithError() throws {
+        try super.setUpWithError()
+        
+        sut = nil
+        stringSut = nil
+    }
     
     func test_enqueue_양의_정수가_순서대로_들어가는지_테스트() throws {
         // given
