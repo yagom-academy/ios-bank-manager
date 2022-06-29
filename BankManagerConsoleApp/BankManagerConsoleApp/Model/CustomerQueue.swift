@@ -28,4 +28,9 @@ struct CustomerQueue<T> {
     func clear() {
         queue.clear()
     }
+    
+    init(elements: [T] = []) {
+        queue = LinkedList()
+        elements.forEach { enqueue(data: $0) }
+    }
 }

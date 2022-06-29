@@ -47,4 +47,8 @@ final class LinkedList<T> {
     func clear() {
         head = nil
     }
+    
+    init(elements: [T] = []) {
+        elements.forEach { append(data: $0) }
+    }
 }
