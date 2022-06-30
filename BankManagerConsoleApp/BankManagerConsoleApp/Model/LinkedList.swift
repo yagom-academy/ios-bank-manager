@@ -29,6 +29,19 @@ final class LinkedList<T> {
         }
         return count
     }
+    var currentList: [T?] {
+        if head == nil {
+            return []
+        }
+        var list: [T?] = []
+        var node = head
+        
+        for _ in 0..<count {
+            list.append(node?.data)
+            node = node?.next
+        }
+        return list
+    }
     
     init(elements: [T] = []) {
         elements.forEach {

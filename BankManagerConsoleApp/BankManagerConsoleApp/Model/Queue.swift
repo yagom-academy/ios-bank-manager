@@ -13,6 +13,7 @@ protocol Queue {
     var isEmpty: Bool { get }
     var peek: Element? { get }
     var count: Int { get }
+    var currentList: [Element?] { get }
     func enqueue(data: Element)
     func dequeue() -> Element?
     func clear()
@@ -27,6 +28,9 @@ extension Queue {
     }
     var count: Int {
         queue.count
+    }
+    var currentList: [Element?] {
+        queue.currentList
     }
 
     func enqueue(data: Element) {
