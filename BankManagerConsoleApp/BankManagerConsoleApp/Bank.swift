@@ -5,6 +5,7 @@ struct Bank {
 
     func excuteWork() {
         let total = Int.random(in: 10...30)
+        appendCustomerQueue(numbers: total)
         for _ in 1...total {
             do {
                 let customer = try customerQueue.dequeue()
@@ -16,8 +17,10 @@ struct Bank {
         printCloseMessage()
     }
 
-    private func createRandom() -> Int {
-        return 0
+    private func appendCustomerQueue(numbers: Int) {
+        for number in 1...numbers {
+            customerQueue.enqueue(data: Customer(name: "\(number)번"))
+        }
     }
 
     private func printCloseMessage() {
