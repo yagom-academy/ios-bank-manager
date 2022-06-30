@@ -25,7 +25,7 @@ extension LinkedList {
     }
     
     func isEmpty() -> Bool {
-        return head == nil ? true : false
+        return head == nil
     }
     
     func removeFirst() -> Node<Element>? {
