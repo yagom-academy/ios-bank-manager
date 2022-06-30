@@ -4,9 +4,9 @@
 //
 //  Created by 보리, 휴 on 2022/06/28.
 //
-final class CustomerQueue<T> {
-    private(set) var head: Node<T>?
-    private(set) var tail: Node<T>?
+final class Queue<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
@@ -56,7 +56,7 @@ final class CustomerQueue<T> {
         return head
     }
     
-    func clear() {
+    private func clear() {
         while head?.nextNode != nil {
             head = head?.nextNode
             head?.previousNode?.nextNode = nil
