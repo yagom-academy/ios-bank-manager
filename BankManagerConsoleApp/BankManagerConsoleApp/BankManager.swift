@@ -1,5 +1,9 @@
 struct BankManager {
-    private let bank = Bank(customer: createCustomerQueue())
+    let bank: Bank
+    
+    init(_ bank: Bank) {
+        self.bank = bank
+    }
     
     func openUpBank() {
         print("1 : 은행개점 \n2 : 종료\n입력 :", terminator: " ")
@@ -29,7 +33,7 @@ struct BankManager {
         while !(bank.customer.isEmpty) {
             do {
                 let customer = try bank.customer.dequeue()
-                bank.banker.serve(customer: customer)
+                bank.banker[0].serve(customer: customer)
                 customerNumber += 1
             } catch {
                 print("응대할 고객이 없습니다.")

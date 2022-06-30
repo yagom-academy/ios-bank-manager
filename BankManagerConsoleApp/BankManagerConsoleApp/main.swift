@@ -10,6 +10,20 @@ func createCustomerQueue() -> Queue<Customer> {
     return customerQueue
 }
 
-let bankManager = BankManager()
+func createBanker(_ numberOfBanker: Int) -> [Banker] {
+    var bankers = [Banker]()
+    
+    for _ in 1...numberOfBanker {
+        let banker = Banker()
+        bankers.append(banker)
+    }
+    
+    return bankers
+}
+
+let bank = Bank(banker: createBanker(1),
+                customer: createCustomerQueue())
+
+let bankManager = BankManager(bank)
 
 bankManager.openUpBank()
