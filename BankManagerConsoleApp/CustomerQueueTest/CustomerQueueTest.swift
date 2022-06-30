@@ -8,20 +8,20 @@
 import XCTest
 
 class CustomerQueueTest: XCTestCase {
-    var sut: CustomerQueue<Int>!
-    var firstNode: Node<Int>!
-    var secondNode: Node<Int>!
-    var thirdNode: Node<Int>!
-    var fourthNode: Node<Int>!
-    var lastNode: Node<Int>!
+    var sut: Queue<Int>!
+    var firstData: Int!
+    var secondData: Int!
+    var thirdData: Int!
+    var fourthData: Int!
+    var lastData: Int!
     
     override func setUpWithError() throws {
-        sut = CustomerQueue()
-        firstNode = Node(1)
-        secondNode = Node(2)
-        thirdNode = Node(3)
-        fourthNode = Node(4)
-        lastNode = Node(5)
+        sut = Queue()
+        firstData = 1
+        secondData = 2
+        thirdData = 3
+        fourthData = 4
+        lastData = 5
         
     }
 
@@ -34,34 +34,34 @@ class CustomerQueueTest: XCTestCase {
     }
     
     func test_노드가_비어있지않으면_false_반환() {
-        sut.enqueue(inputNode: firstNode)
+        sut.enqueue(inputData: firstData)
         
         XCTAssertFalse(sut.isEmpty())
     }
     
     func test_enqueue된_순서대로_dequeue를_통해_반환() {
-        sut.enqueue(inputNode: firstNode)
-        sut.enqueue(inputNode: secondNode)
-        sut.enqueue(inputNode: thirdNode)
-        sut.enqueue(inputNode: fourthNode)
-        sut.enqueue(inputNode: lastNode)
+        sut.enqueue(inputData: firstData)
+        sut.enqueue(inputData: secondData)
+        sut.enqueue(inputData: thirdData)
+        sut.enqueue(inputData: fourthData)
+        sut.enqueue(inputData: lastData)
         
         var result = [Int?]()
-        result.append(sut.dequeue()?.data)
-        result.append(sut.dequeue()?.data)
-        result.append(sut.dequeue()?.data)
-        result.append(sut.dequeue()?.data)
-        result.append(sut.dequeue()?.data)
+        result.append(sut.dequeue())
+        result.append(sut.dequeue())
+        result.append(sut.dequeue())
+        result.append(sut.dequeue())
+        result.append(sut.dequeue())
         
         XCTAssertEqual([1, 2, 3, 4, 5], result)
     }
     
     func test_clear메서드_호출시_isEmpty가_true를_반환() {
-        sut.enqueue(inputNode: firstNode)
-        sut.enqueue(inputNode: secondNode)
-        sut.enqueue(inputNode: thirdNode)
-        sut.enqueue(inputNode: fourthNode)
-        sut.enqueue(inputNode: lastNode)
+        sut.enqueue(inputData: firstData)
+        sut.enqueue(inputData: secondData)
+        sut.enqueue(inputData: thirdData)
+        sut.enqueue(inputData: fourthData)
+        sut.enqueue(inputData: lastData)
         
         sut.clear()
         
@@ -69,8 +69,8 @@ class CustomerQueueTest: XCTestCase {
     }
     
     func test_노드가_하나일때_peek_사용시_노드의_data_반환() {
-        sut.enqueue(inputNode: firstNode)
+        sut.enqueue(inputData: firstData)
         
-        XCTAssertEqual(1, sut.head?.data)
+        XCTAssertEqual(1, sut.peek())
     }
 }

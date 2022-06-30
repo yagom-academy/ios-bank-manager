@@ -20,21 +20,24 @@ final class Queue<T> {
         return false
     }
     
-    func enqueue(inputNode: Node<T>?) {
+    func enqueue(inputData: T?) {
+        let inputNode = Node(inputData)
+        
         guard !isEmpty() else {
             head = inputNode
             tail = inputNode
             return
         }
-        inputNode?.previousNode = tail
+        
+        inputNode.previousNode = tail
         tail?.nextNode = inputNode
         tail = inputNode
     }
     
-    func dequeue() -> Node<T>? {
+    func dequeue() -> T? {
         var firstNode: Node<T>?
         guard !isEmpty() else {
-            return firstNode
+            return firstNode?.data
         }
         if head?.nextNode == nil {
             firstNode = head
@@ -46,14 +49,14 @@ final class Queue<T> {
             firstNode = head?.previousNode
             head?.previousNode = nil
         }
-        return firstNode
+        return firstNode?.data
     }
     
-    func peek() -> Node<T>? {
+    func peek() -> T? {
         guard !isEmpty() else {
             return nil
         }
-        return head
+        return head?.data
     }
     
     private func clear() {
