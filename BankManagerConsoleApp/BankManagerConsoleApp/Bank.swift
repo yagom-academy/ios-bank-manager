@@ -9,7 +9,7 @@ import Foundation
 
 struct Bank {
     
-    mutating func bankStart() {
+    mutating func bankBusinessStart() {
         selectBankOpenAndClose()
     }
     
@@ -18,11 +18,11 @@ struct Bank {
         print("입력 : ", terminator: "")
     }
     
-    mutating func makeCustomerWaitingList() -> BankItemQueue<Customer> {
-        let customerCount = 1...Int.random(in: 10...30)
+    
+    mutating func makeCustomerWaitingList(by totalCustomer: Int) -> BankItemQueue<Customer> {
         var watingQueue = BankItemQueue<Customer>()
         
-        for ticketNumber in customerCount {
+        for ticketNumber in 1...totalCustomer {
             let customer = Customer(bankNumberTicket: ticketNumber)
             watingQueue.enQueue(customer)
         }
@@ -36,12 +36,14 @@ struct Bank {
         
         switch requestInput {
         case "1":
-            clerk.handleBanking(customerList: makeCustomerWaitingList())
-            bankStart()
+            let customerCount = Int.random(in: 10...30)
+            clerk.handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
+            reportWorkResult(resultCustomer: customerCount, processTime: 0.7)
+            bankBusinessStart()
         case "2":
             break
         default:
-            bankStart()
+            bankBusinessStart()
         }
     }
 }
