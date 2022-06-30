@@ -1,21 +1,21 @@
 //
-//  CustomerQueueTests.swift
-//  CustomerQueueTests
+//  ClientQueueTests.swift
+//  ClientQueueTests
 //
 //  Created by 수꿍, 브래드 on 2022/06/28.
 //
 
 import XCTest
 
-class CustomerQueueTests: XCTestCase {
-    var sut: CustomerQueue<Int>!
-    var stringSut: CustomerQueue<String>!
+class ClientQueueTests: XCTestCase {
+    var sut: ClientQueue<Int>!
+    var stringSut: ClientQueue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = CustomerQueue<Int>()
-        stringSut =  CustomerQueue<String>()
+        sut = ClientQueue<Int>()
+        stringSut =  ClientQueue<String>()
     }
 
     override func tearDownWithError() throws {
@@ -31,8 +31,8 @@ class CustomerQueueTests: XCTestCase {
         let input2: Int = 9999
         
         // when
-        sut.enqueue(data: input1)
-        sut.enqueue(data: input2)
+        sut.enqueue(input1)
+        sut.enqueue(input2)
         let result1 = sut.dequeue()
         let result2 = sut.dequeue()
         
@@ -45,8 +45,8 @@ class CustomerQueueTests: XCTestCase {
         // given
         let input1: Int = 1
         let input2: Int = 9999
-        sut.enqueue(data: input1)
-        sut.enqueue(data: input2)
+        sut.enqueue(input1)
+        sut.enqueue(input2)
         
         // when
         let result1 = sut.dequeue()
@@ -64,11 +64,11 @@ class CustomerQueueTests: XCTestCase {
         let input3: Int = 99999
         let input4: Int = 999999
         let input5: Int = 1000000
-        sut.enqueue(data: input1)
-        sut.enqueue(data: input2)
-        sut.enqueue(data: input3)
-        sut.enqueue(data: input4)
-        sut.enqueue(data: input5)
+        sut.enqueue(input1)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        sut.enqueue(input4)
+        sut.enqueue(input5)
         
         // when
         let _ = sut.clear()
@@ -84,8 +84,8 @@ class CustomerQueueTests: XCTestCase {
         let input2: String = "나"
         
         // when
-        stringSut.enqueue(data: input1)
-        stringSut.enqueue(data: input2)
+        stringSut.enqueue(input1)
+        stringSut.enqueue(input2)
         let result1 = stringSut.dequeue()
         let result2 = stringSut.dequeue()
         
@@ -100,8 +100,8 @@ class CustomerQueueTests: XCTestCase {
         let input2: String = "나"
         
         // when
-        stringSut.enqueue(data: input1)
-        stringSut.enqueue(data: input2)
+        stringSut.enqueue(input1)
+        stringSut.enqueue(input2)
         let _ = stringSut.dequeue()
         let result = stringSut.peek
         
@@ -114,7 +114,7 @@ class CustomerQueueTests: XCTestCase {
         let input: String = "가"
         
         // when
-        stringSut.enqueue(data: input)
+        stringSut.enqueue(input)
         let result = stringSut.isEmpty
         
         // then
