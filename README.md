@@ -17,7 +17,7 @@
 - [기능설명](#기능설명)
 - [Debugging](#Debugging)
 - [1️⃣ Step01](https://github.com/Groot-94/ios-bank-manager/wiki/Step01)
-- [2️⃣ Step02]()
+- [2️⃣ Step02](https://github.com/Groot-94/ios-bank-manager/wiki/Step02)
 - [3️⃣ Step03]()
 
 ## 개발자 소개
@@ -32,12 +32,10 @@
     
 ## UML  
 ### [ClassDiagram]
-![classDiagram](https://i.imgur.com/Htemnp3.jpg)
-
+![classDiagram](https://i.imgur.com/jpO2YBJ.jpg)
 
 ## 구현내용
 - 대기하고 있는 고객들의 번호가 담길 대기열(큐, Queue) 타입 구현
-    
     
 ## 키워드
 - Queue
@@ -54,7 +52,8 @@
 - [x] Linked-list 자료구조의 이해 및 구현
 - [x] Queue 자료구조의 이해 및 구현
 - [x] Generics 개념이해 및 적용
-
+- [x] Queue의 활용
+- [x] 타입 추상화 및 일반화
 ## 기능설명
 
 ### Node
@@ -75,6 +74,18 @@ CustomerQueue를 구현하기 위한 Linked-List 타입 구현.
 ```
 CustomerQueue의 에러 타입 구현.
 ``` 
+### Bank
+```
+은행 전반적인 업무를 담당하는 타입 구현.
+```
+### BankManager
+```
+은행 업무를 수행하는 타입 구현
+``` 
+### Customer
+```
+고객 타입 구현
+```    
 ## Debugging 
 ### STEP 1 
 #### Command Line Tool에서 Unit Test를 위해서 `@testable import` 을 사용할 때 모듈을 찾지 못하는 문제가 발생.
@@ -96,6 +107,3 @@ CustomerQueue의 에러 타입 구현.
 
 [참고 페이지](https://jwonylee.tistory.com/entry/XCode-Swift-Command-Line-Tool-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-%EC%9C%A0%EB%8B%9B-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EA%B8%B0)
 ### STEP 2 
-
-### STEP 3 
-
