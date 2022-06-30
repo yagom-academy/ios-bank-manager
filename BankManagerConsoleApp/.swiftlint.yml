@@ -1,0 +1,9 @@
+disabled_rules: # 실행에서 제외할 룰 식별자들
+  - trailing_whitespace
+opt_in_rules:
+
+included:
+  - BankManagerConsoleApp
+excluded:
+  - Pods
+
