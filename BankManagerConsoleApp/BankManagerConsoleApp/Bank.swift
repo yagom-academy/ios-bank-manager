@@ -38,20 +38,10 @@ struct Bank {
         printreportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
     }
     
-    func numberFormatter(number: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.minimumFractionDigits = 2
-        
-        let result = numberFormatter.string(for: number) ?? "0"
-        
-        return result
-    }
-    
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? "2"
-        var clerk = BankClerk()
+        var clerk = BankManager()
         
         switch requestInput {
         case "1":
