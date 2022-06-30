@@ -5,3 +5,11 @@
 // 
 
 import Foundation
+
+func initiateBankBusiness() {
+    var bank = Bank()
+    
+    bank.bankBusinessStart()
+}
+
+initiateBankBusiness()
