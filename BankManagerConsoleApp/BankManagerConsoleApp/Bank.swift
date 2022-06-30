@@ -8,9 +8,9 @@ struct Bank {
         while true {
             printStartMessage()
             switch readLine() {
-            case "1" :
+            case BankStatus.opening.menu :
                 executeWork(totalCustomerCount, workTime)
-            case "2" :
+            case BankStatus.closed.menu :
                 break menuLoop
             default :
                 print("잘못된 입력입니다.")
@@ -41,8 +41,8 @@ struct Bank {
     private func printStartMessage() {
         print(
         """
-        1 : 은행개점
-        2 : 종료
+        \(BankStatus.opening.menu) : 은행개점
+        \(BankStatus.closed.menu) : 종료
         입력 :
         """, terminator: " ")
     }
