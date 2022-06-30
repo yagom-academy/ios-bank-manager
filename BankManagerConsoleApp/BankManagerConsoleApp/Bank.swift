@@ -4,9 +4,14 @@ struct Bank {
     private var bankManager: BankManager
 
     func excuteWork() {
-        let count = createRandom()
-        for _ in 1...count {
-            bankManager.work()
+        let total = Int.random(in: 10...30)
+        for _ in 1...total {
+            do {
+                let customer = try customerQueue.dequeue()
+                bankManager.work(customer: customer, time: 0.7)
+            } catch {
+                break
+            }
         }
         printCloseMessage()
     }
