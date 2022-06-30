@@ -23,6 +23,7 @@
 		371283B52869983800871886 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371283342869772B00871886 /* Node.swift */; };
 		371283B62869983C00871886 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F3E932869882400614FB4 /* LinkedList.swift */; };
 		37618391286B1B5F0028A509 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37618390286B1B5F0028A509 /* QueueError.swift */; };
+		37DB31DE286D6AD000AD29E5 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB31DD286D6AD000AD29E5 /* Bank.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		371283AE2869982900871886 /* LinkedListTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		371283B02869982900871886 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
 		37618390286B1B5F0028A509 /* QueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
+		37DB31DD286D6AD000AD29E5 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				371283342869772B00871886 /* Node.swift */,
+				37DB31DD286D6AD000AD29E5 /* Bank.swift */,
 				058F3E932869882400614FB4 /* LinkedList.swift */,
 				37618390286B1B5F0028A509 /* QueueError.swift */,
 				0574148A2869A9800075BF7D /* CustomerQueue.swift */,
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371283352869772B00871886 /* Node.swift in Sources */,
+				37DB31DE286D6AD000AD29E5 /* Bank.swift in Sources */,
 				05FB96F2286D6A85001D5B7B /* Customer.swift in Sources */,
 				0574148B2869A9800075BF7D /* CustomerQueue.swift in Sources */,
 				0594129B286C3812005E10FD /* main.swift in Sources */,
