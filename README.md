@@ -9,7 +9,10 @@
 ### 팀원
 
 [보리사랑](https://github.com/yusw10) / [휴](https://github.com/Hugh-github)
-### UML: 
+### UML
+
+**Class Diagram**
+![](https://i.imgur.com/QByI1cF.png)
 
 ### 기능 설명
 - 양방향 연결 리스트를 이용해 은행에 도착한 고객의 임시 대기열 생성
