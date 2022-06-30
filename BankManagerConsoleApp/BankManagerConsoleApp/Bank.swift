@@ -14,8 +14,8 @@ struct Bank {
     }
     
     func printBankInterface() {
-        print("1 : 은행개점 \n2 : 종료")
-        print("입력 : ", terminator: "")
+        print(BankComent.greeting.rawValue)
+        print(BankComent.secondGreeting.rawValue, terminator: BankComent.emptyValue.rawValue)
     }
     
     func printreportWorkResult(handledCustomer: Int, handledWorkTime: String) {
@@ -40,16 +40,16 @@ struct Bank {
     
     mutating func selectBankOpenAndClose() {
         printBankInterface()
-        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? ""
+        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
         var clerk = BankManager()
         let rangeCustomerCount: ClosedRange<Int> = 10...30
         switch requestInput {
-        case "1":
+        case BankComent.bankOpen.rawValue:
             let customerCount = Int.random(in: rangeCustomerCount)
             clerk.handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
             reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
             bankBusinessStart()
-        case "2":
+        case BankComent.bankClose.rawValue:
             break
         default:
             bankBusinessStart()

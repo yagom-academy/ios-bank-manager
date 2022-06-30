@@ -12,9 +12,9 @@ struct BankManager {
         let processingTime = 700000
         
         while let completeCuntomer = customerList.deQueue() {
-            print("\(completeCuntomer.bankNumberTicket)번 고객 업무 시작")
+            print("\(completeCuntomer.bankNumberTicket)" + BankManagerComment.handleBankingStart.rawValue)
             usleep(useconds_t(processingTime))
-            print("\(completeCuntomer.bankNumberTicket)번 고객 업무 완료")
+            print("\(completeCuntomer.bankNumberTicket)" + BankManagerComment.handleBankingFinish.rawValue)
         }
     }
 }
