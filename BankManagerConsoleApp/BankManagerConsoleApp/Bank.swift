@@ -18,7 +18,7 @@ struct Bank {
         print(BankComent.secondGreeting.rawValue, terminator: BankComent.emptyValue.rawValue)
     }
     
-    func printreportWorkResult(handledCustomer: Int, handledWorkTime: String) {
+    func printReportWorkResult(handledCustomer: Int, handledWorkTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(handledCustomer)명 이며, 총 업무시간은 \(handledWorkTime)초 입니다.")
     }
     
@@ -35,7 +35,7 @@ struct Bank {
     func reportWorkResult(resultCustomer: Int, processTime: Double) {
         let calculateWorkTime = Double(resultCustomer) * processTime
         let totalWorkTime = numberFormatter(number: calculateWorkTime)
-        printreportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
+        printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
     }
     
     mutating func selectBankOpenAndClose() {
