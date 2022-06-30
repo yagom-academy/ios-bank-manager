@@ -2,7 +2,7 @@
 //  CustomerQueue.swift
 //  BankManagerConsoleApp
 //
-//  Created by 변재은 on 2022/06/28.
+//  Created by 재재, 나별 on 2022/06/28.
 //
 
 import Foundation

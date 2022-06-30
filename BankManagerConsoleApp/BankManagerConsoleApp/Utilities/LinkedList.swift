@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  BankManagerConsoleApp
 //
-//  Created by Gordon Choi on 2022/06/28.
+//  Created by 재재, 나별 on 2022/06/28.
 //
 
 struct LinkedList<T> {

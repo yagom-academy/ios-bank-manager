@@ -43,30 +43,25 @@ extension BankManager {
     }
     
     private func startWork() {
-        //처리한 client 수랑, 처리하며 걸린 시간
-        var finished = 0
-        var timeUsed = 0.0
+        var servedClients = 0
+        var timeSpent = 0.0
         
-        while clients.isNotEmpty {
-            guard let client = clients.dequeue() else {
-                return
-            }
-            
+        while let client = clients.dequeue() {
             firstClerk.provideService(client)
-            finished += 1
-            timeUsed += 0.7
+            servedClients += 1
+            timeSpent += 0.7
         }
                 
         defer {
-            finishedWork(finished: finished, timeUsed: timeUsed)
+            finishWork(customers: servedClients, time: timeSpent)
             openBank()
         }
         
         return
     }
     
-    private func finishedWork(finished: Int, timeUsed: Double) {
-        let formattedTime = String(format: "%.2f", timeUsed)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(finished)명이며, 총 업무시간은 \(formattedTime)초입니다.")
+    private func finishWork(customers: Int, time: Double) {
+        let formattedTime = String(format: "%.2f", time)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(formattedTime)초입니다.")
     }
 }
