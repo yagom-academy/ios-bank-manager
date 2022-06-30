@@ -56,4 +56,11 @@ class BankManagerQueueTest: XCTestCase {
         //then
         XCTAssertTrue(sut.isEmpty)
     }
+    func test_1_2_3을_넣어주고_peek을하면_1이나와야한다() {
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        sut.enqueue(data: 3)
+        let expected = 1
+        XCTAssertEqual(expected, sut.peek())
+    }
 }
