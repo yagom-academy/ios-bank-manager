@@ -38,26 +38,6 @@
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AFF806A42869A54400FCD395"
-               BuildableName = "NodeTests.xctest"
-               BlueprintName = "NodeTests"
-               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AF3D274B286A8F2300D50AAF"
-               BuildableName = "LinkedListTests.xctest"
-               BlueprintName = "LinkedListTests"
-               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

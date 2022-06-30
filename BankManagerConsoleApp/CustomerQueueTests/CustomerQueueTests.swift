@@ -8,7 +8,7 @@
 import XCTest
 
 class CustomerQueueTests: XCTestCase {
-    var sut: CustomerQueue<Int>!
+    var sut: CustomerQueue<Customer>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -40,30 +40,38 @@ class CustomerQueueTests: XCTestCase {
     
     func test_큐에값을3개넣어줄때_dequeue를하면_첫번째값이_제거되고반환되는지() {
         // given
-        let expectation1 = 3
-        let expectation2 = 2
-        sut = CustomerQueue(elements: [3, 5, 7])
+        let firstValue = Customer(number: 3)
+        let secondValue = Customer(number: 5)
+        let thirdValue = Customer(number: 7)
+        
+        sut = CustomerQueue(elements: [firstValue, secondValue, thirdValue])
+        let expectation = [secondValue, thirdValue]
         // when
         let firstItem = sut.dequeue()
-        let count = sut.count
+        let currentList = sut.currentList
+        
         // then
-        XCTAssertEqual(expectation1, firstItem)
-        XCTAssertEqual(expectation2, count)
+        XCTAssertEqual(firstValue, firstItem)
+        XCTAssertEqual(expectation, currentList)
+        
     }
 
     func test_큐에값을2개넣어줄때_peek을하면_첫번째값이반환되는지() {
         // given
-        let expectation = 3
-        sut = CustomerQueue(elements: [3, 7])
+        let firstValue = Customer(number: 3)
+        let secondValue = Customer(number: 7)
+        sut = CustomerQueue(elements: [firstValue, secondValue])
         // when
         let result = sut.peek
         // then
-        XCTAssertEqual(expectation, result)
+        XCTAssertEqual(firstValue, result)
     }
     
     func test_큐에값을2개넣어줄때_peek을여러번해도_똑같은값이_반환되는지() {
         // given
-        sut = CustomerQueue(elements: [3, 7])
+        let firstValue = Customer(number: 3)
+        let secondValue = Customer(number: 7)
+        sut = CustomerQueue(elements: [firstValue, secondValue])
         // when
         let result = sut.peek
         let result2 = sut.peek
@@ -73,7 +81,10 @@ class CustomerQueueTests: XCTestCase {
     
     func test_큐에값을3개넣어줄때_clear를하면_빈큐가되는지() {
         // given
-        sut = CustomerQueue(elements: [3, 7, 5])
+        let firstValue = Customer(number: 3)
+        let secondValue = Customer(number: 7)
+        let thirdValue = Customer(number: 5)
+        sut = CustomerQueue(elements: [firstValue,secondValue,thirdValue])
         sut.clear()
         // when
         let result = sut.isEmpty
