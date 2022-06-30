@@ -9,10 +9,10 @@ import Foundation
 
 func numberFormatter(number: Double) -> String {
     let numberFormatter = NumberFormatter()
-    numberFormatter.maximumFractionDigits = 2
-    numberFormatter.minimumFractionDigits = 2
+    numberFormatter.maximumFractionDigits = SetNumber.decimalRange.rawValue
+    numberFormatter.minimumFractionDigits = SetNumber.decimalRange.rawValue
     
-    let result = numberFormatter.string(for: number) ?? "0"
+    let result = numberFormatter.string(for: number) ?? "\(SetNumber.failNumberFormatter.rawValue)"
     
     return result
 }

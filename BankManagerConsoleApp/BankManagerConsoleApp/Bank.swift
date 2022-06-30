@@ -25,7 +25,7 @@ struct Bank {
     mutating func makeCustomerWaitingList(by totalCustomer: Int) -> BankItemQueue<Customer> {
         var watingQueue = BankItemQueue<Customer>()
         
-        for ticketNumber in 1...totalCustomer {
+        for ticketNumber in SetNumber.minimumCustomerCount.rawValue...totalCustomer {
             let customer = Customer(bankNumberTicket: ticketNumber)
             watingQueue.enQueue(customer)
         }
@@ -40,14 +40,14 @@ struct Bank {
     
     mutating func selectBankOpenAndClose() {
         printBankInterface()
-        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? "2"
+        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? ""
         var clerk = BankManager()
-        
+        let rangeCustomerCount: ClosedRange<Int> = 10...30
         switch requestInput {
         case "1":
-            let customerCount = Int.random(in: 10...30)
+            let customerCount = Int.random(in: rangeCustomerCount)
             clerk.handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
-            reportWorkResult(resultCustomer: customerCount, processTime: 0.7)
+            reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
             bankBusinessStart()
         case "2":
             break
