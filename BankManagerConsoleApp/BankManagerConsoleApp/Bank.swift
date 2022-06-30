@@ -1,22 +1,21 @@
+import Foundation
+
 struct Bank {
     private var customerQueue = CustomerQueue<Customer>(linkedList: LinkedList<Customer>())
-    private var bankManager = BankManager()
 
-    func excuteWork() {
+    func excuteWork(totalCustomerCount: Int, workTime: TimeInterval) {
         var time: Double = 0
-        let total = Int.random(in: 10...30)
-        print(total)
-        appendCustomerQueue(numbers: total)
-        for _ in 1...total {
+        appendCustomerQueue(numbers: totalCustomerCount)
+        for _ in 1...totalCustomerCount {
             do {
                 let customer = try customerQueue.dequeue()
-                bankManager.work(customer: customer, time: 0.7)
-                time += 0.7
+                BankManager.work(customer: customer, time: workTime)
+                time += workTime
             } catch {
                 break
             }
         }
-        printCloseMessage(number: total, time: time)
+        printCloseMessage(number: totalCustomerCount, time: time)
     }
 
     private func appendCustomerQueue(numbers: Int) {

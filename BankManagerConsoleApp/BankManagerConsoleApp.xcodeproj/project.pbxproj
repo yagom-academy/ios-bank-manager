@@ -120,9 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				37DB31DD286D6AD000AD29E5 /* Bank.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				371283342869772B00871886 /* Node.swift */,
-				37DB31DD286D6AD000AD29E5 /* Bank.swift */,
 				058F3E932869882400614FB4 /* LinkedList.swift */,
 				37618390286B1B5F0028A509 /* QueueError.swift */,
 				0574148A2869A9800075BF7D /* CustomerQueue.swift */,
