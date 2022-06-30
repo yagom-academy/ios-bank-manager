@@ -8,10 +8,6 @@
 import Foundation
 
 struct Bank {
-    var clerk: BankClerk
-    var watingQueue: BankItemQueue<Customer>
-    var customerCount: Int
-    var businessHour: Double
     
     mutating func bankStart() {
         selectBankOpenAndClose()
@@ -22,13 +18,25 @@ struct Bank {
         print("입력 : ", terminator: "")
     }
     
+    mutating func makeCustomerWaitingList() -> BankItemQueue<Customer> {
+        let customerCount = 1...Int.random(in: 10...30)
+        var watingQueue = BankItemQueue<Customer>()
+        
+        for ticketNumber in customerCount {
+            let customer = Customer(bankNumberTicket: ticketNumber)
+            watingQueue.enQueue(customer)
+        }
+        return watingQueue
+    }
+    
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? "2"
+        var clerk = BankClerk()
         
         switch requestInput {
         case "1":
-            clerk.handleBanking()
+            clerk.handleBanking(customerList: makeCustomerWaitingList())
             bankStart()
         case "2":
             break

@@ -8,13 +8,13 @@
 import Foundation
 
 struct BankClerk {
-    var customerList: BankItemQueue<Customer>
-    
-    mutating func handleBanking() {
+    mutating func handleBanking(customerList: BankItemQueue<Customer>) {
+        var customerList = customerList
+        
         while let completeCuntomer = customerList.deQueue() {
-            print("\(completeCuntomer)번 고객 업무 시작")
+            print("\(completeCuntomer.bankNumberTicket)번 고객 업무 시작")
             usleep(700000)
-            print("\(completeCuntomer)번 고객 업무 완료")
+            print("\(completeCuntomer.bankNumberTicket)번 고객 업무 완료")
         }
     }
 }
