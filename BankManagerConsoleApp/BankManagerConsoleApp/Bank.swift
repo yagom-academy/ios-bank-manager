@@ -18,6 +18,9 @@ struct Bank {
         print("입력 : ", terminator: "")
     }
     
+    func printreportWorkResult(handledCustomer: Int, handledWorkTime: String) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(handledCustomer)명 이며, 총 업무시간은 \(handledWorkTime)초 입니다.")
+    }
     
     mutating func makeCustomerWaitingList(by totalCustomer: Int) -> BankItemQueue<Customer> {
         var watingQueue = BankItemQueue<Customer>()
@@ -27,6 +30,22 @@ struct Bank {
             watingQueue.enQueue(customer)
         }
         return watingQueue
+    }
+    
+    func reportWorkResult(resultCustomer: Int, processTime: Double) {
+        let calculateWorkTime = Double(resultCustomer) * processTime
+        let totalWorkTime = numberFormatter(number: calculateWorkTime)
+        printreportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
+    }
+    
+    func numberFormatter(number: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.minimumFractionDigits = 2
+        
+        let result = numberFormatter.string(for: number) ?? "0"
+        
+        return result
     }
     
     mutating func selectBankOpenAndClose() {
