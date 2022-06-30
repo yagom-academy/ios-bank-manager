@@ -20,6 +20,10 @@ extension CustomerQueue: Queue {
         return list.isEmpty
     }
     
+    var isNotEmpty: Bool {
+        return list.isNotEmpty
+    }
+    
     var peek: T? {
         return list.peek
     }
