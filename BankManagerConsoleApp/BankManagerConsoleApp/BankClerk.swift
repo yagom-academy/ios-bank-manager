@@ -10,7 +10,7 @@ import Foundation
 struct BankClerk {
     var customerList: BankItemQueue<Customer>
     
-    mutating func handleBanking(customer: Customer) {
+    mutating func handleBanking() {
         while let completeCuntomer = customerList.deQueue() {
             print("\(completeCuntomer)번 고객 업무 시작")
             usleep(700000)
