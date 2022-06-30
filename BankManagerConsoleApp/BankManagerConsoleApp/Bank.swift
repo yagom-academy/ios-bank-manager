@@ -21,5 +21,19 @@ struct Bank {
         print("1 : 은행개점 \n2 : 종료")
         print("입력 : ", terminator: "")
     }
+    
+    mutating func selectBankOpenAndClose() {
+        printBankInterface()
+        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? "2"
+        
+        switch requestInput {
+        case "1":
+            clerk.handleBanking()
+            bankStart()
+        case "2":
+            break
+        default:
+            bankStart()
+        }
     }
 }
