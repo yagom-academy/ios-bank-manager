@@ -7,9 +7,9 @@ struct Bank {
     menuLoop:
         while true {
             printStartMessage()
-
             switch readLine() {
-            case "1" : executeWork(totalCustomerCount, workTime)
+            case "1" :
+                executeWork(totalCustomerCount, workTime)
             case "2" :
                 break menuLoop
             default :
@@ -19,24 +19,18 @@ struct Bank {
     }
 
     private func executeWork(_ totalCustomerCount: Int, _ workTime: TimeInterval) {
-        var time: Double = 0
-        appendCustomerQueue(numbers: totalCustomerCount)
-        for _ in 1...totalCustomerCount {
+        var time = 0.0
+        (0..<totalCustomerCount).forEach { number in
             do {
+                customerQueue.enqueue(data: Customer(name: "\(number + 1)번"))
                 let customer = try customerQueue.dequeue()
                 BankManager.work(customer: customer, time: workTime)
                 time += workTime
             } catch {
-                break
+                return
             }
         }
         printCloseMessage(number: totalCustomerCount, time: time)
-    }
-
-    private func appendCustomerQueue(numbers: Int) {
-        for number in 1...numbers {
-            customerQueue.enqueue(data: Customer(name: "\(number)번"))
-        }
     }
 
     private func printCloseMessage(number: Int, time: Double) {

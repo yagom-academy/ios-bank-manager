@@ -7,4 +7,4 @@
 import Foundation
 
 let bank = Bank()
-bank.execute(totalCustomerCount: 10, workTime: 0.1)
+bank.execute(totalCustomerCount: Int.random(in: 10...30), workTime: 0.7)
