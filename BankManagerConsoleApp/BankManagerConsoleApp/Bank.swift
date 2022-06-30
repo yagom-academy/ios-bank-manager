@@ -15,5 +15,7 @@ struct Bank {
     
     func printBankInterface() {
         print("1 : 은행개점 \n2 : 종료")
+        print("입력 : ", terminator: "")
+    }
     }
 }
