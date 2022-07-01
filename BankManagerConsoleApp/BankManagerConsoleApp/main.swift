@@ -4,14 +4,16 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let randomCustomers = BankCustomer.generateRandomCustomer()
-var bank = Bank(customerQueue: randomCustomers)
+
 
 func startApp() {
     print(NameSpace.consoleAppStartOutput, terminator: "")
     guard let input = readLine()?.trimmingCharacters(in: .whitespaces) else { return }
     
     if input == "1" {
+        let randomCustomers = BankCustomer.generateRandomCustomer()
+        var bank = Bank(customerQueue: randomCustomers)
+        
         bank.openAgency()
         bank.closeAgency()
         startApp()

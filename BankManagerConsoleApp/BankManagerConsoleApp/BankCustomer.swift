@@ -13,7 +13,7 @@ struct BankCustomer: Customer {
         
         var randomCustomerQueue = Queue<BankCustomer>()
         
-        for index in 0..<randomNumber {
+        for index in 1...randomNumber {
             randomCustomerQueue.enqueue(data: BankCustomer(id: index))
         }
         
