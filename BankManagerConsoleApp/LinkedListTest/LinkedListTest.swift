@@ -8,14 +8,15 @@
 import XCTest
 
 class LinkedListTest: XCTestCase {
-
     var sut: LinkedList<Int>?
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = LinkedList<Int>()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
 
