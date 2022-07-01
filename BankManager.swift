@@ -4,7 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-class BankManager {
+final class BankManager {
     private var waitingNumber: Int = 0
     private var customerQueue: Queue<Customer>
     

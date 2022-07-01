@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class Bank {
+final class Bank {
     private let numberOfClerk: Int = 1
     private let manager = BankManager()
     let bankClerk = DispatchQueue(label: "first")
@@ -16,12 +16,12 @@ class Bank {
             print("1 : 은행개점")
             print("2 : 종료")
             print("입력 : ", terminator: "")
-            let commandLineInput = readLine()
+            guard let commandLineInput = readLine() else { return }
             switch commandLineInput {
-            case "1":
+            case BankNameSpace.open:
                 manager.appendCustomerToQueue(from: createCustomer())
                 processTask()
-            case "2":
+            case BankNameSpace.close:
                 return
             default:
                 continue
