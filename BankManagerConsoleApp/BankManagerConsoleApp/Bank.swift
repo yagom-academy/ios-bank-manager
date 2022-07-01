@@ -12,13 +12,31 @@ class Bank {
     
     let bankClerk = DispatchQueue(label: "first")
     
-    private func processTask(task: (Int, String)) {
+    private func processTask() {
         let bankTask = DispatchWorkItem {
             while self.manager.isNotEmptyQueue {
-                print("\(self.manager.transferTask().count)번 고객 \(self.manager.transferTask().task) 시작")
+                let cusomter = self.manager.transferTask()
+                print("\(cusomter.count)번 고객 \(cusomter.task) 시작")
             }
         }
-        
         bankClerk.sync(execute: bankTask)
+    }
+    
+    func doBusiness() {
+        while true {
+            print("1 : 은행개점")
+            print("2 : 종료")
+            print("입력 : ", terminator: "")
+            let commandLineInput = readLine()
+            switch commandLineInput {
+            case "1":
+                manager.appendCustomerToQueue(from: [Customer(task: "업무1"), Customer(task: "업무2")])
+                processTask()
+            case "2":
+                break
+            default:
+                continue
+            }
+        }
     }
 }

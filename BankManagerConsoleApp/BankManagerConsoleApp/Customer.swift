@@ -7,4 +7,3 @@
 struct Customer {
     let task: String
 }
-
