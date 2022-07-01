@@ -5,8 +5,6 @@
 //  Created by 예톤, 웡빙 on 2022/06/27.
 //
 
-import Foundation
-
 final class LinkedList<T> {
     private var head: Node<T>?
     var isEmpty: Bool {
