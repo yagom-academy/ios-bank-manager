@@ -6,5 +6,5 @@
 
 import Foundation
 
-let bank = Bank()
-bank.execute(totalCustomerCount: Int.random(in: 10...30), workTime: 0.7)
+let consol = ConsolManager()
+consol.execute(time: 0.7)
