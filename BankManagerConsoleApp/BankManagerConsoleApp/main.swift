@@ -4,8 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-
-
 func startApp() {
     print(NameSpace.consoleAppStartOutput, terminator: "")
     guard let input = readLine()?.trimmingCharacters(in: .whitespaces) else { return }
