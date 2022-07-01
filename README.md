@@ -20,21 +20,21 @@
 - [1️⃣ STEP 1](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step01/Docs/Step01.md)
 - [2️⃣ STEP 2](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step02/Docs/Step02.md)
 
-## 개발자 소개
+## 개발자 소개🧑🏻‍💻🧑🏻‍💻
 
 |브래드|수꿍|
 |:---:|:---:|
 |<image src = "https://user-images.githubusercontent.com/45350356/174251611-46adf61c-93fa-42a0-815b-2c998af1c258.png" width="250" height="250">| <image src = "https://i.imgur.com/6HkYdmp.png" width="250" height="250">
 |[브래드](https://github.com/bradheo65)|[수꿍](https://github.com/Jeon-Minsu)|
 
-## UML
+## UML📈
 
 ### [ClassDiagram]
 
 ![image](https://user-images.githubusercontent.com/45350356/176827443-6bf8cc88-075a-4a97-9ca8-62f148e2665e.png)
 
 
-## 키워드
+## 키워드💡
 
 - `UML`
 - `Dependency Manager`, `SwitLint`, `CoCoaPods`, `gitignore`
@@ -48,7 +48,7 @@
 - `In-Out parameters`
 - `Thread`, `sleep(forTimeInterval:)`
 
-## 핵심경험
+## 핵심경험🤔
     
 - [x] Linked-list 자료구조의 이해 및 구현
 - [x] Queue 자료구조의 이해 및 구현
@@ -56,7 +56,7 @@
 - [x] Queue의 활용
 - [x] 타입 추상화 및 일반화
     
-## 참고문서
+## 참고문서📚
 
 - [Swift Language Guide - Closures](https://docs.swift.org/swift-book/LanguageGuide/Closures.html)
 - [Swift Language Guide - Inheritance](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html)
@@ -67,7 +67,7 @@
 - [Swift Language Guide - Concurrency(선택사항)](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
 - [오토레이아웃 정복하기 - Dynamic Stack View까지 (선택사항)](https://yagom.net/courses/autolayout/)
     
-## 기능설명
+## 기능설명📝
     
 ### **Customer Queue** 구현을 위한 여러 타입 구현
     - Node
@@ -82,7 +82,7 @@
     - Client
     - Option
 
-## TroubleShooting
+## TroubleShooting🚀
     
 ### STEP 1
 
