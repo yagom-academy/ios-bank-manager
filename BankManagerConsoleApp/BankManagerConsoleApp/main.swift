@@ -5,3 +5,5 @@
 // 
 
 import Foundation
+
+DispatchQueue.global().sync(execute: openBank)
