@@ -13,7 +13,7 @@ final class Queue<T> {
         self.tail = tail
     }
     
-    private func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         if head == nil {
             return true
         }
