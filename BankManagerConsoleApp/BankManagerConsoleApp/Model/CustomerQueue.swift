@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CustomerQueue<Customer>: Queue {
+struct CustomerQueue: Queue {
     
     private(set) var queue: LinkedList<Customer>
     init(elements: [Customer] = []) {
