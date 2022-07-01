@@ -9,7 +9,7 @@ enum NameSpace {
     static let consoleAppStartOutput = """
                 1 : 은행개점
                 2 : 종료
-                입력 :
+                입력 : 
                 """
     static let randomCustomerNumberRange = 10...30
 }
