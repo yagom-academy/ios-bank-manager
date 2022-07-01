@@ -9,28 +9,7 @@ import Foundation
 class Bank {
     private let numberOfClerk: Int = 1
     private let manager = BankManager()
-    
     let bankClerk = DispatchQueue(label: "first")
-    
-    private func processTask() {
-        let date = Date()
-        var totalCustomer = 0
-        let bankTask = DispatchWorkItem {
-            while self.manager.isNotEmptyQueue {
-                let cusomter = self.manager.transferTask()
-                print("\(cusomter.count)번 고객 \(cusomter.task) 시작")
-                usleep(700000)
-                print("\(cusomter.count)번 고객 \(cusomter.task) 종료")
-                totalCustomer += 1
-            }
-        }
-        bankClerk.sync(execute: bankTask)
-        
-        let totalTime = String(format: "%.2f", -date.timeIntervalSinceNow)
-        print("업무가 마감되었습니다.", terminator: "")
-        print("오늘 업무를 처리한 인원은 \(totalCustomer)명이며,", terminator: " ")
-        print("총 업무 시간은 \(totalTime)초입니다.")
-    }
     
     func doBusiness() {
         while true {
@@ -47,6 +26,34 @@ class Bank {
             default:
                 continue
             }
+        }
+    }
+    
+    private func processTask() {
+        let date = Date()
+        var totalCustomer = 0
+        let bankTask = DispatchWorkItem {
+            while self.manager.isNotEmptyQueue {
+                self.workBankTeller()
+                totalCustomer += 1
+            }
+        }
+        bankClerk.sync(execute: bankTask)
+        
+        let totalTime = String(format: "%.2f", -date.timeIntervalSinceNow)
+        print("업무가 마감되었습니다.", terminator: "")
+        print("오늘 업무를 처리한 인원은 \(totalCustomer)명이며,", terminator: " ")
+        print("총 업무 시간은 \(totalTime)초입니다.")
+    }
+    
+    private func workBankTeller() {
+        do {
+            let customer = try self.manager.transferTask()
+            print("\(customer.count)번 고객 \(customer.task) 시작")
+            usleep(700000)
+            print("\(customer.count)번 고객 \(customer.task) 종료")
+        } catch {
+            debugPrint(error.localizedDescription)
         }
     }
 }

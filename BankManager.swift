@@ -27,9 +27,9 @@ class BankManager {
         }
     }
     
-    func transferTask() -> (count: Int, task: String) {
+    func transferTask() throws -> (count: Int, task: String) {
         guard let task = customerQueue.dequeue()?.task else {
-            return (0, "Erro")
+            throw BankError.emptyError
         }
         waitingNumber += 1
         return (waitingNumber, task)
