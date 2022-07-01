@@ -3,10 +3,13 @@ import Foundation
 struct Bank {
     private var customerQueue = CustomerQueue<Customer>(linkedList: LinkedList<Customer>())
 
+    init() {
+        enqueueCustomer()
+    }
+
     func executeWork(workTime: TimeInterval) -> Int {
         var totalCustomer = 0
-        enqueueCustomer()
-        (0..<customerQueue.count).forEach { number in
+        (0..<customerQueue.count).forEach { _ in
             do {
                 let customer = try customerQueue.dequeue()
                 BankManager.work(customer: customer, time: workTime)
@@ -16,10 +19,9 @@ struct Bank {
                 return
             }
         }
-        
         return totalCustomer
     }
-    
+
     private func enqueueCustomer() {
         (0..<Int.random(in: 10...30)).forEach { number in
             customerQueue.enqueue(data: Customer(name: "\(number + 1)번"))

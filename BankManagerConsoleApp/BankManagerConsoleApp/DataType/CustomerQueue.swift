@@ -4,7 +4,7 @@ final class CustomerQueue<T> {
     init(linkedList: LinkedList<T>) {
         self.linkedList = linkedList
     }
-    
+
     var count: Int {
         linkedList.count
     }
