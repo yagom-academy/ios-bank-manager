@@ -8,7 +8,6 @@
 protocol Worker {
     var totalWorkTime: Double { get set }
 
-    mutating func doWork()
-    mutating func startWork()
-    mutating func finishWork()
+    mutating func startWork(of customer: BankCustomer)
+    mutating func finishWork(of customer: BankCustomer)
 }

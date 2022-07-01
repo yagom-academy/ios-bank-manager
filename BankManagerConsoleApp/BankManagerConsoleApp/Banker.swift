@@ -7,21 +7,14 @@
 
 import Foundation
 
-struct Banker { // : Worker {
+struct Banker: Worker {
     var totalWorkTime: Double
     private var enqueueCount: Int
-    
 
-    
     init() {
         self.totalWorkTime = 0.0
         self.enqueueCount = 1
     }
-    
-//    mutating func doWork() {
-//        startWork()
-//        finishWork()
-//    }
     
     mutating func startWork(of customer: BankCustomer) {
         printStartWork(of: customer)
