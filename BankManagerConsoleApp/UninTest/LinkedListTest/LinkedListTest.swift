@@ -34,41 +34,27 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, nil)
     }
 
-    func test_linkedList_remove가_잘되는지() {
+    func test_linkedList_removeAt이_값이_하나일때_값을_삭제하고_반환하는지() {
         // given
         sut.append(data: 1)
-        sut.append(data: 2)
         // when
-        let result = sut.remove()
+        let result = sut.removeAt(index: 0)
         // then
         XCTAssertEqual(result, 1)
     }
 
-    func test_linkedList_remove가_잘되는지2() {
+    func test_linkedList_removeAt이_첫번째값을_삭제하고_반환하는지() {
         // given
         sut.append(data: 1)
         sut.append(data: 2)
         sut.append(data: 3)
         // when
-        _ = sut.remove()
-        _ = sut.remove()
-        let result = sut.remove()
+        let result = sut.removeAt(index: 0)
         // then
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, 1)
     }
 
-    func test_linkedList_removeAt이_잘되는지() {
-        // given
-        sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
-        // when
-        let result = sut.removeAt(index: 1)
-        // then
-        XCTAssertEqual(result, 2)
-    }
-
-    func test_linkedList_removeAt이_잘되는지2() {
+    func test_linkedList_removeAt이_중간값을_삭제하고_반환하는지() {
         // given
         sut.append(data: 1)
         sut.append(data: 2)
@@ -80,16 +66,16 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 3)
     }
 
-    func test_linkedList_매개변수와_index가_같을_경우_removeAt이_잘되는지() {
+    func test_linkedList_매개변수index와_count가_같을_경우_removeAt이_nil을반환하는지() {
         // given
         sut.append(data: 1)
         // when
-        let result = sut.removeAt(index: 0)
+        let result = sut.removeAt(index: 1)
         // then
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(result, nil)
     }
 
-    func test_linkedList_비어있을경우_removeAt이_잘되는지() {
+    func test_linkedList_비어있을경우_removeAt이_nil을반환하는지() {
         // when
         let result = sut.removeAt(index: 0)
         // then
@@ -116,10 +102,6 @@ class LinkedListTest: XCTestCase {
     func test_linkedList_insert가_처음에_잘_추가_되는지() {
         // given
         sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
-        sut.append(data: 4)
-        sut.append(data: 5)
         sut.insert(data: 9, index: 0)
         // when
         let result = sut.peek
@@ -136,8 +118,8 @@ class LinkedListTest: XCTestCase {
         sut.append(data: 5)
         sut.insert(data: 9, index: 2)
         // when
-        _ = sut.remove()
-        _ = sut.remove()
+        _ = sut.removeAt()
+        _ = sut.removeAt()
         let result = sut.peek
         // then
         XCTAssertEqual(result, 9)
@@ -152,10 +134,10 @@ class LinkedListTest: XCTestCase {
         sut.append(data: 5)
         sut.insert(data: 9, index: 4)
         // when
-        _ = sut.remove()
-        _ = sut.remove()
-        _ = sut.remove()
-        _ = sut.remove()
+        _ = sut.removeAt()
+        _ = sut.removeAt()
+        _ = sut.removeAt()
+        _ = sut.removeAt()
         let result = sut.peek
         // then
         XCTAssertEqual(result, 9)
@@ -168,17 +150,5 @@ class LinkedListTest: XCTestCase {
         let result = sut.peek
         // then
         XCTAssertEqual(result, 1)
-    }
-
-    func test_linkedList_serchNode가_잘되는지() {
-        // given
-        sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
-
-        // when
-        let result = sut.searchNode(index: 1)
-        // then
-        XCTAssertEqual(result?.data, 2)
     }
 }

@@ -1,10 +1,22 @@
 final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    private(set) var index = 0
+
+    private(set) var count = 0 {
+        didSet {
+            if count == 0 {
+                head = nil
+                tail = nil
+            }
+        }
+    }
 
     var isEmpty: Bool {
         head == nil
+    }
+
+    var isNotEmpty: Bool {
+        head != nil
     }
 
     var peek: T? {
@@ -20,7 +32,7 @@ final class LinkedList<T> {
         if head == nil {
             head = Node(data: data)
             tail = head
-            index += 1
+            count += 1
             return
         }
 
@@ -28,37 +40,37 @@ final class LinkedList<T> {
         tail?.next = node
         node.previous = tail
         tail = node
-        index += 1
+        count += 1
     }
 
-    func remove() -> T? {
-        let current = head?.next
-        let data = head?.data
-        head = current
-        index -= 1
-        return data
-    }
+    func removeAt(index: Int = 0) -> T? {
+        guard isNotEmpty, index >= 0 else { return nil }
 
-    func removeAt(index: Int) -> T? {
-        guard !isEmpty else { return nil }
-        guard index >= self.index else {
+        if index == 0 {
+            let current = head?.next
+            let data = head?.data
+            head = current
+            count -= 1
+            return data
+        } else if index < count - 1 {
             let indexNode = searchNode(index: index)
             indexNode?.previous?.next = indexNode?.next
             indexNode?.next?.previous = indexNode?.previous
+            count -= 1
             return indexNode?.data
+        } else if index == count - 1 {
+           let data = tail?.data
+           tail?.previous?.next = nil
+           tail = tail?.previous
+           count -= 1
+           return data
         }
-        guard index != self.index else {
-            let data = tail?.data
-            tail?.previous?.next = nil
-            tail = tail?.previous
-            return data
-        }
+
         return nil
     }
 
     func removeAll() {
-        head = nil
-        tail = nil
+        count = 0
     }
 
     func insert(data: T, index: Int) {
@@ -66,14 +78,9 @@ final class LinkedList<T> {
         var indexNode: Node<T>?
         let newNode = Node<T>(data: data)
 
-        if index > self.index || isEmpty {
+        if index >= count || isEmpty {
             append(data: data)
             return
-        } else if index == self.index {
-            previousNode = tail?.previous
-            indexNode = Node<T>(data: data)
-            previousNode?.next = indexNode
-            indexNode?.next = tail
         } else if index == 0 {
             head?.previous = newNode
             newNode.next = head
@@ -87,10 +94,10 @@ final class LinkedList<T> {
             indexNode?.previous = newNode
         }
 
-        self.index += 1
+       count += 1
     }
 
-    func searchNode(index: Int) -> Node<T>? {
+    private func searchNode(index: Int) -> Node<T>? {
         var indexNode = head
 
         for _ in 0..<index {

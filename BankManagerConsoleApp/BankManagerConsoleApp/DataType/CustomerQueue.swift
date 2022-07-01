@@ -5,6 +5,10 @@ final class CustomerQueue<T> {
         self.linkedList = linkedList
     }
 
+    var count: Int {
+        linkedList.count
+    }
+
     var isEmpty: Bool {
         linkedList.isEmpty
     }
@@ -21,7 +25,7 @@ final class CustomerQueue<T> {
     }
 
     func dequeue() throws -> T {
-        guard let data = linkedList.remove() else {
+        guard let data = linkedList.removeAt() else {
             throw QueueError.notExistingData
         }
         return data

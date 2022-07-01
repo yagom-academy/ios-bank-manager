@@ -5,7 +5,7 @@ class CustomerQueueTest: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CustomerQueue()
+        sut = CustomerQueue(linkedList: LinkedList<Int>())
     }
 
     override func tearDownWithError() throws {
@@ -17,7 +17,7 @@ class CustomerQueueTest: XCTestCase {
         // given
         sut.enqueue(data: 1)
         // when
-        let result = sut.peek
+        let result = try? sut.peek()
         // then
         XCTAssertEqual(result, 1)
     }
@@ -27,15 +27,15 @@ class CustomerQueueTest: XCTestCase {
         sut.enqueue(data: 1)
         sut.enqueue(data: 2)
         // when
-        _ = sut.dequeue()
-        let result = sut.dequeue()
+        _ = try? sut.dequeue()
+        let result = try? sut.dequeue()
         // then
         XCTAssertEqual(result, 2)
     }
 
     func test_dequeue가_잘되는지1() {
         // when
-        let result = sut.dequeue()
+        let result = try? sut.dequeue()
         // then
         XCTAssertEqual(result, nil)
     }
