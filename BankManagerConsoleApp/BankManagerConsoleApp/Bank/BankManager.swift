@@ -5,3 +5,6 @@
 //
 
 import Foundation
+
+var numberOfCustomers: Int = 0
+var lineOfCustomers = BankManagerQueue<Customer>()

@@ -49,7 +49,7 @@
 		C147BA5F8CE50D2F9BC13CCB /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +85,26 @@
 				4DF459F0286E8C70004F4D5A /* Time.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		6ADD30F3286E8E90003DA2E9 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				4D8492292869876C0098217F /* Node.swift */,
+				4D849227286987520098217F /* LinkedList.swift */,
+				4D849225286986F80098217F /* BankManagerQueue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		6ADD30F4286E8EAF003DA2E9 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				4DF459E9286E8BF0004F4D5A /* Banker.swift */,
+				4DF459EB286E8BFD004F4D5A /* Customer.swift */,
+			);
+			path = Bank;
 			sourceTree = "<group>";
 		};
 		6AFFCE8C28699199004CBFD6 /* BankManagerQueueTest */ = {
@@ -128,14 +148,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				6ADD30F4286E8EAF003DA2E9 /* Bank */,
 				4DF459EF286E8C55004F4D5A /* Enum */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				6ADD30F3286E8E90003DA2E9 /* Queue */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				4D849225286986F80098217F /* BankManagerQueue.swift */,
-				4D849227286987520098217F /* LinkedList.swift */,
-				4D8492292869876C0098217F /* Node.swift */,
-				4DF459E9286E8BF0004F4D5A /* Banker.swift */,
-				4DF459EB286E8BFD004F4D5A /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
