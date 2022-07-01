@@ -8,11 +8,11 @@ class BankManager {
     private var waitingNumber: Int = 0
     private var customerQueue: Queue<Customer>
     
-    var isEmptyQueue: Bool {
+    var isNotEmptyQueue: Bool {
         if customerQueue.isEmpty() {
-            return true
-        } else {
             return false
+        } else {
+            return true
         }
     }
     
@@ -26,11 +26,12 @@ class BankManager {
         }
     }
     
-    func transferTask() -> String {
+    func transferTask() -> (count: Int, task: String) {
         guard let task = customerQueue.dequeue()?.task else {
-            return "ERROR: FAILURE"
+            return (0, "Erro")
         }
-        return task
+        waitingNumber += 1
+        return (waitingNumber, task)
     }
 }
 
