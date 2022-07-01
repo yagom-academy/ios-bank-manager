@@ -16,6 +16,10 @@
 - 웡빙 [@wongbingg](https://github.com/wongbingg)
 - iOS Career Starter 6th Camper
 
+### UML
+
+<img width="762" alt="스크린샷 2022-07-01 오후 3 36 55" src="https://user-images.githubusercontent.com/98514397/176838333-5b21092e-575a-4f45-b695-af374616a94a.png">
+
 ### Timeline
 
 ### 1주차
@@ -24,14 +28,24 @@
 `그라운드 룰 작성`, `연결리스트 구현`, `연결리스트에 대한 이해`, `CommandLineTool에서 UnitTest작성`, 
     
 - 화 
- `Unit테스트코드 추가`  `PR메세지 작성` `README 업데이트`
+ `Unit테스트코드 추가`  `step1 PR제출 ` `README 업데이트`
 
+- 수
+ `step2 이해를 위한 UML작성`, `step2 UML기반으로 코드 작성`
+- 목
+ `코멘트 토대로 step1 리팩토링`, `queue`에 `initializer` 메서드 추가
+- 금
+ `UML 수정`, `step2 PR 제출`
 
-
-
-### **이번 프로젝트를 수행함에 있어 꼭 읽고 참고해야 하는 문서**
+### **참고한 문서**
 - [command line tool에서 unit test하기](https://jwonylee.tistory.com/entry/XCode-Swift-Command-Line-Tool-프로젝트에서-유닛-테스트-하기)
 - [generics](https://docs.swift.org/swift-book/LanguageGuide/Generics.html)
+- [final](https://velog.io/@ryan-son/Swift-final-키워드-왜-사용하는걸까)
+- [linkedList](https://atelier-chez-moi.tistory.com/90)
+- [associatedType](https://hyunsikwon.github.io/swift/Swift-AssociatedType)
+- [Protocol Oriented Programming](https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift)
+- [Thread.sleep](https://developer.apple.com/documentation/foundation/thread/1413673-sleep)
+- [구조체 내부에 참조가 있을 경우](https://developer.apple.com/videos/play/wwdc2016/416/?time=893)
 
 ### 시간
 
@@ -123,3 +137,97 @@
 
 - CustomerQueue를 구조체로 만들어 주었는데, 안에 쓰이는 Node 인스턴스는 클래스(참조타입) 입니다. 이렇게 만들어줄 경우 CustomerQueue도 결국 참조타입이 되는 것인지 궁금합니다.
 
+## Step 2
+
+### 작업내용
+- **[타입 구현]**
+    - **Bank** : 은행의 전반적인 기능을 작성 해주었습니다 
+    - **BankManager** : 은행원의 수행역할을 작성 해주었습니다
+    - **Customer**: 고객의 번호를 저장할 수 있는 타입을 작성 하였습니다
+- **[랜덤한 고객의 수]**
+    - 10~30사이 숫자의 고객이 방문한다고 가정했습니다
+    - `Int.random(in range: ClosedRange<Int>)`를 이용하여 무작위 수를 생성 해주었습니다. 
+- **[하나의 작업 당 0.7초씩 부여]**
+    - BankManager가 고객을 응대하는 시간을 명당 0.7초로 정의 해주었습니다.
+    - 작업의 시작과 끝 사이에 시간을 멈춰주었습니다.
+    - `Thread.sleep(forTimeInterval: TimeInterval)`을 이용했습니다.
+- **[전체 작업을 실행하는 메서드 구현]**
+    - Bank의 각 작업을 시작하는 `start()` 메인 메서드를 구현했습니다
+    
+### 스텝 핵심 경험
+- [x] Protocol Oriented Programming으로 `CustomerQueue`를 구현
+- [x] Queue의 활용
+- [x] 타입 추상화 및 일반화
+- [x] 유닛 테스트의 번들 Target과 Scheme 
+
+### 고민한 점들
+
+### 1. private(set)
+- 클래스 Queue에서 내부 프로퍼티를 private(set)으로 설정해주었습니다.
+- 저희는 private(set)은 외부에서는 읽기만 가능하고 쓰기는 안되기 때문에 내부 프로퍼티를 외부에서 초기화해주는 것 또한 불가능할 것이라고 생각했습니다. 
+- 하지만 초기화는 프로퍼티의 처음 상태를 설정해주는 것이기 때문에 private(set)으로 설정된 프로퍼티에 초기값을 할당하는 것은 가능하고, 할당된 프로퍼티에 접근해서 새로 할당을 하는 것은 불가능하다는 것을 알게되었습니다.
+
+[코드]
+```swift
+struct CustomerQueue<T> {
+    private(set) var queue: LinkedList<T>
+}
+```
+```swift
+class CustomerQueueTests: XCTestCase {
+    var sut: CustomerQueue<Int>!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = CustomerQueue(queue: LinkedList())
+    }
+} // 정상 실행
+```
+
+### 2. 큐의 초기 조건을 설정해줄 수 있도록 이니셜라이저 추가
+[라이언의 코멘트 1]
+
+> 타입에서 큐의 초기 조건을 설정해줄 수 있도록 이니셜라이저를 추가해주면 좋을 것 같아요. 
+현재 유닛테스트할 때 큐에 미리 아이템이 들어간 상황을 연출하려면 enqueue(data:) 메서드를 사용할 수밖에 없는데, 
+그렇게 되면 enqueue(data:)의 실행 결과에 다른 테스트들이 영향을 받아 테스트의 신뢰성을 떨어뜨릴 수 있을 것 같아요
+
+[라이언의 코멘트 2]
+> peek의 기능을 검증하기 위한 테스트인데, enqueue의 로직과 성공 여부에 테스트 성공 여부가 달려있어 테스트의 독립성이 떨어진다는 의견이 나올 수 있을 것 같네요. 이니셜라이저를 통해 queue의 초기상태를 지정할 수 있는 기능을 추가해보는건 어떨까요?
+[변경한 코드]
+```swift
+struct CustomerQueue: Queue {
+    private(set) var queue: LinkedList<Customer>
+    
+    init(elements: [Customer] = []) {
+        queue = LinkedList()
+        elements.forEach {
+            self.enqueue(data: $0)
+        }
+    }
+}
+```
+- 라이언의 코멘트에 따라 CustomerQueue에 initializer를 추가해주었습니다.
+    -  elements에 아무것도 담기지 않았을 경우 빈 배열로 설정되도록 default initializer로 만들어 주었습니다.
+    -  배열인 elements 안의 요소를 foreach로 돌면서 빈 배열에 데이터를 넣어주었습니다.
+    
+### 3. 테스트 코드 네이밍 수정 
+[라이언의 코멘트]
+> 우리가 제공하는 Queue의 기능 범위는 무엇인가?
+- isEmpty, peek, enqueue, dequeue, ...
+    - 어떤 기능인가?
+        - isEmpty: Queue가 비어있는지 판단할 수 있음 -> 검증할 것: 비어있을 때/비어있지 않을 때 -> queue가 빈 상태인지 판단할 수 있다.
+        - peek: Queue의 첫번째 요소를 알 수 있음, 없으면 nil -> 검증 할 것: 첫 요소 있을 때/없을 때 -> queue의 첫번째 요소를 확인할 수 있다. (없는 경우는 별도의 테스트케이스로 구성 - 첫 요소가 없으면..~)
+        - ...
+
+[변경 코드]
+- `test_3과7과5를넣었을때_dequeue의반환값이3인지` 
+    -> `test_큐에값을3개넣어줄때_dequeue를하면_첫번째값이_제거되고반환된다`
+
+### 배운 키워드
+`code coverage`, `Protocol Oriented Programming`, `scheme`, `target`, `bundle`, `associatedtype`
+
+
+## 트러블 슈팅
+- 유닛테스트에서 정확한 검사를 위해 현재 연결 리스트에 쌓여있는 값들을 배열형태로 가져올 수 있도록 currentList 라는 연산 프로퍼티를 만들어 주었습니다. 
+- 테스트 시, 타입을 찾을 수 없다는 오류발생, TargetMembership에 테스트파일 체크를 해주니 없어졌습니다![](https://i.imgur.com/2r7w6Ur.png)
+- 각 테스트 마다 생성이 되어있던 번들을 하나로 통일 해주었습니다.
