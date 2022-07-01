@@ -47,7 +47,7 @@ struct Bank {
     }
     
     mutating func updateCustomerQueue() {
-        randomNumber = TotalCustomer.generateCustomerNumber()
+        randomNumber = Int.random(in: 10...30)
         let numberList = Array<Int>(1...randomNumber)
         
         
