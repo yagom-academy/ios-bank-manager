@@ -7,12 +7,12 @@ struct Bank {
         enqueueCustomer()
     }
 
-    func executeWork(workTime: TimeInterval) -> Int {
+    func executeWork(during workTime: TimeInterval) -> Int {
         var totalCustomer = 0
         (0..<customerQueue.count).forEach { _ in
             do {
                 let customer = try customerQueue.dequeue()
-                BankManager.work(customer: customer, time: workTime)
+                BankManager.work(for: customer, during: workTime)
                 totalCustomer += 1
             } catch {
                 print("고객이 없습니다.")
