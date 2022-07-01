@@ -18,6 +18,10 @@ struct Bank {
 extension Bank {
     mutating func open() {
         generateClients()
+        
+        while !clientQueue.isEmpty() {
+            assignTask(to: manager)
+        }
     }
 }
 
@@ -29,5 +33,16 @@ private extension Bank {
         for amount in 1...clientAmount {
             clientQueue.enqueue(Client(request: task, waitingNumber: amount))
         }
+    }
+    
+    mutating func assignTask(to bankManager: BankManager) {
+        guard let client = clientQueue.dequeue() else {
+            return
+        }
+        
+        bankManager.processRequest(from: client)
+        
+        totalProcessingTime += client.request.processingTime
+        totalVisitedClients += 1
     }
 }
