@@ -35,6 +35,7 @@
 		D7E57345286EE17E00DC3B96 /* Agency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E57344286EE17E00DC3B96 /* Agency.swift */; };
 		D7E5734D286EE1CF00DC3B96 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5734C286EE1CF00DC3B96 /* Customer.swift */; };
 		D7E5734F286EE1DA00DC3B96 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5734E286EE1DA00DC3B96 /* Worker.swift */; };
+		D7E57351286EE31600DC3B96 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E57350286EE31600DC3B96 /* Banker.swift */; };
 		DF3483F13516D01F69048FC1 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 304C19EEE45F7DC65C6D643A /* Pods_BankManagerConsoleApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		D7E57344286EE17E00DC3B96 /* Agency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agency.swift; sourceTree = "<group>"; };
 		D7E5734C286EE1CF00DC3B96 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		D7E5734E286EE1DA00DC3B96 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		D7E57350286EE31600DC3B96 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
+				D7E57350286EE31600DC3B96 /* Banker.swift */,
 				B40C6587286EE2990013BD36 /* BankCustomer.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				D762D05D2869B13600E8235F /* Node.swift */,
@@ -392,6 +395,7 @@
 				D7BE3A69286A9D9B00CED030 /* Queue+extension.swift in Sources */,
 				D7E5734D286EE1CF00DC3B96 /* Customer.swift in Sources */,
 				B40C6588286EE2990013BD36 /* BankCustomer.swift in Sources */,
+				D7E57351286EE31600DC3B96 /* Banker.swift in Sources */,
 				D7E57345286EE17E00DC3B96 /* Agency.swift in Sources */,
 				B47641C72869A6BC00EE924C /* LinkedList.swift in Sources */,
 				B47038152869E3C800DB790C /* Queue.swift in Sources */,
