@@ -28,6 +28,15 @@ extension LinkedList {
         return head == nil
     }
     
+    func removeFirst() -> Element? {
+        guard let removedNode = head else {
+            return nil
+        }
+        
+        head = removedNode.nextNode
+        
+        return removedNode.data
+    }
     
     func removeAll() {
         head = nil

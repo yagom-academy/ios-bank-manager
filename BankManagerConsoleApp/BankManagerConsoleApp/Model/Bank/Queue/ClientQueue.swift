@@ -20,6 +20,10 @@ extension ClientQueue: Queue {
         queue.append(Node(data))
     }
     
+    func dequeue() -> Element? {
+        return queue.removeFirst()
+    }
+    
     func isEmpty() -> Bool {
         return queue.isEmpty()
     }
