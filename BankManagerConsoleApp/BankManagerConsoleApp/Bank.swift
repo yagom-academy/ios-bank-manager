@@ -9,7 +9,7 @@ import Foundation
 final class Bank {
     private let numberOfClerk: Int = 1
     private let manager = BankManager()
-    let bankClerk = DispatchQueue(label: "first")
+    private let bankClerk = DispatchQueue(label: "first")
     
     func doBusiness() {
         while true {
