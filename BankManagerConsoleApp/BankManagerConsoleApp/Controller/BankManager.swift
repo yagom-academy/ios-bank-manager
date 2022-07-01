@@ -19,11 +19,16 @@ extension BankManager {
         
         switch selection {
         case "1":
-            issueTickets()
+            defer {
+                issueTickets()
+            }
+            return
         case "2":
             return
         default:
-            openBank()
+            defer {
+                openBank()
+            }
             return
         }
     }
