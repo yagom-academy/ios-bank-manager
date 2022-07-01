@@ -12,7 +12,6 @@ struct Bank: Agency {
     var customerCount: Int?
     
     mutating func generateEmployee(numberOfBankers: Int) {
-        
     }
     
     mutating func openAgency() {
