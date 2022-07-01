@@ -7,6 +7,10 @@
 
 struct Queue<T: Equatable> {
     private var linkedList = LinkedList<T>()
+    var count: Int {
+        return linkedList.nodeCount
+    }
+    
     var isEmpty: Bool {
         linkedList.nodeCount == 0
     }

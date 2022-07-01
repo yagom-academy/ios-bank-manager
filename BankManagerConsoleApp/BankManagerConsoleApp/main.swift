@@ -5,11 +5,6 @@
 // 
 
 let randomCustomers = BankCustomer.generateRandomCustomer()
-
-randomCustomers.forEach {
-    print($0.id)
-}
-
 var bank = Bank(customerQueue: randomCustomers)
 
 func startApp() {
@@ -19,6 +14,7 @@ func startApp() {
     if input == "1" {
         bank.openAgency()
         bank.closeAgency()
+        startApp()
     } else if input == "2" {
         return
     } else {

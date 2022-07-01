@@ -112,6 +112,16 @@
 			name = Enum;
 			sourceTree = "<group>";
 		};
+		B40C658B286EE6A80013BD36 /* QueueStructure */ = {
+			isa = PBXGroup;
+			children = (
+				D762D05D2869B13600E8235F /* Node.swift */,
+				B47641C62869A6BC00EE924C /* LinkedList.swift */,
+				B47038142869E3C800DB790C /* Queue.swift */,
+			);
+			name = QueueStructure;
+			sourceTree = "<group>";
+		};
 		B47641CD2869A6CE00EE924C /* LinkedListTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,12 +169,10 @@
 				D7E57350286EE31600DC3B96 /* Banker.swift */,
 				B40C6587286EE2990013BD36 /* BankCustomer.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				D762D05D2869B13600E8235F /* Node.swift */,
-				B47641C62869A6BC00EE924C /* LinkedList.swift */,
-				B47038142869E3C800DB790C /* Queue.swift */,
 				B40C6584286EE0BE0013BD36 /* Enum */,
 				D7BE3A6A286A9E6C00CED030 /* Extension */,
 				D7E57343286EE16E00DC3B96 /* Protocol */,
+				B40C658B286EE6A80013BD36 /* QueueStructure */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
