@@ -1,23 +1,9 @@
 //
-//  Queue.swift
+//  Queue+Extensions.swift
 //  BankManagerConsoleApp
 //
-//  Created by 예톤, 웡빙 on 2022/06/30.
+//  Created by 예톤, 웡빙 on 2022/07/01.
 //
-
-import Foundation
-
-protocol Queue {
-    associatedtype Element
-    var queue: LinkedList<Element> { get }
-    var isEmpty: Bool { get }
-    var peek: Element? { get }
-    var count: Int { get }
-    var currentList: [Element?] { get }
-    func enqueue(data: Element)
-    func dequeue() -> Element?
-    func clear()
-}
 
 extension Queue {
     var isEmpty: Bool {
@@ -46,4 +32,3 @@ extension Queue {
         queue.clear()
     }
 }
-

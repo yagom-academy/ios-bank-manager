@@ -4,6 +4,8 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bank = Bank(bankManager: BankManager(), queue: CustomerQueue())
+let manager = BankManager()
+let queue = CustomerQueue()
+var bank = Bank(employee: manager, customer: queue)
 
 bank.start()
