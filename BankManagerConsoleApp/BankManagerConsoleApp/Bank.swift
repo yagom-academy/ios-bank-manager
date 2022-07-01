@@ -17,7 +17,10 @@ class Bank {
             while self.manager.isNotEmptyQueue {
                 let cusomter = self.manager.transferTask()
                 print("\(cusomter.count)번 고객 \(cusomter.task) 시작")
+                usleep(700000)
+                print("\(cusomter.count)번 고객 \(cusomter.task) 종료")
             }
+            
         }
         bankClerk.sync(execute: bankTask)
     }
@@ -30,10 +33,10 @@ class Bank {
             let commandLineInput = readLine()
             switch commandLineInput {
             case "1":
-                manager.appendCustomerToQueue(from: [Customer(task: "업무1"), Customer(task: "업무2")])
+                manager.appendCustomerToQueue(from: createCustomer())
                 processTask()
             case "2":
-                break
+                return
             default:
                 continue
             }

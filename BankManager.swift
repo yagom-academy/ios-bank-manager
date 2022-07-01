@@ -10,6 +10,7 @@ class BankManager {
     
     var isNotEmptyQueue: Bool {
         if customerQueue.isEmpty() {
+            waitingNumber = 0
             return false
         } else {
             return true
