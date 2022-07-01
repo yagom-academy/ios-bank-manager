@@ -6,13 +6,13 @@
 //
 
 struct Bank {
-    private var bankManager: BankManager
+    private var banker: Banker
     private var servedClient: Int?
     private var waitingClient: Int?
     private var clientQueue: ClientQueue<Client>?
     
-    init(bankManager: BankManager) {
-        self.bankManager = bankManager
+    init(banker: Banker) {
+        self.banker = banker
     }
 
     mutating func run() {
@@ -62,7 +62,7 @@ struct Bank {
             return
         }
         
-        let handledClient = bankManager.work(from: &queue)
+        let handledClient = banker.work(from: &queue)
         servedClient = handledClient
     }
 
@@ -71,7 +71,7 @@ struct Bank {
             return
         }
         
-        let bankingHours = Double(servedClient) * bankManager.time
+        let bankingHours = Double(servedClient) * banker.time
         
         print("""
         업무가 마감되었습니다. \

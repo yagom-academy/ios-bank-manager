@@ -5,5 +5,5 @@
 //
 
 struct BankManager: Banker {
-    var time = 0.7
+    let time = 0.7
 }
