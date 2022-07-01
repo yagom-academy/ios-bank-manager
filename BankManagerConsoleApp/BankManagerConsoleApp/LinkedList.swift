@@ -18,6 +18,7 @@ struct LinkedList<T> {
             tail = node
         } else {
             tail?.next = node
+            node.previous = tail
             tail = node
         }
     }
@@ -33,13 +34,6 @@ struct LinkedList<T> {
     }
     
     mutating func clear() {
-        while nodeCount != 0 {
-            head = head?.next
-            head?.previous?.next = nil
-            head?.previous = nil
-            nodeCount -= 1
-        }
-        
         head = nil
         tail = nil
     }
