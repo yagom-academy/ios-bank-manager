@@ -18,7 +18,7 @@
 
 ### UML
 
-<img width="762" alt="스크린샷 2022-07-01 오후 3 36 55" src="https://user-images.githubusercontent.com/98514397/176838333-5b21092e-575a-4f45-b695-af374616a94a.png">
+<img width="813" alt="스크린샷 2022-07-01 오후 5 00 53" src="https://user-images.githubusercontent.com/98514397/176851733-4ea2ff97-1645-415c-abe7-b1c2f1783216.png">
 
 ### Timeline
 
