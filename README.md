@@ -20,7 +20,7 @@
 |백곰|언체인|
 |:---:|:---:|
 |<img src=https://i.imgur.com/c17eEk8.jpg width=250 height = 250>|<img src="https://i.imgur.com/gEAc4rf.png" width="250" height="250">|
-|[BaekGom](https://github.com/bar-d)|[unchain123](https://github.com/unchain123)|
+|[BaekGom](https://github.com/Baek-Gom-95)|[unchain123](https://github.com/unchain123)|
 
 
 
