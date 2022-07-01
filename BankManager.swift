@@ -19,5 +19,18 @@ class BankManager {
     init() {
         customerQueue = Queue<Customer>()
     }
+
+    func appendCustomerToQueue(from customers: [Customer]) {
+        for customer in customers {
+            customerQueue.enqueue(inputData: customer)
+        }
+    }
+    
+    func transferTask() -> String {
+        guard let task = customerQueue.dequeue()?.task else {
+            return "ERROR: FAILURE"
+        }
+        return task
+    }
 }
 
