@@ -7,5 +7,7 @@
 import Foundation
 
 var bank = Bank(bankManager: BankManager(), queue: CustomerQueue())
-bank.displayMenu()
-bank.selectMenu()
+
+bank.start()
+
+
