@@ -38,7 +38,7 @@
 |1번과 2번 제외 선택시|공백 포함 1번 선택시|  
 |<img src="https://i.imgur.com/kEMIcrx.gif" width="400"/>|<img src="https://i.imgur.com/2XTymbY.gif" width="400"/>|  
 |공백 포함 2번 선택시||   
-|<img src="https://i.imgur.com/587OSQh.gif" width="400"/>|<img src="" width="400"/>|  
+|<img src="https://i.imgur.com/587OSQh.gif" width="400"/>||  
 
 
 ## UML
