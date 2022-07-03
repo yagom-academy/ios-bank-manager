@@ -10,7 +10,6 @@ final class BankManager {
     
     var isNotEmptyQueue: Bool {
         if customerQueue.isEmpty() {
-            waitingNumber = 0
             return false
         } else {
             return true
@@ -27,12 +26,16 @@ final class BankManager {
         }
     }
     
-    func transferTask() throws -> (count: Int, task: String) {
+    func fetchTask() throws -> (count: Int, task: String) {
         guard let task = customerQueue.dequeue()?.task else {
             throw BankError.emptyError
         }
         waitingNumber += 1
         return (waitingNumber, task)
+    }
+    
+    func resetWaitingNumber() {
+        waitingNumber = 0
     }
 }
 

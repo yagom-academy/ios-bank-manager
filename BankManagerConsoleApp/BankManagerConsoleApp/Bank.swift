@@ -49,7 +49,7 @@ final class Bank {
     
     private func workBankTeller() {
         do {
-            let customer = try self.manager.transferTask()
+            let customer = try self.manager.fetchTask()
             print("\(customer.count)번 고객 \(customer.task) 시작")
             usleep(700000)
             print("\(customer.count)번 고객 \(customer.task) 종료")
