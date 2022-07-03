@@ -6,4 +6,6 @@
 
 import Foundation
 
-DispatchQueue.global().sync(execute: openBank)
+var bankManager = BankManager()
+
+bankManager.openBank()
