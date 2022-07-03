@@ -57,4 +57,13 @@ final class Bank {
             debugPrint(error.localizedDescription)
         }
     }
+    
+    private func createCustomer() -> [Customer] {
+        var customers = [Customer]()
+        for _ in 1...Int.random(in: 10...30) {
+            let customer = Customer(task: "업무")
+            customers.append(customer)
+        }
+        return customers
+    }
 }
