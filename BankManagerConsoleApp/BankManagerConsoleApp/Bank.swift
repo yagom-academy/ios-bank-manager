@@ -18,10 +18,11 @@ final class Bank {
             print("입력 : ", terminator: "")
             guard let commandLineInput = readLine() else { return }
             switch commandLineInput {
-            case BankNameSpace.open:
+            case Command.open.description:
                 manager.appendCustomerToQueue(from: createCustomer())
                 processTask()
-            case BankNameSpace.close:
+                manager.resetWaitingNumber()
+            case Command.close.description:
                 return
             default:
                 continue
