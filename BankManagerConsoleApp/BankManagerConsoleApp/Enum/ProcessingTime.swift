@@ -6,12 +6,15 @@
 //
 
 enum ProcessingTime {
-    case general
+    case deposit
+    case loan
     
     var workTime: Double {
         switch self {
-        case .general:
+        case .deposit:
             return 0.7
+        case .loan:
+            return 1.1
         }
     }
 }

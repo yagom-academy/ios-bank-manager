@@ -27,9 +27,9 @@ final class BankManager {
             while !self.lineOfCustomers.isEmpty {
                 guard let customer = self.lineOfCustomers.dequeue() else { return }
                 print("\(customer.customerNumber)번 고객 업무 시작")
-                Thread.sleep(forTimeInterval: ProcessingTime.general.workTime)
+                Thread.sleep(forTimeInterval: ProcessingTime.deposit.workTime)
                 print("\(customer.customerNumber)번 고객 업무 완료")
-                totalTimeOfWork += ProcessingTime.general.workTime
+                totalTimeOfWork += ProcessingTime.deposit.workTime
             }
             print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomers)명이며, 총 업무시간은 \(String(format: "%.2f", totalTimeOfWork))초 입니다.")
         }
