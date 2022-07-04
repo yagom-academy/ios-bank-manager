@@ -1,4 +1,5 @@
 import Foundation
+
 struct Banker {
     func serve(customer: Customer) {
         print("\(customer.number)번 고객 업무 시작")

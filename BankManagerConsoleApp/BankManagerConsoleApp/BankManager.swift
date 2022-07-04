@@ -8,7 +8,7 @@ struct BankManager {
     }
 
     private func selectWork(_ status: String) {
-        let bank = Bank(banker: createBanker(1), customer: createCustomerQueue())
+        let bank = Bank(banker: createBanker(3), customer: createCustomerQueue())
         switch status {
         case "1":
             bank.startBanking()
@@ -25,9 +25,9 @@ struct BankManager {
     private func createCustomerQueue() -> Queue<Customer> {
         let customerQueue = Queue<Customer>()
         let numberOfCustomer = Int.random(in: 10...30)
-
-        for number in 1...numberOfCustomer {
-            let customer = Customer(number)
+        
+        (0..<numberOfCustomer).forEach {
+            let customer = Customer($0 + 1)
             customerQueue.enqueue(customer)
         }
         
@@ -35,11 +35,10 @@ struct BankManager {
     }
 
     private func createBanker(_ numberOfBanker: Int) -> [Banker] {
-        var bankers = [Banker]()
+        let array = Array(0..<numberOfBanker)
         
-        for _ in 1...numberOfBanker {
-            let banker = Banker()
-            bankers.append(banker)
+        let bankers = array.map { _ in
+            return Banker()
         }
         
         return bankers
