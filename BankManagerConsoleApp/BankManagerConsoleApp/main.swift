@@ -6,5 +6,6 @@
 
 import Foundation
 
-let bank = Bank()
-bank.doBusiness()
+let bankService = BankService()
+
+bankService.start()
