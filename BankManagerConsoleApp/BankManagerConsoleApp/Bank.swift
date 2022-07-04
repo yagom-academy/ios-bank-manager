@@ -13,6 +13,24 @@ struct Bank {
         selectBankOpenAndClose()
     }
     
+    mutating func selectBankOpenAndClose() {
+        printBankInterface()
+        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
+        var clerk = BankManager()
+        let rangeCustomerCount: ClosedRange<Int> = 10...30
+        switch requestInput {
+        case BankComent.bankOpen.rawValue:
+            let customerCount = Int.random(in: rangeCustomerCount)
+            clerk.handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
+            reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
+            bankBusinessStart()
+        case BankComent.bankClose.rawValue:
+            break
+        default:
+            bankBusinessStart()
+        }
+    }
+    
     func printBankInterface() {
         print(BankComent.greeting.rawValue)
         print(BankComent.secondGreeting.rawValue, terminator: BankComent.emptyValue.rawValue)
@@ -36,23 +54,5 @@ struct Bank {
         let calculateWorkTime = Double(resultCustomer) * processTime
         let totalWorkTime = numberFormatter(number: calculateWorkTime)
         printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
-    }
-    
-    mutating func selectBankOpenAndClose() {
-        printBankInterface()
-        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
-        var clerk = BankManager()
-        let rangeCustomerCount: ClosedRange<Int> = 10...30
-        switch requestInput {
-        case BankComent.bankOpen.rawValue:
-            let customerCount = Int.random(in: rangeCustomerCount)
-            clerk.handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
-            reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
-            bankBusinessStart()
-        case BankComent.bankClose.rawValue:
-            break
-        default:
-            bankBusinessStart()
-        }
     }
 }
