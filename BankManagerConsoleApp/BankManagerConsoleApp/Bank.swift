@@ -16,10 +16,9 @@ struct Bank: BankManager {
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = userInput()
-        let rangeCustomerCount: ClosedRange<Int> = 10...30
+        let customerCount = setCustomerCount()
         switch requestInput {
         case BankComent.bankOpen.rawValue:
-            let customerCount = Int.random(in: rangeCustomerCount)
             handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
             reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
             bankBusinessStart()

@@ -13,6 +13,8 @@ enum SetNumber: Int {
     case decimalRange = 2
     case minimumCustomerCount = 1
     case failNumberFormatter = 0
+    case minCustomer = 10
+    case maxCustomer = 30
 }
 
 enum BankManagerComment: String {

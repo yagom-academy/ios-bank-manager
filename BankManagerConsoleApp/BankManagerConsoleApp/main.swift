@@ -10,6 +10,10 @@ func userInput() -> String {
     return readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
 }
 
+func setCustomerCount() -> Int {
+    return Int.random(in: SetNumber.minCustomer.rawValue...SetNumber.maxCustomer.rawValue)
+}
+
 func initiateBankBusiness() {
     var bank = Bank()
     
