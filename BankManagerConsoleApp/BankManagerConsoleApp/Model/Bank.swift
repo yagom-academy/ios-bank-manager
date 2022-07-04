@@ -22,11 +22,11 @@ struct Bank {
             displayMenu()
             let selectedMenu = selectMenu()
             
-            if selectedMenu == "1" {
+            if selectedMenu == NameSpace.one.print {
                 updateCustomerQueue()
                 handleCustomer()
                 displayEndMessage()
-            } else if selectedMenu == "2" {
+            } else if selectedMenu == NameSpace.two.print {
                 break
             } else {
                 print("잘못 입력했습니다.")
@@ -35,12 +35,7 @@ struct Bank {
     }
     
     private func displayMenu() {
-        print(
-"""
-1 : 은행 개점
-2 : 종료
-입력 :
-""", terminator: " ")
+        print(NameSpace.startMessage.print, terminator: " ")
     }
     
     mutating private func selectMenu() -> String {
