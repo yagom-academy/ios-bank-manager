@@ -1,9 +1,9 @@
 struct Bank {
-    private let banker: [Banker]
+    private let bankers: [BankerLogic]
     private let customer: Queue<Customer>
     
-    init(banker: [Banker], customer: Queue<Customer>) {
-        self.banker = banker
+    init(banker: [BankerLogic], customer: Queue<Customer>) {
+        self.bankers = banker
         self.customer = customer
     }
     
@@ -12,7 +12,7 @@ struct Bank {
         
         while customer.isEmpty == false {
             guard let customer = customer.dequeue() else { return }
-            banker[0].serve(customer: customer)
+            bankers[0].serve(customer: customer)
             customerNumber += 1
         }
         
