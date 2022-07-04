@@ -25,6 +25,7 @@ struct Bank: BankManager {
         case BankComment.bankClose.rawValue:
             break
         default:
+            printWrongInput()
             bankBusinessStart()
         }
     }
@@ -36,6 +37,14 @@ struct Bank: BankManager {
     
     private func printReportWorkResult(handledCustomer: Int, handledWorkTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(handledCustomer)명 이며, 총 업무시간은 \(handledWorkTime)초 입니다.")
+    }
+    
+    private func printWrongInput() {
+        print(BankComment.wrongInputGreeting.rawValue)
+    }
+    
+    private func printFailChange() {
+        print(BankComment.failChange.rawValue)
     }
     
     mutating func makeCustomerWaitingList(by totalCustomer: Int) -> BankItemQueue<Customer> {
