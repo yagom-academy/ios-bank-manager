@@ -20,7 +20,7 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_큐의요소가비어있을때_빈값으로확인이되는지() {
+    func test_큐의요소가비어있을때_빈값으로확인이된다() {
         // given
         
         // when
@@ -29,7 +29,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_큐의요소가비어있을때_dequeue를하면_nil이반환되는지() {
+    func test_큐의요소가비어있을때_dequeue를하면_nil이반환된다() {
         // given
         
         // when
@@ -38,7 +38,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_큐에값을3개넣어줄때_dequeue를하면_첫번째값이_제거되고반환되는지() {
+    func test_큐에값을3개넣어줄때_dequeue를하면_첫번째값이_제거되고반환된다() {
         // given
         let expectation = 3
         sut = LinkedList(elements: [3, 7, 5])
@@ -48,7 +48,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_큐에값을2개넣어줄때_peek을하면_첫번째값이반환되는지() {
+    func test_큐에값을2개넣어줄때_peek을하면_첫번째값이반환된다() {
         // given
         let expectation = 3
         sut = LinkedList(elements: [3, 7])
@@ -58,7 +58,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_큐에값을2개넣어줄때_peek을여러번해도_똑같은값이_반환되는지() {
+    func test_큐에값을2개넣어줄때_peek을여러번해도_똑같은값이반환된다() {
         // given
         sut = LinkedList(elements: [3, 7])
         // when
@@ -68,7 +68,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, result2)
     }
     
-    func test_큐에값을3개넣어줄때_clear를하면_빈큐가되는지() {
+    func test_큐에값을3개넣어줄때_clear를하면_빈큐가된다() {
         // given
         sut = LinkedList(elements: [3, 7, 5])
         sut.clear()
