@@ -49,9 +49,13 @@ struct Bank: BankManager {
     }
     
     private func reportWorkResult(resultCustomer: Int, processTime: Double) {
-        let calculateWorkTime = Double(resultCustomer) * processTime
-        let totalWorkTime = calculateWorkTime.numberFormatter()
-        printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
+        do {
+            let calculateWorkTime = Double(resultCustomer) * processTime
+            let totalWorkTime = try calculateWorkTime.numberFormatter()
+            printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
+        } catch {
+            print("변환에 실패했습니다.")
+        }
     }
     
     mutating func giveTask(customerList: BankItemQueue<Customer>) {

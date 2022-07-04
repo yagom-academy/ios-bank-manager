@@ -29,3 +29,7 @@ enum BankComment: String {
     case bankOpen = "1"
     case bankClose = "2"
 }
+
+enum NoneValueError: Error {
+    case noneValue
+}

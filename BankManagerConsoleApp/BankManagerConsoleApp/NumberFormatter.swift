@@ -8,12 +8,12 @@
 import Foundation
 
 extension Double {
-    func numberFormatter() -> String {
+    func numberFormatter() throws -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = SetNumber.decimalRange.rawValue
         numberFormatter.minimumFractionDigits = SetNumber.decimalRange.rawValue
         
-        let result = numberFormatter.string(for: self) ?? "\(SetNumber.failNumberFormatter.rawValue)"
+        guard let result = numberFormatter.string(for: self) else { throw NoneValueError.noneValue }
         
         return result
     }
