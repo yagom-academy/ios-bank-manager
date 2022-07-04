@@ -7,8 +7,14 @@
 import Foundation
 
 final class BankManager {
-    let firstClerk = Clerk()
-    var clients = CustomerQueue<Client>()
+    private let firstClerk: Clerk
+    private var clients: CustomerQueue<Client>
+    
+    init(firstClerk: Clerk = Clerk(),
+         clients: CustomerQueue<Client> = CustomerQueue()) {
+        self.firstClerk = firstClerk
+        self.clients = clients
+    }
     
     func openBank() {
         print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
