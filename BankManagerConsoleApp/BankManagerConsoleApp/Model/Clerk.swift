@@ -10,7 +10,7 @@ import Foundation
 struct Clerk {
     func provideService(_ client: Client) {
         print("\(client.number)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
+        Thread.sleep(forTimeInterval: EstimatedTime.deposit)
         print("\(client.number)번 고객 업무 종료")
     }
 }

@@ -13,17 +13,17 @@ final class BankManager {
 
 extension BankManager {
     func openBank() {
-        print("1 : 은행개점\n2 : 종료")
+        print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
         print("입력 :", terminator: " ")
         let selection = readLine()
         
         switch selection {
-        case "1":
+        case Selections.run:
             defer {
                 issueTickets()
             }
             return
-        case "2":
+        case Selections.dismiss:
             return
         default:
             defer {
@@ -34,10 +34,13 @@ extension BankManager {
     }
 
     private func issueTickets() {
-        let customerNumber = Int.random(in: 10...30)
+        let customerNumber = Int.random(
+            in: Customer.minimumNumbers...Customer.maximumNumbers
+        )
         
-        for i in 1...customerNumber {
-            clients.enqueue(Client(number: i))
+        let tickets = Array(1...customerNumber)
+        tickets.forEach {
+            clients.enqueue(Client(number: $0))
         }
         
         defer {
@@ -54,7 +57,7 @@ extension BankManager {
         while let client = clients.dequeue() {
             firstClerk.provideService(client)
             servedClients += 1
-            timeSpent += 0.7
+            timeSpent += EstimatedTime.deposit
         }
                 
         defer {
