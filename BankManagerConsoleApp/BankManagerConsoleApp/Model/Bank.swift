@@ -10,7 +10,7 @@ import Foundation
 struct Bank {
     private var bankManager: BankManager
     private var queue: CustomerQueue
-    private var randomNumber: Int = 0
+    private(set) var randomNumberOfCustomer: Int = 0
     
     init(employee bankManager: BankManager, customer queue: CustomerQueue) {
         self.bankManager = bankManager
@@ -38,7 +38,7 @@ struct Bank {
         print(NameSpace.startMessage.print, terminator: " ")
     }
     
-    mutating private func selectMenu() -> String {
+    private mutating func selectMenu() -> String {
         guard let input = readLine() else {
             return ""
         }
@@ -46,9 +46,9 @@ struct Bank {
        return input
     }
     
-    mutating private func updateCustomerQueue() {
-        randomNumber = Int.random(in: 10...30)
-        let numberList = Array<Int>(1...randomNumber)
+    private mutating func updateCustomerQueue() {
+        randomNumberOfCustomer = Int.random(in: 10...30)
+        let numberList = Array<Int>(1...randomNumberOfCustomer)
         
         numberList.forEach {
             let customer = Customer(number: $0)
@@ -56,7 +56,7 @@ struct Bank {
         }
     }
     
-    mutating private func handleCustomer() {
+    private mutating func handleCustomer() {
         for _ in 0..<queue.count {
             guard let customer = queue.dequeue() else {
                 return
@@ -68,8 +68,9 @@ struct Bank {
     
     private func displayEndMessage() {
         let totalHandlingTime = String(format: "%.2f",
-                                       bankManager.handlingTime * Double(randomNumber))
+                                       bankManager.handlingTime * Double(randomNumberOfCustomer)
+        )
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(randomNumber)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(randomNumberOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
     }
 }

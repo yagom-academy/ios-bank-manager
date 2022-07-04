@@ -7,7 +7,7 @@
 
 extension Queue {
     var isEmpty: Bool {
-        return queue.isEmpty
+        queue.isEmpty
     }
     var peek: Element? {
         queue.peek

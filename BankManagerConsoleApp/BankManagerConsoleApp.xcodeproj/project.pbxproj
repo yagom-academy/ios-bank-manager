@@ -12,6 +12,12 @@
 		426108EC286995BC00756C00 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8069D286989B300FCD395 /* Node.swift */; };
 		AF3D2747286A8F0D00D50AAF /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF806A72869A54400FCD395 /* NodeTests.swift */; };
 		AF44C9B9286E8F860065BF4A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44C9B8286E8F860065BF4A /* Bank.swift */; };
+		AF4CF24B2872B922003828AB /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CF24A2872B922003828AB /* NameSpace.swift */; };
+		AF4CF24D2872BBEE003828AB /* BankManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CF24C2872BBEE003828AB /* BankManagerError.swift */; };
+		AF4CF24F2872C287003828AB /* BankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CF24E2872C287003828AB /* BankTests.swift */; };
+		AF4CF2502872C2C1003828AB /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44C9B8286E8F860065BF4A /* Bank.swift */; };
+		AF4CF2512872C662003828AB /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CF24A2872B922003828AB /* NameSpace.swift */; };
+		AF4CF2522872C665003828AB /* BankManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CF24C2872BBEE003828AB /* BankManagerError.swift */; };
 		AF72F735286ED9DD00C2F719 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF89D60D286D891400B6749A /* Queue.swift */; };
 		AF72F736286ED9E100C2F719 /* Queue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7A2DD286EC1FF0043D86B /* Queue+Extensions.swift */; };
 		AF89D60E286D891400B6749A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF89D60D286D891400B6749A /* Queue.swift */; };
@@ -45,6 +51,9 @@
 		426108E22869943F00756C00 /* CustomerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTests.swift; sourceTree = "<group>"; };
 		AF3D274E286A8F2300D50AAF /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		AF44C9B8286E8F860065BF4A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		AF4CF24A2872B922003828AB /* NameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSpace.swift; sourceTree = "<group>"; };
+		AF4CF24C2872BBEE003828AB /* BankManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerError.swift; sourceTree = "<group>"; };
+		AF4CF24E2872C287003828AB /* BankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTests.swift; sourceTree = "<group>"; };
 		AF89D60D286D891400B6749A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		AF89D610286D89E800B6749A /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		AFE7A2DD286EC1FF0043D86B /* Queue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Queue+Extensions.swift"; sourceTree = "<group>"; };
@@ -81,6 +90,7 @@
 				426108E22869943F00756C00 /* CustomerQueueTests.swift */,
 				AF3D274E286A8F2300D50AAF /* LinkedListTests.swift */,
 				AFF806A72869A54400FCD395 /* NodeTests.swift */,
+				AF4CF24E2872C287003828AB /* BankTests.swift */,
 			);
 			path = CustomerQueueTests;
 			sourceTree = "<group>";
@@ -131,6 +141,8 @@
 				AFE7A2DF286EC22B0043D86B /* Protocol */,
 				AF980D01286A92AF00C063CC /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				AF4CF24A2872B922003828AB /* NameSpace.swift */,
+				AF4CF24C2872BBEE003828AB /* BankManagerError.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -227,10 +239,14 @@
 				426108EC286995BC00756C00 /* Node.swift in Sources */,
 				AFE7A2DC286EC1820043D86B /* BankManager.swift in Sources */,
 				AF89D612286D89F100B6749A /* Customer.swift in Sources */,
+				AF4CF2522872C665003828AB /* BankManagerError.swift in Sources */,
 				426108E32869943F00756C00 /* CustomerQueueTests.swift in Sources */,
+				AF4CF24F2872C287003828AB /* BankTests.swift in Sources */,
 				AFBAEDBC2869BFFE00CDB846 /* CustomerQueue.swift in Sources */,
 				AF980D00286A925100C063CC /* LinkedListTests.swift in Sources */,
 				AF72F736286ED9E100C2F719 /* Queue+Extensions.swift in Sources */,
+				AF4CF2512872C662003828AB /* NameSpace.swift in Sources */,
+				AF4CF2502872C2C1003828AB /* Bank.swift in Sources */,
 				AF72F735286ED9DD00C2F719 /* Queue.swift in Sources */,
 				AF3D2747286A8F0D00D50AAF /* NodeTests.swift in Sources */,
 			);
@@ -243,7 +259,9 @@
 				AFF8069E286989B300FCD395 /* Node.swift in Sources */,
 				AF44C9B9286E8F860065BF4A /* Bank.swift in Sources */,
 				AF89D611286D89E800B6749A /* Customer.swift in Sources */,
+				AF4CF24B2872B922003828AB /* NameSpace.swift in Sources */,
 				AF89D60E286D891400B6749A /* Queue.swift in Sources */,
+				AF4CF24D2872BBEE003828AB /* BankManagerError.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AFF806AE2869AA5200FCD395 /* CustomerQueue.swift in Sources */,
 				AFE7A2DE286EC1FF0043D86B /* Queue+Extensions.swift in Sources */,
