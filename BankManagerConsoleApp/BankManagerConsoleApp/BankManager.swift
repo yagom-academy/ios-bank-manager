@@ -1,10 +1,4 @@
 struct BankManager {
-    let bank: Bank
-    
-    init(_ bank: Bank) {
-        self.bank = bank
-    }
-    
     func openUpBank() {
         print("1 : 은행개점 \n2 : 종료\n입력 :", terminator: " ")
         
@@ -14,9 +8,10 @@ struct BankManager {
     }
 
     private func selectWork(_ status: String) {
+        let bank = Bank(banker: createBanker(1), customer: createCustomerQueue())
         switch status {
         case "1":
-            startBanking()
+            bank.startBanking()
             openUpBank()
         case "2":
             print("업무를 종료합니다.")
@@ -27,17 +22,6 @@ struct BankManager {
         }
     }
     
-    private func startBanking() {
-        var customerNumber: Double = 0
-        
-        while !(bank.customer.isEmpty) {
-            do {
-                let customer = try bank.customer.dequeue()
-                bank.banker[0].serve(customer: customer)
-                customerNumber += 1
-            } catch {
-                print("응대할 고객이 없습니다.")
-            }
     private func createCustomerQueue() -> Queue<Customer> {
         let customerQueue = Queue<Customer>()
         let numberOfCustomer = Int.random(in: 10...30)
