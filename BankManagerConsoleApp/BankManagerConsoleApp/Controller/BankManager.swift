@@ -17,16 +17,12 @@ final class BankManager {
         
         switch selection {
         case Selections.run:
-            defer {
-                issueTickets()
-            }
+            issueTickets()
             return
         case Selections.dismiss:
             return
         default:
-            defer {
-                openBank()
-            }
+            openBank()
             return
         }
     }
@@ -41,10 +37,7 @@ final class BankManager {
             clients.enqueue(Client(number: $0))
         }
         
-        defer {
-            startWork()
-        }
-        
+        startWork()
         return
     }
     
@@ -58,11 +51,8 @@ final class BankManager {
             timeSpent += EstimatedTime.deposit
         }
         
-        defer {
-            finishWork(customers: servedClients, time: timeSpent)
-            openBank()
-        }
-        
+        finishWork(customers: servedClients, time: timeSpent)
+        openBank()
         return
     }
     
