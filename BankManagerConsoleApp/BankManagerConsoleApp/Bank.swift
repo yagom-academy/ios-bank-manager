@@ -19,7 +19,7 @@ struct Bank: BankManager {
         let customerCount = setCustomerCount()
         switch requestInput {
         case BankComment.bankOpen.rawValue:
-            handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
+            giveTask(customerList: makeCustomerWaitingList(by: customerCount))
             reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
             bankBusinessStart()
         case BankComment.bankClose.rawValue:
@@ -52,5 +52,13 @@ struct Bank: BankManager {
         let calculateWorkTime = Double(resultCustomer) * processTime
         let totalWorkTime = numberFormatter(number: calculateWorkTime)
         printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
+    }
+    
+    mutating func giveTask(customerList: BankItemQueue<Customer>) {
+        var customerList = customerList
+        
+        while let completeCustomer = customerList.deQueue() {
+            handleBanking(customer: completeCustomer)
+        }
     }
 }
