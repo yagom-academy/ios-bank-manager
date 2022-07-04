@@ -36,17 +36,11 @@ final class BankManager {
         DispatchQueue.global().sync(execute: handleCustomers)
     }
     
-    private func inputMenu() {
-        print("1 : 은행 개점")
-        print("2 : 종료")
-        print("입력 : ", terminator: "")
-    }
-    
     func openBank() {
         var userInput: String?
         let openBank = DispatchWorkItem {
             repeat {
-                self.inputMenu()
+                Bank.inputMenu()
                 userInput = readLine()
                 if let input = userInput {
                     if input == "1" {
