@@ -10,7 +10,7 @@ struct Bank {
     func startBanking() {
         var customerNumber: Double = 0
         
-        while !(customer.isEmpty) {
+        while customer.isEmpty == false {
             do {
                 let customer = try customer.dequeue()
                 banker[0].serve(customer: customer)
