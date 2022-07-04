@@ -6,12 +6,8 @@ final class LinkedList<T> {
         return head == nil
     }
 
-    func firstNode() throws -> Node<T> {
-        guard let firstNode = head else {
-            throw QueueError.nilOfValue
-        }
-        
-        return firstNode
+    var firstNode: Node<T>? {
+        return head
     }
 
     func append(_ value: T) {
@@ -26,9 +22,9 @@ final class LinkedList<T> {
         }
     }
 
-    func removeHead() throws -> Node<T> {
+    func removeHead() -> Node<T>? {
         guard let node = head else {
-            throw QueueError.nilOfValue
+            return nil
         }
         
         if let next = head?.next {

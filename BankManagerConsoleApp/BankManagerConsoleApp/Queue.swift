@@ -5,16 +5,16 @@ final class Queue<T> {
         return list.isEmpty
     }
     
-    func peek() throws -> T {
-        return try list.firstNode().value
+    var peek: T? {
+        return list.firstNode?.value
     }
     
     func enqueue(_ element: T) {
         list.append(element)
     }
     
-    func dequeue() throws -> T {
-        return try list.removeHead().value
+    func dequeue() -> T? {
+        return list.removeHead()?.value
     }
     
     func clear() {

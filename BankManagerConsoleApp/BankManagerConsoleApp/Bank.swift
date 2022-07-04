@@ -11,13 +11,9 @@ struct Bank {
         var customerNumber: Double = 0
         
         while customer.isEmpty == false {
-            do {
-                let customer = try customer.dequeue()
-                banker[0].serve(customer: customer)
-                customerNumber += 1
-            } catch {
-                print("응대할 고객이 없습니다.")
-            }
+            guard let customer = customer.dequeue() else { return }
+            banker[0].serve(customer: customer)
+            customerNumber += 1
         }
         
         let workingTime = String(format: "%.2f", customerNumber * 0.7)
