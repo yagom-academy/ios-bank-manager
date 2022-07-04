@@ -63,7 +63,7 @@ struct Bank: BankManager {
             let totalWorkTime = try calculateWorkTime.numberFormatter()
             printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
         } catch {
-            print("변환에 실패했습니다.")
+            printFailChange()
         }
     }
     
