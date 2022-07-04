@@ -38,10 +38,26 @@ struct BankManager {
             } catch {
                 print("응대할 고객이 없습니다.")
             }
+    private func createCustomerQueue() -> Queue<Customer> {
+        let customerQueue = Queue<Customer>()
+        let numberOfCustomer = Int.random(in: 10...30)
+
+        for number in 1...numberOfCustomer {
+            let customer = Customer(number)
+            customerQueue.enqueue(customer)
         }
         
-        let workingTime = String(format: "%.2f", customerNumber * 0.7)
+        return customerQueue
+    }
+
+    private func createBanker(_ numberOfBanker: Int) -> [Banker] {
+        var bankers = [Banker]()
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(customerNumber))명이며, 총 업무시간은 \(workingTime)초입니다.")
+        for _ in 1...numberOfBanker {
+            let banker = Banker()
+            bankers.append(banker)
+        }
+        
+        return bankers
     }
 }
