@@ -21,7 +21,7 @@ final class BankManager {
         }
     }
     
-    private func handle() {
+    private func handleCustomers() {
         let handleCustomers = DispatchWorkItem {
             var totalTimeOfWork: Double = 0.0
             while !self.lineOfCustomers.isEmpty {
