@@ -51,8 +51,8 @@ struct Bank: BankManager {
         var watingQueue = BankItemQueue<Customer>()
         
         for ticketNumber in SetNumber.minimumCustomerCount.rawValue...totalCustomer {
-            let customer = Customer(bankNumberTicket: ticketNumber)
-            watingQueue.enQueue(customer)
+            let ticketHolder = takeNumberTicket(number: ticketNumber)
+            watingQueue.enQueue(ticketHolder)
         }
         return watingQueue
     }
