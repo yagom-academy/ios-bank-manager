@@ -1,9 +1,7 @@
 import Foundation
 
-struct BankManager {
-    static func work(for customer: Customer, during time: TimeInterval) {
-        print("\(customer.name) 고객 업무 시작")
+struct BankManager { // 시간초만 반납
+    static func work(during time: TimeInterval) {
         Thread.sleep(forTimeInterval: time)
-        print("\(customer.name) 고객 업무 완료")
     }
 }
