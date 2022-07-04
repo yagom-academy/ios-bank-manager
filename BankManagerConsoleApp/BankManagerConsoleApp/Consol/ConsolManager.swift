@@ -8,9 +8,13 @@ struct ConsolManager {
             switch readLine() {
             case BankStatus.opening.menu :
                 let bank = Bank()
-                let totalCustomer = bank.executeWork(during: time)
-                let totalTime = time * Double(totalCustomer)
-                printCloseMessage(totalCustomer, totalTime)
+                do {
+                    let totalCustomer = try bank.executeWork(during: time)
+                    let totalTime = time * Double(totalCustomer)
+                    printCloseMessage(totalCustomer, totalTime)
+                } catch {
+                    print("고객이 없습니다.")
+                }
             case BankStatus.closed.menu :
                 break menuLoop
             default :
