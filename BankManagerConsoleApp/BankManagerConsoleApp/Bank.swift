@@ -1,6 +1,6 @@
 struct Bank {
-    func startBanking(customer: Queue<Customer>, bankers: [BankerLogic]) -> Int {
-        var customerNumber: Int = 0
+    func startBanking(customer: Queue<Customer>, bankers: [BankerLogic]) -> Double {
+        var customerNumber: Double = 0
         
         while customer.isEmpty == false {
             guard let customer = customer.dequeue() else { return 0 }
