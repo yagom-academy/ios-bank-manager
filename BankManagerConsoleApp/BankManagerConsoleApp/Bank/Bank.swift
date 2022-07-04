@@ -22,8 +22,9 @@ class Bank {
     }
     
     func insertCustomersIntoQueue() {
+        let random = Int.random(in: 0...1)
         for element in 1...self.numberOfCustomers {
-            let customer = Customer(customerNumber: element)
+            let customer = Customer(customerNumber: element, business: WorkType.allCases[random])
             self.lineOfCustomers.enqueue(data: customer)
         }
     }

@@ -5,7 +5,7 @@
 //  Created by Kiwi, Kay on 2022/07/01.
 //
 
-enum WorkType {
+enum WorkType: CaseIterable {
     case deposit
     case loan
     
