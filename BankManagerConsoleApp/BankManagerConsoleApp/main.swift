@@ -6,4 +6,5 @@
 
 import Foundation
 
-
+var hana = Bank()
+var banker1 = BankManager(bank: hana, specialized: .deposit)

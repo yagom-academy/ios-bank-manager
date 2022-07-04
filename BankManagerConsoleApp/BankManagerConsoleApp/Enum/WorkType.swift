@@ -5,11 +5,11 @@
 //  Created by Kiwi, Kay on 2022/07/01.
 //
 
-enum ProcessingTime {
+enum WorkType {
     case deposit
     case loan
     
-    var workTime: Double {
+    var processingTime: Double {
         switch self {
         case .deposit:
             return 0.7
