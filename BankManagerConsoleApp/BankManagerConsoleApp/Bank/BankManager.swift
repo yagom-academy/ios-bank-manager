@@ -9,6 +9,7 @@ import Foundation
 final class BankManager {
     private var bank: Bank
     private var specialized: WorkType
+    private let semaphore = DispatchSemaphore(value: 1)
     
     init(bank: Bank, specialized: WorkType) {
         self.bank = bank
@@ -16,7 +17,8 @@ final class BankManager {
     }
     
     func handleCustomers() {
-        DispatchQueue.global().sync {
+        DispatchQueue.global().async { [self] in
+            self.semaphore.wait()
             while !bank.lineOfCustomers.isEmpty {
                 guard let customer = bank.lineOfCustomers.dequeue() else { return }
                 print("\(customer.customerNumber)번 고객 \(customer.business.name)업무 시작")
@@ -24,6 +26,7 @@ final class BankManager {
                 print("\(customer.customerNumber)번 고객 \(customer.business.name)업무 완료")
                 bank.totalTimeOfWork += customer.business.processingTime
             }
+            self.semaphore.signal()
         }
     }
 }
