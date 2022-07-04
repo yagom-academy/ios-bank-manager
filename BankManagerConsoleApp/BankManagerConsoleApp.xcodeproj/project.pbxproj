@@ -155,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				37DB31FE286ECBD200AD29E5 /* Error */,
 				37DB3201286ECBF300AD29E5 /* UninTest */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
@@ -179,6 +178,7 @@
 				37DB31FD286ECB7800AD29E5 /* Customer */,
 				37DB31FC286ECB6C00AD29E5 /* Consol */,
 				37DB31FB286ECB1B00AD29E5 /* DataType */,
+				37DB31FE286ECBD200AD29E5 /* Error */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
