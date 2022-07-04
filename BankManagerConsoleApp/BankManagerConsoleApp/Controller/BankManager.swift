@@ -9,9 +9,7 @@ import Foundation
 final class BankManager {
     let firstClerk = Clerk()
     var clients = CustomerQueue<Client>()
-}
-
-extension BankManager {
+    
     func openBank() {
         print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
         print("입력 :", terminator: " ")
@@ -32,7 +30,7 @@ extension BankManager {
             return
         }
     }
-
+    
     private func issueTickets() {
         let customerNumber = Int.random(
             in: Customer.minimumNumbers...Customer.maximumNumbers
@@ -59,7 +57,7 @@ extension BankManager {
             servedClients += 1
             timeSpent += EstimatedTime.deposit
         }
-                
+        
         defer {
             finishWork(customers: servedClients, time: timeSpent)
             openBank()
