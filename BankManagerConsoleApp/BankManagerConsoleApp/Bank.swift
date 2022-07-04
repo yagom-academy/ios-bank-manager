@@ -31,12 +31,12 @@ struct Bank {
         }
     }
     
-    func printBankInterface() {
+    private func printBankInterface() {
         print(BankComent.greeting.rawValue)
         print(BankComent.secondGreeting.rawValue, terminator: BankComent.emptyValue.rawValue)
     }
     
-    func printReportWorkResult(handledCustomer: Int, handledWorkTime: String) {
+    private func printReportWorkResult(handledCustomer: Int, handledWorkTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(handledCustomer)명 이며, 총 업무시간은 \(handledWorkTime)초 입니다.")
     }
     
@@ -50,7 +50,7 @@ struct Bank {
         return watingQueue
     }
     
-    func reportWorkResult(resultCustomer: Int, processTime: Double) {
+    private func reportWorkResult(resultCustomer: Int, processTime: Double) {
         let calculateWorkTime = Double(resultCustomer) * processTime
         let totalWorkTime = numberFormatter(number: calculateWorkTime)
         printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
