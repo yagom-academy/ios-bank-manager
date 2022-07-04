@@ -6,6 +6,10 @@
 
 import Foundation
 
+func userInput() -> String {
+    return readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
+}
+
 func initiateBankBusiness() {
     var bank = Bank()
     

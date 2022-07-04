@@ -15,7 +15,7 @@ struct Bank {
     
     mutating func selectBankOpenAndClose() {
         printBankInterface()
-        let requestInput = readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
+        let requestInput = userInput()
         var clerk = BankManager()
         let rangeCustomerCount: ClosedRange<Int> = 10...30
         switch requestInput {
