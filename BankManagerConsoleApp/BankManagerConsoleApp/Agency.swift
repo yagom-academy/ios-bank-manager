@@ -9,7 +9,7 @@ protocol Agency {
     associatedtype T: Equatable
     var customerQueue: Queue<T> { get set }
     
-    mutating func generateEmployee(numberOfBankers: Int)
-    mutating func openAgency()
-    mutating func closeAgency()
+    mutating func generateEmployee(numberOfEmployees: Int)
+    mutating func open()
+    mutating func close()
 }

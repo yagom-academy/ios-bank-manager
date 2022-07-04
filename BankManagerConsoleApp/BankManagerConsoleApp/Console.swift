@@ -14,8 +14,8 @@ struct Console {
             let randomCustomers = BankCustomer.generateRandomCustomer()
             var bank = Bank(customerQueue: randomCustomers)
             
-            bank.openAgency()
-            bank.closeAgency()
+            bank.open()
+            bank.close()
             startApp()
         } else if input == "2" {
             return
