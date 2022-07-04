@@ -15,7 +15,7 @@ final class BankManager {
         self.specialized = specialized
     }
     
-    private func handleCustomers() {
+    func handleCustomers() {
         DispatchQueue.global().sync {
             var totalTimeOfWork: Double = 0.0
             while !bank.lineOfCustomers.isEmpty {
@@ -26,23 +26,6 @@ final class BankManager {
                 totalTimeOfWork += WorkType.deposit.processingTime
             }
             print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.numberOfCustomers)명이며, 총 업무시간은 \(String(format: "%.2f", totalTimeOfWork))초 입니다.")
-        }
-    }
-    
-    func openBank() {
-        DispatchQueue.global().sync {
-            var userInput: String?
-            repeat {
-                bank.inputMenu()
-                userInput = readLine()
-                if let input = userInput {
-                    if input == "1" {
-                        bank.generateRandomNumberOfCustomers()
-                        bank.insertCustomersIntoQueue()
-                        self.handleCustomers()
-                    }
-                }
-            } while userInput != "2"
         }
     }
 }

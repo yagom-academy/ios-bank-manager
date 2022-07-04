@@ -27,4 +27,35 @@ class Bank {
             self.lineOfCustomers.enqueue(data: customer)
         }
     }
+    
+    func distributeTask () {
+        for worker in bankManagers {
+            worker.handleCustomers()
+        }
+    }
+    
+    func makeThreeBankers() -> [BankManager] {
+        let banker1 = BankManager(bank: self, specialized: .deposit)
+        let banker2 = BankManager(bank: self, specialized: .deposit)
+        let banker3 = BankManager(bank: self, specialized: .loan)
+        return [banker1, banker2, banker3]
+    }
+    
+    func openBank() {
+        self.bankManagers = makeThreeBankers()
+        DispatchQueue.global().sync {
+            var userInput: String?
+            repeat {
+                self.inputMenu()
+                userInput = readLine()
+                if let input = userInput {
+                    if input == "1" {
+                        self.generateRandomNumberOfCustomers()
+                        self.insertCustomersIntoQueue()
+                        self.distributeTask()
+                    }
+                }
+            } while userInput != "2"
+        }
+    }
 }
