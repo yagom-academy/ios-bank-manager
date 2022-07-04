@@ -17,7 +17,7 @@ struct Bank {
         self.queue = queue
     }
     
-    mutating func start() {
+    mutating func start() throws {
         while true {
             displayMenu()
             let selectedMenu = selectMenu()
@@ -29,7 +29,7 @@ struct Bank {
             } else if selectedMenu == NameSpace.two.print {
                 break
             } else {
-                print("잘못 입력했습니다.")
+                throw BankManagerError.Input
             }
         }
     }
