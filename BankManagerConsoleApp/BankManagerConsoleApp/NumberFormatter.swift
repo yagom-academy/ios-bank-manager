@@ -7,12 +7,14 @@
 
 import Foundation
 
-func numberFormatter(number: Double) -> String {
-    let numberFormatter = NumberFormatter()
-    numberFormatter.maximumFractionDigits = SetNumber.decimalRange.rawValue
-    numberFormatter.minimumFractionDigits = SetNumber.decimalRange.rawValue
-    
-    let result = numberFormatter.string(for: number) ?? "\(SetNumber.failNumberFormatter.rawValue)"
-    
-    return result
+extension Double {
+    func numberFormatter() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = SetNumber.decimalRange.rawValue
+        numberFormatter.minimumFractionDigits = SetNumber.decimalRange.rawValue
+        
+        let result = numberFormatter.string(for: self) ?? "\(SetNumber.failNumberFormatter.rawValue)"
+        
+        return result
+    }
 }

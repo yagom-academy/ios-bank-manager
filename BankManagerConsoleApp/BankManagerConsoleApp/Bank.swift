@@ -50,7 +50,7 @@ struct Bank: BankManager {
     
     private func reportWorkResult(resultCustomer: Int, processTime: Double) {
         let calculateWorkTime = Double(resultCustomer) * processTime
-        let totalWorkTime = numberFormatter(number: calculateWorkTime)
+        let totalWorkTime = calculateWorkTime.numberFormatter()
         printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
     }
     
