@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  BankManagerConsoleApp
 //
-//  Created by Gordon Choi on 2022/06/28.
+//  Created by 재재, 나별 on 2022/06/28.
 //
 
 struct LinkedList<T> {
@@ -10,9 +10,7 @@ struct LinkedList<T> {
     private var tail: Node<T>?
     
     init() {}
-}
-
-extension LinkedList {
+    
     var isEmpty: Bool {
         return head == nil
     }
@@ -24,9 +22,7 @@ extension LinkedList {
     var isNotEmpty: Bool {
         return !isEmpty
     }
-}
-
-extension LinkedList {
+    
     mutating func append(_ value: T) {
         let node = Node(value: value, next: nil)
         
