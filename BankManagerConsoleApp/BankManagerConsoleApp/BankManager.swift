@@ -19,10 +19,9 @@ struct BankManager {
     }
 
     private func selectWork(_ status: BankStatus) {
-        let bank = Bank(banker: createBanker(1), customer: createCustomerQueue())
         switch status {
         case .open:
-            bank.startBanking()
+            manageBank()
             openUpBank()
         case .close:
             print("업무를 종료합니다.")
@@ -50,5 +49,13 @@ struct BankManager {
         }
         
         return bankers
+    }
+    
+    private func manageBank() {
+        let bank = Bank()
+        let customerNumber = bank.startBanking(customer: createCustomerQueue(), bankers: createBanker(1))
+        let workingTime = String(format: "%.2f", customerNumber)
+    
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(customerNumber))명이며, 총 업무시간은 \(workingTime)초입니다.")
     }
 }
