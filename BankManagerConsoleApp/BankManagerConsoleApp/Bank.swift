@@ -18,11 +18,11 @@ struct Bank: BankManager {
         let requestInput = userInput()
         let customerCount = setCustomerCount()
         switch requestInput {
-        case BankComent.bankOpen.rawValue:
+        case BankComment.bankOpen.rawValue:
             handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
             reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
             bankBusinessStart()
-        case BankComent.bankClose.rawValue:
+        case BankComment.bankClose.rawValue:
             break
         default:
             bankBusinessStart()
@@ -30,8 +30,8 @@ struct Bank: BankManager {
     }
     
     private func printBankInterface() {
-        print(BankComent.greeting.rawValue)
-        print(BankComent.secondGreeting.rawValue, terminator: BankComent.emptyValue.rawValue)
+        print(BankComment.greeting.rawValue)
+        print(BankComment.secondGreeting.rawValue, terminator: BankComment.emptyValue.rawValue)
     }
     
     private func printReportWorkResult(handledCustomer: Int, handledWorkTime: String) {

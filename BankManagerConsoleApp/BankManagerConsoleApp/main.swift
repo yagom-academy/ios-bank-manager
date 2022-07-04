@@ -7,7 +7,7 @@
 import Foundation
 
 func userInput() -> String {
-    return readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComent.emptyValue.rawValue
+    return readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComment.emptyValue.rawValue
 }
 
 func setCustomerCount() -> Int {
