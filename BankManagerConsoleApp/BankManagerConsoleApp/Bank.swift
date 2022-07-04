@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+struct Bank: BankManager {
     
     mutating func bankBusinessStart() {
         selectBankOpenAndClose()
@@ -16,12 +16,11 @@ struct Bank {
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = userInput()
-        var clerk = BankManager()
         let rangeCustomerCount: ClosedRange<Int> = 10...30
         switch requestInput {
         case BankComent.bankOpen.rawValue:
             let customerCount = Int.random(in: rangeCustomerCount)
-            clerk.handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
+            handleBanking(customerList: makeCustomerWaitingList(by: customerCount))
             reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
             bankBusinessStart()
         case BankComent.bankClose.rawValue:

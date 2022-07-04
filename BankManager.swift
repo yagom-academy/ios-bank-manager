@@ -6,8 +6,12 @@
 
 import Foundation
 
-struct BankManager {
-    mutating func handleBanking(customerList: BankItemQueue<Customer>) {
+protocol BankManager {
+    func handleBanking(customerList: BankItemQueue<Customer>)
+}
+
+extension BankManager {
+    func handleBanking(customerList: BankItemQueue<Customer>) {
         var customerList = customerList
         let processingTime = 700000
         
