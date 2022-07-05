@@ -6,9 +6,18 @@
 //
 
 struct Bank: Agency {
-    var ticketNumberQueue: Queue<BankCustomer>
     var banker = Banker()
     var customerCount: Int?
+    var ticketNumberQueue: Queue<BankCustomer> = {
+        let randomNumber = Int.random(in: NameSpace.randomCustomerNumberRange)
+        var randomCustomerQueue = Queue<BankCustomer>()
+        
+        for index in 1...randomNumber {
+            randomCustomerQueue.enqueue(data: BankCustomer(id: index))
+        }
+        
+        return randomCustomerQueue
+    }()
     
     mutating func open() {
         customerCount = ticketNumberQueue.count

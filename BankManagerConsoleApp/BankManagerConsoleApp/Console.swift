@@ -11,8 +11,7 @@ struct Console {
         guard let input = readLine()?.trimmingCharacters(in: .whitespaces) else { return }
         
         if input == "1" {
-            let randomCustomers = BankCustomer.generateRandomCustomer()
-            var bank = Bank(ticketNumberQueue: randomCustomers)
+            var bank = Bank()
             
             bank.open()
             bank.close()
