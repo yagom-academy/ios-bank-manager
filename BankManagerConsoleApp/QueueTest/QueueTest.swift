@@ -8,14 +8,15 @@
 import XCTest
 
 class QueueTest: XCTestCase {
-
     var sut: Queue<Int>?
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = Queue<Int>()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
 

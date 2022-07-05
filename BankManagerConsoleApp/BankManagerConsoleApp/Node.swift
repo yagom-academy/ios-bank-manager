@@ -7,7 +7,7 @@
 
 final class Node<T> {
     var next: Node<T>?
-    var previous: Node<T>?
+    weak var previous: Node<T>?
     var data: T
     
     init(data: T) {
