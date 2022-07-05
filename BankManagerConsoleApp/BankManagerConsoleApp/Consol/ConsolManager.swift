@@ -21,34 +21,28 @@ struct ConsolManager {
 
     func executeWork() -> Int {
         let group = DispatchGroup()
-        let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
-        let loanQueue = DispatchQueue(label: "loan", attributes: .concurrent)
+        let workQueue = DispatchQueue(label: "work", attributes: .concurrent)
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
         let bank = Bank()
-        var totalCustomer = 0
-        let semaphore1 = DispatchSemaphore(value: 2)
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        while !bank.customerQueue.isEmpty {
+        let totalCustomer = bank.customerQueue.count
+
+        while bank.customerQueue.isNotEmpty {
             do {
                 let customer = try bank.popCustomer()
                 if customer.business == "예금업무" {
-                    depositQueue.async(group: group) {
-                        semaphore1.wait()
-                        print("\(customer.name) 고객 \(customer.business) 시작")
-                        Thread.sleep(forTimeInterval: 0.7)
-                        print("\(customer.name) 고객 \(customer.business) 완료")
-                        semaphore1.signal()
+                    workQueue.async(group: group) {
+                        depositSemaphore.wait()
+                        BankManager.work(customer: customer, time: 0.7)
+                        depositSemaphore.signal()
                     }
                 } else {
-                    loanQueue.async(group: group) {
-                        semaphore.wait()
-                        print("\(customer.name) 고객 \(customer.business) 시작")
-                        Thread.sleep(forTimeInterval: 1.1)
-                        print("\(customer.name) 고객 \(customer.business) 완료")
-                        semaphore.signal()
+                    workQueue.async(group: group) {
+                        loanSemaphore.wait()
+                        BankManager.work(customer: customer, time: 1.1)
+                        loanSemaphore.signal()
                     }
                 }
-                totalCustomer += 1
             } catch {
                 print("고객이 없습니다.")
             }
