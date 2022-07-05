@@ -8,6 +8,8 @@
 import Foundation
 
 struct BankAppManager {
+    private var bank = Bank()
+    
     mutating func run() {
         setUpMenuList()
         guard let selectedNumber = readLine(),
@@ -17,7 +19,6 @@ struct BankAppManager {
         
         switch system {
         case .on:
-            var bank = Bank()
             bank.open()
             
             run()
