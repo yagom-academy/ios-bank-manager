@@ -5,15 +5,19 @@
 //
 
 import Foundation
-
+ 
 struct BankManager {
-    let handlingTime: TimeInterval = 0.7
+    var totalHandlingTime: TimeInterval = 0
     
-    func handle(customer: Customer) {
+    mutating func handle(customer: Customer) {
         let customerNumber = customer.number
+        let customerBusiness = customer.business
         
-        print("\(customerNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: handlingTime)
-        print("\(customerNumber)번 고객 업무 완료")
+        print("\(customerNumber)번 고객 \(customerBusiness.name)업무 시작")
+        Thread.sleep(forTimeInterval: customerBusiness.processTime)
+        print("\(customerNumber)번 고객 \(customerBusiness.name)업무 완료")
+        
+        totalHandlingTime += customerBusiness.processTime
     }
 }
+
