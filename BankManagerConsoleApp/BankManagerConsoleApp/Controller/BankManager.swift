@@ -7,17 +7,18 @@
 import Foundation
 
 final class BankManager {
-    private let firstDepositClerk: Clerk
-    private let secondDepositClerk: Clerk
+    private let depositClerk: Clerk
     private let loanClerk: Clerk
     private var clients: CustomerQueue<Client>
     
-    init(firstDepositClerk: Clerk = Clerk(),
-         secondDepositClerk: Clerk = Clerk(),
+    private let clientGroup = DispatchGroup()
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    
+    init(depositClerk: Clerk = Clerk(),
          loanClerk: Clerk = Clerk(),
          clients: CustomerQueue<Client> = CustomerQueue()) {
-        self.firstDepositClerk = firstDepositClerk
-        self.secondDepositClerk = secondDepositClerk
+        self.depositClerk = depositClerk
         self.loanClerk = loanClerk
         self.clients = clients
     }
@@ -61,12 +62,24 @@ final class BankManager {
         
         while let client = self.clients.dequeue() {
             servedClients += 1
-            timeSpent += self.loanClerk.provideService(client)
+            
+            DispatchQueue.global().async(group: clientGroup) {
+                switch client.business {
+                case .deposit:
+                    self.depositSemaphore.wait()
+                    timeSpent += self.depositClerk.provideService(client)
+                    self.depositSemaphore.signal()
+                case .loan:
+                    self.loanSemaphore.wait()
+                    timeSpent += self.loanClerk.provideService(client)
+                    self.loanSemaphore.signal()
+                }
+            }
         }
         
+        clientGroup.wait()
         finishWork(customers: servedClients, time: timeSpent)
         openBank()
-        
         return
     }
     
