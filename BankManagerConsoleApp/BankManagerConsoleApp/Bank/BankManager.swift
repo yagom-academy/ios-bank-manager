@@ -15,7 +15,7 @@ final class BankManager {
         self.bank = bank
     }
     
-    static func depositCustomers(customer: Customer, group: DispatchGroup) {
+    static func handleDepositCustomers(customer: Customer, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
             self.depositSemaphore.wait()
             print("\(customer.customerNumber)번 고객 \(customer.business.name)업무 시작")
@@ -25,7 +25,7 @@ final class BankManager {
         }
     }
     
-    static func loanCustomers(customer: Customer, group: DispatchGroup) {
+    static func handleLoanCustomers(customer: Customer, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
             self.loanSemaphore.wait()
             print("\(customer.customerNumber)번 고객 \(customer.business.name)업무 시작")

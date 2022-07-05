@@ -35,9 +35,9 @@ final class Bank {
         while !Bank.lineOfCustomers.isEmpty {
             guard let customer = Bank.lineOfCustomers.dequeue() else { return }
             if customer.business.name == "예금" {
-                BankManager.depositCustomers(customer: customer, group: group)
+                BankManager.handleDepositCustomers(customer: customer, group: group)
             } else {
-                BankManager.loanCustomers(customer: customer, group: group)
+                BankManager.handleLoanCustomers(customer: customer, group: group)
             }
         }
         group.leave()
