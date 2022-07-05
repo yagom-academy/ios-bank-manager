@@ -17,10 +17,7 @@ struct Bank {
 
     mutating func run() {
         showMenu()
-        guard let option = readLine() else {
-            return
-        }
-        choose(option)
+        chooseOption()
     }
     
     private func showMenu() {
@@ -28,7 +25,11 @@ struct Bank {
         print("입력 : ", terminator: "")
     }
     
-    private mutating func choose(_ option: String) {
+    private mutating func chooseOption() {
+        guard let option = readLine() else {
+            return
+        }
+        
         switch option {
         case Option.open.description:
             openBank()
