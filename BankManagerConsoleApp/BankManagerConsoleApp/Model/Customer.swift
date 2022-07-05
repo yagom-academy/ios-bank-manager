@@ -7,4 +7,5 @@
 
 struct Customer: Equatable {
     var number: Int
+    var business: Business
 }

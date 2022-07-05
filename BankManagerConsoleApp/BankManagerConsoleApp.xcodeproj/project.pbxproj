@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4251BD602872E01E002BC3C7 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4251BD5F2872E01E002BC3C7 /* Business.swift */; };
 		426108E32869943F00756C00 /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426108E22869943F00756C00 /* CustomerQueueTests.swift */; };
 		426108E9286994E800756C00 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8069F28698C6600FCD395 /* LinkedList.swift */; };
 		426108EC286995BC00756C00 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8069D286989B300FCD395 /* Node.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4251BD5F2872E01E002BC3C7 /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		426108E02869943F00756C00 /* CustomerQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomerQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		426108E22869943F00756C00 /* CustomerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTests.swift; sourceTree = "<group>"; };
 		AF3D274E286A8F2300D50AAF /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				AF89D610286D89E800B6749A /* Customer.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				AF44C9B8286E8F860065BF4A /* Bank.swift */,
+				4251BD5F2872E01E002BC3C7 /* Business.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AFF806AE2869AA5200FCD395 /* CustomerQueue.swift in Sources */,
 				AFE7A2DE286EC1FF0043D86B /* Queue+Extensions.swift in Sources */,
+				4251BD602872E01E002BC3C7 /* Business.swift in Sources */,
 				AFF806A028698C6600FCD395 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
