@@ -6,17 +6,6 @@
 //
 
 enum Option {
-    case open
-    case close
-}
-
-extension Option: CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .open:
-            return "1"
-        case .close:
-            return "2"
-        }
-    }
+    static let open = "1"
+    static let close = "2"
 }
