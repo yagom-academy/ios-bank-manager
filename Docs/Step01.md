@@ -1,8 +1,7 @@
 ## 1️⃣ STEP 1
-
 ### STEP 1 Questions
 
-#### Q1. `removeAll 시 head와 tail = nil 차이점`
+#### `removeAll 시 head와 tail = nil 차이점`
 
 - `removeAll` 시 `head`와 `tail` 둘다 `nil`을 해주었을 때, 원하는 대로 `Queue`에 쌓인 데이터들이 다 삭제가 되었습니다. </br>
 `removeAll`의 내부 구현부에서 `head`와 `tail` 모두 `nil`로 처리하는 부분을, 각각 한쪽만 `nil`인 경우로 수정하여, 어떻게 변화되는지 확인해보았습니다.</br>
@@ -23,30 +22,31 @@
     print(queue.linkedList.tail?.prev?.data) // Optional(5)
     ```
     
-#### Q2. `TDD 프로퍼티 생성 관련 질문`
+---
+#### `TDD 프로퍼티 생성 관련 질문`
 - TDD에서 인스턴스화 시키는 과정에서 강제옵셔널을 피할 목적으로 2번 방법과 같이 코드를 작성해 보았는데 하리보는 1번과 2번방법 중 어느 것을 더 선호하시나요??
 
-    ```swift
-    [1번 방법] : 강제 옵셔널 프로퍼티를 만들어서 setUpWithError와 tearDownWithError를 통해 초기화 및 해제
-    var sut: CustomerQueue<Int>!
-    var stringSut: CustomerQueue<String>!
+```swift
+[1번 방법] : 강제 옵셔널 프로퍼티를 만들어서 setUpWithError와 tearDownWithError를 통해 초기화 및 해제
+var sut: CustomerQueue<Int>!
+var stringSut: CustomerQueue<String>!
+    
+override func setUpWithError() throws {
+    sut = CustomerQueue<Int>()
+    stringSut = CustomerQueue<String>()
+}
 
-    override func setUpWithError() throws {
-        sut = CustomerQueue<Int>()
-        stringSut = CustomerQueue<String>()
-    }
+override func tearDownWithError() throws {
+    sut = nil
+    stringSut = nil
+}
 
-    override func tearDownWithError() throws {
-        sut = nil
-        stringSut = nil
-    }
-
-    [2번 방법] : 바로 인스턴스 생성
-    var sut = CustomerQueue<Int>()
-    var stringSut = CustomerQueue<String>()
-    ```
-
-#### Q3. `@testable import 모듈 탐색 오류`
+[2번 방법] : 바로 인스턴스 생성
+var sut = CustomerQueue<Int>()
+var stringSut = CustomerQueue<String>()
+```
+---
+#### `@testable import 모듈 탐색 오류`
 - 현재, 각각의 `Node`, `LinkedList`, `CustomerQueue`에서 `CustomQueueTest`에 대하여 `target memebership`을 설정하여, `Unit Test` 과정에서 해당 클래스, 구조체 등의 프로퍼티와 메서드에 접근하고 있습니다.
 - `target membership`을 각각의 파일에서 설정하기보다는, 각각의 파일들이 포함된 `BankManagerConsoleApp` 모듈을 `@testable import`를 통하여 가져온다면, 파일 내 프로퍼티와 메서드에 손쉽게 접근할 수 있다고 판단하였습니다.
 - 하지만, 타겟 멤버쉽을 모두 해제하고, `@testable import`만 사용한 결과, 아래와 같이 모듈을 찾지 못하는 문제에 직면하였습니다.
@@ -58,23 +58,10 @@
 
 ### STEP 1 Answers
 
-#### A1. `removeAll 시 head와 tail = nil 차이점`
-- head 와 tail 은 단지 첫번째 노드와 마지막 노드를 가리키는 참조 값이예요!
-head 와 tail 에 nil 을 할당해주면 노드를 가리키고 있는 포인터 값을 nil 로 해줄뿐이고
-노드 자체에 nil 을 할당하는게 아니랍니다! 해당 노드를 참조하고 있는 모든 값이 없어지고 나면 그때 메모리에서 해제가 되는거예요 😉
-
-#### A2. `TDD 프로퍼티 생성 관련 질문`
-- 저는 말씀 주신 [1번 방법] : 강제 옵셔널 프로퍼티를 만들어서 setUpWithError와 tearDownWithError를 통해 초기화 및 해제
-을 선호하는 편입니닷 😉
-
-#### A3. `@testable import 모듈 탐색 오류`
-- 음 혹시 저 오류에 있는 DerivedData 폴더 내부를 지워보고 시도 해봐주세요!
-Xcode -> Preference -> Location 을 보면 바로 DerivedData 폴더로 이동할 수 있어요 👀
-
 ---
 ### STEP 1 TroubleShooting
     
-#### T1. `SwiftLint적용`
+#### `SwiftLint적용`
 
 같은 프로젝트 내 라이브러리 적용 시 별도의 설정 없이는 `main.swift`만 적용되었는데 
 `.swiftlint.yml` 파일에서 어떠한 디렉토리에 라이브러리를 적용할지 설정하고 나서 해결되었다.
@@ -99,6 +86,4 @@ included:
 ---
 ### STEP 1 Reviews And Updates
     
-[STEP 1 Pull Request](https://github.com/yagom-academy/ios-bank-manager/pull/188)
-
----
+[STEP 1 Pull Request]()
