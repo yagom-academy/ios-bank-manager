@@ -12,12 +12,12 @@ extension Banker {
         var servedClient: Int = .zero
 
         while clientQueue.isEmpty == false {
-            guard let clientIndex = clientQueue.dequeue()?.waitingNumber else {
+            guard let client = clientQueue.dequeue() else {
                 return .zero
             }
-            print("\(clientIndex)번 고객 업무 시작")
+            print("\(client.waitingNumber)번 고객 \(client.desiredServices)업무 시작")
             Thread.sleep(forTimeInterval: time)
-            print("\(clientIndex)번 고객 업무 완료")
+            print("\(client.waitingNumber)번 고객 \(client.desiredServices)업무 완료")
             servedClient += 1
         }
         return servedClient
