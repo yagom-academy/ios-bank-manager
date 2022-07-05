@@ -2,7 +2,7 @@
 //  Service.swift
 //  BankManagerConsoleApp
 //
-//  Created by Gordon Choi on 2022/07/05.
+//  Created by 재재, 나별 on 2022/07/05.
 //
 
 enum Service: CaseIterable {

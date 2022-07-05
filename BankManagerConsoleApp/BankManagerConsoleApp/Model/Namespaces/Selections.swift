@@ -2,7 +2,7 @@
 //  Selections.swift
 //  BankManagerConsoleApp
 //
-//  Created by Gordon Choi on 2022/07/04.
+//  Created by 재재, 나별 on 2022/07/04.
 //
 
 enum Selections {

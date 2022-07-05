@@ -8,7 +8,7 @@
 import Foundation
 
 struct Clerk {
-    func provideService(_ client: Client) -> Double {
+    func provideService(_ client: Customer) -> Double {
         let business = client.business
         
         print("\(client.number)번 고객 \(business.serviceName)업무 시작")

@@ -7,20 +7,17 @@
 import Foundation
 
 final class BankManager {
-    private let depositClerk: Clerk
-    private let loanClerk: Clerk
-    private var clients: CustomerQueue<Client>
+    private let clerk: Clerk
+    private var customers: CustomerQueue<Customer>
     
-    private let clientGroup = DispatchGroup()
-    private let depositSemaphore = DispatchSemaphore(value: 2)
-    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let customerGroup = DispatchGroup()
+    private let depositSemaphore = DispatchSemaphore(value: NumberOfClerks.deposit)
+    private let loanSemaphore = DispatchSemaphore(value: NumberOfClerks.loan)
     
-    init(depositClerk: Clerk = Clerk(),
-         loanClerk: Clerk = Clerk(),
-         clients: CustomerQueue<Client> = CustomerQueue()) {
-        self.depositClerk = depositClerk
-        self.loanClerk = loanClerk
-        self.clients = clients
+    init(clerk: Clerk = Clerk(),
+         customers: CustomerQueue<Customer> = CustomerQueue()) {
+        self.clerk = clerk
+        self.customers = customers
     }
     
     func openBank() {
@@ -41,14 +38,14 @@ final class BankManager {
     }
     
     private func issueTickets() {
-        let customerNumber = Int.random(
-            in: Customer.minimumNumbers...Customer.maximumNumbers
+        let numberOfCustomer = Int.random(
+            in: NumberOfCustomer.minimum...NumberOfCustomer.maximum
         )
         
-        let tickets = Array(1...customerNumber)
+        let tickets = Array(1...numberOfCustomer)
         tickets.forEach {
             if let business = Service.allCases.randomElement() {
-                clients.enqueue(Client(number: $0, business: business))
+                customers.enqueue(Customer(number: $0, business: business))
             }
         }
         
@@ -57,28 +54,28 @@ final class BankManager {
     }
     
     private func startWork() {
-        var servedClients = 0
+        var servedCustomers = 0
         var timeSpent = 0.0
         
-        while let client = self.clients.dequeue() {
-            servedClients += 1
+        while let customer = customers.dequeue() {
+            servedCustomers += 1
             
-            DispatchQueue.global().async(group: clientGroup) {
-                switch client.business {
+            DispatchQueue.global().async(group: customerGroup) {
+                switch customer.business {
                 case .deposit:
                     self.depositSemaphore.wait()
-                    timeSpent += self.depositClerk.provideService(client)
+                    timeSpent += self.clerk.provideService(customer)
                     self.depositSemaphore.signal()
                 case .loan:
                     self.loanSemaphore.wait()
-                    timeSpent += self.loanClerk.provideService(client)
+                    timeSpent += self.clerk.provideService(customer)
                     self.loanSemaphore.signal()
                 }
             }
         }
         
-        clientGroup.wait()
-        finishWork(customers: servedClients, time: timeSpent)
+        customerGroup.wait()
+        finishWork(customers: servedCustomers, time: timeSpent)
         openBank()
         return
     }
