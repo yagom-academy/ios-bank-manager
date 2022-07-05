@@ -1,3 +1,5 @@
+import Foundation
+
 struct BankManager {
     private enum BankStatus: String {
         case open = "1"
@@ -41,21 +43,33 @@ struct BankManager {
         return customerQueue
     }
 
-    private func createBanker(_ numberOfBanker: Int) -> [Banker] {
-        let array = Array(0..<numberOfBanker)
+    private func createBanker(_ numberOfBanker: Int) -> [BankerLogic] {
+        let bankers = Array(0..<numberOfBanker)
         
-        let bankers = array.map { _ in
+        let bankerList = bankers.map { _ in
             return Banker()
         }
         
-        return bankers
+        return bankerList
     }
     
     private func manageBank() {
         let bank = Bank()
-        let customerNumber = bank.startBanking(customer: createCustomerQueue(), bankers: createBanker(1))
-        let workingTime = String(format: "%.2f", customerNumber * 0.7)
+        var customerNumber: Double = 0
+        
+        let processTime = processTime {
+            customerNumber = bank.startBanking(customer: createCustomerQueue(), bankers: createBanker(1))
+        }
+        
+        let workingTime = String(format: "%.2f", processTime)
     
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(customerNumber))명이며, 총 업무시간은 \(workingTime)초입니다.")
+    }
+    
+    private func processTime(processFunction: () -> Void) -> CFAbsoluteTime {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        processFunction()
+        let processTime = CFAbsoluteTimeGetCurrent() - startTime
+        return processTime
     }
 }
