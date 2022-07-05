@@ -8,7 +8,7 @@ class BankService {
     var bank: Bank
     
     init() {
-        self.bank = Bank()
+        self.bank = Bank(numberOfDepositClerk: 2, numberOfLoanClerk: 1)
     }
     
     private func createCustomer() -> [Customer] {
