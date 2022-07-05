@@ -29,4 +29,8 @@ struct BankItemQueue<T> {
     mutating func clear() {
         linkedList.removeAll()
     }
+    
+    var count: Int {
+        linkedList.count
+    }
 }
