@@ -1,10 +1,10 @@
 struct Customer {
     private(set) var name: String
-    private(set) var business: String
+    private(set) var business: BankBusiness
 
     init(name: String) {
-        let businessArray = ["대출업무", "예금업무"]
-        self.business = businessArray.randomElement() ?? ""
+        let businessArray = [BankBusiness.loan, BankBusiness.deposit]
+        self.business = businessArray.randomElement() ?? .deposit
         self.name = name
     }
 }

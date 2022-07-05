@@ -35,7 +35,7 @@ struct ConsolManager {
                 break
             }
 
-            if customer.business == "예금업무" {
+            if customer.business == .deposit {
                 workBanking(business: deposit, as: bankManagers, for: customer)
             } else {
                 workBanking(business: loan, as: bankManagers, for: customer)
@@ -50,7 +50,8 @@ struct ConsolManager {
                              as bankManagers: DispatchGroup,
                              for customer: Customer) {
         let workQueue = DispatchQueue(label: "work", attributes: .concurrent)
-        let time = customer.business == "예금업무" ? 0.7 : 1.1
+        let time = customer.business == .deposit ?
+        BankBusiness.deposit.processingTime : BankBusiness.loan.processingTime
 
         workQueue.async(group: bankManagers) {
             semaphore.wait()
