@@ -7,4 +7,4 @@
 import Foundation
 
 let consol = ConsolManager()
-consol.execute(during: 0.7)
+consol.execute()

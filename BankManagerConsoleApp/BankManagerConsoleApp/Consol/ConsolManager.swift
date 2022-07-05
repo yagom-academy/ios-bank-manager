@@ -1,14 +1,15 @@
 import Foundation
 
 struct ConsolManager {
-    func execute(during time: Double) {
+    func execute() {
     menuLoop:
         while true {
             printStartMessage()
             switch readLine() {
             case BankStatus.opening.menu :
-                let totalCustomer = executeWork(during: time)
-                let totalTime = time * Double(totalCustomer)
+                let startTime = CFAbsoluteTimeGetCurrent()
+                let totalCustomer = executeWork()
+                let totalTime = CFAbsoluteTimeGetCurrent() - startTime
                 printCloseMessage(totalCustomer, totalTime)
             case BankStatus.closed.menu :
                 break menuLoop
@@ -18,7 +19,7 @@ struct ConsolManager {
         }
     }
 
-    func executeWork(during workTime: TimeInterval) -> Int {
+    func executeWork() -> Int {
         let group = DispatchGroup()
         let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
         let loanQueue = DispatchQueue(label: "loan", attributes: .concurrent)
