@@ -8,6 +8,14 @@
 import Foundation
 
 struct Bank {
+    let customer: BankItemQueue<Customer>
+    let bankmanager: BankManager
+    
+    init(customer: BankItemQueue<Customer>, bankmanager: BankManager) {
+        self.customer = customer
+        self.bankmanager = bankmanager
+    }
+    
     mutating func bankBusinessStart() {
         selectBankOpenAndClose()
     }
@@ -18,7 +26,7 @@ struct Bank {
         let numberOfCustomer = setCustomerCount()
         switch requestInput {
         case BankComment.bankOpen.rawValue:
-            giveTask(customerList: makeCustomerWaitingList(by: numberOfCustomer))
+            giveTask(for: customer)
             calculateWorkTime(by: numberOfCustomer, with: BusinessType.work.rawValue)
             bankBusinessStart()
         case BankComment.bankClose.rawValue:
@@ -46,16 +54,6 @@ struct Bank {
         print(BankComment.failChange.rawValue)
     }
     
-    mutating func makeCustomerWaitingList(by totalCustomer: Int) -> BankItemQueue<Customer> {
-        var watingQueue = BankItemQueue<Customer>()
-        
-        for ticketNumber in SetNumber.minimumCustomerCount.rawValue...totalCustomer {
-            let ticketHolder = takeNumberTicket(number: ticketNumber)
-            watingQueue.enQueue(ticketHolder)
-        }
-        return watingQueue
-    }
-    
     private func calculateWorkTime(by resultCustomer: Int, with processTime: Double) {
         do {
             let calculatedWorkTime = Double(resultCustomer) * processTime
@@ -66,12 +64,12 @@ struct Bank {
         }
     }
     
-    mutating func giveTask(customerList: BankItemQueue<Customer>) {
+    mutating func giveTask(for customerList: BankItemQueue<Customer>) {
         var customerList = customerList
-        let processingTime = WorkType()
+        let workProcessingTime = WorkType()
         
         while let completeCustomer = customerList.deQueue() {
-            BankManager().handleBanking(customer: completeCustomer, processingTime: processingTime)
+            bankmanager.handleBanking(for: completeCustomer, with: workProcessingTime)
         }
     }
 }

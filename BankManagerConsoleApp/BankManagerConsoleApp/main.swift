@@ -19,8 +19,19 @@ func takeNumberTicket(number: Int) -> Customer {
     return customer
 }
 
+func makeCustomer() -> BankItemQueue<Customer> {
+    var watingQueue = BankItemQueue<Customer>()
+    let totalCustomer = setCustomerCount()
+    for ticketNumber in SetNumber.minimumCustomerCount.rawValue...totalCustomer {
+        let ticketHolder = takeNumberTicket(number: ticketNumber)
+        watingQueue.enQueue(ticketHolder)
+    }
+    return watingQueue
+}
+
 func initiateBankBusiness() {
-    var bank = Bank()
+    let bankManager = BankManager()
+    var bank = Bank(customer: makeCustomer(), bankmanager: bankManager)
     
     bank.bankBusinessStart()
 }
