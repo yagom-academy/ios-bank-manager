@@ -1,10 +1,3 @@
-//
-//  Node.swift
-//  BankManagerConsoleApp
-//
-//  Created by bonf, judy on 2022/06/27.
-//
-
 final class Node<T> {
     let value: T
     var next: Node?

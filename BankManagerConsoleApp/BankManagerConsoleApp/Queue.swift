@@ -1,30 +1,23 @@
-//
-//  Queue.swift
-//  BankManagerConsoleApp
-//
-//  Created by bonf, judy on 2022/06/27.
-//
-
 final class Queue<T> {
     private let list = LinkedList<T>()
     
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return list.isEmpty
     }
     
-    func peek() throws -> T {
-        return try list.firstNode().value
+    var peek: T? {
+        return list.firstNode?.value
     }
     
-    public func enqueue(_ element: T) {
+    func enqueue(_ element: T) {
         list.append(element)
     }
     
-    public func dequeue() throws -> T {
-        return try list.removeHead().value
+    func dequeue() -> T? {
+        return list.removeHead()?.value
     }
     
-    public func clear() {
+    func clear() {
         list.removeAll()
     }
 }
