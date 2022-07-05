@@ -15,11 +15,11 @@ struct Bank {
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = userInput()
-        let customerCount = setCustomerCount()
+        let numberOfCustomer = setCustomerCount()
         switch requestInput {
         case BankComment.bankOpen.rawValue:
-            giveTask(customerList: makeCustomerWaitingList(by: customerCount))
-            reportWorkResult(resultCustomer: customerCount, processTime: BusinessType.work.rawValue)
+            giveTask(customerList: makeCustomerWaitingList(by: numberOfCustomer))
+            calculateWorkTime(by: numberOfCustomer, with: BusinessType.work.rawValue)
             bankBusinessStart()
         case BankComment.bankClose.rawValue:
             break
@@ -34,7 +34,7 @@ struct Bank {
         print(BankComment.secondGreeting.rawValue, terminator: BankComment.emptyValue.rawValue)
     }
     
-    private func printReportWorkResult(handledCustomer: Int, handledWorkTime: String) {
+    private func printcalculateWorkTime(by handledCustomer: Int, with handledWorkTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(handledCustomer)명 이며, 총 업무시간은 \(handledWorkTime)초 입니다.")
     }
     
@@ -56,11 +56,11 @@ struct Bank {
         return watingQueue
     }
     
-    private func reportWorkResult(resultCustomer: Int, processTime: Double) {
+    private func calculateWorkTime(by resultCustomer: Int, with processTime: Double) {
         do {
-            let calculateWorkTime = Double(resultCustomer) * processTime
-            let totalWorkTime = try calculateWorkTime.numberFormatter()
-            printReportWorkResult(handledCustomer: resultCustomer, handledWorkTime: totalWorkTime)
+            let calculatedWorkTime = Double(resultCustomer) * processTime
+            let totalWorkTime = try calculatedWorkTime.numberFormatter()
+            printcalculateWorkTime(by: resultCustomer, with: totalWorkTime)
         } catch {
             printFailChange()
         }
