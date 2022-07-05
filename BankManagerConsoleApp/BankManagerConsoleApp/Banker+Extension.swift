@@ -8,14 +8,9 @@
 import Foundation
 
 extension Banker {
-    func work(from client: Client) -> Int {
-        var servedClient: Int = .zero
-        
+    func work(from client: Client) {
         print("\(client.waitingNumber)번 고객 \(client.desiredServices)업무 시작")
         Thread.sleep(forTimeInterval: time)
         print("\(client.waitingNumber)번 고객 \(client.desiredServices)업무 완료")
-        
-        servedClient += 1
-        return servedClient
     }
 }

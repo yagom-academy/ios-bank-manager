@@ -5,6 +5,8 @@
 //  Created by 수꿍, 브래드 on 2022/06/30.
 //
 
+import Foundation
+
 struct Bank {
     private var servedClient: Int
     private var waitingClient: Int?
@@ -65,24 +67,37 @@ struct Bank {
         guard var queue = clientQueue else {
             return
         }
+        
+        let depositBanker = DepositBankManager()
+        let loanBanker = LoanBankManager()
+
+        let bankGroup = DispatchGroup()
+        let depositQueue = DispatchQueue(label: Option.deposit, attributes: .concurrent)
+        let loanQueue = DispatchQueue(label: Option.loan, attributes: .concurrent)
+        let depositSemaphore = DispatchSemaphore(value: numberOfDepositBanker)
+        let loanSemaphore = DispatchSemaphore(value: numberOfLoanBanker)
 
         while queue.isEmpty == false {
             guard let client = queue.dequeue() else {
                 return
             }
-            
+
             if client.desiredServices == Option.deposit {
-                let depositBanker = DepositBankManager()
-                let handledClient = depositBanker.work(from: client)
-                
-                servedClient += handledClient
+                depositQueue.async(group: bankGroup) {
+                    depositSemaphore.wait()
+                    depositBanker.work(from: client)
+                    depositSemaphore.signal()
+                }
             } else if client.desiredServices == Option.loan {
-                let loanBanker = LoanBankManager()
-                let handledClient = loanBanker.work(from: client)
-                
-                servedClient += handledClient
+                loanQueue.async(group: bankGroup) {
+                    loanSemaphore.wait()
+                    loanBanker.work(from: client)
+                    loanSemaphore.signal()
+                }
             }
+            servedClient += 1
         }
+        bankGroup.wait()
     }
 
     private mutating func terminateBusiness() {
