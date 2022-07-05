@@ -19,19 +19,41 @@ struct ConsolManager {
     }
 
     func executeWork(during workTime: TimeInterval) -> Int {
+        let group = DispatchGroup()
+        let depositQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
+        let loanQueue = DispatchQueue(label: "loan", attributes: .concurrent)
         let bank = Bank()
         var totalCustomer = 0
-        for _ in 0..<bank.customerQueue.count {
+        let semaphore1 = DispatchSemaphore(value: 2)
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        while !bank.customerQueue.isEmpty {
             do {
                 let customer = try bank.popCustomer()
-                print("\(customer.name) 고객 업무 시작")
-                BankManager.work(during: workTime)
-                print("\(customer.name) 고객 업무 완료")
+                if customer.business == "예금업무" {
+                    depositQueue.async(group: group) {
+                        semaphore1.wait()
+                        print("\(customer.name) 고객 \(customer.business) 시작")
+                        Thread.sleep(forTimeInterval: 0.7)
+                        print("\(customer.name) 고객 \(customer.business) 완료")
+                        semaphore1.signal()
+                    }
+                } else {
+                    loanQueue.async(group: group) {
+                        semaphore.wait()
+                        print("\(customer.name) 고객 \(customer.business) 시작")
+                        Thread.sleep(forTimeInterval: 1.1)
+                        print("\(customer.name) 고객 \(customer.business) 완료")
+                        semaphore.signal()
+                    }
+                }
                 totalCustomer += 1
             } catch {
                 print("고객이 없습니다.")
             }
         }
+        group.wait()
+
         return totalCustomer
     }
 
