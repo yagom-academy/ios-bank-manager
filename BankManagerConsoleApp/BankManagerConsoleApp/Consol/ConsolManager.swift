@@ -20,36 +20,43 @@ struct ConsolManager {
     }
 
     func executeWork() -> Int {
-        let group = DispatchGroup()
-        let workQueue = DispatchQueue(label: "work", attributes: .concurrent)
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
+        let bankManagers = DispatchGroup()
+        let deposit = DispatchSemaphore(value: 2)
+        let loan = DispatchSemaphore(value: 1)
         let bank = Bank()
         let totalCustomer = bank.customerQueue.count
 
         while bank.customerQueue.isNotEmpty {
+            var customer: Customer
             do {
-                let customer = try bank.popCustomer()
-                if customer.business == "예금업무" {
-                    workQueue.async(group: group) {
-                        depositSemaphore.wait()
-                        BankManager.work(customer: customer, time: 0.7)
-                        depositSemaphore.signal()
-                    }
-                } else {
-                    workQueue.async(group: group) {
-                        loanSemaphore.wait()
-                        BankManager.work(customer: customer, time: 1.1)
-                        loanSemaphore.signal()
-                    }
-                }
+                customer = try bank.popCustomer()
             } catch {
                 print("고객이 없습니다.")
+                break
+            }
+
+            if customer.business == "예금업무" {
+                workBanking(business: deposit, as: bankManagers, for: customer)
+            } else {
+                workBanking(business: loan, as: bankManagers, for: customer)
             }
         }
-        group.wait()
 
+        bankManagers.wait()
         return totalCustomer
+    }
+
+    private func workBanking(business semaphore: DispatchSemaphore,
+                             as bankManagers: DispatchGroup,
+                             for customer: Customer) {
+        let workQueue = DispatchQueue(label: "work", attributes: .concurrent)
+        let time = customer.business == "예금업무" ? 0.7 : 1.1
+
+        workQueue.async(group: bankManagers) {
+            semaphore.wait()
+            BankManager.work(customer: customer, time: time)
+            semaphore.signal()
+        }
     }
 
     private func printCloseMessage(_ totalCustomer: Int, _ time: Double) {
