@@ -6,21 +6,21 @@
 //
 import Foundation
 
-class Bank {
+final class Bank {
     static var lineOfCustomers = BankManagerQueue<Customer>()
-    var numberOfCustomers: Int = 0
+    private var numberOfCustomers: Int = 0
     
-    func inputMenu() {
+    private func inputMenu() {
         print("1 : 은행 개점")
         print("2 : 종료")
         print("입력 : ", terminator: "")
     }
     
-    func generateRandomNumberOfCustomers() {
+    private func generateRandomNumberOfCustomers() {
         numberOfCustomers = Int.random(in: 10...30)
     }
     
-    func insertCustomersIntoQueue() {
+    private func insertCustomersIntoQueue() {
         for element in 1...self.numberOfCustomers {
             let random = Int.random(in: 0...1)
             let customer = Customer(customerNumber: element, business: WorkType.allCases[random])
@@ -28,7 +28,7 @@ class Bank {
         }
     }
     
-    func distributeTask () {
+    private func distributeTask () {
         let start = CFAbsoluteTimeGetCurrent()
         let group = DispatchGroup()
         group.enter()
