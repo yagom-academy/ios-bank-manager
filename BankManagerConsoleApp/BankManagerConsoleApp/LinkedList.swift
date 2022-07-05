@@ -12,7 +12,7 @@ struct LinkedList<T> {
         return head?.data
     }
     var isEmpty: Bool {
-        return head == nil && tail == nil
+        return head == nil || tail == nil
     }
     
     mutating func append(data: T?) {
