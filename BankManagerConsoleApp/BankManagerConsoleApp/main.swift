@@ -14,7 +14,7 @@ func setCustomerCount() -> Int {
     return Int.random(in: SetNumber.minCustomer.rawValue...SetNumber.maxCustomer.rawValue)
 }
 
-func takeNumberTicket(number: Int, workType: Double) -> Customer {
+func takeNumberTicket(number: Int, workType: (Double, String)) -> Customer {
     let customer = Customer(bankNumberTicket: number, bankingType: workType)
     return customer
 }
