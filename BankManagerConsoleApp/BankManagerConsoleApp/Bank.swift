@@ -83,13 +83,17 @@ struct Bank {
     
     private mutating func makeClientQueue() -> ClientQueue<Client>? {
         var clientQueue = ClientQueue<Client>()
+        let task = [Option.deposit, Option.loan]
         
         guard let waitingClient = waitingClient else {
             return nil
         }
-
+        
         for waitingNumber in 1...waitingClient {
-            let client = Client(waitingNumber: waitingNumber)
+            guard let taskRandomElement = task.randomElement() else {
+                return nil
+            }
+            let client = Client(waitingNumber: waitingNumber, desiredServices: taskRandomElement)
             clientQueue.enqueue(client)
         }
         return clientQueue
