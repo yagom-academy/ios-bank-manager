@@ -25,17 +25,17 @@ extension LinkedList {
     }
     
     func isEmpty() -> Bool {
-        return head == nil ? true : false
+        return head == nil
     }
     
-    func removeFirst() -> Node<Element>? {
+    func removeFirst() -> Element? {
         guard let removedNode = head else {
             return nil
         }
         
         head = removedNode.nextNode
         
-        return removedNode
+        return removedNode.data
     }
     
     func removeAll() {

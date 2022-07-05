@@ -9,7 +9,7 @@ struct ClientQueue<Element> {
     private let queue = LinkedList<Element>()
     
     var peek: Element? {
-        return queue.head?.data ?? nil
+        return queue.head?.data
     }
 }
 
@@ -20,12 +20,12 @@ extension ClientQueue: Queue {
         queue.append(Node(data))
     }
     
-    func dequeue() -> Node<Element>? {
-        return queue.isEmpty() == true ? nil : queue.removeFirst()
+    func dequeue() -> Element? {
+        return queue.removeFirst()
     }
     
     func isEmpty() -> Bool {
-        return queue.head == nil ? true : false
+        return queue.isEmpty()
     }
     
     func clear() {

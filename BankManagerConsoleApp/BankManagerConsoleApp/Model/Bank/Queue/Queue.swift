@@ -11,7 +11,7 @@ protocol Queue {
     var peek: Element? { get }
     
     mutating func enqueue(_ data: Element)
-    mutating func dequeue() -> Node<Element>?
+    mutating func dequeue() -> Element?
     func isEmpty() -> Bool
     func clear()
 }
