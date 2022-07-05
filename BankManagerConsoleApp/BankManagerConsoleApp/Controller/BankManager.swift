@@ -7,12 +7,18 @@
 import Foundation
 
 final class BankManager {
-    private let firstClerk: Clerk
+    private let firstDepositClerk: Clerk
+    private let secondDepositClerk: Clerk
+    private let loanClerk: Clerk // 얘가 대출담당
     private var clients: CustomerQueue<Client>
     
-    init(firstClerk: Clerk = Clerk(),
+    init(firstDepositClerk: Clerk = Clerk(),
+         secondDepositClerk: Clerk = Clerk(),
+         loanClerk: Clerk = Clerk(),
          clients: CustomerQueue<Client> = CustomerQueue()) {
-        self.firstClerk = firstClerk
+        self.firstDepositClerk = firstDepositClerk
+        self.secondDepositClerk = secondDepositClerk
+        self.loanClerk = loanClerk
         self.clients = clients
     }
     
@@ -40,7 +46,9 @@ final class BankManager {
         
         let tickets = Array(1...customerNumber)
         tickets.forEach {
-            clients.enqueue(Client(number: $0))
+            if let business = Service.allCases.randomElement() {
+                clients.enqueue(Client(number: $0, business: business))
+            }
         }
         
         startWork()
@@ -52,9 +60,8 @@ final class BankManager {
         var timeSpent = 0.0
         
         while let client = clients.dequeue() {
-            firstClerk.provideService(client)
             servedClients += 1
-            timeSpent += EstimatedTime.deposit
+            timeSpent += firstDepositClerk.provideService(client)
         }
         
         finishWork(customers: servedClients, time: timeSpent)

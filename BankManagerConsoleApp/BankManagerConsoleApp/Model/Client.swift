@@ -7,4 +7,5 @@
 
 struct Client {
     let number: Int
+    let business: Service
 }
