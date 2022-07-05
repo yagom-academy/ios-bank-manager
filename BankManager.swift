@@ -6,16 +6,11 @@
 
 import Foundation
 
-protocol BankManager {
-    func handleBanking(customer: Customer)
-}
-
-extension BankManager {
-    func handleBanking(customer: Customer) {
-        let processingTime = 700000
+struct BankManager {
+    func handleBanking(customer: Customer, processingTime: WorkType) {
         
         print("\(customer.bankNumberTicket)" + BankManagerComment.handleBankingStart.rawValue)
-        usleep(useconds_t(processingTime))
+        usleep(useconds_t(processingTime.workTime))
         print("\(customer.bankNumberTicket)" + BankManagerComment.handleBankingFinish.rawValue)
     }
 }

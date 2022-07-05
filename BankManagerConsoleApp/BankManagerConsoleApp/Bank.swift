@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Bank: BankManager {
-    
+struct Bank {
     mutating func bankBusinessStart() {
         selectBankOpenAndClose()
     }
@@ -69,9 +68,10 @@ struct Bank: BankManager {
     
     mutating func giveTask(customerList: BankItemQueue<Customer>) {
         var customerList = customerList
+        let processingTime = WorkType()
         
         while let completeCustomer = customerList.deQueue() {
-            handleBanking(customer: completeCustomer)
+            BankManager().handleBanking(customer: completeCustomer, processingTime: processingTime)
         }
     }
 }
