@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Banker: Worker {
+struct Banker: Workable {
     var totalWorkTime: Double
 
     init() {

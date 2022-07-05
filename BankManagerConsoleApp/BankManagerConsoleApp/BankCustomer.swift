@@ -6,5 +6,6 @@
 //
 
 struct BankCustomer: Customer {
+    var task: String?
     var id: Int
 }
