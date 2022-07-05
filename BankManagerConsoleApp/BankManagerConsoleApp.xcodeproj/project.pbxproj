@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F0D8FFA2872B49A00EE8C5F /* Selections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D8FF92872B49A00EE8C5F /* Selections.swift */; };
-		4F0D8FFC2872B5A300EE8C5F /* EstimatedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D8FFB2872B5A300EE8C5F /* EstimatedTime.swift */; };
 		4F0D8FFE2872B68300EE8C5F /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D8FFD2872B68300EE8C5F /* Customer.swift */; };
 		4F4F5DA9286DC029001E9E57 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		4F7861682873C9BE00EBD9A4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7861672873C9BE00EBD9A4 /* Service.swift */; };
@@ -42,7 +41,6 @@
 
 /* Begin PBXFileReference section */
 		4F0D8FF92872B49A00EE8C5F /* Selections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selections.swift; sourceTree = "<group>"; };
-		4F0D8FFB2872B5A300EE8C5F /* EstimatedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedTime.swift; sourceTree = "<group>"; };
 		4F0D8FFD2872B68300EE8C5F /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		4F7861672873C9BE00EBD9A4 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		4F7A6772286AE4FF0087EE4F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				4F0D8FF92872B49A00EE8C5F /* Selections.swift */,
-				4F0D8FFB2872B5A300EE8C5F /* EstimatedTime.swift */,
 				4F0D8FFD2872B68300EE8C5F /* Customer.swift */,
 			);
 			path = Namespaces;
@@ -267,7 +264,6 @@
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				4F0D8FFA2872B49A00EE8C5F /* Selections.swift in Sources */,
 				7E3BB999286DAACE00A0A63A /* Client.swift in Sources */,
-				4F0D8FFC2872B5A300EE8C5F /* EstimatedTime.swift in Sources */,
 				4F7861682873C9BE00EBD9A4 /* Service.swift in Sources */,
 				4F7A6773286AE4FF0087EE4F /* Queue.swift in Sources */,
 				4F7A6775286AE77C0087EE4F /* LinkedList.swift in Sources */,

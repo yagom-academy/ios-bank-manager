@@ -9,7 +9,7 @@ import Foundation
 final class BankManager {
     private let firstDepositClerk: Clerk
     private let secondDepositClerk: Clerk
-    private let loanClerk: Clerk // 얘가 대출담당
+    private let loanClerk: Clerk
     private var clients: CustomerQueue<Client>
     
     init(firstDepositClerk: Clerk = Clerk(),
@@ -59,13 +59,14 @@ final class BankManager {
         var servedClients = 0
         var timeSpent = 0.0
         
-        while let client = clients.dequeue() {
+        while let client = self.clients.dequeue() {
             servedClients += 1
-            timeSpent += firstDepositClerk.provideService(client)
+            timeSpent += self.loanClerk.provideService(client)
         }
         
         finishWork(customers: servedClients, time: timeSpent)
         openBank()
+        
         return
     }
     

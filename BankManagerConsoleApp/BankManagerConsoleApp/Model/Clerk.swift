@@ -8,18 +8,12 @@
 import Foundation
 
 struct Clerk {
-    func provideService(_ client: Client) -> Double {
+    func provideService(_ client: Client) -> Double {        
         print("\(client.number)번 고객 업무 시작")
+        let business = client.business
+        Thread.sleep(forTimeInterval: business.estimatedTime)
         
-        switch client.business {
-        case .deposit:
-            Thread.sleep(forTimeInterval: EstimatedTime.deposit)
-            print("\(client.number)번 고객 업무 종료")
-            return EstimatedTime.deposit
-        case .loan:
-            Thread.sleep(forTimeInterval: EstimatedTime.loan)
-            print("\(client.number)번 고객 업무 종료")
-            return EstimatedTime.loan
-        }
+        print("\(client.number)번 고객 업무 종료")
+        return business.estimatedTime
     }
 }
