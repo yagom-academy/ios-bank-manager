@@ -8,6 +8,6 @@
 import Foundation
 
 struct WorkType {
-    let deposit = 700000
-    let loan = 1100000 
+    let deposit = 0.7
+    let loan = 1.1
 }

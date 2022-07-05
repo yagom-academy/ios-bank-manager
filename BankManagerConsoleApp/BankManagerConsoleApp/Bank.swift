@@ -26,8 +26,8 @@ struct Bank {
         let numberOfCustomer = customer.count
         switch requestInput {
         case BankComment.bankOpen.rawValue:
-            giveTask(for: customer)
-            calculateWorkTime(by: numberOfCustomer)
+            let totalTaskTime = giveTask(for: customer)
+            calculateWorkTime(by: numberOfCustomer, with: totalTaskTime)
             bankBusinessStart()
         case BankComment.bankClose.rawValue:
             break
@@ -54,21 +54,21 @@ struct Bank {
         print(BankComment.failChange.rawValue)
     }
     
-    private func calculateWorkTime(by resultCustomer: Int) {
+    private func calculateWorkTime(by resultCustomer: Int, with totaltime: Double) {
         do {
-            let calculatedWorkTime = Double(resultCustomer) * BusinessType.deposit.type
-            let totalWorkTime = try calculatedWorkTime.numberFormatter()
+            let totalWorkTime = try totaltime.numberFormatter()
             printcalculateWorkTime(by: resultCustomer, with: totalWorkTime)
         } catch {
             printFailChange()
         }
     }
     
-    mutating func giveTask(for customerList: BankItemQueue<Customer>) {
+    mutating func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
         var customerList = customerList
-        
+        var sumTime = 0.0
         while let completeCustomer = customerList.deQueue() {
-            bankmanager.handleBanking(for: completeCustomer)
+            sumTime += bankmanager.handleBanking(for: completeCustomer)
         }
+        return sumTime
     }
 }

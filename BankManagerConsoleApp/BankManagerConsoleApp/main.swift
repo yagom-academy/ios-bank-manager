@@ -14,7 +14,7 @@ func setCustomerCount() -> Int {
     return Int.random(in: SetNumber.minCustomer.rawValue...SetNumber.maxCustomer.rawValue)
 }
 
-func takeNumberTicket(number: Int, workType: Int) -> Customer {
+func takeNumberTicket(number: Int, workType: Double) -> Customer {
     let customer = Customer(bankNumberTicket: number, bankingType: workType)
     return customer
 }
@@ -23,7 +23,6 @@ func makeCustomer() -> BankItemQueue<Customer> {
     var watingQueue = BankItemQueue<Customer>()
     let totalCustomer = setCustomerCount()
     let workType = [WorkType().deposit, WorkType().loan]
-    
     for ticketNumber in SetNumber.minimumCustomerCount.rawValue...totalCustomer {
         guard let type = workType.randomElement() else { return watingQueue }
         let ticketHolder = takeNumberTicket(number: ticketNumber, workType: type)
