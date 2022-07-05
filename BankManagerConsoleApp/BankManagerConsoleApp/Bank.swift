@@ -25,6 +25,14 @@ struct Bank {
         chooseOption()
     }
     
+    private func calculateTotalTime(bankTaskFunction: () -> ()) -> CFAbsoluteTime {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        bankTaskFunction()
+        let totalTime = CFAbsoluteTimeGetCurrent() - startTime
+
+        return totalTime
+    }
+    
     private func showMenu() {
         print("1 : 은행개점\n2 : 종료")
         print("입력 : ", terminator: "")
@@ -52,8 +60,8 @@ struct Bank {
     
     private mutating func openBank() {
         reset()
-        runBusiness()
-        terminateBusiness()
+        let bankingHour = runBusiness()
+        terminateBusiness(bankingHour)
         run()
     }
 
@@ -63,9 +71,9 @@ struct Bank {
         clientQueue = makeClientQueue()
     }
     
-    private mutating func runBusiness() {
+    private mutating func runBusiness() -> CFAbsoluteTime {
         guard var queue = clientQueue else {
-            return
+            return .nan
         }
         
         let depositBanker = DepositBankManager()
@@ -77,36 +85,37 @@ struct Bank {
         let depositSemaphore = DispatchSemaphore(value: numberOfDepositBanker)
         let loanSemaphore = DispatchSemaphore(value: numberOfLoanBanker)
 
-        while queue.isEmpty == false {
-            guard let client = queue.dequeue() else {
-                return
-            }
-
-            if client.desiredServices == Option.deposit {
-                depositQueue.async(group: bankGroup) {
-                    depositSemaphore.wait()
-                    depositBanker.work(from: client)
-                    depositSemaphore.signal()
+        let caculTime = calculateTotalTime {
+            while queue.isEmpty == false {
+                guard let client = queue.dequeue() else {
+                    return
                 }
-            } else if client.desiredServices == Option.loan {
-                loanQueue.async(group: bankGroup) {
-                    loanSemaphore.wait()
-                    loanBanker.work(from: client)
-                    loanSemaphore.signal()
+                
+                if client.desiredServices == Option.deposit {
+                    depositQueue.async(group: bankGroup) {
+                        depositSemaphore.wait()
+                        depositBanker.work(from: client)
+                        depositSemaphore.signal()
+                    }
+                } else if client.desiredServices == Option.loan {
+                    loanQueue.async(group: bankGroup) {
+                        loanSemaphore.wait()
+                        loanBanker.work(from: client)
+                        loanSemaphore.signal()
+                    }
                 }
+                servedClient += 1
             }
-            servedClient += 1
+            bankGroup.wait()
         }
-        bankGroup.wait()
+        return caculTime
     }
 
-    private mutating func terminateBusiness() {
-//        let bankingHours = Double(servedClient) * banker.time
-        
+    private mutating func terminateBusiness(_ businessHour: CFAbsoluteTime) {
         print("""
         업무가 마감되었습니다. \
         오늘 업무를 처리한 고객은 총 \(servedClient)명이며, \
-        총 업무시간은 \(String(format: "%.1f", 3.3))초입니다.
+        총 업무시간은 \(String(format: "%.2f", businessHour))초입니다.
         """)
     }
     
