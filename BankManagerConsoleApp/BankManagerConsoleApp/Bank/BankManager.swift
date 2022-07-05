@@ -38,4 +38,3 @@ final class BankManager {
         waitingNumber = 0
     }
 }
-

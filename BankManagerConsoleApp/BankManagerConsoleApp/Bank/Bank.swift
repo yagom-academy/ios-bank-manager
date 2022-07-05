@@ -53,9 +53,7 @@ final class Bank {
         loanQueue.waitUntilAllOperationsAreFinished()
     
         let totalTime = String(format: "%.2f", -date.timeIntervalSinceNow)
-        print("업무가 마감되었습니다.", terminator: "")
-        print("오늘 업무를 처리한 인원은 \(totalCustomer)명이며,", terminator: " ")
-        print("총 업무 시간은 \(totalTime)초입니다.")
+        printResult(totalCustomer: totalCustomer, totalTime: totalTime)
     }
     
     private func workBankTeller() {
@@ -75,5 +73,11 @@ final class Bank {
         } catch {
             debugPrint(error.localizedDescription)
         }
+    }
+    
+    private func printResult(totalCustomer: Int, totalTime: String) {
+        print("업무가 마감되었습니다.", terminator: "")
+        print("오늘 업무를 처리한 인원은 \(totalCustomer)명이며,", terminator: " ")
+        print("총 업무 시간은 \(totalTime)초입니다.")
     }
 }
