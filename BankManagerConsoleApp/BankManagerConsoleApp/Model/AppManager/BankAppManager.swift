@@ -14,13 +14,13 @@ struct BankAppManager {
         setUpMenuList()
         guard let selectedNumber = readLine(),
               let system = BankSystem(rawValue: selectedNumber) else {
+            run()
             return
         }
         
         switch system {
         case .on:
             bank.open()
-            
             bank.close()
             run()
         case .off:
