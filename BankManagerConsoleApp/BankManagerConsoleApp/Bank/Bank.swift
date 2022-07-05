@@ -28,22 +28,21 @@ final class Bank {
         }
     }
     
-    private func distributeTask () {
+    private func distributeTask() {
         let start = CFAbsoluteTimeGetCurrent()
         let group = DispatchGroup()
         group.enter()
         while !Bank.lineOfCustomers.isEmpty {
             guard let customer = Bank.lineOfCustomers.dequeue() else { return }
             if customer.business.name == "예금" {
-                
+                BankManager.depositCustomers(customer: customer, group: group)
             } else {
-                
+                BankManager.loanCustomers(customer: customer, group: group)
             }
         }
         group.leave()
         group.notify(queue: .global()) {
             let diff = CFAbsoluteTimeGetCurrent() - start
-            
             print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomers)명이며, 총 업무시간은 \(String(format: "%.2f", diff))초 입니다.")
             self.inputMenu()
         }
