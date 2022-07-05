@@ -21,6 +21,7 @@ struct BankAppManager {
         case .on:
             bank.open()
             
+            bank.close()
             run()
         case .off:
             break

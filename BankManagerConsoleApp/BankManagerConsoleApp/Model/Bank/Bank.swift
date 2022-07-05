@@ -12,7 +12,7 @@ struct Bank {
     private(set) var clientQueue = ClientQueue<Client>()
     
     private var totalProcessingTime: Double = 0.0
-    private var totalVisitedClients = 0
+    private var totalVisitedClients: Int = 0
 }
 
 extension Bank {
@@ -24,6 +24,11 @@ extension Bank {
         }
         
         reportSummary()
+    }
+    
+    mutating func close() {
+        totalProcessingTime = 0.0
+        totalVisitedClients = 0
     }
 }
 
