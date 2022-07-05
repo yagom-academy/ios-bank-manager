@@ -47,7 +47,7 @@ struct BankManager {
         let bankers = Array(0..<numberOfBanker)
         
         let bankerList = bankers.map { _ in
-            return Banker()
+            return DepositBanker()
         }
         
         return bankerList
