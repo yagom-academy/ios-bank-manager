@@ -15,7 +15,7 @@ final class BankManager {
     private let loanSemaphore = DispatchSemaphore(value: NumberOfClerks.loan)
     
     init(clerk: Clerk = Clerk(),
-         customers: CustomerQueue<Customer> = CustomerQueue()) {
+         customers: CustomerQueue<Customer> = CustomerQueue<Customer>()) {
         self.clerk = clerk
         self.customers = customers
     }
@@ -38,11 +38,11 @@ final class BankManager {
     }
     
     private func issueTickets() {
-        let numberOfCustomer = Int.random(
-            in: NumberOfCustomer.minimum...NumberOfCustomer.maximum
+        let numberOfCustomers = Int.random(
+            in: NumberOfCustomers.minimum...NumberOfCustomers.maximum
         )
         
-        let tickets = Array(1...numberOfCustomer)
+        let tickets = Array(1...numberOfCustomers)
         tickets.forEach {
             if let business = Service.allCases.randomElement() {
                 customers.enqueue(Customer(number: $0, business: business))
@@ -55,7 +55,7 @@ final class BankManager {
     
     private func startWork() {
         var servedCustomers = 0
-        var timeSpent = 0.0
+        var elapsedTime = 0.0
         
         while let customer = customers.dequeue() {
             servedCustomers += 1
@@ -64,18 +64,18 @@ final class BankManager {
                 switch customer.business {
                 case .deposit:
                     self.depositSemaphore.wait()
-                    timeSpent += self.clerk.provideService(customer)
+                    elapsedTime += self.clerk.provideService(customer)
                     self.depositSemaphore.signal()
                 case .loan:
                     self.loanSemaphore.wait()
-                    timeSpent += self.clerk.provideService(customer)
+                    elapsedTime += self.clerk.provideService(customer)
                     self.loanSemaphore.signal()
                 }
             }
         }
         
         customerGroup.wait()
-        finishWork(customers: servedCustomers, time: timeSpent)
+        finishWork(customers: servedCustomers, time: elapsedTime)
         openBank()
         return
     }
