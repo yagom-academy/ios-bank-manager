@@ -7,9 +7,8 @@
 
 protocol Agency {
     associatedtype T: Equatable
-    var customerQueue: Queue<T> { get set }
+    var ticketNumberQueue: Queue<T> { get set }
     
-    mutating func generateEmployee(numberOfEmployees: Int)
     mutating func open()
     mutating func close()
 }

@@ -6,18 +6,14 @@
 //
 
 struct Bank: Agency {
-    typealias T = BankCustomer
-    var customerQueue: Queue<BankCustomer>
+    var ticketNumberQueue: Queue<BankCustomer>
     var banker = Banker()
     var customerCount: Int?
     
-    mutating func generateEmployee(numberOfEmployees: Int) {
-    }
-    
     mutating func open() {
-        customerCount = customerQueue.count
-        for _ in customerQueue {
-            guard let currentCustomer = customerQueue.dequeue() else { return }
+        customerCount = ticketNumberQueue.count
+        for _ in ticketNumberQueue {
+            guard let currentCustomer = ticketNumberQueue.dequeue() else { return }
             banker.startWork(of: currentCustomer)
             banker.finishWork(of: currentCustomer)
         }

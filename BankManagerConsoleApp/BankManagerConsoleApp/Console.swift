@@ -12,7 +12,7 @@ struct Console {
         
         if input == "1" {
             let randomCustomers = BankCustomer.generateRandomCustomer()
-            var bank = Bank(customerQueue: randomCustomers)
+            var bank = Bank(ticketNumberQueue: randomCustomers)
             
             bank.open()
             bank.close()
