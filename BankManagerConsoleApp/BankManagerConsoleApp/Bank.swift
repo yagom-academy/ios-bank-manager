@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    let customer: BankItemQueue<Customer>
+    var customer: BankItemQueue<Customer>
     let bankmanager: BankManager
     
     init(customer: BankItemQueue<Customer>, bankmanager: BankManager) {
@@ -23,11 +23,11 @@ struct Bank {
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = userInput()
-        let numberOfCustomer = setCustomerCount()
+        let numberOfCustomer = customer.count
         switch requestInput {
         case BankComment.bankOpen.rawValue:
             giveTask(for: customer)
-            calculateWorkTime(by: numberOfCustomer, with: BusinessType.work.rawValue)
+            calculateWorkTime(by: numberOfCustomer)
             bankBusinessStart()
         case BankComment.bankClose.rawValue:
             break
@@ -54,9 +54,9 @@ struct Bank {
         print(BankComment.failChange.rawValue)
     }
     
-    private func calculateWorkTime(by resultCustomer: Int, with processTime: Double) {
+    private func calculateWorkTime(by resultCustomer: Int) {
         do {
-            let calculatedWorkTime = Double(resultCustomer) * processTime
+            let calculatedWorkTime = Double(resultCustomer) * BusinessType.deposit.type
             let totalWorkTime = try calculatedWorkTime.numberFormatter()
             printcalculateWorkTime(by: resultCustomer, with: totalWorkTime)
         } catch {
@@ -66,10 +66,9 @@ struct Bank {
     
     mutating func giveTask(for customerList: BankItemQueue<Customer>) {
         var customerList = customerList
-        let workProcessingTime = WorkType()
         
         while let completeCustomer = customerList.deQueue() {
-            bankmanager.handleBanking(for: completeCustomer, with: workProcessingTime)
+            bankmanager.handleBanking(for: completeCustomer)
         }
     }
 }
