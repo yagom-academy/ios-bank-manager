@@ -65,10 +65,11 @@ struct Bank {
     
     mutating func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
         var customerList = customerList
-        var sumTime = 0.0
+        let startTime = CFAbsoluteTimeGetCurrent()
         while let completeCustomer = customerList.deQueue() {
-            sumTime += bankmanager.handleBanking(for: completeCustomer)
+            bankmanager.handleBanking(for: completeCustomer)
         }
-        return sumTime
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        return durationTime
     }
 }

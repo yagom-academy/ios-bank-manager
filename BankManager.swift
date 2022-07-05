@@ -7,11 +7,10 @@
 import Foundation
 
 struct BankManager {
-    func handleBanking(for customer: Customer) -> Double {
+     func handleBanking(for customer: Customer) {
         
         print("\(customer.bankNumberTicket)" + BankManagerComment.handleBankingStart.rawValue)
         Thread.sleep(forTimeInterval: customer.bankingType)
         print("\(customer.bankNumberTicket)" + BankManagerComment.handleBankingFinish.rawValue)
-        return customer.bankingType
     }
 }
