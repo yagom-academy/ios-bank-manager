@@ -6,13 +6,16 @@
 //
 
 struct Bank {
-    private var banker: Banker
-    private var servedClient: Int?
+    private var servedClient: Int
     private var waitingClient: Int?
     private var clientQueue: ClientQueue<Client>?
+    private var numberOfDepositBanker: Int
+    private var numberOfLoanBanker: Int
     
-    init(banker: Banker) {
-        self.banker = banker
+    init(numberOfDepositBanker: Int, numberOfLoanBanker: Int) {
+        self.numberOfDepositBanker = numberOfDepositBanker
+        self.numberOfLoanBanker = numberOfLoanBanker
+        self.servedClient = 0
     }
 
     mutating func run() {
@@ -62,22 +65,33 @@ struct Bank {
         guard var queue = clientQueue else {
             return
         }
-        
-        let handledClient = banker.work(from: &queue)
-        servedClient = handledClient
+
+        while queue.isEmpty == false {
+            guard let client = queue.dequeue() else {
+                return
+            }
+            
+            if client.desiredServices == Option.deposit {
+                let depositBanker = DepositBankManager()
+                let handledClient = depositBanker.work(from: client)
+                
+                servedClient += handledClient
+            } else if client.desiredServices == Option.loan {
+                let loanBanker = LoanBankManager()
+                let handledClient = loanBanker.work(from: client)
+                
+                servedClient += handledClient
+            }
+        }
     }
 
     private mutating func terminateBusiness() {
-        guard let servedClient = servedClient else {
-            return
-        }
-        
-        let bankingHours = Double(servedClient) * banker.time
+//        let bankingHours = Double(servedClient) * banker.time
         
         print("""
         업무가 마감되었습니다. \
         오늘 업무를 처리한 고객은 총 \(servedClient)명이며, \
-        총 업무시간은 \(String(format: "%.1f", bankingHours))초입니다.
+        총 업무시간은 \(String(format: "%.1f", 3.3))초입니다.
         """)
     }
     

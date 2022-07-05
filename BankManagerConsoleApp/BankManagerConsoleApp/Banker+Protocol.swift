@@ -7,6 +7,7 @@
 
 protocol Banker {
     var time: Double { get }
+    var task: String { get }
 
-    func work(from: inout ClientQueue<Client>) -> Int
+    func work(from: Client) -> Int
 }
