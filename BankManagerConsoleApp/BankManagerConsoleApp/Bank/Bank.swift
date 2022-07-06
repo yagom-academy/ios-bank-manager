@@ -29,7 +29,7 @@ final class Bank {
         }
     }
     
-    private func distributeTask() {
+    private func orderBankerToWork() {
         let start = CFAbsoluteTimeGetCurrent()
         let group = DispatchGroup()
         group.enter()
