@@ -9,12 +9,12 @@ enum BusinessType {
     case deposit
     case loan
     
-    var type: Double {
+    var bankingName: String  {
         switch self {
         case .deposit:
-            return 0.7
+            return "예금"
         case .loan:
-            return 1.1
+            return "대출"
         }
     }
 }
