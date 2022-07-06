@@ -1,29 +1,19 @@
 import Foundation
 
 struct Bank {
-    private var customerQueue = CustomerQueue<Customer>(linkedList: LinkedList<Customer>())
+    private(set) var customerQueue = CustomerQueue<Customer>(linkedList: LinkedList<Customer>())
 
-    init() {
-        enqueueCustomer()
+    init(count: Int) {
+        setCustomer(count: count)
     }
 
-    func executeWork(during workTime: TimeInterval) -> Int {
-        var totalCustomer = 0
-        (0..<customerQueue.count).forEach { _ in
-            do {
-                let customer = try customerQueue.dequeue()
-                BankManager.work(for: customer, during: workTime)
-                totalCustomer += 1
-            } catch {
-                print("고객이 없습니다.")
-                return
-            }
-        }
-        return totalCustomer
+    func popCustomer() throws ->  Customer {
+        let customer = try customerQueue.dequeue()
+        return customer
     }
 
-    private func enqueueCustomer() {
-        (0..<Int.random(in: 10...30)).forEach { number in
+    private func setCustomer(count: Int) {
+        (0..<count).forEach { number in
             customerQueue.enqueue(data: Customer(name: "\(number + 1)번"))
         }
     }

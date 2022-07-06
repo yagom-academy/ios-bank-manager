@@ -13,6 +13,10 @@ final class CustomerQueue<T> {
         linkedList.isEmpty
     }
 
+    var isNotEmpty: Bool {
+        !linkedList.isEmpty
+    }
+
     func peek() throws -> T {
         guard let data = linkedList.peek else {
             throw QueueError.notExistingData
