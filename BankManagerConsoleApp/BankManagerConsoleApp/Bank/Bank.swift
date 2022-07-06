@@ -58,7 +58,7 @@ final class Bank {
                 if input == "1" {
                     self.generateRandomNumberOfCustomers()
                     self.insertCustomersIntoQueue()
-                    self.distributeTask()
+                    self.orderBankerToWork()
                 }
             }
         } while userInput != "2"
