@@ -75,6 +75,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185D53DF287554DF003D6C2A /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				2057F6C128699CC500E55844 /* BankManager.swift */,
+				2006B6D1286C2FDB000FAE7E /* Bank.swift */,
+				2006B6D5286C3041000FAE7E /* Customer.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
+		185D53E0287554ED003D6C2A /* Banker */ = {
+			isa = PBXGroup;
+			children = (
+				20DEEB2B28732AD300A53993 /* BankerLogic.swift */,
+				2006B6D3286C3003000FAE7E /* DepositBanker.swift */,
+				20EE81BC2873F8DC00F1EE43 /* LoanBanker.swift */,
+			);
+			path = Banker;
+			sourceTree = "<group>";
+		};
+		185D53E1287554F9003D6C2A /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				18604F842869899A005F2455 /* Queue.swift */,
+				18604F8028698940005F2455 /* LinkedList.swift */,
+				18604F8228698966005F2455 /* Node.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
 		2057F6C828699D0000E55844 /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,16 +146,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				2057F6C128699CC500E55844 /* BankManager.swift */,
+				185D53E1287554F9003D6C2A /* Queue */,
+				185D53E0287554ED003D6C2A /* Banker */,
+				185D53DF287554DF003D6C2A /* Bank */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				18604F842869899A005F2455 /* Queue.swift */,
-				18604F8028698940005F2455 /* LinkedList.swift */,
-				18604F8228698966005F2455 /* Node.swift */,
-				2006B6D1286C2FDB000FAE7E /* Bank.swift */,
-				20DEEB2B28732AD300A53993 /* BankerLogic.swift */,
-				2006B6D3286C3003000FAE7E /* DepositBanker.swift */,
-				20EE81BC2873F8DC00F1EE43 /* LoanBanker.swift */,
-				2006B6D5286C3041000FAE7E /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
