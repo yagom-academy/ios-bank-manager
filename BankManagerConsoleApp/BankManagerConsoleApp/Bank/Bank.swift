@@ -3,8 +3,8 @@ import Foundation
 struct Bank {
     private(set) var customerQueue = CustomerQueue<Customer>(linkedList: LinkedList<Customer>())
 
-    init() {
-        setCustomer()
+    init(count: Int) {
+        setCustomer(count: count)
     }
 
     func popCustomer() throws ->  Customer {
@@ -12,8 +12,8 @@ struct Bank {
         return customer
     }
 
-    private func setCustomer() {
-        (0..<Int.random(in: 10...30)).forEach { number in
+    private func setCustomer(count: Int) {
+        (0..<count).forEach { number in
             customerQueue.enqueue(data: Customer(name: "\(number + 1)번"))
         }
     }
