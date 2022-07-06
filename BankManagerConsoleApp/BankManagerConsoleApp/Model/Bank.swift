@@ -10,14 +10,10 @@ import Foundation
 struct Bank {
     private var bankManager: BankManager
     private var queue: CustomerQueue
-    let loanQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
-    let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
-    private(set) var randomNumberOfCustomer: Int = 0
-    let group = DispatchGroup()
-    let depositSemaphore = DispatchSemaphore(value: 2)
-    let loanSemaphore = DispatchSemaphore(value: 1)
-
-    var totalProcessTime: TimeInterval = 0
+    private let loanBusinessQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
+    private let depositBusinessQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
+    private(set) var countOfCustomer: Int = 0
+    private var totalProcessTime: TimeInterval = 0
     
     init(employee bankManager: BankManager, customer queue: CustomerQueue) {
         self.bankManager = bankManager
@@ -54,8 +50,8 @@ struct Bank {
     }
     
     private mutating func updateCustomerQueue() {
-        randomNumberOfCustomer = Int.random(in: 10...30)
-        let numberList = Array<Int>(1...randomNumberOfCustomer)
+        countOfCustomer = Int.random(in: 10...30)
+        let numberList = Array<Int>(1...countOfCustomer)
         let businessList = [Business.loan, Business.deposit]
         
         numberList.forEach {
@@ -68,6 +64,9 @@ struct Bank {
     
     private mutating func handleCustomer() {
         let startTime = CFAbsoluteTimeGetCurrent()
+        let group = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
         
         for _ in 0..<queue.count {
             while let customer = queue.dequeue() {
@@ -88,9 +87,9 @@ struct Bank {
                 }
                 
                 if customer.business == .loan {
-                    loanQueue.async(group: group, execute: loanWorkItem)
+                    loanBusinessQueue.async(group: group, execute: loanWorkItem)
                 } else {
-                    depositQueue.async(group: group, execute: depositWorkItem)
+                    depositBusinessQueue.async(group: group, execute: depositWorkItem)
                 }
             }
         }
@@ -100,7 +99,6 @@ struct Bank {
     
     private func displayEndMessage() {
         let totalHandlingTime = String(format: "%.2f", totalProcessTime)
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(randomNumberOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(countOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
     }
 }

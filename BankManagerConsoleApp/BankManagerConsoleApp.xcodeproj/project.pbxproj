@@ -97,6 +97,22 @@
 			path = CustomerQueueTests;
 			sourceTree = "<group>";
 		};
+		AF6E665628755142003C9B4D /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				AF4CF24A2872B922003828AB /* NameSpace.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		AF6E665728755160003C9B4D /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AF4CF24C2872BBEE003828AB /* BankManagerError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		AF980D01286A92AF00C063CC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,11 +157,11 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				AF6E665628755142003C9B4D /* Enum */,
 				AFE7A2DF286EC22B0043D86B /* Protocol */,
+				AF6E665728755160003C9B4D /* Error */,
 				AF980D01286A92AF00C063CC /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				AF4CF24A2872B922003828AB /* NameSpace.swift */,
-				AF4CF24C2872BBEE003828AB /* BankManagerError.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
