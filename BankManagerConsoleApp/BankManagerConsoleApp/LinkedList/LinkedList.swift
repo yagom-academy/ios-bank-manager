@@ -41,4 +41,16 @@ struct LinkedList<T> {
         head = nil
         tail = nil
     }
+    
+    var count: Int {
+        guard var node = head else {
+            return 0
+        }
+        var count = 1
+        while let next = node.next {
+            node = next
+            count += 1
+        }
+        return count
+    }
 }

@@ -6,8 +6,9 @@
 //
 
 enum BankManagerComment: String {
-    case handleBankingStart = "번 고객 업무 시작"
-    case handleBankingFinish = "번 고객 업무 완료"
+    case workInit = "번 고객 "
+    case workStart = "업무 시작"
+    case workFinish = "업무 완료"
 }
 
 enum BankComment: String {

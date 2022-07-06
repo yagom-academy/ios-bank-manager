@@ -8,8 +8,11 @@
 import Foundation
 
 struct Bank {
-    let customer: BankItemQueue<Customer>
-    let bankmanager: BankManager
+    private var customer: BankItemQueue<Customer>
+    private let bankmanager: BankManager
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let bankingGroup = DispatchGroup()
     
     init(customer: BankItemQueue<Customer>, bankmanager: BankManager) {
         self.customer = customer
@@ -23,17 +26,17 @@ struct Bank {
     mutating func selectBankOpenAndClose() {
         printBankInterface()
         let requestInput = userInput()
-        let numberOfCustomer = setCustomerCount()
+        let numberOfCustomer = customer.count
         switch requestInput {
         case BankComment.bankOpen.rawValue:
-            giveTask(for: customer)
-            calculateWorkTime(by: numberOfCustomer, with: BusinessType.work.rawValue)
-            bankBusinessStart()
+            let totalTaskTime = giveTask(for: customer)
+            calculateWorkTime(by: numberOfCustomer, with: totalTaskTime)
+            initiateBankBusiness()
         case BankComment.bankClose.rawValue:
             break
         default:
             printWrongInput()
-            bankBusinessStart()
+            initiateBankBusiness()
         }
     }
     
@@ -54,22 +57,35 @@ struct Bank {
         print(BankComment.failChange.rawValue)
     }
     
-    private func calculateWorkTime(by resultCustomer: Int, with processTime: Double) {
+    private func calculateWorkTime(by resultCustomer: Int, with totaltime: Double) {
         do {
-            let calculatedWorkTime = Double(resultCustomer) * processTime
-            let totalWorkTime = try calculatedWorkTime.numberFormatter()
+            let totalWorkTime = try totaltime.numberFormatter()
             printcalculateWorkTime(by: resultCustomer, with: totalWorkTime)
         } catch {
             printFailChange()
         }
     }
     
-    mutating func giveTask(for customerList: BankItemQueue<Customer>) {
+    private func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
         var customerList = customerList
-        let workProcessingTime = WorkType()
+        let startTime = CFAbsoluteTimeGetCurrent()
         
         while let completeCustomer = customerList.deQueue() {
-            bankmanager.handleBanking(for: completeCustomer, with: workProcessingTime)
+            DispatchQueue.global().async(group: bankingGroup) {
+                switch completeCustomer.bankingType.1 {
+                case .deposit:
+                    self.depositSemaphore.wait()
+                    self.bankmanager.handleBanking(for: completeCustomer)
+                    self.depositSemaphore.signal()
+                case .loan:
+                    self.loanSemaphore.wait()
+                    self.bankmanager.handleBanking(for: completeCustomer)
+                    self.loanSemaphore.signal()
+                }
+            }
         }
+        bankingGroup.wait()
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        return durationTime
     }
 }
