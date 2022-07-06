@@ -10,13 +10,13 @@
 
 ## 📑 목차
 
-- [🧑🏻‍💻🧑🏻‍💻 개발자 소개](#개발자-소개)
-- [📈 UML](#UML)
-- [💡 키워드](#키워드)
-- [🤔 핵심경험](#핵심경험)
-- [📚 참고문서](#참고문서)
-- [📝 기능설명](#기능설명)
-- [🚀 TroubleShooting](#TroubleShooting)
+- [🧑🏻‍💻🧑🏻‍💻 개발자 소개](#-개발자-소개)
+- [📈 UML](#-UML)
+- [💡 키워드](#-키워드)
+- [🤔 핵심경험](#-핵심경험)
+- [📚 참고문서](#-참고문서)
+- [📝 기능설명](#-기능설명)
+- [🚀 TroubleShooting](#-TroubleShooting)
 - [1️⃣ STEP 1](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step01/Docs/Step01.md)
 - [2️⃣ STEP 2](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step02/Docs/Step02.md)
 - [3️⃣ STEP 3](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step03/Docs/Step03.md)
