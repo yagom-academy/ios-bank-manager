@@ -10,12 +10,14 @@ import Foundation
 struct Bank {
     private var bankManager: BankManager
     private var queue: CustomerQueue
-    let loanQueue = DispatchQueue(label: "loanQueue")
+    let loanQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
     let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
     private(set) var randomNumberOfCustomer: Int = 0
     let group = DispatchGroup()
     let depositSemaphore = DispatchSemaphore(value: 2)
-    var totalTime: TimeInterval = 0
+    let loanSemaphore = DispatchSemaphore(value: 1)
+
+    var totalProcessTime: TimeInterval = 0
     
     init(employee bankManager: BankManager, customer queue: CustomerQueue) {
         self.bankManager = bankManager
@@ -65,9 +67,11 @@ struct Bank {
     }
     
     private mutating func handleCustomer() {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
         for _ in 0..<queue.count {
             while let customer = queue.dequeue() {
-                let workItem = DispatchWorkItem { [self] in
+                let depositWorkItem = DispatchWorkItem { [self] in
                     group.enter()
                     depositSemaphore.wait()
                     bankManager.handle(customer: customer)
@@ -75,17 +79,27 @@ struct Bank {
                     depositSemaphore.signal()
                 }
                 
+                let loanWorkItem = DispatchWorkItem { [self] in
+                    group.enter()
+                    loanSemaphore.wait()
+                    bankManager.handle(customer: customer)
+                    group.leave()
+                    loanSemaphore.signal()
+                }
+                
                 if customer.business == .loan {
-                    loanQueue.async(group: group, execute: workItem)
+                    loanQueue.async(group: group, execute: loanWorkItem)
                 } else {
-                    depositQueue.async(group: group, execute: workItem)
+                    depositQueue.async(group: group, execute: depositWorkItem)
                 }
             }
         }
+        group.wait()
+        totalProcessTime = CFAbsoluteTimeGetCurrent() - startTime
     }
     
     private func displayEndMessage() {
-        let totalHandlingTime = String(format: "%.2f",totalTime)
+        let totalHandlingTime = String(format: "%.2f", totalProcessTime)
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(randomNumberOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
     }
