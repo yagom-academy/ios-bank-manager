@@ -15,6 +15,7 @@ struct Bank {
     private(set) var randomNumberOfCustomer: Int = 0
     let group = DispatchGroup()
     let depositSemaphore = DispatchSemaphore(value: 2)
+    var totalTime: TimeInterval = 0
     
     init(employee bankManager: BankManager, customer queue: CustomerQueue) {
         self.bankManager = bankManager
@@ -84,8 +85,7 @@ struct Bank {
     }
     
     private func displayEndMessage() {
-        let totalHandlingTime = String(format: "%.2f",
-                                       bankManager.totalHandlingTime)
+        let totalHandlingTime = String(format: "%.2f",totalTime)
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(randomNumberOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
     }
