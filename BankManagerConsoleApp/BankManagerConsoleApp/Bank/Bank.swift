@@ -11,7 +11,7 @@ final class Bank {
     private var numberOfCustomers: Int = 0
     private var banker = Banker()
     
-    private func inputMenu() {
+    private func printMenu() {
         print("1 : 은행 개점")
         print("2 : 종료")
         print("입력 : ", terminator: "")
@@ -45,13 +45,13 @@ final class Bank {
         group.notify(queue: .global()) {
             let diff = CFAbsoluteTimeGetCurrent() - start
             print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomers)명이며, 총 업무시간은 \(String(format: "%.2f", diff))초 입니다.")
-            self.inputMenu()
+            self.printMenu()
         }
     }
     
-    func openBank() {
+    func runBusiness() {
         var userInput: String?
-        self.inputMenu()
+        self.printMenu()
         repeat {
             userInput = readLine()
             if let input = userInput {

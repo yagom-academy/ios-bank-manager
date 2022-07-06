@@ -6,7 +6,7 @@
 
 import Foundation
 
-var hana = Bank()
+var bank = Bank()
 
-hana.openBank()
+bank.runBusiness()
 
