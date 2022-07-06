@@ -7,6 +7,9 @@
 import Foundation
 
 struct BankManager {
+    let name: String
+    let task: Request
+    
     private let taskGroup = DispatchGroup()
     
     func processRequest(from client: Client) {
@@ -15,15 +18,12 @@ struct BankManager {
 //        startTask(for: client)
         
     }
-}
-
-private extension BankManager {
+    
     func startTask(for client: Client) {
-        print("\(client.waitingNumber)번 고객 업무 시작")
+        print("\(self.name): \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
     }
     
     func finishTask(for client: Client) {
-        print("\(client.waitingNumber)번 고객 업무 완료")
+        print("\(self.name): \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
     }
 }
-

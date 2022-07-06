@@ -8,118 +8,88 @@
 import Foundation
 
 final class Bank {
-    private let depositManager1 = BankManager()
-    private let depositManager2 = BankManager()
-    private let loanManager1 = BankManager()
+    private let managers: [BankManager] = [BankManager(name: "예금매니저1", task: .deposit),
+                                           BankManager(name: "예금매니저2", task: .deposit),
+                                           BankManager(name: "대출매니저1", task: .loan)]
     
-    private let semaphore = DispatchSemaphore(value: 1)
+    let bankManagersGroup = DispatchGroup()
+    
+    private let depositSemaphore = DispatchSemaphore(value: 1)
     
     private(set) var depositClientQueue = ClientQueue<Client>()
     private(set) var loanClientQueue = ClientQueue<Client>()
-    
     
     private var totalProcessingTime: Double = 0.0
     private var totalVisitedClients: Int = 0
 }
 
 extension Bank {
+    func decideWhichQueue(for manager: BankManager) -> ClientQueue<Client> {
+        switch manager.task {
+        case .deposit:
+            return depositClientQueue
+        case .loan:
+            return loanClientQueue
+        }
+    }
+    
+    func arrangeAll(_ managers: [BankManager]) {
+        for manager in managers {
+            DispatchQueue.global().async(group: bankManagersGroup) {
+                self.assignTask(to: manager, from: self.decideWhichQueue(for: manager))
+            }
+        }
+    }
+    
+    func assignTask(to manager: BankManager, from queue: ClientQueue<Client>) {
+        while !queue.isEmpty() {
+            self.depositSemaphore.wait()
+            
+            guard let client = queue.dequeue() else {
+                return
+            }
+            
+            manager.processRequest(from: client)
+            manager.startTask(for: client)
+            
+            self.totalVisitedClients += 1
+            self.depositSemaphore.signal()
+            
+            Thread.sleep(forTimeInterval: client.request.processingTime)
+    
+            manager.finishTask(for: client)
+        }
+    }
+    
     func open() {
         generateClients()
 
-        let myGroup = DispatchGroup()
-        
         let startTime = CFAbsoluteTimeGetCurrent()
         
         DispatchQueue.global().sync {
-        
-            DispatchQueue.global().async(group: myGroup) {
-                while !self.depositClientQueue.isEmpty() {
-                    self.semaphore.wait()
-                    
-                    guard let client = self.depositClientQueue.dequeue() else {
-                        return
-                    }
-                    
-                    self.totalVisitedClients += 1
-                    
-                    self.depositManager1.processRequest(from: client)
-                    print("매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
-                    
-                    self.semaphore.signal()
-                    
-                    Thread.sleep(forTimeInterval: 0.7)
-                    
-                    print("매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
-                }
-            }
-            
-            DispatchQueue.global().async(group: myGroup) {
-                while !self.depositClientQueue.isEmpty() {
-                    self.semaphore.wait()
-                    
-                    guard let client = self.depositClientQueue.dequeue() else {
-                        return
-                    }
-                    
-                    self.totalVisitedClients += 1
-                    
-                    self.depositManager2.processRequest(from: client)
-                    print("매니저 2: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
-                    
-                    self.semaphore.signal()
-                    
-                    Thread.sleep(forTimeInterval: 0.7)
-                    
-                    print("매니저 2: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
-                }
-            }
-            
-            DispatchQueue.global().async(group: myGroup) {
-                while !self.loanClientQueue.isEmpty() {
-                    self.semaphore.wait()
-                    
-                    guard let client = self.loanClientQueue.dequeue() else {
-                        return
-                    }
-                    
-                    self.totalVisitedClients += 1
-                    
-                    self.loanManager1.processRequest(from: client)
-                    print("대출매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
-                    
-                    self.semaphore.signal()
-                    
-                    Thread.sleep(forTimeInterval: 1.1)
-                    
-                    print("대출매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
-                }
-            }
-            
-            myGroup.wait()
+            arrangeAll(managers)
+            bankManagersGroup.wait()
         }
         
         let closeTime = CFAbsoluteTimeGetCurrent()
         let elapsedTime = closeTime - startTime
         
-        self.reportSummary()
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVisitedClients)명이며, 총 업무시간은 \(elapsedTime.roundDown())초입니다.")
+        reportSummary(elapsedTime: elapsedTime)
     }
     
     func close() {
         totalProcessingTime = 0.0
         totalVisitedClients = 0
     }
+    
+    func reportSummary(elapsedTime: CFAbsoluteTime) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVisitedClients)명이며, 총 업무시간은 \(elapsedTime.roundDown())초입니다.")
+    }
 }
-
-// loan 추가
-
-// 메서드로 기능 분리
-
 
 private extension Bank {
     func generateClients() {
         let clientAmount = Int.random(in: 10...30)
-        
         
         for amount in 1...clientAmount {
             guard let requestName = Request.allCases.randomElement() else {
@@ -135,11 +105,4 @@ private extension Bank {
         }
     }
     
-    func assignTask(to bankManager: BankManager) {
-        
-    }
-    
-    func reportSummary() {
-
-    }
 }
