@@ -17,10 +17,10 @@ enum Business: String {
     
     var processTime: TimeInterval {
         switch self {
-        case .loan:
-            return 1.1
         case .deposit:
             return 0.7
+        case .loan:
+            return 1.1
         }
     }
 }

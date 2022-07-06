@@ -14,6 +14,9 @@ struct Bank {
     private let depositBusinessQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
     private(set) var countOfCustomer: Int = 0
     private var totalProcessTime: TimeInterval = 0
+    private let group = DispatchGroup()
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let depositSemaphore = DispatchSemaphore(value: 2)
     
     init(employee bankManager: BankManager, customer queue: CustomerQueue) {
         self.bankManager = bankManager
@@ -62,43 +65,44 @@ struct Bank {
         }
     }
     
+    func makeWorkItem(for customer: Customer, by semaphore: DispatchSemaphore) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem { [self] in
+            semaphore.wait()
+            bankManager.handle(customer: customer)
+            semaphore.signal()
+        }
+        
+        return workItem
+    }
+    
     private mutating func handleCustomer() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        let group = DispatchGroup()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
         
         for _ in 0..<queue.count {
-            while let customer = queue.dequeue() {
-                let depositWorkItem = DispatchWorkItem { [self] in
-                    group.enter()
-                    depositSemaphore.wait()
-                    bankManager.handle(customer: customer)
-                    group.leave()
-                    depositSemaphore.signal()
-                }
-                
-                let loanWorkItem = DispatchWorkItem { [self] in
-                    group.enter()
-                    loanSemaphore.wait()
-                    bankManager.handle(customer: customer)
-                    group.leave()
-                    loanSemaphore.signal()
-                }
-                
-                if customer.business == .loan {
-                    loanBusinessQueue.async(group: group, execute: loanWorkItem)
-                } else {
-                    depositBusinessQueue.async(group: group, execute: depositWorkItem)
-                }
-            }
+            putCustomerToSuitableQueue()
         }
+        
         group.wait()
         totalProcessTime = CFAbsoluteTimeGetCurrent() - startTime
     }
     
+    func putCustomerToSuitableQueue() {
+        while let customer = queue.dequeue() {
+            let depositWorkItem = makeWorkItem(for: customer, by: depositSemaphore)
+            let loanWorkItem = makeWorkItem(for: customer, by: loanSemaphore)
+            
+            switch customer.business {
+            case .loan:
+                loanBusinessQueue.async(group: group, execute: loanWorkItem)
+            case .deposit:
+                depositBusinessQueue.async(group: group, execute: depositWorkItem)
+            }
+        }
+    }
+    
     private func displayEndMessage() {
         let totalHandlingTime = String(format: "%.2f", totalProcessTime)
+        
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(countOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
     }
 }

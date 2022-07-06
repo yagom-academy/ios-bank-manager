@@ -10,5 +10,5 @@ import Foundation
 enum NameSpace {
     static let one = "1"
     static let two = "2"
-    static let  startMessage = "1 : 은행 개점\n2 : 종료\n입력 :"
+    static let startMessage = "1 : 은행 개점\n2 : 종료\n입력 :"
 }
