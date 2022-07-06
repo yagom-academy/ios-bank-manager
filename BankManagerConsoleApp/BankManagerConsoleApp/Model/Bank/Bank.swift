@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+class Bank {
     private let manager = BankManager()
     private(set) var clientQueue = ClientQueue<Client>()
     
@@ -16,7 +16,7 @@ struct Bank {
 }
 
 extension Bank {
-    mutating func open() {
+    func open() {
         generateClients()
         
         while !clientQueue.isEmpty() {
@@ -26,14 +26,14 @@ extension Bank {
         reportSummary()
     }
     
-    mutating func close() {
+    func close() {
         totalProcessingTime = 0.0
         totalVisitedClients = 0
     }
 }
 
 private extension Bank {
-    mutating func generateClients() {
+    func generateClients() {
         let clientAmount = Int.random(in: 10...30)
         let task: Request = .task
         
@@ -42,7 +42,7 @@ private extension Bank {
         }
     }
     
-    mutating func assignTask(to bankManager: BankManager) {
+    func assignTask(to bankManager: BankManager) {
         guard let client = clientQueue.dequeue() else {
             return
         }
