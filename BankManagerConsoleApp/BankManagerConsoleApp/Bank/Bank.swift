@@ -7,7 +7,7 @@
 import Foundation
 
 final class Bank {
-    static var lineOfCustomers = BankManagerQueue<Customer>()
+    private var lineOfCustomers = BankManagerQueue<Customer>()
     private var numberOfCustomers: Int = 0
     
     private func inputMenu() {
@@ -24,7 +24,7 @@ final class Bank {
         for element in 1...self.numberOfCustomers {
             let random = Int.random(in: 0...1)
             let customer = Customer(customerNumber: element, business: BankWorkType.allCases[random])
-            Bank.lineOfCustomers.enqueue(data: customer)
+            self.lineOfCustomers.enqueue(data: customer)
         }
     }
     
@@ -32,8 +32,8 @@ final class Bank {
         let start = CFAbsoluteTimeGetCurrent()
         let group = DispatchGroup()
         group.enter()
-        while !Bank.lineOfCustomers.isEmpty {
-            guard let customer = Bank.lineOfCustomers.dequeue() else { return }
+        while !self.lineOfCustomers.isEmpty {
+            guard let customer = self.lineOfCustomers.dequeue() else { return }
             if customer.business == .deposit {
                 BankManager.handleDepositCustomers(customer: customer, group: group)
             } else {
