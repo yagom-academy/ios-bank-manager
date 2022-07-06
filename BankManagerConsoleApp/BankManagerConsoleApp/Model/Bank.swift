@@ -10,7 +10,11 @@ import Foundation
 struct Bank {
     private var bankManager: BankManager
     private var queue: CustomerQueue
+    let loanQueue = DispatchQueue(label: "loanQueue")
+    let depositQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
     private(set) var randomNumberOfCustomer: Int = 0
+    let group = DispatchGroup()
+    let depositSemaphore = DispatchSemaphore(value: 2)
     
     init(employee bankManager: BankManager, customer queue: CustomerQueue) {
         self.bankManager = bankManager
@@ -61,11 +65,21 @@ struct Bank {
     
     private mutating func handleCustomer() {
         for _ in 0..<queue.count {
-            guard let customer = queue.dequeue() else {
-                return
+            while let customer = queue.dequeue() {
+                let workItem = DispatchWorkItem { [self] in
+                    group.enter()
+                    depositSemaphore.wait()
+                    bankManager.handle(customer: customer)
+                    group.leave()
+                    depositSemaphore.signal()
+                }
+                
+                if customer.business == .loan {
+                    loanQueue.async(group: group, execute: workItem)
+                } else {
+                    depositQueue.async(group: group, execute: workItem)
+                }
             }
-            
-            bankManager.handle(customer: customer)
         }
     }
     
