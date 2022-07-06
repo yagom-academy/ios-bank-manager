@@ -28,13 +28,14 @@ struct Bank {
             displayMenu()
             let selectedMenu = selectMenu()
             
-            if selectedMenu == NameSpace.one {
+            switch selectedMenu {
+            case NameSpace.one:
                 updateCustomerQueue()
                 handleCustomer()
                 displayEndMessage()
-            } else if selectedMenu == NameSpace.two {
-                break
-            } else {
+            case NameSpace.two:
+                return
+            default:
                 throw BankManagerError.Input
             }
         }
@@ -65,16 +66,6 @@ struct Bank {
         }
     }
     
-    func makeWorkItem(for customer: Customer, by semaphore: DispatchSemaphore) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem { [self] in
-            semaphore.wait()
-            bankManager.handle(customer: customer)
-            semaphore.signal()
-        }
-        
-        return workItem
-    }
-    
     private mutating func handleCustomer() {
         let startTime = CFAbsoluteTimeGetCurrent()
         
@@ -86,7 +77,7 @@ struct Bank {
         totalProcessTime = CFAbsoluteTimeGetCurrent() - startTime
     }
     
-    func putCustomerToSuitableQueue() {
+    private func putCustomerToSuitableQueue() {
         while let customer = queue.dequeue() {
             let depositWorkItem = makeWorkItem(for: customer, by: depositSemaphore)
             let loanWorkItem = makeWorkItem(for: customer, by: loanSemaphore)
@@ -98,6 +89,16 @@ struct Bank {
                 depositBusinessQueue.async(group: group, execute: depositWorkItem)
             }
         }
+    }
+    
+    private func makeWorkItem(for customer: Customer, by semaphore: DispatchSemaphore) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem { [self] in
+            semaphore.wait()
+            bankManager.handle(customer: customer)
+            semaphore.signal()
+        }
+        
+        return workItem
     }
     
     private func displayEndMessage() {
