@@ -9,6 +9,7 @@ import Foundation
 final class Bank {
     private var lineOfCustomers = BankManagerQueue<Customer>()
     private var numberOfCustomers: Int = 0
+    private var banker = Banker()
     
     private func inputMenu() {
         print("1 : 은행 개점")
@@ -35,9 +36,9 @@ final class Bank {
         while !self.lineOfCustomers.isEmpty {
             guard let customer = self.lineOfCustomers.dequeue() else { return }
             if customer.business == .deposit {
-                BankManager.handleDepositCustomers(customer: customer, group: group)
+                banker.handleDepositCustomers(customer: customer, group: group)
             } else {
-                BankManager.handleLoanCustomers(customer: customer, group: group)
+                banker.handleLoanCustomers(customer: customer, group: group)
             }
         }
         group.leave()
