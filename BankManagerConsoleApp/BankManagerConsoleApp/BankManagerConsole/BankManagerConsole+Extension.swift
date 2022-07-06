@@ -16,12 +16,14 @@ extension BankManagerConsole {
             return
         }
         switch option {
-        case Option.open:
-            let waitingClient = Int.random(in: 10...30)
-            var yagomBank = Bank(waitingClient: waitingClient, numberOfDepositBanker: 2, numberOfLoanBanker: 1)
+        case Namespace.open:
+            let waitingClient = Int.random(in: Namespace.randomNumberOfClient)
+            var yagomBank = Bank(waitingClient: waitingClient,
+                                 numberOfDepositBanker: Namespace.numberOfDepositBanker,
+                                 numberOfLoanBanker: Namespace.numberOfLoanBanker)
             yagomBank.openBank()
             run()
-        case Option.close:
+        case Namespace.close:
             break
         default:
             requestReInput()
