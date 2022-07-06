@@ -37,7 +37,7 @@
 		D7BE3A69286A9D9B00CED030 /* Queue+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BE3A68286A9D9B00CED030 /* Queue+extension.swift */; };
 		D7E57345286EE17E00DC3B96 /* Agency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E57344286EE17E00DC3B96 /* Agency.swift */; };
 		D7E5734D286EE1CF00DC3B96 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5734C286EE1CF00DC3B96 /* Customer.swift */; };
-		D7E5734F286EE1DA00DC3B96 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5734E286EE1DA00DC3B96 /* Worker.swift */; };
+		D7E5734F286EE1DA00DC3B96 /* Workable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5734E286EE1DA00DC3B96 /* Workable.swift */; };
 		D7E57351286EE31600DC3B96 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E57350286EE31600DC3B96 /* Banker.swift */; };
 		D7E57353286EE72500DC3B96 /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E57352286EE72500DC3B96 /* Double+extension.swift */; };
 		D7E57354286EEC1300DC3B96 /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40C6585286EE0D50013BD36 /* NameSpace.swift */; };
@@ -87,7 +87,7 @@
 		D7BE3A6D286AEB7D00CED030 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D7E57344286EE17E00DC3B96 /* Agency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agency.swift; sourceTree = "<group>"; };
 		D7E5734C286EE1CF00DC3B96 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		D7E5734E286EE1DA00DC3B96 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		D7E5734E286EE1DA00DC3B96 /* Workable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workable.swift; sourceTree = "<group>"; };
 		D7E57350286EE31600DC3B96 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		D7E57352286EE72500DC3B96 /* Double+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,7 +216,7 @@
 			children = (
 				D7E57344286EE17E00DC3B96 /* Agency.swift */,
 				D7E5734C286EE1CF00DC3B96 /* Customer.swift */,
-				D7E5734E286EE1DA00DC3B96 /* Worker.swift */,
+				D7E5734E286EE1DA00DC3B96 /* Workable.swift */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -441,7 +441,7 @@
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				D702FFE428700FF8001346A7 /* Console.swift in Sources */,
 				D762D05E2869B13600E8235F /* Node.swift in Sources */,
-				D7E5734F286EE1DA00DC3B96 /* Worker.swift in Sources */,
+				D7E5734F286EE1DA00DC3B96 /* Workable.swift in Sources */,
 				B40C6586286EE0D50013BD36 /* NameSpace.swift in Sources */,
 				D748E9B728755DE000DA83A5 /* Task.swift in Sources */,
 				B40C658A286EE36C0013BD36 /* Bank.swift in Sources */,
