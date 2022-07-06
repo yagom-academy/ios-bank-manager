@@ -11,6 +11,7 @@
 		426108E32869943F00756C00 /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426108E22869943F00756C00 /* CustomerQueueTests.swift */; };
 		426108E9286994E800756C00 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8069F28698C6600FCD395 /* LinkedList.swift */; };
 		426108EC286995BC00756C00 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8069D286989B300FCD395 /* Node.swift */; };
+		426503362875694900D245A6 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4251BD5F2872E01E002BC3C7 /* Business.swift */; };
 		AF3D2747286A8F0D00D50AAF /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF806A72869A54400FCD395 /* NodeTests.swift */; };
 		AF44C9B9286E8F860065BF4A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44C9B8286E8F860065BF4A /* Bank.swift */; };
 		AF4CF24B2872B922003828AB /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4CF24A2872B922003828AB /* NameSpace.swift */; };
@@ -100,6 +101,7 @@
 		AF6E665628755142003C9B4D /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				4251BD5F2872E01E002BC3C7 /* Business.swift */,
 				AF4CF24A2872B922003828AB /* NameSpace.swift */,
 			);
 			path = Enum;
@@ -122,7 +124,6 @@
 				AF89D610286D89E800B6749A /* Customer.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				AF44C9B8286E8F860065BF4A /* Bank.swift */,
-				4251BD5F2872E01E002BC3C7 /* Business.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +258,7 @@
 				426108E9286994E800756C00 /* LinkedList.swift in Sources */,
 				426108EC286995BC00756C00 /* Node.swift in Sources */,
 				AFE7A2DC286EC1820043D86B /* BankManager.swift in Sources */,
+				426503362875694900D245A6 /* Business.swift in Sources */,
 				AF89D612286D89F100B6749A /* Customer.swift in Sources */,
 				AF4CF2522872C665003828AB /* BankManagerError.swift in Sources */,
 				426108E32869943F00756C00 /* CustomerQueueTests.swift in Sources */,
