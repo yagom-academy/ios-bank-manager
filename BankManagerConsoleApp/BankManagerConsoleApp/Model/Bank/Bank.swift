@@ -7,8 +7,12 @@
 
 import Foundation
 
-class Bank {
-    private let manager = BankManager()
+final class Bank {
+    private let depositManager1 = BankManager()
+    private let depositManager2 = BankManager()
+    
+    private let semaphore = DispatchSemaphore(value: 1)
+    
     private(set) var clientQueue = ClientQueue<Client>()
     
     private var totalProcessingTime: Double = 0.0
@@ -19,11 +23,78 @@ extension Bank {
     func open() {
         generateClients()
         
-        while !clientQueue.isEmpty() {
-            assignTask(to: manager)
+        //        while !clientQueue.isEmpty() {
+        //            assignTask(to: manager)
+        //        }
+        
+        //        DispatchQueue.global().async {
+        //            while !self.clientQueue.isEmpty() {
+        //                self.semaphore.wait()
+        //                print("매니저1")
+        //                self.assignTask(to: self.depositManager1)
+        //                self.semaphore.signal()
+        //                Thread.sleep(forTimeInterval: 0.7)
+        //
+        //            }
+        //        }
+        let myGroup = DispatchGroup()
+        
+        DispatchQueue.global().sync {
+            
+            
+            DispatchQueue.global().async(group: myGroup) {
+                while !self.clientQueue.isEmpty() {
+                    self.semaphore.wait()
+                    
+                    
+                    guard let client = self.clientQueue.dequeue() else {
+                        return
+                    }
+                    
+                    self.totalVisitedClients += 1
+                    
+                    
+                    self.depositManager1.processRequest(from: client)
+                    print("매니저 1: \(client.waitingNumber)번 고객 업무 시작")
+                    
+                    self.semaphore.signal()
+                    
+                    
+                    Thread.sleep(forTimeInterval: 0.7)
+                    
+                    print("매니저 1: \(client.waitingNumber)번 고객 업무 완료")
+                    self.totalProcessingTime += client.request.processingTime
+                }
+            }
+            
+            DispatchQueue.global().async(group: myGroup) {
+                while !self.clientQueue.isEmpty() {
+                    self.semaphore.wait()
+                    
+                    
+                    guard let client = self.clientQueue.dequeue() else {
+                        return
+                    }
+                    
+                    self.totalVisitedClients += 1
+                    
+                    self.depositManager2.processRequest(from: client)
+                    print("매니저 2: \(client.waitingNumber)번 고객 업무 시작")
+                    
+                    self.semaphore.signal()
+                    
+                    
+                    Thread.sleep(forTimeInterval: 0.7)
+                    
+                    print("매니저 2: \(client.waitingNumber)번 고객 업무 완료")
+                    self.totalProcessingTime += client.request.processingTime
+                }
+            }
+            
+            myGroup.wait()
         }
         
-        reportSummary()
+        self.reportSummary()
     }
     
     func close() {
@@ -43,14 +114,7 @@ private extension Bank {
     }
     
     func assignTask(to bankManager: BankManager) {
-        guard let client = clientQueue.dequeue() else {
-            return
-        }
         
-        bankManager.processRequest(from: client)
-        
-        totalProcessingTime += client.request.processingTime
-        totalVisitedClients += 1
     }
     
     func reportSummary() {
