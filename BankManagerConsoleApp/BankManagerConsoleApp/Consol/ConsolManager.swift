@@ -20,7 +20,7 @@ struct ConsolManager {
     }
 
     private func executeWork() -> Int {
-        let bankManagers = DispatchGroup()
+        let workQueue = OperationQueue()
         let deposit = DispatchSemaphore(value: 2)
         let loan = DispatchSemaphore(value: 1)
         let bank = Bank(count: Int.random(in: 10...30))
@@ -34,30 +34,28 @@ struct ConsolManager {
                 print("고객이 없습니다.")
                 break
             }
-
             if customer.business == .deposit {
-                workBanking(business: deposit, as: bankManagers, for: customer)
+                workBanking(business: deposit, for: customer, workQueue: workQueue)
             } else {
-                workBanking(business: loan, as: bankManagers, for: customer)
+                workBanking(business: loan, for: customer, workQueue: workQueue)
             }
         }
 
-        bankManagers.wait()
+        workQueue.waitUntilAllOperationsAreFinished()
         return totalCustomer
     }
 
     private func workBanking(business semaphore: DispatchSemaphore,
-                             as bankManagers: DispatchGroup,
-                             for customer: Customer) {
-        let workQueue = DispatchQueue(label: "work", attributes: .concurrent)
+                             for customer: Customer,
+                             workQueue: OperationQueue) {
         let time = customer.business == .deposit ?
         BankBusiness.deposit.processingTime : BankBusiness.loan.processingTime
 
-        workQueue.async(group: bankManagers) {
+        workQueue.addOperation {
             semaphore.wait()
-            BankManager.work(customer: customer, time: time)
+                BankManager.work(customer: customer, time: time)
             semaphore.signal()
-        }
+            }
     }
 
     private func printCloseMessage(_ totalCustomer: Int, _ time: Double) {
