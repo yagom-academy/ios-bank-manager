@@ -23,6 +23,7 @@ extension Bank {
     func open() {
         generateClients()
         
+        
         //        while !clientQueue.isEmpty() {
         //            assignTask(to: manager)
         //        }
@@ -39,9 +40,10 @@ extension Bank {
         //        }
         let myGroup = DispatchGroup()
         
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
         DispatchQueue.global().sync {
-            
-            
+        
             DispatchQueue.global().async(group: myGroup) {
                 while !self.clientQueue.isEmpty() {
                     self.semaphore.wait()
@@ -93,8 +95,11 @@ extension Bank {
             
             myGroup.wait()
         }
+        let closeTime = CFAbsoluteTimeGetCurrent()
+        let elapsedTime = closeTime - startTime
         
         self.reportSummary()
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVisitedClients)명이며, 총 업무시간은 \(elapsedTime.roundDown())초입니다.")
     }
     
     func close() {
@@ -102,6 +107,11 @@ extension Bank {
         totalVisitedClients = 0
     }
 }
+
+// loan 추가
+
+// 메서드로 기능 분리
+
 
 private extension Bank {
     func generateClients() {
@@ -118,6 +128,6 @@ private extension Bank {
     }
     
     func reportSummary() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalVisitedClients)명이며, 총 업무시간은 \(totalProcessingTime.roundDown())초입니다.")
+
     }
 }
