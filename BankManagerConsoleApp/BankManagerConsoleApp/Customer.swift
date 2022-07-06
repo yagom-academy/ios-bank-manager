@@ -6,5 +6,5 @@
 //
 
 protocol Customer: Equatable {
-    var task: String? { get set }
+    var task: Task? { get set }
 }

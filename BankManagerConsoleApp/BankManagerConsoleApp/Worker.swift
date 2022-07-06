@@ -8,6 +8,7 @@
 protocol Workable {
     associatedtype customer: Customer
     var totalWorkTime: Double { get set }
+    var task: Task? { get set }
 
     mutating func startWork(of customer: customer)
     mutating func finishWork(of customer: customer)

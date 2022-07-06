@@ -8,6 +8,7 @@
 import Foundation
 
 struct Banker: Workable {
+    var task: Task?
     var totalWorkTime: Double
 
     init() {
