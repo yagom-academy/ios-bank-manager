@@ -1,21 +1,21 @@
 import Foundation
 
 struct Bank {
-    let depositSemaphore = DispatchSemaphore(value: 2)
-    let loanSemaphore = DispatchSemaphore(value: 1)
+    private let bankingGroup = DispatchGroup()
     
-    func startBanking(customer: Queue<Customer>, bankers: [BankerLogic]) -> Double {
+    func startBanking(customer: Queue<Customer>) -> Double {
         var customerNumber: Double = 0
-        let bankingGroup = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: DepositBanker.number)
+        let loanSemaphore = DispatchSemaphore(value: LoanBanker.number)
         
         while customer.isEmpty == false {
             guard let customer = customer.dequeue() else { return 0 }
             
             switch customer.banking {
             case .loan:
-                processLoan(bankers: bankers, customer: customer, group: bankingGroup)
+                processWork(banker: LoanBanker.self, customer: customer, semaphore: loanSemaphore)
             case .deposit:
-                processDeposit(bankers: bankers, customer: customer, group: bankingGroup)
+                processWork(banker: DepositBanker.self, customer: customer, semaphore: depositSemaphore)
             }
             
             customerNumber += 1
@@ -26,21 +26,13 @@ struct Bank {
         return customerNumber
     }
     
-    func processLoan(bankers: [BankerLogic], customer: Customer, group: DispatchGroup) {
-        let loanWork = DispatchWorkItem {
-            loanSemaphore.wait()
-            bankers[2].serve(customer: customer)
-            loanSemaphore.signal()
+    private func processWork<T: BankerLogic>(banker: T.Type, customer: Customer, semaphore: DispatchSemaphore) {
+        let serveWork = DispatchWorkItem {
+            semaphore.wait()
+            banker.serve(customer: customer)
+            semaphore.signal()
         }
-        DispatchQueue.global().async(group: group, execute: loanWork)
-    }
-    
-    func processDeposit(bankers: [BankerLogic], customer: Customer, group: DispatchGroup) {
-        let depositWork = DispatchWorkItem {
-            depositSemaphore.wait()
-            bankers[0].serve(customer: customer)
-            depositSemaphore.signal()
-        }
-        DispatchQueue.global().async(group: group, execute: depositWork)
+
+        DispatchQueue.global().async(group: bankingGroup, execute: serveWork)
     }
 }

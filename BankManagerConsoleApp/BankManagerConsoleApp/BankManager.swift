@@ -43,21 +43,19 @@ struct BankManager {
         return customerQueue
     }
 
-    private func createBanker(deposit: Int, loan: Int) -> [BankerLogic] {
-        let depositBankers: [BankerLogic] = Array(repeating: DepositBanker(), count: deposit)
-        let loanBankers: [BankerLogic] = Array(repeating: LoanBanker(), count: loan)
-        let bankers = depositBankers + loanBankers
-        
-        return bankers
+    private func hireBanker(deposit: Int, loan: Int) {
+        DepositBanker.number = deposit
+        LoanBanker.number = loan
     }
     
     private func manageBank() {
         let bank = Bank()
         var customerNumber: Double = 0
         
+        hireBanker(deposit: 2, loan: 1)
+        
         let processTime = processTime {
-            customerNumber = bank.startBanking(customer: createCustomerQueue(),
-                                               bankers: createBanker(deposit: 2, loan: 1))
+            customerNumber = bank.startBanking(customer: createCustomerQueue())
         }
         
         let workingTime = String(format: "%.2f", processTime)
