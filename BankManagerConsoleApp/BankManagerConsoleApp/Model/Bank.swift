@@ -29,11 +29,11 @@ struct Bank {
             displayMenu()
             let selectedMenu = selectMenu()
             
-            if selectedMenu == NameSpace.one.print {
+            if selectedMenu == NameSpace.one {
                 updateCustomerQueue()
                 handleCustomer()
                 displayEndMessage()
-            } else if selectedMenu == NameSpace.two.print {
+            } else if selectedMenu == NameSpace.two {
                 break
             } else {
                 throw BankManagerError.Input
@@ -42,7 +42,7 @@ struct Bank {
     }
     
     private func displayMenu() {
-        print(NameSpace.startMessage.print, terminator: " ")
+        print(NameSpace.startMessage, terminator: " ")
     }
     
     private mutating func selectMenu() -> String {
