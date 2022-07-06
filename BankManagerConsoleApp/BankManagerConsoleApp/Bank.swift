@@ -8,8 +8,8 @@
 import Foundation
 
 struct Bank {
-    var customer: BankItemQueue<Customer>
-    let bankmanager: BankManager
+    private var customer: BankItemQueue<Customer>
+    private let bankmanager: BankManager
     private let depositSemaphore = DispatchSemaphore(value: 2)
     private let loanSemaphore = DispatchSemaphore(value: 1)
     private let bankingGroup = DispatchGroup()
@@ -66,7 +66,7 @@ struct Bank {
         }
     }
     
-    func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
+    private func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
         var customerList = customerList
         let startTime = CFAbsoluteTimeGetCurrent()
         
@@ -84,7 +84,6 @@ struct Bank {
                 }
             }
         }
-        
         bankingGroup.wait()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         return durationTime
