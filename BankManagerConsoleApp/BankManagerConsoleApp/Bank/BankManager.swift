@@ -7,13 +7,8 @@
 import Foundation
 
 final class BankManager {
-    private var bank: Bank
     private static let depositSemaphore = DispatchSemaphore(value: 2)
     private static let loanSemaphore = DispatchSemaphore(value: 1)
-    
-    init(bank: Bank) {
-        self.bank = bank
-    }
     
     static func handleDepositCustomers(customer: Customer, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
