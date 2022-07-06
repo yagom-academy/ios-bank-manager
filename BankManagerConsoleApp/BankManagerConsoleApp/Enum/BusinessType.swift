@@ -9,7 +9,7 @@ enum BusinessType {
     case deposit
     case loan
     
-    var bankingName: String  {
+    var bankingName: String {
         switch self {
         case .deposit:
             return "예금"
