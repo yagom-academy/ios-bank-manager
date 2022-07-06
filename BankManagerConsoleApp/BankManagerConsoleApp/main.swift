@@ -6,6 +6,7 @@
 
 import Foundation
 
-var bankManager = BankManager()
+var bank = Bank()
 
-bankManager.openBank()
+bank.runBusiness()
+
