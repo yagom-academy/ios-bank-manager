@@ -10,10 +10,13 @@ import Foundation
 final class Bank {
     private let depositManager1 = BankManager()
     private let depositManager2 = BankManager()
+    private let loanManager1 = BankManager()
     
     private let semaphore = DispatchSemaphore(value: 1)
     
-    private(set) var clientQueue = ClientQueue<Client>()
+    private(set) var depositClientQueue = ClientQueue<Client>()
+    private(set) var loanClientQueue = ClientQueue<Client>()
+    
     
     private var totalProcessingTime: Double = 0.0
     private var totalVisitedClients: Int = 0
@@ -22,22 +25,7 @@ final class Bank {
 extension Bank {
     func open() {
         generateClients()
-        
-        
-        //        while !clientQueue.isEmpty() {
-        //            assignTask(to: manager)
-        //        }
-        
-        //        DispatchQueue.global().async {
-        //            while !self.clientQueue.isEmpty() {
-        //                self.semaphore.wait()
-        //                print("매니저1")
-        //                self.assignTask(to: self.depositManager1)
-        //                self.semaphore.signal()
-        //                Thread.sleep(forTimeInterval: 0.7)
-        //
-        //            }
-        //        }
+
         let myGroup = DispatchGroup()
         
         let startTime = CFAbsoluteTimeGetCurrent()
@@ -45,56 +33,71 @@ extension Bank {
         DispatchQueue.global().sync {
         
             DispatchQueue.global().async(group: myGroup) {
-                while !self.clientQueue.isEmpty() {
+                while !self.depositClientQueue.isEmpty() {
                     self.semaphore.wait()
                     
-                    
-                    guard let client = self.clientQueue.dequeue() else {
+                    guard let client = self.depositClientQueue.dequeue() else {
                         return
                     }
                     
                     self.totalVisitedClients += 1
                     
-                    
                     self.depositManager1.processRequest(from: client)
-                    print("매니저 1: \(client.waitingNumber)번 고객 업무 시작")
+                    print("매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
                     
                     self.semaphore.signal()
                     
-                    
                     Thread.sleep(forTimeInterval: 0.7)
                     
-                    print("매니저 1: \(client.waitingNumber)번 고객 업무 완료")
-                    self.totalProcessingTime += client.request.processingTime
+                    print("매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
                 }
             }
             
             DispatchQueue.global().async(group: myGroup) {
-                while !self.clientQueue.isEmpty() {
+                while !self.depositClientQueue.isEmpty() {
                     self.semaphore.wait()
                     
-                    
-                    guard let client = self.clientQueue.dequeue() else {
+                    guard let client = self.depositClientQueue.dequeue() else {
                         return
                     }
                     
                     self.totalVisitedClients += 1
                     
                     self.depositManager2.processRequest(from: client)
-                    print("매니저 2: \(client.waitingNumber)번 고객 업무 시작")
+                    print("매니저 2: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
                     
                     self.semaphore.signal()
                     
-                    
                     Thread.sleep(forTimeInterval: 0.7)
                     
-                    print("매니저 2: \(client.waitingNumber)번 고객 업무 완료")
-                    self.totalProcessingTime += client.request.processingTime
+                    print("매니저 2: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
+                }
+            }
+            
+            DispatchQueue.global().async(group: myGroup) {
+                while !self.loanClientQueue.isEmpty() {
+                    self.semaphore.wait()
+                    
+                    guard let client = self.loanClientQueue.dequeue() else {
+                        return
+                    }
+                    
+                    self.totalVisitedClients += 1
+                    
+                    self.loanManager1.processRequest(from: client)
+                    print("대출매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 시작")
+                    
+                    self.semaphore.signal()
+                    
+                    Thread.sleep(forTimeInterval: 1.1)
+                    
+                    print("대출매니저 1: \(client.waitingNumber)번 고객 \(client.request.koreanTitle)업무 완료")
                 }
             }
             
             myGroup.wait()
         }
+        
         let closeTime = CFAbsoluteTimeGetCurrent()
         let elapsedTime = closeTime - startTime
         
@@ -116,10 +119,19 @@ extension Bank {
 private extension Bank {
     func generateClients() {
         let clientAmount = Int.random(in: 10...30)
-        let task: Request = .task
+        
         
         for amount in 1...clientAmount {
-            clientQueue.enqueue(Client(request: task, waitingNumber: amount))
+            guard let requestName = Request.allCases.randomElement() else {
+                return
+            }
+            
+            switch requestName {
+            case .deposit:
+                depositClientQueue.enqueue(Client(request: requestName, waitingNumber: amount))
+            case .loan:
+                loanClientQueue.enqueue(Client(request: requestName, waitingNumber: amount))
+            }
         }
     }
     

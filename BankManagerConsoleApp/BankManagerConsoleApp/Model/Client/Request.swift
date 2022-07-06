@@ -7,15 +7,30 @@
 
 import Foundation
 
-enum Request {
-    case task
+enum Request{
+    case deposit
+    case loan
 }
 
-extension Request {
+extension Request: CaseIterable {
     var processingTime: Double {
         switch self {
-        case .task:
+        case .deposit:
             return 0.7
+        case .loan:
+            return 1.1
         }
     }
+    
+    var koreanTitle: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
+    
+    
+    
 }
