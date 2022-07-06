@@ -15,26 +15,31 @@ struct Banker: Workable {
         self.workTime = 0.0
     }
     
-    mutating func startWork(of customer: BankCustomer) {
+    init(task: Task) {
+        self.workTime = 0.0
+        self.task = task
+    }
+    
+    func startWork(of customer: BankCustomer) {
         printStartWork(of: customer)
         switch self.task {
         case .deposit:
-            usleep(700000)
-            self.workTime += Task.deposit.workTime
+            Thread.sleep(forTimeInterval: Task.deposit.workTime)
+//            self.workTime += Task.deposit.workTime
         case .loan:
-            usleep(1100000)
-            self.workTime += Task.loan.workTime
+            Thread.sleep(forTimeInterval: Task.loan.workTime)
+//            self.workTime += Task.loan.workTime
         case .none:
             break
         }
         finishWork(of: customer)
     }
     
-    mutating func finishWork(of customer: BankCustomer) {
+     func finishWork(of customer: BankCustomer) {
         printFinishWork(of: customer)
     }
     
-    private func printStartWork(of customer: BankCustomer) {
+     func printStartWork(of customer: BankCustomer) {
         guard let task = customer.task else { return }
         print("\(customer.id)번 고객 \(task) 업무 시작")
     }
