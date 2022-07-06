@@ -18,6 +18,15 @@ enum BankWorkType: CaseIterable {
         }
     }
     
+    var semaphoreValue: Int {
+        switch self {
+        case .deposit:
+            return 2
+        case .loan:
+            return 1
+        }
+    }
+    
     var processingTime: Double {
         switch self {
         case .deposit:

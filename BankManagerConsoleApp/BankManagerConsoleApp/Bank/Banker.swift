@@ -7,8 +7,8 @@
 import Foundation
 
 final class Banker {
-    private let depositSemaphore = DispatchSemaphore(value: 2)
-    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let depositSemaphore = DispatchSemaphore(value: BankWorkType.deposit.semaphoreValue)
+    private let loanSemaphore = DispatchSemaphore(value: BankWorkType.loan.semaphoreValue)
     
     func handleDepositCustomers(customer: Customer, group: DispatchGroup) {
         DispatchQueue.global().async(group: group) {
