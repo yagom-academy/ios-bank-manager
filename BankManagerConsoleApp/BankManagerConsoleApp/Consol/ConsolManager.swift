@@ -19,15 +19,15 @@ struct ConsolManager {
         }
     }
 
-    func executeWork() -> Int {
+    private func executeWork() -> Int {
         let bankManagers = DispatchGroup()
         let deposit = DispatchSemaphore(value: 2)
         let loan = DispatchSemaphore(value: 1)
-        let bank = Bank()
+        let bank = Bank(count: Int.random(in: 10...30))
         let totalCustomer = bank.customerQueue.count
 
         while bank.customerQueue.isNotEmpty {
-            var customer: Customer
+            let customer: Customer
             do {
                 customer = try bank.popCustomer()
             } catch {
