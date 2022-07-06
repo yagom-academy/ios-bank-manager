@@ -10,6 +10,9 @@ import Foundation
 struct Bank {
     var customer: BankItemQueue<Customer>
     let bankmanager: BankManager
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let bankingGroup = DispatchGroup()
     
     init(customer: BankItemQueue<Customer>, bankmanager: BankManager) {
         self.customer = customer
@@ -63,12 +66,26 @@ struct Bank {
         }
     }
     
-    mutating func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
+    func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
         var customerList = customerList
         let startTime = CFAbsoluteTimeGetCurrent()
+        
         while let completeCustomer = customerList.deQueue() {
-            bankmanager.handleBanking(for: completeCustomer)
+            DispatchQueue.global().async(group: bankingGroup) {
+                switch completeCustomer.bankingType.1 {
+                case .deposit:
+                    self.depositSemaphore.wait()
+                    self.bankmanager.handleBanking(for: completeCustomer)
+                    self.depositSemaphore.signal()
+                case .loan:
+                    self.loanSemaphore.wait()
+                    self.bankmanager.handleBanking(for: completeCustomer)
+                    self.loanSemaphore.signal()
+                }
+            }
         }
+        
+        bankingGroup.wait()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         return durationTime
     }
