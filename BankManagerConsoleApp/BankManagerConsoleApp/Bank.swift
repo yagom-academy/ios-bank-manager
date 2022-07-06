@@ -28,12 +28,12 @@ struct Bank {
         case BankComment.bankOpen.rawValue:
             let totalTaskTime = giveTask(for: customer)
             calculateWorkTime(by: numberOfCustomer, with: totalTaskTime)
-            bankBusinessStart()
+            initiateBankBusiness()
         case BankComment.bankClose.rawValue:
             break
         default:
             printWrongInput()
-            bankBusinessStart()
+            initiateBankBusiness()
         }
     }
     

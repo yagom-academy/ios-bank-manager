@@ -10,16 +10,16 @@ func userInput() -> String {
     return readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComment.emptyValue.rawValue
 }
 
-func setCustomerCount() -> Int {
+private func setCustomerCount() -> Int {
     return Int.random(in: SetNumber.minCustomer.rawValue...SetNumber.maxCustomer.rawValue)
 }
 
-func takeNumberTicket(number: Int, workType: (Double, String)) -> Customer {
+private func takeNumberTicket(number: Int, workType: (Double, String)) -> Customer {
     let customer = Customer(bankNumberTicket: number, bankingType: workType)
     return customer
 }
 
-func makeCustomer() -> BankItemQueue<Customer> {
+private func makeCustomer() -> BankItemQueue<Customer> {
     var watingQueue = BankItemQueue<Customer>()
     let totalCustomer = setCustomerCount()
     let workType = [WorkType().deposit, WorkType().loan]
