@@ -10,8 +10,8 @@ import Foundation
 struct Bank {
     private var customer: BankItemQueue<Customer>
     private let bankmanager: BankManager
-    private let depositSemaphore = DispatchSemaphore(value: 2)
-    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let depositSemaphore = DispatchSemaphore(value: NumberOfBankManager.deposit.rawValue)
+    private let loanSemaphore = DispatchSemaphore(value: NumberOfBankManager.loan.rawValue)
     private let bankingGroup = DispatchGroup()
     
     init(customer: BankItemQueue<Customer>, bankmanager: BankManager) {
