@@ -7,9 +7,9 @@
 
 final class Customer {
     let customerNumber: Int
-    let business: WorkType
+    let business: BankWorkType
     
-    init (customerNumber: Int, business: WorkType) {
+    init (customerNumber: Int, business: BankWorkType) {
         self.customerNumber = customerNumber
         self.business = business
     }
