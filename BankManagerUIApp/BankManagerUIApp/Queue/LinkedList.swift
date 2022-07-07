@@ -14,6 +14,7 @@ final class LinkedList<T> {
     func returnList() -> [T] {
         var list: [T] = []
         var node: Node<T>? = head
+        
         while node != tail {
             guard let currentNode = node else {
                 return []
@@ -26,7 +27,7 @@ final class LinkedList<T> {
         if let node = node {
             list.append(node.value)
         }
-        print(list)
+
         return list
     }
 

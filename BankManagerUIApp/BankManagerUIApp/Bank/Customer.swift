@@ -5,15 +5,14 @@ struct Customer {
     }
             
     let number: Int
-    var banking: Banking {
-        let randomNumber = Int.random(in: 0...1)
-        guard let banking = Banking(rawValue: randomNumber) else {
-            return .deposit
-        }
-        return banking
-    }
+    var banking: Banking = .deposit
     
     init (_ number: Int) {
-        self.number = number
+        let randomNumber = Int.random(in: 0...1)
+        if let banking = Banking(rawValue: randomNumber)  {
+            self.banking = banking
+        }
+        
+        self.number = number  
     }
 }
