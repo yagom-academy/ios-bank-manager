@@ -8,19 +8,19 @@ import Foundation
 
 final class BankManager {
     func openBank() {
-        print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
-        print("입력 :", terminator: " ")
-        let selection = readLine()
-        
-        switch selection {
-        case Selections.run:
-            issueTickets()
-            return
-        case Selections.dismiss:
-            return
-        default:
-            openBank()
-            return
+        while true {
+            print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
+            print("입력 :", terminator: " ")
+            let selection = readLine()
+            
+            switch selection {
+            case Selections.run:
+                issueTickets()
+            case Selections.dismiss:
+                return
+            default:
+                continue
+            }
         }
     }
     
@@ -81,7 +81,6 @@ final class BankManager {
         let elapsedTime = Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
         
         showResult(servedCustomers: servedCustomers, elapsedTime: elapsedTime)
-        openBank()
         return
     }
     
