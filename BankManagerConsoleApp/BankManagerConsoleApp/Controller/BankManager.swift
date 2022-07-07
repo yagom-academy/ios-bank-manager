@@ -75,13 +75,13 @@ final class BankManager {
         }
         
         customerGroup.wait()
-        finishWork(customers: servedCustomers, time: elapsedTime)
+        showResult(servedCustomers: servedCustomers, elapsedTime: elapsedTime)
         openBank()
         return
     }
     
-    private func finishWork(customers: Int, time: Double) {
-        let formattedTime = String(format: "%.2f", time)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(formattedTime)초입니다.")
+    private func showResult(servedCustomers: Int, elapsedTime: Double) {
+        let formattedTime = String(format: "%.2f", elapsedTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(servedCustomers)명이며, 총 업무시간은 \(formattedTime)초입니다.")
     }
 }
