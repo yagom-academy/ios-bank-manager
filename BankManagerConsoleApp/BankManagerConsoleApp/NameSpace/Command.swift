@@ -7,8 +7,6 @@
 enum Command: CustomStringConvertible {
     case open
     case close
-    case loan
-    case deposit
     
     var description: String {
         switch self {
@@ -16,10 +14,6 @@ enum Command: CustomStringConvertible {
             return "1"
         case .close:
             return "2"
-        case .loan:
-            return "대출"
-        case .deposit:
-            return "예금"
         }
     }
 }

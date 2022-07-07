@@ -13,9 +13,9 @@ class BankService {
     
     private func createCustomer() -> [Customer] {
         var customers = [Customer]()
-        let tasks = [Command.deposit.description, Command.loan.description]
+        let tasks = [BankTask.deposit, BankTask.loan]
         for _ in 1...Int.random(in: 10...30) {
-            let customer = Customer(task: tasks.randomElement() ?? Command.deposit.description)
+            let customer = Customer(task: tasks.randomElement() ?? BankTask.deposit)
             customers.append(customer)
         }
         return customers

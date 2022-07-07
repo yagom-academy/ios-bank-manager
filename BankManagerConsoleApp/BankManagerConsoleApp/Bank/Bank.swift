@@ -61,14 +61,12 @@ final class Bank {
             let customer = try self.manager.fetchTask()
             
             switch customer.task {
-            case "예금":
-                let depositTask = DepositOperation(task: customer.task, watingNumber: customer.count)
+            case .deposit:
+                let depositTask = BankOperation(task: customer.task, watingNumber: customer.count, timeInterval: 700000)
                 depositQueue.addOperation(depositTask)
-            case "대출":
-                let loanTask = LoanOperation(task: customer.task, watingNumber: customer.count)
+            case .loan:
+                let loanTask = BankOperation(task: customer.task, watingNumber: customer.count, timeInterval: 1100000)
                 loanQueue.addOperation(loanTask)
-            default:
-                return
             }
         } catch {
             debugPrint(error.localizedDescription)
