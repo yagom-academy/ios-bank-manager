@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank: Agency {
+struct Bank: Agency {
     let depositQueue = DispatchQueue.global()
     var depositBanker = Banker(task: .deposit)
     let depositSemaphore: DispatchSemaphore
@@ -37,7 +37,7 @@ class Bank: Agency {
         self.loanSemaphore = DispatchSemaphore(value: numberOfLoanBankers)
     }
     
-    func open() {
+    mutating func open() {
         customerCount = ticketNumberQueue.count
         while let currentCustomer = ticketNumberQueue.dequeue() {
             switch currentCustomer.task {
@@ -64,12 +64,12 @@ class Bank: Agency {
         }
     }
     
-    func close() {
+    mutating func close() {
         self.checkTotalTime()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount ?? 0)명이며, 총 업무시간은 \(totalWorkTime.formatDoubleToString()) 입니다.")
     }
     
-    func checkTotalTime() {
+    mutating func checkTotalTime() {
         self.totalWorkTime += loanBanker.workTime
         self.totalWorkTime += depositBanker.workTime
     }
