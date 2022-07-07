@@ -13,10 +13,6 @@ struct BankManager {
     private let taskGroup = DispatchGroup()
     
     func processRequest(from client: Client) {
-//        let processingTime = client.request.processingTime
-        
-//        startTask(for: client)
-        
     }
     
     func startTask(for client: Client) {

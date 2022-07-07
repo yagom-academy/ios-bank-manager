@@ -61,8 +61,8 @@ extension Bank {
         }
     }
     
-    func open() {
-        generateClients()
+    func open(clients: (ClientQueue<Client>, ClientQueue<Client>)) {
+        generateClients(clients: clients)
 
         let startTime = CFAbsoluteTimeGetCurrent()
         
@@ -88,21 +88,9 @@ extension Bank {
 }
 
 private extension Bank {
-    func generateClients() {
-        let clientAmount = Int.random(in: 10...30)
-        
-        for amount in 1...clientAmount {
-            guard let requestName = Request.allCases.randomElement() else {
-                return
-            }
-            
-            switch requestName {
-            case .deposit:
-                depositClientQueue.enqueue(Client(request: requestName, waitingNumber: amount))
-            case .loan:
-                loanClientQueue.enqueue(Client(request: requestName, waitingNumber: amount))
-            }
-        }
+    func generateClients(clients: (deposit: ClientQueue<Client>, loan: ClientQueue<Client>)) {
+        depositClientQueue = clients.deposit
+        loanClientQueue = clients.loan
     }
     
 }
