@@ -7,63 +7,85 @@
 import Foundation
 
 final class BankManager {
-    private let firstClerk: Clerk
-    private var clients: CustomerQueue<Client>
-    
-    init(firstClerk: Clerk = Clerk(),
-         clients: CustomerQueue<Client> = CustomerQueue()) {
-        self.firstClerk = firstClerk
-        self.clients = clients
-    }
-    
     func openBank() {
-        print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
-        print("입력 :", terminator: " ")
-        let selection = readLine()
-        
-        switch selection {
-        case Selections.run:
-            issueTickets()
-            return
-        case Selections.dismiss:
-            return
-        default:
-            openBank()
-            return
+        while true {
+            print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
+            print("입력 :", terminator: " ")
+            let selection = readLine()
+            
+            switch selection {
+            case Selections.run:
+                issueTickets()
+            case Selections.dismiss:
+                return
+            default:
+                continue
+            }
         }
     }
     
     private func issueTickets() {
-        let customerNumber = Int.random(
-            in: Customer.minimumNumbers...Customer.maximumNumbers
+        var customersQueue = QueueWithLinkedList<Customer>()
+        
+        let numberOfCustomers = Int.random(
+            in: NumberOfCustomers.minimum...NumberOfCustomers.maximum
         )
         
-        let tickets = Array(1...customerNumber)
-        tickets.forEach {
-            clients.enqueue(Client(number: $0))
+        let customers = (1...numberOfCustomers).compactMap { number -> Customer? in
+            if let business = Service.allCases.randomElement() {
+                let customer = Customer(number: number, business: business)
+                return customer
+            }
+            
+            return nil
         }
         
-        startWork()
+        for customer in customers {
+            customersQueue.enqueue(customer)
+        }
+        
+        startWork(with: customersQueue)
         return
     }
     
-    private func startWork() {
-        var servedClients = 0
-        var timeSpent = 0.0
+    private func startWork(with customersQueue: QueueWithLinkedList<Customer>) {
+        let customerGroup = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: NumberOfClerks.deposit)
+        let loanSemaphore = DispatchSemaphore(value: NumberOfClerks.loan)
         
-        while let client = clients.dequeue() {
-            firstClerk.provideService(client)
-            servedClients += 1
-            timeSpent += EstimatedTime.deposit
+        var servedCustomers = 0
+        var customers = customersQueue
+        
+        let start = DispatchTime.now()
+        
+        while let customer = customers.dequeue() {
+            servedCustomers += 1
+            
+            DispatchQueue.global().async(group: customerGroup) {
+                switch customer.business {
+                case .deposit:
+                    depositSemaphore.wait()
+                    Clerk.provideService(customer)
+                    depositSemaphore.signal()
+                case .loan:
+                    loanSemaphore.wait()
+                    Clerk.provideService(customer)
+                    loanSemaphore.signal()
+                }
+            }
         }
         
-        finishWork(customers: servedClients, time: timeSpent)
-        openBank()
+        customerGroup.wait()
+        
+        let end = DispatchTime.now()
+        let elapsedTime = Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
+        
+        showResult(servedCustomers: servedCustomers, elapsedTime: elapsedTime)
         return
     }
     
-    private func finishWork(customers: Int, time: Double) {
-        let formattedTime = String(format: "%.2f", time)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customers)명이며, 총 업무시간은 \(formattedTime)초입니다.")
+    private func showResult(servedCustomers: Int, elapsedTime: Double) {
+        let formattedTime = String(format: "%.2f", elapsedTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(servedCustomers)명이며, 총 업무시간은 \(formattedTime)초입니다.")
     }
 }

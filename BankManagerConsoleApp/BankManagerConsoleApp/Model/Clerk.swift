@@ -8,9 +8,12 @@
 import Foundation
 
 struct Clerk {
-    func provideService(_ client: Client) {
-        print("\(client.number)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: EstimatedTime.deposit)
-        print("\(client.number)번 고객 업무 종료")
+    static func provideService(_ client: Customer) {
+        let business = client.business
+        
+        print("\(client.number)번 고객 \(business.serviceName)업무 시작")
+        Thread.sleep(forTimeInterval: business.estimatedTime)
+        
+        print("\(client.number)번 고객 \(business.serviceName)업무 완료")
     }
 }
