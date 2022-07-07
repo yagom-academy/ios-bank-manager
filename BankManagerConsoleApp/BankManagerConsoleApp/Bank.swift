@@ -32,6 +32,10 @@ class Bank: Agency {
         return randomCustomerQueue
     }()
     
+    init(numberOfDepositBankers: Int, numberOfLoanBankers: Int) {
+        self.depositSemaphore = DispatchSemaphore(value: numberOfDepositBankers)
+        self.loanSemaphore = DispatchSemaphore(value: numberOfLoanBankers)
+    }
     
     func open() {
         customerCount = ticketNumberQueue.count
