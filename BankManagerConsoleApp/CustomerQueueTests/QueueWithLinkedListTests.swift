@@ -1,19 +1,19 @@
 //
-//  CustomerQueueTests.swift
-//  CustomerQueueTests
+//  QueueWithLinkedListTests.swift
+//  QueueWithLinkedListTests
 //
 //  Created by 재재, 나별 on 2022/06/28.
 //
 
 import XCTest
 
-class CustomerQueueTests: XCTestCase {
-    var sut: CustomerQueue<Int>!
+class QueueWithLinkedListTests: XCTestCase {
+    var sut: QueueWithLinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = CustomerQueue<Int>()
+        sut = QueueWithLinkedList<Int>()
     }
     
     override func tearDownWithError() throws {

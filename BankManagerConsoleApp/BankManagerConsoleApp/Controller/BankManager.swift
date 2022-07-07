@@ -8,14 +8,14 @@ import Foundation
 
 final class BankManager {
     private let clerk: Clerk
-    private var customers: CustomerQueue<Customer>
+    private var customers: QueueWithLinkedList<Customer>
     
     private let customerGroup = DispatchGroup()
     private let depositSemaphore = DispatchSemaphore(value: NumberOfClerks.deposit)
     private let loanSemaphore = DispatchSemaphore(value: NumberOfClerks.loan)
     
     init(clerk: Clerk = Clerk(),
-         customers: CustomerQueue<Customer> = CustomerQueue<Customer>()) {
+         customers: QueueWithLinkedList<Customer> = QueueWithLinkedList<Customer>()) {
         self.clerk = clerk
         self.customers = customers
     }

@@ -1,5 +1,5 @@
 //
-//  CustomerQueue.swift
+//  QueueWithLinkedList.swift
 //  BankManagerConsoleApp
 //
 //  Created by 재재, 나별 on 2022/06/28.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CustomerQueue<T> {
+struct QueueWithLinkedList<T> {
     private var list: LinkedList<T>
     
     init(list: LinkedList<T> = LinkedList<T>()) {
@@ -15,7 +15,7 @@ struct CustomerQueue<T> {
     }
 }
 
-extension CustomerQueue: Queue {
+extension QueueWithLinkedList: Queue {
     var isEmpty: Bool {
         return list.isEmpty
     }
