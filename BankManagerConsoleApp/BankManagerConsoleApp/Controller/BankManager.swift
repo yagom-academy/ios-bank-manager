@@ -7,19 +7,6 @@
 import Foundation
 
 final class BankManager {
-    private let clerk: Clerk
-    private var customers: QueueWithLinkedList<Customer>
-    
-    private let customerGroup = DispatchGroup()
-    private let depositSemaphore = DispatchSemaphore(value: NumberOfClerks.deposit)
-    private let loanSemaphore = DispatchSemaphore(value: NumberOfClerks.loan)
-    
-    init(clerk: Clerk = Clerk(),
-         customers: QueueWithLinkedList<Customer> = QueueWithLinkedList<Customer>()) {
-        self.clerk = clerk
-        self.customers = customers
-    }
-    
     func openBank() {
         print("\(Selections.run) : 은행개점\n\(Selections.dismiss) : 종료")
         print("입력 :", terminator: " ")
@@ -38,23 +25,36 @@ final class BankManager {
     }
     
     private func issueTickets() {
+        var customersQueue = QueueWithLinkedList<Customer>()
+        
         let numberOfCustomers = Int.random(
             in: NumberOfCustomers.minimum...NumberOfCustomers.maximum
         )
         
-        let tickets = Array(1...numberOfCustomers)
-        tickets.forEach {
+        let customers = (1...numberOfCustomers).compactMap { number -> Customer? in
             if let business = Service.allCases.randomElement() {
-                customers.enqueue(Customer(number: $0, business: business))
+                let customer = Customer(number: number, business: business)
+                return customer
             }
+            
+            return nil
         }
         
-        startWork()
+        for customer in customers {
+            customersQueue.enqueue(customer)
+        }
+        
+        startWork(with: customersQueue)
         return
     }
     
-    private func startWork() {
+    private func startWork(with customersQueue: QueueWithLinkedList<Customer>) {
+        let customerGroup = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: NumberOfClerks.deposit)
+        let loanSemaphore = DispatchSemaphore(value: NumberOfClerks.loan)
+        
         var servedCustomers = 0
+        var customers = customersQueue
         
         let start = DispatchTime.now()
         
@@ -64,13 +64,13 @@ final class BankManager {
             DispatchQueue.global().async(group: customerGroup) {
                 switch customer.business {
                 case .deposit:
-                    self.depositSemaphore.wait()
-                    self.clerk.provideService(customer)
-                    self.depositSemaphore.signal()
+                    depositSemaphore.wait()
+                    Clerk.provideService(customer)
+                    depositSemaphore.signal()
                 case .loan:
-                    self.loanSemaphore.wait()
-                    self.clerk.provideService(customer)
-                    self.loanSemaphore.signal()
+                    loanSemaphore.wait()
+                    Clerk.provideService(customer)
+                    loanSemaphore.signal()
                 }
             }
         }
