@@ -11,7 +11,7 @@ struct Console {
         guard let input = readLine()?.trimmingCharacters(in: .whitespaces) else { return }
         
         if input == "1" {
-            var bank = Bank()
+            let bank = Bank()
             
             bank.open()
             bank.close()
