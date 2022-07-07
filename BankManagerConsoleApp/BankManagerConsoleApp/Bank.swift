@@ -8,9 +8,18 @@
 import Foundation
 
 class Bank: Agency {
-    var customerCount: Int?
-    var loanBanker = Banker(task: .loan)
+    let depositQueue = DispatchQueue.global()
     var depositBanker = Banker(task: .deposit)
+    let depositSemaphore: DispatchSemaphore
+    
+    let loanQueue = DispatchQueue.global()
+    var loanBanker = Banker(task: .loan)
+    let loanSemaphore: DispatchSemaphore
+    
+    let group = DispatchGroup()
+    
+    var totalWorkTime: Double = 0
+    var customerCount: Int?
     
     var ticketNumberQueue: Queue<BankCustomer> = {
         let randomNumber = Int.random(in: NameSpace.randomCustomerNumberRange)
@@ -23,24 +32,16 @@ class Bank: Agency {
         return randomCustomerQueue
     }()
     
-    var totalWorkTime: Double = 0
-    
-    let depositQueue = DispatchQueue.global()
-    let loanQueue = DispatchQueue.global()
-    
-    let depositsemaphore = DispatchSemaphore(value: 2)
-    let loansemaphore = DispatchSemaphore(value: 1)
-    let group = DispatchGroup()
     
     func open() {
         customerCount = ticketNumberQueue.count
         while let currentCustomer = ticketNumberQueue.dequeue() {
             switch currentCustomer.task {
             case .deposit:
-                matchWork(to: depositBanker, with: currentCustomer, queue: depositQueue, semaphore: depositsemaphore)
+                matchWork(to: depositBanker, with: currentCustomer, queue: depositQueue, semaphore: depositSemaphore)
                 depositBanker.workTime += 0.7
             case .loan:
-                matchWork(to: loanBanker, with: currentCustomer, queue: loanQueue, semaphore: loansemaphore)
+                matchWork(to: loanBanker, with: currentCustomer, queue: loanQueue, semaphore: loanSemaphore)
                 loanBanker.workTime += 0.7
             case .none:
                 break
