@@ -55,7 +55,8 @@ final class BankManager {
     
     private func startWork() {
         var servedCustomers = 0
-        var elapsedTime = 0.0
+        
+        let start = DispatchTime.now()
         
         while let customer = customers.dequeue() {
             servedCustomers += 1
@@ -64,17 +65,21 @@ final class BankManager {
                 switch customer.business {
                 case .deposit:
                     self.depositSemaphore.wait()
-                    elapsedTime += self.clerk.provideService(customer)
+                    self.clerk.provideService(customer)
                     self.depositSemaphore.signal()
                 case .loan:
                     self.loanSemaphore.wait()
-                    elapsedTime += self.clerk.provideService(customer)
+                    self.clerk.provideService(customer)
                     self.loanSemaphore.signal()
                 }
             }
         }
         
         customerGroup.wait()
+        
+        let end = DispatchTime.now()
+        let elapsedTime = Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000000
+        
         showResult(servedCustomers: servedCustomers, elapsedTime: elapsedTime)
         openBank()
         return
