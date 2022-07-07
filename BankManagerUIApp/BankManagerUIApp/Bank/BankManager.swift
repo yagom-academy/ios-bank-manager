@@ -6,32 +6,19 @@ struct BankManager {
         case close = "2"
     }
     
-    func openUpBank() {
-        print("1 : 은행개점 \n2 : 종료\n입력 :", terminator: " ")
-        
-        guard let status = readLine() else { return }
-        
-        guard let bankStatus = BankStatus(rawValue: status) else {
-            print("입력이 잘못되었습니다.")
-            openUpBank()
-            return
-        }
-        
-        selectWork(bankStatus)
-    }
+    private func addCustomerQueue(lastCustomer number: Int) -> Queue<Customer> {
+        let customerQueue = Queue<Customer>()
+        let numberOfCustomer = number + 10
 
-    private func selectWork(_ status: BankStatus) {
-        switch status {
-        case .open:
-            manageBank()
-            openUpBank()
-        case .close:
-            print("업무를 종료합니다.")
-            return
+        (number..<numberOfCustomer).forEach {
+            let customer = Customer($0 + 1)
+            customerQueue.enqueue(customer)
         }
+
+        return customerQueue
     }
     
-    private func createCustomerQueue() -> Queue<Customer> {
+     func createCustomerQueue() -> Queue<Customer> {
         let customerQueue = Queue<Customer>()
         let numberOfCustomer = Int.random(in: 10...30)
         
@@ -48,14 +35,14 @@ struct BankManager {
         LoanBanker.number = loan
     }
     
-    private func manageBank() {
+    func manageBank(customers: Queue<Customer>) {
         let bank = Bank()
         var customerNumber: Double = 0
         
         hireBanker(deposit: 2, loan: 1)
         
         let processTime = processTime {
-            customerNumber = bank.startBanking(customer: createCustomerQueue())
+            customerNumber = bank.startBanking(customer: customers)
         }
         
         let workingTime = String(format: "%.2f", processTime)
