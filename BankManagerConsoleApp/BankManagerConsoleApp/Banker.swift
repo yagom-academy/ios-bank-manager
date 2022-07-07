@@ -8,27 +8,32 @@
 import Foundation
 
 struct Banker: Workable {
-    var totalWorkTime: Double
-
-    init() {
-        self.totalWorkTime = 0.0
+    var task: Task?
+    var workTime: Double
+    
+    init(task: Task) {
+        self.workTime = 0.0
+        self.task = task
     }
     
-    mutating func startWork(of customer: BankCustomer) {
+    func startWork(of customer: BankCustomer) {
         printStartWork(of: customer)
-        usleep(700000)
-        self.totalWorkTime += 0.7
+        Thread.sleep(forTimeInterval: customer.task?.workTime ?? 0.0)
+        
+        finishWork(of: customer)
     }
     
-    mutating func finishWork(of customer: BankCustomer) {
+     func finishWork(of customer: BankCustomer) {
         printFinishWork(of: customer)
     }
     
-    private func printStartWork(of customer: BankCustomer) {
-        print("\(customer.id)번 고객 업무 시작")
+     func printStartWork(of customer: BankCustomer) {
+        guard let task = customer.task else { return }
+         print("\(customer.id)번 고객 \(task.name)업무 시작")
     }
     
     private func printFinishWork(of customer: BankCustomer) {
-        print("\(customer.id)번 고객 업무 완료")
+        guard let task = customer.task else { return }
+        print("\(customer.id)번 고객 \(task.name)업무 종료")
     }
 }
