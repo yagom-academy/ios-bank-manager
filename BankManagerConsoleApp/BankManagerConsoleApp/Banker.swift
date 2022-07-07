@@ -23,13 +23,13 @@ struct Banker: Workable {
         finishWork(of: customer)
     }
     
-     func finishWork(of customer: BankCustomer) {
+    func finishWork(of customer: BankCustomer) {
         printFinishWork(of: customer)
     }
     
-     func printStartWork(of customer: BankCustomer) {
+    func printStartWork(of customer: BankCustomer) {
         guard let task = customer.task else { return }
-         print("\(customer.id)번 고객 \(task.name)업무 시작")
+        print("\(customer.id)번 고객 \(task.name)업무 시작")
     }
     
     private func printFinishWork(of customer: BankCustomer) {
