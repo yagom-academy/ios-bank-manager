@@ -12,6 +12,13 @@ class MainViewController: UIViewController {
         
         setCustomerLabel(customers: customers)
         bankManager.manageBank(customers: customers)
+        
+        mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonDidTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc func addCustomerButtonDidTapped(_ sender: UIButton) {
+        let customers = bankManager.addCustomerQueue(lastCustomer: 10)
+        setCustomerLabel(customers: customers)
     }
 
     func setCustomerLabel(customers: Queue<Customer>) {
@@ -37,9 +44,6 @@ class MainViewController: UIViewController {
             
             mainView.waitingStackView.addArrangedSubview(customerLabel)
         }
-        
-        mainView.layoutSubviews()
     }
-
 }
 

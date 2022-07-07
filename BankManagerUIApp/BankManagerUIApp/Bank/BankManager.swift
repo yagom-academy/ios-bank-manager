@@ -6,7 +6,7 @@ struct BankManager {
         case close = "2"
     }
     
-    private func addCustomerQueue(lastCustomer number: Int) -> Queue<Customer> {
+    func addCustomerQueue(lastCustomer number: Int) -> Queue<Customer> {
         let customerQueue = Queue<Customer>()
         let numberOfCustomer = number + 10
 

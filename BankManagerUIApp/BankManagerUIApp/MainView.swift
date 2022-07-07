@@ -95,12 +95,24 @@ class MainView: UIView {
         return stack
     }()
     
+    let waitingScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    let processingScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     let processingStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fill
+        stack.distribution = .equalSpacing
         stack.spacing = 8
         return stack
     }()
@@ -110,7 +122,7 @@ class MainView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fill
+        stack.distribution = .equalSpacing
         stack.spacing = 8
         return stack
     }()
@@ -132,8 +144,10 @@ class MainView: UIView {
         statusStackView.addArrangedSubview(waitStatusLabel)
         statusStackView.addArrangedSubview(processStatusLabel)
         
-        bankingStackView.addArrangedSubview(waitingStackView)
-        bankingStackView.addArrangedSubview(processingStackView)
+        waitingScrollView.addSubview(waitingStackView)
+        bankingStackView.addArrangedSubview(waitingScrollView)
+        processingScrollView.addSubview(processingStackView)
+        bankingStackView.addArrangedSubview(processingScrollView)
         
         mainStackView.addArrangedSubview(customerStackView)
         mainStackView.addArrangedSubview(workingTimeLabel)
@@ -152,6 +166,18 @@ class MainView: UIView {
             mainStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
+            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor),
+            
+            processingStackView.topAnchor.constraint(equalTo: processingScrollView.topAnchor),
+            processingStackView.leadingAnchor.constraint(equalTo: processingScrollView.leadingAnchor),
+            processingStackView.trailingAnchor.constraint(equalTo: processingScrollView.trailingAnchor),
+            processingStackView.bottomAnchor.constraint(equalTo: processingScrollView.bottomAnchor),
+            processingStackView.widthAnchor.constraint(equalTo: processingScrollView.widthAnchor),
             
             statusStackView.heightAnchor.constraint(equalToConstant: 50)
             ])
