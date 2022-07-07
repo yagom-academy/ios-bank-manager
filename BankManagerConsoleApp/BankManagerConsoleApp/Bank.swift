@@ -38,8 +38,10 @@ class Bank: Agency {
             switch currentCustomer.task {
             case .deposit:
                 matchWork(to: depositBanker, with: currentCustomer, queue: depositQueue, semaphore: depositsemaphore)
+                depositBanker.workTime += 0.7
             case .loan:
                 matchWork(to: loanBanker, with: currentCustomer, queue: loanQueue, semaphore: loansemaphore)
+                loanBanker.workTime += 0.7
             case .none:
                 break
             }
@@ -58,6 +60,12 @@ class Bank: Agency {
     }
     
     func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount ?? 0)명이며, 총 업무시간은 \(totalWorkTime.formatDoubleToString())초입니다.")
+        self.checkTotalTime()
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount ?? 0)명이며, 총 업무시간은 \(totalWorkTime.formatDoubleToString()) 입니다.")
+    }
+    
+    func checkTotalTime() {
+        self.totalWorkTime += loanBanker.workTime
+        self.totalWorkTime += depositBanker.workTime
     }
 }
