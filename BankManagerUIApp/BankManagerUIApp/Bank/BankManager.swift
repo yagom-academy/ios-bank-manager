@@ -35,19 +35,18 @@ struct BankManager {
         LoanBanker.number = loan
     }
     
-    func manageBank(customers: Queue<Customer>) {
+    func manageBank(customers: Queue<Customer>) -> Int {
         let bank = Bank()
-        var customerNumber: Double = 0
         
         hireBanker(deposit: 2, loan: 1)
         
-        let processTime = processTime {
-            customerNumber = bank.startBanking(customer: customers)
-        }
+//        let processTime = processTime {
+//            customerNumber = bank.startBanking(customer: customers)
+//        }
         
-        let workingTime = String(format: "%.2f", processTime)
-    
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(Int(customerNumber))명이며, 총 업무시간은 \(workingTime)초입니다.")
+        let customerNumber = bank.startBanking(customer: customers)
+
+        return customerNumber
     }
     
     private func processTime(processFunction: () -> Void) -> CFAbsoluteTime {

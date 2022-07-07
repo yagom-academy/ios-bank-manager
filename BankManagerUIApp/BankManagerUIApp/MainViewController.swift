@@ -3,27 +3,29 @@ import UIKit
 class MainViewController: UIViewController {
     private let mainView = MainView()
     private let bankManager = BankManager()
-    
+    private var customerNumber = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
         
         let customers = self.bankManager.createCustomerQueue()
+//        DispatchQueue.main.async {
+//            self.setCustomerLabel(customers: customers)
+//        }
         
         setCustomerLabel(customers: customers)
-        bankManager.manageBank(customers: customers)
-        
+        customerNumber = bankManager.manageBank(customers: customers)
         mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonDidTapped(_:)), for: .touchUpInside)
     }
     
     @objc func addCustomerButtonDidTapped(_ sender: UIButton) {
-        let customers = bankManager.addCustomerQueue(lastCustomer: 10)
+        let customers = bankManager.addCustomerQueue(lastCustomer: customerNumber)
         setCustomerLabel(customers: customers)
+        customerNumber += 10
     }
 
     func setCustomerLabel(customers: Queue<Customer>) {
-        while customers.isEmpty == false {
-            guard let customer = customers.dequeue() else { return }
+        for customer in customers.returnList() {
             
             let customerLabel = UILabel()
             var bankingLabel = ""

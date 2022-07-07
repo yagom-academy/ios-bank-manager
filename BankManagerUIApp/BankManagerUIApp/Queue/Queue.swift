@@ -1,4 +1,4 @@
-final class Queue<T> {
+struct Queue<T> {
     private let list = LinkedList<T>()
     
     var isEmpty: Bool {
@@ -7,6 +7,10 @@ final class Queue<T> {
     
     var peek: T? {
         return list.firstNode?.value
+    }
+    
+    func returnList() -> [T] {
+        return list.returnList()
     }
     
     func enqueue(_ element: T) {

@@ -3,8 +3,8 @@ import Foundation
 struct Bank {
     private let bankingGroup = DispatchGroup()
     
-    func startBanking(customer: Queue<Customer>) -> Double {
-        var customerNumber: Double = 0
+    func startBanking(customer: Queue<Customer>) -> Int {
+        var customerNumber = 0
         let depositSemaphore = DispatchSemaphore(value: DepositBanker.number)
         let loanSemaphore = DispatchSemaphore(value: LoanBanker.number)
         
@@ -17,8 +17,9 @@ struct Bank {
             case .deposit:
                 processWork(banker: DepositBanker.self, customer: customer, semaphore: depositSemaphore)
             }
-            
+        
             customerNumber += 1
+            
         }
         
 //        bankingGroup.wait()

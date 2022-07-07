@@ -89,7 +89,7 @@ class MainView: UIView {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
-        stack.alignment = .top
+        stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.spacing = 0
         return stack
