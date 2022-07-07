@@ -49,14 +49,12 @@ extension Bank {
                 return
             }
             
-            manager.processRequest(from: client)
             manager.startTask(for: client)
             
             self.totalVisitedClients += 1
             self.depositSemaphore.signal()
             
-            Thread.sleep(forTimeInterval: client.request.processingTime)
-    
+            manager.processRequest(from: client)
             manager.finishTask(for: client)
         }
     }

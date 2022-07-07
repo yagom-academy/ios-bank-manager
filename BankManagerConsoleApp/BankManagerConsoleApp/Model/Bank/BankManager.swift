@@ -16,7 +16,7 @@ struct BankManager {
 //        let processingTime = client.request.processingTime
         
 //        startTask(for: client)
-        
+        Thread.sleep(forTimeInterval: client.request.processingTime)
     }
     
     func startTask(for client: Client) {
