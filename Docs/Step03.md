@@ -109,7 +109,48 @@
 - 위와 같은 고민은, 인스턴스의 수를 은행원의 수와 동일시하여 생각되는 문제라고 생각됩니다. 일단 현재는 `semaphore`가 은행원의 수라고 생각을 하고 진행을 해보았는데 이 생각이 과연 맞는 것인지 궁금하고, 또한 은행원 인스턴스의 생성은 어디에서 어떻게 호출해야 하는지 질문을 드리고 싶습니다.
 
 ### STEP 3 Answers
+A1. 프로젝트 폴더, 파일 관리 컨벤션
+주로 view, viewModel, viewController, Network 처럼 각각 파일의 역할 별로 폴더링을 하곤 합니다!
+지금 폴더 나누신 기준도 각각 역할에 맞게 잘 나눠주신것 같아요 👏🏻
 
+A2. 메서드화 시 매개변수
+우선 메서드화를 하고자 하시는 이유에 대해서 여쭤보고 싶어요!
+두번째 코드에서 메서드화를 해주신 부분은
+수행하는 역할이 다르거나, 코드 반복되거나, 코드 길이가 아주 길어보이지는 않아요!
+이미 hadleTask() 도 메서드화되어 빠져 있어서
+저라면 굳이 그 부분에서 메서드화를 한다면 코드가 반복되고 있는
+
+depositQueue.async(group: bankGroup) {
+   handleTask(of: depositBanker, by: memberOfDepositBanker, for: client)
+}
+이 부분을 할것 같아요, handleTask 메서드도 저라면 한 하나의 큰 메서드로 빼줄것 같습니다!
+그렇게 되면
+
+extractedFunc(queue: depositQueue,
+              bankGroup: bankGroup,
+               banker: depositBanker,
+               member: memberOfDepositBanker,
+               client: client)
+
+private func extractedFunc(queue: DispatchQueue, bankGroup: DispatchGroup, banker: Banker, member: DispatchSemaphore, client: Client) {
+        queue.async(group: bankGroup) {
+            member.wait()
+            banker.work(from: client)
+            member.signal()
+        }
+    }
+매개변수가 그래도 많긴 하지만 이런식으로 되겠죠!
+
+A3. BankManager 인스턴스 생성 위치 문제
+말씀 주신것 처럼 semaphore 가 은행원의 수라고 생각하시는게 맞아요! 그리고 반복문안에서 인스턴스 생성도 적절하지 않다고 잘 판단해주셨어요 😉 
+지금 구현해주신 위치에서 semaphore 생성을 해주면 semaphore 의 value 를 1,2 로 각각 지정해주고 있어서,
+DispatchQueue 내에서 딱 두개씩만 작업 개수를 제한해줍니다!
+
+📌 추가로
++Extension 파일을 분리하셨는데
+주로 UI Component 들이나 스위프트 프레임워크 같은 큰 공통 기능들에 대해서 +Extension 으로 구현해주는 편이예요.
+구현해 주신 것 처럼, 단지 기능이나 코드 분리를 위해서 사용하는 경우는 보통 한 파일 내에서 extension 으로 빼주는 정도입니다!
+꼭 수정해주지 않으셔도 되고 알아두시면 좋을 것 같아서 말씀드려용
 
 ---
 ### STEP 3 TroubleShooting
@@ -143,6 +184,6 @@
 ---
 ### STEP 3 Reviews And Updates
     
-[STEP 3 Pull Request]()
+[STEP 3 Pull Request](https://github.com/yagom-academy/ios-bank-manager/pull/206)
 
 ---
