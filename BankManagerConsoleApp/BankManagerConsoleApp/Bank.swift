@@ -47,14 +47,9 @@ extension Bank {
     }
     
     private func runBusiness() -> (Int, CFAbsoluteTime) {
-        var servedClient: Int = .zero
-        let runTime = calculateTotalTime {
-            guard let numberOfServedClient = serveClient() else {
-                return
-            }
-            servedClient = numberOfServedClient
-        }
-        return (servedClient, runTime)
+        let result = serveClient()
+        
+        return result
     }
     
     private func calculateTotalTime(of bankTask: () -> Void) -> CFAbsoluteTime {
@@ -65,47 +60,49 @@ extension Bank {
         return totalTime
     }
     
-    private func serveClient() -> Int? {
-        guard var queue = clientQueue else {
-            return nil
-        }
+    private func serveClient() -> (Int, CFAbsoluteTime) {
         var numberOfServedClient: Int = .zero
-        let depositBanker = DepositBankManager()
-        let loanBanker = LoanBankManager()
+        let runtime = calculateTotalTime {
+            guard var queue = clientQueue else {
+                return
+            }
+            
+            let depositBanker = DepositBankManager()
+            let loanBanker = LoanBankManager()
 
-        let bankGroup = DispatchGroup()
-        let depositQueue = DispatchQueue(label: Task.deposit,
-                                         attributes: .concurrent)
-        let loanQueue = DispatchQueue(label: Task.loan,
-                                      attributes: .concurrent)
-        let memberOfDepositBanker = DispatchSemaphore(value: numberOfDepositBanker)
-        let memberOfLoanBanker = DispatchSemaphore(value: numberOfLoanBanker)
-        
-        while queue.isEmpty == false {
-            guard let client = queue.dequeue() else {
-                return nil
+            let bankGroup = DispatchGroup()
+            let depositQueue = DispatchQueue(label: Task.deposit,
+                                             attributes: .concurrent)
+            let loanQueue = DispatchQueue(label: Task.loan,
+                                          attributes: .concurrent)
+            let memberOfDepositBanker = DispatchSemaphore(value: numberOfDepositBanker)
+            let memberOfLoanBanker = DispatchSemaphore(value: numberOfLoanBanker)
+            
+            while queue.isEmpty == false {
+                guard let client = queue.dequeue() else {
+                    return
+                }
+                switch client.desiredServices {
+                case Task.deposit:
+                    work(queue: depositQueue,
+                         bankGroup: bankGroup,
+                         banker: depositBanker,
+                         memberOfDepositBanker: memberOfDepositBanker,
+                         client: client)
+                case Task.loan:
+                    work(queue: loanQueue,
+                         bankGroup: bankGroup,
+                         banker: loanBanker,
+                         memberOfDepositBanker: memberOfLoanBanker,
+                         client: client)
+                default:
+                    break
+                }
+                numberOfServedClient += 1
             }
-            switch client.desiredServices {
-            case Task.deposit:
-                work(queue: depositQueue,
-                     bankGroup: bankGroup,
-                     banker: depositBanker,
-                     memberOfDepositBanker: memberOfDepositBanker,
-                     client: client)
-            case Task.loan:
-                work(queue: loanQueue,
-                     bankGroup: bankGroup,
-                     banker: loanBanker,
-                     memberOfDepositBanker: memberOfLoanBanker,
-                     client: client)
-            default:
-                break
-            }
-            numberOfServedClient += 1
+            bankGroup.wait()
         }
-        bankGroup.wait()
-        
-        return numberOfServedClient
+        return (numberOfServedClient, runtime)
     }
     
     private func work(queue: DispatchQueue, bankGroup: DispatchGroup, banker: Banker, memberOfDepositBanker: DispatchSemaphore, client: Client) {
