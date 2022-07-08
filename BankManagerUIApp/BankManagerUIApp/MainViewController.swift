@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
         setCustomerLabel(customers: customers)
         customerNumber = bankManager.manageBank(customers: customers)
         mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonDidTapped(_:)), for: .touchUpInside)
+        mainView.clearCustomerButton.addTarget(self, action: #selector(clearCustomerButtonDidTapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(transferProcessing(notification:)), name: Notification.Name(rawValue: "process"), object: nil)
         
@@ -24,6 +25,20 @@ class MainViewController: UIViewController {
         let customers = bankManager.addCustomerQueue(lastCustomer: customerNumber)
         setCustomerLabel(customers: customers)
         customerNumber += 10
+    }
+    
+    @objc func clearCustomerButtonDidTapped(_ sender: UIButton) {
+        mainView.waitingStackView.arrangedSubviews.forEach {
+            mainView.waitingStackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
+        
+        mainView.processingStackView.arrangedSubviews.forEach {
+            mainView.processingStackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
+        
+        customerNumber = 0
     }
     
     @objc func transferProcessing(notification: Notification) {
