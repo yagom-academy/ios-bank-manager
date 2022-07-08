@@ -9,5 +9,5 @@ import Foundation
 
 struct Customer {
     let bankNumberTicket: Int
-    let bankingType: (Double, BusinessType)
+    let bankingType: BusinessType
 }

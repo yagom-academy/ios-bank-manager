@@ -5,7 +5,7 @@
 //  Created by unchain, BeakGom on 2022/07/05.
 //
 
-enum BusinessType {
+enum BusinessType: CaseIterable {
     case deposit
     case loan
     

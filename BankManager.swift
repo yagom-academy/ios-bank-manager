@@ -10,9 +10,9 @@ struct BankManager {
     func handleBanking(for customer: Customer) {
         
         print("\(customer.bankNumberTicket)" + BankManagerComment.workInit.rawValue +
-              "\(customer.bankingType.1.bankingName)" + BankManagerComment.workStart.rawValue)
-        Thread.sleep(forTimeInterval: customer.bankingType.0)
+              "\(customer.bankingType.bankingName)" + BankManagerComment.workStart.rawValue)
+        Thread.sleep(forTimeInterval: customer.bankingType.bankingProcessingTime)
         print("\(customer.bankNumberTicket)" + BankManagerComment.workInit.rawValue +
-              "\(customer.bankingType.1.bankingName)" + BankManagerComment.workFinish.rawValue)
+              "\(customer.bankingType.bankingName)" + BankManagerComment.workFinish.rawValue)
     }
 }

@@ -70,7 +70,7 @@ struct Bank {
         var customerList = customerList
         while let completeCustomer = customerList.deQueue() {
             DispatchQueue.global().async(group: bankingGroup) {
-                switch completeCustomer.bankingType.1 {
+                switch completeCustomer.bankingType {
                 case .deposit:
                     self.depositSemaphore.wait()
                     self.bankmanager.handleBanking(for: completeCustomer)

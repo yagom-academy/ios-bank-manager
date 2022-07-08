@@ -8,6 +8,6 @@
 import Foundation
 
 struct WorkType {
-    let deposit = (BusinessType.deposit.bankingProcessingTime, BusinessType.deposit)
-    let loan = (BusinessType.loan.bankingProcessingTime, BusinessType.loan)
+    let deposit: BusinessType
+    let loan: BusinessType
 }
