@@ -7,19 +7,19 @@
 
 struct Console {
     func startApp() {
-        print(NameSpace.consoleAppStartOutput, terminator: "")
+        print(ConsoleTask.consoleAppStartOutput, terminator: "")
         guard let input = readLine()?.trimmingCharacters(in: .whitespaces) else { return }
         
-        if input == "1" {
+        if input == ConsoleTask.open {
             var bank = Bank(numberOfDepositBankers: 2, numberOfLoanBankers: 1)
             
             bank.open()
             bank.close()
             startApp()
-        } else if input == "2" {
+        } else if input == ConsoleTask.close {
             return
         } else {
-            print("잘못된 입력입니다. 다시 시도해주세요🥲")
+            print(ConsoleTask.wrongInput)
             startApp()
         }
     }
