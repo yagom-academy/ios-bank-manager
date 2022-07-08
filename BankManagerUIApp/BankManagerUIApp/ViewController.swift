@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(resetCustomer), for: .touchUpInside)
         return button
     }()
     
@@ -192,5 +193,24 @@ class ViewController: UIViewController {
     
     private func addLabel(to stackView: UIStackView, with label: UILabel) {
         stackView.addArrangedSubview(label)
+    }
+    
+    private func removeLabel(to stackView: UIStackView, with label: UILabel) {
+        stackView.removeArrangedSubview(label)
+    }
+    
+    @objc private func resetCustomer() {
+        currentWatingStackView.removeAllArrangedSubView()
+        currentWorkingStackView.removeAllArrangedSubView()
+        bank.reset()
+    }
+}
+
+extension UIStackView {
+    func removeAllArrangedSubView() {
+        self.arrangedSubviews.forEach {
+            self.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
     }
 }
