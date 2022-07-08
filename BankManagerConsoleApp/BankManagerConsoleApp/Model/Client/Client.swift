@@ -5,8 +5,6 @@
 //  Created by minsson, Derrick kim on 2022/07/01.
 //
 
-import Foundation
-
 struct Client {
     private(set) var waitingNumber: Int
     private(set) var request: Request

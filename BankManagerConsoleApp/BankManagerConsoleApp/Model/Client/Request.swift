@@ -5,8 +5,6 @@
 //  Created by minsson, Derrick kim on 2022/07/01.
 //
 
-import Foundation
-
 enum Request{
     case deposit
     case loan
@@ -30,7 +28,4 @@ extension Request: CaseIterable {
             return "대출"
         }
     }
-    
-    
-    
 }

@@ -4,7 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
-
-var a = BankAppManager()
-a.run()
+var bankAppManager = BankAppManager()
+bankAppManager.run()
