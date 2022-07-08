@@ -5,6 +5,9 @@ class MainViewController: UIViewController {
     private let bankManager = BankManager()
     private var customerNumber = 0
     
+    var timer = Timer()
+    var workingTime: Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
@@ -19,15 +22,31 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(startProcessing(notification:)), name: Notification.Name(rawValue: "process"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(finishProcessing), name: Notification.Name(rawValue: "finish"), object: nil)
+        
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
+        
     }
     
-    @objc func addCustomerButtonDidTapped(_ sender: UIButton) {
+    @objc func playTimer() {
+        workingTime += 0.001
+        let dateFormatter = DateFormatter()
+        let date = Date(timeIntervalSinceReferenceDate: workingTime)
+        dateFormatter.dateFormat = "mm:ss:SSS"
+        
+        mainView.workingTimeLabel.text = "업무시간 - \(dateFormatter.string(from: date))"
+    }
+    
+    @objc private func addCustomerButtonDidTapped(_ sender: UIButton) {
         let customers = bankManager.addCustomerQueue(lastCustomer: customerNumber)
         setCustomerLabel(customers: customers)
-        customerNumber += 10
+        customerNumber += bankManager.manageBank(customers: customers)
+        if timer.isValid == false {
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
+        }
     }
     
-    @objc func clearCustomerButtonDidTapped(_ sender: UIButton) {
+    @objc private func clearCustomerButtonDidTapped(_ sender: UIButton) {
         mainView.waitingStackView.arrangedSubviews.forEach {
             mainView.waitingStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
@@ -38,18 +57,21 @@ class MainViewController: UIViewController {
             $0.removeFromSuperview()
         }
         
+        workingTime = 0
         customerNumber = 0
+        mainView.workingTimeLabel.text = "업무시간 - 00:00:000"
+        timer.invalidate()
     }
     
-    @objc func startProcessing(notification: Notification) {
+    @objc private func startProcessing(notification: Notification) {
         transferCustomer(at: mainView.waitingStackView, notification)
     }
     
-    @objc func finishProcessing(notification: Notification) {
+    @objc private func finishProcessing(notification: Notification) {
         transferCustomer(at: mainView.processingStackView, notification)
     }
     
-    func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
+    private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
         guard let customer = notification.object as? Customer else { return }
         
         var text = ""
@@ -81,7 +103,7 @@ class MainViewController: UIViewController {
     }
     
     
-    func setCustomerLabel(customers: Queue<Customer>) {
+    private func setCustomerLabel(customers: Queue<Customer>) {
         for customer in customers.returnList() {
             
             let customerLabel = UILabel()
