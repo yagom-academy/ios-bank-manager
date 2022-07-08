@@ -43,10 +43,10 @@ struct Bank: Agency {
             switch currentCustomer.task {
             case .deposit:
                 matchWork(to: depositBanker, with: currentCustomer, queue: depositQueue, semaphore: depositSemaphore)
-                depositBanker.workTime += 0.7
+                depositBanker.workTime += Task.deposit.workTime
             case .loan:
                 matchWork(to: loanBanker, with: currentCustomer, queue: loanQueue, semaphore: loanSemaphore)
-                loanBanker.workTime += 1.1
+                loanBanker.workTime += Task.loan.workTime
             case .none:
                 break
             }
