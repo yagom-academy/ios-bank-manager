@@ -29,11 +29,11 @@ struct Banker: Workable {
     
     func printStartWork(of customer: BankCustomer) {
         guard let task = customer.task else { return }
-        print("\(customer.id)번 고객 \(task.name)업무 시작")
+        print("\(customer.id)" + BankerTask.bankerCurrentCustomerID +  "\(task.name)" + BankerTask.bankerTaksStart)
     }
     
     private func printFinishWork(of customer: BankCustomer) {
         guard let task = customer.task else { return }
-        print("\(customer.id)번 고객 \(task.name)업무 종료")
+        print("\(customer.id)" + BankerTask.bankerCurrentCustomerID + "\(task.name)" +  BankerTask.bankerTaskFinished)
     }
 }
