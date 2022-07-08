@@ -2,34 +2,36 @@ import Foundation
 
 struct Bank {
     private let bankingGroup = DispatchGroup()
+    private var depositSemaphore: DispatchSemaphore
+    private var loanSemaphore: DispatchSemaphore
     
-    let depositSemaphore = DispatchSemaphore(value: DepositBanker.number)
-    let loanSemaphore = DispatchSemaphore(value: LoanBanker.number)
+    init(depositNumber: Int, loanNumber: Int) {
+        self.depositSemaphore = DispatchSemaphore(value: depositNumber)
+        self.loanSemaphore = DispatchSemaphore(value: loanNumber)
+    }
     
-    func startBanking(customer: Queue<Customer>) -> Int {
+    func startBanking(customers: Queue<Customer>, bankers: [Banking: BankerLogic]) -> Int {
         var customerNumber = 0
         
+        guard let depositBanker = bankers[Banking.deposit], let loanBanker = bankers[Banking.loan] else { return 0 }
         
-        while customer.isEmpty == false {
-            guard let customer = customer.dequeue() else { return 0 }
+        while customers.isEmpty == false {
+            guard let customer = customers.dequeue() else { return 0 }
             
             switch customer.banking {
             case .loan:
-                processWork(banker: LoanBanker.self, customer: customer, semaphore: loanSemaphore)
+                processWork(banker: loanBanker, customer: customer, semaphore: loanSemaphore)
             case .deposit:
-                processWork(banker: DepositBanker.self, customer: customer, semaphore: depositSemaphore)
+                processWork(banker: depositBanker, customer: customer, semaphore: depositSemaphore)
             }
         
             customerNumber += 1
-            
         }
-        
-//        bankingGroup.wait()
         
         return customerNumber
     }
     
-    private func processWork<T: BankerLogic>(banker: T.Type, customer: Customer, semaphore: DispatchSemaphore) {
+    private func processWork(banker: BankerLogic, customer: Customer, semaphore: DispatchSemaphore) {
         let serveWork = DispatchWorkItem {
             semaphore.wait()
             banker.serve(customer: customer)

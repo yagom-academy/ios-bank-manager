@@ -44,8 +44,7 @@ class MainView: UIView {
     let workingTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "업무시간 - "
-        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
         label.adjustsFontForContentSizeCategory = true
         return label
@@ -179,7 +178,7 @@ class MainView: UIView {
             processingStackView.bottomAnchor.constraint(equalTo: processingScrollView.bottomAnchor),
             processingStackView.widthAnchor.constraint(equalTo: processingScrollView.widthAnchor),
             
-            statusStackView.heightAnchor.constraint(equalToConstant: 50)
+            statusStackView.heightAnchor.constraint(equalToConstant: 40)
             ])
     }
 }

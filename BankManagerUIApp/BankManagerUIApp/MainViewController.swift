@@ -4,31 +4,37 @@ class MainViewController: UIViewController {
     private let mainView = MainView()
     private var bankManager = BankManager()
     private var customerNumber = 0
-    
-    var timer = Timer()
-    var workingTime: Double = 0.0
+    private var timer = Timer()
+    private var workingTime: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
+        addButtonTarget()
+        addNotificationObserver()
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
         
         let customers = bankManager.createCustomerQueue()
-        
         setCustomerLabel(customers: customers)
         customerNumber = bankManager.manageBank(customers: customers)
+    }
+    
+    private func addButtonTarget() {
         mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonDidTapped(_:)), for: .touchUpInside)
         mainView.clearCustomerButton.addTarget(self, action: #selector(clearCustomerButtonDidTapped), for: .touchUpInside)
         
+    }
+    
+    private func addNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(startProcessing(notification:)), name: Notification.Name(rawValue: "process"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(finishProcessing), name: Notification.Name(rawValue: "finish"), object: nil)
-        
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
     }
     
     @objc func playTimer() {
         workingTime += 0.001
+        
         let dateFormatter = DateFormatter()
         let date = Date(timeIntervalSinceReferenceDate: workingTime)
         dateFormatter.dateFormat = "mm:ss:SSS"
@@ -38,8 +44,10 @@ class MainViewController: UIViewController {
     
     @objc private func addCustomerButtonDidTapped(_ sender: UIButton) {
         let customers = bankManager.addCustomerQueue(lastCustomer: customerNumber)
+        
         setCustomerLabel(customers: customers)
         customerNumber += bankManager.manageBank(customers: customers)
+        
         if timer.isValid == false {
             timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
         }
@@ -68,6 +76,7 @@ class MainViewController: UIViewController {
     
     @objc private func finishProcessing(notification: Notification) {
         transferCustomer(at: mainView.processingStackView, notification)
+        
         DispatchQueue.main.async {
             if self.mainView.waitingStackView.arrangedSubviews.isEmpty && self.mainView.processingStackView.arrangedSubviews.isEmpty {
                 self.timer.invalidate()
@@ -78,14 +87,7 @@ class MainViewController: UIViewController {
     private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
         guard let customer = notification.object as? Customer else { return }
         
-        var text = ""
-        
-        switch customer.banking {
-        case .deposit:
-            text = "\(customer.number) - 예금"
-        case .loan:
-            text = "\(customer.number) - 대출"
-        }
+        let text = "\(customer.number) - \(customer.banking.rawValue)"
         
         DispatchQueue.main.async {
             let customerLabel = stackView.arrangedSubviews.filter {
@@ -106,19 +108,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    
     private func setCustomerLabel(customers: Queue<Customer>) {
         for customer in customers.returnList() {
-            
             let customerLabel = UILabel()
-            var bankingLabel = ""
+            let bankingLabel = "\(customer.number) - \(customer.banking.rawValue)"
             
             switch customer.banking {
             case .loan:
-                bankingLabel = "\(customer.number) - 대출"
                 customerLabel.textColor = .systemPurple
             case .deposit:
-                bankingLabel = "\(customer.number) - 예금"
                 customerLabel.textColor = .black
             }
             
