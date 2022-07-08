@@ -1,11 +1,24 @@
 //
-//  Bank+Extension.swift
+//  Bank.swift
 //  BankManagerConsoleApp
 //
-//  Created by 수꿍, 브래드 on 2022/07/05.
+//  Created by 수꿍, 브래드 on 2022/06/30.
 //
 
 import Foundation
+
+struct Bank {
+    private(set) var waitingClient: Int
+    private(set) var numberOfDepositBanker: Int
+    private(set) var numberOfLoanBanker: Int
+    var clientQueue: ClientQueue<Client>?
+    
+    init(waitingClient: Int, numberOfDepositBanker: Int, numberOfLoanBanker: Int) {
+        self.waitingClient = waitingClient
+        self.numberOfDepositBanker = numberOfDepositBanker
+        self.numberOfLoanBanker = numberOfLoanBanker
+    }
+}
 
 extension Bank {
     mutating func openBank() {
@@ -73,23 +86,31 @@ extension Bank {
                 return nil
             }
             if client.desiredServices == Namespace.deposit {
-                depositQueue.async(group: bankGroup) {
-                    handleTask(of: depositBanker,
-                               by: memberOfDepositBanker,
-                               for: client)
-                }
+                work(queue: depositQueue,
+                     bankGroup: bankGroup,
+                     banker: depositBanker,
+                     memberOfDepositBanker: memberOfDepositBanker,
+                     client: client)
             } else if client.desiredServices == Namespace.loan {
-                loanQueue.async(group: bankGroup) {
-                    handleTask(of: loanBanker,
-                               by: memberOfLoanBanker,
-                               for: client)
-                }
+                work(queue: loanQueue,
+                     bankGroup: bankGroup,
+                     banker: loanBanker,
+                     memberOfDepositBanker: memberOfLoanBanker,
+                     client: client)
             }
             numberOfServedClient += 1
         }
         bankGroup.wait()
         
         return numberOfServedClient
+    }
+    
+    private func work(queue: DispatchQueue, bankGroup: DispatchGroup, banker: Banker, memberOfDepositBanker: DispatchSemaphore, client: Client) {
+        queue.async(group: bankGroup) {
+            handleTask(of: banker,
+                       by: memberOfDepositBanker,
+                       for: client)
+        }
     }
     
     private func handleTask(of banker: Banker, by member: DispatchSemaphore, for client: Client) {
