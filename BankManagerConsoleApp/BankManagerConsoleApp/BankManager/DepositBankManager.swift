@@ -5,6 +5,6 @@
 //
 
 struct DepositBankManager: Banker {
-    let time = Namespace.requiredTimeForDeposit
-    let task = Namespace.deposit
+    let time = Constant.requiredTimeForDeposit
+    let task = Task.deposit
 }

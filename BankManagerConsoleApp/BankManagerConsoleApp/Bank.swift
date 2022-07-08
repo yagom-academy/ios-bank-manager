@@ -33,7 +33,7 @@ extension Bank {
     
     private mutating func makeClientQueue() -> ClientQueue<Client>? {
         var clientQueue = ClientQueue<Client>()
-        let task = [Namespace.deposit, Namespace.loan]
+        let task = [Task.deposit, Task.loan]
         
         for waitingNumber in 1...waitingClient {
             guard let taskRandomElement = task.randomElement() else {
@@ -74,9 +74,9 @@ extension Bank {
         let loanBanker = LoanBankManager()
 
         let bankGroup = DispatchGroup()
-        let depositQueue = DispatchQueue(label: Namespace.deposit,
+        let depositQueue = DispatchQueue(label: Task.deposit,
                                          attributes: .concurrent)
-        let loanQueue = DispatchQueue(label: Namespace.loan,
+        let loanQueue = DispatchQueue(label: Task.loan,
                                       attributes: .concurrent)
         let memberOfDepositBanker = DispatchSemaphore(value: numberOfDepositBanker)
         let memberOfLoanBanker = DispatchSemaphore(value: numberOfLoanBanker)
@@ -85,18 +85,21 @@ extension Bank {
             guard let client = queue.dequeue() else {
                 return nil
             }
-            if client.desiredServices == Namespace.deposit {
+            switch client.desiredServices {
+            case Task.deposit:
                 work(queue: depositQueue,
                      bankGroup: bankGroup,
                      banker: depositBanker,
                      memberOfDepositBanker: memberOfDepositBanker,
                      client: client)
-            } else if client.desiredServices == Namespace.loan {
+            case Task.loan:
                 work(queue: loanQueue,
                      bankGroup: bankGroup,
                      banker: loanBanker,
                      memberOfDepositBanker: memberOfLoanBanker,
                      client: client)
+            default:
+                break
             }
             numberOfServedClient += 1
         }

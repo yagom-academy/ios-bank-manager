@@ -6,6 +6,6 @@
 //
 
 struct LoanBankManager: Banker {
-    let time = Namespace.requiredTimeForLoan
-    let task = Namespace.loan
+    let time = Constant.requiredTimeForLoan
+    let task = Task.loan
 }
