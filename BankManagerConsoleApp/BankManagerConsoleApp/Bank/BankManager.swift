@@ -26,7 +26,7 @@ final class BankManager {
         }
     }
     
-    func fetchTask() throws -> (count: Int, task: String) {
+    func fetchTask() throws -> (count: Int, task: BankTask) {
         guard let task = customerQueue.dequeue()?.task else {
             throw BankError.emptyError
         }
@@ -38,4 +38,3 @@ final class BankManager {
         waitingNumber = 0
     }
 }
-
