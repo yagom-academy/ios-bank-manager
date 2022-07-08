@@ -29,7 +29,7 @@ struct Bank {
         let numberOfCustomer = customer.count
         switch requestInput {
         case BankComment.bankOpen.rawValue:
-            let totalTaskTime = giveTask(for: customer)
+            let totalTaskTime = calculateWorkingHour(for: customer)
             calculateWorkTime(by: numberOfCustomer, with: totalTaskTime)
             initiateBankBusiness()
         case BankComment.bankClose.rawValue:
@@ -66,10 +66,8 @@ struct Bank {
         }
     }
     
-    private func giveTask(for customerList: BankItemQueue<Customer>) -> Double {
+    private func giveTask(for customerList: BankItemQueue<Customer>) {
         var customerList = customerList
-        let startTime = CFAbsoluteTimeGetCurrent()
-        
         while let completeCustomer = customerList.deQueue() {
             DispatchQueue.global().async(group: bankingGroup) {
                 switch completeCustomer.bankingType.1 {
@@ -84,6 +82,11 @@ struct Bank {
                 }
             }
         }
+    }
+    
+    private func calculateWorkingHour(for customerList: BankItemQueue<Customer>) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        giveTask(for: customerList)
         bankingGroup.wait()
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         return durationTime

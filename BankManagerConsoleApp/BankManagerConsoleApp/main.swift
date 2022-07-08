@@ -10,22 +10,22 @@ func userInput() -> String {
     return readLine()?.trimmingCharacters(in: .whitespaces) ?? BankComment.emptyValue.rawValue
 }
 
-private func setCustomerCount() -> Int {
+private func generateRandomNumber() -> Int {
     return Int.random(in: SetNumber.minCustomer.rawValue...SetNumber.maxCustomer.rawValue)
 }
 
-private func takeNumberTicket(number: Int, workType: (Double, BusinessType)) -> Customer {
+private func makeCustomer(number: Int, workType: (Double, BusinessType)) -> Customer {
     let customer = Customer(bankNumberTicket: number, bankingType: workType)
     return customer
 }
 
-private func makeCustomer() -> BankItemQueue<Customer> {
+private func lineUpCustomer() -> BankItemQueue<Customer> {
     var watingQueue = BankItemQueue<Customer>()
-    let totalCustomer = setCustomerCount()
+    let totalCustomer = generateRandomNumber()
     let workType = [WorkType().deposit, WorkType().loan]
     for ticketNumber in SetNumber.minimumCustomerCount.rawValue...totalCustomer {
         guard let type = workType.randomElement() else { return watingQueue }
-        let ticketHolder = takeNumberTicket(number: ticketNumber, workType: type)
+        let ticketHolder = makeCustomer(number: ticketNumber, workType: type)
         watingQueue.enQueue(ticketHolder)
     }
     return watingQueue
@@ -33,7 +33,7 @@ private func makeCustomer() -> BankItemQueue<Customer> {
 
 func initiateBankBusiness() {
     let bankManager = BankManager()
-    var bank = Bank(customer: makeCustomer(), bankmanager: bankManager)
+    var bank = Bank(customer: lineUpCustomer(), bankmanager: bankManager)
     
     bank.bankBusinessStart()
 }
