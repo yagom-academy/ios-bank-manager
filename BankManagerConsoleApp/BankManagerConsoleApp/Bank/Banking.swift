@@ -1,4 +1,4 @@
-enum Banking: Int {
+enum Banking: CaseIterable {
     case loan
     case deposit
 }
