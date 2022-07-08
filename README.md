@@ -12,7 +12,6 @@
 - [UML](#UML)
     - [STEP1](#STEP1-UML)
     - [STEP2](#STEP2-UML)
-- [키워드](#키워드)
 - [PR메세지](#PR메세지)
     - [STEP1에서 PR내용](#STEP1PR)
     - [STEP2에서 PR내용](#STEP2PR)
