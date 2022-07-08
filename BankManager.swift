@@ -7,10 +7,12 @@
 import Foundation
 
 struct BankManager {
-    func handleBanking(for customer: Customer,with processingTime: WorkType) {
+    func handleBanking(for customer: Customer) {
         
-        print("\(customer.bankNumberTicket)" + BankManagerComment.handleBankingStart.rawValue)
-        usleep(useconds_t(processingTime.workTime))
-        print("\(customer.bankNumberTicket)" + BankManagerComment.handleBankingFinish.rawValue)
+        print("\(customer.bankNumberTicket)" + BankManagerComment.workInit.rawValue +
+              "\(customer.bankingType.bankingName)" + BankManagerComment.workStart.rawValue)
+        Thread.sleep(forTimeInterval: customer.bankingType.bankingProcessingTime)
+        print("\(customer.bankNumberTicket)" + BankManagerComment.workInit.rawValue +
+              "\(customer.bankingType.bankingName)" + BankManagerComment.workFinish.rawValue)
     }
 }

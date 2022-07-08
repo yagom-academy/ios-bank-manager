@@ -18,6 +18,10 @@ struct BankItemQueue<T> {
         return linkedList.peek
     }
     
+    var count: Int {
+        linkedList.count
+    }
+    
     mutating func enQueue(_ data: T) {
         linkedList.append(data: data)
     }
