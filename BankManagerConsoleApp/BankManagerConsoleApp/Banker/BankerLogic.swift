@@ -1,4 +1,4 @@
 protocol BankerLogic {
-    static var number: Int { get set }
-    static func serve(customer: Customer)
+    var number: Int { get set }
+    func serve(customer: Customer)
 }

@@ -3,19 +3,22 @@ import Foundation
 struct Bank {
     private let bankingGroup = DispatchGroup()
     
-    func startBanking(customer: Queue<Customer>) -> Double {
+    func startBanking(customer: Queue<Customer>, bankers: [Banking: BankerLogic]) -> Double {
         var customerNumber: Double = 0
-        let depositSemaphore = DispatchSemaphore(value: DepositBanker.number)
-        let loanSemaphore = DispatchSemaphore(value: LoanBanker.number)
+        
+        guard let depositBanker = bankers[Banking.deposit], let loanBanker = bankers[Banking.loan] else {return 0 }
+        
+        let depositSemaphore = DispatchSemaphore(value: depositBanker.number)
+        let loanSemaphore = DispatchSemaphore(value: loanBanker.number)
         
         while customer.isEmpty == false {
             guard let customer = customer.dequeue() else { return 0 }
             
             switch customer.banking {
             case .loan:
-                processWork(banker: LoanBanker.self, customer: customer, semaphore: loanSemaphore)
+                processWork(banker: loanBanker, customer: customer, semaphore: loanSemaphore)
             case .deposit:
-                processWork(banker: DepositBanker.self, customer: customer, semaphore: depositSemaphore)
+                processWork(banker: depositBanker, customer: customer, semaphore: depositSemaphore)
             }
             
             customerNumber += 1
@@ -26,7 +29,7 @@ struct Bank {
         return customerNumber
     }
     
-    private func processWork<T: BankerLogic>(banker: T.Type, customer: Customer, semaphore: DispatchSemaphore) {
+    private func processWork(banker: BankerLogic, customer: Customer, semaphore: DispatchSemaphore) {
         let serveWork = DispatchWorkItem {
             semaphore.wait()
             banker.serve(customer: customer)

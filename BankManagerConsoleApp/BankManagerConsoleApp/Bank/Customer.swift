@@ -1,9 +1,4 @@
 struct Customer {
-    enum Banking: Int {
-        case loan
-        case deposit
-    }
-            
     let number: Int
     var banking: Banking {
         let randomNumber = Int.random(in: 0...1)
