@@ -3,10 +3,12 @@ import Foundation
 struct Bank {
     private let bankingGroup = DispatchGroup()
     
+    let depositSemaphore = DispatchSemaphore(value: DepositBanker.number)
+    let loanSemaphore = DispatchSemaphore(value: LoanBanker.number)
+    
     func startBanking(customer: Queue<Customer>) -> Int {
         var customerNumber = 0
-        let depositSemaphore = DispatchSemaphore(value: DepositBanker.number)
-        let loanSemaphore = DispatchSemaphore(value: LoanBanker.number)
+        
         
         while customer.isEmpty == false {
             guard let customer = customer.dequeue() else { return 0 }

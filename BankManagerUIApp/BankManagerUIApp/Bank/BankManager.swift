@@ -5,6 +5,7 @@ struct BankManager {
         case open = "1"
         case close = "2"
     }
+    lazy var bank = Bank()
     
     func addCustomerQueue(lastCustomer number: Int) -> Queue<Customer> {
         let customerQueue = Queue<Customer>()
@@ -35,9 +36,7 @@ struct BankManager {
         LoanBanker.number = loan
     }
     
-    func manageBank(customers: Queue<Customer>) -> Int {
-        let bank = Bank()
-        
+    mutating func manageBank(customers: Queue<Customer>) -> Int {
         hireBanker(deposit: 2, loan: 1)
         
 //        let processTime = processTime {

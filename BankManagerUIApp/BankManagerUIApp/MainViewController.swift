@@ -2,7 +2,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     private let mainView = MainView()
-    private let bankManager = BankManager()
+    private var bankManager = BankManager()
     private var customerNumber = 0
     
     var timer = Timer()
@@ -25,7 +25,6 @@ class MainViewController: UIViewController {
         
         
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
-        
     }
     
     @objc func playTimer() {
@@ -69,6 +68,11 @@ class MainViewController: UIViewController {
     
     @objc private func finishProcessing(notification: Notification) {
         transferCustomer(at: mainView.processingStackView, notification)
+        DispatchQueue.main.async {
+            if self.mainView.waitingStackView.arrangedSubviews.isEmpty && self.mainView.processingStackView.arrangedSubviews.isEmpty {
+                self.timer.invalidate()
+            }
+        }
     }
     
     private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
