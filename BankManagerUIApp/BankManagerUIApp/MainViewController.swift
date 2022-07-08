@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
         mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonDidTapped(_:)), for: .touchUpInside)
         mainView.clearCustomerButton.addTarget(self, action: #selector(clearCustomerButtonDidTapped), for: .touchUpInside)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(transferProcessing(notification:)), name: Notification.Name(rawValue: "process"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startProcessing(notification:)), name: Notification.Name(rawValue: "process"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(finishProcessing), name: Notification.Name(rawValue: "finish"), object: nil)
     }
@@ -41,7 +41,15 @@ class MainViewController: UIViewController {
         customerNumber = 0
     }
     
-    @objc func transferProcessing(notification: Notification) {
+    @objc func startProcessing(notification: Notification) {
+        transferCustomer(at: mainView.waitingStackView, notification)
+    }
+    
+    @objc func finishProcessing(notification: Notification) {
+        transferCustomer(at: mainView.processingStackView, notification)
+    }
+    
+    func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
         guard let customer = notification.object as? Customer else { return }
         
         var text = ""
@@ -54,46 +62,24 @@ class MainViewController: UIViewController {
         }
         
         DispatchQueue.main.async {
-            let customerLabel = self.mainView.waitingStackView.arrangedSubviews.filter {
+            let customerLabel = stackView.arrangedSubviews.filter {
                 let label = $0 as? UILabel
                 return label?.text == text
             }
             
             customerLabel.forEach {
-                self.mainView.waitingStackView.removeArrangedSubview($0)
+                stackView.removeArrangedSubview($0)
                 $0.removeFromSuperview()
             }
             
-            customerLabel.forEach {
-                self.mainView.processingStackView.addArrangedSubview($0)
+            if stackView == self.mainView.waitingStackView {
+                customerLabel.forEach {
+                    self.mainView.processingStackView.addArrangedSubview($0)
+                }
             }
         }
     }
     
-    @objc func finishProcessing(notification: Notification) {
-        guard let customer = notification.object as? Customer else { return }
-        
-        var text = ""
-        
-        switch customer.banking {
-        case .deposit:
-            text = "\(customer.number) - 예금"
-        case .loan:
-            text = "\(customer.number) - 대출"
-        }
-        
-        DispatchQueue.main.async {
-            let customerLabel = self.mainView.processingStackView.arrangedSubviews.filter {
-                let label = $0 as? UILabel
-                return label?.text == text
-            }
-            
-            customerLabel.forEach {
-                self.mainView.processingStackView.removeArrangedSubview($0)
-                $0.removeFromSuperview()
-            }
-        }
-    }
     
     func setCustomerLabel(customers: Queue<Customer>) {
         for customer in customers.returnList() {
