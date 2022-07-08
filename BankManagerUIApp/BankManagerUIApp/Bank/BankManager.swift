@@ -5,7 +5,8 @@ struct BankManager {
         case open = "1"
         case close = "2"
     }
-    lazy var bank = Bank()
+    
+    let bank = Bank(depositNumber: 2, loanNumber: 1)
     
     func addCustomerQueue(lastCustomer number: Int) -> Queue<Customer> {
         let customerQueue = Queue<Customer>()
@@ -31,27 +32,17 @@ struct BankManager {
         return customerQueue
     }
 
-    private func hireBanker(deposit: Int, loan: Int) {
-        DepositBanker.number = deposit
-        LoanBanker.number = loan
-    }
-    
-    mutating func manageBank(customers: Queue<Customer>) -> Int {
-        hireBanker(deposit: 2, loan: 1)
-        
-//        let processTime = processTime {
-//            customerNumber = bank.startBanking(customer: customers)
-//        }
-        
-        let customerNumber = bank.startBanking(customer: customers)
+    private func setUpBanker() -> [Banking: BankerLogic] {
+        let depositBanker = DepositBanker()
+        let loanBanker = LoanBanker()
+        let bankers: [Banking: BankerLogic] = [Banking.deposit: depositBanker, Banking.loan: loanBanker]
 
-        return customerNumber
+        return bankers
     }
     
-    private func processTime(processFunction: () -> Void) -> CFAbsoluteTime {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        processFunction()
-        let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        return processTime
+    func manageBank(customers: Queue<Customer>) -> Int {
+        let customerNumber = bank.startBanking(customers: customers,
+                                               bankers: setUpBanker())
+        return customerNumber
     }
 }
