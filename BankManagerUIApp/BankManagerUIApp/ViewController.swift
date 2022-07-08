@@ -3,6 +3,12 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: Property
     var bank = Bank()
+    var time = 0.0
+    var timer: Timer? {
+        willSet {
+            timer?.invalidate()
+            }
+    }
     
     // MARK: View property
     let rootStackView: UIStackView = {
@@ -45,7 +51,7 @@ class ViewController: UIViewController {
     let timerLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "업무시간 - "
+        label.text = "업무시간 - 00:00:000"
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -170,6 +176,7 @@ class ViewController: UIViewController {
             do {
                 customer = try bank.popCustomer()
                 addLabel(to: currentWatingStackView, with: createLabel(customer: customer))
+                timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimeLabelText), userInfo: nil, repeats: true)
             } catch {
                 print("고객이 없습니다.")
                 break
@@ -203,7 +210,19 @@ class ViewController: UIViewController {
         currentWatingStackView.removeAllArrangedSubView()
         currentWorkingStackView.removeAllArrangedSubView()
         bank.reset()
+        timerLabel.text = "업무시간 - 00:00:000"
+        timer = nil
+        time = 0.0
     }
+    
+    @objc func updateTimeLabelText() {
+            self.time += 0.001
+            let minute: Int = Int(self.time / 60)
+            let second: Int = Int(self.time.truncatingRemainder(dividingBy: 60))
+            let milisecond: Int = Int(self.time.truncatingRemainder(dividingBy: 1) * 1000)
+            let timeText: String = String(format: "%02ld:%02ld:%03ld", minute, second, milisecond)
+            self.timerLabel.text = "업무시간 - \(timeText)"
+        }
 }
 
 extension UIStackView {
