@@ -23,7 +23,7 @@ struct ConsolManager {
         let workQueue = OperationQueue()
         let deposit = DispatchSemaphore(value: 2)
         let loan = DispatchSemaphore(value: 1)
-        let bank = Bank(count: Int.random(in: 10...30))
+        let bank = Bank()
         let totalCustomer = bank.customerQueue.count
 
         while bank.customerQueue.isNotEmpty {

@@ -1,6 +1,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // MARK: Property
+    var bank = Bank()
+    
     // MARK: View property
     let rootStackView: UIStackView = {
         let stackView = UIStackView()
@@ -26,6 +29,7 @@ class ViewController: UIViewController {
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(addCustomer), for: .touchUpInside)
         return button
     }()
     
@@ -90,7 +94,7 @@ class ViewController: UIViewController {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.axis = .vertical
+        stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -156,5 +160,37 @@ class ViewController: UIViewController {
             currentStatusStackView.leadingAnchor.constraint(equalTo: statusScrollView.frameLayoutGuide.leadingAnchor),
             currentStatusStackView.trailingAnchor.constraint(equalTo: statusScrollView.frameLayoutGuide.trailingAnchor)
         ])
+    }
+    
+    @objc private func addCustomer() {
+        bank.setCustomer(count: 10)
+        while bank.customerQueue.isNotEmpty {
+            let customer: Customer
+            do {
+                customer = try bank.popCustomer()
+                addLabel(to: currentWatingStackView, with: createLabel(customer: customer))
+            } catch {
+                print("고객이 없습니다.")
+                break
+            }
+        }
+    }
+    
+    private func createLabel(customer: Customer) -> UILabel {
+        let label = UILabel()
+        label.text = "\(customer.name) - \(customer.business.part)"
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        if customer.business == .loan {
+            label.textColor = .systemPurple
+        }
+        return label
+    }
+    
+    private func addLabel(to stackView: UIStackView, with label: UILabel) {
+        stackView.addArrangedSubview(label)
     }
 }
