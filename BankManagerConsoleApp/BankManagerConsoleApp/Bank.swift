@@ -56,7 +56,7 @@ struct Bank: Agency {
     
     func matchWork(to banker: Banker, with currentCustomer: BankCustomer, queue: DispatchQueue, semaphore: DispatchSemaphore) {
         group.enter()
-        queue.async { [self] in
+        queue.async {
             semaphore.wait()
             banker.startWork(of: currentCustomer)
             semaphore.signal()
