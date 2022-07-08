@@ -29,7 +29,7 @@ private extension BankManager {
 }
 
 extension BankManager {
-    mutating func assignTask(to queue: ClientQueue<Client>) {
+    mutating func processTask(from queue: ClientQueue<Client>) {
         while !queue.isEmpty() {
             self.queueSemaphore.wait()
             

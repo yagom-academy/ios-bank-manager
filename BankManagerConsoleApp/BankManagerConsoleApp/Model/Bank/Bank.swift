@@ -30,7 +30,7 @@ private extension Bank {
     func arrange(bankManagers number: Int, to queue: ClientQueue<Client>) {
         for _ in 1...number {
             DispatchQueue.global().async(group: bankManagersGroup) {
-                self.bankManager.assignTask(to: queue)
+                self.bankManager.processTask(from: queue)
             }
         }
     }
