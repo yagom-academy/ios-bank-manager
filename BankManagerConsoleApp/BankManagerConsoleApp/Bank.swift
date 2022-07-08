@@ -57,9 +57,9 @@ struct Bank {
         print(BankComment.failChange.rawValue)
     }
     
-    private func calculateWorkTime(by resultCustomer: Int, with totaltime: Double) {
+    private func calculateWorkTime(by resultCustomer: Int, with totalTime: Double) {
         do {
-            let totalWorkTime = try totaltime.numberFormatter()
+            let totalWorkTime = try totalTime.numberFormatter()
             printcalculateWorkTime(by: resultCustomer, with: totalWorkTime)
         } catch {
             printFailChange()

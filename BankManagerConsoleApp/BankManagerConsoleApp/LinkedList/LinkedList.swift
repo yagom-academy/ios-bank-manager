@@ -19,6 +19,18 @@ struct LinkedList<T> {
         return head
     }
     
+    var count: Int {
+        guard var node = head else {
+            return 0
+        }
+        var count = 1
+        while let next = node.next {
+            node = next
+            count += 1
+        }
+        return count
+    }
+    
     mutating func append(data: T?) {
         let newValue = Node(data: data)
         
@@ -40,17 +52,5 @@ struct LinkedList<T> {
     mutating func removeAll() {
         head = nil
         tail = nil
-    }
-    
-    var count: Int {
-        guard var node = head else {
-            return 0
-        }
-        var count = 1
-        while let next = node.next {
-            node = next
-            count += 1
-        }
-        return count
     }
 }

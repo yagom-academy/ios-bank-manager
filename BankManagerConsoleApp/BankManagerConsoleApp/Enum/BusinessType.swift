@@ -1,5 +1,5 @@
 //
-//  BysinessType.swift
+//  BusinessType.swift
 //  BankManagerConsoleApp
 //
 //  Created by unchain, BeakGom on 2022/07/05.
