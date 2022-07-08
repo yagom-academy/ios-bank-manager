@@ -17,6 +17,10 @@
 - [📚 참고문서](#-참고문서)
 - [📝 기능설명](#-기능설명)
 - [🚀 TroubleShooting](#-TroubleShooting)
+    - [🚀 STEP 1](#-STEP-1)
+    - [🚀 STEP 2](#-STEP-2)
+    - [🚀 STEP 3](#-STEP-3)
+
 - [1️⃣ STEP 1](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step01/Docs/Step01.md)
 - [2️⃣ STEP 2](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step02/Docs/Step02.md)
 - [3️⃣ STEP 3](https://github.com/Jeon-Minsu/ios-bank-manager/tree/step03/Docs/Step03.md)
@@ -108,7 +112,7 @@
     
 ## 🚀 TroubleShooting
     
-### STEP 1
+### 🚀 STEP 1
 
 #### T1. `SwiftLint적용`
     
@@ -125,7 +129,7 @@ included:
   - BankManagerConsoleApp
 ```
 
-### STEP 2 
+### 🚀 STEP 2 
     
 #### T1. `bank와 bankManager간 의존성 주입`
 
@@ -145,7 +149,7 @@ included:
 
 - 이에, 2번 방법을 채택하여 `Bank`의 내부 프로퍼티로 `BankManager`를 구현하는 것이 적절하다 판단을 내렸습니다. 추가로, 의존성 역전 원칙에 따라, 의존성 주입 과정에서 각 모듈이 직접 의존을 갖기 보다는 추상화된 인터페이스를 의존하게 하기 위하여, `Banker`라는 프로토콜을 생성하여 사용해보았습니다. 
 
-### STEP 3
+### 🚀 STEP 3
     
 #### T1. isEmpty 프로퍼티 문제
 
