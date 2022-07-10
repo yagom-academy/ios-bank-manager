@@ -2,7 +2,7 @@
 //  MainView.swift
 //  BankManagerUIApp
 //
-//  Created by 이원빈 on 2022/07/10.
+//  Created by 예톤, 웡빙 on 2022/07/10.
 //
 
 import UIKit
@@ -15,7 +15,6 @@ class MainView: UIView {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.alignment = .fill
         stackview.distribution = .fill
-        
         return stackview
     }()
     
@@ -80,7 +79,7 @@ class MainView: UIView {
         label.text = "업무중"
         label.textColor = .white
         label.textAlignment = .center
-        label.backgroundColor = .systemBlue
+        label.backgroundColor = UIColor(red: 50.0/255, green: 58.0/255, blue: 200.0/255, alpha: 1.0)
         return label
     }()
     
@@ -117,7 +116,7 @@ class MainView: UIView {
         self.rootViewController = rootViewController
         addAllSubViews()
         designateMainStackConstraints()
-        addProcess(text: "")
+        addProcessInWaitingStackView(text: "")
     }
     
     required init?(coder: NSCoder) {
@@ -138,12 +137,11 @@ class MainView: UIView {
         currentStateStackView.addArrangedSubview(processingLabel)
         mainStackView.addArrangedSubview(currentStateStackView)
         
-        waitingScrollView.addSubview(waitingStackView) // 스크롤뷰 안의 버티컬 스택뷰를 넣어줌
-        processingScrollView.addSubview(processingStackView)  // 스크롤뷰 안에 요소를 넣어주어야 생기려나 ? 스크롤뷰 제약에서 에러가 나는듯
+        waitingScrollView.addSubview(waitingStackView)
+        processingScrollView.addSubview(processingStackView)
         
         rootViewController.view.addSubview(waitingScrollView)
         rootViewController.view.addSubview(processingScrollView)
-        
     }
     
     func designateMainStackConstraints() {
@@ -156,19 +154,17 @@ class MainView: UIView {
         waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor).isActive = true
         waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor).isActive = true
         waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor).isActive = true
-        let frameConstraints = waitingStackView.heightAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.heightAnchor)
+        let frameConstraints = waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.widthAnchor)
         frameConstraints.priority = .defaultLow
         frameConstraints.isActive = true
-        waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor).isActive = true
         waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor).isActive = true
 
         processingStackView.topAnchor.constraint(equalTo: processingScrollView.topAnchor).isActive = true
         processingStackView.leadingAnchor.constraint(equalTo: processingScrollView.leadingAnchor).isActive = true
         processingStackView.widthAnchor.constraint(equalTo: processingScrollView.widthAnchor).isActive = true
-        let frameConstraints2 = processingStackView.heightAnchor.constraint(equalTo: processingScrollView.frameLayoutGuide.heightAnchor)
+        let frameConstraints2 = processingStackView.widthAnchor.constraint(equalTo: processingScrollView.frameLayoutGuide.widthAnchor)
         frameConstraints2.priority = .defaultLow
         frameConstraints2.isActive = true
-        processingStackView.trailingAnchor.constraint(equalTo: processingScrollView.trailingAnchor).isActive = true
         processingStackView.bottomAnchor.constraint(equalTo: processingScrollView.bottomAnchor).isActive = true
         
         waitingScrollView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor).isActive = true
@@ -182,7 +178,7 @@ class MainView: UIView {
         processingScrollView.bottomAnchor.constraint(equalTo: rootViewController.view.bottomAnchor).isActive = true
     }
     
-    func addProcess(text: String) {
+    func addProcessInWaitingStackView(text: String) {
         let processLabel: UILabel = {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -197,7 +193,7 @@ class MainView: UIView {
         waitingStackView.addArrangedSubview(processLabel)
     }
     
-    func startProcessing(text: String) {
+    func addProcessInProcessingStackView(text: String) {
         let processLabel: UILabel = {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
