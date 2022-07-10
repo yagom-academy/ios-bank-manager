@@ -53,7 +53,7 @@ struct ConsolManager {
 
         workQueue.addOperation {
             semaphore.wait()
-                BankManager.work(customer: customer, time: time)
+            //BankManager.work(customer: customer, time: time)
             semaphore.signal()
             }
     }
