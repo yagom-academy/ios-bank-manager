@@ -108,13 +108,13 @@ class ViewController: UIViewController {
     
     let currentWatingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView .translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsHorizontalScrollIndicator = true
         return scrollView
     }()
     
     let currentWorkingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView .translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
@@ -213,6 +213,7 @@ class ViewController: UIViewController {
         let labelOperation = BlockOperation {
             self.currentWatingStackView.removeLabel(with: customer.name)
             self.addLabel(to: self.currentWorkingStackView, with: self.createLabel(customer: customer))
+            self.currentWatingScrollView.contentSize = CGSize(width: self.currentWatingScrollView.contentSize.width, height: self.currentWatingStackView.bounds.height)
         }
         let workOperation = BlockOperation {
             semaphore.wait()
@@ -222,6 +223,7 @@ class ViewController: UIViewController {
             }
             OperationQueue.main.addOperation {
                 self.currentWorkingStackView.removeLabel(with: customer.name)
+                self.currentWatingScrollView.contentSize = CGSize(width: self.currentWatingScrollView.contentSize.width, height: self.currentWatingStackView.bounds.height)
                 if self.currentWorkingStackView.subviews.isEmpty, self.currentWatingStackView.subviews.isEmpty {
                     self.timer?.invalidate()
                 }
