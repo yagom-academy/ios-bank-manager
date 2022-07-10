@@ -29,11 +29,11 @@ struct Bank {
             let selectedMenu = selectMenu()
             
             switch selectedMenu {
-            case NameSpace.one:
+            case Menu.startProcess:
                 updateCustomerQueue()
                 handleCustomer()
                 displayEndMessage()
-            case NameSpace.two:
+            case Menu.endProcess:
                 return
             default:
                 throw BankManagerError.Input
@@ -42,7 +42,7 @@ struct Bank {
     }
     
     private func displayMenu() {
-        print(NameSpace.startMessage, terminator: " ")
+        print(Menu.startMessage, terminator: " ")
     }
     
     private mutating func selectMenu() -> String {

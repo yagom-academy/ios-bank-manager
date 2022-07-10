@@ -7,12 +7,17 @@
 
 import Foundation
 
-enum Business: String {
-    case deposit = "예금"
-    case loan = "대출"
+enum Business {
+    case deposit
+    case loan
     
     var name: String {
-        rawValue
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
     }
     
     var processTime: TimeInterval {
