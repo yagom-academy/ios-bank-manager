@@ -8,6 +8,7 @@
 import Foundation
 
 struct Bank {
+    var delegate: WorkProtocol?
     private var bankManager: BankManager
     var queue: CustomerQueue
     private let loanBusinessQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
