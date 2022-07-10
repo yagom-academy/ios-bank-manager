@@ -9,10 +9,10 @@ import Foundation
 
 struct Bank {
     private var bankManager: BankManager
-    private var queue: CustomerQueue
+    var queue: CustomerQueue
     private let loanBusinessQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
     private let depositBusinessQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
-    private(set) var countOfCustomer: Int = 0
+    private(set) var countOfCustomer: Int = 1
     private var totalProcessTime: TimeInterval = 0
     private let group = DispatchGroup()
     private let loanSemaphore = DispatchSemaphore(value: 1)
@@ -23,58 +23,27 @@ struct Bank {
         self.queue = queue
     }
     
-    mutating func start() throws {
-        while true {
-            displayMenu()
-            let selectedMenu = selectMenu()
-            
-            switch selectedMenu {
-            case Menu.startProcess:
-                updateCustomerQueue()
-                handleCustomer()
-                displayEndMessage()
-            case Menu.endProcess:
-                return
-            default:
-                throw BankManagerError.Input
-            }
-        }
-    }
-    
-    private func displayMenu() {
-        print(Menu.startMessage, terminator: " ")
-    }
-    
-    private mutating func selectMenu() -> String {
-        guard let input = readLine() else {
-            return ""
-        }
-    
-       return input
-    }
-    
-    private mutating func updateCustomerQueue() {
-        countOfCustomer = Int.random(in: 10...30)
-        let numberList = Array<Int>(1...countOfCustomer)
+    mutating func updateCustomerQueue() {
         let businessList = [Business.loan, Business.deposit]
         
-        numberList.forEach {
+        (countOfCustomer...(countOfCustomer + 9)).forEach { number in
             let randomNumber = Int.random(in: 0...1)
-            let customer = Customer(number: $0, business: businessList[randomNumber])
+            let customer = Customer(number: number, business: businessList[randomNumber])
             
             queue.enqueue(data: customer)
         }
+        countOfCustomer += 10
     }
     
-    private mutating func handleCustomer() {
-        let startTime = CFAbsoluteTimeGetCurrent()
+    mutating func handleCustomer() {
         
         for _ in 0..<queue.count {
             putCustomerToSuitableQueue()
         }
         
-        group.wait()
-        totalProcessTime = CFAbsoluteTimeGetCurrent() - startTime
+        group.notify(queue: loanBusinessQueue) { [self] in
+            delegate?.allWorkisFinished()
+        }
     }
     
     private func putCustomerToSuitableQueue() {
@@ -99,11 +68,5 @@ struct Bank {
         }
         
         return workItem
-    }
-    
-    private func displayEndMessage() {
-        let totalHandlingTime = String(format: "%.2f", totalProcessTime)
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(countOfCustomer)명이며, 총 업무시간은 \(totalHandlingTime)초입니다.")
     }
 }

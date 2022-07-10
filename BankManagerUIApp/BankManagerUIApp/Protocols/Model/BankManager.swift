@@ -9,12 +9,9 @@ import Foundation
 struct BankManager {
     
     func handle(customer: Customer) {
-        let customerNumber = customer.number
-        let customerBusiness = customer.business
+        let processTime = customer.business.processTime
         
-        print("\(customerNumber)번 고객 \(customerBusiness.name)업무 시작")
-        Thread.sleep(forTimeInterval: customerBusiness.processTime)
-        print("\(customerNumber)번 고객 \(customerBusiness.name)업무 완료")
+        Thread.sleep(forTimeInterval: processTime)
     }
 }
 
