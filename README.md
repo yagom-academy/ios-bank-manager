@@ -127,19 +127,29 @@ CustomerQueue의 에러 타입 구현.
           
 - 문제 해결을 위한 시도 
     - Unit Testing Bundle을 사용해서 직접 프로젝트 target을 추가했다.
+    
     <img src = "https://i.imgur.com/6B7tJpG.png" width="500" height="300"> 
+    
     - Scheme도 직접 추가하는 방법을 사용.
+    
         1️⃣
+        
         <img src = "https://i.imgur.com/fZ3vgDw.png" width="500" height="400">
             
         2️⃣
+        
         <img src = "https://i.imgur.com/uDCXPub.png" width="500" height="400">
         
     - 마지막으로 테스트에 사용되는 클래스의 target Target Membership을 추가했다.
+    
     <img src = "https://i.imgur.com/9b9xxIp.png" width="500" height="700">
+    
 - 테스트 파일에서 `@testable import`를 사용하지 않아도 문제가 일어나지 않았다.
+
 <img src = "https://i.imgur.com/kFp6l0O.png" width="500" height="500">
+
 [참고 페이지](https://jwonylee.tistory.com/entry/XCode-Swift-Command-Line-Tool-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-%EC%9C%A0%EB%8B%9B-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EA%B8%B0)
+
 ### STEP 3
 #### 비동기 처리 시 모든 업무시작이 출력된 후 업무완료가 출력되는 문제  
 |문제가 발생한 출력|정상 출력|
