@@ -1,7 +1,7 @@
 import Foundation
 
 struct Bank {
-    private var totalcount = 0
+    private var totalCount = 0
     private(set) var customerQueue = CustomerQueue<Customer>(linkedList: LinkedList<Customer>())
 
     init() {}
@@ -13,13 +13,13 @@ struct Bank {
 
     mutating func setCustomer(count: Int) {
         (1...count).forEach { number in
-            totalcount += 1
-            customerQueue.enqueue(data: Customer(name: "\(totalcount)"))
+            totalCount += 1
+            customerQueue.enqueue(data: Customer(name: "\(totalCount)"))
         }
     }
     
     mutating func reset() {
-        totalcount = 0
+        totalCount = 0
         customerQueue.clear()
     }
 }
