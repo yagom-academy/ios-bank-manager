@@ -22,8 +22,6 @@
 		C7694E42259C3E9F0053667F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7694E40259C3E9F0053667F /* Main.storyboard */; };
 		C7694E44259C3EA20053667F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7694E43259C3EA20053667F /* Assets.xcassets */; };
 		C7694E47259C3EA20053667F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7694E45259C3EA20053667F /* LaunchScreen.storyboard */; };
-		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
-		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +60,7 @@
 		C7694E46259C3EA20053667F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7694E48259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7694E4D259C3EA20053667F /* BankManagerUIAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerUIAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppTests.swift; sourceTree = "<group>"; };
-		C7694E53259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7694E58259C3EA20053667F /* BankManagerUIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerUIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
-		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +137,6 @@
 				057A56482877EC1F00101A82 /* DataType */,
 				057A56462877EC1F00101A82 /* Error */,
 				C7694E39259C3E9F0053667F /* BankManagerUIApp */,
-				C7694E50259C3EA20053667F /* BankManagerUIAppTests */,
-				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
 				C7694E38259C3E9F0053667F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -171,24 +163,6 @@
 				C7694E48259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIApp;
-			sourceTree = "<group>";
-		};
-		C7694E50259C3EA20053667F /* BankManagerUIAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */,
-				C7694E53259C3EA20053667F /* Info.plist */,
-			);
-			path = BankManagerUIAppTests;
-			sourceTree = "<group>";
-		};
-		C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */,
-				C7694E5E259C3EA20053667F /* Info.plist */,
-			);
-			path = BankManagerUIAppUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +314,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +321,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
