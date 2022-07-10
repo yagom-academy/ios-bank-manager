@@ -96,12 +96,6 @@ class ViewController: UIViewController {
         return label
     }()
     
-    let statusScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView .translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
     let currentStatusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
@@ -110,6 +104,18 @@ class ViewController: UIViewController {
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    let currentWatingScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView .translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    let currentWorkingScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView .translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
     }()
     
     let currentWatingStackView: UIStackView = {
@@ -135,13 +141,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         addView()
         configureRootStackView()
-        configurecurrentStatusStackView()
+        configureCurrentStatusStackView()
     }
     
     // MARK: Methods
     private func addView() {
         self.view.addSubview(rootStackView)
-        [buttonStackView, timerLabel, statusStackView, statusScrollView].forEach {
+        [buttonStackView, timerLabel, statusStackView, currentStatusStackView].forEach {
             rootStackView.addArrangedSubview($0)
         }
         [addedButton, resetButton].forEach {
@@ -150,10 +156,11 @@ class ViewController: UIViewController {
         [waitingLabel, workingLabel].forEach {
             statusStackView.addArrangedSubview($0)
         }
-        [currentWatingStackView, currentWorkingStackView].forEach {
+        [currentWatingScrollView, currentWorkingScrollView].forEach {
             currentStatusStackView.addArrangedSubview($0)
         }
-        statusScrollView.addSubview(currentStatusStackView)
+        currentWatingScrollView.addSubview(currentWatingStackView)
+        currentWorkingScrollView.addSubview(currentWorkingStackView)
     }
     
     private func configureRootStackView() {
@@ -165,12 +172,10 @@ class ViewController: UIViewController {
         ])
     }
     
-    private func configurecurrentStatusStackView() {
+    private func configureCurrentStatusStackView() {
         NSLayoutConstraint.activate([
-            currentStatusStackView.topAnchor.constraint(equalTo: statusScrollView.contentLayoutGuide.topAnchor),
-            currentStatusStackView.bottomAnchor.constraint(equalTo: statusScrollView.contentLayoutGuide.bottomAnchor),
-            currentStatusStackView.leadingAnchor.constraint(equalTo: statusScrollView.frameLayoutGuide.leadingAnchor),
-            currentStatusStackView.trailingAnchor.constraint(equalTo: statusScrollView.frameLayoutGuide.trailingAnchor)
+            currentWatingStackView.widthAnchor.constraint(equalTo: currentWatingScrollView.frameLayoutGuide.widthAnchor),
+            currentWorkingStackView.widthAnchor.constraint(equalTo: currentWorkingScrollView.frameLayoutGuide.widthAnchor)
         ])
     }
     
@@ -252,6 +257,8 @@ class ViewController: UIViewController {
     private func resetCustomer() {
         currentWatingStackView.removeAllArrangedSubView()
         currentWorkingStackView.removeAllArrangedSubView()
+        currentWatingScrollView.heightAnchor.constraint(equalTo: currentWatingScrollView.contentLayoutGuide.heightAnchor).isActive = true
+        currentWorkingScrollView.heightAnchor.constraint(equalTo: currentWorkingScrollView.contentLayoutGuide.heightAnchor).isActive = true
         bank.reset()
         self.labelOperations.forEach {
             $0.cancel()
