@@ -218,9 +218,7 @@ class ViewController: UIViewController {
         let workOperation = BlockOperation {
             semaphore.wait()
             OperationQueue.main.addOperation(labelOperation)
-            if !labelOperation.isCancelled {
-                BankManager.work(customer: customer, time: time)
-            }
+            BankManager.work(customer: customer, time: time)
             OperationQueue.main.addOperation {
                 self.currentWorkingStackView.removeLabel(with: customer.name)
                 self.currentWatingScrollView.contentSize = CGSize(width: self.currentWatingScrollView.contentSize.width, height: self.currentWatingStackView.bounds.height)
@@ -263,6 +261,9 @@ class ViewController: UIViewController {
         currentWorkingScrollView.heightAnchor.constraint(equalTo: currentWorkingScrollView.contentLayoutGuide.heightAnchor).isActive = true
         bank.reset()
         self.labelOperations.forEach {
+            $0.cancel()
+        }
+        self.workOperations.forEach {
             $0.cancel()
         }
         timerLabel.text = "업무시간 - 00:00:000"
