@@ -7,8 +7,10 @@
 
 struct Client {
     let waitingNumber: Int
+    let desiredServices: String
     
-    init(waitingNumber: Int) {
+    init(waitingNumber: Int, desiredServices: String) {
         self.waitingNumber = waitingNumber
+        self.desiredServices = desiredServices
     }
 }

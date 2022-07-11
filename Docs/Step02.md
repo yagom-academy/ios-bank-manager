@@ -78,6 +78,25 @@
 
 ### STEP 2 Answers
 
+#### A1. Switch case 쓰는 이유
+- if 문 보다 switch case 문을 더 많이 사용하는 케이스는 대표적으로 enum 의 case 들을 처리 할때가 있어요! 
+- 모든 case들을 정의해야 하기 때문에 컴파일 단에서 놓친 case 들을 확인 할 수 있게 됩니다. if else 문에서는 필요한 조건만 정의하면 되는데 요 차이가 있겠죠! 그리고 여러 조건을 처리해야 한다면 if else 문 보다 switch 를 더 자주 사용하기도 합니다. 개발자 취향에 따라 달라지지만 if, else 로 끝나지 않고 조건이 세개 이상되면 switch 를 쓰시는 분들도 계십니다.
+
+#### A2. 프로토콜 파일 정리
+- 프로토콜 네이밍 컨벤션 글을 참고해 보시면 좋을것 같아요 😉
+https://dev.srdanstanic.com/swift-protocol-types-and-naming/
+- 프로토콜을 정의할 때 주로 파일 하나에 프로토콜을 하나를 정의해주곤 합니다!
+- 그래서 파일명도 해당 프로토콜 이름과 동일하게 프로토콜 네임으로 해주시면 됩니닷 ✨
+
+#### A3. enum rawValue
+- 네네! 아주 좋습니다 👏 실제로 회사 코드에서도 자주 사용합니다!
+
+#### A4. extension 파일 생성 이후, private 접근자 사용 불가 문제
+- 음 우선 말씀하신것 처럼 Bank 의 run() 내부 구현이 하나의 구조체 안에 들어가는게 가독성을 해친다고 생각하지는 않아요! 단지 private 함수들이 파일안에 많다고 해서 가독성을 저하된다고 생각하진 않습니닷. 대신 그 함수들이 Bank 의 역할을 수행하고 있는지, 주입 받을 수 있는 것들이 있는지를 판단해서 분리하는게 좋을것 같아요 🙂
+- Q4-2 처럼 하나의 구조체 안에서 호출해주시고, 내부에서 또 크게 기능을 분리하고 싶으시면 extension 으로 빼는 정도까지 해주시면 될 것 같습니다 😉
+
+- private 접근지정자 자체가 객체가 선언된 괄호 안에서만 사용 가능하기 때문에 extension 파일로 빼서 사용하시려면 Internal 로 지정해주시면 됩니다!
+
 ---
 ### STEP 2 TroubleShooting
     
@@ -114,6 +133,4 @@
 ---
 ### STEP 2 Reviews And Updates
     
-[STEP 2 Pull Request]()
-
----
+[STEP 2 Pull Request](https://github.com/yagom-academy/ios-bank-manager/pull/196)
