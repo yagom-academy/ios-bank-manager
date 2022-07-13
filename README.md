@@ -19,24 +19,26 @@
 - [1️⃣ Step01](https://github.com/Groot-94/ios-bank-manager/wiki/Step01)
 - [2️⃣ Step02](https://github.com/Groot-94/ios-bank-manager/wiki/Step02)
 - [3️⃣ Step03](https://github.com/Groot-94/ios-bank-manager/wiki/Step03)
-
+- [4️⃣ Step04](https://github.com/Groot-94/ios-bank-manager/wiki/Step04)
 ## 개발자 소개
 |현이|그루트|
 |:---:|:---:|
-| <image src = "https://i.imgur.com/0UjNUFH.jpg" width="250" height="250">| <image src = "https://i.imgur.com/Cxc3e7j.jpg" width="250" height="250"> |
+| <img src = "https://i.imgur.com/0UjNUFH.jpg" width="250" height="250">| <img src = "https://i.imgur.com/Cxc3e7j.jpg" width="250" height="250"> |
 |[현이](https://github.com/seohyeon2?tab=repositories)|[그루트](https://github.com/Groot-94)|
 
 
 ## 프로젝트 소개
-- 은행 고객의 총 수와 소요 시간을 콘솔로 확인할 수 있는 프로젝트입니다.
+- 은행 고객의 업무처리를 동시성 프로그래밍을 이용해서 구현했습니다.
     
 ## UML  
 ### [ClassDiagram]
-![](https://i.imgur.com/7O0LMBE.jpg)
+![](https://i.imgur.com/PxtG5Q6.png)
 
 
 ## 구현내용  
-- 추후 추가예정
+|고객 10명 추가|고객 여러명 추가|초기화 버튼 클릭|
+|:---:|:---:|:---:|
+|<img src = "https://i.imgur.com/I8xnF8p.gif" width="200" height="500">    |<img src = "https://i.imgur.com/H7t5FNP.gif" width="200" height="500">|<img src = "https://i.imgur.com/fsAoUns.gif" width="200" height="500">|
 ## 키워드
 - Queue
 - Node
@@ -46,7 +48,7 @@
 - Generics
 - Synchronous, Asynchronous
 - GCD(Dispatch Queue)
-- Concurrency Programming   
+- Concurrency Programming
 ## 참고문서
 - [Swift Language Guide - Closures](https://docs.swift.org/swift-book/LanguageGuide/Generics.html)
 - [Swift Language Guide - Inheritance](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html)
@@ -69,6 +71,10 @@
 - [x] 스레드(Thread) 개념에 대한 이해
 - [x] GCD를 활용한 동시성 프로그래밍 구현
 - [x] 동기(Synchronous)와 비동기(Asynchronous) 동작의 구현 및 적용
+- [x] 동시성 프로그래밍 중 UI 요소 업데이트의 주의점 이해
+- [x] 커스텀 뷰 구현
+- [x] 스택뷰 활용
+- [x] Xcode 프로젝트 관리 구조의 이해와 응용
 ## 기능설명
 
 ### Node
@@ -117,28 +123,38 @@ CustomerQueue의 에러 타입 구현.
 ### STEP 1 
 #### Command Line Tool에서 Unit Test를 위해서 `@testable import` 을 사용할 때 모듈을 찾지 못하는 문제가 발생.
 
-<image src = "https://i.imgur.com/0KmmZb2.png" width="500" height="100">   
+<img src = "https://i.imgur.com/0KmmZb2.png" width="500" height="100">   
           
 - 문제 해결을 위한 시도 
     - Unit Testing Bundle을 사용해서 직접 프로젝트 target을 추가했다.
-    <image src = "https://i.imgur.com/6B7tJpG.png" width="500" height="300"> 
+    
+    <img src = "https://i.imgur.com/6B7tJpG.png" width="500" height="300"> 
+    
     - Scheme도 직접 추가하는 방법을 사용.
+    
         1️⃣
-        <image src = "https://i.imgur.com/fZ3vgDw.png" width="500" height="400">
+        
+        <img src = "https://i.imgur.com/fZ3vgDw.png" width="500" height="400">
             
         2️⃣
-        <image src = "https://i.imgur.com/uDCXPub.png" width="500" height="400">
+        
+        <img src = "https://i.imgur.com/uDCXPub.png" width="500" height="400">
         
     - 마지막으로 테스트에 사용되는 클래스의 target Target Membership을 추가했다.
-    <image src = "https://i.imgur.com/9b9xxIp.png" width="500" height="700">
+    
+    <img src = "https://i.imgur.com/9b9xxIp.png" width="500" height="700">
+    
 - 테스트 파일에서 `@testable import`를 사용하지 않아도 문제가 일어나지 않았다.
-<image src = "https://i.imgur.com/kFp6l0O.png" width="500" height="500">
+
+<img src = "https://i.imgur.com/kFp6l0O.png" width="500" height="500">
+
 [참고 페이지](https://jwonylee.tistory.com/entry/XCode-Swift-Command-Line-Tool-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-%EC%9C%A0%EB%8B%9B-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EA%B8%B0)
+
 ### STEP 3
 #### 비동기 처리 시 모든 업무시작이 출력된 후 업무완료가 출력되는 문제  
 |문제가 발생한 출력|정상 출력|
 |:---:|:---:|
-|<image src = "https://i.imgur.com/ZJf3rBZ.png" width="200" height="500">    |    <image src = "https://i.imgur.com/UthR4c6.png" width="200" height="500">|
+|<img src = "https://i.imgur.com/ZJf3rBZ.png" width="200" height="500">    |    <img src = "https://i.imgur.com/UthR4c6.png" width="200" height="500">|
     
 - 원인 분석
      - 스레드의 수를 제어하지 않고 실행했기 때문에, work 함수를 workQueue에 넣어주는 만큼 스레드가 할당된다. 그러므로 모든 업무를 시작하는 시점이 거의 동일하게 진행된다는 점을 발견.

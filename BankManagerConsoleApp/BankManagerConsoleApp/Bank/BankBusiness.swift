@@ -5,9 +5,9 @@ enum BankBusiness {
     var part: String {
         switch self {
         case .deposit:
-            return "예금업무"
+            return "예금"
         case .loan:
-            return "대출업무"
+            return "대출"
         }
     }
 
