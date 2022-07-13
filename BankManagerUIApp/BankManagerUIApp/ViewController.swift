@@ -300,3 +300,16 @@ extension UIStackView {
         }
     }
 }
+
+extension UIButton {
+
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        alpha = 0.5
+        super.touchesBegan(touches, with: event)
+    }
+
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        alpha = 1
+        super.touchesEnded(touches, with: event)
+    }
+}
