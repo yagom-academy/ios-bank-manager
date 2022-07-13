@@ -200,7 +200,7 @@ class BankViewController: UIViewController {
                     workBanking(business: loan, for: customer)
                 }
             } catch {
-                print("고객이 없습니다.")
+                alertError()
                 break
             }
         }
@@ -281,6 +281,13 @@ class BankViewController: UIViewController {
         let milisecond: Int = Int(self.time.truncatingRemainder(dividingBy: 1) * 1000)
         let timeText: String = String(format: "%02ld:%02ld:%03ld", minute, second, milisecond)
         self.timerLabel.text = "업무시간 - \(timeText)"
+    }
+    
+    private func alertError() {
+        let alert = UIAlertController(title: "경고", message: "고객이 없습니다.", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "확인", style: .cancel)
+        alert.addAction(alertAction)
+        present(alert, animated: false)
     }
 }
 
