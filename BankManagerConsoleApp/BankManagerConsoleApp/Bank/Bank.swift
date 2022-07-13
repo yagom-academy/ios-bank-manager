@@ -12,7 +12,7 @@ struct Bank {
     }
 
     mutating func setCustomer(count: Int) {
-        (1...count).forEach { number in
+        (1...count).forEach { _ in
             totalCount += 1
             customerQueue.enqueue(data: Customer(name: "\(totalCount)"))
         }

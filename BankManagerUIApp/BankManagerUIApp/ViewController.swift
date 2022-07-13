@@ -282,6 +282,7 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: Extension
 extension UIStackView {
     func removeAllArrangedSubView() {
         self.arrangedSubviews.forEach {
