@@ -218,7 +218,9 @@ class ViewController: UIViewController {
         let workOperation = BlockOperation {
             semaphore.wait()
             OperationQueue.main.addOperation(labelOperation)
-            BankManager.work(customer: customer, time: time)
+            if labelOperation.isCancelled == false {
+                BankManager.work(customer: customer, time: time)
+            }
             OperationQueue.main.addOperation {
                 self.currentWorkingStackView.removeLabel(with: customer.name)
                 self.currentWatingScrollView.contentSize = CGSize(width: self.currentWatingScrollView.contentSize.width, height: self.currentWatingStackView.bounds.height)
