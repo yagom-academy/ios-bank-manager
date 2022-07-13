@@ -1,22 +1,22 @@
 import UIKit
 
-class ViewController: UIViewController {
+class BankViewController: UIViewController {
     // MARK: Property
-    var bank = Bank()
-    var time = 0.0
-    var timer: Timer? {
+    private var bank = Bank()
+    private var time = 0.0
+    private var timer: Timer? {
         willSet {
             timer?.invalidate()
         }
     }
-    var workQueue: OperationQueue?
-    var workOperations: [BlockOperation] = []
-    var labelOperations: [BlockOperation] = []
-    let deposit = DispatchSemaphore(value: 2)
-    let loan = DispatchSemaphore(value: 1)
+    private var workQueue: OperationQueue?
+    private var workOperations: [BlockOperation] = []
+    private var labelOperations: [BlockOperation] = []
+    private let deposit = DispatchSemaphore(value: 2)
+    private let loan = DispatchSemaphore(value: 1)
     
     // MARK: View property
-    let rootStackView: UIStackView = {
+    private let rootStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    let buttonStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    let addedButton: UIButton = {
+    private let addedButton: UIButton = {
         let button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    let resetButton: UIButton = {
+    private let resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    let timerLabel: UILabel = {
+    private let timerLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "업무시간 - 00:00:000"
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    let statusStackView: UIStackView = {
+    private let statusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    let waitingLabel: UILabel = {
+    private let waitingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "대기중"
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    let workingLabel: UILabel = {
+    private let workingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "업무중"
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
         return label
     }()
     
-    let currentStatusStackView: UIStackView = {
+    private let currentStatusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -106,19 +106,19 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    let currentWatingScrollView: UIScrollView = {
+    private let currentWatingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = true
         return scrollView
     }()
     
-    let currentWorkingScrollView: UIScrollView = {
+    private let currentWorkingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
-    let currentWatingStackView: UIStackView = {
+    private let currentWatingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
         stackView.distribution = .fill
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    let currentWorkingStackView: UIStackView = {
+    private let currentWorkingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
         stackView.distribution = .fill
