@@ -12,12 +12,8 @@ class MainViewController: UIViewController {
         view = mainView
         addButtonTarget()
         addNotificationObserver()
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
-        
-        let customers = bankManager.createCustomerQueue()
-        setCustomerLabel(customers: customers)
-        customerNumber = bankManager.manageBank(customers: customers)
+        configureTimer()
+        configureCustomer()
     }
     
     private func addButtonTarget() {
@@ -33,7 +29,17 @@ class MainViewController: UIViewController {
                                                name: BankManagerNotificationName.serviceDidEnd, object: nil)
     }
     
-    @objc func playTimer() {
+    private func configureCustomer() {
+        let customers = bankManager.createCustomerQueue()
+        setCustomerLabel(customers: customers)
+        customerNumber = bankManager.manageBank(customers: customers)
+    }
+    
+    private func configureTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(playTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func playTimer() {
         workingTime += 0.001
         
         let dateFormatter = DateFormatter()
