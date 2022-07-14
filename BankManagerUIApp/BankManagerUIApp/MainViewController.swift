@@ -1,15 +1,19 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    private let mainView = MainView()
+    private lazy var mainView = MainView()
     private var bankManager = BankManager()
     private var customerNumber = 0
     private var timer = Timer()
     private var workingTime: Double = 0.0
     
+    override func loadView() {
+        super.loadView()
+        view = mainView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = mainView
         addButtonTarget()
         addNotificationObserver()
         configureTimer()
@@ -48,7 +52,7 @@ class MainViewController: UIViewController {
         
         mainView.workingTimeLabel.text = "업무시간 - \(dateFormatter.string(from: date))"
     }
-    
+
     @objc private func addCustomerButtonDidTapped(_ sender: UIButton) {
         let customers = bankManager.addCustomerQueue(lastCustomer: customerNumber)
         
@@ -117,11 +121,11 @@ class MainViewController: UIViewController {
     }
     
     private func setCustomerLabel(customers: Queue<Customer>) {
-        for customer in customers.returnList() {
+        customers.returnList().forEach {
             let customerLabel = UILabel()
-            let bankingLabel = "\(customer.number) - \(customer.banking.rawValue)"
+            let bankingLabel = "\($0.number) - \($0.banking.rawValue)"
             
-            switch customer.banking {
+            switch $0.banking {
             case .loan:
                 customerLabel.textColor = .systemPurple
             case .deposit:
