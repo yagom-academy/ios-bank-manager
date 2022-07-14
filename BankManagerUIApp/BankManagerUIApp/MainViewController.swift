@@ -26,9 +26,11 @@ class MainViewController: UIViewController {
     }
     
     private func addNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(startProcessing(notification:)), name: Notification.Name(rawValue: "process"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startProcessing(notification:)),
+                                               name: BankManagerNotificationName.serviceDidBegin, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(finishProcessing), name: Notification.Name(rawValue: "finish"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(finishProcessing),
+                                               name: BankManagerNotificationName.serviceDidEnd, object: nil)
     }
     
     @objc func playTimer() {
@@ -84,7 +86,9 @@ class MainViewController: UIViewController {
         }
     }
     
-    fileprivate func extractedFunc(_ customer: Customer, _ stackView: UIStackView) {
+    private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
+        guard let customer = notification.object as? Customer else { return }
+        
         let text = "\(customer.number) - \(customer.banking.rawValue)"
         
         DispatchQueue.main.async {
@@ -104,12 +108,6 @@ class MainViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
-        guard let customer = notification.object as? Customer else { return }
-        
-        extractedFunc(customer, stackView)
     }
     
     private func setCustomerLabel(customers: Queue<Customer>) {

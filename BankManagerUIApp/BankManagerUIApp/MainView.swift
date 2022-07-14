@@ -1,7 +1,7 @@
 import UIKit
 
 class MainView: UIView {
-    let mainStackView: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
@@ -11,7 +11,7 @@ class MainView: UIView {
         return stack
     }()
     
-    let customerStackView: UIStackView = {
+    private let customerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
@@ -20,7 +20,7 @@ class MainView: UIView {
         stack.spacing = 0
         return stack
     }()
-
+    
     let addCustomerButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,8 +49,8 @@ class MainView: UIView {
         label.adjustsFontForContentSizeCategory = true
         return label
     }()
-
-    let statusStackView: UIStackView = {
+    
+    private let statusStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
@@ -60,7 +60,7 @@ class MainView: UIView {
         return stack
     }()
     
-    let waitStatusLabel: UILabel = {
+    private let waitStatusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "대기중"
@@ -72,7 +72,7 @@ class MainView: UIView {
         return label
     }()
     
-    let processStatusLabel: UILabel = {
+    private let processStatusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "업무중"
@@ -84,7 +84,7 @@ class MainView: UIView {
         return label
     }()
     
-    let bankingStackView: UIStackView = {
+    private let bankingStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
@@ -94,13 +94,13 @@ class MainView: UIView {
         return stack
     }()
     
-    let waitingScrollView: UIScrollView = {
+    private let waitingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
-    let processingScrollView: UIScrollView = {
+    private let processingScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
@@ -179,6 +179,6 @@ class MainView: UIView {
             processingStackView.widthAnchor.constraint(equalTo: processingScrollView.widthAnchor),
             
             statusStackView.heightAnchor.constraint(equalToConstant: 40)
-            ])
+        ])
     }
 }
