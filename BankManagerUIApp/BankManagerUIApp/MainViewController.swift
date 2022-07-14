@@ -23,7 +23,6 @@ class MainViewController: UIViewController {
     private func addButtonTarget() {
         mainView.addCustomerButton.addTarget(self, action: #selector(addCustomerButtonDidTapped(_:)), for: .touchUpInside)
         mainView.clearCustomerButton.addTarget(self, action: #selector(clearCustomerButtonDidTapped), for: .touchUpInside)
-        
     }
     
     private func addNotificationObserver() {
@@ -64,6 +63,7 @@ class MainViewController: UIViewController {
             $0.removeFromSuperview()
         }
         
+        bankManager.bank.isCancelled = true
         workingTime = 0
         customerNumber = 0
         mainView.workingTimeLabel.text = "업무시간 - 00:00:000"
@@ -84,9 +84,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
-        guard let customer = notification.object as? Customer else { return }
-        
+    fileprivate func extractedFunc(_ customer: Customer, _ stackView: UIStackView) {
         let text = "\(customer.number) - \(customer.banking.rawValue)"
         
         DispatchQueue.main.async {
@@ -106,6 +104,12 @@ class MainViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func transferCustomer(at stackView: UIStackView, _ notification: Notification) {
+        guard let customer = notification.object as? Customer else { return }
+        
+        extractedFunc(customer, stackView)
     }
     
     private func setCustomerLabel(customers: Queue<Customer>) {

@@ -1,9 +1,10 @@
 import Foundation
 
-struct Bank {
+class Bank {
     private let bankingGroup = DispatchGroup()
     private var depositSemaphore: DispatchSemaphore
     private var loanSemaphore: DispatchSemaphore
+    var isCancelled: Bool?
     
     init(depositNumber: Int, loanNumber: Int) {
         self.depositSemaphore = DispatchSemaphore(value: depositNumber)
@@ -12,9 +13,8 @@ struct Bank {
     
     func startBanking(customers: Queue<Customer>, bankers: [Banking: BankerLogic]) -> Int {
         var customerNumber = 0
-        
+        isCancelled = false
         guard let depositBanker = bankers[Banking.deposit], let loanBanker = bankers[Banking.loan] else { return 0 }
-        
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else { return 0 }
             
@@ -34,8 +34,13 @@ struct Bank {
     private func processWork(banker: BankerLogic, customer: Customer, semaphore: DispatchSemaphore) {
         let serveWork = DispatchWorkItem {
             semaphore.wait()
+            if self.isCancelled == true {
+                semaphore.signal()
+                return
+            }
             banker.serve(customer: customer)
             semaphore.signal()
+                
         }
 
         DispatchQueue.global().async(group: bankingGroup, execute: serveWork)
