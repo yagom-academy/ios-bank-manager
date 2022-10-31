@@ -15,7 +15,7 @@ struct CustomerQueue<T> {
         rear == nil ? true : false
     }
     
-    private mutating func enqueue(data: T?) {
+    mutating func enqueue(data: T?) {
         let newNode = Node(data: data, next: nil)
         
         if isEmpty {
@@ -27,7 +27,7 @@ struct CustomerQueue<T> {
         }
     }
     
-    private mutating func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         if isEmpty {
             return nil
         } else {
@@ -37,11 +37,11 @@ struct CustomerQueue<T> {
         }
     }
     
-    private func peek() -> T? {
+    func peek() -> T? {
         isEmpty ? nil : front?.data
     }
     
-    private mutating func clear() {
+    mutating func clear() {
         front = nil
         rear = nil
     }
