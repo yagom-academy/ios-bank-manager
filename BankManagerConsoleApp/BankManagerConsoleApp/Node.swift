@@ -2,7 +2,7 @@
 //  BankManagerConsoleApp
 //  Created by jeremy, LJ on 2022/10/31.
 
-class Node<T> {
+final class Node<T> {
     let data: T
     var next: Node?
     

@@ -14,4 +14,15 @@ struct CustomerQueue<Element> {
     func createNode(data: Element) -> Node<Element> {
         return Node(data: data)
     }
+    
+    mutating func enqueue(data: Element) {
+        
+        if front == nil {
+            self.front = createNode(data: data)
+            self.rear = front
+        } else {
+            rear?.next = createNode(data: data)
+            rear = rear?.next
+        }
+    }
 }
