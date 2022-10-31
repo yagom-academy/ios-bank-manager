@@ -2,24 +2,6 @@
 //  LinkedList.swift
 //  BankManagerConsoleApp
 
-final class Node<Element> {
-    private(set) var value: Element
-    private(set) var next: Node<Element>?
-    
-    init(value: Element, next: Node<Element>? = nil) {
-        self.value = value
-        self.next = next
-    }
-    
-    func changeValue(_ value: Element) {
-        self.value = value
-    }
-    
-    func changeNext(_ node: Node?) {
-        self.next = node
-    }
-}
-
 struct LinkedList<Element> {
     private(set) var head: Node<Element>?
     private var tail: Node<Element>?
@@ -40,8 +22,12 @@ struct LinkedList<Element> {
     
     mutating func removeFirst() -> Node<Element>? {
         guard !isEmpty else { return nil }
-        let firstNode = head
+        let firstNode: Node<Element>? = head
         head = head?.next
         return firstNode
+    }
+    
+    mutating func clear() {
+        head = nil
     }
 }
