@@ -16,7 +16,7 @@ struct CustomerQueue<Element> {
     }
     
     mutating func enqueue(data: Element) {
-        if front == nil {
+        if self.isEmpty() {
             front = createNode(data: data)
             rear = front
         } else {
@@ -44,5 +44,9 @@ struct CustomerQueue<Element> {
     
     mutating func clear() {
         front = nil
+    }
+    
+    func isEmpty() -> Bool {
+        return front == nil ? true : false
     }
 }
