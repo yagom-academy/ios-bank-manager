@@ -10,15 +10,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E3B2A5A1290F6F9C004A9ED3"
-               BuildableName = "NodeTests.xctest"
-               BlueprintName = "NodeTests"
+               BlueprintIdentifier = "E3C9D751290FE6A100E2FF59"
+               BuildableName = "BankManagerConsoleAppTests.xctest"
+               BlueprintName = "BankManagerConsoleAppTests"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>

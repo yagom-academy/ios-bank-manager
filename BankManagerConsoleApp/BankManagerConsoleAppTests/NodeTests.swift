@@ -1,8 +1,8 @@
 //
-//  NodeTests.swift
-//  NodeTests
+//  BankManagerConsoleAppTests.swift
+//  BankManagerConsoleAppTests
 //
-//  Created by Kyo, Wonbi on 2022/10/31.
+//  Created by Wonbi on 2022/10/31.
 //
 
 import XCTest
