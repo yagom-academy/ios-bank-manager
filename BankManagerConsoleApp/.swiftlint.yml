@@ -5,7 +5,7 @@ included:
 
 excluded:
 - Pods
-- NodeTests/
+- BankManagerConsoleAppTests/
 
 line_length:
     warning: 100
