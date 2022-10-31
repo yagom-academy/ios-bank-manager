@@ -1,11 +1,11 @@
 //
-//  Queue.swift
+//  ClientQueue.swift
 //  BankManagerConsoleApp
 //
 //  Created by Kyo, Wonbi on 2022/10/31.
 //
 
-struct Queue<Element> {
+struct ClientQueue<Element> {
     private var list: LinkedList<Element> = LinkedList()
     
     var peek: Element? {

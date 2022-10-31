@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		3C9D4107290F627200945718 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D4106290F627200945718 /* Node.swift */; };
 		3C9D4109290F628000945718 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D4108290F628000945718 /* LinkedList.swift */; };
-		3CA6BFAB290FEE510004A8CF /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6BFAA290FEE510004A8CF /* QueueTests.swift */; };
-		3CA6BFAC290FEED40004A8CF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3218A2E290FC3F500A92638 /* Queue.swift */; };
+		3CA6BFAB290FEE510004A8CF /* ClientQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6BFAA290FEE510004A8CF /* ClientQueueTests.swift */; };
+		3CA6BFAC290FEED40004A8CF /* ClientQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3218A2E290FC3F500A92638 /* ClientQueue.swift */; };
 		5EE5EA078596F35A5CAA86C7 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7789858A642D6ADDE31D39 /* Pods_BankManagerConsoleApp.framework */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
-		E3218A2F290FC3F500A92638 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3218A2E290FC3F500A92638 /* Queue.swift */; };
+		E3218A2F290FC3F500A92638 /* ClientQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3218A2E290FC3F500A92638 /* ClientQueue.swift */; };
 		E3C9D755290FE6A100E2FF59 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9D754290FE6A100E2FF59 /* NodeTests.swift */; };
 		E3C9D759290FE74A00E2FF59 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D4106290F627200945718 /* Node.swift */; };
 		E3C9D75B290FE78000E2FF59 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9D75A290FE78000E2FF59 /* LinkedListTests.swift */; };
@@ -37,14 +37,14 @@
 		3C81CDA4290FBEDA007B24D0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3C9D4106290F627200945718 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		3C9D4108290F628000945718 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		3CA6BFAA290FEE510004A8CF /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		3CA6BFAA290FEE510004A8CF /* ClientQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientQueueTests.swift; sourceTree = "<group>"; };
 		3EDCC907D681FE10B9716DA6 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7B5129430990DAE83B4339F2 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		CA7789858A642D6ADDE31D39 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3218A2E290FC3F500A92638 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		E3218A2E290FC3F500A92638 /* ClientQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientQueue.swift; sourceTree = "<group>"; };
 		E3C9D752290FE6A100E2FF59 /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3C9D754290FE6A100E2FF59 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		E3C9D75A290FE78000E2FF59 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 			children = (
 				3C9D4106290F627200945718 /* Node.swift */,
 				3C9D4108290F628000945718 /* LinkedList.swift */,
-				E3218A2E290FC3F500A92638 /* Queue.swift */,
+				E3218A2E290FC3F500A92638 /* ClientQueue.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 			children = (
 				E3C9D754290FE6A100E2FF59 /* NodeTests.swift */,
 				E3C9D75A290FE78000E2FF59 /* LinkedListTests.swift */,
-				3CA6BFAA290FEE510004A8CF /* QueueTests.swift */,
+				3CA6BFAA290FEE510004A8CF /* ClientQueueTests.swift */,
 			);
 			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3218A2F290FC3F500A92638 /* Queue.swift in Sources */,
+				E3218A2F290FC3F500A92638 /* ClientQueue.swift in Sources */,
 				3C9D4107290F627200945718 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				3C9D4109290F628000945718 /* LinkedList.swift in Sources */,
@@ -282,9 +282,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C9D755290FE6A100E2FF59 /* NodeTests.swift in Sources */,
-				3CA6BFAC290FEED40004A8CF /* Queue.swift in Sources */,
+				3CA6BFAC290FEED40004A8CF /* ClientQueue.swift in Sources */,
 				E3C9D75B290FE78000E2FF59 /* LinkedListTests.swift in Sources */,
-				3CA6BFAB290FEE510004A8CF /* QueueTests.swift in Sources */,
+				3CA6BFAB290FEE510004A8CF /* ClientQueueTests.swift in Sources */,
 				E3C9D75C290FE83900E2FF59 /* LinkedList.swift in Sources */,
 				E3C9D759290FE74A00E2FF59 /* Node.swift in Sources */,
 			);

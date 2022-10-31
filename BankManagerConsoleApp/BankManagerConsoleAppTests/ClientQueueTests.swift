@@ -1,5 +1,5 @@
 //
-//  QueueTests.swift
+//  ClientQueueTests.swift
 //  BankManagerConsoleAppTests
 //
 //  Created by Kyo, Wonbi on 2022/10/31.
@@ -8,13 +8,13 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-class QueueTests: XCTestCase {
-    var sut: Queue<Int>?
+class ClientQueueTests: XCTestCase {
+    var sut: ClientQueue<Int>?
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = Queue()
+        sut = ClientQueue()
     }
 
     override func tearDownWithError() throws {
