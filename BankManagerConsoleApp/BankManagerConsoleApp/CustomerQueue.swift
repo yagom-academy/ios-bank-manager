@@ -26,12 +26,12 @@ struct CustomerQueue<Element> {
     }
     
     mutating func dequeue() -> Element? {
-        guard let value: Node<Element> = front else {
+        guard let result: Node<Element> = front else {
             return nil
         }
         front = front?.next
         
-        return value.data
+        return result.data
     }
     
     func peek() -> Node<Element>? {
@@ -40,5 +40,9 @@ struct CustomerQueue<Element> {
         }
         
         return result
+    }
+    
+    mutating func clear() {
+        front = nil
     }
 }
