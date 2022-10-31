@@ -48,4 +48,12 @@ class LinkedList<T> {
         
         return temp
     }
+    
+    func peek() -> Node<T>? {
+        if isEmpty {
+            return nil
+        }
+        
+        return self.head
+    }
 }
