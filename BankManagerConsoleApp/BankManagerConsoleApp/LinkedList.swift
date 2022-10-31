@@ -14,3 +14,28 @@ class Node<T> {
         self.next = next
     }
 }
+
+class LinkedList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    
+    var isEmpty: Bool {
+        if head == nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func push(_ node: Node<T>) {
+        if self.isEmpty {
+            self.head = node
+            self.tail = node
+            return
+        }
+        
+        let temp = self.tail
+        self.tail = node
+        self.tail?.next = temp
+    }    
+}
