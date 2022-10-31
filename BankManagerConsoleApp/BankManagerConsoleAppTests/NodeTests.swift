@@ -17,8 +17,10 @@ class NodeTests: XCTestCase {
     
     func test_Node의Next가_지정한Node를가르키는지() {
         let node = Node<Int>(data: 1)
-        let result = Node<Int>(data: 2, next: node)
+        let result = Node<Int>(data: 2)
         
-        XCTAssertEqual(result.bringNextNode()?.bringNodeData(), node.bringNodeData())
+        node.setupNext(node: result)
+        
+        XCTAssertEqual(node.bringNextNode()?.bringNodeData(), result.bringNodeData())
     }
 }

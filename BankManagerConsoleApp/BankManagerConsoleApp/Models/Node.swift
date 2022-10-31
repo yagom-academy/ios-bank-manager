@@ -22,7 +22,7 @@ final class Node<Element> {
         return next
     }
     
-    func setupNextNode(node: Node<Element>) {
+    func setupNext(node: Node<Element>) {
         next = node
     }
 }

@@ -20,7 +20,7 @@ struct LinkedList<Element> {
         if count == 0 {
             head = node
         } else {
-            tail?.setupNextNode(node: node)
+            tail?.setupNext(node: node)
         }
         
         tail = node
