@@ -119,8 +119,8 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				11123007290FCE7500C60709 /* LinkedList.swift */,
-				3C381580290FEA160061D86A /* Node.swift */,
 				3CC80D4B290FEC3800D7B7C1 /* CustomerQueue.swift */,
+				3C381580290FEA160061D86A /* Node.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";

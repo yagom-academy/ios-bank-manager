@@ -6,8 +6,8 @@
 //
 
 class LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+    var head: Node<T>?
+    var tail: Node<T>?
     
     var isEmpty: Bool {
         if head == nil {

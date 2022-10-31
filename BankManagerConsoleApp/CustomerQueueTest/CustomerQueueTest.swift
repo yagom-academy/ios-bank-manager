@@ -29,4 +29,38 @@ final class CustomerQueueTest: XCTestCase {
         let result = sut.dequeue()
         XCTAssertEqual(result, "Aaron")
     }
+    
+    func test_one을_deque했을_때_Aaron이_나오는지() {
+        sut.customerList.head = Node(one)
+        let result = sut.dequeue()
+        XCTAssertEqual(result, "Aaron")
+    }
+    
+    func test_값이_없을때_isEmpty가_true를_반환하는지() {
+        let result = sut.isEmpty
+        XCTAssertTrue(result)
+    }
+    
+    func test_값이_있을때_isEmpty가_false를_반환하는지() {
+        sut.enqueue(one)
+        let result = sut.isEmpty
+        XCTAssertFalse(result)
+    }
+    
+    func test_clear했을_때_isEmpty가_true인지() {
+        sut.enqueue(one)
+        sut.enqueue(two)
+        sut.enqueue(three)
+        sut.clear()
+        let result = sut.isEmpty
+        XCTAssertTrue(result)
+    }
+    
+    func test_peek을_했을_때_Tottale가_나오는지() {
+        sut.enqueue(three)
+        sut.enqueue(one)
+        sut.enqueue(two)
+        let result = sut.peek()
+        XCTAssertEqual(result, "Tottale")
+    }
 }
