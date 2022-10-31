@@ -5,16 +5,6 @@
 //  Created by Tottale, Aaron on 2022/10/31.
 //
 
-class Node<T> {
-    let value: T
-    var next: Node?
-    
-    init(_ value: T, next: Node? = nil) {
-        self.value = value
-        self.next = next
-    }
-}
-
 class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
@@ -47,5 +37,10 @@ class LinkedList<T> {
         self.head = self.head?.next
         
         return temp
+    }
+    
+    func removeAll() {
+        self.head = nil
+        self.tail = nil
     }
 }
