@@ -17,8 +17,8 @@ struct CustomerQueue<Element> {
     
     mutating func enqueue(data: Element) {
         if front == nil {
-            self.front = createNode(data: data)
-            self.rear = front
+            front = createNode(data: data)
+            rear = front
         } else {
             rear?.next = createNode(data: data)
             rear = rear?.next
@@ -32,5 +32,13 @@ struct CustomerQueue<Element> {
         front = front?.next
         
         return value.data
+    }
+    
+    func peek() -> Node<Element>? {
+        guard let result: Node<Element> = front else {
+            return nil
+        }
+        
+        return result
     }
 }
