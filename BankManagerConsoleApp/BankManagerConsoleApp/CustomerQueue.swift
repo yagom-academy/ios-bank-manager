@@ -10,4 +10,8 @@ import Foundation
 struct CustomerQueue<Element> {
     private var front: Node<Element>?
     private var rear: Node<Element>?
+    
+    func createNode(data: Element) -> Node<Element> {
+        return Node(data: data)
+    }
 }
