@@ -5,9 +5,9 @@
 //  Created by Tottale, Aaron on 2022/10/31.
 //
 
-class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+final class LinkedList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     var isEmpty: Bool {
         if head == nil {
