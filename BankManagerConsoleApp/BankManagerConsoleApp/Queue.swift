@@ -19,11 +19,11 @@ struct Queue<T> {
         return queue.removeFirst()
     }
     
-    mutating func clear() {
-        queue.removeAll()
-    }
-    
     mutating func peek() -> T? {
         return queue.head?.data
+    }
+    
+    mutating func clear() {
+        queue.removeAll()
     }
 }

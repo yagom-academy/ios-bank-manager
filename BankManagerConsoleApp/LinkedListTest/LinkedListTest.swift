@@ -20,9 +20,7 @@ class LinkedListTest: XCTestCase {
     }
     
     func test_append메서드호출시_head가없으면_입력값이head로지정() {
-        //given
-        
-        //when
+        //give, when
         sut.append(3)
         
         //then
@@ -43,9 +41,7 @@ class LinkedListTest: XCTestCase {
     }
     
     func test_last프로퍼티호출시_head가없으면_nil을반환() {
-        //given
-        
-        //when
+        //give, when
         let result = sut.last
         
         //then
@@ -66,9 +62,7 @@ class LinkedListTest: XCTestCase {
     }
     
     func test_isEmpty프로퍼티호출시_head가없으면_true를반환() {
-        //given
-        
-        //when
+        //give, when
         let result = sut.isEmpty
         
         //then
@@ -88,9 +82,7 @@ class LinkedListTest: XCTestCase {
     }
     
     func test_removeFirst메서드호출시_head가없으면_nil을반환() {
-        //given
-        
-        //when
+        //give, when
         let result = sut.removeFirst()
         
         //then

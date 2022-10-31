@@ -38,6 +38,16 @@
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "417677CA29100CEF00AB65EE"
+               BuildableName = "QueueTest.xctest"
+               BlueprintName = "QueueTest"
+               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

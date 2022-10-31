@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		417677C4290FE3B500AB65EE /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C3290FE3B500AB65EE /* Node.swift */; };
 		417677C6290FF2E500AB65EE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C5290FF2E500AB65EE /* Queue.swift */; };
+		417677CE29100CEF00AB65EE /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677CD29100CEF00AB65EE /* QueueTest.swift */; };
+		417677D229100CFF00AB65EE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C5290FF2E500AB65EE /* Queue.swift */; };
+		417677D329100D0200AB65EE /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEDC290FE872008EAC13 /* LinkedList.swift */; };
+		417677D429100D0500AB65EE /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C3290FE3B500AB65EE /* Node.swift */; };
+		417677D529100D0700AB65EE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		B256EEEA290FFCE5008EAC13 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEDC290FE872008EAC13 /* LinkedList.swift */; };
 		B256EEEC290FFD66008EAC13 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEDC290FE872008EAC13 /* LinkedList.swift */; };
 		B256EEED290FFD6F008EAC13 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEE4290FF8E4008EAC13 /* LinkedListTest.swift */; };
@@ -34,6 +39,8 @@
 /* Begin PBXFileReference section */
 		417677C3290FE3B500AB65EE /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		417677C5290FF2E500AB65EE /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		417677CB29100CEF00AB65EE /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		417677CD29100CEF00AB65EE /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
 		B256EEDC290FE872008EAC13 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		B256EEE2290FF8E3008EAC13 /* LinkedListTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B256EEE4290FF8E4008EAC13 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
@@ -43,6 +50,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		417677C829100CEF00AB65EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B256EEDF290FF8E3008EAC13 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -60,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		417677CC29100CEF00AB65EE /* QueueTest */ = {
+			isa = PBXGroup;
+			children = (
+				417677CD29100CEF00AB65EE /* QueueTest.swift */,
+			);
+			path = QueueTest;
+			sourceTree = "<group>";
+		};
 		B256EEE3290FF8E4008EAC13 /* LinkedListTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +95,7 @@
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				B256EEE3290FF8E4008EAC13 /* LinkedListTest */,
+				417677CC29100CEF00AB65EE /* QueueTest */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +105,7 @@
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
 				B256EEE2290FF8E3008EAC13 /* LinkedListTest.xctest */,
+				417677CB29100CEF00AB65EE /* QueueTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,6 +125,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		417677CA29100CEF00AB65EE /* QueueTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 417677D129100CEF00AB65EE /* Build configuration list for PBXNativeTarget "QueueTest" */;
+			buildPhases = (
+				417677C729100CEF00AB65EE /* Sources */,
+				417677C829100CEF00AB65EE /* Frameworks */,
+				417677C929100CEF00AB65EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QueueTest;
+			productName = QueueTest;
+			productReference = 417677CB29100CEF00AB65EE /* QueueTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B256EEE1290FF8E3008EAC13 /* LinkedListTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B256EEE8290FF8E4008EAC13 /* Build configuration list for PBXNativeTarget "LinkedListTest" */;
@@ -141,9 +182,12 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
+					417677CA29100CEF00AB65EE = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					B256EEE1290FF8E3008EAC13 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -167,11 +211,19 @@
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
 				B256EEE1290FF8E3008EAC13 /* LinkedListTest */,
+				417677CA29100CEF00AB65EE /* QueueTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		417677C929100CEF00AB65EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B256EEE0290FF8E3008EAC13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,6 +234,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		417677C729100CEF00AB65EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				417677D329100D0200AB65EE /* LinkedList.swift in Sources */,
+				417677D529100D0700AB65EE /* main.swift in Sources */,
+				417677CE29100CEF00AB65EE /* QueueTest.swift in Sources */,
+				417677D229100CFF00AB65EE /* Queue.swift in Sources */,
+				417677D429100D0500AB65EE /* Node.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B256EEDE290FF8E3008EAC13 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,13 +273,47 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		417677CF29100CEF00AB65EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunny.QueueTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		417677D029100CEF00AB65EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunny.QueueTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		B256EEE6290FF8E4008EAC13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R4D3JSH53Q;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
 				MARKETING_VERSION = 1.0;
@@ -232,7 +330,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R4D3JSH53Q;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
 				MARKETING_VERSION = 1.0;
@@ -364,7 +462,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				EXCLUDED_ARCHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -376,7 +476,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				EXCLUDED_ARCHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -387,6 +489,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		417677D129100CEF00AB65EE /* Build configuration list for PBXNativeTarget "QueueTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				417677CF29100CEF00AB65EE /* Debug */,
+				417677D029100CEF00AB65EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B256EEE8290FF8E4008EAC13 /* Build configuration list for PBXNativeTarget "LinkedListTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
