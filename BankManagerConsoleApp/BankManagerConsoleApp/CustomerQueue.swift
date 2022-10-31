@@ -17,4 +17,16 @@ class CustomerQueue<T> {
     func dequeue() -> T? {
         return customerList.pop()?.value
     }
+    
+    func clear() {
+        customerList.removeAll()
+    }
+    
+    func peek() -> T? {
+        return customerList.peek()?.value
+    }
+    
+    var isEmpty: Bool {
+        return customerList.isEmpty
+    }
 }
