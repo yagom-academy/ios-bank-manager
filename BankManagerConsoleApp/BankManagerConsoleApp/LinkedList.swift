@@ -33,9 +33,19 @@ class LinkedList<T> {
             self.tail = node
             return
         }
-        
-        let temp = self.tail
+
+        self.tail?.next = node
         self.tail = node
-        self.tail?.next = temp
-    }    
+    }
+    
+    func pop() -> Node<T>? {
+        if isEmpty {
+            return nil
+        }
+        
+        let temp = self.head
+        self.head = self.head?.next
+        
+        return temp
+    }
 }
