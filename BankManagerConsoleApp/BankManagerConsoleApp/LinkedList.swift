@@ -42,6 +42,7 @@ class LinkedList<T> {
     func removeAll() {
         self.head = nil
         self.tail = nil
+    }
 
     func peek() -> Node<T>? {
         if isEmpty {
