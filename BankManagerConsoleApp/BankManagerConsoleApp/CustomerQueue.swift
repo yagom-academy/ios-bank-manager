@@ -16,7 +16,6 @@ struct CustomerQueue<Element> {
     }
     
     mutating func enqueue(data: Element) {
-        
         if front == nil {
             self.front = createNode(data: data)
             self.rear = front
@@ -24,5 +23,14 @@ struct CustomerQueue<Element> {
             rear?.next = createNode(data: data)
             rear = rear?.next
         }
+    }
+    
+    mutating func dequeue() -> Element? {
+        guard let value: Node<Element> = front else {
+            return nil
+        }
+        front = front?.next
+        
+        return value.data
     }
 }
