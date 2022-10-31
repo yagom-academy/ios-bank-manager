@@ -28,10 +28,10 @@ struct LinkedList<Element> {
     }
     
     mutating func removeFirst() -> Element? {
-        let removeItem = head
+        let removedItem = head
         head = head?.bringNextNode()
         count -= 1
-        return removeItem?.bringNodeData()
+        return removedItem?.bringNodeData()
     }
     
     mutating func removeAll() {
