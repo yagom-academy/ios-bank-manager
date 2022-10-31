@@ -16,15 +16,15 @@ struct Queue<Element> {
         return list.bringListCount() == 0 ? true : false
     }
     
-    func enqueue(_ data: Element) {
+    mutating func enqueue(_ data: Element) {
         list.append(data: data)
     }
     
-    func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         return list.removeFirst()
     }
     
-    func clear() {
+    mutating func clear() {
         list.removeAll()
     }
 }

@@ -2,7 +2,7 @@
 //  NodeTests.swift
 //  NodeTests
 //
-//  Created by Wonbi on 2022/10/31.
+//  Created by Kyo, Wonbi on 2022/10/31.
 //
 
 import XCTest

@@ -5,7 +5,7 @@
 //  Created by Kyo, Wonbi on 2022/10/31.
 //
 
-final class LinkedList<Element> {
+struct LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     private var count: Int = 0
@@ -15,7 +15,7 @@ final class LinkedList<Element> {
         return head?.bringNodeData()
     }
     
-    func append(data: Element) {
+    mutating func append(data: Element) {
         let node: Node<Element> = Node(data: data)
         if count == 0 {
             head = node
@@ -27,14 +27,14 @@ final class LinkedList<Element> {
         count += 1
     }
     
-    func removeFirst() -> Element? {
+    mutating func removeFirst() -> Element? {
         let removeItem = head
         head = head?.bringNextNode()
         count -= 1
         return removeItem?.bringNodeData()
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
         count = 0
