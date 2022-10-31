@@ -10,7 +10,7 @@ struct LinkedList<T> {
     var last: Node<T>? {
         var currentNode = head
         
-        while currentNode != nil {
+        while currentNode?.next != nil {
             currentNode = currentNode?.next
         }
         
