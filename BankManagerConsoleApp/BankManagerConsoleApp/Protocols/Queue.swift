@@ -6,11 +6,12 @@
 //
 
 protocol Queue {
-    associatedtype DataType
+    var head: Node<Queueable>? { get set }
+    var tail: Node<Queueable>? { get set }
     
-    mutating func enqueue(_ element: DataType)
-    mutating func dequeue() -> DataType?
+    mutating func enqueue(_ element: Queueable)
+    mutating func dequeue() -> Queueable?
     mutating func clear()
-    func peek() -> DataType?
+    func peek() -> Queueable?
     func isEmpty() -> Bool
 }

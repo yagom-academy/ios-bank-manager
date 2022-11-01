@@ -10,22 +10,37 @@ struct BankCustomerQueue<DataType: Queueable>: Queue {
     var tail: Node<DataType>?
     
     mutating func enqueue(_ element: DataType) {
-        <#code#>
+        let node = Node(data: element)
+        isEmpty() ? (self.head = node) : (self.tail?.next = node)
+        tail = node
     }
     
     mutating func dequeue() -> DataType? {
-        <#code#>
+        guard let head = head else {
+            return nil
+        }
+        
+        let data = head.data
+        
+        if head === self.tail {
+            self.tail = nil
+        }
+        
+        self.head = head.next
+        
+        return data
     }
     
     mutating func clear() {
-        <#code#>
+        self.head = nil
+        self.tail = nil
     }
     
     func peek() -> DataType? {
-        <#code#>
+        return self.head?.data
     }
     
     func isEmpty() -> Bool {
-        <#code#>
+        return self.head == nil
     }
 }
