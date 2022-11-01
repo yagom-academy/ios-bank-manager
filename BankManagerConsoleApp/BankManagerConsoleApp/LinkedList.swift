@@ -7,24 +7,23 @@
 
 import Foundation
 
-struct LinkedList<T> {
+struct LinkedList<T: Equatable> {
     private var head: Node<T>?
     private var tail: Node<T>?
+    
+    var count: Int = 0
     var isEmpty: Bool {
         return head == nil
     }
-    
     var first: T? {
         return head?.data
     }
-    
     var last: T? {
         return tail?.data
     }
-    var count: Int = 0
     
     mutating func append(_ element: T) {
-        let newNode: Node<T> = Node(value: element)
+        let newNode: Node<T> = Node(data: element)
         
         if isEmpty == true {
             head = newNode
@@ -60,11 +59,11 @@ struct LinkedList<T> {
         return currentTail.data
     }
     
-    func searchNode(from element: T?) -> Node<T>? {
+    func searchFirstNode(from data: T) -> Node<T>? {
         var currentNode: Node<T>? = head
         
         while currentNode != nil {
-            if currentNode.data == element {
+            if currentNode?.data == data {
                 return currentNode
             }
             
@@ -81,7 +80,7 @@ struct LinkedList<T> {
         
         var currentNode: Node<T>? = head
         
-        for nowIndex in 1..<index {
+        for _ in 1..<index {
             currentNode = currentNode?.nextNode
         }
         
@@ -110,7 +109,7 @@ struct LinkedList<T> {
         
         var currentNode: Node<T>? = head
         
-        for nowIndex in 1..<index {
+        for _ in 1..<index {
             currentNode = currentNode?.nextNode
         }
         
