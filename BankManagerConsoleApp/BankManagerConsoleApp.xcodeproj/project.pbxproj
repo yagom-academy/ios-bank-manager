@@ -12,7 +12,9 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		E58661CE012328C9D2F319F0 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743D125E074CDE7564544C56 /* Pods_BankManagerConsoleApp.framework */; };
-		F6DA96E32910BA1D00A67D80 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA96E22910BA1D00A67D80 /* Node.swift */; };
+		F60C035D2910ED6D0095E27E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E7B7C2910BB3D008E8F1A /* LinkedList.swift */; };
+		F60C035E2910ED800095E27E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA96E22910BA1D00A67D80 /* Node.swift */; };
+		F60C035F2910EE020095E27E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA96E22910BA1D00A67D80 /* Node.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -247,6 +249,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F60C035E2910ED800095E27E /* Node.swift in Sources */,
+				F60C035D2910ED6D0095E27E /* LinkedList.swift in Sources */,
 				043E7B9B2910CAD6008E8F1A /* LinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,10 +259,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6DA96E32910BA1D00A67D80 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				043E7B7D2910BB3D008E8F1A /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				F60C035F2910EE020095E27E /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
