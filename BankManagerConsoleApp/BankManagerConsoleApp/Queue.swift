@@ -1,10 +1,10 @@
 //  Created by stone, 애종 on 2022/11/01.
 
 struct Queue<T> {
-    var linkedList = LinkedList<T>()
+    private var linkedList = LinkedList<T>()
     
     var peek: T? {
-        return linkedList.headData
+        return self.linkedList.headData
     }
     
     var isEmpty: Bool {

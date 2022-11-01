@@ -3,11 +3,11 @@
 import Foundation
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
 
     var headData: T? {
-        return head?.data
+        return self.head?.data
     }
     
     var isEmpty: Bool {
