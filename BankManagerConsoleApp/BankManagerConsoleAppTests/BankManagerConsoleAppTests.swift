@@ -84,4 +84,16 @@ class BankManagerConsoleAppTests: XCTestCase {
         //then
         XCTAssertEqual(result, customerData1)
     }
+    
+    func test_peek이_첫번쨰_요소를_가르키는지_확인() {
+        //given
+        let customerData1: String = "customer1"
+        
+        //when
+        sut.enqueue(data: customerData1)
+        let result = sut.peek()
+        
+        //then
+        XCTAssertEqual(result?.data, customerData1)
+    }
 }
