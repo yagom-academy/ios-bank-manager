@@ -1,16 +1,16 @@
 //
-//  Queue.swift
+//  List.swift
 //  BankManagerConsoleApp
 //
 //  Created by Gundy, jpush on 2022/11/01.
 //
 
-protocol Queue {
+protocol List {
     associatedtype Item
     
-    mutating func enqueue(_ element: Item)
-    mutating func dequeue() -> Item?
+    mutating func pushLast(_ element: Item)
+    mutating func popFirst() -> Node<Item>?
     mutating func clear()
-    func peek() -> Item?
+    func peek() -> Node<Item>?
     func isEmpty() -> Bool
 }
