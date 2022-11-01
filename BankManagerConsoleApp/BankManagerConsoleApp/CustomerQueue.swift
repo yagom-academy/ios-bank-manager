@@ -7,26 +7,25 @@
 import Foundation
 
 struct CustomerQueue<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {
-        return false
+        return linkedList.isEmpty
     }
     
-    func enqueue(value: T) {
-        
+    mutating func enqueue(value: T) {
+        linkedList.append(data: value)
     }
     
-    func dequeue() -> T? {
-        return nil
+    mutating func dequeue() -> T? {
+        return linkedList.removeFirst()
     }
     
-    func clear() {
-        
+    mutating func clear() {
+        linkedList.removeAll()
     }
     
     func peek() -> T? {
-        return nil
+        return linkedList.first()
     }
 }

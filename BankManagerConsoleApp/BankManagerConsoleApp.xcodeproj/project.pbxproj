@@ -10,6 +10,9 @@
 		18A08DBC290F7C9500DEE94C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D3C98B290F6680005355A4 /* Node.swift */; };
 		18A08DBE290FACAD00DEE94C /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A08DBD290FACAD00DEE94C /* CustomerQueue.swift */; };
 		18C2F22A290F62CB006418E3 /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2F229290F62CB006418E3 /* CustomerQueueTests.swift */; };
+		18EC9D4D2910B4D20084F258 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC9D4C2910B4D20084F258 /* LinkedList.swift */; };
+		18EC9D4E2910B5790084F258 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A08DBD290FACAD00DEE94C /* CustomerQueue.swift */; };
+		18EC9D4F2910B5C60084F258 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC9D4C2910B4D20084F258 /* LinkedList.swift */; };
 		23532D697DD3A987F9860EED /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E96D3635EA11402B6E5108 /* Pods_BankManagerConsoleApp.framework */; };
 		B4D3C98C290F6680005355A4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D3C98B290F6680005355A4 /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -32,6 +35,7 @@
 		18A08DBD290FACAD00DEE94C /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		18C2F227290F62CB006418E3 /* ManagerQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManagerQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C2F229290F62CB006418E3 /* CustomerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTests.swift; sourceTree = "<group>"; };
+		18EC9D4C2910B4D20084F258 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		A5E96D3635EA11402B6E5108 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D3C98B290F6680005355A4 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		B773D3558629ED8B19BFE330 /* Pods-BankManagerConsoleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.release.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				B4D3C98B290F6680005355A4 /* Node.swift */,
 				18A08DBD290FACAD00DEE94C /* CustomerQueue.swift */,
+				18EC9D4C2910B4D20084F258 /* LinkedList.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -140,8 +145,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7694E7D259C3EC00053667F /* Build configuration list for PBXNativeTarget "BankManagerConsoleApp" */;
 			buildPhases = (
-				B49267DF2910AA5F00C47AB7 /* ShellScript */,
 				F1EAB3E6FD31E090BF55154C /* [CP] Check Pods Manifest.lock */,
+				B49267DF2910AA5F00C47AB7 /* ShellScript */,
 				C7694E72259C3EC00053667F /* Sources */,
 				C7694E73259C3EC00053667F /* Frameworks */,
 				C7694E74259C3EC00053667F /* CopyFiles */,
@@ -251,6 +256,8 @@
 			files = (
 				18A08DBC290F7C9500DEE94C /* Node.swift in Sources */,
 				18C2F22A290F62CB006418E3 /* CustomerQueueTests.swift in Sources */,
+				18EC9D4F2910B5C60084F258 /* LinkedList.swift in Sources */,
+				18EC9D4E2910B5790084F258 /* CustomerQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +267,7 @@
 			files = (
 				B4D3C98C290F6680005355A4 /* Node.swift in Sources */,
 				18A08DBE290FACAD00DEE94C /* CustomerQueue.swift in Sources */,
+				18EC9D4D2910B4D20084F258 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
