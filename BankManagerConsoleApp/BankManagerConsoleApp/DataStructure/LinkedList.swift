@@ -6,7 +6,7 @@
 //
 
 struct LinkedList<DataType>: List {
-    typealias Item = Queueable
+    typealias Item = DataType
     
     private var head: Node<Item>?
     private var tail: Node<Item>?
@@ -22,7 +22,7 @@ struct LinkedList<DataType>: List {
             return nil
         }
         
-        if self.head === self.tail {
+        if self.head?.next == nil {
             self.tail = nil
         }
         
@@ -41,6 +41,6 @@ struct LinkedList<DataType>: List {
     }
     
     func isEmpty() -> Bool {
-        return self.head == nil
+        return self.head == nil && self.tail == nil
     }
 }

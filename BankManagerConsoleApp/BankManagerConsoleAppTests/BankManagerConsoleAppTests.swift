@@ -8,37 +8,41 @@
 import XCTest
 
 class BankManagerConsoleAppTests: XCTestCase {
+    var sut: BankCustomerQueue = BankCustomerQueue()
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        
+        sut = BankCustomerQueue()
+    }
+    
     func test_when_generate_then_not_nil() {
         // given
-        let queue: BankCustomerQueue
         
         // when
-        queue = BankCustomerQueue()
         
         // then
-        XCTAssertNotNil(queue)
+        XCTAssertNotNil(sut)
     }
 
     func test_when_enqueue_then_not_empty() {
         // given
-        var queue = BankCustomerQueue()
         
         // when
-        queue.enqueue("일이삼")
-        queue.enqueue(123)
+        sut.enqueue("일이삼")
+        sut.enqueue(123)
 
         // then
-        XCTAssertFalse(queue.isEmpty())
+        XCTAssertFalse(sut.isEmpty())
     }
     
     func test_when_dequeue_then_return_valid_value() {
         // given
         let data = "steven"
-        var queue = BankCustomerQueue()
 
         // when
-        queue.enqueue(data)
-        let result = queue.dequeue()
+        sut.enqueue(data)
+        let result = sut.dequeue()
         
         // then
         XCTAssertEqual(result as? String, data)
@@ -47,11 +51,10 @@ class BankManagerConsoleAppTests: XCTestCase {
     func test_when_peek_then_return_valid_value() {
         // given
         let data = "steven"
-        var queue = BankCustomerQueue()
 
         // when
-        queue.enqueue(data)
-        let result = queue.peek()
+        sut.enqueue(data)
+        let result = sut.peek()
         
         // then
         XCTAssertEqual(result as? String, data)
@@ -60,23 +63,54 @@ class BankManagerConsoleAppTests: XCTestCase {
     func test_when_clear_then_is_empty() {
         // given
         let data = "steven"
-        var queue = BankCustomerQueue()
-        queue.enqueue(data)
+        sut.enqueue(data)
         
         // when
-        queue.clear()
+        sut.clear()
 
         // then
-        XCTAssertTrue(queue.isEmpty())
+        XCTAssertTrue(sut.isEmpty())
     }
     
     func test_when_nothing_then_is_empty() {
         // given
-        let queue = BankCustomerQueue()
         
         // when
         
         // then
-        XCTAssertTrue(queue.isEmpty())
+        XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_when_enqueue_5_times_dequeue_5_times_then_return_valid_value() {
+        // given
+        let items: [String] = ["1", "이", "steve", "jpush", "햄버"]
+        
+        // when
+        items.forEach {
+            sut.enqueue($0)
+        }
+        
+        // then
+        for index in items.indices {
+            let result = items[index]
+            XCTAssertTrue(result == sut.dequeue() as? String)
+        }
+    }
+    
+    func test_when_dequeue_by_number_of_elements_then_is_empty() {
+        // given
+        let items: [String] = ["1", "이", "steve", "jpush", "햄버"]
+        
+        // when
+        items.forEach {
+            sut.enqueue($0)
+        }
+        
+        items.indices.forEach { _ in
+            sut.dequeue()
+        }
+        
+        // then
+        XCTAssertTrue(sut.isEmpty())
     }
 }

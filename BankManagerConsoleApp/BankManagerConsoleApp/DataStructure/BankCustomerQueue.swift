@@ -5,26 +5,27 @@
 //  Created by Gundy, jpush on 2022/11/01.
 //
 
-struct BankCustomerQueue: Queue {
+public struct BankCustomerQueue: Queue {
     private var linkedList: LinkedList<Queueable> = .init()
     
-    mutating func enqueue(_ element: Queueable) {
+    public mutating func enqueue(_ element: Queueable) {
         self.linkedList.pushLast(element)
     }
     
-    mutating func dequeue() -> Queueable? {
+    @discardableResult
+    public mutating func dequeue() -> Queueable? {
         return self.linkedList.popFirst()?.data
     }
     
-    mutating func clear() {
+    public mutating func clear() {
         self.linkedList.clear()
     }
     
-    func peek() -> Queueable? {
+    public func peek() -> Queueable? {
         return self.linkedList.peek()?.data
     }
     
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         return self.linkedList.isEmpty()
     }
 }
