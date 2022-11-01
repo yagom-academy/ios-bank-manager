@@ -24,27 +24,37 @@ class BankManagerUIAppTests: XCTestCase {
         customQueue = nil
     }
     
-    func test_enqueue호출시_rear가nil이라면_front와rear둘다newNode를할당받는지() {
-        customQueue?.enqueue(data: input1)
-        let frontData = customQueue.front?.data
-        let rearData = customQueue.rear?.data
-        XCTAssertEqual(frontData, rearData)
+    func test_peek호출시_큐가nil이라면_nil을반환하는지() {
+        let peekData = customQueue.peek()
+        XCTAssertNil(peekData)
     }
     
-    func test_enqueue호출시_rear가nil이아니라면_rear에노드가잘할당되는지() {
+    func test_peek호출시_큐가nil이아니라면_데이터를잘반환하는지() {
         customQueue?.enqueue(data: input1)
         customQueue?.enqueue(data: input2)
         customQueue?.enqueue(data: input3)
-        let rearData = customQueue.rear?.data
-        XCTAssertEqual(rearData, input3)
+        let peekData = customQueue.peek()
+        XCTAssertEqual(peekData, input1)
+    }
+    
+    func test_enqueue호출시_큐가비어있다면_front의data를잘반환하는지() {
+        customQueue?.enqueue(data: input1)
+        let peekData = customQueue.peek()
+        XCTAssertEqual(peekData, input1)
+    }
+    
+    func test_enqueue호출시_큐가비어있다면_rear의data를잘반환하는지() {
+        customQueue?.enqueue(data: input1)
+        let peekData = customQueue.peek()
+        XCTAssertEqual(peekData, input1)
     }
     
     func test_enqueue여러번호출시_front가정상적인값을나타내는지() {
         customQueue?.enqueue(data: input1)
         customQueue?.enqueue(data: input2)
         customQueue?.enqueue(data: input3)
-        let frontData = customQueue.front?.data
-        XCTAssertEqual(frontData, input1)
+        let peekData = customQueue.peek()
+        XCTAssertEqual(peekData, input1)
     }
     
     func test_dequeue호출시_큐가nil이라면nil이반환되는지() {
@@ -59,20 +69,7 @@ class BankManagerUIAppTests: XCTestCase {
         let dequeueData = customQueue.dequeue()
         XCTAssertEqual(dequeueData, input1)
     }
-    
-    func test_peek호출시_큐가nil이라면_nil을반환하는지() {
-        let peekData = customQueue.peek()
-        XCTAssertNil(peekData)
-    }
-    
-    func test_peek호출시_큐가nil이아니라면_데이터를잘반환하는지() {
-        customQueue?.enqueue(data: input1)
-        customQueue?.enqueue(data: input2)
-        customQueue?.enqueue(data: input3)
-        let peekData = customQueue.peek()
-        XCTAssertEqual(peekData, input1)
-    }
-    
+
     func test_isEmpty호출시_큐가비어있을경우_true를반환하는지() {
         XCTAssertTrue(customQueue.isEmpty)
     }
