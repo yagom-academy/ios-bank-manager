@@ -43,5 +43,24 @@ class LinkedList<T> {
             count += 1
         }
     }
+    
+    func pop() -> Node<T>? {
+        if head == nil {
+            return nil
+        }
+        
+        count -= 1
+        if count == 1 {
+            let currentNode = head
+            head = nil
+            
+            return currentNode
+        }
+        
+        let currentNode = head
+        head = head?.next
+        
+        return currentNode
+    }
 }
 
