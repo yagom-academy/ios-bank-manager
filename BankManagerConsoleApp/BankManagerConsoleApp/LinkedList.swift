@@ -23,8 +23,14 @@ struct LinkedList<T> {
         }
     }
     
-    func dequeue() {
-        
+    func dequeue() -> T? {
+        if head == nil {
+            return nil
+        } else {
+            let dequeuedValue = head?.value
+            head = head?.next
+            return dequeuedValue
+        }
     }
     
     func clear() {
