@@ -2,9 +2,7 @@
 //  Created by Ayaan/Dragon/som on 2022/10/31.
 //  Copyright © yagom academy. All rights reserved.
 
-import Foundation
-
-class Node<T> {
+final class Node<T> {
     var nextNode: Node?
     weak var previousNode: Node?
     let data: T

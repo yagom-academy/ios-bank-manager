@@ -1,9 +1,6 @@
-//
-//  LinkedListTests.swift
-//  LinkedListTests
-//
-//  Created by Ayaan on 2022/11/01.
-//
+//  BankManagerConsoleApp - LinkedListTests.swift
+//  Created by Ayaan/Dragon/som on 2022/11/01.
+//  Copyright © yagom academy. All rights reserved.
 
 import XCTest
 

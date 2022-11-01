@@ -1,11 +1,6 @@
-//
-//  LinkedList.swift
-//  BankManagerConsoleApp
-//
+//  BankManagerConsoleApp - LinkedList.swift
 //  Created by Ayaan/Dragon/som on 2022/11/01.
-//
-
-import Foundation
+//  Copyright © yagom academy. All rights reserved.
 
 struct LinkedList<T: Equatable> {
     private var head: Node<T>?

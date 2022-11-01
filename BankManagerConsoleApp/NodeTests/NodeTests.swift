@@ -1,9 +1,6 @@
-//
-//  NodeTests.swift
-//  NodeTests
-//
+//  BankManagerConsoleApp - NodeTests.swift
 //  Created by Ayaan/Dragon/som on 2022/10/31.
-//
+//  Copyright © yagom academy. All rights reserved.
 
 import XCTest
 
