@@ -9,16 +9,16 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 class BankManagerConsoleAppTest: XCTestCase {
-    var sut1: CustomerQueue<String>!
+    var sut: CustomerQueue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut1 = CustomerQueue()
+        sut = CustomerQueue()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut1 = nil
+        sut = nil
     }
     
     func test_node에_data가_잘들어가는지() {
@@ -30,5 +30,16 @@ class BankManagerConsoleAppTest: XCTestCase {
         
         //then
         XCTAssertEqual(node.data, "customer01")
+    }
+    
+    func test_createNode가_Node를_잘만들어주는지() {
+        //given
+        let customerData: String = "customer2"
+        
+        //when
+        let result = sut.createNode(data: customerData)
+        
+        //then
+        XCTAssertEqual(result.data, customerData)
     }
 }
