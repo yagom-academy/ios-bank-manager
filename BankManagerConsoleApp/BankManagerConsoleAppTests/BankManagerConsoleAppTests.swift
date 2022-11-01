@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
 
 class BankManagerConsoleAppTests: XCTestCase {
     var sut: CustomerQueue<String>!
@@ -52,5 +51,21 @@ class BankManagerConsoleAppTests: XCTestCase {
         
         //then
         XCTAssertEqual(sut.front?.data, sut.rear?.data)
+    }
+    
+    func test_enqueue를_3번_했을떄_front와_rear확인() {
+        //given
+        let customerData1: String = "customer1"
+        let customerData2: String = "customer2"
+        let customerData3: String = "customer3"
+        
+        //when
+        sut.enqueue(data: customerData1)
+        sut.enqueue(data: customerData2)
+        sut.enqueue(data: customerData3)
+        
+        //then
+        XCTAssertEqual(sut.front?.data, customerData1)
+        XCTAssertEqual(sut.rear?.data, customerData3)
     }
 }
