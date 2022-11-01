@@ -113,4 +113,16 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertNil(sut.front)
         XCTAssertNil(sut.rear)
     }
+    
+    func test_queue가_비어있을떄_isEmpty가_True를_반환한하는지_확인() {
+        //given
+        let customerData1: String = "customer1"
+        
+        //when
+        sut.enqueue(data: customerData1)
+        sut.dequeue()
+        
+        //then
+        XCTAssertTrue(sut.isEmpty())
+    }
 }
