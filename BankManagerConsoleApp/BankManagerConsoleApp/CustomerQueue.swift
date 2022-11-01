@@ -30,4 +30,3 @@ struct CustomerQueue<T> {
         return nil
     }
 }
-
