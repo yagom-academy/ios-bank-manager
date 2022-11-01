@@ -6,7 +6,7 @@
 //
 
 final class Queue<T> {
-    private let linkedList: LinkedList<T> = LinkedList()
+    let linkedList: LinkedList<T> = LinkedList()
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
