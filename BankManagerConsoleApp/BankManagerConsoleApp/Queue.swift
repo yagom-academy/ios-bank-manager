@@ -62,5 +62,10 @@ class LinkedList<T> {
         
         return currentNode
     }
+    
+    func clear() {
+        head = nil
+        count = 0
+    }
 }
 
