@@ -38,7 +38,11 @@ struct LinkedList<T> {
         tail = nil
     }
     
-    func peek() {
-        
+    func peek() -> T? {
+        if head == nil {
+            return nil
+        } else {
+            return head?.value
+        }
     }
 }
