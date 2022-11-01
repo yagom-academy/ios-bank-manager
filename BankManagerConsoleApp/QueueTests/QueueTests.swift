@@ -8,15 +8,11 @@
 import XCTest
 
 class QueueTests: XCTestCase {
-    var sut: Queue<Int>!
+    var sut: Queue<Int> = Queue<Int>()
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Queue()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
     }
     
     func test_빈_Queue를_peek한_경우_결과값은_nil이다() {

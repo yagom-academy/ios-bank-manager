@@ -2,41 +2,34 @@
 //  Created by Ayaan/Dragon/som on 2022/10/31.
 //  Copyright © yagom academy. All rights reserved.
 
-struct Queue<Element> {
-    private var head: Node<Element>?
-    private var tail: Node<Element>?
+struct Queue<Element: Equatable> {
+    private var linkedList: LinkedList<Element> = LinkedList<Element>()
+    
     var isEmpty: Bool {
-        get { return head == nil }
+        return linkedList.isEmpty
     }
     
-    mutating func enqueue(_ value: Element) {
-        let newNode: Node<Element> = Node(value: value)
-        
-        if isEmpty == true {
-            head = newNode
-        } else {
-            tail?.nextNode = newNode
-        }
-        
-        tail = newNode
+    var first: Element? {
+        return linkedList.first
+    }
+    
+    var last: Element? {
+        return linkedList.last
+    }
+    
+    mutating func enqueue(_ data: Element) {
+        linkedList.append(data)
     }
     
     mutating func dequeue() -> Element? {
-        guard let currentHead: Node<Element> = head else {
-            return nil
-        }
-        
-        head = head?.nextNode
-        
-        return currentHead.value
+        return linkedList.removeFirst()
     }
     
     mutating func clear() {
-        head = nil
-        tail = nil
+        linkedList.removeAll()
     }
     
     func peek() -> Element? {
-        return head?.value
+        return first
     }
 }
