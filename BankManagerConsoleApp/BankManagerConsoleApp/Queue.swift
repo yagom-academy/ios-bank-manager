@@ -7,12 +7,41 @@
 
 import Foundation
 
-class Node<T> {
-    var value: T
-    var next: Node?
+class LinkedList<T> {
+    class Node<T> {
+        var value: T
+        var next: Node?
+        
+        init(value: T, next: Node? = nil) {
+            self.value = value
+            self.next = next
+        }
+    }
     
-    init(value: T, next: Node? = nil) {
-        self.value = value
-        self.next = next
+    private(set) var head: Node<T>?
+    private(set) var count: Int = 0
+    
+    var isEmpty: Bool {
+        if count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func append(_ element: T) {
+        if isEmpty == true {
+            head = Node(value: element)
+            count += 1
+        } else {
+            var node = head
+            while node?.next != nil {
+                node = node?.next
+            }
+            
+            node?.next = Node(value: element)
+            count += 1
+        }
     }
 }
+
