@@ -68,4 +68,20 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(sut.front?.data, customerData1)
         XCTAssertEqual(sut.rear?.data, customerData3)
     }
+    
+    func test_큐에_요소가_3개있을때_dequeue_1번_하는경우_결과값이_가장_먼저들어간_값이_나오는지_확인() {
+        //given
+        let customerData1: String = "customer1"
+        let customerData2: String = "customer2"
+        let customerData3: String = "customer3"
+        
+        //when
+        sut.enqueue(data: customerData1)
+        sut.enqueue(data: customerData2)
+        sut.enqueue(data: customerData3)
+        let result: String? = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, customerData1)
+    }
 }
