@@ -6,3 +6,6 @@
 //
 
 protocol Queueable {}
+
+extension String: Queueable {}
+extension Int: Queueable {}
