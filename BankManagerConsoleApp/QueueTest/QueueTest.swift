@@ -64,4 +64,31 @@ class QueueTest: XCTestCase {
         // then
         XCTAssertEqual(1, result)
     }
+    
+    func test_clear메서드가_정상동작하는지() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.clear()
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_peek메서드가_정상동작하는지() {
+        // given
+        sut.enqueue(3)
+        sut.enqueue(2)
+        sut.enqueue(1)
+        
+        // when
+        let result = sut.peek()
+        
+        // then
+        XCTAssertEqual(3, result)
+    }
 }
