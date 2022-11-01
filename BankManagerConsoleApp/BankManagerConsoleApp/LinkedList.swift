@@ -12,8 +12,15 @@ struct LinkedList<T> {
       head == nil
     }
     
-    func enqueue() {
-        
+    mutating func enqueue(value: T) {
+        let newNode: Node<T> = Node(value: value, next: nil)
+        if head == nil {
+            head = newNode
+            tail = newNode
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
     }
     
     func dequeue() {
