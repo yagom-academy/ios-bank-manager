@@ -67,5 +67,8 @@ class LinkedList<T> {
         head = nil
         count = 0
     }
+    
+    func peek() -> T? {
+        return head == nil ? nil : head?.value
+    }
 }
-
