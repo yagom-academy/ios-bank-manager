@@ -28,7 +28,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.isEmpty, false)
     }
     
-    func test_enqueue호출후_dequeue호출하면_같은_값이_나오는지() {
+    func test_enqueue_호출후_dequeue_호출하면_같은_값이_나오는지() {
         //given
         sut.enqueue(value: 3)
         
@@ -39,7 +39,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_dequeue호출시_여러개의_값중에_처음들어간값이_나오는지() {
+    func test_dequeue_호출시_여러개의_값중에_처음들어간_값이_나오는지() {
         //given
         sut.enqueue(value: 3)
         sut.enqueue(value: 2)
@@ -52,7 +52,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_큐에_값이_없을때_dequeue호출시_nil을_반환하는지() {
+    func test_큐에_값이_없을때_dequeue_호출시_nil을_반환하는지() {
         //given
         
         //when
@@ -75,7 +75,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.dequeue(), nil)
     }
     
-    func test_peek_호출시_처음넣은값이_반환되는지() {
+    func test_peek_호출시_처음넣은_값이_반환되는지() {
         //given
         sut.enqueue(value: 3)
         sut.enqueue(value: 2)
