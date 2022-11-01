@@ -44,6 +44,7 @@ struct CustomerQueue<Element> {
     
     mutating func clear() {
         front = nil
+        rear = nil
     }
     
     func isEmpty() -> Bool {

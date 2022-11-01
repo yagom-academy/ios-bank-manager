@@ -96,4 +96,21 @@ class BankManagerConsoleAppTests: XCTestCase {
         //then
         XCTAssertEqual(result?.data, customerData1)
     }
+    
+    func test_clear가_큐를_비우는지_확인() {
+        //given
+        let customerData1: String = "customer1"
+        let customerData2: String = "customer2"
+        let customerData3: String = "customer3"
+        sut.enqueue(data: customerData1)
+        sut.enqueue(data: customerData2)
+        sut.enqueue(data: customerData3)
+        
+        //when
+        sut.clear()
+        
+        //then
+        XCTAssertNil(sut.front)
+        XCTAssertNil(sut.rear)
+    }
 }
