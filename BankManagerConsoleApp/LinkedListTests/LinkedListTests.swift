@@ -73,5 +73,28 @@ class LinkedListTests: XCTestCase {
         
         //then
         XCTAssertEqual(sut.dequeue(), nil)
-    }   
+    }
+    
+    func test_peek_호출시_처음넣은값이_반환되는지() {
+        //given
+        sut.enqueue(value: 3)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 1)
+        
+        //when
+        let result = sut.peek()
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_큐가_비었을때_peek_호출시_nil_반환되는지() {
+        //given
+        
+        //when
+        let result = sut.peek()
+        
+        //then
+        XCTAssertEqual(result, nil)
+    }
 }
