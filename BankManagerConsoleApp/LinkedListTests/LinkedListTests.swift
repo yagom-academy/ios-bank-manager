@@ -38,4 +38,27 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(result, 3)
     }
+    
+    func test_dequeue호출시_여러개의_값중에_처음들어간값이_나오는지() {
+        //given
+        sut.enqueue(value: 3)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 1)
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_큐에_값이_없을때_dequeue호출시_nil을_반환하는지() {
+        //given
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, nil)
+    }
 }
