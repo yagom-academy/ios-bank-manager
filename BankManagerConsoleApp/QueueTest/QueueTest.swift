@@ -38,4 +38,30 @@ class QueueTest: XCTestCase {
         // then
         XCTAssertFalse(result)
     }
+    
+    func test_queue에1_2_3을_넣었을때_카운트가_3인지() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        // when
+        let result = sut.linkedList.count
+        
+        // then
+        XCTAssertEqual(3, result)
+    }
+    
+    func test_queue에1_2_3을_넣었을때_dequeue가_1인지() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(1, result)
+    }
 }
