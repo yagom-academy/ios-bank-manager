@@ -5,8 +5,8 @@
 //  Created by 애쉬, 로빈 on 2022/11/01.
 //
 
-class LinkedList<T> {
-    class Node<T> {
+final class LinkedList<T> {
+    final class Node<T> {
         var value: T
         var next: Node?
         
