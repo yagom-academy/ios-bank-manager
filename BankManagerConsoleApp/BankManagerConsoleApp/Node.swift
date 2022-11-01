@@ -6,10 +6,12 @@ import Foundation
 
 class Node<T> {
     var nextNode: Node?
-    let value: T
+    weak var previousNode: Node?
+    let data: T
     
-    init(nextNode: Node? = nil, value: T) {
+    init(nextNode: Node? = nil, previousNode: Node? = nil, data: T) {
         self.nextNode = nextNode
-        self.value = value
+        self.previousNode = previousNode
+        self.data = data
     }
 }

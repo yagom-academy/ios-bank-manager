@@ -17,7 +17,7 @@ class NodeTests: XCTestCase {
         firstNode.nextNode = secondNode
         
         // then
-        XCTAssertEqual(firstNode.nextNode?.value, 2)
+        XCTAssertEqual(firstNode.nextNode?.data, 2)
     }
     
     func test_1부터_5를_순서대로_Node로_생성한_후_각각의_Node를_순서대로_연결할_때_firstNode의_nextNode의_nextNode에_value는_3와_같다() {
@@ -35,6 +35,6 @@ class NodeTests: XCTestCase {
         fourthNode.nextNode = fifthNode
         
         // then
-        XCTAssertEqual(firstNode.nextNode?.nextNode?.value, 3)
+        XCTAssertEqual(firstNode.nextNode?.nextNode?.data, 3)
     }
 }

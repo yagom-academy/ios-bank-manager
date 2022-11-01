@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B21C725ECBF214B4E30DAA4 /* Pods_BankManagerConsoleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9046BF2B0EFF50FACB7AD03 /* Pods_BankManagerConsoleApp.framework */; };
+		AE093F222910E2B8004EAA1F /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE093F212910E2B8004EAA1F /* LinkedList.swift */; };
 		AE81AB35290FEE8A00C59DC8 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE81AB34290FEE8A00C59DC8 /* NodeTests.swift */; };
 		AE81AB3B290FF34600C59DC8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33190A2290FE46900D3182D /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		023924CE756E2F7F2D8570D6 /* Pods-BankManagerConsoleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankManagerConsoleApp.debug.xcconfig"; path = "Target Support Files/Pods-BankManagerConsoleApp/Pods-BankManagerConsoleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		AE093F212910E2B8004EAA1F /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		AE81AB32290FEE8A00C59DC8 /* NodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE81AB34290FEE8A00C59DC8 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		B9046BF2B0EFF50FACB7AD03 /* Pods_BankManagerConsoleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankManagerConsoleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				D33190A2290FE46900D3182D /* Node.swift */,
 				D013F1F1290FE7230060EC9E /* Queue.swift */,
+				AE093F212910E2B8004EAA1F /* LinkedList.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				D33190A3290FE46900D3182D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				AE093F222910E2B8004EAA1F /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				D013F1F2290FE7230060EC9E /* Queue.swift in Sources */,
 			);
