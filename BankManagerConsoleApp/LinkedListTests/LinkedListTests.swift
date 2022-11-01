@@ -61,4 +61,17 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(result, nil)
     }
+    
+    func test_clear_호출시_값이_초기화되는지() {
+        //given
+        sut.enqueue(value: 3)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 1)
+        
+        //when
+        sut.clear()
+        
+        //then
+        XCTAssertEqual(sut.dequeue(), nil)
+    }   
 }
