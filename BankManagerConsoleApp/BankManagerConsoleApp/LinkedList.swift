@@ -23,7 +23,7 @@ struct LinkedList<T> {
         }
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         if head == nil {
             return nil
         } else {
@@ -33,8 +33,9 @@ struct LinkedList<T> {
         }
     }
     
-    func clear() {
-        
+    mutating func clear() {
+        head = nil
+        tail = nil
     }
     
     func peek() {
