@@ -8,38 +8,29 @@
 import Foundation
 
 struct CustomerQueue<T> {
-    var front: Node<T>?
-    var rear: Node<T>?
+    private var front: Node<T>?
+    private var rear: Node<T>?
     
-    var isEmpty: Bool {
-        rear == nil ? true : false
-    }
+    var isEmpty: Bool { rear == nil }
     
     mutating func enqueue(data: T?) {
         let newNode = Node(data: data, next: nil)
         
         if isEmpty {
             front = newNode
-            rear = newNode
         } else {
             rear?.next = newNode
-            rear = newNode
         }
+        rear = newNode
     }
     
     mutating func dequeue() -> T? {
-        if isEmpty {
-            return nil
-        } else {
-            let data = front?.data
-            front = front?.next
-            return data
-        }
+        let data = front?.data
+        front = front?.next
+        return data
     }
     
-    func peek() -> T? {
-        isEmpty ? nil : front?.data
-    }
+    func peek() -> T? { front?.data }
     
     mutating func clear() {
         front = nil
