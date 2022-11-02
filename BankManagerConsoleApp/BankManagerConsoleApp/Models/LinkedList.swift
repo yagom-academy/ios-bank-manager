@@ -11,7 +11,6 @@ struct LinkedList<Element> {
     private var count: Int = 0
     
     func bringHead() -> Element? {
-        let head = head
         return head?.bringNodeData()
     }
     

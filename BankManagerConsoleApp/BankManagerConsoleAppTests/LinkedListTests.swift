@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
 
 class LinkedListTests: XCTestCase {
     var sut: LinkedList<Int>?

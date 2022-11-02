@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
 
 class NodeTests: XCTestCase {
     func test_Node가Int타입1로_초기화가잘이루어지는지() {
