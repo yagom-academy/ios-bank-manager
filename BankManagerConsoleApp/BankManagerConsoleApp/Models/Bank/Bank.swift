@@ -7,7 +7,7 @@
 
 struct Bank {
     private let bankWorker: BankWorker
-    private var clientQueue: ClientQueue<Client> = ClientQueue()
+    private var clientQueue: ClientQueue = ClientQueue()
     private var bankManager: BankManager = BankManager()
     
     init(bankWorker: BankWorker) {
