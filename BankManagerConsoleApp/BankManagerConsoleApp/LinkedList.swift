@@ -10,13 +10,14 @@ final class LinkedList<T> {
         var value: T
         var next: Node?
         
-        init(value: T, next: Node? = nil) {
+        init(_ value: T, next: Node? = nil) {
             self.value = value
             self.next = next
         }
     }
     
     private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     private(set) var count: Int = 0
     
     var isEmpty: Bool {
@@ -27,18 +28,27 @@ final class LinkedList<T> {
         }
     }
     
-    func append(_ value: T) {
+    func insertLast(_ value: T) {
+        count += 1
+        
         if isEmpty == true {
-            head = Node(value: value)
-            count += 1
+            head = Node(value)
+            tail = Node(value)
         } else {
-            var node = head
-            while node?.next != nil {
-                node = node?.next
-            }
-            
-            node?.next = Node(value: value)
-            count += 1
+            tail?.next = Node(value)
+            tail = Node(value)
+        }
+    }
+    
+    func insertFirst(_ value: T) {
+        count += 1
+        
+        if isEmpty == true {
+            head = Node(value)
+            tail = Node(value)
+        } else {
+            head?.next = head
+            head = Node(value)
         }
     }
     
