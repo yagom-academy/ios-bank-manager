@@ -3,8 +3,8 @@
 //  Copyright © yagom academy. All rights reserved.
 
 struct Banker: Person {
-    var name: String
-    var idCardNumber: String
+    var name: String?
+    var idCardNumber: String?
     func work(_: BankingService) {
     }
 }

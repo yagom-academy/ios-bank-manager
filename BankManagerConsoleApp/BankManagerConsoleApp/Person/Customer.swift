@@ -3,8 +3,9 @@
 //  Copyright © yagom academy. All rights reserved.
 
 struct Customer: Person, Equatable {
-    var name: String
-    var idCardNumber: String
+    var name: String?
+    var idCardNumber: String?
+    let waitingNumber: Int
     let bankingService: BankingService
 }
 
