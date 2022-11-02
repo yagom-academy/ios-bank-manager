@@ -1,7 +1,8 @@
 //
 //  BankManager.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
+//  BankManagerConsoleApp
+//
+//  Created by Kyo, Wonbi on 2022/11/02.
 //
 
 import Foundation
@@ -11,7 +12,7 @@ struct BankManager {
     private var totalWorkTime: Double = 0.0
     private var currentDate: Date = Date()
     
-    mutating func addCount() {
+    mutating func addClientCount() {
         clientCount += 1
     }
     
@@ -29,5 +30,10 @@ struct BankManager {
     
     func bringTotalWorkTime() -> Double {
         return totalWorkTime
+    }
+    
+    mutating func resetData() {
+        clientCount = 0
+        totalWorkTime = 0.0
     }
 }
