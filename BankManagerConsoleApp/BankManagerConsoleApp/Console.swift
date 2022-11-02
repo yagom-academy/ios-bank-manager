@@ -25,9 +25,9 @@ struct Console {
             }
             
             if consoleFlag == openingFlag {
-                let workReslt: WorkResult = openBank()
+                let workResult: WorkResult = openBank()
                 
-                printCompleteMessage(about: workReslt)
+                printCompleteMessage(about: workResult)
             } else if consoleFlag == closingFlag {
                 return
             }
@@ -47,7 +47,7 @@ struct Console {
     private func receivedUserInput() -> Result<Int, ConsoleError> {
         guard let input: String = readLine(),
               let flag: Int = Int(input),
-              Array(openingFlag, closingFlag).contains(flag) == true else {
+              (flag == openingFlag || flag == closingFlag) == true else {
                   return.failure(.invalidError)
               }
     
