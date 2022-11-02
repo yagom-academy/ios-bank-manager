@@ -5,11 +5,10 @@
 import Foundation
 
 struct Bank {
-    private let manager: Int
-    private var lineOfCustomer: Int
-    private var randomNumber: Int
+    private let manager: Int = 1
+    private var lineOfCustomer = LinkedList<Customer>()
     
-    func selectMenu() {
+    mutating func selectMenu() {
      print(" 1 : 은행개점\n 2 : 종료\n입력 :")
         switch receiveUserInput() {
         case "1":
@@ -29,7 +28,20 @@ struct Bank {
         return userInput
     }
     
-    func startTask() {
+    mutating func startTask() {
+        let customerCount = Int.random(in: 10...30)
+        print(customerCount)
+        for customerIndex in 1...customerCount {
+            lineOfCustomer.enqueue(value: Customer(number: customerIndex))
+        }
         
+        while lineOfCustomer.isEmpty == false {
+            let currentCustomer = lineOfCustomer.dequeue()
+            print("\(currentCustomer!.number)번 고객 업무 시작")
+            print("\(currentCustomer!.number)번 고객 업무 종료")
+        }
+
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(0.7 * Double(customerCount))초 입니다.")
+        selectMenu()
     }
 }
