@@ -110,13 +110,13 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				547972092912127F0046EF9D /* Bank.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				5479720B2912128D0046EF9D /* Customer.swift */,
 				575692E62910B538009DF06D /* Node.swift */,
 				5462C1BD2910B6E70011E035 /* LinkedList.swift */,
 				5462C1BF2910B6FE0011E035 /* Queue.swift */,
-				547972092912127F0046EF9D /* Bank.swift */,
-				5479720B2912128D0046EF9D /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";

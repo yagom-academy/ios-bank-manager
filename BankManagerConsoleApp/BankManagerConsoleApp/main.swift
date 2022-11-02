@@ -4,4 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+let bank = Bank()
+bank.start()
