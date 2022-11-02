@@ -12,7 +12,7 @@ struct Bank {
         return 0
     }
     
-    func showManual() {
+    mutating func showManual() {
         print("""
         1 : 은행 개점
         2 : 종료
@@ -22,14 +22,13 @@ struct Bank {
         receiveUserInput()
     }
     
-    func receiveUserInput() {
+    mutating func receiveUserInput() {
         guard let input = readLine() else {
             return
         }
         
         switch input {
         case "1":
-            receiveCustomer()
             startBanking()
         case "2":
             return
@@ -37,13 +36,23 @@ struct Bank {
             return
         }
     }
-    
-    func receiveCustomer() {
+
+    mutating func startBanking() {
+        while !customers.isEmpty {
+            guard let customer = customers.dequeue() else {
+                return
+            }
+            
+            serveCustomer(number: customer.waitingNumber)
+        }
         
+        closeBanking()
     }
     
-    func startBanking() {
-        
+    func serveCustomer(number: Int) {
+        print("\(number)번 고객 업무 시작")
+        sleep(1)
+        print("\(number)번 고객 업무 완료")
     }
     
     func closeBanking() {
