@@ -11,3 +11,4 @@ struct BankManager {
         print("\(customerNumber)번 고객 업무 종료")
     }
 }
+

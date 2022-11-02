@@ -14,6 +14,7 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60BF202910181300C8F7A0 /* CustomerQueue.swift */; };
+		DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF932689291262CC001BF846 /* WorkLoadManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		DF60BF202910181300C8F7A0 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
+		DF932689291262CC001BF846 /* WorkLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLoadManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +87,11 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				90AA6A6229101433002DE5C3 /* Node.swift */,
 				DF60BF202910181300C8F7A0 /* CustomerQueue.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				DF932689291262CC001BF846 /* WorkLoadManager.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				90AA6A6329101433002DE5C3 /* Node.swift in Sources */,
 				DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */,
+				DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
