@@ -19,24 +19,31 @@ final class LinkedList<T: Equatable> {
     }
     
     func insertLast(_ value: T) {
-        count += 1
+        let newNode = Node(value)
         
         if isEmpty {
-            head = Node(value)
-            tail = Node(value)
+            head = newNode
+            tail = newNode
+        } else if count == 1 {
+            tail = newNode
+            head?.next = tail
         } else {
-            tail?.next = Node(value)
-            tail = Node(value)
+            tail?.next = newNode
+            tail = newNode
         }
+        
+        count += 1
     }
     
     func insertFirst(_ value: T) {
+        let newNode = Node(value)
+        
         if isEmpty {
-            head = Node(value)
-            tail = Node(value)
+            head = newNode
+            tail = newNode
         } else {
-            head?.next = head
-            head = Node(value)
+            newNode.next = head
+            head = newNode
         }
         
         count += 1
