@@ -8,14 +8,14 @@
 import Foundation
 
 struct BankManager {
-//        let numberOfCustomer: Int
-//        var customerQueue: CustomerQueue<Customer>
+    var numberOfCustomer: Int = Int.random(in: 10...30)
+    var customerQueue: CustomerQueue<Customer>
     
-    func openUp() {
+    mutating func openUp() {
         selectMenu()
     }
     
-    private func selectMenu() {
+    private mutating func selectMenu() {
         print("""
               1 : 은행개점
               2 : 종료
@@ -25,12 +25,19 @@ struct BankManager {
         
         switch userInput {
         case "1":
-            break
+            addCustomer()
         case "2":
             break
         default:
             print("입력이 잘못되었습니다. \n")
             selectMenu()
+        }
+    }
+    
+    private mutating func addCustomer() {
+        for number in 1...numberOfCustomer {
+            let customer: Customer = Customer(waitingNumber: number)
+            customerQueue.enqueue(data: customer)
         }
     }
 }

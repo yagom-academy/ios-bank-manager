@@ -6,6 +6,6 @@
 
 import Foundation
 
-let bankManager = BankManager()
-
+let customerQueue = CustomerQueue<Customer>()
+var bankManager = BankManager(customerQueue: customerQueue)
 bankManager.openUp()
