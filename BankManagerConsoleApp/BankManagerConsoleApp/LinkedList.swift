@@ -68,13 +68,11 @@ final class LinkedList<T: Equatable> {
         
         if count == 1 {
             head = nil
-            
-            return currentNode
+        } else {
+            head = head?.next
         }
         
-        head = head?.next
         count -= 1
-        
         return currentNode
     }
     
