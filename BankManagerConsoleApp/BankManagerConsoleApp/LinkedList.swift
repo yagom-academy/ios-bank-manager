@@ -7,28 +7,20 @@ import Foundation
 
 struct LinkedList<T> {
     private(set) var head: Node<T>?
-    var last: Node<T>? {
-        var currentNode = head
-        
-        while currentNode?.next != nil {
-            currentNode = currentNode?.next
-        }
-        
-        return currentNode
-    }
+    private(set) var last: Node<T>?
     var isEmpty: Bool {
-        return head == nil ? true : false
+        return head == nil
     }
     
     mutating func append(_ data: T) {
         guard head != nil else {
             head = Node(data: data)
+            last = head
             return
         }
         
-        if last?.next == nil {
-            last?.next = Node(data: data)
-        }
+        last?.next = Node(data: data)
+        last = last?.next
     }
     
     mutating func removeFirst() -> T? {
@@ -40,5 +32,6 @@ struct LinkedList<T> {
     
     mutating func removeAll() {
         head = nil
+        last = nil
     }
 }
