@@ -24,15 +24,14 @@ struct BankManager {
         totalWorkTime += -currentDate.timeIntervalSinceNow
     }
     
-    func bringClientCount() -> Int {
-        return clientCount
+    mutating func printWorkFinished() {
+        print("업무가 마감되었습니다. ", terminator: "")
+        print("오늘 업무를 처리한 고객은 총 \(clientCount)명이며, ", terminator: "")
+        print("총 업무시간은 \(String(format: "%.2f", totalWorkTime))초입니다.")
+        resetData()
     }
     
-    func bringTotalWorkTime() -> Double {
-        return totalWorkTime
-    }
-    
-    mutating func resetData() {
+    mutating private func resetData() {
         clientCount = 0
         totalWorkTime = 0.0
     }
