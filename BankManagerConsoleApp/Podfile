@@ -1,0 +1,16 @@
+# Uncomment the next line to define a global platform for your project
+platform :macos, '10.15'
+
+  use_frameworks!
+
+target 'BankManagerConsoleApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+	pod 'SwiftLint', '0.49'
+
+end
+
+target 'BankManagerTests' do
+  # Comment the next line if you don't want to use dynamic frameworks
+	pod 'SwiftLint', '0.49'
+
+end
