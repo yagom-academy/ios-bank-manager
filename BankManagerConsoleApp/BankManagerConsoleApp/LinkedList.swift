@@ -6,7 +6,7 @@
 //
 
 final class LinkedList<T: Equatable> {
-    final class Node<T> {
+    final class Node<T: Equatable> {
         var value: T
         var next: Node?
         
@@ -91,7 +91,24 @@ final class LinkedList<T: Equatable> {
         count = 0
     }
     
-    func peek() -> T? {
-        return head == nil ? nil : head?.value
+    func remove(_ value: T) -> T? {
+        if isEmpty {
+            return nil
+        }
+        
+        if value == head?.value {
+            let node = removeFirst()
+            return node?.value
+        }
+        
+        let node = search(value)
+        var currentNode = head
+        while currentNode?.next === node {
+            currentNode = currentNode?.next
+        }
+        currentNode?.next = currentNode?.next?.next
+        count -= 1
+        
+        return node?.value
     }
 }

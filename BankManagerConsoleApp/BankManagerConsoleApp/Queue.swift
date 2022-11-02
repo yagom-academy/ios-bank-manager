@@ -5,18 +5,18 @@
 //  Created by 애쉬, 로빈 on 2022/11/01.
 //
 
-final class Queue<T> {
+final class Queue<T: Equatable> {
     private(set) var linkedList: LinkedList<T> = LinkedList()
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
     
     func enqueue(_ value: T) {
-        linkedList.append(value)
+        linkedList.insertLast(value)
     }
     
     func dequeue() -> T? {
-        return linkedList.pop()?.value
+        return linkedList.removeFirst()?.value
     }
     
     func clear() {
@@ -24,6 +24,6 @@ final class Queue<T> {
     }
     
     func peek() -> T? {
-        return linkedList.peek()
+        return linkedList.head?.value
     }
 }
