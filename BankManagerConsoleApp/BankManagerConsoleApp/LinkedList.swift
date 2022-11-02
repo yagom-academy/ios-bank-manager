@@ -8,7 +8,7 @@
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    var firstValue: T? {
+    var headData: T? {
         return head?.data
     }
     var isEmpty: Bool {

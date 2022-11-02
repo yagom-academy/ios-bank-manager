@@ -6,7 +6,6 @@
 //
 
 struct Queue<T> {
-    
     private var linkedList: LinkedList<T> = LinkedList()
     var isEmpty: Bool {
         return linkedList.isEmpty
@@ -25,6 +24,6 @@ struct Queue<T> {
     }
     
     func peek() -> T? {
-        return linkedList.firstValue
+        return linkedList.headData
     }
 }
