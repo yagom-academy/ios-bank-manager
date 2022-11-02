@@ -20,7 +20,7 @@ struct BankManager {
     }
     
     mutating func stopTimer() {
-        totalWorkTime += currentDate.timeIntervalSinceNow
+        totalWorkTime += -currentDate.timeIntervalSinceNow
     }
     
     func bringClientCount() -> Int {

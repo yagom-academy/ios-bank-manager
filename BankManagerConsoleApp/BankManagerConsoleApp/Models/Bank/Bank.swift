@@ -11,11 +11,22 @@ struct Bank {
     var bankManager: BankManager = BankManager()
     
     mutating func openBank(clients: [Client]) {
-        enqueueClients(clients)
-        bankManager.startTimer()
-        startBankWork()
-        bankManager.stopTimer()
-        closeBank()
+        while true {
+            print("1 : 은행개점")
+            print("2 : 종료")
+            print("입력 : ", terminator: "")
+            guard let input = readLine(), let menu = Int(input), 1...2 ~= menu else {
+                print("잘못된 입력입니다.")
+                continue
+            }
+            guard menu == 1 else { return }
+            
+            enqueueClients(clients)
+            bankManager.startTimer()
+            startBankWork()
+            bankManager.stopTimer()
+            closeBank()
+        }
     }
     
     mutating func enqueueClients(_ clients: [Client]) {
@@ -24,12 +35,14 @@ struct Bank {
             bankManager.addCount()
         }
     }
-
+    
     mutating func startBankWork() {
-        guard let client = clientQueue.dequeue() else { return }
-        bankWorker.startWork(client: client)
+        for _ in 1...bankManager.bringClientCount() {
+            guard let client = clientQueue.dequeue() else { return }
+            bankWorker.startWork(client: client)
+        }
     }
-
+    
     func closeBank() {
         print("업무가 마감되었습니다.", terminator: "")
         print("오늘 업무를 처리한 고객은 총 \(bankManager.bringClientCount())명이며,", terminator: "")
