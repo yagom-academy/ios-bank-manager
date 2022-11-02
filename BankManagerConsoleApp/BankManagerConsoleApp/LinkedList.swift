@@ -51,13 +51,14 @@ final class LinkedList<T: Equatable> {
         }
         
         var currentNode = head
-        while currentNode?.next != nil {
+        while currentNode != nil {
             if currentNode?.value == value {
-                break
+                return currentNode
             }
             currentNode = currentNode?.next
         }
-        return currentNode
+        
+        return nil
     }
     
     func removeFirst() -> Node<T>? {
@@ -68,6 +69,7 @@ final class LinkedList<T: Equatable> {
         
         if count == 1 {
             head = nil
+            tail = nil
         } else {
             head = head?.next
         }
@@ -92,14 +94,22 @@ final class LinkedList<T: Equatable> {
             return node?.value
         }
         
-        let node = search(value)
+        guard let node = search(value) else {
+            return nil
+        }
+        
         var currentNode = head
-        while currentNode?.next === node {
+        while currentNode?.next !== node {
             currentNode = currentNode?.next
         }
+        
+        if tail === currentNode?.next {
+            tail = currentNode
+        }
+        
         currentNode?.next = currentNode?.next?.next
         count -= 1
         
-        return node?.value
+        return node.value
     }
 }

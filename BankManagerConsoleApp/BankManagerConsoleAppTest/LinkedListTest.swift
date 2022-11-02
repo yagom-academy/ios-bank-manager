@@ -80,12 +80,13 @@ class LinkedListTest: XCTestCase {
         // given
         sut.insertLast(3)
         sut.insertLast(5)
+        sut.insertLast(7)
         
         // when
-        let result = sut.search(5)?.value
+        let result = sut.search(7)?.value
         
         // then
-        XCTAssertEqual(result, 5)
+        XCTAssertEqual(result, 7)
     }
     
     func test_count가0인list에서remove를호출했을때_삭제된값이잘반환되는지() {
@@ -110,8 +111,9 @@ class LinkedListTest: XCTestCase {
     
     func test_count가2인list에서remove를호출했을때_삭제된값이잘반환되는지() {
         // given
-        sut.insertFirst(2)
         sut.insertLast(1)
+        sut.insertLast(2)
+        sut.insertLast(3)
         
         // when
         let result = sut.remove(1)
