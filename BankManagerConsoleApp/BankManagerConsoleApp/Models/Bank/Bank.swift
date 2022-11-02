@@ -8,15 +8,20 @@
 struct Bank {
     var clientQueue: ClientQueue<Client> = ClientQueue()
     var bankWorker: BankWorker
+    var bankManager: BankManager = BankManager()
     
     mutating func openBank(clients: [Client]) {
         enqueueClients(clients)
+        bankManager.startTimer()
         startBankWork()
+        bankManager.stopTimer()
+        closeBank()
     }
     
     mutating func enqueueClients(_ clients: [Client]) {
         clients.forEach { client in
             clientQueue.enqueue(client)
+            bankManager.addCount()
         }
     }
 
@@ -25,7 +30,9 @@ struct Bank {
         bankWorker.startWork(client: client)
     }
 
-//    func 업무마감() {
-//         clientQueue.isEmpty -> 업무마감
-//    }
+    func closeBank() {
+        print("업무가 마감되었습니다.", terminator: "")
+        print("오늘 업무를 처리한 고객은 총 \(bankManager.bringClientCount())명이며,", terminator: "")
+        print("총 업무시간은 \(String(format: "%.2f", bankManager.bringTotalWorkTime()))초입니다.")
+    }
 }
