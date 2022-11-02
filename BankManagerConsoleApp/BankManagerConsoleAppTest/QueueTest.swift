@@ -65,7 +65,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(1, result)
     }
     
-    func test_clear메서드가_정상동작하는지() {
+    func test_clear호출시_isEmpty가true를반환하는지() {
         // given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -79,7 +79,7 @@ class QueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_peek메서드가_정상동작하는지() {
+    func test_peek호출시_head의value값을반환하는지() {
         // given
         sut.enqueue(3)
         sut.enqueue(2)

@@ -11,11 +11,7 @@ final class LinkedList<T: Equatable> {
     private(set) var count: Int = 0
     
     var isEmpty: Bool {
-        if count == 0 {
-            return true
-        } else {
-            return false
-        }
+        return count == 0
     }
     
     func insertLast(_ value: T) {

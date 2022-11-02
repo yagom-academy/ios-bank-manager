@@ -87,4 +87,36 @@ class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, 5)
     }
+    
+    func test_count가0인list에서remove를호출했을때_삭제된값이잘반환되는지() {
+        // given
+        // when
+        let result = sut.remove(2)
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_count가1인list에서remove를호출했을때_삭제된값이잘반환되는지() {
+        // given
+        sut.insertFirst(2)
+        
+        // when
+        let result = sut.remove(2)
+        
+        // then
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_count가2인list에서remove를호출했을때_삭제된값이잘반환되는지() {
+        // given
+        sut.insertFirst(2)
+        sut.insertLast(1)
+        
+        // when
+        let result = sut.remove(1)
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
 }
