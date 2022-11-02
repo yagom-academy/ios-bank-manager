@@ -5,6 +5,10 @@
 struct Banker: Person {
     var name: String?
     var idCardNumber: String?
-    func work(_: BankingService) {
+    
+    func work(_ customer: Customer) {
+        print("\(customer.waitingNumber)번 고객 업무 시작")
+        customer.bankingService.service()
+        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }
