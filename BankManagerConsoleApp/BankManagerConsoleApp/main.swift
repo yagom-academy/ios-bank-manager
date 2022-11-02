@@ -6,6 +6,8 @@
 
 import Foundation
 
+let randomNumber = Int.random(in: 10...30)
 let customerQueue = CustomerQueue<Customer>()
-var bankManager = BankManager(customerQueue: customerQueue)
+var bankManager = BankManager(numberOfCustomer: randomNumber, customerQueue: customerQueue)
+
 bankManager.openUp()
