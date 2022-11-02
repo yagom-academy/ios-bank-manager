@@ -5,6 +5,7 @@
 import Foundation
 
 struct Console {
+    typealias WorkResult = (customerCount: Int, time: Double)
     private let consoleGuideLine: String = """
     1 : 은행개점
     2 : 종료
@@ -26,8 +27,8 @@ struct Console {
             }
             
             if consoleFlag == 1 {
-                openBank()
-                printCompleteMessage()
+                let workReslt: WorkResult = openBank()
+                printCompleteMessage(about: workReslt)
             } else {
                 return
             }
@@ -48,13 +49,15 @@ struct Console {
         return.success(flag)
     }
     
-    private func openBank() {
+    private func openBank() -> WorkResult {
         var bank: Bank = Bank()
         bank.startBankingService()
+        return bank.workResult
     }
     
-    private func printCompleteMessage() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 10명이며, 총 업무시간은 7.00초입니다.")
+    private func printCompleteMessage(about workResult: WorkResult) {
+        let timeText: String = String(format: "%.2f", workResult.time)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(workResult.customerCount)명이며, 총 업무시간은 \(timeText)초입니다.")
     }
 }
 
