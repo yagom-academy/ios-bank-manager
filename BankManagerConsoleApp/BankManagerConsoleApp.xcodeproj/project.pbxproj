@@ -14,6 +14,9 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D00901952911093000965085 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE093F212910E2B8004EAA1F /* LinkedList.swift */; };
+		D00901982912256000965085 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00901972912256000965085 /* Job.swift */; };
+		D009019A2912257600965085 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00901992912257600965085 /* Customer.swift */; };
+		D009019C2912258200965085 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D009019B2912258200965085 /* Banker.swift */; };
 		D013F1F2290FE7230060EC9E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D013F1F1290FE7230060EC9E /* Queue.swift */; };
 		D33190A3290FE46900D3182D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33190A2290FE46900D3182D /* Node.swift */; };
 		D33190AB290FF63F00D3182D /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33190AA290FF63F00D3182D /* QueueTests.swift */; };
@@ -49,6 +52,9 @@
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		D00901972912256000965085 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		D00901992912257600965085 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		D009019B2912258200965085 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		D013F1F1290FE7230060EC9E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		D33190A2290FE46900D3182D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		D33190A8290FF63F00D3182D /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,9 +151,20 @@
 				D33190A2290FE46900D3182D /* Node.swift */,
 				D013F1F1290FE7230060EC9E /* Queue.swift */,
 				AE093F212910E2B8004EAA1F /* LinkedList.swift */,
+				D00901962912252C00965085 /* Job */,
 				D34CAC0F291224AB008A7D99 /* BankingService */,
 			);
 			path = BankManagerConsoleApp;
+			sourceTree = "<group>";
+		};
+		D00901962912252C00965085 /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				D00901972912256000965085 /* Job.swift */,
+				D00901992912257600965085 /* Customer.swift */,
+				D009019B2912258200965085 /* Banker.swift */,
+			);
+			path = Job;
 			sourceTree = "<group>";
 		};
 		D33190A9290FF63F00D3182D /* QueueTests */ = {
@@ -385,13 +402,16 @@
 			files = (
 				D33190A3290FE46900D3182D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				D009019C2912258200965085 /* Banker.swift in Sources */,
 				AE093F222910E2B8004EAA1F /* LinkedList.swift in Sources */,
 				D34CAC0C29122462008A7D99 /* SavingAccount.swift in Sources */,
 				D34CAC0E29122473008A7D99 /* CreditCardIssuance.swift in Sources */,
 				D34CAC0A2912242A008A7D99 /* Loan.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				D009019A2912257600965085 /* Customer.swift in Sources */,
 				D34CAC08291223CA008A7D99 /* BankingService.swift in Sources */,
 				D013F1F2290FE7230060EC9E /* Queue.swift in Sources */,
+				D00901982912256000965085 /* Job.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
