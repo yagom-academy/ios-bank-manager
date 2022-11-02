@@ -25,6 +25,7 @@ struct Bank {
         switch input {
         case "1":
             openBank()
+            start()
         case "2":
             break
         default:
@@ -45,6 +46,6 @@ struct Bank {
             print(totalWorkTime)
         }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime.doubleValue)초입니다.")
     }
 }
