@@ -17,7 +17,7 @@ struct Bank {
     mutating func openBank() {
         updateClientQueue()
         startBankWork()
-        closeBank()
+        endBankWork()
     }
     
     mutating private func updateClientQueue() {
@@ -30,13 +30,13 @@ struct Bank {
     mutating private func startBankWork() {
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
-            bankManager.startTimer()
+            bankManager.resetWorkTime()
             bankWorker.startWork(client: client)
-            bankManager.stopTimer()
+            bankManager.addWorkTime()
         }
     }
     
-    mutating private func closeBank() {
+    mutating private func endBankWork() {
         bankManager.printWorkFinished()
     }
 }

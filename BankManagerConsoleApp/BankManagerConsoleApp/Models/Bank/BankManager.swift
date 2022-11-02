@@ -10,18 +10,18 @@ import Foundation
 struct BankManager {
     private var clientCount: Int = 0
     private var totalWorkTime: Double = 0.0
-    private var currentDate: Date = Date()
+    private var workStartTime: Date = Date()
     
     mutating func addClientCount() {
         clientCount += 1
     }
     
-    mutating func startTimer() {
-        currentDate = Date()
+    mutating func resetWorkTime() {
+        workStartTime = Date()
     }
     
-    mutating func stopTimer() {
-        totalWorkTime += -currentDate.timeIntervalSinceNow
+    mutating func addWorkTime() {
+        totalWorkTime += -workStartTime.timeIntervalSinceNow
     }
     
     mutating func printWorkFinished() {
