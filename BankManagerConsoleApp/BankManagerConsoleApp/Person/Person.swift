@@ -2,7 +2,7 @@
 //  Created by Ayaan/Dragon/som on 2022/11/02.
 //  Copyright © yagom academy. All rights reserved.
 
-struct Person {
-    let name: String
-    let job: Job
+protocol Person {
+    var name: String { get set }
+    var idCardNumber: String { get set }
 }
