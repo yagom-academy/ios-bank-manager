@@ -7,24 +7,25 @@
 
 struct Bank {
     var clientQueue: ClientQueue<Client> = ClientQueue()
+    var bankWorker: BankWorker
+    
+    mutating func openBank(clients: [Client]) {
+        enqueueClients(clients)
+        startBankWork()
+    }
     
     mutating func enqueueClients(_ clients: [Client]) {
         clients.forEach { client in
             clientQueue.enqueue(client)
         }
     }
-    
-//    mutating func 개점() {
-//        enqueueClients([])
-//        업무시작()
-//    }
-//
-//    mutating func 업무시작() {
-//        clerk.업무처리하기(어떤고객: clientQueue.dequeue()!)
-//    }
-//
+
+    mutating func startBankWork() {
+        guard let client = clientQueue.dequeue() else { return }
+        bankWorker.startWork(client: client)
+    }
+
 //    func 업무마감() {
 //         clientQueue.isEmpty -> 업무마감
 //    }
 }
-
