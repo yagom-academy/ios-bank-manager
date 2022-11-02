@@ -27,7 +27,6 @@ class QueueTests: XCTestCase {
         XCTAssertEqual(true, sut.isEmpty)
     }
     
-    
     func test_Queue에_5개의_값을_넣고_5개의_값을_뺐을때_isEmpty가_맞는지() {
         for _ in 1...5 {
             sut.enqueue("ABC")
