@@ -9,12 +9,12 @@ import Foundation
 
 extension Double {
 
-    var formatted: String? {
+    var formatted: String {
         let number = NSNumber(integerLiteral: Int(self))
         let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.minimumFractionDigits = 2
         guard let result = numberFormatter.string(from: number) else {
-            return nil
+            return ""
         }
         
         return result
