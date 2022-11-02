@@ -11,7 +11,7 @@ struct CustomerQueue<T> {
     private var front: Node<T>?
     private var rear: Node<T>?
     
-    var isEmpty: Bool { rear == nil }
+    var isEmpty: Bool { front == nil }
     
     mutating func enqueue(data: T?) {
         let newNode = Node(data: data, next: nil)
