@@ -68,4 +68,34 @@ final class QueueTests: XCTestCase {
         // then
         XCTAssertTrue(result)
     }
+    
+    func test_enqueue하면_isEmpty가_false인지() {
+        // given
+        let input: Int = 3
+
+        // when
+        sut.enqueue(input)
+        let result: Bool = sut.isEmpty
+
+        // then
+        XCTAssertFalse(result)
+    }
+    
+    func test_ABC를_enqueue하고_4번_dequeue하면_nil인지() {
+        // given
+        let input: [String] = ["A", "B", "C"]
+        
+        // when
+        input.forEach { sut.enqueue($0) }
+
+        for _ in 0..<input.count {
+            sut.dequeue()
+        }
+        let result: Any? = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    
 }
