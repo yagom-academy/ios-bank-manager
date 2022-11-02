@@ -5,7 +5,7 @@
 //  Created by 애쉬, 로빈 on 2022/11/01.
 //
 
-final class LinkedList<T> {
+final class LinkedList<T: Equatable> {
     final class Node<T> {
         var value: T
         var next: Node?
@@ -31,7 +31,7 @@ final class LinkedList<T> {
     func insertLast(_ value: T) {
         count += 1
         
-        if isEmpty == true {
+        if isEmpty {
             head = Node(value)
             tail = Node(value)
         } else {
@@ -43,13 +43,28 @@ final class LinkedList<T> {
     func insertFirst(_ value: T) {
         count += 1
         
-        if isEmpty == true {
+        if isEmpty {
             head = Node(value)
             tail = Node(value)
         } else {
             head?.next = head
             head = Node(value)
         }
+    }
+    
+    func search(_ value: T) -> Node<T>? {
+        if isEmpty {
+            return nil
+        }
+        
+        var currentNode = head
+        while currentNode?.next != nil {
+            if currentNode?.value == value {
+                break
+            }
+            currentNode = currentNode?.next
+        }
+        return currentNode
     }
     
     func pop() -> Node<T>? {
