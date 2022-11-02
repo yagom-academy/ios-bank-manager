@@ -6,6 +6,10 @@ struct Bank {
     private let banker: Banker = Banker()
     private var customerQueue: Queue<Customer> = Queue<Customer>()
     
+    init() {
+        setCustomerQueue()
+    }
+    
     mutating func setCustomerQueue() {
         let customerCount: Int = Int.random(in: 10...30)
         for count in 1...customerCount {
