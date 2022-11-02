@@ -19,6 +19,10 @@
 		D33190AB290FF63F00D3182D /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33190AA290FF63F00D3182D /* QueueTests.swift */; };
 		D33190AF290FF64600D3182D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D013F1F1290FE7230060EC9E /* Queue.swift */; };
 		D33190B0290FF64900D3182D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33190A2290FE46900D3182D /* Node.swift */; };
+		D34CAC08291223CA008A7D99 /* BankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34CAC07291223CA008A7D99 /* BankingService.swift */; };
+		D34CAC0A2912242A008A7D99 /* Loan.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34CAC092912242A008A7D99 /* Loan.swift */; };
+		D34CAC0C29122462008A7D99 /* SavingAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34CAC0B29122462008A7D99 /* SavingAccount.swift */; };
+		D34CAC0E29122473008A7D99 /* CreditCardIssuance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34CAC0D29122473008A7D99 /* CreditCardIssuance.swift */; };
 		D3561FA92910F83D00324321 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3561FA82910F83D00324321 /* LinkedListTests.swift */; };
 		D3561FAD2910F86400324321 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33190A2290FE46900D3182D /* Node.swift */; };
 		D3561FAE2910F86B00324321 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE093F212910E2B8004EAA1F /* LinkedList.swift */; };
@@ -49,6 +53,10 @@
 		D33190A2290FE46900D3182D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		D33190A8290FF63F00D3182D /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33190AA290FF63F00D3182D /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		D34CAC07291223CA008A7D99 /* BankingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingService.swift; sourceTree = "<group>"; };
+		D34CAC092912242A008A7D99 /* Loan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loan.swift; sourceTree = "<group>"; };
+		D34CAC0B29122462008A7D99 /* SavingAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccount.swift; sourceTree = "<group>"; };
+		D34CAC0D29122473008A7D99 /* CreditCardIssuance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardIssuance.swift; sourceTree = "<group>"; };
 		D3561FA62910F83D00324321 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3561FA82910F83D00324321 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		D3561FAF29110D8700324321 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -137,6 +145,7 @@
 				D33190A2290FE46900D3182D /* Node.swift */,
 				D013F1F1290FE7230060EC9E /* Queue.swift */,
 				AE093F212910E2B8004EAA1F /* LinkedList.swift */,
+				D34CAC0F291224AB008A7D99 /* BankingService */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -147,6 +156,17 @@
 				D33190AA290FF63F00D3182D /* QueueTests.swift */,
 			);
 			path = QueueTests;
+			sourceTree = "<group>";
+		};
+		D34CAC0F291224AB008A7D99 /* BankingService */ = {
+			isa = PBXGroup;
+			children = (
+				D34CAC07291223CA008A7D99 /* BankingService.swift */,
+				D34CAC092912242A008A7D99 /* Loan.swift */,
+				D34CAC0B29122462008A7D99 /* SavingAccount.swift */,
+				D34CAC0D29122473008A7D99 /* CreditCardIssuance.swift */,
+			);
+			path = BankingService;
 			sourceTree = "<group>";
 		};
 		D3561FA72910F83D00324321 /* LinkedListTests */ = {
@@ -366,7 +386,11 @@
 				D33190A3290FE46900D3182D /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AE093F222910E2B8004EAA1F /* LinkedList.swift in Sources */,
+				D34CAC0C29122462008A7D99 /* SavingAccount.swift in Sources */,
+				D34CAC0E29122473008A7D99 /* CreditCardIssuance.swift in Sources */,
+				D34CAC0A2912242A008A7D99 /* Loan.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				D34CAC08291223CA008A7D99 /* BankingService.swift in Sources */,
 				D013F1F2290FE7230060EC9E /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
