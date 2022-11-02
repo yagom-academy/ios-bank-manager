@@ -20,7 +20,7 @@ final class Queue<T> {
     }
     
     func clear() {
-        linkedList.clear()
+        linkedList.removeAll()
     }
     
     func peek() -> T? {

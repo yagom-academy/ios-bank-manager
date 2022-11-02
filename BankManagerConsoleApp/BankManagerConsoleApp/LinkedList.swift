@@ -41,8 +41,6 @@ final class LinkedList<T: Equatable> {
     }
     
     func insertFirst(_ value: T) {
-        count += 1
-        
         if isEmpty {
             head = Node(value)
             tail = Node(value)
@@ -50,6 +48,8 @@ final class LinkedList<T: Equatable> {
             head?.next = head
             head = Node(value)
         }
+        
+        count += 1
     }
     
     func search(_ value: T) -> Node<T>? {
@@ -67,27 +67,27 @@ final class LinkedList<T: Equatable> {
         return currentNode
     }
     
-    func pop() -> Node<T>? {
-        if head == nil {
+    func removeFirst() -> Node<T>? {
+        if isEmpty {
             return nil
         }
+        let currentNode = head
         
-        count -= 1
         if count == 1 {
-            let currentNode = head
             head = nil
             
             return currentNode
         }
         
-        let currentNode = head
         head = head?.next
+        count -= 1
         
         return currentNode
     }
     
-    func clear() {
+    func removeAll() {
         head = nil
+        tail = nil
         count = 0
     }
     
