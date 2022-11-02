@@ -3,10 +3,20 @@
 //  Copyright © yagom academy. All rights reserved.
 
 struct Customer: Person, Equatable {
-    var name: String?
-    var idCardNumber: String?
+    let name: String?
+    let idCardNumber: String?
     let waitingNumber: Int
     let bankingService: BankingService
+    
+    init(name: String? = nil,
+         idCardNumber: String? = nil,
+         waitingNumber: Int,
+         bankingService: BankingService) {
+        self.name = name
+        self.idCardNumber = idCardNumber
+        self.waitingNumber = waitingNumber
+        self.bankingService = bankingService
+    }
 }
 
 extension Customer {

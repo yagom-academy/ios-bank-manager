@@ -3,8 +3,13 @@
 //  Copyright © yagom academy. All rights reserved.
 
 struct Banker: Person {
-    var name: String?
-    var idCardNumber: String?
+    let name: String?
+    let idCardNumber: String?
+    
+    init(name: String? = nil, idCardNumber: String? = nil) {
+        self.name = name
+        self.idCardNumber = idCardNumber
+    }
     
     func work(_ customer: Customer) {
         let startingMessage: String = "\(customer.waitingNumber)번 고객 업무 시작"

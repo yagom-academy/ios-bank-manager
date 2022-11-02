@@ -3,6 +3,6 @@
 //  Copyright © yagom academy. All rights reserved.
 
 protocol Person {
-    var name: String? { get set }
-    var idCardNumber: String? { get set }
+    var name: String? { get }
+    var idCardNumber: String? { get }
 }
