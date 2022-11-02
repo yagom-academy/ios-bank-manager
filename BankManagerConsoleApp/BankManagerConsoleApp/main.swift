@@ -4,5 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let bank = Bank()
+var bank = Bank()
 bank.start()
