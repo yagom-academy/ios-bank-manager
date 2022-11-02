@@ -7,8 +7,11 @@ struct Banker: Person {
     var idCardNumber: String?
     
     func work(_ customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        let startingMessage: String = "\(customer.waitingNumber)번 고객 업무 시작"
+        let endingMessage: String = "\(customer.waitingNumber)번 고객 업무 완료"
+        
+        print(startingMessage)
         customer.bankingService.service()
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        print(endingMessage)
     }
 }

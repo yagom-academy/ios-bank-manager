@@ -18,6 +18,7 @@ struct Bank {
     mutating private func setCustomerQueue() {
         for count in 1...customerCount {
             let customer: Customer = Customer(waitingNumber: count, bankingService: Loan())
+            
             customerQueue.enqueue(customer)
         }
     }
