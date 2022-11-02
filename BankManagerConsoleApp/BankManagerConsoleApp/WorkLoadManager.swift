@@ -2,7 +2,7 @@
 //  WorkLoadManager.swift
 //  BankManagerConsoleApp
 //
-//  Created by 유제민 on 2022/11/02.
+//  Created by jeremy, LJ on 2022/11/02.
 //
 
 struct WorkLoadManager {
@@ -11,7 +11,9 @@ struct WorkLoadManager {
     mutating func checkManagers(managers: [BankManager]) {
         for manager in managers {
             if manager.isAvailable {
-                let task = self.taskQueue.dequeue()
+                guard let task = self.taskQueue.dequeue() else {
+                    return
+                }
                 giveTask(to: manager, task: task)
             }
         }
@@ -21,4 +23,3 @@ struct WorkLoadManager {
         manager.work(customerNumber: task)
     }
 }
-
