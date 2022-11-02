@@ -6,8 +6,7 @@ struct LinkedList<Element> {
     private(set) var head: Node<Element>?
     private var tail: Node<Element>?
     var isEmpty: Bool {
-        if head == nil { return true }
-        else { return false }
+        return head == nil
     }
     
     mutating func append(_ node: Node<Element>) {
