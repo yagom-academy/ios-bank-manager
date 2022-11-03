@@ -3,17 +3,12 @@
 import Foundation
 
 struct Bank {
-    private var manager: BankManager
-    private var customerList: Queue<Customer>
-    var totalWorkTime: Decimal
+    private var manager: BankManager = BankManager()
+    private var customerList: Queue<Customer> = Queue()
+    var totalWorkTime: Decimal = 0.0
+    var numberOfCustomer: Int = 0
     
-    init() {
-        self.manager = BankManager()
-        self.customerList = Queue()
-        self.totalWorkTime = 0.0
-    }
-    
-    mutating func start() {
+    mutating func startConsoleApp() {
         print("""
             1 : 은행 개점
             2 : 종료
@@ -25,27 +20,35 @@ struct Bank {
         switch input {
         case "1":
             openBank()
-            start()
+            startConsoleApp()
         case "2":
             break
         default:
-            start()
+            startConsoleApp()
         }
     }
     
     mutating func openBank() {
-        let numberOfCustomer: Int = Int.random(in: 10...30)
-        
-        for number in 1...numberOfCustomer {
-            self.customerList.enqueue(Customer(number: number))
-        }
+        numberOfCustomer = Int.random(in: 10...30)
+        registerCustomers(with: numberOfCustomer)
         
         while !customerList.isEmpty {
             manager.provideService(to: customerList.dequeue())
             totalWorkTime += Decimal(0.7)
-            print(totalWorkTime)
         }
         
+        closeBank()
+    }
+    
+    mutating func registerCustomers(with numberOfCustomer: Int) {
+        for number in 1...numberOfCustomer {
+            self.customerList.enqueue(Customer(number: number))
+        }
+    }
+    
+    mutating func closeBank() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime.doubleValue)초입니다.")
+        self.totalWorkTime = 0.0
+        self.numberOfCustomer = 0
     }
 }

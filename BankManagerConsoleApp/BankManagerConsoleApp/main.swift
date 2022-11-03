@@ -5,4 +5,4 @@
 // 
 
 var bank = Bank()
-bank.start()
+bank.startConsoleApp()
