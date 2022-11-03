@@ -2,12 +2,16 @@
 //  BankManager.swift
 //  BankManagerConsoleApp
 
+import Foundation
+
 struct BankManager {
     private var bank: Bank = Bank(numberOfClerks: 1)
     private var timePerTask: Double = 0.7
+    private(set) var isRunning: Bool = true
     
     mutating func run() {
         printMenu()
+        
         let userInput = readLine()
         identifyMenu(userInput)
     }
@@ -28,6 +32,7 @@ struct BankManager {
             open()
             close()
         case "2":
+            isRunning = false
             return
         default:
             print("") // 에러처리
@@ -47,12 +52,14 @@ struct BankManager {
     
     mutating func open() {
         let customers: Int = createCustomer()
+        
         for _ in 1...customers {
             bank.performTask()
         }
     }
     
     func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무시간은 \(Double(bank.customerCount) * timePerTask)초 입니다.")
+        let totalTime: String = (Double(bank.customerCount) * 0.7).format()
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무시간은 \(totalTime)초 입니다.")
     }
 }

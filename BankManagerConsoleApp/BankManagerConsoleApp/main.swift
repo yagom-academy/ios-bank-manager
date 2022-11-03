@@ -7,4 +7,7 @@
 import Foundation
 
 var bankManager = BankManager()
-bankManager.run()
+
+while bankManager.isRunning {
+    bankManager.run()
+}
