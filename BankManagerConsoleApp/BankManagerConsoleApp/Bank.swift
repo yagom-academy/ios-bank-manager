@@ -12,7 +12,7 @@ struct Bank {
         return customerQueue?.isEmpty ?? false
     }
     
-    mutating func openedBank() {
+    mutating func createQueue() {
         customerQueue = CustomerQueue()
     }
     
@@ -42,7 +42,7 @@ struct Bank {
         endWork(customerCount: customerCount, duringTime: time)
     }
     
-    func endWork(customerCount: Int, duringTime: Double) {
+    private func endWork(customerCount: Int, duringTime: Double) {
         let workedTime = round(duringTime * 1000) / 1000
         print("업무를 마감합니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workedTime)초입니다.")
     }

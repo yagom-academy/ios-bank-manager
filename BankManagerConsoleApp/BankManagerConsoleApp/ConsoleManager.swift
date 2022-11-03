@@ -5,7 +5,9 @@
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
 struct ConsoleManager {
-    func startConsole() {
+    var bankManager: BankManager
+    
+    mutating func startConsole() {
         showMenu()
         doAct(userInput: validateUserInput())
     }
@@ -28,14 +30,12 @@ struct ConsoleManager {
         return filteredInput
     }
     
-    private func doAct(userInput: Int) {
+    private mutating func doAct(userInput: Int) {
         switch userInput {
         case 1:
-            // TODO: - Bank문열고 업무 시작하기
-            var bankManager = BankManager()
             bankManager.openBank()
             bankManager.startBankWork()
-            
+            bankManager.closeBank()
             startConsole()
         case 2:
             return

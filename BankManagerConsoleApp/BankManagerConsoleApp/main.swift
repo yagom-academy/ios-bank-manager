@@ -4,5 +4,5 @@
 //
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
-let console = ConsoleManager()
+var console = ConsoleManager(bankManager: BankManager())
 console.startConsole()

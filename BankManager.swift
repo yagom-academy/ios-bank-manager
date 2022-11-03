@@ -8,7 +8,7 @@ struct BankManager {
     private var bank: Bank = Bank()
     
     mutating func openBank() {
-        bank.openedBank()
+        bank.createQueue()
         
         let customerCount: Int = Int.random(in: 10...30)
         
@@ -20,5 +20,9 @@ struct BankManager {
     
     mutating func startBankWork() {
         bank.startWork()
+    }
+    
+    mutating func closeBank() {
+        bank.resetCustomerQueue()
     }
 }
