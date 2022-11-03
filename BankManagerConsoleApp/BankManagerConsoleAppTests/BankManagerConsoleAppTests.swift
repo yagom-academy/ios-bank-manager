@@ -8,12 +8,12 @@
 import XCTest
 
 class BankManagerConsoleAppTests: XCTestCase {
-    var sut: BankCustomerQueue = BankCustomerQueue()
+    var sut: BankCustomerQueue = BankCustomerQueue<String>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = BankCustomerQueue()
+        sut = BankCustomerQueue<String>()
     }
     
     func test_when_generate_then_not_nil() {
@@ -30,7 +30,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         
         // when
         sut.enqueue("일이삼")
-        sut.enqueue(123)
+        sut.enqueue("123")
 
         // then
         XCTAssertFalse(sut.isEmpty())
@@ -45,7 +45,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         let result = sut.dequeue()
         
         // then
-        XCTAssertEqual(result as? String, data)
+        XCTAssertEqual(result, data)
     }
 
     func test_when_peek_then_return_valid_value() {
@@ -57,7 +57,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         let result = sut.peek()
         
         // then
-        XCTAssertEqual(result as? String, data)
+        XCTAssertEqual(result, data)
     }
 
     func test_when_clear_then_is_empty() {
@@ -83,7 +83,7 @@ class BankManagerConsoleAppTests: XCTestCase {
     
     func test_when_enqueue_5_times_dequeue_5_times_then_return_valid_value() {
         // given
-        let items: [String] = ["1", "이", "steve", "jpush", "햄버"]
+        let items: [String] = ["1", "이", "steven", "jpush", "햄버"]
         
         // when
         items.forEach {
@@ -93,13 +93,13 @@ class BankManagerConsoleAppTests: XCTestCase {
         // then
         for index in items.indices {
             let result = items[index]
-            XCTAssertTrue(result == sut.dequeue() as? String)
+            XCTAssertEqual(result, sut.dequeue())
         }
     }
     
     func test_when_dequeue_by_number_of_elements_then_is_empty() {
         // given
-        let items: [String] = ["1", "이", "steve", "jpush", "햄버"]
+        let items: [String] = ["1", "이", "steven", "jpush", "햄버"]
         
         // when
         items.forEach {
@@ -112,5 +112,43 @@ class BankManagerConsoleAppTests: XCTestCase {
         
         // then
         XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_when_queue_is_empty_and_dequeue_then_return_nil() {
+        // given
+        
+        // when
+        let value = sut.dequeue()
+        
+        // then
+        XCTAssertNil(value)
+    }
+    
+    func test_when_queue_is_empty_and_peek_then_return_nil() {
+        // given
+        
+        // when
+        let value = sut.peek()
+        
+        // then
+        XCTAssertNil(value)
+    }
+    
+    func test_when_exceeding_dequeue_then_return_nil() {
+        // given
+        let items: [String] = ["s", "t", "e", "v", "e", "n"]
+        
+        // when
+        items.forEach {
+            sut.enqueue($0)
+        }
+        
+        items.indices.forEach { _ in
+            let value = sut.peek()
+            XCTAssertEqual(value, sut.dequeue())
+        }
+        
+        // then
+        XCTAssertNil(sut.dequeue())
     }
 }
