@@ -21,6 +21,8 @@
 		DF3B0347291403B70019BD69 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B0346291403B70019BD69 /* Displayable.swift */; };
 		DF3B0349291403E90019BD69 /* Displayable + displayMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */; };
 		DF3B034B291406020019BD69 /* MenuSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B034A291406020019BD69 /* MenuSelection.swift */; };
+		DF3B034D29140E5C0019BD69 /* Runnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B034C29140E5C0019BD69 /* Runnable.swift */; };
+		DF3B034F29140E870019BD69 /* Runnable + runBankManagerConsoleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B034E29140E870019BD69 /* Runnable + runBankManagerConsoleApp.swift */; };
 		DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60BF202910181300C8F7A0 /* CustomerQueue.swift */; };
 		DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF932689291262CC001BF846 /* WorkLoadManager.swift */; };
 		DF93268D2912B988001BF846 /* Double + formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF93268C2912B988001BF846 /* Double + formatted.swift */; };
@@ -55,6 +57,8 @@
 		DF3B0346291403B70019BD69 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
 		DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Displayable + displayMenu.swift"; sourceTree = "<group>"; };
 		DF3B034A291406020019BD69 /* MenuSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelection.swift; sourceTree = "<group>"; };
+		DF3B034C29140E5C0019BD69 /* Runnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runnable.swift; sourceTree = "<group>"; };
+		DF3B034E29140E870019BD69 /* Runnable + runBankManagerConsoleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Runnable + runBankManagerConsoleApp.swift"; sourceTree = "<group>"; };
 		DF60BF202910181300C8F7A0 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		DF932689291262CC001BF846 /* WorkLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLoadManager.swift; sourceTree = "<group>"; };
 		DF93268C2912B988001BF846 /* Double + formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + formatted.swift"; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 			children = (
 				DF3B0346291403B70019BD69 /* Displayable.swift */,
 				90901F5F291404B50007BB9D /* SelectableMenu.swift */,
+				DF3B034C29140E5C0019BD69 /* Runnable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				DF93268C2912B988001BF846 /* Double + formatted.swift */,
 				DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */,
 				90901F61291404EC0007BB9D /* SelectableMenu + getInput.swift */,
+				DF3B034E29140E870019BD69 /* Runnable + runBankManagerConsoleApp.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -244,10 +250,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				90901F60291404B50007BB9D /* SelectableMenu.swift in Sources */,
+				DF3B034D29140E5C0019BD69 /* Runnable.swift in Sources */,
 				90AA6A6329101433002DE5C3 /* Node.swift in Sources */,
 				90901F62291404EC0007BB9D /* SelectableMenu + getInput.swift in Sources */,
 				DF93268D2912B988001BF846 /* Double + formatted.swift in Sources */,
 				DF3B0349291403E90019BD69 /* Displayable + displayMenu.swift in Sources */,
+				DF3B034F29140E870019BD69 /* Runnable + runBankManagerConsoleApp.swift in Sources */,
 				DF3B034B291406020019BD69 /* MenuSelection.swift in Sources */,
 				DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */,
 				DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */,

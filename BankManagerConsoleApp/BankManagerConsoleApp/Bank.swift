@@ -5,7 +5,8 @@
 //  Created by jeremy, LJ on 2022/11/02.
 //
 
-struct Bank: Displayable, SelectableMenu {
+typealias App = Displayable & SelectableMenu & Runnable
+struct Bank: App {
     private var workLoadManager: WorkLoadManager = WorkLoadManager()
     mutating func openBank() {
         var workCount: Int = 0
