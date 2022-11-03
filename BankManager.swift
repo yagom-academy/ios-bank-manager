@@ -7,31 +7,27 @@ import Foundation
 
 struct BankManager {
     mutating func startManagement() {
-        print("""
-        1 : 은행 개점
-        2 : 종료
-        입력 :
-        """, terminator: " ")
+        print(Constant.options, terminator: Constant.empty)
         
         guard let input = readLine() else {
             return
         }
         
         switch input {
-        case "1":
+        case Constant.optionOne:
             setupBank()
             startManagement()
-        case "2":
+        case Constant.optionTwo:
             return
         default:
-            print("다시 입력해주세요")
+            print(Constant.wrongInputMessage)
             startManagement()
         }
     }
     
     mutating func receiveCustomer() -> Queue<Customer> {
         var customers: Queue<Customer> = Queue()
-        let customerCount = Int.random(in: 10...30)
+        let customerCount = Int.random(in: Constant.customerRange)
         
         for count in 1...customerCount {
             customers.enqueue(Customer.init(waitingNumber: count))
@@ -44,5 +40,18 @@ struct BankManager {
         let customers = receiveCustomer()
         var bank = Bank(customers: customers)
         bank.startBanking()
+        bank.closeBanking()
     }
 }
+
+extension BankManager {
+    enum Constant {
+        static let options: String = "1 : 은행 개점 \n2 : 종료 \n입력 : "
+        static let empty: String = ""
+        static let optionOne: String = "1"
+        static let optionTwo: String = "2"
+        static let wrongInputMessage: String = "다시 입력해주세요"
+        static let customerRange: ClosedRange<Int> = 10...30
+    }
+}
+
