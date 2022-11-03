@@ -15,11 +15,12 @@ struct Bank {
             입력 :
             """, terminator: " ")
         
-        guard let input = readLine() else { return }
+        guard let userInput = readLine() else { return }
         
-        switch input {
+        switch userInput {
         case "1":
             openBank()
+            closeBank()
             startConsoleApp()
         case "2":
             break
@@ -29,15 +30,13 @@ struct Bank {
     }
     
     mutating func openBank() {
-        numberOfCustomer = Int.random(in: 10...30)
-        registerCustomers(with: numberOfCustomer)
+        self.numberOfCustomer = Int.random(in: 10...30)
+        registerCustomers(with: self.numberOfCustomer)
         
-        while !customerList.isEmpty {
-            manager.provideService(to: customerList.dequeue())
-            totalWorkTime += Decimal(0.7)
+        while !self.customerList.isEmpty {
+            self.manager.provideService(to: self.customerList.dequeue())
+            self.totalWorkTime += Decimal(0.7)
         }
-        
-        closeBank()
     }
     
     mutating func registerCustomers(with numberOfCustomer: Int) {
@@ -47,7 +46,7 @@ struct Bank {
     }
     
     mutating func closeBank() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime.doubleValue)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomer)명이며, 총 업무시간은 \(self.totalWorkTime.doubleValue)초입니다.")
         self.totalWorkTime = 0.0
         self.numberOfCustomer = 0
     }
