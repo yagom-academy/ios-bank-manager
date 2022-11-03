@@ -36,6 +36,7 @@ struct Bank {
             
             serveCustomer(number: customer.waitingNumber)
         }
+        
         isOpen = false
     }
     
