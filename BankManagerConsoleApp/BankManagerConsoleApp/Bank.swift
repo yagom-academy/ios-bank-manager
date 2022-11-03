@@ -9,7 +9,13 @@ struct Bank {
     var customers: Queue<Customer>
     var completedCustomerCount: Int = 0
     var processingTime: Double {
-        return 0
+        guard let result = Double(String(format: "%.2f",
+                                         0.7 * Double(completedCustomerCount)))
+        else {
+            return 0.0
+        }
+        
+        return result
     }
     
     mutating func showManual() {
