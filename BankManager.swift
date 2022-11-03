@@ -9,11 +9,11 @@ struct BankManager {
     private var timePerTask: Double = 0.7
     private(set) var isRunning: Bool = true
     
-    mutating func run() {
+    mutating func run() throws {
         printMenu()
         
         let userInput = readLine()
-        identifyMenu(userInput)
+        try identifyMenu(userInput)
     }
     
     func printMenu() {
@@ -26,16 +26,16 @@ struct BankManager {
             terminator: " : ")
     }
     
-    mutating func identifyMenu(_ userInput: String?) {
+    mutating func identifyMenu(_ userInput: String?) throws {
         switch userInput {
         case "1":
             open()
-            close()
+            try close()
         case "2":
             isRunning = false
             return
         default:
-            print("") // 에러처리
+            throw BankError.invalidInput
         }
     }
     
@@ -58,8 +58,8 @@ struct BankManager {
         }
     }
     
-    func close() {
-        let totalTime: String = (Double(bank.customerCount) * 0.7).format()
+    func close() throws {
+        let totalTime: String = try (Double(bank.customerCount) * 0.7).format()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무시간은 \(totalTime)초 입니다.")
     }
 }

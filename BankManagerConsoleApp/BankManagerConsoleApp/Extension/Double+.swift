@@ -5,7 +5,7 @@
 import Foundation
 
 extension Double {
-    func format() -> String {
+    func format() throws -> String {
         let formatter: NumberFormatter = {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -15,7 +15,7 @@ extension Double {
         }()
         
         guard let result = formatter.string(for: self) else {
-            return "계산 불가능"
+            throw BankError.formattingError
         }
         return result
     }

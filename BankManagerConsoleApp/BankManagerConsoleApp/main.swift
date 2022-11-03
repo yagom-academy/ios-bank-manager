@@ -9,5 +9,11 @@ import Foundation
 var bankManager = BankManager()
 
 while bankManager.isRunning {
-    bankManager.run()
+    do {
+        try bankManager.run()
+    } catch {
+        if let error = error as? BankError {
+            print(error.message)
+        }
+    }
 }
