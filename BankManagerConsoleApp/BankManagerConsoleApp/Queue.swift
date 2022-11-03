@@ -5,7 +5,7 @@
 //  Created by jin on 10/31/22.
 //
 
-final class CustomerQueue<T> {
+final class Queue<T> {
     private let customerList = LinkedList<T>()
     
     func enqueue(_ customer: T) {
