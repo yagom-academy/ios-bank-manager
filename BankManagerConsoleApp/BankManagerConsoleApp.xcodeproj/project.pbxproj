@@ -113,11 +113,11 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				F6DA96E22910BA1D00A67D80 /* Node.swift */,
 				043E7B7C2910BB3D008E8F1A /* LinkedList.swift */,
 				0436C25A2912396C009266DE /* Bank.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				FC3A50B7291252F100490EF3 /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
