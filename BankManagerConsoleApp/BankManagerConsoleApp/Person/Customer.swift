@@ -2,7 +2,7 @@
 //  Created by Ayaan/Dragon/som on 2022/11/02.
 //  Copyright © yagom academy. All rights reserved.
 
-struct Customer: Equatable {
+struct Customer {
     let waitingNumber: Int
     let bankingService: BankingService
     
@@ -12,8 +12,8 @@ struct Customer: Equatable {
     }
 }
 
-extension Customer {
+extension Customer: Equatable {
     static func == (lhs: Customer, rhs: Customer) -> Bool {
-        return lhs.idCardNumber == rhs.idCardNumber
+        return (lhs.waitingNumber == rhs.waitingNumber) && (lhs.bankingService == rhs.bankingService)
     }
 }
