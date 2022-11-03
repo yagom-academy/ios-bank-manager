@@ -10,9 +10,13 @@ struct BankManager {
     mutating func openBank() {
         let customerCount: Int = Int.random(in: 10...30)
         
-        for turn in 1..<customerCount {
+        for turn in 1...customerCount {
             let newCustomer: Customer = Customer(ticketNumber: turn)
             self.bank.addCustomer(customer: newCustomer)
         }
+    }
+    
+    mutating func startBankWork() {
+        bank.startWork()
     }
 }
