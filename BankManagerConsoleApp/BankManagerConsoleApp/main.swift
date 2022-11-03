@@ -4,4 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-Bank().runBankManagerConsoleApp()
+var jlBank: Bank = Bank()
+ 
+jlBank.runBankManagerConsoleApp()
