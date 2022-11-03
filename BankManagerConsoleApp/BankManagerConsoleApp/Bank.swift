@@ -17,31 +17,6 @@ struct Bank {
         
         return result
     }
-    
-    mutating func showManual() {
-        print("""
-        1 : 은행 개점
-        2 : 종료
-        입력 :
-        """, terminator: " ")
-        
-        receiveUserInput()
-    }
-    
-    mutating func receiveUserInput() {
-        guard let input = readLine() else {
-            return
-        }
-        
-        switch input {
-        case "1":
-            startBanking()
-        case "2":
-            return
-        default:
-            return
-        }
-    }
 
     mutating func startBanking() {
         while !customers.isEmpty {

@@ -98,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				B256EEE3290FF8E4008EAC13 /* LinkedListTest */,
 				417677CC29100CEF00AB65EE /* QueueTest */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
@@ -124,6 +123,7 @@
 				B26FA1E529123DAA00111772 /* Customer.swift */,
 				41583D2229123E7400C54C54 /* Bank.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				B256EEE3290FF8E4008EAC13 /* LinkedListTest */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -472,7 +472,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4D3JSH53Q;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				EXCLUDED_ARCHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -486,7 +486,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4D3JSH53Q;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				EXCLUDED_ARCHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
