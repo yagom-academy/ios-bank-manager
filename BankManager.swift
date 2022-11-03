@@ -8,6 +8,8 @@ struct BankManager {
     private var bank: Bank = Bank()
     
     mutating func openBank() {
+        bank.openedBank()
+        
         let customerCount: Int = Int.random(in: 10...30)
         
         for turn in 1...customerCount {
