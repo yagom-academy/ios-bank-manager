@@ -1,0 +1,11 @@
+disabled_rules:
+- trailing_whitespace
+
+included:
+
+excluded:
+- Pods
+- BankManagerConsoleAppTests/
+
+line_length:
+    warning: 100
