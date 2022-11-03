@@ -28,10 +28,10 @@ struct BankManager {
     
     mutating func identifyMenu(_ userInput: String?) throws {
         switch userInput {
-        case "1":
+        case Constant.firstMenu:
             open()
             try close()
-        case "2":
+        case Constant.secondMenu:
             isRunning = false
             return
         default:
@@ -40,10 +40,10 @@ struct BankManager {
     }
     
     mutating func createCustomer() -> Int {
-        let customers: Int = Int.random(in: 10...30)
+        let customers: Int = Int.random(in: Constant.customerNumberRange)
         
-        for i in 1...customers {
-            let customer: Customer = Customer(queueNumber: i)
+        for number in 1...customers {
+            let customer: Customer = Customer(queueNumber: number)
             bank.addCustomer(customer)
         }
         
@@ -59,7 +59,7 @@ struct BankManager {
     }
     
     func close() throws {
-        let totalTime: String = try (Double(bank.customerCount) * 0.7).format()
+        let totalTime: String = try (Double(bank.customerCount) * timePerTask).format()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무시간은 \(totalTime)초 입니다.")
     }
 }
