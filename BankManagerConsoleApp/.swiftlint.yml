@@ -1,7 +1,7 @@
 disabled_rules:
 - trailing_whitespace
 - redundant_discardable_let
-
+- line_length
 excluded:
   - Pods
 

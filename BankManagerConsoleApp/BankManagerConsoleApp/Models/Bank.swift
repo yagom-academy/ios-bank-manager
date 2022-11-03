@@ -5,8 +5,8 @@ import Foundation
 struct Bank {
     private var manager: BankManager = BankManager()
     private var customerList: Queue<Customer> = Queue()
+    private var numberOfCustomer: Int = 0
     var totalWorkTime: Decimal = 0.0
-    var numberOfCustomer: Int = 0
     
     mutating func startConsoleApp() {
         print("""
