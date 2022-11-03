@@ -6,15 +6,13 @@
 import Foundation
 
 struct BankManager {
-    mutating func showManual() {
+    mutating func startManagement() {
         print("""
         1 : 은행 개점
         2 : 종료
         입력 :
         """, terminator: " ")
-    }
-    
-    mutating func receiveUserInput() {
+        
         guard let input = readLine() else {
             return
         }
@@ -22,10 +20,12 @@ struct BankManager {
         switch input {
         case "1":
             setupBank()
+            startManagement()
         case "2":
             return
         default:
-            return
+            print("다시 입력해주세요")
+            startManagement()
         }
     }
     
