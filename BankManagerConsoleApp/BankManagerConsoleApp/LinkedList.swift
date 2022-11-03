@@ -12,9 +12,9 @@ final class LinkedList<T> {
     var isEmpty: Bool {
         if head == nil {
             return true
-        } else {
-            return false
         }
+        
+        return false
     }
     
     func push(_ node: Node<T>) {
