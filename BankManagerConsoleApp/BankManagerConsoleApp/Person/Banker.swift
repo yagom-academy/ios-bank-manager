@@ -8,7 +8,7 @@ struct Banker {
         let endingMessage: String = "\(customer.waitingNumber)번 고객 업무 완료"
         
         print(startingMessage)
-        customer.bankingService.service()
+        customer.bankingService.request()
         print(endingMessage)
     }
 }

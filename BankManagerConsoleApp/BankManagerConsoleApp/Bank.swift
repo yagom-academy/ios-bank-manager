@@ -17,7 +17,7 @@ struct Bank {
     
     mutating private func setCustomerQueue() {
         for count in 1...customerCount {
-            guard let randomBankingService: BankingService = BankingServiceMaker.makeRandomService() else {
+            guard let randomBankingService: BankingService = BankingService.random() else {
                 return
             }
             
