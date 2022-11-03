@@ -9,11 +9,10 @@ import Foundation
 
 extension Double {
 
-    var formatted: String {
-        let number = NSNumber(integerLiteral: Int(self))
+    var formattedToString: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.minimumFractionDigits = 2
-        guard let result = numberFormatter.string(from: number) else {
+        guard let result = numberFormatter.string(from: self as NSNumber) else {
             return ""
         }
         
