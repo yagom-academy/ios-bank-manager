@@ -7,7 +7,6 @@ import Foundation
 
 struct Bank {
     var customers: Queue<Customer>
-    var customerCount: Int
     var completedCustomerCount: Int = 0
     var processingTime: Double {
         return 0

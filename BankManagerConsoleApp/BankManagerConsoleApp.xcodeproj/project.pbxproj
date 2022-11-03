@@ -117,13 +117,13 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				417677C3290FE3B500AB65EE /* Node.swift */,
 				B256EEDC290FE872008EAC13 /* LinkedList.swift */,
 				417677C5290FF2E500AB65EE /* Queue.swift */,
 				B26FA1E529123DAA00111772 /* Customer.swift */,
 				41583D2229123E7400C54C54 /* Bank.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
