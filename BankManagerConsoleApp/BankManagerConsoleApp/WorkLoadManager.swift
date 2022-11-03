@@ -10,7 +10,7 @@ struct WorkLoadManager {
     var bankManagers: [BankManager]  = [BankManager()]
     
     mutating func giveWorkToAvailableManager() {
-        guard let available = searchForAvailable(),
+        guard let available = searchForAvailableManager(),
               let task = getNextTask() else {
             print("no available manager")
             return
@@ -19,24 +19,24 @@ struct WorkLoadManager {
         giveTask(number: available, task: task)
     }
     
-    mutating func getNextTask() -> Int? {
+    private mutating func getNextTask() -> Int? {
         guard let task = self.taskQueue.dequeue() else {
             return nil
         }
         return task
     }
     
-    func searchForAvailable() -> Int? {
+    private func searchForAvailableManager() -> Int? {
         let managersCountRange = Array<Int>(0...(bankManagers.count - 1))
-        for number in managersCountRange {
-            if bankManagers[number].isAvailable {
-                return number
-            }
-        }
-        return nil
+        let number = managersCountRange.first(
+            where: {
+            bankManagers[$0].isAvailable
+        })
+
+        return number
     }
     
-    mutating func giveTask(number: Int, task: Int) {
+    private mutating func giveTask(number: Int, task: Int) {
         bankManagers[number].toggleAvailability()
         bankManagers[number].work(customerNumber: task)
         bankManagers[number].toggleAvailability()
