@@ -6,7 +6,6 @@
 //
 
 struct Bank {
-    private var bankManagers: [BankManager]  = []
     private var workLoadManager: WorkLoadManager = WorkLoadManager()
 
     mutating func openBank() {

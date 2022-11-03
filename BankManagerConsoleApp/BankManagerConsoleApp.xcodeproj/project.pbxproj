@@ -17,6 +17,9 @@
 		DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60BF202910181300C8F7A0 /* CustomerQueue.swift */; };
 		DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF932689291262CC001BF846 /* WorkLoadManager.swift */; };
 		DF93268D2912B988001BF846 /* Double + formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF93268C2912B988001BF846 /* Double + formatted.swift */; };
+		DFE3E84C2913BAAA001D4E90 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90901F592912876E0007BB9D /* Bank.swift */; };
+		DFE3E84D2913BAF2001D4E90 /* WorkLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF932689291262CC001BF846 /* WorkLoadManager.swift */; };
+		DFE3E84E2913BAFF001D4E90 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -199,8 +202,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				90AA6A7B2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift in Sources */,
+				DFE3E84C2913BAAA001D4E90 /* Bank.swift in Sources */,
+				DFE3E84D2913BAF2001D4E90 /* WorkLoadManager.swift in Sources */,
 				9073D6E42910C0A600590836 /* Node.swift in Sources */,
 				9073D6E52910C0AB00590836 /* CustomerQueue.swift in Sources */,
+				DFE3E84E2913BAFF001D4E90 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
