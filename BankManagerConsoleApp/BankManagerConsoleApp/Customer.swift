@@ -3,5 +3,5 @@
 //  BankManagerConsoleApp
 
 struct Customer {
-    private(set) let queueNumber: Int
+    private let queueNumber: Int
 }
