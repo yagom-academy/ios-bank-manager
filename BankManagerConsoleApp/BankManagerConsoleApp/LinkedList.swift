@@ -18,11 +18,11 @@ final class LinkedList<T> {
     }
     
     func push(_ node: Node<T>) {
-        self.tail?.next = node
-        self.tail = node
+        tail?.next = node
+        tail = node
         
-        if self.isEmpty {
-            self.head = node
+        if isEmpty {
+            head = node
             return
         }
     }
@@ -32,15 +32,15 @@ final class LinkedList<T> {
             return nil
         }
         
-        let temp = self.head
-        self.head = self.head?.next
+        let temp = head
+        head = head?.next
         
         return temp
     }
     
     func removeAll() {
-        self.head = nil
-        self.tail = nil
+        head = nil
+        tail = nil
     }
 
     func peek() -> Node<T>? {
@@ -48,6 +48,6 @@ final class LinkedList<T> {
             return nil
         }
         
-        return self.head
+        return head
     }
 }
