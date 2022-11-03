@@ -4,4 +4,11 @@
 //
 //  Created by Aaron, ttotale on 2022/11/03.
 //
-struct BankClerk {}
+import Foundation
+
+struct BankClerk {
+    
+    func work(for customer: Customer) {
+        print("\(customer.number)번 고객 업무 시작")
+    }
+}

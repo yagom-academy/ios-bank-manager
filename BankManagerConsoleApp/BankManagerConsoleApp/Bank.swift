@@ -4,16 +4,37 @@
 //
 //  Created by Aaron, tottale on 11/3/22.
 //
+import Foundation
 
 struct Bank {
     let clerk = BankClerk()
     let customerQueue = Queue<Customer>()
     
     func open() {
+        setupRandomCustomerQueue()
+        startBankJob()
+        menu()
+    }
+    
+    func setupRandomCustomerQueue() {
         Array(repeating: 0, count: Int.random(in: 10...30)).enumerated().forEach { index, number in
             customerQueue.enqueue(Customer(number: index+1))
         }
     }
+    
+    func startBankJob() {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        var customerCount = 0
+        while let customer = customerQueue.dequeue() {
+            clerk.work(for: customer)
+            usleep(useconds_t(700000))
+            customerCount += 1
+        }
+        let endTime = CFAbsoluteTimeGetCurrent()
+        let timeInterval = endTime - startTime
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(timeInterval)초입니다.")
+    }
+    
     func close() {}
     
     func menu() {
