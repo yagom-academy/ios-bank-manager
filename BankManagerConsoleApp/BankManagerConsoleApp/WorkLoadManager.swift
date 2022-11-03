@@ -22,6 +22,8 @@ struct WorkLoadManager {
     }
     
     mutating func giveTask(number: Int, task: Int) {
+        bankManagers[number].toggleAvailability()
         bankManagers[number].work(customerNumber: task)
+        bankManagers[number].toggleAvailability()
     }
 }
