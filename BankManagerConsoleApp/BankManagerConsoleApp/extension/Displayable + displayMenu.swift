@@ -10,7 +10,7 @@ extension Displayable {
         print("""
                 1 : 은행개점
                 2 : 종료
-                입력 :
+                입력 : 
                 """,
               terminator: "")
     }

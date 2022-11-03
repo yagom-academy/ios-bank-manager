@@ -13,7 +13,8 @@ extension SelectableMenu {
             MenuSelection.second.rawValue
         ]
         
-        guard let input = readLine(),       menuSelection.contains(input) else {
+        guard let input = readLine(),
+                  menuSelection.contains(input) else {
             return nil
         }
         

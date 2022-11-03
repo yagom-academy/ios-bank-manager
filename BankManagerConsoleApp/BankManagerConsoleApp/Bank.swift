@@ -11,7 +11,7 @@ struct Bank: Displayable, SelectableMenu {
         var workCount: Int = 0
         print("openBank")
         letCustomersIn()
-        while workLoadManager.taskQueue.isEmpty() == true {
+        while workLoadManager.taskQueue.isEmpty() == false {
             workLoadManager.giveWorkToAvailableManager()
             workCount += 1
         }
