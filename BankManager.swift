@@ -25,6 +25,14 @@ struct BankManager {
         }
     }
     
+    mutating func setupBank() {
+        let customers = receiveCustomer()
+        var bank = Bank(customers: customers)
+        
+        bank.startBanking()
+        bank.closeBanking()
+    }
+    
     mutating func receiveCustomer() -> Queue<Customer> {
         var customers: Queue<Customer> = Queue()
         let customerCount = Int.random(in: Constant.customerRange)
@@ -34,13 +42,6 @@ struct BankManager {
         }
         
         return customers
-    }
-    
-    mutating func setupBank() {
-        let customers = receiveCustomer()
-        var bank = Bank(customers: customers)
-        bank.startBanking()
-        bank.closeBanking()
     }
 }
 
