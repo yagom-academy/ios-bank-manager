@@ -16,6 +16,8 @@
 		90AA6A7B2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AA6A7A2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		DF3B0347291403B70019BD69 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B0346291403B70019BD69 /* Displayable.swift */; };
+		DF3B0349291403E90019BD69 /* Displayable + displayMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */; };
 		DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60BF202910181300C8F7A0 /* CustomerQueue.swift */; };
 		DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF932689291262CC001BF846 /* WorkLoadManager.swift */; };
 		DF93268D2912B988001BF846 /* Double + formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF93268C2912B988001BF846 /* Double + formatted.swift */; };
@@ -45,6 +47,8 @@
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		DF3B0346291403B70019BD69 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
+		DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Displayable + displayMenu.swift"; sourceTree = "<group>"; };
 		DF60BF202910181300C8F7A0 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		DF932689291262CC001BF846 /* WorkLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLoadManager.swift; sourceTree = "<group>"; };
 		DF93268C2912B988001BF846 /* Double + formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + formatted.swift"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				DF3B0345291403A50019BD69 /* Protocols */,
 				DF93268B2912B974001BF846 /* extension */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				90AA6A6229101433002DE5C3 /* Node.swift */,
@@ -109,10 +114,19 @@
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
 		};
+		DF3B0345291403A50019BD69 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DF3B0346291403B70019BD69 /* Displayable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		DF93268B2912B974001BF846 /* extension */ = {
 			isa = PBXGroup;
 			children = (
 				DF93268C2912B988001BF846 /* Double + formatted.swift */,
+				DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -222,10 +236,12 @@
 			files = (
 				90AA6A6329101433002DE5C3 /* Node.swift in Sources */,
 				DF93268D2912B988001BF846 /* Double + formatted.swift in Sources */,
+				DF3B0349291403E90019BD69 /* Displayable + displayMenu.swift in Sources */,
 				DF60BF212910181300C8F7A0 /* CustomerQueue.swift in Sources */,
 				DF93268A291262CC001BF846 /* WorkLoadManager.swift in Sources */,
 				90901F5A2912876E0007BB9D /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				DF3B0347291403B70019BD69 /* Displayable.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
