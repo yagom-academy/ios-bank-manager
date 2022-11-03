@@ -21,7 +21,7 @@ struct Bank {
         bankers.append(banker)
     }
     
-    mutating func printClosingMesage() {
+    private mutating func printClosingMesage() {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.minimumFractionDigits = 2
         guard let formattedProcessedTotalTime: String = numberFormatter.string(from: NSNumber(value: processedTotalTime)) else {

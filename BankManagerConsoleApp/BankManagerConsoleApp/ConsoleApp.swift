@@ -17,7 +17,7 @@ struct ConsoleApp {
         }
     }
     
-    func inputMenu() -> ConsoleAppMenu {
+    private func inputMenu() -> ConsoleAppMenu {
         print("입력 :", terminator: " ")
         guard let input: Int = Int(readLine() ?? ""),
               let inputMenu: ConsoleAppMenu = ConsoleAppMenu(rawValue: input) else {
@@ -27,7 +27,7 @@ struct ConsoleApp {
         return inputMenu
     }
     
-    func startBankByCreatingBankManager() {
+    private func startBankByCreatingBankManager() {
         var bankManager: BankManager = BankManager()
         let customerCount: Int = Int.random(in: 10...30)
         bankManager.addCustomers(count: customerCount)
