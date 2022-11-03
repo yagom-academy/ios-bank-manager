@@ -2,7 +2,7 @@
 //  ConsoleManager.swift
 //  BankManagerConsoleApp
 //
-//  Copyright (c) 2022 Minii All rights reserved.
+//  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
 struct ConsoleManager {
     func startConsole() {
