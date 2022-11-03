@@ -32,6 +32,8 @@ struct ConsoleManager {
         switch userInput {
         case 1:
             // TODO: - Bank문열고 업무 시작하기
+            var bankManager = BankManager()
+            bankManager.openBank()
             print("업무를 마감합니다. 오늘 업무를 처리한 고객은 총 XX명이며, 총 업무시간은 XX초입니다.")
             startConsole()
         case 2:

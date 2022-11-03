@@ -5,5 +5,9 @@
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
 struct Bank {
-    var customerQueue: CustomerQueue<Customer> = CustomerQueue<Customer>()
+    private var customerQueue: CustomerQueue<Customer> = CustomerQueue<Customer>()
+    
+    mutating func addCustomer(customer: Customer) {
+        customerQueue.enqueue(value: customer)
+    }
 }
