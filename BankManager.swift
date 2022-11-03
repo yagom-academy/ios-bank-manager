@@ -25,7 +25,7 @@ struct BankManager {
         }
     }
     
-    mutating func receiveCustomer() -> Queue<Customer> {
+    private mutating func receiveCustomer() -> Queue<Customer> {
         var customers: Queue<Customer> = Queue()
         let customerCount = Int.random(in: Constant.customerRange)
         
@@ -36,15 +36,14 @@ struct BankManager {
         return customers
     }
     
-    mutating func setupBank() {
+    private mutating func setupBank() {
         let customers = receiveCustomer()
         var bank = Bank(customers: customers)
-        bank.startBanking()
-        bank.closeBanking()
+        bank.openBank()
     }
 }
 
-extension BankManager {
+private extension BankManager {
     enum Constant {
         static let options: String = "1 : 은행 개점 \n2 : 종료 \n입력 : "
         static let empty: String = ""

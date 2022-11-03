@@ -6,15 +6,29 @@
 import Foundation
 
 struct Bank {
-    var customers: Queue<Customer>
-    var completedCustomerCount: Int = 0
-    var totalProcessingTime: String {
+    private var customers: Queue<Customer>
+    private var completedCustomerCount: Int = 0
+    private var isOpen: Bool {
+        didSet {
+            isOpen ? startBanking() : closeBanking()
+        }
+    }
+    private var totalProcessingTime: String {
         let result = String(format: Constant.twoDecimal,
                             Constant.processingTime * Double(completedCustomerCount))
         return result
     }
+    
+    init(customers: Queue<Customer>) {
+        self.customers = customers
+        self.isOpen = false
+    }
+    
+    mutating func openBank() {
+        isOpen = true
+    }
 
-    mutating func startBanking() {
+    private mutating func startBanking() {
         while !customers.isEmpty {
             guard let customer = customers.dequeue() else {
                 return
@@ -22,21 +36,22 @@ struct Bank {
             
             serveCustomer(number: customer.waitingNumber)
         }
+        isOpen = false
     }
     
-    mutating func serveCustomer(number: Int) {
+    private mutating func serveCustomer(number: Int) {
         print(Constant.startMessage(number))
         Thread.sleep(forTimeInterval: Constant.processingTime)
         completedCustomerCount += 1
         print(Constant.endMessage(number))
     }
     
-    func closeBanking() {
+    private func closeBanking() {
         print(Constant.bankClosedMessage(completedCustomerCount, totalProcessingTime))
     }
 }
 
-extension Bank {
+private extension Bank {
     enum Constant {
         static let twoDecimal: String = "%.2f"
         static let processingTime: Double = 0.7
@@ -50,6 +65,5 @@ extension Bank {
             return "업무가 마감되었습니다. " +
                    "오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(processingTime)초입니다."
         }
-        
     }
 }
