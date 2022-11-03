@@ -4,13 +4,12 @@
 
 struct BankManager {
     private var bank: Bank = Bank(numberOfClerks: 1)
+    private var timePerTask: Double = 0.7
     
     mutating func run() {
         printMenu()
-        
-        let userInput = fetchUserInput()
+        let userInput = readLine()
         identifyMenu(userInput)
-        
     }
     
     func printMenu() {
@@ -23,20 +22,11 @@ struct BankManager {
             terminator: " : ")
     }
     
-    func fetchUserInput() -> String? {
-        guard let userInput = readLine() else { return nil }
-        
-        return userInput
-    }
-    
     mutating func identifyMenu(_ userInput: String?) {
         switch userInput {
         case "1":
-            let customers = createCustomer()
-            for _ in 1...customers {
-                bank.performTask()
-            }
-            print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 n명이며, 총 업무시간은 0.00초 입니다.")
+            open()
+            close()
         case "2":
             return
         default:
@@ -53,5 +43,16 @@ struct BankManager {
         }
         
         return customers
+    }
+    
+    mutating func open() {
+        let customers: Int = createCustomer()
+        for _ in 1...customers {
+            bank.performTask()
+        }
+    }
+    
+    func close() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.customerCount)명이며, 총 업무시간은 \(Double(bank.customerCount) * timePerTask)초 입니다.")
     }
 }
