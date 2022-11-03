@@ -6,15 +6,17 @@ import Foundation
 
 struct Console {
     typealias WorkResult = (customerCount: Int, time: Double)
-    private let openingFlag: Int = 1
-    private let closingFlag: Int = 2
+    private enum Flag: Int {
+        case opening = 1
+        case closing = 2
+    }
     
     func start() {
         while true {
             printConsoleGuideLine()
             
-            let result: Result<Int, ConsoleError> = receivedUserInput()
-            let consoleFlag: Int
+            let result: Result<Flag, ConsoleError> = receivedUserInput()
+            let consoleFlag: Flag
             
             switch result {
             case .success(let flag):
@@ -24,11 +26,12 @@ struct Console {
                 continue
             }
             
-            if consoleFlag == openingFlag {
+            switch consoleFlag {
+            case .opening:
                 let workResult: WorkResult = openBank()
                 
                 printCompleteMessage(about: workResult)
-            } else if consoleFlag == closingFlag {
+            case .closing:
                 return
             }
         }
@@ -44,10 +47,10 @@ struct Console {
         print(consoleGuideLine, terminator: " ")
     }
     
-    private func receivedUserInput() -> Result<Int, ConsoleError> {
+    private func receivedUserInput() -> Result<Flag, ConsoleError> {
         guard let input: String = readLine(),
-              let flag: Int = Int(input),
-              (flag == openingFlag || flag == closingFlag) == true else {
+              let flagRawValue: Int = Int(input),
+              let flag: Flag = Flag.init(rawValue: flagRawValue) else {
                   return.failure(.invalidError)
               }
     
