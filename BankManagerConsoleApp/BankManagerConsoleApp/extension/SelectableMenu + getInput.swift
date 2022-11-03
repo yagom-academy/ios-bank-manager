@@ -8,7 +8,12 @@
 extension SelectableMenu {
     
     func getInput() -> String? {
-        guard let input = readLine(), ["1","2"].contains(input) else {
+        let menuSelection: [String] = [
+            MenuSelection.first.rawValue,
+            MenuSelection.second.rawValue
+        ]
+        
+        guard let input = readLine(),       menuSelection.contains(input) else {
             return nil
         }
         
