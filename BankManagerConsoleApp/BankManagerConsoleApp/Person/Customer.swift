@@ -2,18 +2,11 @@
 //  Created by Ayaan/Dragon/som on 2022/11/02.
 //  Copyright © yagom academy. All rights reserved.
 
-struct Customer: Person, Equatable {
-    let name: String?
-    let idCardNumber: String?
+struct Customer: Equatable {
     let waitingNumber: Int
     let bankingService: BankingService
     
-    init(name: String? = nil,
-         idCardNumber: String? = nil,
-         waitingNumber: Int,
-         bankingService: BankingService) {
-        self.name = name
-        self.idCardNumber = idCardNumber
+    init(waitingNumber: Int, bankingService: BankingService) {
         self.waitingNumber = waitingNumber
         self.bankingService = bankingService
     }
