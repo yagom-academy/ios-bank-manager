@@ -5,15 +5,15 @@
 //  Created by Gundy, jpush on 2022/11/01.
 //
 
-public struct BankCustomerQueue: Queue {
-    private var linkedList: LinkedList<Queueable> = .init()
+public struct BankCustomerQueue<DataType>: Queue {
+    private var linkedList: LinkedList<DataType> = .init()
     
-    public mutating func enqueue(_ element: Queueable) {
+    public mutating func enqueue(_ element: DataType) {
         self.linkedList.pushLast(element)
     }
     
     @discardableResult
-    public mutating func dequeue() -> Queueable? {
+    public mutating func dequeue() -> DataType? {
         return self.linkedList.popFirst()?.data
     }
     
@@ -21,7 +21,7 @@ public struct BankCustomerQueue: Queue {
         self.linkedList.clear()
     }
     
-    public func peek() -> Queueable? {
+    public func peek() -> DataType? {
         return self.linkedList.peek()?.data
     }
     

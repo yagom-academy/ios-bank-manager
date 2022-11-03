@@ -10,14 +10,12 @@
 		AC17C2872911098E001D97C0 /* BankCustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E152910E178000E2EA3 /* BankCustomerQueue.swift */; };
 		AC17C28829110990001D97C0 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E1E2910F6D8000E2EA3 /* LinkedList.swift */; };
 		AC17C28929110992001D97C0 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E1C2910E514000E2EA3 /* Node.swift */; };
-		AC17C28A29110994001D97C0 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E1A2910E46E000E2EA3 /* Queueable.swift */; };
 		AC17C28B29110996001D97C0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E182910E326000E2EA3 /* Queue.swift */; };
 		AC17C28C29110998001D97C0 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E202910F7BD000E2EA3 /* List.swift */; };
 		BFF51E0E2910DD62000E2EA3 /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E0D2910DD62000E2EA3 /* BankManagerConsoleAppTests.swift */; };
 		BFF51E142910DFB8000E2EA3 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		BFF51E162910E178000E2EA3 /* BankCustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E152910E178000E2EA3 /* BankCustomerQueue.swift */; };
 		BFF51E192910E326000E2EA3 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E182910E326000E2EA3 /* Queue.swift */; };
-		BFF51E1B2910E46E000E2EA3 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E1A2910E46E000E2EA3 /* Queueable.swift */; };
 		BFF51E1D2910E514000E2EA3 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E1C2910E514000E2EA3 /* Node.swift */; };
 		BFF51E1F2910F6D8000E2EA3 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E1E2910F6D8000E2EA3 /* LinkedList.swift */; };
 		BFF51E212910F7BD000E2EA3 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF51E202910F7BD000E2EA3 /* List.swift */; };
@@ -42,7 +40,6 @@
 		BFF51E0D2910DD62000E2EA3 /* BankManagerConsoleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerConsoleAppTests.swift; sourceTree = "<group>"; };
 		BFF51E152910E178000E2EA3 /* BankCustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCustomerQueue.swift; sourceTree = "<group>"; };
 		BFF51E182910E326000E2EA3 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		BFF51E1A2910E46E000E2EA3 /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
 		BFF51E1C2910E514000E2EA3 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		BFF51E1E2910F6D8000E2EA3 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		BFF51E202910F7BD000E2EA3 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -92,7 +89,6 @@
 			children = (
 				BFF51E202910F7BD000E2EA3 /* List.swift */,
 				BFF51E182910E326000E2EA3 /* Queue.swift */,
-				BFF51E1A2910E46E000E2EA3 /* Queueable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -221,7 +217,6 @@
 				BFF51E0E2910DD62000E2EA3 /* BankManagerConsoleAppTests.swift in Sources */,
 				AC17C28829110990001D97C0 /* LinkedList.swift in Sources */,
 				BFF51E142910DFB8000E2EA3 /* BankManager.swift in Sources */,
-				AC17C28A29110994001D97C0 /* Queueable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +227,6 @@
 				BFF51E192910E326000E2EA3 /* Queue.swift in Sources */,
 				BFF51E212910F7BD000E2EA3 /* List.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				BFF51E1B2910E46E000E2EA3 /* Queueable.swift in Sources */,
 				BFF51E1D2910E514000E2EA3 /* Node.swift in Sources */,
 				BFF51E162910E178000E2EA3 /* BankCustomerQueue.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
