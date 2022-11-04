@@ -71,7 +71,7 @@
 
 ### UML
 - ConsoleApp 구현 타입의 UML
-![UMLofConsole](https://i.imgur.com/3vJxP9O.jpg)
+![ConsoleAppUML](https://user-images.githubusercontent.com/99257965/199923301-c4d42e00-ebbc-421e-a84d-87e4596a6386.jpg)
 
 <br>
 
