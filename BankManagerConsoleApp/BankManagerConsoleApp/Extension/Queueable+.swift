@@ -7,11 +7,11 @@
 
 extension Queueable {
     var peek: Element? {
-        return list.bringHead()
+        return list.headData
     }
     
     var isEmpty: Bool {
-        return list.bringListCount() == 0 ? true : false
+        return list.currentCount == 0
     }
     
     mutating func enqueue(_ data: Element) {

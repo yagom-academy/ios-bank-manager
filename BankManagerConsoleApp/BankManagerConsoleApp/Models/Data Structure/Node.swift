@@ -14,11 +14,11 @@ final class Node<Element> {
         self.next = next
     }
     
-    func bringNodeData() -> Element {
+    var nodeData: Element {
         return data
     }
     
-    func bringNextNode() -> Node<Element>? {
+    var nextNode: Node<Element>? {
         return next
     }
     
