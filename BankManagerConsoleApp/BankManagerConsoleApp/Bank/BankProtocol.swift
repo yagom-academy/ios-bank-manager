@@ -8,7 +8,3 @@
 protocol BankProtocol {
     mutating func open()
 }
-
-extension BankProtocol {
-    
-}
