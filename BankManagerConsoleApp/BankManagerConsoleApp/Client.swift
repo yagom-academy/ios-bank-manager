@@ -12,3 +12,9 @@ struct Client {
         self.ticketNumber = bank.returnTicketNumber()
     }
 }
+
+extension Client: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.ticketNumber == rhs.ticketNumber
+    }
+}
