@@ -4,6 +4,7 @@
 //
 //  Created by 애쉬, 로빈 on 2022/11/03.
 //
+import Foundation
 
 struct Bank {
     let bankWorker: BankWorker
@@ -17,6 +18,16 @@ struct Bank {
         numberTicketQueue.enqueue(client)
     }
     
+    func directBankWorker() {
+        while !numberTicketQueue.isEmpty {
+            guard let client = numberTicketQueue.dequeue() else {
+                return
+            }
+            
+            bankWorker.startWork(client: client)
+        }
+    }
+    
     func open() {
         print("""
             1. 은행개점
@@ -28,10 +39,10 @@ struct Bank {
         
         switch menuNumber {
         case "1":
+            directBankWorker()
             return
-        // 실행할 메서드 구현
         case "2":
-            return
+            exit(0)
         default:
             print("올바른 메뉴 번호를 입력해주세요.")
         }
