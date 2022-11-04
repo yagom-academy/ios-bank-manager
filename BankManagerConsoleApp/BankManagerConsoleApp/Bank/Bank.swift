@@ -56,6 +56,7 @@ struct Bank: BankProtocol {var bankerList: [Banker] = [Banker()]
     }
     
     func close() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedCustomerCount)명이며, 총 업무시간은 \(totalWorkedTime)초입니다.")
+        let wasteTime = String(format: "%.2f", totalWorkedTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedCustomerCount)명이며, 총 업무시간은 \(wasteTime)초입니다.")
     }
 }
