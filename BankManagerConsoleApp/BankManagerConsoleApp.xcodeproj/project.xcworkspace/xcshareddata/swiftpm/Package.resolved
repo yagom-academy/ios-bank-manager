@@ -1,14 +1,16 @@
 {
-  "pins" : [
-    {
-      "identity" : "bankcustomerqueue",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jjpush/BankCustomerQueue.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "99755b2e7d7074d976379596db750d7841100bb7"
+  "object": {
+    "pins": [
+      {
+        "package": "BankCustomerQueue",
+        "repositoryURL": "https://github.com/jjpush/BankCustomerQueue.git",
+        "state": {
+          "branch": "main",
+          "revision": "99755b2e7d7074d976379596db750d7841100bb7",
+          "version": null
+        }
       }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }

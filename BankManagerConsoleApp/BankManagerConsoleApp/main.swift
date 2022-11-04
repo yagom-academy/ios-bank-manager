@@ -6,5 +6,3 @@
 
 import Foundation
 import BankCustomerQueue
-
-

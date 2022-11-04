@@ -6,9 +6,10 @@
 //
 
 import XCTest
+import BankCustomerQueue
 
 class BankManagerConsoleAppTests: XCTestCase {
-    var sut: BankCustomerQueue = BankCustomerQueue<String>()
+    var sut: BankCustomerQueue<String> = BankCustomerQueue<String>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
