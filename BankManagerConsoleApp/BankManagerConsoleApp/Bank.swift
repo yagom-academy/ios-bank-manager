@@ -48,8 +48,7 @@ struct Bank {
     
     private func closeBanking() {
         print(String(format: Constant.bankClosedMessage,
-                     completedCustomerCount,
-                     totalProcessingTime))
+                     arguments: [completedCustomerCount, totalProcessingTime]))
     }
 }
 
