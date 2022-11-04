@@ -29,7 +29,7 @@ struct Bank {
         }
     }
     
-    mutating func openBank() {
+    mutating private func openBank() {
         self.numberOfCustomer = Int.random(in: 10...30)
         registerCustomers(with: self.numberOfCustomer)
         
@@ -39,13 +39,13 @@ struct Bank {
         }
     }
     
-    mutating func registerCustomers(with numberOfCustomer: Int) {
+    mutating private func registerCustomers(with numberOfCustomer: Int) {
         for number in 1...numberOfCustomer {
             self.customerList.enqueue(Customer(number: number))
         }
     }
     
-    mutating func closeBank() {
+    mutating private func closeBank() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomer)명이며, 총 업무시간은 \(self.totalWorkTime.doubleValue)초입니다.")
         self.totalWorkTime = 0.0
         self.numberOfCustomer = 0
