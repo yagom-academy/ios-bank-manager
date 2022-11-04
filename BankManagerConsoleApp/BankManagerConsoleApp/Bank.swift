@@ -8,13 +8,11 @@ import Foundation
 
 struct Bank {
     let bankWorker: BankWorker
-    let numberTicketQueue: Queue<Client>
-    var cumulativeClientCount: Int
+    let numberTicketQueue: Queue<Client> = Queue()
+    var cumulativeClientCount: Int = 0
     
-    init(bankWorker: BankWorker, numberTicketQueue: Queue<Client> = Queue(), cumulativeClientCount: Int = 0) {
+    init(bankWorker: BankWorker) {
         self.bankWorker = bankWorker
-        self.numberTicketQueue = numberTicketQueue
-        self.cumulativeClientCount = cumulativeClientCount
     }
     
     mutating func updateClientList(_ client: Client) {
