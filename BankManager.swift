@@ -26,21 +26,19 @@ struct BankManager {
     }
     
     private mutating func setupBank() {
-        let customers = receiveCustomer()
-        var bank = Bank(customers: customers)
+        var bank = Bank()
         
+        addCustomer(to: &bank)
         bank.openBank()
     }
     
-    private mutating func receiveCustomer() -> Queue<Customer> {
-        var customers: Queue<Customer> = Queue()
+    private mutating func addCustomer(to bank: inout Bank) {
         let customerCount = Int.random(in: Constant.customerRange)
         
         for count in 1...customerCount {
-            customers.enqueue(Customer.init(waitingNumber: count))
+            let customer = Customer.init(waitingNumber: count)
+            bank.receive(customer: customer)
         }
-        
-        return customers
     }
 }
 

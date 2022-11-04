@@ -6,9 +6,9 @@
 import Foundation
 
 struct Bank {
-    private var customers: Queue<Customer>
+    private var customers: Queue<Customer> = Queue()
     private var completedCustomerCount: Int = 0
-    private var isOpen: Bool {
+    private var isOpen: Bool = false {
         didSet {
             isOpen ? startBanking() : closeBanking()
         }
@@ -19,13 +19,12 @@ struct Bank {
         return result
     }
     
-    init(customers: Queue<Customer>) {
-        self.customers = customers
-        self.isOpen = false
-    }
-    
     mutating func openBank() {
         isOpen = true
+    }
+    
+    mutating func receive(customer: Customer) {
+        customers.enqueue(customer)
     }
 
     private mutating func startBanking() {
