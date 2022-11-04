@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC8E36652914B4D200C25FEA /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E36642914B4D200C25FEA /* Bank.swift */; };
+		AC8E36662914B4D200C25FEA /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E36642914B4D200C25FEA /* Bank.swift */; };
+		AC8E36682914B4FF00C25FEA /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E36672914B4FF00C25FEA /* BankProtocol.swift */; };
+		AC8E36692914B4FF00C25FEA /* BankProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E36672914B4FF00C25FEA /* BankProtocol.swift */; };
+		AC8E366B2914B55400C25FEA /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E366A2914B55400C25FEA /* Banker.swift */; };
+		AC8E366C2914B55400C25FEA /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E366A2914B55400C25FEA /* Banker.swift */; };
 		BF32254F2914A87E0097B1A6 /* BankCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32254E2914A87E0097B1A6 /* BankCustomer.swift */; };
 		BF3225512914A8DB0097B1A6 /* BankCustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3225502914A8DB0097B1A6 /* BankCustomerTests.swift */; };
 		BF3225532914A8F90097B1A6 /* BankCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32254E2914A87E0097B1A6 /* BankCustomer.swift */; };
@@ -31,6 +37,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC8E36642914B4D200C25FEA /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		AC8E36672914B4FF00C25FEA /* BankProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankProtocol.swift; sourceTree = "<group>"; };
+		AC8E366A2914B55400C25FEA /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		BF32254E2914A87E0097B1A6 /* BankCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCustomer.swift; sourceTree = "<group>"; };
 		BF3225502914A8DB0097B1A6 /* BankCustomerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCustomerTests.swift; sourceTree = "<group>"; };
 		BFF51E0B2910DD62000E2EA3 /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +69,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC8E366D2914B5DC00C25FEA /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				AC8E366A2914B55400C25FEA /* Banker.swift */,
+				AC8E36642914B4D200C25FEA /* Bank.swift */,
+				AC8E36672914B4FF00C25FEA /* BankProtocol.swift */,
+				BF32254E2914A87E0097B1A6 /* BankCustomer.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		BF32255B2914B1010097B1A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,8 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
+				AC8E366D2914B5DC00C25FEA /* Bank */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				BF32254E2914A87E0097B1A6 /* BankCustomer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -202,10 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8E366C2914B55400C25FEA /* Banker.swift in Sources */,
 				BF3225512914A8DB0097B1A6 /* BankCustomerTests.swift in Sources */,
 				BFF51E0E2910DD62000E2EA3 /* BankManagerConsoleAppTests.swift in Sources */,
+				AC8E36662914B4D200C25FEA /* Bank.swift in Sources */,
 				BFF51E142910DFB8000E2EA3 /* BankManager.swift in Sources */,
 				BF3225532914A8F90097B1A6 /* BankCustomer.swift in Sources */,
+				AC8E36692914B4FF00C25FEA /* BankProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +236,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8E36682914B4FF00C25FEA /* BankProtocol.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				AC8E366B2914B55400C25FEA /* Banker.swift in Sources */,
+				AC8E36652914B4D200C25FEA /* Bank.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				BF32254F2914A87E0097B1A6 /* BankCustomer.swift in Sources */,
 			);
