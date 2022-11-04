@@ -7,5 +7,6 @@
 import Foundation
 import BankCustomerQueue
 
-Bank().open()
+var bank: Bank = Bank()
 
+bank.open()

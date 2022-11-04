@@ -8,8 +8,10 @@
 import Foundation
 import BankCustomerQueue
 
-struct Bank: BankProtocol {
+struct Bank: BankProtocol {var bankerList: [Banker] = [Banker()]
     var bankCustomerQueue: BankCustomerQueue<BankCustomer>
+    private var completedCustomerCount: Int = 0
+    private var totalWorkedTime: TimeInterval = 0
     
     init() {
         self.bankCustomerQueue = .init()
@@ -21,17 +23,15 @@ struct Bank: BankProtocol {
         }
     }
     
-    func work(customer: BankCustomer) {
-        
+    mutating func work() {
+        let banker: Banker = bankerList.removeFirst()
+        while let customer = bankCustomerQueue.dequeue() {
+            banker.work(customer)
+            completedCustomerCount += 1
+        }
     }
     
-    var bankerList: [Banker] = [Banker()]
-    
-    func work() {
-        print("일하는 중")
-    }
-    
-    func open() {
+    mutating func open() {
         while true {
             floatingMenu()
             print("입력 :", terminator: " ")
@@ -42,7 +42,11 @@ struct Bank: BankProtocol {
             
             switch menu {
             case "1":
+                let startPoint = Date()
                 work()
+                let endPoint = Date()
+                totalWorkedTime = endPoint.timeIntervalSince(startPoint)
+                close()
             case "2":
                 return
             default:
@@ -52,8 +56,6 @@ struct Bank: BankProtocol {
     }
     
     func close() {
-        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedCustomerCount)명이며, 총 업무시간은 \(totalWorkedTime)초입니다.")
     }
-    
-    
 }

@@ -12,9 +12,8 @@ protocol BankProtocol {
     var bankerList: [Banker] { get set }
     var bankCustomerQueue: BankCustomerQueue<BankCustomer> { get set }
     
-    func work(customer: BankCustomer)
+    mutating func work()
     func close()
-    
     func floatingMenu()
 }
 
