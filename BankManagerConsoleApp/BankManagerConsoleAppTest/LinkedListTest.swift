@@ -20,7 +20,7 @@ class LinkedListTest: XCTestCase {
         sut = nil
     }
 
-    func test_count가0인list에insertFirst를호출했을때_head값의변경이잘되었는지() {
+    func test_count가0인list에insertFirst를호출했을때_head값이_2인지() {
         // given
         sut.insertFirst(2)
         
@@ -31,7 +31,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_count가1인list에insertFirst를호출했을때_head값의변경이잘되었는지() {
+    func test_count가1인list에insertFirst를호출했을때_head값이_10인지() {
         // given
         sut.insertLast(5)
         sut.insertFirst(10)
@@ -43,7 +43,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 10)
     }
     
-    func test_count가2인list에insertFirst를호출했을때_head값의변경이잘되었는지() {
+    func test_count가2인list에insertFirst를호출했을때_head값이_3인지() {
         // given
         sut.insertLast(1)
         sut.insertLast(2)
@@ -56,7 +56,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_count가0인list에서search를호출했을때_노드값이잘반환되는지() {
+    func test_count가0인list에서search를호출했을때_반환값이_nil인지() {
         // given
         // when
         let result = sut.search(3)
@@ -65,7 +65,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_count가1인list에서search를호출했을때_노드값이잘반환되는지() {
+    func test_count가1이고_노드값이3이들어있는_list에서search3를호출했을때_반환값이_3인지() {
         // given
         sut.insertLast(3)
         
@@ -76,7 +76,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_count가2인list에서search를호출했을때_노드값이잘반환되는지() {
+    func test_노드값7이들어있는_list에서_search7를호출했을때_반환값이_7인지() {
         // given
         sut.insertLast(3)
         sut.insertLast(5)
@@ -89,7 +89,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 7)
     }
     
-    func test_count가0인list에서remove를호출했을때_삭제된값이잘반환되는지() {
+    func test_count가0인list에서remove를호출했을때_반환값이_nil인지() {
         // given
         // when
         let result = sut.remove(2)
@@ -98,7 +98,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_count가1인list에서remove를호출했을때_삭제된값이잘반환되는지() {
+    func test_count가1이고_노드값2가들어있는list에서remove2를호출했을때_반환값이_2인지() {
         // given
         sut.insertFirst(2)
         
@@ -109,7 +109,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_count가2인list에서remove를호출했을때_삭제된값이잘반환되는지() {
+    func test_노드값1이들어있는list에서remove1를호출했을때_반환값이_1인지() {
         // given
         sut.insertLast(1)
         sut.insertLast(2)
