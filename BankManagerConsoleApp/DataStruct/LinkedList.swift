@@ -52,7 +52,7 @@ final class LinkedList<T: Equatable> {
         
         var currentNode = head
         while currentNode != nil {
-            if currentNode?== value {
+            if currentNode?.value == value {
                 return currentNode
             }
             currentNode = currentNode?.next
