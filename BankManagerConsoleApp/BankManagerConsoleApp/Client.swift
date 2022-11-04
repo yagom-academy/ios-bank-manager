@@ -6,11 +6,7 @@
 //
 
 struct Client {
-    var ticketNumber: Int?
-    
-    mutating func getWaitingNumberTicket(at bank: Bank) {
-        self.ticketNumber = bank.returnTicketNumber()
-    }
+    var ticketNumber: Int
 }
 
 extension Client: Equatable {
