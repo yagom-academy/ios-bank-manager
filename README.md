@@ -25,11 +25,11 @@
 
 ## 🤙 Ground Rule
 
-[Ground Rule 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/Ground-Rule)
+[Ground Rule 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/1.-Ground-Rule)
 
 ## 🖋 Code Convention
 
-[Code Convention 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/Code-Convention)
+[Code Convention 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/2.-Code-Convention)
 
 ## 🛠 실행 화면
 |**실행 화면**|
@@ -403,7 +403,7 @@ struct LinkedList<Element> {
 
 ## 📝 일일 스크럼
 
-[일일 스크럼 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/Bank-Manager-Scrum)
+[일일 스크럼 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/3.-Bank-Manager-Scrum)
 
 ## 🔗 참고 링크
 
