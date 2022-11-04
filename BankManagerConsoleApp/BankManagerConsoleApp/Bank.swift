@@ -5,40 +5,42 @@
 //  Created by 애쉬, 로빈 on 2022/11/03.
 //
 
+import Foundation
+
 struct Bank {
-    let bankWorker: BankWorker
-    let clientQueue: Queue<Client> = Queue()
-    var cumulativeClientCount: Int = 0
+    var bankManager: BankManager
     
-    init(bankWorker: BankWorker) {
-        self.bankWorker = bankWorker
-    }
-    
-    mutating func addClientQueue(_ client: Client) {
-        cumulativeClientCount += 1
-        clientQueue.enqueue(client)
-    }
-    
-    func directBankWorker() {
-        while !clientQueue.isEmpty {
-            guard let client = clientQueue.dequeue() else { return }
-            
-            bankWorker.startWork(for: client)
+    mutating func generateClient() {
+        let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
+        
+        for number in 1...randomNumber {
+            let client = Client(ticketNumber: number)
+            self.bankManager.addClientQueue(client)
         }
     }
     
-    func open() {
-        directBankWorker()
-    }
-    
-    mutating func close() {
-        let time: Double = Double(cumulativeClientCount) * 0.7
-        let message: String =
-        String(format: "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초 입니다.",
-               cumulativeClientCount,
-               time)
-        
-        print("\(message)")
-        cumulativeClientCount = 0
+    mutating func openSystem() {
+        while true {
+            print("""
+                1. 은행개점
+                2. 종료
+                입력 :
+                """, terminator: " ")
+            
+            guard let selection = readLine(),
+                  let menu = MenuOption(rawValue: selection) else {
+                print("올바른 메뉴 번호를 입력해주세요.")
+                continue
+            }
+            
+            switch menu {
+            case .open:
+                generateClient()
+                self.bankManager.open()
+                self.bankManager.close()
+            case .exit:
+                exit(0)
+            }
+        }
     }
 }
