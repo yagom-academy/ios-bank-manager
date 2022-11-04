@@ -9,13 +9,16 @@ import Foundation
 struct Bank {
     let bankWorker: BankWorker
     let numberTicketQueue: Queue<Client>
-    let cumulativeClientCount: Int
+    var cumulativeClientCount: Int
     
-    func returnTicketNumber() -> Int {
-        return numberTicketQueue.linkedList.count
+    init(bankWorker: BankWorker, numberTicketQueue: Queue<Client> = Queue(), cumulativeClientCount: Int = 0) {
+        self.bankWorker = bankWorker
+        self.numberTicketQueue = numberTicketQueue
+        self.cumulativeClientCount = cumulativeClientCount
     }
     
-    func updateClientList(_ client: Client) {
+    mutating func updateClientList(_ client: Client) {
+        cumulativeClientCount += 1
         numberTicketQueue.enqueue(client)
     }
     

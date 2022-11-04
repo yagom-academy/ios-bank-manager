@@ -20,7 +20,6 @@
 		26A7D97E2910F719003B33D5 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4971B72910AF350059F8F0 /* LinkedList.swift */; };
 		2DCC59A6C4FCE6CF63766378 /* libPods-BankManagerConsoleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A658056DD5E1AAFDD7EB63 /* libPods-BankManagerConsoleApp.a */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,7 +50,6 @@
 		A9A658056DD5E1AAFDD7EB63 /* libPods-BankManagerConsoleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BankManagerConsoleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				264C5F7C2913501F00DBBADB /* Bank.swift */,
 				264C5F7E291355C600DBBADB /* BankWorker.swift */,
 				264C5F80291355CB00DBBADB /* Client.swift */,
@@ -292,7 +289,6 @@
 				26536AD92912102000927DFF /* Node.swift in Sources */,
 				1A4971B82910AF350059F8F0 /* LinkedList.swift in Sources */,
 				264C5F7D2913501F00DBBADB /* Bank.swift in Sources */,
-				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				264C5F7F291355C600DBBADB /* BankWorker.swift in Sources */,
 				264C5F81291355CB00DBBADB /* Client.swift in Sources */,
 				2656B80E2910B7C2002AB758 /* Queue.swift in Sources */,
