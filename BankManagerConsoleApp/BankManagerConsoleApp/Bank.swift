@@ -2,14 +2,14 @@
 //  Bank.swift
 //  BankManagerConsoleApp
 //
-//  Created by Mangdi on 2022/11/02.
+//  Created by Mene, Mangdi on 2022/11/02.
 //
 
 import Foundation
 
 struct Bank {
     let manager: [BankManager]
-    var numberOfCustomer: Int
+    let numberOfCustomer: Int
     var customerQueue: CustomerQueue<Customer>
     
     mutating func openUp() {

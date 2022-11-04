@@ -6,9 +6,9 @@
 
 import Foundation
 
-let mene = BankManager(name: "mene")
 let randomNumber = Int.random(in: 10...30)
 let customerQueue = CustomerQueue<Customer>()
+let mene = BankManager(name: "mene")
 var kbBank = Bank(
     manager: [mene],
     numberOfCustomer: randomNumber,
