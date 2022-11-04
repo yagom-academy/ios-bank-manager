@@ -18,13 +18,13 @@ final class LinkedList<T> {
     }
     
     func push(_ node: Node<T>) {
-        tail?.next = node
-        tail = node
-        
         if isEmpty {
             head = node
-            return
+        } else {
+            tail?.next = node
         }
+    
+        tail = node
     }
     
     func pop() -> Node<T>? {
