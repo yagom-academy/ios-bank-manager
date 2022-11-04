@@ -5,8 +5,8 @@
 //  Created by Gundy, jpush on 2022/11/04.
 //
 
-struct BankCustomer: Equatable {
-    static var customerNumber: Int = 0
+struct BankCustomer {
+    private static var customerNumber: Int = 0
     var waitingNumber: Int
     
     init() {

@@ -20,6 +20,6 @@ class BankCustomerTests: XCTestCase {
         let result = sut.dequeue()
         
         // then
-        XCTAssertEqual(customer, result)
+        XCTAssertEqual(customer.waitingNumber, result?.waitingNumber)
     }
 }
