@@ -14,7 +14,7 @@
 ### 은행창구 매니저 프로젝트
 
 ### 팀원 
-|jeremy(@yjjem)|LJ(@lj-7-77)|
+|[jeremy](https://github.com/yjjem)| [L J](https://github.com/lj-7-77) |
 |:-:|:-:|
 
 
