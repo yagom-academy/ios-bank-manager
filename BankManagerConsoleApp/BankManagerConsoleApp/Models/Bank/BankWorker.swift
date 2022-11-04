@@ -10,7 +10,7 @@ import Foundation
 struct BankWorker {
     func startWork(client: Client) {
         print("\(client.waitingTicket)번 고객 업무 시작")
-        usleep(700000)
+        Thread.sleep(forTimeInterval: 0.7)
         print("\(client.waitingTicket)번 고객 업무 완료")
     }
 }

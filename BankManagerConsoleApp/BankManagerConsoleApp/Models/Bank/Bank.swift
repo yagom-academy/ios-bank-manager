@@ -22,7 +22,8 @@ struct Bank {
     
     mutating private func updateClientQueue() {
         for number in 1...Int.random(in: 10...30) {
-            clientQueue.enqueue(Client(waitingTicket: number))
+            let client = Client(waitingTicket: number)
+            clientQueue.enqueue(client)
             bankManager.addClientCount()
         }
     }

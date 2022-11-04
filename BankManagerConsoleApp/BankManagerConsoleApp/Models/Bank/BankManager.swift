@@ -21,7 +21,7 @@ struct BankManager {
     }
     
     mutating func addWorkTime() {
-        totalWorkTime += -workStartTime.timeIntervalSinceNow
+        totalWorkTime -= workStartTime.timeIntervalSinceNow
     }
     
     mutating func printWorkFinished() {
