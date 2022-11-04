@@ -11,10 +11,10 @@ extension Runnable {
         jlBank.displayMenu()
         let input: String? = jlBank.getInput()
         switch input {
-        case "1":
+        case MenuSelection.first.rawValue:
             jlBank.openBank()
             runBankManagerConsoleApp()
-        case "2":
+        case MenuSelection.second.rawValue:
             return
         default:
             print("잘못된 입력입니다.")

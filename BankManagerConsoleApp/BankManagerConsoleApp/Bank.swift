@@ -8,6 +8,7 @@
 typealias App = Displayable & SelectableMenu & Runnable
 struct Bank: App {
     private var workLoadManager: WorkLoadManager = WorkLoadManager()
+    
     mutating func openBank() {
         var workCount: Int = 0
         print("openBank")

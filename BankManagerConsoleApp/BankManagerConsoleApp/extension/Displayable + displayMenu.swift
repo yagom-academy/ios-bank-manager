@@ -6,6 +6,7 @@
 //
 
 extension Displayable {
+    
     func displayMenu() {
         print("""
                 1 : 은행개점
