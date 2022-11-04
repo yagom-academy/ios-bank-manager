@@ -38,7 +38,9 @@ struct Bank {
     }
     
     private mutating func addCustomer() {
-        for number in 1...numberOfCustomer {
+        let numbers = Array(1...numberOfCustomer)
+
+        numbers.forEach { number in
             let customer: Customer = Customer(waitingNumber: number)
             customerQueue.enqueue(data: customer)
         }
