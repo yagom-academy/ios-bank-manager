@@ -5,7 +5,7 @@
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
 struct ConsoleManager {
-    var bankManager: BankManager
+    private var bankManager: BankManager
     
     mutating func startConsole() {
         showMenu()
