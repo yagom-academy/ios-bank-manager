@@ -5,8 +5,6 @@
 //  Created by 애쉬, 로빈 on 2022/11/04.
 //
 
-import Foundation
-
 struct BankManager {
     private let bankWorker: BankWorkable
     private let clientQueue: Queue<Client> = Queue()
