@@ -54,12 +54,12 @@ struct LinkedList<T: Equatable> {
         return currentTail.data
     }
     
-    func searchFirstNode(from data: T) -> Node<T>? {
+    func searchFirstIndex(of data: T) -> Int? {
         var currentNode: Node<T>? = head
         
-        while currentNode != nil {
+        for index in 0..<count {
             if currentNode?.data == data {
-                return currentNode
+                return index
             }
             
             currentNode = currentNode?.nextNode

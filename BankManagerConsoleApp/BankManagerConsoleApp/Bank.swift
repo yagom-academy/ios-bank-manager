@@ -4,7 +4,7 @@
 
 struct Bank {
     private let banker: Banker = Banker()
-    private var customerQueue: Queue<Customer> = Queue<Customer>()
+    private var customerQueue: CustomerQueue = CustomerQueue()
     private let customerCount: Int
     var workResult: (customerCount: Int, time: Double) {
         return (customerCount, Double(customerCount) * 0.7)
