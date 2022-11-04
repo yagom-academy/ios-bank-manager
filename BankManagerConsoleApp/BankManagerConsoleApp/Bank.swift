@@ -7,7 +7,7 @@ import Darwin
 struct Bank {
     private let numberOfClerks: Int
     private var waitingLine: Queue<Customer> = Queue()
-    private(set) var customerCount: Int = 0
+    private(set) var finishedCustomerCount: Int = 0
     private let timePerTask: UInt32 = 700000
     
     init(numberOfClerks: Int) {
@@ -19,12 +19,12 @@ struct Bank {
             return
         }
         
-        print("\(customer.queueNumber)번 고객 업무 시작")
+        print("\(customer.waitingNumber)번 고객 업무 시작")
         
         usleep(timePerTask)
         
-        print("\(customer.queueNumber)번 고객 업무 완료")
-        customerCount += 1
+        print("\(customer.waitingNumber)번 고객 업무 완료")
+        finishedCustomerCount += 1
     }
     
     mutating func addCustomer(_ customer: Customer) {
