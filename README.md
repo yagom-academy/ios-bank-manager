@@ -1,4 +1,4 @@
-# 은행창구 매니저 🏦
+# 은행창구 매니저🏦
 
 ## 📖 목차
 
@@ -7,7 +7,7 @@
 3. [구현 내용](#-구현-내용)
 4. [타임라인](#-타임라인)
 5. [실행 화면](#-실행-화면)
-6. [트러블 슈팅 & 어려웠던 점](#-트러블-슈팅-&-어려웠던-점)
+6. [트러블 슈팅 & 어려웠던 점](#-트러블-슈팅--어려웠던-점)
 7. [참고 링크](#-참고-링크)
 
 ## 🌱 소개
@@ -125,4 +125,4 @@ UnitTest를 진행하기 위해 `@testable import`를 사용하려 했으나 아
 [[iOS] could not find module for target 'x86_64-apple-ios-simulator' found arm64.. 오류 해결법](https://levenshtein.tistory.com/396)
 [Commandline-tool 에서 Unit 테스트 환경 구축하기](https://woongsios.tistory.com/162)
 
-[🔝 맨 위로 이동하기](#-은행창구-매니저-)
+[🔝 맨 위로 이동하기](#은행창구-매니저)
