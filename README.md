@@ -23,7 +23,7 @@
 #### 3. [타임라인](#-타임라인)
 #### 4. [기능 설명(실행 화면)](#-기능-설명실행-화면)
 #### 5. [트러블 슈팅](#-트러블-슈팅)
-#### 6. [고민한 점](https://github.com/ash-youu/ios-bank-manager/edit/step2/README.md#%EF%B8%8F-%EA%B3%A0%EB%AF%BC%ED%95%9C-%EC%A0%90)
+#### 6. [고민한 점](https://github.com/ash-youu/ios-bank-manager/tree/step2#%EF%B8%8F-%EA%B3%A0%EB%AF%BC%ED%95%9C-%EC%A0%90)
 #### 7. [참고 링크](#-참고-링크)
 
 ---
