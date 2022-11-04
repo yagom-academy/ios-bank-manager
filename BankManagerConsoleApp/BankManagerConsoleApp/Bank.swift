@@ -7,9 +7,13 @@
 
 struct Bank {
     let bankWorker: BankWorker
-    let numberTicketQueue: Queue<Int>
+    let numberTicketQueue: Queue<Client>
     
     func returnTicketNumber() -> Int {
         return numberTicketQueue.linkedList.count
+    }
+    
+    func updateClientList(_ client: Client) {
+        numberTicketQueue.enqueue(client)
     }
 }

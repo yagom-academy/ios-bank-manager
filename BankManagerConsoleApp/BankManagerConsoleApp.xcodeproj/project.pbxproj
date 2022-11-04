@@ -73,6 +73,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A4971F12914A3410059F8F0 /* DataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				2656B80D2910B7C2002AB758 /* Queue.swift */,
+				1A4971B72910AF350059F8F0 /* LinkedList.swift */,
+				26536AD82912102000927DFF /* Node.swift */,
+			);
+			path = DataStruct;
+			sourceTree = "<group>";
+		};
 		264CBB222910F4A100277543 /* BankManagerConsoleAppTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 			children = (
 				1A4971BF291104240059F8F0 /* .swiftlint.yml */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
+				1A4971F12914A3410059F8F0 /* DataStruct */,
 				264CBB222910F4A100277543 /* BankManagerConsoleAppTest */,
 				C7694E77259C3EC00053667F /* Products */,
 				6F916E8335E96B5B7DC33E5A /* Pods */,
@@ -123,14 +134,11 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				264C5F7C2913501F00DBBADB /* Bank.swift */,
 				264C5F7E291355C600DBBADB /* BankWorker.swift */,
 				264C5F80291355CB00DBBADB /* Client.swift */,
-				2656B80D2910B7C2002AB758 /* Queue.swift */,
-				1A4971B72910AF350059F8F0 /* LinkedList.swift */,
-				26536AD82912102000927DFF /* Node.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
