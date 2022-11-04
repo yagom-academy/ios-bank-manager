@@ -5,13 +5,14 @@
 //  Created by Kyo, Wonbi on 2022/11/02.
 //
 
-struct Bank {
+struct Bank<Queue: ClientQueueable> {
     private let bankWorker: BankWorker
-    private var clientQueue: ClientQueue = ClientQueue()
+    private var clientQueue: Queue
     private var bankManager: BankManager = BankManager()
     
-    init(bankWorker: BankWorker) {
+    init(bankWorker: BankWorker, queue: Queue) {
         self.bankWorker = bankWorker
+        self.clientQueue = queue
     }
     
     mutating func openBank() {
