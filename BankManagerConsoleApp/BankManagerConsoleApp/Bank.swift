@@ -49,13 +49,15 @@ struct Bank {
         processedCustomer = 0
         
         while lineOfCustomer.isEmpty == false {
-            let currentCustomer = lineOfCustomer.dequeue()
-            
-            print("\(currentCustomer!.number)번 고객 업무 시작")
+            guard let currentCustomer = lineOfCustomer.dequeue() else {
+                break
+            }
+
+            print("\(currentCustomer.number)번 고객 업무 시작")
             taskTime += 0.7
             usleep(70_000)
             processedCustomer += 1
-            print("\(currentCustomer!.number)번 고객 업무 종료")
+            print("\(currentCustomer.number)번 고객 업무 종료")
         }
         
         taskTime = round(taskTime * 100)/100
