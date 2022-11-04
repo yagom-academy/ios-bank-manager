@@ -40,7 +40,7 @@ struct Bank {
     
     mutating private func listUpCustomer(_ customerCount: Int) {
         for customerIndex in 1...customerCount {
-            lineOfCustomer.enqueue(value: Customer(number: customerIndex))
+            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex))
         }
     }
     
@@ -53,11 +53,11 @@ struct Bank {
                 break
             }
 
-            print("\(currentCustomer.number)번 고객 업무 시작")
+            print("\(currentCustomer.waitingNumber)번 고객 업무 시작")
             taskTime += 0.7
             usleep(70_000)
             processedCustomer += 1
-            print("\(currentCustomer.number)번 고객 업무 종료")
+            print("\(currentCustomer.waitingNumber)번 고객 업무 종료")
         }
         
         taskTime = round(taskTime * 100)/100
