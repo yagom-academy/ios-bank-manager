@@ -27,7 +27,7 @@ struct Bank {
         var customerCount = 0
         while let customer = customerQueue.dequeue() {
             clerk.work(for: customer)
-            usleep(useconds_t(700000))
+            
             customerCount += 1
         }
         let endTime = CFAbsoluteTimeGetCurrent()
