@@ -4,29 +4,26 @@
 //
 //  Created by 애쉬, 로빈 on 2022/11/03.
 //
-import Foundation
 
 struct Bank {
     let bankWorker: BankWorker
-    let numberTicketQueue: Queue<Client> = Queue()
+    let clientQueue: Queue<Client> = Queue()
     var cumulativeClientCount: Int = 0
     
     init(bankWorker: BankWorker) {
         self.bankWorker = bankWorker
     }
     
-    mutating func updateClientList(_ client: Client) {
+    mutating func addClientQueue(_ client: Client) {
         cumulativeClientCount += 1
-        numberTicketQueue.enqueue(client)
+        clientQueue.enqueue(client)
     }
     
     func directBankWorker() {
-        while !numberTicketQueue.isEmpty {
-            guard let client = numberTicketQueue.dequeue() else {
-                return
-            }
+        while !clientQueue.isEmpty {
+            guard let client = clientQueue.dequeue() else { return }
             
-            bankWorker.startWork(client: client)
+            bankWorker.startWork(for: client)
         }
     }
     

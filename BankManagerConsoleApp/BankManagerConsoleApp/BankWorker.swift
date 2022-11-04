@@ -6,17 +6,17 @@
 //
 
 protocol BankWorkable {
-    func startWork(client: Client)
-    func finishWork(client: Client)
+    func startWork(for client: Client)
+    func finishWork(for client: Client)
 }
 
 extension BankWorkable {
-    func startWork(client: Client) {
+    func startWork(for client: Client) {
         print("\(client.ticketNumber)번 고객 업무 시작")
-        finishWork(client: client)
+        finishWork(for: client)
     }
     
-    func finishWork(client: Client) {
+    func finishWork(for client: Client) {
         print("\(client.ticketNumber)번 고객 업무 종료")
     }
 }

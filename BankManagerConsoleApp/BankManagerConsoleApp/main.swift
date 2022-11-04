@@ -10,11 +10,11 @@ let bankWorker: BankWorker = BankWorker()
 var bank: Bank = Bank(bankWorker: bankWorker)
 
 func generateClient() {
-    let randomNumber = Int.random(in: 10...30)
+    let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
     
     for number in 1...randomNumber {
         let client = Client(ticketNumber: number)
-        bank.updateClientList(client)
+        bank.addClientQueue(client)
     }
 }
 
@@ -25,16 +25,18 @@ while true {
         입력 :
         """, terminator: " ")
     
-    let menuNumber: String?  = readLine()
+    guard let selection = readLine(),
+          let menu = MenuOption(rawValue: selection) else {
+        print("올바른 메뉴 번호를 입력해주세요.")
+        continue
+    }
     
-    switch menuNumber {
-    case "1":
+    switch menu {
+    case .open:
         generateClient()
         bank.open()
         bank.close()
-    case "2":
+    case .exit:
         exit(0)
-    default:
-        print("올바른 메뉴 번호를 입력해주세요.")
     }
 }
