@@ -16,14 +16,14 @@ extension BankingServiceProtocol {
     }
 }
 
-enum BankingService: BankingServiceProtocol {
-    case loan
-    case deposit
+enum BankingService: String, BankingServiceProtocol {
+    case loan = "대출"
+    case deposit = "예금"
     
     var processTime: Double {
         switch self {
         case .loan:
-            return 0.7
+            return 1.1
         case .deposit:
             return 0.7
         }

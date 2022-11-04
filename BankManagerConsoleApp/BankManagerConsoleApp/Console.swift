@@ -58,11 +58,16 @@ struct Console {
     }
     
     private func openBank() -> WorkResult {
-        var bank: Bank = Bank()
+        let bank: Bank = Bank()
+        var count: Int = 0
+        var totalTime: Double = 0.0
         
-        bank.startBankingService()
+        bank.startBankingService { (customerCount, totalServiceTime) in
+            count = customerCount
+            totalTime = totalServiceTime
+        }
         
-        return bank.workResult
+        return (count, totalTime)
     }
     
     private func printCompleteMessage(about workResult: WorkResult) {

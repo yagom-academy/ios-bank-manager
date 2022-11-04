@@ -4,8 +4,8 @@
 
 struct Banker {
     func work(_ customer: Customer, completion: @escaping () -> Void) {
-        let startingMessage: String = "\(customer.waitingNumber)번 고객 업무 시작"
-        let endingMessage: String = "\(customer.waitingNumber)번 고객 업무 완료"
+        let startingMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.rawValue)업무 시작"
+        let endingMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.rawValue)업무 완료"
         
         defer {
             completion()

@@ -9,9 +9,6 @@ class Bank {
     private var customerQueue: CustomerQueue = CustomerQueue()
     private let customerCount: Int
     private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
-    var workResult: (customerCount: Int, time: Double) {
-        return (customerCount, Double(customerCount) * 0.7)
-    }
     
     init() {
         customerCount = Int.random(in: 10...30)
@@ -31,7 +28,29 @@ class Bank {
         }
     }
     
-    func entrustBankerService() {
+    func startBankingService(completion: @escaping (Int, Double) -> Void) {
+        let group: DispatchGroup = DispatchGroup()
+        let startingTime: Date = Date()
+        
+        DispatchQueue.global().async(group: group) {
+            self.entrustBankerService()
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            self.entrustBankerService()
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            self.entrustBankerService()
+        }
+        
+        group.wait()
+        
+        let totalServiceTime: Double = Date().timeIntervalSince(startingTime)
+        completion(customerCount, totalServiceTime)
+    }
+    
+    private func entrustBankerService() {
         guard let currentCustomer: Customer = requestCustomer() else {
             return
         }
@@ -41,17 +60,7 @@ class Bank {
         }
     }
     
-    func startBankingService() {
-        let group: DispatchGroup = DispatchGroup()
-        
-        DispatchQueue.global().async(group: group) {
-            self.entrustBankerService()
-        }
-        
-        group.wait()
-    }
-    
-    func requestCustomer() -> Customer? {
+    private func requestCustomer() -> Customer? {
         semaphore.wait()
         
         defer {
