@@ -53,7 +53,7 @@ final class QueueTests: XCTestCase {
     }
     
     func test_Double타입의값을enqueue한후_dequeue를했을때_enqueue한값반환되어야한다() {
-        //given
+        // given
         sut.enqueue(10.0)
         // when
         let result = sut.dequeue()

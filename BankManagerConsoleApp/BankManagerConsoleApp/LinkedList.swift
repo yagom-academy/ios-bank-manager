@@ -20,7 +20,10 @@ struct LinkedList<Element> {
     }
     
     mutating func removeFirst() -> Node<Element>? {
-        guard !isEmpty else { return nil }
+        guard !isEmpty else {
+            tail = nil
+            return nil
+        }
         let firstNode: Node<Element>? = head
         head = head?.next
         return firstNode
