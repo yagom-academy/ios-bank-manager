@@ -11,12 +11,13 @@ struct Bank: App {
     
     mutating func openBank() {
         var workCount: Int = 0
-        print("openBank")
+
         letCustomersIn()
         while workLoadManager.taskQueue.isEmpty() == false {
             workLoadManager.giveWorkToAvailableManager()
             workCount += 1
         }
+        
         closeBank(with: workCount)
     }
     
