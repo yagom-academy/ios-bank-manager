@@ -1,8 +1,6 @@
 //
-//  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
-// 
+//  main.swift
+//  BankManagerConsoleApp
 
 import Foundation
 
@@ -13,7 +11,7 @@ while bankManager.isRunning {
         try bankManager.run()
     } catch {
         if let error = error as? BankError {
-            print(error.message)
+            print(error.localizedDescription)
         }
     }
 }

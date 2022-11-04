@@ -6,7 +6,6 @@ import Foundation
 
 struct BankManager {
     private var bank: Bank = Bank(numberOfClerks: 1)
-    private var timePerTask: Double = 0.7
     private(set) var isRunning: Bool = true
     
     mutating func run() throws {
@@ -59,7 +58,24 @@ struct BankManager {
     }
     
     private func close() throws {
-        let totalTime: String = try (Double(bank.finishedCustomerCount) * timePerTask).format()
+        let totalTime: String = try format(time: (Double(bank.finishedCustomerCount) * Double(bank.timePerTask) * Constant.micro))
+        
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.finishedCustomerCount)명이며, 총 업무시간은 \(totalTime)초 입니다.")
+    }
+    
+    private func format(time: Double) throws -> String {
+        let formatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 2
+            
+            return formatter
+        }()
+        
+        guard let result = formatter.string(for: time) else {
+            throw BankError.formattingError
+        }
+        
+        return result
     }
 }

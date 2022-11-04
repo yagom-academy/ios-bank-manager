@@ -2,13 +2,13 @@
 //  Bank.swift
 //  BankManagerConsoleApp
 
-import Darwin
+import Foundation
 
 struct Bank {
     private let numberOfClerks: Int
     private var waitingLine: Queue<Customer> = Queue()
     private(set) var finishedCustomerCount: Int = 0
-    private let timePerTask: UInt32 = 700000
+    let timePerTask: UInt32 = 700000
     
     init(numberOfClerks: Int) {
         self.numberOfClerks = numberOfClerks
