@@ -8,9 +8,13 @@
 import Foundation
 
 struct Bank {
-    var bankManager: BankManager
+    private var bankManager: BankManager
     
-    mutating func generateClient() {
+    init(bankManager: BankManager) {
+        self.bankManager = bankManager
+    }
+    
+    mutating private func generateClient() {
         let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
         
         for number in 1...randomNumber {

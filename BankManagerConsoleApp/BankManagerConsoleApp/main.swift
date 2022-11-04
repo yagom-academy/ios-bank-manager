@@ -4,8 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
-
 let bankWorker: BankWorker = BankWorker()
 let bankManager: BankManager = BankManager(bankWorker: bankWorker)
 var bank: Bank = Bank(bankManager: bankManager)

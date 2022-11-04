@@ -8,16 +8,20 @@
 import Foundation
 
 struct BankManager {
-    let bankWorker: BankWorkable
-    let clientQueue: Queue<Client> = Queue()
-    var cumulativeClientCount: Int = 0
+    private let bankWorker: BankWorkable
+    private let clientQueue: Queue<Client> = Queue()
+    private var cumulativeClientCount: Int = 0
+    
+    init(bankWorker: BankWorkable) {
+        self.bankWorker = bankWorker
+    }
     
     mutating func addClientQueue(_ client: Client) {
         cumulativeClientCount += 1
         clientQueue.enqueue(client)
     }
     
-    func directBankWorker() {
+    private func directBankWorker() {
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
             

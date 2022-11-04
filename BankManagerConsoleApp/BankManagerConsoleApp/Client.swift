@@ -6,7 +6,7 @@
 //
 
 struct Client {
-    var ticketNumber: Int
+    let ticketNumber: Int
 }
 
 extension Client: Equatable {
