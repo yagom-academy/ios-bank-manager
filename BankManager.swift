@@ -14,10 +14,10 @@ struct BankManager {
         }
         
         switch input {
-        case Constant.optionOne:
+        case BankMenu.open:
             setupBank()
             startManagement()
-        case Constant.optionTwo:
+        case BankMenu.close:
             return
         default:
             print(Constant.wrongInputMessage)
@@ -43,11 +43,14 @@ struct BankManager {
 }
 
 private extension BankManager {
+    enum BankMenu {
+        static let open: String = "1"
+        static let close: String = "2"
+    }
+    
     enum Constant {
         static let options: String = "1 : 은행 개점 \n2 : 종료 \n입력 : "
         static let empty: String = ""
-        static let optionOne: String = "1"
-        static let optionTwo: String = "2"
         static let wrongInputMessage: String = "다시 입력해주세요"
         static let customerRange: ClosedRange<Int> = 10...30
     }
