@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankManager {
+struct BankManager: BankManagable {
     private var clientCount: Int = 0
     private var totalWorkTime: Double = 0.0
     private var workStartTime: Date = Date()

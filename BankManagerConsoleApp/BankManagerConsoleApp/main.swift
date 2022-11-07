@@ -7,7 +7,8 @@
 
 let banker = Banker()
 var clientQueue = ClientQueue()
-var bank = Bank(banker: banker, queue: clientQueue)
+var bankManager = BankManager()
+var bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
 
 func startProcess() {
     while true {

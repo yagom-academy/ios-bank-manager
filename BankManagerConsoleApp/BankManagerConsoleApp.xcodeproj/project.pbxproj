@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C160272291920F100B315B9 /* BankManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C160271291920F100B315B9 /* BankManagable.swift */; };
 		3C2EE18829120F8000C20988 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18729120F8000C20988 /* Banker.swift */; };
 		3C2EE18C2912688F00C20988 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18B2912688F00C20988 /* Queueable.swift */; };
 		3C2EE18E291268C300C20988 /* Queueable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18D291268C300C20988 /* Queueable+.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C160271291920F100B315B9 /* BankManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagable.swift; sourceTree = "<group>"; };
 		3C2EE18729120F8000C20988 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		3C2EE18B2912688F00C20988 /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
 		3C2EE18D291268C300C20988 /* Queueable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Queueable+.swift"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				3C2EE18B2912688F00C20988 /* Queueable.swift */,
 				E33B32252914C8F400B92CDD /* ClientQueueable.swift */,
+				3C160271291920F100B315B9 /* BankManagable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			files = (
 				E3218A2F290FC3F500A92638 /* ClientQueue.swift in Sources */,
 				E33B32262914C8F400B92CDD /* ClientQueueable.swift in Sources */,
+				3C160272291920F100B315B9 /* BankManagable.swift in Sources */,
 				3C2EE18829120F8000C20988 /* Banker.swift in Sources */,
 				3C2EE18C2912688F00C20988 /* Queueable.swift in Sources */,
 				E3C9D76229120C0300E2FF59 /* Client.swift in Sources */,

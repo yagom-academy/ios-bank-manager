@@ -14,11 +14,12 @@ struct Bank<Queue: ClientQueueable> {
     
     private let banker: Banker
     private var clientQueue: Queue
-    private var bankManager: BankManager = BankManager()
+    private var bankManager: BankManagable
     
-    init(banker: Banker, queue: Queue) {
+    init(banker: Banker, queue: Queue, bankManager: BankManagable) {
         self.banker = banker
         self.clientQueue = queue
+        self.bankManager = bankManager
     }
     
     mutating func openBank() {
