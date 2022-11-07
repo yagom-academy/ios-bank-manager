@@ -6,7 +6,7 @@ struct Bank {
     private var manager: Workable
     private var customerList: Queue<Customer>
     private var numberOfCustomer: Int
-    var totalWorkTime: Decimal
+    private var totalWorkTime: Decimal
     
     init(manager: Workable, customerList: Queue<Customer>) {
         self.manager = manager
@@ -14,6 +14,7 @@ struct Bank {
         self.numberOfCustomer = 0
         self.totalWorkTime = 0
     }
+    
     mutating func startConsoleApp() {
         print("""
             1 : 은행 개점
@@ -21,14 +22,20 @@ struct Bank {
             입력 :
             """, terminator: " ")
         
-        guard let userInput = readLine() else { return }
-        
+        handleBankSystem(userInput: fetchUserInput())
+    }
+    
+    private func fetchUserInput() -> String? {
+        return readLine()
+    }
+    
+    mutating private func handleBankSystem(userInput: String?) {
         switch userInput {
-        case "1":
+        case Namespace.openBank:
             openBank()
             closeBank()
             startConsoleApp()
-        case "2":
+        case Namespace.closeBank:
             break
         default:
             startConsoleApp()
@@ -39,9 +46,13 @@ struct Bank {
         self.numberOfCustomer = Int.random(in: 10...30)
         registerCustomers(with: self.numberOfCustomer)
         
+        startWork()
+    }
+    
+    mutating private func startWork() {
         while !self.customerList.isEmpty {
             self.manager.provideService(to: self.customerList.dequeue())
-            self.totalWorkTime += Decimal(0.7)
+            self.totalWorkTime += Namespace.depositTime
         }
     }
     
