@@ -9,10 +9,10 @@ struct ConsoleApp {
     var bankManager: BankManager = BankManager()
     
     mutating func start() {
-        ConsoleAppMenu.printMenuList()
+        printMenuList()
         while inputMenu() == .startBank {
             startBankByCreatingBankManager()
-            ConsoleAppMenu.printMenuList()
+            printMenuList()
         }
     }
     
@@ -32,5 +32,12 @@ struct ConsoleApp {
         bankManager.addCustomers(count: customerCount)
         bankManager.addBankers(count: 1)
         bankManager.startBank()
+    }
+    
+    private func printMenuList() {
+        for menu in ConsoleAppMenu.allCases {
+            let menuInfo: String = "\(menu.rawValue) : \(menu.description)"
+            print(menuInfo)
+        }
     }
 }

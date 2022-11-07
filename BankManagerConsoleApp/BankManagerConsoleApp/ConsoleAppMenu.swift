@@ -17,11 +17,4 @@ enum ConsoleAppMenu: Int, CaseIterable {
             return "종료"
         }
     }
-    
-    static func printMenuList() {
-        for menu in Self.allCases {
-            let menuInfo: String = "\(menu.rawValue) : \(menu.description)"
-            print(menuInfo)
-        }
-    }
 }
