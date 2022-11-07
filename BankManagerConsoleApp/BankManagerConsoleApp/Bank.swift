@@ -58,6 +58,7 @@ class Bank {
         group.wait()
         
         let totalServiceTime: Double = Date().timeIntervalSince(startingTime)
+        
         completion(customerCount, totalServiceTime)
     }
     

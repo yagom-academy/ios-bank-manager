@@ -51,10 +51,10 @@ struct Console {
         guard let input: String = readLine(),
               let flagRawValue: Int = Int(input),
               let flag: Flag = Flag.init(rawValue: flagRawValue) else {
-                  return.failure(.invalidError)
+                  return .failure(.invalidError)
               }
     
-        return.success(flag)
+        return .success(flag)
     }
     
     private func openBank() -> WorkResult {

@@ -113,7 +113,7 @@ struct LinkedList<T: Equatable> {
     }
     
     @discardableResult
-    mutating func removeFrist(of data: T) -> T? {
+    mutating func removeFirst(of data: T) -> T? {
         var currentNode: Node<T>? = head
         var currentPosition: Int = 0
         

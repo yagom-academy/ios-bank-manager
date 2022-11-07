@@ -279,7 +279,7 @@ class LinkedListTests: XCTestCase {
         }
         
         //when
-        let removeResult: Int? = sut.removeFrist(of: 1)
+        let removeResult: Int? = sut.removeFirst(of: 1)
         let searchResult: Node<Int>? = sut.searchNode(at: 1)
         
         //then
@@ -296,7 +296,7 @@ class LinkedListTests: XCTestCase {
         }
         
         //when
-        let removeResult: Int? = sut.removeFrist(of: 10)
+        let removeResult: Int? = sut.removeFirst(of: 10)
         let searchResult: Node<Int>? = sut.searchNode(at: 10)
         
         //then
@@ -313,7 +313,7 @@ class LinkedListTests: XCTestCase {
         }
         
         //when
-        let removeResult: Int? = sut.removeFrist(of: 5)
+        let removeResult: Int? = sut.removeFirst(of: 5)
         let searchResult: Node<Int>? = sut.searchNode(at: 5)
         
         //then
