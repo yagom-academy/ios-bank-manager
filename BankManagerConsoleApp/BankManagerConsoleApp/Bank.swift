@@ -12,6 +12,10 @@ struct Bank {
         return customerQueue?.isEmpty ?? false
     }
     
+    init(customerQueue: CustomerQueue<Customer>? = nil) {
+        self.customerQueue = customerQueue
+    }
+    
     mutating func createQueue() {
         customerQueue = CustomerQueue()
     }
@@ -43,12 +47,18 @@ struct Bank {
     }
     
     private func endWork(customerCount: Int, duringTime: Double) {
-        let workedTime = round(duringTime * 1000) / 1000
-        print("업무를 마감합니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workedTime)초입니다.")
+        print("업무를 마감합니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(duringTime.convertedNumberToTime)초입니다.")
     }
     
     mutating func resetCustomerQueue() {
         customerQueue?.clear()
         customerQueue = nil
+    }
+}
+
+private extension Double {
+    static let thousand: Self = 1000.0
+    var convertedNumberToTime: Double {
+        return (self * Self.thousand).rounded() / Self.thousand
     }
 }

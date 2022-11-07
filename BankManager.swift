@@ -7,6 +7,10 @@
 struct BankManager {
     private var bank: Bank = Bank()
     
+    init(bank: Bank) {
+        self.bank = bank
+    }
+    
     mutating func openBank() {
         bank.createQueue()
         
