@@ -41,7 +41,10 @@ struct Bank {
         let numbers = Array(1...numberOfCustomer)
 
         numbers.forEach { number in
-            let customer: Customer = Customer(waitingNumber: number)
+            let customer: Customer = Customer(
+                waitingNumber: number,
+                requestingTask: .init(rawValue: Int.random(in: 1...2)) ?? .deposit
+            )
             customerQueue.enqueue(data: customer)
         }
     }
