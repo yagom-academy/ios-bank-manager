@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    let manager: [BankManager]
+    let manager: BankManager
     let numberOfCustomer: Int
     var customerQueue: CustomerQueue<Customer>
     
@@ -39,7 +39,7 @@ struct Bank {
     
     private mutating func addCustomer() {
         let numbers = Array(1...numberOfCustomer)
-
+        
         numbers.forEach { number in
             let customer: Customer = Customer(
                 waitingNumber: number,
@@ -50,17 +50,34 @@ struct Bank {
     }
     
     private mutating func allocateCustomer() {
-        DispatchQueue.global().sync {
-            while customerQueue.isEmpty == false {
-                self.manager.forEach { manager in
-                    guard let customer = customerQueue.peek() else { return }
-                    manager.processTask(customer: customer)
-                    customerQueue.dequeue()
+        let group = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        
+        while customerQueue.isEmpty == false {
+                guard let customer = customerQueue.dequeue() else { return }
+                if customer.requestingTask == .deposit {
+                    DispatchQueue.global().async(group: group) { [self] in
+                        depositSemaphore.wait()
+                        DispatchQueue.global().sync {
+                            manager.processTask(customer)
+                        }
+                        depositSemaphore.signal()
+                    }
+                    
+                } else {
+                    DispatchQueue.global().async(group: group) { [self] in
+                        loanSemaphore.wait()
+                        DispatchQueue.global().sync {
+                            manager.processTask(customer)
+                        }
+                        loanSemaphore.signal()
+                    }
                 }
-            }
         }
-
-        let totalProcessTime = String(format: "%.2f", Double(numberOfCustomer) * 0.7)
+        
+        group.wait()
+        let totalProcessTime = String(format: "%.2f", 20)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, " +
               "총 업무시간은 \(totalProcessTime)초 입니다. \n")
     }
