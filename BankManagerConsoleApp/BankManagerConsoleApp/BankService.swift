@@ -14,4 +14,13 @@ enum BankService: CaseIterable {
             return 1.1
         }
     }
+    
+    var serviceName: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
+        }
+    }
 }

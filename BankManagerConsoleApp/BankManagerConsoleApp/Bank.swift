@@ -9,9 +9,15 @@ final class Bank {
     private(set) var finishedCustomerCount: Int = 0
     private let depositQueue: DispatchQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
     private let loanQueue: DispatchQueue = DispatchQueue(label: "loan")
-    private let depositSemaphore: DispatchSemaphore = DispatchSemaphore(value: 2)
+    private let depositSemaphore: DispatchSemaphore
+    private let loanSemaphore: DispatchSemaphore
     private let customerCountSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     let bankingServiceGroup: DispatchGroup = DispatchGroup()
+    
+    init(depositBooth: Int, loanBooth: Int) {
+        self.depositSemaphore = DispatchSemaphore(value: depositBooth)
+        self.loanSemaphore = DispatchSemaphore(value: loanBooth)
+    }
     
     func allocateCustomer() {
         guard let customer = waitingLine.dequeue() else {
@@ -27,17 +33,19 @@ final class Bank {
             }
         case .loan:
             loanQueue.async(group: bankingServiceGroup) {
+                self.loanSemaphore.wait()
                 self.handleBankingService(customer)
+                self.loanSemaphore.signal()
             }
         }
     }
     
     private func handleBankingService(_ customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer.banking)업무 시작")
+        print("\(customer.waitingNumber)번 고객 \(customer.banking.serviceName)업무 시작")
         
-        Thread.sleep(forTimeInterval: customer.banking.timePerTask)
+        Thread.sleep(forTimeInterval: customer.banking.timePerService)
         
-        print("\(customer.waitingNumber)번 고객 \(customer.banking)업무 완료")
+        print("\(customer.waitingNumber)번 고객 \(customer.banking.serviceName)업무 완료")
         
         customerCountSemaphore.wait()
         finishedCustomerCount += 1

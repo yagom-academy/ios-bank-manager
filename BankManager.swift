@@ -5,8 +5,12 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank = Bank()
+    private var bank: Bank
     private(set) var isRunning: Bool = true
+    
+    init(bank: Bank) {
+        self.bank = bank
+    }
     
     mutating func run() throws {
         printMenu()
