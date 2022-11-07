@@ -6,7 +6,7 @@
 import Foundation
 
 protocol BankClerk {
-    var bankingType: BankingTypes { get }
+    var bankingType: BankingType { get }
     var processingTime: Double { get }
     var counter: DispatchQueue { get }
     
@@ -29,13 +29,13 @@ extension BankClerk {
 }
 
 struct DepositBankClerk: BankClerk {
-    let bankingType: BankingTypes
+    let bankingType: BankingType
     let processingTime: Double
     let counter: DispatchQueue
 }
 
 struct LoanBankClerk: BankClerk {
-    let bankingType: BankingTypes
+    let bankingType: BankingType
     let processingTime: Double
     let counter: DispatchQueue
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41113B4029194E4E001CBB1D /* BankingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41113B3F29194E4E001CBB1D /* BankingType.swift */; };
 		41583D2329123E7400C54C54 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41583D2229123E7400C54C54 /* Bank.swift */; };
 		417677C4290FE3B500AB65EE /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C3290FE3B500AB65EE /* Node.swift */; };
 		417677C6290FF2E500AB65EE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C5290FF2E500AB65EE /* Queue.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41113B3F29194E4E001CBB1D /* BankingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingType.swift; sourceTree = "<group>"; };
 		41583D2229123E7400C54C54 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		417677C3290FE3B500AB65EE /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		417677C5290FF2E500AB65EE /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				B288FF4B2919443A00CB353B /* BankClerk.swift */,
 				41583D2229123E7400C54C54 /* Bank.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				41113B3F29194E4E001CBB1D /* BankingType.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				417677C4290FE3B500AB65EE /* Node.swift in Sources */,
 				B26FA1E629123DAA00111772 /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				41113B4029194E4E001CBB1D /* BankingType.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				41583D2329123E7400C54C54 /* Bank.swift in Sources */,
 				B288FF4C2919443A00CB353B /* BankClerk.swift in Sources */,
