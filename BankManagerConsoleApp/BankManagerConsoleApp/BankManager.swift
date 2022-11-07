@@ -11,8 +11,12 @@ struct BankManager {
     let name: String
     
     func processTask(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
-        usleep(700000)
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        print("\(self.name) \(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 시작")
+        if customer.requestingTask == .deposit {
+            usleep(700000)
+        } else {
+            usleep(1100000)
+        }
+        print("\(self.name) \(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 완료")
     }
 }
