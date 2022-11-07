@@ -7,12 +7,10 @@ struct Banker {
         let startingMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.rawValue)업무 시작"
         let endingMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.rawValue)업무 완료"
         
-        defer {
-            completion()
-        }
-        
         print(startingMessage)
         customer.bankingService.request()
         print(endingMessage)
+        
+        completion()
     }
 }
