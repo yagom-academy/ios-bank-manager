@@ -21,6 +21,8 @@ struct Bank {
     }
     
     mutating func addBanker(_ banker: Banker) {
+        
+        
         bankers.append(banker)
     }
     
