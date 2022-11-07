@@ -6,12 +6,12 @@
 //
 
 struct Bank<Queue: ClientQueueable> {
-    private let bankWorker: BankWorker
+    private let banker: Banker
     private var clientQueue: Queue
     private var bankManager: BankManager = BankManager()
     
-    init(bankWorker: BankWorker, queue: Queue) {
-        self.bankWorker = bankWorker
+    init(banker: Banker, queue: Queue) {
+        self.banker = banker
         self.clientQueue = queue
     }
     
@@ -23,7 +23,8 @@ struct Bank<Queue: ClientQueueable> {
     
     mutating private func updateClientQueue() {
         for number in 1...Int.random(in: 10...30) {
-            let client = Client(waitingTicket: number)
+            guard let randomWork = Client.Purpose.allCases.randomElement() else { return }
+            let client = Client(waitingTicket: number, purpose: randomWork)
             clientQueue.enqueue(client)
             bankManager.addClientCount()
         }
@@ -33,7 +34,7 @@ struct Bank<Queue: ClientQueueable> {
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
             bankManager.resetWorkTime()
-            bankWorker.startWork(client: client)
+            banker.startWork(client: client)
             bankManager.addWorkTime()
         }
     }

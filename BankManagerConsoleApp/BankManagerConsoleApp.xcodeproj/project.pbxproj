@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C2EE18829120F8000C20988 /* BankWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18729120F8000C20988 /* BankWorker.swift */; };
+		3C2EE18829120F8000C20988 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18729120F8000C20988 /* Banker.swift */; };
 		3C2EE18C2912688F00C20988 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18B2912688F00C20988 /* Queueable.swift */; };
 		3C2EE18E291268C300C20988 /* Queueable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18D291268C300C20988 /* Queueable+.swift */; };
 		3C9D4107290F627200945718 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D4106290F627200945718 /* Node.swift */; };
@@ -43,7 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C2EE18729120F8000C20988 /* BankWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWorker.swift; sourceTree = "<group>"; };
+		3C2EE18729120F8000C20988 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		3C2EE18B2912688F00C20988 /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
 		3C2EE18D291268C300C20988 /* Queueable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Queueable+.swift"; sourceTree = "<group>"; };
 		3C81CDA4290FBEDA007B24D0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				E3C9D75F2912025300E2FF59 /* Bank.swift */,
-				3C2EE18729120F8000C20988 /* BankWorker.swift */,
+				3C2EE18729120F8000C20988 /* Banker.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 			);
 			path = Bank;
@@ -324,7 +324,7 @@
 			files = (
 				E3218A2F290FC3F500A92638 /* ClientQueue.swift in Sources */,
 				E33B32262914C8F400B92CDD /* ClientQueueable.swift in Sources */,
-				3C2EE18829120F8000C20988 /* BankWorker.swift in Sources */,
+				3C2EE18829120F8000C20988 /* Banker.swift in Sources */,
 				3C2EE18C2912688F00C20988 /* Queueable.swift in Sources */,
 				E3C9D76229120C0300E2FF59 /* Client.swift in Sources */,
 				3C9D4107290F627200945718 /* Node.swift in Sources */,
