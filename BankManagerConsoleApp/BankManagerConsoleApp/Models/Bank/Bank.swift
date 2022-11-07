@@ -5,7 +5,11 @@
 //  Created by Kyo, Wonbi on 2022/11/02.
 //
 
+import Foundation
+
 struct Bank<Queue: ClientQueueable> {
+    private let depositBooth = DispatchSemaphore(value: 2)
+    private let loanBooth = DispatchQueue(label: "loanBanker")
     private let banker: Banker
     private var clientQueue: Queue
     private var bankManager: BankManager = BankManager()
@@ -31,12 +35,24 @@ struct Bank<Queue: ClientQueueable> {
     }
     
     mutating private func startBankWork() {
+        bankManager.resetWorkTime()
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
-            bankManager.resetWorkTime()
-            banker.startWork(client: client)
-            bankManager.addWorkTime()
+            
+            switch client.purpose {
+            case .deposit:
+                DispatchQueue.global().async { [self] in
+                    self.depositBooth.wait()
+                    self.banker.startWork(client: client)
+                    self.depositBooth.signal()
+                }
+            case .loan:
+                loanBooth.sync {
+                    self.banker.startWork(client: client)
+                }
+            }
         }
+        bankManager.addWorkTime()
     }
     
     mutating private func endBankWork() {
