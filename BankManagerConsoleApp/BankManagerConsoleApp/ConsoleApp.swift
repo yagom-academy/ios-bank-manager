@@ -6,14 +6,13 @@
 //
 
 struct ConsoleApp {
-    func start() {
+    var bankManager: BankManager = BankManager()
+    
+    mutating func start() {
         ConsoleAppMenu.printMenuList()
-        switch inputMenu() {
-        case .startBank:
+        while inputMenu() == .startBank {
             startBankByCreatingBankManager()
-            self.start()
-        case .quit:
-            return
+            ConsoleAppMenu.printMenuList()
         }
     }
     
@@ -27,8 +26,8 @@ struct ConsoleApp {
         return inputMenu
     }
     
-    private func startBankByCreatingBankManager() {
-        var bankManager: BankManager = BankManager()
+    private mutating func startBankByCreatingBankManager() {
+        bankManager.reset()
         let customerCount: Int = Int.random(in: 10...30)
         bankManager.addCustomers(count: customerCount)
         bankManager.addBankers(count: 1)

@@ -23,4 +23,8 @@ struct BankManager {
     mutating func startBank() {
         bank.startBankBusiness()
     }
+    
+    mutating func reset() {
+        bank = Bank()
+    }
 }
