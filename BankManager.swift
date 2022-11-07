@@ -28,7 +28,7 @@ struct BankManager {
     mutating private func identifyMenu(_ userInput: String?) throws {
         switch userInput {
         case Constant.openBank:
-            open()
+            try open()
             try close()
         case Constant.closeBank:
             isRunning = false
@@ -38,19 +38,22 @@ struct BankManager {
         }
     }
     
-    mutating private func createCustomer() -> Int {
+    mutating private func createCustomer() throws -> Int {
         let customers: Int = Int.random(in: Constant.customerNumberRange)
         
         for number in 1...customers {
-            let customer: Customer = Customer(waitingNumber: number)
+            guard let banking: BankService = BankService.allCases.randomElement() else {
+                throw BankError.invalidService
+            }
+            let customer: Customer = Customer(waitingNumber: number, banking: banking)
             bank.addCustomer(customer)
         }
         
         return customers
     }
     
-    mutating private func open() {
-        let customers: Int = createCustomer()
+    mutating private func open() throws {
+        let customers: Int = try createCustomer()
         
         for _ in 1...customers {
             bank.performTask()
