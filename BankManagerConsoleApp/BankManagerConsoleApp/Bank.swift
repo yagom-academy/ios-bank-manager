@@ -6,12 +6,18 @@ import Foundation
 
 class Bank {
     private let banker: Banker = Banker()
-    private var customerQueue: CustomerQueue = CustomerQueue()
+    private var loanCustomerQueue: CustomerQueue = CustomerQueue()
+    private var depositCustomerQueue: CustomerQueue = CustomerQueue()
+    private let depositSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private let loanSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private let depositBankerCount: Int
+    private let loanBankerCount: Int
     private let customerCount: Int
-    private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
     init() {
         customerCount = Int.random(in: 10...30)
+        depositBankerCount = 2
+        loanBankerCount = 1
         setCustomerQueue()
     }
     
@@ -24,7 +30,12 @@ class Bank {
             let customer: Customer = Customer(waitingNumber: count,
                                               bankingService: randomBankingService)
             
-            customerQueue.enqueue(customer)
+            switch customer.bankingService {
+            case .loan:
+                loanCustomerQueue.enqueue(customer)
+            case .deposit:
+                depositCustomerQueue.enqueue(customer)
+            }
         }
     }
     
@@ -32,16 +43,16 @@ class Bank {
         let group: DispatchGroup = DispatchGroup()
         let startingTime: Date = Date()
         
-        DispatchQueue.global().async(group: group) {
-            self.entrustBankerService()
+        for _ in 1...depositBankerCount {
+            DispatchQueue.global().async(group: group) {
+                self.entrustBankerService(of: .deposit)
+            }
         }
         
-        DispatchQueue.global().async(group: group) {
-            self.entrustBankerService()
-        }
-        
-        DispatchQueue.global().async(group: group) {
-            self.entrustBankerService()
+        for _ in 1...loanBankerCount {
+            DispatchQueue.global().async(group: group) {
+                self.entrustBankerService(of: .loan)
+            }
         }
         
         group.wait()
@@ -50,23 +61,30 @@ class Bank {
         completion(customerCount, totalServiceTime)
     }
     
-    private func entrustBankerService() {
-        guard let currentCustomer: Customer = requestCustomer() else {
+    private func entrustBankerService(of bankingService: BankingService) {
+        guard let currentCustomer: Customer = requestCustomer(of: bankingService) else {
             return
         }
-
+        
         banker.work(currentCustomer) {
-            self.entrustBankerService()
+            self.entrustBankerService(of: bankingService)
         }
     }
     
-    private func requestCustomer() -> Customer? {
-        semaphore.wait()
+    private func requestCustomer(of bankingService: BankingService) -> Customer? {
+        let currentCustomer: Customer?
         
-        defer {
-            semaphore.signal()
+        switch bankingService {
+        case .loan:
+            loanSemaphore.wait()
+            currentCustomer = loanCustomerQueue.dequeue()
+            loanSemaphore.signal()
+        case.deposit:
+            depositSemaphore.wait()
+            currentCustomer = depositCustomerQueue.dequeue()
+            depositSemaphore.signal()
         }
         
-        return customerQueue.dequeue()
+        return currentCustomer
     }
 }
