@@ -48,16 +48,6 @@ struct Bank {
         }
     }
     
-    private func processTask(_ customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 시작")
-        if customer.requestingTask == .deposit {
-            usleep(700000)
-        } else {
-            usleep(1100000)
-        }
-        print("\(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 완료")
-    }
-    
     private mutating func allocateCustomer() {
         let group = DispatchGroup()
         let depositSemaphore = DispatchSemaphore(value: 2)
@@ -67,25 +57,35 @@ struct Bank {
             while customerQueue.isEmpty == false {
                 guard let customer = customerQueue.dequeue() else { return }
                 if customer.requestingTask == .deposit {
-                    DispatchQueue.global().async(group: group) { [self] in
-                        depositSemaphore.wait()
-                        DispatchQueue.global().sync {
-                            processTask(customer)
-                        }
-                        depositSemaphore.signal()
-                    }
+                    prepareTask(to: depositSemaphore, for: customer, group)
                 } else {
-                    DispatchQueue.global().async(group: group) { [self] in
-                        loanSemaphore.wait()
-                        DispatchQueue.global().sync {
-                            processTask(customer)
-                        }
-                        loanSemaphore.signal()
-                    }
+                    prepareTask(to: loanSemaphore, for: customer, group)
                 }
             }
             group.wait()
         }
+    }
+    
+    private func prepareTask(to banker: DispatchSemaphore,
+                             for customer: Customer,
+                             _ group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            banker.wait()
+            DispatchQueue.global().sync {
+                processTask(customer)
+            }
+            banker.signal()
+        }
+    }
+    
+    private func processTask(_ customer: Customer) {
+        print("\(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 시작")
+        if customer.requestingTask == .deposit {
+            usleep(700000)
+        } else {
+            usleep(1100000)
+        }
+        print("\(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 완료")
     }
     
     private func processTime(closure: () -> ()) {

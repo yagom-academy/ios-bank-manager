@@ -24,7 +24,7 @@ struct CustomerQueue<T> {
         rear = newNode
     }
     
-    @discardableResult mutating func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         let data = front?.data
         front = front?.next
         return data
