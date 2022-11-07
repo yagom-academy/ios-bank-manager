@@ -3,11 +3,17 @@
 import Foundation
 
 struct Bank {
-    private var manager: BankManager = BankManager()
-    private var customerList: Queue<Customer> = Queue()
-    private var numberOfCustomer: Int = 0
-    var totalWorkTime: Decimal = 0.0
+    private var manager: Workable
+    private var customerList: Queue<Customer>
+    private var numberOfCustomer: Int
+    var totalWorkTime: Decimal
     
+    init(manager: Workable, customerList: Queue<Customer>) {
+        self.manager = manager
+        self.customerList = customerList
+        self.numberOfCustomer = 0
+        self.totalWorkTime = 0
+    }
     mutating func startConsoleApp() {
         print("""
             1 : 은행 개점
@@ -41,7 +47,7 @@ struct Bank {
     
     mutating private func registerCustomers(with numberOfCustomer: Int) {
         for number in 1...numberOfCustomer {
-            self.customerList.enqueue(Customer(number: number))
+            self.customerList.enqueue(BankCustomer(number: number))
         }
     }
     

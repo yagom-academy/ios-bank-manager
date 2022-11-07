@@ -6,14 +6,16 @@
 
 import Foundation
 
-struct BankManager {
+struct BankManager: Workable {
+    
     func provideService(to customer: Customer?) {
-        guard let customer = customer else {
+        guard let customer = customer,
+              let bankCustomer = customer as? BankCustomer else {
             return
         }
-
-        print("\(customer.number)번 고객 업무 시작")
+        
+        print("\(bankCustomer.number)번 고객 업무 시작")
         usleep(700000)
-        print("\(customer.number)번 고객 업무 완료")
+        print("\(bankCustomer.number)번 고객 업무 완료")
     }
 }

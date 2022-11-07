@@ -4,5 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bank = Bank()
+var bank = Bank(manager: BankManager(), customerList: Queue())
 bank.startConsoleApp()
