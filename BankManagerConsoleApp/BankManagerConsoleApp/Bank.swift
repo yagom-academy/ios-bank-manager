@@ -12,6 +12,9 @@ struct Bank {
     private var bankers: [Banker] = []
     private var processedCustomerNumber: Int = 0
     private var processedTotalTime: Double = 0
+    private var formattedProcessedTotalTime: String {
+        return String(format: "%.2f", processedTotalTime)
+    }
     
     mutating func addCustomerToQueue(_ customer: Customer) {
         customerQueue.enqueue(customer)
@@ -22,11 +25,6 @@ struct Bank {
     }
     
     private mutating func printClosingMessage() {
-        let numberFormatter: NumberFormatter = NumberFormatter()
-        numberFormatter.minimumFractionDigits = 2
-        guard let formattedProcessedTotalTime: String = numberFormatter.string(from: NSNumber(value: processedTotalTime)) else {
-            return
-        }
         let processingClosedMessage: String = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(processedCustomerNumber)명이며, 총 업무시간은 \(formattedProcessedTotalTime)초입니다."
         print(processingClosedMessage)
     }
