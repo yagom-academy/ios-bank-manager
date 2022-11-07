@@ -17,6 +17,7 @@
 		F60C035E2910ED800095E27E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA96E22910BA1D00A67D80 /* Node.swift */; };
 		F60C035F2910EE020095E27E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DA96E22910BA1D00A67D80 /* Node.swift */; };
 		FC3A50B8291252F100490EF3 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A50B7291252F100490EF3 /* Customer.swift */; };
+		FC5713D82919270F0087A624 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5713D72919270F0087A624 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		F605C7392918FEEE00E390F7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F6DA96E22910BA1D00A67D80 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FC3A50B7291252F100490EF3 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		FC5713D72919270F0087A624 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				0436C25A2912396C009266DE /* Bank.swift */,
 				FC3A50B7291252F100490EF3 /* Customer.swift */,
 				04D1B65B2919188700244A5F /* Task.swift */,
+				FC5713D72919270F0087A624 /* BankManager.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				FC5713D82919270F0087A624 /* BankManager.swift in Sources */,
 				043E7B7D2910BB3D008E8F1A /* LinkedList.swift in Sources */,
 				0436C25B2912396C009266DE /* Bank.swift in Sources */,
 				FC3A50B8291252F100490EF3 /* Customer.swift in Sources */,

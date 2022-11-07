@@ -40,7 +40,7 @@ struct Bank {
     
     mutating private func listUpCustomer(_ customerCount: Int) {
         for customerIndex in 1...customerCount {
-            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex))
+//            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex))
         }
     }
     
