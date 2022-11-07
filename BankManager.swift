@@ -5,7 +5,7 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank = Bank(numberOfClerks: 1)
+    private var bank: Bank = Bank()
     private(set) var isRunning: Bool = true
     
     mutating func run() throws {
@@ -29,6 +29,7 @@ struct BankManager {
         switch userInput {
         case Constant.openBank:
             try open()
+            bank.dispatchGroup.wait()
             try close()
         case Constant.closeBank:
             isRunning = false
@@ -54,9 +55,10 @@ struct BankManager {
     
     mutating private func open() throws {
         let customers: Int = try createCustomer()
+        bank.resetFinishedCustomerCount()
         
         for _ in 1...customers {
-            bank.performTask()
+            bank.allocateCustomer()
         }
     }
     
