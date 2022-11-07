@@ -22,6 +22,6 @@ struct BankManager {
     }
     
     mutating func startBank() {
-        bank.processBankingBusinessOfCustomers()
+        bank.startBankBusiness()
     }
 }
