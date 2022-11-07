@@ -7,9 +7,13 @@
 import Foundation
 
 struct Bank {
+    enum Constant {
+        static let depositTakenSeconds: Double = 0.7
+    }
+    
     private var customerQueue: CustomerQueue<Customer>?
     private var isQueueEmpty: Bool {
-        return customerQueue?.isEmpty ?? false
+        return customerQueue?.isEmpty ?? true
     }
     
     init(customerQueue: CustomerQueue<Customer>? = nil) {
@@ -36,8 +40,8 @@ struct Bank {
             print("\(customer.ticketNumber)번 고객 업무 시작")
             
             DispatchQueue.global().sync {
-                usleep(700000)
-                time += (700000 / 1000000)
+                Thread.sleep(forTimeInterval: Constant.depositTakenSeconds)
+                time += (Constant.depositTakenSeconds)
                 customerCount += 1
                 print("\(customer.ticketNumber)번 고객 업무 종료")
             }
@@ -57,8 +61,8 @@ struct Bank {
 }
 
 private extension Double {
-    static let thousand: Self = 1000.0
-    var convertedNumberToTime: Double {
-        return (self * Self.thousand).rounded() / Self.thousand
+    static let hundred: Self = 100.0
+    var convertedNumberToTime: String {
+        return String(format: "%.2f", (self * Self.hundred).rounded() / Self.hundred)
     }
 }
