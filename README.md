@@ -76,7 +76,7 @@
 |<img src="https://i.imgur.com/vE9Xqbh.gif" width="300px">|<img src="https://i.imgur.com/68Y8ozn.gif" width="300px">| -->
 > <img src="https://i.imgur.com/HZ4T4NK.gif" width="600px">
 
-## 🎯 트러블 슈팅 및 고민****
+## 🎯 트러블 슈팅 및 고민
 ### `push 메서드 로직`
 ```swift!
 class LinkedList<T> {
