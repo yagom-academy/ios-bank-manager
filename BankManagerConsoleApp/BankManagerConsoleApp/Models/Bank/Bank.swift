@@ -12,11 +12,11 @@ struct Bank<Queue: ClientQueueable> {
     private let depositBooth = DispatchSemaphore(value: 2)
     private let loanBooth = DispatchQueue(label: "loanBanker")
     
-    private let banker: Banker
+    private let banker: Bankerable
     private var clientQueue: Queue
     private var bankManager: BankManagable
     
-    init(banker: Banker, queue: Queue, bankManager: BankManagable) {
+    init(banker: Bankerable, queue: Queue, bankManager: BankManagable) {
         self.banker = banker
         self.clientQueue = queue
         self.bankManager = bankManager
