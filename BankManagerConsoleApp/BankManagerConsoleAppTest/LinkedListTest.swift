@@ -20,7 +20,7 @@ class LinkedListTest: XCTestCase {
         sut = nil
     }
 
-    func test_count가0인list에insertFirst를호출했을때_head값이_2인지() {
+    func test_list에_insertFirst로노드를집어넣으면_head값이_해당노드값이여야한다() {
         // given
         sut.insertFirst(2)
         
@@ -31,32 +31,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_count가1인list에insertFirst를호출했을때_head값이_10인지() {
-        // given
-        sut.insertLast(5)
-        sut.insertFirst(10)
-        
-        // when
-        let result = sut.head?.value
-        
-        // then
-        XCTAssertEqual(result, 10)
-    }
-    
-    func test_count가2인list에insertFirst를호출했을때_head값이_3인지() {
-        // given
-        sut.insertLast(1)
-        sut.insertLast(2)
-        sut.insertFirst(3)
-        
-        // when
-        let result = sut.head?.value
-        
-        // then
-        XCTAssertEqual(result, 3)
-    }
-    
-    func test_count가0인list에서search를호출했을때_반환값이_nil인지() {
+    func test_list에없는노드값을_search로호출했을때_nil이_반환돼야한다() {
         // given
         // when
         let result = sut.search(3)
@@ -65,7 +40,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_count가1이고_노드값이3이들어있는_list에서search3를호출했을때_반환값이_3인지() {
+    func test_list에있는노드값을_search로호출했을때_해당노드값을_반환해야한다() {
         // given
         sut.insertLast(3)
         
@@ -76,20 +51,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_노드값7이들어있는_list에서_search7를호출했을때_반환값이_7인지() {
-        // given
-        sut.insertLast(3)
-        sut.insertLast(5)
-        sut.insertLast(7)
-        
-        // when
-        let result = sut.search(7)?.value
-        
-        // then
-        XCTAssertEqual(result, 7)
-    }
-    
-    func test_count가0인list에서remove를호출했을때_반환값이_nil인지() {
+    func test_list에없는노드값을_remove로호출했을때_nil을_반환해야한다() {
         // given
         // when
         let result = sut.remove(2)
@@ -98,7 +60,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_count가1이고_노드값2가들어있는list에서remove2를호출했을때_반환값이_2인지() {
+    func test_list에있는노드값을_remove로호출했을때_해당노드값을_반환해야한다() {
         // given
         sut.insertFirst(2)
         
@@ -107,18 +69,5 @@ class LinkedListTest: XCTestCase {
         
         // then
         XCTAssertEqual(result, 2)
-    }
-    
-    func test_노드값1이들어있는list에서remove1를호출했을때_반환값이_1인지() {
-        // given
-        sut.insertLast(1)
-        sut.insertLast(2)
-        sut.insertLast(3)
-        
-        // when
-        let result = sut.remove(1)
-        
-        // then
-        XCTAssertEqual(result, 1)
     }
 }
