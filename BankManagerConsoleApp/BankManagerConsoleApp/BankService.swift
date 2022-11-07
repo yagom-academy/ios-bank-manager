@@ -6,12 +6,12 @@ enum BankService: CaseIterable {
     case deposit
     case loan
     
-    var timePerTask: UInt32 {
+    var timePerService: Double {
         switch self {
         case .deposit:
-            return 700000
+            return 0.7
         case .loan:
-            return 1100000
+            return 1.1
         }
     }
 }
