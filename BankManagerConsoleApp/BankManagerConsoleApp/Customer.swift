@@ -4,4 +4,5 @@
 
 struct Customer {
     let waitingNumber: Int
+    let purposeOfServie: Task
 }
