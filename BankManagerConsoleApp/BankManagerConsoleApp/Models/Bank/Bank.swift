@@ -8,6 +8,7 @@
 import Foundation
 
 struct Bank<Queue: ClientQueueable> {
+    private let bankDispatchGroup = DispatchGroup()
     private let depositBooth = DispatchSemaphore(value: 2)
     private let loanBooth = DispatchQueue(label: "loanBanker")
     private let banker: Banker
@@ -21,7 +22,10 @@ struct Bank<Queue: ClientQueueable> {
     
     mutating func openBank() {
         updateClientQueue()
+        bankManager.resetWorkTime()
         startBankWork()
+        bankDispatchGroup.wait()
+        bankManager.addWorkTime()
         endBankWork()
     }
     
@@ -35,24 +39,27 @@ struct Bank<Queue: ClientQueueable> {
     }
     
     mutating private func startBankWork() {
-        bankManager.resetWorkTime()
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
             
-            switch client.purpose {
-            case .deposit:
-                DispatchQueue.global().async { [self] in
-                    self.depositBooth.wait()
-                    self.banker.startWork(client: client)
-                    self.depositBooth.signal()
-                }
-            case .loan:
-                loanBooth.sync {
-                    self.banker.startWork(client: client)
-                }
+            divideWork(client: client)
+        }
+    }
+    
+    private func divideWork(client: Client) {
+        switch client.purpose {
+        case .deposit:
+            DispatchQueue.global().async(group: bankDispatchGroup) { [self] in
+                self.depositBooth.wait()
+                defer { self.depositBooth.signal() }
+                
+                self.banker.startWork(client: client)
+            }
+        case .loan:
+            loanBooth.async(group: bankDispatchGroup) { [self] in
+                self.banker.startWork(client: client)
             }
         }
-        bankManager.addWorkTime()
     }
     
     mutating private func endBankWork() {
