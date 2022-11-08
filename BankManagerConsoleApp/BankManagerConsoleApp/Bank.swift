@@ -44,11 +44,31 @@ struct Bank {
         }
     }
     
-    func randomTask() -> Task {
+    private func randomTask() -> Task {
         Int.random(in: 1...2) == 1 ? .deposit : .loan
     }
     
-    func startTask() {
+    private mutating func startTask() {
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depoSemaphore = DispatchSemaphore(value: 2)
         
+        while lineOfCustomer.isEmpty == false {
+            guard let currentCustomer = lineOfCustomer.dequeue() else { break }
+            
+            switch currentCustomer.purposeOfServie {
+            case .deposit:
+                DispatchQueue.global().async { [self] in
+                    depoSemaphore.wait()
+                    manager.task(customer: currentCustomer)
+                    depoSemaphore.signal()
+                }
+            case .loan:
+                DispatchQueue.global().async { [self] in
+                    loanSemaphore.wait()
+                    manager.task(customer: currentCustomer)
+                    loanSemaphore.signal()
+                }
+            }
+        }
     }
 }
