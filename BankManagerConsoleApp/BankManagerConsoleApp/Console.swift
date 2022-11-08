@@ -84,9 +84,7 @@ enum ConsoleError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidError:
-            let errorMessage: String = "잘못된 입력입니다."
-            
-            return errorMessage
+            return "잘못된 입력입니다."
         }
     }
 }
