@@ -27,10 +27,10 @@ struct BankManager {
     }
     
     private mutating func addCustomer() {
-        let customerCount = 12 //Int.random(in: Constant.customerRange)
+        let customerCount = Constant.RandomCustomerCount
         
         for count in 1...customerCount {
-            guard let bankingType = BankingType(rawValue: Int.random(in: 1...2)) else { return }
+            guard let bankingType = BankingType(rawValue: Constant.depositOrLoan) else { return }
             
             let customer = Customer.init(waitingNumber: count, bankingType: bankingType)
             bank.receive(customer: customer)
@@ -48,6 +48,7 @@ private extension BankManager {
         static let options: String = "1 : 은행 개점 \n2 : 종료 \n입력 : "
         static let empty: String = ""
         static let wrongInputMessage: String = "다시 입력해주세요"
-        static let customerRange: ClosedRange<Int> = 10...30
+        static let RandomCustomerCount: Int = Int.random(in: 10...30)
+        static let depositOrLoan: Int = Int.random(in: 1...2)
     }
 }

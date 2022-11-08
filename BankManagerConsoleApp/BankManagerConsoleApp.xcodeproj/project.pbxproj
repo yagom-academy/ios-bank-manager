@@ -15,6 +15,7 @@
 		417677D229100CFF00AB65EE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C5290FF2E500AB65EE /* Queue.swift */; };
 		417677D329100D0200AB65EE /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEDC290FE872008EAC13 /* LinkedList.swift */; };
 		417677D429100D0500AB65EE /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417677C3290FE3B500AB65EE /* Node.swift */; };
+		41C5FEA4291A5B73002376A0 /* Servable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C5FEA3291A5B73002376A0 /* Servable.swift */; };
 		B256EEEA290FFCE5008EAC13 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEDC290FE872008EAC13 /* LinkedList.swift */; };
 		B256EEEC290FFD66008EAC13 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEDC290FE872008EAC13 /* LinkedList.swift */; };
 		B256EEED290FFD6F008EAC13 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256EEE4290FF8E4008EAC13 /* LinkedListTest.swift */; };
@@ -45,6 +46,7 @@
 		417677C5290FF2E500AB65EE /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		417677CB29100CEF00AB65EE /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		417677CD29100CEF00AB65EE /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
+		41C5FEA3291A5B73002376A0 /* Servable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Servable.swift; sourceTree = "<group>"; };
 		B256EEDC290FE872008EAC13 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		B256EEE2290FF8E3008EAC13 /* LinkedListTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B256EEE4290FF8E4008EAC13 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 			path = QueueTest;
 			sourceTree = "<group>";
 		};
+		41C5FEA2291A5836002376A0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				41C5FEA3291A5B73002376A0 /* Servable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		B256EEE3290FF8E4008EAC13 /* LinkedListTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +129,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				41C5FEA2291A5836002376A0 /* Protocol */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				417677C3290FE3B500AB65EE /* Node.swift */,
 				B256EEDC290FE872008EAC13 /* LinkedList.swift */,
@@ -271,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B256EEEC290FFD66008EAC13 /* LinkedList.swift in Sources */,
+				41C5FEA4291A5B73002376A0 /* Servable.swift in Sources */,
 				417677C6290FF2E500AB65EE /* Queue.swift in Sources */,
 				417677C4290FE3B500AB65EE /* Node.swift in Sources */,
 				B26FA1E629123DAA00111772 /* Customer.swift in Sources */,
@@ -476,7 +488,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4D3JSH53Q;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				EXCLUDED_ARCHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
