@@ -13,6 +13,6 @@ struct BankCustomer {
     init(customerType: CustomerType) {
         Self.customerNumber += 1
         self.waitingNumber = Self.customerNumber
-        self.type = customerType
+        self.type = CustomerType.allCases.randomElement() ?? .deposit
     }
 }

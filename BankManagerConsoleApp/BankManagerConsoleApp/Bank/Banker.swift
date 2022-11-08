@@ -9,8 +9,11 @@ import Foundation
 
 struct Banker {
     func work(_ customer: BankCustomer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
+        let waitingNumber = customer.waitingNumber
+        let workType = customer.type.description
+        
+        print("\(waitingNumber)번 고객 \(workType)업무 시작")
         Thread.sleep(forTimeInterval: customer.type.wasteSeconds)
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+        print("\(waitingNumber)번 고객 \(workType)업무 완료")
     }
 }

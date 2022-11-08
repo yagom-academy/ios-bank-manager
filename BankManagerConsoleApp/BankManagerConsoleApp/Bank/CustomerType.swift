@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomerType {
+enum CustomerType: CaseIterable {
     case deposit
     case loan
     
@@ -17,6 +17,15 @@ enum CustomerType {
             return 0.7
         case .loan:
             return 1.1
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
         }
     }
 }
