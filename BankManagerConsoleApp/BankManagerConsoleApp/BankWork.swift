@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BankWork {
+enum BankWork: CaseIterable {
     case deposit
     case loan
     

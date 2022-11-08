@@ -6,12 +6,12 @@
 //
 
 struct BankManager {
-    private let bankWorker: BankWorkable
+    private let bankWorkers: [BankWorker]
     private let clientQueue: Queue<Client> = Queue()
     private var totalClientCount: Int = 0
     
-    init(bankWorker: BankWorkable) {
-        self.bankWorker = bankWorker
+    init(bankWorkers: [BankWorker]) {
+        self.bankWorkers = bankWorkers
     }
     
     mutating func addClientQueue(_ client: Client) {
@@ -23,7 +23,7 @@ struct BankManager {
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
             
-            bankWorker.startWork(for: client)
+            //bankWorkers.startWork(for: client)
         }
     }
     
