@@ -19,15 +19,26 @@ struct Bank {
         customers.enqueue(customer)
     }
  
-    mutating func startBanking() {
+    mutating func runBankingCycle() {
+        processingStartTime = Date()
+        
+        var customers: (deposit: Queue<Customer>, loan: Queue<Customer>) = sortCustomer()
         let group = DispatchGroup()
+        
+        matchClerk(to: &customers.deposit, of: .deposit, group: group)
+        matchClerk(to: &customers.loan, of: .loan, group: group)
+        group.wait()
+        closeBanking()
+    }
+    
+    mutating func sortCustomer() -> (Queue<Customer>, Queue<Customer>) {
         var depositCustomers = Queue<Customer>()
         var loanCustomers = Queue<Customer>()
         
-        processingStartTime = Date()
-        
         while !customers.isEmpty {
-            guard let customer = customers.dequeue() else { return }
+            guard let customer = customers.dequeue() else {
+                return (depositCustomers, loanCustomers)
+            }
             
             if customer.bankingType == .deposit {
                 depositCustomers.enqueue(customer)
@@ -35,11 +46,8 @@ struct Bank {
                 loanCustomers.enqueue(customer)
             }
         }
-   
-        matchClerk(to: &depositCustomers, of: .deposit, group: group)
-        matchClerk(to: &loanCustomers, of: .loan, group: group)
-        group.wait()
-        closeBanking()
+        
+        return (depositCustomers, loanCustomers)
     }
     
     mutating func matchClerk(to customers: inout Queue<Customer>,
