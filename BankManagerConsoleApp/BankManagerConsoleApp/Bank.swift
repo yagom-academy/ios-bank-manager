@@ -5,9 +5,8 @@
 import Foundation
 
 struct Bank {
-    private let manager: [BankManager]
-    private var lineOfDepositCustomer = LinkedList<Customer>()
-    private var lineOfLoanCustomer = LinkedList<Customer>()
+    private let manager = BankManager()
+    private var lineOfCustomer = LinkedList<Customer>()
     private var processedCustomer: Int = 0
     private var taskTime: Double = 0
     
@@ -41,12 +40,7 @@ struct Bank {
     
     mutating private func listUpCustomer(_ customerCount: Int) {
         for customerIndex in 1...customerCount {
-            switch randomTask() {
-            case .deposit:
-                lineOfDepositCustomer.enqueue(value: Customer(waitingNumber: customerIndex, purposeOfServie: .deposit))
-            case .loan:
-                lineOfLoanCustomer.enqueue(value: Customer(waitingNumber: customerIndex, purposeOfServie: .loan))
-            }
+            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex, purposeOfServie: randomTask()))
         }
     }
     
