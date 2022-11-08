@@ -14,3 +14,7 @@ enum MenuOption: String {
     case open = "1"
     case exit = "2"
 }
+
+enum DepositWorkerNumber {
+    static let max = 2
+}

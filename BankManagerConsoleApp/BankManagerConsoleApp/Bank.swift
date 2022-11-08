@@ -40,6 +40,7 @@ struct Bank {
             case .open:
                 self.bankManager.open()
                 self.bankManager.close()
+                self.bankManager.resetWorkData()
                 
             case .exit:
                 exit(0)
