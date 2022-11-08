@@ -10,23 +10,19 @@ protocol BankClerk {
     var processingTime: Double { get }
     var counter: DispatchQueue { get }
     
-    func serve(customer: Customer)
-    func call(customer: Customer)
+    func serve(customer: Customer, group: DispatchGroup)
 }
 
 extension BankClerk {
-    func serve(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer.bankingType)업무 시작")
-        Thread.sleep(forTimeInterval: processingTime)
-        print("\(customer.waitingNumber)번 고객 \(customer.bankingType)업무 종료")
-    }
-    
-    func call(customer: Customer) {
-        counter.async {
-            serve(customer: customer)
+    func serve(customer: Customer, group: DispatchGroup) {
+        counter.async(group: group) {
+            print("\(customer.waitingNumber)번 고객 \(customer.bankingType)업무 시작")
+            Thread.sleep(forTimeInterval: processingTime)
+            print("\(customer.waitingNumber)번 고객 \(customer.bankingType)업무 종료")
         }
     }
 }
+
 
 struct DepositBankClerk: BankClerk {
     let bankingType: BankingType

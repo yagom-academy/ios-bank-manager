@@ -24,6 +24,7 @@ struct Bank {
     }
     
     mutating func startBanking() {
+        let group = DispatchGroup()
         var depositCustomers = Queue<Customer>()
         var loanCustomers = Queue<Customer>()
         
@@ -37,20 +38,23 @@ struct Bank {
                 : loanCustomers.enqueue(customer)
         }
         
-        matchClerk(to: &depositCustomers, of: .deposit)
-        matchClerk(to: &loanCustomers, of: .loan)
+        matchClerk(to: &depositCustomers, of: .deposit, group: group)
+        matchClerk(to: &loanCustomers, of: .loan, group: group)
+        group.wait()
     }
     
-    mutating func matchClerk(to customers: inout Queue<Customer>, of type: BankingType) {
-        let depositClerks = bankClerks.filter { $0.bankingType == type }
+    mutating func matchClerk(to customers: inout Queue<Customer>,
+                             of type: BankingType,
+                             group: DispatchGroup) {
+        let bankClerks = bankClerks.filter { $0.bankingType == type }
         
         while !customers.isEmpty {
-            depositClerks.forEach { bankClerk in
+            bankClerks.forEach { bankClerk in
                 guard let customer = customers.dequeue() else {
                     return
                 }
                 
-                bankClerk.call(customer: customer)
+                bankClerk.serve(customer: customer, group: group)
             }
         }
     }
