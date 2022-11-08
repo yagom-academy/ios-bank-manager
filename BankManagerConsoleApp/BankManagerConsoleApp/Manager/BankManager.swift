@@ -4,6 +4,8 @@
 //
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
+import Foundation
+
 struct BankManager {
     private var bank: Bank = Bank()
     
@@ -23,11 +25,19 @@ struct BankManager {
         }
     }
     
-    mutating func startBankWork() {
-        bank.startWork()
+    mutating func startBankWork() -> ReportData {
+        return measureTime {
+            bank.startWork()
+        }
     }
     
     mutating func closeBank() {
         bank.resetCustomerQueue()
+    }
+    
+    func measureTime(_ closure: () -> (Int)) -> ReportData {
+        let startDate = Date()
+        let userCount = closure()
+        return (userCount, Date().timeIntervalSince(startDate))
     }
 }
