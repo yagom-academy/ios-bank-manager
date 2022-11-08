@@ -22,7 +22,7 @@ private func generateBankWorkers() -> [BankWorker] {
 private func generateClient() {
     let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
     for _ in 1...randomNumber {
-        let randomWork = BankWork.allCases.randomElement() ?? .deposit
+        let randomWork = [BankWork.loan, BankWork.deposit].randomElement() ?? .deposit
         let client = Client(ticketNumber: bank.publishTicketNumber(), requestWork: randomWork)
         bankManager.addClientQueue(client)
     }

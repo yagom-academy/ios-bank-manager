@@ -34,17 +34,9 @@ struct Bank {
             
             switch menu {
             case .open:
-//                let group = DispatchGroup()
-//                
-//                group.enter()
-//                DispatchQueue.global().sync {
-//                    generateClient()
-                    self.bankManager.open()
-//                    
-//                }
-//                group.leave()
-//                group.wait()
-//                self.bankManager.close()
+                self.bankManager.open()
+                self.bankManager.close()
+                
             case .exit:
                 exit(0)
             }

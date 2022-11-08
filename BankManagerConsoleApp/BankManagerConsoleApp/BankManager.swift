@@ -33,7 +33,7 @@ struct BankManager {
     mutating func addClientQueue(_ client: Client) {
         let requestWork = client.requestWork
         
-        totalWorkTime += client.requestWork.time
+        self.totalWorkTime += client.requestWork.time
         
         switch requestWork {
         case .deposit:
@@ -48,34 +48,23 @@ struct BankManager {
     private func directBankWork() {
         let customQueue = DispatchQueue(label: "Cuncurrent", attributes: .concurrent)
         let semaphore = DispatchSemaphore(value: 1)
+        let group: DispatchGroup = DispatchGroup()
         
-        customQueue.async {
-            while !depositClientQueue.isEmpty {
-                semaphore.wait()
-                guard let client = depositClientQueue.dequeue() else {
-                    print("업무를 처리할 예금 고객이 없습니다.")
-                    return
+        for index in 0...1 {
+            customQueue.async(group: group) {
+                while !depositClientQueue.isEmpty {
+                    semaphore.wait()
+                    guard let client = depositClientQueue.dequeue() else {
+                        print("업무를 처리할 예금 고객이 없습니다.")
+                        return
+                    }
+                    semaphore.signal()
+                    bankWorkers[index].startWork(for: client)
                 }
-                
-                bankWorkers[0].startWork(for: client)
-                semaphore.signal()
             }
         }
         
-        customQueue.async {
-            while !depositClientQueue.isEmpty {
-                semaphore.wait()
-                guard let client = depositClientQueue.dequeue() else {
-                    print("업무를 처리할 예금 고객이 없습니다.")
-                    return
-                }
-                
-                bankWorkers[1].startWork(for: client)
-                semaphore.signal()
-            }
-        }
-        
-        customQueue.async {
+        customQueue.async(group: group) {
             while !loanClientQueue.isEmpty {
                 guard let client = loanClientQueue.dequeue() else {
                     print("업무를 처리할 대출 고객이 없습니다.")
@@ -85,6 +74,8 @@ struct BankManager {
                 bankWorkers[2].startWork(for: client)
             }
         }
+        
+        group.wait()
     }
     
     mutating func open() {
@@ -100,5 +91,6 @@ struct BankManager {
         
         print("\(message)")
         totalClientCount = 0
+        totalWorkTime = 0
     }
 }
