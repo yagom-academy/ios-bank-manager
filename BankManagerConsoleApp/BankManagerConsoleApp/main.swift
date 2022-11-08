@@ -4,4 +4,5 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+var bank = Bank(manager: BankManager(), customerList: Queue())
+bank.startConsoleApp()
