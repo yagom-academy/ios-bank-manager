@@ -10,8 +10,12 @@ struct LinkedList<Element> {
     private var tail: Node<Element>?
     private var count: Int = 0
     
-    func bringHead() -> Element? {
-        return head?.bringNodeData()
+    var headData: Element? {
+        return head?.nodeData
+    }
+    
+    var currentCount: Int {
+        return count
     }
     
     mutating func append(data: Element) {
@@ -28,18 +32,14 @@ struct LinkedList<Element> {
     
     mutating func removeFirst() -> Element? {
         let removedItem = head
-        head = head?.bringNextNode()
+        head = head?.nextNode
         count -= 1
-        return removedItem?.bringNodeData()
+        return removedItem?.nodeData
     }
     
     mutating func removeAll() {
         head = nil
         tail = nil
         count = 0
-    }
-    
-    func bringListCount() -> Int {
-        return count
     }
 }

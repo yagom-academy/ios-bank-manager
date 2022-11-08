@@ -25,7 +25,7 @@ class LinkedListTests: XCTestCase {
     func test_LinkedList에1을append했을때_bringHead메서드의반환값이1이나오는지() {
         sut?.append(data: 1)
         
-        XCTAssertEqual(sut?.bringHead(), 1)
+        XCTAssertEqual(sut?.headData, 1)
     }
     
     func test_LinkedList에append를3번진행하였을때_count값이3인지() {
@@ -35,7 +35,7 @@ class LinkedListTests: XCTestCase {
             sut?.append(data: number)
         }
         
-        XCTAssertEqual(sut?.bringListCount(), numbers.count)
+        XCTAssertEqual(sut?.currentCount, numbers.count)
     }
     
     func test_bringHead메서드의반환값이첫번째로append된값이나오는지() {
@@ -45,7 +45,7 @@ class LinkedListTests: XCTestCase {
             sut?.append(data: number)
         }
         
-        XCTAssertEqual(sut?.bringHead(), numbers.first)
+        XCTAssertEqual(sut?.headData, numbers.first)
     }
     
     func test_removeFirst메서드를호출했을때_첫번째값이삭제되고반환값으로삭제된값이나오는지() {
@@ -57,7 +57,7 @@ class LinkedListTests: XCTestCase {
         
         let result = sut?.removeFirst()
         
-        XCTAssertEqual(sut?.bringListCount(), numbers.count - 1)
+        XCTAssertEqual(sut?.currentCount, numbers.count - 1)
         XCTAssertEqual(result, numbers.first)
     }
     
@@ -70,7 +70,7 @@ class LinkedListTests: XCTestCase {
         
         sut?.removeAll()
         
-        XCTAssertNil(sut?.bringHead())
-        XCTAssertEqual(sut?.bringListCount(), 0)
+        XCTAssertNil(sut?.headData)
+        XCTAssertEqual(sut?.currentCount, 0)
     }
 }

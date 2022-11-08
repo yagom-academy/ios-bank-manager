@@ -1,19 +1,17 @@
 //
-//  ClientQueue.swift
+//  Queueable+.swift
 //  BankManagerConsoleApp
 //
-//  Created by Kyo, Wonbi on 2022/10/31.
+//  Created by Kyo, Wonbi on 2022/11/02.
 //
 
-struct ClientQueue<Element> {
-    private var list: LinkedList<Element> = LinkedList()
-    
+extension Queueable {
     var peek: Element? {
-        return list.bringHead()
+        return list.headData
     }
     
     var isEmpty: Bool {
-        return list.bringListCount() == 0 ? true : false
+        return list.currentCount == 0
     }
     
     mutating func enqueue(_ data: Element) {
