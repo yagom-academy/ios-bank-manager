@@ -7,8 +7,13 @@
 import Foundation
 
 struct Bank {
-    let clerk = BankClerk()
+    let clerks: [BankClerk]
     let customerQueue = Queue<Customer>()
+    var customerCount: Int = 0
+    
+    init(clerkCount: Int) {
+        self.clerks = Array(repeating: BankClerk(), count: clerkCount)
+    }
     
     func open() {
         startBankJob()
@@ -16,22 +21,17 @@ struct Bank {
     
     func startBankJob() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        let customerCount = manageCustomer()
+        manageCustomer()
         let endTime = CFAbsoluteTimeGetCurrent()
         let timeInterval = endTime - startTime
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(timeInterval.formattedNumber)초입니다.")
     }
     
-    func manageCustomer() -> Int {
-        var customerCount = 0
+    func manageCustomer() {
         while let customer = customerQueue.dequeue() {
-            clerk.work(for: customer)
-            
-            customerCount += 1
+            clerks.first?.work(for: customer)
         }
-        
-        return customerCount
     }
     
     func close() {}

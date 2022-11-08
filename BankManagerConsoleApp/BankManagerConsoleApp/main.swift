@@ -6,7 +6,7 @@
 
 import Foundation
 
-let bank = Bank()
+var bank: Bank = Bank(clerkCount: 1)
 start()
 
 func printMenu() {
@@ -30,7 +30,9 @@ func start() {
 }
 
 func setupRandomCustomerQueue() {
-    Array(repeating: 0, count: Int.random(in: 10...30)).enumerated().forEach { index, number in
+    let randomNumber = Int.random(in: 10...30)
+    bank.customerCount = randomNumber
+    Array(repeating: 0, count: randomNumber).enumerated().forEach { index, number in
         bank.customerQueue.enqueue(Customer(number: index+1))
     }
 }
