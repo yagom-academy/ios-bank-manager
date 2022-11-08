@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A4971B82910AF350059F8F0 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4971B72910AF350059F8F0 /* LinkedList.swift */; };
+		1A4972222919E3420059F8F0 /* BankWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4972212919E3420059F8F0 /* BankWork.swift */; };
 		26478F902914C94C0014AB28 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26478F8F2914C94C0014AB28 /* BankManager.swift */; };
 		264C5F7D2913501F00DBBADB /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C5F7C2913501F00DBBADB /* Bank.swift */; };
 		264C5F7F291355C600DBBADB /* BankWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C5F7E291355C600DBBADB /* BankWorker.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		1A4971B72910AF350059F8F0 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		1A4971BF291104240059F8F0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		1A4972212919E3420059F8F0 /* BankWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWork.swift; sourceTree = "<group>"; };
 		26478F8F2914C94C0014AB28 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		264C5F7C2913501F00DBBADB /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		264C5F7E291355C600DBBADB /* BankWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWorker.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				264C5F7E291355C600DBBADB /* BankWorker.swift */,
 				264C5F80291355CB00DBBADB /* Client.swift */,
 				26575B2E2914AFB200994D06 /* NameSpace.swift */,
+				1A4972212919E3420059F8F0 /* BankWork.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				1A4971B82910AF350059F8F0 /* LinkedList.swift in Sources */,
 				264C5F7D2913501F00DBBADB /* Bank.swift in Sources */,
 				264C5F7F291355C600DBBADB /* BankWorker.swift in Sources */,
+				1A4972222919E3420059F8F0 /* BankWork.swift in Sources */,
 				264C5F81291355CB00DBBADB /* Client.swift in Sources */,
 				2656B80E2910B7C2002AB758 /* Queue.swift in Sources */,
 				26575B2F2914AFB200994D06 /* NameSpace.swift in Sources */,
