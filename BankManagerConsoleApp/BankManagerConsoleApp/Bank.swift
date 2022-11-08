@@ -77,7 +77,9 @@ struct Bank {
     }
     
     func taskEnd() {
-        let time = manager.depositTimer > manager.loanTimer ? manager.depositTimer : manager.loanTimer
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(manager.processedCustomer)명이며, 총 업무시간은 \(time)초입니다.")
+        var taskTime = manager.depositTimer > manager.loanTimer ? manager.depositTimer : manager.loanTimer
+        taskTime = Double(round(taskTime * 100) / 100)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(manager.processedCustomer)명이며, 총 업무시간은 \(taskTime)초입니다.")
+        manager.managerClear()
     }
 }
