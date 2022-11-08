@@ -58,7 +58,7 @@ struct Console {
     }
     
     private func openBank() -> WorkResult {
-        let bank: Bank = Bank()
+        let bank: Bank = Bank(customers: Customer.make(), depositBankerCount: 2, loanBankerCount: 1)
         var count: Int = 0
         var totalTime: Double = 0.0
         

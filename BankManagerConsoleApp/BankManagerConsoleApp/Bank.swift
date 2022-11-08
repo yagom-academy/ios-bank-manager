@@ -14,27 +14,20 @@ class Bank {
     private let loanBankerCount: Int
     private let customerCount: Int
     
-    init() {
-        customerCount = Int.random(in: 10...30)
-        depositBankerCount = 2
-        loanBankerCount = 1
-        setCustomerQueue()
+    init(customers: [Customer], depositBankerCount: Int, loanBankerCount: Int) {
+        self.depositBankerCount = depositBankerCount
+        self.loanBankerCount = loanBankerCount
+        customerCount = customers.count
+        setCustomerQueue(from: customers)
     }
     
-    private func setCustomerQueue() {
-        for count in 1...customerCount {
-            guard let randomBankingService: BankingService = BankingService.random() else {
-                return
-            }
-            
-            let customer: Customer = Customer(waitingNumber: count,
-                                              bankingService: randomBankingService)
-            
-            switch customer.bankingService {
+    private func setCustomerQueue(from customers: [Customer]) {
+        customers.forEach {
+            switch $0.bankingService {
             case .loan:
-                loanCustomerQueue.enqueue(customer)
+                loanCustomerQueue.enqueue($0)
             case .deposit:
-                depositCustomerQueue.enqueue(customer)
+                depositCustomerQueue.enqueue($0)
             }
         }
     }
