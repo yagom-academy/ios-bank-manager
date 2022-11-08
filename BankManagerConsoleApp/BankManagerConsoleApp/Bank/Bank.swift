@@ -103,6 +103,7 @@ struct Bank: BankProtocol {
     private mutating func open() {
         let startTime = Date()
         deposit()
+        loan()
         
         group.wait()
         let endTime = Date()
@@ -115,15 +116,28 @@ struct Bank: BankProtocol {
             return
         }
         
-        DispatchQueue.global().async { [self] in
-            group.enter()
+        DispatchQueue.global().async(group: group) { [self] in
             depositDesk.work(customer)
             Self.completedCustomerCount += 1
-            group.leave()
         }
         
         if depositCustomerQueue.isEmpty() == false {
             deposit()
+        }
+    }
+    
+    private mutating func loan() {
+        guard let customer = loanCustomerQueue.dequeue() else {
+            return
+        }
+        
+        DispatchQueue.global().async(group: group) { [self] in
+            loanDesk.work(customer)
+            Self.completedCustomerCount += 1
+        }
+        
+        if loanCustomerQueue.isEmpty() == false {
+            loan()
         }
     }
     
