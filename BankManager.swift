@@ -30,7 +30,9 @@ struct BankManager {
         let customerCount = Constant.randomCustomerCount
         
         for count in 1...customerCount {
-            guard let bankingType = BankingType(rawValue: Int.random(in: 1...2)) else { return }
+            guard let bankingType = BankingType(
+                rawValue: Int.random(in: Constant.depositOrLoan)
+            ) else { return }
             
             let customer = Customer.init(waitingNumber: count, bankingType: bankingType)
             bank.receive(customer: customer)
@@ -49,5 +51,6 @@ private extension BankManager {
         static let empty: String = ""
         static let wrongInputMessage: String = "다시 입력해주세요"
         static let randomCustomerCount: Int = Int.random(in: 10...30)
+        static let depositOrLoan: ClosedRange<Int> = 1...2
     }
 }
