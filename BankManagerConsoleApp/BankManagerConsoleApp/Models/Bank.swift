@@ -7,6 +7,7 @@ struct Bank {
     private var customerList: Queue<Customer>
     private var numberOfCustomer: Int
     private var totalWorkTime: Decimal
+    private var group: DispatchGroup = DispatchGroup()
     
     init(manager: Workable, customerList: Queue<Customer>) {
         self.manager = manager
@@ -33,8 +34,10 @@ struct Bank {
         switch userInput {
         case Namespace.openBank:
             openBank()
+            group.wait()
             closeBank()
             startConsoleApp()
+        
         case Namespace.closeBank:
             break
         default:
@@ -50,10 +53,25 @@ struct Bank {
     }
     
     mutating private func startWork() {
+        let semaphore = DispatchSemaphore(value: 2)
+        let loanQueue = DispatchQueue(label: WorkType.loan.rawValue)
+        
         while !self.customerList.isEmpty {
-            let customer = self.customerList.dequeue()
-            DispatchQueue.global().async { [self] in
-                self.manager.provideService(to: customer)
+            let bankCustomer = self.customerList.dequeue() as? BankCustomer
+            
+            switch bankCustomer?.type {
+            case .deposit:
+                semaphore.wait()
+                DispatchQueue.global().async(group: group) { [self] in
+                    self.manager.provideService(to: bankCustomer)
+                    semaphore.signal()
+                }
+            case .loan:
+                loanQueue.async(group: group) { [self] in
+                    self.manager.provideService(to: bankCustomer)
+                }
+            default:
+                break
             }
         }
     }
