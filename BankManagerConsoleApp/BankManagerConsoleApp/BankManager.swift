@@ -24,7 +24,7 @@ struct BankManager {
         return ticketNumber
     }
     
-    mutating func allocateWork(to worker: BankWorker) {
+    mutating func allocateWork() {
         bankWorkers[0].bankWork = .deposit
         bankWorkers[1].bankWork = .deposit
         bankWorkers[2].bankWork = .loan
@@ -88,6 +88,7 @@ struct BankManager {
     }
     
     mutating func open() {
+        allocateWork()
         directBankWork()
     }
     

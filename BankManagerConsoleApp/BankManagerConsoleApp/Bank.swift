@@ -39,7 +39,7 @@ struct Bank {
 //                group.enter()
 //                DispatchQueue.global().sync {
 //                    generateClient()
-//                    self.bankManager.open()
+                    self.bankManager.open()
 //                    
 //                }
 //                group.leave()

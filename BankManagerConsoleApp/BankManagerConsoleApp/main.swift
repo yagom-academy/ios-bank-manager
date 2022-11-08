@@ -4,15 +4,19 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bankWorkers: [BankWorker] = []
+var bankWorkers: [BankWorker] = generateBankWorkers()
 var bankManager: BankManager = BankManager(bankWorkers: bankWorkers)
 var bank: Bank = Bank(bankManager: bankManager)
 
-private func generateBankWorkers() {
+private func generateBankWorkers() -> [BankWorker] {
+    var bankWorkers: [BankWorker] = []
+    
     for _ in 0...2 {
         let bankWorker = BankWorker()
         bankWorkers.append(bankWorker)
     }
+    
+    return bankWorkers
 }
 
 private func generateClient() {
@@ -24,6 +28,5 @@ private func generateClient() {
     }
 }
 
-generateBankWorkers()
 generateClient()
 bank.openSystem()
