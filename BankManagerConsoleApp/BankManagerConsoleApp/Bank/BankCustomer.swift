@@ -15,4 +15,8 @@ struct BankCustomer {
         self.waitingNumber = Self.customerNumber
         self.type = CustomerType.allCases.randomElement() ?? .deposit
     }
+    
+    static func resetCustomerNumber() {
+        Self.customerNumber = 0
+    }
 }

@@ -28,21 +28,26 @@ struct Bank: BankProtocol {
     
     private let constant: Constant = .init()
     private var depositDesk: BankDesk
+    private var loanDesk: BankDesk
+    
     private var customerQueue: BankCustomerQueue<BankCustomer>
     private var depositCustomerQueue: BankCustomerQueue<BankCustomer>
     private var loanCustomerQueue: BankCustomerQueue<BankCustomer>
+    
     private static var completedCustomerCount: Int = .zero
     private var totalWorkedTime: TimeInterval = .zero
+    
     private let group: DispatchGroup = .init()
     
-    init(depositBankerCount: Int) {
+    init(depositBankerCount: Int, loanBankerCount: Int) {
         self.depositDesk = BankDesk(banker: depositBankerCount)
+        self.loanDesk = BankDesk(banker: loanBankerCount)
+        
         self.customerQueue = .init()
         self.depositCustomerQueue = .init()
         self.loanCustomerQueue = .init()
         
-        arrangeCustomer()
-        separateCustomer()
+        configure()
     }
     
     private mutating func arrangeCustomer() {
@@ -74,12 +79,21 @@ struct Bank: BankProtocol {
             switch menu {
             case constant.openOption:
                 open()
+                configure()
             case constant.closeOption:
                 return
             default:
                 print(constant.invalidInput)
             }
         }
+    }
+    
+    private mutating func configure() {
+        arrangeCustomer()
+        separateCustomer()
+        
+        Self.completedCustomerCount = .zero
+        BankCustomer.resetCustomerNumber()
     }
     
     private func floatingMenu() {
@@ -89,6 +103,7 @@ struct Bank: BankProtocol {
     private mutating func open() {
         let startTime = Date()
         deposit()
+        
         group.wait()
         let endTime = Date()
         self.totalWorkedTime = endTime.timeIntervalSince(startTime)

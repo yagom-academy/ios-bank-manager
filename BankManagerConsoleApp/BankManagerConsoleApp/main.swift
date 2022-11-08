@@ -7,6 +7,6 @@
 import Foundation
 import BankCustomerQueue
 
-var bank: Bank = Bank(depositBankerCount: 2)
+var bank: Bank = Bank(depositBankerCount: 2, loanBankerCount: 1)
 
 bank.startBusiness()
