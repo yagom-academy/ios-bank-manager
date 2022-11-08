@@ -7,6 +7,7 @@ import Foundation
 struct Bank {
     private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
+    let group = DispatchGroup()
     
     mutating func selectMenu() {
         print(" 1 : 은행개점\n 2 : 종료\n입력 :", terminator: " ")
@@ -33,6 +34,8 @@ struct Bank {
         
         listUpCustomer(totalCustomer)
         startTask()
+        group.wait()
+        taskEnd()
         selectMenu()
     }
     
@@ -55,20 +58,26 @@ struct Bank {
             
             switch currentCustomer.purposeOfServie {
             case .deposit:
-                DispatchQueue.global().async { [self] in
+                DispatchQueue.global().async(group: group) { [self] in
                     depoSemaphore.wait()
                     manager.task(customer: currentCustomer)
                     manager.addDepositTime()
                     depoSemaphore.signal()
                 }
             case .loan:
-                DispatchQueue.global().async { [self] in
+                DispatchQueue.global().async(group: group) { [self] in
                     loanSemaphore.wait()
                     manager.task(customer: currentCustomer)
                     manager.addLoanTime()
                     loanSemaphore.signal()
                 }
             }
+            manager.addCustomer()
         }
+    }
+    
+    func taskEnd() {
+        let time = manager.depositTimer > manager.loanTimer ? manager.depositTimer : manager.loanTimer
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(manager.processedCustomer)명이며, 총 업무시간은 \(time)초입니다.")
     }
 }

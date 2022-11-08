@@ -28,7 +28,7 @@ class BankManager {
     }
     
     func addLoanTime() {
-        LoanTimer += 1.1
+        loanTimer += 1.1
     }
     
     func addCustomer() {
@@ -40,6 +40,4 @@ class BankManager {
         loanTimer = 0
         processedCustomer = 0 
     }
-    
-    
 }
