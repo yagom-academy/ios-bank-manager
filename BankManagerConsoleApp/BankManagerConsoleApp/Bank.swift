@@ -4,15 +4,15 @@
 
 import Foundation
 
-final class Bank {
-    private var waitingLine: Queue<Customer> = Queue()
-    private(set) var finishedCustomerCount: Int = 0
-    private let depositQueue: DispatchQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
-    private let loanQueue: DispatchQueue = DispatchQueue(label: "loan")
-    private let depositSemaphore: DispatchSemaphore
-    private let loanSemaphore: DispatchSemaphore
-    private let customerCountSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
-    let bankingServiceGroup: DispatchGroup = DispatchGroup()
+final class Bank: Bankable {
+    var waitingLine: Queue<Customer> = Queue()
+    var finishedCustomerCount: Int = 0
+    var depositQueue: DispatchQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
+    var loanQueue: DispatchQueue = DispatchQueue(label: "loan")
+    var depositSemaphore: DispatchSemaphore
+    var loanSemaphore: DispatchSemaphore
+    var customerCountSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    var bankingServiceGroup: DispatchGroup = DispatchGroup()
     
     init(depositBooth: Int, loanBooth: Int) {
         self.depositSemaphore = DispatchSemaphore(value: depositBooth)
@@ -40,7 +40,7 @@ final class Bank {
         }
     }
     
-    private func handleBankingService(_ customer: Customer) {
+    func handleBankingService(_ customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(customer.banking.serviceName)업무 시작")
         
         Thread.sleep(forTimeInterval: customer.banking.timePerService)
@@ -50,13 +50,5 @@ final class Bank {
         customerCountSemaphore.wait()
         finishedCustomerCount += 1
         customerCountSemaphore.signal()
-    }
-    
-    func addCustomer(_ customer: Customer) {
-        waitingLine.enqueue(customer)
-    }
-    
-    func resetFinishedCustomerCount() {
-        finishedCustomerCount = 0
     }
 }

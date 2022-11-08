@@ -5,10 +5,10 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank
+    private var bank: Bankable
     private(set) var isRunning: Bool = true
     
-    init(bank: Bank) {
+    init(bank: Bankable) {
         self.bank = bank
     }
     
