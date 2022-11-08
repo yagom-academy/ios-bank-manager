@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  BankManagerConsoleApp
 //
-//  Copyright (c) 2022 Minii All rights reserved.
+//  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
 struct LinkedList<T> {
     private var head: Node<T>?

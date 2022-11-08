@@ -1,9 +1,8 @@
 //
 //  CustomerQueueTests.swift
-//  CustomerQueueTests
+//  BankManagerConsoleApp
 //
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
-        
 
 import XCTest
 
@@ -77,5 +76,18 @@ final class CustomerQueueTests: XCTestCase {
         
         // then
         XCTAssertNil(result)
+    }
+    
+    func test_clear를_하고나면_모든값이_지워져있는가() {
+        // given
+        let inputValues = [100, 200, 300]
+        
+        // when
+        inputValues.forEach { sut.enqueue(value: $0) }
+        sut.clear()
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
     }
 }

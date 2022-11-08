@@ -2,9 +2,7 @@
 //  CustomerQueue.swift
 //  BankManagerConsoleApp
 //
-//  Copyright (c) 2022 Minii All rights reserved.
-
-import Foundation
+//  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
 struct CustomerQueue<T> {
     private var linkedList = LinkedList<T>()

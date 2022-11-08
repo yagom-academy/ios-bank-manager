@@ -1,7 +1,8 @@
 //
-//  CustomerQueueTests.swift
-//  CustomerQueueTests
+//  main.swift
+//  BankManagerConsoleApp
 //
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
-import Foundation
+var console = ConsoleManager(bankManager: BankManager(bank: Bank()))
+console.startConsole()
