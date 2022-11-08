@@ -14,13 +14,8 @@ struct Bank {
         self.bankManager = bankManager
     }
     
-    mutating private func generateClient() {
-        let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
-        for number in 1...randomNumber {
-            let randomWork = BankWork.allCases.randomElement() ?? .deposit
-            let client = Client(ticketNumber: number, requestWork: randomWork)
-            self.bankManager.addClientQueue(client)
-        }
+    private func publishTicketNumber() -> Int {
+        return bankManager.publishTicketNumber()
     }
     
     mutating func openSystem() {

@@ -18,9 +18,13 @@ struct BankManager {
         self.bankWorkers = bankWorkers
     }
     
+    mutating func publishTicketNumber() -> Int {
+        totalClientCount += 1
+    }
+    
     mutating func addClientQueue(_ client: Client) {
         let requestWork = client.requestWork
-        totalClientCount += 1
+        
         totalWorkTime += client.requestWork.time
         
         switch requestWork {
