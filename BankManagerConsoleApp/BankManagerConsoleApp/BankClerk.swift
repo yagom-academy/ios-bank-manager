@@ -23,7 +23,6 @@ extension BankClerk {
     }
 }
 
-
 struct DepositBankClerk: BankClerk {
     let bankingType: BankingType
     let processingTime: Double

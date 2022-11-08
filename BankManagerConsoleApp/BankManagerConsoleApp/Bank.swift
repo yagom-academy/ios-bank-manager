@@ -26,13 +26,13 @@ struct Bank {
         openingTime = Date()
         
         while !customers.isEmpty {
-            guard let customer = customers.dequeue() else {
-                return
-            }
+            guard let customer = customers.dequeue() else { return }
             
-            customer.bankingType == .deposit
-                ? depositCustomers.enqueue(customer)
-                : loanCustomers.enqueue(customer)
+            if customer.bankingType == .deposit {
+                depositCustomers.enqueue(customer)
+            } else if customer.bankingType == .loan {
+                loanCustomers.enqueue(customer)
+            }
         }
         
         matchClerk(to: &depositCustomers, of: .deposit, group: group)
@@ -48,9 +48,7 @@ struct Bank {
         
         while !customers.isEmpty {
             bankClerks.forEach { bankClerk in
-                guard let customer = customers.dequeue() else {
-                    return
-                }
+                guard let customer = customers.dequeue() else { return }
                 
                 bankClerk.serve(customer: customer, group: group)
                 completedCustomerCount += 1

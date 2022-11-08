@@ -11,9 +11,7 @@ struct BankManager {
     mutating func startManagement() {
         print(Constant.options, terminator: Constant.empty)
         
-        guard let input = readLine() else {
-            return
-        }
+        guard let input = readLine() else { return }
         
         switch input {
         case BankMenu.open:
@@ -32,9 +30,7 @@ struct BankManager {
         let customerCount = 12 //Int.random(in: Constant.customerRange)
         
         for count in 1...customerCount {
-            guard let bankingType = BankingType.init(rawValue: Int.random(in: 1...2)) else {
-                return
-            }
+            guard let bankingType = BankingType(rawValue: Int.random(in: 1...2)) else { return }
             
             let customer = Customer.init(waitingNumber: count, bankingType: bankingType)
             bank.receive(customer: customer)
