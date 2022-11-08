@@ -16,9 +16,9 @@ protocol BankClerk {
 
 extension BankClerk {
     func serve(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer)업무 시작")
+        print("\(customer.waitingNumber)번 고객 \(customer.bankingType)업무 시작")
         Thread.sleep(forTimeInterval: processingTime)
-        print("\(customer.waitingNumber)번 고객 \(customer)업무 종료")
+        print("\(customer.waitingNumber)번 고객 \(customer.bankingType)업무 종료")
     }
     
     func call(customer: Customer) {

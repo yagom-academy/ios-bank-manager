@@ -8,6 +8,7 @@ import Foundation
 struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var completedCustomerCount: Int = 0
+    private var bankClerks: [BankClerk]
     private var isOpen: Bool = false {
         didSet {
             isOpen ? startBanking() : closeBanking()
@@ -26,24 +27,20 @@ struct Bank {
     mutating func receive(customer: Customer) {
         customers.enqueue(customer)
     }
-
-    private mutating func startBanking() {
+    
+    mutating func startBanking() {
+        var depositCustomers = Queue<Customer>()
+        var loanCustomers = Queue<Customer>()
+        
         while !customers.isEmpty {
             guard let customer = customers.dequeue() else {
                 return
             }
             
-            serveCustomer(number: customer.waitingNumber)
+            customer.bankingType == .deposit
+                ? depositCustomers.enqueue(customer)
+                : loanCustomers.enqueue(customer)
         }
-        
-        isOpen = false
-    }
-    
-    private mutating func serveCustomer(number: Int) {
-        print(String(format: Constant.startMessage, number))
-        Thread.sleep(forTimeInterval: Constant.processingTime)
-        completedCustomerCount += 1
-        print(String(format: Constant.endMessage, number))
     }
     
     private func closeBanking() {

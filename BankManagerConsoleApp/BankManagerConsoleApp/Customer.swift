@@ -7,4 +7,5 @@ import Foundation
 
 struct Customer {
     let waitingNumber: Int
+    let bankingType: BankingType
 }
