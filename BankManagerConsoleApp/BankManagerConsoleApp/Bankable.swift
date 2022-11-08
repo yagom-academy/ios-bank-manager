@@ -9,9 +9,6 @@ protocol Bankable: AnyObject {
     var finishedCustomerCount: Int { get set }
     var depositQueue: DispatchQueue { get }
     var loanQueue: DispatchQueue { get }
-    var depositSemaphore: DispatchSemaphore { get }
-    var loanSemaphore: DispatchSemaphore { get }
-    var customerCountSemaphore: DispatchSemaphore { get }
     var bankingServiceGroup: DispatchGroup { get }
     
     func allocateCustomer()

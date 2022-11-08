@@ -9,10 +9,11 @@ final class Bank: Bankable {
     var finishedCustomerCount: Int = 0
     var depositQueue: DispatchQueue = DispatchQueue(label: "deposit", attributes: .concurrent)
     var loanQueue: DispatchQueue = DispatchQueue(label: "loan")
-    var depositSemaphore: DispatchSemaphore
-    var loanSemaphore: DispatchSemaphore
-    var customerCountSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     var bankingServiceGroup: DispatchGroup = DispatchGroup()
+    private var depositSemaphore: DispatchSemaphore
+    private var loanSemaphore: DispatchSemaphore
+    private var customerCountSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    
     
     init(depositBooth: Int, loanBooth: Int) {
         self.depositSemaphore = DispatchSemaphore(value: depositBooth)
