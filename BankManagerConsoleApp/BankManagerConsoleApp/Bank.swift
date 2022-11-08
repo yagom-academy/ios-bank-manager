@@ -7,8 +7,6 @@ import Foundation
 struct Bank {
     private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
-    private var processedCustomer: Int = 0
-    private var taskTime: Double = 0
     
     mutating func selectMenu() {
         print(" 1 : 은행개점\n 2 : 종료\n입력 :", terminator: " ")
@@ -60,12 +58,14 @@ struct Bank {
                 DispatchQueue.global().async { [self] in
                     depoSemaphore.wait()
                     manager.task(customer: currentCustomer)
+                    manager.addDepositTime()
                     depoSemaphore.signal()
                 }
             case .loan:
                 DispatchQueue.global().async { [self] in
                     loanSemaphore.wait()
                     manager.task(customer: currentCustomer)
+                    manager.addLoanTime()
                     loanSemaphore.signal()
                 }
             }

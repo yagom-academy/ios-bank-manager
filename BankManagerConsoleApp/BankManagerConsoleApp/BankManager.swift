@@ -6,7 +6,11 @@
 
 import Foundation
 
-struct BankManager {
+class BankManager {
+    var depositTimer: Double = 0
+    var loanTimer: Double = 0
+    var processedCustomer: Int = 0
+    
     func task(customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(customer.purposeOfServie.rawValue)업무 시작")
         
@@ -18,4 +22,24 @@ struct BankManager {
         }
         print("\(customer.waitingNumber)번 고객 \(customer.purposeOfServie.rawValue)업무 종료")
     }
+    
+    func addDepositTime () {
+        depositTimer += 0.7
+    }
+    
+    func addLoanTime() {
+        LoanTimer += 1.1
+    }
+    
+    func addCustomer() {
+        processedCustomer += 1
+    }
+    
+    func managerClear() {
+        depositTimer = 0
+        loanTimer = 0
+        processedCustomer = 0 
+    }
+    
+    
 }
