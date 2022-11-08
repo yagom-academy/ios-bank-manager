@@ -6,5 +6,5 @@
 
 enum BankBusiness: String, CaseIterable {
     case deposit = "예금"
-    case loans = "적금"
+    case loans = "대출"
 }

@@ -40,8 +40,22 @@ struct Bank {
     }
 
     mutating func startWork() {
+        let depositQueue = OperationQueue()
+        let loansQueue = OperationQueue()
+        depositQueue.maxConcurrentOperationCount = 2
+        loansQueue.maxConcurrentOperationCount = 1
+        
         while !isQueueEmpty {
             guard let customer = customerQueue?.dequeue() else { return }
+            let customerOperation = BankerOperation(customer: customer)
+            
+            switch customer.business {
+            case .deposit:
+                depositQueue.addOperation(customerOperation)
+                
+            case .loans:
+                loansQueue.addOperation(customerOperation)
+            }
             
             // 대기열에서 손님이 차례가 되어서 일어났다.
             
