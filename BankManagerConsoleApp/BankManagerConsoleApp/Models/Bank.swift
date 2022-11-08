@@ -51,14 +51,16 @@ struct Bank {
     
     mutating private func startWork() {
         while !self.customerList.isEmpty {
-            self.manager.provideService(to: self.customerList.dequeue())
-            self.totalWorkTime += Namespace.depositTime
+            let customer = self.customerList.dequeue()
+            DispatchQueue.global().async { [self] in
+                self.manager.provideService(to: customer)
+            }
         }
     }
     
     mutating private func registerCustomers(with numberOfCustomer: Int) {
         for number in 1...numberOfCustomer {
-            self.customerList.enqueue(BankCustomer(number: number))
+            self.customerList.enqueue(BankCustomer(number: number, type: WorkType.allCases.randomElement()))
         }
     }
     
