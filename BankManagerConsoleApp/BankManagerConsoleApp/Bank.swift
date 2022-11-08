@@ -60,22 +60,20 @@ struct Bank {
             
             switch currentCustomer.purposeOfServie {
             case .deposit:
-                DispatchQueue.global().async(group: group) { [self] in
-                    depoSemaphore.wait()
-                    manager.task(customer: currentCustomer)
-                    manager.addDepositTime()
-                    depoSemaphore.signal()
-                    manager.addCustomer()
-                }
+                dispatchTask(of: currentCustomer, using: depoSemaphore)
             case .loan:
-                DispatchQueue.global().async(group: group) { [self] in
-                    loanSemaphore.wait()
-                    manager.task(customer: currentCustomer)
-                    manager.addLoanTime()
-                    loanSemaphore.signal()
-                    manager.addCustomer()
-                }
+                dispatchTask(of: currentCustomer, using: loanSemaphore)
             }
+        }
+    }
+    
+    private func dispatchTask(of currentCustomer: Customer, using semaphore: DispatchSemaphore) {
+        DispatchQueue.global().async(group: group) { [self] in
+            semaphore.wait()
+            manager.task(customer: currentCustomer)
+            manager.addLoanTime()
+            semaphore.signal()
+            manager.addCustomer()
         }
     }
     
