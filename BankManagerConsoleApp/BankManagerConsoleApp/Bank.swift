@@ -11,20 +11,12 @@ struct Bank {
     let customerQueue = Queue<Customer>()
     
     func open() {
-        setupRandomCustomerQueue()
         startBankJob()
-        start()
-    }
-    
-    func setupRandomCustomerQueue() {
-        Array(repeating: 0, count: Int.random(in: 10...30)).enumerated().forEach { index, number in
-            customerQueue.enqueue(Customer(number: index+1))
-        }
     }
     
     func startBankJob() {
         let startTime = CFAbsoluteTimeGetCurrent()
-        var customerCount = manageCustomer()
+        let customerCount = manageCustomer()
         let endTime = CFAbsoluteTimeGetCurrent()
         let timeInterval = endTime - startTime
         
@@ -44,21 +36,4 @@ struct Bank {
     
     func close() {}
     
-    func printMenu() {
-        print("1: 은행 개점")
-        print("2: 종료")
-    }
-    
-    func start() {
-        printMenu()
-        let menuNumber = readLine()
-        switch menuNumber {
-        case "1":
-            open()
-        case "2":
-            close()
-        default:
-            start()
-        }
-    }
 }
