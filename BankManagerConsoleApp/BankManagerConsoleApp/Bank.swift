@@ -7,7 +7,9 @@ import Foundation
 struct Bank {
     private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
-    let group = DispatchGroup()
+    private let group = DispatchGroup()
+    private let loanFront = 1
+    private let depositFront = 2
     
     mutating func selectMenu() {
         print(" 1 : 은행개점\n 2 : 종료\n입력 :", terminator: " ")
@@ -50,8 +52,8 @@ struct Bank {
     }
     
     private mutating func startTask() {
-        let loanSemaphore = DispatchSemaphore(value: 1)
-        let depoSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: loanFront)
+        let depoSemaphore = DispatchSemaphore(value: depositFront)
         
         while lineOfCustomer.isEmpty == false {
             guard let currentCustomer = lineOfCustomer.dequeue() else { break }
@@ -63,6 +65,7 @@ struct Bank {
                     manager.task(customer: currentCustomer)
                     manager.addDepositTime()
                     depoSemaphore.signal()
+                    manager.addCustomer()
                 }
             case .loan:
                 DispatchQueue.global().async(group: group) { [self] in
@@ -70,9 +73,9 @@ struct Bank {
                     manager.task(customer: currentCustomer)
                     manager.addLoanTime()
                     loanSemaphore.signal()
+                    manager.addCustomer()
                 }
             }
-            manager.addCustomer()
         }
     }
     
