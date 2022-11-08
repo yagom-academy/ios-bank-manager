@@ -68,7 +68,7 @@ struct Bank {
     }
     
     private func dispatchTask(of currentCustomer: Customer, using semaphore: DispatchSemaphore) {
-        DispatchQueue.global().async(group: group) { [self] in
+        DispatchQueue.global().async(group: group) {
             semaphore.wait()
             manager.task(customer: currentCustomer)
             manager.addLoanTime()
