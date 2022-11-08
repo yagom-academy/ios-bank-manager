@@ -14,6 +14,10 @@ struct Bank {
         self.bankManager = bankManager
     }
     
+    mutating func addClient(_ client: Client) {
+        bankManager.addClientQueue(client)
+    }
+    
     mutating func publishTicketNumber() -> Int {
         return bankManager.publishTicketNumber()
     }

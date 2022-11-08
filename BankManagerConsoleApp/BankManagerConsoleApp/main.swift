@@ -7,6 +7,7 @@
 var bankWorkers: [BankWorker] = generateBankWorkers()
 var bankManager: BankManager = BankManager(bankWorkers: bankWorkers)
 var bank: Bank = Bank(bankManager: bankManager)
+var clients: [Client] = generateClients()
 
 private func generateBankWorkers() -> [BankWorker] {
     var bankWorkers: [BankWorker] = []
@@ -19,14 +20,20 @@ private func generateBankWorkers() -> [BankWorker] {
     return bankWorkers
 }
 
-private func generateClient() {
+private func generateClients() -> [Client] {
+    var clients: [Client] = []
+    
     let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
     for _ in 1...randomNumber {
         let randomWork = [BankWork.loan, BankWork.deposit].randomElement() ?? .deposit
         let client = Client(ticketNumber: bank.publishTicketNumber(), requestWork: randomWork)
-        bankManager.addClientQueue(client)
+        clients.append(client)
     }
+    
+    return clients
 }
 
-generateClient()
+clients.forEach {
+    bank.addClient($0)
+}
 bank.openSystem()

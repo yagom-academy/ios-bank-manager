@@ -12,7 +12,7 @@ struct BankManager {
     private let depositClientQueue: Queue<Client> = Queue()
     private let loanClientQueue: Queue<Client> = Queue()
     private var totalClientCount: Int = 0
-    private var totalWorkTime: Double = 0
+    private var totalWorkTime: Double = 0.0
     
     init(bankWorkers: [BankWorker]) {
         self.bankWorkers = bankWorkers
@@ -32,8 +32,7 @@ struct BankManager {
     
     mutating func addClientQueue(_ client: Client) {
         let requestWork = client.requestWork
-        
-        self.totalWorkTime += client.requestWork.time
+        totalWorkTime += requestWork.time
         
         switch requestWork {
         case .deposit:
