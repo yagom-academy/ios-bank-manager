@@ -2,7 +2,7 @@
 //  BankWork.swift
 //  BankManagerConsoleApp
 //
-//  Created by 노유빈 on 2022/11/08.
+//  Created by 애쉬, 로빈 on 2022/11/08.
 //
 
 import Foundation
@@ -27,5 +27,9 @@ enum BankWork {
         case .loan:
             return 1.1
         }
+    }
+    
+    var workTime: useconds_t {
+        return useconds_t(self.time * 1000000)
     }
 }
