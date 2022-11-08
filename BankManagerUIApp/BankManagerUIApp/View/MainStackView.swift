@@ -40,7 +40,7 @@ final class MainStackView: UIStackView {
         self.spacing = 15
     }
     
-    func setSubView() {
+    private func setSubView() {
         self.addArrangedSubview(buttonStackView)
         self.addArrangedSubview(timerLabel)
         self.addArrangedSubview(bankStateStackView)

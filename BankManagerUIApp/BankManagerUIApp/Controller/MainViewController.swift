@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class MainViewController: UIViewController {
     let mainStackView: MainStackView = MainStackView()
     
     override func viewDidLoad() {

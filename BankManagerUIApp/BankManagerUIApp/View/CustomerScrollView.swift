@@ -13,6 +13,7 @@ final class CustomerScrollView: UIScrollView {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .vertical
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView

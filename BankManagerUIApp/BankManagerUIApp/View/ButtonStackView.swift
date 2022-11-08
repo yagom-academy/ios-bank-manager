@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ButtonStackView: UIStackView {
+final class ButtonStackView: UIStackView {
     private let addButton: UIButton = {
         let button: UIButton = UIButton()
         
@@ -37,14 +37,14 @@ class ButtonStackView: UIStackView {
         fatalError()
     }
     
-    func configure() {
+    private func configure() {
         self.alignment = .fill
         self.distribution = .fillEqually
         self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func setSubView() {
+    private func setSubView() {
         self.addArrangedSubview(addButton)
         self.addArrangedSubview(resetButton)
     }
