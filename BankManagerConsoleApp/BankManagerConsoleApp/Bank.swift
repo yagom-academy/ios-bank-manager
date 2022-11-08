@@ -24,20 +24,22 @@ struct Bank {
     
     func startBankJob() {
         let startTime = CFAbsoluteTimeGetCurrent()
+        var customerCount = manageCustomer()
+        let endTime = CFAbsoluteTimeGetCurrent()
+        let timeInterval = endTime - startTime
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(timeInterval.formattedNumber)초입니다.")
+    }
+    
+    func manageCustomer() -> Int {
         var customerCount = 0
         while let customer = customerQueue.dequeue() {
             clerk.work(for: customer)
             
             customerCount += 1
         }
-        let endTime = CFAbsoluteTimeGetCurrent()
-        let timeInterval = endTime - startTime
         
-        guard let formattedTime = timeInterval.formattedNumber else {
-            return
-        }
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(formattedTime)초입니다.")
+        return customerCount
     }
     
     func close() {}

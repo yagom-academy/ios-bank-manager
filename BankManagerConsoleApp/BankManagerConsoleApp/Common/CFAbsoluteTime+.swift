@@ -8,12 +8,12 @@
 import Foundation
 
 extension CFAbsoluteTime {
-    var formattedNumber: String? {
+    var formattedNumber: String {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.roundingMode = .floor
         numberFormatter.maximumSignificantDigits = 4
         
-        return numberFormatter.string(for: self)
+        return numberFormatter.string(for: self) ?? ""
     }
 }
