@@ -20,7 +20,7 @@ class QueueTest: XCTestCase {
         sut = nil
     }
 
-    func test_queue에linkedList의count가0일때_isEmpty가true를반환하는지() {
+    func test_queue에linkedList의count가0일때_isEmpty가true를반환해야한다() {
         // when
         let result = sut.isEmpty
         
@@ -28,7 +28,7 @@ class QueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_queue에linkedList의count가0이아닐때_isEmpty가false를반환하는지() {
+    func test_queue에linkedList의count가0이아닐때_isEmpty가false를반환해야한다n() {
         // given
         sut.enqueue(1)
         
@@ -39,7 +39,7 @@ class QueueTest: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_queue에1_2_3을_넣었을때_카운트가_3인지() {
+    func test_queue에n개의값을enqueue했을때_카운트가n이어야한다() {
         // given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -52,7 +52,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(3, result)
     }
     
-    func test_queue에1_2_3을_넣었을때_dequeue가_1인지() {
+    func test_queue에순서대로enqueue했을때_dequeue값은첫번째값이어야한다() {
         // given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -65,7 +65,7 @@ class QueueTest: XCTestCase {
         XCTAssertEqual(1, result)
     }
     
-    func test_clear호출시_isEmpty가true를반환하는지() {
+    func test_clear호출시_isEmpty가true를반환해야한다() {
         // given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -79,7 +79,7 @@ class QueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_peek호출시_head의value값을반환하는지() {
+    func test_peek호출시_head의value값을반환해야한다() {
         // given
         sut.enqueue(3)
         sut.enqueue(2)
