@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		189838C5291A416900C3753A /* BankOperationProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189838C4291A416900C3753A /* BankOperationProcessing.swift */; };
+		189838C7291A417B00C3753A /* BankerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189838C6291A417B00C3753A /* BankerOperation.swift */; };
 		18A08DBC290F7C9500DEE94C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D3C98B290F6680005355A4 /* Node.swift */; };
 		18A08DBE290FACAD00DEE94C /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A08DBD290FACAD00DEE94C /* CustomerQueue.swift */; };
 		18C2F22A290F62CB006418E3 /* CustomerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2F229290F62CB006418E3 /* CustomerQueueTests.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		189838C4291A416900C3753A /* BankOperationProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankOperationProcessing.swift; sourceTree = "<group>"; };
+		189838C6291A417B00C3753A /* BankerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankerOperation.swift; sourceTree = "<group>"; };
 		18A08DBD290FACAD00DEE94C /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		18C2F227290F62CB006418E3 /* ManagerQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManagerQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C2F229290F62CB006418E3 /* CustomerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTests.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 				B40861EF2913AF81000F493D /* Bank.swift */,
 				B4B882B3291A38A000E3C3C6 /* BankBusiness.swift */,
 				B40861ED2913AEC1000F493D /* Customer.swift */,
+				189838C4291A416900C3753A /* BankOperationProcessing.swift */,
+				189838C6291A417B00C3753A /* BankerOperation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,10 +307,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189838C5291A416900C3753A /* BankOperationProcessing.swift in Sources */,
 				B4D3C98C290F6680005355A4 /* Node.swift in Sources */,
 				18A08DBE290FACAD00DEE94C /* CustomerQueue.swift in Sources */,
 				18EC9D4D2910B4D20084F258 /* LinkedList.swift in Sources */,
 				B40861EE2913AEC1000F493D /* Customer.swift in Sources */,
+				189838C7291A417B00C3753A /* BankerOperation.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				18FCF2B42913B2FD008B7BAA /* ConsoleManager.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,

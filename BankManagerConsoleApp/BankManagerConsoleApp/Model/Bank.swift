@@ -6,6 +6,17 @@
 
 import Foundation
 
+/*
+ 1. 은행원의 수 구현 - 3명으로 제한
+ 2. 업무 종류와 소요 시간 구현
+ 
+ 구현 방법
+ - Semephore + DispatchQueue
+ - OperationQueue
+ 
+ */
+
+
 struct Bank {
     enum Constant {
         static let depositTakenSeconds: Double = 0.7
@@ -29,25 +40,22 @@ struct Bank {
     }
 
     mutating func startWork() {
-        var time: Double = 0
-        var customerCount: Int = 0
-
         while !isQueueEmpty {
-            guard let customer = customerQueue?.dequeue() else {
-                return
-            }
-
-            print("\(customer.ticketNumber)번 고객 업무 시작")
-
-            DispatchQueue.global().sync {
-                Thread.sleep(forTimeInterval: Constant.depositTakenSeconds)
-                time += (Constant.depositTakenSeconds)
-                customerCount += 1
-                print("\(customer.ticketNumber)번 고객 업무 종료")
-            }
+            guard let customer = customerQueue?.dequeue() else { return }
+            
+            // 대기열에서 손님이 차례가 되어서 일어났다.
+            
+            // 손님은 해당되는 업무가 있기에 해당되는 직원을 찾아가야 한다.
+                // 손님의 업무가 예금이라면 예금 은행원이 있는 곳
+                // 손님의 업무가 대출이라면 대출 은행원이 있는 곳
+            
+            // 은행원은 이에 맞춰서 업무를 볼 수 있어야 한다.
+                // 즉, 대출업무와 예금 업무를 모두 볼 수 있어야 한다.
+            
+            // 은행 업무는 해당되는 시간만큼 걸리기 때문에 시간이 지난 후, 업무를 종료한다.
+            
+            // 은행원은 업무가 끝나는 즉시 다른 업무를 할 수 있어야 한다.
         }
-
-        endWork(customerCount: customerCount, duringTime: time)
     }
 
     private func endWork(customerCount: Int, duringTime: Double) {
