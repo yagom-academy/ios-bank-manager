@@ -10,9 +10,9 @@ import BankCustomerQueue
 
 struct Bank: BankProtocol {
     private struct Constant {
-        let invalidInputDescription: String = "잘못된 입력입니다."
-        let bankOpenOption: String = "1"
-        let bankCloseOption: String = "2"
+        let invalidInput: String = "잘못된 입력입니다."
+        let openOption: String = "1"
+        let closeOption: String = "2"
         let menu: String = """
                            1 : 은행 개점
                            2 : 종료
@@ -28,40 +28,34 @@ struct Bank: BankProtocol {
     
     private let constant: Constant = .init()
     private var bankerList: [Banker]
-    private var bankCustomerQueue: BankCustomerQueue<BankCustomer>
+    private var customerQueue: BankCustomerQueue<BankCustomer>
     private var completedCustomerCount: Int = .zero
     private var totalWorkedTime: TimeInterval = .zero
     
     init(bankerCount: Int = 1) {
         self.bankerList = .init(repeating: Banker(), count: bankerCount)
-        self.bankCustomerQueue = .init()
+        self.customerQueue = .init()
         let randomNumber = Int.random(in: constant.customerCountRange)
         
         for _ in 1...randomNumber {
             let bankCustomer: BankCustomer = .init(customerType: .deposit)
-            bankCustomerQueue.enqueue(bankCustomer)
+            customerQueue.enqueue(bankCustomer)
         }
     }
     
-    mutating func open() {
+    mutating func startBusiness() {
         while true {
             floatingMenu()
             
-            guard let menu = readLine() else {
-                return
-            }
+            let menu = readLine()
             
             switch menu {
-            case constant.bankOpenOption:
-                let startPoint = Date()
-                work()
-                let endPoint = Date()
-                self.totalWorkedTime = endPoint.timeIntervalSince(startPoint)
-                close()
-            case constant.bankCloseOption:
+            case constant.openOption:
+                open()
+            case constant.closeOption:
                 return
             default:
-                print(constant.invalidInputDescription)
+                print(constant.invalidInput)
             }
         }
     }
@@ -70,9 +64,17 @@ struct Bank: BankProtocol {
         print(constant.menu, terminator: constant.spacing)
     }
     
+    private mutating func open() {
+        let startTime = Date()
+        work()
+        let endTime = Date()
+        self.totalWorkedTime = endTime.timeIntervalSince(startTime)
+        close()
+    }
+    
     private mutating func work() {
         let banker: Banker = bankerList.removeFirst()
-        while let customer = bankCustomerQueue.dequeue() {
+        while let customer = customerQueue.dequeue() {
             banker.work(customer)
             completedCustomerCount += 1
         }

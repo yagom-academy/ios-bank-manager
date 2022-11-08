@@ -9,4 +9,6 @@ import BankCustomerQueue
 
 var bank: Bank = Bank()
 
-bank.open()
+bank.startBusiness()
+
+

@@ -6,5 +6,5 @@
 //
 
 protocol BankProtocol {
-    mutating func open()
+    mutating func startBusiness()
 }
