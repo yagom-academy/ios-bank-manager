@@ -9,11 +9,7 @@ struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var completedCustomerCount: Int = 0
     private var bankClerks: [BankClerk]
-    private var totalProcessingTime: String {
-        let result = String(format: Constant.twoDecimal,
-                            Constant.processingTime * Double(completedCustomerCount))
-        return result
-    }
+    private var openingTime: Date?
 
     mutating func receive(customer: Customer) {
         customers.enqueue(customer)
@@ -27,6 +23,7 @@ struct Bank {
         let group = DispatchGroup()
         var depositCustomers = Queue<Customer>()
         var loanCustomers = Queue<Customer>()
+        openingTime = Date()
         
         while !customers.isEmpty {
             guard let customer = customers.dequeue() else {
@@ -41,6 +38,7 @@ struct Bank {
         matchClerk(to: &depositCustomers, of: .deposit, group: group)
         matchClerk(to: &loanCustomers, of: .loan, group: group)
         group.wait()
+        closeBanking()
     }
     
     mutating func matchClerk(to customers: inout Queue<Customer>,
@@ -55,11 +53,17 @@ struct Bank {
                 }
                 
                 bankClerk.serve(customer: customer, group: group)
+                completedCustomerCount += 1
             }
         }
     }
     
     private func closeBanking() {
+        guard let openingTime = openingTime else { return }
+        
+        let totalProcessingTime = String(format: Constant.twoDecimal,
+                                         -openingTime.timeIntervalSinceNow)
+
         print(String(format: Constant.bankClosedMessage,
                      arguments: [completedCustomerCount, totalProcessingTime]))
     }
