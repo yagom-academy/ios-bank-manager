@@ -7,4 +7,4 @@
 import Foundation
 
 let bank = Bank()
-bank.menu()
+bank.start()

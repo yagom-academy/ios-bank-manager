@@ -13,7 +13,7 @@ struct Bank {
     func open() {
         setupRandomCustomerQueue()
         startBankJob()
-        menu()
+        start()
     }
     
     func setupRandomCustomerQueue() {
@@ -44,10 +44,13 @@ struct Bank {
     
     func close() {}
     
-    func menu() {
+    func printMenu() {
         print("1: 은행 개점")
         print("2: 종료")
-        
+    }
+    
+    func start() {
+        printMenu()
         let menuNumber = readLine()
         switch menuNumber {
         case "1":
@@ -55,7 +58,7 @@ struct Bank {
         case "2":
             close()
         default:
-            menu()
+            start()
         }
     }
 }
