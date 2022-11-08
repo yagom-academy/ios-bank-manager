@@ -27,19 +27,41 @@ struct Bank: BankProtocol {
     }
     
     private let constant: Constant = .init()
-    private var bankerList: [Banker]
+    private var depositDesk: BankDesk
     private var customerQueue: BankCustomerQueue<BankCustomer>
-    private var completedCustomerCount: Int = .zero
+    private var depositCustomerQueue: BankCustomerQueue<BankCustomer>
+    private var loanCustomerQueue: BankCustomerQueue<BankCustomer>
+    private static var completedCustomerCount: Int = .zero
     private var totalWorkedTime: TimeInterval = .zero
+    private let group: DispatchGroup = .init()
     
-    init(bankerCount: Int = 1) {
-        self.bankerList = .init(repeating: Banker(), count: bankerCount)
+    init(depositBankerCount: Int) {
+        self.depositDesk = BankDesk(banker: depositBankerCount)
         self.customerQueue = .init()
+        self.depositCustomerQueue = .init()
+        self.loanCustomerQueue = .init()
+        
+        arrangeCustomer()
+        separateCustomer()
+    }
+    
+    private mutating func arrangeCustomer() {
         let randomNumber = Int.random(in: constant.customerCountRange)
         
         for _ in 1...randomNumber {
             let bankCustomer: BankCustomer = .init(customerType: .deposit)
             customerQueue.enqueue(bankCustomer)
+        }
+    }
+    
+    private mutating func separateCustomer() {
+        while let customer = self.customerQueue.dequeue() {
+            switch customer.type {
+            case .deposit:
+                self.depositCustomerQueue.enqueue(customer)
+            case .loan:
+                self.loanCustomerQueue.enqueue(customer)
+            }
         }
     }
     
@@ -66,21 +88,31 @@ struct Bank: BankProtocol {
     
     private mutating func open() {
         let startTime = Date()
-        work()
+        deposit()
+        group.wait()
         let endTime = Date()
         self.totalWorkedTime = endTime.timeIntervalSince(startTime)
         close()
     }
     
-    private mutating func work() {
-        let banker: Banker = bankerList.removeFirst()
-        while let customer = customerQueue.dequeue() {
-            banker.work(customer)
-            completedCustomerCount += 1
+    private mutating func deposit() {
+        guard let customer = depositCustomerQueue.dequeue() else {
+            return
+        }
+        
+        DispatchQueue.global().async { [self] in
+            group.enter()
+            depositDesk.work(customer)
+            Self.completedCustomerCount += 1
+            group.leave()
+        }
+        
+        if depositCustomerQueue.isEmpty() == false {
+            deposit()
         }
     }
     
     private func close() {
-        print(constant.closingMent(completedCustomerCount, totalWorkedTime))
+        print(constant.closingMent(Self.completedCustomerCount, totalWorkedTime))
     }
 }
