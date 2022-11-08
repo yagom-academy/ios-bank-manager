@@ -7,9 +7,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let mainStackView: MainStackView = MainStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.addSubview(mainStackView)
+        mainStackView.setConstraints(from: self.view)
     }
 }

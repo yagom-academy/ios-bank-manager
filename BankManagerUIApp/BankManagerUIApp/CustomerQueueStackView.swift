@@ -23,7 +23,7 @@ final class CustomerQueueStackView: UIStackView {
     private func configure() {
         self.alignment = .fill
         self.distribution = .fillEqually
-        self.axis = .vertical
+        self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     

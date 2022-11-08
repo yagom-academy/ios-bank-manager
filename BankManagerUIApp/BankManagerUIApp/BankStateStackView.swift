@@ -31,8 +31,8 @@ final class BankStateStackView: UIStackView {
         return label
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         configure()
         setSubView()
     }
@@ -44,7 +44,7 @@ final class BankStateStackView: UIStackView {
     private func configure() {
         self.alignment = .fill
         self.distribution = .fillEqually
-        self.axis = .vertical
+        self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     

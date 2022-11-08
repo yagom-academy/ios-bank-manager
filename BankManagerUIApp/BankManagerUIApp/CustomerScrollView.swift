@@ -10,9 +10,9 @@ final class CustomerScrollView: UIScrollView {
     private let customerStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         
-        stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
+        stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView

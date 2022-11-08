@@ -27,8 +27,8 @@ class ButtonStackView: UIStackView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         configure()
         setSubView()
     }
@@ -39,8 +39,8 @@ class ButtonStackView: UIStackView {
     
     func configure() {
         self.alignment = .fill
-        self.distribution = .fill
-        self.axis = .vertical
+        self.distribution = .fillEqually
+        self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
