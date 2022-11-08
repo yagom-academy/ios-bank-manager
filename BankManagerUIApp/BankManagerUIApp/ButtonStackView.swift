@@ -11,7 +11,7 @@ class ButtonStackView: UIStackView {
         let button: UIButton = UIButton()
         
         button.setTitle("고객 10명 추가", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button

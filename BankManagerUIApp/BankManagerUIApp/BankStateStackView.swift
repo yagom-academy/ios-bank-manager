@@ -11,8 +11,9 @@ final class BankStateStackView: UIStackView {
         let label: UILabel = UILabel()
         
         label.text = "대기중"
+        label.textAlignment = .center
         label.textColor = .white
-        label.backgroundColor = .green
+        label.backgroundColor = .systemGreen
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         
@@ -23,6 +24,7 @@ final class BankStateStackView: UIStackView {
         let label: UILabel = UILabel()
         
         label.text = "업무중"
+        label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = .systemIndigo
         label.translatesAutoresizingMaskIntoConstraints = false
