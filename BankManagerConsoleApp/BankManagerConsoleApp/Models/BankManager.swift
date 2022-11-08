@@ -7,11 +7,10 @@
 import Foundation
 
 struct BankManager: Workable {
-    
     func provideService(to customer: Customer?) {
         guard let customer = customer,
               let bankCustomer = customer as? BankCustomer,
-              let workType = bankCustomer.type else {
+              let workType = bankCustomer.purpose else {
             return
         }
         let sleepTime: UInt32 = workType.rawValue == "예금" ? 700000 : 1100000

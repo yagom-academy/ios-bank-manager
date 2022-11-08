@@ -2,5 +2,5 @@
 
 struct BankCustomer: Customer {
     let number: Int
-    let type: WorkType?
+    let purpose: WorkType?
 }
