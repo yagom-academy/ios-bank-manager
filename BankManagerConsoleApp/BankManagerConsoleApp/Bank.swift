@@ -9,21 +9,12 @@ struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var completedCustomerCount: Int = 0
     private var bankClerks: [BankClerk]
-    private var isOpen: Bool = false {
-        didSet {
-            isOpen ? startBanking() : closeBanking()
-        }
-    }
     private var totalProcessingTime: String {
         let result = String(format: Constant.twoDecimal,
                             Constant.processingTime * Double(completedCustomerCount))
         return result
     }
-    
-    mutating func openBank() {
-        isOpen = true
-    }
-    
+
     mutating func receive(customer: Customer) {
         customers.enqueue(customer)
     }
@@ -40,6 +31,30 @@ struct Bank {
             customer.bankingType == .deposit
                 ? depositCustomers.enqueue(customer)
                 : loanCustomers.enqueue(customer)
+        }
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        matchClerk(to: &depositCustomers, of: .deposit)
+        matchClerk(to: &loanCustomers, of: .loan)
+        group.leave()
+        group.notify(queue: .main) { [self] in
+            closeBanking()
+        }
+    }
+    
+    mutating func matchClerk(to customers: inout Queue<Customer>, of type: BankingType) {
+        let depositClerks = bankClerks.filter { $0.bankingType == type }
+        
+        while !customers.isEmpty {
+            depositClerks.forEach { bankClerk in
+                guard let customer = customers.dequeue() else {
+                    return
+                }
+                
+                bankClerk.call(customer: customer)
+            }
         }
     }
     
