@@ -20,10 +20,19 @@ enum BankingService: BankingServiceProtocol {
     case loan
     case deposit
     
+    var name: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
+    
     var processTime: Double {
         switch self {
         case .loan:
-            return 0.7
+            return 1.1
         case .deposit:
             return 0.7
         }

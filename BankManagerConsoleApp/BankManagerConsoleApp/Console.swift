@@ -51,18 +51,23 @@ struct Console {
         guard let input: String = readLine(),
               let flagRawValue: Int = Int(input),
               let flag: Flag = Flag.init(rawValue: flagRawValue) else {
-                  return.failure(.invalidError)
+                  return .failure(.invalidError)
               }
     
-        return.success(flag)
+        return .success(flag)
     }
     
     private func openBank() -> WorkResult {
-        var bank: Bank = Bank()
+        let bank: Bank = Bank(customers: Customer.make(), depositBankerCount: 2, loanBankerCount: 1)
+        var count: Int = 0
+        var totalTime: Double = 0.0
         
-        bank.startBankingService()
+        bank.startBankingService { (customerCount, totalServiceTime) in
+            count = customerCount
+            totalTime = totalServiceTime
+        }
         
-        return bank.workResult
+        return (count, totalTime)
     }
     
     private func printCompleteMessage(about workResult: WorkResult) {
@@ -79,9 +84,7 @@ enum ConsoleError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidError:
-            let errorMessage: String = "잘못된 입력입니다."
-            
-            return errorMessage
+            return "잘못된 입력입니다."
         }
     }
 }

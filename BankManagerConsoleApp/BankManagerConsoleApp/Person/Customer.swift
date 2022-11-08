@@ -12,6 +12,21 @@ struct Customer {
     }
 }
 
+extension Customer {
+    static func make(count: Int = Int.random(in: 10...30)) -> [Customer] {
+        var customers: [Customer] = []
+        
+        for waitingNumber in 1...count {
+            let bankingService: BankingService = BankingService.random() ?? .deposit
+            let customer: Customer = Customer(waitingNumber: waitingNumber, bankingService: bankingService)
+            
+            customers.append(customer)
+        }
+        
+        return customers
+    }
+}
+
 extension Customer: Equatable {
     static func == (lhs: Customer, rhs: Customer) -> Bool {
         return (lhs.waitingNumber == rhs.waitingNumber) && (lhs.bankingService == rhs.bankingService)

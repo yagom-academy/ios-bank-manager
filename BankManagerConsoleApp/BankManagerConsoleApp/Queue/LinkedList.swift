@@ -31,6 +31,7 @@ struct LinkedList<T: Equatable> {
         count += 1
     }
     
+    @discardableResult
     mutating func removeFirst() -> T? {
         guard let currentHead: Node<T> = head else {
             return nil
@@ -42,6 +43,7 @@ struct LinkedList<T: Equatable> {
         return currentHead.data
     }
     
+    @discardableResult
     mutating func removeLast() -> T? {
         guard let currentTail: Node<T> = tail else {
             return nil
@@ -54,69 +56,78 @@ struct LinkedList<T: Equatable> {
         return currentTail.data
     }
     
-    func searchFirstNode(from data: T) -> Node<T>? {
-        var currentNode: Node<T>? = head
-        
-        while currentNode != nil {
-            if currentNode?.data == data {
-                return currentNode
-            }
-            
-            currentNode = currentNode?.nextNode
-        }
-        
-        return nil
-    }
-    
-    func searchNode(at index: Int) -> Node<T>? {
-        guard count >= index else {
+    func searchNode(at nodePosition: Int) -> Node<T>? {
+        let targetPosition: Int = nodePosition - 1
+        guard (targetPosition < count) == true else {
             return nil
         }
         
         var currentNode: Node<T>? = head
         
-        for _ in 1..<index {
-            currentNode = currentNode?.nextNode
+        for position in 0..<count {
+            if position == targetPosition {
+                break
+            } else {
+                currentNode = currentNode?.nextNode
+            }
         }
         
         return currentNode
     }
     
-    mutating func remove(at index: Int) -> T? {
-        guard let node: Node<T> = searchNode(at: index) else {
+    @discardableResult
+    mutating func remove(at nodePosition: Int) -> T? {
+        if nodePosition == 0 {
+            return removeFirst()
+        } else if nodePosition == count - 1 {
+            return removeLast()
+        } else if let node: Node<T> = searchNode(at: nodePosition) {
+            node.previousNode?.nextNode = node.nextNode
+            node.nextNode?.previousNode = node.previousNode
+            
+            return node.data
+        } else {
             return nil
         }
-        
-        let previousNode: Node<T>? = node.previousNode
-        let nextNode: Node<T>? = node.nextNode
-        
-        previousNode?.nextNode = nextNode
-        nextNode?.previousNode = previousNode
-        count -= 1
-        
-        return node.data
     }
     
-    mutating func insert(at index: Int, data: T) {
-        guard count >= index else {
-            return
-        }
-        
-        var currentNode: Node<T>? = head
-        
-        for _ in 1..<index {
-            currentNode = currentNode?.nextNode
-        }
-        
+    mutating func insert(at nodePosition: Int, data: T) {
         let node: Node<T> = Node(data: data)
-        let previousNode: Node<T>? = currentNode?.previousNode
+
+        if nodePosition == count {
+            append(data)
+        } else if nodePosition == 0 {
+            node.nextNode = head
+            head?.previousNode = node
+            
+            head = node
+        } else if let currentNodePosition: Node<T> = searchNode(at: nodePosition) {
+            let previousNode: Node<T>? = currentNodePosition.previousNode
+            
+            node.previousNode = previousNode
+            node.nextNode = currentNodePosition
+            
+            previousNode?.nextNode = node
+            currentNodePosition.previousNode = node
+        }
+    }
+    
+    @discardableResult
+    mutating func removeFirst(of data: T) -> T? {
+        var currentNode: Node<T>? = head
+        var currentPosition: Int = 0
         
-        node.previousNode = previousNode
-        previousNode?.nextNode = node
-        node.nextNode = currentNode
-        currentNode?.previousNode = node
+        repeat {
+            if currentNode?.data == data {
+                remove(at: currentPosition)
+                return currentNode?.data
+            } else {
+                currentNode = currentNode?.nextNode
+                currentPosition += 1
+            }
+        } while currentNode != nil
         
-        count += 1
+        return nil
     }
     
     mutating func removeAll() {

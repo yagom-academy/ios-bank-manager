@@ -95,36 +95,6 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 20)
     }
     
-    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_정수_11로_searchFirstNode한_경우_결과는_nil이다() {
-        //given
-        let data: [Int] = Array(1...10)
-        
-        data.forEach {
-            sut.append($0)
-        }
-        
-        //when
-        let result: Node<Int>? = sut.searchFirstNode(from: 11)
-        
-        //then
-        XCTAssertNil(result)
-    }
-    
-    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_정수_5를_searchFirstNode한_경우_결과값의_data는_5와_같다() {
-        //given
-        let data: [Int] = Array(1...10)
-        
-        data.forEach {
-            sut.append($0)
-        }
-        
-        //when
-        let result: Node<Int>? = sut.searchFirstNode(from: 5)
-        
-        //then
-        XCTAssertEqual(result?.data, 5)
-    }
-    
     func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_20번째를_searchNode한_경우_결과는_nil이다() {
         //given
         let data: [Int] = Array(1...10)
@@ -138,6 +108,36 @@ class LinkedListTests: XCTestCase {
         
         //then
         XCTAssertNil(result)
+    }
+    
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_0번째를_searchNode한_경우_결과값의_data는_1과_같다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        let result: Node<Int>? = sut.searchNode(at: 1)
+        
+        //then
+        XCTAssertEqual(result?.data, 1)
+    }
+    
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_10번째를_searchNode한_경우_결과값의_data는_10과_같다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        let result: Node<Int>? = sut.searchNode(at: 10)
+        
+        //then
+        XCTAssertEqual(result?.data, 10)
     }
     
     func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_7번째를_searchNode한_경우_결과값의_data는_7과_같다() {
@@ -222,6 +222,38 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(secondResult)
     }
     
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_0번째에_정수60를_insert한_후_1번째를_searchNode한_경우_결과값의_data는_60과_같다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        sut.insert(at: 0, data: 60)
+        let result: Node<Int>? = sut.searchNode(at: 1)
+        
+        //then
+        XCTAssertEqual(result?.data, 60)
+    }
+    
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList의_10번째_정수60를_insert한_후_11번째를_searchNode한_경우_결과값의_data는_60과_같다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        sut.insert(at: 10, data: 60)
+        let result: Node<Int>? = sut.searchNode(at: 11)
+
+        //then
+        XCTAssertEqual(result?.data, 60)
+    }
+    
     func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_6번째에_정수60를_insert한_후_6번째를_searchNode한_경우_결과값의_data는_60과_같다() {
         //given
         let data: [Int] = Array(1...10)
@@ -236,6 +268,57 @@ class LinkedListTests: XCTestCase {
         
         //then
         XCTAssertEqual(result?.data, 60)
+    }
+    
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_1에_해당하는_값을_removeFirst한_경우_결과값은_1과_같고_LinkedList의_1번째를_searchNode한_결과값의_data는_2와_같다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        let removeResult: Int? = sut.removeFirst(of: 1)
+        let searchResult: Node<Int>? = sut.searchNode(at: 1)
+        
+        //then
+        XCTAssertEqual(removeResult, 1)
+        XCTAssertEqual(searchResult?.data, 2)
+    }
+    
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_10에_해당하는_값을_removeFirst한_경우_결과값은_10과_같고_LinkedList의_10번째를_searchNode한_결과값은_nil이다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        let removeResult: Int? = sut.removeFirst(of: 10)
+        let searchResult: Node<Int>? = sut.searchNode(at: 10)
+        
+        //then
+        XCTAssertEqual(removeResult, 10)
+        XCTAssertNil(searchResult)
+    }
+    
+    func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList에_5에_해당하는_값을_removeFirst한_경우_결과값은_5와_같고_LinkedList의_5번째를_searchNode한_결과값의_data는_6과_같다() {
+        //given
+        let data: [Int] = Array(1...10)
+        
+        data.forEach {
+            sut.append($0)
+        }
+        
+        //when
+        let removeResult: Int? = sut.removeFirst(of: 5)
+        let searchResult: Node<Int>? = sut.searchNode(at: 5)
+        
+        //then
+        XCTAssertEqual(removeResult, 5)
+        XCTAssertEqual(searchResult?.data, 6)
     }
     
     func test_1부터_10까지의_정수로_이루어진_배열을_차례대로_append된_LinkedList를_removeAll한_경우_LinkedList의_isEmpty가_true이다() {
