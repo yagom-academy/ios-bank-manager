@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankManager {
-    private let bankWorkers: [BankWorker]
+    private var bankWorkers: [BankWorker] = []
     private let depositClientQueue: Queue<Client> = Queue()
     private let loanClientQueue: Queue<Client> = Queue()
     private var totalClientCount: Int = 0
@@ -19,7 +19,15 @@ struct BankManager {
     }
     
     mutating func publishTicketNumber() -> Int {
-        totalClientCount += 1
+        let ticketNumber = totalClientCount + 1
+        totalClientCount = ticketNumber
+        return ticketNumber
+    }
+    
+    mutating func allocateWork(to worker: BankWorker) {
+        bankWorkers[0].bankWork = .deposit
+        bankWorkers[1].bankWork = .deposit
+        bankWorkers[2].bankWork = .loan
     }
     
     mutating func addClientQueue(_ client: Client) {
@@ -32,6 +40,8 @@ struct BankManager {
             depositClientQueue.enqueue(client)
         case .loan:
             loanClientQueue.enqueue(client)
+        case .none:
+            return
         }
     }
     

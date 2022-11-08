@@ -14,7 +14,7 @@ struct Bank {
         self.bankManager = bankManager
     }
     
-    private func publishTicketNumber() -> Int {
+    mutating func publishTicketNumber() -> Int {
         return bankManager.publishTicketNumber()
     }
     

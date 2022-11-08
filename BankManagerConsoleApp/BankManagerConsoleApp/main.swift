@@ -4,20 +4,26 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let bankWorkers: [BankWorker] = [BankWorker(bankWork: .deposit),
-                                 BankWorker(bankWork: .deposit),
-                                 BankWorker(bankWork: .loan)]
-let bankManager: BankManager = BankManager(bankWorkers: bankWorkers)
+var bankWorkers: [BankWorker] = []
+var bankManager: BankManager = BankManager(bankWorkers: bankWorkers)
 var bank: Bank = Bank(bankManager: bankManager)
+
+private func generateBankWorkers() {
+    for _ in 0...2 {
+        let bankWorker = BankWorker()
+        bankWorkers.append(bankWorker)
+    }
+}
 
 private func generateClient() {
     let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
-    for number in 1...randomNumber {
+    for _ in 1...randomNumber {
         let randomWork = BankWork.allCases.randomElement() ?? .deposit
         let client = Client(ticketNumber: bank.publishTicketNumber(), requestWork: randomWork)
         bankManager.addClientQueue(client)
     }
 }
 
+generateBankWorkers()
 generateClient()
 bank.openSystem()

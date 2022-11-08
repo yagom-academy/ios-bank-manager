@@ -27,9 +27,5 @@ extension BankWorkable {
 }
 
 struct BankWorker: BankWorkable {
-    var bankWork: BankWork
-    
-    init(bankWork: BankWork) {
-        self.bankWork = bankWork
-    }
+    var bankWork: BankWork = .none
 }
