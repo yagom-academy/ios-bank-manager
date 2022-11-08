@@ -13,6 +13,7 @@ struct BankManager {
     private let loanClientQueue: Queue<Client> = Queue()
     private var totalClientCount: Int = 0
     private var totalWorkTime: Double = 0.0
+    private let group = DispatchGroup()
     
     init(bankWorkers: [BankWorker]) {
         self.bankWorkers = bankWorkers
@@ -44,33 +45,43 @@ struct BankManager {
         }
     }
     
-    private func directBankWork() {
-        let customQueue = DispatchQueue(label: "Cuncurrent", attributes: .concurrent)
+    private func depositWork(_ worker: BankWorker) {
         let semaphore = DispatchSemaphore(value: 1)
-        let group: DispatchGroup = DispatchGroup()
-        
-        for index in 0...1 {
-            customQueue.async(group: group) {
-                while !depositClientQueue.isEmpty {
-                    semaphore.wait()
-                    guard let client = depositClientQueue.dequeue() else {
-                        print("업무를 처리할 예금 고객이 없습니다.")
-                        return
-                    }
-                    semaphore.signal()
-                    bankWorkers[index].startWork(for: client)
+        DispatchQueue.global().async(group: group) {
+            while !depositClientQueue.isEmpty {
+                semaphore.wait()
+                guard let client = depositClientQueue.dequeue() else {
+                    print("업무를 처리할 예금 고객이 없습니다.")
+                    return
                 }
+                semaphore.signal()
+                worker.startWork(for: client)
             }
         }
-        
-        customQueue.async(group: group) {
+    }
+    
+    private func loanWork(_ worker: BankWorker) {
+        DispatchQueue.global().async(group: group) {
             while !loanClientQueue.isEmpty {
                 guard let client = loanClientQueue.dequeue() else {
                     print("업무를 처리할 대출 고객이 없습니다.")
                     return
                 }
                 
-                bankWorkers[2].startWork(for: client)
+                worker.startWork(for: client)
+            }
+        }
+    }
+    
+    private func allocateBankWork() {
+        for worker in bankWorkers {
+            switch worker.bankWork {
+            case .deposit:
+                depositWork(worker)
+            case .loan:
+                loanWork(worker)
+            case .none:
+                return
             }
         }
         
@@ -79,7 +90,7 @@ struct BankManager {
     
     mutating func open() {
         allocateWork()
-        directBankWork()
+        allocateBankWork()
     }
     
     mutating func close() {
