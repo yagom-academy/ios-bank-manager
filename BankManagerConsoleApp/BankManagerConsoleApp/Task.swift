@@ -2,7 +2,7 @@
 //  BankManagerConsoleApp
 //  Created by Baem & Bella on 2022/11/07.
 
-enum Task {
-    case deposit
-    case loan
+enum Task: String {
+    case deposit = "예금"
+    case loan = "대출"
 }
