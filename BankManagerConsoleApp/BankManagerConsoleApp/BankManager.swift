@@ -47,7 +47,7 @@ struct BankManager {
         assignBankWork()
     }
     
-    mutating func designateWorkType() {
+    mutating private func designateWorkType() {
         var currentDepositWorkerCount: Int = 0
         
         for index in 0..<bankWorkers.count {
