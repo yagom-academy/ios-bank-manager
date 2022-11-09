@@ -14,6 +14,8 @@ struct BankManager {
     private var totalClientCount: Int = 0
     private var totalWorkTime: TimeInterval = 0.0
     private let group: DispatchGroup = DispatchGroup()
+    private let depositSemaphore = DispatchSemaphore(value: 1)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
     
     init(bankWorkers: [BankWorker]) {
         self.bankWorkers = bankWorkers
@@ -76,36 +78,32 @@ struct BankManager {
     }
     
     private func doDepositWork(by worker: BankWorker) {
-        let semaphore = DispatchSemaphore(value: 1)
-        
         DispatchQueue.global().async(group: group) {
             while !depositClientQueue.isEmpty {
-                semaphore.wait()
+                depositSemaphore.wait()
                 guard let client = depositClientQueue.dequeue() else {
-                    semaphore.signal()
+                    depositSemaphore.signal()
                     print("업무를 처리할 예금 고객이 없습니다.")
                     return
                 }
                 
-                semaphore.signal()
+                depositSemaphore.signal()
                 worker.startWork(for: client)
             }
         }
     }
     
     private func doLoanWork(by worker: BankWorker) {
-        let semaphore = DispatchSemaphore(value: 1)
-        
         DispatchQueue.global().async(group: group) {
             while !loanClientQueue.isEmpty {
-                semaphore.wait()
+                loanSemaphore.wait()
                 guard let client = loanClientQueue.dequeue() else {
-                    semaphore.signal()
+                    loanSemaphore.signal()
                     print("업무를 처리할 대출 고객이 없습니다.")
                     return
                 }
                 
-                semaphore.signal()
+                loanSemaphore.signal()
                 worker.startWork(for: client)
             }
         }
