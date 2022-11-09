@@ -21,7 +21,7 @@ struct BankManager {
     
     mutating func publishTicketNumber() -> Int {
         let ticketNumber = totalClientCount + 1
-
+        
         totalClientCount = ticketNumber
         
         return ticketNumber
@@ -29,8 +29,6 @@ struct BankManager {
     
     mutating func addClientQueue(_ client: Client) {
         let requestingWork = client.requestingWork
-        
-        totalWorkTime += requestingWork.time
         
         switch requestingWork {
         case .deposit:
@@ -40,6 +38,8 @@ struct BankManager {
         case .none:
             return
         }
+        
+        totalWorkTime += requestingWork.time
     }
     
     mutating func open() {
@@ -82,6 +82,7 @@ struct BankManager {
             while !depositClientQueue.isEmpty {
                 semaphore.wait()
                 guard let client = depositClientQueue.dequeue() else {
+                    semaphore.signal()
                     print("업무를 처리할 예금 고객이 없습니다.")
                     return
                 }
@@ -99,6 +100,7 @@ struct BankManager {
             while !loanClientQueue.isEmpty {
                 semaphore.wait()
                 guard let client = loanClientQueue.dequeue() else {
+                    semaphore.signal()
                     print("업무를 처리할 대출 고객이 없습니다.")
                     return
                 }
