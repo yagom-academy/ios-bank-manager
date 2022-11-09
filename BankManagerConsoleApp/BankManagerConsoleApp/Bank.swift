@@ -54,8 +54,7 @@ struct Bank {
         let loanSemaphore = DispatchSemaphore(value: 1)
         
         checkTime {
-            while customerQueue.isEmpty == false {
-                guard let customer = customerQueue.dequeue() else { return }
+            while let customer = customerQueue.dequeue() {
                 if customer.requestingTask == .deposit {
                     prepareTask(to: depositSemaphore, for: customer, group)
                 } else {
