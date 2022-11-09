@@ -22,7 +22,7 @@ struct Bank {
     mutating func runBankingCycle() {
         processingStartTime = Date()
         
-        var customers: (deposit: Queue<Customer>, loan: Queue<Customer>) = sortCustomer()
+        var customers: (deposit: Queue<Customer>, loan: Queue<Customer>) = divideCustomers()
         let group = DispatchGroup()
         
         matchClerk(to: &customers.deposit, of: .deposit, group: group)
@@ -31,7 +31,7 @@ struct Bank {
         closeBanking()
     }
     
-    mutating func sortCustomer() -> (Queue<Customer>, Queue<Customer>) {
+    mutating func divideCustomers() -> (Queue<Customer>, Queue<Customer>) {
         var depositCustomers = Queue<Customer>()
         var loanCustomers = Queue<Customer>()
         

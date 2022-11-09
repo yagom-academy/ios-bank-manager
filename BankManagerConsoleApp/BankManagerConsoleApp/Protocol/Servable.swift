@@ -1,8 +1,6 @@
 //
 //  Servable.swift
-//  BankManagerConsoleApp
-//
-//  Created by 맹선아 on 2022/11/08.
+//  Created by sunnycookie, inho
 //
 
 import Foundation

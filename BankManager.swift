@@ -49,6 +49,5 @@ private extension BankManager {
         static let empty: String = ""
         static let wrongInputMessage: String = "다시 입력해주세요"
         static let randomCustomerCount: Int = Int.random(in: 10...30)
-        static let depositOrLoan: ClosedRange<Int> = 1...2
     }
 }
