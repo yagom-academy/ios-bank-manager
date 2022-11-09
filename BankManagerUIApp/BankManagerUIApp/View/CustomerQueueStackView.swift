@@ -42,4 +42,17 @@ final class CustomerQueueStackView: UIStackView {
         waitingCustomerScrollView.removeAllCustomerLabels()
         workingCustomerScrollView.removeAllCustomerLabels()
     }
+    
+    func removeWaitingCustomerLabel(of waitingNumber: Int) {
+        guard let havingCustomer: CanHaveCustomer = waitingCustomerScrollView.removeCustomerLabel(of: waitingNumber) as? CanHaveCustomer,
+              let customer: Customer = havingCustomer.customer else {
+            return
+        }
+        
+        workingCustomerScrollView.addCustomerLabel(CustomerLabelMaker.make(of: customer))
+    }
+    
+    func removeWorkingCustomerLabel(of waitingNumber: Int) {
+        workingCustomerScrollView.removeCustomerLabel(of: waitingNumber)
+    }
 }

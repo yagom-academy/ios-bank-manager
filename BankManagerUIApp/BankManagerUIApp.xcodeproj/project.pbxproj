@@ -29,6 +29,7 @@
 		D03ED9C2291B8CA7005F30A8 /* CustomerSettingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ED9C1291B8CA7005F30A8 /* CustomerSettingDelegate.swift */; };
 		D03ED9C4291B939E005F30A8 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ED9C3291B939E005F30A8 /* CustomerLabel.swift */; };
 		D03ED9C6291B944A005F30A8 /* CustomerLabelMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ED9C5291B944A005F30A8 /* CustomerLabelMaker.swift */; };
+		D03ED9C8291BCAC8005F30A8 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03ED9C7291BCAC8005F30A8 /* NotificationName.swift */; };
 		D0C33469291A73D3005D5586 /* MainStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C33468291A73D3005D5586 /* MainStackView.swift */; };
 		D0C3346B291A78C5005D5586 /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3346A291A78C5005D5586 /* ButtonStackView.swift */; };
 		D36ACB94291B747600EBD7AE /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36ACB93291B747600EBD7AE /* StopWatch.swift */; };
@@ -86,6 +87,7 @@
 		D03ED9C1291B8CA7005F30A8 /* CustomerSettingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerSettingDelegate.swift; sourceTree = "<group>"; };
 		D03ED9C3291B939E005F30A8 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
 		D03ED9C5291B944A005F30A8 /* CustomerLabelMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabelMaker.swift; sourceTree = "<group>"; };
+		D03ED9C7291BCAC8005F30A8 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		D0C33468291A73D3005D5586 /* MainStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackView.swift; sourceTree = "<group>"; };
 		D0C3346A291A78C5005D5586 /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		D36ACB93291B747600EBD7AE /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				D03ED9AF291B392F005F30A8 /* Bank.swift */,
 				D03ED9BF291B831F005F30A8 /* BankManager.swift */,
 				D03ED9C5291B944A005F30A8 /* CustomerLabelMaker.swift */,
+				D03ED9C7291BCAC8005F30A8 /* NotificationName.swift */,
 				D03ED9AC291B392F005F30A8 /* Person */,
 				D03ED9B5291B392F005F30A8 /* BankingService */,
 				D03ED9B0291B392F005F30A8 /* Queue */,
@@ -470,6 +473,7 @@
 				D3C011CF291A86100046C6AF /* CustomerScrollView.swift in Sources */,
 				D03ED9C6291B944A005F30A8 /* CustomerLabelMaker.swift in Sources */,
 				D03ED9C4291B939E005F30A8 /* CustomerLabel.swift in Sources */,
+				D03ED9C8291BCAC8005F30A8 /* NotificationName.swift in Sources */,
 				D03ED9B9291B392F005F30A8 /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

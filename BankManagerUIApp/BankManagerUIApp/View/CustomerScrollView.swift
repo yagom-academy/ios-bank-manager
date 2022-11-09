@@ -61,4 +61,18 @@ final class CustomerScrollView: UIScrollView {
             $0.removeFromSuperview()
         }
     }
+    
+    func removeCustomerLabel(of waitingNumber: Int) -> UIView? {
+        for subView in customerStackView.arrangedSubviews {
+            if let label: CanHaveCustomer = subView as? CanHaveCustomer,
+               let labelWaitingNumber: Int = label.customer?.waitingNumber,
+               waitingNumber == labelWaitingNumber {
+                subView.removeFromSuperview()
+                
+                return subView
+            }
+        }
+        
+        return nil
+    }
 }

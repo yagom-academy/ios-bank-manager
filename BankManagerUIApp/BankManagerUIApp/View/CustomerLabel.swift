@@ -6,9 +6,16 @@
 
 import UIKit
 
-final class DepositCustomerLabel: UILabel {
+protocol CanHaveCustomer {
+    var customer: Customer? { get set }
+}
+
+final class DepositCustomerLabel: UILabel, CanHaveCustomer {
+    var customer: Customer?
+    
     init(_ customer: Customer) {
         super.init(frame: .zero)
+        self.customer = customer
         self.text = "\(customer.waitingNumber) - \(customer.bankingService.name)"
         configure()
     }
@@ -25,9 +32,12 @@ final class DepositCustomerLabel: UILabel {
     }
 }
 
-final class LoanCustomerLabel: UILabel {
+final class LoanCustomerLabel: UILabel, CanHaveCustomer {
+    var customer: Customer?
+    
     init(_ customer: Customer) {
         super.init(frame: .zero)
+        self.customer = customer
         self.text = "\(customer.waitingNumber) - \(customer.bankingService.name)"
         configure()
     }

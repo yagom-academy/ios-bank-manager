@@ -30,6 +30,14 @@ final class MainViewController: UIViewController {
         buttonStackView.resetButton.addTarget(self,
                                               action: #selector(tappedResetButton),
                                               for: .touchUpInside)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveStartWork),
+                                               name: .startWork,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveCompleteWork),
+                                               name: .completeWork,
+                                               object: nil)
         stopWatch.setDelegate(to: stopWatchLabel)
         bankManager.setDelegate(of: self)
     }
@@ -64,6 +72,24 @@ final class MainViewController: UIViewController {
         stopWatch.cancel()
         bankManager.reset()
         customerQueueStackView.reset()
+    }
+    
+    @objc
+    func didReceiveStartWork(_ notification: Notification) {
+        guard let waitingNumber: Int = notification.object as? Int else {
+            return
+        }
+        
+        customerQueueStackView.removeWaitingCustomerLabel(of: waitingNumber)
+    }
+    
+    @objc
+    func didReceiveCompleteWork(_ notification: Notification) {
+        guard let waitingNumber: Int = notification.object as? Int else {
+            return
+        }
+        
+        customerQueueStackView.removeWorkingCustomerLabel(of: waitingNumber)
     }
 }
 
