@@ -4,10 +4,10 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bankworker1: BankWorker = BankWorker()
-var bankworker2: BankWorker = BankWorker()
-var bankworker3: BankWorker = BankWorker()
-var bankWorkers: [BankWorker] = [bankworker1, bankworker2, bankworker3]
+var bankWorker1: BankWorker = BankWorker()
+var bankWorker2: BankWorker = BankWorker()
+var bankWorker3: BankWorker = BankWorker()
+var bankWorkers: [BankWorker] = [bankWorker1, bankWorker2, bankWorker3]
 var bankManager: BankManager = BankManager(bankWorkers: bankWorkers)
 var bank: Bank = Bank(bankManager: bankManager)
 
