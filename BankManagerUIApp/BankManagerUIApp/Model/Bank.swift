@@ -12,13 +12,10 @@ class Bank {
     private let loanSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     private let depositBankerCount: Int
     private let loanBankerCount: Int
-    private var depositWorkItem: DispatchWorkItem?
-    private var loanWorkItem: DispatchWorkItem?
     
     init(depositBankerCount: Int, loanBankerCount: Int) {
         self.depositBankerCount = depositBankerCount
         self.loanBankerCount = loanBankerCount
-        setWorkItem()
     }
     
     func setCustomerQueue(from customers: [Customer]) {
@@ -32,38 +29,30 @@ class Bank {
         }
     }
     
-    private func setWorkItem() {
-        depositWorkItem = DispatchWorkItem {
-            self.entrustBankerService(of: .deposit)
-        }
-        loanWorkItem = DispatchWorkItem {
-            self.entrustBankerService(of: .loan)
-        }
-    }
-    
-    func startBankingService() {
-        guard let depositWorkItem = depositWorkItem,
-              let loanWorkItem = loanWorkItem else {
-            return
-        }
+    func startBankingService(of bankingService: BankingService, completion: () -> Void) {
         
         let group: DispatchGroup = DispatchGroup()
         
-        for _ in 1...depositBankerCount {
-            DispatchQueue.global().async(group: group, execute: depositWorkItem)
+        switch bankingService {
+        case .deposit:
+            for _ in 1...depositBankerCount {
+                DispatchQueue.global().async(group: group) {
+                    self.entrustBankerService(of: bankingService)
+                }
+            }
+        case .loan:
+            for _ in 1...loanBankerCount {
+                DispatchQueue.global().async(group: group) {
+                    self.entrustBankerService(of: bankingService)
+                }
+            }
         }
         
-        for _ in 1...loanBankerCount {
-            DispatchQueue.global().async(group: group, execute: loanWorkItem)
-        }
-        
-//        group.wait()
-        group.notify(queue: .main) {
-            NotificationCenter.default.post(name: .completeBankingSevice, object: nil)
-        }
+        group.wait()
+        completion()
     }
     
-    private func entrustBankerService(of bankingService: BankingService) {
+    func entrustBankerService(of bankingService: BankingService) {
         guard let currentCustomer: Customer = requestCustomer(of: bankingService) else {
             return
         }

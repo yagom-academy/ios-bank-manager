@@ -1,5 +1,5 @@
 //
-//  BankManagerUIApp - ViewController.swift
+//  BankManagerUIApp - MainViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom academy. All rights reserved.
 // 
