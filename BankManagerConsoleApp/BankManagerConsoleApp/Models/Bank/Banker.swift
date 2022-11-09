@@ -5,4 +5,4 @@
 //  Created by Kyo, Wonbi on 2022/11/02.
 //
 
-struct Banker: Bankerable { }
+struct Banker: BankWorkable { }

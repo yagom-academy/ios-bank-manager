@@ -26,8 +26,8 @@
 		E3C9D75E291201D300E2FF59 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D4108290F628000945718 /* LinkedList.swift */; };
 		E3C9D7602912025300E2FF59 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9D75F2912025300E2FF59 /* Bank.swift */; };
 		E3C9D76229120C0300E2FF59 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9D76129120C0300E2FF59 /* Client.swift */; };
-		E3F346602919279B009BFFBD /* Bankerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3465F2919279B009BFFBD /* Bankerable.swift */; };
-		E3F34662291928FE009BFFBD /* Bankerable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F34661291928FE009BFFBD /* Bankerable+.swift */; };
+		E3F346602919279B009BFFBD /* BankWorkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3465F2919279B009BFFBD /* BankWorkable.swift */; };
+		E3F34662291928FE009BFFBD /* BankWorkable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F34661291928FE009BFFBD /* BankWorkable+.swift */; };
 		E3F71A072912B4E9006981A0 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9D76129120C0300E2FF59 /* Client.swift */; };
 		E3F71A082912B512006981A0 /* Queueable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18D291268C300C20988 /* Queueable+.swift */; };
 		E3F71A092912B514006981A0 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EE18B2912688F00C20988 /* Queueable.swift */; };
@@ -67,8 +67,8 @@
 		E3C9D75A290FE78000E2FF59 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		E3C9D75F2912025300E2FF59 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		E3C9D76129120C0300E2FF59 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		E3F3465F2919279B009BFFBD /* Bankerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bankerable.swift; sourceTree = "<group>"; };
-		E3F34661291928FE009BFFBD /* Bankerable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bankerable+.swift"; sourceTree = "<group>"; };
+		E3F3465F2919279B009BFFBD /* BankWorkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWorkable.swift; sourceTree = "<group>"; };
+		E3F34661291928FE009BFFBD /* BankWorkable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankWorkable+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +95,8 @@
 			children = (
 				3C2EE18B2912688F00C20988 /* Queueable.swift */,
 				E33B32252914C8F400B92CDD /* ClientQueueable.swift */,
+				E3F3465F2919279B009BFFBD /* BankWorkable.swift */,
 				3C160271291920F100B315B9 /* BankManagable.swift */,
-				E3F3465F2919279B009BFFBD /* Bankerable.swift */,
 				3C2EE18A2912687A00C20988 /* Extension */,
 			);
 			path = Protocol;
@@ -105,7 +105,7 @@
 		3C2EE18A2912687A00C20988 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E3F34661291928FE009BFFBD /* Bankerable+.swift */,
+				E3F34661291928FE009BFFBD /* BankWorkable+.swift */,
 				3C2EE18D291268C300C20988 /* Queueable+.swift */,
 			);
 			path = Extension;
@@ -331,14 +331,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3F34662291928FE009BFFBD /* Bankerable+.swift in Sources */,
+				E3F34662291928FE009BFFBD /* BankWorkable+.swift in Sources */,
 				E3218A2F290FC3F500A92638 /* ClientQueue.swift in Sources */,
 				E33B32262914C8F400B92CDD /* ClientQueueable.swift in Sources */,
 				3C160272291920F100B315B9 /* BankManagable.swift in Sources */,
 				3C2EE18829120F8000C20988 /* Banker.swift in Sources */,
 				3C2EE18C2912688F00C20988 /* Queueable.swift in Sources */,
 				E3C9D76229120C0300E2FF59 /* Client.swift in Sources */,
-				E3F346602919279B009BFFBD /* Bankerable.swift in Sources */,
+				E3F346602919279B009BFFBD /* BankWorkable.swift in Sources */,
 				3C9D4107290F627200945718 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				E3C9D7602912025300E2FF59 /* Bank.swift in Sources */,

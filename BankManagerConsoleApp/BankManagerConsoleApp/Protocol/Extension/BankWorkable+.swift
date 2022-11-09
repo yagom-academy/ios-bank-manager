@@ -1,5 +1,5 @@
 //
-//  Bankerable+.swift
+//  BankWorkable+.swift
 //  BankManagerConsoleApp
 //
 //  Created by Kyo, Wonbi on 2022/11/07.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Bankerable {
+extension BankWorkable {
     func startWork(client: Client) {
         print("\(client.waitingTicket)번 고객 \(client.purpose.name)업무 시작")
         selectWork(purpose: client.purpose)
