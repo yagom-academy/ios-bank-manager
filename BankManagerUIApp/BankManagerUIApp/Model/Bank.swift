@@ -32,6 +32,15 @@ class Bank {
         }
     }
     
+    private func setWorkItem() {
+        depositWorkItem = DispatchWorkItem {
+            self.entrustBankerService(of: .deposit)
+        }
+        loanWorkItem = DispatchWorkItem {
+            self.entrustBankerService(of: .loan)
+        }
+    }
+    
     func startBankingService() {
         guard let depositWorkItem = depositWorkItem,
               let loanWorkItem = loanWorkItem else {
@@ -49,25 +58,6 @@ class Bank {
         }
         
         group.wait()
-    }
-    
-    private func setWorkItem() {
-        depositWorkItem = DispatchWorkItem {
-            self.entrustBankerService(of: .deposit)
-        }
-        loanWorkItem = DispatchWorkItem {
-            self.entrustBankerService(of: .loan)
-        }
-    }
-    
-    func cancelWork() {
-        depositWorkItem?.cancel()
-        loanWorkItem?.cancel()
-    }
-    
-    func removeAllCustomers() {
-        depositCustomerQueue.clear()
-        loanCustomerQueue.clear()
     }
     
     private func entrustBankerService(of bankingService: BankingService) {
@@ -95,5 +85,10 @@ class Bank {
         }
         
         return currentCustomer
+    }
+    
+    func removeAllCustomers() {
+        depositCustomerQueue.clear()
+        loanCustomerQueue.clear()
     }
 }
