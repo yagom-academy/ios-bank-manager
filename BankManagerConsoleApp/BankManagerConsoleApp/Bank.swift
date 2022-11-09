@@ -9,6 +9,9 @@ import Foundation
 
 struct Bank {
     let numberOfCustomer: Int
+    private let group = DispatchGroup()
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
     var customerQueue: CustomerQueue<Customer>
     
     mutating func openUp() {
@@ -49,16 +52,12 @@ struct Bank {
     }
     
     private mutating func allocateCustomer() {
-        let group = DispatchGroup()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
-        
-        checkTime {
+            checkTime {
             while let customer = customerQueue.dequeue() {
                 if customer.requestingTask == .deposit {
-                    prepareTask(to: depositSemaphore, for: customer, group)
+                    prepareTask(to: depositSemaphore, for: customer)
                 } else {
-                    prepareTask(to: loanSemaphore, for: customer, group)
+                    prepareTask(to: loanSemaphore, for: customer)
                 }
             }
             group.wait()
@@ -66,8 +65,7 @@ struct Bank {
     }
     
     private func prepareTask(to banker: DispatchSemaphore,
-                             for customer: Customer,
-                             _ group: DispatchGroup) {
+                             for customer: Customer) {
         DispatchQueue.global().async(group: group) {
             banker.wait()
             DispatchQueue.global().sync {
