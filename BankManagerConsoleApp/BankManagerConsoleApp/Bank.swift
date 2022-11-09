@@ -53,7 +53,7 @@ struct Bank {
         let depositSemaphore = DispatchSemaphore(value: 2)
         let loanSemaphore = DispatchSemaphore(value: 1)
         
-        processTime {
+        checkTime {
             while customerQueue.isEmpty == false {
                 guard let customer = customerQueue.dequeue() else { return }
                 if customer.requestingTask == .deposit {
@@ -88,10 +88,10 @@ struct Bank {
         print("\(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 완료")
     }
     
-    private func processTime(closure: () -> ()) {
-        let start = CFAbsoluteTimeGetCurrent()
-        closure()
-        let processTime = String(format: "%.2f", CFAbsoluteTimeGetCurrent() - start)
+    private func checkTime(process: () -> ()) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        process()
+        let processTime = String(format: "%.2f", CFAbsoluteTimeGetCurrent() - startTime)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, " +
               "총 업무시간은 \(processTime)초 입니다. \n")
     }
