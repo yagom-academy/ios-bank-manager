@@ -55,27 +55,27 @@ struct Bank {
             checkTime {
             while let customer = customerQueue.dequeue() {
                 if customer.requestingTask == .deposit {
-                    prepareTask(to: depositSemaphore, for: customer)
+                    processTask(to: depositSemaphore, for: customer)
                 } else {
-                    prepareTask(to: loanSemaphore, for: customer)
+                    processTask(to: loanSemaphore, for: customer)
                 }
             }
             group.wait()
         }
     }
     
-    private func prepareTask(to banker: DispatchSemaphore,
+    private func processTask(to banker: DispatchSemaphore,
                              for customer: Customer) {
         DispatchQueue.global().async(group: group) {
             banker.wait()
             DispatchQueue.global().sync {
-                processTask(customer)
+                processCustomerRequest(customer)
             }
             banker.signal()
         }
     }
     
-    private func processTask(_ customer: Customer) {
+    private func processCustomerRequest(_ customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(customer.requestingTask.name) 업무 시작")
         if customer.requestingTask == .deposit {
             usleep(700000)
