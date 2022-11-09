@@ -7,20 +7,10 @@
 import UIKit
 
 final class MainStackView: UIStackView {
-    private let buttonStackView: ButtonStackView = ButtonStackView()
+    let buttonStackView: ButtonStackView = ButtonStackView()
     private let bankStateStackView: BankStateStackView = BankStateStackView()
     private let customerQueueStackView: CustomerQueueStackView = CustomerQueueStackView()
-    private let timerLabel: UILabel = {
-        let label: UILabel = UILabel()
-        
-        label.textAlignment = .center
-        label.textColor = .black
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "업무시간 - 00:00:000"
-        
-        return label
-    }()
+    let stopWatchLabel: StopWatchLabel = StopWatchLabel()
     
     init() {
         super.init(frame: .zero)
@@ -42,7 +32,7 @@ final class MainStackView: UIStackView {
     
     private func setSubView() {
         self.addArrangedSubview(buttonStackView)
-        self.addArrangedSubview(timerLabel)
+        self.addArrangedSubview(stopWatchLabel)
         self.addArrangedSubview(bankStateStackView)
         self.addArrangedSubview(customerQueueStackView)
     }

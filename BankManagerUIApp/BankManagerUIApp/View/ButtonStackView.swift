@@ -7,7 +7,7 @@
 import UIKit
 
 final class ButtonStackView: UIStackView {
-    private let addButton: UIButton = {
+    let addButton: UIButton = {
         let button: UIButton = UIButton()
         
         button.setTitle("고객 10명 추가", for: .normal)
@@ -17,7 +17,7 @@ final class ButtonStackView: UIStackView {
         return button
     }()
     
-    private let resetButton: UIButton = {
+    let resetButton: UIButton = {
         let button: UIButton = UIButton()
         
         button.setTitle("초기화", for: .normal)
@@ -42,20 +42,10 @@ final class ButtonStackView: UIStackView {
         self.distribution = .fillEqually
         self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
-        addButton.addTarget(self, action: #selector(tappedAddButton(_:)), for: .touchUpInside)
-        resetButton.addTarget(self, action: #selector(tappedResetButton(_:)), for: .touchUpInside)
     }
     
     private func setSubView() {
         self.addArrangedSubview(addButton)
         self.addArrangedSubview(resetButton)
-    }
-    
-    @objc func tappedAddButton(_ sender: UIButton) {
-        print("얍!")
-    }
-    
-    @objc func tappedResetButton(_ sender: UIButton) {
-        print("사라져!")
     }
 }
