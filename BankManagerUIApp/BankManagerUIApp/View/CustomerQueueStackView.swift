@@ -37,4 +37,9 @@ final class CustomerQueueStackView: UIStackView {
             waitingCustomerScrollView.addCustomerLabel(CustomerLabelMaker.make(of: $0))
         }
     }
+    
+    func reset() {
+        waitingCustomerScrollView.removeAllCustomerLabels()
+        workingCustomerScrollView.removeAllCustomerLabels()
+    }
 }

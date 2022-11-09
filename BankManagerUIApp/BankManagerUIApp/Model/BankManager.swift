@@ -33,4 +33,9 @@ struct BankManager {
     mutating func setDelegate(of delegate: CustomerSettingDelegate) {
         customerSettingDelegate = delegate
     }
+    
+    func reset() {
+        bank.cancelWork()
+        bank.removeAllCustomers()
+    }
 }

@@ -40,6 +40,8 @@ final class MainViewController: UIViewController {
     @objc
     func tappedResetButton() {
         stopWatch.cancel()
+        bankManager.reset()
+        mainStackView.customerQueueStackView.reset() 
     }
 }
 

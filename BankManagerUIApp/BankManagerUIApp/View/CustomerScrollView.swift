@@ -55,4 +55,10 @@ final class CustomerScrollView: UIScrollView {
     func addCustomerLabel(_ customerLabel: UILabel) {
         customerStackView.addArrangedSubview(customerLabel)
     }
+    
+    func removeAllCustomerLabels() {
+        customerStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
 }

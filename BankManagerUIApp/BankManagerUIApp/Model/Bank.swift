@@ -12,10 +12,13 @@ class Bank {
     private let loanSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     private let depositBankerCount: Int
     private let loanBankerCount: Int
+    private var depositWorkItem: DispatchWorkItem?
+    private var loanWorkItem: DispatchWorkItem?
     
     init(depositBankerCount: Int, loanBankerCount: Int) {
         self.depositBankerCount = depositBankerCount
         self.loanBankerCount = loanBankerCount
+        setWorkItem()
     }
     
     func setCustomerQueue(from customers: [Customer]) {
@@ -30,21 +33,41 @@ class Bank {
     }
     
     func startBankingService() {
+        guard let depositWorkItem = depositWorkItem,
+              let loanWorkItem = loanWorkItem else {
+            return
+        }
+        
         let group: DispatchGroup = DispatchGroup()
         
         for _ in 1...depositBankerCount {
-            DispatchQueue.global().async(group: group) {
-                self.entrustBankerService(of: .deposit)
-            }
+            DispatchQueue.global().async(group: group, execute: depositWorkItem)
         }
         
         for _ in 1...loanBankerCount {
-            DispatchQueue.global().async(group: group) {
-                self.entrustBankerService(of: .loan)
-            }
+            DispatchQueue.global().async(group: group, execute: loanWorkItem)
         }
         
         group.wait()
+    }
+    
+    private func setWorkItem() {
+        depositWorkItem = DispatchWorkItem {
+            self.entrustBankerService(of: .deposit)
+        }
+        loanWorkItem = DispatchWorkItem {
+            self.entrustBankerService(of: .loan)
+        }
+    }
+    
+    func cancelWork() {
+        depositWorkItem?.cancel()
+        loanWorkItem?.cancel()
+    }
+    
+    func removeAllCustomers() {
+        depositCustomerQueue.clear()
+        loanCustomerQueue.clear()
     }
     
     private func entrustBankerService(of bankingService: BankingService) {
