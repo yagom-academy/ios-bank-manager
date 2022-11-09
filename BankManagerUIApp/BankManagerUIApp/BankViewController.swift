@@ -8,6 +8,8 @@ import UIKit
 
 class BankViewController: UIViewController {
 
+    // MARK: - UI Componet
+    // MARK: - Top StackView
     private let clientAddButton: UIButton = {
         var button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
@@ -59,6 +61,7 @@ class BankViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: - Middle StackView
     private let waitingLabel: UILabel = {
         var label = UILabel()
         label.text = "대기중"
@@ -93,6 +96,7 @@ class BankViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: - Bottom StackView
     private let waitingScrollView: UIScrollView = {
         var scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -163,7 +167,6 @@ extension BankViewController {
         view.addSubview(bottomStackView)
         
         setupStackViewConstraint()
-        
     }
     
     private func setupScrollView() {
@@ -172,48 +175,85 @@ extension BankViewController {
         
         setupScrollViewConstraint()
         
-//        for _ in 0...40 {
-//            let testLabel: UILabel = {
-//                var label = UILabel()
-//                label.text = "Test"
-//                label.textAlignment = .center
-//                label.adjustsFontForContentSizeCategory = true
-//                label.translatesAutoresizingMaskIntoConstraints = false
-//                return label
-//            }()
-//            waitingStackView.addArrangedSubview(testLabel)
-//        }
+        for _ in 0...40 {
+            let waitTestLabel: UILabel = {
+                let label = UILabel()
+                label.text = "대기"
+                label.textAlignment = .center
+                label.adjustsFontForContentSizeCategory = true
+                label.translatesAutoresizingMaskIntoConstraints = false
+                return label
+            }()
+            let workTestLabel: UILabel = {
+                let label = UILabel()
+                label.text = "업무"
+                label.textAlignment = .center
+                label.adjustsFontForContentSizeCategory = true
+                label.translatesAutoresizingMaskIntoConstraints = false
+                return label
+            }()
+            waitingStackView.addArrangedSubview(waitTestLabel)
+            workingStackView.addArrangedSubview(workTestLabel)
+        }
     }
     
+    // MARK: - AutoLayout Constraints
     private func setupStackViewConstraint() {
         NSLayoutConstraint.activate([
-            buttonStackView.widthAnchor.constraint(equalTo: topStackView.widthAnchor),
-            buttonStackView.heightAnchor.constraint(equalToConstant: 40),
+            buttonStackView.widthAnchor.constraint(
+                equalTo: topStackView.widthAnchor),
+            buttonStackView.heightAnchor.constraint(
+                equalToConstant: 40),
             
-            topStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            topStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            topStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            topStackView.heightAnchor.constraint(equalToConstant: 80),
+            topStackView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topStackView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topStackView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            topStackView.heightAnchor.constraint(
+                equalToConstant: 80),
             
-            middleStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor),
-            middleStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            middleStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            middleStackView.heightAnchor.constraint(equalTo: waitingLabel.heightAnchor),
+            middleStackView.topAnchor.constraint(
+                equalTo: topStackView.bottomAnchor),
+            middleStackView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            middleStackView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            middleStackView.heightAnchor.constraint(
+                equalTo: waitingLabel.heightAnchor),
             
-            bottomStackView.topAnchor.constraint(equalTo: middleStackView.bottomAnchor),
-            bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            bottomStackView.topAnchor.constraint(
+                equalTo: middleStackView.bottomAnchor),
+            bottomStackView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomStackView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            bottomStackView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     private func setupScrollViewConstraint() {
-        let safeAreaFrame = self.view.safeAreaLayoutGuide.layoutFrame
         NSLayoutConstraint.activate([
-
+            waitingScrollView.contentLayoutGuide.heightAnchor.constraint(
+                equalTo: waitingStackView.heightAnchor),
+            waitingScrollView.contentLayoutGuide.widthAnchor.constraint(
+                equalTo: waitingStackView.widthAnchor),
+            
+            workingScrollView.contentLayoutGuide.heightAnchor.constraint(
+                equalTo: workingStackView.heightAnchor),
+            workingScrollView.contentLayoutGuide.widthAnchor.constraint(
+                equalTo: workingStackView.widthAnchor),
+            
+            waitingScrollView.frameLayoutGuide.heightAnchor.constraint(
+                equalTo: bottomStackView.heightAnchor),
+            waitingScrollView.frameLayoutGuide.widthAnchor.constraint(
+                equalTo: waitingStackView.widthAnchor),
+            workingScrollView.frameLayoutGuide.heightAnchor.constraint(
+                equalTo: bottomStackView.heightAnchor),
+            workingScrollView.frameLayoutGuide.widthAnchor.constraint(
+                equalTo: workingStackView.widthAnchor)
         ])
-//        let contentViewHeight = waitingScrollView.frameLayoutGuide.heightAnchor.constraint(equalTo: leftStackView.heightAnchor)
-//        contentViewHeight.priority = .defaultLow
-//        contentViewHeight.isActive = true
     }
 }
