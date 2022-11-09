@@ -42,10 +42,20 @@ final class ButtonStackView: UIStackView {
         self.distribution = .fillEqually
         self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
+        addButton.addTarget(self, action: #selector(tappedAddButton(_:)), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(tappedResetButton(_:)), for: .touchUpInside)
     }
     
     private func setSubView() {
         self.addArrangedSubview(addButton)
         self.addArrangedSubview(resetButton)
+    }
+    
+    @objc func tappedAddButton(_ sender: UIButton) {
+        print("얍!")
+    }
+    
+    @objc func tappedResetButton(_ sender: UIButton) {
+        print("사라져!")
     }
 }
