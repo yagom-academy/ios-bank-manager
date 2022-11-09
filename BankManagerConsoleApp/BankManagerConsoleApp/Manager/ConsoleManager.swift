@@ -12,7 +12,7 @@ struct ConsoleManager {
     init(bankManager: BankManager) {
         self.bankManager = bankManager
     }
-    
+
     mutating func startConsole() {
         showMenu()
         doAct(userInput: validateUserInput())

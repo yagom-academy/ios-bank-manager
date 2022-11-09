@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    private var bank: Bank = Bank()
+    private var bank: Bank
     
     init(bank: Bank) {
         self.bank = bank
@@ -35,7 +35,7 @@ struct BankManager {
         bank.resetCustomerQueue()
     }
     
-    func measureTime(_ closure: () -> (Int)) -> ReportData {
+    private func measureTime(_ closure: () -> (Int)) -> ReportData {
         let startDate = Date()
         let userCount = closure()
         return (userCount, Date().timeIntervalSince(startDate))

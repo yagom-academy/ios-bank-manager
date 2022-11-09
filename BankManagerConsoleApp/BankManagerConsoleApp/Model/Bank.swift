@@ -7,18 +7,10 @@
 import Foundation
 
 struct Bank {
-    enum Constant {
-        static let depositTakenSeconds: Double = 0.7
-    }
-
     private var customerQueue: CustomerQueue<Customer>?
     
     private var isQueueEmpty: Bool {
         return customerQueue?.isEmpty ?? true
-    }
-
-    init(customerQueue: CustomerQueue<Customer>? = nil) {
-        self.customerQueue = customerQueue
     }
 
     mutating func createQueue() {
@@ -45,12 +37,12 @@ struct Bank {
             
             switch customer.business {
             case .deposit:
-                waitingLines.dispositQueue.addOperation(customerOperation)
+                waitingLines.depositQueue.addOperation(customerOperation)
             case .loans:
                 waitingLines.loansQueue.addOperation(customerOperation)
             }
         }
-        waitingLines.dispositQueue.waitUntilAllOperationsAreFinished()
+        waitingLines.depositQueue.waitUntilAllOperationsAreFinished()
         waitingLines.loansQueue.waitUntilAllOperationsAreFinished()
         
         return userCount
@@ -63,7 +55,7 @@ struct Bank {
 }
 
 private extension Bank {
-    func setUpWaitingLine() -> (dispositQueue: OperationQueue, loansQueue: OperationQueue) {
+    func setUpWaitingLine() -> (depositQueue: OperationQueue, loansQueue: OperationQueue) {
         let depositQueue = OperationQueue()
         let loansQueue = OperationQueue()
         

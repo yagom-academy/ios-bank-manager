@@ -8,5 +8,8 @@ import Foundation
 
 typealias ReportData = (customerCount: Int, duringTime: TimeInterval)
 
-var console = ConsoleManager(bankManager: BankManager(bank: Bank()))
+let bank = Bank()
+let bankManager = BankManager(bank: bank)
+
+var console = ConsoleManager(bankManager: bankManager)
 console.startConsole()
