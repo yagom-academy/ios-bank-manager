@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank<Queue: ClientQueueable> {
+final class Bank<Queue: ClientQueueable> {
     private let bankDispatchGroup = DispatchGroup()
     private let depositBooth = DispatchSemaphore(value: 2)
     private let loanBooth = DispatchQueue(label: "loanBanker")
@@ -22,13 +22,13 @@ struct Bank<Queue: ClientQueueable> {
         self.bankManager = bankManager
     }
     
-    mutating func openBank() {
+    func openBank() {
         updateClientQueue()
         startBankWork()
         endBankWork()
     }
     
-    mutating private func updateClientQueue() {
+    private func updateClientQueue() {
         for number in 1...Int.random(in: 10...30) {
             guard let randomPurpose = Client.Purpose.allCases.randomElement() else { return }
             let client = Client(waitingTicket: number, purpose: randomPurpose)
@@ -37,7 +37,7 @@ struct Bank<Queue: ClientQueueable> {
         }
     }
     
-    mutating private func startBankWork() {
+    private func startBankWork() {
         bankManager.resetWorkTime()
         
         while !clientQueue.isEmpty {
@@ -66,7 +66,7 @@ struct Bank<Queue: ClientQueueable> {
         }
     }
     
-    mutating private func endBankWork() {
+    private func endBankWork() {
         bankManager.printWorkFinished()
     }
 }
