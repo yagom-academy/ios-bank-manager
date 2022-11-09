@@ -9,7 +9,7 @@ import UIKit
 final class MainStackView: UIStackView {
     let buttonStackView: ButtonStackView = ButtonStackView()
     private let bankStateStackView: BankStateStackView = BankStateStackView()
-    private let customerQueueStackView: CustomerQueueStackView = CustomerQueueStackView()
+    let customerQueueStackView: CustomerQueueStackView = CustomerQueueStackView()
     let stopWatchLabel: StopWatchLabel = StopWatchLabel()
     
     init() {

@@ -31,4 +31,10 @@ final class CustomerQueueStackView: UIStackView {
         self.addArrangedSubview(waitingCustomerScrollView)
         self.addArrangedSubview(workingCustomerScrollView)
     }
+    
+    func addWaitingCustomers(_ customers: [Customer]) {
+        customers.forEach {
+            waitingCustomerScrollView.addCustomerLabel(CustomerLabelMaker.make(of: $0))
+        }
+    }
 }

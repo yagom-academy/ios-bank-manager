@@ -51,4 +51,8 @@ final class CustomerScrollView: UIScrollView {
         heightConstraint.priority = .defaultLow
         heightConstraint.isActive = true
     }
+    
+    func addCustomerLabel(_ customerLabel: UILabel) {
+        customerStackView.addArrangedSubview(customerLabel)
+    }
 }

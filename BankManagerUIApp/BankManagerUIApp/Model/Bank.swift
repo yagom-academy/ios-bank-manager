@@ -12,16 +12,13 @@ class Bank {
     private let loanSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     private let depositBankerCount: Int
     private let loanBankerCount: Int
-    private let customerCount: Int
     
-    init(customers: [Customer], depositBankerCount: Int, loanBankerCount: Int) {
+    init(depositBankerCount: Int, loanBankerCount: Int) {
         self.depositBankerCount = depositBankerCount
         self.loanBankerCount = loanBankerCount
-        customerCount = customers.count
-        setCustomerQueue(from: customers)
     }
     
-    private func setCustomerQueue(from customers: [Customer]) {
+    func setCustomerQueue(from customers: [Customer]) {
         customers.forEach {
             switch $0.bankingService {
             case .loan:
@@ -32,9 +29,8 @@ class Bank {
         }
     }
     
-    func startBankingService(completion: @escaping (Int, Double) -> Void) {
+    func startBankingService() {
         let group: DispatchGroup = DispatchGroup()
-        let startingTime: Date = Date()
         
         for _ in 1...depositBankerCount {
             DispatchQueue.global().async(group: group) {
@@ -49,10 +45,6 @@ class Bank {
         }
         
         group.wait()
-        
-        let totalServiceTime: Double = Date().timeIntervalSince(startingTime)
-        
-        completion(customerCount, totalServiceTime)
     }
     
     private func entrustBankerService(of bankingService: BankingService) {

@@ -5,6 +5,7 @@
 struct Customer {
     let waitingNumber: Int
     let bankingService: BankingService
+    static var lastWaitingNumber: Int = 0
     
     init(waitingNumber: Int, bankingService: BankingService) {
         self.waitingNumber = waitingNumber
@@ -13,17 +14,24 @@ struct Customer {
 }
 
 extension Customer {
-    static func make(count: Int = Int.random(in: 10...30)) -> [Customer] {
+    static func make(count: Int = 10) -> [Customer] {
         var customers: [Customer] = []
         
         for waitingNumber in 1...count {
             let bankingService: BankingService = BankingService.random() ?? .deposit
-            let customer: Customer = Customer(waitingNumber: waitingNumber, bankingService: bankingService)
+            let customer: Customer = Customer(waitingNumber: lastWaitingNumber + waitingNumber,
+                                              bankingService: bankingService)
             
             customers.append(customer)
         }
         
+        lastWaitingNumber += count
+        
         return customers
+    }
+    
+    static func reset() {
+       lastWaitingNumber = 0
     }
 }
 

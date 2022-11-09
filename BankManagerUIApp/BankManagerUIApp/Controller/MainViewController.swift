@@ -9,6 +9,7 @@ import UIKit
 final class MainViewController: UIViewController {
     let mainStackView: MainStackView = MainStackView()
     var stopWatch: StopWatch = StopWatch()
+    var bankManager: BankManager = BankManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +26,25 @@ final class MainViewController: UIViewController {
                                                             action: #selector(tappedResetButton),
                                                             for: .touchUpInside)
         stopWatch.setDelegate(to: mainStackView.stopWatchLabel)
+        bankManager.setDelegate(of: self)
     }
     
     @objc
     func tappedAddButton() {
+        DispatchQueue.global().async { [self] in
+            bankManager.addTenCustomers()
+        }
         stopWatch.start()
     }
     
     @objc
     func tappedResetButton() {
         stopWatch.cancel()
+    }
+}
+
+extension MainViewController: CustomerSettingDelegate {
+    func complete(_ customers: [Customer]) {
+        mainStackView.customerQueueStackView.addWaitingCustomers(customers)
     }
 }
