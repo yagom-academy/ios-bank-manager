@@ -43,14 +43,14 @@ struct BankManager {
     }
     
     mutating func open() {
-        designateWorkType()
+        configureWorkType()
         assignBankWork()
     }
     
-    mutating private func designateWorkType() {
+    mutating private func configureWorkType() {
         var currentDepositWorkerCount: Int = 0
         
-        for index in 0..<bankWorkers.count {
+        for (index, _) in bankWorkers.enumerated() {
             if currentDepositWorkerCount < DepositWorkerNumber.max {
                 bankWorkers[index].bankWork = .deposit
                 currentDepositWorkerCount += 1
