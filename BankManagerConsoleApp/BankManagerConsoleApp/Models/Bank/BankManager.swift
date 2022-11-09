@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol BankManagable {
+    mutating func addClientCount()
+    mutating func resetWorkTime()
+    mutating func addWorkTime()
+    mutating func printWorkFinished()
+}
+
 struct BankManager: BankManagable {
     private var clientCount: Int = 0
     private var totalWorkTime: Double = 0.0
