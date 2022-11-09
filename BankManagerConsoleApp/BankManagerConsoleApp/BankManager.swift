@@ -50,7 +50,7 @@ struct BankManager {
     mutating private func configureWorkType() {
         var currentDepositWorkerCount: Int = 0
         
-        for (index, _) in bankWorkers.enumerated() {
+        for index in bankWorkers.indices {
             if currentDepositWorkerCount < DepositWorkerNumber.max {
                 bankWorkers[index].bankWork = .deposit
                 currentDepositWorkerCount += 1
