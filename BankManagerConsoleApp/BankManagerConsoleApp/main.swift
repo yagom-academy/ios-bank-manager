@@ -5,3 +5,10 @@
 // 
 
 import Foundation
+import BankCustomerQueue
+
+var bank: Bank = Bank()
+
+bank.startBusiness()
+
+
