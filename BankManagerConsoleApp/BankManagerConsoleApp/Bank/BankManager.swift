@@ -43,9 +43,9 @@ struct BankManager {
     }
     
     mutating private func createCustomer() throws -> Int {
-        let customers: Int = Int.random(in: Constant.customerNumberRange)
+        let totalCustomerCount: Int = Int.random(in: Constant.customerNumberRange)
         
-        for number in 1...customers {
+        for number in 1...totalCustomerCount {
             guard let banking: BankService = BankService.allCases.randomElement() else {
                 throw BankError.invalidService
             }
@@ -54,11 +54,11 @@ struct BankManager {
             bank.addCustomer(customer)
         }
         
-        return customers
+        return totalCustomerCount
     }
     
     mutating private func open() throws -> Double {
-        bank.resetFinishedCustomerCount()
+        bank.resetHandledCustomerCount()
         
         let customers: Int = try createCustomer()
         
@@ -76,6 +76,6 @@ struct BankManager {
     }
     
     private func close(_ totalExecutionTime: Double) throws {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.finishedCustomerCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalExecutionTime))초 입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.handledCustomerCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalExecutionTime))초 입니다.")
     }
 }

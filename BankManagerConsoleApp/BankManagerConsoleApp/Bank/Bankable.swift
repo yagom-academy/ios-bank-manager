@@ -6,13 +6,10 @@ import Foundation
 
 protocol Bankable: AnyObject {
     var waitingLine: Queue<Customer> { get set }
-    var finishedCustomerCount: Int { get set }
-    var depositQueue: DispatchQueue { get }
-    var loanQueue: DispatchQueue { get }
+    var handledCustomerCount: Int { get set }
     var bankingServiceGroup: DispatchGroup { get }
     
     func allocateCustomer()
-    func handleBankingService(_ customer: Customer)
 }
 
 extension Bankable {
@@ -20,7 +17,7 @@ extension Bankable {
         self.waitingLine.enqueue(customer)
     }
     
-    func resetFinishedCustomerCount() {
-        self.finishedCustomerCount = 0
+    func resetHandledCustomerCount() {
+        self.handledCustomerCount = 0
     }
 }

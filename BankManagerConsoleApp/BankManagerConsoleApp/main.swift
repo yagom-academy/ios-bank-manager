@@ -4,7 +4,7 @@
 
 import Foundation
 
-let bank: Bank = Bank(depositBooth: 2, loanBooth: 1)
+let bank: Bank = Bank(depositClerks: 2, loanClerks: 1)
 var bankManager: BankManager = BankManager(bank: bank)
 
 while bankManager.isRunning {
