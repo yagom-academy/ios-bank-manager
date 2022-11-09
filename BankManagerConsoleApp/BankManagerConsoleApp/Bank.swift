@@ -45,35 +45,30 @@ struct Bank {
     }
     
     func serve() {
+        let group = DispatchGroup()
         let serialQueue = DispatchQueue(label: "serial")
-        
-        DispatchQueue.global().async {
-            while depositQueue.isEmpty == false {
-                serialQueue.sync {
-                    guard let customer = depositQueue.dequeue() else {
-                        return
-                    }
-                    clerks.first?.work(for: customer)
-                }
-            }
-        }
-        
-        DispatchQueue.global().async {
-            while depositQueue.isEmpty == false {
-                serialQueue.sync {
-                    guard let customer = depositQueue.dequeue() else {
-                        return
-                    }
-                    clerks.first?.work(for: customer)
-                }
-            }
-        }
-        
-        DispatchQueue.global().async {
+        let loanWorkItem = DispatchWorkItem {
             while let customer = loanQueue.dequeue() {
                 clerks.first?.work(for: customer)
             }
         }
+        
+        let depositWorkItem = DispatchWorkItem {
+            while depositQueue.isEmpty == false {
+                serialQueue.sync {
+                    guard let customer = depositQueue.dequeue() else {
+                        return
+                    }
+                    clerks.first?.work(for: customer)
+                }
+            }
+        }
+        
+        DispatchQueue.global().async(group: group, execute: loanWorkItem)
+        DispatchQueue.global().async(group: group, execute: depositWorkItem)
+        DispatchQueue.global().async(group: group, execute: depositWorkItem)
+
+        group.wait()
     }
     
     func close() {}
