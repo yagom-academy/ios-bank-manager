@@ -30,9 +30,7 @@ struct BankManager {
         let customerCount = Constant.randomCustomerCount
         
         for count in 1...customerCount {
-            guard let bankingType = BankingType(
-                rawValue: Int.random(in: Constant.depositOrLoan)
-            ) else { return }
+            guard let bankingType = BankingType.allCases.randomElement() else { return }
             
             let customer = Customer.init(waitingNumber: count, bankingType: bankingType)
             bank.receive(customer: customer)

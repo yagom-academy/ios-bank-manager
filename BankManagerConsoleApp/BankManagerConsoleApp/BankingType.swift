@@ -5,9 +5,9 @@
 
 import Foundation
 
-enum BankingType: Int {
-    case deposit = 1
-    case loan = 2
+enum BankingType: CaseIterable {
+    case deposit
+    case loan
     
     var name: String {
         switch self {
