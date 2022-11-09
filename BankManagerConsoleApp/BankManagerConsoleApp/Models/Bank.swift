@@ -64,8 +64,8 @@ struct Bank {
             
             switch customer?.purpose {
             case .deposit:
-                semaphore.wait()
                 DispatchQueue.global().async(group: group) { [self] in
+                    semaphore.wait()
                     self.manager.provideService(to: customer)
                     semaphore.signal()
                 }
