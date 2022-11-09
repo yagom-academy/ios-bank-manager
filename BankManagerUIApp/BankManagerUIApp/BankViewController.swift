@@ -26,12 +26,30 @@ class BankViewController: UIViewController {
         return button
     }()
     
-    private let topStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 10
+        stackView.spacing = 0
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let timeLabel: UILabel = {
+        var label = UILabel()
+        label.text = "업무시간 - \(Date())"
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let topStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.spacing = 0
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -58,18 +76,24 @@ extension BankViewController {
     }
     
     private func setupTopStackView() {
-        topStackView.addArrangedSubview(clientAddButton)
-        topStackView.addArrangedSubview(clearButton)
+        buttonStackView.addArrangedSubview(clientAddButton)
+        buttonStackView.addArrangedSubview(clearButton)
+        topStackView.addArrangedSubview(buttonStackView)
+        topStackView.addArrangedSubview(timeLabel)
+        
         view.addSubview(topStackView)
-        setupTopButtonConstraint()
+        setupTopStackViewConstraint()
     }
     
-    private func setupTopButtonConstraint() {
+    private func setupTopStackViewConstraint() {
         NSLayoutConstraint.activate([
+            buttonStackView.widthAnchor.constraint(equalTo: topStackView.widthAnchor),
+            buttonStackView.heightAnchor.constraint(equalToConstant: 40),
+            
             topStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             topStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            topStackView.heightAnchor.constraint(equalToConstant: 40)
+            topStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 }
