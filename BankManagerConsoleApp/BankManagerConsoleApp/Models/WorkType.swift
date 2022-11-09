@@ -1,10 +1,4 @@
-//
-//  WorkType.swift
-//  BankManagerConsoleApp
-//
-//  Created by leewonseok on 2022/11/08.
-//
-import Foundation
+//  Created by stone, 애종 on 2022/11/09.
 
 enum WorkType: String, CaseIterable {
     case deposit = "예금"

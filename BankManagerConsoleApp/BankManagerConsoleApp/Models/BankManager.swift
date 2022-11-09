@@ -13,10 +13,10 @@ struct BankManager: Workable {
               let workType = bankCustomer.purpose else {
             return
         }
-        let sleepTime: UInt32 = workType.rawValue == "예금" ? 700000 : 1100000
+        let serviceTime: UInt32 = workType.rawValue == "예금" ? Namespace.depositDelay : Namespace.loanDelay
         
         print("\(bankCustomer.number)번 고객 \(workType.rawValue)업무 시작")
-        usleep(sleepTime)
+        usleep(serviceTime)
         print("\(bankCustomer.number)번 고객 \(workType.rawValue)업무 완료")
     }
 }

@@ -93,11 +93,12 @@
 		5479720E291232D40046EF9D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				57569361291B4353009DF06D /* Queue */,
+				57569360291B4343009DF06D /* Protocols */,
+				54413B662914A7B4007DA61A /* Extensions */,
 				547972092912127F0046EF9D /* Bank.swift */,
 				5479720B2912128D0046EF9D /* BankCustomer.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				54584E972918FD980030CCF6 /* Workable.swift */,
-				54584E99291901180030CCF6 /* Customer.swift */,
 				54347A942919E98B002805AB /* WorkType.swift */,
 			);
 			path = Models;
@@ -117,6 +118,33 @@
 				5756935E291906CE009DF06D /* Namespace.swift */,
 			);
 			path = Namespace;
+			sourceTree = "<group>";
+		};
+		57569360291B4343009DF06D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				54584E972918FD980030CCF6 /* Workable.swift */,
+				54584E99291901180030CCF6 /* Customer.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		57569361291B4353009DF06D /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				575692E62910B538009DF06D /* Node.swift */,
+				5462C1BD2910B6E70011E035 /* LinkedList.swift */,
+				5462C1BF2910B6FE0011E035 /* Queue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		57569362291B4364009DF06D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E79259C3EC00053667F /* main.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		76924BD570EAB34D042C6ACC /* Frameworks */ = {
@@ -151,13 +179,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				57569362291B4364009DF06D /* Controller */,
 				5756935D2919068D009DF06D /* Namespace */,
-				54413B662914A7B4007DA61A /* Extensions */,
 				5479720E291232D40046EF9D /* Models */,
-				C7694E79259C3EC00053667F /* main.swift */,
-				575692E62910B538009DF06D /* Node.swift */,
-				5462C1BD2910B6E70011E035 /* LinkedList.swift */,
-				5462C1BF2910B6FE0011E035 /* Queue.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";

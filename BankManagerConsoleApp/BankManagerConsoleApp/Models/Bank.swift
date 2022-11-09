@@ -41,8 +41,7 @@ struct Bank {
             let startTime = CFAbsoluteTimeGetCurrent()
             openBank()
             self.group.wait()
-            let endTime = CFAbsoluteTimeGetCurrent() - startTime
-            self.totalWorkTime = endTime
+            self.totalWorkTime = CFAbsoluteTimeGetCurrent() - startTime
             endWork()
         case Namespace.closeBank:
             return
