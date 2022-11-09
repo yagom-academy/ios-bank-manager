@@ -6,5 +6,21 @@
 //
 
 struct Customer {
-    var number: Int
+    
+    enum Service: CaseIterable {
+        case deposit
+        case loan
+        
+        var message: String {
+            switch self {
+            case .deposit:
+                return "예금"
+            case .loan:
+                return "대출"
+            }
+        }
+    }
+    
+    let number: Int
+    let serviceType: Service
 }

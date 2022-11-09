@@ -33,6 +33,9 @@ func setupRandomCustomerQueue() {
     let randomNumber = Int.random(in: 10...30)
     bank.customerCount = randomNumber
     Array(repeating: 0, count: randomNumber).enumerated().forEach { index, number in
-        bank.customerQueue.enqueue(Customer(number: index+1))
+        guard let serviceType = Customer.Service.allCases.randomElement() else {
+            return
+        }
+        bank.customerQueue.enqueue(Customer(number: index+1, serviceType: serviceType))
     }
 }
