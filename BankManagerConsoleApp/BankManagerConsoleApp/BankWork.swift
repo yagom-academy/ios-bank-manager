@@ -23,7 +23,7 @@ enum BankWork: CaseIterable {
         }
     }
     
-    var time: Double {
+    var time: TimeInterval {
         switch self {
         case .deposit:
             return 0.7

@@ -12,7 +12,7 @@ struct BankManager {
     private let depositClientQueue: Queue<Client> = Queue()
     private let loanClientQueue: Queue<Client> = Queue()
     private var totalClientCount: Int = 0
-    private var totalWorkTime: Double = 0.0
+    private var totalWorkTime: TimeInterval = 0.0
     private let group: DispatchGroup = DispatchGroup()
     
     init(bankWorkers: [BankWorker]) {
