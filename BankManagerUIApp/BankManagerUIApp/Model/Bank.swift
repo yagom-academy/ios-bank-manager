@@ -57,7 +57,10 @@ class Bank {
             DispatchQueue.global().async(group: group, execute: loanWorkItem)
         }
         
-        group.wait()
+//        group.wait()
+        group.notify(queue: .main) {
+            NotificationCenter.default.post(name: .completeBankingSevice, object: nil)
+        }
     }
     
     private func entrustBankerService(of bankingService: BankingService) {

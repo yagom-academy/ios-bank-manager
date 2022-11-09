@@ -38,6 +38,10 @@ final class MainViewController: UIViewController {
                                                selector: #selector(didReceiveCompleteWork),
                                                name: .completeWork,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveCompleteBankingService),
+                                               name: .completeBankingSevice,
+                                               object: nil)
         stopWatch.setDelegate(to: stopWatchLabel)
         bankManager.setDelegate(of: self)
     }
@@ -55,7 +59,10 @@ final class MainViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            buttonStackView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.075),
+            stopWatchLabel.heightAnchor.constraint(equalTo: buttonStackView.heightAnchor),
+            bankStateStackView.heightAnchor.constraint(equalTo: buttonStackView.heightAnchor)
         ])
     }
     
@@ -90,6 +97,11 @@ final class MainViewController: UIViewController {
         }
         
         customerQueueStackView.removeWorkingCustomerLabel(of: waitingNumber)
+    }
+    
+    @objc
+    func didReceiveCompleteBankingService() {
+        stopWatch.pause()
     }
 }
 
