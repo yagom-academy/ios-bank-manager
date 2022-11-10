@@ -6,19 +6,38 @@ import Foundation
 
 struct Banker {
     func work(_ customer: Customer, completion: @escaping () -> Void) {
+        printStartingMessage(of: customer)
+        postStartWorkNotification(of: customer)
+        
+        customer.bankingService.request()
+        
+        printCompletingMessage(of: customer)
+        postCompleteWorkNotification(of: customer)
+        
+        completion()
+    }
+    
+    private func printStartingMessage(of customer: Customer) {
         let startingMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.name)업무 시작"
-        let endingMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.name)업무 완료"
         
         print(startingMessage)
+    }
+    
+    private func printCompletingMessage(of customer: Customer) {
+        let completeMessage: String = "\(customer.waitingNumber)번 고객 \(customer.bankingService.name)업무 완료"
+        
+        print(completeMessage)
+    }
+    
+    private func postStartWorkNotification(of customer: Customer) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .startWork, object: customer.waitingNumber)
         }
-        customer.bankingService.request()
-        print(endingMessage)
+    }
+    
+    private func postCompleteWorkNotification(of customer: Customer) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .completeWork, object: customer.waitingNumber)
         }
-            
-        completion()
     }
 }
