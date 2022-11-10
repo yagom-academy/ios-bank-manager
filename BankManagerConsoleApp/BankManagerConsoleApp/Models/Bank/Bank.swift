@@ -40,15 +40,11 @@ final class Bank<Queue: ClientQueueable> {
     }
     
     func startBankWork() {
-        bankManager.resetWorkTime()
-        
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
             
             divideWork(client: client)
         }
-        
-        bankManager.addWorkTime()
     }
     
     private func divideWork(client: Client) {

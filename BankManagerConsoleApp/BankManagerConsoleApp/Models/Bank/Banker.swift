@@ -11,13 +11,7 @@ protocol BankWorkable { }
 
 extension BankWorkable {
     func startWork(client: Client) {
-        print("\(client.waitingTicket)번 고객 \(client.purpose.name)업무 시작")
-        selectWork(purpose: client.purpose)
-        print("\(client.waitingTicket)번 고객 \(client.purpose.name)업무 종료")
-    }
-    
-    private func selectWork(purpose: Client.Purpose) {
-        switch purpose {
+        switch client.purpose {
         case .deposit:
             Thread.sleep(forTimeInterval: 0.7)
         case .loan:

@@ -148,6 +148,7 @@ final class MainView: UIView {
     }()
 }
 
+// MARK: - AutoLayout Constraints
 extension MainView {
     private func setupStackView() {
         self.addSubview(topStackView)
@@ -164,7 +165,6 @@ extension MainView {
         setupScrollViewConstraint()
     }
     
-    // MARK: - AutoLayout Constraints
     private func setupStackViewConstraint() {
         NSLayoutConstraint.activate([
             buttonStackView.widthAnchor.constraint(

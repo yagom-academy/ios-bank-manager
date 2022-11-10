@@ -20,28 +20,6 @@ final class BankViewController: UIViewController {
     private let timerFormatter = DateFormatter()
     private var isFirstTap: Bool = true
     
-    private func makeTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { _ in
-            DispatchQueue.global().async {
-                self.timeCount += 0.001
-                let time = self.makeTimeLabel(count: self.timeCount)
-                DispatchQueue.main.async {
-                    self.mainView.timeLabel.text = "업무시간 - \(time)"
-                }
-            }
-        }
-    }
-    
-    private func makeTimeLabel(count: Double) -> String {
-        let date = Date(timeIntervalSince1970: count)
-        return timerFormatter.string(from: date)
-    }
-    
-    private func addButtonTarget() {
-        mainView.clientAddButton.addTarget(self, action: #selector(addClient), for: .touchUpInside)
-        mainView.clearButton.addTarget(self, action: #selector(resetData), for: .touchUpInside)
-    }
-    
     override func loadView() {
         self.view = mainView
     }
@@ -52,6 +30,18 @@ final class BankViewController: UIViewController {
         addButtonTarget()
         
         timerFormatter.dateFormat = "mm:ss:SSS"
+    }
+    
+    private func addNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handlingStackView),
+                                               name: .client,
+                                               object: nil)
+    }
+    
+    private func addButtonTarget() {
+        mainView.clientAddButton.addTarget(self, action: #selector(addClient), for: .touchUpInside)
+        mainView.clearButton.addTarget(self, action: #selector(resetData), for: .touchUpInside)
     }
     
     @objc func addClient() {
@@ -66,15 +56,6 @@ final class BankViewController: UIViewController {
             }
         }
         bank.startBankWork()
-    }
-    
-    private func resetTimer() {
-        timer?.invalidate()
-        isFirstTap = true
-        timeCount = 0.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
-            self.mainView.timeLabel.text = "업무시간 - 00:00:000"
-        }
     }
     
     @objc func resetData() {
@@ -92,13 +73,6 @@ final class BankViewController: UIViewController {
         return label
     }
     
-    private func addNotification() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handlingStackView),
-                                               name: .client,
-                                               object: nil)
-    }
-    
     @objc func handlingStackView(noti: Notification) {
         guard let workState = noti.userInfo?["WorkState"] as? WorkState else { return }
         
@@ -110,10 +84,6 @@ final class BankViewController: UIViewController {
         }
     }
     
-    private func addToWorkingStackView(_ label: UILabel) {
-        mainView.workingStackView.addArrangedSubview(label)
-    }
-    
     private func handleLabel(by stackView: UIStackView, noti: Notification) {
         DispatchQueue.main.async { [weak self] in
             guard let client = noti.object as? Client else { return }
@@ -121,8 +91,7 @@ final class BankViewController: UIViewController {
             
             guard let labels = stackView.arrangedSubviews as? [UILabel],
                   let targetLabel = labels.filter({ label in
-                      if let text = label.text?.split(separator: " ").first,
-                         Int(text) == ticketNumber {
+                      if ticketNumber == label.text?.split(separator: " ").map({ Int($0) }).first {
                           return true
                       }
                       return false
@@ -138,13 +107,46 @@ final class BankViewController: UIViewController {
         }
     }
     
-    func pauseTimer(_ self: BankViewController?) {
+    private func addToWorkingStackView(_ label: UILabel) {
+        mainView.workingStackView.addArrangedSubview(label)
+    }
+}
+
+// MARK: - Timer
+extension BankViewController {
+    private func makeTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { _ in
+            DispatchQueue.global().async {
+                self.timeCount += 0.001
+                let time = self.makeTimeLabel(count: self.timeCount)
+                DispatchQueue.main.async {
+                    self.mainView.timeLabel.text = "업무시간 - \(time)"
+                }
+            }
+        }
+    }
+    
+    private func makeTimeLabel(count: Double) -> String {
+        let date = Date(timeIntervalSince1970: count)
+        return timerFormatter.string(from: date)
+    }
+    
+    private func pauseTimer(_ self: BankViewController?) {
         guard let self = self else { return }
         
         if self.mainView.workingStackView.arrangedSubviews.isEmpty,
            self.mainView.waitingStackView.arrangedSubviews.isEmpty {
             self.timer?.invalidate()
             self.isFirstTap = true
+        }
+    }
+    
+    private func resetTimer() {
+        timer?.invalidate()
+        isFirstTap = true
+        timeCount = 0.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+            self.mainView.timeLabel.text = "업무시간 - 00:00:000"
         }
     }
 }
