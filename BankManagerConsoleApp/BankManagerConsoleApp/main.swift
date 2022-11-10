@@ -4,5 +4,12 @@
 //
 //  Copyright (c) 2022 Zhilly, Minii All rights reserved.
 
-var console = ConsoleManager(bankManager: BankManager(bank: Bank()))
+import Foundation
+
+typealias ReportData = (customerCount: Int, duringTime: TimeInterval)
+
+let bank = Bank()
+let bankManager = BankManager(bank: bank)
+
+var console = ConsoleManager(bankManager: bankManager)
 console.startConsole()
