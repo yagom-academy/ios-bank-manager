@@ -17,7 +17,7 @@ class BankViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.addTarget(self, action: #selector(addClient), for: .touchUpInside)
+        button.addTarget(BankViewController.self, action: #selector(addClient), for: .touchUpInside)
         return button
     }()
     
@@ -28,7 +28,7 @@ class BankViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.addTarget(self, action: #selector(resetData), for: .touchUpInside)
+        button.addTarget(BankViewController.self, action: #selector(resetData), for: .touchUpInside)
         return button
     }()
     
@@ -157,9 +157,6 @@ class BankViewController: UIViewController {
         for _ in 1...10 {
             if let client = bank.updateClientQueue() {
                 waitingStackView.addArrangedSubview(makeClientLabel(client))
-                
-                // Test
-                workingStackView.addArrangedSubview(makeClientLabel(client))
             }
         }
         bank.startBankWork()
@@ -179,38 +176,45 @@ class BankViewController: UIViewController {
     
     private func addNotification() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(dispatchWorkingStackView),
-                                               name: .workStart,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(deleteWorkingStackView),
-                                               name: .workEnd,
+                                               selector: #selector(handlingStackView),
+                                               name: .client,
                                                object: nil)
     }
     
-    @objc func dispatchWorkingStackView(notification: Notification) {
+    @objc func handlingStackView(noti: Notification) {
+        guard let workState = noti.userInfo?["WorkState"] as? WorkState else { return }
         
+        switch workState {
+        case .start:
+            handleLabel(by: waitingStackView, noti: noti)
+        case .done:
+            handleLabel(by: workingStackView, noti: noti)
+        }
+    }
+
+    private func addToWorkingStackView(_ label: UILabel) {
+        workingStackView.addArrangedSubview(label)
     }
     
-    @objc func deleteWorkingStackView(notification: Notification) {
-        removeLabel(notification)
-    }
-    
-    func removeLabel(_ noti: Notification){
+    private func handleLabel(by stackView: UIStackView, noti: Notification) {
         DispatchQueue.main.async { [weak self] in
-            guard let client = noti.userInfo?[ClientNoti.client] as? Client else { return }
+            guard let client = noti.object as? Client else { return }
             let ticketNumber = client.waitingTicket
             
-            guard let labels = self?.workingStackView.arrangedSubviews as? [UILabel] else { return }
+            guard let labels = stackView.arrangedSubviews as? [UILabel],
+                  let targetLabel = labels.filter({ label in
+                      if let text = label.text?.split(separator: " ").first,
+                         Int(text) == ticketNumber {
+                          return true
+                      }
+                      return false
+                  }).first else { return }
             
-            guard let textLabel = labels.filter({ label in
-                if let text = label.text?.split(separator: " ").first, ticketNumber == Int(text) {
-                    return true
-                }
-                return false
-            }).first else { return }
+            targetLabel.removeFromSuperview()
             
-            textLabel.removeFromSuperview()
+            if stackView == self?.waitingStackView {
+                self?.addToWorkingStackView(targetLabel)
+            }
         }
     }
 }

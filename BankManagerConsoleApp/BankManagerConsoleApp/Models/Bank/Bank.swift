@@ -7,6 +7,15 @@
 
 import Foundation
 
+extension Notification.Name {
+    static let client = Notification.Name("Client")
+}
+
+enum WorkState {
+    case start
+    case done
+}
+
 final class Bank<Queue: ClientQueueable> {
     private let bankDispatchGroup = DispatchGroup()
     private let depositBooth = DispatchSemaphore(value: 2)
@@ -39,7 +48,6 @@ final class Bank<Queue: ClientQueueable> {
             divideWork(client: client)
         }
         
-//        bankDispatchGroup.wait()
         bankManager.addWorkTime()
     }
     
@@ -49,25 +57,24 @@ final class Bank<Queue: ClientQueueable> {
             DispatchQueue.global().async(group: bankDispatchGroup) { [self] in
                 self.depositBooth.wait()
                 defer { self.depositBooth.signal() }
-                NotificationCenter.default.post(name: .workStart, object: nil, userInfo: [ClientNoti.client : client])
+                NotificationCenter.default.post(name: .client,
+                                                object: client,
+                                                userInfo: ["WorkState" : WorkState.start])
                 self.banker.startWork(client: client)
-                NotificationCenter.default.post(name: .workEnd, object: nil, userInfo: [ClientNoti.client : client])
+                NotificationCenter.default.post(name: .client,
+                                                object: client,
+                                                userInfo: ["WorkState" : WorkState.done])
             }
         case .loan:
             loanBooth.async(group: bankDispatchGroup) { [self] in
-                NotificationCenter.default.post(name: .workStart, object: nil, userInfo: [ClientNoti.client : client])
+                NotificationCenter.default.post(name: .client,
+                                                object: client,
+                                                userInfo: ["WorkState" : WorkState.start])
                 self.banker.startWork(client: client)
-                NotificationCenter.default.post(name: .workEnd, object: nil, userInfo: [ClientNoti.client : client])
+                NotificationCenter.default.post(name: .client,
+                                                object: client,
+                                                userInfo: ["WorkState" : WorkState.done])
             }
         }
     }
-}
-
-extension Notification.Name {
-    static let  workStart = Notification.Name("workStart")
-    static let  workEnd = Notification.Name("workEnd")
-}
-
-enum ClientNoti {
-    case client
 }
