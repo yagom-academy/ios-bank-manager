@@ -9,16 +9,16 @@ import Foundation
 
 struct Bank {
     private var customerQueue: Queue<Customer> = Queue()
-    private var bankers: [Banker] = []
     private var totalCustomerCount: Int = 0
     private var totalTime: Double = 0
+    var bankers: [Banker] = []
     
     mutating func addCustomerToQueue(_ customer: Customer) {
         customerQueue.enqueue(customer)
     }
     
-    mutating func addBanker(_ banker: Banker) {
-        bankers.append(banker)
+    mutating func addBanker(_ banker: [Banker]) {
+        bankers += banker
     }
       
     mutating func startBankBusiness() {

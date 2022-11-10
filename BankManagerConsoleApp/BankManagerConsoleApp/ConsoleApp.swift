@@ -11,7 +11,7 @@ struct ConsoleApp {
     mutating func start() {
         printMenuList()
         while inputMenu() == .startBank {
-            startBankByCreatingBankManager()
+            startBankManager()
             printMenuList()
         }
     }
@@ -26,7 +26,7 @@ struct ConsoleApp {
         return inputMenu
     }
     
-    private mutating func startBankByCreatingBankManager() {
+    private mutating func startBankManager() {
         bankManager.reset()
         let customerCount: Int = Int.random(in: 10...30)
         bankManager.addCustomers(count: customerCount)
