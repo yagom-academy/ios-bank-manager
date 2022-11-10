@@ -10,15 +10,11 @@ struct Bank: App {
     private var workLoadManager: WorkLoadManager = WorkLoadManager()
     
     mutating func openBank() {
-        var workCount: Int = 0
-
         letCustomersIn()
         while workLoadManager.taskQueue.isEmpty() == false {
-            workLoadManager.giveWorkToAvailableManager()
-            workCount += 1
         }
         
-        closeBank(with: workCount)
+        closeBank(with: 30)
     }
     
     private mutating func letCustomersIn() {
