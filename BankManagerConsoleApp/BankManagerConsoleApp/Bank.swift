@@ -19,10 +19,13 @@ struct Bank: App {
     
     private mutating func letCustomersIn() {
         let randomIntNumber = Int.random(in: 10...30)
-        
+    
         let customerCount = Array<Int>(1...randomIntNumber)
         customerCount.forEach {
-            workLoadManager.taskQueue.enqueue(data: $0)
+            guard let data = workLoadManager.makeDispatchWorkItem(number: $0) else {
+                return
+            }
+            workLoadManager.taskQueue.enqueue(data: data)
         }
     }
     

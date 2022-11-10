@@ -7,11 +7,12 @@
 import Foundation
 
 struct WorkLoadManager {
-    var taskQueue: CustomerQueue = CustomerQueue<Int>()
+    var taskQueue: CustomerQueue = CustomerQueue<(Task, DispatchWorkItem)>()
     let loanQueue: DispatchQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
     let loanSemaphore = DispatchSemaphore(value: 1)
     let depositQueue: DispatchQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
     let depositSemaphore = DispatchSemaphore(value: 2)
+    let banking: DispatchGroup = DispatchGroup()
     
     func makeDispatchWorkItem(number: Int) -> (Task, DispatchWorkItem)? {
         guard let task = Task(rawValue: Int.random(in: 1...2)) else { return nil }
@@ -40,5 +41,20 @@ struct WorkLoadManager {
             }
             return (task, loan)
         }
+    }
+    
+    mutating func work() {
+        while taskQueue.isEmpty() != true {
+            guard let (taskType, dispatchWorkItem) = taskQueue.dequeue() else { return }
+            
+            switch taskType {
+            case .deposit:
+                depositQueue.async(group: banking, execute: dispatchWorkItem)
+            case .loan:
+                loanQueue.async(group: banking, execute: dispatchWorkItem)
+            }
+        }
+        
+        banking.wait()
     }
 }
