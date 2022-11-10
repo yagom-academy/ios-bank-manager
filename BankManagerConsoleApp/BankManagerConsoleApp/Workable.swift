@@ -25,12 +25,14 @@ extension Workable {
     func scheduleWork(from customerQueue: Queue<Customer>) -> DispatchWorkItem {
         let depositWorkItem = DispatchWorkItem {
             while customerQueue.isEmpty == false {
+                var customer: Customer?
                 Self.serviceQueue.sync {
-                    guard let customer = customerQueue.dequeue() else {
-                        return
-                    }
-                    self.work(for: customer)
+                    customer = customerQueue.dequeue()
                 }
+                guard let customer = customer else {
+                    return
+                }
+                self.work(for: customer)
             }
         }
         return depositWorkItem

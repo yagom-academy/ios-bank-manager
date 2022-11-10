@@ -18,18 +18,17 @@ struct Bank {
         self.clerks.append(contentsOf: Array(repeating: DepositClerk(), count: clerkCount - loanClerkCount))
     }
     
-    func open() {
-        startBankJob()
+    func endWork(_ timeInterval: TimeInterval) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(timeInterval.formattedNumber)초입니다.")
     }
     
-    func startBankJob() {
+    func open() {
         let startTime = CFAbsoluteTimeGetCurrent()
         manageCustomerQueue()
         serve()
         let endTime = CFAbsoluteTimeGetCurrent()
         let timeInterval = endTime - startTime
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(timeInterval.formattedNumber)초입니다.")
+        endWork(timeInterval)
     }
     
     func manageCustomerQueue() {
