@@ -12,7 +12,8 @@ struct Bank {
     private var depositBankerQueue: Queue<Banker> = Queue()
     private var loanBankerQueue: Queue<Banker> = Queue()
     private var totalCustomerCount: Int = 0
-    private var totalTime: Double = 0
+    private var startTime: Date?
+    private var endTime: Date?
     
     mutating func addCustomerToQueue(_ customer: Customer) {
         customerQueue.enqueue(customer)
@@ -30,10 +31,10 @@ struct Bank {
     }
     
     mutating func startBankBusiness() {
+        startTime = Date()
         let depositSemaphore: DispatchSemaphore = DispatchSemaphore(value: depositBankerQueue.count)
         let loanSemaphore: DispatchSemaphore = DispatchSemaphore(value: loanBankerQueue.count)
         let group: DispatchGroup = DispatchGroup()
-        
         while customerQueue.isEmpty != true {
             guard let customer: Customer = customerQueue.dequeue() else { return }
             switch customer.bankBusiness {
@@ -58,12 +59,15 @@ struct Bank {
             }
         }
         group.wait()
+        endTime = Date()
         printClosingMessage()
     }
     
     private mutating func printClosingMessage() {
-        let formattedProcessedTotalTime: String = String(format: "%.2f", totalTime)
-        let processingClosedMessage: String = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무시간은 \(formattedProcessedTotalTime)초입니다."
+        guard let startTime = startTime,
+              let endTime = endTime else { return }
+        let totalTime : String = String(format: "%.2f", endTime.timeIntervalSince(startTime))
+        let processingClosedMessage: String = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무시간은 \(totalTime)초입니다."
         print(processingClosedMessage)
     }
 }
