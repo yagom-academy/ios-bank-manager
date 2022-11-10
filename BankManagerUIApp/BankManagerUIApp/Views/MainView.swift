@@ -50,9 +50,9 @@ final class MainView: UIView {
         return stackView
     }()
     
-    private let timeLabel: UILabel = {
+    let timeLabel: UILabel = {
         var label = UILabel()
-        label.text = "업무시간 - \(Date())"
+        label.text = "업무시간 - 00:00:000"
         label.font = .preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
