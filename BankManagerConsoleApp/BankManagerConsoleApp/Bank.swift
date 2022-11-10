@@ -66,8 +66,8 @@ struct Bank {
     private mutating func printClosingMessage() {
         guard let startTime = startTime,
               let endTime = endTime else { return }
-        let totalTime : String = String(format: "%.2f", endTime.timeIntervalSince(startTime))
-        let processingClosedMessage: String = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무시간은 \(totalTime)초입니다."
+        let totalTime : String = String(format: NameSpace.totalTimeFormat, endTime.timeIntervalSince(startTime))
+        let processingClosedMessage: String = NameSpace.processingClosedMessage(totalCustomerCount: totalCustomerCount, totalTime: totalTime)
         print(processingClosedMessage)
     }
 }

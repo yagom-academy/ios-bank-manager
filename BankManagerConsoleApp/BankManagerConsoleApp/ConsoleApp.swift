@@ -17,10 +17,10 @@ struct ConsoleApp {
     }
     
     private func inputMenu() -> ConsoleAppMenu {
-        print("입력 :", terminator: " ")
-        guard let input: Int = Int(readLine() ?? ""),
+        print(NameSpace.input, terminator: NameSpace.blank)
+        guard let input: Int = Int(readLine() ?? NameSpace.blank),
               let inputMenu: ConsoleAppMenu = ConsoleAppMenu(rawValue: input) else {
-            print("다시 입력하세요.")
+            print(NameSpace.wrongInput)
             return inputMenu()
         }
         return inputMenu
@@ -28,16 +28,16 @@ struct ConsoleApp {
     
     private mutating func startBankManager() {
         bankManager.reset()
-        let customerCount: Int = Int.random(in: 10...30)
+        let customerCount: Int = Int.random(in: NameSpace.customerCountRange)
         bankManager.addCustomers(count: customerCount)
-        bankManager.addBankers(bankBusiness: BankBusiness.deposit, count: 2)
-        bankManager.addBankers(bankBusiness: BankBusiness.loan, count: 1)
+        bankManager.addBankers(bankBusiness: BankBusiness.deposit, count: NameSpace.depositBankerCount)
+        bankManager.addBankers(bankBusiness: BankBusiness.loan, count: NameSpace.loanBankerCount)
         bankManager.startBank()
     }
     
     private func printMenuList() {
         for menu in ConsoleAppMenu.allCases {
-            let menuInfo: String = "\(menu.rawValue) : \(menu.description)"
+            let menuInfo: String = NameSpace.menuInfo(menuNumber: menu.rawValue, menuDescription: menu.description)
             print(menuInfo)
         }
     }

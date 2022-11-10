@@ -11,10 +11,10 @@ struct Banker {
     let bankBusiness: BankBusiness
     
     func processBankingBusiness(of customer: Customer) {
-        let processingStartMessage: String = "\(customer.number)번 고객 \(bankBusiness.description)업무 시작"
+        let processingStartMessage: String = NameSpace.processingStartMessage(customerNumber: customer.number, bankBusinessDescription: bankBusiness.description)
         print(processingStartMessage)
         Thread.sleep(forTimeInterval: bankBusiness.processingTimePerCustomer)
-        let processingFinishMessage: String = "\(customer.number)번 고객 \(bankBusiness.description)업무 완료"
+        let processingFinishMessage: String = NameSpace.processingFinishMessage(customerNumber: customer.number, bankBusinessDescription: bankBusiness.description)
         print(processingFinishMessage)
     }
 }
