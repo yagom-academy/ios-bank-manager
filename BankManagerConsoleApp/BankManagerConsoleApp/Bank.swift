@@ -7,9 +7,6 @@ import Foundation
 struct Bank {
     private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
-    private let taskingGroup = DispatchGroup()
-    private let loanFront = Task.loan.front
-    private let depositFront = Task.deposit.front
     
     mutating func selectMenu() {
         print(" 1 : 은행개점\n 2 : 종료\n입력 :", terminator: " ")
@@ -35,9 +32,8 @@ struct Bank {
         let totalCustomer = Int.random(in: 10...30)
         
         listUpCustomer(totalCustomer)
-        startTask()
-        taskingGroup.wait()
-        taskEnd()
+        manager.startTask(lineOfCustomer)
+        manager.endTask()
         selectMenu()
     }
     
@@ -49,38 +45,5 @@ struct Bank {
     
     private func randomTask() -> Task {
         Int.random(in: 1...2) == 1 ? .deposit : .loan
-    }
-    
-    private mutating func startTask() {
-        let loanSemaphore = DispatchSemaphore(value: loanFront)
-        let depoSemaphore = DispatchSemaphore(value: depositFront)
-        
-        while lineOfCustomer.isEmpty == false {
-            guard let currentCustomer = lineOfCustomer.dequeue() else { break }
-            
-            switch currentCustomer.purposeOfService {
-            case .deposit:
-                dispatchTask(of: currentCustomer, using: depoSemaphore)
-            case .loan:
-                dispatchTask(of: currentCustomer, using: loanSemaphore)
-            }
-        }
-    }
-    
-    private func dispatchTask(of currentCustomer: Customer, using semaphore: DispatchSemaphore) {
-        DispatchQueue.global().async(group: taskingGroup) {
-            semaphore.wait()
-            manager.task(customer: currentCustomer)
-            manager.addLoanTime()
-            semaphore.signal()
-            manager.addCustomer()
-        }
-    }
-    
-    func taskEnd() {
-        var taskTime = manager.depositTimer > manager.loanTimer ? manager.depositTimer : manager.loanTimer
-        taskTime = Double(round(taskTime * 100) / 100)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(manager.processedCustomer)명이며, 총 업무시간은 \(taskTime)초입니다.")
-        manager.managerClear()
     }
 }
