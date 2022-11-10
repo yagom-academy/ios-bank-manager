@@ -21,23 +21,23 @@ struct WorkLoadManager {
         case .deposit:
             let deposit = DispatchWorkItem {
                 depositSemaphore.wait()
-                print("\(number)번째 고객, \(task)업무 진행")
+                print("\(number)번째 고객, \(task.name)업무 진행")
                 usleep(700000)
                 depositSemaphore.signal()
             }
             deposit.notify(queue: depositQueue) {
-                print("\(number)번째 고객, \(task)업무 완료")
+                print("\(number)번째 고객, \(task.name)업무 완료")
             }
             return (task, deposit)
         case .loan:
             let loan = DispatchWorkItem {
                 loanSemaphore.wait()
-                print("\(number)번째 고객, \(task)업무 진행")
+                print("\(number)번째 고객, \(task.name)업무 진행")
                 usleep(1100000)
                 loanSemaphore.signal()
             }
             loan.notify(queue: depositQueue) {
-                print("\(number)번째 고객, \(task)업무 완료")
+                print("\(number)번째 고객, \(task.name)업무 완료")
             }
             return (task, loan)
         }

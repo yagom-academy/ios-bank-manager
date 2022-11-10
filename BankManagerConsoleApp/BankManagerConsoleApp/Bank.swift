@@ -12,6 +12,7 @@ struct Bank: App {
     mutating func openBank() {
         letCustomersIn()
         while workLoadManager.taskQueue.isEmpty() == false {
+            workLoadManager.work()
         }
         
         closeBank(with: 30)
