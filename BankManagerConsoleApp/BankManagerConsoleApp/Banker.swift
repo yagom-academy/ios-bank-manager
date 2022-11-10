@@ -8,14 +8,15 @@
 import Foundation
 
 struct Banker {
+    let bankBusiness: BankBusiness
     let processingTimePerCustomer: Double = 0.7
     let oneMillion: Double = 1_000_000
     
     func processBankingBusiness(of customer: Customer) {
-        let processingStartMessage: String = "\(customer.number)번 고객 업무 시작"
+        let processingStartMessage: String = "\(customer.number)번 고객 \(bankBusiness.description)업무 시작"
         print(processingStartMessage)
         usleep(UInt32(processingTimePerCustomer * oneMillion))
-        let processingFinishMessage: String = "\(customer.number)번 고객 업무 완료"
+        let processingFinishMessage: String = "\(customer.number)번 고객 \(bankBusiness.description)업무 완료"
         print(processingFinishMessage)
     }
 }

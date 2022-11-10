@@ -30,7 +30,8 @@ struct ConsoleApp {
         bankManager.reset()
         let customerCount: Int = Int.random(in: 10...30)
         bankManager.addCustomers(count: customerCount)
-        bankManager.addBankers(count: 1)
+        bankManager.addBankers(bankBusiness: BankBusiness.deposit, count: 2)
+        bankManager.addBankers(bankBusiness: BankBusiness.loan, count: 1)
         bankManager.startBank()
     }
     
