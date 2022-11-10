@@ -30,7 +30,7 @@ final class Bank<Queue: ClientQueueable> {
         return client
     }
     
-    private func startBankWork() {
+    func startBankWork() {
         bankManager.resetWorkTime()
         
         while !clientQueue.isEmpty {
@@ -39,7 +39,7 @@ final class Bank<Queue: ClientQueueable> {
             divideWork(client: client)
         }
         
-        bankDispatchGroup.wait()
+//        bankDispatchGroup.wait()
         bankManager.addWorkTime()
     }
     
@@ -49,13 +49,25 @@ final class Bank<Queue: ClientQueueable> {
             DispatchQueue.global().async(group: bankDispatchGroup) { [self] in
                 self.depositBooth.wait()
                 defer { self.depositBooth.signal() }
-                
+                NotificationCenter.default.post(name: .workStart, object: nil, userInfo: [ClientNoti.client : client])
                 self.banker.startWork(client: client)
+                NotificationCenter.default.post(name: .workEnd, object: nil, userInfo: [ClientNoti.client : client])
             }
         case .loan:
             loanBooth.async(group: bankDispatchGroup) { [self] in
+                NotificationCenter.default.post(name: .workStart, object: nil, userInfo: [ClientNoti.client : client])
                 self.banker.startWork(client: client)
+                NotificationCenter.default.post(name: .workEnd, object: nil, userInfo: [ClientNoti.client : client])
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let  workStart = Notification.Name("workStart")
+    static let  workEnd = Notification.Name("workEnd")
+}
+
+enum ClientNoti {
+    case client
 }

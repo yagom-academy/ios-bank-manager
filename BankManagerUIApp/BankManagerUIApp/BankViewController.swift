@@ -150,27 +150,68 @@ class BankViewController: UIViewController {
         setupView()
         setupStackView()
         setupScrollView()
+        addNotification()
     }
     
     @objc func addClient() {
         for _ in 1...10 {
             if let client = bank.updateClientQueue() {
                 waitingStackView.addArrangedSubview(makeClientLabel(client))
+                
+                // Test
+                workingStackView.addArrangedSubview(makeClientLabel(client))
             }
         }
+        bank.startBankWork()
     }
     
     @objc func resetData() {
         
     }
     
-    func makeClientLabel(_ client: Client) -> UILabel {
+    private func makeClientLabel(_ client: Client) -> UILabel {
         let label = UILabel()
         label.text = "\(client.waitingTicket) - \(client.purpose.name)"
         label.textColor = client.purpose == .deposit ? .black : .systemPurple
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-  
+    }
+    
+    private func addNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(dispatchWorkingStackView),
+                                               name: .workStart,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deleteWorkingStackView),
+                                               name: .workEnd,
+                                               object: nil)
+    }
+    
+    @objc func dispatchWorkingStackView(notification: Notification) {
+        
+    }
+    
+    @objc func deleteWorkingStackView(notification: Notification) {
+        removeLabel(notification)
+    }
+    
+    func removeLabel(_ noti: Notification){
+        DispatchQueue.main.async { [weak self] in
+            guard let client = noti.userInfo?[ClientNoti.client] as? Client else { return }
+            let ticketNumber = client.waitingTicket
+            
+            guard let labels = self?.workingStackView.arrangedSubviews as? [UILabel] else { return }
+            
+            guard let textLabel = labels.filter({ label in
+                if let text = label.text?.split(separator: " ").first, ticketNumber == Int(text) {
+                    return true
+                }
+                return false
+            }).first else { return }
+            
+            textLabel.removeFromSuperview()
+        }
     }
 }
 
@@ -193,27 +234,6 @@ extension BankViewController {
         workingScrollView.addSubview(workingStackView)
         
         setupScrollViewConstraint()
-        
-//        for _ in 0...40 {
-//            let waitTestLabel: UILabel = {
-//                let label = UILabel()
-//                label.text = "대기"
-//                label.textAlignment = .center
-//                label.adjustsFontForContentSizeCategory = true
-//                label.translatesAutoresizingMaskIntoConstraints = false
-//                return label
-//            }()
-//            let workTestLabel: UILabel = {
-//                let label = UILabel()
-//                label.text = "업무"
-//                label.textAlignment = .center
-//                label.adjustsFontForContentSizeCategory = true
-//                label.translatesAutoresizingMaskIntoConstraints = false
-//                return label
-//            }()
-//            waitingStackView.addArrangedSubview(waitTestLabel)
-//            workingStackView.addArrangedSubview(workTestLabel)
-//        }
     }
     
     // MARK: - AutoLayout Constraints
