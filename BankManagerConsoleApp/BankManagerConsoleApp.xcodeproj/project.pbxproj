@@ -10,7 +10,6 @@
 		9073D6E42910C0A600590836 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AA6A6229101433002DE5C3 /* Node.swift */; };
 		9073D6E52910C0AB00590836 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60BF202910181300C8F7A0 /* CustomerQueue.swift */; };
 		90901F5A2912876E0007BB9D /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90901F592912876E0007BB9D /* Bank.swift */; };
-		90901F5C2913DDDB0007BB9D /* BankManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90901F5B2913DDDB0007BB9D /* BankManagerTests.swift */; };
 		90901F5E2913E0420007BB9D /* Double + formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF93268C2912B988001BF846 /* Double + formatted.swift */; };
 		90901F60291404B50007BB9D /* SelectableMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90901F5F291404B50007BB9D /* SelectableMenu.swift */; };
 		90901F62291404EC0007BB9D /* SelectableMenu + getInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90901F61291404EC0007BB9D /* SelectableMenu + getInput.swift */; };
@@ -25,6 +24,7 @@
 		90AA6A6329101433002DE5C3 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AA6A6229101433002DE5C3 /* Node.swift */; };
 		90AA6A7B2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AA6A7A2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift */; };
 		90D33148291D0FE9001C2B46 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D33147291D0FE9001C2B46 /* Task.swift */; };
+		90D3314A291D33D1001C2B46 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D33147291D0FE9001C2B46 /* Task.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		DF3B0347291403B70019BD69 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B0346291403B70019BD69 /* Displayable.swift */; };
 		DF3B0349291403E90019BD69 /* Displayable + displayMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B0348291403E90019BD69 /* Displayable + displayMenu.swift */; };
@@ -52,7 +52,6 @@
 
 /* Begin PBXFileReference section */
 		90901F592912876E0007BB9D /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
-		90901F5B2913DDDB0007BB9D /* BankManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerTests.swift; sourceTree = "<group>"; };
 		90901F5F291404B50007BB9D /* SelectableMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableMenu.swift; sourceTree = "<group>"; };
 		90901F61291404EC0007BB9D /* SelectableMenu + getInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectableMenu + getInput.swift"; sourceTree = "<group>"; };
 		90AA6A6229101433002DE5C3 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				90AA6A7A2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift */,
-				90901F5B2913DDDB0007BB9D /* BankManagerTests.swift */,
 			);
 			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
@@ -241,7 +239,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90901F5C2913DDDB0007BB9D /* BankManagerTests.swift in Sources */,
 				90AA6A7B2910B75C002DE5C3 /* BankManagerConsoleAppTests.swift in Sources */,
 				DFE3E84C2913BAAA001D4E90 /* Bank.swift in Sources */,
 				DFE3E84D2913BAF2001D4E90 /* BankManagers.swift in Sources */,
@@ -249,6 +246,7 @@
 				90901F6D29149E8B0007BB9D /* Displayable + displayMenu.swift in Sources */,
 				90901F6C29149E870007BB9D /* Runnable.swift in Sources */,
 				9073D6E42910C0A600590836 /* Node.swift in Sources */,
+				90D3314A291D33D1001C2B46 /* Task.swift in Sources */,
 				9073D6E52910C0AB00590836 /* CustomerQueue.swift in Sources */,
 				90901F7029149E9B0007BB9D /* MenuSelection.swift in Sources */,
 				90901F6B29149E850007BB9D /* SelectableMenu.swift in Sources */,
