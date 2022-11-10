@@ -14,10 +14,10 @@ class BankManager {
     private var loanTimer: TimeInterval = 0
     private var processedCustomer: Int = 0
     
-    func startTask(_ lineOfCustomer1: LinkedList<Customer>) {
+    func startTask(_ customerList: LinkedList<Customer>) {
         let loanSemaphore = DispatchSemaphore(value: loanFront)
         let depoSemaphore = DispatchSemaphore(value: depositFront)
-        var lineOfCustomer = lineOfCustomer1
+        var lineOfCustomer = customerList
         
         while lineOfCustomer.isEmpty == false {
             guard let currentCustomer = lineOfCustomer.dequeue() else { break }
