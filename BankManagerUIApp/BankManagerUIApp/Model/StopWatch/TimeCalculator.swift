@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct TimeCalculator {
+enum TimeCalculator {
     static func calculate(_ time: Double) -> String {
         let minute: Int = Int(fmod(time / 60, 60))
         let second: Int = Int(fmod(time, 60))

@@ -27,7 +27,7 @@ final class CustomerScrollView: UIScrollView {
     }
     
     required init(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {
@@ -62,6 +62,7 @@ final class CustomerScrollView: UIScrollView {
         }
     }
     
+    @discardableResult
     func removeCustomerLabel(of waitingNumber: Int) -> UIView? {
         for subView in customerStackView.arrangedSubviews {
             if let label: CanHaveCustomer = subView as? CanHaveCustomer,

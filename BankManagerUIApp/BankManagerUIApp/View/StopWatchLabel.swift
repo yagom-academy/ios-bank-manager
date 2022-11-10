@@ -22,7 +22,7 @@ final class StopWatchLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         self.textAlignment = .center
         self.textColor = .black
         self.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -30,7 +30,7 @@ final class StopWatchLabel: UILabel {
         self.text = "업무시간 - 00:00:000"
     }
     
-    func setTime() {
+    private func setTime() {
         let time: String = TimeCalculator.calculate(stopWatchTime)
         self.text = "업무시간 - \(time)"
     }

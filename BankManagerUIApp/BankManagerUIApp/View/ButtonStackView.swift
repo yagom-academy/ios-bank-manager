@@ -34,7 +34,7 @@ final class ButtonStackView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {

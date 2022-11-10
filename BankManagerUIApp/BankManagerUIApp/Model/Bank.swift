@@ -52,7 +52,7 @@ class Bank {
         completion()
     }
     
-    func entrustBankerService(of bankingService: BankingService) {
+    private func entrustBankerService(of bankingService: BankingService) {
         guard let currentCustomer: Customer = requestCustomer(of: bankingService) else {
             return
         }

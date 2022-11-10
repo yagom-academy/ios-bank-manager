@@ -24,7 +24,7 @@ final class DepositCustomerLabel: UILabel, CanHaveCustomer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         self.textAlignment = .center
         self.textColor = .black
         self.font = UIFont.preferredFont(forTextStyle: .body)
@@ -46,7 +46,7 @@ final class LoanCustomerLabel: UILabel, CanHaveCustomer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         self.textAlignment = .center
         self.textColor = .purple
         self.font = UIFont.preferredFont(forTextStyle: .body)

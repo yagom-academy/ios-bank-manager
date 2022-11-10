@@ -19,29 +19,13 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        setSubView()
-        setConstraints()
     }
     
-    func configure() {
-        buttonStackView.addButton.addTarget(self,
-                                            action: #selector(tappedAddButton),
-                                            for: .touchUpInside)
-        buttonStackView.resetButton.addTarget(self,
-                                              action: #selector(tappedResetButton),
-                                              for: .touchUpInside)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didReceiveStartWork),
-                                               name: .startWork,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didReceiveCompleteWork),
-                                               name: .completeWork,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didReceiveCompleteBankingService),
-                                               name: .completeBankingSevice,
-                                               object: nil)
+    private func configure() {
+        setSubView()
+        setConstraints()
+        setNotificationObserver()
+        setButtonTarget()
         stopWatch.stopWatchDelegate = self
         bankManager.customerSettingDelegate = self
     }
@@ -60,12 +44,37 @@ final class MainViewController: UIViewController {
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            buttonStackView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.075),
+            buttonStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.075),
             stopWatchLabel.heightAnchor.constraint(equalTo: buttonStackView.heightAnchor),
             bankStateStackView.heightAnchor.constraint(equalTo: buttonStackView.heightAnchor)
         ])
     }
     
+    private func setNotificationObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveStartWork),
+                                               name: .startWork,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveCompleteWork),
+                                               name: .completeWork,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveCompleteBankingService),
+                                               name: .completeBankingSevice,
+                                               object: nil)
+    }
+    
+    private func setButtonTarget() {
+        buttonStackView.addButton.addTarget(self,
+                                            action: #selector(tappedAddButton),
+                                            for: .touchUpInside)
+        buttonStackView.resetButton.addTarget(self,
+                                              action: #selector(tappedResetButton),
+                                              for: .touchUpInside)
+    }
+    
+// MARK: - Button Target Method
     @objc
     func tappedAddButton() {
         DispatchQueue.global().async { [self] in
@@ -82,6 +91,7 @@ final class MainViewController: UIViewController {
         customerQueueStackView.reset()
     }
     
+// MARK: - Notification Observer Method
     @objc
     func didReceiveStartWork(_ notification: Notification) {
         guard let waitingNumber: Int = notification.object as? Int else {
@@ -106,12 +116,14 @@ final class MainViewController: UIViewController {
     }
 }
 
+// MARK: - MainViewController Extension CustomerSettingDelegate
 extension MainViewController: CustomerSettingDelegate {
     func complete(_ customers: [Customer]) {
         customerQueueStackView.addWaitingCustomers(customers)
     }
 }
 
+// MARK: - MainViewController Extension StopWatchDelegate
 extension MainViewController: StopWatchDelegate {
     func reset() {
         stopWatchLabel.reset()
