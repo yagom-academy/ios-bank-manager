@@ -8,36 +8,41 @@ import Foundation
 
 struct BankManagers {
     var taskQueue: CustomerQueue = CustomerQueue<(Task, DispatchWorkItem)>()
+    
     let loanQueue: DispatchQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
     let loanSemaphore = DispatchSemaphore(value: 1)
+    
     let depositQueue: DispatchQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
     let depositSemaphore = DispatchSemaphore(value: 2)
+   
     let banking: DispatchGroup = DispatchGroup()
     
     func makeDispatchWorkItem(number: Int) -> (Task, DispatchWorkItem)? {
-        guard let task = Task(rawValue: Int.random(in: 1...2)) else { return nil }
+        guard let task = Task(rawValue: Int.random(in: 1...2)) else {
+            return nil
+        }
         
         switch task {
         case .deposit:
             let deposit = DispatchWorkItem {
                 depositSemaphore.wait()
-                print("\(number)번째 고객, \(task.name)업무 진행")
+                task.startMessage(number: number)
                 usleep(700000)
                 depositSemaphore.signal()
             }
             deposit.notify(queue: depositQueue) {
-                print("\(number)번째 고객, \(task.name)업무 완료")
+                task.finishMessage(number: number)
             }
             return (task, deposit)
         case .loan:
             let loan = DispatchWorkItem {
                 loanSemaphore.wait()
-                print("\(number)번째 고객, \(task.name)업무 진행")
+                task.startMessage(number: number)
                 usleep(1100000)
                 loanSemaphore.signal()
             }
             loan.notify(queue: depositQueue) {
-                print("\(number)번째 고객, \(task.name)업무 완료")
+                task.finishMessage(number: number)
             }
             return (task, loan)
         }
