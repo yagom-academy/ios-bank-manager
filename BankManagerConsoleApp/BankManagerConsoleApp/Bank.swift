@@ -7,14 +7,15 @@
 import Foundation
 
 struct Bank {
-    let clerks: [BankClerk]
+    var clerks: [Workable]
     let customerQueue = Queue<Customer>()
     let loanQueue = Queue<Customer>()
     let depositQueue = Queue<Customer>()
     var customerCount: Int = 0
     
-    init(clerkCount: Int) {
-        self.clerks = Array(repeating: BankClerk(), count: clerkCount)
+    init(clerkCount: Int, loanClerkCount: Int) {
+        self.clerks = Array(repeating: LoanClerk(), count: loanClerkCount)
+        self.clerks.append(contentsOf: Array(repeating: DepositClerk(), count: clerkCount - loanClerkCount))
     }
     
     func open() {
@@ -46,27 +47,15 @@ struct Bank {
     
     func serve() {
         let group = DispatchGroup()
-        let serialQueue = DispatchQueue(label: "serial")
-        let loanWorkItem = DispatchWorkItem {
-            while let customer = loanQueue.dequeue() {
-                clerks.first?.work(for: customer)
+        
+        clerks.forEach { clerk in
+            switch clerk.service {
+            case .loan:
+                DispatchQueue.global().async(group: group, execute: clerk.scheduleWork(from: loanQueue))
+            case .deposit:
+                DispatchQueue.global().async(group: group, execute: clerk.scheduleWork(from: depositQueue))
             }
         }
-        
-        let depositWorkItem = DispatchWorkItem {
-            while depositQueue.isEmpty == false {
-                serialQueue.sync {
-                    guard let customer = depositQueue.dequeue() else {
-                        return
-                    }
-                    clerks.first?.work(for: customer)
-                }
-            }
-        }
-        
-        DispatchQueue.global().async(group: group, execute: loanWorkItem)
-        DispatchQueue.global().async(group: group, execute: depositWorkItem)
-        DispatchQueue.global().async(group: group, execute: depositWorkItem)
 
         group.wait()
     }
