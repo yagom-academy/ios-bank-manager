@@ -11,7 +11,7 @@ struct Bank {
     private var customerQueue: Queue<Customer> = Queue()
     private var totalCustomerCount: Int = 0
     private var totalTime: Double = 0
-    var bankers: [Banker] = []
+    private var bankers: [Banker] = []
     
     mutating func addCustomerToQueue(_ customer: Customer) {
         customerQueue.enqueue(customer)
