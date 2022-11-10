@@ -7,17 +7,18 @@
 import Foundation
 
 struct BankManagers {
-    var taskQueue: CustomerQueue = CustomerQueue<(Task, DispatchWorkItem)>()
+    typealias Ticket = (Task, DispatchWorkItem)
+    var taskQueue: CustomerQueue = CustomerQueue<Ticket>()
     
-    let loanQueue: DispatchQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
-    let loanSemaphore = DispatchSemaphore(value: 1)
+    private let loanQueue: DispatchQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
+    private let loanSemaphore = DispatchSemaphore(value: 1)
     
-    let depositQueue: DispatchQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
-    let depositSemaphore = DispatchSemaphore(value: 2)
+    private let depositQueue: DispatchQueue = DispatchQueue(label: "depositQueue", attributes: .concurrent)
+    private let depositSemaphore = DispatchSemaphore(value: 2)
    
-    let banking: DispatchGroup = DispatchGroup()
+    private let banking: DispatchGroup = DispatchGroup()
     
-    func makeDispatchWorkItem(number: Int) -> (Task, DispatchWorkItem)? {
+    func makeDispatchWorkItem(number: Int) -> Ticket? {
         guard let task = Task(rawValue: Int.random(in: 1...2)) else {
             return nil
         }
@@ -50,7 +51,7 @@ struct BankManagers {
     
     mutating func work() {
         while taskQueue.isEmpty() != true {
-            guard let (taskType, dispatchWorkItem) = taskQueue.dequeue() else { return }
+            guard let (taskType, dispatchWorkItem): Ticket = taskQueue.dequeue() else { return }
             
             switch taskType {
             case .deposit:

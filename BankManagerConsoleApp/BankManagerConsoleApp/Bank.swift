@@ -9,7 +9,7 @@ import Foundation
 typealias App = Displayable & SelectableMenu & Runnable
 struct Bank: App {
     private var bankManagers: BankManagers = BankManagers()
-    let randomCustomersNumber = Int.random(in: 10...30)
+    private let randomCustomersNumber = Int.random(in: 10...30)
     
     mutating func openBank() {
         letCustomersIn()
