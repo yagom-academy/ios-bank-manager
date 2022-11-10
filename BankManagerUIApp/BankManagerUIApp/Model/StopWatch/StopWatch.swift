@@ -6,19 +6,9 @@
 
 import Foundation
 
-enum StopWatchState {
-    case nonPause
-    case pause
-}
-
 struct StopWatch {
     private var timer: DispatchSourceTimer?
-    private var stopWatchState: StopWatchState = .nonPause
-    private weak var stopWatchDelegate: StopWatchDelegate?
-    
-    mutating func setDelegate(to stopWatchDelegate: StopWatchDelegate) {
-        self.stopWatchDelegate = stopWatchDelegate
-    }
+    weak var stopWatchDelegate: StopWatchDelegate?
     
     mutating func start() {
         if timer == nil {
@@ -28,20 +18,16 @@ struct StopWatch {
                 stopWatchDelegate?.addOneMilliSecond()
             })
             timer?.resume()
-        } else if stopWatchState == .pause {
-            timer?.resume()
-            stopWatchState = .nonPause
         }
     }
     
     mutating func pause() {
-        timer?.suspend()
-        stopWatchState = .pause
+        timer?.cancel()
+        timer = nil
     }
     
     mutating func cancel() {
         stopWatchDelegate?.reset()
-        stopWatchState = .nonPause
         timer?.cancel()
         timer = nil
     }

@@ -42,7 +42,7 @@ final class MainViewController: UIViewController {
                                                selector: #selector(didReceiveCompleteBankingService),
                                                name: .completeBankingSevice,
                                                object: nil)
-        stopWatch.setDelegate(to: stopWatchLabel)
+        stopWatch.stopWatchDelegate = self
         bankManager.setDelegate(of: self)
     }
     
@@ -108,5 +108,15 @@ final class MainViewController: UIViewController {
 extension MainViewController: CustomerSettingDelegate {
     func complete(_ customers: [Customer]) {
         customerQueueStackView.addWaitingCustomers(customers)
+    }
+}
+
+extension MainViewController: StopWatchDelegate {
+    func reset() {
+        stopWatchLabel.reset()
+    }
+    
+    func addOneMilliSecond() {
+        stopWatchLabel.addOneMilliSecond()
     }
 }

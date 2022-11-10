@@ -34,9 +34,7 @@ final class StopWatchLabel: UILabel {
         let time: String = TimeCalculator.calculate(stopWatchTime)
         self.text = "업무시간 - \(time)"
     }
-}
-
-extension StopWatchLabel: StopWatchDelegate {
+    
     func reset() {
         self.stopWatchTime = 0.0
     }
