@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
                                                name: .completeBankingSevice,
                                                object: nil)
         stopWatch.stopWatchDelegate = self
-        bankManager.setDelegate(of: self)
+        bankManager.customerSettingDelegate = self
     }
     
     private func setSubView() {
@@ -70,6 +70,7 @@ final class MainViewController: UIViewController {
     func tappedAddButton() {
         DispatchQueue.global().async { [self] in
             bankManager.addTenCustomers()
+            bankManager.startWork()
         }
         stopWatch.start()
     }

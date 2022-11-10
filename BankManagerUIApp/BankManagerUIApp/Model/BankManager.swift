@@ -10,10 +10,11 @@ enum BankerState {
 }
 
 class BankManager {
-    private weak var customerSettingDelegate: CustomerSettingDelegate?
+    weak var customerSettingDelegate: CustomerSettingDelegate?
     private let bank: Bank = Bank(depositBankerCount: 2, loanBankerCount: 1)
     private var depositBankerState: BankerState = .notWorking
     private var loanBankerState: BankerState = .notWorking
+    private let bankWorkingGroup: DispatchGroup = DispatchGroup()
     
     func addTenCustomers() {
         let customers: [Customer] = Customer.make()
@@ -23,12 +24,19 @@ class BankManager {
         DispatchQueue.main.async { [self] in
             customerSettingDelegate?.complete(customers)
         }
-        
-        DispatchQueue.global().async { [self] in
+    }
+    
+    func startWork() {
+        DispatchQueue.global().async(group: bankWorkingGroup) { [self] in
             startDepositService()
         }
-        DispatchQueue.global().async { [self] in
+        DispatchQueue.global().async(group: bankWorkingGroup) { [self] in
             startLoanService()
+        }
+        
+        bankWorkingGroup.notify(queue: .main) {
+            NotificationCenter.default.post(name: .completeBankingSevice,
+                                            object: nil)
         }
     }
     
@@ -37,12 +45,6 @@ class BankManager {
             depositBankerState = .working
             bank.startBankingService(of: .deposit) { [self] in
                 depositBankerState = .notWorking
-                if isCompletedBankingService() == true {
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .completeBankingSevice,
-                                                        object: nil)
-                    }
-                }
             }
         }
     }
@@ -52,27 +54,8 @@ class BankManager {
             loanBankerState = .working
             bank.startBankingService(of: .loan) { [self] in
                 loanBankerState = .notWorking
-                if isCompletedBankingService() == true {
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .completeBankingSevice,
-                                                        object: nil)
-                    }
-                }
             }
         }
-    }
-    
-    func isCompletedBankingService() -> Bool {
-        switch (depositBankerState, loanBankerState) {
-        case (.notWorking, .notWorking):
-            return true
-        default:
-            return false
-        }
-    }
-    
-    func setDelegate(of delegate: CustomerSettingDelegate) {
-        customerSettingDelegate = delegate
     }
     
     func reset() {
