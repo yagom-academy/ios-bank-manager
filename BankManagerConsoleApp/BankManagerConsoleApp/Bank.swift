@@ -7,12 +7,12 @@
 
 typealias App = Displayable & SelectableMenu & Runnable
 struct Bank: App {
-    private var workLoadManager: WorkLoadManager = WorkLoadManager()
+    private var bankManagers: BankManagers = BankManagers()
     
     mutating func openBank() {
         letCustomersIn()
-        while workLoadManager.taskQueue.isEmpty() == false {
-            workLoadManager.work()
+        while bankManagers.taskQueue.isEmpty() == false {
+            bankManagers.work()
         }
         
         closeBank(with: 30)
@@ -23,10 +23,10 @@ struct Bank: App {
     
         let customerCount = Array<Int>(1...randomIntNumber)
         customerCount.forEach {
-            guard let data = workLoadManager.makeDispatchWorkItem(number: $0) else {
+            guard let data = bankManagers.makeDispatchWorkItem(number: $0) else {
                 return
             }
-            workLoadManager.taskQueue.enqueue(data: data)
+            bankManagers.taskQueue.enqueue(data: data)
         }
     }
     

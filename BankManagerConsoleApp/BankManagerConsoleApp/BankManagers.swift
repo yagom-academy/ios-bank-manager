@@ -1,12 +1,12 @@
 //
-//  WorkLoadManager.swift
+//  BankManagers.swift
 //  BankManagerConsoleApp
 //
-//  Created by jeremy, LJ on 2022/11/02.
+//  Created by jeremy, LJ on 2022/11/10.
 //
 import Foundation
 
-struct WorkLoadManager {
+struct BankManagers {
     var taskQueue: CustomerQueue = CustomerQueue<(Task, DispatchWorkItem)>()
     let loanQueue: DispatchQueue = DispatchQueue(label: "loanQueue", attributes: .concurrent)
     let loanSemaphore = DispatchSemaphore(value: 1)
