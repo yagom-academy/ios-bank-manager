@@ -6,7 +6,7 @@
 //
 
 struct ConsoleApp {
-    var bankManager: BankManager = BankManager()
+    private var bankManager: BankManager = BankManager()
     
     mutating func start() {
         printMenuList()

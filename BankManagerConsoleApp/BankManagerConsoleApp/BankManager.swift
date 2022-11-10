@@ -12,7 +12,6 @@ struct BankManager {
             guard let bankBusiness: BankBusiness = BankBusiness.allCases.randomElement() else { return }
             let customer: Customer = Customer(number: customerNumber, bankBusiness: bankBusiness)
             bank.addCustomerToQueue(customer)
-
         }
     }
     
