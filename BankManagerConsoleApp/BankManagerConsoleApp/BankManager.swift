@@ -12,15 +12,15 @@ class BankManager {
     var processedCustomer: Int = 0
     
     func task(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 \(customer.purposeOfServie.rawValue)업무 시작")
+        print("\(customer.waitingNumber)번 고객 \(customer.purposeOfService.rawValue)업무 시작")
         
-        switch customer.purposeOfServie {
+        switch customer.purposeOfService {
         case .deposit:
-            usleep(700000)
+            usleep(700_000)
         case .loan:
-            usleep(1100000)
+            usleep(1_100_000)
         }
-        print("\(customer.waitingNumber)번 고객 \(customer.purposeOfServie.rawValue)업무 종료")
+        print("\(customer.waitingNumber)번 고객 \(customer.purposeOfService.rawValue)업무 종료")
     }
     
     func addDepositTime () {

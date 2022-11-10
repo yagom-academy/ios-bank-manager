@@ -7,7 +7,7 @@ import Foundation
 struct Bank {
     private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
-    private let group = DispatchGroup()
+    private let taskingGroup = DispatchGroup()
     private let loanFront = 1
     private let depositFront = 2
     
@@ -36,14 +36,14 @@ struct Bank {
         
         listUpCustomer(totalCustomer)
         startTask()
-        group.wait()
+        taskingGroup.wait()
         taskEnd()
         selectMenu()
     }
     
     mutating private func listUpCustomer(_ customerCount: Int) {
         for customerIndex in 1...customerCount {
-            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex, purposeOfServie: randomTask()))
+            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex, purposeOfService: randomTask()))
         }
     }
     
@@ -58,7 +58,7 @@ struct Bank {
         while lineOfCustomer.isEmpty == false {
             guard let currentCustomer = lineOfCustomer.dequeue() else { break }
             
-            switch currentCustomer.purposeOfServie {
+            switch currentCustomer.purposeOfService {
             case .deposit:
                 dispatchTask(of: currentCustomer, using: depoSemaphore)
             case .loan:
@@ -68,7 +68,7 @@ struct Bank {
     }
     
     private func dispatchTask(of currentCustomer: Customer, using semaphore: DispatchSemaphore) {
-        DispatchQueue.global().async(group: group) {
+        DispatchQueue.global().async(group: taskingGroup) {
             semaphore.wait()
             manager.task(customer: currentCustomer)
             manager.addLoanTime()
