@@ -5,15 +5,15 @@
 import Foundation
 
 final class Bank: Bankable, Depositable, Loanable {
-    var depositDepartment: DepositDepartment
-    var loanDepartment: LoanDepartment
+    let depositDepartment: Department
+    let loanDepartment: Department
     var waitingLine: Queue<Customer> = Queue()
     var handledCustomerCount: Int = 0
-    var bankingServiceGroup: DispatchGroup = DispatchGroup()
+    let bankingServiceGroup: DispatchGroup = DispatchGroup()
 
     init(depositClerks: Int, loanClerks: Int) {
-        self.depositDepartment = DepositDepartment(numberOfClerks: depositClerks)
-        self.loanDepartment = LoanDepartment(numberOfClerks: loanClerks)
+        self.depositDepartment = Department(service: .deposit, numberOfClerks: depositClerks)
+        self.loanDepartment = Department(service: .loan, numberOfClerks: loanClerks)
     }
     
     func allocateCustomer() {

@@ -5,5 +5,5 @@
 import Foundation
 
 protocol Loanable {
-    var loanDepartment: LoanDepartment { get }
+    var loanDepartment: Department { get }
 }

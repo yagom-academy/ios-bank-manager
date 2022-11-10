@@ -5,5 +5,5 @@
 import Foundation
 
 protocol Depositable {
-    var depositDepartment: DepositDepartment { get }
+    var depositDepartment: Department { get }
 }

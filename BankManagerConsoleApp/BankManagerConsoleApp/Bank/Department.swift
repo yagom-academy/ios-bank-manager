@@ -1,18 +1,16 @@
 //
-//  Departmentable.swift
+//  Department.swift
 //  BankManagerConsoleApp
 
 import Foundation
 
-protocol Departmentable {
-    var bankService: BankService { get }
-    var numberOfClerks: Int { get }
-    var customerQueue: DispatchQueue { get }
-    var queueSemaphore: DispatchSemaphore { get }
-}
-
-extension Departmentable {
-    var serviceName: String {
+struct Department {
+    private let bankService: BankService
+    private let numberOfClerks: Int
+    private let customerQueue: DispatchQueue
+    private let queueSemaphore: DispatchSemaphore
+    
+    private var serviceName: String {
         switch self.bankService {
         case .deposit:
             return "예금"
@@ -21,7 +19,7 @@ extension Departmentable {
         }
     }
     
-    var timePerService: Double {
+    private var timePerService: Double {
         switch self.bankService {
         case .deposit:
             return 0.7
@@ -30,7 +28,14 @@ extension Departmentable {
         }
     }
     
-    mutating func handleCustomer(_ customer: Customer, dispatchGroup: DispatchGroup) {
+    init(service: BankService, numberOfClerks: Int) {
+        self.bankService = service
+        self.numberOfClerks = numberOfClerks
+        self.customerQueue = DispatchQueue(label: "\(service)", attributes: .concurrent)
+        self.queueSemaphore = DispatchSemaphore(value: numberOfClerks)
+    }
+
+    func handleCustomer(_ customer: Customer, dispatchGroup: DispatchGroup) {
         customerQueue.async(group: dispatchGroup) { [self] in
             self.queueSemaphore.wait()
             self.handleBankingService(customer)
@@ -38,7 +43,7 @@ extension Departmentable {
         }
     }
     
-    func handleBankingService(_ customer: Customer) {
+    private func handleBankingService(_ customer: Customer) {
         print("\(customer.waitingNumber)번 고객 \(self.serviceName)업무 시작")
         
         Thread.sleep(forTimeInterval: self.timePerService)
