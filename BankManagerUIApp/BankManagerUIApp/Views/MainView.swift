@@ -1,34 +1,42 @@
 //
-//  BankManagerUIApp - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
-// 
+//  MainView.swift
+//  BankManagerUIApp
+//
+//  Created by Kyo, Wonbi on 2022/11/10.
+//
 
 import UIKit
 
-class BankViewController: UIViewController {
-
-    // MARK: - UI Componet
+final class MainView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        setupStackView()
+        setupScrollView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Top StackView
-    private let clientAddButton: UIButton = {
+    let clientAddButton: UIButton = {
         var button = UIButton()
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.addTarget(BankViewController.self, action: #selector(addClient), for: .touchUpInside)
         return button
     }()
     
-    private let clearButton: UIButton = {
+    let clearButton: UIButton = {
         var button = UIButton()
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.addTarget(BankViewController.self, action: #selector(resetData), for: .touchUpInside)
         return button
     }()
     
@@ -103,7 +111,7 @@ class BankViewController: UIViewController {
         return scrollView
     }()
     
-    private let waitingStackView: UIStackView = {
+    let waitingStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 7
         stackView.axis = .vertical
@@ -119,7 +127,7 @@ class BankViewController: UIViewController {
         return scrollView
     }()
     
-    private let workingStackView: UIStackView = {
+    let workingStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 7
         stackView.axis = .vertical
@@ -138,97 +146,13 @@ class BankViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
-    private let banker: Banker = Banker()
-    private var clientQueue: ClientQueue = ClientQueue()
-    private var bankManager: BankManager = BankManager()
-    
-    private lazy var bank: Bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-        setupStackView()
-        setupScrollView()
-        addNotification()
-    }
-    
-    @objc func addClient() {
-        for _ in 1...10 {
-            if let client = bank.updateClientQueue() {
-                waitingStackView.addArrangedSubview(makeClientLabel(client))
-            }
-        }
-        bank.startBankWork()
-    }
-    
-    @objc func resetData() {
-        
-    }
-    
-    private func makeClientLabel(_ client: Client) -> UILabel {
-        let label = UILabel()
-        label.text = "\(client.waitingTicket) - \(client.purpose.name)"
-        label.textColor = client.purpose == .deposit ? .black : .systemPurple
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }
-    
-    private func addNotification() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handlingStackView),
-                                               name: .client,
-                                               object: nil)
-    }
-    
-    @objc func handlingStackView(noti: Notification) {
-        guard let workState = noti.userInfo?["WorkState"] as? WorkState else { return }
-        
-        switch workState {
-        case .start:
-            handleLabel(by: waitingStackView, noti: noti)
-        case .done:
-            handleLabel(by: workingStackView, noti: noti)
-        }
-    }
-
-    private func addToWorkingStackView(_ label: UILabel) {
-        workingStackView.addArrangedSubview(label)
-    }
-    
-    private func handleLabel(by stackView: UIStackView, noti: Notification) {
-        DispatchQueue.main.async { [weak self] in
-            guard let client = noti.object as? Client else { return }
-            let ticketNumber = client.waitingTicket
-            
-            guard let labels = stackView.arrangedSubviews as? [UILabel],
-                  let targetLabel = labels.filter({ label in
-                      if let text = label.text?.split(separator: " ").first,
-                         Int(text) == ticketNumber {
-                          return true
-                      }
-                      return false
-                  }).first else { return }
-            
-            targetLabel.removeFromSuperview()
-            
-            if stackView == self?.waitingStackView {
-                self?.addToWorkingStackView(targetLabel)
-            }
-        }
-    }
 }
 
-extension BankViewController {
-    
-    private func setupView() {
-        view.backgroundColor = .white
-    }
-    
+extension MainView {
     private func setupStackView() {
-        view.addSubview(topStackView)
-        view.addSubview(middleStackView)
-        view.addSubview(bottomStackView)
+        self.addSubview(topStackView)
+        self.addSubview(middleStackView)
+        self.addSubview(bottomStackView)
         
         setupStackViewConstraint()
     }
@@ -249,31 +173,31 @@ extension BankViewController {
                 equalToConstant: 40),
             
             topStackView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor),
+                equalTo: self.safeAreaLayoutGuide.topAnchor),
             topStackView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             topStackView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             topStackView.heightAnchor.constraint(
                 equalToConstant: 80),
             
             middleStackView.topAnchor.constraint(
                 equalTo: topStackView.bottomAnchor),
             middleStackView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             middleStackView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             middleStackView.heightAnchor.constraint(
                 equalTo: waitingLabel.heightAnchor),
             
             bottomStackView.topAnchor.constraint(
                 equalTo: middleStackView.bottomAnchor),
             bottomStackView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             bottomStackView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             bottomStackView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

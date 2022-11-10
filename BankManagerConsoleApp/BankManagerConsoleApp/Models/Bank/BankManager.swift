@@ -13,6 +13,7 @@ protocol BankManagable {
     mutating func resetWorkTime()
     mutating func addWorkTime()
     mutating func printWorkFinished()
+    mutating func resetData()
 }
 
 struct BankManager: BankManagable {
@@ -43,7 +44,7 @@ struct BankManager: BankManagable {
         resetData()
     }
     
-    mutating private func resetData() {
+    mutating func resetData() {
         clientCount = 0
         totalWorkTime = 0.0
     }

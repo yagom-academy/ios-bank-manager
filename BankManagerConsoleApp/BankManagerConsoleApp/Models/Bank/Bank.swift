@@ -17,10 +17,8 @@ enum WorkState {
 }
 
 final class Bank<Queue: ClientQueueable> {
-    private let bankDispatchGroup = DispatchGroup()
-    private let depositBooth = DispatchSemaphore(value: 2)
-    private let loanBooth = DispatchQueue(label: "loanBanker")
-    
+    private let depositQueue = OperationQueue()
+    private let loanQueue = OperationQueue()
     private let banker: BankWorkable
     private var clientQueue: Queue
     private var bankManager: BankManagable
@@ -29,6 +27,8 @@ final class Bank<Queue: ClientQueueable> {
         self.banker = banker
         self.clientQueue = queue
         self.bankManager = bankManager
+        self.depositQueue.maxConcurrentOperationCount = 2
+        self.loanQueue.maxConcurrentOperationCount = 1
     }
     
     func updateClientQueue() -> Client? {
@@ -54,9 +54,7 @@ final class Bank<Queue: ClientQueueable> {
     private func divideWork(client: Client) {
         switch client.purpose {
         case .deposit:
-            DispatchQueue.global().async(group: bankDispatchGroup) { [self] in
-                self.depositBooth.wait()
-                defer { self.depositBooth.signal() }
+            depositQueue.addOperation {
                 NotificationCenter.default.post(name: .client,
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.start])
@@ -65,8 +63,9 @@ final class Bank<Queue: ClientQueueable> {
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.done])
             }
+            
         case .loan:
-            loanBooth.async(group: bankDispatchGroup) { [self] in
+            loanQueue.addOperation {
                 NotificationCenter.default.post(name: .client,
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.start])
@@ -76,5 +75,12 @@ final class Bank<Queue: ClientQueueable> {
                                                 userInfo: ["WorkState" : WorkState.done])
             }
         }
+    }
+    
+    func resetAll() {
+        clientQueue.clear()
+        bankManager.resetData()
+        depositQueue.cancelAllOperations()
+        loanQueue.cancelAllOperations()
     }
 }
