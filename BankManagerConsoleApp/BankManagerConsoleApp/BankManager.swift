@@ -36,7 +36,12 @@ class BankManager {
         DispatchQueue.global().async(group: taskingGroup) {
             semaphore.wait()
             self.task(customer: currentCustomer)
-            self.addLoanTime()
+            switch currentCustomer.purposeOfService {
+            case .deposit:
+                self.addDepositTime()
+            case .loan:
+                self.addLoanTime()
+            }
             semaphore.signal()
             self.addCustomer()
         }
