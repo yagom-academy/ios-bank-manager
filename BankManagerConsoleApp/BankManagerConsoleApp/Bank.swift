@@ -30,23 +30,34 @@ struct Bank {
     }
     
     mutating func startBankBusiness() {
+        let depositSemaphore: DispatchSemaphore = DispatchSemaphore(value: depositBankerQueue.count)
+        let loanSemaphore: DispatchSemaphore = DispatchSemaphore(value: loanBankerQueue.count)
+        let group: DispatchGroup = DispatchGroup()
+        
         while customerQueue.isEmpty != true {
             guard let customer: Customer = customerQueue.dequeue() else { return }
             switch customer.bankBusiness {
             case .deposit:
-                guard let banker: Banker = depositBankerQueue.dequeue() else { return }
-                banker.processBankingBusiness(of: customer)
-                totalCustomerCount += 1
-                totalTime += BankBusiness.deposit.processingTimePerCustomer
-                depositBankerQueue.enqueue(banker)
+                guard let banker: Banker = self.depositBankerQueue.dequeue() else { return }
+                DispatchQueue.global().async(group: group) {
+                    depositSemaphore.wait()
+                    banker.processBankingBusiness(of: customer)
+                    depositSemaphore.signal()
+                }
+                self.totalCustomerCount += 1
+                self.depositBankerQueue.enqueue(banker)
             case .loan:
-                guard let banker: Banker = loanBankerQueue.dequeue() else { return }
-                banker.processBankingBusiness(of: customer)
-                totalCustomerCount += 1
-                totalTime += BankBusiness.loan.processingTimePerCustomer
-                loanBankerQueue.enqueue(banker)
+                guard let banker: Banker = self.loanBankerQueue.dequeue() else { return }
+                DispatchQueue.global().async(group: group) {
+                    loanSemaphore.wait()
+                    banker.processBankingBusiness(of: customer)
+                    loanSemaphore.signal()
+                }
+                self.totalCustomerCount += 1
+                self.loanBankerQueue.enqueue(banker)
             }
         }
+        group.wait()
         printClosingMessage()
     }
     
