@@ -4,24 +4,23 @@
 //
 //  Created by jeremy, LJ on 2022/11/02.
 //
+import Foundation
 
 typealias App = Displayable & SelectableMenu & Runnable
 struct Bank: App {
     private var bankManagers: BankManagers = BankManagers()
+    let randomCustomersNumber = Int.random(in: 10...30)
     
     mutating func openBank() {
         letCustomersIn()
-        while bankManagers.taskQueue.isEmpty() == false {
-            bankManagers.work()
-        }
-        
-        closeBank(with: 30)
+        let time = CFAbsoluteTimeGetCurrent()
+        bankManagers.work()
+        let endTime = CFAbsoluteTimeGetCurrent() - time
+        closeBank(time: endTime)
     }
     
     private mutating func letCustomersIn() {
-        let randomIntNumber = Int.random(in: 10...30)
-    
-        let customerCount = Array<Int>(1...randomIntNumber)
+        let customerCount = Array<Int>(1...randomCustomersNumber)
         customerCount.forEach {
             guard let data = bankManagers.makeDispatchWorkItem(number: $0) else {
                 return
@@ -30,8 +29,7 @@ struct Bank: App {
         }
     }
     
-    private func closeBank(with workCount: Int) {
-        let totalWorkingTime: Double = Double(workCount) * 0.7
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(workCount)명이며, 총 업무시간은 \(totalWorkingTime.formattedToString)초입니다.")
+    private func closeBank(time: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(randomCustomersNumber)명이며, 총 업무시간은 \(time.formattedToString)초입니다.")
     }
 }
