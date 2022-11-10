@@ -10,6 +10,7 @@ struct Bank {
     private let group: DispatchGroup
     private let semaphore: DispatchSemaphore
     private let loanQueue: DispatchQueue
+    private let depositQueue: DispatchQueue
     
     init(manager: Workable, customerList: Queue<Customer>) {
         self.manager = manager
@@ -19,6 +20,7 @@ struct Bank {
         self.group = DispatchGroup()
         self.semaphore = DispatchSemaphore(value: 2)
         self.loanQueue = DispatchQueue(label: WorkType.loan.rawValue)
+        self.depositQueue = DispatchQueue(label: WorkType.deposit.rawValue, attributes: .concurrent)
     }
     
     mutating func startConsoleApp() {
@@ -64,7 +66,7 @@ struct Bank {
             
             switch customer?.purpose {
             case .deposit:
-                DispatchQueue.global().async(group: group) { [self] in
+                depositQueue.async(group: group) { [self] in
                     semaphore.wait()
                     self.manager.provideService(to: customer)
                     semaphore.signal()
