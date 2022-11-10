@@ -138,6 +138,12 @@ class BankViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+
+    private let banker: Banker = Banker()
+    private var clientQueue: ClientQueue = ClientQueue()
+    private var bankManager: BankManager = BankManager()
+    
+    private lazy var bank: Bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,11 +153,24 @@ class BankViewController: UIViewController {
     }
     
     @objc func addClient() {
-        
+        for _ in 1...10 {
+            if let client = bank.updateClientQueue() {
+                waitingStackView.addArrangedSubview(makeClientLabel(client))
+            }
+        }
     }
     
     @objc func resetData() {
         
+    }
+    
+    func makeClientLabel(_ client: Client) -> UILabel {
+        let label = UILabel()
+        label.text = "\(client.waitingTicket) - \(client.purpose.name)"
+        label.textColor = client.purpose == .deposit ? .black : .systemPurple
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+  
     }
 }
 
@@ -175,26 +194,26 @@ extension BankViewController {
         
         setupScrollViewConstraint()
         
-        for _ in 0...40 {
-            let waitTestLabel: UILabel = {
-                let label = UILabel()
-                label.text = "대기"
-                label.textAlignment = .center
-                label.adjustsFontForContentSizeCategory = true
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let workTestLabel: UILabel = {
-                let label = UILabel()
-                label.text = "업무"
-                label.textAlignment = .center
-                label.adjustsFontForContentSizeCategory = true
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            waitingStackView.addArrangedSubview(waitTestLabel)
-            workingStackView.addArrangedSubview(workTestLabel)
-        }
+//        for _ in 0...40 {
+//            let waitTestLabel: UILabel = {
+//                let label = UILabel()
+//                label.text = "대기"
+//                label.textAlignment = .center
+//                label.adjustsFontForContentSizeCategory = true
+//                label.translatesAutoresizingMaskIntoConstraints = false
+//                return label
+//            }()
+//            let workTestLabel: UILabel = {
+//                let label = UILabel()
+//                label.text = "업무"
+//                label.textAlignment = .center
+//                label.adjustsFontForContentSizeCategory = true
+//                label.translatesAutoresizingMaskIntoConstraints = false
+//                return label
+//            }()
+//            waitingStackView.addArrangedSubview(waitTestLabel)
+//            workingStackView.addArrangedSubview(workTestLabel)
+//        }
     }
     
     // MARK: - AutoLayout Constraints

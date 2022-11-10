@@ -22,19 +22,12 @@ final class Bank<Queue: ClientQueueable> {
         self.bankManager = bankManager
     }
     
-    func openBank() {
-        updateClientQueue()
-        startBankWork()
-        endBankWork()
-    }
-    
-    private func updateClientQueue() {
-        for number in 1...Int.random(in: 10...30) {
-            guard let randomPurpose = Client.Purpose.allCases.randomElement() else { return }
-            let client = Client(waitingTicket: number, purpose: randomPurpose)
-            clientQueue.enqueue(client)
-            bankManager.addClientCount()
-        }
+    func updateClientQueue() -> Client? {
+        guard let randomPurpose = Client.Purpose.allCases.randomElement() else { return nil }
+        let client = Client(waitingTicket: bankManager.checkCount() + 1, purpose: randomPurpose)
+        clientQueue.enqueue(client)
+        bankManager.addClientCount()
+        return client
     }
     
     private func startBankWork() {
@@ -64,9 +57,5 @@ final class Bank<Queue: ClientQueueable> {
                 self.banker.startWork(client: client)
             }
         }
-    }
-    
-    private func endBankWork() {
-        bankManager.printWorkFinished()
     }
 }

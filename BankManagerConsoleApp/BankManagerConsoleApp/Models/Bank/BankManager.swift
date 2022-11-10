@@ -8,6 +8,7 @@
 import Foundation
 
 protocol BankManagable {
+    func checkCount() -> Int
     mutating func addClientCount()
     mutating func resetWorkTime()
     mutating func addWorkTime()
@@ -18,6 +19,10 @@ struct BankManager: BankManagable {
     private var clientCount: Int = 0
     private var totalWorkTime: Double = 0.0
     private var workStartTime: Date = Date()
+    
+    func checkCount() -> Int {
+        return clientCount
+    }
     
     mutating func addClientCount() {
         clientCount += 1
