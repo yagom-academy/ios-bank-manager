@@ -8,8 +8,8 @@ struct Bank {
     private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
     private let taskingGroup = DispatchGroup()
-    private let loanFront = 1
-    private let depositFront = 2
+    private let loanFront = Task.loan.front
+    private let depositFront = Task.deposit.front
     
     mutating func selectMenu() {
         print(" 1 : 은행개점\n 2 : 종료\n입력 :", terminator: " ")
