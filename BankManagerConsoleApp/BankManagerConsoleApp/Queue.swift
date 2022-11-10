@@ -10,6 +10,9 @@ struct Queue<T> {
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
+    var count: Int {
+        return linkedList.count
+    }
     
     mutating func enqueue(_ element: T) {
         linkedList.addLast(element)
@@ -18,7 +21,7 @@ struct Queue<T> {
     mutating func dequeue() -> T? {
         return linkedList.removeFirst()
     }
-
+    
     mutating func clear() {
         linkedList.removeAll()
     }
