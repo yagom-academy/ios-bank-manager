@@ -6,13 +6,21 @@ struct Bank {
     private var manager: Workable
     private var customerList: Queue<Customer>
     private var numberOfCustomer: Int
-    private var totalWorkTime: Decimal
+    private var totalWorkTime: Double
+    private let group: DispatchGroup
+    private let semaphore: DispatchSemaphore
+    private let loanQueue: DispatchQueue
+    private let depositQueue: DispatchQueue
     
     init(manager: Workable, customerList: Queue<Customer>) {
         self.manager = manager
         self.customerList = customerList
         self.numberOfCustomer = 0
         self.totalWorkTime = 0
+        self.group = DispatchGroup()
+        self.semaphore = DispatchSemaphore(value: 2)
+        self.loanQueue = DispatchQueue(label: WorkType.loan.rawValue)
+        self.depositQueue = DispatchQueue(label: WorkType.deposit.rawValue, attributes: .concurrent)
     }
     
     mutating func startConsoleApp() {
@@ -32,14 +40,17 @@ struct Bank {
     mutating private func handleBankSystem(userInput: String?) {
         switch userInput {
         case Namespace.openBank:
+            let startTime = CFAbsoluteTimeGetCurrent()
             openBank()
-            closeBank()
-            startConsoleApp()
+            self.group.wait()
+            self.totalWorkTime = CFAbsoluteTimeGetCurrent() - startTime
+            endWork()
         case Namespace.closeBank:
-            break
+            return
         default:
-            startConsoleApp()
+            break
         }
+        startConsoleApp()
     }
     
     mutating private func openBank() {
@@ -51,19 +62,33 @@ struct Bank {
     
     mutating private func startWork() {
         while !self.customerList.isEmpty {
-            self.manager.provideService(to: self.customerList.dequeue())
-            self.totalWorkTime += Namespace.depositTime
+            let customer = self.customerList.dequeue()
+            
+            switch customer?.purpose {
+            case .deposit:
+                depositQueue.async(group: group) { [self] in
+                    semaphore.wait()
+                    self.manager.provideService(to: customer)
+                    semaphore.signal()
+                }
+            case .loan:
+                loanQueue.async(group: group) { [self] in
+                    self.manager.provideService(to: customer)
+                }
+            default:
+                break
+            }
         }
     }
     
     mutating private func registerCustomers(with numberOfCustomer: Int) {
         for number in 1...numberOfCustomer {
-            self.customerList.enqueue(BankCustomer(number: number))
+            self.customerList.enqueue(BankCustomer(number: number, purpose: WorkType.allCases.randomElement()))
         }
     }
     
-    mutating private func closeBank() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomer)명이며, 총 업무시간은 \(self.totalWorkTime.doubleValue)초입니다.")
+    mutating private func endWork() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(self.numberOfCustomer)명이며, 총 업무시간은 \(self.totalWorkTime.stringValue)초입니다.")
         self.totalWorkTime = 0.0
         self.numberOfCustomer = 0
     }

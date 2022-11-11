@@ -5,4 +5,5 @@
 // 
 
 var bank = Bank(manager: BankManager(), customerList: Queue())
+
 bank.startConsoleApp()
