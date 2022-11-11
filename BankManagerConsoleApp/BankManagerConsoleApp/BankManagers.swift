@@ -42,7 +42,7 @@ struct BankManagers {
                 usleep(1100000)
                 loanSemaphore.signal()
             }
-            loan.notify(queue: depositQueue) {
+            loan.notify(queue: loanQueue) {
                 task.finishMessage(number: number)
             }
             return (task, loan)
