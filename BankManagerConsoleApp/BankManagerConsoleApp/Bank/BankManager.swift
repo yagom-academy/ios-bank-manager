@@ -7,12 +7,15 @@ import Foundation
 struct BankManager {
     private var bank: Bankable
     private(set) var isRunning: Bool = true
+    private var customers: [Customer] = []
     
     init(bank: Bankable) {
         self.bank = bank
     }
     
-    mutating func run() throws {
+    mutating func run(_ customers: [Customer]) throws {
+        self.customers = customers
+        
         printMenu()
         
         let userInput = readLine()
@@ -32,8 +35,8 @@ struct BankManager {
     mutating private func identifyMenu(_ userInput: String?) throws {
         switch userInput {
         case Constant.openBank:
-            let totalExecutionTime: Double = try open()
-            try close(totalExecutionTime)
+            let totalExecutionTime: Double = open()
+            close(totalExecutionTime)
         case Constant.closeBank:
             isRunning = false
             return
@@ -42,29 +45,16 @@ struct BankManager {
         }
     }
     
-    mutating private func createCustomer() throws -> Int {
-        let totalCustomerCount: Int = Int.random(in: Constant.customerNumberRange)
+    mutating private func open() -> Double {
+        bank.resetHandledCustomerCount()
         
-        for number in 1...totalCustomerCount {
-            guard let banking: BankService = BankService.allCases.randomElement() else {
-                throw BankError.invalidService
-            }
-            
-            let customer: Customer = Customer(waitingNumber: number, banking: banking)
+        for customer in customers {
             bank.addCustomer(customer)
         }
         
-        return totalCustomerCount
-    }
-    
-    mutating private func open() throws -> Double {
-        bank.resetHandledCustomerCount()
-        
-        let customers: Int = try createCustomer()
-        
         let serviceStartTime = DispatchTime.now().uptimeNanoseconds
         
-        for _ in 1...customers {
+        for _ in 0..<customers.count {
             bank.allocateCustomer()
         }
         
@@ -75,7 +65,7 @@ struct BankManager {
         return Double(serviceEndTime - serviceStartTime) / 1_000_000_000
     }
     
-    private func close(_ totalExecutionTime: Double) throws {
+    private func close(_ totalExecutionTime: Double) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bank.handledCustomerCount)명이며, 총 업무시간은 \(String(format: "%.2f", totalExecutionTime))초 입니다.")
     }
 }
