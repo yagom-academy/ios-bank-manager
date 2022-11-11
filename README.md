@@ -3,11 +3,12 @@
 ## 📖 목차
 1. [소개](#-소개)
 2. [타임라인](#-타임라인)
-3. [UML](#-uml)
-4. [실행 화면](#-실행-화면)
-5. [고민한 점](#-고민한-점)
-6. [트러블 슈팅](#-트러블-슈팅)
-7. [참고 링크](#-참고-링크)
+3. [Tree](#-tree)
+4. [UML](#-uml)
+5. [실행 화면](#-실행-화면)
+6. [고민한 점](#-고민한-점)
+7. [트러블 슈팅](#-트러블-슈팅)
+8. [참고 링크](#-참고-링크)
 
 ## 🌱 소개
 
@@ -62,16 +63,38 @@
 |:--:|:--:|
 |[SummerCat](https://github.com/dev-summer)|[하모](https://github.com/lxodud)|
 
+## 🌲 Tree
+```
+── BankManagerConsoleApp
+   ├── Bank
+   │   ├── \004Department.swift
+   │   ├── Bank.swift
+   │   ├── BankError.swift
+   │   ├── BankManager.swift
+   │   ├── BankService.swift
+   │   ├── Bankable.swift
+   │   ├── Depositable.swift
+   │   └── Loanable.swift
+   ├── Constant.swift
+   ├── Customer.swift
+   ├── Queue
+   │   ├── LinkedList.swift
+   │   ├── Node.swift
+   │   └── Queue.swift
+   └── main.swift
+
+```
+
 ## 🌲 UML
 
 ![](https://i.imgur.com/NPxTw0c.png)
 
 
 ## 🖥 실행 화면
-Step-2
+Step-2  
 <img src = "https://i.imgur.com/I9HaZa7.gif" width=700>
 
-Step-3
+Step-3  
 <img src = "https://i.imgur.com/AZqFL0B.gif" width=700>
 
 
