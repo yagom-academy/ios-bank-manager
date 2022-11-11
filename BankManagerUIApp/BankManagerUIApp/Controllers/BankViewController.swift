@@ -120,6 +120,7 @@ extension BankViewController {
                 }
             }
         }
+        timer?.tolerance = 0.0001
     }
     
     private func makeTimeLabel(count: Double) -> String {
