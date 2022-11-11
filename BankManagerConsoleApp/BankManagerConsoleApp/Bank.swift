@@ -8,10 +8,21 @@
 import Foundation
 
 struct Bank {
-    private var bankManager: BankManager
+    private var bankManager: BankManager = BankManager()
     
-    init(bankManager: BankManager) {
-        self.bankManager = bankManager
+    private mutating func updateClients() {
+        var clients: [Client] = []
+        
+        let randomNumber = Int.random(in: ClientNumber.min...ClientNumber.max)
+        for _ in 1...randomNumber {
+            let work = [BankWork.loan, BankWork.deposit].randomElement() ?? .deposit
+            let client = Client(ticketNumber: self.publishTicketNumber(), requestingWork: work)
+            clients.append(client)
+        }
+        
+        clients.forEach {
+            self.addClient($0)
+        }
     }
     
     mutating func addClient(_ client: Client) {
@@ -38,6 +49,7 @@ struct Bank {
             
             switch menu {
             case .open:
+                self.updateClients()
                 self.bankManager.open()
                 self.bankManager.close()
                 self.bankManager.resetWorkData()

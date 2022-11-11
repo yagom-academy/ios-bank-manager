@@ -18,3 +18,7 @@ enum MenuOption: String {
 enum DepositWorkerNumber {
     static let max = 2
 }
+
+enum LoanWorkerNumber {
+    static let max = 1
+}

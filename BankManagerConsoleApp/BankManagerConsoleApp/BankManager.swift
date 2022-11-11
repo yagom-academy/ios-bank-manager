@@ -17,8 +17,21 @@ struct BankManager {
     private let depositSemaphore = DispatchSemaphore(value: 1)
     private let loanSemaphore = DispatchSemaphore(value: 1)
     
-    init(bankWorkers: [BankWorker]) {
-        self.bankWorkers = bankWorkers
+    init() {
+        var currentDepositWorkerCount: Int = 0
+        
+        for _ in 0..<(DepositWorkerNumber.max + LoanWorkerNumber.max) {
+            if currentDepositWorkerCount < DepositWorkerNumber.max {
+                let bankWorker: BankWorker = BankWorker(bankWork: .deposit)
+                
+                bankWorkers.append(bankWorker)
+                currentDepositWorkerCount += 1
+            } else {
+                let bankWorker: BankWorker = BankWorker(bankWork: .loan)
+                
+                bankWorkers.append(bankWorker)
+            }
+        }
     }
     
     mutating func publishTicketNumber() -> Int {
@@ -37,29 +50,13 @@ struct BankManager {
             depositClientQueue.enqueue(client)
         case .loan:
             loanClientQueue.enqueue(client)
-        case .none:
-            return
         }
         
         totalWorkTime += requestingWork.time
     }
     
     mutating func open() {
-        configureWorkType()
         assignBankWork()
-    }
-    
-    mutating private func configureWorkType() {
-        var currentDepositWorkerCount: Int = 0
-        
-        for index in bankWorkers.indices {
-            if currentDepositWorkerCount < DepositWorkerNumber.max {
-                bankWorkers[index].bankWork = .deposit
-                currentDepositWorkerCount += 1
-            } else {
-                bankWorkers[index].bankWork = .loan
-            }
-        }
     }
     
     private func assignBankWork() {
@@ -69,7 +66,7 @@ struct BankManager {
                 doDepositWork(by: worker)
             case .loan:
                 doLoanWork(by: worker)
-            case .none:
+            default:
                 return
             }
         }

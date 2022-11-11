@@ -10,7 +10,6 @@ import Foundation
 enum BankWork: CaseIterable {
     case deposit
     case loan
-    case none
     
     var name: String {
         switch self {
@@ -18,8 +17,6 @@ enum BankWork: CaseIterable {
             return "예금"
         case .loan:
             return "대출"
-        case .none:
-            return "없음"
         }
     }
     
@@ -29,8 +26,6 @@ enum BankWork: CaseIterable {
             return 0.7
         case .loan:
             return 1.1
-        case .none:
-            return 0
         }
     }
     
