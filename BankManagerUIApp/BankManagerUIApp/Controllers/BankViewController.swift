@@ -67,6 +67,7 @@ final class BankViewController: UIViewController {
     
     private func makeClientLabel(_ client: Client) -> UILabel {
         let label = UILabel()
+        label.tag = client.waitingTicket
         label.text = "\(client.waitingTicket) - \(client.purpose.name)"
         label.textColor = client.purpose == .deposit ? .black : .systemPurple
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -90,12 +91,7 @@ final class BankViewController: UIViewController {
             let ticketNumber = client.waitingTicket
             
             guard let labels = stackView.arrangedSubviews as? [UILabel],
-                  let targetLabel = labels.filter({ label in
-                      if ticketNumber == label.text?.split(separator: " ").map({ Int($0) }).first {
-                          return true
-                      }
-                      return false
-                  }).first else { return }
+                  let targetLabel = labels.filter({ $0.tag == ticketNumber }).first else { return }
             
             targetLabel.removeFromSuperview()
             
