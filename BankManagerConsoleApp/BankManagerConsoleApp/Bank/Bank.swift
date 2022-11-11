@@ -4,7 +4,7 @@
 
 import Foundation
 
-final class Bank: Bankable, Depositable, Loanable {
+struct Bank: Bankable, Depositable, Loanable {
     let depositDepartment: Department
     let loanDepartment: Department
     var waitingLine: Queue<Customer> = Queue()
@@ -16,7 +16,7 @@ final class Bank: Bankable, Depositable, Loanable {
         self.loanDepartment = Department(service: .loan, numberOfClerks: loanClerks)
     }
     
-    func allocateCustomer() {
+    mutating func allocateCustomer() {
         guard let customer = waitingLine.dequeue() else { return }
         
         switch customer.banking {
