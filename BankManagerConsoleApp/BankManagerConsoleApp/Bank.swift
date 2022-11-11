@@ -5,10 +5,8 @@
 import Foundation
 
 struct Bank {
-    private let manager: Int = 1
+    private let manager = BankManager()
     private var lineOfCustomer = LinkedList<Customer>()
-    private var processedCustomer: Int = 0
-    private var taskTime: Double = 0
     
     mutating func selectMenu() {
         print(" 1 : 은행개점\n 2 : 종료\n입력 :", terminator: " ")
@@ -34,33 +32,18 @@ struct Bank {
         let totalCustomer = Int.random(in: 10...30)
         
         listUpCustomer(totalCustomer)
-        startTask()
+        manager.startTask(lineOfCustomer)
+        manager.endTask()
         selectMenu()
     }
     
     mutating private func listUpCustomer(_ customerCount: Int) {
         for customerIndex in 1...customerCount {
-            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex))
+            lineOfCustomer.enqueue(value: Customer(waitingNumber: customerIndex, purposeOfService: randomTask()))
         }
     }
     
-    mutating private func startTask() {
-        taskTime = 0
-        processedCustomer = 0
-        
-        while lineOfCustomer.isEmpty == false {
-            guard let currentCustomer = lineOfCustomer.dequeue() else {
-                break
-            }
-
-            print("\(currentCustomer.waitingNumber)번 고객 업무 시작")
-            taskTime += 0.7
-            usleep(70_000)
-            processedCustomer += 1
-            print("\(currentCustomer.waitingNumber)번 고객 업무 종료")
-        }
-        
-        taskTime = round(taskTime * 100)/100
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(processedCustomer)명이며, 총 업무시간은 \(taskTime)초입니다.")
+    private func randomTask() -> Task {
+        Int.random(in: 1...2) == 1 ? .deposit : .loan
     }
 }
