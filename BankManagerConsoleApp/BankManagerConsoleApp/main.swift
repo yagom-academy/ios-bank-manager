@@ -5,9 +5,10 @@
 //  Created by Kyo, Wonbi on 2022/11/02.
 //
 
-let bankWorker = BankWorker()
+let banker = Banker()
 var clientQueue = ClientQueue()
-var bank = Bank(bankWorker: bankWorker, queue: clientQueue)
+var bankManager = BankManager()
+var bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
 
 func startProcess() {
     while true {

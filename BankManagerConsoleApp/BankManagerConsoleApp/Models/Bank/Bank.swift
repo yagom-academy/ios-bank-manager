@@ -5,40 +5,68 @@
 //  Created by Kyo, Wonbi on 2022/11/02.
 //
 
-struct Bank<Queue: ClientQueueable> {
-    private let bankWorker: BankWorker
-    private var clientQueue: Queue
-    private var bankManager: BankManager = BankManager()
+import Foundation
+
+final class Bank<Queue: ClientQueueable> {
+    private let bankDispatchGroup = DispatchGroup()
+    private let depositBooth = DispatchSemaphore(value: 2)
+    private let loanBooth = DispatchQueue(label: "loanBanker")
     
-    init(bankWorker: BankWorker, queue: Queue) {
-        self.bankWorker = bankWorker
+    private let banker: BankWorkable
+    private var clientQueue: Queue
+    private var bankManager: BankManagable
+    
+    init(banker: BankWorkable, queue: Queue, bankManager: BankManagable) {
+        self.banker = banker
         self.clientQueue = queue
+        self.bankManager = bankManager
     }
     
-    mutating func openBank() {
+    func openBank() {
         updateClientQueue()
         startBankWork()
         endBankWork()
     }
     
-    mutating private func updateClientQueue() {
+    private func updateClientQueue() {
         for number in 1...Int.random(in: 10...30) {
-            let client = Client(waitingTicket: number)
+            guard let randomPurpose = Client.Purpose.allCases.randomElement() else { return }
+            let client = Client(waitingTicket: number, purpose: randomPurpose)
             clientQueue.enqueue(client)
             bankManager.addClientCount()
         }
     }
     
-    mutating private func startBankWork() {
+    private func startBankWork() {
+        bankManager.resetWorkTime()
+        
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { return }
-            bankManager.resetWorkTime()
-            bankWorker.startWork(client: client)
-            bankManager.addWorkTime()
+            
+            divideWork(client: client)
+        }
+        
+        bankDispatchGroup.wait()
+        bankManager.addWorkTime()
+    }
+    
+    private func divideWork(client: Client) {
+        switch client.purpose {
+        case .deposit:
+            DispatchQueue.global().async(group: bankDispatchGroup) { [self] in
+                self.depositBooth.wait()
+                defer { self.depositBooth.signal() }
+                
+                self.banker.startWork(client: client)
+            }
+        case .loan:
+            loanBooth.async(group: bankDispatchGroup) { [self] in
+                self.banker.startWork(client: client)
+            }
         }
     }
     
-    mutating private func endBankWork() {
+    private func endBankWork() {
         bankManager.printWorkFinished()
     }
 }
