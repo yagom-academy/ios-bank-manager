@@ -7,7 +7,7 @@
 import UIKit
 
 final class BankViewController: UIViewController {
-    lazy var mainView = MainView()
+    private lazy var mainView = MainView()
     
     private let banker: Banker = Banker()
     private var clientQueue: ClientQueue = ClientQueue()
