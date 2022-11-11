@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol BankWorkable { }
+protocol BankWorkable {
+    func startWork(client: Client)
+}
 
 extension BankWorkable {
     func startWork(client: Client) {
