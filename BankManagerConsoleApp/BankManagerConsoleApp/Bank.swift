@@ -21,12 +21,8 @@ struct Bank: App {
     
     private mutating func letCustomersIn() {
         let customerCount = Array<Int>(1...randomCustomersNumber)
-        customerCount.forEach {
-            guard let data = bankManagers.makeDispatchWorkItem(number: $0) else {
-                return
-            }
-            bankManagers.taskQueue.enqueue(data: data)
-        }
+        customerCount.compactMap { bankManagers.makeDispatchWorkItem(number: $0) }
+            .forEach { bankManagers.taskQueue.enqueue(data: $0) }
     }
     
     private func closeBank(time: Double) {
