@@ -7,6 +7,7 @@
 
 struct Client {
     let ticketNumber: Int
+    let requestingWork: BankWork
 }
 
 extension Client: Equatable {

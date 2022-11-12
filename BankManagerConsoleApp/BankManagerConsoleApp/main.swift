@@ -4,8 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let bankWorker: BankWorker = BankWorker()
-let bankManager: BankManager = BankManager(bankWorker: bankWorker)
-var bank: Bank = Bank(bankManager: bankManager)
+var bank: Bank = Bank()
 
 bank.openSystem()
