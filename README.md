@@ -27,34 +27,34 @@
 
 ## ⏰ 타임라인
 
-22.10.31
+**22.10.31**
 - SwiftLint Cocopod으로 적용
 - Node 클래스 구현
 - LinkedList 구조체 구현
 - Queue 구조체 구현
 
-22.11.03 
+**22.11.03** 
 - Bank 구조체 구현
 - Customer 구조체 구현
 - BankManager 구조체 구현
 
-22.11.07
+**22.11.07**
 - BankService 열거형 생성
 - performTask 메서드 allocateCustomer로 네이밍 수정 및 내부 로직 변경
 
-22.11.08
+**22.11.08**
 - 은행 업무 처리시간 측정 기능 구현
 - Bank 클래스 구현
 - Bankable 프로퍼티 구현
 
-22.11.09
+**22.11.09**
 - Bank 클래스의 기능 일부 Departmentable 프로토콜로 분리
 
-22.11.10
+**22.11.10**
 - Departable 프로토콜 제거 및 Department 구조체 구현
 
 
-22.11.11
+**22.11.11**
 - 고객 생성 로직 BankManager에서 분리
 
 
@@ -67,7 +67,7 @@
 ```
 ── BankManagerConsoleApp
    ├── Bank
-   │   ├── \004Department.swift
+   │   ├── Department.swift
    │   ├── Bank.swift
    │   ├── BankError.swift
    │   ├── BankManager.swift
@@ -120,17 +120,17 @@ Step-3
     - 아래와 같은 형태로 타이머를 구현해 모든 업무를 처리하는 데 걸린 시간을 계산할 수도 있지만, 이런 경우 작업을 처리하는데 걸린 시간 외에 print 등의 다른 작업을 수행하는 시간까지 포함된 시간을 구하게 됩니다.
     - 정확히 업무 처리에 걸린 시간만을 계산하는 것이 과제의 취지라고 생각해서 사용하지 않았습니다.
 
-```swift
-mutating func open() -> CFAbsoluteTime {
-    let customers: Int = createCustomer()
-    let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
-    for _ in 1...customers {
-        bank.performTask()
+    ```swift
+    mutating func open() -> CFAbsoluteTime {
+        let customers: Int = createCustomer()
+        let startTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
+        for _ in 1...customers {
+            bank.performTask()
+        }
+        let workTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent() - startTime
+        return workTime
     }
-    let workTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent() - startTime
-    return workTime
-}
-```
+    ```
 
 - `format()` 메서드를 정의하는 Double의 extension 구현
     - `Double+` 파일을 별도로 생성하여 해당 파일 내에 `format()` 메서드를 Double 타입의 extension으로 구현해주었습니다.
@@ -277,12 +277,19 @@ mutating func open() -> CFAbsoluteTime {
 ## 🔗 참고 링크
 
 [동시성 프로그래밍 - 야곰닷넷](https://yagom.net/courses/%eb%8f%99%ec%8b%9c%ec%84%b1-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d-concurrency-programming/)
+
 [Memberwise Initializer](https://www.swiftbysundell.com/tips/when-can-memberwise-initializers-be-used/)
+
 [Swift Language Guide - Closures](https://docs.swift.org/swift-book/LanguageGuide/Closures.html)
+
 [Concurrent Programming With GCD in Swift 3](https://developer.apple.com/videos/play/wwdc2016/720/)
+
 [Escaping Closure Captures Mutating 'self' Parameter](https://stackoverflow.com/questions/70649135/escaping-closure-captures-mutating-self-parameter-struct)
+
 [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/)
+
 [오픈소스 라이브러리 만들기 - 야곰닷넷](https://yagom.net/courses/open-source-library/)
+
 [SwiftLint](https://github.com/realm/SwiftLint)
 
 [🔝 맨 위로 이동하기](#-은행창구-매니저)
