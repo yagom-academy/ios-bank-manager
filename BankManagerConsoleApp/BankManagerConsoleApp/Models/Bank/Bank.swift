@@ -33,7 +33,7 @@ final class Bank<Queue: ClientQueueable> {
     
     func updateClientQueue() -> Client? {
         guard let randomPurpose = Client.Purpose.allCases.randomElement() else { return nil }
-        let client = Client(waitingTicket: bankManager.checkCount() + 1, purpose: randomPurpose)
+        let client = Client(waitingTicket: bankManager.clientCount + 1, purpose: randomPurpose)
         clientQueue.enqueue(client)
         bankManager.addClientCount()
         return client
@@ -50,22 +50,22 @@ final class Bank<Queue: ClientQueueable> {
     private func divideWork(client: Client) {
         switch client.purpose {
         case .deposit:
-            depositQueue.addOperation {
+            depositQueue.addOperation { [weak self] in
                 NotificationCenter.default.post(name: .client,
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.start])
-                self.banker.startWork(client: client)
+                self?.banker.startWork(client: client)
                 NotificationCenter.default.post(name: .client,
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.done])
             }
             
         case .loan:
-            loanQueue.addOperation {
+            loanQueue.addOperation { [weak self] in
                 NotificationCenter.default.post(name: .client,
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.start])
-                self.banker.startWork(client: client)
+                self?.banker.startWork(client: client)
                 NotificationCenter.default.post(name: .client,
                                                 object: client,
                                                 userInfo: ["WorkState" : WorkState.done])

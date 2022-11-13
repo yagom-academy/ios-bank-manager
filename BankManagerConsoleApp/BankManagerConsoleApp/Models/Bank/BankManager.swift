@@ -8,17 +8,13 @@
 import Foundation
 
 protocol BankManagable {
-    func checkCount() -> Int
+    var clientCount: Int { get }
     mutating func addClientCount()
     mutating func resetData()
 }
 
 struct BankManager: BankManagable {
-    private var clientCount: Int = 0
-    
-    func checkCount() -> Int {
-        return clientCount
-    }
+    private(set) var clientCount: Int = 0
     
     mutating func addClientCount() {
         clientCount += 1
