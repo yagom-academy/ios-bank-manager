@@ -17,7 +17,7 @@ extension Queueable {
     }
     
     var isEmpty: Bool {
-        return list.currentCount == 0
+        return list.currentCount == .zero
     }
     
     mutating func enqueue(_ data: Element) {

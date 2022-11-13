@@ -14,13 +14,13 @@ protocol BankManagable {
 }
 
 struct BankManager: BankManagable {
-    private(set) var clientCount: Int = 0
+    private(set) var clientCount: Int = .zero
     
     mutating func addClientCount() {
         clientCount += 1
     }
     
     mutating func resetData() {
-        clientCount = 0
+        clientCount = .zero
     }
 }

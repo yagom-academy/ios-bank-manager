@@ -7,7 +7,29 @@
 import UIKit
 
 final class BankViewController: UIViewController {
-    private lazy var mainView = MainView()
+    private let clientAddButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitleColor(UIColor.blue, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.addTarget(nil, action: #selector(addClient), for: .touchUpInside)
+        return button
+    }()
+    
+    private let clearButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("초기화", for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.addTarget(nil, action: #selector(resetData), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var bankView = BankView()
     
     private let banker: Banker = Banker()
     private var clientQueue: ClientQueue = ClientQueue()
@@ -16,18 +38,18 @@ final class BankViewController: UIViewController {
     private lazy var bank: Bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
     
     private var timer: Timer?
-    private var timeCount: Double = 0.0
+    private var timeCount: Double = .zero
     private let timerFormatter = DateFormatter()
     private var isFirstTap: Bool = true
     
     override func loadView() {
-        self.view = mainView
+        self.view = bankView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addNotification()
-        addButtonTarget()
+        addButton()
         
         timerFormatter.dateFormat = "mm:ss:SSS"
     }
@@ -39,9 +61,9 @@ final class BankViewController: UIViewController {
                                                object: nil)
     }
     
-    private func addButtonTarget() {
-        mainView.clientAddButton.addTarget(self, action: #selector(addClient), for: .touchUpInside)
-        mainView.clearButton.addTarget(self, action: #selector(resetData), for: .touchUpInside)
+    private func addButton() {
+        bankView.buttonStackView.addArrangedSubview(clientAddButton)
+        bankView.buttonStackView.addArrangedSubview(clearButton)
     }
     
     @objc func addClient() {
@@ -52,7 +74,7 @@ final class BankViewController: UIViewController {
         
         for _ in 1...10 {
             if let client = bank.updateClientQueue() {
-                mainView.waitingStackView.addArrangedSubview(makeClientLabel(client))
+                bankView.waitingStackView.addArrangedSubview(makeClientLabel(client))
             }
         }
         bank.startBankWork()
@@ -60,8 +82,8 @@ final class BankViewController: UIViewController {
     
     @objc func resetData() {
         bank.resetAll()
-        mainView.workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        mainView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankView.workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         resetTimer()
     }
     
@@ -79,9 +101,9 @@ final class BankViewController: UIViewController {
         
         switch workState {
         case .start:
-            handleLabel(by: mainView.waitingStackView, noti: noti)
+            handleLabel(by: bankView.waitingStackView, noti: noti)
         case .done:
-            handleLabel(by: mainView.workingStackView, noti: noti)
+            handleLabel(by: bankView.workingStackView, noti: noti)
         }
     }
     
@@ -95,7 +117,7 @@ final class BankViewController: UIViewController {
             
             targetLabel.removeFromSuperview()
             
-            if stackView == self?.mainView.waitingStackView {
+            if stackView == self?.bankView.waitingStackView {
                 self?.addToWorkingStackView(targetLabel)
             }
             
@@ -104,7 +126,7 @@ final class BankViewController: UIViewController {
     }
     
     private func addToWorkingStackView(_ label: UILabel) {
-        mainView.workingStackView.addArrangedSubview(label)
+        bankView.workingStackView.addArrangedSubview(label)
     }
 }
 
@@ -116,7 +138,7 @@ extension BankViewController {
                 self.timeCount += 0.001
                 let time = self.makeTimeLabel(count: self.timeCount)
                 DispatchQueue.main.async {
-                    self.mainView.timeLabel.text = "업무시간 - \(time)"
+                    self.bankView.timeLabel.text = "업무시간 - \(time)"
                 }
             }
         }
@@ -131,8 +153,8 @@ extension BankViewController {
     private func pauseTimer(_ self: BankViewController?) {
         guard let self = self else { return }
         
-        if self.mainView.workingStackView.arrangedSubviews.isEmpty,
-           self.mainView.waitingStackView.arrangedSubviews.isEmpty {
+        if self.bankView.workingStackView.arrangedSubviews.isEmpty,
+           self.bankView.waitingStackView.arrangedSubviews.isEmpty {
             self.timer?.invalidate()
             self.isFirstTap = true
         }
@@ -141,9 +163,9 @@ extension BankViewController {
     private func resetTimer() {
         timer?.invalidate()
         isFirstTap = true
-        timeCount = 0.0
+        timeCount = .zero
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
-            self.mainView.timeLabel.text = "업무시간 - 00:00:000"
+            self.bankView.timeLabel.text = "업무시간 - 00:00:000"
         }
     }
 }

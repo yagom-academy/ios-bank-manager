@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  BankView.swift
 //  BankManagerUIApp
 //
 //  Created by Kyo, Wonbi on 2022/11/10.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainView: UIView {
+final class BankView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -20,29 +20,9 @@ final class MainView: UIView {
     }
     
     // MARK: - Top StackView
-    let clientAddButton: UIButton = {
-        var button = UIButton()
-        button.setTitle("고객 10명 추가", for: .normal)
-        button.setTitleColor(UIColor.blue, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        return button
-    }()
-    
-    let clearButton: UIButton = {
-        var button = UIButton()
-        button.setTitle("초기화", for: .normal)
-        button.setTitleColor(UIColor.red, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        return button
-    }()
-    
-    private lazy var buttonStackView: UIStackView = {
-        var stackView = UIStackView(arrangedSubviews: [clientAddButton, clearButton])
-        stackView.spacing = 0
+    let buttonStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.spacing = .zero
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillEqually
@@ -61,7 +41,7 @@ final class MainView: UIView {
     
     private lazy var topStackView: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: [buttonStackView, timeLabel])
-        stackView.spacing = 0
+        stackView.spacing = .zero
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
@@ -96,7 +76,7 @@ final class MainView: UIView {
     
     private lazy var middleStackView: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: [waitingLabel, workingLabel])
-        stackView.spacing = 0
+        stackView.spacing = .zero
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillEqually
@@ -139,7 +119,7 @@ final class MainView: UIView {
     
     private lazy var bottomStackView: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: [waitingScrollView, workingScrollView])
-        stackView.spacing = 0
+        stackView.spacing = .zero
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillEqually
@@ -149,7 +129,7 @@ final class MainView: UIView {
 }
 
 // MARK: - AutoLayout Constraints
-extension MainView {
+extension BankView {
     private func setupStackView() {
         self.addSubview(topStackView)
         self.addSubview(middleStackView)

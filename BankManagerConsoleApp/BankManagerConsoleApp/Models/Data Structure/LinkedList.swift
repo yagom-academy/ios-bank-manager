@@ -8,7 +8,7 @@
 struct LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
-    private var count: Int = 0
+    private var count: Int = .zero
     
     var headData: Element? {
         return head?.nodeData
@@ -20,7 +20,7 @@ struct LinkedList<Element> {
     
     mutating func append(data: Element) {
         let node: Node<Element> = Node(data: data)
-        if count == 0 {
+        if count == .zero {
             head = node
         } else {
             tail?.setupNext(node: node)
@@ -40,6 +40,6 @@ struct LinkedList<Element> {
     mutating func removeAll() {
         head = nil
         tail = nil
-        count = 0
+        count = .zero
     }
 }
