@@ -14,7 +14,7 @@ final class BankViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.addTarget(nil, action: #selector(addClient), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(addClientButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -25,22 +25,33 @@ final class BankViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.addTarget(nil, action: #selector(resetData), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(clearButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private lazy var bankView = BankView()
-    
-    private let banker: Banker = Banker()
-    private var clientQueue: ClientQueue = ClientQueue()
-    private var bankManager: BankManager = BankManager()
-    
-    private lazy var bank: Bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
-    
+    private let bankView = BankView()
+    private let bank: Bank<ClientQueue>
     private var timer: Timer?
     private var timeCount: Double = .zero
-    private let timerFormatter = DateFormatter()
+    private let timerFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "mm:ss:SSS"
+        return formatter
+    }()
     private var isFirstTap: Bool = true
+    
+    init() {
+        let banker: Banker = Banker()
+        let clientQueue: ClientQueue = ClientQueue()
+        let bankManager: BankManager = BankManager()
+        
+        bank = Bank(banker: banker, queue: clientQueue, bankManager: bankManager)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         self.view = bankView
@@ -50,8 +61,6 @@ final class BankViewController: UIViewController {
         super.viewDidLoad()
         addNotification()
         addButton()
-        
-        timerFormatter.dateFormat = "mm:ss:SSS"
     }
     
     private func addNotification() {
@@ -66,7 +75,7 @@ final class BankViewController: UIViewController {
         bankView.buttonStackView.addArrangedSubview(clearButton)
     }
     
-    @objc func addClient() {
+    @objc func addClientButtonTapped() {
         if isFirstTap {
             makeTimer()
             isFirstTap = false
@@ -80,7 +89,7 @@ final class BankViewController: UIViewController {
         bank.startBankWork()
     }
     
-    @objc func resetData() {
+    @objc func clearButtonTapped() {
         bank.resetAll()
         bankView.workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
