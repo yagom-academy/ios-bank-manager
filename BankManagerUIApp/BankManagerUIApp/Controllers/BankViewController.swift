@@ -92,26 +92,26 @@ final class BankViewController: UIViewController {
     
     @objc func clearButtonTapped() {
         bank.resetAll()
-        bankView.workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankView.workingStackView.removeAllArrangedSubviews()
+        bankView.waitingStackView.removeAllArrangedSubviews()
         resetTimer()
     }
     
-    @objc func handlingStackView(noti: Notification) {
-        guard let workState = noti.userInfo?["WorkState"] as? WorkState else { return }
+    @objc func handlingStackView(notification: Notification) {
+        guard let workState = notification.userInfo?["WorkState"] as? WorkState else { return }
         
         switch workState {
         case .start:
-            handleLabel(by: bankView.waitingStackView, noti: noti)
+            handleLabel(by: bankView.waitingStackView, notification: notification)
         case .done:
-            handleLabel(by: bankView.workingStackView, noti: noti)
+            handleLabel(by: bankView.workingStackView, notification: notification)
         }
     }
     
-    private func handleLabel(by stackView: UIStackView, noti: Notification) {
+    private func handleLabel(by stackView: UIStackView, notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
-                  let client = noti.object as? Client else { return }
+                  let client = notification.object as? Client else { return }
             let ticketNumber = client.waitingTicket
             
             guard let labels = stackView.arrangedSubviews as? [ClientLabel],

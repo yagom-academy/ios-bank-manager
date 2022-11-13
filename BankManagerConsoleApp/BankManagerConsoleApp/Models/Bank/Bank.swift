@@ -7,10 +7,6 @@
 
 import Foundation
 
-extension Notification.Name {
-    static let client = Notification.Name("Client")
-}
-
 enum WorkState {
     case start
     case done
