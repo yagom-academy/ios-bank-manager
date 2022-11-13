@@ -33,12 +33,12 @@ final class BankViewController: UIViewController {
     private let bank: Bank<ClientQueue>
     private var timer: Timer?
     private var timeCount: Double = .zero
+    private var isFirstTap: Bool = true
     private let timerFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "mm:ss:SSS"
         return formatter
     }()
-    private var isFirstTap: Bool = true
     
     init() {
         let banker: Banker = Banker()
@@ -83,7 +83,8 @@ final class BankViewController: UIViewController {
         
         for _ in 1...10 {
             if let client = bank.updateClientQueue() {
-                bankView.waitingStackView.addArrangedSubview(makeClientLabel(client))
+                let clientLabel = ClientLabel(client: client)
+                bankView.waitingStackView.addArrangedSubview(clientLabel)
             }
         }
         bank.startBankWork()
@@ -94,15 +95,6 @@ final class BankViewController: UIViewController {
         bankView.workingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         bankView.waitingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         resetTimer()
-    }
-    
-    private func makeClientLabel(_ client: Client) -> UILabel {
-        let label = UILabel()
-        label.tag = client.waitingTicket
-        label.text = "\(client.waitingTicket) - \(client.purpose.name)"
-        label.textColor = client.purpose == .deposit ? .black : .systemPurple
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }
     
     @objc func handlingStackView(noti: Notification) {
@@ -118,19 +110,21 @@ final class BankViewController: UIViewController {
     
     private func handleLabel(by stackView: UIStackView, noti: Notification) {
         DispatchQueue.main.async { [weak self] in
-            guard let client = noti.object as? Client else { return }
+            guard let self = self,
+                  let client = noti.object as? Client else { return }
             let ticketNumber = client.waitingTicket
             
-            guard let labels = stackView.arrangedSubviews as? [UILabel],
-                  let targetLabel = labels.filter({ $0.tag == ticketNumber }).first else { return }
+            guard let labels = stackView.arrangedSubviews as? [ClientLabel],
+                  let targetLabel = labels.filter({ $0.client.waitingTicket == ticketNumber }).first
+            else { return }
             
             targetLabel.removeFromSuperview()
             
-            if stackView == self?.bankView.waitingStackView {
-                self?.addToWorkingStackView(targetLabel)
+            if stackView == self.bankView.waitingStackView {
+                self.addToWorkingStackView(targetLabel)
             }
             
-            self?.pauseTimer(self)
+            self.pauseTimer()
         }
     }
     
@@ -142,8 +136,10 @@ final class BankViewController: UIViewController {
 // MARK: - Timer
 extension BankViewController {
     private func makeTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { _ in
-            DispatchQueue.global().async {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) {_ in
+            DispatchQueue.global().async { [weak self] in
+                guard let self = self else { return }
+                
                 self.timeCount += 0.001
                 let time = self.makeTimeLabel(count: self.timeCount)
                 DispatchQueue.main.async {
@@ -159,13 +155,11 @@ extension BankViewController {
         return timerFormatter.string(from: date)
     }
     
-    private func pauseTimer(_ self: BankViewController?) {
-        guard let self = self else { return }
-        
-        if self.bankView.workingStackView.arrangedSubviews.isEmpty,
-           self.bankView.waitingStackView.arrangedSubviews.isEmpty {
-            self.timer?.invalidate()
-            self.isFirstTap = true
+    private func pauseTimer() {
+        if bankView.workingStackView.arrangedSubviews.isEmpty,
+           bankView.waitingStackView.arrangedSubviews.isEmpty {
+            timer?.invalidate()
+            isFirstTap = true
         }
     }
     

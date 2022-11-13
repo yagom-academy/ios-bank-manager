@@ -24,6 +24,7 @@
 		E3C63B8F291BBFD9007D2833 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C63B86291BBFD9007D2833 /* BankManager.swift */; };
 		E3C63B90291BBFD9007D2833 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C63B87291BBFD9007D2833 /* Bank.swift */; };
 		E3C63B91291BBFD9007D2833 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C63B88291BBFD9007D2833 /* Client.swift */; };
+		E3D3392C29212607006325AB /* ClientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D3392B29212607006325AB /* ClientLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		E3C63B86291BBFD9007D2833 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		E3C63B87291BBFD9007D2833 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		E3C63B88291BBFD9007D2833 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		E3D3392B29212607006325AB /* ClientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				3CEB95A7291CFDB0004FDD8E /* BankView.swift */,
+				E3D3392B29212607006325AB /* ClientLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				C7694E3F259C3E9F0053667F /* BankViewController.swift in Sources */,
 				E3C63B8A291BBFD9007D2833 /* ClientQueueable.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				E3D3392C29212607006325AB /* ClientLabel.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				E3C63B8E291BBFD9007D2833 /* Banker.swift in Sources */,
 				E3C63B90291BBFD9007D2833 /* Bank.swift in Sources */,
