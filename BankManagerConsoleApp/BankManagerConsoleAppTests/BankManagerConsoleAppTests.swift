@@ -31,18 +31,7 @@ class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertEqual(node.data, "customer1")
     }
     
-    func test_createNode가_Node를_잘만들어주는지() {
-        //given
-        let customerData: String = "customer2"
-        
-        //when
-        let result = sut.createNode(data: customerData)
-        
-        //then
-        XCTAssertEqual(result.data, customerData)
-    }
-    
-    func test_enqueue_Node1개를_넣었을때_front와rear_모두_같은_Node를_가리키는지() {
+    func test_enqueue_Node1개를_넣었을때_front와rear_모두_같은_Node를_가리키는지_확인() {
         //given
         let customerData: String = "customer3"
         

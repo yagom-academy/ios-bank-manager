@@ -11,7 +11,7 @@ struct CustomerQueue<Element> {
     private(set) var front: Node<Element>?
     private(set) var rear: Node<Element>?
     
-    func createNode(data: Element) -> Node<Element> {
+    private func createNode(data: Element) -> Node<Element> {
         return Node(data: data)
     }
     

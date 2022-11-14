@@ -4,4 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+var jlBank: Bank = Bank()
+ 
+jlBank.runBankManagerConsoleApp()
