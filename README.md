@@ -38,6 +38,7 @@
 |:---:|:---:|
 |<img width = 450, src = "https://i.imgur.com/lgiEti4.gif">|<img width = 450, src = "https://i.imgur.com/rhPWtGb.gif">|
 
+
 ## 👀 Diagram
 
 ### 🧬 Class Diagram
@@ -308,6 +309,8 @@ BankManagerUIApp
     
 </details>
     
+
+
 ## 🏃🏻 기술적 도전
 ### ⚙️ LinkedList 
 <details>
@@ -436,7 +439,6 @@ depositQueue.addOperation {
 
 </details>
     
-
     
 ## 🏔 트러블 슈팅 및 고민
 ### 🚀 DIP, DI 적용시 제네릭 처리
@@ -545,6 +547,7 @@ struct LinkedList<Element> {
 - 또한, ClientQueue가 가지고 있는 LinkedList로 데이터의 연결이 가능하다는 것을 알았고, 추후에 다른 기능으로의 확장성이 더 높아질 수 있다고 생각하였습니다.
 
 </details>
+
 
     
 ### 💭 구조체 mutating 메서드와 클로저의 캡쳐에 대한 고민
