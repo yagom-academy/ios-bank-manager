@@ -32,44 +32,51 @@
 [Code Convention 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/2.-Code-Convention)
 
 ## 🛠 실행 화면
-|**실행 화면**|
-|---|
-|<img width = 300, height = 600, src = "https://user-images.githubusercontent.com/59204352/199897630-26888271-e159-45e0-ba11-935a15eb8161.gif">|
- 
+- 중간에 대기가 없어지는 경우는 초기화 버튼을 클릭한 상황입니다.
+
+|**실행 화면**|**스크롤 실행 화면**|
+|:---:|:---:|
+|<img width = 450, src = "https://i.imgur.com/lgiEti4.gif">|<img width = 450, src = "https://i.imgur.com/rhPWtGb.gif">|
 
 
 ## 👀 Diagram
 
 ### 🧬 Class Diagram
-![](https://i.imgur.com/3xFD1CQ.png)
+![](https://i.imgur.com/NBLKk1m.png)
 
  
 ## 🗂 폴더 구조
-> BankManagerConsoleApp: 앱을 구동하는 부분<br>
-> BankManagerConsoleAppTests: 앱 내부 로직의 Unit Test 부분
+> BankManagerConsoleApp 내부에 Model 코드 존재 <br>
+> BankManagerUIApp 내부에 View, ViewController 코드 존재
 ```
 BankManagerConsoleApp
-├── BankManagerConsoleApp
-│   ├── main
-│   ├── Extension
-│   │   └── Queueable+
-│   ├── Protocol
-│   │   ├── Queueable
-│   │   └── ClientQueueable
-│   └── Models
-│       ├── Bank
-│       │   ├── Bank
-│       │   ├── BankWorker
-│       │   └── BankManager
-│       ├── Client
-│       └── Data Structure
-│           ├── Node
-│           ├── LinkedList
-│           └── ClientQueue
-└── BankManagerConsoleAppTests
-    ├── NodeTests
-    ├── LinkedListTests
-    └── ClientQueueTests
+├── Models
+│   ├── Bank
+│   │   ├── Bank.swift
+│   │   ├── BankManager.swift
+│   │   └── Banker.swift
+│   ├── Client.swift
+│   └── Data Structure
+│       ├── ClientQueue.swift
+│       ├── LinkedList.swift
+│       └── Node.swift
+├── Protocol
+│   ├── ClientQueueable.swift
+│   └── Queueable.swift
+└── main.swift
+```
+
+```
+BankManagerUIApp
+├── AppDelegate.swift
+├── SceneDelegate.swift
+├── Info.plist
+├── Base.lproj
+│   └── LaunchScreen.storyboard
+├── Controllers
+│   └── BankViewController.swift
+└── Views
+    └── MainView.swift
 ```
 
 ## ⏰ 타임라인
@@ -211,6 +218,97 @@ BankManagerConsoleApp
 - 해당 프로토콜은 Queueable을 채택받고 Queueable의 `Element`를 `Client`로 제한 시킵니다.
 
 </details>
+    
+### 👟 Step 3
+- DispatchQueue를 이용한 비동기 구현
+    - ✅ DispatchGroup 활용
+    - ✅ Custom DispatchQueue 활용
+    - ✅ DispatchSemaphore 활용
+- DIP, DI 적용
+    - ✅ Protocol을 이용한 타입 추상화 및 일반화
+    - ✅ Protocol과 Default Implementation을 이용한 DIP(의존성 역전 법칙) 적용
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+#### 1️⃣ Bank
+- `divideWork`
+    - 고객의 방문 목적에 따라 각각의 업무를 진행하도록 고객을 분리하는 메서드입니다.
+    - 각 업무는 비동기로 이루어집니다.
+#### 2️⃣ Banker
+- 기존 이름인 `BankWorker`를 `Banker`로 교체하였습니다.
+- 이제 `Bankerable`을 채택합니다.
+#### 3️⃣ BankManager
+- 이제 `BankManagable`을 채택합니다.
+#### 4️⃣ BankManagable
+- 다음 메서드를 필수 구현해야 하는 프로토콜입니다.
+    - addClientCount()
+    - resetWorkTime()
+    - addWorkTime()
+    - printWorkFinished()
+#### 5️⃣ Bankerable+
+- startWork(client:)
+    - 업무시작과 업무종료를 알리고 업무에 따라 적절한 시간을 대기하는 로직이 포함된 메서드입니다.
+- selectWork(purpose:)
+    - 업무에 따라 얼만큼 시간을 정지할지 선택하는 메서드입니다.
+
+</details>
+
+### 👟 Step 4
+- 프로젝트 관리
+    - ✅ Xcode 프로젝트 관리 구조의 이해와 응용
+    - ✅ 동시성 프로그래밍 중 UI 요소 업데이트의 주의점 이해
+- UI 구현
+    - ✅ Custom View 구현
+    - ✅ Stack View 활용
+- Model 리팩토링
+    - ✅ Operation Queue 사용
+    - ✅ Timer 사용
+    
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+#### 1️⃣ `MainView`
+- view를 그리기 위한 UI Components 와 오토레이아웃 제약조건을 설정하는 메서드를 구현하였습니다.
+- `setupStackView()`
+    - 만들어진 Component들이 들어있는 StackView에를 `MainView`의 SubViwe로 추가하고 오토레이아웃을 적용하는 메서드입니다.
+- `setupScrollView()`
+    - '대기중'과 '업무중'을 표현하기 위한 Label을 담는 StackView를 ScrollView에 추가하고 오토레이아웃을 적용하는 메서드입니다.
+#### 2️⃣ `BankViewController`
+- `addNotification()`
+    - 고객의 업무의 시작과 끝을 알리는 `NotificationCenter`를 추가하는 메서드입니다.
+- `addButtonTarget()`
+    - 고객추가와 초기화 버튼을 클릭시 동작되는 Action을 추가한 메서드입니다.
+- `addClient()`
+    - 고객추가 버튼을 누르면 `bank`의 고객을 10명 추가하고 업무를 진행시키는 메서드입니다.
+- `resetData()`
+    - bank내부의 Data를 초기화 하고 모든 대기중, 업무중인 StackView를 비어주는 메서드입니다.
+- `makeClientLabel(_:)`
+    - 대기중 StackView에 갈때 쌓일 Label들을 만드는 메서드입니다.
+- `handlingStackView(noti:)`
+    - `NotificationCenter`가 고객업무의 시작과 끝을 알리면 실행되는 메서드입니다.
+    - 업무 유형을 분별해, 어떤 StackView의 레이블을 핸들링 할지 결정합니다.
+- `handleLabel(by:noti:)`
+    - StackView에 있는 레이블과 `NotificationCenter`를 통해 전달받은 정보를 비교해 해당 레이블을 옮기거나 제거하는 메서드입니다.
+- `addToWorkingStackView(_:)`
+    - 업무중 StackView에 label을 추가해주는 메서드입니다.
+- `makeTimer()`
+    - 0.001초마다 업무시간 Label을 업데이트 하는 타이머를 활성화 시키는 메서드입니다.
+    - 타이머의 tolerance는 0.0001 입니다.
+- `makeTimeLabel(count:)`
+    - 업무시간 Label에 들어가는 시간을 00:00:000 과 같은 형식으로 변환해주는 포멧터를 적용하는 메서드입니다.
+- `pauseTimer(_:)`
+    - 대기중인 고객이 없고, 업무중인 고객이 없는 경우를 만족할때, Timer가 정지되게끔 동작하는 메서드입니다. 
+- `resetTimer()`
+    - 타이머를 비활성화 시키고, 시간 카운트와 업무시간 Label을 초기화하는 메서드입니다.
+    
+</details>
+    
 
 
 ## 🏃🏻 기술적 도전
@@ -292,6 +390,55 @@ struct Bank<Queue: ClientQueueable> {
 - 또한, 의존성 관리도구에 대한 경험이 두 팀원 모두 적어 사용하기가 비교적으로 쉽다는 CocoaPods을 선택하였습니다. 
 
 </details>
+
+### ⚙️ Timer
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+```swift
+let timer: Timer?
+    
+timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { 
+// 시간을 UI에 그리는 로직
+}
+    
+timer.tolerance = 0.0001
+```
+- `Timer` 클래스는 특정 시간 간격이 경과한 후 실행되어 지정된 메시지를 대상 개체에 보내는 객체입니다.
+- `Timer`를 활용하여 원하는 시간에 미리 설정해둔 코드블럭을 실행시키거나, 특정 간격으로 반복적으로 실행시키는 것이 가능합니다.
+- `tolerance`프로퍼티를 이용해 Timer가 이벤트를 발생시키는 것에 여유를 허용하므로써 시스템이 전원 관리와 반응성을 최적화 할 수 있습니다.
+- `tolerance`값을 설정하지 않아도 프로그램은 어느정도 여유를 허용하지만, Apple 공식 문서에서 권장하는 tolerance 값은 최소 원래 간격의 10% 이상입니다.<br><br>
+- 💡 이번 프로젝트에선 0.001초마다 UI의 업무시간을 업데이트하여 은행의 총 업무시간을 실시간으로 표현해주도록 구현해 보았습니다. 여기서 `tolerance`는 0.001초의 10%인 0.0001입니다.
+
+</details>    
+    
+### ⚙️ OperationQueue
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+```swift
+private let depositQueue = OperationQueue()
+
+depositQueue.maxConcurrentOperationCount = 2
+    
+depositQueue.addOperation {
+    // 업무를 진행하는 메서드
+}
+```
+- `Operation`은 GCD를 객체지향적으로 재탄생시킨 것입니다. Operation을 사용하면 동시성 프로그래밍과 관련된 모든 작업들은 Operation이라는 객체로서 만들어지게 됩니다.
+- `Operation`과 `OperationQueue`에서는 객체지향적으로 설계를 했기 때문에 좀 더 세부적인 스케쥴링이 가능한 장점이 있습니다.<br><br>
+- 💡 기존 GCD를 사용한 로직에서 초기화버튼을 클릭시, `DispatchQueue`의 Thread의 작업을 취소하는 로직이 필요했습니다.
+- `DispatchQueue`의 Thread 작업을 취소하기 위해서 `cancel()`과 `exit()`라는 메서드를 알아보았고, `DispatchQueue`의 Thread 작업을 취소하기 위해서는 `DispatchWorkItem`를 사용해야만 했습니다. 
+- 하지만, `DispatchWorkItem`을 사용하게되면 클로저의 캡처리스트를 사용을 할 수가 없었기 때문에 작업관리가 쉬운 Operation Queue로 변경하였습니다.
+
+</details>
+    
     
 ## 🏔 트러블 슈팅 및 고민
 ### 🚀 DIP, DI 적용시 제네릭 처리
@@ -401,6 +548,124 @@ struct LinkedList<Element> {
 
 </details>
 
+
+    
+### 💭 구조체 mutating 메서드와 클로저의 캡쳐에 대한 고민
+    
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+**고민 🤔**
+1️⃣ 왜 mutating 메서드 내부에서 클로저 사용시 캡처리스트를 해야하는지 생각해보았습니다.
+`mutating` 키워드를 사용하면 메서드가 자신의 어떠한 값이 변경될 수 있다는 뜻이고,
+컴파일러의 입장에서 `@escaping` 클로저는 `mutating` 메서드의 호출이 끝난 이후에도 값을 참조하고 변경할 수 있으므로 오류를 발생시킵니다.
+그러므로 캡쳐 리스트를 사용해 캡쳐가 할 시점을 명시해줌으로써 오류 해결한다고 생각합니다.
+2️⃣ 클로저 내부에 `mutating` 메서드를 호출할 수 없는 이유에 대한 것도 생각해보았습니다.
+`@escaping` 클로저가 외부의 값을 캡쳐해올 때 그 값은 상수로 캡쳐를 해오기 때문에
+`mutating` 메서드가 붙은 메서드를 호출하려고 하면 상수로 선언된 구조체의 값을 변경할 수 있은 메서드를 호출하는 것이므로 클로저 내부에서 `mutating` 메서드를 호출하려고 하면 컴파일 오류가 발생합니다.   
+
+</details>
+    
+### 🚀 Scroll View 오토레이아웃 세로 StackView 적용 ➡️ 가로 StackView 적용
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+**문제 👻**
+- 초기에 오토레이아웃을 상단 부를 잡고 `대기중 label`과, `ScrollView`, 내부의 `StackView`를 설정하고 이 3가지 Component를 잡을 큰 `StackView`를 생각하였습니다. 그리고 업무중 도 마찬가지로 오토레이아웃 설정을 하려했습니다.
+- 하지만 이렇게 StackView를 설정하게 될 경우 내부적으로 `ScrollView`의 오토레이아웃을 설정할 때 내부의 제약조건을 불필요하게 걸어주어야 했습니다.
+    
+**해결 🔫**
+- 더 편하게 오토레이아웃 제약을 주기 위해서 상단, 중단, 하단부를 각각의 Horizontal StackView로 잡아서 보다 편하게 해결할 수 있었습니다.
+</details>
+    
+    
+### 🚀 Waiting에서 Working으로 `Label` 이동
+    
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+**문제 👻**
+- 대기중에서 업무중으로 변경 될 때, UI상에서 대기중의 `Label`은 업무중으로 이동시켜야했고, 업무중의 Label은 삭제를 해야했습니다.
+
+**해결 🔫**    
+- 이런 이벤트들을 실시간적으로 받기 위해서 `Notification`을 사용하였습니다.
+- 그리고**대기중인 상태인지 업무중인 상태인지를 식별할 수 있는 값과 해당 label을 식별할 수 있는 client 객체**를 Controller에게 전달하는 로직을 구현하였습니다.
+```swift
+NotificationCenter.default.post(name: .client,
+                                object: client,
+                                userInfo: ["WorkState" : WorkState.start])
+// 실행할 메서드 및 로직
+NotificationCenter.default.post(name: .client,
+                                object: client,
+                                userInfo: ["WorkState" : WorkState.done])
+```    
+</details>
+
+### 🚀 StackView에서 삭제가 돌 Label을 찾는 로직 구현
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+**문제 👻**
+- 대기중에서 업무중으로 변경 될 때, UI상에서 대기중의 `Label`은 업무중으로 이동시켜야했고, 업무중의 Label은 삭제를 해야했습니다.
+
+**해결 🔫**    
+- `StackViwe`쌓인 `Label`들 중 업무가 끝나서 삭제가 필요하거나, 대기중에서 삭제가 될 `Label`을 찾는 로직이 필요하였습니다.
+- 복잡했던 logic들을 고차함수를 이용하여 점점 가독성을 높혔고, 최종적으로 고차함수와 `Label tag`를 이용하여 코드 line수를 줄여나갔습니다.
+```swift
+guard let labels = stackView.arrangedSubviews as? [UILabel],
+let targetLabel = labels.filter({ $0.tag == ticketNumber }).first else { return }
+targetLabel.removeFromSuperview()            
+```
+</details>   
+    
+### 🚀 Timer 비동기 문제
+
+<details>
+<summary> 
+펼쳐보기
+</summary>    
+    
+**문제 👻**
+```swift
+private func makeTimer() {
+    timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { _ in
+        // UI를 업데이트 하는 로직 ..
+    }
+}
+
+// 초기화 버튼을 누르면 다음 메서드가 실행    
+private func resetTimer() {
+    timer?.invalidate()
+    mainView.timeLabel.text = "업무시간 - 00:00:000"
+}
+```
+- 초기화 버튼을 누르면 `Timer`가 작업을 추가하는 걸 멈추도록 `invalidate()` 메서드를 호출하도록 구현 하였습니다.
+- 하지만 초기화 버튼을 누르는 시점이 `Timer`가 만든 코드 블럭의 처리가 완료되지 않은 시점일 경우, UI가 제대로 초기화 되지 않는 문제가 있었습니다.
+
+**해결 🔫**
+```swift
+private func resetTimer() {
+    timer?.invalidate()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+        self.mainView.timeLabel.text = "업무시간 - 00:00:000"
+    }
+}
+```
+- 이는 초기화 버튼을 누를 때, 타이머가 생성한 코드블럭이 아직 작동중이어서 생기는 문제점이었습니다. 
+- 이를 해결하기 위해, UI를 초기화 하는 로직을 0.001초 후에 실행되도록 하여 초기화 버튼을 누르는 시점이 `Timer`의 코드블럭이 실행되는 중이더라도 제대로 초기화가 되도록 구현하였습니다.
+
+</details>
+    
 ## 📝 일일 스크럼
 
 [일일 스크럼 바로가기](https://github.com/KyoPak/ios-bank-manager/wiki/3.-Bank-Manager-Scrum)
