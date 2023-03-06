@@ -26,7 +26,7 @@ class BankManagerUIAppTests: XCTestCase {
         let input: Double = 11
         
         // when
-        sut.Enqueue(data: 11)
+        sut.enqueue(data: 11)
         
         // then
         XCTAssertEqual(input, sut.head?.data )

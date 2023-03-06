@@ -20,7 +20,9 @@ struct BankQueue<T> {
     
     private(set) var head: Node<T>?
     
-    mutating func Enqueue(data: T?) {
+    // Enqueue, Dequeue, Clear, Peek, isEmpty
+    
+    mutating func enqueue(data: T?) {
         if head == nil {
             head = Node(data: data)
             return
@@ -32,9 +34,19 @@ struct BankQueue<T> {
         node?.next = Node(data: data)
     }
     
+    @discardableResult
+    mutating func dequeue() -> T? {
+        if head == nil { return nil }
+        
+        head = head?.next
+        return head?.data
+    }
+    
     func isEmpty() -> Bool {
         return head == nil
     }
     
-    // Enqueue, Dequeue, Clear, Peek, isEmpty
+    mutating func clearAll() {
+        head = nil
+    }
 }
