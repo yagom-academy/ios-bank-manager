@@ -4,3 +4,5 @@ disabled_rules:
 - line_length
 - unused_optional_binding
 - comment_spacing
+- redundant_discardable_let
+- mark
