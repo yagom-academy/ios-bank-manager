@@ -12,6 +12,10 @@ struct CustomerQueue<T> {
         return list.isEmpty
     }
     
+    var count: Int {
+        return list.count
+    }
+    
     mutating func enqueue(_ data: T) {
         list.append(data: data)
     }
