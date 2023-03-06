@@ -5,15 +5,6 @@
 //  Created by Rowan, 릴라 on 2023/03/06.
 //
 
-final class Node<T> {
-    var next: Node? = nil
-    let data: T
-    
-    init(data: T) {
-        self.data = data
-    }
-}
-
 struct LinkedList<T> {
     final private class Node<T> {
         var next: Node? = nil
