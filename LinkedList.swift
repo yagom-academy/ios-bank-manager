@@ -18,6 +18,11 @@ final class Node<T> {
 struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
+    var count: Int
+    
+    var isEmpty: Bool {
+        return self.count == 0
+    }
     
     mutating func append(data: T) {
         let node = Node(data: data)
@@ -29,5 +34,17 @@ struct LinkedList<T> {
             tail?.next = node
             tail = node
         }
+        
+        count += 1
+    }
+    
+    mutating func removeFirst() -> Node<T>? {
+        guard isEmpty == false else { return nil }
+        
+        let node = head
+        head = head?.next
+        count -= 1
+        
+        return node
     }
 }
