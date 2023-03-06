@@ -16,9 +16,9 @@ final class Node<T> {
 }
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    var count: Int
+    private(set) var head: Node<T>? = nil
+    private(set) var tail: Node<T>? = nil
+    private(set) var count: Int = 0
     
     var isEmpty: Bool {
         return self.count == 0
@@ -46,5 +46,11 @@ struct LinkedList<T> {
         count -= 1
         
         return node
+    }
+    
+    mutating func clear() {
+        head = nil
+        tail = nil
+        count = 0
     }
 }
