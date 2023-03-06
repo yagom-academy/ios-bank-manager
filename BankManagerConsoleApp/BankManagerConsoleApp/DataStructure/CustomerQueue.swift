@@ -22,9 +22,9 @@ struct CustomerQueue<T> {
     
     @discardableResult
     mutating func dequeue() -> T? {
-        guard let node = list.removeFirst() else { return nil }
+        guard let data = list.removeFirst() else { return nil }
         
-        return node.data
+        return data
     }
     
     mutating func clear() {
@@ -33,8 +33,8 @@ struct CustomerQueue<T> {
     
     @discardableResult
     func peek() -> T? {
-        guard let head = list.head else { return nil }
+        guard let data = list.headData else { return nil }
         
-        return head.data
+        return data
     }
 }
