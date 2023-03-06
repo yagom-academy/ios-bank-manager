@@ -27,4 +27,8 @@ final class BankManagerQueue<T> {
     func dequeue() -> T? {
         return linkedList.removeFirst()
     }
+    
+    func clear() {
+        linkedList.removeAll()
+    }
 }

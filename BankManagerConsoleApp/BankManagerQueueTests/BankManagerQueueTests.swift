@@ -54,4 +54,21 @@ final class BankManagerQueueTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_큐에5와6과7이있을때_clear를_호출하면_isEmpty는true다() {
+        // given
+        let headNode = Node(value: 5)
+        let centerNode = Node(value: 6)
+        let tailNode = Node(value: 7)
+        headNode.next = centerNode
+        centerNode.next = tailNode
+        let linkedList = LinkedList(head: headNode, tail: tailNode)
+        sut = BankManagerQueue(linkedList: linkedList)
+        
+        // when
+        sut.clear()
+        
+        //then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
