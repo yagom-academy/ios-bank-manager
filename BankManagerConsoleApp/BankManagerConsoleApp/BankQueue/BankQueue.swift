@@ -20,7 +20,7 @@ struct BankQueue<T> {
     }
     
     mutating func enqueue(_ data: T) {
-        linkedList.push(data)
+        linkedList.append(data)
     }
     
     mutating func dequeue() -> T? {

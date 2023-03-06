@@ -60,16 +60,16 @@ final class BankQueueTest: XCTestCase {
         //then
         XCTAssertEqual(result, expectedData)
     }
-    
+
     func test_peek호출시_값을두개넣으면_첫번째값이반환된다() {
         //given
         sut = .init()
         sut.enqueue(2.0)
         sut.enqueue(1.0)
-        
+       
         //when
-        let result = sut.peek
-        let expectedData = 1.0
+         let result = sut.peek
+        let expectedData = 2.0
         
         //then
         XCTAssertEqual(result, expectedData)
@@ -106,9 +106,9 @@ final class BankQueueTest: XCTestCase {
         
         //when
         let result = sut.dequeue()
-        let expectedData = 1.0
+        let expectedData = 2.0
         let remainData = sut.peek
-        let expectedRemainData = 2.0
+        let expectedRemainData = 1.0
         
         //then
         XCTAssertEqual(result, expectedData)

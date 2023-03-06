@@ -23,6 +23,16 @@ struct LinkedList<T> {
         }
     }
     
+    mutating func append(_ data: T) {
+        guard !isEmpty else {
+            push(data)
+            return
+        }
+        tail!.next = Node(data: data)
+        tail = tail!.next
+    }
+    
+    
     mutating func pop() -> T? {
         defer {
             head = head?.next
@@ -35,8 +45,7 @@ struct LinkedList<T> {
     }
     
     mutating func clear() {
-        while !isEmpty {
-            pop()
-        }
+        head = nil
+        tail = nil 
     }
 }
