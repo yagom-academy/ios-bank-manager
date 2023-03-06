@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
+		D01A1B1F29B5AFC10028B601 /* BankLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01A1B1E29B5AFC10028B601 /* BankLinkedList.swift */; };
+		D01A1B2129B5B3DC0028B601 /* BankNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01A1B2029B5B3DC0028B601 /* BankNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,8 @@
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		D01A1B1E29B5AFC10028B601 /* BankLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankLinkedList.swift; sourceTree = "<group>"; };
+		D01A1B2029B5B3DC0028B601 /* BankNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				D01A1B2029B5B3DC0028B601 /* BankNode.swift */,
+				D01A1B1E29B5AFC10028B601 /* BankLinkedList.swift */,
 				3673979F29B59E48007AF8FA /* .swiftlint.yml */,
 			);
 			path = BankManagerConsoleApp;
@@ -148,7 +154,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				D01A1B1F29B5AFC10028B601 /* BankLinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				D01A1B2129B5B3DC0028B601 /* BankNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
