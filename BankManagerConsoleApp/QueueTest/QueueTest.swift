@@ -44,7 +44,7 @@ final class QueueTest: XCTestCase {
     }
     
     //MARK: - enqueue test
-    func test_list가비어있지않으면_isEmpty는_false이다() {
+    func test_enqueue를실행하면_isEmpty는_false이다() {
         // given
         sut.enqueue("10")
         
@@ -53,5 +53,42 @@ final class QueueTest: XCTestCase {
         
         // then
         XCTAssertFalse(result)
+    }
+    
+    //MARK: - dequeue test
+    func test_enqueue된값이_없을때_dequeue실행시_nil을반환한다() {
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_enqueue된값이_1_2_3일때_dequeue실행시_1을반환한다() {
+        // given
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        let expectation = "1"
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    //MARK: - clear test
+    func test_clear실행시_isEmpty는_true이다() {
+        // given
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
     }
 }
