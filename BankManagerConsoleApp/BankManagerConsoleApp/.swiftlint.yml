@@ -1,7 +1,7 @@
 # swiftLint에서 기본적으로 사용하는 규칙 중 비활성화할 규칙
 disabled_rules:
 - comma # 쉼표 좌우 공백을 사용하지 않도록 하는 규칙
-- trailing_whitespae #라인 끝에 공백이 있을 경우 경고를 발생 시키는 규칙
+- trailing_whitespace #라인 끝에 공백이 있을 경우 경고를 발생 시키는 규칙
 
 # SwiftLint에서 사용하지 않는 규칙 중 활성화 할 규칙
 opt_in_rules:

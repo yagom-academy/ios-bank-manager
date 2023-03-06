@@ -4,8 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-import Foundation
-
 struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
