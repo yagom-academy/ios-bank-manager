@@ -11,4 +11,14 @@ struct CustomerQueue<T> {
     mutating func enqueue(_ data: T) {
         list.append(data: data)
     }
+    
+    mutating func dequeue() -> T? {
+        guard let node = list.removeFirst() else { return nil }
+        
+        return node.data
+    }
+    
+    mutating func clear() {
+        list.clear()
+    }
 }
