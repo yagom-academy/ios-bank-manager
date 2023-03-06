@@ -1,0 +1,49 @@
+//
+//  BankManagerQueueTests.swift
+//  BankManagerQueueTests
+//
+//  Created by brody, christy, harry on 2023/03/06.
+//
+
+import XCTest
+
+final class BankManagerQueueTests: XCTestCase {
+    private var sut: BankManagerQueue<Int>!
+    
+    override func setUpWithError() throws {
+        let linkedList = LinkedList<Int>()
+        sut = BankManagerQueue.init(linkedList: linkedList)
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+
+    func test_큐가비어있을때_enqueue로_5를추가하면_linkedList의_head의_값은5다() {
+        // given
+        let value = 5
+        let expectation = 5
+        
+        // when
+        sut.enqueue(value)
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_큐에5가있을때_enqueue로_3을추가하면_linkedList의_head의_값은5다() {
+        // given
+        let value = 5
+        let expectation = 5
+        sut.enqueue(value)
+        
+        // when
+        let input = 3
+        sut.enqueue(input)
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+}

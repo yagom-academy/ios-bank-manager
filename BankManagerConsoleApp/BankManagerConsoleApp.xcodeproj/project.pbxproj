@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		4A57F99829B5CD4900289E97 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
 		4A57F99929B5CD4B00289E97 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6257D2DF29B5B177002D0818 /* Node.swift */; };
+		4A57F99B29B5DF7500289E97 /* BankManagerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57F99A29B5DF7500289E97 /* BankManagerQueue.swift */; };
+		4A57F9A329B5DF8A00289E97 /* BankManagerQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57F9A229B5DF8A00289E97 /* BankManagerQueueTests.swift */; };
+		4A57F9A729B5E00D00289E97 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
+		4A57F9A829B5E01200289E97 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6257D2DF29B5B177002D0818 /* Node.swift */; };
+		4A57F9A929B5E02500289E97 /* BankManagerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57F99A29B5DF7500289E97 /* BankManagerQueue.swift */; };
 		6257D2E029B5B177002D0818 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6257D2DF29B5B177002D0818 /* Node.swift */; };
 		7FA2498329B5B48A0064270A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
 		7FA249AC29B5C0720064270A /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA249AB29B5C0720064270A /* LinkedListTests.swift */; };
@@ -29,6 +34,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A57F99A29B5DF7500289E97 /* BankManagerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerQueue.swift; sourceTree = "<group>"; };
+		4A57F9A029B5DF8A00289E97 /* BankManagerQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A57F9A229B5DF8A00289E97 /* BankManagerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerQueueTests.swift; sourceTree = "<group>"; };
 		6257D2DF29B5B177002D0818 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		7FA2498229B5B4890064270A /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		7FA249A929B5C0710064270A /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4A57F99D29B5DF8A00289E97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FA249A629B5C0710064270A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A57F9A129B5DF8A00289E97 /* BankManagerQueueTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A57F9A229B5DF8A00289E97 /* BankManagerQueueTests.swift */,
+			);
+			path = BankManagerQueueTests;
+			sourceTree = "<group>";
+		};
 		7FA249AA29B5C0720064270A /* LinkedListTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +92,7 @@
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				7FA249AA29B5C0720064270A /* LinkedListTests */,
+				4A57F9A129B5DF8A00289E97 /* BankManagerQueueTests */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,6 +102,7 @@
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
 				7FA249A929B5C0710064270A /* LinkedListTests.xctest */,
+				4A57F9A029B5DF8A00289E97 /* BankManagerQueueTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +114,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				6257D2DF29B5B177002D0818 /* Node.swift */,
 				7FA2498229B5B4890064270A /* LinkedList.swift */,
+				4A57F99A29B5DF7500289E97 /* BankManagerQueue.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -96,6 +122,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4A57F99F29B5DF8A00289E97 /* BankManagerQueueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A57F9A429B5DF8A00289E97 /* Build configuration list for PBXNativeTarget "BankManagerQueueTests" */;
+			buildPhases = (
+				4A57F99C29B5DF8A00289E97 /* Sources */,
+				4A57F99D29B5DF8A00289E97 /* Frameworks */,
+				4A57F99E29B5DF8A00289E97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BankManagerQueueTests;
+			productName = BankManagerQueueTests;
+			productReference = 4A57F9A029B5DF8A00289E97 /* BankManagerQueueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7FA249A829B5C0710064270A /* LinkedListTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FA249AD29B5C0720064270A /* Build configuration list for PBXNativeTarget "LinkedListTests" */;
@@ -139,6 +182,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
+					4A57F99F29B5DF8A00289E97 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					7FA249A829B5C0710064270A = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -162,11 +208,19 @@
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
 				7FA249A829B5C0710064270A /* LinkedListTests */,
+				4A57F99F29B5DF8A00289E97 /* BankManagerQueueTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4A57F99E29B5DF8A00289E97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FA249A729B5C0710064270A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,6 +231,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4A57F99C29B5DF8A00289E97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A57F9A829B5E01200289E97 /* Node.swift in Sources */,
+				4A57F9A929B5E02500289E97 /* BankManagerQueue.swift in Sources */,
+				4A57F9A729B5E00D00289E97 /* LinkedList.swift in Sources */,
+				4A57F9A329B5DF8A00289E97 /* BankManagerQueueTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FA249A529B5C0710064270A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -192,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FA2498329B5B48A0064270A /* LinkedList.swift in Sources */,
+				4A57F99B29B5DF7500289E97 /* BankManagerQueue.swift in Sources */,
 				6257D2E029B5B177002D0818 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
@@ -201,6 +267,48 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		4A57F9A529B5DF8A00289E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VS6NMW5G3Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ac.kr.harry-hyeon.BankManagerQueueTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4A57F9A629B5DF8A00289E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VS6NMW5G3Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ac.kr.harry-hyeon.BankManagerQueueTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		7FA249AE29B5C0720064270A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -379,6 +487,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4A57F9A429B5DF8A00289E97 /* Build configuration list for PBXNativeTarget "BankManagerQueueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A57F9A529B5DF8A00289E97 /* Debug */,
+				4A57F9A629B5DF8A00289E97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7FA249AD29B5C0720064270A /* Build configuration list for PBXNativeTarget "LinkedListTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
