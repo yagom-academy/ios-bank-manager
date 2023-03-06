@@ -31,11 +31,31 @@ final class CustomerQueueTest: XCTestCase {
         XCTAssertEqual(expectedResult, result)
     }
 
-    func test_() {
+    func test_dequeue호출시_Queue의_첫번째값이_반환된다() {
         // given
+        sut?.enqueue(5)
+        sut?.enqueue(10)
+        let expectedResult = 5
         
         // when
+        let result = sut?.dequeue()
         
         // then
+        XCTAssertEqual(expectedResult, result)
+    }
+    
+    func test_dequeue호출시_Queue의_Count가_1줄어든다() {
+        // given
+        sut?.enqueue(5)
+        sut?.enqueue(10)
+        let expectedResult = 1
+        
+        // when
+        sut?.dequeue()
+        let result = sut?.count
+        
+        // then
+        XCTAssertEqual(expectedResult, result)
+    
     }
 }

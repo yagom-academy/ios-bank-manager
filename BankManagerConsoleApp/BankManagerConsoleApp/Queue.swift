@@ -20,6 +20,7 @@ struct CustomerQueue<T> {
         list.append(data: data)
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         guard let node = list.removeFirst() else { return nil }
         
