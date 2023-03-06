@@ -27,4 +27,11 @@ struct LinkedList<T> {
         node?.next = Node(data: data)
         tail = node?.next
     }
+    
+    mutating func dequeue() -> T? {
+        guard let node = head else { return nil }
+        self.head = head?.next
+        
+        return node.data
+    }
 }
