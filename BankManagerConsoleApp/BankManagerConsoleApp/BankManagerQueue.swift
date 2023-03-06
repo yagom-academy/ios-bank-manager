@@ -5,7 +5,7 @@
 //  Created by brody, christy, harry on 2023/03/06.
 //
 
-final class BankManagerQueue<T> {
+struct BankManagerQueue<T> {
     private let linkedList: LinkedList<T>
     
     var peek: T? {
