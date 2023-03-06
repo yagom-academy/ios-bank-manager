@@ -6,8 +6,8 @@
 //
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     var isEmpty: Bool { head == nil }
     var peek: T? { head?.orderNumber }
     
