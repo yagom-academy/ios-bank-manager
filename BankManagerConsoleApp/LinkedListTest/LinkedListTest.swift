@@ -28,6 +28,20 @@ final class LinkedListTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
+    //MARK: - peek test
+    func test_append된값이_있을때_peek접근시_첫번째값을_반환한다() {
+        // given
+        sut.append("11")
+        sut.append("12")
+        let expectation = "11"
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
     //MARK: - append test
 
     func test_값이있는경우_isEmpty가_false다() {
@@ -93,20 +107,6 @@ final class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
         XCTAssertEqual(result2, expectation2)
-    }
-    
-    //MARK: - peek test
-    func test_append된값이_있을때_peek접근시_첫번째값을_반환한다() {
-        // given
-        sut.append("11")
-        sut.append("12")
-        let expectation = "11"
-        
-        // when
-        let result = sut.peek
-        
-        // then
-        XCTAssertEqual(result, expectation)
     }
     
     //MARK: - removeAll test

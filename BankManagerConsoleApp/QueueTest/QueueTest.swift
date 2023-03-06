@@ -20,7 +20,7 @@ final class QueueTest: XCTestCase {
         sut = nil
     }
     
-    //MARK: isEmpty test
+    //MARK: - isEmpty test
     func test_list가비어있으면_isEmpty는_true이다() {
         // when
         let result = sut.isEmpty
@@ -29,7 +29,21 @@ final class QueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    //MARK: enqueue test
+    //MARK: - peek test
+    func test_enqueue된값이_있을때_peek접근시_첫번째값을_반환한다() {
+        // given
+        sut.enqueue("1")
+        sut.enqueue("11")
+        let expectation = "1"
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    //MARK: - enqueue test
     func test_list가비어있지않으면_isEmpty는_false이다() {
         // given
         sut.enqueue("10")

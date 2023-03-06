@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B56954529B5ECF700366C7A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56954429B5ECF700366C7A /* Queue.swift */; };
+		4B56954729B5FE7B00366C7A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56954429B5ECF700366C7A /* Queue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		FB580D7929B5DEE8003E95B5 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB580D7829B5DEE8003E95B5 /* Node.swift */; };
@@ -281,6 +282,7 @@
 				FB580D8829B5E034003E95B5 /* Node.swift in Sources */,
 				FB580D8729B5E030003E95B5 /* LinkedList.swift in Sources */,
 				FB580D8329B5DF11003E95B5 /* LinkedListTest.swift in Sources */,
+				4B56954729B5FE7B00366C7A /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
