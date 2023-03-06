@@ -1,8 +1,0 @@
-disabled_rules:
-- trailing_whitespace
-- vertical_whitespace
-- line_length
-- unused_optional_binding
-- comment_spacing
-- redundant_discardable_let
-- mark
