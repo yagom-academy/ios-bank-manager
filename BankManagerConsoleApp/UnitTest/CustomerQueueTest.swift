@@ -2,7 +2,7 @@
 //  CustomerQueueTest.swift
 //  CustomerQueueTest
 //
-//  Created by Rowan on 2023/03/06.
+//  Created by 릴라, Rowan on 2023/03/06.
 //
 
 import XCTest
