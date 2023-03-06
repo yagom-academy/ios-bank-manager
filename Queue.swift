@@ -6,8 +6,12 @@
 //
 
 struct Queue<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     mutating func enqueue(_ data: T) {
         if head == nil {
@@ -28,5 +32,14 @@ struct Queue<T> {
         dequeue?.next = nil
         
         return dequeue?.data
+    }
+    
+    func peek() -> T? {
+        return head?.data
+    }
+    
+    mutating func clear() {
+        head = nil
+        tail = nil
     }
 }

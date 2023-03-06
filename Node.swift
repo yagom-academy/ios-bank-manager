@@ -6,7 +6,7 @@
 //
 
 final class Node<T> {
-    var data: T
+    let data: T
     var next: Node<T>?
     
     init(_ data: T, next: Node? = nil) {
