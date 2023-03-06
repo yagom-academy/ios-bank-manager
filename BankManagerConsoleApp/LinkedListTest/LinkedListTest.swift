@@ -28,9 +28,11 @@ final class LinkedListTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
+    //MARK: - append test
+
     func test_값이있는경우_isEmpty가_false다() {
         // given
-        sut.enqueue("1")
+        sut.append("1")
         
         // when
         let result = sut.isEmpty
@@ -39,55 +41,54 @@ final class LinkedListTest: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    //MARK: - enqueue test
-    func test_enqueue된값이없을때_dequeue실행시_nil을반환한다() {
+    //MARK: - removeFirst test
+    func test_append된값이없을때_removeFirst실행시_nil을반환한다() {
         // when
-        let result = sut.dequeue()
+        let result = sut.removeFirst()
         
         // then
         XCTAssertNil(result)
     }
     
-    //MARK: - dequeue test
-    func test_enqueue된값이_1_2_3_일때_dequeue실행시_1을반환한다() {
+    func test_append된값이_1_2_3_일때_removeFirst실행시_1을반환한다() {
         // given
-        sut.enqueue("1")
-        sut.enqueue("2")
-        sut.enqueue("3")
+        sut.append("1")
+        sut.append("2")
+        sut.append("3")
         let expectation = "1"
         
         // when
-        let result = sut.dequeue()
+        let result = sut.removeFirst()
         
         // then
         XCTAssertEqual(result, expectation)
     }
 
-    func test_enqueue된값이_있을때_dequeue실행시_head가_변경된다() {
+    func test_append된값이_있을때_removeFirst실행시_head가_변경된다() {
         // given
-        sut.enqueue("4")
-        sut.enqueue("5")
-        sut.enqueue("6")
+        sut.append("4")
+        sut.append("5")
+        sut.append("6")
         let expectation = "5"
         
         // when
-        let _ = sut.dequeue()
+        let _ = sut.removeFirst()
         let result = sut.head?.data
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_enqueue된값이_있을때_dequeue실행시_enqueue된순서대로_값을_반환한다() {
+    func test_append된값이_있을때_removeFirst실행시_append된순서대로_값을_반환한다() {
         // given
-        sut.enqueue("4")
-        sut.enqueue("5")
+        sut.append("4")
+        sut.append("5")
         let expectation = "4"
         let expectation2 = "5"
         
         // when
-        let result = sut.dequeue()
-        let result2 = sut.dequeue()
+        let result = sut.removeFirst()
+        let result2 = sut.removeFirst()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -95,10 +96,10 @@ final class LinkedListTest: XCTestCase {
     }
     
     //MARK: - peek test
-    func test_enqueue된값이_있을때_peek접근시_첫번째값을_반환한다() {
+    func test_append된값이_있을때_peek접근시_첫번째값을_반환한다() {
         // given
-        sut.enqueue("11")
-        sut.enqueue("12")
+        sut.append("11")
+        sut.append("12")
         let expectation = "11"
         
         // when
@@ -108,14 +109,14 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    //MARK: - clear test
-    func test_clear실행시_isEmpty는_true다() {
+    //MARK: - removeAll test
+    func test_removeAll실행시_isEmpty는_true다() {
         // given
-        sut.enqueue("10")
-        sut.enqueue("20")
+        sut.append("10")
+        sut.append("20")
    
         // when
-        sut.clear()
+        sut.removeAll()
         
         // then
         XCTAssertTrue(sut.isEmpty)

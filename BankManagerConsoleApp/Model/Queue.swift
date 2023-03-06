@@ -6,7 +6,7 @@
 //
 
 struct Queue<T> {
-    private(set) var list: LinkedList<T>
+    private var list = LinkedList<T>()
     var isEmpty: Bool {
         return list.isEmpty
     }
