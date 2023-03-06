@@ -36,7 +36,6 @@
 		FB580D7A29B5DEF0003E95B5 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		FB580D8029B5DF11003E95B5 /* LinkedListTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB580D8229B5DF11003E95B5 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
-		FB580D8D29B5E14B003E95B5 /* LinkedList2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedList2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB97FCE029B5E347001F18B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,13 +48,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FB580D7D29B5DF11003E95B5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB580D8A29B5E14B003E95B5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -81,7 +73,6 @@
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
 				FB580D8029B5DF11003E95B5 /* LinkedListTest.xctest */,
-				FB580D8D29B5E14B003E95B5 /* LinkedList2.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,23 +141,6 @@
 			productReference = FB580D8029B5DF11003E95B5 /* LinkedListTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FB580D8C29B5E14B003E95B5 /* LinkedList2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FB580D9129B5E14B003E95B5 /* Build configuration list for PBXNativeTarget "LinkedList2" */;
-			buildPhases = (
-				FB580D8929B5E14B003E95B5 /* Sources */,
-				FB580D8A29B5E14B003E95B5 /* Frameworks */,
-				FB580D8B29B5E14B003E95B5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LinkedList2;
-			productName = LinkedList2;
-			productReference = FB580D8D29B5E14B003E95B5 /* LinkedList2.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -180,9 +154,6 @@
 						CreatedOnToolsVersion = 12.1;
 					};
 					FB580D7F29B5DF11003E95B5 = {
-						CreatedOnToolsVersion = 14.2;
-					};
-					FB580D8C29B5E14B003E95B5 = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -202,20 +173,12 @@
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
 				FB580D7F29B5DF11003E95B5 /* LinkedListTest */,
-				FB580D8C29B5E14B003E95B5 /* LinkedList2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FB580D7E29B5DF11003E95B5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB580D8B29B5E14B003E95B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,13 +226,6 @@
 				FB580D8829B5E034003E95B5 /* Node.swift in Sources */,
 				FB580D8729B5E030003E95B5 /* LinkedList.swift in Sources */,
 				FB580D8329B5DF11003E95B5 /* LinkedListTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FB580D8929B5E14B003E95B5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,46 +405,6 @@
 			};
 			name = Release;
 		};
-		FB580D9229B5E14B003E95B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.riji.LinkedList2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FB580D9329B5E14B003E95B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.riji.LinkedList2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -515,15 +431,6 @@
 			buildConfigurations = (
 				FB580D8529B5DF11003E95B5 /* Debug */,
 				FB580D8629B5DF11003E95B5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FB580D9129B5E14B003E95B5 /* Build configuration list for PBXNativeTarget "LinkedList2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FB580D9229B5E14B003E95B5 /* Debug */,
-				FB580D9329B5E14B003E95B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

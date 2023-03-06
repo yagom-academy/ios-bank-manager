@@ -6,3 +6,4 @@ disabled_rules:
 - comment_spacing
 - redundant_discardable_let
 - mark
+- trailing_newline
