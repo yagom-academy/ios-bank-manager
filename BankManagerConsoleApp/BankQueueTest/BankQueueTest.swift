@@ -9,7 +9,7 @@ import XCTest
 
 final class BankQueueTest: XCTestCase {
     var sut: BankQueue<Double>!
-
+    
     override func tearDownWithError() throws {
         sut = nil
     }
@@ -60,15 +60,15 @@ final class BankQueueTest: XCTestCase {
         //then
         XCTAssertEqual(result, expectedData)
     }
-
+    
     func test_peek호출시_값을두개넣으면_첫번째값이반환된다() {
         //given
         sut = .init()
         sut.enqueue(2.0)
         sut.enqueue(1.0)
-       
+        
         //when
-         let result = sut.peek
+        let result = sut.peek
         let expectedData = 2.0
         
         //then

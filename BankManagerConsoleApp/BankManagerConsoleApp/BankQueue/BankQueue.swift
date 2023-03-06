@@ -14,7 +14,7 @@ struct BankQueue<T> {
     var peek: T? {
         return linkedList.peek
     }
-   
+    
     init(linkedList: LinkedList<T> = LinkedList<T>()) {
         self.linkedList = linkedList
     }

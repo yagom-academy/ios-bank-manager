@@ -46,6 +46,6 @@ struct LinkedList<T> {
     
     mutating func clear() {
         head = nil
-        tail = nil 
+        tail = nil
     }
 }
