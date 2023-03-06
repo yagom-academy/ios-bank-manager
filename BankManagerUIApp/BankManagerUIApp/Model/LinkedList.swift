@@ -8,10 +8,10 @@
 struct LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
-    private var isEmpty: Bool {
+    var isEmpty: Bool {
         return head == nil
     }
-    private var peek: T? {
+    var peek: T? {
         return self.head?.data
     }
     

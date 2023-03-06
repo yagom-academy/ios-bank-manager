@@ -3,3 +3,4 @@ disabled_rules:
 - vertical_whitespace
 - line_length
 - unused_optional_binding
+- comment_spacing
