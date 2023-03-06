@@ -8,6 +8,10 @@
 struct CustomerQueue<T> {
     private var list: LinkedList<T> = LinkedList()
     
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+    
     mutating func enqueue(_ data: T) {
         list.append(data: data)
     }
@@ -20,5 +24,11 @@ struct CustomerQueue<T> {
     
     mutating func clear() {
         list.clear()
+    }
+    
+    func peek() -> T? {
+        guard let head = list.head else { return nil }
+        
+        return head.data
     }
 }
