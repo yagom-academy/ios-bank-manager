@@ -19,16 +19,12 @@ struct LinkedList<T> {
         if isEmpty {
             self.head = Node(data: data)
             self.tail = head
+            
+            return
         }
         
-        var node = self.head
-        
-        while node?.next != nil {
-            node = node?.next
-        }
-        
-        node?.next = Node(data: data)
-        self.tail = node?.next
+        tail?.next = Node(data: data)
+        self.tail = tail?.next
     }
     
     mutating func dequeue() -> T? {
