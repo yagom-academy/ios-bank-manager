@@ -41,4 +41,9 @@ final class LinkedList<T> {
         
         return value
     }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
+    }
 }

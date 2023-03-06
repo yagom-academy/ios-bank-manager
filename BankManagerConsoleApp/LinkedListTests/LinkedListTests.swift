@@ -54,7 +54,7 @@ final class LinkedListTests: XCTestCase {
     func test_LinkedList에_노드가하나있을때_removeFirst를호출하면_head와tail은_nil이다() {
         // given
         let node = Node(value: 5)
-        sut = LinkedList<Int>(head: node, tail: node)
+        sut = LinkedList(head: node, tail: node)
         
         // when
         sut.removeFirst()
@@ -71,7 +71,7 @@ final class LinkedListTests: XCTestCase {
         let headNode = Node(value: 5)
         let tailNode = Node(value: 6)
         headNode.next = tailNode
-        sut = LinkedList<Int>(head: headNode, tail: tailNode)
+        sut = LinkedList(head: headNode, tail: tailNode)
         let expectation = 5
         
         // when
@@ -80,5 +80,22 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_LinkedList에_5와6과7이있을때_removeAll을호출하면_3개의node가nil이다() {
+        // given
+        let headNode = Node(value: 5)
+        let centerNode = Node(value: 6)
+        let tailNode = Node(value: 7)
+        headNode.next = centerNode
+        centerNode.next = tailNode
+        sut = LinkedList(head: headNode, tail: tailNode)
+        
+        // when
+        sut.removeAll()
+        
+        // then
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.head?.next)
+        XCTAssertNil(sut.tail)
+    }
 }
-
