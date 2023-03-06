@@ -56,6 +56,42 @@ final class CustomerQueueTest: XCTestCase {
         
         // then
         XCTAssertEqual(expectedResult, result)
+    }
     
+    func test_isEmpty호출시_Queue가비어있다면_true반환한다() {
+        // given
+        let expectedResult = true
+        
+        // when
+        let result = sut?.isEmpty
+        
+        // then
+        XCTAssertEqual(expectedResult, result)
+    }
+    
+    func test_isEmpty호출시_Queue가비어있지않다면_false반환한다() {
+        // given
+        sut?.enqueue(5)
+        let expectedResult = false
+        
+        // when
+        let result = sut?.isEmpty
+        
+        // then
+        XCTAssertEqual(expectedResult, result)
+    }
+    
+    func test_clear호출시_Queue가비워진다() {
+        // given
+        sut?.enqueue(5)
+        sut?.enqueue(10)
+        let expectedResult = true
+        
+        // when
+        sut?.clear()
+        let result = sut?.isEmpty
+        
+        // then
+        XCTAssertEqual(expectedResult, result)
     }
 }
