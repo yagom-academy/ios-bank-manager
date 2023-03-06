@@ -1,5 +1,9 @@
-//  BankManagerConsoleApp - Queue.swift
+//
+//  Queue.swift
+//  BankManagerConsoleApp
+//
 //  created by vetto, kokkilE on 2023/03/06
+//
 
 struct Queue<T> {
     private(set) var linkedList = LinkedList<T>()
