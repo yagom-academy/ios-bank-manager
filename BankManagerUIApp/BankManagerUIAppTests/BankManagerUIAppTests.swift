@@ -34,11 +34,57 @@ class BankManagerUIAppTests: XCTestCase {
     
     func test_head에_값이없을때_isEmpty를호출할경우_true를반환하는지_확인하는함수() {
         // given
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 12)
         
         // when
+        sut.dequeue()
+        sut.dequeue()
         
         // then
         XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_dequeue함수호출을하면_처음들어온값을_삭제하는지_확인하는함수() {
+        // given
+        let input: Double = 12
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 12)
+        
+        // when
+        sut.dequeue()
+        
+        // then
+        XCTAssertEqual(input, sut.head?.data)
+    }
+    
+    func test_clearAll함수를호출할경우_모든값이삭제되는지_확인하는함수() {
+        // given
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 13)
+        sut.enqueue(data: 15)
+        sut.enqueue(data: 17)
+        
+        // when
+        sut.clearAll()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_peek함수호출시_현재List의첫번째값을_반환하는지_확인하는함수() {
+        // given
+        let input: Double = 13
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 13)
+        sut.dequeue()
+        sut.enqueue(data: 15)
+        
+        // when
+        let result = sut.peek()
+        
+        // then
+        XCTAssertEqual(input, result)
     }
 
 }

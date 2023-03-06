@@ -20,8 +20,6 @@ struct BankQueue<T> {
     
     private(set) var head: Node<T>?
     
-    // Enqueue, Dequeue, Clear, Peek, isEmpty
-    
     mutating func enqueue(data: T?) {
         if head == nil {
             head = Node(data: data)
@@ -39,6 +37,10 @@ struct BankQueue<T> {
         if head == nil { return nil }
         
         head = head?.next
+        return head?.data
+    }
+    
+    func peek() -> T? {
         return head?.data
     }
     
