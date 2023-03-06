@@ -11,6 +11,9 @@ struct LinkedList<T> {
     private var isEmpty: Bool {
         return head == nil
     }
+    private var peek: T? {
+        return self.head?.data
+    }
     
     mutating func enqueue(_ data: T) {
         if isEmpty {
