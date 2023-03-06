@@ -31,6 +31,7 @@ struct CustomerQueue<T> {
         list.clear()
     }
     
+    @discardableResult
     func peek() -> T? {
         guard let head = list.head else { return nil }
         

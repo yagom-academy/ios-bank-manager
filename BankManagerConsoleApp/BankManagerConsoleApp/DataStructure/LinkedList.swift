@@ -6,7 +6,6 @@
 //
 
 final class Node<T> {
-    var previous: Node? = nil
     var next: Node? = nil
     let data: T
     
@@ -27,7 +26,7 @@ struct LinkedList<T> {
     mutating func append(data: T) {
         let node = Node(data: data)
         
-        if head == nil {
+        if count == 0 {
             head = node
             tail = node
         } else {
@@ -44,6 +43,10 @@ struct LinkedList<T> {
         let node = head
         head = head?.next
         count -= 1
+        
+        if count == 0 {
+            tail = nil
+        }
         
         return node
     }
