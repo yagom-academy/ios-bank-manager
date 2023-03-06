@@ -77,4 +77,47 @@ final class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_enqueue된값이_있을때_dequeue실행시_enqueue된순서대로_값을_반환한다() {
+        // given
+        sut.enqueue("4")
+        sut.enqueue("5")
+        let expectation = "4"
+        let expectation2 = "5"
+        
+        // when
+        let result = sut.dequeue()
+        let result2 = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result2, expectation2)
+    }
+    
+    //MARK: - peek test
+    func test_enqueue된값이_있을때_peek접근시_첫번째값을_반환한다() {
+        // given
+        sut.enqueue("11")
+        sut.enqueue("12")
+        let expectation = "11"
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    //MARK: - clear test
+    func test_clear실행시_isEmpty는_true다() {
+        // given
+        sut.enqueue("10")
+        sut.enqueue("20")
+   
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
  }
