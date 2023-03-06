@@ -8,25 +8,37 @@ import XCTest
 @testable import BankManagerUIApp
 
 class BankManagerUIAppTests: XCTestCase {
+    
+    var sut: BankQueue<Double>!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = BankQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_enqueue함수호출로_값을넣으면_값이삽입되는지확인하는함수() {
+        // given
+        let input: Double = 11
+        
+        // when
+        sut.Enqueue(data: 11)
+        
+        // then
+        XCTAssertEqual(input, sut.head?.data )
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_head에_값이없을때_isEmpty를호출할경우_true를반환하는지_확인하는함수() {
+        // given
+        
+        // when
+        
+        // then
+        XCTAssertTrue(sut.isEmpty())
     }
 
 }

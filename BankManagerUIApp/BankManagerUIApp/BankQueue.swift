@@ -9,13 +9,32 @@ import Foundation
 
 struct BankQueue<T> {
     final class Node<T> {
-        private var data: T?
-        private var next: Node?
+        var data: T?
+        var next: Node?
         
         init(data: T?, next: Node? = nil) {
             self.data = data
             self.next = next
         }
     }
-    private var head: Node<T>?
+    
+    private(set) var head: Node<T>?
+    
+    mutating func Enqueue(data: T?) {
+        if head == nil {
+            head = Node(data: data)
+            return
+        }
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data: data)
+    }
+    
+    func isEmpty() -> Bool {
+        return head == nil
+    }
+    
+    // Enqueue, Dequeue, Clear, Peek, isEmpty
 }
