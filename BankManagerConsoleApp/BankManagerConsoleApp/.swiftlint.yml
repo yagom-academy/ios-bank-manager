@@ -1,0 +1,36 @@
+# swiftLint에서 기본적으로 사용하는 규칙 중 비활성화할 규칙
+disabled_rules:
+- comma # 쉼표 좌우 공백을 사용하지 않도록 하는 규칙
+- trailing_whitespae #라인 끝에 공백이 있을 경우 경고를 발생 시키는 규칙
+
+# SwiftLint에서 사용하지 않는 규칙 중 활성화 할 규칙
+opt_in_rules:
+    - empty_count # 비어있는 Collenction이나 String 사용 방지
+    - force_unwrapping # 강제 언래핑 검사
+    - sorted_imports #임포트를 자동으로 알파벳 순으로 정렬
+    
+# self를 명시하지 않은 인스턴스 메서드나 프로퍼티에 경고를 발생 시킴
+analyzer_rules:
+    - explicit_self
+
+# SwiftLint 적용할 파일
+included:
+    - BankMangerConsoleApp
+
+# SwiftLint 적용하지 않는 파일
+excluded:
+    - Source/ExcludedFolder
+
+# true : SwiftLint 대상 파일이 없어도 종료한다.
+# false : SwiftLint 대상 파일이 없으면 SwiftLint 실패
+allow_zero_lintable_files: false
+
+# 최대 글자 길이
+line_length: 100
+
+# 콜론(:)을 사용할 때는 콜론의 오른쪽에만 공백
+colon:
+    style: nospace
+
+# SwiftLint 검사 결과를 출력할 때 사용할 Reporter 타입을 설정하는 부분
+reporter: "xcode"
