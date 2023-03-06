@@ -15,7 +15,7 @@ struct LinkedList<T> {
         return self.head?.data
     }
     
-    mutating func enqueue(_ data: T) {
+    mutating func append(_ data: T) {
         if isEmpty {
             self.head = Node(data: data)
             self.tail = head
@@ -27,16 +27,15 @@ struct LinkedList<T> {
         self.tail = tail?.next
     }
     
-    mutating func dequeue() -> T? {
+    mutating func removeFirst() -> T? {
         guard let node = head else { return nil }
         self.head = head?.next
         
         return node.data
     }
     
-    mutating func clear() {
+    mutating func removeAll() {
         self.head = nil
         self.tail = nil
     }
 }
-
