@@ -12,10 +12,8 @@ final class LinkedList<T> {
     private(set) var tail: Node<T>?
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
-        
         self.head = head
         self.tail = tail
-        
     }
     
     func appendLast(value: T) {

@@ -46,4 +46,12 @@ final class BankManagerQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_큐가비어있을때_dequeue를_호출하면_nil을반환한다() {
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
 }

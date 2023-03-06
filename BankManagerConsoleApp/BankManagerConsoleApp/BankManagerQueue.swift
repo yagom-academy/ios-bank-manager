@@ -12,6 +12,10 @@ final class BankManagerQueue<T> {
         linkedList.head?.value
     }
     
+    var isEmpty: Bool {
+        linkedList.head == nil ? true : false
+    }
+    
     init(linkedList: LinkedList<T>) {
         self.linkedList = linkedList
     }
@@ -20,4 +24,7 @@ final class BankManagerQueue<T> {
         linkedList.appendLast(value: value)
     }
     
+    func dequeue() -> T? {
+        return linkedList.removeFirst()
+    }
 }
