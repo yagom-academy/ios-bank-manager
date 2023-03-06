@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A57F99829B5CD4900289E97 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
+		4A57F99929B5CD4B00289E97 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6257D2DF29B5B177002D0818 /* Node.swift */; };
 		6257D2E029B5B177002D0818 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6257D2DF29B5B177002D0818 /* Node.swift */; };
 		7FA2498329B5B48A0064270A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
 		7FA249AC29B5C0720064270A /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA249AB29B5C0720064270A /* LinkedListTests.swift */; };
@@ -179,6 +181,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A57F99929B5CD4B00289E97 /* Node.swift in Sources */,
+				4A57F99829B5CD4900289E97 /* LinkedList.swift in Sources */,
 				7FA249AC29B5C0720064270A /* LinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,7 +207,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CXGQQN2D22;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -224,7 +228,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CXGQQN2D22;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;

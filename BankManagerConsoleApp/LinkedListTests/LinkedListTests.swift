@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
 
 final class LinkedListTests: XCTestCase {
     var sut: LinkedList<Int>!
@@ -28,8 +27,22 @@ final class LinkedListTests: XCTestCase {
         let result = sut.head?.value
         
         // then
-        XCTAssertEqual(expectation, result)
+        XCTAssertEqual(result, expectation)
         
+    }
+    
+    func test_List에_노드가있을때_appendLast로_6을추가하면_tail의값은6이다() {
+        // given
+        sut = LinkedList<Int>()
+        sut.appendLast(value: 5)
+        let expectation = 6
+        
+        // when
+        sut.appendLast(value: 6)
+        let result = sut.tail?.value
+        
+        // then
+        XCTAssertEqual(result, expectation)
     }
 }
 
