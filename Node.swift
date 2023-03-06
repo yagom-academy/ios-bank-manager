@@ -1,6 +1,6 @@
 //
 //  Node.swift
-//  BankManagerConsoleApp
+//  BankManagerUIApp
 //
 //  Created by kaki, songjun on 2023/03/06.
 //
