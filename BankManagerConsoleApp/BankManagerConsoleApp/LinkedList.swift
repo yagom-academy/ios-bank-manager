@@ -12,8 +12,10 @@ final class LinkedList<T> {
     private(set) var tail: Node<T>?
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
+        
         self.head = head
         self.tail = tail
+        
     }
     
     func appendLast(value: T) {
@@ -24,5 +26,19 @@ final class LinkedList<T> {
             tail?.next = Node(value: value)
             tail = tail?.next
         }
+    }
+    
+    @discardableResult
+    func removeFirst() -> T? {
+        guard head != nil else { return nil }
+        
+        let value = head?.value
+        head = head?.next
+        
+        if head == nil {
+            tail = nil
+        }
+        
+        return value
     }
 }
