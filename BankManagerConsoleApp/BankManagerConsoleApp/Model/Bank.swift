@@ -9,7 +9,12 @@ import Foundation
 
 struct Bank {
     let bankers: [Banker]
+    var customerQueue: CustomerQueue<Customer> = CustomerQueue()
     
-    
-    //뱅커한테 일시키기
+    func open() {
+        
+    }
+    ///Todo
+    ///1. 뱅커한테 일시키기
+    ///2. 고객 받기
 }
