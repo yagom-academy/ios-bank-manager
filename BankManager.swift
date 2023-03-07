@@ -14,15 +14,10 @@ struct BankManager {
         
         let queueItem = DispatchWorkItem {
             print("\(customer.number)번 고객 업무 시작")
+            Thread.sleep(forTimeInterval: 0.7)
             print("\(customer.number)번 고객 업무 완료")
         }
         
-        serialQueue.asyncAfter(deadline: .now() + 1, execute: queueItem)
-    }
-    
-    func aaa() {
-        serialQueue.asyncAfter(deadline: .now() + 1) {
-            work()
-        }
+        serialQueue.sync(execute: queueItem)
     }
 }

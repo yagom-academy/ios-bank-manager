@@ -39,7 +39,7 @@ struct Bank {
     mutating func doWork(customer: Customer) {
         manager.customer = customer
         
-        manager.aaa()
+        manager.work()
     }
     
     mutating func run() {
