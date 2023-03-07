@@ -7,8 +7,4 @@
 
 struct BankClient {
     let waitingNumber: Int
-    
-    init(waitingNumber: Int) {
-        self.waitingNumber = waitingNumber
-    }
 }

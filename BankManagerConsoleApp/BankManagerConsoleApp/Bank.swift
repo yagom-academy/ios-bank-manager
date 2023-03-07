@@ -31,6 +31,8 @@ struct Bank {
     }
     
     private mutating func assignClientsToBankTeller() {
+        numberOfClient = 0
+        
         while let client = clientQueue.dequeue() {
             bankTeller[0].receiveClient(bankClient: client)
             numberOfClient += 1
@@ -43,7 +45,7 @@ struct Bank {
         numberFormatter.maximumFractionDigits = 2
         numberFormatter.minimumFractionDigits = 2
         
-        guard let workTime = numberFormatter.string(for: Double(numberOfClient) * 0.7) else { return }
+        guard let workTime = numberFormatter.string(for: Double(numberOfClient) * bankTeller[0].requiredTime) else { return }
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(workTime)초입니다.")
     }

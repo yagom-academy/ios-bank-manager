@@ -8,9 +8,11 @@
 import Foundation
 
 struct BankTeller {
+    let requiredTime: Double = 0.7
+    
     func receiveClient(bankClient: BankClient) {
         print("\(bankClient.waitingNumber)번 고객 업무 시작")
-        usleep(700000)
+        Thread.sleep(forTimeInterval: requiredTime)
         print("\(bankClient.waitingNumber)번 고객 업무 완료")
     }
 }
