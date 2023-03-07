@@ -6,7 +6,7 @@
 //
 
 struct BankManager {
-    var bank = Bank()
+    private var bank = Bank()
     
     mutating func startBankManager() {
         while true {
@@ -24,13 +24,13 @@ struct BankManager {
         }
     }
     
-    func printBankMenu() {
+    private func printBankMenu() {
         print("1 : 은행 개점")
         print("2 : 종료")
         print("입력 : ", terminator: "")
     }
     
-    func receiveUserInput() -> String? {
+    private func receiveUserInput() -> String? {
         let userInput = readLine()
         
         return userInput
