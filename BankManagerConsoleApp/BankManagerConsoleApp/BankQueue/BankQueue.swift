@@ -15,10 +15,6 @@ struct BankQueue<T> {
         return linkedList.peek
     }
     
-    init(linkedList: LinkedList<T> = LinkedList<T>()) {
-        self.linkedList = linkedList
-    }
-    
     mutating func enqueue(_ data: T) {
         linkedList.append(data)
     }
