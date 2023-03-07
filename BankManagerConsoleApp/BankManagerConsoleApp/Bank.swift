@@ -39,9 +39,7 @@ struct Bank {
     mutating func doWork(customer: Customer) {
         manager.customer = customer
         
-        print("\(customer.number)번 고객 업무 시작")
-        // manager 일하기
-        print("\(customer.number)번 고객 업무 완료")
+        manager.aaa()
     }
     
     mutating func run() {

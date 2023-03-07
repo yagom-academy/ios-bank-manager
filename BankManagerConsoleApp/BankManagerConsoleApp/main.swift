@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+var a = Bank()
+a.printMenu()
