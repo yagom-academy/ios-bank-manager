@@ -45,6 +45,22 @@ class BankManagerUIAppTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
+    func test_head에_값이_남아있다면_isEmpty를_호출할경우_false를_반환하는지_확인하는함수() {
+        // given
+        sut.enqueue(data: 5)
+        sut.enqueue(data: 12)
+        sut.enqueue(data: 32)
+        sut.enqueue(data: 71)
+        
+        // when
+        sut.dequeue()
+        sut.dequeue()
+        
+        // then
+        XCTAssertFalse(sut.isEmpty())
+    
+    }
+    
     func test_dequeue함수호출을하면_처음들어온값을_삭제하는지_확인하는함수() {
         // given
         let input: Double = 12
