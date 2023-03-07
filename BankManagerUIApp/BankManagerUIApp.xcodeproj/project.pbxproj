@@ -104,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				710FAE4729B5AE5500CE91A7 /* BankQueue.swift */,
+				71A09F1029B6E8DE0015C160 /* BankManager.swift */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				71A09F1029B6E8DE0015C160 /* BankManager.swift */,
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
 				C7694E40259C3E9F0053667F /* Main.storyboard */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
