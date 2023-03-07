@@ -1,6 +1,6 @@
 //
 //  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
+//  Created by 레옹아범, 혜모리.
 //  Copyright © yagom academy. All rights reserved.
 // 
 
