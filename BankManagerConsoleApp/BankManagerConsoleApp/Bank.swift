@@ -7,6 +7,7 @@
 
 struct Bank {
     private var customers: Queue<Customer> = Queue()
+    private var manager: BankManager = BankManager()
     
     func printMenu() {
         print("1 : 은행개점\n2 : 종료")
@@ -31,5 +32,13 @@ struct Bank {
         for count in 1...customerCount {
             customers.enqueue(Customer(number: count))
         }
+    }
+    
+    mutating func doWork(customer: Customer) {
+        manager.customer = customer
+        
+        print("\(customer.number)번 고객 업무 시작")
+        // manager 일하기
+        print("\(customer.number)번 고객 업무 완료")
     }
 }
