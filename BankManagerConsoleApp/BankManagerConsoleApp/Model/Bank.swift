@@ -6,9 +6,14 @@
 //
 
 final class Bank {
-    private var bankers: [Banker] = []
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var bankers: [Banker] = []
+    private let numberOfBanker: Int
     private(set) var totalCustomer: Int = 10
+    
+    init(numberOfBanker: Int = 1) {
+        self.numberOfBanker = numberOfBanker
+    }
     
     func open() {
         setBankers()
@@ -17,9 +22,10 @@ final class Bank {
     }
 
     private func setBankers() {
-        let banker = Banker()
-
-        bankers.append(banker)
+        for _ in 1...numberOfBanker {
+            let banker = Banker()
+            bankers.append(banker)
+        }
     }
     
     private func receiveCustomer() {
