@@ -9,7 +9,18 @@ struct Bank {
     private let bankers: [Banker]
     private var customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
     
-    init(bankers: [Banker]) {
-        self.bankers = bankers
+    init(bankersCount: Int) {
+        self.bankers = .init(repeating: Banker(), count: bankersCount)
+        
+        let numberOfCustomer = Int.random(in: 10...30)
+        
+        for waitingNumber in 1...numberOfCustomer {
+            let customer = Customer(waitingNumber: waitingNumber)
+            customerQueue.enqueue(customer)
+        }
+    }
+    
+    func startWork() {
+        
     }
 }
