@@ -25,11 +25,11 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() -> T? {
-        let firstNode = head
-        
         guard isEmpty == false else {
             return nil
         }
+        
+        let firstNode = head
         
         head = firstNode?.next
         return firstNode?.orderNumber
