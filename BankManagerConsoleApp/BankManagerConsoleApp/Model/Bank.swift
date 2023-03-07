@@ -8,34 +8,37 @@
 import Foundation
 
 struct Bank {
-    var bankers: [Banker]
+    var bankers: [Banker] = []
     var customerQueue: CustomerQueue<Customer> = CustomerQueue()
     
-    func open() {
+    mutating func open() -> Int {
+        setBankers()
+        receiveCustomer()
+        let totalCustomer = customerQueue.count
         
+        orderWork()
+        
+        return totalCustomer
     }
-    ///Todo
-    ///1. 뱅커한테 일시키기
-    ///2. 고객 받기
-    
+
     mutating func setBankers() {
         let yagom = Banker(name: "야곰")
         bankers.append(yagom)
     }
     
     mutating func receiveCustomer() {
-        guard let numberOfCustomer = (10...30).randomElement() else { return }
+        guard let totalCustomer = (10...30).randomElement() else { return }
         
-        for number in 0...numberOfCustomer {
+        for number in 0...totalCustomer {
             let customer = Customer(numberTicket: number.description)
             customerQueue.enqueue(customer)
         }
     }
     
     mutating func orderWork() {
-        let numberOfCustomer = customerQueue.count
+        let totalCustomer = customerQueue.count
         
-        for _ in 0...numberOfCustomer {
+        for _ in 0...totalCustomer {
             bankers.forEach { banker in
                 let customer = customerQueue.dequeue()
                 banker.doWork(for: customer)

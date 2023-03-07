@@ -9,13 +9,13 @@ import Foundation
 
 struct Banker {
     let name: String
-    let processTime: Double = 0.7
+    static let processTime: Double = 0.7
     
     func doWork(for customer: Customer?) {
         guard let currentCustomer = customer else { return }
         
         print("\(currentCustomer.numberTicket)번 고객 업무 시작")
-        sleep(UInt32(processTime))
+        sleep(UInt32(Banker.processTime))
         print("\(currentCustomer.numberTicket)번 고객 업무 완료")
     }
 }
