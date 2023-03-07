@@ -16,22 +16,16 @@ struct LinkedList<T> {
         return head?.data
     }
     
-    mutating func push(_ data: T) {
-        head = Node(data: data, next: head)
-        if tail == nil {
-            tail = head
-        }
-    }
-    
     mutating func append(_ data: T) {
-        guard !isEmpty else {
-            push(data)
-            return
+        let node = Node(data: data)
+        if isEmpty {
+            head = node
+            tail = node
+        } else {
+            tail?.next = node
+            tail = node
         }
-        tail!.next = Node(data: data)
-        tail = tail!.next
     }
-    
     
     mutating func pop() -> T? {
         defer {
