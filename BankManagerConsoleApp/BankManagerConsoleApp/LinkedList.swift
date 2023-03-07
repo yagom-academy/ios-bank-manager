@@ -4,6 +4,7 @@
 //
 //  Created by brody, christy, harry on 2023/03/06.
 //
+import Foundation
 
 final class LinkedList<T> {
     private(set) var head: Node<T>?

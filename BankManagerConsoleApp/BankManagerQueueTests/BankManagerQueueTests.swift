@@ -10,12 +10,12 @@ import XCTest
 final class BankManagerQueueTests: XCTestCase {
     private var sut: BankManagerQueue<Int>!
     
-    override func setUpWithError() throws {
+    override func setUp() {
         let linkedList = LinkedList<Int>()
         sut = BankManagerQueue.init(linkedList: linkedList)
     }
-
-    override func tearDownWithError() throws {
+    
+    override func tearDown() {
         sut = nil
     }
 

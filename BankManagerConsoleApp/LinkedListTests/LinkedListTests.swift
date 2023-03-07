@@ -10,11 +10,11 @@ import XCTest
 final class LinkedListTests: XCTestCase {
     private var sut: LinkedList<Int>!
 
-    override func setUpWithError() throws {
+    override func setUp() {
         sut = LinkedList<Int>()
     }
-
-    override func tearDownWithError() throws {
+    
+    override func tearDown() {
         sut = nil
     }
     
