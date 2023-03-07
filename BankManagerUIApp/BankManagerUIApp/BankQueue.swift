@@ -21,7 +21,7 @@ struct BankQueue<T> {
     private(set) var head: Node<T>?
     
     mutating func enqueue(data: T?) {
-        if head == nil {
+        guard head != nil else {
             head = Node(data: data)
             return
         }
@@ -34,7 +34,7 @@ struct BankQueue<T> {
     
     @discardableResult
     mutating func dequeue() -> T? {
-        if head == nil { return nil }
+        guard head != nil else { return nil }
         
         head = head?.next
         return head?.data
