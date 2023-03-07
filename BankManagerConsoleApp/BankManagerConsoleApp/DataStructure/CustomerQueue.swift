@@ -6,7 +6,7 @@
 //
 
 struct CustomerQueue<T> {
-    private var list: LinkedList<T> = LinkedList()
+    private let list: LinkedList<T> = LinkedList()
 
     var isEmpty: Bool {
         return list.isEmpty
@@ -22,9 +22,7 @@ struct CustomerQueue<T> {
 
     @discardableResult
     func dequeue() -> T? {
-        guard let data = list.removeFirst() else { return nil }
-
-        return data
+        return list.removeFirst()
     }
 
     func clear() {
@@ -33,8 +31,6 @@ struct CustomerQueue<T> {
 
     @discardableResult
     func peek() -> T? {
-        guard let data = list.headData else { return nil }
-
-        return data
+        return list.headData
     }
 }

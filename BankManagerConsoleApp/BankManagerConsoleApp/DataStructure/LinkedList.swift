@@ -42,8 +42,6 @@ final class LinkedList<T> {
     }
 
     func removeFirst() -> T? {
-        guard isEmpty == false else { return nil }
-
         let node = head
         head = head?.next
         count -= 1
