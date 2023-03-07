@@ -7,8 +7,8 @@
 import Foundation
 
 struct BankManager {
-    var clientNumber = 0
-    var waitingQueue = Queue<String>()
+    private var clientNumber = 0
+    private var waitingQueue = Queue<String>()
     
     mutating func setupWaitingQueueAndClientNumber() {
         for number in 1...Int.random(in: 10...30) {
