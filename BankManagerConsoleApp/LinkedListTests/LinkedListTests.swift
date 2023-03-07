@@ -73,13 +73,13 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_peek의값과_removeFirst호출시_삭제된head의orderNumber값과같다() {
+    func test_빈List에_1을_추가할_경우_peek의_값은_1이다() {
         // given
         sut.appendLast("1")
-        let expectation = sut.peek
+        let expectation = "1"
 
         // when
-        let result = sut.removeFirst()
+        let result = sut.peek
 
         // then
         XCTAssertEqual(result, expectation)
