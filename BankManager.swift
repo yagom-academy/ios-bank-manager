@@ -5,3 +5,12 @@
 //
 
 import Foundation
+
+struct BankManager {
+    let bank: Bank
+    
+    //메뉴 띄우기
+    func printMenu() {
+        
+    }
+}
