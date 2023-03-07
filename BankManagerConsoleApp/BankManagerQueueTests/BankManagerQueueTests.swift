@@ -55,6 +55,22 @@ final class BankManagerQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
+    func test_큐에5가있을때_dequeue를_호출하면_5가반환되고_isEmpty는_true이다() {
+        // given
+        let headNode = Node(value: 5)
+        let tailNode = headNode
+        let linkedList = LinkedList(head: headNode, tail: tailNode)
+        sut = BankManagerQueue(linkedList: linkedList)
+        let dequeueExpectation = 5
+        
+        // when
+        let returnResult = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(returnResult, dequeueExpectation)
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
     func test_큐에5와6과7이있을때_clear를_호출하면_isEmpty는true다() {
         // given
         let headNode = Node(value: 5)
