@@ -21,10 +21,11 @@ struct BankQueue<T> {
     private(set) var head: Node<T>?
     
     mutating func enqueue(data: T?) {
-        guard head != nil else {
+        guard isEmpty() == false else {
             head = Node(data: data)
             return
         }
+        
         var node = head
         while node?.next != nil {
             node = node?.next
@@ -34,14 +35,14 @@ struct BankQueue<T> {
     
     @discardableResult
     mutating func dequeue() -> T? {
-        guard head != nil else { return nil }
+        guard isEmpty() == false else { return nil }
         
         head = head?.next
         return head?.data
     }
     
     func peek() -> T? {
-        return head?.data
+        head?.data
     }
     
     func isEmpty() -> Bool {
