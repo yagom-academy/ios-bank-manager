@@ -20,8 +20,9 @@ final class Bank {
     }
 
     private func setBankers() {
-        let yagom = Banker(name: "야곰")
-        bankers.append(yagom)
+        let banker = Banker()
+
+        bankers.append(banker)
     }
     
     private func receiveCustomer() {

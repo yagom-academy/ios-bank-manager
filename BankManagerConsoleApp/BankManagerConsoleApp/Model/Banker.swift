@@ -9,13 +9,15 @@ import Foundation
 
 struct Banker {
     static let processTime: Double = 0.7
-    let name: String
     
     func doWork(for customer: Customer?) {
         guard let currentCustomer = customer else { return }
         
-        print("\(currentCustomer.numberTicket)번 고객 업무 시작")
+        let startMessage = "\(currentCustomer.numberTicket)번 고객 업무 시작"
+        let endMessage = "\(currentCustomer.numberTicket)번 고객 업무 완료"
+        
+        print(startMessage)
         Thread.sleep(forTimeInterval: Banker.processTime)
-        print("\(currentCustomer.numberTicket)번 고객 업무 완료")
+        print(endMessage)
     }
 }
