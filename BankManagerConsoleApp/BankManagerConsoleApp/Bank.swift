@@ -4,6 +4,7 @@
 //
 //  Created by brody, christy, harry on 2023/03/07.
 //
+import Foundation
 
 struct Bank {
     private let bankers: [Banker]
@@ -20,7 +21,21 @@ struct Bank {
         }
     }
     
-    func startWork() {
-        
+    func open() {
+        var completedJobCount = 0.0
+        let startTime = CFAbsoluteTimeGetCurrent()
+        while customerQueue.isEmpty == false {
+            guard let currentCustomer = customerQueue.dequeue() else { return }
+            bankers[0].work(customer: currentCustomer)
+            completedJobCount += 1
+        }
+        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
+        close(completedJobCount, durationTime)
     }
+    
+    private func close(_ completedJobCount: Double, _ durationTime: CFAbsoluteTime) {
+        let formattedTime = String(format: "%.2f", durationTime)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.")
+    }
+    
 }

@@ -6,7 +6,7 @@
 //
 
 struct BankManagerQueue<T> {
-    private let linkedList: LinkedList<T> = LinkedList()
+    private var linkedList: LinkedList<T>
     
     var peek: T? {
         linkedList.head?.value
@@ -14,6 +14,10 @@ struct BankManagerQueue<T> {
     
     var isEmpty: Bool {
         linkedList.head == nil ? true : false
+    }
+    
+    init(linkedList: LinkedList<T> = LinkedList()) {
+        self.linkedList = linkedList
     }
     
     func enqueue(_ value: T) {
