@@ -31,4 +31,15 @@ struct Bank {
             customerQueue.enqueue(customer)
         }
     }
+    
+    mutating func orderWork() {
+        let numberOfCustomer = customerQueue.count
+        
+        for _ in 0...numberOfCustomer {
+            bankers.forEach { banker in
+                let customer = customerQueue.dequeue()
+                banker.doWork(for: customer)
+            }
+        }
+    }
 }

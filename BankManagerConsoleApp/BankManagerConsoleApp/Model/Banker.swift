@@ -11,9 +11,11 @@ struct Banker {
     let name: String
     let processTime: Double = 0.7
     
-    func doWork(for customer: Customer) {
-        print("\(customer.numberTicket)번 고객 업무 시작")
+    func doWork(for customer: Customer?) {
+        guard let currentCustomer = customer else { return }
+        
+        print("\(currentCustomer.numberTicket)번 고객 업무 시작")
         sleep(UInt32(processTime))
-        print("\(customer.numberTicket)번 고객 업무 완료")
+        print("\(currentCustomer.numberTicket)번 고객 업무 완료")
     }
 }
