@@ -13,7 +13,7 @@ struct Bank {
     init(bankersCount: Int) {
         self.bankers = .init(repeating: Banker(), count: bankersCount)
         
-        let numberOfCustomer = Int.random(in: 10...30)
+        let numberOfCustomer = Int.random(in: 10...10)
         
         for waitingNumber in 1...numberOfCustomer {
             let customer = Customer(waitingNumber: waitingNumber)
@@ -22,7 +22,7 @@ struct Bank {
     }
     
     func open() {
-        var completedJobCount = 0.0
+        var completedJobCount = 0
         let startTime = CFAbsoluteTimeGetCurrent()
         while customerQueue.isEmpty == false {
             guard let currentCustomer = customerQueue.dequeue() else { return }
@@ -33,9 +33,8 @@ struct Bank {
         close(completedJobCount, durationTime)
     }
     
-    private func close(_ completedJobCount: Double, _ durationTime: CFAbsoluteTime) {
+    private func close(_ completedJobCount: Int, _ durationTime: CFAbsoluteTime) {
         let formattedTime = String(format: "%.2f", durationTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.\n")
     }
-    
 }
