@@ -38,7 +38,9 @@ struct BankManager {
     }
     
     private func openBank() {
-        let totalCustomer = bank.open()
+        bank.open()
+        
+        let totalCustomer = bank.totalCustomer
         let totalProcessTime = Double(totalCustomer) * Banker.processTime
         let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime)초 입니다."
         

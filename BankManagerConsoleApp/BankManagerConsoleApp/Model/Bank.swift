@@ -8,15 +8,12 @@
 final class Bank {
     private var bankers: [Banker] = []
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private(set) var totalCustomer: Int = 10
     
-    func open() -> Int {
+    func open() {
         setBankers()
         receiveCustomer()
-        let totalCustomer = customerQueue.count
-        
         orderWork()
-        
-        return totalCustomer
     }
 
     private func setBankers() {
@@ -27,7 +24,7 @@ final class Bank {
     
     private func receiveCustomer() {
         let customerRange: ClosedRange<Int> = 10...30
-        let totalCustomer = Int.random(in: customerRange)
+        totalCustomer = Int.random(in: customerRange)
         
         for number in 1...totalCustomer {
             let customer = Customer(numberTicket: number.description)
