@@ -15,7 +15,7 @@ struct Banker {
         guard let currentCustomer = customer else { return }
         
         print("\(currentCustomer.numberTicket)번 고객 업무 시작")
-        sleep(UInt32(Banker.processTime))
+        Thread.sleep(forTimeInterval: Banker.processTime)
         print("\(currentCustomer.numberTicket)번 고객 업무 완료")
     }
 }

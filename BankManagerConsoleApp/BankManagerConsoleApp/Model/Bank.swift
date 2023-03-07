@@ -29,7 +29,7 @@ struct Bank {
     mutating func receiveCustomer() {
         guard let totalCustomer = (10...30).randomElement() else { return }
         
-        for number in 0...totalCustomer {
+        for number in 1...totalCustomer {
             let customer = Customer(numberTicket: number.description)
             customerQueue.enqueue(customer)
         }
@@ -38,7 +38,7 @@ struct Bank {
     mutating func orderWork() {
         let totalCustomer = customerQueue.count
         
-        for _ in 0...totalCustomer {
+        for _ in 1...totalCustomer {
             bankers.forEach { banker in
                 let customer = customerQueue.dequeue()
                 banker.doWork(for: customer)

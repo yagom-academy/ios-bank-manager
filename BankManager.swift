@@ -7,8 +7,8 @@
 import Foundation
 
 struct BankManager {
-    var bank: Bank
-    var isRunning: Bool = true
+    private var bank: Bank = Bank()
+    private var isRunning: Bool = true
     
     mutating func start() {
         while isRunning == true {
