@@ -14,7 +14,7 @@ final class BankQueueTest: XCTestCase {
         sut = nil
     }
     
-    private func test_isEmpty호출시_값이없을경우_true를반환한다() {
+    func test_isEmpty호출시_값이없을경우_true를반환한다() {
         //given
         sut = .init()
         
@@ -25,7 +25,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    private func test_isEmpty호출시_값이있을경우_false를반환한다() {
+    func test_isEmpty호출시_값이있을경우_false를반환한다() {
         //given
         sut = .init()
         sut.enqueue(1.0)
@@ -37,7 +37,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    private func test_peek호출시_값이없을경우_nil을반환한다() {
+    func test_peek호출시_값이없을경우_nil을반환한다() {
         //given
         sut = .init()
         
@@ -48,7 +48,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    private func test_peek호출시_값을하나넣으면_하나를반환한다() {
+    func test_peek호출시_값을하나넣으면_하나를반환한다() {
         //given
         sut = .init()
         sut.enqueue(1.0)
@@ -61,7 +61,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertEqual(result, expectedData)
     }
     
-    private func test_peek호출시_값을두개넣으면_첫번째값이반환된다() {
+    func test_peek호출시_값을두개넣으면_첫번째값이반환된다() {
         //given
         sut = .init()
         sut.enqueue(2.0)
@@ -75,7 +75,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertEqual(result, expectedData)
     }
     
-    private func test_enqueue호출시_값을하나넣으면_값이하나들어간다() {
+    func test_enqueue호출시_값을하나넣으면_값이하나들어간다() {
         //given
         sut = .init()
         
@@ -87,7 +87,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertEqual(sut.peek, expectedData)
     }
     
-    private func test_dequeue호출시_큐가빈상태일경우_nil을반환한다() {
+    func test_dequeue호출시_큐가빈상태일경우_nil을반환한다() {
         //given
         sut = .init()
         
@@ -98,7 +98,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    private func test_dequeue호출시_큐에1과2가있는경우_1을반환하고2가남는다() {
+    func test_dequeue호출시_큐에1과2가있는경우_1을반환하고2가남는다() {
         //given
         sut = .init()
         sut.enqueue(2.0)
@@ -115,7 +115,7 @@ final class BankQueueTest: XCTestCase {
         XCTAssertEqual(remainData, expectedRemainData)
     }
     
-    private func test_clear호출시_큐에요소가있는경우_모든요소가사라진다() {
+    func test_clear호출시_큐에요소가있는경우_모든요소가사라진다() {
         //given
         sut = .init()
         sut.enqueue(1.0)
