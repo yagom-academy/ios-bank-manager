@@ -9,6 +9,7 @@ import Foundation
 
 struct Banker {
     let name: String
+    let processTime: Double = 0.7
     
     func startWork(){
         
