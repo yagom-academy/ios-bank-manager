@@ -16,7 +16,7 @@ struct CustomerQueue<T> {
         return list.count
     }
 
-    mutating func enqueue(_ data: T) {
+    func enqueue(_ data: T) {
         list.append(data: data)
     }
 
@@ -27,7 +27,7 @@ struct CustomerQueue<T> {
         return data
     }
 
-    mutating func clear() {
+    func clear() {
         list.clear()
     }
 

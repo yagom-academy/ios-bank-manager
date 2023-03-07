@@ -5,7 +5,7 @@
 //  Created by Rowan, 릴라 on 2023/03/06.
 //
 
-struct LinkedList<T> {
+final class LinkedList<T> {
     final private class Node<T> {
         var next: Node?
         let data: T
@@ -27,7 +27,7 @@ struct LinkedList<T> {
         return self.count == 0
     }
 
-    mutating func append(data: T) {
+    func append(data: T) {
         let node = Node(data: data)
 
         if count == 0 {
@@ -41,7 +41,7 @@ struct LinkedList<T> {
         count += 1
     }
 
-    mutating func removeFirst() -> T? {
+    func removeFirst() -> T? {
         guard isEmpty == false else { return nil }
 
         let node = head
@@ -55,7 +55,7 @@ struct LinkedList<T> {
         return node?.data
     }
     
-    mutating func clear() {
+     func clear() {
         head = nil
         tail = nil
         count = 0
