@@ -15,6 +15,9 @@
 		62CCAB0729B60407007240F8 /* BankManagerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57F99A29B5DF7500289E97 /* BankManagerQueue.swift */; };
 		62CCAB0829B60446007240F8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
 		62CCAB0929B60479007240F8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6257D2DF29B5B177002D0818 /* Node.swift */; };
+		7F23169A29B724BF00B5DC7B /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23169929B724BF00B5DC7B /* Bank.swift */; };
+		7F23169C29B7254900B5DC7B /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23169B29B7254900B5DC7B /* Banker.swift */; };
+		7F23169E29B7255700B5DC7B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23169D29B7255700B5DC7B /* Customer.swift */; };
 		7FA2498329B5B48A0064270A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2498229B5B4890064270A /* LinkedList.swift */; };
 		7FA249AC29B5C0720064270A /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA249AB29B5C0720064270A /* LinkedListTests.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -38,6 +41,9 @@
 		4A57F9A029B5DF8A00289E97 /* BankManagerQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A57F9A229B5DF8A00289E97 /* BankManagerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerQueueTests.swift; sourceTree = "<group>"; };
 		6257D2DF29B5B177002D0818 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		7F23169929B724BF00B5DC7B /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		7F23169B29B7254900B5DC7B /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
+		7F23169D29B7255700B5DC7B /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		7FA2498229B5B4890064270A /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		7FA249A929B5C0710064270A /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FA249AB29B5C0720064270A /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
@@ -115,6 +121,9 @@
 				6257D2DF29B5B177002D0818 /* Node.swift */,
 				7FA2498229B5B4890064270A /* LinkedList.swift */,
 				4A57F99A29B5DF7500289E97 /* BankManagerQueue.swift */,
+				7F23169929B724BF00B5DC7B /* Bank.swift */,
+				7F23169B29B7254900B5DC7B /* Banker.swift */,
+				7F23169D29B7255700B5DC7B /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -256,9 +265,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F23169C29B7254900B5DC7B /* Banker.swift in Sources */,
 				7FA2498329B5B48A0064270A /* LinkedList.swift in Sources */,
 				4A57F99B29B5DF7500289E97 /* BankManagerQueue.swift in Sources */,
+				7F23169E29B7255700B5DC7B /* Customer.swift in Sources */,
 				6257D2E029B5B177002D0818 /* Node.swift in Sources */,
+				7F23169A29B724BF00B5DC7B /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
