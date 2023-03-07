@@ -6,11 +6,11 @@
 //
 
 final class Node<T> {
-    var orderNumber: T
+    var value: T
     var next: Node?
     
-    init(orderNumber: T, next: Node? = nil) {
-        self.orderNumber = orderNumber
+    init(value: T, next: Node? = nil) {
+        self.value = value
         self.next = next
     }
 }

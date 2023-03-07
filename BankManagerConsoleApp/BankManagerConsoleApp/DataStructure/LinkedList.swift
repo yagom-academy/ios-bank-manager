@@ -9,10 +9,10 @@ struct LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     var isEmpty: Bool { head == nil }
-    var peek: T? { head?.orderNumber }
+    var peek: T? { head?.value }
     
     mutating func appendLast(_ data: T) {
-        let node = Node(orderNumber: data)
+        let node = Node(value: data)
         
         guard isEmpty == false else {
             head = node
@@ -32,7 +32,7 @@ struct LinkedList<T> {
         let firstNode = head
         
         head = firstNode?.next
-        return firstNode?.orderNumber
+        return firstNode?.value
     }
     
     mutating func removeAll() {
