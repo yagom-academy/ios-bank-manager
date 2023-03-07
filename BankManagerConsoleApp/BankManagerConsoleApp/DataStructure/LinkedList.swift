@@ -30,7 +30,7 @@ final class LinkedList<T> {
     func append(data: T) {
         let node = Node(data: data)
 
-        if count == 0 {
+        if head == nil {
             head = node
             tail = node
         } else {
@@ -42,15 +42,17 @@ final class LinkedList<T> {
     }
 
     func removeFirst() -> T? {
-        let node = head
-        head = head?.next
-        count -= 1
+        guard let node = head else { return nil }
         
-        if count == 0 {
+        head = head?.next
+        
+        if head == nil {
             tail = nil
         }
         
-        return node?.data
+        count -= 1
+        
+        return node.data
     }
     
      func clear() {
