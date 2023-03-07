@@ -7,11 +7,11 @@ import Foundation
 
 struct BankManager {
     var customer: Customer?
-    let serialQueue = DispatchQueue(label: "WorkQueue")
     
     func work() {
         guard let customer = customer else { return }
         
+        let serialQueue = DispatchQueue(label: "WorkQueue")
         let queueItem = DispatchWorkItem {
             print("\(customer.number)번 고객 업무 시작")
             Thread.sleep(forTimeInterval: 0.7)
