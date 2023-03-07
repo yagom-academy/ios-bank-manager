@@ -6,18 +6,16 @@
 //
 
 struct BankManager {
-    let bank = Bank()
-    var clientQueue = Queue<BankClient>()
-    let numberOfClient: Int = Int.random(in: 10...30)
+    var bank = Bank()
     
-    func startBankManager() {
+    mutating func startBankManager() {
         while true {
             printBankMenu()
             let input = receiveUserInput()
             
             switch input {
             case "1":
-                print("")
+                bank.openBank()
             case "2":
                 return
             default:
@@ -36,11 +34,5 @@ struct BankManager {
         let userInput = readLine()
         
         return userInput
-    }
-    
-    mutating func setupClient() {
-        for number in 1...numberOfClient {
-            clientQueue.enqueue(BankClient(waitingNumber: number))
-        }
     }
 }
