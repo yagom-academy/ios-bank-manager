@@ -6,8 +6,8 @@
 //
 
 final class Bank {
-    var bankers: [Banker] = []
-    var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var bankers: [Banker] = []
+    private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
     
     func open() -> Int {
         setBankers()
@@ -19,12 +19,12 @@ final class Bank {
         return totalCustomer
     }
 
-    func setBankers() {
+    private func setBankers() {
         let yagom = Banker(name: "야곰")
         bankers.append(yagom)
     }
     
-    func receiveCustomer() {
+    private func receiveCustomer() {
         guard let totalCustomer = (10...30).randomElement() else { return }
         
         for number in 1...totalCustomer {
@@ -33,7 +33,7 @@ final class Bank {
         }
     }
     
-    func orderWork() {
+    private func orderWork() {
         let totalCustomer = customerQueue.count
         
         for _ in 1...totalCustomer {

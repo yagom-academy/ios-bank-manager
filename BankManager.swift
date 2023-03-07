@@ -14,7 +14,7 @@ struct BankManager {
         }
     }
     
-    mutating func printMenu() {
+    private mutating func printMenu() {
         let menuText = """
             1 : 은행 개점
             2 : 종료
@@ -35,7 +35,7 @@ struct BankManager {
         }
     }
     
-    func openBank() {
+    private func openBank() {
         let totalCustomer = bank.open()
         let totalProcessTime = Double(totalCustomer) * Banker.processTime
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime) 입니다.")
