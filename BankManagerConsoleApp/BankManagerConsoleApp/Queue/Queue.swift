@@ -4,7 +4,7 @@
 //  Created by Rhode, sehong.
 //
 
-struct BankQueue<T> {
+struct Queue<T> {
     private var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {

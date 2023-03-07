@@ -7,8 +7,8 @@
 
 import XCTest
 
-final class BankQueueTest: XCTestCase {
-    private var sut: BankQueue<Double>!
+final class QueueTest: XCTestCase {
+    private var sut: Queue<Double>!
     
     override func tearDownWithError() throws {
         sut = nil
