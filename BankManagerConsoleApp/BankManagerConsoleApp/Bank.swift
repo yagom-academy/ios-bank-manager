@@ -9,7 +9,7 @@ struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var manager: BankManager = BankManager()
     
-    func printMenu() {
+    mutating func printMenu() {
         print("1 : 은행개점\n2 : 종료")
         
         guard let input = readLine() else {
@@ -18,20 +18,22 @@ struct Bank {
         
         switch input {
         case "1":
-            return
+            run()
         case "2":
             return
         default:
-            return
+            printMenu()
         }
     }
     
-    mutating func receive() {
+    mutating func receive() -> Int {
         let customerCount = Int.random(in: 10...30)
         
         for count in 1...customerCount {
             customers.enqueue(Customer(number: count))
         }
+        
+        return customerCount
     }
     
     mutating func doWork(customer: Customer) {
@@ -40,5 +42,21 @@ struct Bank {
         print("\(customer.number)번 고객 업무 시작")
         // manager 일하기
         print("\(customer.number)번 고객 업무 완료")
+    }
+    
+    mutating func run() {
+        let customerCount = receive()
+        let totalWorkTime = Double(customerCount) * 0.7
+        
+        while customers.isEmpty == false {
+            guard let customer = customers.dequeue() else {
+                break
+            }
+            
+            doWork(customer: customer)
+        }
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
+        printMenu()
     }
 }
