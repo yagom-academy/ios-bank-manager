@@ -5,18 +5,18 @@
 //  created by vetto, kokkilE on 2023/03/06.
 //
 
-struct Queue<T> {
-    private(set) var linkedList = LinkedList<T>()
+struct Queue<Element> {
+    private(set) var linkedList = LinkedList<Element>()
     
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
     
-    mutating func enqueue(_ data: T) {
+    mutating func enqueue(_ data: Element) {
         linkedList.append(data)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return linkedList.removeFirst()
     }
     
@@ -24,7 +24,7 @@ struct Queue<T> {
         linkedList.clear()
     }
     
-    func peek() -> T? {
+    func peek() -> Element? {
         guard let head = linkedList.head else {
             return nil
         }
