@@ -19,7 +19,17 @@ final class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
+    func test_List에초기값은_비어있다() {
+        // given
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
     func test_빈List인경우_1을추가하면_마지막값이1이다() {
         // given
         let expectation = "1"
@@ -32,7 +42,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(expectation, tailOfQueue)
     }
     
-    func test_List에1_2를추가하는경우_head의next_orderNumber는2이다() {
+    func test_List에1과_2를추가하는경우_head의next_orderNumber는2이다() {
         // given, when
         sut.appendLast("1")
         let targetNode = sut.head
@@ -51,10 +61,10 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_removeFirst호출시_List에head하나만있는경우_head를삭제하고_반환된orderNumber는_1이다() {
+    func test_removeFirst호출시_List에1하나만있는경우_반환된orderNumber는_1이다() {
         // given
         sut.appendLast("1")
-        let expectation = sut.head?.orderNumber
+        let expectation = "1"
 
         // when
         let result = sut.removeFirst()
