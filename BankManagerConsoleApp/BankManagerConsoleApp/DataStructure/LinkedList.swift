@@ -7,29 +7,29 @@
 
 struct LinkedList<T> {
     final private class Node<T> {
-        var next: Node? = nil
+        var next: Node?
         let data: T
-        
+
         init(data: T) {
             self.data = data
         }
     }
-    
-    private var head: Node<T>? = nil
-    private var tail: Node<T>? = nil
+
+    private var head: Node<T>?
+    private var tail: Node<T>?
     private(set) var count: Int = 0
-    
+
     var headData: T? {
         return head?.data
     }
-    
+
     var isEmpty: Bool {
         return self.count == 0
     }
-    
+
     mutating func append(data: T) {
         let node = Node(data: data)
-        
+
         if count == 0 {
             head = node
             tail = node
@@ -37,13 +37,13 @@ struct LinkedList<T> {
             tail?.next = node
             tail = node
         }
-        
+
         count += 1
     }
-    
+
     mutating func removeFirst() -> T? {
         guard isEmpty == false else { return nil }
-        
+
         let node = head
         head = head?.next
         count -= 1
