@@ -85,16 +85,19 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_removeAll호출시_head와tail모두nil이된다() {
+    func test_빈List에_1과_2를_추가하고_removeAll호출시_head와tail모두nil이된다() {
         // given
+        sut.appendLast("1")
+        sut.appendLast("2")
+        
+        // when
+        sut.removeAll()
+        
         let head = sut.head
         let tail = sut.tail
         var condition: Bool {
             head == nil && tail == nil
         }
-        
-        // when
-        sut.removeAll()
         
         // then
         XCTAssertTrue(condition)
