@@ -16,7 +16,7 @@ struct LinkedList<T> {
     }
     
     mutating func append(_ data: T) {
-        if isEmpty {
+        guard !isEmpty else {
             self.head = Node(data: data)
             self.tail = head
             
