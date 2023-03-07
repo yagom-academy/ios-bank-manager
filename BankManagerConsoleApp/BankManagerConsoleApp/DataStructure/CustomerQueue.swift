@@ -21,7 +21,7 @@ struct CustomerQueue<T> {
     }
 
     @discardableResult
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         guard let data = list.removeFirst() else { return nil }
 
         return data
