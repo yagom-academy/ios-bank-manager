@@ -11,9 +11,9 @@ struct BankManager {
     mutating func startBankManager() {
         while true {
             printBankMenu()
-            let input = receiveUserInput()
+            let userInput = readLine()
             
-            switch input {
+            switch userInput {
             case "1":
                 bank.openBank()
             case "2":
@@ -28,11 +28,5 @@ struct BankManager {
         print("1 : 은행 개점")
         print("2 : 종료")
         print("입력 : ", terminator: "")
-    }
-    
-    private func receiveUserInput() -> String? {
-        let userInput = readLine()
-        
-        return userInput
     }
 }
