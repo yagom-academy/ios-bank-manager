@@ -25,7 +25,8 @@ final class Bank {
     }
     
     private func receiveCustomer() {
-        guard let totalCustomer = (10...30).randomElement() else { return }
+        let customerRange: ClosedRange<Int> = 10...30
+        let totalCustomer = Int.random(in: customerRange)
         
         for number in 1...totalCustomer {
             let customer = Customer(numberTicket: number.description)
@@ -34,9 +35,7 @@ final class Bank {
     }
     
     private func orderWork() {
-        let totalCustomer = customerQueue.count
-        
-        for _ in 1...totalCustomer {
+        while customerQueue.isEmpty == false {
             bankers.forEach { banker in
                 let customer = customerQueue.dequeue()
                 banker.doWork(for: customer)
