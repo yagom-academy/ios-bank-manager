@@ -9,7 +9,7 @@ struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var manager: BankManager = BankManager()
     
-    mutating private func run() {
+    mutating func run() {
         print("1 : 은행개점\n2 : 종료")
         
         guard let input = readLine() else {
