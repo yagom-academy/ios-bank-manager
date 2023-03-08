@@ -10,8 +10,7 @@ import Foundation
 class BankManager {
     var bankClerk: Int = 1
     var bankCustomer = BankQueue<Int>()
-    
-    let bankCustomers = Int.random(in: 1...5)
+    var bankCustomers: Int = 0
     
     func doBanking() {
         for i in 1...bankCustomers {
