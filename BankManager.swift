@@ -8,14 +8,13 @@
 import Foundation
 
 class BankManager {
-    var bankClerk: Int = 1
     var customerQueue = BankQueue<Int>()
     var bankCustomers: Int = 0
     
     func doBanking() {
         for i in 1...bankCustomers {
             
-            let workItem = DispatchWorkItem {
+            let bankClerk = DispatchWorkItem {
                 self.customerQueue.enqueue(data: i)
                 guard let customer = self.customerQueue.peek() else { return }
                 
@@ -25,7 +24,7 @@ class BankManager {
                 print("\(customer)번 고객 업무 완료")
                 usleep(700000)
             }
-            DispatchQueue.global().sync(execute: workItem)
+            DispatchQueue.global().sync(execute: bankClerk)
         }
         let time: Double = 0.7 * Double(bankCustomers)
         let formattedTime = digitFormatter(input: time)
