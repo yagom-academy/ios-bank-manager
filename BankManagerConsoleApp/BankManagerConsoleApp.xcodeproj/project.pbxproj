@@ -10,6 +10,7 @@
 		4B56954529B5ECF700366C7A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56954429B5ECF700366C7A /* Queue.swift */; };
 		4B56954729B5FE7B00366C7A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56954429B5ECF700366C7A /* Queue.swift */; };
 		4BF70BC129B842320060E794 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF70BC029B842320060E794 /* Client.swift */; };
+		4BF70BC329B8435A0060E794 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF70BC229B8435A0060E794 /* Bank.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		FB33C7BB29B842BE00F2C3A2 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB33C7BA29B842BE00F2C3A2 /* BankClerk.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		4B56954429B5ECF700366C7A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		4BF70BC029B842320060E794 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		4BF70BC229B8435A0060E794 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				4B56954429B5ECF700366C7A /* Queue.swift */,
 				4BF70BC029B842320060E794 /* Client.swift */,
 				FB33C7BA29B842BE00F2C3A2 /* BankClerk.swift */,
+				4BF70BC229B8435A0060E794 /* Bank.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B56954529B5ECF700366C7A /* Queue.swift in Sources */,
+				4BF70BC329B8435A0060E794 /* Bank.swift in Sources */,
 				FB33C7BB29B842BE00F2C3A2 /* BankClerk.swift in Sources */,
 				FB580D7929B5DEE8003E95B5 /* Node.swift in Sources */,
 				4BF70BC129B842320060E794 /* Client.swift in Sources */,
