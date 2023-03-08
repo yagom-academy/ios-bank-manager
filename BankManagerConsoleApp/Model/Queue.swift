@@ -7,6 +7,9 @@
 
 struct Queue<T> {
     private var list = LinkedList<T>()
+    var count: Int {
+        return list.count
+    }
     var isEmpty: Bool {
         return list.isEmpty
     }
