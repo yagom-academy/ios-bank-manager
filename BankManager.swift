@@ -9,24 +9,33 @@ import Foundation
 
 class BankManager {
     var bankClerk: Int = 1
-    var bankCustomer = BankQueue<Int>()
+    var customerQueue = BankQueue<Int>()
     var bankCustomers: Int = 0
     
     func doBanking() {
         for i in 1...bankCustomers {
             
             let workItem = DispatchWorkItem {
-                self.bankCustomer.enqueue(data: i)
-                guard let customer = self.bankCustomer.peek() else { return }
+                self.customerQueue.enqueue(data: i)
+                guard let customer = self.customerQueue.peek() else { return }
                 
-                print("\(customer)번 시작")
+                print("\(customer)번 고객 업무 시작")
                 usleep(700000)
-                self.bankCustomer.dequeue()
-                print("\(customer)번 종료")
+                self.customerQueue.dequeue()
+                print("\(customer)번 고객 업무 완료")
                 usleep(700000)
             }
             DispatchQueue.global().sync(execute: workItem)
         }
-        print("모두끝")
+        let time: Double = 0.7 * Double(bankCustomers)
+        let formattedTime = digitFormatter(input: time)
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bankCustomers)명이며, 총 업무시간은 \(formattedTime)초입니다 ")
+    }
+    
+    func digitFormatter(input: Double) -> String {
+        let decimal = input
+        let result = String(format: "%.2f", decimal)
+        
+        return result
     }
 }

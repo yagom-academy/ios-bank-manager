@@ -6,18 +6,26 @@
 
 import Foundation
 
-print("1 : 은행개점")
-print("2 : 종료")
-print("입력 : ", terminator: "")
-let inputNumber = readLine()!
-let bankManager = BankManager()
+menuMessage()
+while let inputNumber = readLine() {
+    let bankManager = BankManager()
 
-if inputNumber == "1" {
-    let customer = Int.random(in: 10...30)
-    bankManager.bankCustomers = customer
-    bankManager.doBanking()
-} else if inputNumber == "2" {
-    
-} else {
-    print("입력이 잘못 되었습니다.")
+    if inputNumber == "2" {
+        print("종료")
+        break
+    } else if inputNumber == "1" {
+        let customerCount = Int.random(in: 10...30)
+        bankManager.bankCustomers = customerCount
+        bankManager.doBanking()
+        menuMessage()
+    } else {
+        print("입력이 잘못 되었습니다.")
+        menuMessage()
+    }
+}
+
+func menuMessage(){
+    print("1 : 은행개점")
+    print("2 : 종료")
+    print("입력 : ", terminator: "")
 }
