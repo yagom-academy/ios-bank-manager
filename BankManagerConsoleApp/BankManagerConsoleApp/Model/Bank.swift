@@ -40,10 +40,10 @@ final class Bank {
     }
     
     private func orderWork() {
+        guard let banker = bankers.first else { return }
+        
         while let customer = customerQueue.dequeue() {
-            bankers.forEach { banker in
-                banker.doWork(for: customer)
-            }
+            banker.doWork(for: customer)
         }
     }
     
