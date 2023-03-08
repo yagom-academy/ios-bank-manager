@@ -15,10 +15,10 @@ struct Bank {
     }
     
     mutating func openBank() {
-        print("1 : 은행개점 \n2 : 종료\n입력 :", terminator: " ")
+        print(NameSpace.bankMenuText, terminator: " ")
         guard let status = readLine(),
               let bankStatus = BankStatus(rawValue: status) else {
-            print("입력이 잘못되었습니다.")
+            print(NameSpace.InvalidInputText)
             openBank()
             
             return
@@ -37,7 +37,7 @@ struct Bank {
     
     private mutating func managingClientQueue() -> Queue<Client> {
         var clientQueue = Queue<Client>()
-        let randomClients = Int.random(in: 0...10)
+        let randomClients = Int.random(in: 10...30)
         
         (0..<randomClients).forEach {
             let client = Client(clientWaitingNumber: $0 + 1)
