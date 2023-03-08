@@ -8,25 +8,99 @@ import XCTest
 @testable import BankManagerUIApp
 
 class BankManagerUIAppTests: XCTestCase {
+    
+    var sut: BankQueue<Double>!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = BankQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_enqueue함수호출로_값을넣으면_값이삽입되는지확인하는함수() {
+        // given
+        let input: Double = 11
+        
+        // when
+        sut.enqueue(data: 11)
+        
+        // then
+        XCTAssertEqual(input, sut.head?.data )
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_head에_값이없을때_isEmpty를호출할경우_true를반환하는지_확인하는함수() {
+        // given
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 12)
+        
+        // when
+        sut.dequeue()
+        sut.dequeue()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_head에_값이_남아있다면_isEmpty를_호출할경우_false를_반환하는지_확인하는함수() {
+        // given
+        sut.enqueue(data: 5)
+        sut.enqueue(data: 12)
+        sut.enqueue(data: 32)
+        sut.enqueue(data: 71)
+        
+        // when
+        sut.dequeue()
+        sut.dequeue()
+        
+        // then
+        XCTAssertFalse(sut.isEmpty())
+    
+    }
+    
+    func test_dequeue함수호출을하면_처음들어온값을_삭제하는지_확인하는함수() {
+        // given
+        let input: Double = 12
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 12)
+        
+        // when
+        sut.dequeue()
+        
+        // then
+        XCTAssertEqual(input, sut.head?.data)
+    }
+    
+    func test_clearAll함수를호출할경우_모든값이삭제되는지_확인하는함수() {
+        // given
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 13)
+        sut.enqueue(data: 15)
+        sut.enqueue(data: 17)
+        
+        // when
+        sut.clearAll()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_peek함수호출시_현재List의첫번째값을_반환하는지_확인하는함수() {
+        // given
+        let input: Double = 13
+        sut.enqueue(data: 11)
+        sut.enqueue(data: 13)
+        sut.dequeue()
+        sut.enqueue(data: 15)
+        
+        // when
+        let result = sut.peek()
+        
+        // then
+        XCTAssertEqual(input, result)
     }
 
 }
