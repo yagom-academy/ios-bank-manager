@@ -5,3 +5,7 @@
 //
 
 import Foundation
+
+var bank = Bank()
+
+bank.openBank()
