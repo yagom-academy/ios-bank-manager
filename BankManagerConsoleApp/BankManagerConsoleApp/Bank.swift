@@ -17,9 +17,9 @@ struct Bank {
         }
         
         switch input {
-        case "1":
+        case BankOption.openValue:
             open()
-        case "2":
+        case BankOption.closeValue:
             return
         default:
             run()
@@ -28,7 +28,7 @@ struct Bank {
     
     mutating private func open() {
         let customerCount = receive()
-        let totalWorkTime = Double(customerCount) * 0.7
+        let totalWorkTime = Double(customerCount) * BankOption.processingTime
         
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else {
@@ -43,7 +43,7 @@ struct Bank {
     }
     
     mutating private func receive() -> Int {
-        let customerCount = Int.random(in: 10...30)
+        let customerCount = Int.random(in: BankOption.rangeOfCustomer)
         
         for count in 1...customerCount {
             customers.enqueue(Customer(number: count))

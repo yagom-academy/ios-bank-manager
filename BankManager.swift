@@ -14,7 +14,7 @@ struct BankManager {
         let serialQueue = DispatchQueue(label: "WorkQueue")
         let queueItem = DispatchWorkItem {
             print("\(customer.number)번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: 0.7)
+            Thread.sleep(forTimeInterval: BankOption.processingTime)
             print("\(customer.number)번 고객 업무 완료")
         }
         

@@ -19,7 +19,7 @@ extension Double {
     
     func applyNumberFormatter() -> String {
         guard let value = numberFormatter.string(for: Double(self)) else {
-            return "0"
+            return BankOption.zero
         }
         return value
     }
