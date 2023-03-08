@@ -8,10 +8,10 @@
 import Foundation
 
 struct Bank {
-    var waitingLine = Queue<Client>()
-    var clientCount: Int = 10
-    var BankClerkCount: Int = 1
-    var bankClerk = BankClerk()
+    private var waitingLine = Queue<Client>()
+    private var clientCount: Int = 10
+    private var BankClerkCount: Int = 1
+    private var bankClerk = BankClerk()
 
     mutating func lineUpClient() {
         clientCount = Int.random(in: 10...30)
