@@ -64,6 +64,11 @@ struct Bank {
             }
         }
         group.wait()
+        completeManagingBank(count: count, time: 7.0)
         openBank()
+    }
+    
+    private func completeManagingBank(count: Int, time: Double) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(count)명이며, 총 업무시간은 \(time)초 입니다.")
     }
 }
