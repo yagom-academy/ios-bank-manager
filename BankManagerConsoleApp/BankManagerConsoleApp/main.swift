@@ -4,7 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+var bank = Bank()
 
-var a = Bank()
-a.printMenu()
+bank.printMenu()
