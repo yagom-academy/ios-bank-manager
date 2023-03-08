@@ -11,7 +11,7 @@ struct BankManager {
     mutating func start() {
         while self.isRunning {
             printMenu()
-            receiveInput()
+            handleMenuInput()
         }
     }
     
@@ -25,12 +25,13 @@ struct BankManager {
         print(menuText, terminator: " ")
     }
     
-    private mutating func receiveInput() {
+    private mutating func handleMenuInput() {
         guard let userInput = readLine() else { return }
         
         switch userInput {
         case "1":
-            openBank()
+            bank.open()
+            bank.reportResult()
         case "2":
             isRunning = false
         default:
@@ -39,11 +40,5 @@ struct BankManager {
         }
     }
     
-    private func openBank() {
-        bank.open()
-        let totalCustomer = bank.totalCustomer
-        let totalProcessTime = Double(totalCustomer) * Banker.processTime
-        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime)초 입니다."
-        print(message)
-    }
+    
 }
