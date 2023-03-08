@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9848E5F729B82432006560E3 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9848E5F629B82432006560E3 /* Int+Extension.swift */; };
+		9848E5F929B82443006560E3 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9848E5F829B82443006560E3 /* Double+Extension.swift */; };
 		986D653F29B5D49F007F9401 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986D653E29B5D49F007F9401 /* Queue.swift */; };
 		AA264A6629B6DFAC0007E1E3 /* BankClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA264A6529B6DFAC0007E1E3 /* BankClient.swift */; };
 		AA264A6829B6E0330007E1E3 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA264A6729B6E0330007E1E3 /* Bank.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9848E5F629B82432006560E3 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		9848E5F829B82443006560E3 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		986D653E29B5D49F007F9401 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		AA264A6529B6DFAC0007E1E3 /* BankClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClient.swift; sourceTree = "<group>"; };
 		AA264A6729B6E0330007E1E3 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -65,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9848E5F529B82418006560E3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9848E5F629B82432006560E3 /* Int+Extension.swift */,
+				9848E5F829B82443006560E3 /* Double+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		AA2DCB2829B5D53B00DE4111 /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +107,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				9848E5F529B82418006560E3 /* Extension */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				AA2DCB1E29B5D3E700DE4111 /* Node.swift */,
 				AA2DCB2129B5D3F600DE4111 /* LinkedList.swift */,
@@ -208,10 +222,12 @@
 				986D653F29B5D49F007F9401 /* Queue.swift in Sources */,
 				AA264A6829B6E0330007E1E3 /* Bank.swift in Sources */,
 				AA2DCB1F29B5D3E700DE4111 /* Node.swift in Sources */,
+				9848E5F729B82432006560E3 /* Int+Extension.swift in Sources */,
 				AA264A6629B6DFAC0007E1E3 /* BankClient.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AA2DCB2229B5D3F600DE4111 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				9848E5F929B82443006560E3 /* Double+Extension.swift in Sources */,
 				AA264A6A29B708E60007E1E3 /* BankTeller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
