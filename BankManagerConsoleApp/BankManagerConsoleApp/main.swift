@@ -6,4 +6,4 @@
 
 var bank = Bank()
 
-bank.printMenu()
+bank.run()
