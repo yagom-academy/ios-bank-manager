@@ -7,25 +7,25 @@
 
 final class Bank {
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
-    private var bankers: [Banker] = []
-    private let numberOfBanker: Int
+    private let bankers: [Banker]
     private(set) var totalCustomer: Int = 0
     
-    init(numberOfBanker: Int = 1) {
-        self.numberOfBanker = numberOfBanker
+    init(numberOfBanker number: Int = 1) {
+        self.bankers = Bank.registerBankers(numberOfBanker: number)
     }
     
     func open() {
-        setBankers()
         receiveCustomer()
         orderWork()
     }
     
-    private func setBankers() {
-        for _ in 1...numberOfBanker {
+    private static func registerBankers(numberOfBanker: Int) -> [Banker] {
+        let bankers = [1...numberOfBanker].map { _ in
             let banker = Banker()
-            bankers.append(banker)
+            return banker
         }
+        
+        return bankers
     }
     
     private func receiveCustomer() {
