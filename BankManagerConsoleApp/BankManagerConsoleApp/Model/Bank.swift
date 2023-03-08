@@ -40,9 +40,8 @@ final class Bank {
     }
     
     private func orderWork() {
-        while customerQueue.isEmpty == false {
+        while let customer = customerQueue.dequeue() {
             bankers.forEach { banker in
-                let customer = customerQueue.dequeue()
                 banker.doWork(for: customer)
             }
         }
