@@ -4,4 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-import Foundation
+struct Client {
+    let clientWaitingNumber: Int
+}
