@@ -39,6 +39,4 @@ struct BankManager {
             print(message)
         }
     }
-    
-    
 }
