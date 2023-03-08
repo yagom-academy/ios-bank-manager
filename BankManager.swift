@@ -9,12 +9,13 @@ struct BankManager {
     private var isRunning: Bool = true
     
     mutating func start() {
-        while isRunning == true {
+        while self.isRunning {
             printMenu()
+            receiveInput()
         }
     }
     
-    private mutating func printMenu() {
+    private func printMenu() {
         let menuText = """
             1 : 은행 개점
             2 : 종료
@@ -22,7 +23,9 @@ struct BankManager {
             """
         
         print(menuText, terminator: " ")
-        
+    }
+    
+    private mutating func receiveInput() {
         guard let userInput = readLine() else { return }
         
         switch userInput {
