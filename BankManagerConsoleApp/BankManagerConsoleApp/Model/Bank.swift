@@ -33,7 +33,8 @@ final class Bank {
         totalCustomer = Int.random(in: customerRange)
         
         for number in 1...totalCustomer {
-            let customer = Customer(numberTicket: number.description)
+            let numberTicket = String(describing: number)
+            let customer = Customer(numberTicket: numberTicket)
             customerQueue.enqueue(customer)
         }
     }
