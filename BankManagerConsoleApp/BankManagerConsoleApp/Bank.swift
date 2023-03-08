@@ -31,4 +31,16 @@ struct Bank {
             return
         }
     }
+    
+    private func managingClientQueue() -> Queue<Client> {
+        var clientQueue = Queue<Client>()
+        let randomClients = Int.random(in: 0...10)
+        
+        (0..<randomClients).forEach {
+            let client = Client(clientWaitingNumber: $0 + 1)
+            clientQueue.enqueue(client)
+        }
+        return clientQueue
+    }
+    
 }
