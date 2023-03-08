@@ -26,7 +26,7 @@ struct Bank {
     private func startWork(_ status: BankStatus) {
         switch status {
         case .open:
-            return
+            manageBank(bankManagerCount: 1)
         case .close:
             return
         }
@@ -43,4 +43,27 @@ struct Bank {
         return clientQueue
     }
     
+    private func manageBank(bankManagerCount: Int) {
+        var clientList = managingClientQueue()
+        let bankManager = BankManager()
+        
+        var count = 0
+        
+        let group = DispatchGroup()
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        for _ in Int.zero..<bankManagerCount {
+            DispatchQueue.global().async(group: group) {
+                semaphore.wait()
+                while !clientList.isEmpty {
+                    guard let client = clientList.dequeue()?.clientWaitingNumber else { return }
+                    count += 1
+                    bankManager.work(client: client)
+                    semaphore.signal()
+                }
+            }
+        }
+        group.wait()
+        openBank()
+    }
 }
