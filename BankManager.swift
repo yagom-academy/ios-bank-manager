@@ -8,7 +8,7 @@
 import Foundation
 
 class BankManager {
-    var customerCountQueue = BankQueue<Int>()
+    private var customerCountQueue: BankQueue<Int> = BankQueue<Int>()
     var bankCustomer: Int = 0
     
     func doBanking() {
@@ -27,13 +27,13 @@ class BankManager {
             DispatchQueue.global().sync(execute: bankClerk)
         }
         let time: Double = 0.7 * Double(bankCustomer)
-        let formattedTime = digitFormatter(input: time)
+        let formattedTime: String = digitFormatter(input: time)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(bankCustomer)명이며, 총 업무시간은 \(formattedTime)초입니다 ")
     }
     
     func digitFormatter(input: Double) -> String {
-        let decimal = input
-        let result = String(format: "%.2f", decimal)
+        let decimal: Double = input
+        let result: String = String(format: "%.2f", decimal)
         
         return result
     }
