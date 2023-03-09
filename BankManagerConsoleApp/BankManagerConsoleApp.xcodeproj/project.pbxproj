@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5899903629BA109F00D4D272 /* BankDesk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5899903529BA109F00D4D272 /* BankDesk.swift */; };
+		5899903829BA1EB700D4D272 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5899903729BA1EB700D4D272 /* Extension.swift */; };
 		719EBEE429B84B5A00B86AAF /* BankQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719EBEE329B84B5A00B86AAF /* BankQueue.swift */; };
 		71A09F0F29B6E8630015C160 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A09F0E29B6E8630015C160 /* BankManager.swift */; };
 		71BBD4BE29BA131500E70105 /* TextEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BBD4BD29BA131500E70105 /* TextEnum.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		5899903529BA109F00D4D272 /* BankDesk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankDesk.swift; path = ../../BankDesk.swift; sourceTree = "<group>"; };
+		5899903729BA1EB700D4D272 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = ../../Extension.swift; sourceTree = "<group>"; };
 		719EBEE329B84B5A00B86AAF /* BankQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankQueue.swift; path = ../../BankQueue.swift; sourceTree = "<group>"; };
 		71A09F0E29B6E8630015C160 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		71BBD4BD29BA131500E70105 /* TextEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnum.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
+				5899903729BA1EB700D4D272 /* Extension.swift */,
 				71A09F0E29B6E8630015C160 /* BankManager.swift */,
 				5899903529BA109F00D4D272 /* BankDesk.swift */,
 				719EBEE329B84B5A00B86AAF /* BankQueue.swift */,
@@ -134,6 +137,7 @@
 				5899903629BA109F00D4D272 /* BankDesk.swift in Sources */,
 				71BBD4BE29BA131500E70105 /* TextEnum.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				5899903829BA1EB700D4D272 /* Extension.swift in Sources */,
 				71A09F0F29B6E8630015C160 /* BankManager.swift in Sources */,
 				719EBEE429B84B5A00B86AAF /* BankQueue.swift in Sources */,
 			);
