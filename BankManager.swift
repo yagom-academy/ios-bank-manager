@@ -5,8 +5,13 @@
 //
 
 struct BankManager {
-    private let bank: Bank = Bank()
-    private var isRunning: Bool = true
+    private let bank: Bank
+    private var isRunning: Bool
+    
+    init(bank: Bank, isRunning: Bool = true) {
+        self.bank = bank
+        self.isRunning = isRunning
+    }
     
     mutating func start() {
         while self.isRunning {

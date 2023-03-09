@@ -7,4 +7,5 @@
 
 struct Customer {
     let numberTicket: String
+    let business: Business
 }

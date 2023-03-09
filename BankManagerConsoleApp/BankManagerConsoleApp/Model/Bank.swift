@@ -7,11 +7,13 @@
 
 final class Bank {
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
-    private let bankers: [Banker]
+    private let loanBankers: [Banker]
+    private let depositBankers: [Banker]
     private(set) var totalCustomer: Int = 0
     
-    init(numberOfBanker number: Int = 1) {
-        self.bankers = Bank.registerBankers(numberOfBanker: number)
+    init(loanBankers: [Banker], depositBankers: [Banker]) {
+        self.loanBankers = loanBankers
+        self.depositBankers = depositBankers
     }
     
     func open() {
@@ -19,14 +21,14 @@ final class Bank {
         orderWork()
     }
     
-    private static func registerBankers(numberOfBanker: Int) -> [Banker] {
-        let bankers = [1...numberOfBanker].map { _ in
-            let banker = Banker()
-            return banker
-        }
-        
-        return bankers
-    }
+//    private static func registerBankers(numberOfBanker: Int) -> [Banker] {
+//        let bankers = [1...numberOfBanker].map { _ in
+//            let banker = Banker()
+//            return banker
+//        }
+//
+//        return bankers
+//    }
     
     private func receiveCustomer() {
         let customerRange: ClosedRange<Int> = 10...30
@@ -34,13 +36,13 @@ final class Bank {
         
         for number in 1...totalCustomer {
             let numberTicket = String(describing: number)
-            let customer = Customer(numberTicket: numberTicket)
+            let customer = Customer(numberTicket: numberTicket, business: .deposit)
             customerQueue.enqueue(customer)
         }
     }
     
     private func orderWork() {
-        guard let banker = bankers.first else { return }
+        guard let banker = depositBankers.first else { return }
         
         while let customer = customerQueue.dequeue() {
             banker.doWork(for: customer)

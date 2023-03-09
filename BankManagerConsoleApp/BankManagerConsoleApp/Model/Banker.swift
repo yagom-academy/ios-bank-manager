@@ -9,6 +9,7 @@ import Foundation
 
 struct Banker {
     static let processTime: Double = 0.7
+    let department: Business
     
     func doWork(for customer: Customer?) {
         guard let currentCustomer = customer else { return }
