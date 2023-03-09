@@ -5,7 +5,7 @@
 //
 import Foundation
 
-struct BankManager {
+class BankManager {
     var customer: Customer?
     let duty: Banking
     
@@ -20,9 +20,9 @@ struct BankManager {
         let time = duty == .deposit ? BankOption.processingTimeAtDeposit : BankOption.processingTimeAtLoan
         
         let queueItem = DispatchWorkItem {
-            print("\(customer.waitingNumber)번 고객 \(customer.banking.rawValue)업무 시작")
+            print("\(customer.waitingNumber)번 고객 \(self.duty.rawValue)업무 시작")
             Thread.sleep(forTimeInterval: time)
-            print("\(customer.waitingNumber)번 고객 \(customer.banking.rawValue)업무 완료")
+            print("\(customer.waitingNumber)번 고객 \(self.duty.rawValue)업무 완료")
         }
         
         serialQueue.sync(execute: queueItem)

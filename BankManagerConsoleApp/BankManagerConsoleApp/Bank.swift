@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Bank {
+class Bank {
     private var customers: Queue<Customer> = Queue()
     private var managers: [BankManager] = []
     
-    mutating func run() {
+    func run() {
         print("1 : 은행개점\n2 : 종료")
         
         guard let input = readLine() else {
@@ -29,7 +29,7 @@ struct Bank {
         }
     }
     
-    mutating private func open() {
+    private func open() {
         let numberOfCustomer = receiveNumberOfCustomers()
         let startDate = Date()
         
@@ -38,7 +38,11 @@ struct Bank {
                 break
             }
             
-            work(for: customer)
+            if customer.banking == .deposit {
+                work(for: customer, manager: managers[0])
+            } else {
+                work(for: customer, manager: managers[2])
+            }
         }
         
         let finishDate = Date().timeIntervalSince(startDate)
@@ -47,7 +51,7 @@ struct Bank {
         run()
     }
     
-    mutating private func receiveNumberOfCustomers() -> Int {
+    private func receiveNumberOfCustomers() -> Int {
         let numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
         
         for count in 1...numberOfCustomer {
@@ -59,13 +63,13 @@ struct Bank {
         return numberOfCustomer
     }
     
-    mutating private func work(for customer: Customer) {
-        managers[0].customer = customer
+    private func work(for customer: Customer, manager: BankManager) {
+        manager.customer = customer
         
-        managers[0].work()
+        manager.work()
     }
     
-    mutating private func addManager() {
+    private func addManager() {
         for _ in 1...BankOption.numberOfDepositManager {
             self.managers.append(BankManager(duty: .deposit))
         }
