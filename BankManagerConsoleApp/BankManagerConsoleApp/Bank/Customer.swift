@@ -20,6 +20,7 @@ struct Customer {
     
     init?(waitingNumber: Int) {
         guard let businessType = BusinessType.allCases.randomElement() else { return nil }
+        
         self.businessType = businessType
         self.waitingNumber = waitingNumber
     }

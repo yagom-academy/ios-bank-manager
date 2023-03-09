@@ -8,17 +8,32 @@
 import Foundation
 
 struct Bank {
-    private let bankers: [Banker]
+    private let loanSection: Banker
+    private let depositSection: Banker
     private let customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
     
-    init(bankersCount: Int) {
-        self.bankers = .init(repeating: Banker(), count: bankersCount)
-    }
+//    init(bankersCount: Int) {
+//        self.bankers = .init(repeating: Banker(), count: bankersCount)
+//    }
     
     func receive(of numberOfCustomer: Int) {
         for waitingNumber in 1...numberOfCustomer {
-            let customer = Customer(waitingNumber: waitingNumber)
+            guard let customer = Customer(waitingNumber: waitingNumber) else { return }
+            
             customerQueue.enqueue(customer)
+        }
+    }
+    
+    func work() {
+        while customerQueue.isEmpty == false {
+            guard let currentCustomer = customerQueue.dequeue() else { return }
+            
+            switch currentCustomer.businessType {
+            case .loan:
+                loanBanker.work()
+            case .deposit:
+                
+            }
         }
     }
     
