@@ -8,17 +8,17 @@
 import Foundation
 
 extension Double {
-    var numberFormatter: NumberFormatter {
+    static let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 2
         numberFormatter.minimumFractionDigits = 2
         return numberFormatter
-    }
+    }()
     
     func applyNumberFormatter() -> String {
-        guard let value = numberFormatter.string(for: Double(self)) else {
+        guard let value = Double.numberFormatter.string(for: Double(self)) else {
             return BankOption.zero
         }
         return value
