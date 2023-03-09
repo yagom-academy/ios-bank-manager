@@ -16,8 +16,6 @@ struct BankManager {
     }
     
     mutating func startBankApp() {
-        let open = "1"
-        let close = "2"
         let noticeMenu = "1 : 은행 개점 \n2 : 종료 \n입력 : "
         let inputError = "입력이 잘못되었습니다."
         
@@ -26,13 +24,18 @@ struct BankManager {
         guard let input = readLine() else { return }
         
         switch input {
-        case open:
+        case BankState.open:
             openBank()
-        case close:
+        case BankState.close:
             return
         default:
             print(inputError)
             startBankApp()
         }
+    }
+    
+    private enum BankState {
+        static let open = "1"
+        static let close = "2"
     }
 }
