@@ -4,14 +4,14 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-let loanBanker = Banker(department: .loan)
-let depositBanker = Banker(department: .deposit)
-let depositBanker2 = Banker(department: .deposit)
+func makeBank(loanBanker: Int, depositBanker: Int) -> Bank {
+    let loanBankers = Array(repeating: Banker(department: .loan), count: loanBanker)
+    let depositBankers = Array(repeating: Banker(department: .deposit), count: depositBanker)
+    let bank = Bank(loanBankers: loanBankers, depositBankers: depositBankers)
+    return bank
+}
 
-let depositBankers = [depositBanker, depositBanker2]
-let loanBankers = [loanBanker]
-
-let bank = Bank(loanBankers: loanBankers, depositBankers: depositBankers)
+let bank = makeBank(loanBanker: 1, depositBanker: 2)
 var bankManager = BankManager(bank: bank)
 
 bankManager.start()
