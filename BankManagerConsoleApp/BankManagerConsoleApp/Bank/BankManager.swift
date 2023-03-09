@@ -17,7 +17,7 @@ struct BankManager {
             
             switch userInput {
             case "1":
-                let bank = Bank(bankersCount: 1)
+                var bank = Bank()
                 let numberOfCustomer = Int.random(in: 10...30)
                 
                 bank.receive(of: numberOfCustomer)

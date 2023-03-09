@@ -11,16 +11,21 @@ protocol BankWorkable {
     var bankDispatchQueue: DispatchQueue { get }
     var businessType: BusinessType { get }
     var bankSemaphore: DispatchSemaphore { get }
+    var completedJobCount: Int { get set }
 }
 
 extension BankWorkable {
     func work(for customer: Customer) {
         bankDispatchQueue.async {
-            bankSemaphore.wait()
+            self.bankSemaphore.wait()
             print("\(customer.waitingNumber)번 고객 업무 시작")
             Thread.sleep(forTimeInterval: customer.consultingTime)
             print("\(customer.waitingNumber)번 고객 업무 완료")
-            bankSemaphore.signal()
+            self.bankSemaphore.signal()
         }
+    }
+    
+    mutating func addJobCount() {
+        completedJobCount += 1
     }
 }
