@@ -7,7 +7,7 @@
 
 struct Bank {
     private var customers: Queue<Customer> = Queue()
-    private var manager: BankManager = BankManager()
+    private var managers: [BankManager] = []
     
     mutating func run() {
         print("1 : 은행개점\n2 : 종료")
@@ -18,6 +18,7 @@ struct Bank {
         
         switch input {
         case BankOption.openValue:
+            addManager()
             open()
         case BankOption.closeValue:
             return
@@ -53,8 +54,14 @@ struct Bank {
     }
     
     mutating private func work(for customer: Customer) {
-        manager.customer = customer
+        managers[0].customer = customer
         
-        manager.work()
+        managers[0].work()
+    }
+    
+    mutating private func addManager() {
+        for _ in 1...BankOption.numberOfManager {
+            self.managers.append(BankManager())
+        }
     }
 }
