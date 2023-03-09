@@ -13,6 +13,17 @@ struct Queue<T> {
         return head == nil
     }
     
+    var size: Int {
+        var count = 0
+        var current = head
+        while current != nil {
+            current = current?.next
+            count += 1
+        }
+        
+        return count
+    }
+    
     mutating func enqueue(_ data: T) {
         if head == nil {
             head = Node.init(data)

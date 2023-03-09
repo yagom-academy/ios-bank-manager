@@ -32,8 +32,8 @@ final class QueueTests: XCTestCase {
     func test_enqueue됐을_경우_isEmpty는_false를_반환한다() {
         // given
         let expectation = false
-        // when
         sut.enqueue("hello")
+        // when
         let result = sut.isEmpty
         // then
         XCTAssertEqual(result, expectation)
@@ -111,4 +111,5 @@ final class QueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 }
+
 
