@@ -29,7 +29,7 @@ struct Bank {
         while customerQueue.isEmpty == false {
             guard let currentCustomer = customerQueue.dequeue() else { return }
             
-            bankers[0].work(customer: currentCustomer)
+            bankers[0].work(for: currentCustomer)
             completedJobCount += 1
         }
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime

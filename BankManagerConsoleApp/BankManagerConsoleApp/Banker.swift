@@ -8,7 +8,7 @@
 import Foundation
 
 struct Banker {
-    func work(customer: Customer) {
+    func work(for customer: Customer) {
         print("\(customer.waitingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: customer.consultingTime)
         print("\(customer.waitingNumber)번 고객 업무 완료")
