@@ -9,10 +9,10 @@ import Foundation
 
 struct BankQueue<T> {
     final class Node<T> {
-        var data: T?
+        let data: T
         var next: Node?
-        
-        init(data: T?, next: Node? = nil) {
+
+        init(data: T, next: Node? = nil) {
             self.data = data
             self.next = next
         }
@@ -20,7 +20,7 @@ struct BankQueue<T> {
     
     private(set) var head: Node<T>?
     
-    mutating func enqueue(data: T?) {
+    mutating func enqueue(data: T) {
         guard isEmpty() == false else {
             head = Node(data: data)
             return

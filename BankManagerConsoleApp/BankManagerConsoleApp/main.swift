@@ -9,12 +9,12 @@ import Foundation
 menuMessage()
 while let inputNumber = readLine() {
     let bankManager = BankManager()
-
+    
     if inputNumber == "2" {
         print("종료")
         break
     } else if inputNumber == "1" {
-        let customerCount = Int.random(in: 10...30)
+        let customerCount = Int.random(in: 1...4)
         bankManager.bankCustomers = customerCount
         bankManager.doBanking()
         menuMessage()
