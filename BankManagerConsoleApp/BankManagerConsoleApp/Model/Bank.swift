@@ -21,26 +21,19 @@ final class Bank {
         orderWork()
     }
     
-//    private static func registerBankers(numberOfBanker: Int) -> [Banker] {
-//        let bankers = [1...numberOfBanker].map { _ in
-//            let banker = Banker()
-//            return banker
-//        }
-//
-//        return bankers
-//    }
-    
     private func receiveCustomer() {
         let customerRange: ClosedRange<Int> = 10...30
         totalCustomer = Int.random(in: customerRange)
         
         for number in 1...totalCustomer {
+            guard let business = Business.allCases.randomElement() else { return }
             let numberTicket = String(describing: number)
-            let customer = Customer(numberTicket: numberTicket, business: .deposit)
+            let customer = Customer(numberTicket: numberTicket, business: business)
             customerQueue.enqueue(customer)
         }
     }
     
+    // 동시성 추가
     private func orderWork() {
         guard let banker = depositBankers.first else { return }
         
@@ -49,8 +42,9 @@ final class Bank {
         }
     }
     
+    // processTime 수정
     func reportResult() {
-        let totalProcessTime = Double(totalCustomer) * Banker.processTime
+//        let totalProcessTime = Double(totalCustomer) * Banker.processTime
         let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime)초 입니다."
         print(message)
     }

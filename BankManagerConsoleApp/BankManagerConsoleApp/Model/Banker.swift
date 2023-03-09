@@ -7,8 +7,8 @@
 
 import Foundation
 
+// DispatchQueue 추가
 struct Banker {
-    static let processTime: Double = 0.7
     let department: Business
     
     func doWork(for customer: Customer?) {
@@ -18,7 +18,7 @@ struct Banker {
         let endMessage = "\(currentCustomer.numberTicket)번 고객 업무 완료"
         
         print(startMessage)
-        Thread.sleep(forTimeInterval: Banker.processTime)
+        Thread.sleep(forTimeInterval: department.processtime)
         print(endMessage)
     }
 }
