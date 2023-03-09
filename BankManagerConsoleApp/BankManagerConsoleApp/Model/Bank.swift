@@ -4,9 +4,12 @@
 //
 //  Created by Rowan, 릴라 on 2023/03/07.
 //
+import Foundation
 
 final class Bank {
-    private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var depositCustomerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var loanCustomerQueue: CustomerQueue<Customer> = CustomerQueue()
+    
     private let loanBankers: [Banker]
     private let depositBankers: [Banker]
     private(set) var totalCustomer: Int = 0
@@ -29,23 +32,46 @@ final class Bank {
             guard let business = Business.allCases.randomElement() else { return }
             let numberTicket = String(describing: number)
             let customer = Customer(numberTicket: numberTicket, business: business)
-            customerQueue.enqueue(customer)
+            
+            switch customer.business {
+            case .loan:
+                loanCustomerQueue.enqueue(customer)
+            case .deposit:
+                depositCustomerQueue.enqueue(customer)
+            }
         }
     }
     
     // 동시성 추가
     private func orderWork() {
-        guard let banker = depositBankers.first else { return }
+        let loanWorkQueue = DispatchQueue.global()
+        let depositWorkQueue = DispatchQueue.global()
         
-        while let customer = customerQueue.dequeue() {
-            banker.doWork(for: customer)
+        loanWorkQueue.async {
+            while self.loanCustomerQueue.isEmpty == false {
+                self.loanBankers.forEach { banker in
+                    let customer = self.loanCustomerQueue.dequeue()
+                    banker.doWork(for: customer)
+                }
+            }
         }
+        
+        depositWorkQueue.async {
+            while self.depositCustomerQueue.isEmpty == false {
+                self.depositBankers.forEach{ banker in
+                    let customer = self.depositCustomerQueue.dequeue()
+                    banker.doWork(for: customer)
+                }
+            }
+        }
+        
+        
     }
     
     // processTime 수정
     func reportResult() {
 //        let totalProcessTime = Double(totalCustomer) * Banker.processTime
-        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime)초 입니다."
-        print(message)
+//        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime)초 입니다."
+//        print(message)
     }
 }
