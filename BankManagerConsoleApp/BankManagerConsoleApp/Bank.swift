@@ -52,6 +52,7 @@ struct Bank {
         
         for count in 1...numberOfCustomer {
             guard let randomBanking = Banking.allCases.randomElement() else { return count - 1 }
+            
             customers.enqueue(Customer(waitingNumber: count, banking: randomBanking))
         }
         

@@ -17,10 +17,12 @@ struct BankManager {
         guard let customer = customer else { return }
         
         let serialQueue = DispatchQueue(label: "WorkQueue")
+        let time = duty == .deposit ? BankOption.processingTimeAtDeposit : BankOption.processingTimeAtLoan
+        
         let queueItem = DispatchWorkItem {
-            print("\(customer.waitingNumber)번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: BankOption.processingTimeAtDeposit)
-            print("\(customer.waitingNumber)번 고객 업무 완료")
+            print("\(customer.waitingNumber)번 고객 \(customer.banking.rawValue)업무 시작")
+            Thread.sleep(forTimeInterval: time)
+            print("\(customer.waitingNumber)번 고객 \(customer.banking.rawValue)업무 완료")
         }
         
         serialQueue.sync(execute: queueItem)
