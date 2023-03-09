@@ -9,12 +9,12 @@ enum Business: CaseIterable {
     case loan
     case deposit
     
-    var processtime: Double {
+    var processTime: Double {
         switch self {
         case .loan:
-            return 0.7
-        case .deposit:
             return 1.1
+        case .deposit:
+            return 0.7
         }
     }
 }
