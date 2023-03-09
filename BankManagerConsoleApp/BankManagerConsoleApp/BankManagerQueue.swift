@@ -6,7 +6,7 @@
 //
 
 struct BankManagerQueue<T> {
-    private var linkedList: LinkedList<T>
+    private let linkedList: LinkedList<T>
     
     var peek: T? {
         linkedList.head?.value

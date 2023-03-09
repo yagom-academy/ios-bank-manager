@@ -18,7 +18,10 @@ struct BankManager {
             switch userInput {
             case "1":
                 let bank = Bank(bankersCount: 1)
-                bank.open()
+                let numberOfCustomer = Int.random(in: 10...30)
+                
+                bank.receive(of: numberOfCustomer)
+                bank.startBusiness()
             case "2":
                 isSelectedOpen = false
             default:

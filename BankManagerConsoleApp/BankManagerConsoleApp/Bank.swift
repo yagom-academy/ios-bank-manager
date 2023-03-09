@@ -9,20 +9,20 @@ import Foundation
 
 struct Bank {
     private let bankers: [Banker]
-    private var customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
+    private let customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
     
     init(bankersCount: Int) {
         self.bankers = .init(repeating: Banker(), count: bankersCount)
-        
-        let numberOfCustomer = Int.random(in: 10...30)
-        
+    }
+    
+    func receive(of numberOfCustomer: Int) {
         for waitingNumber in 1...numberOfCustomer {
             let customer = Customer(waitingNumber: waitingNumber)
             customerQueue.enqueue(customer)
         }
     }
     
-    func open() {
+    func startBusiness() {
         var completedJobCount = 0
         let startTime = CFAbsoluteTimeGetCurrent()
         
@@ -34,10 +34,10 @@ struct Bank {
         }
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         
-        close(count: completedJobCount, time: durationTime)
+        endBusiness(count: completedJobCount, time: durationTime)
     }
     
-    private func close(count completedJobCount: Int, time durationTime: CFAbsoluteTime) {
+    private func endBusiness(count completedJobCount: Int, time durationTime: CFAbsoluteTime) {
         let formattedTime = String(format: "%.2f", durationTime)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.\n")
     }
