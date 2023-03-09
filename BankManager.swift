@@ -20,7 +20,7 @@ struct BankManager {
         numberOfClient = waitingQueue.size
     }
     
-    mutating func startBusiness() {
+    mutating func processBusiness() {
         while !waitingQueue.isEmpty {
             guard let client = waitingQueue.dequeue() else { return }
             print("\(client) 업무 시작")
@@ -28,6 +28,10 @@ struct BankManager {
             print("\(client) 업무 완료")
         }
         
+        presentBusinessResult()
+    }
+    
+    private func presentBusinessResult() {
         let businessHours = Double(numberOfClient) * 0.7
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 엄무시간은 \(String(format: "%.2f", businessHours))초입니다.")
     }

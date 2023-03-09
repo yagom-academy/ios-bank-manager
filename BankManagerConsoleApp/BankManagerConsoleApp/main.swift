@@ -13,7 +13,7 @@ while true {
     
     if userInput == "1" {
         bankManager.setupWaitingQueueAndClientNumber()
-        bankManager.startBusiness()
+        bankManager.processBusiness()
     } else if userInput == "2" {
         break
     }

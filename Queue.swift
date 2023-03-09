@@ -16,7 +16,7 @@ struct Queue<T> {
     var size: Int {
         var count = 0
         var current = head
-        while (current != nil) {
+        while current != nil {
             current = current?.next
             count += 1
         }
