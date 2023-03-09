@@ -9,8 +9,8 @@ import Foundation
 
 struct BankClerk {
     mutating func service(to client: Client) {
-        let start = "\(client.number)번 고객 업무 시작"
-        let end = "\(client.number)번 고객 업무 완료"
+        let start = "\(client.waitingNumber)번 고객 업무 시작"
+        let end = "\(client.waitingNumber)번 고객 업무 완료"
         
         print(start)
         usleep(700000)

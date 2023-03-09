@@ -22,7 +22,7 @@ struct Bank {
     mutating func lineUpClient() {
         clientCount = Int.random(in: 10...30)
         for number in 1...clientCount {
-            let currentClient = Client(number: number)
+            let currentClient = Client(waitingNumber: number)
             waitingLine.enqueue(currentClient)
         }
     }

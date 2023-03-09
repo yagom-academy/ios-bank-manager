@@ -6,5 +6,5 @@
 //
 
 struct Client {
-    private(set) var number: Int
+    private(set) var waitingNumber: Int
 }
