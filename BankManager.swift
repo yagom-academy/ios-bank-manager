@@ -13,18 +13,11 @@ class BankManager {
     
     func manageBanking() {
         for i in 1...bankCustomer {
-            
-            let bankClerk = DispatchWorkItem {
-                self.customerCountQueue.enqueue(data: i)
-                guard let customer = self.customerCountQueue.peek() else { return }
-                
-                print("\(customer)번 고객 업무 시작")
-                usleep(700000)
-                self.customerCountQueue.dequeue()
-                print("\(customer)번 고객 업무 완료")
-                usleep(700000)
-            }
-            DispatchQueue.global().sync(execute: bankClerk)
+            self.customerCountQueue.enqueue(data: i)
+            print("\(i)번 고객 업무 시작")
+            usleep(700000)
+            self.customerCountQueue.dequeue()
+            print("\(i)번 고객 업무 완료")
         }
         let time: Double = 0.7 * Double(bankCustomer)
         let formattedTime = time.digitFormatter()
