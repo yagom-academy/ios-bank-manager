@@ -8,19 +8,19 @@
 import Foundation
 
 class BankManager {
-    var customerQueue = BankQueue<Int>()
+    var customerCountQueue = BankQueue<Int>()
     var bankCustomer: Int = 0
     
     func doBanking() {
         for i in 1...bankCustomer {
             
             let bankClerk = DispatchWorkItem {
-                self.customerQueue.enqueue(data: i)
-                guard let customer = self.customerQueue.peek() else { return }
+                self.customerCountQueue.enqueue(data: i)
+                guard let customer = self.customerCountQueue.peek() else { return }
                 
                 print("\(customer)번 고객 업무 시작")
                 usleep(700000)
-                self.customerQueue.dequeue()
+                self.customerCountQueue.dequeue()
                 print("\(customer)번 고객 업무 완료")
                 usleep(700000)
             }

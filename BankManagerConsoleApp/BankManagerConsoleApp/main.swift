@@ -15,7 +15,7 @@ while let inputNumber = readLine() {
         break
     } else if inputNumber == "1" {
         let customerCount = Int.random(in: 10...30)
-        bankManager.bankCustomers = customerCount
+        bankManager.bankCustomer = customerCount
         bankManager.doBanking()
         menuMessage()
     } else {
