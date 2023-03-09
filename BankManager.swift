@@ -36,7 +36,7 @@ struct BankManager {
         switch userInput {
         case "1":
             bank.open()
-            bank.reportResult()
+//            bank.reportResult()
         case "2":
             isRunning = false
         default:
