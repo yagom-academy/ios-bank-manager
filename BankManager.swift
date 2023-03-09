@@ -9,12 +9,6 @@ import Foundation
 struct BankManager {
     private var bank = Bank()
     
-    mutating private func openBank() {
-        bank.lineUpClient()
-        bank.doTask()
-        startBankApp()
-    }
-    
     mutating func startBankApp() {
         let noticeMenu = "1 : 은행 개점 \n2 : 종료 \n입력 : "
         let inputError = "입력이 잘못되었습니다."
@@ -25,7 +19,8 @@ struct BankManager {
         
         switch input {
         case BankState.open:
-            openBank()
+            bank.manageTodayTask()
+            startBankApp()
         case BankState.close:
             return
         default:
