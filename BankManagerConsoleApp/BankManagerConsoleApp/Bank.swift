@@ -51,7 +51,8 @@ struct Bank {
         let numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
         
         for count in 1...numberOfCustomer {
-            customers.enqueue(Customer(waitingNumber: count))
+            guard let randomBanking = Banking.allCases.randomElement() else { return count - 1 }
+            customers.enqueue(Customer(waitingNumber: count, banking: randomBanking))
         }
         
         return numberOfCustomer
@@ -64,8 +65,12 @@ struct Bank {
     }
     
     mutating private func addManager() {
-        for _ in 1...BankOption.numberOfManager {
-            self.managers.append(BankManager())
+        for _ in 1...BankOption.numberOfDepositManager {
+            self.managers.append(BankManager(duty: .deposit))
+        }
+        
+        for _ in 1...BankOption.numberOfLoanManager {
+            self.managers.append(BankManager(duty: .loan))
         }
     }
 }
