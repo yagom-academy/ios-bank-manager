@@ -10,6 +10,7 @@
 		5899903629BA109F00D4D272 /* BankDesk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5899903529BA109F00D4D272 /* BankDesk.swift */; };
 		719EBEE429B84B5A00B86AAF /* BankQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719EBEE329B84B5A00B86AAF /* BankQueue.swift */; };
 		71A09F0F29B6E8630015C160 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A09F0E29B6E8630015C160 /* BankManager.swift */; };
+		71BBD4BE29BA131500E70105 /* TextEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BBD4BD29BA131500E70105 /* TextEnum.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		5899903529BA109F00D4D272 /* BankDesk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankDesk.swift; path = ../../BankDesk.swift; sourceTree = "<group>"; };
 		719EBEE329B84B5A00B86AAF /* BankQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankQueue.swift; path = ../../BankQueue.swift; sourceTree = "<group>"; };
 		71A09F0E29B6E8630015C160 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		71BBD4BD29BA131500E70105 /* TextEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnum.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +69,7 @@
 				71A09F0E29B6E8630015C160 /* BankManager.swift */,
 				5899903529BA109F00D4D272 /* BankDesk.swift */,
 				719EBEE329B84B5A00B86AAF /* BankQueue.swift */,
+				71BBD4BD29BA131500E70105 /* TextEnum.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5899903629BA109F00D4D272 /* BankDesk.swift in Sources */,
+				71BBD4BE29BA131500E70105 /* TextEnum.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				71A09F0F29B6E8630015C160 /* BankManager.swift in Sources */,
 				719EBEE429B84B5A00B86AAF /* BankQueue.swift in Sources */,

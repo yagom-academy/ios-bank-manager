@@ -11,27 +11,27 @@ struct BankDesk {
     
     var bankManager = BankManager()
     
-    func menuMessage(){
-        print("1 : 은행개점")
-        print("2 : 종료")
-        print("입력 : ", terminator: "")
+    func showMenuMessage(){
+        print("1 :\(menuMessage.bankOpen)")
+        print("2 : \(menuMessage.bankClose)")
+        print(menuMessage.input, terminator: "")
     }
     
     func inputBankingMenu() {
-        menuMessage()
+        showMenuMessage()
         while let inputNumber = readLine() {
             
             if inputNumber == "2" {
-                print("종료")
+                print(menuMessage.bankClose)
                 return
             } else if inputNumber == "1" {
                 let customerCount = Int.random(in: 10...30)
                 bankManager.bankCustomer = customerCount
                 bankManager.manageBanking()
-                menuMessage()
+                showMenuMessage()
             } else {
-                print("입력이 잘못 되었습니다.")
-                menuMessage()
+                print(menuMessage.inputErrorMessage)
+                showMenuMessage()
             }
         }
     }
