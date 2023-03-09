@@ -10,9 +10,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        a.doBanking()
+        
     }
-
-let a = BankManager()
 }
 

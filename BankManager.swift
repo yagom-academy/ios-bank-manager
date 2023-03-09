@@ -11,7 +11,7 @@ class BankManager {
     private var customerCountQueue: BankQueue<Int> = BankQueue<Int>()
     var bankCustomer: Int = 0
     
-    func doBanking() {
+    func manageBanking() {
         for i in 1...bankCustomer {
             
             let bankClerk = DispatchWorkItem {
