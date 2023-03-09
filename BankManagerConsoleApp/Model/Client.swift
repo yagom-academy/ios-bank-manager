@@ -7,4 +7,5 @@
 
 struct Client {
     private(set) var waitingNumber: Int
+    private(set) var purposeOfVisit: Task
 }

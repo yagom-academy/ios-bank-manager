@@ -12,6 +12,7 @@ struct Bank {
     private var clientCount: Int = 10
     private var BankClerkCount: Int = 1
     private var bankClerk = BankClerk()
+    private let typeOfTask: [Task] = [.deposit, .loan]
 
     mutating func manageTodayTask() {
         lineUpClient()
@@ -22,9 +23,11 @@ struct Bank {
     mutating func lineUpClient() {
         clientCount = Int.random(in: 10...30)
         for number in 1...clientCount {
-            let currentClient = Client(waitingNumber: number)
+            guard let type = typeOfTask.randomElement() else { return }
+            let currentClient = Client(waitingNumber: number, purposeOfVisit: type)
             waitingLine.enqueue(currentClient)
         }
+   
     }
 
     mutating func doTask() {
@@ -46,4 +49,5 @@ struct Bank {
         let success = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalTime)초입니다."
         print(success)
     }
+    
 }
