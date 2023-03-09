@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankClerk {
-    mutating func service(to client: Client) {
+    func service(to client: Client) {
         let start = "\(client.waitingNumber)번 고객 \(client.purposeOfVisit.rawValue)업무 시작"
         let end = "\(client.waitingNumber)번 고객 \(client.purposeOfVisit.rawValue)업무 완료"
         

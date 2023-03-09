@@ -10,7 +10,7 @@ import Foundation
 struct Bank {
     private var waitingLine = Queue<Client>()
     private var clientCount: Int = 10
-    private var BankClerkCount: Int = 1
+    private var BankClerkCount: Int = 3
     private var bankClerk = BankClerk()
     private let typeOfTask: [Task] = [.deposit, .loan]
 
@@ -33,7 +33,8 @@ struct Bank {
     mutating func doTask() {
         for _ in 1...waitingLine.count {
             guard let currentClient = waitingLine.dequeue() else { return }
-            bankClerk.service(to: currentClient)
+            //bankClerk.service(to: currentClient)
+            dispatchQueue(currentClient)
         }
     }
     
@@ -50,4 +51,22 @@ struct Bank {
         print(success)
     }
     
+    func dispatchQueue(_ client: Client) {
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        
+        let service = DispatchWorkItem() {
+            bankClerk.service(to: client)
+        }
+        
+        if client.purposeOfVisit == .deposit {
+            depositSemaphore.wait()
+            DispatchQueue.global().async(execute: service)
+            depositSemaphore.signal()
+        } else {
+            loanSemaphore.wait()
+            DispatchQueue.global().async(execute: service)
+            loanSemaphore.signal()
+        }
+    }
 }
