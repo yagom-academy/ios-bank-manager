@@ -16,5 +16,7 @@ while true {
         bankManager.processBusiness()
     } else if userInput == "2" {
         break
+    } else {
+        print("잘못된 입력입니다. 다시 입력해주세요.")
     }
 }
