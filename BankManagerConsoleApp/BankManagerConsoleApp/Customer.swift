@@ -6,5 +6,5 @@
 //
 
 struct Customer {
-    let number: Int
+    let waitingNumber: Int
 }

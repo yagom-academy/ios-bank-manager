@@ -27,32 +27,32 @@ struct Bank {
     }
     
     mutating private func open() {
-        let customerCount = receive()
-        let totalWorkTime = Double(customerCount) * BankOption.processingTime
+        let numberOfCustomer = receiveNumberOfCustomers()
+        let totalWorkTime = Double(numberOfCustomer) * BankOption.processingTime
         
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else {
                 break
             }
             
-            doWork(customer: customer)
+            work(for: customer)
         }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalWorkTime.applyNumberFormatter())초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime.applyNumberFormatter())초입니다.")
         run()
     }
     
-    mutating private func receive() -> Int {
-        let customerCount = Int.random(in: BankOption.rangeOfCustomer)
+    mutating private func receiveNumberOfCustomers() -> Int {
+        let numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
         
-        for count in 1...customerCount {
-            customers.enqueue(Customer(number: count))
+        for count in 1...numberOfCustomer {
+            customers.enqueue(Customer(waitingNumber: count))
         }
         
-        return customerCount
+        return numberOfCustomer
     }
     
-    mutating private func doWork(customer: Customer) {
+    mutating private func work(for customer: Customer) {
         manager.customer = customer
         
         manager.work()
