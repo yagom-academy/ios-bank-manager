@@ -5,6 +5,8 @@
 //  Created by 레옹아범, 혜모리 on 2023/03/07.
 //
 
+import Foundation
+
 struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var managers: [BankManager] = []
@@ -29,7 +31,7 @@ struct Bank {
     
     mutating private func open() {
         let numberOfCustomer = receiveNumberOfCustomers()
-        let totalWorkTime = Double(numberOfCustomer) * BankOption.processingTime
+        let startDate = Date()
         
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else {
@@ -39,7 +41,9 @@ struct Bank {
             work(for: customer)
         }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(totalWorkTime.applyNumberFormatter())초입니다.")
+        let finishDate = Date().timeIntervalSince(startDate)
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(finishDate.applyNumberFormatter())초입니다.")
         run()
     }
     
