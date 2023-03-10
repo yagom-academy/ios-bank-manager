@@ -8,15 +8,16 @@
 import Foundation
 
 protocol BankWorkable {
+    var dispatchGroup: DispatchGroup { get }
     var bankDispatchQueue: DispatchQueue { get }
-    var businessType: BusinessType { get }
     var bankSemaphore: DispatchSemaphore { get }
+    var businessType: BusinessType { get }
     var completedJobCount: Int { get set }
 }
 
 extension BankWorkable {
     func work(for customer: Customer) {
-        bankDispatchQueue.async {
+        bankDispatchQueue.async(group: dispatchGroup) {
             self.bankSemaphore.wait()
             print("\(customer.waitingNumber)번 고객 업무 시작")
             Thread.sleep(forTimeInterval: customer.consultingTime)
