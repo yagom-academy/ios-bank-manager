@@ -47,11 +47,44 @@
 # 트러블 슈팅
 ## 1️⃣ STEP3의 요구사항 중 `세 명의 은행원`에 대한 해석
 > 은행에는 3명의 은행원이 근무합니다(예금담당 2명, 대출담당 1명)
-
 - 은행에는 은행원이 세 명 근무하도록 안내되어있었습니다. `BankClerk`타입을 구현 해 놓은 후라서 "세 개의 global 스레드 안에 각각 BankClerk 인스턴스를 만들어주면 되지 않을까?" 생각을 했습니다. 
-- 저희가 만들어 놓은 로직에서는 은행원이 직접 손님들의 대기열을 dequeue하지 않고, 은행 내부에서 dequeue한 손님들을 목적(대출 or 예금)에 따라 은행원에게 보내주도록 구현해놓았습니다. 
-이 상태에서 위 처럼 생각 후 비동기 스레드를 구현하니 예금목적 손님들은 예금을 담당하는 두 명의 은행원 스레드를 돌게되는 등의 오류가 발생했습니다.
-- BankClerk의 인스턴스로 은행원의 실체를 만드는 것이 아니라, 은행원을 하나의 스레드로 생각 하고 서비스를 제공하는 BankClerk의 인스턴스 한개를 전역변수로 구현하였습니다. 그리고 **접근하는 스레드의 수 (=은행원)** 를 `Semaphore`로 제한함으로써 총 3명의 은행원이 일을 처리하도록 구현하였습니다.
+
+#### `BankClerk()` 인스턴스로 생각했을 때 (문제발생)
+- 저희가 처음 생각한 부분은 은행이 은행원에게 대기줄에 있는 손님들을 async로 줄세워주고, 손님들을 받은 은행원들은 동기적으로 일을 처리한다고 생각했습니다.
+그래서 은행이 client의 watingLine에서 dequeue하여 bankClerk에게 전달하는 행위자체를 `DispatchQueue.global().async { }` 로 구현하였습니다. 
+그리고 client를 전달받은 `BankClerk()`이 3명이 존재하므로 3개의 `DispatchWorkItem`안에 `BankClerk()` 인스턴스를 각각 만들어주었고, client의 방문 목적에 따라 if문을 통하여 deposit/loan으로 나뉘어 세 개의 스레드 중 해당 업무를 처리하는 `BankClerk()`이 존재하는 스레드로 보내주었습니다.
+- 위와같이 생각하고 구현을 한 결과, 다음과 같은 문제들이 발생했습니다.
+    1. deposit 목적의 client는 두 개의 스레드를 거쳐서 중복으로 출력된다.
+    2. 세 개의 스레드 안에 존재하는 `BankClerk()`들이 동기적으로 일을 하지 못한다.
+    
+```swift
+private func dispatchQueue(_ currentClient: Client) {
+    DispatchQueue.global().async { // 은행원에게 고객을 주는 과정이라고 생각
+        let depositServiceA = DispatchWorkItem() { //은행원이 고객을 담당하여 업무를 처리하는 과정이라고 생각하여 총 3명의 은행원을 직접 구현
+            let bankClerk = BankClerk()
+            bankClerk.service(to: currentClient)
+        }
+        let depositServiceB = DispatchWorkItem() {
+            let bankClerk = BankClerk()
+            bankClerk.service(to: currentClient)
+        }
+        let loanService = DispatchWorkItem() {
+            let bankClerk = BankClerk()
+            bankClerk.service(to: currentClient)
+        }
+
+        if currentClient.purposeOfVisit == .deposit {
+            DispatchQueue.global().sync(execute: depositServiceA)
+            DispatchQueue.global().sync(execute: depositServiceB)
+        } else {
+            DispatchQueue.global().sync(execute: loanService)
+            }
+}
+    
+```
+
+#### `Thread` 로 생각했을 때 (해결방법)
+- 인스턴스로 직접 만들어서 구현하니 위와같은 문제가 발생하여 BankClerk의 인스턴스로 은행원의 실체를 만드는 것이 아니라, 은행원을 하나의 스레드로 생각 하고 서비스를 제공하는 BankClerk의 인스턴스 한개를 전역변수로 구현하였습니다. 그리고 **접근하는 스레드의 수 (=은행원)** 를 `Semaphore`로 제한함으로써 총 3명의 은행원이 일을 처리하도록 구현하였습니다.
 ```swift
 // Bank.swift
 private var bankClerk = BankClerk()
@@ -77,6 +110,7 @@ private func dispatchQueue(_ currentClient: Client) {
     }
 }
 ```
+
 
 ## 2️⃣ 스레드 실행 순서 고민
 - 은행원을 스레드로 생각하여 `DispatchQueue.global().async` 로 3명의 은행원에서 고객들을 비동기적으로 처리하도록 구현하였는데, 메인스레드가 아닌 다른 스레드에서 작업을 처리하여 작업이 끝나기 전에 메인스레드에 있는 `notifyTaskCompletion` 메서드가 실행되어 함수 내부의 print문이 출력되는 오류가 있었습니다.
