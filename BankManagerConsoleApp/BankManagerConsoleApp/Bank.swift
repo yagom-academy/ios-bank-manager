@@ -9,6 +9,10 @@ import Foundation
 struct Bank {
     private var clientCount = 0
     
+    init(clientCount: Int) {
+        self.clientCount = clientCount
+    }
+    
     private enum BankStatus: String {
         case open = "1"
         case close = "2"
@@ -48,13 +52,11 @@ struct Bank {
     
     private mutating func manageClientQueue() -> Queue<Client> {
         var clientQueue = Queue<Client>()
-        let randomClientCount = Int.random(in: 10...30)
         
-        (0..<randomClientCount).forEach {
+        (0..<clientCount).forEach {
             let client = Client(clientWaitingNumber: $0 + 1)
             
             clientQueue.enqueue(client)
-            clientCount += 1
         }
         return clientQueue
     }
