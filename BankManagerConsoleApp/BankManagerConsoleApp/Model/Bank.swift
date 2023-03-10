@@ -7,16 +7,19 @@
 import Foundation
 
 final class Bank {
-    private var depositCustomerQueue: CustomerQueue<Customer> = CustomerQueue()
-    private var loanCustomerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private let banker = Banker()
     
-    private let loanBankers: [Banker]
-    private let depositBankers: [Banker]
-    private(set) var totalCustomer: Int = 0
+    private let loanSemaphore: DispatchSemaphore
+    private let depositSemaphore: DispatchSemaphore
+    private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
+    private let workGroup: DispatchGroup = DispatchGroup()
     
-    init(loanBankers: [Banker], depositBankers: [Banker]) {
-        self.loanBankers = loanBankers
-        self.depositBankers = depositBankers
+    private var totalCustomer: Int = 0
+    
+    init(loanBankers: Int, depositBankers: Int) {
+        self.loanSemaphore = DispatchSemaphore(value: loanBankers)
+        self.depositSemaphore = DispatchSemaphore(value: depositBankers)
     }
     
     func open() {
@@ -32,55 +35,43 @@ final class Bank {
             guard let business = Business.allCases.randomElement() else { return }
             let numberTicket = String(describing: number)
             let customer = Customer(numberTicket: numberTicket, business: business)
-            
-            switch customer.business {
-            case .loan:
-                loanCustomerQueue.enqueue(customer)
-            case .deposit:
-                depositCustomerQueue.enqueue(customer)
-            }
+            customerQueue.enqueue(customer)
         }
     }
     
-    // 동시성 추가
     private func orderWork() {
-        let workGroup = DispatchGroup()
-        
-        let loanWorkItem = DispatchWorkItem {
-            while self.loanCustomerQueue.isEmpty == false {
-                self.loanBankers.forEach { banker in
-                    let customer = self.loanCustomerQueue.dequeue()
-                    banker.workQueue.async(group: workGroup) {
-                        banker .doWork(for: customer)
-                    }
-                }
-            }
-        }
-        let depositWorkItem = DispatchWorkItem {
-            while self.depositCustomerQueue.isEmpty == false {
-                self.depositBankers.forEach{ banker in
-                    let customer = self.depositCustomerQueue.dequeue()
-                    banker.workQueue.async(group: workGroup) {
-                        banker.doWork(for: customer)
-                    }
-                }
-            }
-        }
-        
         let startTime = CFAbsoluteTimeGetCurrent()
         
-        DispatchQueue.global().async(group: workGroup, execute: loanWorkItem)
-        DispatchQueue.global().async(group: workGroup, execute: depositWorkItem)
-            
+        while customerQueue.isEmpty == false {
+            guard let customer = customerQueue.dequeue() else { return }
+            treat(for: customer)
+        }
+        
         workGroup.wait()
         
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
         let roundedProcessTime = round(processTime * 100) / 100
         reportResult(processTime: roundedProcessTime)
     }
+
+    private func treat(for customer: Customer) {
+        switch customer.business {
+        case .deposit:
+            workQueue.async(group: workGroup) {
+                self.depositSemaphore.wait()
+                self.banker.doWork(for: customer)
+                self.depositSemaphore.signal()
+            }
+        case .loan:
+            workQueue.async(group: workGroup) {
+                self.loanSemaphore.wait()
+                self.banker.doWork(for: customer)
+                self.loanSemaphore.signal()
+            }
+        }
+    }
     
-    // processTime 수정
-    func reportResult(processTime: CFAbsoluteTime) {
+    private func reportResult(processTime: CFAbsoluteTime) {
         let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(processTime)초 입니다."
         print(message)
     }
