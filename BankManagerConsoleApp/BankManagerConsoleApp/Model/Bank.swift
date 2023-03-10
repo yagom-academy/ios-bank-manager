@@ -11,14 +11,14 @@ final class Bank {
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
     private var totalCustomer: Int = 0
     
-    private let loanSemaphore: DispatchSemaphore
-    private let depositSemaphore: DispatchSemaphore
+    private let loanDepartment: DispatchSemaphore
+    private let depositDepartment: DispatchSemaphore
     private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
     private let workGroup: DispatchGroup = DispatchGroup()
     
     init(loanBankerCount: Int, depositBankerCount: Int) {
-        self.loanSemaphore = DispatchSemaphore(value: loanBankerCount)
-        self.depositSemaphore = DispatchSemaphore(value: depositBankerCount)
+        self.loanDepartment = DispatchSemaphore(value: loanBankerCount)
+        self.depositDepartment = DispatchSemaphore(value: depositBankerCount)
     }
     
     func open() {
@@ -60,15 +60,15 @@ final class Bank {
         switch customer.business {
         case .deposit:
             workQueue.async(group: workGroup) {
-                self.depositSemaphore.wait()
+                self.depositDepartment.wait()
                 Banker.doWork(for: customer)
-                self.depositSemaphore.signal()
+                self.depositDepartment.signal()
             }
         case .loan:
             workQueue.async(group: workGroup) {
-                self.loanSemaphore.wait()
+                self.loanDepartment.wait()
                 Banker.doWork(for: customer)
-                self.loanSemaphore.signal()
+                self.loanDepartment.signal()
             }
         }
     }
