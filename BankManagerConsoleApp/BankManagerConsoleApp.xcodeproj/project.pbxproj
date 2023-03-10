@@ -43,7 +43,7 @@
 		AD3774A929B5BA6C00E68DA7 /* CustomerQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTest.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +67,8 @@
 		08878DAA29B6D6EE00CD8F05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AD3774B029B5C94D00E68DA7 /* DataStructure */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				08878DA829B6D6E100CD8F05 /* Customer.swift */,
 				08878DA629B6D60600CD8F05 /* Banker.swift */,
 				08878DAB29B6D84600CD8F05 /* Bank.swift */,
@@ -96,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				AD3774B029B5C94D00E68DA7 /* DataStructure */,
 				AD3774A829B5BA6C00E68DA7 /* UnitTest */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
@@ -114,7 +115,6 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				08878DAA29B6D6EE00CD8F05 /* Model */,
 			);
