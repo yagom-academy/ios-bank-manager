@@ -7,10 +7,14 @@
 import Foundation
 
 struct Bank {
-    private var clientCount = 0
+    var clientCount: Int
+    var clientArray: [Int]
+    var loanArray: [Int]
     
-    init(clientCount: Int) {
+    init(clientCount: Int, clientArray: [Int], loanArray: [Int]) {
         self.clientCount = clientCount
+        self.clientArray = clientArray
+        self.loanArray = loanArray
     }
     
     private enum BankStatus: String {
@@ -50,19 +54,29 @@ struct Bank {
         }
     }
     
-    private mutating func manageClientQueue() -> Queue<Client> {
-        var clientQueue = Queue<Client>()
+    private mutating func manageClientQueue() -> (deposit: Queue<Client>, loan: Queue<Client>) {
+        var depositClientQueue = Queue<Client>()
+        var loanClientQueue = Queue<Client>()
         
-        (0..<clientCount).forEach {
-            let client = Client(clientWaitingNumber: $0 + 1)
-            
-            clientQueue.enqueue(client)
+        for loanClientNumber in loanArray {
+            let loanClient = Client(clientWaitingNumber: loanClientNumber, bankingType: .loan)
+            loanClientQueue.enqueue(loanClient)
         }
-        return clientQueue
+        
+        clientArray.removeAll(where: {loanArray.contains($0)})
+        
+        for depositClientNumber in clientArray {
+            let depositClient = Client(clientWaitingNumber: depositClientNumber, bankingType: .deposit)
+            depositClientQueue.enqueue(depositClient)
+        }
+        
+        let clientTuple = (deposit: depositClientQueue, loan: loanClientQueue)
+        
+        return clientTuple
     }
     
     private mutating func distributeClient(depositManagerCount: Int, loanManagerCount: Int) {
-        let clientLists = managingClientQueue()
+        let clientLists = manageClientQueue()
         var depositClientList = clientLists.deposit
         var loanClientList = clientLists.loan
         let bankManager = BankManager()
@@ -94,7 +108,7 @@ struct Bank {
     
     private mutating func manageBank() {
         let workTime = workTime {
-            distributeClient(bankManagerCount: 1)
+            distributeClient(depositManagerCount: 2, loanManagerCount: 1)
         }
         
         completeManagingBank(count: clientCount, time: workTime)
