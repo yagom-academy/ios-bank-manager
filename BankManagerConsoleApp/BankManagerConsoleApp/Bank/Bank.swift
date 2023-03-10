@@ -11,6 +11,7 @@ struct Bank {
     private var loanSection: BusinessSection
     private var depositSection: BusinessSection
     private let customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
+    private let dispatchGroup = DispatchGroup()
     
     init() {
         loanSection = BusinessSection(
@@ -39,10 +40,10 @@ struct Bank {
             
             switch currentCustomer.businessType {
             case .loan:
-                loanSection.work(for: currentCustomer)
+                loanSection.processJob(for: currentCustomer, group: dispatchGroup)
                 loanSection.addJobCount()
             case .deposit:
-                depositSection.work(for: currentCustomer)
+                depositSection.processJob(for: currentCustomer, group: dispatchGroup)
                 depositSection.addJobCount()
             }
         }
@@ -52,6 +53,7 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         work()
+        dispatchGroup.wait()
         
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         let completedJobCount = loanSection.completedJobCount + depositSection.completedJobCount
