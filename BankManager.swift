@@ -6,7 +6,7 @@
 //
 
 struct BankManager {
-    private var bank: Bank = .init()
+    private let bank: Bank = .init()
     
     mutating func startBankManager() {
         while true {

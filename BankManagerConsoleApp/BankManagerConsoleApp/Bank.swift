@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct Bank {
-    private var bankTeller: [Banker] = .init()
+class Bank {
+    private var banker: [Banker] = .init()
     private var clientQueue: Queue<BankClient> = .init()
     private var numberOfClient: Int = 0
     
     init() {
-        bankTeller.append(Banker())
+        banker.append(Banker())
     }
     
-    mutating func openBank() {
+    func openBank() {
         setupClient()
         assignClientsToBankTeller()
-        printClosingMessage()
+        closeBank()
     }
     
-    private mutating func setupClient() {
+    private func setupClient() {
         let numberOfWaitingClient = Int.random(in: 10...30)
         
         for number in 1...numberOfWaitingClient {
@@ -30,13 +30,17 @@ struct Bank {
         }
     }
     
-    private mutating func assignClientsToBankTeller() {
-        numberOfClient = 0
-        
+    private func assignClientsToBankTeller() {
         while let client = clientQueue.dequeue() {
-            bankTeller[0].receive(client: client)
+            guard let banker = banker.first else { return }
+            banker.receive(client: client)
             numberOfClient += 1
         }
+    }
+    
+    private func closeBank() {
+        printClosingMessage()
+        clearNumberOfClient()
     }
     
     private func printClosingMessage() {
@@ -44,5 +48,9 @@ struct Bank {
               let totalWorkTime = (Double(numberOfClient) * Banker.requiredTime).numberFormat() else { return }
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
+    }
+    
+    private func clearNumberOfClient() {
+        numberOfClient = 0
     }
 }
