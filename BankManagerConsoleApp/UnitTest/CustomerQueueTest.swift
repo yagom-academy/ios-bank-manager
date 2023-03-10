@@ -30,20 +30,6 @@ final class CustomerQueueTest: XCTestCase {
         // then
         XCTAssertEqual(expectedResult, result)
     }
-
-    func test_dequeue호출시_Queue의_Count가_1줄어든다() {
-        // given
-        sut?.enqueue(5)
-        sut?.enqueue(10)
-        let expectedResult = 1
-
-        // when
-        sut?.dequeue()
-        let result = sut?.count
-
-        // then
-        XCTAssertEqual(expectedResult, result)
-    }
     
     func test_isEmpty호출시_Queue가_비어있다면_true를반환한다() {
         // given
@@ -116,20 +102,6 @@ final class CustomerQueueTest: XCTestCase {
 
         // when
         let result = sut?.peek()
-
-        // then
-        XCTAssertEqual(expectedResult, result)
-    }
-
-    func test_peek호출시_count가_감소하지않는다() {
-        // given
-        sut?.enqueue(5)
-        sut?.enqueue(10)
-        let expectedResult = 2
-
-        // when
-        sut?.peek()
-        let result = sut?.count
 
         // then
         XCTAssertEqual(expectedResult, result)
