@@ -17,9 +17,9 @@ final class Bank {
     
     private var totalCustomer: Int = 0
     
-    init(loanBankers: Int, depositBankers: Int) {
-        self.loanSemaphore = DispatchSemaphore(value: loanBankers)
-        self.depositSemaphore = DispatchSemaphore(value: depositBankers)
+    init(loanBankerCount: Int, depositBankerCount: Int) {
+        self.loanSemaphore = DispatchSemaphore(value: loanBankerCount)
+        self.depositSemaphore = DispatchSemaphore(value: depositBankerCount)
     }
     
     func open() {

@@ -8,8 +8,6 @@
 import Foundation
 
 struct Banker {
-    let workQueue = DispatchQueue(label: "workQueue")
-    
     func doWork(for customer: Customer) {
         let startMessage = "\(customer.numberTicket)번 고객 \(customer.business) 업무 시작"
         let endMessage = "\(customer.numberTicket)번 고객 \(customer.business) 업무 완료"
