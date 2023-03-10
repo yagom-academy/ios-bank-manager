@@ -46,7 +46,7 @@ struct Bank {
         }
     }
     
-    private mutating func managingClientQueue() -> Queue<Client> {
+    private mutating func manageClientQueue() -> Queue<Client> {
         var clientQueue = Queue<Client>()
         let randomClients = Int.random(in: 10...30)
         
@@ -60,7 +60,7 @@ struct Bank {
     }
     
     private mutating func distributeClient(bankManagerCount: Int) {
-        var clientList = managingClientQueue()
+        var clientList = manageClientQueue()
         let bankManager = BankManager()
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 1)
