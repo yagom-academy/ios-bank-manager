@@ -24,7 +24,8 @@ final class Bank {
     
     func open() {
         receiveCustomer()
-        orderWork()
+        let processTime = checkProcessTime(for: orderWork)
+        reportResult(processTime: processTime)
     }
     
     private func receiveCustomer() {
@@ -40,18 +41,20 @@ final class Bank {
     }
     
     private func orderWork() {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        
         while customerQueue.isEmpty == false {
             guard let customer = customerQueue.dequeue() else { return }
             treat(for: customer)
         }
         
         workGroup.wait()
-        
+    }
+    
+    private func checkProcessTime(for process: () -> Void) -> CFAbsoluteTime {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        process()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        let roundedProcessTime = round(processTime * 100) / 100
-        reportResult(processTime: roundedProcessTime)
+        
+        return processTime
     }
 
     private func treat(for customer: Customer) {
@@ -72,7 +75,8 @@ final class Bank {
     }
     
     private func reportResult(processTime: CFAbsoluteTime) {
-        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(processTime)초 입니다."
+        let roundedProcessTime = round(processTime * 100) / 100
+        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(roundedProcessTime)초 입니다."
         print(message)
     }
 }
