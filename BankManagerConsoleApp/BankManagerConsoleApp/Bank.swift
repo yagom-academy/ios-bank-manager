@@ -44,13 +44,20 @@ class Bank {
     }
     
     private func printClosingMessage() {
-        guard let totalClient = numberOfClient.numberFormat(),
-              let totalWorkTime = (Double(numberOfClient) * Banker.requiredTime).numberFormat() else { return }
+        let totalWorkTime = numberOfClient.totalWorkTime(by: Banker.requiredTime)
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
     
     private func clearNumberOfClient() {
         numberOfClient = 0
+    }
+}
+
+fileprivate extension Int {
+    func totalWorkTime(by workTime: Double) -> String {
+        let totalWorkTime = Double(self) * workTime
+        
+        return String(format: "%0.2f", totalWorkTime)
     }
 }
