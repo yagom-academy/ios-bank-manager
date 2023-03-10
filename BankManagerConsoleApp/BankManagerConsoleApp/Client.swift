@@ -5,9 +5,9 @@
 //
 
 struct Client {
-    enum BankingType: String {
-        case deposit = "예금"
-        case loan = "대출"
+    enum BankingType {
+        case deposit
+        case loan
     }
     
     let clientWaitingNumber: Int
@@ -18,6 +18,15 @@ struct Client {
             return 0.7
         case .loan:
             return 1.1
+        }
+    }
+    
+    var bankingTypeText: String {
+        switch bankingType {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
         }
     }
 }

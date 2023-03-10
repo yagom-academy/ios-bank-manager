@@ -7,7 +7,7 @@
 import Foundation
 
 struct Bank {
-    var clientCount: Int = Int.zero
+    private var clientCount: Int = Int.zero
     
     private enum BankStatus: String {
         case open = "1"
