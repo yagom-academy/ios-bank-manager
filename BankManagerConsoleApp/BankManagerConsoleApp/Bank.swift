@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
     private var banker: [Banker] = .init()
     private var clientQueue: Queue<BankClient> = .init()
     private var numberOfClient: Int = 0
