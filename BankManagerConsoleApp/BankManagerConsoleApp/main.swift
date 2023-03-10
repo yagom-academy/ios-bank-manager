@@ -6,6 +6,6 @@
 
 import Foundation
 
-var bank = Bank(clientCount: Int.random(in: 10...30))
+var bank = Bank()
 
 bank.openBank()

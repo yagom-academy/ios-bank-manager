@@ -7,15 +7,7 @@
 import Foundation
 
 struct Bank {
-    var clientCount: Int
-    var clientArray: [Int]
-    var loanArray: [Int]
-    
-    init(clientCount: Int, clientArray: [Int], loanArray: [Int]) {
-        self.clientCount = clientCount
-        self.clientArray = clientArray
-        self.loanArray = loanArray
-    }
+    var clientCount: Int = 0
     
     private enum BankStatus: String {
         case open = "1"
@@ -57,6 +49,28 @@ struct Bank {
     private mutating func manageClientQueue() -> (deposit: Queue<Client>, loan: Queue<Client>) {
         var depositClientQueue = Queue<Client>()
         var loanClientQueue = Queue<Client>()
+        
+        var clientArray: [Int] = []
+        clientCount = Int.random(in: 5...10)
+        
+        (0..<clientCount).forEach {
+            clientArray.append($0 + 1)
+        }
+        
+        var loanArray: [Int] = []
+        let loanCount = Int.random(in: 0...clientCount)
+        
+        while loanArray.count < loanCount {
+            let loanClientNumber = Int.random(in: 1...clientCount)
+            
+            if loanArray.contains(loanClientNumber) {
+                continue
+            } else {
+                loanArray.append(loanClientNumber)
+            }
+        }
+        
+        loanArray = loanArray.sorted()
         
         for loanClientNumber in loanArray {
             let loanClient = Client(clientWaitingNumber: loanClientNumber, bankingType: .loan)
