@@ -21,13 +21,13 @@ struct Bank {
     }
     
     private func displayBankMenu() {
-        print(NameSpace.bankMenuText, terminator: " ")
+        print(Constants.bankMenuText, terminator: " ")
     }
     
     private mutating func readMenuNumber() -> BankStatus? {
         guard let status = readLine(),
               let bankStatus = BankStatus(rawValue: status) else {
-            print(NameSpace.InvalidInputText)
+            print(Constants.InvalidInputText)
             openBank()
             
             return nil
@@ -102,5 +102,12 @@ struct Bank {
         let workingTime = String(format: "%.1f", time)
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(count)명이며, 총 업무시간은 \(workingTime)초 입니다.")
+    }
+}
+
+extension Bank {
+    enum Constants {
+        static let bankMenuText = "1 : 은행개점 \n2 : 종료\n입력 :"
+        static let InvalidInputText = "입력이 잘못되었습니다."
     }
 }
