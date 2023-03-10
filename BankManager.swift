@@ -7,9 +7,9 @@
 import Foundation
 
 struct BankManager {
-    func work(client: Int) {
-        print("\(client)번 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
-        print("\(client)번 업무 완료")
+    func work(client: Client) {
+        print("\(client.clientWaitingNumber)번 고객 \(client.bankingType.rawValue)업무 시작")
+        Thread.sleep(forTimeInterval: client.bankingTime)
+        print("\(client.clientWaitingNumber)번 고객 \(client.bankingType.rawValue)업무 완료")
     }
 }
