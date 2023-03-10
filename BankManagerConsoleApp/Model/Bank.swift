@@ -10,11 +10,10 @@ import Foundation
 struct Bank {
     private var waitingLine = Queue<Client>()
     private var clientCount: Int = 10
-    private var BankClerkCount: Int = 3
     private var bankClerk = BankClerk()
     private let typeOfTask: [Task] = [.deposit, .loan]
-    private let loanSemaphore = DispatchSemaphore(value: 1)
-    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let loanBankClerk = DispatchSemaphore(value: 1)
+    private let depositBankClerks = DispatchSemaphore(value: 2)
     private let group = DispatchGroup()
     
     mutating func manageTodayTask() {
@@ -54,15 +53,15 @@ struct Bank {
     }
     
     private func dispatchQueue(_ currentClient: Client) {
-        let depositService = DispatchWorkItem() { [self] in
-            depositSemaphore.wait()
+        let depositService = DispatchWorkItem() {
+            depositBankClerks.wait()
             bankClerk.service(to: currentClient)
-            depositSemaphore.signal()
+            depositBankClerks.signal()
         }
-        let loanService = DispatchWorkItem() { [self] in
-            loanSemaphore.wait()
+        let loanService = DispatchWorkItem() {
+            loanBankClerk.wait()
             bankClerk.service(to: currentClient)
-            loanSemaphore.signal()
+            loanBankClerk.signal()
         }
         
         if currentClient.purposeOfVisit == .deposit {
