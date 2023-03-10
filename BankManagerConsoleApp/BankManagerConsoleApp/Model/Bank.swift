@@ -9,14 +9,12 @@ import Foundation
 
 final class Bank {
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
-    private let banker = Banker()
+    private var totalCustomer: Int = 0
     
     private let loanSemaphore: DispatchSemaphore
     private let depositSemaphore: DispatchSemaphore
     private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
     private let workGroup: DispatchGroup = DispatchGroup()
-    
-    private var totalCustomer: Int = 0
     
     init(loanBankerCount: Int, depositBankerCount: Int) {
         self.loanSemaphore = DispatchSemaphore(value: loanBankerCount)
@@ -41,6 +39,14 @@ final class Bank {
         }
     }
     
+    private func checkProcessTime(for process: () -> Void) -> CFAbsoluteTime {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        process()
+        let processTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        return processTime
+    }
+    
     private func startWork() {
         while customerQueue.isEmpty == false {
             guard let customer = customerQueue.dequeue() else { return }
@@ -49,27 +55,19 @@ final class Bank {
         
         workGroup.wait()
     }
-    
-    private func checkProcessTime(for process: () -> Void) -> CFAbsoluteTime {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        process()
-        let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        
-        return processTime
-    }
 
     private func respond(to customer: Customer) {
         switch customer.business {
         case .deposit:
             workQueue.async(group: workGroup) {
                 self.depositSemaphore.wait()
-                self.banker.doWork(for: customer)
+                Banker.doWork(for: customer)
                 self.depositSemaphore.signal()
             }
         case .loan:
             workQueue.async(group: workGroup) {
                 self.loanSemaphore.wait()
-                self.banker.doWork(for: customer)
+                Banker.doWork(for: customer)
                 self.loanSemaphore.signal()
             }
         }
