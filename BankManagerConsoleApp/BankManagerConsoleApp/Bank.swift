@@ -8,12 +8,12 @@
 import Foundation
 
 struct Bank {
-    private var bankTeller = [BankTeller]()
-    private var clientQueue = Queue<BankClient>()
+    private var bankTeller: [Banker] = .init()
+    private var clientQueue: Queue<BankClient> = .init()
     private var numberOfClient: Int = 0
     
     init() {
-        bankTeller.append(BankTeller())
+        bankTeller.append(Banker())
     }
     
     mutating func openBank() {
@@ -34,14 +34,14 @@ struct Bank {
         numberOfClient = 0
         
         while let client = clientQueue.dequeue() {
-            bankTeller[0].receiveClient(bankClient: client)
+            bankTeller[0].receive(client: client)
             numberOfClient += 1
         }
     }
     
     private func printClosingMessage() {
         guard let totalClient = numberOfClient.numberFormat(),
-              let totalWorkTime = (Double(numberOfClient) * BankTeller.requiredTime).numberFormat() else { return }
+              let totalWorkTime = (Double(numberOfClient) * Banker.requiredTime).numberFormat() else { return }
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalClient)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
