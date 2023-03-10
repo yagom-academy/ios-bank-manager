@@ -61,18 +61,30 @@ struct Bank {
         return clientQueue
     }
     
-    private mutating func distributeClient(bankManagerCount: Int) {
-        var clientList = manageClientQueue()
+    private mutating func distributeClient(depositManagerCount: Int, loanManagerCount: Int) {
+        let clientLists = managingClientQueue()
+        var depositClientList = clientLists.deposit
+        var loanClientList = clientLists.loan
         let bankManager = BankManager()
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: 1)
         
-        for _ in Int.zero..<bankManagerCount {
+        for _ in Int.zero..<depositManagerCount {
             DispatchQueue.global().async(group: group) {
                 semaphore.wait()
                 
-                while let clientWaitingNumber = clientList.dequeue()?.clientWaitingNumber {
-                    bankManager.work(client: clientWaitingNumber)
+                while let client = depositClientList.dequeue() {
+                    bankManager.work(client: client)
+                    semaphore.signal()
+                }
+            }
+        }
+        for _ in Int.zero..<loanManagerCount {
+            DispatchQueue.global().async(group: group) {
+                semaphore.wait()
+                
+                while let client = loanClientList.dequeue() {
+                    bankManager.work(client: client)
                     semaphore.signal()
                 }
             }
