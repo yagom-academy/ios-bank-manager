@@ -4,6 +4,7 @@
 //
 //  Created by Rowan, 릴라 on 2023/03/07.
 //
+
 import Foundation
 
 final class Bank {
@@ -24,7 +25,7 @@ final class Bank {
     
     func open() {
         receiveCustomer()
-        let processTime = checkProcessTime(for: orderWork)
+        let processTime = checkProcessTime(for: startWork)
         reportResult(processTime: processTime)
     }
     
@@ -40,10 +41,10 @@ final class Bank {
         }
     }
     
-    private func orderWork() {
+    private func startWork() {
         while customerQueue.isEmpty == false {
             guard let customer = customerQueue.dequeue() else { return }
-            treat(for: customer)
+            respond(to: customer)
         }
         
         workGroup.wait()
@@ -57,7 +58,7 @@ final class Bank {
         return processTime
     }
 
-    private func treat(for customer: Customer) {
+    private func respond(to customer: Customer) {
         switch customer.business {
         case .deposit:
             workQueue.async(group: workGroup) {

@@ -5,9 +5,9 @@
 //  Created by Rowan, 릴라 on 2023/03/09.
 //
 
-enum Business: CaseIterable {
-    case loan
-    case deposit
+enum Business: String, CaseIterable {
+    case loan = "대출"
+    case deposit = "예금"
     
     var processTime: Double {
         switch self {
