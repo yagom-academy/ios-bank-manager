@@ -87,10 +87,10 @@ struct Bank {
         openBank()
     }
     
-    private func workTime(workTimeFunction: () -> Void) -> TimeInterval {
+    private func workTime(workTimeHandler: () -> Void) -> TimeInterval {
         let startTime = Date()
         
-        workTimeFunction()
+        workTimeHandler()
         
         let endTime = Date()
         let workTime = endTime.timeIntervalSince(startTime)
