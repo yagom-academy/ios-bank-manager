@@ -18,7 +18,7 @@ struct Bank {
     
     mutating func manageTodayTask() {
         lineUpClient()
-        let totalTime = checkTaskTime()
+        let totalTime = calculateTaskTime()
         notifyTaskCompletion(totalTime)
     }
     
@@ -32,7 +32,7 @@ struct Bank {
         }
     }
     
-    mutating func checkTaskTime() -> String {
+    mutating func calculateTaskTime() -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         doTask()
