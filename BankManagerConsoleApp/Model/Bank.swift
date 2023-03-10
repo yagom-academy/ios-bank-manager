@@ -15,7 +15,8 @@ struct Bank {
     private let typeOfTask: [Task] = [.deposit, .loan]
     private let loanSemaphore = DispatchSemaphore(value: 1)
     private let depositSemaphore = DispatchSemaphore(value: 2)
-
+    private let group = DispatchGroup()
+    
     mutating func manageTodayTask() {
         lineUpClient()
         let totalTime = checkTaskTime()
@@ -24,6 +25,7 @@ struct Bank {
     
     mutating func lineUpClient() {
         clientCount = Int.random(in: 10...30)
+        
         for number in 1...clientCount {
             guard let type = typeOfTask.randomElement() else { return }
             let currentClient = Client(waitingNumber: number, purposeOfVisit: type)
@@ -33,9 +35,12 @@ struct Bank {
     
     mutating func checkTaskTime() -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
+        
         doTask()
+        
         let timeOfTask = CFAbsoluteTimeGetCurrent() - startTime
         let totalTime = String(format: "%.2f", timeOfTask)
+        
         return totalTime
     }
 
@@ -44,10 +49,11 @@ struct Bank {
             guard let currentClient = waitingLine.dequeue() else { return }
             dispatchQueue(currentClient)
         }
+        
+        group.wait()
     }
     
     private func dispatchQueue(_ currentClient: Client) {
-        
         let depositService = DispatchWorkItem() { [self] in
             depositSemaphore.wait()
             bankClerk.service(to: currentClient)
@@ -60,9 +66,9 @@ struct Bank {
         }
         
         if currentClient.purposeOfVisit == .deposit {
-            DispatchQueue.global().async(execute: depositService)
+            DispatchQueue.global().async(group: group, execute: depositService)
         } else {
-            DispatchQueue.global().async(execute: loanService)
+            DispatchQueue.global().async(group: group, execute: loanService)
         }
     }
     
