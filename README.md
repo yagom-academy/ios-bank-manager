@@ -62,8 +62,7 @@ BankManagerConsoleApp
 
 ### 클래스 다이어그램
 
-<img height="600px" src="https://i.imgur.com/kruQWYD.png
-">
+<img height="600px" src="https://i.imgur.com/v8Tti2j.png">
 
 
 <br/>
@@ -143,6 +142,7 @@ private mutating func distributeClient(bankManagerCount: Int) {
 
 > - [야곰닷넷 - 동시성프로그래밍](https://yagom.net/courses/%eb%8f%99%ec%8b%9c%ec%84%b1-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d-concurrency-programming/)
 > - [WWDC 2015 Protocol - Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2016/720/)
+
 
 
 
