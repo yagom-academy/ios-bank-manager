@@ -8,13 +8,15 @@ import Foundation
 
 struct BankManager {
     private var numberOfClient = 0
-    private var waitingQueue = Queue<String>()
+    private var waitingQueue = Queue<Client>()
     
     mutating func setupWaitingQueueAndClientNumber() {
         let randomNumberOfClient = Int.random(in: 10...30)
         
         for number in 1...randomNumberOfClient {
-            waitingQueue.enqueue("\(number)번 고객")
+            let client = Client(clientNumber: number,
+                                requstedTask: .init(rawValue: Int.random(in: 1...2)) ?? .deposit)
+            waitingQueue.enqueue(client)
         }
         
         numberOfClient = waitingQueue.size
@@ -23,9 +25,9 @@ struct BankManager {
     mutating func processBusiness() {
         while !waitingQueue.isEmpty {
             guard let client = waitingQueue.dequeue() else { return }
-            print("\(client) 업무 시작")
+            print("\(client.clientNumber)번 고객 업무 시작")
             Thread.sleep(forTimeInterval: 0.7)
-            print("\(client) 업무 완료")
+            print("\(client.clientNumber)번 고객 업무 완료")
         }
         
         presentBusinessResult()
