@@ -16,7 +16,7 @@ struct BankManagerQueue<T> {
         linkedList.head == nil ? true : false
     }
     
-    init(linkedList: LinkedList<T>) {
+    init(linkedList: LinkedList<T> = LinkedList()) {
         self.linkedList = linkedList
     }
     
