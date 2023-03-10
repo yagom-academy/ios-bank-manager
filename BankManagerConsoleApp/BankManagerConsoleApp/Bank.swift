@@ -7,7 +7,7 @@
 import Foundation
 
 struct Bank {
-    var clientCount: Int = 0
+    var clientCount: Int = Int.zero
     
     private enum BankStatus: String {
         case open = "1"
@@ -51,14 +51,14 @@ struct Bank {
         var loanClientQueue = Queue<Client>()
         
         var clientArray: [Int] = []
-        clientCount = Int.random(in: 5...10)
+        clientCount = Int.random(in: 10...30)
         
-        (0..<clientCount).forEach {
+        (Int.zero..<clientCount).forEach {
             clientArray.append($0 + 1)
         }
         
         var loanArray: [Int] = []
-        let loanCount = Int.random(in: 0...clientCount)
+        let loanCount = Int.random(in: Int.zero...clientCount)
         
         while loanArray.count < loanCount {
             let loanClientNumber = Int.random(in: 1...clientCount)
@@ -99,9 +99,9 @@ struct Bank {
         
         for _ in Int.zero..<depositManagerCount {
             DispatchQueue.global().async(group: group) {
-                semaphore.wait()
                 
                 while let client = depositClientList.dequeue() {
+                    semaphore.wait()
                     bankManager.work(client: client)
                     semaphore.signal()
                 }
@@ -109,9 +109,9 @@ struct Bank {
         }
         for _ in Int.zero..<loanManagerCount {
             DispatchQueue.global().async(group: group) {
-                semaphore.wait()
                 
                 while let client = loanClientList.dequeue() {
+                    semaphore.wait()
                     bankManager.work(client: client)
                     semaphore.signal()
                 }
