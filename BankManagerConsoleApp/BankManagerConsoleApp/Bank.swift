@@ -69,9 +69,7 @@ struct Bank {
             DispatchQueue.global().async(group: group) {
                 semaphore.wait()
                 
-                while !clientList.isEmpty {
-                    guard let client = clientList.dequeue()?.clientWaitingNumber else { return }
-                    
+                while let client = clientList.dequeue()?.clientWaitingNumber {
                     bankManager.work(client: client)
                     semaphore.signal()
                 }
