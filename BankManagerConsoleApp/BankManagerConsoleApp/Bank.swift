@@ -15,22 +15,33 @@ struct Bank {
     }
     
     mutating func openBank() {
+        displayBankMenu()
+        let bankStatus = readMenuNumber()
+        startWork(bankStatus)
+    }
+    
+    private func displayBankMenu() {
         print(NameSpace.bankMenuText, terminator: " ")
+    }
+    
+    private mutating func readMenuNumber() -> BankStatus? {
         guard let status = readLine(),
               let bankStatus = BankStatus(rawValue: status) else {
             print(NameSpace.InvalidInputText)
             openBank()
             
-            return
+            return nil
         }
-        startWork(bankStatus)
+        return bankStatus
     }
     
-    private mutating func startWork(_ status: BankStatus) {
+    private mutating func startWork(_ status: BankStatus?) {
         switch status {
         case .open:
             manageBank()
         case .close:
+            return
+        default:
             return
         }
     }
