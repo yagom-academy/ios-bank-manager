@@ -22,7 +22,7 @@
 
 ## 팀원을 소개합니다 👀
 
-|<center>[Rowan](https://github.com/kokkilE)</center> | <center> [릴라](https://github.com/juun97)</center> | 
+|<center>[Rowan](https://github.com/Kyeongjun2)</center> | <center> [릴라](https://github.com/juun97)</center> | 
 |--- | --- |
 |<Img src = "https://i.imgur.com/S1hlffJ.jpg" width="300">| <img src="https://i.imgur.com/9M6jEo2.png" width=300>  |
 
