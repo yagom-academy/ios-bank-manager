@@ -8,6 +8,7 @@
 struct LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
+    var count: Int = 0
     var isEmpty: Bool {
         return head == nil
     }
@@ -19,17 +20,20 @@ struct LinkedList<T> {
         guard !isEmpty else {
             self.head = Node(data: data)
             self.tail = head
+            count += 1
             
             return
         }
         
         tail?.next = Node(data: data)
         self.tail = tail?.next
+        count += 1
     }
     
     mutating func removeFirst() -> T? {
         guard let node = head else { return nil }
         self.head = head?.next
+        count -= 1
         
         return node.data
     }
@@ -37,5 +41,6 @@ struct LinkedList<T> {
     mutating func removeAll() {
         self.head = nil
         self.tail = nil
+        count = 0
     }
 }
