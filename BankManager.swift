@@ -9,6 +9,9 @@ import Foundation
 struct BankManager {
     private var numberOfClient = 0
     private var waitingQueue = Queue<Client>()
+    private let loanSemaphore = DispatchSemaphore(value: 1)
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let group = DispatchGroup()
     
     mutating func setupWaitingQueueAndClientNumber() {
         let randomNumberOfClient = Int.random(in: 10...30)
@@ -23,18 +26,39 @@ struct BankManager {
     }
     
     mutating func processBusiness() {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
         while !waitingQueue.isEmpty {
             guard let client = waitingQueue.dequeue() else { return }
-            print("\(client.clientNumber)번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: 0.7)
-            print("\(client.clientNumber)번 고객 업무 완료")
+            processBankTask(client)
         }
+        group.wait()
         
-        presentBusinessResult()
+        let wasteTime = CFAbsoluteTimeGetCurrent() - startTime
+        presentBusinessResult(time: wasteTime)
     }
     
-    private func presentBusinessResult() {
-        let businessHours = Double(numberOfClient) * 0.7
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 엄무시간은 \(String(format: "%.2f", businessHours))초입니다.")
+    private func processBankTask(_ client: Client) {
+        if client.requstedTask == .loan {
+            DispatchQueue.global().async(group: group) {
+                loanSemaphore.wait()
+                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
+                Thread.sleep(forTimeInterval: 1.1)
+                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
+                loanSemaphore.signal()
+            }
+        } else {
+            DispatchQueue.global().async(group: group) {
+                depositSemaphore.wait()
+                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
+                Thread.sleep(forTimeInterval: 0.7)
+                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
+                depositSemaphore.signal()
+            }
+        }
+    }
+    
+    private func presentBusinessResult(time: CFAbsoluteTime) {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 엄무시간은 \(String(format: "%.2f", time))초입니다.")
     }
 }
