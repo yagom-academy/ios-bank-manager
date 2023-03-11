@@ -5,14 +5,14 @@
 //  Created by vetto, kokkilE on 2023/03/06.
 //
 
-struct LinkedList<T> {
-    private(set) var head: Node<T>?
-    private(set) var tail: Node<T>?
+struct LinkedList<Element> {
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     var isEmpty: Bool {
         return head == nil
     }
     
-    mutating func append(_ data: T) {
+    mutating func append(_ data: Element) {
         let node = Node(data)
         
         if head == nil {
@@ -24,7 +24,7 @@ struct LinkedList<T> {
         }
     }
     
-    mutating func removeFirst() -> T? {
+    mutating func removeFirst() -> Element? {
         guard let node = head else {
             return nil
         }
