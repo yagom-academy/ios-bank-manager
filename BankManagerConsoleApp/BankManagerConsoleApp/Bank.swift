@@ -95,7 +95,7 @@ struct Bank {
         var loanClientList = clientLists.loan
         let bankManager = BankManager()
         let group = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: 1)
+        let semaphore = DispatchSemaphore(value: 2)
         
         for _ in Int.zero..<depositManagerCount {
             DispatchQueue.global().async(group: group) {
@@ -111,9 +111,9 @@ struct Bank {
             DispatchQueue.global().async(group: group) {
                 
                 while let client = loanClientList.dequeue() {
-                    semaphore.wait()
+//                    semaphore.wait()
                     bankManager.work(client: client)
-                    semaphore.signal()
+//                    semaphore.signal()
                 }
             }
         }
