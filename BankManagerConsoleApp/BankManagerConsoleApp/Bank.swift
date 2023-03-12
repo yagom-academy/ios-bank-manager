@@ -11,6 +11,11 @@ final class Bank {
     private var banker: [Banker] = .init()
     private var clientQueue: Queue<BankClient> = .init()
     private var numberOfClient: Int = 0
+    private var totalWorkTime: Double = 0
+    
+    private let dispatchQueue: DispatchQueue = .init(label: "bankerDispatchQueue", attributes: .concurrent)
+    private let depositSemaphore: DispatchSemaphore = .init(value: 2)
+    private let loanSemaphore: DispatchSemaphore = .init(value: 1)
     
     init() {
         banker.append(Banker())
@@ -18,24 +23,48 @@ final class Bank {
     
     func openBank() {
         setupClient()
-        assignClientsToBankTeller()
+        assignClientsToBankTeller이름변경()
         closeBank()
     }
     
     private func setupClient() {
-        let numberOfWaitingClient = Int.random(in: 10...30)
+        let numberOfWaitingClient = Int.random(in: 5...10)
         
         for number in 1...numberOfWaitingClient {
-            clientQueue.enqueue(BankClient(waitingNumber: number))
+            guard let businessType = BusinessType.allCases.randomElement() else { return }
+            let client: BankClient = .init(waitingNumber: number, businessType: businessType)
+            
+            clientQueue.enqueue(client)
         }
     }
     
-    private func assignClientsToBankTeller() {
+    private func assignClientsToBankTeller이름변경() {
+        let businessDispatchGroup: DispatchGroup = .init()
+        
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
         while let client = clientQueue.dequeue() {
-            guard let banker = banker.first else { return }
-            banker.receive(client: client)
+            switch client.businessType {
+            case .deposit:
+                dispatchQueue.async(group: businessDispatchGroup) {
+                    self.depositSemaphore.wait()
+                    Banker.receive(client: client)
+                    self.depositSemaphore.signal()
+                }
+            case .loan:
+                dispatchQueue.async(group: businessDispatchGroup) {
+                    self.loanSemaphore.wait()
+                    Banker.receive(client: client)
+                    self.loanSemaphore.signal()
+                }
+            }
+            
             numberOfClient += 1
         }
+        
+        businessDispatchGroup.wait()
+        
+        totalWorkTime = CFAbsoluteTimeGetCurrent() - startTime
     }
     
     private func closeBank() {
@@ -44,9 +73,7 @@ final class Bank {
     }
     
     private func printClosingMessage() {
-        let totalWorkTime = numberOfClient.totalWorkTime(by: Banker.requiredTime)
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(String(format: "%0.2f", totalWorkTime))초입니다.")
     }
     
     private func clearNumberOfClient() {
