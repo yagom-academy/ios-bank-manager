@@ -8,6 +8,8 @@
 import Foundation
 
 struct Banker {
+    private init() {}
+    
     static func receive(client: BankClient) {
         print("\(client.waitingNumber)번 고객 \(client.businessType.rawValue)업무 시작")
         Thread.sleep(forTimeInterval: client.businessType.time)
