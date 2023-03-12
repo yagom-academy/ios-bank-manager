@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98441C4529BD5E9300CBF10C /* BusinessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98441C4429BD5E9300CBF10C /* BusinessType.swift */; };
 		986D653F29B5D49F007F9401 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986D653E29B5D49F007F9401 /* Queue.swift */; };
 		AA264A6629B6DFAC0007E1E3 /* BankClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA264A6529B6DFAC0007E1E3 /* BankClient.swift */; };
 		AA264A6829B6E0330007E1E3 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA264A6729B6E0330007E1E3 /* Bank.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		98441C4429BD5E9300CBF10C /* BusinessType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessType.swift; sourceTree = "<group>"; };
 		986D653E29B5D49F007F9401 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		AA264A6529B6DFAC0007E1E3 /* BankClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClient.swift; sourceTree = "<group>"; };
 		AA264A6729B6E0330007E1E3 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				AA264A6729B6E0330007E1E3 /* Bank.swift */,
 				AA264A6929B708E60007E1E3 /* Banker.swift */,
 				AA264A6529B6DFAC0007E1E3 /* BankClient.swift */,
+				98441C4429BD5E9300CBF10C /* BusinessType.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				986D653F29B5D49F007F9401 /* Queue.swift in Sources */,
 				AA264A6829B6E0330007E1E3 /* Bank.swift in Sources */,
 				AA2DCB1F29B5D3E700DE4111 /* Node.swift in Sources */,
+				98441C4529BD5E9300CBF10C /* BusinessType.swift in Sources */,
 				AA264A6629B6DFAC0007E1E3 /* BankClient.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AA2DCB2229B5D3F600DE4111 /* LinkedList.swift in Sources */,
