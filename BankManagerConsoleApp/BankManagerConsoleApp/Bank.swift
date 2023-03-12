@@ -11,7 +11,7 @@ final class Bank {
     private var clientQueue: Queue<BankClient> = .init()
     private var numberOfClient: Int = 0
     
-    private let dispatchQueue: DispatchQueue = .init(label: "bankerDispatchQueue", attributes: .concurrent)
+    private let businessQueue: DispatchQueue = .init(label: "bankerDispatchQueue", attributes: .concurrent)
     private let depositSemaphore: DispatchSemaphore = .init(value: 2)
     private let loanSemaphore: DispatchSemaphore = .init(value: 1)
     
@@ -33,7 +33,7 @@ final class Bank {
         }
     }
     
-    public func measureProcessTime(_ process: () -> ()) -> Double {
+    private func measureProcessTime(_ process: () -> ()) -> Double {
         let startTime = CFAbsoluteTimeGetCurrent()
         process()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
@@ -55,13 +55,13 @@ final class Bank {
     private func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
         switch client.businessType {
         case .deposit:
-            dispatchQueue.async(group: dispatchGroup) {
+            businessQueue.async(group: dispatchGroup) {
                 self.depositSemaphore.wait()
                 Banker.receive(client: client)
                 self.depositSemaphore.signal()
             }
         case .loan:
-            dispatchQueue.async(group: dispatchGroup) {
+            businessQueue.async(group: dispatchGroup) {
                 self.loanSemaphore.wait()
                 Banker.receive(client: client)
                 self.loanSemaphore.signal()
