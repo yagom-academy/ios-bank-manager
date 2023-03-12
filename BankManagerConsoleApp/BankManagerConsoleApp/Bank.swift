@@ -8,7 +8,6 @@
 import Foundation
 
 final class Bank {
-    private var banker: [Banker] = .init()
     private var clientQueue: Queue<BankClient> = .init()
     private var numberOfClient: Int = 0
     private var totalWorkTime: Double = 0
@@ -17,13 +16,9 @@ final class Bank {
     private let depositSemaphore: DispatchSemaphore = .init(value: 2)
     private let loanSemaphore: DispatchSemaphore = .init(value: 1)
     
-    init() {
-        banker.append(Banker())
-    }
-    
     func openBank() {
         setupClient()
-        assignClientsToBankTeller이름변경()
+        processBusiness()
         closeBank()
     }
     
@@ -38,33 +33,36 @@ final class Bank {
         }
     }
     
-    private func assignClientsToBankTeller이름변경() {
+    private func processBusiness() {
         let businessDispatchGroup: DispatchGroup = .init()
         
         let startTime = CFAbsoluteTimeGetCurrent()
         
         while let client = clientQueue.dequeue() {
-            switch client.businessType {
-            case .deposit:
-                dispatchQueue.async(group: businessDispatchGroup) {
-                    self.depositSemaphore.wait()
-                    Banker.receive(client: client)
-                    self.depositSemaphore.signal()
-                }
-            case .loan:
-                dispatchQueue.async(group: businessDispatchGroup) {
-                    self.loanSemaphore.wait()
-                    Banker.receive(client: client)
-                    self.loanSemaphore.signal()
-                }
-            }
-            
+            dispatchClient(client, group: businessDispatchGroup)
             numberOfClient += 1
         }
         
         businessDispatchGroup.wait()
         
         totalWorkTime = CFAbsoluteTimeGetCurrent() - startTime
+    }
+    
+    private func dispatchClient(_ client: BankClient, group: DispatchGroup) {
+        switch client.businessType {
+        case .deposit:
+            dispatchQueue.async(group: group) {
+                self.depositSemaphore.wait()
+                Banker.receive(client: client)
+                self.depositSemaphore.signal()
+            }
+        case .loan:
+            dispatchQueue.async(group: group) {
+                self.loanSemaphore.wait()
+                Banker.receive(client: client)
+                self.loanSemaphore.signal()
+            }
+        }
     }
     
     private func closeBank() {
@@ -78,13 +76,5 @@ final class Bank {
     
     private func clearNumberOfClient() {
         numberOfClient = 0
-    }
-}
-
-fileprivate extension Int {
-    func totalWorkTime(by workTime: Double) -> String {
-        let totalWorkTime = Double(self) * workTime
-        
-        return String(format: "%0.2f", totalWorkTime)
     }
 }
