@@ -15,7 +15,7 @@ final class Bank {
     private let depositSemaphore: DispatchSemaphore = .init(value: 2)
     private let loanSemaphore: DispatchSemaphore = .init(value: 1)
     
-    func openBank() {
+    func open() {
         setupClient()
         let processTime = measureProcessTime(processBusiness)
         closeBank(processTime: processTime)
@@ -45,23 +45,23 @@ final class Bank {
         let businessDispatchGroup: DispatchGroup = .init()
                 
         while let client = clientQueue.dequeue() {
-            dispatchClient(client, group: businessDispatchGroup)
+            dispatchClient(client, dispatchGroup: businessDispatchGroup)
             numberOfClient += 1
         }
         
         businessDispatchGroup.wait()
     }
     
-    private func dispatchClient(_ client: BankClient, group: DispatchGroup) {
+    private func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
         switch client.businessType {
         case .deposit:
-            dispatchQueue.async(group: group) {
+            dispatchQueue.async(group: dispatchGroup) {
                 self.depositSemaphore.wait()
                 Banker.receive(client: client)
                 self.depositSemaphore.signal()
             }
         case .loan:
-            dispatchQueue.async(group: group) {
+            dispatchQueue.async(group: dispatchGroup) {
                 self.loanSemaphore.wait()
                 Banker.receive(client: client)
                 self.loanSemaphore.signal()
