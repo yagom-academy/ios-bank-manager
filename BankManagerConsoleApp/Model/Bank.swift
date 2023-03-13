@@ -64,9 +64,10 @@ struct Bank {
             loanBankClerk.signal()
         }
         
-        if currentClient.purposeOfVisit == .deposit {
+        switch currentClient.purposeOfVisit {
+        case .deposit:
             DispatchQueue.global().async(group: group, execute: depositService)
-        } else {
+        case .loan:
             DispatchQueue.global().async(group: group, execute: loanService)
         }
     }
