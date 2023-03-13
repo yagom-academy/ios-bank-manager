@@ -1,6 +1,6 @@
 //
 //  BankManagerUIApp - ViewController.swift
-//  Created by yagom. 
+//  Created by Rowan, 릴라. 
 //  Copyright © yagom academy. All rights reserved.
 // 
 
