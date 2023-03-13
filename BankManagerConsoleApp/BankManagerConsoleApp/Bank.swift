@@ -55,18 +55,22 @@ final class Bank {
     private func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
         switch client.business {
         case .deposit:
-            businessQueue.async(group: dispatchGroup) {
-                self.depositSemaphore.wait()
-                Banker.receive(client: client)
-                self.depositSemaphore.signal()
-            }
+            let task = makeWorkItem(client, dispatchGroup: dispatchGroup, semaphore: depositSemaphore)
+            businessQueue.async(group: dispatchGroup, execute: task)
         case .loan:
-            businessQueue.async(group: dispatchGroup) {
-                self.loanSemaphore.wait()
-                Banker.receive(client: client)
-                self.loanSemaphore.signal()
-            }
+            let task = makeWorkItem(client, dispatchGroup: dispatchGroup, semaphore: loanSemaphore)
+            businessQueue.async(group: dispatchGroup, execute: task)
         }
+    }
+    
+    private func makeWorkItem(_ client: BankClient, dispatchGroup: DispatchGroup, semaphore: DispatchSemaphore) -> DispatchWorkItem {
+        let task = DispatchWorkItem {
+            semaphore.wait()
+            Banker.receive(client: client)
+            semaphore.signal()
+        }
+        
+        return task
     }
     
     private func closeBank(processTime: Double) {
