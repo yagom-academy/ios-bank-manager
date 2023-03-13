@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Bank {
+public struct Bank {
     private var waitingLine = Queue<Client>()
     private var clientCount: Int = 10
     private var bankClerk = BankClerk()

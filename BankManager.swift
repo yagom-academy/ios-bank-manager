@@ -7,7 +7,7 @@
 import Foundation
 
 struct BankManager {
-    private var bank = Bank()
+//    private var bank = Bank()
     
     mutating func startBankApp() {
         let noticeMenu = "1 : 은행 개점 \n2 : 종료 \n입력 : "
@@ -19,7 +19,7 @@ struct BankManager {
         
         switch input {
         case BankState.open:
-            bank.manageTodayTask()
+//            bank.manageTodayTask()
             startBankApp()
         case BankState.close:
             return
