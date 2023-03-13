@@ -35,12 +35,19 @@ struct BankManager {
         
         switch userInput {
         case "1":
-            bank.open()
+            let totalCustomer = receiveCustomer()
+            bank.open(totalCustomer: totalCustomer)
         case "2":
             isRunning = false
         default:
             let message = "잘못 입력하셨습니다."
             print(message)
         }
+    }
+    
+    private func receiveCustomer() -> Int {
+        let customerRange: ClosedRange<Int> = 10...30
+        let totalCustomer = Int.random(in: customerRange)
+        return totalCustomer
     }
 }

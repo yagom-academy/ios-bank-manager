@@ -9,7 +9,6 @@ import Foundation
 
 final class Bank {
     private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
-    private var totalCustomer: Int = 0
     
     private let loanDepartment: DispatchSemaphore
     private let depositDepartment: DispatchSemaphore
@@ -21,16 +20,13 @@ final class Bank {
         self.depositDepartment = DispatchSemaphore(value: depositBankerCount)
     }
     
-    func open() {
-        receiveCustomer()
+    func open(totalCustomer: Int) {
+        setCustomerQueue(totalCustomer: totalCustomer)
         let processTime = checkProcessTime(for: startWork)
-        reportResult(processTime: processTime)
+        reportResult(totalCustomer: totalCustomer, processTime: processTime)
     }
     
-    private func receiveCustomer() {
-        let customerRange: ClosedRange<Int> = 10...30
-        totalCustomer = Int.random(in: customerRange)
-        
+    private func setCustomerQueue(totalCustomer: Int) {   
         for number in 1...totalCustomer {
             guard let business = Business.allCases.randomElement() else { return }
             let numberTicket = String(describing: number)
@@ -73,7 +69,7 @@ final class Bank {
         }
     }
     
-    private func reportResult(processTime: CFAbsoluteTime) {
+    private func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) {
         let roundedProcessTime = round(processTime * 100) / 100
         let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(roundedProcessTime)초 입니다."
         print(message)
