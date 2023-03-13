@@ -6,11 +6,10 @@
 
 struct BankManager {
     private let bank: Bank
-    private var isRunning: Bool
+    private var isRunning: Bool = true
     
-    init(bank: Bank, isRunning: Bool = true) {
+    init(bank: Bank) {
         self.bank = bank
-        self.isRunning = isRunning
     }
     
     mutating func start() {
