@@ -7,7 +7,7 @@
 import Foundation
 
 struct Bank {
-    private var clientCount: Int = Int.zero
+    private let clientWaitingLine = ClientWaitingLine()
     
     private let depositSemaphore = DispatchSemaphore(value: 2)
     private let depositQueue = DispatchQueue(label: "loan", attributes: .concurrent)
@@ -51,22 +51,9 @@ struct Bank {
         }
     }
     
-    private mutating func manageClientQueue() -> Queue<Client>  {
-        var clientQueue = Queue<Client>()
-        clientCount = Int.random(in: 10...30)
-        
-        for i in 1...clientCount {
-            Client.Banking.allCases.randomElement().map {
-                clientQueue.enqueue(Client(clientWaitingNumber: i, banking: $0))
-            }
-        }
-        
-        return clientQueue
-    }
-    
     private mutating func distributeClient() {
         let group = DispatchGroup()
-        var clientQueue = manageClientQueue()
+        var clientQueue = clientWaitingLine.manageClientQueue()
         let bankManager = BankManager()
         
         while let client = clientQueue.dequeue() {
@@ -94,7 +81,7 @@ struct Bank {
             distributeClient()
         }
         
-        completeManagingBank(count: clientCount, time: workTime)
+        completeManagingBank(count: clientWaitingLine.clientCount, time: workTime)
         openBank()
     }
     

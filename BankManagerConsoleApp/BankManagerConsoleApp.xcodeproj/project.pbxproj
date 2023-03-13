@@ -20,6 +20,7 @@
 		D01A1B2F29B5C3CC0028B601 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367397A029B5B509007AF8FA /* Queue.swift */; };
 		D01A1B3029B5C3CF0028B601 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D01A1B3129B5C3D20028B601 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
+		D0EB1EAC29BF01F100E2E9CA /* ClientWaitingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EB1EAB29BF01F100E2E9CA /* ClientWaitingLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		D01A1B2029B5B3DC0028B601 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		D01A1B2629B5C1E40028B601 /* BankQueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankQueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D01A1B2829B5C1E40028B601 /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
+		D0EB1EAB29BF01F100E2E9CA /* ClientWaitingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientWaitingLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				367397CD29B8431A007AF8FA /* Bank.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				367397CF29B8434B007AF8FA /* Client.swift */,
+				D0EB1EAB29BF01F100E2E9CA /* ClientWaitingLine.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				367397A229B5B676007AF8FA /* Queue */,
 			);
@@ -205,6 +208,7 @@
 				367397D029B8434B007AF8FA /* Client.swift in Sources */,
 				367397A129B5B509007AF8FA /* Queue.swift in Sources */,
 				D01A1B1F29B5AFC10028B601 /* LinkedList.swift in Sources */,
+				D0EB1EAC29BF01F100E2E9CA /* ClientWaitingLine.swift in Sources */,
 				367397CE29B8431A007AF8FA /* Bank.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				D01A1B2129B5B3DC0028B601 /* Node.swift in Sources */,
