@@ -9,7 +9,9 @@ import Foundation
 
 class Bank {
     private var customers: Queue<Customer> = Queue()
-    private var managers: [BankManager] = []
+    private let workingGroup = DispatchGroup()
+    private let depositManager = DispatchSemaphore(value: BankOption.numberOfDepositManager)
+    private let loanManager = DispatchSemaphore(value: BankOption.numberOfLoanManager)
     
     func run() {
         print("1 : 은행개점\n2 : 종료")
@@ -20,7 +22,6 @@ class Bank {
         
         switch input {
         case BankOption.openValue:
-            addManager()
             open()
         case BankOption.closeValue:
             return
@@ -38,12 +39,10 @@ class Bank {
                 break
             }
             
-            if customer.banking == .deposit {
-                work(for: customer, manager: managers[0])
-            } else {
-                work(for: customer, manager: managers[2])
-            }
+            workManager(for: customer)
         }
+        
+        workingGroup.wait()
         
         let finishDate = Date().timeIntervalSince(startDate)
         
@@ -63,19 +62,20 @@ class Bank {
         return numberOfCustomer
     }
     
-    private func work(for customer: Customer, manager: BankManager) {
-        manager.customer = customer
-        
-        manager.work()
-    }
-    
-    private func addManager() {
-        for _ in 1...BankOption.numberOfDepositManager {
-            self.managers.append(BankManager(duty: .deposit))
-        }
-        
-        for _ in 1...BankOption.numberOfLoanManager {
-            self.managers.append(BankManager(duty: .loan))
+    private func workManager(for customer: Customer) {
+        switch customer.banking {
+        case .deposit:
+            DispatchQueue.global().async(group: workingGroup) { [weak self] in
+                self?.depositManager.wait()
+                BankManager.work(for: customer, duty: customer.banking)
+                self?.depositManager.signal()
+            }
+        case .loan:
+            DispatchQueue.global().async(group: workingGroup) { [weak self] in
+                self?.loanManager.wait()
+                BankManager.work(for: customer, duty: customer.banking)
+                self?.loanManager.signal()
+            }
         }
     }
 }
