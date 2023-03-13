@@ -56,8 +56,8 @@ struct Bank {
         clientCount = Int.random(in: 10...30)
         
         for i in 1...clientCount {
-            Client.BankingType.allCases.randomElement().map {
-                clientQueue.enqueue(Client(clientWaitingNumber: i, bankingType: $0))
+            Client.Banking.allCases.randomElement().map {
+                clientQueue.enqueue(Client(clientWaitingNumber: i, banking: $0))
             }
         }
         
@@ -70,7 +70,7 @@ struct Bank {
         let bankManager = BankManager()
         
         while let client = clientQueue.dequeue() {
-            switch client.bankingType {
+            switch client.banking {
             case .deposit:
                 depositQueue.async(group: group) { [self] in
                     depositSemaphore.wait()

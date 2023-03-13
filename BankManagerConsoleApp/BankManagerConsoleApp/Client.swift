@@ -5,15 +5,15 @@
 //
 
 struct Client {
-    enum BankingType: CaseIterable{
+    enum Banking: CaseIterable{
         case deposit
         case loan
     }
     
     let clientWaitingNumber: Int
-    let bankingType: BankingType
+    let banking: Banking
     var bankingTime: Double {
-        switch bankingType {
+        switch banking {
         case .deposit:
             return 0.7
         case .loan:
@@ -21,8 +21,8 @@ struct Client {
         }
     }
     
-    var bankingTypeText: String {
-        switch bankingType {
+    var bankingText: String {
+        switch banking {
         case .deposit:
             return "예금"
         case .loan:
