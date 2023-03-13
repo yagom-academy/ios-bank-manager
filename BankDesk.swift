@@ -20,7 +20,7 @@ struct BankDesk {
     func inputBankingMenu() {
         showMenuMessage()
         let customerCount = Int.random(in: 10...30)
-        bankManager.bankCustomer = customerCount
+        bankManager.customerCount = customerCount
         
         while let inputNumber = readLine() {
             if inputNumber == "2" {
