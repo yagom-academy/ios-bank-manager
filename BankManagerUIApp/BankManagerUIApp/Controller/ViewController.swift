@@ -16,6 +16,7 @@ final class BankManagerViewController: UIViewController {
         setMainStackView()
         setButtons()
         setTimerLabel()
+        setQueueLabel()
     }
     
     private func setMainStackView() {
@@ -24,7 +25,7 @@ final class BankManagerViewController: UIViewController {
         mainStackView.axis = .vertical
         mainStackView.distribution = .fill
         mainStackView.spacing = 10
-  
+        
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -33,7 +34,7 @@ final class BankManagerViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         ])
     }
-
+    
     private func setButtons() {
         let addCustomerButton = {
             let button = UIButton()
@@ -56,7 +57,7 @@ final class BankManagerViewController: UIViewController {
             let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
             stackView.axis = .horizontal
             stackView.distribution = .fillEqually
-
+            
             return stackView
         }()
         
@@ -77,9 +78,41 @@ final class BankManagerViewController: UIViewController {
         mainStackView.addArrangedSubview(timerLabel)
     }
     
+    private func setQueueLabel() {
+        let waitingLabel = {
+            let label = UILabel()
+            label.textColor = .white
+            label.backgroundColor = .systemGreen
+            label.text = "대기중"
+            label.textAlignment = .center
+            label.font = .preferredFont(forTextStyle: .title1)
+            
+            return label
+        }()
+        
+        let workingLabel = {
+            let label = UILabel()
+            label.textColor = .white
+            label.backgroundColor = .systemIndigo
+            label.text = "업무중"
+            label.textAlignment = .center
+            label.font = .preferredFont(forTextStyle: .title1)
+            
+            return label
+        }()
+        
+        let stackView = {
+            let stackView = UIStackView(arrangedSubviews: [waitingLabel, workingLabel])
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+            
+            return stackView
+        }()
+        
+        mainStackView.addArrangedSubview(stackView)
+    }
     
     
-
 }
 
 import SwiftUI
