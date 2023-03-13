@@ -1,8 +1,7 @@
 //
 //  ClientWaitingLine.swift
-//  BankManagerConsoleApp
-//
-//  Created by Jinah Park on 2023/03/13.
+//  Created by Rhode, sehong.
+//  Copyright © yagom academy. All rights reserved.
 //
 
 class ClientWaitingLine {
@@ -10,7 +9,7 @@ class ClientWaitingLine {
     
     func manageClientQueue() -> Queue<Client>  {
         var clientQueue = Queue<Client>()
-        clientCount = Int.random(in: 1...5)
+        clientCount = Int.random(in: 10...30)
         
         for i in 1...clientCount {
             Client.Banking.allCases.randomElement().map {

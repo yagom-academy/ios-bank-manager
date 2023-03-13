@@ -21,7 +21,9 @@ struct Bank {
     
     mutating func openBank() {
         displayBankMenu()
+        
         let bankStatus = readMenuNumber()
+        
         startWork(bankStatus)
     }
     
