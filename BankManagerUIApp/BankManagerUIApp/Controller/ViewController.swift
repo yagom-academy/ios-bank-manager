@@ -17,6 +17,7 @@ final class BankManagerViewController: UIViewController {
         setButtons()
         setTimerLabel()
         setQueueLabel()
+        setCustomerScrollView()
     }
     
     private func setMainStackView() {
@@ -112,6 +113,108 @@ final class BankManagerViewController: UIViewController {
         mainStackView.addArrangedSubview(stackView)
     }
     
+    private func setCustomerScrollView() {
+        let anotherStackView = {
+            let stackView = UIStackView()
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+            
+            return stackView
+        }()
+        
+        let waitingStackView = {
+            let stackView = UIStackView()
+            stackView.axis = .vertical
+            stackView.distribution = .fillEqually
+            
+            return stackView
+        }()
+        
+        let waitingScrollView = {
+            let scrollView = UIScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+
+            scrollView.addSubview(waitingStackView)
+
+            NSLayoutConstraint.activate([
+//                scrollView.topAnchor.constraint(equalTo: mainStackView.topAnchor),
+//                scrollView.widthAnchor.constraint(equalTo: self.mainStackView.widthAnchor, multiplier: 0.5),
+            ])
+
+            return scrollView
+        }()
+        
+
+  
+        let workingStackView = {
+           let stackView = UIStackView()
+            stackView.axis = .vertical
+            stackView.distribution = .fillEqually
+            
+            return stackView
+        }()
+        
+        
+        let testLabel1 = {
+            let label = UILabel()
+            label.textColor = .black
+            label.text = "테스트"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 50)
+            
+            return label
+        }()
+        
+        let testLabel2 = {
+            let label = UILabel()
+            label.textColor = .black
+            label.text = "테스트"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 50)
+            
+            return label
+        }()
+        
+        let testLabel3 = {
+            let label = UILabel()
+            label.textColor = .black
+            label.text = "테스트"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 50)
+            
+            return label
+        }()
+        
+        let testLabel4 = {
+            let label = UILabel()
+            label.textColor = .black
+            label.text = "테스트"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 50)
+            
+            return label
+        }()
+        
+        let testLabel5 = {
+            let label = UILabel()
+            label.textColor = .black
+            label.text = "테스트"
+            label.textAlignment = .center
+            
+            return label
+        }()
+        
+        anotherStackView.addArrangedSubview(waitingScrollView)
+        anotherStackView.addArrangedSubview(workingStackView)
+
+        waitingStackView.addArrangedSubview(testLabel1)
+        waitingStackView.addArrangedSubview(testLabel2)
+        waitingStackView.addArrangedSubview(testLabel3)
+        waitingStackView.addArrangedSubview(testLabel4)
+        workingStackView.addArrangedSubview(testLabel5)
+
+        mainStackView.addArrangedSubview(anotherStackView)
+    }
     
 }
 
