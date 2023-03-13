@@ -21,5 +21,14 @@ struct Client {
                 return "예금"
             }
         }
+        
+        var taskTime: Double {
+            switch self {
+            case .loan:
+                return 1.1
+            case .deposit:
+                return 0.7
+            }
+        }
     }
 }

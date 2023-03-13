@@ -41,20 +41,22 @@ struct BankManager {
         if client.requstedTask == .loan {
             DispatchQueue.global().async(group: bankTaskGroup) {
                 loanSemaphore.wait()
-                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
-                Thread.sleep(forTimeInterval: NumberCase.loanTime)
-                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
+                processPersonalBankTask(client)
                 loanSemaphore.signal()
             }
         } else if client.requstedTask == .deposit {
             DispatchQueue.global().async(group: bankTaskGroup) {
                 depositSemaphore.wait()
-                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
-                Thread.sleep(forTimeInterval: NumberCase.depositTime)
-                print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
+                processPersonalBankTask(client)
                 depositSemaphore.signal()
             }
         }
+    }
+    
+    private func processPersonalBankTask(_ client: Client) {
+        print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
+        Thread.sleep(forTimeInterval: client.requstedTask.taskTime)
+        print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
     }
     
     private func presentBusinessResult(time: CFAbsoluteTime) {
