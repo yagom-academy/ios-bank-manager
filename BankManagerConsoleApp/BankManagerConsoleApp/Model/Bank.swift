@@ -44,8 +44,7 @@ final class Bank {
     }
     
     private func startWork() {
-        while customerQueue.isEmpty == false {
-            guard let customer = customerQueue.dequeue() else { return }
+        while let customer = customerQueue.dequeue() {
             respond(to: customer)
         }
         
@@ -55,18 +54,22 @@ final class Bank {
     private func respond(to customer: Customer) {
         switch customer.business {
         case .deposit:
-            workQueue.async(group: workGroup) {
-                self.depositDepartment.wait()
-                Banker.doWork(for: customer)
-                self.depositDepartment.signal()
-            }
+            let bankerTask = makeBankerTask(for: customer, Department: depositDepartment)
+            workQueue.async(group: workGroup, execute: bankerTask)
         case .loan:
-            workQueue.async(group: workGroup) {
-                self.loanDepartment.wait()
-                Banker.doWork(for: customer)
-                self.loanDepartment.signal()
-            }
+            let bankerTask = makeBankerTask(for: customer, Department: loanDepartment)
+            workQueue.async(group: workGroup, execute: bankerTask)
         }
+    }
+    
+    private func makeBankerTask(for customer: Customer, Department: DispatchSemaphore) -> DispatchWorkItem {
+        let task = DispatchWorkItem {
+            Department.wait()
+            Banker.doWork(for: customer)
+            Department.signal()
+        }
+        
+        return task
     }
     
     private func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) {
