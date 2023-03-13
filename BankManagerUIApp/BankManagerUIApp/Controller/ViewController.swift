@@ -11,11 +11,55 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        setButton()
     }
 
+    func setButton() {
+        let addCustomerButton = UIButton()
+        addCustomerButton.titleLabel?.text = "고객 10명 추가"
+        addCustomerButton.titleLabel?.textColor = .systemBlue
+        addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        
+        
+        let resetButton = UIButton()
+        resetButton.titleLabel?.text = "초기화"
+        resetButton.titleLabel?.textColor = .systemRed
+        resetButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        
+        let stackView = UIStackView()
+
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        
+        stackView.addArrangedSubview(addCustomerButton)
+        stackView.addArrangedSubview(resetButton)
+        
+
+        
+        
+    }
+    
+    
+    
 
 }
+
+
+
+
+
+
 
 import SwiftUI
 
