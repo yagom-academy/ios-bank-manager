@@ -10,8 +10,8 @@ struct Client {
     let requstedTask: Banktask
     
     enum Banktask: Int {
-        case loan = 1
-        case deposit = 2
+        case loan
+        case deposit
         
         var taskName: String {
             switch self {

@@ -11,14 +11,13 @@ struct BankManager {
     private var waitingQueue = Queue<Client>()
     private let loanSemaphore = DispatchSemaphore(value: 1)
     private let depositSemaphore = DispatchSemaphore(value: 2)
-    private let group = DispatchGroup()
+    private let bankTaskGroup = DispatchGroup()
     
     mutating func setupWaitingQueueAndClientNumber() {
         let randomNumberOfClient = Int.random(in: 10...30)
         
         for number in 1...randomNumberOfClient {
-            let client = Client(clientNumber: number,
-                                requstedTask: .init(rawValue: Int.random(in: 1...2)) ?? .deposit)
+            let client = Client(clientNumber: number, requstedTask: .init(rawValue: Int.random(in: 0...1)) ?? .deposit)
             waitingQueue.enqueue(client)
         }
         
@@ -32,15 +31,15 @@ struct BankManager {
             guard let client = waitingQueue.dequeue() else { return }
             processBankTask(client)
         }
-        group.wait()
+        bankTaskGroup.wait()
         
-        let wasteTime = CFAbsoluteTimeGetCurrent() - startTime
-        presentBusinessResult(time: wasteTime)
+        let leadTime = CFAbsoluteTimeGetCurrent() - startTime
+        presentBusinessResult(time: leadTime)
     }
     
     private func processBankTask(_ client: Client) {
         if client.requstedTask == .loan {
-            DispatchQueue.global().async(group: group) {
+            DispatchQueue.global().async(group: bankTaskGroup) {
                 loanSemaphore.wait()
                 print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
                 Thread.sleep(forTimeInterval: 1.1)
@@ -48,7 +47,7 @@ struct BankManager {
                 loanSemaphore.signal()
             }
         } else {
-            DispatchQueue.global().async(group: group) {
+            DispatchQueue.global().async(group: bankTaskGroup) {
                 depositSemaphore.wait()
                 print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
