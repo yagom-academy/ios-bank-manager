@@ -42,15 +42,15 @@ struct BankManager {
             DispatchQueue.global().async(group: bankTaskGroup) {
                 loanSemaphore.wait()
                 print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
-                Thread.sleep(forTimeInterval: 1.1)
+                Thread.sleep(forTimeInterval: NumberCase.loanTime)
                 print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
                 loanSemaphore.signal()
             }
-        } else {
+        } else if client.requstedTask == .deposit {
             DispatchQueue.global().async(group: bankTaskGroup) {
                 depositSemaphore.wait()
                 print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
-                Thread.sleep(forTimeInterval: 0.7)
+                Thread.sleep(forTimeInterval: NumberCase.depositTime)
                 print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
                 depositSemaphore.signal()
             }
