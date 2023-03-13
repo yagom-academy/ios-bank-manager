@@ -46,49 +46,19 @@ struct Bank {
         }
     }
     
-    private mutating func manageClientQueue() -> (deposit: Queue<Client>, loan: Queue<Client>) {
-        var depositClientQueue = Queue<Client>()
-        var loanClientQueue = Queue<Client>()
-        
-        var clientArray: [Int] = []
+    private mutating func manageClientQueue() -> Queue<Client>  {
+        var clientQueue = Queue<Client>()
         clientCount = Int.random(in: 10...30)
         
-        (Int.zero..<clientCount).forEach {
-            clientArray.append($0 + 1)
-        }
-        
-        var loanArray: [Int] = []
-        let loanCount = Int.random(in: Int.zero...clientCount)
-        
-        while loanArray.count < loanCount {
-            let loanClientNumber = Int.random(in: 1...clientCount)
-            
-            if loanArray.contains(loanClientNumber) {
-                continue
-            } else {
-                loanArray.append(loanClientNumber)
+        for i in 1...clientCount {
+            Client.BankingType.allCases.randomElement().map {
+                clientQueue.enqueue(Client(clientWaitingNumber: i, bankingType: $0))
             }
+            
+            return clientQueue
         }
-        
-        loanArray = loanArray.sorted()
-        
-        for loanClientNumber in loanArray {
-            let loanClient = Client(clientWaitingNumber: loanClientNumber, bankingType: .loan)
-            loanClientQueue.enqueue(loanClient)
-        }
-        
-        clientArray.removeAll(where: {loanArray.contains($0)})
-        
-        for depositClientNumber in clientArray {
-            let depositClient = Client(clientWaitingNumber: depositClientNumber, bankingType: .deposit)
-            depositClientQueue.enqueue(depositClient)
-        }
-        
-        let clientTuple = (deposit: depositClientQueue, loan: loanClientQueue)
-        
-        return clientTuple
     }
-    
+        
     private mutating func distributeClient(depositManagerCount: Int, loanManagerCount: Int) {
         let clientLists = manageClientQueue()
         var depositClientList = clientLists.deposit

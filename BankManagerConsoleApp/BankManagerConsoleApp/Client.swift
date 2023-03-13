@@ -5,7 +5,7 @@
 //
 
 struct Client {
-    enum BankingType {
+    enum BankingType: CaseIterable{
         case deposit
         case loan
     }
