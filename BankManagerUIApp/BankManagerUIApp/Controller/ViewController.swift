@@ -7,47 +7,48 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+final class BankManagerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setButton()
+        setButtons()
     }
 
-    func setButton() {
-        let addCustomerButton = UIButton()
-        addCustomerButton.titleLabel?.text = "고객 10명 추가"
-        addCustomerButton.titleLabel?.textColor = .systemBlue
-        addCustomerButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+    private func setButtons() {
+        let addCustomerButton = {
+            let button = UIButton()
+            button.setTitle("고객 10명 추가", for: .normal)
+            button.setTitleColor(.systemBlue, for: .normal)
+            
+            return button
+        }()
         
         
-        let resetButton = UIButton()
-        resetButton.titleLabel?.text = "초기화"
-        resetButton.titleLabel?.textColor = .systemRed
-        resetButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        let resetButton = {
+            let button = UIButton()
+            button.setTitle("초기화", for: .normal)
+            button.setTitleColor(.systemRed, for: .normal)
+            
+            return button
+        }()
         
-        let stackView = UIStackView()
+        let stackView = {
+            let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+
+            return stackView
+        }()
 
         view.addSubview(stackView)
         
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: view.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        
-        stackView.addArrangedSubview(addCustomerButton)
-        stackView.addArrangedSubview(resetButton)
-        
-
-        
-        
     }
     
     
@@ -55,22 +56,16 @@ class ViewController: UIViewController {
 
 }
 
-
-
-
-
-
-
 import SwiftUI
 
 struct SwiftUIViewController: UIViewControllerRepresentable {
-    typealias UIViewControllerType = ViewController
+    typealias UIViewControllerType = BankManagerViewController
     
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        return BankManagerViewController()
     }
     
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) { }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }
 
 @available(iOS 13.0.0, *)
