@@ -4,8 +4,8 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-struct Client {
-    enum Banking: CaseIterable{
+struct Client: CustomStringConvertible {
+    enum Banking: CaseIterable {
         case deposit
         case loan
     }
@@ -21,7 +21,7 @@ struct Client {
         }
     }
     
-    var bankingText: String {
+    var description: String {
         switch banking {
         case .deposit:
             return "예금"

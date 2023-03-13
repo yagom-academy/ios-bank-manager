@@ -8,8 +8,8 @@ import Foundation
 
 struct BankManager {
     func work(client: Client) {
-        print("\(client.clientWaitingNumber)번 고객 \(client.bankingText)업무 시작")
+        print("\(client.clientWaitingNumber)번 고객 \(client.description)업무 시작")
         Thread.sleep(forTimeInterval: client.bankingTime)
-        print("\(client.clientWaitingNumber)번 고객 \(client.bankingText)업무 종료")
+        print("\(client.clientWaitingNumber)번 고객 \(client.description)업무 종료")
     }
 }
