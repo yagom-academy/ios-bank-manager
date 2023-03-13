@@ -1,5 +1,5 @@
 //
-//  BusinessType.swift
+//  Business.swift
 //  BankManagerConsoleApp
 //
 //  Created by vetto, kokkilE on 2023/03/12.
