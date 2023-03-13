@@ -5,7 +5,7 @@
 //  Created by vetto, kokkilE on 2023/03/12.
 //
 
-enum BusinessType: String, CaseIterable {
+enum Business: String, CaseIterable {
     case deposit = "예금"
     case loan = "대출"
     

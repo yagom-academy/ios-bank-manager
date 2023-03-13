@@ -26,8 +26,8 @@ final class Bank {
         let numberOfWaitingClient = Int.random(in: 10...30)
         
         for number in 1...numberOfWaitingClient {
-            guard let businessType = BusinessType.allCases.randomElement() else { return }
-            let client: BankClient = .init(waitingNumber: number, businessType: businessType)
+            guard let business = Business.allCases.randomElement() else { return }
+            let client: BankClient = .init(waitingNumber: number, business: business)
             
             clientQueue.enqueue(client)
         }
@@ -53,7 +53,7 @@ final class Bank {
     }
     
     private func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
-        switch client.businessType {
+        switch client.business {
         case .deposit:
             businessQueue.async(group: dispatchGroup) {
                 self.depositSemaphore.wait()
