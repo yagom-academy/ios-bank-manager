@@ -6,18 +6,18 @@
 import Foundation
 
 struct BankManager {
-    static let depositManager = DispatchSemaphore(value: 2)
-    static let loanManager = DispatchSemaphore(value: 1)
+    private static let depositManager = DispatchSemaphore(value: 2)
+    private static let loanManager = DispatchSemaphore(value: 1)
     
     private init() {}
     
-    static func work(for customer: Customer, duty: Banking) {
+    private static func work(for customer: Customer) {
         let workQueue = DispatchQueue(label: "WorkQueue")
         
         let queueItem = DispatchWorkItem {
-            print("\(customer.waitingNumber)번 고객 \(duty)업무 시작")
-            Thread.sleep(forTimeInterval: duty.time)
-            print("\(customer.waitingNumber)번 고객 \(duty)업무 완료")
+            print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 시작")
+            Thread.sleep(forTimeInterval: customer.desiredBanking.time)
+            print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 완료")
         }
         
         workQueue.sync(execute: queueItem)
@@ -28,13 +28,13 @@ struct BankManager {
         case .deposit:
             DispatchQueue.global().async(group: Bank.workingGroup) {
                 depositManager.wait()
-                work(for: customer, duty: customer.desiredBanking)
+                work(for: customer)
                 depositManager.signal()
             }
         case .loan:
             DispatchQueue.global().async(group: Bank.workingGroup) {
                 loanManager.wait()
-                work(for: customer, duty: customer.desiredBanking)
+                work(for: customer)
                 loanManager.signal()
             }
         }
