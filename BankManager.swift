@@ -22,17 +22,17 @@ struct BankManager {
     }
     
     static func workManager(for customer: Customer) {
-        switch customer.banking {
+        switch customer.desiredBanking {
         case .deposit:
             DispatchQueue.global().async(group: Bank.workingGroup) {
                 depositManager.wait()
-                work(for: customer, duty: customer.banking)
+                work(for: customer, duty: customer.desiredBanking)
                 depositManager.signal()
             }
         case .loan:
             DispatchQueue.global().async(group: Bank.workingGroup) {
                 loanManager.wait()
-                work(for: customer, duty: customer.banking)
+                work(for: customer, duty: customer.desiredBanking)
                 loanManager.signal()
             }
         }
