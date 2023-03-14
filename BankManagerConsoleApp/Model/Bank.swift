@@ -14,7 +14,7 @@ struct Bank {
     private let typeOfTask: [Task] = [.deposit, .loan]
     private let loanBankClerk = DispatchSemaphore(value: 1)
     private let depositBankClerks = DispatchSemaphore(value: 2)
-    private let group = DispatchGroup()
+    private let taskGroup = DispatchGroup()
     
     mutating func manageTodayTask() {
         lineUpClient()
@@ -46,13 +46,13 @@ struct Bank {
     mutating func doTask() {
         for _ in 1...waitingLine.count {
             guard let currentClient = waitingLine.dequeue() else { return }
-            dispatchQueue(currentClient)
+            assignToBankClerk(currentClient)
         }
         
-        group.wait()
+        taskGroup.wait()
     }
     
-    private func dispatchQueue(_ currentClient: Client) {
+    private func assignToBankClerk(_ currentClient: Client) {
         let depositService = DispatchWorkItem() {
             depositBankClerks.wait()
             bankClerk.service(to: currentClient)
@@ -66,9 +66,9 @@ struct Bank {
         
         switch currentClient.purposeOfVisit {
         case .deposit:
-            DispatchQueue.global().async(group: group, execute: depositService)
+            DispatchQueue.global().async(group: taskGroup, execute: depositService)
         case .loan:
-            DispatchQueue.global().async(group: group, execute: loanService)
+            DispatchQueue.global().async(group: taskGroup, execute: loanService)
         }
     }
     
