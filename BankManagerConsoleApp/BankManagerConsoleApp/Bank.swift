@@ -40,7 +40,7 @@ class Bank {
                 break
             }
             
-            BankManager.workManager(for: customer)
+            BankManager.divideWork(accordingTo: customer)
         }
         
         Bank.workingGroup.wait()

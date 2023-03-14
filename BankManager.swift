@@ -23,7 +23,7 @@ struct BankManager {
         workQueue.sync(execute: queueItem)
     }
     
-    static func workManager(for customer: Customer) {
+    static func divideWork(accordingTo customer: Customer) {
         switch customer.desiredBanking {
         case .deposit:
             DispatchQueue.global().async(group: Bank.workingGroup) {
