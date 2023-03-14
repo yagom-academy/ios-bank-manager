@@ -20,7 +20,7 @@ struct BankManager {
                 var bank = Bank()
                 let numberOfCustomer = Int.random(in: 10...30)
                 
-                bank.receive(of: numberOfCustomer)
+                bank.receive(numberOfCustomer)
                 bank.startBusiness()
             case "2":
                 isSelectedOpen = false

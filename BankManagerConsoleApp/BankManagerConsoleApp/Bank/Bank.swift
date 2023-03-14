@@ -26,7 +26,7 @@ struct Bank {
         )
     }
     
-    func receive(numberOfCustomer: Int) {
+    func receive(_ numberOfCustomer: Int) {
         for waitingNumber in 1...numberOfCustomer {
             guard let customer = Customer(waitingNumber: waitingNumber) else { return }
             

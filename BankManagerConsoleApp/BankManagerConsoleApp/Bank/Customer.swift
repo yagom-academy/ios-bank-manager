@@ -9,15 +9,6 @@ struct Customer {
     let businessType: BusinessType
     let waitingNumber: Int
     
-    var consultingTime: Double {
-        switch businessType {
-        case .loan:
-            return 1.1
-        case .deposit:
-            return 0.7
-        }
-    }
-    
     init?(waitingNumber: Int) {
         guard let businessType = BusinessType.allCases.randomElement() else { return nil }
         

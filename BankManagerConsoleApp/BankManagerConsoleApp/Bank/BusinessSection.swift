@@ -23,7 +23,7 @@ struct BusinessSection: BankWorkable {
         bankDispatchQueue.async(group: group) {
             self.bankSemaphore.wait()
             print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 시작")
-            Thread.sleep(forTimeInterval: customer.consultingTime)
+            Thread.sleep(forTimeInterval: customer.businessType.consultingTime)
             print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 완료")
             self.bankSemaphore.signal()
         }
