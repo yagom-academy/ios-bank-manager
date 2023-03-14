@@ -6,5 +6,5 @@
 
 import Foundation
 
-private let bankDesk = BankDesk()
+private var bankDesk = BankDesk()
 bankDesk.openBanking()
