@@ -17,7 +17,8 @@ struct BankManager {
         let randomNumberOfClient = Int.random(in: 10...30)
         
         for number in 1...randomNumberOfClient {
-            let client = Client(clientNumber: number, requstedTask: .init(rawValue: Int.random(in: 0...1)) ?? .deposit)
+            let randomNumberOfTask = Int.random(in: 0...1)
+            let client = Client(clientNumber: number, requstedTask: .init(rawValue: randomNumberOfTask) ?? .deposit)
             waitingQueue.enqueue(client)
         }
         
