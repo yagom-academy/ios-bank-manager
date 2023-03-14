@@ -6,23 +6,30 @@
 
 import Foundation
 
+protocol BankManagerDelegate: AnyObject {
+    func sendClient(client: Client)
+}
+
 struct BankManager {
     private var numberOfClient = 0
     private var waitingQueue = Queue<Client>()
     private let loanSemaphore = DispatchSemaphore(value: 1)
     private let depositSemaphore = DispatchSemaphore(value: 2)
     private let bankTaskGroup = DispatchGroup()
+    weak var delegate: BankManagerDelegate?
     
     mutating func setupWaitingQueueAndClientNumber() {
-        let randomNumberOfClient = Int.random(in: 10...30)
-        
-        for number in 1...randomNumberOfClient {
+        for _ in 1...10 {
+            numberOfClient += 1
             let randomNumberOfTask = Int.random(in: 0...1)
-            let client = Client(clientNumber: number, requstedTask: .init(rawValue: randomNumberOfTask) ?? .deposit)
+            let client = Client(clientNumber: numberOfClient, requstedTask: .init(rawValue: randomNumberOfTask) ?? .deposit)
             waitingQueue.enqueue(client)
+            delegate?.sendClient(client: client)
         }
-        
-        numberOfClient = waitingQueue.size
+    }
+    
+    mutating func reset() {
+        waitingQueue.clear()
     }
     
     mutating func processBusiness() {
