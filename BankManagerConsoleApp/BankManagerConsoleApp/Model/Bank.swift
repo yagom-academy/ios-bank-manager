@@ -10,7 +10,6 @@ import Foundation
 protocol workable {
     var customerQueue: CustomerQueue<Customer> { get }
     
-    
     func open(totalCustomer: Int)
     func setCustomerQueue(totalCustomer: Int)
     func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime)
@@ -30,7 +29,7 @@ final class Bank {
     
     func open(totalCustomer: Int) {
         setCustomerQueue(totalCustomer: totalCustomer)
-        let processTime = checkProcessTime(for: startWork)
+        let processTime = ProcessTimer.calculateProcessTime(for: startWork)
         reportResult(totalCustomer: totalCustomer, processTime: processTime)
     }
     
@@ -40,14 +39,6 @@ final class Bank {
             let customer = Customer(numberTicket: numberTicket)
             customerQueue.enqueue(customer)
         }
-    }
-    
-    private func checkProcessTime(for process: () -> Void) -> CFAbsoluteTime {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        process()
-        let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        
-        return processTime
     }
     
     private func startWork() {
@@ -63,7 +54,6 @@ final class Bank {
         
         workGroup.wait()
     }
-    
     
     private func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) {
         let roundedProcessTime = round(processTime * 100) / 100

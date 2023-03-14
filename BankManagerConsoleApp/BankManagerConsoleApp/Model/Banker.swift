@@ -8,11 +8,11 @@
 import Foundation
 
 struct Banker {
-    private let department: DispatchSemaphore
+    private let workableBanker: DispatchSemaphore
     private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
     
     init(department: DispatchSemaphore) {
-        self.department = department
+        self.workableBanker = department
     }
     
     func respond(to customer: Customer, workGroup: DispatchGroup) {
@@ -22,9 +22,9 @@ struct Banker {
     
     private func makeTask(for customer: Customer) -> DispatchWorkItem {
         let task = DispatchWorkItem {
-            self.department.wait()
+            self.workableBanker.wait()
             self.doWork(for: customer)
-            self.department.signal()
+            self.workableBanker.signal()
         }
         
         return task
