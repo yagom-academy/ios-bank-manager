@@ -11,22 +11,21 @@ class BankManager {
     private var customerCountQueue: BankQueue<Int> = BankQueue<Int>()
     var customerCount: Int = 0
     
-    func manageBanking() {
+    func insertCustomerCountToQueue() {
         for i in 1...customerCount {
             self.customerCountQueue.enqueue(data: i)
-            print("\(i)번 고객 업무 시작")
-            usleep(700000)
-            self.customerCountQueue.dequeue()
-            print("\(i)번 고객 업무 완료")
         }
-        calculateBankingTime()
     }
     
-    private func digitFormatter(input: Double) -> String {
-        let decimal: Double = input
-        let result: String = String(format: "%.2f", decimal)
-        
-        return result
+    func manageBanking() {
+        while customerCountQueue.isEmpty() == false {
+            guard let firstCustomer = self.customerCountQueue.peek() else { return }
+            print("\(firstCustomer)번 고객 업무 시작")
+            usleep(700000)
+            self.customerCountQueue.dequeue()
+            print("\(firstCustomer)번 고객 업무 완료")
+        }
+        calculateBankingTime()
     }
     
     private func calculateBankingTime() {
