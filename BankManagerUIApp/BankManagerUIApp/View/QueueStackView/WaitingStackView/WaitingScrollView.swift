@@ -8,12 +8,13 @@
 import UIKit
 
 final class WaitingScrollView: UIScrollView {
-    let waitingQueueContentView = WaitingQueueContentView()
+    let waitingClientStackView = WaitingClientStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
         setUpWaitingScrollView()
+        configureConstraint()
     }
     
     required init(coder: NSCoder) {
@@ -25,6 +26,12 @@ final class WaitingScrollView: UIScrollView {
     }
     
     private func setUpWaitingScrollView() {
-        self.addSubview(waitingQueueContentView)
+        self.addSubview(waitingClientStackView)
+    }
+    
+    private func configureConstraint() {
+        NSLayoutConstraint.activate([
+            waitingClientStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        ])
     }
 }

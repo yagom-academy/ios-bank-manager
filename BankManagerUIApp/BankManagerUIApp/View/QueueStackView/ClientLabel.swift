@@ -1,5 +1,5 @@
 //
-//  WaitingQueueContentView.swift
+//  ClientLabel.swift
 //  BankManagerUIApp
 //
 //  Created by 리지, 무리 on 2023/03/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WaitingQueueContentView: UIView {
+final class ClientLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -19,5 +19,7 @@ final class WaitingQueueContentView: UIView {
     
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.font = UIFont.preferredFont(forTextStyle: .title2)
+        self.textAlignment = .center
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 public struct Bank {
-    private var waitingLine = Queue<Client>()
-    private var clientCount: Int = 10
+    var waitingLine = Queue<Client>()
+    private(set) var clientCount: Int = 0
     private var bankClerk = BankClerk()
     private let typeOfTask: [Task] = [.deposit, .loan]
     private let loanBankClerk = DispatchSemaphore(value: 1)
@@ -22,8 +22,8 @@ public struct Bank {
         notifyTaskCompletion(totalTime)
     }
     
-    mutating private func lineUpClient() {
-        clientCount = Int.random(in: 10...30)
+    mutating func lineUpClient() {
+        clientCount += 10
         
         for number in 1...clientCount {
             guard let type = typeOfTask.randomElement() else { return }

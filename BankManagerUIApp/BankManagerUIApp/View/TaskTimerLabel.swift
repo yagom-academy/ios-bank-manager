@@ -18,6 +18,8 @@ final class TaskTimerLabel: UILabel {
     }
    
     private func configure() {
+        self.setContentCompressionResistancePriority(.required, for: .vertical)
+        self.setContentHuggingPriority(.required, for: .vertical)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.textAlignment = .center
         self.font = UIFont.preferredFont(forTextStyle: .title2)

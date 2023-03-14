@@ -12,11 +12,14 @@ class ViewController: UIViewController {
     private let taskTimerLabel = TaskTimerLabel()
     private let queueStackView = QueueStackView()
     
+    private var bank = Bank()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpScreenStackView()
         configureConstraint()
         view.backgroundColor = .white
+        addClientButtonTapped()
     }
     
     private func setUpScreenStackView() {
@@ -34,8 +37,28 @@ class ViewController: UIViewController {
             screenStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
-        ])            
+        ])
     }
+    
+    private func addClientButtonTapped() {
+        buttonStackView.addClientButton.addTarget(self, action: #selector(addTenClients), for: .touchUpInside)
+    }
+    
+    @objc func addTenClients() {
+        bank.lineUpClient()
+        
+        for _ in 1...bank.clientCount {
+            let clientLabel = ClientLabel()
+            guard let client = bank.waitingLine.dequeue() else { return }
+            let message = "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)"
+            
+            clientLabel.text = message
+            
+            queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.addArrangedSubview(clientLabel)
+        }
+        
+    }
+    
 }
 
 

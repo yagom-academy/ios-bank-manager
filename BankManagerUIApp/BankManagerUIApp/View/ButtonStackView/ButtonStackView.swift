@@ -8,8 +8,8 @@
 import UIKit
 
 final class ButtonStackView: UIStackView {
-    private let addClientButton = AddClientButton()
-    private let resetButton = ResetButton()
+    let addClientButton = AddClientButton()
+    let resetButton = ResetButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

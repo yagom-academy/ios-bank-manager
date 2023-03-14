@@ -19,6 +19,8 @@ final class DoingTaskLabel: UILabel {
     
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.setContentCompressionResistancePriority(.required, for: .vertical)
+        self.setContentHuggingPriority(.required, for: .vertical)
         self.textAlignment = .center
         self.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         self.text = "업무중"
