@@ -9,10 +9,10 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 class DummyCustomerReceiver: Receivable {
-    var testValue = 0
+    var totalCustomer = 0
     
     func receiveCustomer() -> Int {
-        return testValue
+        return totalCustomer
     }
     
 }

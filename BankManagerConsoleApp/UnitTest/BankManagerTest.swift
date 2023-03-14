@@ -25,11 +25,11 @@ final class BankManagerTest: XCTestCase {
         sut = nil
     }
 
-    func test_start호출시_Input이_1일때_bank에totalCustomer가전달된다() throws {
+    func test_start호출시_userInput이_1일때_bank에totalCustomer가전달된다() throws {
         // given
-        let input = "1"
-        dummyCustomerReceiver.testValue = 30
-        let expectation = dummyCustomerReceiver.testValue
+        let testValue = 30
+        dummyCustomerReceiver.totalCustomer = testValue
+        let expectation = dummyCustomerReceiver.totalCustomer
         
         // when
         sut.start()
