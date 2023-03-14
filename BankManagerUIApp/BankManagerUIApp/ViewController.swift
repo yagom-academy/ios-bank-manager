@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private let screenView = ScreenStackView()
+    private let screenStackView = ScreenStackView()
     private let buttonStackView = ButtonStackView()
     private let taskTimerLabel = TaskTimerLabel()
     private let queueStackView = QueueStackView()
@@ -20,20 +20,20 @@ class ViewController: UIViewController {
     }
     
     private func setUpScreenStackView() {
-        view.addSubview(screenView)
-        screenView.addArrangedSubview(buttonStackView)
-        screenView.addArrangedSubview(taskTimerLabel)
-        screenView.addArrangedSubview(queueStackView)
+        view.addSubview(screenStackView)
+        screenStackView.addArrangedSubview(buttonStackView)
+        screenStackView.addArrangedSubview(taskTimerLabel)
+        screenStackView.addArrangedSubview(queueStackView)
         
     }
 
     private func configureConstraint() {
         //screenView
         NSLayoutConstraint.activate([
-            screenView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            screenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            screenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            screenView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            screenStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            screenStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            screenStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            screenStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
         ])
     }
