@@ -26,7 +26,7 @@ struct Bank {
         )
     }
     
-    func receive(of numberOfCustomer: Int) {
+    func receive(numberOfCustomer: Int) {
         for waitingNumber in 1...numberOfCustomer {
             guard let customer = Customer(waitingNumber: waitingNumber) else { return }
             
@@ -34,7 +34,7 @@ struct Bank {
         }
     }
     
-    mutating func work() {
+    private mutating func work() {
         while !customerQueue.isEmpty {
             guard let currentCustomer = customerQueue.dequeue() else { return }
             
