@@ -41,6 +41,7 @@
 		AD56812D29C03462009923C9 /* MockBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD56812B29C0343B009923C9 /* MockBank.swift */; };
 		AD56812E29C035F9009923C9 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		AD56813829C04D26009923C9 /* BankTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD56813729C04D26009923C9 /* BankTest.swift */; };
+		AD56813F29C06AAA009923C9 /* MockDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD56813E29C06AAA009923C9 /* MockDepartment.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		AD56812B29C0343B009923C9 /* MockBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBank.swift; sourceTree = "<group>"; };
 		AD56813529C04D26009923C9 /* BankTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD56813729C04D26009923C9 /* BankTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTest.swift; sourceTree = "<group>"; };
+		AD56813E29C06AAA009923C9 /* MockDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDepartment.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				AD56813729C04D26009923C9 /* BankTest.swift */,
 				08BCEDE429C052AC00A49289 /* MockQueue.swift */,
+				AD56813E29C06AAA009923C9 /* MockDepartment.swift */,
 			);
 			path = BankTest;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				08BCEDDB29C051DD00A49289 /* BankDepartment.swift in Sources */,
 				AD56813829C04D26009923C9 /* BankTest.swift in Sources */,
 				08BCEDDA29C051D700A49289 /* Bank.swift in Sources */,
+				AD56813F29C06AAA009923C9 /* MockDepartment.swift in Sources */,
 				08BCEDE029C051EB00A49289 /* CustomerReceiver.swift in Sources */,
 				08BCEDDF29C051E800A49289 /* Customer.swift in Sources */,
 				08BCEDE129C051ED00A49289 /* CustomerQueue.swift in Sources */,

@@ -18,7 +18,7 @@ class MockQueue: Queue<Customer> {
     
     override func dequeue() -> Customer? {
         dequeueCount += 1
-        return nil
+        return dummyCustomer
     }
     
 }

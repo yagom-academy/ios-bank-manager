@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct BankDepartment {
+protocol Respondable {
+    func respond(to customer: Customer, workGroup: DispatchGroup)
+}
+
+struct BankDepartment: Respondable {
     private let workableBanker: DispatchSemaphore
     private let taskQueue: DispatchQueue = DispatchQueue(label: "taskQueue", attributes: .concurrent)
     

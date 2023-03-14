@@ -13,13 +13,13 @@ protocol Openable {
 
 final class Bank: Openable {
     private let customerQueue: Queue<Customer>
-    private let loanDepartment: BankDepartment
-    private let depositDepartment: BankDepartment
+    private let loanDepartment: Respondable
+    private let depositDepartment: Respondable
     private let workGroup: DispatchGroup = DispatchGroup()
     
-    init(loanBankerCount: Int, depositBankerCount: Int, customerQueue: Queue<Customer>) {
-        self.loanDepartment = BankDepartment(workableBankerCount: loanBankerCount)
-        self.depositDepartment = BankDepartment(workableBankerCount: depositBankerCount)
+    init(loanDepartment: Respondable, depositDepartment: Respondable, customerQueue: Queue<Customer>) {
+        self.loanDepartment = loanDepartment
+        self.depositDepartment = depositDepartment
         self.customerQueue = customerQueue
     }
     
