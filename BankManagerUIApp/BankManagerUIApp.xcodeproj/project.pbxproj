@@ -29,6 +29,7 @@
 		FB1DA56229C0535200D7D01A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55B29C0535200D7D01A /* Task.swift */; };
 		FB1DA56329C0535200D7D01A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55C29C0535200D7D01A /* Node.swift */; };
 		FB1DA56429C0535200D7D01A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55D29C0535200D7D01A /* LinkedList.swift */; };
+		FB1DA56629C0815900D7D01A /* ClientStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA56529C0815900D7D01A /* ClientStackView.swift */; };
 		FB4190A029BF1A7C00970F6B /* ScreenStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB41909F29BF1A7C00970F6B /* ScreenStackView.swift */; };
 		FB4190A229BF1AA500970F6B /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4190A129BF1AA500970F6B /* ButtonStackView.swift */; };
 		FB4190A429BF1AB200970F6B /* QueueStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4190A329BF1AB200970F6B /* QueueStackView.swift */; };
@@ -91,6 +92,7 @@
 		FB1DA55B29C0535200D7D01A /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FB1DA55C29C0535200D7D01A /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FB1DA55D29C0535200D7D01A /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		FB1DA56529C0815900D7D01A /* ClientStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientStackView.swift; sourceTree = "<group>"; };
 		FB41909F29BF1A7C00970F6B /* ScreenStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenStackView.swift; sourceTree = "<group>"; };
 		FB4190A129BF1AA500970F6B /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		FB4190A329BF1AB200970F6B /* QueueStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStackView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				FB1DA55729C0535200D7D01A /* BankClerk.swift */,
 				FB1DA55629C0535200D7D01A /* Model */,
 				FB41909E29BF1A3600970F6B /* View */,
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
@@ -213,7 +216,6 @@
 		FB1DA55629C0535200D7D01A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB1DA55729C0535200D7D01A /* BankClerk.swift */,
 				FB1DA55829C0535200D7D01A /* Client.swift */,
 				FB1DA55929C0535200D7D01A /* Bank.swift */,
 				FB1DA55A29C0535200D7D01A /* Queue.swift */,
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				FB4190A329BF1AB200970F6B /* QueueStackView.swift */,
+				FB1DA56529C0815900D7D01A /* ClientStackView.swift */,
 				4B0B67EA29C04B7D00045D1F /* DoingTaskStackView */,
 				4B0B67E929C04B6300045D1F /* WaitingStackView */,
 			);
@@ -436,6 +439,7 @@
 				FB4190C829C011B600970F6B /* DoingTaskLabel.swift in Sources */,
 				FB4190A029BF1A7C00970F6B /* ScreenStackView.swift in Sources */,
 				4B0B67DC29C007AA00045D1F /* WaitingQueueStackView.swift in Sources */,
+				FB1DA56629C0815900D7D01A /* ClientStackView.swift in Sources */,
 				FB4190A429BF1AB200970F6B /* QueueStackView.swift in Sources */,
 				4B0B67E829C040A400045D1F /* WaitingQueueContentView.swift in Sources */,
 				FB1DA55F29C0535200D7D01A /* Client.swift in Sources */,

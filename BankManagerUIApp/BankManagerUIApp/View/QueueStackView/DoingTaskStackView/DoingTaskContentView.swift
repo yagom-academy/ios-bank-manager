@@ -8,9 +8,13 @@
 import UIKit
 
 final class DoingTaskContentView: UIView {
+    private let clientStackView = ClientStackView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        setUpDoingTaskContentView()
+        configureConstraint()
     }
     
     required init(coder: NSCoder) {
@@ -19,5 +23,20 @@ final class DoingTaskContentView: UIView {
     
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .systemRed
     }
+    
+    private func setUpDoingTaskContentView() {
+        self.addSubview(clientStackView)
+    }
+    
+    private func configureConstraint() {
+        
+        NSLayoutConstraint.activate([
+            clientStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            clientStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            clientStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+    }
+ 
 }

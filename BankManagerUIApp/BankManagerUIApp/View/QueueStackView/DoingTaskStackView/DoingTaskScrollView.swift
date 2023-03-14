@@ -14,6 +14,7 @@ final class DoingTaskScrollView: UIScrollView {
         super.init(frame: frame)
         configure()
         setUpTaskScrollView()
+        configureConstraint()
     }
     
     required init(coder: NSCoder) {
@@ -27,4 +28,18 @@ final class DoingTaskScrollView: UIScrollView {
     private func setUpTaskScrollView() {
         self.addSubview(doingTaskContentView)
     }
+    
+    private func configureConstraint() {
+        
+        NSLayoutConstraint.activate([
+            doingTaskContentView.topAnchor.constraint(equalTo: self.topAnchor),
+            doingTaskContentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            doingTaskContentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            doingTaskContentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            doingTaskContentView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            doingTaskContentView.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor)
+
+        ])
+    }
+    
 }

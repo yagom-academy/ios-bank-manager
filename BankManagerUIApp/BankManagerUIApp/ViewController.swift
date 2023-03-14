@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         setUpScreenStackView()
         configureConstraint()
         view.backgroundColor = .white
+        
     }
     
     private func setUpScreenStackView() {
@@ -35,7 +36,7 @@ class ViewController: UIViewController {
             screenStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             screenStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
-        ])
+        ])            
     }
 }
 
@@ -62,3 +63,11 @@ struct ViewPreview: PreviewProvider {
     }
 }
 
+/*
+ 과일재고 -> label    과일재고 notification, delegate
+ 주문화면 - 재고수정화면 (화면간 화면)
+ 
+ 
+ 대기중인 고객 -> label  고객 10명추가 대기중인고객 delegate
+ model (clientCount/client) - viewController
+ */
