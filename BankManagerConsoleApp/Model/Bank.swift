@@ -22,7 +22,7 @@ struct Bank {
         notifyTaskCompletion(totalTime)
     }
     
-    mutating func lineUpClient() {
+    mutating private func lineUpClient() {
         clientCount = Int.random(in: 10...30)
         
         for number in 1...clientCount {
@@ -32,7 +32,7 @@ struct Bank {
         }
     }
     
-    mutating func calculateTaskTime() -> String {
+    mutating private func calculateTaskTime() -> String {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         doTask()
@@ -43,7 +43,7 @@ struct Bank {
         return totalTime
     }
 
-    mutating func doTask() {
+    mutating private func doTask() {
         for _ in 1...waitingLine.count {
             guard let currentClient = waitingLine.dequeue() else { return }
             assignToBankClerk(currentClient)
@@ -72,7 +72,7 @@ struct Bank {
         }
     }
     
-    mutating func notifyTaskCompletion(_ totalTime: String) {
+    private func notifyTaskCompletion(_ totalTime: String) {
         let success = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalTime)초입니다."
         print(success)
     }
