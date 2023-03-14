@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+private let bankDesk = BankDesk()
+bankDesk.startBanking()
