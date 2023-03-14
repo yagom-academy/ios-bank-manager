@@ -20,20 +20,17 @@ final class ClientStackView: UIStackView {
     }
     
     private func configure() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
         self.alignment = .center
-        self.distribution = .fill
     }
   
     private func setUpDoingTaskClientStackView() {
         let clientLabel: UILabel = {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
-
             label.text = "1 - 예금"
-            label.font = UIFont.preferredFont(forTextStyle: .body)
-            label.backgroundColor = .green
-            label.textColor = .black
+            label.font = UIFont.preferredFont(forTextStyle: .title2)
             
             return label
         }()

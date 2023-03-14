@@ -30,16 +30,13 @@ final class DoingTaskScrollView: UIScrollView {
     }
     
     private func configureConstraint() {
-        
         NSLayoutConstraint.activate([
             doingTaskContentView.topAnchor.constraint(equalTo: self.topAnchor),
             doingTaskContentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             doingTaskContentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             doingTaskContentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            doingTaskContentView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            doingTaskContentView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -10),
             doingTaskContentView.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor)
-
         ])
     }
-    
 }

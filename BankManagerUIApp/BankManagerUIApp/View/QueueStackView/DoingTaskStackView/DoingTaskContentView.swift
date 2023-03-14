@@ -23,7 +23,6 @@ final class DoingTaskContentView: UIView {
     
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .systemRed
     }
     
     private func setUpDoingTaskContentView() {
@@ -31,12 +30,10 @@ final class DoingTaskContentView: UIView {
     }
     
     private func configureConstraint() {
-        
         NSLayoutConstraint.activate([
-            clientStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            clientStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
             clientStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             clientStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
- 
 }
