@@ -8,17 +8,20 @@
 import XCTest
 
 class MockQueue: CustomerQueueable {
+    var list: LinkedList<Customer> = LinkedList()
+    
     var enqueueCount: Int = 0
     var dequeueCount: Int = 0
     var dummyCustomer: Customer?
     
     func enqueue(_ data: Customer) {
+        list.append(data: data)
         enqueueCount += 1
     }
     
     func dequeue() -> Customer? {
         dequeueCount += 1
-        return dummyCustomer
+        return list.removeFirst()
     }
     
 }

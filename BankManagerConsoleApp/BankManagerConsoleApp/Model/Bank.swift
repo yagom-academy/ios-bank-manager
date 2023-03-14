@@ -47,7 +47,6 @@ final class Bank: Openable {
                 loanDepartment.respond(to: customer, workGroup: workGroup)
             }
         }
-        
         workGroup.wait()
     }
     
