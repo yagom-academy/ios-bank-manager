@@ -8,7 +8,7 @@
 import Foundation
 
 final class Bank {
-    private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var customerQueue: Queue
     
     private let loanDepartment: DispatchSemaphore
     private let depositDepartment: DispatchSemaphore

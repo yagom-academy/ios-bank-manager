@@ -16,6 +16,9 @@
 		AD3774AA29B5BA6C00E68DA7 /* CustomerQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3774A929B5BA6C00E68DA7 /* CustomerQueueTest.swift */; };
 		AD3774AE29B5BABF00E68DA7 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3774A129B5B1C800E68DA7 /* CustomerQueue.swift */; };
 		AD3774AF29B5BAC200E68DA7 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD37749D29B5ACDA00E68DA7 /* LinkedList.swift */; };
+		AD56812829BFFA0E009923C9 /* BankTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD56812229BFFA01009923C9 /* BankTest.swift */; };
+		AD56812929BFFA15009923C9 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08878DAB29B6D84600CD8F05 /* Bank.swift */; };
+		AD56812A29BFFA19009923C9 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3774A129B5B1C800E68DA7 /* CustomerQueue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +44,8 @@
 		AD3774A129B5B1C800E68DA7 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		AD3774A729B5BA6C00E68DA7 /* CustomerQueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomerQueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD3774A929B5BA6C00E68DA7 /* CustomerQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueTest.swift; sourceTree = "<group>"; };
+		AD56812029BFFA01009923C9 /* BankTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD56812229BFFA01009923C9 /* BankTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTest.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
@@ -48,6 +53,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		AD3774A429B5BA6C00E68DA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD56811D29BFFA01009923C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -81,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				AD3774A929B5BA6C00E68DA7 /* CustomerQueueTest.swift */,
+				AD56812229BFFA01009923C9 /* BankTest.swift */,
 			);
 			path = UnitTest;
 			sourceTree = "<group>";
@@ -108,6 +121,7 @@
 			children = (
 				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
 				AD3774A729B5BA6C00E68DA7 /* CustomerQueueTest.xctest */,
+				AD56812029BFFA01009923C9 /* BankTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +155,23 @@
 			productReference = AD3774A729B5BA6C00E68DA7 /* CustomerQueueTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		AD56811F29BFFA01009923C9 /* BankTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD56812629BFFA01009923C9 /* Build configuration list for PBXNativeTarget "BankTest" */;
+			buildPhases = (
+				AD56811C29BFFA01009923C9 /* Sources */,
+				AD56811D29BFFA01009923C9 /* Frameworks */,
+				AD56811E29BFFA01009923C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BankTest;
+			productName = BankTest;
+			productReference = AD56812029BFFA01009923C9 /* BankTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C7694E75259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7694E7D259C3EC00053667F /* Build configuration list for PBXNativeTarget "BankManagerConsoleApp" */;
@@ -170,6 +201,9 @@
 					AD3774A629B5BA6C00E68DA7 = {
 						CreatedOnToolsVersion = 14.2;
 					};
+					AD56811F29BFFA01009923C9 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					C7694E75259C3EC00053667F = {
 						CreatedOnToolsVersion = 12.1;
 					};
@@ -190,12 +224,20 @@
 			targets = (
 				C7694E75259C3EC00053667F /* BankManagerConsoleApp */,
 				AD3774A629B5BA6C00E68DA7 /* CustomerQueueTest */,
+				AD56811F29BFFA01009923C9 /* BankTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AD3774A529B5BA6C00E68DA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD56811E29BFFA01009923C9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -212,6 +254,16 @@
 				AD3774AF29B5BAC200E68DA7 /* LinkedList.swift in Sources */,
 				AD3774AA29B5BA6C00E68DA7 /* CustomerQueueTest.swift in Sources */,
 				AD3774AE29B5BABF00E68DA7 /* CustomerQueue.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD56811C29BFFA01009923C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD56812829BFFA0E009923C9 /* BankTest.swift in Sources */,
+				AD56812929BFFA15009923C9 /* Bank.swift in Sources */,
+				AD56812A29BFFA19009923C9 /* CustomerQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +316,46 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.CustomerQueueTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AD56812429BFFA01009923C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BankTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD56812529BFFA01009923C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.BankTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -420,6 +512,15 @@
 			buildConfigurations = (
 				AD3774AC29B5BA6C00E68DA7 /* Debug */,
 				AD3774AD29B5BA6C00E68DA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD56812629BFFA01009923C9 /* Build configuration list for PBXNativeTarget "BankTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD56812429BFFA01009923C9 /* Debug */,
+				AD56812529BFFA01009923C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
