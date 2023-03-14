@@ -4,8 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-let customerQueue = CustomerQueue<Customer>()
-let bank = Bank(loanBankerCount: 1, depositBankerCount: 2, customerQueue: customerQueue)
+let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
 var bankManager = BankManager(bank: bank)
 
 bankManager.start()

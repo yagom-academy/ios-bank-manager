@@ -5,18 +5,9 @@
 //  Created by Rowan, 릴라 on 2023/03/06.
 //
 
-struct CustomerQueue<T>: Queue {
+struct CustomerQueue<T> {
     let list: LinkedList<T> = LinkedList()
-}
-
-protocol Queue {
-    associatedtype T
     
-    var list: LinkedList<T> { get }
-    
-}
-
-extension Queue {
     var isEmpty: Bool {
         return list.isEmpty
     }
