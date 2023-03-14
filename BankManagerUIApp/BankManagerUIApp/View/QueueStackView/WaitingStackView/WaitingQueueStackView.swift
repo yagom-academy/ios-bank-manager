@@ -9,7 +9,7 @@ import UIKit
 
 final class WaitingQueueStackView: UIStackView {
     private let waitingQueueLabel = WaitingQueueLabel()
-    private let waitingScrollView = WaitingScrollView()
+    let waitingScrollView = WaitingScrollView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

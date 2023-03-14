@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         screenStackView.addArrangedSubview(queueStackView)
         
     }
-
+    
     private func configureConstraint() {
         //screenView
         NSLayoutConstraint.activate([
@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         ])
     }
 }
+
 
 //MARK: - Canvas
 
