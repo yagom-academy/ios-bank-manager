@@ -15,16 +15,6 @@ protocol BankWorkable {
 }
 
 extension BankWorkable {
-    func processJob(for customer: Customer, group: DispatchGroup) {
-        bankDispatchQueue.async(group: group) {
-            self.bankSemaphore.wait()
-            print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 시작")
-            Thread.sleep(forTimeInterval: customer.consultingTime)
-            print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 완료")
-            self.bankSemaphore.signal()
-        }
-    }
-    
     mutating func addJobCount() {
         completedJobCount += 1
     }
