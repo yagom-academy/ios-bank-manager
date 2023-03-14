@@ -31,6 +31,13 @@ class QueueStackView: UIStackView {
         subStackView.addArrangedSubview(label)
     }
     
+    func resetLabel() {
+        subStackView.arrangedSubviews.forEach { label in
+            subStackView.removeArrangedSubview(label)
+            label.removeFromSuperview()
+        }
+    }
+    
     func createTitleLabel(_ text: String, backgroundColor: UIColor) {
         let label = UILabel()
         

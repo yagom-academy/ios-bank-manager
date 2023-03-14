@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
         waitingStackView.createTitleLabel("대기중", backgroundColor: .systemGreen)
         workingStackView.createTitleLabel("업무중", backgroundColor: .systemIndigo)
         addCustomerButton.addTarget(self, action: #selector(didTapAddCustomerButton), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
     }
     
     @objc private func didTapAddCustomerButton() {
@@ -45,6 +46,12 @@ class MainViewController: UIViewController {
             guard let customer = bank.addCustomer() else { return }
             waitingStackView.addLabel(customer: customer)
         }
+    }
+    
+    @objc private func didTapResetButton() {
+        bank = Bank()
+        waitingStackView.resetLabel()
+        workingStackView.resetLabel()
     }
 }
 
