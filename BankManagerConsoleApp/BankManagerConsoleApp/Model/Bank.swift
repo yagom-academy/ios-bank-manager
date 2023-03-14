@@ -7,8 +7,16 @@
 
 import Foundation
 
+protocol workable {
+    var customerQueue: CustomerQueue<Customer> { get }
+    
+    func open(totalCustomer: Int)
+    func setCustomerQueue(totalCustomer: Int)
+    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime)
+}
+
 final class Bank {
-    private var customerQueue: CustomerQueue = CustomerQueue<Customer>()
+    private let customerQueue: CustomerQueue = CustomerQueue<Customer>()
     
     private let loanDepartment: DispatchSemaphore
     private let depositDepartment: DispatchSemaphore
@@ -28,9 +36,8 @@ final class Bank {
     
     private func setCustomerQueue(totalCustomer: Int) {   
         for number in 1...totalCustomer {
-            guard let business = Business.allCases.randomElement() else { return }
             let numberTicket = String(describing: number)
-            let customer = Customer(numberTicket: numberTicket, business: business)
+            let customer = Customer(numberTicket: numberTicket)
             customerQueue.enqueue(customer)
         }
     }
@@ -52,7 +59,8 @@ final class Bank {
     }
 
     private func respond(to customer: Customer) {
-        switch customer.business {
+        guard let business = customer.business else { return }
+        switch business {
         case .deposit:
             let bankerTask = makeBankerTask(for: customer, Department: depositDepartment)
             workQueue.async(group: workGroup, execute: bankerTask)

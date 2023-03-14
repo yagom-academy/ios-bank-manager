@@ -7,5 +7,10 @@
 
 struct Customer {
     let numberTicket: String
-    let business: Business
+    let business: Business?
+    
+    init(numberTicket: String) {
+        self.numberTicket = numberTicket
+        self.business = Business.allCases.randomElement()
+    }
 }
