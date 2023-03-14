@@ -5,7 +5,7 @@
 //  Created by Rowan, 릴라 on 2023/03/07.
 //
 
-struct Customer: Equatable {
+struct Customer {
     let numberTicket: String
     let business: Business?
     

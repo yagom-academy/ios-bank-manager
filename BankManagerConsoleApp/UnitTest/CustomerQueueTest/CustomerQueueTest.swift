@@ -7,11 +7,11 @@
 
 import XCTest
 
-final class CustomerQueueTest: XCTestCase {
-    var sut: Queue<Int>?
+final class QueueTest: XCTestCase {
+    var sut: MockQueue<Int>?
 
     override func setUpWithError() throws {
-        sut = Queue<Int>()
+        sut = MockQueue<Int>()
     }
 
     override func tearDownWithError() throws {

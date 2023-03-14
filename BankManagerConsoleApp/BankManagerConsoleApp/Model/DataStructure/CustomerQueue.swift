@@ -8,27 +8,32 @@
 protocol Queueable {
     associatedtype T
     
-    func enqueue(_ data: T)
-   
-    func dequeue() -> T?
+    var list: LinkedList<T> { get }
+    
+    var isEmpty: Bool { get }
+
+    mutating func enqueue(_ data: T)
+
+    @discardableResult
+    mutating func dequeue() -> T?
+
+    func clear()
+
+    @discardableResult
+    func peek() -> T?
 }
 
-protocol CustomQueueable : Queueable where T == Customer { }
-
-
-class CustomerQueue: CustomQueueable {
-    let list: LinkedList<T> = LinkedList()
-    
+extension Queueable {
     var isEmpty: Bool {
         return list.isEmpty
     }
 
-    func enqueue(_ data: Customer) {
+    mutating func enqueue(_ data: T) {
         list.append(data: data)
     }
 
     @discardableResult
-    func dequeue() -> Customer? {
+    mutating func dequeue() -> T? {
         return list.removeFirst()
     }
 
@@ -40,4 +45,10 @@ class CustomerQueue: CustomQueueable {
     func peek() -> T? {
         return list.headData
     }
+}
+
+protocol CustomerQueueable : Queueable where T == Customer { }
+
+struct CustomerQueue: CustomerQueueable {
+    let list: LinkedList<Customer> = LinkedList()
 }

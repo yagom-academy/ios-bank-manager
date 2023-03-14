@@ -12,12 +12,12 @@ protocol Openable {
 }
 
 final class Bank: Openable {
-    private let customerQueue: any CustomQueueable
+    private var customerQueue: any CustomerQueueable
     private let loanDepartment: Respondable
     private let depositDepartment: Respondable
     private let workGroup: DispatchGroup = DispatchGroup()
     
-    init(loanDepartment: Respondable, depositDepartment: Respondable, customerQueue: any CustomQueueable) {
+    init(loanDepartment: Respondable, depositDepartment: Respondable, customerQueue: any CustomerQueueable) {
         self.loanDepartment = loanDepartment
         self.depositDepartment = depositDepartment
         self.customerQueue = customerQueue

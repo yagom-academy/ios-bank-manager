@@ -7,9 +7,7 @@
 
 import XCTest
 
-
-
-class MockQueue: CustomQueueable {
+class MockQueue: CustomerQueueable {
     var enqueueCount: Int = 0
     var dequeueCount: Int = 0
     var dummyCustomer: Customer?
