@@ -7,9 +7,11 @@
 struct BankManager {
     private let bank: Openable
     private var isRunning: Bool = true
+    private var customerReceiver: Receivable
     
-    init(bank: Openable) {
+    init(bank: Openable, customerReceiver: Receivable) {
         self.bank = bank
+        self.customerReceiver = customerReceiver
     }
     
     mutating func start() {
@@ -39,7 +41,7 @@ struct BankManager {
     private mutating func handleMenuInput(_ userInput: String) {
         switch userInput {
         case "1":
-            let totalCustomer = receiveCustomer()
+            let totalCustomer = customerReceiver.receiveCustomer()
             bank.open(totalCustomer: totalCustomer)
         case "2":
             isRunning = false
@@ -49,9 +51,4 @@ struct BankManager {
         }
     }
     
-    private func receiveCustomer() -> Int {
-        let customerRange: ClosedRange<Int> = 10...30
-        let totalCustomer = Int.random(in: customerRange)
-        return totalCustomer
-    }
 }

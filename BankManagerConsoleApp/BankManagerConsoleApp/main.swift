@@ -5,6 +5,7 @@
 //
 
 let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
-var bankManager = BankManager(bank: bank)
+let customerReceiver = CustomerReceiver()
+var bankManager = BankManager(bank: bank, customerReceiver: customerReceiver)
 
 bankManager.start()
