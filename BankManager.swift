@@ -25,10 +25,10 @@ class BankManager {
             self.customerCountQueue.dequeue()
             print("\(firstCustomer)번 고객 업무 완료")
         }
-        calculateBankingTime()
+        closeBanking()
     }
     
-    private func calculateBankingTime() {
+    private func closeBanking() {
         let time: Double = 0.7 * Double(customerCount)
         let formattedTime = time.digitFormatter()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(formattedTime)초입니다 ")

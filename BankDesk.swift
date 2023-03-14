@@ -19,7 +19,7 @@ struct BankDesk {
         bankManager.customerCount = customerCount
     }
     
-    func startBanking() {
+    func openBanking() {
         showMenuMessage()
         while let inputNumber = readLine() {
             if inputNumber == "1" {
