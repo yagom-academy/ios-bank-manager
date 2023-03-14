@@ -18,12 +18,13 @@ class QueueStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addLabel() {
+    func addLabel(customer: Customer) {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = false
-        label.text = "1 - 예금"
+        label.text = "\(customer.waitingNumber) - \(customer.desiredBanking)"
+        label.textColor = customer.fontColor
         label.font = .preferredFont(forTextStyle: .title3)
         label.numberOfLines = 1
         

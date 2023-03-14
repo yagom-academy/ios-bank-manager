@@ -7,6 +7,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    private var bank = Bank()
     private let addCustomerButton = CustomButton(type: .system)
     private let resetButton = CustomButton(type: .system)
     private let mainStackView = UIStackView()
@@ -36,6 +37,14 @@ class MainViewController: UIViewController {
         resetButton.setTitleColor(.red, for: .normal)
         waitingStackView.createTitleLabel("대기중", backgroundColor: .systemGreen)
         workingStackView.createTitleLabel("업무중", backgroundColor: .systemIndigo)
+        addCustomerButton.addTarget(self, action: #selector(didTapAddCustomerButton), for: .touchUpInside)
+    }
+    
+    @objc private func didTapAddCustomerButton() {
+        for _ in 1...10 {
+            guard let customer = bank.addCustomer() else { return }
+            waitingStackView.addLabel(customer: customer)
+        }
     }
 }
 
@@ -75,7 +84,7 @@ extension MainViewController {
         billboardStackView.translatesAutoresizingMaskIntoConstraints = false
         billboardStackView.axis = .horizontal
         billboardStackView.distribution = .fillEqually
-        billboardStackView.alignment = .center
+        billboardStackView.alignment = .firstBaseline
         
         mainStackView.addArrangedSubview(billboardStackView)
         
@@ -93,10 +102,7 @@ extension MainViewController {
         waitingStackView.spacing = 16
         
         billboardStackView.addArrangedSubview(waitingStackView)
-        
-        for _ in 0..<10 {
-            waitingStackView.addLabel()
-        }
+    
     }
     
     private func configureWorkingStackView() {
@@ -107,10 +113,6 @@ extension MainViewController {
         workingStackView.spacing = 16
         
         billboardStackView.addArrangedSubview(workingStackView)
-        
-        for _ in 0..<10 {
-            workingStackView.addLabel()
-        }
     }
 }
 

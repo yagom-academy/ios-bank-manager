@@ -30,6 +30,18 @@ struct Bank {
         }
     }
     
+    mutating func addCustomer() -> Customer? {
+        numberOfCustomer += 1
+        
+        guard let randomBanking = Banking.allCases.randomElement() else { return nil }
+        
+        let customer = Customer(waitingNumber: numberOfCustomer, desiredBanking: randomBanking)
+        
+        customers.enqueue(customer)
+        
+        return customer
+    }
+    
     private mutating func open() {
         let startDate = Date()
         
