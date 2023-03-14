@@ -9,6 +9,7 @@ import Foundation
 
 class Bank {
     private var customers: Queue<Customer> = Queue()
+    private var numberOfCustomer = 0
     static let workingGroup = DispatchGroup()
     
     func run() {
@@ -20,6 +21,7 @@ class Bank {
         
         switch input {
         case BankOption.openValue:
+            numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
             open()
         case BankOption.closeValue:
             return
@@ -29,8 +31,9 @@ class Bank {
     }
     
     private func open() {
-        let numberOfCustomer = receiveNumberOfCustomers()
         let startDate = Date()
+        
+        receiveCustomers()
         
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else {
@@ -48,15 +51,11 @@ class Bank {
         run()
     }
     
-    private func receiveNumberOfCustomers() -> Int {
-        let numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
-        
+    private func receiveCustomers() {
         for count in 1...numberOfCustomer {
-            guard let randomBanking = Banking.allCases.randomElement() else { return count - 1 }
+            guard let randomBanking = Banking.allCases.randomElement() else { return }
             
-            customers.enqueue(Customer(waitingNumber: count, banking: randomBanking))
+            customers.enqueue(Customer(waitingNumber: count, desiredBanking: randomBanking))
         }
-        
-        return numberOfCustomer
     }
 }

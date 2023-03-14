@@ -8,7 +8,4 @@
 enum ManagerOption {
     static let processingTimeAtDeposit = 0.7
     static let processingTimeAtLoan = 1.1
-    
-    static let numberOfDepositManager = 2
-    static let numberOfLoanManager = 1
 }
