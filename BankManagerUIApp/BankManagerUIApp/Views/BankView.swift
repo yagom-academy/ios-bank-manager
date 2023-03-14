@@ -133,6 +133,9 @@ final class BankView: UIView {
         
         taskStatusLabelStackView.addArrangedSubview(waitTaskLabel)
         taskStatusLabelStackView.addArrangedSubview(processTaskLabel)
+        
+        presentClientStackView.addArrangedSubview(waitClientStackView)
+        presentClientStackView.addArrangedSubview(processClientStackView)
 
         // autolayout
         NSLayoutConstraint.activate([

@@ -23,6 +23,7 @@ final class BankViewController: UIViewController {
     
     @objc private func pushAddClientButton() {
         bankManager.setupWaitingQueueAndClientNumber()
+        bankManager.processBusiness()
     }
 }
 
@@ -40,9 +41,30 @@ extension BankViewController: BankManagerDelegate {
         return label
     }
     
-    func sendClient(client: Client) {
+    func sendClient(_ client: Client) {
         bankView.waitClientStackView.addArrangedSubview(setClientLabel(client))
     }
     
+    func startClientTask(_ client: Client) {
+        DispatchQueue.main.async {
+            self.bankView.waitClientStackView.arrangedSubviews.forEach {
+                let label = $0 as? UILabel
+                if label?.text == "\(client.clientNumber) - \(client.requstedTask.taskName)" {
+                    $0.removeFromSuperview()
+                    self.bankView.processClientStackView.addArrangedSubview($0)
+                }
+            }
+        }
+    }
     
+    func endClientTask(_ client: Client) {
+        DispatchQueue.main.async {
+            self.bankView.processClientStackView.arrangedSubviews.forEach {
+                let label = $0 as? UILabel
+                if label?.text == "\(client.clientNumber) - \(client.requstedTask.taskName)" {
+                    $0.removeFromSuperview()
+                }
+            }
+        }
+    }
 }

@@ -7,7 +7,9 @@
 import Foundation
 
 protocol BankManagerDelegate: AnyObject {
-    func sendClient(client: Client)
+    func sendClient(_ client: Client)
+    func startClientTask(_ client: Client)
+    func endClientTask(_ client: Client)
 }
 
 struct BankManager {
@@ -24,7 +26,7 @@ struct BankManager {
             let randomNumberOfTask = Int.random(in: 0...1)
             let client = Client(clientNumber: numberOfClient, requstedTask: .init(rawValue: randomNumberOfTask) ?? .deposit)
             waitingQueue.enqueue(client)
-            delegate?.sendClient(client: client)
+            delegate?.sendClient(client)
         }
     }
     
@@ -33,16 +35,11 @@ struct BankManager {
     }
     
     mutating func processBusiness() {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        
         while !waitingQueue.isEmpty {
             guard let client = waitingQueue.dequeue() else { return }
             processBankTask(client)
         }
         bankTaskGroup.wait()
-        
-        let leadTime = CFAbsoluteTimeGetCurrent() - startTime
-        presentBusinessResult(time: leadTime)
     }
     
     private func processBankTask(_ client: Client) {
@@ -62,9 +59,9 @@ struct BankManager {
     }
     
     private func processPersonalBankTask(_ client: Client) {
-        print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 시작")
+        delegate?.startClientTask(client)
         Thread.sleep(forTimeInterval: client.requstedTask.taskTime)
-        print("\(client.clientNumber)번 고객 \(client.requstedTask.taskName)업무 완료")
+        delegate?.endClientTask(client)
     }
     
     private func presentBusinessResult(time: CFAbsoluteTime) {
