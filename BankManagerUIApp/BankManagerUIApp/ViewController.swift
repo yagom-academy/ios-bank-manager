@@ -77,6 +77,28 @@ class ViewController: UIViewController {
         return label
     }()
     
+    private let presentClientStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private let waitClientStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private let processClientStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -86,6 +108,7 @@ class ViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(wholeStackView)
+        view.addSubview(presentClientStackView)
         
         wholeStackView.addArrangedSubview(buttonStackView)
         wholeStackView.addArrangedSubview(leadTimeLabel)
@@ -96,13 +119,20 @@ class ViewController: UIViewController {
         
         taskStatusLabelStackView.addArrangedSubview(waitTaskLabel)
         taskStatusLabelStackView.addArrangedSubview(processTaskLabel)
+        
+        presentClientStackView.addArrangedSubview(waitClientStackView)
+        presentClientStackView.addArrangedSubview(processClientStackView)
 
         // autolayout
         NSLayoutConstraint.activate([
             wholeStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             wholeStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             wholeStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            wholeStackView.heightAnchor.constraint(equalToConstant: 100)
+            
+            presentClientStackView.topAnchor.constraint(equalTo: wholeStackView.bottomAnchor, constant: 10),
+            presentClientStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            presentClientStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            presentClientStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
     }
 }
