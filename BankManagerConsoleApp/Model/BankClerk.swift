@@ -8,12 +8,17 @@
 import Foundation
 
 struct BankClerk {
-    mutating func service(to client: Client) {
-        let start = "\(client.waitingNumber)번 고객 업무 시작"
-        let end = "\(client.waitingNumber)번 고객 업무 완료"
+    func service(to client: Client) {
+        let start = "\(client.waitingNumber)번 고객 \(client.purposeOfVisit.rawValue)업무 시작"
+        let end = "\(client.waitingNumber)번 고객 \(client.purposeOfVisit.rawValue)업무 완료"
         
         print(start)
-        usleep(700000)
+        switch client.purposeOfVisit {
+        case .loan:
+            usleep(1100000)
+        case .deposit:
+            usleep(700000)
+        }
         print(end)
     }
 }
