@@ -21,9 +21,9 @@ enum Banking: CaseIterable, CustomStringConvertible {
     var time: Double {
         switch self {
         case .deposit:
-            return BankOption.processingTimeAtDeposit
+            return ManagerOption.processingTimeAtDeposit
         case .loan:
-            return BankOption.processingTimeAtLoan
+            return ManagerOption.processingTimeAtLoan
         }
     }
 }
