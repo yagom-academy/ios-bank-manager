@@ -1,5 +1,5 @@
 //
-//  Banker.swift
+//  Department.swift
 //  BankManagerConsoleApp
 //
 //  Created by Rowan, 릴라 on 2023/03/07.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Department {
+struct BankDepartment {
     private let workableBanker: DispatchSemaphore
-    private let taskQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
+    private let taskQueue: DispatchQueue = DispatchQueue(label: "taskQueue", attributes: .concurrent)
     
     init(workableBankerCount: Int) {
         self.workableBanker = DispatchSemaphore(value: workableBankerCount)

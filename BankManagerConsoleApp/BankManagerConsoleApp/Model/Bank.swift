@@ -7,23 +7,19 @@
 
 import Foundation
 
-protocol workable {
-    var customerQueue: CustomerQueue<Customer> { get }
-    
+protocol Openable {
     func open(totalCustomer: Int)
-    func setCustomerQueue(totalCustomer: Int)
-    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime)
 }
 
-final class Bank {
+final class Bank: Openable {
     private let customerQueue: CustomerQueue = CustomerQueue<Customer>()
-    private let loanDepartment: Department
-    private let depositDepartment: Department
+    private let loanDepartment: BankDepartment
+    private let depositDepartment: BankDepartment
     private let workGroup: DispatchGroup = DispatchGroup()
     
     init(loanBankerCount: Int, depositBankerCount: Int) {
-        self.loanDepartment = Department(workableBankerCount: loanBankerCount)
-        self.depositDepartment = Department(workableBankerCount: depositBankerCount)
+        self.loanDepartment = BankDepartment(workableBankerCount: loanBankerCount)
+        self.depositDepartment = BankDepartment(workableBankerCount: depositBankerCount)
     }
     
     func open(totalCustomer: Int) {

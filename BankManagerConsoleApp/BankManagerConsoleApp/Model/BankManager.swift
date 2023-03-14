@@ -5,10 +5,10 @@
 //
 
 struct BankManager {
-    private let bank: Bank
+    private let bank: Openable
     private var isRunning: Bool = true
     
-    init(bank: Bank) {
+    init(bank: Openable) {
         self.bank = bank
     }
     
