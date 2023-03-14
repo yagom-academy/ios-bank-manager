@@ -6,6 +6,5 @@
 
 import Foundation
 
-
-let bankDesk = BankDesk()
+private let bankDesk = BankDesk()
 bankDesk.inputBankingMenu()

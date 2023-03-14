@@ -8,29 +8,30 @@
 import Foundation
 
 struct BankDesk {
+    private var bankManager = BankManager()
     
-    var bankManager = BankManager()
+    private func showMenuMessage() {
+        print("1 : \(MenuMessage.bankOpen)\n2 : \(MenuMessage.bankClose)\n\(MenuMessage.input)", terminator: "")
+    }
     
-    func showMenuMessage(){
-        print("1 :\(menuMessage.bankOpen)")
-        print("2 : \(menuMessage.bankClose)")
-        print(menuMessage.input, terminator: "")
+    private func createCustomerCount() {
+        let customerCount = Int.random(in: 10...30)
+        bankManager.customerCount = customerCount
     }
     
     func inputBankingMenu() {
         showMenuMessage()
-        let customerCount = Int.random(in: 10...30)
-        bankManager.customerCount = customerCount
         
         while let inputNumber = readLine() {
             if inputNumber == "2" {
-                print(menuMessage.bankClose)
+                print(MenuMessage.bankClose)
                 return
             } else if inputNumber == "1" {
+                createCustomerCount()
                 bankManager.manageBanking()
                 showMenuMessage()
             } else {
-                print(menuMessage.inputErrorMessage)
+                print(MenuMessage.inputErrorMessage)
                 showMenuMessage()
             }
         }
