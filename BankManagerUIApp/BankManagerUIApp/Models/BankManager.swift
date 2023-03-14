@@ -15,9 +15,8 @@ protocol BankManagerDelegate: AnyObject {
 struct BankManager {
     private var numberOfClient = 0
     private var waitingQueue = Queue<Client>()
-    private let loanSemaphore = DispatchSemaphore(value: 1)
-    private let depositSemaphore = DispatchSemaphore(value: 2)
-    private let bankTaskGroup = DispatchGroup()
+    private let loanQueue = OperationQueue()
+    private let depositQueue = OperationQueue()
     weak var delegate: BankManagerDelegate?
     
     mutating func setupWaitingQueueAndClientNumber() {
@@ -39,21 +38,18 @@ struct BankManager {
             guard let client = waitingQueue.dequeue() else { return }
             processBankTask(client)
         }
-        bankTaskGroup.wait()
     }
     
     private func processBankTask(_ client: Client) {
         if client.requstedTask == .loan {
-            DispatchQueue.global().async(group: bankTaskGroup) {
-                loanSemaphore.wait()
+            loanQueue.maxConcurrentOperationCount = 1
+            loanQueue.addOperation {
                 processPersonalBankTask(client)
-                loanSemaphore.signal()
             }
         } else if client.requstedTask == .deposit {
-            DispatchQueue.global().async(group: bankTaskGroup) {
-                depositSemaphore.wait()
+            depositQueue.maxConcurrentOperationCount = 2
+            depositQueue.addOperation {
                 processPersonalBankTask(client)
-                depositSemaphore.signal()
             }
         }
     }
