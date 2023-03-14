@@ -1,12 +1,13 @@
 //
-//  WaitingQueueStackView.swift
+//  DoingTaskStackView.swift
 //  BankManagerUIApp
 //
-//  Created by 리지, 무리 on 2023/03/13.
+//  Created by 리지, 무리 on 2023/03/14.
 //
+
 import UIKit
 
-final class WaitingQueueStackView: UIStackView {
+final class DoingTaskStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

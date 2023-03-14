@@ -1,5 +1,5 @@
 //
-//  WaitingQueueLabel.swift
+//  DoingTaskLabel.swift
 //  BankManagerUIApp
 //
 //  Created by 리지, 무리 on 2023/03/14.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-final class WaitingQueueLabel: UILabel {
-
+final class DoingTaskLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -22,9 +21,10 @@ final class WaitingQueueLabel: UILabel {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.textAlignment = .center
         self.font = UIFont.preferredFont(forTextStyle: .title1)
-        self.text = "대기중"
+        self.text = "업무중"
         self.textColor = .white
-        self.backgroundColor = .systemGreen
+        self.backgroundColor = .systemIndigo
     }
     
+
 }

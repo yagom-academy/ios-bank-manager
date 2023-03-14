@@ -10,15 +10,26 @@ class ViewController: UIViewController {
     private let screenView = ScreenStackView()
     private let buttonStackView = ButtonStackView()
     private let queueStackView = QueueStackView()
+    
     private let waitingQueueStackView = WaitingQueueStackView()
-    private let doingTaskStackView = DoingTaskStackView()
     private let waitingQueueLabel = WaitingQueueLabel()
     private let waitingScrollView = WaitingScrollView()
+    
+    private let doingTaskStackView = DoingTaskStackView()
+    private let doingTaskLabel = DoingTaskLabel()
+    private let doingTaskScrollView = DoingTaskScrollView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpScreenStackView()
+        setUpView()
         configureConstraint()
+      
+    }
+    
+    private func setUpView() {
+        setUpScreenStackView()
         setUpWaitingQueueStackView()
+        setUpDoingTaskStackView()
     }
     
     private func setUpScreenStackView() {
@@ -30,13 +41,18 @@ class ViewController: UIViewController {
         queueStackView.addArrangedSubview(waitingQueueStackView)
         queueStackView.addArrangedSubview(doingTaskStackView)
         
-        
     }
     
     private func setUpWaitingQueueStackView() {
         waitingQueueStackView.addArrangedSubview(waitingQueueLabel)
         waitingQueueStackView.addArrangedSubview(waitingScrollView)
     }
+    
+    private func setUpDoingTaskStackView() {
+        doingTaskStackView.addArrangedSubview(doingTaskLabel)
+        doingTaskStackView.addArrangedSubview(doingTaskScrollView)
+    }
+    
     private func configureConstraint() {
         //screenView
         NSLayoutConstraint.activate([
@@ -46,16 +62,11 @@ class ViewController: UIViewController {
             screenView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             screenView.taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
         ])
-        //buttonStackView
-        NSLayoutConstraint.activate([
-        
-        ])
-        //waitingQueueStackView
-        NSLayoutConstraint.activate([
-//            waitingQueueStackView.topAnchor.constraint(equalTo: screenView.taskTimerLabel.bottomAnchor)
-        ])
     }
 }
+
+
+
 
 import SwiftUI
 
