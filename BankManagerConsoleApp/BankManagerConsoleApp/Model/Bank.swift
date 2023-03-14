@@ -18,15 +18,14 @@ protocol workable {
 
 final class Bank {
     private let customerQueue: CustomerQueue = CustomerQueue<Customer>()
-    private let banker: Banker
-    
-//    private let loanDepartment: DispatchSemaphore
-//    private let depositDepartment: DispatchSemaphore
+    private let loanBanker: Banker
+    private let depositBanker: Banker
     private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
     private let workGroup: DispatchGroup = DispatchGroup()
     
     init(loanBankerCount: Int, depositBankerCount: Int) {
-        banker = Banker(loanDepartment: loanBankerCount, depositDepartment: depositBankerCount)
+        self.loanBanker = Banker(department: DispatchSemaphore(value: loanBankerCount))
+        self.depositBanker = Banker(department: DispatchSemaphore(value: depositBankerCount))
     }
     
     func open(totalCustomer: Int) {
@@ -35,7 +34,7 @@ final class Bank {
         reportResult(totalCustomer: totalCustomer, processTime: processTime)
     }
     
-    private func setCustomerQueue(totalCustomer: Int) {   
+    private func setCustomerQueue(totalCustomer: Int) {
         for number in 1...totalCustomer {
             let numberTicket = String(describing: number)
             let customer = Customer(numberTicket: numberTicket)
@@ -52,13 +51,19 @@ final class Bank {
     }
     
     private func startWork() {
-        while let customer = customerQueue.dequeue() {
-            banker.respond(to: customer)
+        while let customer = customerQueue.dequeue(),
+              let business = customer.business {
+            switch business {
+            case .deposit:
+                depositBanker.respond(to: customer, workGroup: workGroup)
+            case .loan:
+                loanBanker.respond(to: customer, workGroup: workGroup)
+            }
         }
         
         workGroup.wait()
     }
-
+    
     
     private func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) {
         let roundedProcessTime = round(processTime * 100) / 100
