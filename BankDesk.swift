@@ -21,19 +21,17 @@ struct BankDesk {
     
     func inputBankingMenu() {
         showMenuMessage()
-        
         while let inputNumber = readLine() {
-            if inputNumber == "2" {
-                print(MenuMessage.bankClose)
-                return
-            } else if inputNumber == "1" {
+            if inputNumber == "1" {
                 createCustomerCount()
                 bankManager.manageBanking()
-                showMenuMessage()
+            } else if inputNumber == "2" {
+                print(MenuMessage.bankClose)
+                break
             } else {
                 print(MenuMessage.inputErrorMessage)
-                showMenuMessage()
             }
+            showMenuMessage()
         }
     }
 }
