@@ -15,7 +15,8 @@ struct BankManager {
     mutating func start() {
         while self.isRunning {
             printMenu()
-            handleMenuInput()
+            guard let userInput = readInput() else { return }
+            handleMenuInput(userInput)
         }
     }
     
@@ -29,9 +30,13 @@ struct BankManager {
         print(menuText, terminator: " ")
     }
     
-    private mutating func handleMenuInput() {
-        guard let userInput = readLine() else { return }
+    private func readInput() -> String? {
+        let userInput = readLine()
         
+        return userInput
+    }
+    
+    private mutating func handleMenuInput(_ userInput: String) {
         switch userInput {
         case "1":
             let totalCustomer = receiveCustomer()
