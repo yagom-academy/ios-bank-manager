@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2601324629B5AE24003EB0A6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2601324529B5AE24003EB0A6 /* Queue.swift */; };
+		2617EFB129C00FC900CACBD2 /* ManagerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617EFB029C00FC900CACBD2 /* ManagerOption.swift */; };
 		263D6F8A29B5C1A200CC988B /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263D6F8929B5C1A200CC988B /* QueueTests.swift */; };
 		263D6F8E29B5C1A800CC988B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD4849229B5AD8000617DE4 /* Node.swift */; };
 		263D6F8F29B5C1AA00CC988B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0BF0C29B5A93000198BAB /* LinkedList.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		2601324529B5AE24003EB0A6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		2617EFB029C00FC900CACBD2 /* ManagerOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerOption.swift; sourceTree = "<group>"; };
 		263D6F8729B5C1A100CC988B /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		263D6F8929B5C1A200CC988B /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		2688A7B529B82E7E00A263B9 /* BankOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankOption.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				2688A7B529B82E7E00A263B9 /* BankOption.swift */,
+				2617EFB029C00FC900CACBD2 /* ManagerOption.swift */,
 			);
 			path = NameSpace;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF048D4429B82C3C006FAB11 /* Double+extension.swift in Sources */,
+				2617EFB129C00FC900CACBD2 /* ManagerOption.swift in Sources */,
 				2601324629B5AE24003EB0A6 /* Queue.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				2688A7B629B82E7E00A263B9 /* BankOption.swift in Sources */,

@@ -7,13 +7,12 @@
 
 import Foundation
 
-class Bank {
+struct Bank {
     private var customers: Queue<Customer> = Queue()
-    private let workingGroup = DispatchGroup()
-    private let depositManager = DispatchSemaphore(value: BankOption.numberOfDepositManager)
-    private let loanManager = DispatchSemaphore(value: BankOption.numberOfLoanManager)
+    private var numberOfCustomer = 0
+    static let workingGroup = DispatchGroup()
     
-    func run() {
+    mutating func run() {
         print("1 : 은행개점\n2 : 종료")
         
         guard let input = readLine() else {
@@ -22,6 +21,7 @@ class Bank {
         
         switch input {
         case BankOption.openValue:
+            numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
             open()
         case BankOption.closeValue:
             return
@@ -30,19 +30,20 @@ class Bank {
         }
     }
     
-    private func open() {
-        let numberOfCustomer = receiveNumberOfCustomers()
+    private mutating func open() {
         let startDate = Date()
+        
+        receiveCustomers()
         
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else {
                 break
             }
             
-            workManager(for: customer)
+            BankManager.divideWork(accordingTo: customer)
         }
         
-        workingGroup.wait()
+        Bank.workingGroup.wait()
         
         let finishDate = Date().timeIntervalSince(startDate)
         
@@ -50,32 +51,11 @@ class Bank {
         run()
     }
     
-    private func receiveNumberOfCustomers() -> Int {
-        let numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
-        
+    private mutating func receiveCustomers() {
         for count in 1...numberOfCustomer {
-            guard let randomBanking = Banking.allCases.randomElement() else { return count - 1 }
+            guard let randomBanking = Banking.allCases.randomElement() else { return }
             
-            customers.enqueue(Customer(waitingNumber: count, banking: randomBanking))
-        }
-        
-        return numberOfCustomer
-    }
-    
-    private func workManager(for customer: Customer) {
-        switch customer.banking {
-        case .deposit:
-            DispatchQueue.global().async(group: workingGroup) { [weak self] in
-                self?.depositManager.wait()
-                BankManager.work(for: customer, duty: customer.banking)
-                self?.depositManager.signal()
-            }
-        case .loan:
-            DispatchQueue.global().async(group: workingGroup) { [weak self] in
-                self?.loanManager.wait()
-                BankManager.work(for: customer, duty: customer.banking)
-                self?.loanManager.signal()
-            }
+            customers.enqueue(Customer(waitingNumber: count, desiredBanking: randomBanking))
         }
     }
 }

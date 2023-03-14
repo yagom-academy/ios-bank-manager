@@ -7,5 +7,5 @@
 
 struct Customer {
     let waitingNumber: Int
-    let banking: Banking
+    let desiredBanking: Banking
 }
