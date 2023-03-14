@@ -10,6 +10,7 @@ import Foundation
 class BankManager {
     private var customerCountQueue: BankQueue<Int> = BankQueue<Int>()
     var customerCount: Int = 0
+    let semaphore = DispatchSemaphore(value: 2)
     
     func insertCustomerCountToQueue() {
         for i in 1...customerCount {
@@ -19,11 +20,41 @@ class BankManager {
     
     func manageBanking() {
         while customerCountQueue.isEmpty() == false {
-            guard let firstCustomer = self.customerCountQueue.peek() else { return }
-            print("\(firstCustomer)번 고객 업무 시작")
-            usleep(700000)
-            self.customerCountQueue.dequeue()
-            print("\(firstCustomer)번 고객 업무 완료")
+            let group = DispatchGroup()
+            
+            let depositBankClerk1 = DispatchQueue(label: "depositBankClerk1")
+            let depositBankClerk2 = DispatchQueue(label: "depositBankClerk2")
+            let loanBankClerk = DispatchQueue(label: "loanBankClerk")
+            
+            depositBankClerk1.async(group: group) {
+                self.semaphore.wait()
+                guard let currentCustomer = self.customerCountQueue.peek() else { return }
+                print("\(currentCustomer)번 고객 예금업무 시작")
+                Thread.sleep(forTimeInterval: 0.7)
+                print("\(currentCustomer)번 고객 예금업무 종료")
+                self.customerCountQueue.dequeue()
+                self.semaphore.signal()
+            }
+            
+            depositBankClerk2.async(group: group) {
+                self.semaphore.wait()
+                guard let currentCustomer = self.customerCountQueue.peek() else { return }
+                print("\(currentCustomer)번 고객 예금업무 시작")
+                Thread.sleep(forTimeInterval: 0.7)
+                print("\(currentCustomer)번 고객 예금업무 종료")
+                self.customerCountQueue.dequeue()
+                self.semaphore.signal()
+            }
+            
+            loanBankClerk.async(group: group) {
+                self.semaphore.wait()
+                guard let currentCustomer = self.customerCountQueue.peek() else { return }
+                print("\(currentCustomer)번 고객 대출업무 시작")
+                Thread.sleep(forTimeInterval: 1.1)
+                print("\(currentCustomer)번 고객 대출업무 종료")
+                self.customerCountQueue.dequeue()
+                self.semaphore.signal()
+            }
         }
         closeBanking()
     }
