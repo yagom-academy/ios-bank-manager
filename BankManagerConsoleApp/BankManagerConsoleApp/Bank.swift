@@ -7,12 +7,12 @@
 
 import Foundation
 
-class Bank {
+struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var numberOfCustomer = 0
     static let workingGroup = DispatchGroup()
     
-    func run() {
+    mutating func run() {
         print("1 : 은행개점\n2 : 종료")
         
         guard let input = readLine() else {
@@ -30,7 +30,7 @@ class Bank {
         }
     }
     
-    private func open() {
+    private mutating func open() {
         let startDate = Date()
         
         receiveCustomers()
@@ -51,7 +51,7 @@ class Bank {
         run()
     }
     
-    private func receiveCustomers() {
+    private mutating func receiveCustomers() {
         for count in 1...numberOfCustomer {
             guard let randomBanking = Banking.allCases.randomElement() else { return }
             

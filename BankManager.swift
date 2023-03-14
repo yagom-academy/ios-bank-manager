@@ -6,10 +6,10 @@
 import Foundation
 
 struct BankManager {
-    static let numberOfDepositManager = 2
-    static let numberOfLoanManager = 1
-    static let depositManager = DispatchSemaphore(value: numberOfDepositManager)
-    static let loanManager = DispatchSemaphore(value: numberOfLoanManager)
+    static let depositManager = DispatchSemaphore(value: 2)
+    static let loanManager = DispatchSemaphore(value: 1)
+    
+    private init() {}
     
     static func work(for customer: Customer, duty: Banking) {
         let workQueue = DispatchQueue(label: "WorkQueue")
