@@ -34,9 +34,6 @@ struct Bank {
     private mutating func readMenuNumber() -> BankStatus? {
         guard let status = readLine(),
               let bankStatus = BankStatus(rawValue: status) else {
-            print(Constants.InvalidInputText)
-            openBank()
-            
             return nil
         }
         return bankStatus
@@ -49,8 +46,17 @@ struct Bank {
         case .close:
             return
         default:
-            return
+            print(Constants.InvalidInputText)
         }
+        openBank()
+    }
+    
+    private mutating func manageBank() {
+        let workTime = workTime {
+            distributeClient()
+        }
+        
+        completeManagingBank(count: clientWaitingLine.clientCount, time: workTime)
     }
     
     private mutating func distributeClient() {
@@ -76,15 +82,6 @@ struct Bank {
         }
         
         group.wait()
-    }
-    
-    private mutating func manageBank() {
-        let workTime = workTime {
-            distributeClient()
-        }
-        
-        completeManagingBank(count: clientWaitingLine.clientCount, time: workTime)
-        openBank()
     }
     
     private func workTime(workTimeHandler: () -> Void) -> TimeInterval {
