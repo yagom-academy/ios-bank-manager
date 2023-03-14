@@ -6,6 +6,9 @@
 import Foundation
 
 struct BankManager {
+    static let depositManager = DispatchSemaphore(value: BankOption.numberOfDepositManager)
+    static let loanManager = DispatchSemaphore(value: BankOption.numberOfLoanManager)
+    
     static func work(for customer: Customer, duty: Banking) {
         let workQueue = DispatchQueue(label: "WorkQueue")
         let time = duty == .deposit ? BankOption.processingTimeAtDeposit : BankOption.processingTimeAtLoan
@@ -17,5 +20,22 @@ struct BankManager {
         }
         
         workQueue.sync(execute: queueItem)
+    }
+    
+    static func workManager(for customer: Customer) {
+        switch customer.banking {
+        case .deposit:
+            DispatchQueue.global().async(group: Bank.workingGroup) {
+                depositManager.wait()
+                work(for: customer, duty: customer.banking)
+                depositManager.signal()
+            }
+        case .loan:
+            DispatchQueue.global().async(group: Bank.workingGroup) {
+                loanManager.wait()
+                work(for: customer, duty: customer.banking)
+                loanManager.signal()
+            }
+        }
     }
 }

@@ -9,9 +9,7 @@ import Foundation
 
 class Bank {
     private var customers: Queue<Customer> = Queue()
-    private let workingGroup = DispatchGroup()
-    private let depositManager = DispatchSemaphore(value: BankOption.numberOfDepositManager)
-    private let loanManager = DispatchSemaphore(value: BankOption.numberOfLoanManager)
+    static let workingGroup = DispatchGroup()
     
     func run() {
         print("1 : 은행개점\n2 : 종료")
@@ -39,10 +37,10 @@ class Bank {
                 break
             }
             
-            workManager(for: customer)
+            BankManager.workManager(for: customer)
         }
         
-        workingGroup.wait()
+        Bank.workingGroup.wait()
         
         let finishDate = Date().timeIntervalSince(startDate)
         
@@ -60,22 +58,5 @@ class Bank {
         }
         
         return numberOfCustomer
-    }
-    
-    private func workManager(for customer: Customer) {
-        switch customer.banking {
-        case .deposit:
-            DispatchQueue.global().async(group: workingGroup) { [weak self] in
-                self?.depositManager.wait()
-                BankManager.work(for: customer, duty: customer.banking)
-                self?.depositManager.signal()
-            }
-        case .loan:
-            DispatchQueue.global().async(group: workingGroup) { [weak self] in
-                self?.loanManager.wait()
-                BankManager.work(for: customer, duty: customer.banking)
-                self?.loanManager.signal()
-            }
-        }
     }
 }
