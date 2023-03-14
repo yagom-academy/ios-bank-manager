@@ -28,4 +28,8 @@ struct BusinessSection: BankWorkable {
             self.bankSemaphore.signal()
         }
     }
+    
+    mutating func addJobCount() {
+        completedJobCount += 1
+    }
 }

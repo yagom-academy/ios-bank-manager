@@ -13,9 +13,3 @@ protocol BankWorkable {
     var businessType: BusinessType { get }
     var completedJobCount: Int { get set }
 }
-
-extension BankWorkable {
-    mutating func addJobCount() {
-        completedJobCount += 1
-    }
-}
