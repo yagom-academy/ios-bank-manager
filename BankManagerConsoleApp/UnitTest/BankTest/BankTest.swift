@@ -18,7 +18,9 @@ final class BankTest: XCTestCase {
         mockQueue = MockQueue()
         mockLoanDepartment = MockDepartment()
         mockDepositDepartment = MockDepartment()
-        sut = Bank(loanDepartment: mockLoanDepartment, depositDepartment: mockDepositDepartment, customerQueue: mockQueue)
+        sut = Bank(loanDepartment: mockLoanDepartment,
+                   depositDepartment: mockDepositDepartment,
+                   customerQueue: mockQueue)
     }
 
     override func tearDownWithError() throws {

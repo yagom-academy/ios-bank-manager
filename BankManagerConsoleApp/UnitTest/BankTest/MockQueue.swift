@@ -7,16 +7,18 @@
 
 import XCTest
 
-class MockQueue: Queue<Customer> {
+
+
+class MockQueue: CustomQueueable {
     var enqueueCount: Int = 0
     var dequeueCount: Int = 0
     var dummyCustomer: Customer?
     
-    override func enqueue(_ data: Customer) {
+    func enqueue(_ data: Customer) {
         enqueueCount += 1
     }
     
-    override func dequeue() -> Customer? {
+    func dequeue() -> Customer? {
         dequeueCount += 1
         return dummyCustomer
     }
