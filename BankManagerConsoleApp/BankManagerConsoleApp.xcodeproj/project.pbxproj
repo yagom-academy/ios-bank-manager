@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08878DA729B6D60600CD8F05 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08878DA629B6D60600CD8F05 /* Banker.swift */; };
+		08878DA729B6D60600CD8F05 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08878DA629B6D60600CD8F05 /* Department.swift */; };
 		08878DA929B6D6E100CD8F05 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08878DA829B6D6E100CD8F05 /* Customer.swift */; };
 		08878DAC29B6D84600CD8F05 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08878DAB29B6D84600CD8F05 /* Bank.swift */; };
 		08BCEDCC29C01BBD00A49289 /* ProcessTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDCB29C01BBD00A49289 /* ProcessTimer.swift */; };
@@ -37,7 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08878DA629B6D60600CD8F05 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
+		08878DA629B6D60600CD8F05 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		08878DA829B6D6E100CD8F05 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		08878DAB29B6D84600CD8F05 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		08BCEDCB29C01BBD00A49289 /* ProcessTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTimer.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 				AD3774B029B5C94D00E68DA7 /* DataStructure */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				08878DA829B6D6E100CD8F05 /* Customer.swift */,
-				08878DA629B6D60600CD8F05 /* Banker.swift */,
+				08878DA629B6D60600CD8F05 /* Department.swift */,
 				08878DAB29B6D84600CD8F05 /* Bank.swift */,
 				08BCEDCB29C01BBD00A49289 /* ProcessTimer.swift */,
 				08C5E85529B9A5A40024AB60 /* Business.swift */,
@@ -274,7 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08878DA729B6D60600CD8F05 /* Banker.swift in Sources */,
+				08878DA729B6D60600CD8F05 /* Department.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				AD37749E29B5ACDA00E68DA7 /* LinkedList.swift in Sources */,
 				08878DA929B6D6E100CD8F05 /* Customer.swift in Sources */,

@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct Banker {
+struct Department {
     private let workableBanker: DispatchSemaphore
-    private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
+    private let taskQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
     
-    init(department: DispatchSemaphore) {
-        self.workableBanker = department
+    init(workableBankerCount: Int) {
+        self.workableBanker = DispatchSemaphore(value: workableBankerCount)
     }
     
     func respond(to customer: Customer, workGroup: DispatchGroup) {
         let task = makeTask(for: customer)
-        workQueue.async(group: workGroup, execute: task)
+        taskQueue.async(group: workGroup, execute: task)
     }
     
     private func makeTask(for customer: Customer) -> DispatchWorkItem {

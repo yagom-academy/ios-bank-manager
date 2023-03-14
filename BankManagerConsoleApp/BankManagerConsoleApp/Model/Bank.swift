@@ -17,14 +17,13 @@ protocol workable {
 
 final class Bank {
     private let customerQueue: CustomerQueue = CustomerQueue<Customer>()
-    private let loanBanker: Banker
-    private let depositBanker: Banker
-    private let workQueue: DispatchQueue = DispatchQueue(label: "workQueue", attributes: .concurrent)
+    private let loanDepartment: Department
+    private let depositDepartment: Department
     private let workGroup: DispatchGroup = DispatchGroup()
     
     init(loanBankerCount: Int, depositBankerCount: Int) {
-        self.loanBanker = Banker(department: DispatchSemaphore(value: loanBankerCount))
-        self.depositBanker = Banker(department: DispatchSemaphore(value: depositBankerCount))
+        self.loanDepartment = Department(workableBankerCount: loanBankerCount)
+        self.depositDepartment = Department(workableBankerCount: depositBankerCount)
     }
     
     func open(totalCustomer: Int) {
@@ -46,9 +45,9 @@ final class Bank {
               let business = customer.business {
             switch business {
             case .deposit:
-                depositBanker.respond(to: customer, workGroup: workGroup)
+                depositDepartment.respond(to: customer, workGroup: workGroup)
             case .loan:
-                loanBanker.respond(to: customer, workGroup: workGroup)
+                loanDepartment.respond(to: customer, workGroup: workGroup)
             }
         }
         
