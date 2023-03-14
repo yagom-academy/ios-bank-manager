@@ -49,7 +49,7 @@ public struct Bank {
             assignToBankClerk(currentClient)
         }
         
-        group.wait()
+        taskGroup.wait()
     }
     
     private func assignToBankClerk(_ currentClient: Client) {

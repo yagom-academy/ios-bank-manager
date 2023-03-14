@@ -22,6 +22,13 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
+		FB1DA55E29C0535200D7D01A /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55729C0535200D7D01A /* BankClerk.swift */; };
+		FB1DA55F29C0535200D7D01A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55829C0535200D7D01A /* Client.swift */; };
+		FB1DA56029C0535200D7D01A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55929C0535200D7D01A /* Bank.swift */; };
+		FB1DA56129C0535200D7D01A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55A29C0535200D7D01A /* Queue.swift */; };
+		FB1DA56229C0535200D7D01A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55B29C0535200D7D01A /* Task.swift */; };
+		FB1DA56329C0535200D7D01A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55C29C0535200D7D01A /* Node.swift */; };
+		FB1DA56429C0535200D7D01A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DA55D29C0535200D7D01A /* LinkedList.swift */; };
 		FB4190A029BF1A7C00970F6B /* ScreenStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB41909F29BF1A7C00970F6B /* ScreenStackView.swift */; };
 		FB4190A229BF1AA500970F6B /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4190A129BF1AA500970F6B /* ButtonStackView.swift */; };
 		FB4190A429BF1AB200970F6B /* QueueStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4190A329BF1AB200970F6B /* QueueStackView.swift */; };
@@ -77,6 +84,13 @@
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		FB1DA55729C0535200D7D01A /* BankClerk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
+		FB1DA55829C0535200D7D01A /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		FB1DA55929C0535200D7D01A /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		FB1DA55A29C0535200D7D01A /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		FB1DA55B29C0535200D7D01A /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FB1DA55C29C0535200D7D01A /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		FB1DA55D29C0535200D7D01A /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		FB41909F29BF1A7C00970F6B /* ScreenStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenStackView.swift; sourceTree = "<group>"; };
 		FB4190A129BF1AA500970F6B /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		FB4190A329BF1AB200970F6B /* QueueStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStackView.swift; sourceTree = "<group>"; };
@@ -165,6 +179,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				FB1DA55629C0535200D7D01A /* Model */,
 				FB41909E29BF1A3600970F6B /* View */,
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
@@ -193,6 +208,21 @@
 				C7694E5E259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIAppUITests;
+			sourceTree = "<group>";
+		};
+		FB1DA55629C0535200D7D01A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB1DA55729C0535200D7D01A /* BankClerk.swift */,
+				FB1DA55829C0535200D7D01A /* Client.swift */,
+				FB1DA55929C0535200D7D01A /* Bank.swift */,
+				FB1DA55A29C0535200D7D01A /* Queue.swift */,
+				FB1DA55B29C0535200D7D01A /* Task.swift */,
+				FB1DA55C29C0535200D7D01A /* Node.swift */,
+				FB1DA55D29C0535200D7D01A /* LinkedList.swift */,
+			);
+			name = Model;
+			path = ../../BankManagerConsoleApp/Model;
 			sourceTree = "<group>";
 		};
 		FB41909E29BF1A3600970F6B /* View */ = {
@@ -387,21 +417,28 @@
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				4B0B67E629C02AA800045D1F /* ResetButton.swift in Sources */,
+				FB1DA56429C0535200D7D01A /* LinkedList.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				FB1DA56329C0535200D7D01A /* Node.swift in Sources */,
+				FB1DA56129C0535200D7D01A /* Queue.swift in Sources */,
+				FB1DA56229C0535200D7D01A /* Task.swift in Sources */,
 				FB4190CC29C02ECA00970F6B /* TaskTimerLabel.swift in Sources */,
 				FB4190CA29C0122C00970F6B /* DoingTaskScrollView.swift in Sources */,
 				4B0B67E229C00CB800045D1F /* WaitingQueueLabel.swift in Sources */,
+				FB1DA56029C0535200D7D01A /* Bank.swift in Sources */,
 				FB4190C629C0118500970F6B /* DoingTaskStackView.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				4B0B67E429C029A500045D1F /* AddClientButton.swift in Sources */,
 				4B0B67EC29C04BAF00045D1F /* DoingTaskContentView.swift in Sources */,
 				FB4190A229BF1AA500970F6B /* ButtonStackView.swift in Sources */,
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
+				FB1DA55E29C0535200D7D01A /* BankClerk.swift in Sources */,
 				FB4190C829C011B600970F6B /* DoingTaskLabel.swift in Sources */,
 				FB4190A029BF1A7C00970F6B /* ScreenStackView.swift in Sources */,
 				4B0B67DC29C007AA00045D1F /* WaitingQueueStackView.swift in Sources */,
 				FB4190A429BF1AB200970F6B /* QueueStackView.swift in Sources */,
 				4B0B67E829C040A400045D1F /* WaitingQueueContentView.swift in Sources */,
+				FB1DA55F29C0535200D7D01A /* Client.swift in Sources */,
 				4B0B67E029C0091D00045D1F /* WaitingScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
