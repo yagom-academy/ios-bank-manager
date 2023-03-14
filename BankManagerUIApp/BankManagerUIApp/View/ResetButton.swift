@@ -1,5 +1,5 @@
 //
-//  WaitingQueueLabel.swift
+//  ResetButton.swift
 //  BankManagerUIApp
 //
 //  Created by 리지, 무리 on 2023/03/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WaitingQueueLabel: UILabel {
+final class ResetButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -19,10 +19,8 @@ final class WaitingQueueLabel: UILabel {
     
     func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.textAlignment = .center
-        self.font = UIFont.preferredFont(forTextStyle: .title1)
-        self.text = "대기중"
-        self.textColor = .white
-        self.backgroundColor = .systemGreen
+        self.setTitle("초기화", for: .normal)
+        self.setTitleColor(.systemRed, for: .normal)
+        self.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
     }
 }

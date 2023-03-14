@@ -8,7 +8,11 @@ import UIKit
 
 class ViewController: UIViewController {
     private let screenView = ScreenStackView()
+    
     private let buttonStackView = ButtonStackView()
+    private let addClientButton = AddClientButton()
+    private let resetButton = ResetButton()
+    
     private let queueStackView = QueueStackView()
     
     private let waitingQueueStackView = WaitingQueueStackView()
@@ -23,13 +27,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setUpView()
         configureConstraint()
-      
     }
     
     private func setUpView() {
         setUpScreenStackView()
         setUpWaitingQueueStackView()
         setUpDoingTaskStackView()
+        setUpButtonStackView()
     }
     
     private func setUpScreenStackView() {
@@ -40,7 +44,11 @@ class ViewController: UIViewController {
         
         queueStackView.addArrangedSubview(waitingQueueStackView)
         queueStackView.addArrangedSubview(doingTaskStackView)
-        
+    }
+
+    private func setUpButtonStackView() {
+        buttonStackView.addArrangedSubview(addClientButton)
+        buttonStackView.addArrangedSubview(resetButton)
     }
     
     private func setUpWaitingQueueStackView() {
@@ -60,21 +68,24 @@ class ViewController: UIViewController {
             screenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             screenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             screenView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            screenView.taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
+            screenView.taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            
+            buttonStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
         ])
     }
 }
 
-
-
+//MARK: - Canvas
 
 import SwiftUI
 
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
     typealias UIViewControllerType = ViewController
+    
     func makeUIViewController(context: Context) -> ViewController {
         return ViewController()
     }
+    
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
     }
 }

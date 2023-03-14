@@ -25,6 +25,4 @@ final class DoingTaskLabel: UILabel {
         self.textColor = .white
         self.backgroundColor = .systemIndigo
     }
-    
-
 }

@@ -4,6 +4,7 @@
 //
 //  Created by 리지, 무리 on 2023/03/13.
 //
+
 import UIKit
 
 final class WaitingQueueStackView: UIStackView {
