@@ -18,6 +18,7 @@ class ControlPanelStackView: UIStackView {
         clearButton.setTitleColor(.systemRed, for: .normal)
         
         let stackView = UIStackView(arrangedSubviews: [addCustomerButton, clearButton])
+        
         stackView.distribution = .fillEqually
         stackView.alignment = .center
 
@@ -51,6 +52,7 @@ class ControlPanelStackView: UIStackView {
         processingLabel.font = .preferredFont(forTextStyle: .largeTitle)
         
         let stackView = UIStackView(arrangedSubviews: [waitLabel, processingLabel])
+        
         stackView.distribution = .fillEqually
         stackView.alignment = .center
         
@@ -70,7 +72,6 @@ class ControlPanelStackView: UIStackView {
         self.axis = .vertical
         self.spacing = 10
         self.distribution = .fillEqually
-        self.translatesAutoresizingMaskIntoConstraints = false
         
         self.addArrangedSubview(controlButtonStackView)
         self.addArrangedSubview(timerLabel)
