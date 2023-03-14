@@ -43,6 +43,9 @@ struct BankManager {
         case "1":
             let totalCustomer = customerReceiver.receiveCustomer()
             bank.open(totalCustomer: totalCustomer)
+            let report = bank.reportResult(totalCustomer: totalCustomer,
+                                           processTime: bank.processTime ?? 0)
+            print(report)
         case "2":
             isRunning = false
         default:
