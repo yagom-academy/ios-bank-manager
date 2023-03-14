@@ -23,7 +23,7 @@ class ScreenStackView: UIStackView {
         self.backgroundColor = .white
         self.axis = .vertical
         self.spacing = 10
-        self.distribution = .fill
+        self.distribution = .equalSpacing
     }
 
     let taskTimerLabel: UILabel = {

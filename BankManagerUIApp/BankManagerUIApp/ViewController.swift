@@ -10,12 +10,15 @@ class ViewController: UIViewController {
     private let screenView = ScreenStackView()
     private let buttonStackView = ButtonStackView()
     private let queueStackView = QueueStackView()
-    
+    private let waitingQueueStackView = WaitingQueueStackView()
+    private let doingTaskStackView = DoingTaskStackView()
+    private let waitingQueueLabel = WaitingQueueLabel()
+    private let waitingScrollView = WaitingScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpScreenStackView()
         configureConstraint()
-        
+        setUpWaitingQueueStackView()
     }
     
     private func setUpScreenStackView() {
@@ -24,22 +27,32 @@ class ViewController: UIViewController {
         screenView.addArrangedSubview(screenView.taskTimerLabel)
         screenView.addArrangedSubview(queueStackView)
         
+        queueStackView.addArrangedSubview(waitingQueueStackView)
+        queueStackView.addArrangedSubview(doingTaskStackView)
+        
+        
     }
     
+    private func setUpWaitingQueueStackView() {
+        waitingQueueStackView.addArrangedSubview(waitingQueueLabel)
+        waitingQueueStackView.addArrangedSubview(waitingScrollView)
+    }
     private func configureConstraint() {
+        //screenView
         NSLayoutConstraint.activate([
-            buttonStackView.topAnchor.constraint(equalTo: screenView.topAnchor, constant: 50),
-            buttonStackView.leadingAnchor.constraint(equalTo: screenView.leadingAnchor),
-            screenView.taskTimerLabel.leadingAnchor.constraint(equalTo: screenView.leadingAnchor),
-            queueStackView.leadingAnchor.constraint(equalTo: screenView.leadingAnchor),
-            queueStackView.bottomAnchor.constraint(equalTo: screenView.bottomAnchor),
-            buttonStackView.centerXAnchor.constraint(equalTo: screenView.centerXAnchor),
-            screenView.taskTimerLabel.centerXAnchor.constraint(equalTo: screenView.centerXAnchor),
-            queueStackView.centerXAnchor.constraint(equalTo: screenView.centerXAnchor),
             screenView.topAnchor.constraint(equalTo: view.topAnchor),
             screenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             screenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             screenView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            screenView.taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
+        ])
+        //buttonStackView
+        NSLayoutConstraint.activate([
+        
+        ])
+        //waitingQueueStackView
+        NSLayoutConstraint.activate([
+//            waitingQueueStackView.topAnchor.constraint(equalTo: screenView.taskTimerLabel.bottomAnchor)
         ])
     }
 }
