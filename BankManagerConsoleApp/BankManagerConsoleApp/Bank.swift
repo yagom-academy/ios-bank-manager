@@ -7,11 +7,12 @@
 import Foundation
 
 struct Bank {
-    private var clientCount = 0
+    private let clientWaitingLine = ClientWaitingLine()
     
-    init(clientCount: Int) {
-        self.clientCount = clientCount
-    }
+    private let depositSemaphore = DispatchSemaphore(value: 2)
+    private let depositQueue = DispatchQueue(label: "loan", attributes: .concurrent)
+    
+    private let loanQueue = DispatchQueue(label: "deposit")
     
     private enum BankStatus: String {
         case open = "1"
@@ -20,7 +21,9 @@ struct Bank {
     
     mutating func openBank() {
         displayBankMenu()
+        
         let bankStatus = readMenuNumber()
+        
         startWork(bankStatus)
     }
     
@@ -31,9 +34,6 @@ struct Bank {
     private mutating func readMenuNumber() -> BankStatus? {
         guard let status = readLine(),
               let bankStatus = BankStatus(rawValue: status) else {
-            print(Constants.InvalidInputText)
-            openBank()
-            
             return nil
         }
         return bankStatus
@@ -46,47 +46,42 @@ struct Bank {
         case .close:
             return
         default:
-            return
+            print(Constants.InvalidInputText)
         }
-    }
-    
-    private mutating func manageClientQueue() -> Queue<Client> {
-        var clientQueue = Queue<Client>()
-        
-        (0..<clientCount).forEach {
-            let client = Client(clientWaitingNumber: $0 + 1)
-            
-            clientQueue.enqueue(client)
-        }
-        return clientQueue
-    }
-    
-    private mutating func distributeClient(bankManagerCount: Int) {
-        var clientList = manageClientQueue()
-        let bankManager = BankManager()
-        let group = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: 1)
-        
-        for _ in Int.zero..<bankManagerCount {
-            DispatchQueue.global().async(group: group) {
-                semaphore.wait()
-                
-                while let clientWaitingNumber = clientList.dequeue()?.clientWaitingNumber {
-                    bankManager.work(client: clientWaitingNumber)
-                    semaphore.signal()
-                }
-            }
-        }
-        group.wait()
+        openBank()
     }
     
     private mutating func manageBank() {
         let workTime = workTime {
-            distributeClient(bankManagerCount: 1)
+            distributeClient()
         }
         
-        completeManagingBank(count: clientCount, time: workTime)
-        openBank()
+        completeManagingBank(count: clientWaitingLine.clientCount, time: workTime)
+    }
+    
+    private mutating func distributeClient() {
+        let group = DispatchGroup()
+        var clientQueue = clientWaitingLine.manageClientQueue()
+        let bankManager = BankManager()
+        
+        while let client = clientQueue.dequeue() {
+            switch client.banking {
+            case .deposit:
+                depositQueue.async(group: group) { [self] in
+                    depositSemaphore.wait()
+                    
+                    bankManager.work(client: client)
+                    depositSemaphore.signal()
+                }
+                
+            case .loan:
+                loanQueue.async(group: group) {
+                    bankManager.work(client: client)
+                }
+            }
+        }
+        
+        group.wait()
     }
     
     private func workTime(workTimeHandler: () -> Void) -> TimeInterval {
@@ -101,7 +96,7 @@ struct Bank {
     }
     
     private func completeManagingBank(count: Int, time: Double) {
-        let workingTime = String(format: "%.1f", time)
+        let workingTime = String(format: "%.2f", time)
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총\(count)명이며, 총 업무시간은 \(workingTime)초 입니다.")
     }
