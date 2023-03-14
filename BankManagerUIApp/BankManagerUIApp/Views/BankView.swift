@@ -1,12 +1,13 @@
 //
-//  BankManagerUIApp - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom academy. All rights reserved.
-// 
+//  BankView.swift
+//  BankManagerUIApp
+//
+//  Created by kaki, songjun on 2023/03/14.
+//
 
 import UIKit
 
-class ViewController: UIViewController {
+final class BankView: UIView {
     private let wholeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,15 +27,15 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private let addClientButton: UIButton = {
+    let addClientButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("고객 10명 추가", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
-    private let resetButton: UIButton = {
+    let resetButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("초기화", for: .normal)
@@ -42,9 +43,10 @@ class ViewController: UIViewController {
         return button
     }()
     
-    private let leadTimeLabel: UILabel = {
+    let leadTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "업무시간"
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -61,6 +63,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "대기중"
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = .systemGreen
@@ -71,9 +74,10 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "업무중"
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.textAlignment = .center
         label.textColor = .white
-        label.backgroundColor = .systemBlue
+        label.backgroundColor = .systemIndigo
         return label
     }()
     
@@ -86,7 +90,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private let waitClientStackView: UIStackView = {
+    let waitClientStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -94,7 +98,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private let processClientStackView: UIStackView = {
+    let processClientStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -102,16 +106,22 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = .white
         configureUI()
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
+        let safeArea = self.safeAreaLayoutGuide
         
-        view.addSubview(wholeStackView)
-        view.addSubview(presentClientStackView)
+        self.addSubview(wholeStackView)
+        self.addSubview(presentClientStackView)
         
         wholeStackView.addArrangedSubview(buttonStackView)
         wholeStackView.addArrangedSubview(leadTimeLabel)
@@ -123,17 +133,12 @@ class ViewController: UIViewController {
         
         taskStatusLabelStackView.addArrangedSubview(waitTaskLabel)
         taskStatusLabelStackView.addArrangedSubview(processTaskLabel)
-        
-    
 
         // autolayout
         NSLayoutConstraint.activate([
             wholeStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             wholeStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             wholeStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
-            
-           
         ])
     }
 }
-
