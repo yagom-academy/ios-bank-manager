@@ -12,14 +12,15 @@ protocol Openable {
 }
 
 final class Bank: Openable {
-    private let customerQueue: Queueable = CustomerQueue<Customer>()
+    private let customerQueue: Queue<Customer>
     private let loanDepartment: BankDepartment
     private let depositDepartment: BankDepartment
     private let workGroup: DispatchGroup = DispatchGroup()
     
-    init(loanBankerCount: Int, depositBankerCount: Int) {
+    init(loanBankerCount: Int, depositBankerCount: Int, customerQueue: Queue<Customer>) {
         self.loanDepartment = BankDepartment(workableBankerCount: loanBankerCount)
         self.depositDepartment = BankDepartment(workableBankerCount: depositBankerCount)
+        self.customerQueue = customerQueue
     }
     
     func open(totalCustomer: Int) {
@@ -37,7 +38,7 @@ final class Bank: Openable {
     }
     
     private func startWork() {
-        while let customer = customerQueue.dequeue() as? Customer,
+        while let customer = customerQueue.dequeue(),
               let business = customer.business {
             switch business {
             case .deposit:

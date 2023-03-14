@@ -5,15 +5,7 @@
 //  Created by Rowan, 릴라 on 2023/03/06.
 //
 
-protocol Queueable {
-    associatedtype T
-    
-    func enqueue(_ data: T)
-    func dequeue() -> T?
-
-}
-
-struct CustomerQueue<T>: Queueable {
+class Queue<T> {
     let list: LinkedList<T> = LinkedList()
     
     var isEmpty: Bool {
@@ -38,3 +30,5 @@ struct CustomerQueue<T>: Queueable {
         return list.headData
     }
 }
+
+final class CustomerQueue: Queue<Customer> { }
