@@ -9,7 +9,8 @@ import Foundation
 
 struct Bank {
     private var customers: Queue<Customer> = Queue()
-    private var managers: [BankManager] = []
+    private var numberOfCustomer = 0
+    static let workingGroup = DispatchGroup()
     
     mutating func run() {
         print("1 : 은행개점\n2 : 종료")
@@ -20,7 +21,7 @@ struct Bank {
         
         switch input {
         case BankOption.openValue:
-            addManager()
+            numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
             open()
         case BankOption.closeValue:
             return
@@ -29,17 +30,20 @@ struct Bank {
         }
     }
     
-    mutating private func open() {
-        let numberOfCustomer = receiveNumberOfCustomers()
+    private mutating func open() {
         let startDate = Date()
+        
+        receiveCustomers()
         
         while customers.isEmpty == false {
             guard let customer = customers.dequeue() else {
                 break
             }
             
-            work(for: customer)
+            BankManager.divideWork(accordingTo: customer)
         }
+        
+        Bank.workingGroup.wait()
         
         let finishDate = Date().timeIntervalSince(startDate)
         
@@ -47,25 +51,11 @@ struct Bank {
         run()
     }
     
-    mutating private func receiveNumberOfCustomers() -> Int {
-        let numberOfCustomer = Int.random(in: BankOption.rangeOfCustomer)
-        
+    private mutating func receiveCustomers() {
         for count in 1...numberOfCustomer {
-            customers.enqueue(Customer(waitingNumber: count))
-        }
-        
-        return numberOfCustomer
-    }
-    
-    mutating private func work(for customer: Customer) {
-        managers[0].customer = customer
-        
-        managers[0].work()
-    }
-    
-    mutating private func addManager() {
-        for _ in 1...BankOption.numberOfManager {
-            self.managers.append(BankManager())
+            guard let randomBanking = Banking.allCases.randomElement() else { return }
+            
+            customers.enqueue(Customer(waitingNumber: count, desiredBanking: randomBanking))
         }
     }
 }
