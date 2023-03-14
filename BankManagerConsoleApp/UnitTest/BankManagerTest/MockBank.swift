@@ -1,5 +1,5 @@
 //
-//  DummyBank.swift
+//  MockBank.swift
 //  BankManagerConsoleApp
 //
 //  Created by Rowan, 릴라 on 2023/03/14.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-class DummyBank: Openable {
+class MockBank: Openable {
     var open_totalCustomer: Int = 0
     
     func open(totalCustomer: Int) {

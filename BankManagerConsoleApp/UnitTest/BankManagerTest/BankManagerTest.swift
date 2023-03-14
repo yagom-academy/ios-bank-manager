@@ -9,13 +9,13 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerTest: XCTestCase {
-    var dummyBank: DummyBank!
+    var dummyBank: MockBank!
     var sut: BankManager!
-    var dummyCustomerReceiver: DummyCustomerReceiver!
+    var dummyCustomerReceiver: StubCustomerReceiver!
     
     override func setUpWithError() throws {
-        dummyBank = DummyBank()
-        dummyCustomerReceiver = DummyCustomerReceiver()
+        dummyBank = MockBank()
+        dummyCustomerReceiver = StubCustomerReceiver()
         sut = BankManager(bank: dummyBank, customerReceiver: dummyCustomerReceiver)
     }
 

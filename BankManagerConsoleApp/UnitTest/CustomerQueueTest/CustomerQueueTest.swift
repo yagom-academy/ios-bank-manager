@@ -8,10 +8,10 @@
 import XCTest
 
 final class CustomerQueueTest: XCTestCase {
-    var sut: CustomerQueue<Int>?
+    var sut: Queue<Int>?
 
     override func setUpWithError() throws {
-        sut = CustomerQueue<Int>()
+        sut = Queue<Int>()
     }
 
     override func tearDownWithError() throws {
