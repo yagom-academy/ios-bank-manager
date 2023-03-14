@@ -8,16 +8,24 @@
 import UIKit
 
 class ControlPanelStackView: UIStackView {
+    private let addCustomerButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("고객 10명 추가", for: .normal)
+        
+        return button
+    }()
+    
+    private let clearButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        button.setTitle("초기화", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        
+        return button
+    }()
+    
     private let controlButtonStackView: UIStackView = {
-        let addCustomerButton = UIButton(type: .system)
-        let clearButton = UIButton(type: .system)
-        
-        addCustomerButton.setTitle("고객 10명 추가", for: .normal)
-        
-        clearButton.setTitle("초기화", for: .normal)
-        clearButton.setTitleColor(.systemRed, for: .normal)
-        
-        let stackView = UIStackView(arrangedSubviews: [addCustomerButton, clearButton])
+        let stackView = UIStackView()
         
         stackView.distribution = .fillEqually
         stackView.alignment = .center
@@ -73,8 +81,16 @@ class ControlPanelStackView: UIStackView {
         self.spacing = 10
         self.distribution = .fillEqually
         
+        controlButtonStackView.addArrangedSubview(addCustomerButton)
+        controlButtonStackView.addArrangedSubview(clearButton)
+        
         self.addArrangedSubview(controlButtonStackView)
         self.addArrangedSubview(timerLabel)
         self.addArrangedSubview(statusLabelStackView)
+    }
+    
+    func setControlButtonTarget(addAction: Selector, clearAction: Selector) {
+        addCustomerButton.addTarget(nil, action: addAction, for: .touchUpInside)
+        clearButton.addTarget(nil, action: clearAction, for: .touchUpInside)
     }
 }

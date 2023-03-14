@@ -76,6 +76,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6232685B29C08E0B00682E8B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6232685C29C08E1200682E8B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */,
+				4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6232685D29C08E1600682E8B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3E259C3E9F0053667F /* BankManagerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +123,13 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				6232685D29C08E1600682E8B /* Controller */,
+				6232685C29C08E1200682E8B /* View */,
+				6232685B29C08E0B00682E8B /* Model */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				C7694E3E259C3E9F0053667F /* BankManagerViewController.swift */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E48259C3EA20053667F /* Info.plist */,
-				7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */,
-				4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */,
 			);
 			path = BankManagerUIApp;
 			sourceTree = "<group>";

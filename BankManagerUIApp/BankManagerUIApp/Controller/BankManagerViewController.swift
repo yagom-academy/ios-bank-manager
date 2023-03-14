@@ -14,6 +14,10 @@ final class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        controlPanelStackView.setControlButtonTarget(
+            addAction: #selector(addCustomerButtonTapped),
+            clearAction: #selector(clearButtonTapped)
+        )
         configureControlPanelStackView()
         configureCustomerQueueScrollView()
     }
@@ -40,5 +44,13 @@ final class BankManagerViewController: UIViewController {
             customerQueueScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             customerQueueScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc func addCustomerButtonTapped() {
+        print("Add")
+    }
+    
+    @objc func clearButtonTapped() {
+        print("clear")
     }
 }
