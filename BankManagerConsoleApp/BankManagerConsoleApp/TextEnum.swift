@@ -2,7 +2,7 @@
 //  TextEnum.swift
 //  BankManagerConsoleApp
 //
-//  Created by Andrew on 2023/03/09.
+//  Created by goat, Andrew on 2023/03/09.
 //
 
 import Foundation

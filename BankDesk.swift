@@ -20,19 +20,20 @@ struct BankDesk {
     }
     
     func openBanking() {
-        showMenuMessage()
-        while let inputNumber = readLine() {
-            if inputNumber == "1" {
-                createCustomerCount()
-                bankManager.insertCustomerCountToQueue()
-                bankManager.manageBanking()
-            } else if inputNumber == "2" {
-                print(MenuMessage.bankClose)
-                break
-            } else {
-                print(MenuMessage.inputErrorMessage)
-            }
+        while true {
             showMenuMessage()
+            if let inputNumber = readLine() {
+                if inputNumber == "1" {
+                    createCustomerCount()
+                    bankManager.insertCustomerCountToQueue()
+                    bankManager.manageBanking()
+                } else if inputNumber == "2" {
+                    print(MenuMessage.bankClose)
+                    break
+                } else {
+                    print(MenuMessage.inputErrorMessage)
+                }
+            }
         }
     }
 }

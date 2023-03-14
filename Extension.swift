@@ -2,7 +2,7 @@
 //  Extension.swift
 //  BankManagerConsoleApp
 //
-//  Created by 송종환 on 2023/03/09.
+//  Created by goat, Andrew on 2023/03/09.
 //
 
 import Foundation
