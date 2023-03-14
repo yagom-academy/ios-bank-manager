@@ -8,9 +8,13 @@
 import UIKit
 
 final class WaitingQueueStackView: UIStackView {
+    private let waitingQueueLabel = WaitingQueueLabel()
+    private let waitingScrollView = WaitingScrollView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        setUpWaitingQueueStackView()
     }
     
     required init(coder: NSCoder) {
@@ -19,5 +23,10 @@ final class WaitingQueueStackView: UIStackView {
     
     private func configure() {
         self.axis = .vertical
+    }
+    
+    private func setUpWaitingQueueStackView() {
+        self.addArrangedSubview(waitingQueueLabel)
+        self.addArrangedSubview(waitingScrollView)
     }
 }

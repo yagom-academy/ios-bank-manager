@@ -19,19 +19,8 @@ final class ScreenStackView: UIStackView {
     
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .white
         self.axis = .vertical
-        self.spacing = 10
-        self.distribution = .equalSpacing
-    }
+        self.spacing = 15
 
-    let taskTimerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        label.text = "업무시간 - "
-        
-        return label
-    }()
+    }    
 }

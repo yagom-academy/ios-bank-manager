@@ -8,69 +8,33 @@ import UIKit
 
 class ViewController: UIViewController {
     private let screenView = ScreenStackView()
-    
     private let buttonStackView = ButtonStackView()
-    private let addClientButton = AddClientButton()
-    private let resetButton = ResetButton()
-    
+    private let taskTimerLabel = TaskTimerLabel()
     private let queueStackView = QueueStackView()
-    
-    private let waitingQueueStackView = WaitingQueueStackView()
-    private let waitingQueueLabel = WaitingQueueLabel()
-    private let waitingScrollView = WaitingScrollView()
-    
-    private let doingTaskStackView = DoingTaskStackView()
-    private let doingTaskLabel = DoingTaskLabel()
-    private let doingTaskScrollView = DoingTaskScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpView()
-        configureConstraint()
-    }
-    
-    private func setUpView() {
         setUpScreenStackView()
-        setUpWaitingQueueStackView()
-        setUpDoingTaskStackView()
-        setUpButtonStackView()
+        configureConstraint()
+        view.backgroundColor = .white
     }
     
     private func setUpScreenStackView() {
         view.addSubview(screenView)
         screenView.addArrangedSubview(buttonStackView)
-        screenView.addArrangedSubview(screenView.taskTimerLabel)
+        screenView.addArrangedSubview(taskTimerLabel)
         screenView.addArrangedSubview(queueStackView)
         
-        queueStackView.addArrangedSubview(waitingQueueStackView)
-        queueStackView.addArrangedSubview(doingTaskStackView)
     }
 
-    private func setUpButtonStackView() {
-        buttonStackView.addArrangedSubview(addClientButton)
-        buttonStackView.addArrangedSubview(resetButton)
-    }
-    
-    private func setUpWaitingQueueStackView() {
-        waitingQueueStackView.addArrangedSubview(waitingQueueLabel)
-        waitingQueueStackView.addArrangedSubview(waitingScrollView)
-    }
-    
-    private func setUpDoingTaskStackView() {
-        doingTaskStackView.addArrangedSubview(doingTaskLabel)
-        doingTaskStackView.addArrangedSubview(doingTaskScrollView)
-    }
-    
     private func configureConstraint() {
         //screenView
         NSLayoutConstraint.activate([
-            screenView.topAnchor.constraint(equalTo: view.topAnchor),
+            screenView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             screenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             screenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             screenView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            screenView.taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            
-            buttonStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
+            taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
         ])
     }
 }

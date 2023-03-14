@@ -8,9 +8,13 @@
 import UIKit
 
 final class DoingTaskStackView: UIStackView {
+    private let doingTaskLabel = DoingTaskLabel()
+    private let doingTaskScrollView = DoingTaskScrollView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        setUpDoingTaskStackView()
     }
     
     required init(coder: NSCoder) {
@@ -19,5 +23,10 @@ final class DoingTaskStackView: UIStackView {
     
     private func configure() {
         self.axis = .vertical
+    }
+    
+    private func setUpDoingTaskStackView() {
+        self.addArrangedSubview(doingTaskLabel)
+        self.addArrangedSubview(doingTaskScrollView)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AddClientButton.swift
+//  WaitingQueueLabel.swift
 //  BankManagerUIApp
 //
 //  Created by 리지, 무리 on 2023/03/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddClientButton: UIButton {
+final class WaitingQueueLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -17,10 +17,12 @@ final class AddClientButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.setTitle("고객 10명 추가", for: .normal)
-        self.setTitleColor(.systemBlue, for: .normal)
-        self.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        self.textAlignment = .center
+        self.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        self.text = "대기중"
+        self.textColor = .white
+        self.backgroundColor = .systemGreen
     }
 }

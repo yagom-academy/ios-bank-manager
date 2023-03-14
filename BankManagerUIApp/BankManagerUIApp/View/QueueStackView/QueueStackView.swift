@@ -8,9 +8,13 @@
 import UIKit
 
 final class QueueStackView: UIStackView {
+    private let waitingQueueStackView = WaitingQueueStackView()
+    private let doingTaskStackView = DoingTaskStackView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        setUpQueueStackView()
     }
     
     required init(coder: NSCoder) {
@@ -20,5 +24,10 @@ final class QueueStackView: UIStackView {
     private func configure() {
         self.axis = .horizontal
         self.distribution = .fillEqually
+    }
+    
+    private func setUpQueueStackView() {
+        self.addArrangedSubview(waitingQueueStackView)
+        self.addArrangedSubview(doingTaskStackView)
     }
 }
