@@ -23,6 +23,7 @@ final class DoingTaskStackView: UIStackView {
     
     private func configure() {
         self.axis = .vertical
+        self.spacing = 10
     }
     
     private func setUpDoingTaskStackView() {

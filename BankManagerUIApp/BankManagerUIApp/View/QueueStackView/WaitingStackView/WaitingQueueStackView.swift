@@ -23,6 +23,7 @@ final class WaitingQueueStackView: UIStackView {
     
     private func configure() {
         self.axis = .vertical
+        self.spacing = 10
     }
     
     private func setUpWaitingQueueStackView() {

@@ -9,7 +9,7 @@ import Foundation
 
 public struct Bank {
     var waitingLine = Queue<Client>()
-    private(set) var clientCount: Int = 0
+    var clientCount: Int = 0
     private var bankClerk = BankClerk()
     private let typeOfTask: [Task] = [.deposit, .loan]
     private let loanBankClerk = DispatchSemaphore(value: 1)

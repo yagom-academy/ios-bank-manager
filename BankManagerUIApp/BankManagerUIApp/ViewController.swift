@@ -51,6 +51,13 @@ class ViewController: UIViewController {
             let clientLabel = ClientLabel()
             guard let client = bank.waitingLine.dequeue() else { return }
             let message = "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)"
+           
+            switch client.purposeOfVisit {
+            case .loan:
+                clientLabel.textColor = .systemPurple
+            case .deposit:
+                clientLabel.textColor = .black
+            }
             
             clientLabel.text = message
             

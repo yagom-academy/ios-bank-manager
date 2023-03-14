@@ -22,6 +22,6 @@ final class TaskClientStackView: UIStackView {
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
-        self.alignment = .center
+        self.spacing = 10
     }
 }
