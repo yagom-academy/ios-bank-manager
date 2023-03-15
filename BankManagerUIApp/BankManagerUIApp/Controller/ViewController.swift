@@ -16,19 +16,26 @@ final class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setMainStackView()
-        setButtons()
-        setTimerLabel()
-        setQueueLabel()
-        setCustomerScrollView()
     }
     
     private func setMainStackView() {
         view.addSubview(mainStackView)
+        mainStackView.distribution = .fill
         mainStackView.spacing = 10
         mainStackView.setAutoLayoutConstraint(equalTo: view.safeAreaLayoutGuide)
+        
+        let buttonStackView = makeButtonStackView()
+        let timerLabel = makeTimerLabel()
+        let queueLabelStackView = makeQueueLabelStackView()
+        let customerStackView = makeCustomerStackView()
+        
+        mainStackView.addArrangedSubview(buttonStackView)
+        mainStackView.addArrangedSubview(timerLabel)
+        mainStackView.addArrangedSubview(queueLabelStackView)
+        mainStackView.addArrangedSubview(customerStackView)
     }
     
-    private func setButtons() {
+    private func makeButtonStackView() -> UIStackView {
         let addCustomerButton = {
             let button = UIButton()
             button.setTitle("고객 10명 추가", for: .normal)
@@ -45,12 +52,12 @@ final class BankManagerViewController: UIViewController {
             return button
         }()
         
-        let stackView = HorizontalStackView(arrangedSubviews: [addCustomerButton, resetButton])
+        let buttonStackView = HorizontalStackView(arrangedSubviews: [addCustomerButton, resetButton])
         
-        mainStackView.addArrangedSubview(stackView)
+        return buttonStackView
     }
     
-    private func setTimerLabel() {
+    private func makeTimerLabel() -> UILabel {
         let timerLabel = {
             let label = UILabel()
             label.text = "타이머 넣기"
@@ -61,10 +68,10 @@ final class BankManagerViewController: UIViewController {
             return label
         }()
         
-        mainStackView.addArrangedSubview(timerLabel)
+        return timerLabel
     }
     
-    private func setQueueLabel() {
+    private func makeQueueLabelStackView() -> UIStackView {
         let waitingLabel = {
             let label = UILabel()
             label.textColor = .white
@@ -87,19 +94,13 @@ final class BankManagerViewController: UIViewController {
             return label
         }()
         
-        let stackView = {
-            let stackView = UIStackView(arrangedSubviews: [waitingLabel, workingLabel])
-            stackView.axis = .horizontal
-            stackView.distribution = .fillEqually
-            
-            return stackView
-        }()
+        let queueLabelStackView = HorizontalStackView(arrangedSubviews: [waitingLabel, workingLabel])
         
-        mainStackView.addArrangedSubview(stackView)
+        return queueLabelStackView
     }
     
-    private func setCustomerScrollView() {
-        let anotherStackView = {
+    private func makeCustomerStackView() -> UIStackView {
+        let customerStackView = {
             let stackView = HorizontalStackView()
             stackView.alignment = .top
             
@@ -115,13 +116,11 @@ final class BankManagerViewController: UIViewController {
         
         waitingStackView.setAutoLayoutConstraint(equalTo: waitingScrollView.safeAreaLayoutGuide)
         
-        anotherStackView.addArrangedSubview(waitingScrollView)
-        anotherStackView.addArrangedSubview(workingStackView)
+        customerStackView.addArrangedSubview(waitingScrollView)
+        customerStackView.addArrangedSubview(workingStackView)
         
-        mainStackView.addArrangedSubview(anotherStackView)
-        
+        return customerStackView
     }
-    
 }
 
 import SwiftUI

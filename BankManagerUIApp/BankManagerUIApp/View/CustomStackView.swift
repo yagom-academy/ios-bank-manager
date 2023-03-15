@@ -38,6 +38,6 @@ class VerticalStackView: UIStackView {
     
     func configure() {
         self.distribution = .fillEqually
-        self.axis = .horizontal
+        self.axis = .vertical
     }
 }
