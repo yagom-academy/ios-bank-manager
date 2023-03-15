@@ -31,6 +31,7 @@ struct BankManager {
     
     mutating func reset() {
         waitingQueue.clear()
+        numberOfClient = 0
     }
     
     mutating func processBusiness() {
@@ -58,10 +59,5 @@ struct BankManager {
         delegate?.startClientTask(client)
         Thread.sleep(forTimeInterval: client.requstedTask.taskTime)
         delegate?.endClientTask(client)
-    }
-    
-    private func presentBusinessResult(time: CFAbsoluteTime) {
-        let totalTaskTime: String = String(format: "%.2f", time)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(totalTaskTime)초입니다.")
     }
 }

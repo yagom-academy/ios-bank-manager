@@ -8,13 +8,26 @@ import UIKit
 
 final class BankViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
-    var bankManager = BankManager()
+    private var bankManager = BankManager()
+    private var timeCount: Double = .zero
+    private var timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "mm:ss:SSS"
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bankManager.delegate = self
         view = bankView
+        updateTimeLabel()
         setupButton()
+    }
+    
+    private func updateTimeLabel() {
+        let date = Date(timeIntervalSince1970: timeCount)
+        let time = timeFormatter.string(from: date)
+        bankView.leadTimeLabel.text = "업무시간 - \(time)"
     }
     
     private func setupButton() {

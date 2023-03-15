@@ -45,7 +45,6 @@ final class BankView: UIView {
     
     let leadTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "업무시간"
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
