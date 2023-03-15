@@ -15,6 +15,7 @@ final class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        addNotificationObservers()
         controlPanelStackView.setControlButtonTarget(
             addAction: #selector(addCustomerButtonTapped),
             clearAction: #selector(clearButtonTapped)
@@ -36,11 +37,15 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func moveCustomerLabel(_ noti: Notification) {
+        guard let customer = noti.userInfo?[NotificationKey.customer] as? Customer else { return }
         
+        customerQueueScrollView.moveToProcessingQueue(customer: customer)
     }
     
     @objc private func removeCustomerLabel(_ noti: Notification) {
+        guard let customer = noti.userInfo?[NotificationKey.customer] as? Customer else { return }
         
+        customerQueueScrollView.removeFromProcessingQueue(customer: customer)
     }
     
     private func configureControlPanelStackView() {
@@ -79,9 +84,3 @@ final class BankManagerViewController: UIViewController {
         print("clear")
     }
 }
-
-//extension BankManagerViewController: CustomerQueueDelegate {
-//    func addLabels(customers: [Customer]) {
-//        <#code#>
-//    }
-//}

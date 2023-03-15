@@ -6,7 +6,6 @@
 
 struct BankManager {
     var bank = Bank()
-    var customerQueueManageDelegate: CustomerQueueDelegate?
     
     func addTenCustomers(_ customers: [Customer]) {
         bank.setUpCustomerQueue(customers: customers)

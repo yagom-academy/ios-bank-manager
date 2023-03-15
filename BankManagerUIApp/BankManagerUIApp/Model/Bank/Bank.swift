@@ -51,7 +51,7 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         work()
-        dispatchGroup.wait()
+//        dispatchGroup.wait()
         
         let durationTime = CFAbsoluteTimeGetCurrent() - startTime
         let completedJobCount = loanSection.completedJobCount + depositSection.completedJobCount

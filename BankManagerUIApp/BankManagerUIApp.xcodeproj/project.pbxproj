@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4ABB8A2829C05159000BA484 /* CustomerQueueScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */; };
-		4ABB8A4229C1925C000BA484 /* CustomerQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */; };
 		4ABB8A4529C1B7A2000BA484 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A4429C1B7A2000BA484 /* NotificationName.swift */; };
 		6232686329C19FCC00682E8B /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6232686229C19FCC00682E8B /* CustomerLabel.swift */; };
 		7F16B56129C03D9B00A584FA /* ControlPanelStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */; };
@@ -49,7 +48,6 @@
 
 /* Begin PBXFileReference section */
 		4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueScrollView.swift; sourceTree = "<group>"; };
-		4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueDelegate.swift; sourceTree = "<group>"; };
 		4ABB8A4429C1B7A2000BA484 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		6232686229C19FCC00682E8B /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
 		7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelStackView.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				7F16B5A329C0ACCF00A584FA /* BankWorkable.swift */,
-				4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -344,7 +341,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6232686329C19FCC00682E8B /* CustomerLabel.swift in Sources */,
-				4ABB8A4229C1925C000BA484 /* CustomerQueueDelegate.swift in Sources */,
 				4ABB8A2829C05159000BA484 /* CustomerQueueScrollView.swift in Sources */,
 				7F16B59C29C0AC5700A584FA /* BankManager.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,

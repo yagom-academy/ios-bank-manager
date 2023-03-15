@@ -63,4 +63,22 @@ final class CustomerQueueScrollView: UIScrollView {
             self.waitingQueueStackView.addArrangedSubview(CustomerLabel($0))
         }
     }
+    
+    func moveToProcessingQueue(customer: Customer) {
+        guard let label = self.waitingQueueStackView.viewWithTag(customer.waitingNumber) else {
+            return
+        }
+        
+        label.removeFromSuperview()
+        
+        self.processingQueueStackView.addArrangedSubview(label)
+    }
+    
+    func removeFromProcessingQueue(customer: Customer) {
+        guard let label = self.processingQueueStackView.viewWithTag(customer.waitingNumber) else {
+            return
+        }
+        
+        label.removeFromSuperview()
+    }
 }
