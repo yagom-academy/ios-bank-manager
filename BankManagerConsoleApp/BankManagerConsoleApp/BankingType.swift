@@ -9,12 +9,12 @@ import Foundation
 
 struct BankingType {
     let customer: Customer 
-    let countNumber: Int
+    let customerNumber: Int
     
-    init?(countNumber: Int){
+    init?(customerNumber: Int){
         guard let customer = Customer.allCases.randomElement() else { return nil }
     
         self.customer = customer
-        self.countNumber = countNumber
+        self.customerNumber = customerNumber
     }
 }

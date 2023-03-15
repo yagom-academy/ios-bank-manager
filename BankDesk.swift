@@ -27,7 +27,7 @@ struct BankDesk {
             if let inputNumber = readLine() {
                 if inputNumber == "1" {
                     createCustomerCount()
-                    bankManager.banking()
+                    bankManager.manageBanking()
                 } else if inputNumber == "2" {
                     print(MenuMessage.bankClose)
                     break

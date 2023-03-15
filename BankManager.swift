@@ -11,42 +11,42 @@ class BankManager {
     private var customerQueue: BankQueue<BankingType> = BankQueue<BankingType>()
     var customerCount: Int = 0
     
-    func banking(){
+    func manageBanking(){
         insertCustomerCountToQueue()
         closeBanking()
     }
     
     private func insertCustomerCountToQueue() {
         for i in 1...customerCount {
-            guard let customer = BankingType.init(countNumber: i) else { return }
-            self.customerQueue.enqueue(data: customer)
+            guard let count = BankingType.init(customerNumber: i) else { return }
+            self.customerQueue.enqueue(data: count)
         }
     }
 
-    private func manageBanking() {
+    private func banking() {
         let group = DispatchGroup()
         let depositDispatchQueuqe = DispatchQueue(label: "depositDispatchQueuqe")
         let loanDispatchQueue = DispatchQueue(label: "loanDispatchQueue")
         
         while customerQueue.isEmpty() == false {
-            guard let dequeueCustomer = customerQueue.peek() else { return }
-            let semaphore = DispatchSemaphore(value: dequeueCustomer.customer.deskCount)
+            guard let currentCustomer = customerQueue.peek() else { return }
+            let semaphore = DispatchSemaphore(value: currentCustomer.customer.deskCount)
             
-            switch dequeueCustomer.customer {
+            switch currentCustomer.customer {
             case .deposit:
                 depositDispatchQueuqe.async(group: group) {
                     semaphore.wait()
-                    print("\(dequeueCustomer.countNumber)\(BankingMessage.depositStartMessage)")
-                    Thread.sleep(forTimeInterval: dequeueCustomer.customer.takenTimeForBanking)
-                    print("\(dequeueCustomer.countNumber)\(BankingMessage.depositEndingMessage)")
+                    print("\(currentCustomer.customerNumber)\(BankingMessage.depositStartMessage)")
+                    Thread.sleep(forTimeInterval: currentCustomer.customer.takenTimeForBanking)
+                    print("\(currentCustomer.customerNumber)\(BankingMessage.depositEndingMessage)")
                     semaphore.signal()
                 }
             case .loan:
                 loanDispatchQueue.async(group: group) {
                     semaphore.wait()
-                    print("\(dequeueCustomer.countNumber)\(BankingMessage.loanStartMessage)")
-                    Thread.sleep(forTimeInterval: dequeueCustomer.customer.takenTimeForBanking)
-                    print("\(dequeueCustomer.countNumber)\(BankingMessage.loanEndingMessage)")
+                    print("\(currentCustomer.customerNumber)\(BankingMessage.loanStartMessage)")
+                    Thread.sleep(forTimeInterval: currentCustomer.customer.takenTimeForBanking)
+                    print("\(currentCustomer.customerNumber)\(BankingMessage.loanEndingMessage)")
                     semaphore.signal()
                 }
             }
@@ -63,7 +63,7 @@ class BankManager {
     }
 
     private func closeBanking() {
-        let bankingTime = calculateProcessTime(manageBanking)
+        let bankingTime = calculateProcessTime(banking)
         let formattedBankingTime = bankingTime.digitFormatter()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(formattedBankingTime)초입니다 ")
     }
