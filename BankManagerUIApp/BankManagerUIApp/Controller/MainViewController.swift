@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         configureLayout()
         configureUI()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateWaitingCustomer), name: .waitWork, object: nil)
     }
 
     private func configureLayout() {
@@ -42,9 +44,25 @@ class MainViewController: UIViewController {
     }
     
     @objc private func didTapAddCustomerButton() {
-        for _ in 1...10 {
-            guard let customer = bank.addCustomer() else { return }
-            waitingStackView.addLabel(customer: customer)
+        DispatchQueue.main.async { [self] in
+            for _ in 1...10 {
+                guard let customer = bank.addCustomer() else { return }
+                waitingStackView.addLabel(customer: customer)
+                sleep(1)
+            }
+        }
+        
+        bank.open()
+    }
+    
+    @objc func updateWaitingCustomer(_ noti: Notification) {
+        guard let customer = noti.object as? Customer else {
+            return
+        }
+        
+        DispatchQueue.main.async { [self] in
+            waitingStackView.removeLabel(customer: customer)
+            workingStackView.addLabel(customer: customer)
         }
     }
     

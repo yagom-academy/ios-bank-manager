@@ -31,6 +31,19 @@ class QueueStackView: UIStackView {
         subStackView.addArrangedSubview(label)
     }
     
+    func removeLabel(customer: Customer) {
+        let newCustomer = "\(customer.waitingNumber) - \(customer.desiredBanking)"
+        
+        subStackView.arrangedSubviews.forEach { label in
+            guard let oldLabel = label as? UILabel else { return }
+            
+            if newCustomer == oldLabel.text {
+                subStackView.removeArrangedSubview(oldLabel)
+                oldLabel.removeFromSuperview()
+            }
+        }
+    }
+    
     func resetLabel() {
         subStackView.arrangedSubviews.forEach { label in
             subStackView.removeArrangedSubview(label)
