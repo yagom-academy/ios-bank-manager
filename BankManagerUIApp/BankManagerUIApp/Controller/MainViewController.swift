@@ -11,7 +11,7 @@ class MainViewController: UIViewController {
     private var timer: DispatchSourceTimer?
     private var date = Date(timeIntervalSince1970: 0)
     private var isRunningTimer = false
-    static var isRunningWork = false
+    static var isRunningWork = true
     private let addCustomerButton = CustomButton(type: .system)
     private let resetButton = CustomButton(type: .system)
     private let mainStackView = UIStackView()
@@ -155,6 +155,8 @@ class MainViewController: UIViewController {
         workTimeLabel.text = "업무시간 - 00:00:000"
         waitingStackView.resetLabel()
         workingStackView.resetLabel()
+        
+        Bank.workingGroup.wait()
     }
     
     private func resetTimer() {

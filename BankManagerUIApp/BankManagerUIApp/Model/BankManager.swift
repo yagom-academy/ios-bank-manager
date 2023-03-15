@@ -14,33 +14,31 @@ struct BankManager {
     private static func work(for customer: Customer) {
         let workQueue = DispatchQueue(label: "WorkQueue")
         
-        NotificationCenter.default.post(name: .workingNoti, object: customer)
-        
-        let queueItem = DispatchWorkItem {
+        let queueItem = DispatchWorkItem(qos: .userInitiated) {
             print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 시작")
-            Thread.sleep(forTimeInterval: customer.desiredBanking.time)
+            
+            if MainViewController.isRunningWork {
+                NotificationCenter.default.post(name: .workingNoti, object: customer)
+                Thread.sleep(forTimeInterval: customer.desiredBanking.time)
+                NotificationCenter.default.post(name: .completeNoti, object: customer)
+            }
+            
             print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 완료")
         }
         
-        if MainViewController.isRunningWork == true {
-            workQueue.sync(execute: queueItem)
-        } else {
-            queueItem.cancel()
-        }
-        
-        NotificationCenter.default.post(name: .completeNoti, object: customer)
+        workQueue.sync(execute: queueItem)
     }
     
     static func divideWork(accordingTo customer: Customer) {
         switch customer.desiredBanking {
         case .deposit:
-            DispatchQueue.global().async(group: Bank.workingGroup, qos: .userInitiated) {
+            DispatchQueue.global().async(group: Bank.workingGroup, qos: .background) {
                 depositManager.wait()
                 work(for: customer)
                 depositManager.signal()
             }
         case .loan:
-            DispatchQueue.global().async(group: Bank.workingGroup, qos: .userInitiated) {
+            DispatchQueue.global().async(group: Bank.workingGroup, qos: .background) {
                 loanManager.wait()
                 work(for: customer)
                 loanManager.signal()
@@ -48,4 +46,3 @@ struct BankManager {
         }
     }
 }
-
