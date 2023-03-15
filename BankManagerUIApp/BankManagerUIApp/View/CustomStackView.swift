@@ -37,5 +37,6 @@ class VerticalStackView: UIStackView {
     func configureProperties() {
         self.distribution = .fillEqually
         self.axis = .vertical
+        self.spacing = 8
     }
 }

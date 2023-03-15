@@ -16,18 +16,19 @@ final class BankManagerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        registerObserver()
         setMainStackView()
     }
     
     private func registerObserver() {
         notification.addObserver(self,
                                  selector: #selector(registerCustomerView),
-                                 name: .enqueue,
+                                 name: .waiting,
                                  object: nil)
         
         notification.addObserver(self,
                                  selector: #selector(moveToWorkingView),
-                                 name: .dequeue,
+                                 name: .working,
                                  object: nil)
         
         notification.addObserver(self,
@@ -38,15 +39,21 @@ final class BankManagerViewController: UIViewController {
 
     }
     
-    @objc func registerCustomerView() {
+    @objc func registerCustomerView(_ notification:NSNotification) {
+        guard let customer = notification.userInfo?[NotificationKey.waiting] as? Customer else {
+            return
+        }
+        
+        let customerLabel = CustomerLabel(customer: customer)
+        waitingStackView.addArrangedSubview(customerLabel)
+        waitingStackView.layoutIfNeeded()
+    }
+    
+    @objc func moveToWorkingView(_ notification:NSNotification) {
         
     }
     
-    @objc func moveToWorkingView() {
-        
-    }
-    
-    @objc func deleteCustomerLabelFromView() {
+    @objc func deleteCustomerLabelFromView(_ notification:NSNotification) {
         
     }
     
@@ -72,6 +79,7 @@ final class BankManagerViewController: UIViewController {
             let button = UIButton()
             button.setTitle("고객 10명 추가", for: .normal)
             button.setTitleColor(.systemBlue, for: .normal)
+            button.addTarget(self, action: #selector(addTenCustomer), for: .touchUpInside)
             
             return button
         }()
@@ -142,11 +150,24 @@ final class BankManagerViewController: UIViewController {
         let waitingScrollView = {
             let scrollView = UIScrollView()
             scrollView.addSubview(waitingStackView)
-            
+      
             return scrollView
         }()
         
-        waitingStackView.setAutoLayoutConstraint(equalTo: waitingScrollView.safeAreaLayoutGuide)
+
+        waitingScrollView.addSubview(waitingStackView)
+        waitingStackView.distribution = .equalSpacing
+        
+        
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
+            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            waitingStackView.heightAnchor.constraint(equalTo: waitingScrollView.heightAnchor)
+        ])
         
         customerStackView.addArrangedSubview(waitingScrollView)
         customerStackView.addArrangedSubview(workingStackView)
@@ -155,9 +176,7 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func addTenCustomer() {
-        for _ in 1...10 {
-//            let customerLabel = CustomerLabel(customer: <#T##Customer#>)
-        }
+        bank.open(totalCustomer: 10)
     }
 }
 
