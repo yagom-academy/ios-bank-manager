@@ -5,30 +5,10 @@
 //
 
 struct BankManager {
-    func start() {
-        var isSelectedOpen = true
-        
-        while isSelectedOpen {
-            print("1 : 은행개점")
-            print("2 : 종료")
-            print("입력 : ", terminator: "")
-            
-            guard let userInput = readLine() else { continue }
-            
-            switch userInput {
-            case "1":
-                var bank = Bank()
-                let numberOfCustomer = Int.random(in: 10...30)
-                
-                bank.receive(numberOfCustomer)
-                bank.startBusiness()
-            case "2":
-                isSelectedOpen = false
-            default:
-                print()
-                
-                continue
-            }
-        }
-    }
+    // 버튼을 눌렀을때
+    // 1. 큐에 커스터머 10개를 만들어서 넣는다.
+    // 2. 대기중에 커스터머 레이블을 10개를 넣음
+    var bank = Bank()
+    var customerQueueManageDelegate: CustomerQueueDelegate?
+    
 }

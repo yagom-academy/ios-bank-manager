@@ -9,10 +9,12 @@ import UIKit
 final class BankManagerViewController: UIViewController {
     private let controlPanelStackView = ControlPanelStackView()
     private let customerQueueScrollView = CustomerQueueScrollView()
+    private var bankManager = BankManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        bankManager.delegate = self
         
         controlPanelStackView.setControlButtonTarget(
             addAction: #selector(addCustomerButtonTapped),
@@ -48,9 +50,16 @@ final class BankManagerViewController: UIViewController {
     
     @objc func addCustomerButtonTapped() {
         print("Add")
+        
     }
     
     @objc func clearButtonTapped() {
         print("clear")
+    }
+}
+
+extension BankManagerViewController: CustomerQueueDelegate {
+    func addLabels(customers: [Customer]) {
+        <#code#>
     }
 }

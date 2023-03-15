@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4ABB8A2829C05159000BA484 /* CustomerQueueScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */; };
+		4ABB8A4229C1925C000BA484 /* CustomerQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */; };
 		7F16B56129C03D9B00A584FA /* ControlPanelStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */; };
 		7F16B59A29C0AC4100A584FA /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16B59929C0AC4100A584FA /* Bank.swift */; };
 		7F16B59C29C0AC5700A584FA /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16B59B29C0AC5700A584FA /* BankManager.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueScrollView.swift; sourceTree = "<group>"; };
+		4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueDelegate.swift; sourceTree = "<group>"; };
 		7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelStackView.swift; sourceTree = "<group>"; };
 		7F16B59929C0AC4100A584FA /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		7F16B59B29C0AC5700A584FA /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
@@ -94,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4ABB8A4029C1916D000BA484 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7F16B5A329C0ACCF00A584FA /* BankWorkable.swift */,
+				4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		6232685B29C08E0B00682E8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +114,6 @@
 				7F16B59D29C0AC6800A584FA /* Customer.swift */,
 				7F16B59F29C0AC7400A584FA /* BusinessType.swift */,
 				7F16B5A129C0AC8200A584FA /* BusinessSection.swift */,
-				7F16B5A329C0ACCF00A584FA /* BankWorkable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,6 +168,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				4ABB8A4029C1916D000BA484 /* Protocol */,
 				6232685D29C08E1600682E8B /* Controller */,
 				6232685C29C08E1200682E8B /* View */,
 				6232685B29C08E0B00682E8B /* Model */,
@@ -315,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ABB8A4229C1925C000BA484 /* CustomerQueueDelegate.swift in Sources */,
 				4ABB8A2829C05159000BA484 /* CustomerQueueScrollView.swift in Sources */,
 				7F16B59C29C0AC5700A584FA /* BankManager.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,
