@@ -10,7 +10,9 @@ final class BankViewController: UIViewController {
     private lazy var bankView = BankView(frame: view.bounds)
     private var bankManager = BankManager()
     private var timeCount: Double = .zero
-    private var timeFormatter: DateFormatter = {
+    private var timer = Timer()
+    private var isPlay = false
+    private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "mm:ss:SSS"
         return formatter
@@ -20,7 +22,7 @@ final class BankViewController: UIViewController {
         super.viewDidLoad()
         bankManager.delegate = self
         view = bankView
-        updateTimeLabel()
+        updateTime()
         setupButton()
     }
     
@@ -37,6 +39,24 @@ final class BankViewController: UIViewController {
     @objc private func pushAddClientButton() {
         bankManager.setupWaitingQueueAndClientNumber()
         bankManager.processBusiness()
+    }
+    
+    private func startTimer() {
+        if isPlay { return }
+        isPlay = true
+        timer = .scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTime() {
+        timeCount += 0.001
+        updateTimeLabel()
+    }
+    
+    private func resetTimer() {
+        timeCount = .zero
+        updateTimeLabel()
+        isPlay = false
+        timer.invalidate()
     }
 }
 
