@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIView {
-    func setAutoLayout(to superView: UIView) {
+    func setAutoLayoutConstraint(equalTo superView: UILayoutGuide) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

@@ -8,9 +8,9 @@ import UIKit
 
 
 final class BankManagerViewController: UIViewController {
-    let mainStackView = UIStackView()
-    let workingStackView = UIStackView()
-    let waitingStackView = UIStackView()
+    let mainStackView = VerticalStackView()
+    let workingStackView = VerticalStackView()
+    let waitingStackView = VerticalStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +24,8 @@ final class BankManagerViewController: UIViewController {
     
     private func setMainStackView() {
         view.addSubview(mainStackView)
-        
-        mainStackView.axis = .vertical
-        mainStackView.distribution = .fill
         mainStackView.spacing = 10
-        
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        ])
+        mainStackView.setAutoLayoutConstraint(equalTo: view.safeAreaLayoutGuide)
     }
     
     private func setButtons() {
@@ -47,7 +37,6 @@ final class BankManagerViewController: UIViewController {
             return button
         }()
         
-        
         let resetButton = {
             let button = UIButton()
             button.setTitle("초기화", for: .normal)
@@ -56,13 +45,7 @@ final class BankManagerViewController: UIViewController {
             return button
         }()
         
-        let stackView = {
-            let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
-            stackView.axis = .horizontal
-            stackView.distribution = .fillEqually
-            
-            return stackView
-        }()
+        let stackView = HorizontalStackView(arrangedSubviews: [addCustomerButton, resetButton])
         
         mainStackView.addArrangedSubview(stackView)
     }
@@ -117,60 +100,26 @@ final class BankManagerViewController: UIViewController {
     
     private func setCustomerScrollView() {
         let anotherStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .horizontal
-            stackView.distribution = .fillEqually
+            let stackView = HorizontalStackView()
             stackView.alignment = .top
-            
-            return stackView
-        }()
-        
-        let waitingStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .vertical
-            stackView.distribution = .fillEqually
-            
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            
-
             
             return stackView
         }()
         
         let waitingScrollView = {
             let scrollView = UIScrollView()
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-
             scrollView.addSubview(waitingStackView)
-
-            NSLayoutConstraint.activate([
-                
-            ])
-
+            
             return scrollView
         }()
         
-        NSLayoutConstraint.activate([
-            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.leadingAnchor),
-            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.trailingAnchor),
-            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.topAnchor),
-            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.bottomAnchor)
-        ])
-  
-        let workingStackView = {
-           let stackView = UIStackView()
-            stackView.axis = .vertical
-            stackView.distribution = .fillEqually
-
-            return stackView
-        }()
+        waitingStackView.setAutoLayoutConstraint(equalTo: waitingScrollView.safeAreaLayoutGuide)
         
         anotherStackView.addArrangedSubview(waitingScrollView)
         anotherStackView.addArrangedSubview(workingStackView)
-
+        
         mainStackView.addArrangedSubview(anotherStackView)
         
-        let stackView = CustomStackView()
     }
     
 }
