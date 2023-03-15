@@ -43,7 +43,7 @@ final class BankView: UIView {
         return button
     }()
     
-    let leadTimeLabel: UILabel = {
+    let timeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
@@ -123,7 +123,7 @@ final class BankView: UIView {
         self.addSubview(presentClientStackView)
         
         wholeStackView.addArrangedSubview(buttonStackView)
-        wholeStackView.addArrangedSubview(leadTimeLabel)
+        wholeStackView.addArrangedSubview(timeLabel)
         wholeStackView.addArrangedSubview(taskStatusLabelStackView)
         wholeStackView.addArrangedSubview(presentClientStackView)
         

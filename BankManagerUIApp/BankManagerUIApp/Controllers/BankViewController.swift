@@ -29,7 +29,7 @@ final class BankViewController: UIViewController {
     private func updateTimeLabel() {
         let date = Date(timeIntervalSince1970: timeCount)
         let time = timeFormatter.string(from: date)
-        bankView.leadTimeLabel.text = "업무시간 - \(time)"
+        bankView.timeLabel.text = "업무시간 - \(time)"
     }
     
     private func setupButton() {
