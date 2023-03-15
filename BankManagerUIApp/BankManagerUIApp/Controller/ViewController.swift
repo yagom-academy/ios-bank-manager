@@ -9,8 +9,8 @@ import UIKit
 
 final class BankManagerViewController: UIViewController {
     let mainStackView = UIStackView()
-    var waitingScrollView = UIScrollView()
-    
+    let workingStackView = UIStackView()
+    let waitingStackView = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +137,7 @@ final class BankManagerViewController: UIViewController {
             return stackView
         }()
         
-        waitingScrollView = {
+        let waitingScrollView = {
             let scrollView = UIScrollView()
             scrollView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -150,7 +150,6 @@ final class BankManagerViewController: UIViewController {
             return scrollView
         }()
         
-
         NSLayoutConstraint.activate([
             waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.leadingAnchor),
             waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.trailingAnchor),
@@ -170,6 +169,8 @@ final class BankManagerViewController: UIViewController {
         anotherStackView.addArrangedSubview(workingStackView)
 
         mainStackView.addArrangedSubview(anotherStackView)
+        
+        let stackView = CustomStackView()
     }
     
 }
