@@ -11,11 +11,43 @@ final class BankManagerViewController: UIViewController {
     let workingStackView = VerticalStackView()
     let waitingStackView = VerticalStackView()
     let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
+    let notification = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setMainStackView()
+    }
+    
+    private func registerObserver() {
+        notification.addObserver(self,
+                                 selector: #selector(registerCustomerView),
+                                 name: .enqueue,
+                                 object: nil)
+        
+        notification.addObserver(self,
+                                 selector: #selector(moveToWorkingView),
+                                 name: .dequeue,
+                                 object: nil)
+        
+        notification.addObserver(self,
+                                 selector: #selector(deleteCustomerLabelFromView),
+                                 name: .finished,
+                                 object: nil)
+        
+
+    }
+    
+    @objc func registerCustomerView() {
+        
+    }
+    
+    @objc func moveToWorkingView() {
+        
+    }
+    
+    @objc func deleteCustomerLabelFromView() {
+        
     }
     
     private func setMainStackView() {
