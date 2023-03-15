@@ -4,7 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
-
+// 콘솔이 돌아가는 창
 private var bankDesk = BankDesk()
 bankDesk.openBanking()

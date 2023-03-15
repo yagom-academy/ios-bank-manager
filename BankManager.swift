@@ -10,7 +10,7 @@ import Foundation
 class BankManager {
     private var customerCountQueue: BankQueue<BankingType> = BankQueue<BankingType>()
     var customerCount: Int = 0
-    
+
     func insertCustomerCountToQueue() {
         for i in 1...customerCount {
             guard let customer = BankingType.init(countNumber: i) else { return }
@@ -19,50 +19,49 @@ class BankManager {
     }
 
     func manageBanking() {
-        guard let currentCustomer = customerCountQueue.dequeue() else { return }
-        let semaphore = DispatchSemaphore(value: currentCustomer.customer.deskCount)
         let group = DispatchGroup()
-        let dispatchQueue = DispatchQueue(label: currentCustomer.customer.rawValue)
+        let dispatchQueues = DispatchQueue(label: "label")
+        let dispatchQueues2 = DispatchQueue(label: "label2")
         
+        let timer = CFAbsoluteTimeGetCurrent()
         while customerCountQueue.isEmpty() == false {
-        
-            switch currentCustomer.customer {
+            guard let dequeueCustomer = customerCountQueue.peek() else { return }
+            let semaphore = DispatchSemaphore(value: dequeueCustomer.customer.deskCount)
+            
+            switch dequeueCustomer.customer {
             case .deposit:
-                dispatchQueue.async(group: group) {
+                dispatchQueues.async(group: group) {
                     semaphore.wait()
-                    guard let currentCustomer = self.customerCountQueue.peek() else { return }
-                    print("\(currentCustomer)번 고객 예금업무 시작")
-                    Thread.sleep(forTimeInterval: currentCustomer.customer.takenTimeForBanking)
-                    print("\(currentCustomer)번 고객 예금업무 종료")
-                    self.customerCountQueue.dequeue()
+                    print("\(dequeueCustomer.countNumber)번 고객 예금업무 시작")
+                    Thread.sleep(forTimeInterval: dequeueCustomer.customer.takenTimeForBanking)
+                    print("\(dequeueCustomer.countNumber)번 고객 예금업무 종료")
                     semaphore.signal()
                 }
             case .loan:
-                dispatchQueue.async(group: group) {
+                dispatchQueues2.async(group: group) {
                     semaphore.wait()
-                    guard let currentCustomer = self.customerCountQueue.peek() else { return }
-                    print("\(currentCustomer)번 고객 대출업무 시작")
-                    Thread.sleep(forTimeInterval: currentCustomer.customer.takenTimeForBanking)
-                    print("\(currentCustomer)번 고객 대출업무 종료")
-                    self.customerCountQueue.dequeue()
+                    print("\(dequeueCustomer.countNumber)번 고객 대출업무 시작")
+                    Thread.sleep(forTimeInterval: dequeueCustomer.customer.takenTimeForBanking)
+                    print("\(dequeueCustomer.countNumber)번 고객 대출업무 종료")
                     semaphore.signal()
                 }
             }
+            self.customerCountQueue.dequeue()
         }
-        closeBanking()
+        group.wait()
+        print("\(CFAbsoluteTimeGetCurrent() - timer) ")
+//        closeBanking()
     }
-
-//    func assignBankingDesk(customer: Customer){
-//         guard let currentCustomer = self.customerCountQueue.peek() else { return }
-//         print("\(currentCustomer)번 고객 대출업무 시작")
-//         Thread.sleep(forTimeInterval: customer.takenTimeForBanking)
-//         print("\(currentCustomer)번 고객 대출업무 종료")
-//         self.customerCountQueue.dequeue()
-//     }
     
+//    func progressTime(_ closure: () -> () ) -> TimeInterval {
+//        let start = CFAbsoluteTimeGetCurrent()
+//        closure()
+//        let diff = CFAbsoluteTimeGetCurrent() - start
+//        return diff
+//    }
+
     private func closeBanking() {
-        let time: Double = 0.7 * Double(customerCount)
-        let formattedTime = time.digitFormatter()
+        let formattedTime = progressTime(manageBanking).digitFormatter()
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(formattedTime)초입니다 ")
     }
 }
