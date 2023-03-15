@@ -134,8 +134,10 @@ class MainViewController: UIViewController {
         }
         
         Bank.workingGroup.notify(queue: .global()) { [self] in
-            timer?.suspend()
-            isRunningTimer = false
+            if isRunningTimer == true {
+                timer?.suspend()
+                isRunningTimer = false
+            }
         }
     }
     
