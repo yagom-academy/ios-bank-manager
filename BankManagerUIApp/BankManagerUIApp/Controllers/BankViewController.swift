@@ -22,7 +22,7 @@ final class BankViewController: UIViewController {
         super.viewDidLoad()
         bankManager.delegate = self
         view = bankView
-        updateTime()
+        updateTimeLabel()
         setupButton()
     }
     
@@ -34,11 +34,19 @@ final class BankViewController: UIViewController {
     
     private func setupButton() {
         bankView.addClientButton.addTarget(self, action: #selector(pushAddClientButton), for: .touchUpInside)
+        bankView.resetButton.addTarget(self, action: #selector(pushResetButton), for: .touchUpInside)
     }
     
     @objc private func pushAddClientButton() {
         bankManager.setupWaitingQueueAndClientNumber()
         bankManager.processBusiness()
+    }
+    
+    @objc private func pushResetButton() {
+        bankView.waitClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankView.processClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankManager.reset()
+        resetTimer()
     }
     
     private func startTimer() {
@@ -80,6 +88,7 @@ extension BankViewController: BankManagerDelegate {
     
     func startClientTask(_ client: Client) {
         DispatchQueue.main.async {
+            self.startTimer()
             self.bankView.waitClientStackView.arrangedSubviews.forEach {
                 let label = $0 as? UILabel
                 if label?.text == "\(client.clientNumber) - \(client.requstedTask.taskName)" {
@@ -97,6 +106,10 @@ extension BankViewController: BankManagerDelegate {
                 if label?.text == "\(client.clientNumber) - \(client.requstedTask.taskName)" {
                     $0.removeFromSuperview()
                 }
+            }
+            if self.bankView.processClientStackView.arrangedSubviews.isEmpty {
+                self.isPlay = false
+                self.timer.invalidate()
             }
         }
     }

@@ -32,6 +32,8 @@ struct BankManager {
     mutating func reset() {
         waitingQueue.clear()
         numberOfClient = 0
+        loanQueue.cancelAllOperations()
+        depositQueue.cancelAllOperations()
     }
     
     mutating func processBusiness() {
