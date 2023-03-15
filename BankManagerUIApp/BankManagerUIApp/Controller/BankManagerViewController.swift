@@ -48,19 +48,10 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc func addCustomerButtonTapped() {
-        let customers = make(numberOfCustomer: 10)
+        let customers = CustomerGenerator.make(numberOfCustomer: 10)
         
         bankManager.addTenCustomers(customers)
-    }
-    
-    private func make(numberOfCustomer: Int)  -> [Customer] {
-        var customers: [Customer] = []
-        for waitingNumber in 1...10 {
-            guard let customer = Customer(waitingNumber: waitingNumber) else { return [] }
-            customers.append(customer)
-        }
-        
-        return customers
+        customerQueueScrollView.addWaitingLabel(customers: customers)
     }
     
     @objc func clearButtonTapped() {

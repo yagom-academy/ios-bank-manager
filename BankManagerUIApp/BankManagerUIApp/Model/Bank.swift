@@ -26,22 +26,6 @@ struct Bank {
         )
     }
     
-    func receive(numberOfCustomer: Int) {
-        let customers = make(numberOfCustomer: numberOfCustomer)
-        
-        setUpCustomerQueue(customers: customers)
-    }
-    
-    func make(numberOfCustomer: Int)  -> [Customer] {
-        var customers: [Customer] = []
-        for waitingNumber in 1...10 {
-            guard let customer = Customer(waitingNumber: waitingNumber) else { return [] }
-            customers.append(customer)
-        }
-        
-        return customers
-    }
-    
     func setUpCustomerQueue(customers: [Customer]) {
         customers.forEach {
             customerQueue.enqueue($0)

@@ -11,6 +11,8 @@ final class CustomerLabel: UILabel {
     init(_ customer: Customer) {
         super.init(frame: .zero)
         self.text = "\(customer.waitingNumber) - \(customer.businessType.rawValue)"
+        self.textAlignment = .center
+        self.font = .preferredFont(forTextStyle: .title2)
         
         switch customer.businessType {
         case .deposit:

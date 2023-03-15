@@ -21,6 +21,7 @@ final class CustomerQueueScrollView: UIScrollView {
     private let waitingQueueStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         
         return stackView
     }()
@@ -55,5 +56,11 @@ final class CustomerQueueScrollView: UIScrollView {
             contentStackView.trailingAnchor.constraint(equalTo: frameLayoutGuide.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    func addWaitingLabel(customers: [Customer]) {
+        customers.forEach {
+            self.waitingQueueStackView.addArrangedSubview(CustomerLabel($0))
+        }
     }
 }
