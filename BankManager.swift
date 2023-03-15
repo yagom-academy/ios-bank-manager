@@ -10,8 +10,10 @@ import Foundation
 class BankManager {
     private var customerQueue: BankQueue<BankingType> = BankQueue<BankingType>()
     var customerCount: Int = 0
-    
-    func manageBanking(){
+    private var semaphoreValue: Int = 0
+    private lazy var semaphore = DispatchSemaphore(value: semaphoreValue)
+
+   func manageBanking(){
         insertCustomerCountToQueue()
         closeBanking()
     }
@@ -28,26 +30,27 @@ class BankManager {
         let depositDispatchQueuqe = DispatchQueue(label: "depositDispatchQueuqe")
         let loanDispatchQueue = DispatchQueue(label: "loanDispatchQueue")
         
+        
         while customerQueue.isEmpty() == false {
             guard let currentCustomer = customerQueue.peek() else { return }
-            let semaphore = DispatchSemaphore(value: currentCustomer.customer.deskCount)
-            
+            semaphoreValue = currentCustomer.customer.deskCount
+//            let semaphore = DispatchSemaphore(value: currentCustomer.customer.deskCount)
             switch currentCustomer.customer {
             case .deposit:
                 depositDispatchQueuqe.async(group: group) {
-                    semaphore.wait()
+                    self.semaphore.wait()
                     print("\(currentCustomer.customerNumber)\(BankingMessage.depositStartMessage)")
                     Thread.sleep(forTimeInterval: currentCustomer.customer.takenTimeForBanking)
                     print("\(currentCustomer.customerNumber)\(BankingMessage.depositEndingMessage)")
-                    semaphore.signal()
+                    self.semaphore.signal()
                 }
             case .loan:
                 loanDispatchQueue.async(group: group) {
-                    semaphore.wait()
+                    self.semaphore.wait()
                     print("\(currentCustomer.customerNumber)\(BankingMessage.loanStartMessage)")
                     Thread.sleep(forTimeInterval: currentCustomer.customer.takenTimeForBanking)
                     print("\(currentCustomer.customerNumber)\(BankingMessage.loanEndingMessage)")
-                    semaphore.signal()
+                    self.semaphore.signal()
                 }
             }
             self.customerQueue.dequeue()

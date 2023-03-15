@@ -73,10 +73,10 @@
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
 				5899903729BA1EB700D4D272 /* Extension.swift */,
+				58C0BD2E29C0501000E530D4 /* Customer.swift */,
 				5820528B29C0784C0084449B /* BankingType.swift */,
 				71A09F0E29B6E8630015C160 /* BankManager.swift */,
 				5899903529BA109F00D4D272 /* BankDesk.swift */,
-				58C0BD2E29C0501000E530D4 /* Customer.swift */,
 				719EBEE329B84B5A00B86AAF /* BankQueue.swift */,
 				71BBD4BD29BA131500E70105 /* TextEnum.swift */,
 			);
