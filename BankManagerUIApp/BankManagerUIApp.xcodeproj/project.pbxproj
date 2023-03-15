@@ -13,10 +13,8 @@
 		08BCEDF629C1A32300A49289 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEC29C1A32200A49289 /* Customer.swift */; };
 		08BCEDF729C1A32300A49289 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEE29C1A32200A49289 /* CustomerQueue.swift */; };
 		08BCEDF829C1A32300A49289 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEF29C1A32200A49289 /* LinkedList.swift */; };
-		08BCEDF929C1A32300A49289 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDF029C1A32200A49289 /* BankManager.swift */; };
 		08BCEDFA29C1A32300A49289 /* BankDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDF129C1A32200A49289 /* BankDepartment.swift */; };
 		08BCEDFB29C1A32300A49289 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDF229C1A32200A49289 /* Bank.swift */; };
-		08BCEDFC29C1A32300A49289 /* CustomerReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDF329C1A32200A49289 /* CustomerReceiver.swift */; };
 		08BCEDFD29C1A32300A49289 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDF429C1A32200A49289 /* Business.swift */; };
 		ADA8C74029C1860300E1A30B /* extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8C73F29C1860300E1A30B /* extension+UIView.swift */; };
 		ADA8C74229C1B59600E1A30B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8C74129C1B59600E1A30B /* Notification.swift */; };
@@ -53,10 +51,8 @@
 		08BCEDEC29C1A32200A49289 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		08BCEDEE29C1A32200A49289 /* CustomerQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		08BCEDEF29C1A32200A49289 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		08BCEDF029C1A32200A49289 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		08BCEDF129C1A32200A49289 /* BankDepartment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankDepartment.swift; sourceTree = "<group>"; };
 		08BCEDF229C1A32200A49289 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
-		08BCEDF329C1A32200A49289 /* CustomerReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerReceiver.swift; sourceTree = "<group>"; };
 		08BCEDF429C1A32200A49289 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		ADA8C73F29C1860300E1A30B /* extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UIView.swift"; sourceTree = "<group>"; };
 		ADA8C74129C1B59600E1A30B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -114,10 +110,8 @@
 			children = (
 				08BCEDF229C1A32200A49289 /* Bank.swift */,
 				08BCEDF129C1A32200A49289 /* BankDepartment.swift */,
-				08BCEDF029C1A32200A49289 /* BankManager.swift */,
 				08BCEDF429C1A32200A49289 /* Business.swift */,
 				08BCEDEC29C1A32200A49289 /* Customer.swift */,
-				08BCEDF329C1A32200A49289 /* CustomerReceiver.swift */,
 				08BCEDED29C1A32200A49289 /* DataStructure */,
 				ADA8C74129C1B59600E1A30B /* Notification.swift */,
 				08BCEDEB29C1A32200A49289 /* ProcessTimer.swift */,
@@ -361,8 +355,6 @@
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				08BCEDF529C1A32300A49289 /* ProcessTimer.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
-				08BCEDFC29C1A32300A49289 /* CustomerReceiver.swift in Sources */,
-				08BCEDF929C1A32300A49289 /* BankManager.swift in Sources */,
 				08BCEDFB29C1A32300A49289 /* Bank.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 			);

@@ -19,6 +19,7 @@ final class Bank: Openable {
     private let loanDepartment: Respondable
     private let depositDepartment: Respondable
     private let workGroup: DispatchGroup = DispatchGroup()
+    private var currentNumberTicket: Int = 1
     var processTime: CFAbsoluteTime?
     
     init(loanDepartment: Respondable, depositDepartment: Respondable, customerQueue: any CustomerQueueable) {
@@ -39,16 +40,16 @@ final class Bank: Openable {
     func open(totalCustomer: Int) {
         setCustomerQueue(totalCustomer: totalCustomer)
         let processTime = ProcessTimer.calculateProcessTime(for: startWork)
-        
         self.processTime = processTime
     }
     
     private func setCustomerQueue(totalCustomer: Int) {
-        for number in 1...totalCustomer {
-            let numberTicket = String(describing: number)
+        for _ in 1...totalCustomer {
+            let numberTicket = String(describing: currentNumberTicket)
+            currentNumberTicket += 1
             let customer = Customer(numberTicket: numberTicket)
             customerQueue.enqueue(customer)
-            
+ 
             NotificationCenter.default.post(name: .waiting,
                                             object: nil,
                                             userInfo: [NotificationKey.waiting: customer])
@@ -65,7 +66,6 @@ final class Bank: Openable {
                 loanDepartment.respond(to: customer, workGroup: workGroup)
             }
         }
-        workGroup.wait()
     }
     
     func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) -> String {

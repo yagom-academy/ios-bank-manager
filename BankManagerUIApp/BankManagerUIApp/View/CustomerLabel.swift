@@ -8,7 +8,8 @@
 import UIKit
 
 class CustomerLabel: UILabel {
-    let customer: Customer
+    private let customer: Customer
+    var identifierNumber: String { return customer.numberTicket }
     
     init(frame: CGRect, customer: Customer) {
         self.customer = customer

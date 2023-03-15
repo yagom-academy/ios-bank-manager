@@ -44,15 +44,41 @@ final class BankManagerViewController: UIViewController {
         
         let customerLabel = CustomerLabel(customer: customer)
         waitingStackView.addArrangedSubview(customerLabel)
-        waitingStackView.layoutIfNeeded()
     }
     
     @objc func moveToWorkingView(_ notification:NSNotification) {
+        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
+            return
+        }
+ 
+       let index = waitingStackView.arrangedSubviews.firstIndex { label  in
+            if let customerLabel = label as? CustomerLabel,
+               customerLabel.identifierNumber == customer.numberTicket {
+                return true
+            }
+            return false
+        }
         
+        let view = waitingStackView.arrangedSubviews[index!]
+        waitingStackView.removeArrangedSubview(view)
+        workingStackView.addArrangedSubview(view)
     }
     
     @objc func deleteCustomerLabelFromView(_ notification:NSNotification) {
+        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
+            return
+        }
         
+        let index = workingStackView.arrangedSubviews.firstIndex { label  in
+             if let customerLabel = label as? CustomerLabel,
+                customerLabel.identifierNumber == customer.numberTicket {
+                 return true
+             }
+             return false
+         }
+         
+         let view = workingStackView.arrangedSubviews[index!]
+        workingStackView.removeArrangedSubview(view)
     }
     
     private func setMainStackView() {
