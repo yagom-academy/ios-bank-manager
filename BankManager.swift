@@ -34,7 +34,6 @@ class BankManager {
         while customerQueue.isEmpty() == false {
             guard let currentCustomer = customerQueue.peek() else { return }
             semaphoreValue = currentCustomer.customer.deskCount
-//            let semaphore = DispatchSemaphore(value: currentCustomer.customer.deskCount)
             switch currentCustomer.customer {
             case .deposit:
                 depositDispatchQueuqe.async(group: group) {
