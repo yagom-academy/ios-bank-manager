@@ -12,9 +12,6 @@ struct Bank {
     var clientCount: Int = 0
     private var bankClerk = BankClerk()
     private let typeOfTask: [Task] = [.deposit, .loan]
-    private let loanBankClerk = DispatchSemaphore(value: 1)
-    private let depositBankClerks = DispatchSemaphore(value: 2)
-    private let taskGroup = DispatchGroup()
     private let depositClerk = OperationQueue()
     private let loanClerk = OperationQueue()
     
@@ -48,7 +45,7 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         doTask()
-        taskGroup.wait()
+        
         let timeOfTask = CFAbsoluteTimeGetCurrent() - startTime
         let totalTime = String(format: "%.2f", timeOfTask)
         
