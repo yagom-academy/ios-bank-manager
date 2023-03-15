@@ -35,8 +35,6 @@ final class BankManagerViewController: UIViewController {
                                  selector: #selector(deleteCustomerLabelFromView),
                                  name: .finished,
                                  object: nil)
-        
-
     }
     
     @objc func registerCustomerView(_ notification:NSNotification) {
@@ -61,7 +59,7 @@ final class BankManagerViewController: UIViewController {
         view.addSubview(mainStackView)
         mainStackView.distribution = .fill
         mainStackView.spacing = 10
-        mainStackView.setAutoLayoutConstraint(equalTo: view.safeAreaLayoutGuide)
+        mainStackView.setLayoutConstraint(toLayoutGuide: view.safeAreaLayoutGuide)
         
         let buttonStackView = makeButtonStackView()
         let timerLabel = makeTimerLabel()
@@ -156,18 +154,11 @@ final class BankManagerViewController: UIViewController {
         
 
         waitingScrollView.addSubview(waitingStackView)
-        waitingStackView.distribution = .equalSpacing
         
-        
-        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
-            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
-            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
-            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
-            waitingStackView.heightAnchor.constraint(equalTo: waitingScrollView.heightAnchor)
-        ])
+        waitingStackView.setLayoutConstraint(toView: waitingScrollView, needWidthAnchor: true)
+        let heightConstraint = waitingStackView.heightAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.heightAnchor)
+        heightConstraint.priority = UILayoutPriority(250)
+        heightConstraint.isActive = true
         
         customerStackView.addArrangedSubview(waitingScrollView)
         customerStackView.addArrangedSubview(workingStackView)
