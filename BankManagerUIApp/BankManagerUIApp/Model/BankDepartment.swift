@@ -8,28 +8,34 @@
 import Foundation
 
 protocol Respondable {
-    func respond(to customer: Customer, workGroup: DispatchGroup)
+    func respond(to customer: Customer)
+    func cancelTasks()
 }
 
-struct BankDepartment: Respondable {
+final class BankDepartment: Respondable {
     private let workableBanker: DispatchSemaphore
     private let taskQueue: DispatchQueue = DispatchQueue(label: "taskQueue", attributes: .concurrent)
+    var tasks: [DispatchWorkItem] = []
     
     init(workableBankerCount: Int) {
         self.workableBanker = DispatchSemaphore(value: workableBankerCount)
     }
     
-    func respond(to customer: Customer, workGroup: DispatchGroup) {
+    func respond(to customer: Customer) {
         let task = makeTask(for: customer)
-        taskQueue.async(group: workGroup, execute: task)
+        guard task.isCancelled == false else { return }
+        taskQueue.async(execute: task)
+        
     }
     
     private func makeTask(for customer: Customer) -> DispatchWorkItem {
-        let task = DispatchWorkItem {
-            self.workableBanker.wait()
-            self.doWork(for: customer)
-            self.workableBanker.signal()
+        let task = DispatchWorkItem { [weak self] in
+            self?.workableBanker.wait()
+            self?.doWork(for: customer)
+            self?.workableBanker.signal()
         }
+        
+        self.tasks.append(task)
         
         return task
     }
@@ -55,6 +61,11 @@ struct BankDepartment: Respondable {
                                             object: nil,
                                             userInfo: [NotificationKey.finished: customer])
         }
-        
+    }
+    
+    func cancelTasks() {
+        self.tasks.forEach {
+            $0.cancel()
+        }
     }
 }

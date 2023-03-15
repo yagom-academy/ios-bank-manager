@@ -21,6 +21,5 @@ extension Customer: Equatable {
                         lhs.numberTicket == rhs.numberTicket
         
         return result
-
     }
 }

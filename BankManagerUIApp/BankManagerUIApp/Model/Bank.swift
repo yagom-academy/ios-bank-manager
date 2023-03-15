@@ -16,9 +16,8 @@ protocol Openable {
 
 final class Bank: Openable {
     private var customerQueue: any CustomerQueueable
-    private let loanDepartment: Respondable
-    private let depositDepartment: Respondable
-    private let workGroup: DispatchGroup = DispatchGroup()
+    private var loanDepartment: Respondable
+    private var depositDepartment: Respondable
     private var currentNumberTicket: Int = 1
     var processTime: CFAbsoluteTime?
     
@@ -40,7 +39,8 @@ final class Bank: Openable {
     func open(totalCustomer: Int) {
         setCustomerQueue(totalCustomer: totalCustomer)
         let processTime = ProcessTimer.calculateProcessTime(for: startWork)
-        self.processTime = processTime
+        let result = self.reportResult(totalCustomer: currentNumberTicket, processTime: processTime)
+        print(result)
     }
     
     private func setCustomerQueue(totalCustomer: Int) {
@@ -61,9 +61,9 @@ final class Bank: Openable {
               let business = customer.business {
             switch business {
             case .deposit:
-                depositDepartment.respond(to: customer, workGroup: workGroup)
+                depositDepartment.respond(to: customer)
             case .loan:
-                loanDepartment.respond(to: customer, workGroup: workGroup)
+                loanDepartment.respond(to: customer)
             }
         }
     }
@@ -73,5 +73,10 @@ final class Bank: Openable {
         let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(roundedProcessTime)초 입니다."
         
         return message
+    }
+    
+    func close() {
+        loanDepartment.cancelTasks()
+        depositDepartment.cancelTasks()
     }
 }

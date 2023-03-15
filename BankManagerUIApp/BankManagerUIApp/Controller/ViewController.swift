@@ -50,8 +50,8 @@ final class BankManagerViewController: UIViewController {
         guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
             return
         }
- 
-       let index = waitingStackView.arrangedSubviews.firstIndex { label  in
+        
+        let index = waitingStackView.arrangedSubviews.firstIndex { label  in
             if let customerLabel = label as? CustomerLabel,
                customerLabel.identifierNumber == customer.numberTicket {
                 return true
@@ -65,20 +65,20 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc func deleteCustomerLabelFromView(_ notification:NSNotification) {
-        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
+        guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer else {
             return
         }
         
         let index = workingStackView.arrangedSubviews.firstIndex { label  in
-             if let customerLabel = label as? CustomerLabel,
-                customerLabel.identifierNumber == customer.numberTicket {
-                 return true
-             }
-             return false
-         }
-         
-         let view = workingStackView.arrangedSubviews[index!]
-        workingStackView.removeArrangedSubview(view)
+            if let customerLabel = label as? CustomerLabel,
+               customerLabel.identifierNumber == customer.numberTicket {
+                return true
+            }
+            return false
+        }
+        
+        let view = workingStackView.arrangedSubviews[index!]
+        view.removeFromSuperview()
     }
     
     private func setMainStackView() {
@@ -103,7 +103,9 @@ final class BankManagerViewController: UIViewController {
             let button = UIButton()
             button.setTitle("고객 10명 추가", for: .normal)
             button.setTitleColor(.systemBlue, for: .normal)
-            button.addTarget(self, action: #selector(addTenCustomer), for: .touchUpInside)
+            button.addTarget(self,
+                             action: #selector(addTenCustomer),
+                             for: .touchUpInside)
             
             return button
         }()
@@ -112,6 +114,9 @@ final class BankManagerViewController: UIViewController {
             let button = UIButton()
             button.setTitle("초기화", for: .normal)
             button.setTitleColor(.systemRed, for: .normal)
+            button.addTarget(self,
+                             action: #selector(reset),
+                             for: .touchUpInside)
             
             return button
         }()
@@ -174,11 +179,11 @@ final class BankManagerViewController: UIViewController {
         let waitingScrollView = {
             let scrollView = UIScrollView()
             scrollView.addSubview(waitingStackView)
-      
+            
             return scrollView
         }()
         
-
+        
         waitingScrollView.addSubview(waitingStackView)
         
         waitingStackView.setLayoutConstraint(toView: waitingScrollView, needWidthAnchor: true)
@@ -193,7 +198,12 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func addTenCustomer() {
-        bank.open(totalCustomer: 10)
+        let totalCustomer = 10
+        bank.open(totalCustomer: totalCustomer)
+    }
+    
+    @objc private func reset() {
+        bank.close()
     }
 }
 
