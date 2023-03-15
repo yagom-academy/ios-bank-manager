@@ -11,6 +11,7 @@ class MainViewController: UIViewController {
     private var timer: DispatchSourceTimer?
     private var date = Date(timeIntervalSince1970: 0)
     private var isRunningTimer = false
+    private var isRunningWork = false
     private let addCustomerButton = CustomButton(type: .system)
     private let resetButton = CustomButton(type: .system)
     private let mainStackView = UIStackView()
@@ -105,8 +106,9 @@ class MainViewController: UIViewController {
             guard let customer = bank.addCustomer() else { return }
             waitingStackView.addLabel(customer: customer)
         }
-
+        
         bank.open()
+        isRunningWork = true
     }
     
     @objc func updateWaitingCustomer(_ noti: Notification) {
@@ -117,7 +119,12 @@ class MainViewController: UIViewController {
         DispatchQueue.global().async { [self] in
             DispatchQueue.main.async { [self] in
                 waitingStackView.removeLabel(customer: customer)
-                workingStackView.addLabel(customer: customer)
+                
+                if isRunningWork {
+                    workingStackView.addLabel(customer: customer)
+                } else {
+                    return
+                }
             }
         }
     }
@@ -142,13 +149,23 @@ class MainViewController: UIViewController {
     }
     
     @objc private func didTapResetButton() {
-        timer?.cancel()
-        timer = nil
-        date = Date(timeIntervalSince1970: 0)
-        workTimeLabel.text = "업무시간 - 00:00:000"
+        isRunningWork = false
         bank = Bank()
+        resetTimer()
+        workTimeLabel.text = "업무시간 - 00:00:000"
         waitingStackView.resetLabel()
         workingStackView.resetLabel()
+    }
+    
+    private func resetTimer() {
+        if isRunningTimer == false {
+            timer?.resume()
+        }
+        
+        timer?.cancel()
+        timer = nil
+        
+        date = Date(timeIntervalSince1970: 0)
     }
 }
 
