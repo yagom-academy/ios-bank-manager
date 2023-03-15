@@ -22,14 +22,28 @@ struct BusinessSection: BankWorkable {
     func processJob(for customer: Customer, group: DispatchGroup) {
         bankDispatchQueue.async(group: group) {
             self.bankSemaphore.wait()
-            print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 시작")
+//            print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 시작")
+            notifyStartJob(customer: customer)
             Thread.sleep(forTimeInterval: customer.businessType.consultingTime)
-            print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 완료")
+//            print("\(customer.waitingNumber)번 고객 \(customer.businessType.rawValue)업무 완료")
+            notifyFinishJob(customer: customer)
             self.bankSemaphore.signal()
         }
     }
     
     mutating func addJobCount() {
         completedJobCount += 1
+    }
+    
+    func notifyStartJob(customer: Customer) {
+        NotificationCenter.default.post(name: .startJob,
+                                        object: self,
+                                        userInfo: [NotificationKey.customer: customer])
+    }
+    
+    func notifyFinishJob(customer: Customer) {
+        NotificationCenter.default.post(name: .finishJob,
+                                        object: self,
+                                        userInfo: [NotificationKey.customer: customer])
     }
 }

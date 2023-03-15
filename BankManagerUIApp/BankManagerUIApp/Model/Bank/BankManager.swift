@@ -11,4 +11,8 @@ struct BankManager {
     func addTenCustomers(_ customers: [Customer]) {
         bank.setUpCustomerQueue(customers: customers)
     }
+    
+    mutating func startBusiness() {
+        bank.startBankService()
+    }
 }

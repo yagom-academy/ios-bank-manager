@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4ABB8A2829C05159000BA484 /* CustomerQueueScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */; };
 		4ABB8A4229C1925C000BA484 /* CustomerQueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */; };
+		4ABB8A4529C1B7A2000BA484 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB8A4429C1B7A2000BA484 /* NotificationName.swift */; };
 		6232686329C19FCC00682E8B /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6232686229C19FCC00682E8B /* CustomerLabel.swift */; };
 		7F16B56129C03D9B00A584FA /* ControlPanelStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */; };
 		7F16B59A29C0AC4100A584FA /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16B59929C0AC4100A584FA /* Bank.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		4ABB8A2729C05159000BA484 /* CustomerQueueScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueScrollView.swift; sourceTree = "<group>"; };
 		4ABB8A4129C1925C000BA484 /* CustomerQueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueDelegate.swift; sourceTree = "<group>"; };
+		4ABB8A4429C1B7A2000BA484 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		6232686229C19FCC00682E8B /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
 		7F16B56029C03D9B00A584FA /* ControlPanelStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelStackView.swift; sourceTree = "<group>"; };
 		7F16B59929C0AC4100A584FA /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -109,16 +111,25 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		4ABB8A4329C1B727000BA484 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				7F16B59929C0AC4100A584FA /* Bank.swift */,
+				7F16B59B29C0AC5700A584FA /* BankManager.swift */,
+				7F16B59F29C0AC7400A584FA /* BusinessType.swift */,
+				7F16B5A129C0AC8200A584FA /* BusinessSection.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		6232685B29C08E0B00682E8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4ABB8A4329C1B727000BA484 /* Bank */,
 				7F16B5A529C0ACEE00A584FA /* DataStructure */,
-				7F16B59929C0AC4100A584FA /* Bank.swift */,
-				7F16B59B29C0AC5700A584FA /* BankManager.swift */,
 				7F16B59D29C0AC6800A584FA /* Customer.swift */,
-				7F16B59F29C0AC7400A584FA /* BusinessType.swift */,
-				7F16B5A129C0AC8200A584FA /* BusinessSection.swift */,
 				7F16B5AC29C1AA0D00A584FA /* CustomerGenerator.swift */,
+				4ABB8A4429C1B7A2000BA484 /* NotificationName.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +350,7 @@
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,
 				7F16B5A729C0AD0C00A584FA /* Node.swift in Sources */,
 				7F16B5A029C0AC7400A584FA /* BusinessType.swift in Sources */,
+				4ABB8A4529C1B7A2000BA484 /* NotificationName.swift in Sources */,
 				7F16B59E29C0AC6800A584FA /* Customer.swift in Sources */,
 				7F16B56129C03D9B00A584FA /* ControlPanelStackView.swift in Sources */,
 				7F16B5A429C0ACCF00A584FA /* BankWorkable.swift in Sources */,

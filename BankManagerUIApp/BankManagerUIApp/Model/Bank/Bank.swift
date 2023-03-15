@@ -47,7 +47,7 @@ struct Bank {
         }
     }
     
-    mutating func startBusiness() {
+    mutating func startBankService() {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         work()

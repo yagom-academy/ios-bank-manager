@@ -23,6 +23,26 @@ final class BankManagerViewController: UIViewController {
         configureCustomerQueueScrollView()
     }
     
+    private func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(moveCustomerLabel(_:)),
+                                               name: .startJob,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(removeCustomerLabel(_:)),
+                                               name: .finishJob,
+                                               object: nil)
+    }
+    
+    @objc private func moveCustomerLabel(_ noti: Notification) {
+        
+    }
+    
+    @objc private func removeCustomerLabel(_ noti: Notification) {
+        
+    }
+    
     private func configureControlPanelStackView() {
         view.addSubview(controlPanelStackView)
         controlPanelStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,6 +72,7 @@ final class BankManagerViewController: UIViewController {
         
         bankManager.addTenCustomers(customers)
         customerQueueScrollView.addWaitingLabel(customers: customers)
+        bankManager.startBusiness()
     }
     
     @objc func clearButtonTapped() {
