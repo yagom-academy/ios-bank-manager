@@ -8,8 +8,8 @@
 import UIKit
 
 final class DoingTaskStackView: UIStackView {
-    private let doingTaskLabel = DoingTaskLabel()
-    private let doingTaskScrollView = DoingTaskScrollView()
+    let doingTaskLabel = DoingTaskLabel()
+    let doingTaskScrollView = DoingTaskScrollView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

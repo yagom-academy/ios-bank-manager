@@ -9,7 +9,7 @@ import UIKit
 
 final class QueueStackView: UIStackView {
     let waitingQueueStackView = WaitingQueueStackView()
-    private let doingTaskStackView = DoingTaskStackView()
+    let doingTaskStackView = DoingTaskStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

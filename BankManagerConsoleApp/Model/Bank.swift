@@ -15,8 +15,10 @@ struct Bank {
     private let loanBankClerk = DispatchSemaphore(value: 1)
     private let depositBankClerks = DispatchSemaphore(value: 2)
     private let taskGroup = DispatchGroup()
-    var delegate: BankDelegate?
+    private let depositClerk = OperationQueue()
+    private let loanClerk = OperationQueue()
     
+    var delegate: BankDelegate?
     
     mutating func manageTodayTask() {
         lineUpClient()
@@ -33,7 +35,7 @@ struct Bank {
         } else {
             startCount = clientCount - 9
         }
-    
+        
         for number in startCount...clientCount {
             guard let type = typeOfTask.randomElement() else { return }
             let currentClient = Client(waitingNumber: number, purposeOfVisit: type)
@@ -46,39 +48,35 @@ struct Bank {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         doTask()
-        
+        taskGroup.wait()
         let timeOfTask = CFAbsoluteTimeGetCurrent() - startTime
         let totalTime = String(format: "%.2f", timeOfTask)
         
         return totalTime
     }
     
-    mutating private func doTask() {
+    mutating func doTask() {
         for _ in 1...waitingLine.count {
             guard let currentClient = waitingLine.dequeue() else { return }
             assignToBankClerk(currentClient)
         }
-        
-        taskGroup.wait()
     }
     
     private func assignToBankClerk(_ currentClient: Client) {
-        let depositService = DispatchWorkItem() {
-            depositBankClerks.wait()
+        let depositService = BlockOperation {
             bankClerk.service(to: currentClient)
-            depositBankClerks.signal()
         }
-        let loanService = DispatchWorkItem() {
-            loanBankClerk.wait()
+        let loanService = BlockOperation {
             bankClerk.service(to: currentClient)
-            loanBankClerk.signal()
         }
-        
+
         switch currentClient.purposeOfVisit {
         case .deposit:
-            DispatchQueue.global().async(group: taskGroup, execute: depositService)
+            depositClerk.maxConcurrentOperationCount = 2
+            depositClerk.addOperation(depositService)
         case .loan:
-            DispatchQueue.global().async(group: taskGroup, execute: loanService)
+            loanClerk.maxConcurrentOperationCount = 1
+            loanClerk.addOperation(loanService)
         }
     }
     
@@ -90,4 +88,5 @@ struct Bank {
 
 protocol BankDelegate {
     func sendData(of client: Client)
+    func processData(of client: Client)
 }

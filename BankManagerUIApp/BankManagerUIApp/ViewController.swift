@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     
     @objc func addTenClients() {
         bank.lineUpClient()
+        bank.doTask()
     }
     
     private func makeLabel(of client: Client) -> UILabel {
@@ -67,11 +68,17 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: BankDelegate {    
+extension ViewController: BankDelegate {
     func sendData(of client: Client) {
-        let waitingClientLabel = makeLabel(of: client)
+       let waitingClientLabel = makeLabel(of: client)
         
         queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.addArrangedSubview(waitingClientLabel)
+    }
+
+    func processData(of client: Client) {
+        let doingTaskClientLabel = makeLabel(of: client)
+        queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.arrangedSubviews[0].removeFromSuperview()
+        queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.addArrangedSubview(doingTaskClientLabel)
     }
 }
 
