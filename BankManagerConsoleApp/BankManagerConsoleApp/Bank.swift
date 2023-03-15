@@ -10,12 +10,11 @@ import Foundation
 struct Bank {
     private var customers: Queue<Customer> = Queue()
     private var numberOfCustomer = 0
-    static let workingGroup = DispatchGroup()
 
     mutating func addCustomer() -> Customer? {
-        numberOfCustomer += 1
-        
         guard let randomBanking = Banking.allCases.randomElement() else { return nil }
+        
+        numberOfCustomer += 1
         
         let customer = Customer(waitingNumber: numberOfCustomer, desiredBanking: randomBanking)
         
@@ -26,9 +25,7 @@ struct Bank {
     
     mutating func open() {
         while customers.isEmpty == false {
-            guard let customer = customers.dequeue() else {
-                break
-            }
+            guard let customer = customers.dequeue() else { break }
             
             BankManager.divideWork(accordingTo: customer)
         }

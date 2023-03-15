@@ -14,7 +14,7 @@ struct Customer {
     var fontColor: UIColor {
         switch desiredBanking {
         case .deposit:
-            return .black
+            return .label
         case .loan:
             return .systemIndigo
         }

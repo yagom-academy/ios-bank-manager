@@ -40,6 +40,8 @@ class QueueStackView: UIStackView {
             if newCustomer == oldLabel.text {
                 subStackView.removeArrangedSubview(oldLabel)
                 oldLabel.removeFromSuperview()
+                
+                return
             }
         }
     }

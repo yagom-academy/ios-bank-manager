@@ -6,9 +6,7 @@
 //
 
 enum BankOption {
-    static let openValue = "1"
-    static let closeValue = "2"
-    static let zero = "0"
-    
-    static let rangeOfCustomer = 10...30
+    static let defalutWorkTime = "00:00:000"
+    static let timerMilliSecond = 77
+    static let timerSecond = 0.077
 }
