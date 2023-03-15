@@ -9,6 +9,8 @@ import UIKit
 class MainViewController: UIViewController {
     private var bank = Bank()
     private var timer: DispatchSourceTimer?
+    private var date = Date(timeIntervalSince1970: 0)
+    private var isRunningTimer = false
     private let addCustomerButton = CustomButton(type: .system)
     private let resetButton = CustomButton(type: .system)
     private let mainStackView = UIStackView()
@@ -21,7 +23,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = false
-        label.text = "업무시간 - 04:00:123"
+        label.text = "업무시간 - 00:00:000"
         label.font = .preferredFont(forTextStyle: .title3)
         label.numberOfLines = 1
         
@@ -40,7 +42,6 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         configureLayout()
         configureUI()
-        configureTimer()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateWaitingCustomer),
@@ -72,20 +73,33 @@ class MainViewController: UIViewController {
     }
     
     private func configureTimer() {
+        if timer != nil {
+            return
+        }
+        
         timer = DispatchSource.makeTimerSource(queue: .global())
         timer?.schedule(deadline: .now(), repeating: .milliseconds(77))
         
         timer?.setEventHandler(handler: { [self] in
-            let date = Date()
+            date = date.addingTimeInterval(0.077)
             
-            DispatchQueue.main.async {
-                workTimeLabel.text = dateFormatter.string(from: date)
+            DispatchQueue.main.async { [self] in
+                workTimeLabel.text = "업무시간 - \(dateFormatter.string(from: date))"
             }
         })
+        
+        timer?.resume()
+        isRunningTimer = true
+        
     }
     
     @objc private func didTapAddCustomerButton() {
-        timer?.resume()
+        configureTimer()
+        
+        if isRunningTimer == false {
+            timer?.resume()
+            isRunningTimer = true
+        }
         
         for _ in 1...10 {
             guard let customer = bank.addCustomer() else { return }
@@ -118,12 +132,18 @@ class MainViewController: UIViewController {
                 workingStackView.removeLabel(customer: customer)
             }
         }
+        
+        Bank.workingGroup.notify(queue: .global()) { [self] in
+            timer?.suspend()
+            isRunningTimer = false
+        }
     }
     
     @objc private func didTapResetButton() {
         timer?.cancel()
         timer = nil
-        
+        date = Date(timeIntervalSince1970: 0)
+        workTimeLabel.text = "업무시간 - 00:00:000"
         bank = Bank()
         waitingStackView.resetLabel()
         workingStackView.resetLabel()
