@@ -8,7 +8,7 @@
 import Foundation
 
 class BankManager {
-    private var customerCountQueue: BankQueue<BankingType> = BankQueue<BankingType>()
+    private var customerQueue: BankQueue<BankingType> = BankQueue<BankingType>()
     var customerCount: Int = 0
     
     func banking(){
@@ -19,7 +19,7 @@ class BankManager {
     private func insertCustomerCountToQueue() {
         for i in 1...customerCount {
             guard let customer = BankingType.init(countNumber: i) else { return }
-            self.customerCountQueue.enqueue(data: customer)
+            self.customerQueue.enqueue(data: customer)
         }
     }
 
@@ -28,29 +28,29 @@ class BankManager {
         let depositDispatchQueuqe = DispatchQueue(label: "depositDispatchQueuqe")
         let loanDispatchQueue = DispatchQueue(label: "loanDispatchQueue")
         
-        while customerCountQueue.isEmpty() == false {
-            guard let dequeueCustomer = customerCountQueue.peek() else { return }
+        while customerQueue.isEmpty() == false {
+            guard let dequeueCustomer = customerQueue.peek() else { return }
             let semaphore = DispatchSemaphore(value: dequeueCustomer.customer.deskCount)
             
             switch dequeueCustomer.customer {
             case .deposit:
                 depositDispatchQueuqe.async(group: group) {
                     semaphore.wait()
-                    print("\(dequeueCustomer.countNumber)번 고객 예금업무 시작")
+                    print("\(dequeueCustomer.countNumber)\(BankingMessage.depositStartMessage)")
                     Thread.sleep(forTimeInterval: dequeueCustomer.customer.takenTimeForBanking)
-                    print("\(dequeueCustomer.countNumber)번 고객 예금업무 종료")
+                    print("\(dequeueCustomer.countNumber)\(BankingMessage.depositEndingMessage)")
                     semaphore.signal()
                 }
             case .loan:
                 loanDispatchQueue.async(group: group) {
                     semaphore.wait()
-                    print("\(dequeueCustomer.countNumber)번 고객 대출업무 시작")
+                    print("\(dequeueCustomer.countNumber)\(BankingMessage.loanStartMessage)")
                     Thread.sleep(forTimeInterval: dequeueCustomer.customer.takenTimeForBanking)
-                    print("\(dequeueCustomer.countNumber)번 고객 대출업무 종료")
+                    print("\(dequeueCustomer.countNumber)\(BankingMessage.loanEndingMessage)")
                     semaphore.signal()
                 }
             }
-            self.customerCountQueue.dequeue()
+            self.customerQueue.dequeue()
         }
         group.wait()
     }

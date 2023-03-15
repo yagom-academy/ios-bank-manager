@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankingType {
-    let customer: Customer
+    let customer: Customer 
     let countNumber: Int
     
     init?(countNumber: Int){
