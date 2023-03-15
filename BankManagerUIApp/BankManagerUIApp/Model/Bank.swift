@@ -48,6 +48,10 @@ final class Bank: Openable {
             let numberTicket = String(describing: number)
             let customer = Customer(numberTicket: numberTicket)
             customerQueue.enqueue(customer)
+            
+            NotificationCenter.default.post(name: .waiting,
+                                            object: nil,
+                                            userInfo: [NotificationKey.waiting: customer])
         }
     }
     

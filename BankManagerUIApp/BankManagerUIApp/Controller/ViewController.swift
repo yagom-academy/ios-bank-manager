@@ -156,7 +156,7 @@ final class BankManagerViewController: UIViewController {
     
     @objc private func addTenCustomer() {
         for _ in 1...10 {
-            let customerLabel = CustomerLabel(customer: <#T##Customer#>)
+//            let customerLabel = CustomerLabel(customer: <#T##Customer#>)
         }
     }
 }

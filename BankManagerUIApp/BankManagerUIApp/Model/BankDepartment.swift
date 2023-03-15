@@ -40,7 +40,15 @@ struct BankDepartment: Respondable {
         let endMessage = "\(customer.numberTicket)번 고객 \(business.rawValue)업무 완료"
         
         print(startMessage)
+        NotificationCenter.default.post(name: .working,
+                                        object: nil,
+                                        userInfo: [NotificationKey.working: customer])
+        
         Thread.sleep(forTimeInterval: business.processTime)
+        
         print(endMessage)
+        NotificationCenter.default.post(name: .finished,
+                                        object: nil,
+                                        userInfo: [NotificationKey.finished: customer])
     }
 }
