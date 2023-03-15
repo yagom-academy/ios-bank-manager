@@ -8,5 +8,6 @@
 import Foundation
 
 extension Notification.Name {
-    static let waitWork = Notification.Name("waitWork")
+    static let workingNoti = Notification.Name("workingNoti")
+    static let completeNoti = Notification.Name("completeNoti")
 }

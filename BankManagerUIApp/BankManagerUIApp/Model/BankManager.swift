@@ -14,7 +14,7 @@ struct BankManager {
     private static func work(for customer: Customer) {
         let workQueue = DispatchQueue(label: "WorkQueue")
         
-        NotificationCenter.default.post(name: .waitWork, object: customer)
+        NotificationCenter.default.post(name: .workingNoti, object: customer)
         
         let queueItem = DispatchWorkItem {
             print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 시작")
@@ -23,18 +23,20 @@ struct BankManager {
         }
         
         workQueue.sync(execute: queueItem)
+        
+        NotificationCenter.default.post(name: .completeNoti, object: customer)
     }
     
     static func divideWork(accordingTo customer: Customer) {
         switch customer.desiredBanking {
         case .deposit:
-            DispatchQueue.global().async(group: Bank.workingGroup) {
+            DispatchQueue.global().async(group: Bank.workingGroup, qos: .background) {
                 depositManager.wait()
                 work(for: customer)
                 depositManager.signal()
             }
         case .loan:
-            DispatchQueue.global().async(group: Bank.workingGroup) {
+            DispatchQueue.global().async(group: Bank.workingGroup, qos: .background) {
                 loanManager.wait()
                 work(for: customer)
                 loanManager.signal()

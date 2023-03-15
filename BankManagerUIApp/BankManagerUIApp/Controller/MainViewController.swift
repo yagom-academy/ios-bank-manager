@@ -15,13 +15,32 @@ class MainViewController: UIViewController {
     private let waitingStackView = QueueStackView()
     private let workingStackView = QueueStackView()
     
+    private let workTimeLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = false
+        label.text = "업무시간 - 04:00:123"
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.numberOfLines = 1
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureLayout()
         configureUI()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateWaitingCustomer), name: .waitWork, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateWaitingCustomer),
+                                               name: .workingNoti,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateCompleteCustomer),
+                                               name: .completeNoti,
+                                               object: nil)
     }
 
     private func configureLayout() {
@@ -44,13 +63,9 @@ class MainViewController: UIViewController {
     }
     
     @objc private func didTapAddCustomerButton() {
-        DispatchQueue.global().async { [self] in
-            DispatchQueue.main.sync {
-                for _ in 1...10 {
-                    guard let customer = bank.addCustomer() else { return }
-                    waitingStackView.addLabel(customer: customer)
-                }
-            }
+        for _ in 1...10 {
+            guard let customer = bank.addCustomer() else { return }
+            waitingStackView.addLabel(customer: customer)
         }
 
         bank.open()
@@ -62,9 +77,21 @@ class MainViewController: UIViewController {
         }
         
         DispatchQueue.global().async { [self] in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 waitingStackView.removeLabel(customer: customer)
                 workingStackView.addLabel(customer: customer)
+            }
+        }
+    }
+    
+    @objc func updateCompleteCustomer(_ noti: Notification) {
+        guard let customer = noti.object as? Customer else {
+            return
+        }
+        
+        DispatchQueue.global().async { [self] in
+            DispatchQueue.main.async { [self] in
+                workingStackView.removeLabel(customer: customer)
             }
         }
     }
@@ -147,14 +174,6 @@ extension MainViewController {
 // MARK: - UILabel
 extension MainViewController {
     private func createWorkTimeLabel() {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = false
-        label.text = "업무시간 - 04:00:123"
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 1
-        
-        mainStackView.addArrangedSubview(label)
+        mainStackView.addArrangedSubview(workTimeLabel)
     }
 }
