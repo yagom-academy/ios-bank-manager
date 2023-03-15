@@ -22,7 +22,11 @@ struct BankManager {
             print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 완료")
         }
         
-        workQueue.sync(execute: queueItem)
+        if MainViewController.isRunningWork == true {
+            workQueue.sync(execute: queueItem)
+        } else {
+            queueItem.cancel()
+        }
         
         NotificationCenter.default.post(name: .completeNoti, object: customer)
     }
@@ -30,13 +34,13 @@ struct BankManager {
     static func divideWork(accordingTo customer: Customer) {
         switch customer.desiredBanking {
         case .deposit:
-            DispatchQueue.global().async(group: Bank.workingGroup, qos: .background) {
+            DispatchQueue.global().async(group: Bank.workingGroup, qos: .userInitiated) {
                 depositManager.wait()
                 work(for: customer)
                 depositManager.signal()
             }
         case .loan:
-            DispatchQueue.global().async(group: Bank.workingGroup, qos: .background) {
+            DispatchQueue.global().async(group: Bank.workingGroup, qos: .userInitiated) {
                 loanManager.wait()
                 work(for: customer)
                 loanManager.signal()
