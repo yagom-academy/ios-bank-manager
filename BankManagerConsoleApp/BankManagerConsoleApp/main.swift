@@ -4,7 +4,13 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
-var bankManager = BankManager(bank: bank)
+let customerQueue = CustomerQueue()
+let loanDepartment = BankDepartment(workableBankerCount: 1)
+let depositDepartment = BankDepartment(workableBankerCount: 2)
+let bank = Bank(loanDepartment: loanDepartment,
+                depositDepartment: depositDepartment,
+                customerQueue: customerQueue)
+let customerReceiver = CustomerReceiver()
+var bankManager = BankManager(bank: bank, customerReceiver: customerReceiver)
 
 bankManager.start()

@@ -5,19 +5,35 @@
 //  Created by Rowan, 릴라 on 2023/03/06.
 //
 
-struct CustomerQueue<T> {
-    private let list: LinkedList<T> = LinkedList()
+protocol Queueable {
+    associatedtype T
+    
+    var list: LinkedList<T> { get }
+    
+    var isEmpty: Bool { get }
 
+    mutating func enqueue(_ data: T)
+
+    @discardableResult
+    mutating func dequeue() -> T?
+
+    func clear()
+
+    @discardableResult
+    func peek() -> T?
+}
+
+extension Queueable {
     var isEmpty: Bool {
         return list.isEmpty
     }
 
-    func enqueue(_ data: T) {
+    mutating func enqueue(_ data: T) {
         list.append(data: data)
     }
 
     @discardableResult
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         return list.removeFirst()
     }
 
@@ -29,4 +45,10 @@ struct CustomerQueue<T> {
     func peek() -> T? {
         return list.headData
     }
+}
+
+protocol CustomerQueueable : Queueable where T == Customer { }
+
+struct CustomerQueue: CustomerQueueable {
+    let list: LinkedList<Customer> = LinkedList()
 }
