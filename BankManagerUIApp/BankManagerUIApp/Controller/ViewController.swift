@@ -6,7 +6,6 @@
 
 import UIKit
 
-
 final class BankManagerViewController: UIViewController {
     let mainStackView = VerticalStackView()
     let workingStackView = VerticalStackView()
