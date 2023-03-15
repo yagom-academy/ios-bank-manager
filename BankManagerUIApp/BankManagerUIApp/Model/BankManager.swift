@@ -14,6 +14,8 @@ struct BankManager {
     private static func work(for customer: Customer) {
         let workQueue = DispatchQueue(label: "WorkQueue")
         
+        NotificationCenter.default.post(name: .waitWork, object: customer)
+        
         let queueItem = DispatchWorkItem {
             print("\(customer.waitingNumber)번 고객 \(customer.desiredBanking)업무 시작")
             Thread.sleep(forTimeInterval: customer.desiredBanking.time)

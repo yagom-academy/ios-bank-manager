@@ -32,11 +32,10 @@ struct Bank {
                 break
             }
             
-            NotificationCenter.default.post(name: .waitWork, object: customer)
             BankManager.divideWork(accordingTo: customer)
         }
         
-        Bank.workingGroup.wait()
+//        Bank.workingGroup.wait()
         
         let finishDate = Date().timeIntervalSince(startDate)
         

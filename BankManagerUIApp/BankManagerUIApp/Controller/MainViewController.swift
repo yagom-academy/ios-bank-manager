@@ -44,14 +44,15 @@ class MainViewController: UIViewController {
     }
     
     @objc private func didTapAddCustomerButton() {
-        DispatchQueue.main.async { [self] in
-            for _ in 1...10 {
-                guard let customer = bank.addCustomer() else { return }
-                waitingStackView.addLabel(customer: customer)
-                sleep(1)
+        DispatchQueue.global().async { [self] in
+            DispatchQueue.main.sync {
+                for _ in 1...10 {
+                    guard let customer = bank.addCustomer() else { return }
+                    waitingStackView.addLabel(customer: customer)
+                }
             }
         }
-        
+
         bank.open()
     }
     
@@ -60,9 +61,11 @@ class MainViewController: UIViewController {
             return
         }
         
-        DispatchQueue.main.async { [self] in
-            waitingStackView.removeLabel(customer: customer)
-            workingStackView.addLabel(customer: customer)
+        DispatchQueue.global().async { [self] in
+            DispatchQueue.main.async {
+                waitingStackView.removeLabel(customer: customer)
+                workingStackView.addLabel(customer: customer)
+            }
         }
     }
     
