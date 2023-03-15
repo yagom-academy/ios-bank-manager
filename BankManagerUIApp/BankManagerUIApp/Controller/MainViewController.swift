@@ -8,6 +8,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     private var bank = Bank()
+    private var timer: DispatchSourceTimer?
     private let addCustomerButton = CustomButton(type: .system)
     private let resetButton = CustomButton(type: .system)
     private let mainStackView = UIStackView()
@@ -27,11 +28,19 @@ class MainViewController: UIViewController {
         return label
     }()
     
+    lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "mm:ss:SSS"
+        
+        return formatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureLayout()
         configureUI()
+        configureTimer()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateWaitingCustomer),
@@ -62,7 +71,22 @@ class MainViewController: UIViewController {
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
     }
     
+    private func configureTimer() {
+        timer = DispatchSource.makeTimerSource(queue: .global())
+        timer?.schedule(deadline: .now(), repeating: .milliseconds(77))
+        
+        timer?.setEventHandler(handler: { [self] in
+            let date = Date()
+            
+            DispatchQueue.main.async {
+                workTimeLabel.text = dateFormatter.string(from: date)
+            }
+        })
+    }
+    
     @objc private func didTapAddCustomerButton() {
+        timer?.resume()
+        
         for _ in 1...10 {
             guard let customer = bank.addCustomer() else { return }
             waitingStackView.addLabel(customer: customer)
@@ -97,6 +121,9 @@ class MainViewController: UIViewController {
     }
     
     @objc private func didTapResetButton() {
+        timer?.cancel()
+        timer = nil
+        
         bank = Bank()
         waitingStackView.resetLabel()
         workingStackView.resetLabel()
