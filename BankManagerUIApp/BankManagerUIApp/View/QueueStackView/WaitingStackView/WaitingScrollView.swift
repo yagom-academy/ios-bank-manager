@@ -31,7 +31,11 @@ final class WaitingScrollView: UIScrollView {
     
     private func configureConstraint() {
         NSLayoutConstraint.activate([
-            waitingClientStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            waitingClientStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            waitingClientStackView.topAnchor.constraint(equalTo: self.topAnchor),
+            waitingClientStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            waitingClientStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            waitingClientStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

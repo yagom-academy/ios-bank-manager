@@ -22,6 +22,7 @@ final class QueueStackView: UIStackView {
     }
     
     private func configure() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .horizontal
         self.distribution = .fillEqually
     }

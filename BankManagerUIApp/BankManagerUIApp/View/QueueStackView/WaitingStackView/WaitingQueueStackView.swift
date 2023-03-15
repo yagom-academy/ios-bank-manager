@@ -22,6 +22,7 @@ final class WaitingQueueStackView: UIStackView {
     }
     
     private func configure() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
         self.spacing = 10
     }

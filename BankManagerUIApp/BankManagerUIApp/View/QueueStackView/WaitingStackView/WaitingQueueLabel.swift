@@ -19,8 +19,7 @@ final class WaitingQueueLabel: UILabel {
     
     private func configure() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.setContentCompressionResistancePriority(.required, for: .vertical)
-        self.setContentHuggingPriority(.required, for: .vertical)
+        self.setContentHuggingPriority(.defaultHigh, for: .vertical)
         self.textAlignment = .center
         self.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         self.text = "대기중"

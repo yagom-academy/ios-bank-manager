@@ -33,10 +33,10 @@ class ViewController: UIViewController {
         //screenView
         NSLayoutConstraint.activate([
             screenStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            screenStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            screenStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            screenStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            taskTimerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
+            screenStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            screenStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            screenStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            taskTimerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
         ])
     }
     
