@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         configureConstraint()
         view.backgroundColor = .white
         addClientButtonTapped()
+        bank.delegate = self
     }
     
     private func setUpScreenStackView() {
@@ -46,26 +47,32 @@ class ViewController: UIViewController {
     
     @objc func addTenClients() {
         bank.lineUpClient()
-        
-        for _ in 1...bank.clientCount {
-            let clientLabel = ClientLabel()
-            guard let client = bank.waitingLine.dequeue() else { return }
-            let message = "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)"
-           
-            switch client.purposeOfVisit {
-            case .loan:
-                clientLabel.textColor = .systemPurple
-            case .deposit:
-                clientLabel.textColor = .black
-            }
-            
-            clientLabel.text = message
-            
-            queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.addArrangedSubview(clientLabel)
-        }
-        
     }
     
+    private func makeLabel(of client: Client) -> UILabel {
+        let clientLabel = UILabel()
+        let message = "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)"
+        clientLabel.text = message
+        clientLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        clientLabel.textAlignment = .center
+        
+        switch client.purposeOfVisit {
+        case .loan:
+            clientLabel.textColor = .systemPurple
+        case .deposit:
+            clientLabel.textColor = .black
+        }
+        
+        return clientLabel
+    }
+}
+
+extension ViewController: BankDelegate {    
+    func sendData(of client: Client) {
+        let waitingClientLabel = makeLabel(of: client)
+        
+        queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.addArrangedSubview(waitingClientLabel)
+    }
 }
 
 
@@ -90,3 +97,4 @@ struct ViewPreview: PreviewProvider {
         ViewControllerRepresentable()
     }
 }
+

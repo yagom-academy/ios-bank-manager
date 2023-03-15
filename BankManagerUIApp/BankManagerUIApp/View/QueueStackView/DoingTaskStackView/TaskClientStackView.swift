@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class TaskClientStackView: UIStackView {
-    let clientLabel = ClientLabel()
-    
+final class TaskClientStackView: UIStackView {    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

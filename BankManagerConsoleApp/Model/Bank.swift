@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Bank {
+struct Bank {
     var waitingLine = Queue<Client>()
     var clientCount: Int = 0
     private var bankClerk = BankClerk()
@@ -15,6 +15,8 @@ public struct Bank {
     private let loanBankClerk = DispatchSemaphore(value: 1)
     private let depositBankClerks = DispatchSemaphore(value: 2)
     private let taskGroup = DispatchGroup()
+    var delegate: BankDelegate?
+    
     
     mutating func manageTodayTask() {
         lineUpClient()
@@ -24,11 +26,19 @@ public struct Bank {
     
     mutating func lineUpClient() {
         clientCount += 10
+        var startCount = 1
         
-        for number in 1...clientCount {
+        if clientCount == 10 {
+            startCount = 1
+        } else {
+            startCount = clientCount - 9
+        }
+    
+        for number in startCount...clientCount {
             guard let type = typeOfTask.randomElement() else { return }
             let currentClient = Client(waitingNumber: number, purposeOfVisit: type)
             waitingLine.enqueue(currentClient)
+            delegate?.sendData(of: currentClient)
         }
     }
     
@@ -76,4 +86,8 @@ public struct Bank {
         let success = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalTime)초입니다."
         print(success)
     }
+}
+
+protocol BankDelegate {
+    func sendData(of client: Client)
 }

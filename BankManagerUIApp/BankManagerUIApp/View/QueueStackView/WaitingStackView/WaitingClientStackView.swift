@@ -8,8 +8,6 @@
 import UIKit
 
 final class WaitingClientStackView: UIStackView {
-    let clientLabel = ClientLabel()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
