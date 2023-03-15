@@ -10,14 +10,14 @@ import UIKit
 class HorizontalStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureProperties()
     }
 
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func configureProperties() {
         self.distribution = .fillEqually
         self.axis = .horizontal
     }
@@ -27,14 +27,14 @@ class HorizontalStackView: UIStackView {
 class VerticalStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureProperties()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func configureProperties() {
         self.distribution = .fillEqually
         self.axis = .vertical
     }

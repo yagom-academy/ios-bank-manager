@@ -110,14 +110,14 @@
 		08BCEDEA29C1A32200A49289 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				08BCEDEB29C1A32200A49289 /* ProcessTimer.swift */,
-				08BCEDEC29C1A32200A49289 /* Customer.swift */,
-				08BCEDED29C1A32200A49289 /* DataStructure */,
-				08BCEDF029C1A32200A49289 /* BankManager.swift */,
-				08BCEDF129C1A32200A49289 /* BankDepartment.swift */,
 				08BCEDF229C1A32200A49289 /* Bank.swift */,
-				08BCEDF329C1A32200A49289 /* CustomerReceiver.swift */,
+				08BCEDF129C1A32200A49289 /* BankDepartment.swift */,
+				08BCEDF029C1A32200A49289 /* BankManager.swift */,
 				08BCEDF429C1A32200A49289 /* Business.swift */,
+				08BCEDEC29C1A32200A49289 /* Customer.swift */,
+				08BCEDF329C1A32200A49289 /* CustomerReceiver.swift */,
+				08BCEDED29C1A32200A49289 /* DataStructure */,
+				08BCEDEB29C1A32200A49289 /* ProcessTimer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

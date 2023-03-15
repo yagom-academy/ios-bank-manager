@@ -27,6 +27,15 @@ final class Bank: Openable {
         self.customerQueue = customerQueue
     }
     
+    convenience init(loanBankerCount: Int, depositBankerCount: Int) {
+        let loanDepartment = BankDepartment(workableBankerCount: 1)
+        let depositDepartment = BankDepartment(workableBankerCount: 2)
+        let customerQueue = CustomerQueue()
+        self.init(loanDepartment: loanDepartment,
+                  depositDepartment: depositDepartment,
+                  customerQueue: customerQueue)
+    }
+    
     func open(totalCustomer: Int) {
         setCustomerQueue(totalCustomer: totalCustomer)
         let processTime = ProcessTimer.calculateProcessTime(for: startWork)

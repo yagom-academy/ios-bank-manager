@@ -10,6 +10,7 @@ final class BankManagerViewController: UIViewController {
     let mainStackView = VerticalStackView()
     let workingStackView = VerticalStackView()
     let waitingStackView = VerticalStackView()
+    let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +120,12 @@ final class BankManagerViewController: UIViewController {
         customerStackView.addArrangedSubview(workingStackView)
         
         return customerStackView
+    }
+    
+    @objc private func addTenCustomer() {
+        for _ in 1...10 {
+            let customerLabel = CustomerLabel(customer: <#T##Customer#>)
+        }
     }
 }
 

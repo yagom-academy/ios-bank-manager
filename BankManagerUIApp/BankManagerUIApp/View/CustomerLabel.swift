@@ -2,7 +2,7 @@
 //  CustomerLabel.swift
 //  BankManagerUIApp
 //
-//  Created by 김성준 on 2023/03/15.
+//  Created by 릴라, Rowan on 2023/03/15.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class CustomerLabel: UILabel {
         self.customer = customer
         super.init(frame: frame)
         
-        configure()
+        configureProperties()
     }
     
     convenience init(customer: Customer) {
@@ -26,7 +26,7 @@ class CustomerLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func configureProperties() {
         guard let business = customer.business else { return }
         self.text = "\(customer.numberTicket) - \(business.rawValue)"
         self.textAlignment = .center
