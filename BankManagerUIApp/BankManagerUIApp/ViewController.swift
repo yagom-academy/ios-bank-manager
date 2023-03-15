@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     private let taskTimerLabel = TaskTimerLabel()
     private let queueStackView = QueueStackView()
     
+    private let main = OperationQueue.main
     private var bank = Bank()
     
     override func viewDidLoad() {
@@ -74,11 +75,28 @@ extension ViewController: BankDelegate {
         
         queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.addArrangedSubview(waitingClientLabel)
     }
-
-    func processData(of client: Client) {
-        let doingTaskClientLabel = makeLabel(of: client)
-        queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.arrangedSubviews[0].removeFromSuperview()
-        queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.addArrangedSubview(doingTaskClientLabel)
+    
+    func startTask(of client: Client) {
+        main.addOperation { [self] in
+            queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.arrangedSubviews.forEach {
+                let label = $0 as? UILabel
+                if label?.text == "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)" {
+                    $0.removeFromSuperview()
+                    queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.addArrangedSubview($0)
+                }
+            }
+        }
+    }
+    
+    func completeTask(of client: Client) {
+        main.addOperation { [self] in
+            queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.arrangedSubviews.forEach {
+                let label = $0 as? UILabel
+                if label?.text == "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)" {
+                    $0.removeFromSuperview()
+                }
+            }
+        }
     }
 }
 

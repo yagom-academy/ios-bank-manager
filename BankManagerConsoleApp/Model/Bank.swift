@@ -60,20 +60,19 @@ struct Bank {
     }
     
     private func assignToBankClerk(_ currentClient: Client) {
-        let depositService = BlockOperation {
+        let process = BlockOperation {
+            delegate?.startTask(of: currentClient)
             bankClerk.service(to: currentClient)
-        }
-        let loanService = BlockOperation {
-            bankClerk.service(to: currentClient)
+            delegate?.completeTask(of: currentClient)
         }
 
         switch currentClient.purposeOfVisit {
         case .deposit:
             depositClerk.maxConcurrentOperationCount = 2
-            depositClerk.addOperation(depositService)
+            depositClerk.addOperation(process)
         case .loan:
             loanClerk.maxConcurrentOperationCount = 1
-            loanClerk.addOperation(loanService)
+            loanClerk.addOperation(process)
         }
     }
     
@@ -85,5 +84,6 @@ struct Bank {
 
 protocol BankDelegate {
     func sendData(of client: Client)
-    func processData(of client: Client)
+    func startTask(of client: Client)
+    func completeTask(of client: Client)
 }
