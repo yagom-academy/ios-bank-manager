@@ -26,18 +26,10 @@ struct Bank {
         )
     }
     
-//    func receive(_ numberOfCustomer: Int) {
-//        for waitingNumber in 1...numberOfCustomer {
-//            guard let customer = Customer(waitingNumber: waitingNumber) else { return }
-//
-//            customerQueue.enqueue(customer)
-//        }
-//    }
-    
     func receive(numberOfCustomer: Int) {
         let customers = make(numberOfCustomer: numberOfCustomer)
         
-        setUPCustomerQueue(customers: customers)
+        setUpCustomerQueue(customers: customers)
     }
     
     func make(numberOfCustomer: Int)  -> [Customer] {
@@ -50,7 +42,7 @@ struct Bank {
         return customers
     }
     
-    func setUPCustomerQueue(customers: [Customer]) {
+    func setUpCustomerQueue(customers: [Customer]) {
         customers.forEach {
             customerQueue.enqueue($0)
         }

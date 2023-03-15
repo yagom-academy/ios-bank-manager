@@ -14,7 +14,6 @@ final class BankManagerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        bankManager.delegate = self
         
         controlPanelStackView.setControlButtonTarget(
             addAction: #selector(addCustomerButtonTapped),
@@ -49,8 +48,19 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc func addCustomerButtonTapped() {
-        print("Add")
+        let customers = make(numberOfCustomer: 10)
         
+        bankManager.addTenCustomers(customers)
+    }
+    
+    private func make(numberOfCustomer: Int)  -> [Customer] {
+        var customers: [Customer] = []
+        for waitingNumber in 1...10 {
+            guard let customer = Customer(waitingNumber: waitingNumber) else { return [] }
+            customers.append(customer)
+        }
+        
+        return customers
     }
     
     @objc func clearButtonTapped() {
@@ -58,8 +68,8 @@ final class BankManagerViewController: UIViewController {
     }
 }
 
-extension BankManagerViewController: CustomerQueueDelegate {
-    func addLabels(customers: [Customer]) {
-        <#code#>
-    }
-}
+//extension BankManagerViewController: CustomerQueueDelegate {
+//    func addLabels(customers: [Customer]) {
+//        <#code#>
+//    }
+//}
