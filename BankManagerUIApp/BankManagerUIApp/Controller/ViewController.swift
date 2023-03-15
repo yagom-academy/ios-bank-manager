@@ -9,6 +9,8 @@ import UIKit
 
 final class BankManagerViewController: UIViewController {
     let mainStackView = UIStackView()
+    var waitingScrollView = UIScrollView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +120,7 @@ final class BankManagerViewController: UIViewController {
             let stackView = UIStackView()
             stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.alignment = .top
             
             return stackView
         }()
@@ -127,91 +130,44 @@ final class BankManagerViewController: UIViewController {
             stackView.axis = .vertical
             stackView.distribution = .fillEqually
             
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            
+
+            
             return stackView
         }()
         
-        let waitingScrollView = {
+        waitingScrollView = {
             let scrollView = UIScrollView()
             scrollView.translatesAutoresizingMaskIntoConstraints = false
 
             scrollView.addSubview(waitingStackView)
 
             NSLayoutConstraint.activate([
-//                scrollView.topAnchor.constraint(equalTo: mainStackView.topAnchor),
-//                scrollView.widthAnchor.constraint(equalTo: self.mainStackView.widthAnchor, multiplier: 0.5),
+                
             ])
 
             return scrollView
         }()
         
 
+        NSLayoutConstraint.activate([
+            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.leadingAnchor),
+            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.trailingAnchor),
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.topAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.bottomAnchor)
+        ])
   
         let workingStackView = {
            let stackView = UIStackView()
             stackView.axis = .vertical
             stackView.distribution = .fillEqually
-            
+
             return stackView
-        }()
-        
-        
-        let testLabel1 = {
-            let label = UILabel()
-            label.textColor = .black
-            label.text = "테스트"
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 50)
-            
-            return label
-        }()
-        
-        let testLabel2 = {
-            let label = UILabel()
-            label.textColor = .black
-            label.text = "테스트"
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 50)
-            
-            return label
-        }()
-        
-        let testLabel3 = {
-            let label = UILabel()
-            label.textColor = .black
-            label.text = "테스트"
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 50)
-            
-            return label
-        }()
-        
-        let testLabel4 = {
-            let label = UILabel()
-            label.textColor = .black
-            label.text = "테스트"
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 50)
-            
-            return label
-        }()
-        
-        let testLabel5 = {
-            let label = UILabel()
-            label.textColor = .black
-            label.text = "테스트"
-            label.textAlignment = .center
-            
-            return label
         }()
         
         anotherStackView.addArrangedSubview(waitingScrollView)
         anotherStackView.addArrangedSubview(workingStackView)
-
-        waitingStackView.addArrangedSubview(testLabel1)
-        waitingStackView.addArrangedSubview(testLabel2)
-        waitingStackView.addArrangedSubview(testLabel3)
-        waitingStackView.addArrangedSubview(testLabel4)
-        workingStackView.addArrangedSubview(testLabel5)
 
         mainStackView.addArrangedSubview(anotherStackView)
     }
