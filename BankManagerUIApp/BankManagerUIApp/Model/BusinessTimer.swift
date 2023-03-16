@@ -11,32 +11,33 @@ enum BusinessTimer {
     enum TimerState {
         case suspended
         case resumed
-        case canceled
         case finished
     }
-    static let timer = DispatchSource.makeTimerSource(queue: .main)
+    static var timer: DispatchSourceTimer?
     static var state: TimerState = .finished
     
     static func start(handler: @escaping () -> ()) {
         if state == .finished {
-            timer.schedule(deadline: .now(), repeating: 0.1)
-            timer.setEventHandler(handler: handler)
-            timer.activate()
+            timer = DispatchSource.makeTimerSource(queue: .main)
+            timer?.schedule(deadline: .now(), repeating: 0.1)
+            timer?.setEventHandler(handler: handler)
+            timer?.resume()
             state = .resumed
         } else if state == .suspended {
-            timer.resume()
+            timer?.resume()
         }
     }
     
     static func pause() {
         if state == .resumed {
-            timer.suspend()
+            timer?.suspend()
             state = .suspended
         }
     }
     
     static func reset() {
-        timer.cancel()
+        timer?.cancel()
+        timer = nil
         state = .finished
     }
 }
