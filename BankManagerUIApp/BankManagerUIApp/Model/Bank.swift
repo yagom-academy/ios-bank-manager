@@ -21,6 +21,17 @@ final class Bank {
         closeBank(processTime: processTime)
     }
     
+    func makeClient() -> BankClient? {
+            guard let businessType = BusinessType.allCases.randomElement() else { return nil }
+            
+            let client: BankClient = .init(waitingNumber: numberOfClient, businessType: businessType)
+            
+            clientQueue.enqueue(client)
+            numberOfClient += 1
+            
+            return client
+        }
+    
     private func setupClient() {
         numberOfClient = 0
         let numberOfWaitingClient = Int.random(in: 10...30)
@@ -41,7 +52,7 @@ final class Bank {
         return processTime
     }
     
-    private func processBusiness() {
+    func processBusiness() {
         let businessDispatchGroup: DispatchGroup = .init()
                 
         while let client = clientQueue.dequeue() {
@@ -49,10 +60,10 @@ final class Bank {
             numberOfClient += 1
         }
         
-        businessDispatchGroup.wait()
+        //        businessDispatchGroup.wait()
     }
     
-    private func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
+    func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
         switch client.business {
         case .deposit:
             let task = makeWorkItem(client, dispatchGroup: dispatchGroup, semaphore: depositSemaphore)

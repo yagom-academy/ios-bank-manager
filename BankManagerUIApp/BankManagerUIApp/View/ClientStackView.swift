@@ -48,4 +48,20 @@ final class ClientStackView: UIStackView {
             self.addArrangedSubview(label)
         }
     }
+    
+    func add(client: BankClient) {
+            let label: UILabel = .init()
+            label.text = "\(client.waitingNumber)-\(client.businessType.rawValue)"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 24)
+            
+            switch client.businessType {
+            case .loan:
+                label.textColor = .systemPurple
+            case .deposit:
+                label.textColor = .black
+            }
+            
+            self.addArrangedSubview(label)
+        }
 }

@@ -10,6 +10,7 @@ class BankManagerViewController: UIViewController {
     private let mainStackView: UIStackView = .init()
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
+    private let bank: Bank = .init() // 싱글톤?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,21 @@ class BankManagerViewController: UIViewController {
         //        waitingClientStackView.addClient()
         //        processingClientStackView.addClient()
     }
+    
+    private func addNotificationObserver() {
+        //        NotificationCenter.default.addObserver(
+        //            self,
+        //            selector: #selector(addClient),
+        //            name: Notification.Name("startBankBusiness"),
+        //            object: nil)
+        
+        /* 발신지 코드
+         NotificationCenter.default.post(
+         name: Notification.Name("startBankBusiness"),
+         object: nil)
+         */
+    }
+    
     
     private func setupMainStackView() {
         view.addSubview(mainStackView)
@@ -42,7 +58,8 @@ class BankManagerViewController: UIViewController {
         let addClientButton: UIButton = .init()
         addClientButton.setTitle("고객 10명 추가", for: .normal)
         addClientButton.setTitleColor(.systemBlue, for: .normal)
-        addClientButton.addTarget(self, action: #selector(addClient), for: .touchUpInside)
+        addClientButton.addTarget(self, action: #selector(touchUpAddClientButton), for: .touchUpInside)
+        
         
         let resetButton: UIButton = .init()
         resetButton.setTitle("초기화", for: .normal)
@@ -124,8 +141,14 @@ class BankManagerViewController: UIViewController {
         processingClientStackView.setAutoLayout()
     }
     
-    @objc func addClient() {
-        waitingClientStackView.addClient()
+    @objc func touchUpAddClientButton() {
+        for _ in 1...10 {
+            guard let client = bank.makeClient() else { return }
+            
+            waitingClientStackView.add(client: client)
+        }
+        
+        bank.processBusiness()
     }
 }
 
