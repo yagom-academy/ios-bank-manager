@@ -39,10 +39,8 @@ struct Bank {
             switch currentCustomer.businessType {
             case .loan:
                 loanSection.processJob(for: currentCustomer, group: dispatchGroup)
-                loanSection.addJobCount()
             case .deposit:
                 depositSection.processJob(for: currentCustomer, group: dispatchGroup)
-                depositSection.addJobCount()
             }
         }
     }

@@ -72,7 +72,7 @@ final class BankManagerViewController: UIViewController {
         ])
     }
     
-    @objc func addCustomerButtonTapped() {
+    @objc private func addCustomerButtonTapped() {
         let customers = CustomerGenerator.make(numberOfCustomer: 10)
         
         bankManager.addTenCustomers(customers)
@@ -83,7 +83,7 @@ final class BankManagerViewController: UIViewController {
         })
     }
     
-    @objc func clearButtonTapped() {
+    @objc private func clearButtonTapped() {
         customerQueueScrollView.resetAllStackView()
         bankManager.stopAllTask()
         CustomerGenerator.reset()

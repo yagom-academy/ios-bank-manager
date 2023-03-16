@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ControlPanelStackView: UIStackView {
+final class ControlPanelStackView: UIStackView {
     private let addCustomerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("고객 10명 추가", for: .normal)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BusinessSection: BankWorkable {
+final class BusinessSection: BankWorkable {
     var bankDispatchQueue: DispatchQueue
     var bankSemaphore: DispatchSemaphore
     let businessType: BusinessType
@@ -35,7 +35,7 @@ class BusinessSection: BankWorkable {
         }
     }
     
-    func notifyStartJob(customer: Customer) {
+    private func notifyStartJob(customer: Customer) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .startJob,
                                             object: self,
@@ -43,7 +43,7 @@ class BusinessSection: BankWorkable {
         }
     }
     
-    func notifyFinishJob(customer: Customer) {
+    private func notifyFinishJob(customer: Customer) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .finishJob,
                                             object: self,
