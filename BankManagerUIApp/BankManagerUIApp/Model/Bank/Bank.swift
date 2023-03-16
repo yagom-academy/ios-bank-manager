@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Bank {
-    private var loanSection: BusinessSection
-    private var depositSection: BusinessSection
+class Bank {
+    var loanSection: BusinessSection
+    var depositSection: BusinessSection
     private let customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
     private let dispatchGroup = DispatchGroup()
     
@@ -32,7 +32,7 @@ struct Bank {
         }
     }
     
-    private mutating func work() {
+    private func work() {
         while !customerQueue.isEmpty {
             guard let currentCustomer = customerQueue.dequeue() else { return }
             
@@ -47,7 +47,7 @@ struct Bank {
         }
     }
     
-    mutating func startBankService() {
+    func startBankService() {
         let startTime = CFAbsoluteTimeGetCurrent()
         
         work()
@@ -61,6 +61,6 @@ struct Bank {
     
     private func endBusiness(count completedJobCount: Int, time durationTime: CFAbsoluteTime) {
         let formattedTime = String(format: "%.2f", durationTime)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.\n")
+//        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.\n")
     }
 }

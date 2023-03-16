@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BankWorkable {
-    var bankDispatchQueue: DispatchQueue { get }
+    var bankDispatchQueue: DispatchQueue? { get set }
     var bankSemaphore: DispatchSemaphore { get }
     var businessType: BusinessType { get }
     var completedJobCount: Int { get set }
