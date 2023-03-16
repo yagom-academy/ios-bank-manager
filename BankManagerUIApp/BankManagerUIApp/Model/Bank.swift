@@ -9,7 +9,7 @@ import Foundation
 
 final class Bank {
     private var clientQueue: Queue<BankClient> = .init()
-    private var numberOfClient: Int = 0
+    private var numberOfClient: Int = 1
     private let depositQueue: OperationQueue = {
         let queue: OperationQueue = .init()
         queue.maxConcurrentOperationCount = 2
@@ -29,9 +29,6 @@ final class Bank {
     }
     
     func open() {
-        setupClient()
-        let processTime = measureProcessTime(processBusiness)
-        closeBank(processTime: processTime)
     }
     
     func makeClient() -> BankClient? {
@@ -45,38 +42,13 @@ final class Bank {
         return client
     }
     
-    private func setupClient() {
-        numberOfClient = 0
-        let numberOfWaitingClient = Int.random(in: 10...30)
-        
-        for number in 1...numberOfWaitingClient {
-            guard let business = Business.allCases.randomElement() else { return }
-            let client: BankClient = .init(waitingNumber: number, business: business)
-            
-            clientQueue.enqueue(client)
-        }
-    }
-    
-    private func measureProcessTime(_ process: () -> ()) -> Double {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        process()
-        let processTime = CFAbsoluteTimeGetCurrent() - startTime
-        
-        return processTime
-    }
-    
     func processBusiness() {
-        let businessDispatchGroup: DispatchGroup = .init()
-        
         while let client = clientQueue.dequeue() {
-            dispatchClient(client, dispatchGroup: businessDispatchGroup)
-            numberOfClient += 1
+            addClientToOperationQueue(client)
         }
-        
-        //        businessDispatchGroup.wait()
     }
     
-    func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
+    func addClientToOperationQueue(_ client: BankClient) {
         switch client.business {
         case .deposit:
             let blockOperation = makeBlockOperation(client)

@@ -82,7 +82,7 @@ class BankManagerViewController: UIViewController {
         let resetButton: UIButton = .init()
         resetButton.setTitle("초기화", for: .normal)
         resetButton.setTitleColor(.systemRed, for: .normal)
-        addClientButton.addTarget(self, action: #selector(resetClientAndTime), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(resetClientAndTime), for: .touchUpInside)
         
         let buttonStackView: UIStackView = .init()
         buttonStackView.axis = .horizontal
@@ -115,7 +115,7 @@ class BankManagerViewController: UIViewController {
         timeStackView.addArrangedSubview(businessTime)
         timeStackView.addArrangedSubview(totalTime)
         
-        mainStackView.addArrangedSubview(businessTime)
+        mainStackView.addArrangedSubview(timeStackView)
     }
     
     private func addQueueLabel() {
