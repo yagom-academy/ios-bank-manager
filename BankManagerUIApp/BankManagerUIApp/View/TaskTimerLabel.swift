@@ -22,6 +22,6 @@ final class TaskTimerLabel: UILabel {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.textAlignment = .center
         self.font = UIFont.preferredFont(forTextStyle: .title2)
-        self.text = "업무시간 - "
+        self.text = "업무시간 - 00 : 00 : 000"
     }
 }
