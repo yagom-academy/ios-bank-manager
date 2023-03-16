@@ -46,13 +46,12 @@ final class BankDepartment: Respondable {
         
         Thread.sleep(forTimeInterval: business.processTime)
         
-        print(endMessage)
-        
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .finished,
                                             object: nil,
                                             userInfo: [NotificationKey.finished: customer])
         }
+        print(endMessage)
     }
     
     func cancelTasks() {

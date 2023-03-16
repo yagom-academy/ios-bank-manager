@@ -78,5 +78,6 @@ final class Bank: Openable {
     func close() {
         loanDepartment.cancelTasks()
         depositDepartment.cancelTasks()
+        currentNumberTicket = 1
     }
 }

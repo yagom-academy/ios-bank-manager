@@ -1,5 +1,5 @@
 //
-//  BankManagerUIApp - ViewController.swift
+//  BankManagerUIApp - BankManagerViewController.swift
 //  Created by Rowan, 릴라. 
 //  Copyright © yagom academy. All rights reserved.
 // 
@@ -77,7 +77,9 @@ final class BankManagerViewController: UIViewController {
             return false
         }
         
-        let view = workingStackView.arrangedSubviews[index!]
+        guard let bindedIndex = index else { return }
+        
+        let view = workingStackView.arrangedSubviews[bindedIndex]
         view.removeFromSuperview()
     }
     
@@ -204,6 +206,16 @@ final class BankManagerViewController: UIViewController {
     
     @objc private func reset() {
         bank.close()
+        resetCustomerStackView()
+    }
+    
+    private func resetCustomerStackView() {
+        waitingStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        workingStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 }
 
