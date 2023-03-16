@@ -127,7 +127,7 @@ final class MainViewController: UIViewController {
             workingStackView.removeLabel(customer: customer)
         }
         
-        BankManager.workingGroup.notify(queue: .global()) { [self] in
+        BankManager.workingGroup.notify(queue: .main) { [self] in
             if isRunningTimer {
                 timer?.suspend()
                 isRunningTimer = false
