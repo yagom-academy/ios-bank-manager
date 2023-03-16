@@ -78,11 +78,15 @@ final class BankManagerViewController: UIViewController {
         bankManager.addTenCustomers(customers)
         customerQueueScrollView.addWaitingLabel(customers: customers)
         bankManager.startBusiness()
+        BusinessTimer.start(handler: {
+            print("111")
+        })
     }
     
     @objc func clearButtonTapped() {
         customerQueueScrollView.resetAllStackView()
         bankManager.stopAllTask()
         CustomerGenerator.reset()
+        BusinessTimer.reset()
     }
 }
