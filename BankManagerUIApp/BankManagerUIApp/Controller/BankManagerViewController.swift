@@ -217,6 +217,10 @@ final class BankManagerViewController: UIViewController {
     
     var timer: Timer = Timer()
     var timerNum: Double = 0
+}
+
+extension BankManagerViewController {
+    
     
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 0.001,
@@ -232,19 +236,17 @@ final class BankManagerViewController: UIViewController {
     
     @objc func updateTimer() {
         timerNum += 0.001
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "업무시간 - mm:ss:SSS"
-        let convertTime = timeFormatter.date(from: ("\(timerNum)"))
         
-//        let myTimeFormatter = DateFormatter()
-//        myTimeFormatter.dateFormat = "업무시간 - mm:ss:SSS"
-//        let timerText = myTimeFormatter.date(from: convertTime)
-//
-        self.timerLabel.text = "\(String(describing: convertTime))"
+        let totalSecond = Int(timerNum)
         
-
+        let minute = totalSecond / 60
+        let second = totalSecond % 60
+        let milisecond = Int((timerNum - Double(totalSecond)) * 1000)
+        
+        let textFormat = "업무시간 - %02d:%02d:%003d"
+        
+        self.timerLabel.text = String(format: textFormat, minute, second, milisecond)
     }
-    
 }
 
 import SwiftUI
