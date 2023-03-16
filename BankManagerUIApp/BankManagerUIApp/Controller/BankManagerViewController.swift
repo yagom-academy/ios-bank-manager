@@ -11,6 +11,7 @@ class BankManagerViewController: UIViewController {
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
     private let bank: Bank = .init() // 싱글톤?
+    private let totalTime: UILabel = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +21,23 @@ class BankManagerViewController: UIViewController {
         addQueueLabel()
         addScrollView()
         addNotificationObserver()
-        // testing..
-        //        waitingClientStackView.addClient()
-        //        processingClientStackView.addClient()
+    }
+    
+    private var timer = Timer()
+    private var startTime: CFAbsoluteTime = .zero
+    
+    @objc func measerTime() {
+        let currentTime = CFAbsoluteTimeGetCurrent() - startTime
+        
+        let milliseconds = Int(currentTime * 1000) % 1000
+        let seconds = (Int(currentTime * 1000) / 1000) % 60
+        let minutes = (Int(currentTime * 1000) / (1000 * 60)) % 60
+        
+        totalTime.text = String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
+    }
+    
+    func setTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(measerTime), userInfo: nil, repeats: true)
     }
     
     private func addNotificationObserver() {

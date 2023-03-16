@@ -22,15 +22,15 @@ final class Bank {
     }
     
     func makeClient() -> BankClient? {
-            guard let business = Business.allCases.randomElement() else { return nil }
-            
-            let client: BankClient = .init(waitingNumber: numberOfClient, business: business)
-            
-            clientQueue.enqueue(client)
-            numberOfClient += 1
-            
-            return client
-        }
+        guard let business = Business.allCases.randomElement() else { return nil }
+        
+        let client: BankClient = .init(waitingNumber: numberOfClient, business: business)
+        
+        clientQueue.enqueue(client)
+        numberOfClient += 1
+        
+        return client
+    }
     
     private func setupClient() {
         numberOfClient = 0
@@ -54,7 +54,7 @@ final class Bank {
     
     func processBusiness() {
         let businessDispatchGroup: DispatchGroup = .init()
-                
+        
         while let client = clientQueue.dequeue() {
             dispatchClient(client, dispatchGroup: businessDispatchGroup)
             numberOfClient += 1
@@ -66,11 +66,25 @@ final class Bank {
     func dispatchClient(_ client: BankClient, dispatchGroup: DispatchGroup) {
         switch client.business {
         case .deposit:
-            let task = makeWorkItem(client, dispatchGroup: dispatchGroup, semaphore: depositSemaphore)
-            businessQueue.async(group: dispatchGroup, execute: task)
+            let workItem: DispatchWorkItem = .init(qos: .background) {
+                self.depositSemaphore.wait()
+                NotificationCenter.default.post(name: NSNotification.Name("1"), object: client)
+                Banker.receive(client: client)
+                self.depositSemaphore.signal()
+                NotificationCenter.default.post(name: NSNotification.Name("2"), object: client)
+            }
+            
+            businessQueue.async(group: dispatchGroup, execute: workItem)
         case .loan:
-            let task = makeWorkItem(client, dispatchGroup: dispatchGroup, semaphore: loanSemaphore)
-            businessQueue.async(group: dispatchGroup, execute: task)
+            let workItem: DispatchWorkItem = .init(qos: .background) {
+                self.loanSemaphore.wait()
+                NotificationCenter.default.post(name: NSNotification.Name("1"), object: client)
+                Banker.receive(client: client)
+                self.loanSemaphore.signal()
+                NotificationCenter.default.post(name: NSNotification.Name("2"), object: client)
+            }
+            
+            businessQueue.async(group: dispatchGroup, execute: workItem)
         }
     }
     
