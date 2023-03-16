@@ -82,9 +82,7 @@ final class BankManagerViewController: UIViewController {
     
     @objc func clearButtonTapped() {
         customerQueueScrollView.resetAllStackView()
-        bankManager.bank.depositSection.bankDispatchQueue?.suspend()
-        bankManager.bank.loanSection.bankDispatchQueue?.suspend()
-//        bankManager.bank.depositSection.changeState()
-//        bankManager.bank.loanSection.changeState()
+        bankManager.stopAllTask()
+        CustomerGenerator.reset()
     }
 }

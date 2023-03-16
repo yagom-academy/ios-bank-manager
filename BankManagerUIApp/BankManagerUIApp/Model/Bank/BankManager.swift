@@ -4,14 +4,18 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-class BankManager {
-    var bank = Bank()
+struct BankManager {
+    private var bank = Bank()
     
     func addTenCustomers(_ customers: [Customer]) {
         bank.setUpCustomerQueue(customers: customers)
     }
     
-    func startBusiness() {
+    mutating func startBusiness() {
         bank.startBankService()
+    }
+    
+    func stopAllTask() {
+        bank.reset()
     }
 }

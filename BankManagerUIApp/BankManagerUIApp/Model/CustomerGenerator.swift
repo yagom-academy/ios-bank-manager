@@ -19,4 +19,8 @@ enum CustomerGenerator {
         
         return customers
     }
+    
+    static func reset() {
+        Self.totalCount = 1
+    }
 }
