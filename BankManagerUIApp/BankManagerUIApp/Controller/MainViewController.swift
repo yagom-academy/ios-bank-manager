@@ -84,9 +84,7 @@ final class MainViewController: UIViewController {
         timer?.setEventHandler(handler: { [self] in
             date = date.addingTimeInterval(BankOption.timerSecond)
             
-            DispatchQueue.main.async { [self] in
-                workTimeLabel.text = "업무시간 - \(date.applyDateFormatter())"
-            }
+            workTimeLabel.text = "업무시간 - \(date.applyDateFormatter())"
         })
         
         timer?.resume()
