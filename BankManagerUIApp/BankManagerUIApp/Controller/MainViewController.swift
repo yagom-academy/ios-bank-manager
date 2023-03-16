@@ -69,7 +69,7 @@ final class MainViewController: UIViewController {
                                                name: .workingNoti,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateCompleteCustomer),
+                                               selector: #selector(updateCompletionOfCustomerWork),
                                                name: .completeNoti,
                                                object: nil)
     }
@@ -122,8 +122,8 @@ final class MainViewController: UIViewController {
             }
         }
     }
-    // 여기부터 수정해야함!
-    @objc func updateCompleteCustomer(_ noti: Notification) {
+
+    @objc func updateCompletionOfCustomerWork(_ noti: Notification) {
         guard let customer = noti.object as? Customer else { return }
         
         DispatchQueue.global().async { [self] in
@@ -133,7 +133,7 @@ final class MainViewController: UIViewController {
         }
         
         BankManager.workingGroup.notify(queue: .global()) { [self] in
-            if isRunningTimer == true {
+            if isRunningTimer {
                 timer?.suspend()
                 isRunningTimer = false
             }
@@ -141,14 +141,13 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func didTapResetButton() {
-        BankManager.isRunningWork = false
         bank = Bank()
+        workTimeLabel.text = "업무시간 - \(BankOption.defalutWorkTime)"
+        
         resetTimer()
-        workTimeLabel.text = "업무시간 - 00:00:000"
         waitingStackView.resetLabel()
         workingStackView.resetLabel()
-        
-        BankManager.workingGroup.wait()
+        BankManager.resetWork()
     }
     
     private func resetTimer() {
@@ -183,6 +182,7 @@ extension MainViewController {
     
     private func createButtonStackView() {
         let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -191,7 +191,7 @@ extension MainViewController {
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor)
         ])
     }
     
@@ -217,7 +217,6 @@ extension MainViewController {
         waitingStackView.spacing = 16
         
         billboardStackView.addArrangedSubview(waitingStackView)
-    
     }
     
     private func configureWorkingStackView() {

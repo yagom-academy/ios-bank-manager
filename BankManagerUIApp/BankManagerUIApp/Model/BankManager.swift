@@ -44,4 +44,10 @@ struct BankManager {
         
         workQueue.sync(execute: queueItem)
     }
+    
+    static func resetWork() {
+        isRunningWork = false
+        
+        workingGroup.wait()
+    }
 }
