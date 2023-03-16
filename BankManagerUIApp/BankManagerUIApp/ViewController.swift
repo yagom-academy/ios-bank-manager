@@ -13,10 +13,9 @@ class ViewController: UIViewController {
     private let queueStackView = QueueStackView()
     private var bank = Bank()
     private let main = OperationQueue.main
-    var timer: Timer?
-    var taskTime: Double = 0.0
-    var startTime = Date()
-    var isOpened: Bool = false
+    private var timer: Timer?
+    private var taskTime: Double = 0
+    private var isOpened: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,6 @@ class ViewController: UIViewController {
         configureConstraint()
         setUpButton()
         setTimer()
-        
     }
     
     private func setUpScreenStackView() {
@@ -37,7 +35,6 @@ class ViewController: UIViewController {
     }
     
     private func configureConstraint() {
-        //screenView
         NSLayoutConstraint.activate([
             screenStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             screenStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -46,7 +43,7 @@ class ViewController: UIViewController {
             taskTimerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
         ])
     }
-
+    
     private func setUpButton() {
         addClientButtonTapped()
         resetButtonTapped()
@@ -56,30 +53,29 @@ class ViewController: UIViewController {
         buttonStackView.addClientButton.addTarget(self, action: #selector(addTenClients), for: .touchUpInside)
     }
     
+    @objc private func addTenClients() {
+        bank.lineUpClient()
+        bank.doTask()
+        isOpened = true
+    }
+    
     private func setTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timeUp), userInfo: nil, repeats: true)
     }
     
     @objc private func timeUp() {
-        
-        let timeInterval = Date().timeIntervalSince(self.startTime)
-        
+        if isOpened == true {
+            taskTime += 0.001
+        }
+        let timeInterval = taskTime
         let minute = (Int)(fmod((timeInterval/60), 60))
         let second = (Int)(fmod(timeInterval, 60))
         let milliSecond = (Int)((timeInterval - floor(timeInterval))*1000)
         
         let minuteLabel = String(format: "%02d", minute)
         let secondLabel = String(format: "%02d", second)
-        let milliSecondLabel = String(format: "%02d", milliSecond)
+        let milliSecondLabel = String(format: "%03d", milliSecond)
         taskTimerLabel.text = " 업무시간 - \(minuteLabel) : \(secondLabel) : \(milliSecondLabel)"
-        
-    }
-    
-    @objc private func addTenClients() {
-        bank.lineUpClient()
-        bank.doTask()
-        isOpened = true
-        self.startTime = Date()
     }
     
     private func resetButtonTapped() {
@@ -87,6 +83,8 @@ class ViewController: UIViewController {
     }
     
     @objc func resetAll() {
+        isOpened = false
+        taskTime = 0
         queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
         bank.reset()
@@ -136,6 +134,9 @@ extension ViewController: BankDelegate {
                 if label?.text == "\(client.waitingNumber) - \(client.purposeOfVisit.rawValue)" {
                     $0.removeFromSuperview()
                 }
+            }
+            if queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.subviews.isEmpty && queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.subviews.isEmpty {
+                isOpened = false
             }
         }
     }
