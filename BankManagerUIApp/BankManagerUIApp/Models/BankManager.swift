@@ -23,7 +23,7 @@ struct BankManager {
         for _ in 1...10 {
             numberOfClient += 1
             let randomNumberOfTask = Int.random(in: 0...1)
-            let client = Client(clientNumber: numberOfClient, requstedTask: .init(rawValue: randomNumberOfTask) ?? .deposit)
+            let client = Client(clientNumber: numberOfClient, requstedTask: .init(rawValue: randomNumberOfTask))
             waitingQueue.enqueue(client)
             delegate?.sendClient(client)
         }
@@ -49,11 +49,11 @@ struct BankManager {
             loanQueue.addOperation {
                 processPersonalBankTask(client)
             }
-        } else if client.requstedTask == .deposit {
-            depositQueue.maxConcurrentOperationCount = 2
-            depositQueue.addOperation {
-                processPersonalBankTask(client)
-            }
+        }
+        
+        depositQueue.maxConcurrentOperationCount = 2
+        depositQueue.addOperation {
+            processPersonalBankTask(client)
         }
     }
     

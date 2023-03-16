@@ -30,5 +30,16 @@ struct Client {
                 return 0.7
             }
         }
+        
+        init(rawValue: Int) {
+            switch rawValue {
+            case 0:
+                self = .loan
+            case 1:
+                self = .deposit
+            default:
+                self = .loan
+            }
+        }
     }
 }
