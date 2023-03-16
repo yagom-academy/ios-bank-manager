@@ -215,7 +215,10 @@ final class BankManagerViewController: UIViewController {
         }
     }
     
-    var timer: Timer = Timer()
+    var timer: Timer = {
+        let timer = Timer()
+        return timer
+    }()
     var timerNum: Double = 0
 }
 
@@ -223,11 +226,15 @@ extension BankManagerViewController {
     
     
     func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 0.001,
-                                     target: self,
-                                     selector: #selector(updateTimer),
-                                     userInfo: nil,
-                                     repeats: true)
+        if timer.isValid { return }
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 0.001,
+                                              target: self,
+                                              selector: #selector(self.updateTimer),
+                                              userInfo: nil,
+                                              repeats: true)
+            RunLoop.current.add(self.timer, forMode: .common)
+        }
     }
     
     func pauseTimer() {
@@ -241,11 +248,13 @@ extension BankManagerViewController {
         
         let minute = totalSecond / 60
         let second = totalSecond % 60
-        let milisecond = Int((timerNum - Double(totalSecond)) * 1000)
+        let miliSecond = Int((timerNum - Double(totalSecond)) * 1000)
         
         let textFormat = "업무시간 - %02d:%02d:%003d"
+  
+            self.timerLabel.text = String(format: textFormat, minute, second, miliSecond)
         
-        self.timerLabel.text = String(format: textFormat, minute, second, milisecond)
+        
     }
 }
 
