@@ -8,6 +8,8 @@ import UIKit
 
 class BankManagerViewController: UIViewController {
     private let mainStackView: UIStackView = .init()
+    private let waitingClientStackView: ClientStackView = .init()
+    private let processingClientStackView: ClientStackView = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +111,18 @@ class BankManagerViewController: UIViewController {
         scrollStackView.addArrangedSubview(waitingScrollView)
         scrollStackView.addArrangedSubview(businessScrollView)
         
+        waitingScrollView.addSubview(waitingClientStackView)
+        businessScrollView.addSubview(processingClientStackView)
+        //        let waitingStackView: UIStackView = .init()
+        //        waitingStackView.axis = .vertical
+        //        waitingStackView.spacing = 8
+        //        waitingStackView.alignment = .center
+        //        waitingStackView.distribution = .fillEqually
+        //
+        //        let businessStackView: UIStackView = .init()
+        //        businessStackView.axis = .vertical
+        
+        
         let waitingStackView: UIStackView = .init()
         waitingStackView.axis = .vertical
         waitingStackView.spacing = 8
@@ -118,55 +132,47 @@ class BankManagerViewController: UIViewController {
         let businessStackView: UIStackView = .init()
         businessStackView.axis = .vertical
         
-        waitingScrollView.addSubview(waitingStackView)
-        businessScrollView.addSubview(businessStackView)
+        waitingScrollView.contentLayoutGuide.widthAnchor.constraint(equalTo: waitingScrollView.frameLayoutGuide.widthAnchor, constant: -1).isActive = true
+        businessScrollView.contentLayoutGuide.widthAnchor.constraint(equalTo: businessScrollView.frameLayoutGuide.widthAnchor, constant: -1).isActive = true
         
-        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        waitingClientStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
-            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
-            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
-            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
-            waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor)
+            waitingClientStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
+            waitingClientStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
+            waitingClientStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            waitingClientStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingClientStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor)
+            
         ])
         
-        businessStackView.translatesAutoresizingMaskIntoConstraints = false
+        processingClientStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            businessStackView.leadingAnchor.constraint(equalTo: businessScrollView.leadingAnchor),
-            businessStackView.trailingAnchor.constraint(equalTo: businessScrollView.trailingAnchor),
-            businessStackView.bottomAnchor.constraint(equalTo: businessScrollView.bottomAnchor),
-            businessStackView.topAnchor.constraint(equalTo: businessScrollView.topAnchor),
-            businessStackView.widthAnchor.constraint(equalTo: businessScrollView.widthAnchor)
+            processingClientStackView.leadingAnchor.constraint(equalTo: businessScrollView.leadingAnchor),
+            processingClientStackView.trailingAnchor.constraint(equalTo: businessScrollView.trailingAnchor),
+            processingClientStackView.bottomAnchor.constraint(equalTo: businessScrollView.bottomAnchor),
+            processingClientStackView.topAnchor.constraint(equalTo: businessScrollView.topAnchor),
+            processingClientStackView.widthAnchor.constraint(equalTo: businessScrollView.widthAnchor)
+            
         ])
-        
-        let clientLabel: UILabel = .init()
-        clientLabel.text = "5-예금"
-        clientLabel.textAlignment = .center
-        clientLabel.font = .systemFont(ofSize: 24)
-        
-        let clientLabel2: UILabel = .init()
-        clientLabel2.text = "8-예금"
-        clientLabel2.textAlignment = .center
-        clientLabel2.font = .systemFont(ofSize: 24)
-        
-        waitingStackView.addArrangedSubview(clientLabel)
-        waitingStackView.addArrangedSubview(clientLabel2)
         
         for index in 1...30 {
-                     let label: UILabel = .init()
-                     label.text = "\(index)-예금"
-                     label.textAlignment = .center
-                     label.font = .systemFont(ofSize: 24)
-
-                     waitingStackView.addArrangedSubview(label)
-                 }
+            let label: UILabel = .init()
+            label.text = "\(index)-예금"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 24)
+            
+            waitingClientStackView.addArrangedSubview(label)
+        }
         
-        let clientLabel3: UILabel = .init()
-        clientLabel3.text = "11-예금"
-        clientLabel3.textAlignment = .center
-        clientLabel3.font = .systemFont(ofSize: 24)
-        
-        businessStackView.addArrangedSubview(clientLabel3)
+        for index in 1...40 {
+            let label: UILabel = .init()
+            label.text = "\(index)-예금"
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 24)
+            
+            processingClientStackView.addArrangedSubview(label)
+        }
     }
 }
 
