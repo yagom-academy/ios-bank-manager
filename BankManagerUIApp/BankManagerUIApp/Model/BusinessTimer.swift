@@ -23,8 +23,6 @@ enum BusinessTimer {
             timer?.setEventHandler(handler: handler)
             timer?.resume()
             state = .resumed
-        } else {
-            timer?.resume()
         }
     }
     
