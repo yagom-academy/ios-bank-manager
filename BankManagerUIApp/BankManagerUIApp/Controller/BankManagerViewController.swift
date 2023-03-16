@@ -10,6 +10,8 @@ final class BankManagerViewController: UIViewController {
     let mainStackView = VerticalStackView()
     let workingStackView = VerticalStackView()
     let waitingStackView = VerticalStackView()
+    let timerLabel = UILabel()
+    
     let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
     let notification = NotificationCenter.default
     
@@ -90,7 +92,7 @@ final class BankManagerViewController: UIViewController {
         mainStackView.setLayoutConstraint(toLayoutGuide: view.safeAreaLayoutGuide)
         
         let buttonStackView = makeButtonStackView()
-        let timerLabel = makeTimerLabel()
+        makeTimerLabel()
         let queueLabelStackView = makeQueueLabelStackView()
         let customerStackView = makeCustomerStackView()
         
@@ -128,18 +130,12 @@ final class BankManagerViewController: UIViewController {
         return buttonStackView
     }
     
-    private func makeTimerLabel() -> UILabel {
-        let timerLabel = {
-            let label = UILabel()
-            label.text = "타이머 넣기"
-            label.font = .preferredFont(forTextStyle: .title2)
-            label.textColor = .black
-            label.textAlignment = .center
-            
-            return label
-        }()
-        
-        return timerLabel
+    private func makeTimerLabel()  {
+        timerLabel.text = "업무시간 - 00:00:000"
+        timerLabel.font = .preferredFont(forTextStyle: .title2)
+        timerLabel.textColor = .black
+        timerLabel.textAlignment = .center
+
     }
     
     private func makeQueueLabelStackView() -> UIStackView {
@@ -202,6 +198,7 @@ final class BankManagerViewController: UIViewController {
     @objc private func addTenCustomer() {
         let totalCustomer = 10
         bank.open(totalCustomer: totalCustomer)
+        startTimer()
     }
     
     @objc private func reset() {
@@ -217,6 +214,37 @@ final class BankManagerViewController: UIViewController {
             $0.removeFromSuperview()
         }
     }
+    
+    var timer: Timer = Timer()
+    var timerNum: Double = 0
+    
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.001,
+                                     target: self,
+                                     selector: #selector(updateTimer),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    func pauseTimer() {
+        
+    }
+    
+    @objc func updateTimer() {
+        timerNum += 0.001
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "업무시간 - mm:ss:SSS"
+        let convertTime = timeFormatter.date(from: ("\(timerNum)"))
+        
+//        let myTimeFormatter = DateFormatter()
+//        myTimeFormatter.dateFormat = "업무시간 - mm:ss:SSS"
+//        let timerText = myTimeFormatter.date(from: convertTime)
+//
+        self.timerLabel.text = "\(String(describing: convertTime))"
+        
+
+    }
+    
 }
 
 import SwiftUI
