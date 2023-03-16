@@ -61,7 +61,7 @@ final class TimerStackView: UIStackView {
         currentTime = .zero
     }
     
-    @objc func measureTime() {
+    @objc private func measureTime() {
         currentTime = CFAbsoluteTimeGetCurrent() - startTime + previousTime
         
         let milliseconds = Int(currentTime * 1000) % 1000

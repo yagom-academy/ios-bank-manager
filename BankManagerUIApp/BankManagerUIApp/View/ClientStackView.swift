@@ -8,8 +8,6 @@
 import UIKit
 
 final class ClientStackView: UIStackView {
-    private var isStop: Bool = false
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -17,14 +15,6 @@ final class ClientStackView: UIStackView {
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func stopDrawingUI() {
-        isStop = true
-    }
-    
-    func startDrawingUI() {
-        isStop = false
     }
     
     private func setup() {
@@ -45,12 +35,8 @@ final class ClientStackView: UIStackView {
     }
     
     func add(client: BankClient) {
-        if isStop {
-            return
-        }
-        
         let label: UILabel = .init()
-        label.text = "\(client.waitingNumber)-\(client.business.rawValue)"
+        label.text = "\(client.waitingNumber)-\(client.business.type)"
         label.tag = client.waitingNumber
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24)

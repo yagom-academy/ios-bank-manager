@@ -6,12 +6,12 @@
 
 import UIKit
 
-class BankManagerViewController: UIViewController {
+final class BankManagerViewController: UIViewController {
     private let mainStackView: UIStackView = .init()
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
     private let timerStackView: TimerStackView = .init()
-    private let bank: Bank = .init() // 싱글톤?
+    private let bank: Bank = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +21,7 @@ class BankManagerViewController: UIViewController {
         addQueueLabel()
         addScrollView()
         addNotificationObserver()
-        
-        bank.open()
+        bank.addNotificationObserver()
     }
     
     private func addNotificationObserver() {
@@ -130,7 +129,7 @@ class BankManagerViewController: UIViewController {
         processingClientStackView.setAutoLayout()
     }
     
-    @objc func startBankBusiness(notification: Notification) {
+    @objc private func startBankBusiness(notification: Notification) {
         guard let client = notification.object as? BankClient else { return }
         
         OperationQueue.main.addOperation {
@@ -139,7 +138,7 @@ class BankManagerViewController: UIViewController {
         }
     }
     
-    @objc func endBankBusiness(notification: Notification) {
+    @objc private func endBankBusiness(notification: Notification) {
         guard let client = notification.object as? BankClient else { return }
         
         OperationQueue.main.addOperation {
@@ -152,26 +151,22 @@ class BankManagerViewController: UIViewController {
         }
     }
     
-    @objc func touchUpAddClientButton() {
-        processingClientStackView.startDrawingUI()
-        
+    @objc private func touchUpAddClientButton() {
         for _ in 1...10 {
             guard let client = bank.makeClient() else { return }
             
             waitingClientStackView.add(client: client)
         }
         
-        bank.processBusiness()
+        bank.startBankBusiness()
         timerStackView.startTimer()
     }
     
-    @objc func touchUpClearButton() {
+    @objc private func touchUpClearButton() {
         waitingClientStackView.clear()
         processingClientStackView.clear()
         timerStackView.clearTimer()
         
         NotificationCenter.default.post(name: NSNotification.Name("touchUpResetButton"), object: nil)
-        
-        processingClientStackView.stopDrawingUI()
     }
 }

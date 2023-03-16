@@ -22,12 +22,8 @@ final class Bank {
         
         return queue
     }()
-
-    func open() {
-        addNotificationObserver()
-    }
     
-    private func addNotificationObserver() {
+    func addNotificationObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(allClear),
@@ -62,13 +58,13 @@ final class Bank {
         return client
     }
     
-    func processBusiness() {
+    func startBankBusiness() {
         while let client = clientQueue.dequeue() {
             addClientToOperationQueue(client)
         }
     }
     
-    func addClientToOperationQueue(_ client: BankClient) {
+    private func addClientToOperationQueue(_ client: BankClient) {
         switch client.business {
         case .deposit:
             let blockOperation = makeBlockOperation(client)

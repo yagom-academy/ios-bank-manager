@@ -5,9 +5,9 @@
 //  Created by vetto, kokkilE on 2023/03/12.
 //
 
-enum Business: String, CaseIterable {
-    case deposit = "예금"
-    case loan = "대출"
+enum Business: CaseIterable {
+    case deposit
+    case loan
     
     var time: Double {
         switch self {
@@ -15,6 +15,15 @@ enum Business: String, CaseIterable {
             return 0.7
         case .loan:
             return 1.1
+        }
+    }
+    
+    var type: String {
+        switch self {
+        case .deposit:
+            return "예금"
+        case .loan:
+            return "대출"
         }
     }
 }
