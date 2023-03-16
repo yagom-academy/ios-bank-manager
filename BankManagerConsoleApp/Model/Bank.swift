@@ -76,6 +76,13 @@ struct Bank {
         }
     }
     
+    mutating func reset() {
+        waitingLine.clear()
+        clientCount = 0
+        depositClerk.cancelAllOperations()
+        loanClerk.cancelAllOperations()
+    }
+    
     private func notifyTaskCompletion(_ totalTime: String) {
         let success = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(totalTime)초입니다."
         print(success)

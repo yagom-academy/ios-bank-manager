@@ -11,20 +11,19 @@ class ViewController: UIViewController {
     private let buttonStackView = ButtonStackView()
     private let taskTimerLabel = TaskTimerLabel()
     private let queueStackView = QueueStackView()
-    
-    private let main = OperationQueue.main
     private var bank = Bank()
+    private let main = OperationQueue.main
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpScreenStackView()
         configureConstraint()
-        view.backgroundColor = .white
-        addClientButtonTapped()
+        setUpButton()
         bank.delegate = self
     }
     
     private func setUpScreenStackView() {
+        view.backgroundColor = .white
         view.addSubview(screenStackView)
         screenStackView.addArrangedSubview(buttonStackView)
         screenStackView.addArrangedSubview(taskTimerLabel)
@@ -42,6 +41,11 @@ class ViewController: UIViewController {
         ])
     }
     
+    private func setUpButton() {
+        addClientButtonTapped()
+        resetButtonTapped()
+    }
+    
     private func addClientButtonTapped() {
         buttonStackView.addClientButton.addTarget(self, action: #selector(addTenClients), for: .touchUpInside)
     }
@@ -49,6 +53,16 @@ class ViewController: UIViewController {
     @objc func addTenClients() {
         bank.lineUpClient()
         bank.doTask()
+    }
+    
+    private func resetButtonTapped() {
+        buttonStackView.resetButton.addTarget(self, action: #selector(resetAll), for: .touchUpInside)
+    }
+    
+    @objc func resetAll() {
+        queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
+        bank.reset()
     }
     
     private func makeLabel(of client: Client) -> UILabel {
@@ -71,7 +85,7 @@ class ViewController: UIViewController {
 
 extension ViewController: BankDelegate {
     func sendData(of client: Client) {
-       let waitingClientLabel = makeLabel(of: client)
+        let waitingClientLabel = makeLabel(of: client)
         
         queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView.addArrangedSubview(waitingClientLabel)
     }
