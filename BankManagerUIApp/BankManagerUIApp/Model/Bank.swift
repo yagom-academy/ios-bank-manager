@@ -22,9 +22,9 @@ final class Bank {
     }
     
     func makeClient() -> BankClient? {
-            guard let businessType = BusinessType.allCases.randomElement() else { return nil }
+            guard let business = Business.allCases.randomElement() else { return nil }
             
-            let client: BankClient = .init(waitingNumber: numberOfClient, businessType: businessType)
+            let client: BankClient = .init(waitingNumber: numberOfClient, business: business)
             
             clientQueue.enqueue(client)
             numberOfClient += 1
@@ -77,8 +77,10 @@ final class Bank {
     private func makeWorkItem(_ client: BankClient, dispatchGroup: DispatchGroup, semaphore: DispatchSemaphore) -> DispatchWorkItem {
         let task = DispatchWorkItem {
             semaphore.wait()
+            NotificationCenter.default.post(name: NSNotification.Name("1"), object: client)
             Banker.receive(client: client)
             semaphore.signal()
+            NotificationCenter.default.post(name: NSNotification.Name("2"), object: client)
         }
         
         return task

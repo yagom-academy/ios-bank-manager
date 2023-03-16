@@ -33,35 +33,30 @@ final class ClientStackView: UIStackView {
             self.widthAnchor.constraint(equalTo: superScrollView.widthAnchor)
         ])
     }
-
-    func addClient() {
-        for index in 1...40 {
-            let label: UILabel = .init()
-            label.text = "\(index)-예금"
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 24)
-            
-            if index % 2 == 0 {
-                label.textColor = .systemPurple
-            }
-            
-            self.addArrangedSubview(label)
-        }
-    }
     
     func add(client: BankClient) {
-            let label: UILabel = .init()
-            label.text = "\(client.waitingNumber)-\(client.businessType.rawValue)"
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 24)
-            
-            switch client.businessType {
-            case .loan:
-                label.textColor = .systemPurple
-            case .deposit:
-                label.textColor = .black
-            }
-            
-            self.addArrangedSubview(label)
+        let label: UILabel = .init()
+        label.text = "\(client.waitingNumber)-\(client.business.rawValue)"
+        label.tag = client.waitingNumber
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 24)
+        
+        switch client.business {
+        case .loan:
+            label.textColor = .systemPurple
+        case .deposit:
+            label.textColor = .black
         }
+        
+        self.addArrangedSubview(label)
+    }
+    
+    func remove(client: BankClient) {
+        self.arrangedSubviews.forEach {
+            if $0.tag == client.waitingNumber {
+                self.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
+        }
+    }
 }
