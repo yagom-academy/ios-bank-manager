@@ -48,22 +48,15 @@ struct Bank {
     }
     
     mutating func startBankService() {
-        let startTime = CFAbsoluteTimeGetCurrent()
         loanSection.isWorking = true
         depositSection.isWorking = true
         work()
         
-        let durationTime = CFAbsoluteTimeGetCurrent() - startTime
-        let completedJobCount = loanSection.completedJobCount + depositSection.completedJobCount
-        
-        endBusiness(count: completedJobCount, time: durationTime)
+        dispatchGroup.notify(queue: .global()) {
+            BusinessTimer.cancel()
+        }
     }
-    
-    private func endBusiness(count completedJobCount: Int, time durationTime: CFAbsoluteTime) {
-        let formattedTime = String(format: "%.2f", durationTime)
-//        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(completedJobCount)명이며, 총 업무시간은 \(formattedTime)초입니다.\n")
-    }
-    
+
     func reset() {
         customerQueue.clear()
         loanSection.isWorking = false

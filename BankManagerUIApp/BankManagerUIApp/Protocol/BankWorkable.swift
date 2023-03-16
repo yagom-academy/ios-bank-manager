@@ -11,5 +11,4 @@ protocol BankWorkable {
     var bankDispatchQueue: DispatchQueue { get }
     var bankSemaphore: DispatchSemaphore { get }
     var businessType: BusinessType { get }
-    var completedJobCount: Int { get set }
 }

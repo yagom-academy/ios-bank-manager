@@ -11,7 +11,6 @@ class BusinessSection: BankWorkable {
     var bankDispatchQueue: DispatchQueue
     var bankSemaphore: DispatchSemaphore
     let businessType: BusinessType
-    var completedJobCount: Int = 0
     var isWorking: Bool = true
     
     init(queueName: String, businessType: BusinessType, numberOfBankers: Int) {
@@ -34,10 +33,6 @@ class BusinessSection: BankWorkable {
             self.notifyFinishJob(customer: customer)
             self.bankSemaphore.signal()
         }
-    }
-    
-    func addJobCount() {
-        completedJobCount += 1
     }
     
     func notifyStartJob(customer: Customer) {

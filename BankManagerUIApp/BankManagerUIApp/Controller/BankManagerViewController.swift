@@ -87,7 +87,8 @@ final class BankManagerViewController: UIViewController {
         customerQueueScrollView.resetAllStackView()
         bankManager.stopAllTask()
         CustomerGenerator.reset()
-        BusinessTimer.reset()
+        BusinessTimer.cancel()
+        controlPanelStackView.resetTimerLabel()
     }
     
     private func updateTimerLabel() {

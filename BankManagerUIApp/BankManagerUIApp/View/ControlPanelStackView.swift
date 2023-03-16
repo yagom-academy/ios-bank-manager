@@ -112,4 +112,8 @@ class ControlPanelStackView: UIStackView {
         
         timerLabel.text = "업무시간 - \(newMinute):\(newSecond):\(newMiliSecond)"
     }
+    
+    func resetTimerLabel() {
+        timerLabel.text = "업무시간 - 00:00:000"
+    }
 }

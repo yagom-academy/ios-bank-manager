@@ -9,7 +9,6 @@ import Foundation
 
 enum BusinessTimer {
     enum TimerState {
-        case suspended
         case resumed
         case finished
     }
@@ -24,19 +23,12 @@ enum BusinessTimer {
             timer?.setEventHandler(handler: handler)
             timer?.resume()
             state = .resumed
-        } else if state == .suspended {
+        } else {
             timer?.resume()
         }
     }
     
-    static func pause() {
-        if state == .resumed {
-            timer?.suspend()
-            state = .suspended
-        }
-    }
-    
-    static func reset() {
+    static func cancel() {
         timer?.cancel()
         timer = nil
         state = .finished
