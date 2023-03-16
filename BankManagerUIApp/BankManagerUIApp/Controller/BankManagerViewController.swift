@@ -18,73 +18,11 @@ final class BankManagerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        registerObserver()
         setMainStackView()
+        registerObserver()
     }
     
-    private func registerObserver() {
-        notification.addObserver(self,
-                                 selector: #selector(registerCustomerView),
-                                 name: .waiting,
-                                 object: nil)
-        
-        notification.addObserver(self,
-                                 selector: #selector(moveToWorkingView),
-                                 name: .working,
-                                 object: nil)
-        
-        notification.addObserver(self,
-                                 selector: #selector(deleteCustomerLabelFromView),
-                                 name: .finished,
-                                 object: nil)
-    }
-    
-    @objc func registerCustomerView(_ notification:NSNotification) {
-        guard let customer = notification.userInfo?[NotificationKey.waiting] as? Customer else {
-            return
-        }
-        
-        let customerLabel = CustomerLabel(customer: customer)
-        waitingStackView.addArrangedSubview(customerLabel)
-    }
-    
-    @objc func moveToWorkingView(_ notification:NSNotification) {
-        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
-            return
-        }
-        
-        let index = waitingStackView.arrangedSubviews.firstIndex { label  in
-            if let customerLabel = label as? CustomerLabel,
-               customerLabel.identifierNumber == customer.numberTicket {
-                return true
-            }
-            return false
-        }
-        
-        let view = waitingStackView.arrangedSubviews[index!]
-        waitingStackView.removeArrangedSubview(view)
-        workingStackView.addArrangedSubview(view)
-    }
-    
-    @objc func deleteCustomerLabelFromView(_ notification:NSNotification) {
-        guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer else {
-            return
-        }
-        
-        let index = workingStackView.arrangedSubviews.firstIndex { label  in
-            if let customerLabel = label as? CustomerLabel,
-               customerLabel.identifierNumber == customer.numberTicket {
-                return true
-            }
-            return false
-        }
-        
-        guard let bindedIndex = index else { return }
-        
-        let view = workingStackView.arrangedSubviews[bindedIndex]
-        view.removeFromSuperview()
-    }
-    
+    // MARK: - UI Setting
     private func setMainStackView() {
         view.addSubview(mainStackView)
         mainStackView.distribution = .fill
@@ -135,7 +73,7 @@ final class BankManagerViewController: UIViewController {
         timerLabel.font = .preferredFont(forTextStyle: .title2)
         timerLabel.textColor = .black
         timerLabel.textAlignment = .center
-
+        
     }
     
     private func makeQueueLabelStackView() -> UIStackView {
@@ -215,15 +153,78 @@ final class BankManagerViewController: UIViewController {
         }
     }
     
-    var timer: Timer = {
-        let timer = Timer()
-        return timer
-    }()
-    var timerNum: Double = 0
-}
-
-extension BankManagerViewController {
+    // MARK: - Notification
+    private func registerObserver() {
+        notification.addObserver(self,
+                                 selector: #selector(registerCustomerView),
+                                 name: .waiting,
+                                 object: nil)
+        
+        notification.addObserver(self,
+                                 selector: #selector(moveToWorkingView),
+                                 name: .working,
+                                 object: nil)
+        
+        notification.addObserver(self,
+                                 selector: #selector(deleteCustomerLabelFromView),
+                                 name: .finished,
+                                 object: nil)
+    }
     
+    @objc func registerCustomerView(_ notification:NSNotification) {
+        guard let customer = notification.userInfo?[NotificationKey.waiting] as? Customer else {
+            return
+        }
+        
+        let customerLabel = CustomerLabel(customer: customer)
+        waitingStackView.addArrangedSubview(customerLabel)
+    }
+    
+    @objc func moveToWorkingView(_ notification:NSNotification) {
+        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
+            return
+        }
+        
+        let index = waitingStackView.arrangedSubviews.firstIndex { label  in
+            if let customerLabel = label as? CustomerLabel,
+               customerLabel.identifierNumber == customer.numberTicket {
+                return true
+            }
+            return false
+        }
+        
+        let view = waitingStackView.arrangedSubviews[index!]
+        waitingStackView.removeArrangedSubview(view)
+        workingStackView.addArrangedSubview(view)
+    }
+    
+    @objc func deleteCustomerLabelFromView(_ notification:NSNotification) {
+        guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer else {
+            return
+        }
+        
+        let index = workingStackView.arrangedSubviews.firstIndex { label  in
+            if let customerLabel = label as? CustomerLabel,
+               customerLabel.identifierNumber == customer.numberTicket {
+                return true
+            }
+            return false
+        }
+        
+        guard let bindedIndex = index else { return }
+        
+        let view = workingStackView.arrangedSubviews[bindedIndex]
+        view.removeFromSuperview()
+        
+        if workingStackView.arrangedSubviews.isEmpty {
+            pauseTimer()
+        }
+    }
+    
+    
+    // MARK: - Timer
+    var timer: Timer = Timer()
+    var timerNum: Double = 0
     
     func startTimer(){
         if timer.isValid { return }
@@ -238,7 +239,7 @@ extension BankManagerViewController {
     }
     
     func pauseTimer() {
-        
+        timer.invalidate()
     }
     
     @objc func updateTimer() {
@@ -251,10 +252,8 @@ extension BankManagerViewController {
         let miliSecond = Int((timerNum - Double(totalSecond)) * 1000)
         
         let textFormat = "업무시간 - %02d:%02d:%003d"
-  
-            self.timerLabel.text = String(format: textFormat, minute, second, miliSecond)
         
-        
+        self.timerLabel.text = String(format: textFormat, minute, second, miliSecond)
     }
 }
 
