@@ -81,6 +81,6 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc func clearButtonTapped() {
-        print("clear")
+        customerQueueScrollView.resetAllStackView()
     }
 }

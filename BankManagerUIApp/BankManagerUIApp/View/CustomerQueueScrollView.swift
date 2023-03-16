@@ -81,4 +81,13 @@ final class CustomerQueueScrollView: UIScrollView {
         
         label.removeFromSuperview()
     }
+    
+    func resetAllStackView() {
+        waitingQueueStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        processingQueueStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
 }
