@@ -111,6 +111,7 @@ class BankManagerViewController: UIViewController {
         
         let waitingStackView: UIStackView = .init()
         waitingStackView.axis = .vertical
+        waitingStackView.spacing = 8
         waitingStackView.alignment = .center
         waitingStackView.distribution = .fillEqually
         
@@ -125,7 +126,8 @@ class BankManagerViewController: UIViewController {
             waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
             waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
             waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
-            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor)
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor),
+            waitingStackView.widthAnchor.constraint(equalTo: waitingScrollView.widthAnchor)
         ])
         
         businessStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +135,8 @@ class BankManagerViewController: UIViewController {
             businessStackView.leadingAnchor.constraint(equalTo: businessScrollView.leadingAnchor),
             businessStackView.trailingAnchor.constraint(equalTo: businessScrollView.trailingAnchor),
             businessStackView.bottomAnchor.constraint(equalTo: businessScrollView.bottomAnchor),
-            businessStackView.topAnchor.constraint(equalTo: businessScrollView.topAnchor)
+            businessStackView.topAnchor.constraint(equalTo: businessScrollView.topAnchor),
+            businessStackView.widthAnchor.constraint(equalTo: businessScrollView.widthAnchor)
         ])
         
         let clientLabel: UILabel = .init()
@@ -148,6 +151,15 @@ class BankManagerViewController: UIViewController {
         
         waitingStackView.addArrangedSubview(clientLabel)
         waitingStackView.addArrangedSubview(clientLabel2)
+        
+        for index in 1...30 {
+                     let label: UILabel = .init()
+                     label.text = "\(index)-예금"
+                     label.textAlignment = .center
+                     label.font = .systemFont(ofSize: 24)
+
+                     waitingStackView.addArrangedSubview(label)
+                 }
         
         let clientLabel3: UILabel = .init()
         clientLabel3.text = "11-예금"
