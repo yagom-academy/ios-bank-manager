@@ -43,8 +43,12 @@ final class BankViewController: UIViewController {
     }
     
     @objc private func pushResetButton() {
-        bankView.waitClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        bankView.processClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        bankView.waitClientStackView.arrangedSubviews.forEach { element in
+            element.removeFromSuperview()
+        }
+        bankView.processClientStackView.arrangedSubviews.forEach { element in
+            element.removeFromSuperview()
+        }
         bankManager.reset()
         resetTimer()
     }
@@ -89,11 +93,11 @@ extension BankViewController: BankManagerDelegate {
     func startClientTask(_ client: Client) {
         DispatchQueue.main.async {
             self.startTimer()
-            self.bankView.waitClientStackView.arrangedSubviews.forEach {
-                let label = $0 as? UILabel
+            self.bankView.waitClientStackView.arrangedSubviews.forEach { element in
+                let label = element as? UILabel
                 if label?.text == "\(client.clientNumber) - \(client.requstedTask.taskName)" {
-                    $0.removeFromSuperview()
-                    self.bankView.processClientStackView.addArrangedSubview($0)
+                    element.removeFromSuperview()
+                    self.bankView.processClientStackView.addArrangedSubview(element)
                 }
             }
         }
