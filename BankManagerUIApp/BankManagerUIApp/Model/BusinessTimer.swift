@@ -13,13 +13,14 @@ enum BusinessTimer {
         case resumed
         case finished
     }
+    
     static var timer: DispatchSourceTimer?
     static var state: TimerState = .finished
     
     static func start(handler: @escaping () -> ()) {
         if state == .finished {
             timer = DispatchSource.makeTimerSource(queue: .main)
-            timer?.schedule(deadline: .now(), repeating: 0.1)
+            timer?.schedule(deadline: .now(), repeating: 0.001)
             timer?.setEventHandler(handler: handler)
             timer?.resume()
             state = .resumed

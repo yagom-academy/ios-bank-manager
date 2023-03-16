@@ -78,8 +78,8 @@ final class BankManagerViewController: UIViewController {
         bankManager.addTenCustomers(customers)
         customerQueueScrollView.addWaitingLabel(customers: customers)
         bankManager.startBusiness()
-        BusinessTimer.start(handler: {
-            print("111")
+        BusinessTimer.start(handler: { [weak self] in
+            self?.updateTimerLabel()
         })
     }
     
@@ -88,5 +88,9 @@ final class BankManagerViewController: UIViewController {
         bankManager.stopAllTask()
         CustomerGenerator.reset()
         BusinessTimer.reset()
+    }
+    
+    private func updateTimerLabel() {
+        controlPanelStackView.setTimerLabel()
     }
 }

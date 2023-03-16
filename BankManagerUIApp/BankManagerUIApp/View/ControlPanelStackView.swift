@@ -36,7 +36,7 @@ class ControlPanelStackView: UIStackView {
     private let timerLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "업무시간 - 01:00:000"
+        label.text = "업무시간 - 00:00:000"
         label.font = .preferredFont(forTextStyle: .title2)
         label.textAlignment = .center
         
@@ -92,5 +92,24 @@ class ControlPanelStackView: UIStackView {
     func setControlButtonTarget(addAction: Selector, clearAction: Selector) {
         addCustomerButton.addTarget(nil, action: addAction, for: .touchUpInside)
         clearButton.addTarget(nil, action: clearAction, for: .touchUpInside)
+    }
+    
+    func setTimerLabel() {
+        guard let currentTime = timerLabel.text else { return }
+        
+        let splittedTime = currentTime
+            .dropFirst(7)
+            .split(separator: ":")
+            .map { Int($0) }
+            .compactMap { $0 }
+        
+        let minute = splittedTime[0], second = splittedTime[1], miliSecond = splittedTime[2]
+        let time = minute * 60 * 1000 + second * 1000 + miliSecond + 1
+        
+        let newMinute = String(format: "%02d", time / 60 / 1000)
+        let newSecond = String(format: "%02d", time % 60000 / 1000)
+        let newMiliSecond = String(format: "%03d", time % 60000 % 1000)
+        
+        timerLabel.text = "업무시간 - \(newMinute):\(newSecond):\(newMiliSecond)"
     }
 }
