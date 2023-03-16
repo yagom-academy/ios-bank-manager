@@ -14,31 +14,27 @@ protocol Respondable {
 
 final class BankDepartment: Respondable {
     private let operationQueue: OperationQueue = OperationQueue()
-
+    
     init(workableBankerCount: Int) {
         operationQueue.maxConcurrentOperationCount = workableBankerCount
     }
     
-    
     func respond(to customer: Customer) {
         let operation = makeTask(for: customer)
         operation.completionBlock =  {
-  
-                NotificationCenter.default.post(name: .stop,
-                                                object: nil,
-                                                userInfo: nil)
-       
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .stop, object: nil, userInfo: nil)
+            }
         }
-
-        operationQueue.addOperation(operation)
         
+        operationQueue.addOperation(operation)
     }
     
     private func makeTask(for customer: Customer) -> BlockOperation {
         let task = BlockOperation {
             self.doWork(for: customer)
         }
-
+        
         return task
     }
     

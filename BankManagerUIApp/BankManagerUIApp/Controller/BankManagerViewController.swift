@@ -7,13 +7,13 @@
 import UIKit
 
 final class BankManagerViewController: UIViewController {
-    let mainStackView = VerticalStackView()
-    let workingStackView = VerticalStackView()
-    let waitingStackView = VerticalStackView()
-    let timerLabel = UILabel()
+    private let mainStackView = VerticalStackView()
+    private let workingStackView = VerticalStackView()
+    private let waitingStackView = VerticalStackView()
+    private let timerLabel = UILabel()
     
-    let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
-    let notification = NotificationCenter.default
+    private let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
+    private let notification = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ final class BankManagerViewController: UIViewController {
         mainStackView.setLayoutConstraint(toLayoutGuide: view.safeAreaLayoutGuide)
         
         let buttonStackView = makeButtonStackView()
-        makeTimerLabel()
+        setTimerLabel()
         let queueLabelStackView = makeQueueLabelStackView()
         let customerStackView = makeCustomerStackView()
         
@@ -68,7 +68,7 @@ final class BankManagerViewController: UIViewController {
         return buttonStackView
     }
     
-    private func makeTimerLabel()  {
+    private func setTimerLabel()  {
         timerLabel.text = "업무시간 - 00:00:000"
         timerLabel.font = .preferredFont(forTextStyle: .title2)
         timerLabel.textColor = .black
@@ -140,8 +140,11 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func reset() {
+        pauseTimer()
         bank.close()
         resetCustomerStackView()
+        timerLabel.text = "업무시간 - 00:00:000"
+        timerNum = 0
     }
     
     private func resetCustomerStackView() {
@@ -176,14 +179,7 @@ final class BankManagerViewController: UIViewController {
                                  object: nil)
     }
     
-    @objc func stopTimer() {
-        if waitingStackView.arrangedSubviews.isEmpty {
-            timer.invalidate()
-        }
-        //timer.invalidate()
-    }
-    
-    @objc func registerCustomerView(_ notification:NSNotification) {
+    @objc private func registerCustomerView(_ notification:NSNotification) {
         guard let customer = notification.userInfo?[NotificationKey.waiting] as? Customer else {
             return
         }
@@ -192,7 +188,7 @@ final class BankManagerViewController: UIViewController {
         waitingStackView.addArrangedSubview(customerLabel)
     }
     
-    @objc func moveToWorkingView(_ notification:NSNotification) {
+    @objc private func moveToWorkingView(_ notification:NSNotification) {
         guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
             return
         }
@@ -210,7 +206,7 @@ final class BankManagerViewController: UIViewController {
         workingStackView.addArrangedSubview(view)
     }
     
-    @objc func deleteCustomerLabelFromView(_ notification:NSNotification) {
+    @objc private func deleteCustomerLabelFromView(_ notification:NSNotification) {
         guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer else {
             return
         }
@@ -230,12 +226,17 @@ final class BankManagerViewController: UIViewController {
         
     }
     
+    @objc private func stopTimer() {
+        if waitingStackView.arrangedSubviews.isEmpty && workingStackView.arrangedSubviews.isEmpty {
+            timer.invalidate()
+        }
+    }
     
     // MARK: - Timer
-    var timer: Timer = Timer()
-    var timerNum: Double = 0
+    private var timer: Timer = Timer()
+    private var timerNum: Double = 0
     
-    func startTimer(){
+    private func startTimer(){
         if timer.isValid { return }
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 0.001,
@@ -247,11 +248,11 @@ final class BankManagerViewController: UIViewController {
         }
     }
     
-    func pauseTimer() {
+    private func pauseTimer() {
         timer.invalidate()
     }
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         timerNum += 0.001
         
         let totalSecond = Int(timerNum)
