@@ -9,7 +9,6 @@ import UIKit
 final class MainViewController: UIViewController {
     private var bank = Bank()
     private var timer: DispatchSourceTimer?
-    private var date = Date(timeIntervalSince1970: 0)
     private var isRunningTimer = false
     
     // MARK: UI 프로퍼티
@@ -76,6 +75,8 @@ final class MainViewController: UIViewController {
     
     private func configureTimer() {
         if timer != nil { return }
+        
+        var date = Date(timeIntervalSince1970: 0)
         
         timer = DispatchSource.makeTimerSource(queue: .main)
         timer?.schedule(deadline: .now(), repeating: .milliseconds(BankOption.timerMilliSecond))
@@ -153,8 +154,6 @@ final class MainViewController: UIViewController {
         
         timer?.cancel()
         timer = nil
-        
-        date = Date(timeIntervalSince1970: 0)
     }
 }
 
