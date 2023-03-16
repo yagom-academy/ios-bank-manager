@@ -13,10 +13,12 @@ class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         setupMainStackView()
         addButton()
+        addTimeLabel()
     }
     
     private func setupMainStackView() {
         view.addSubview(mainStackView)
+        mainStackView.axis = .vertical
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -43,6 +45,25 @@ class BankManagerViewController: UIViewController {
         mainStackView.addArrangedSubview(buttonStackView)
         buttonStackView.addArrangedSubview(addClientButton)
         buttonStackView.addArrangedSubview(resetButton)
+        
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    private func addTimeLabel() {
+        let businessTime: UILabel = .init()
+        
+        businessTime.text = "업무 시간 - 04:33:253"
+        businessTime.textAlignment = .center
+        businessTime.backgroundColor = .green
+        
+        businessTime.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 20)
+        
+        
+        mainStackView.addArrangedSubview(businessTime)
+        
+        businessTime.translatesAutoresizingMaskIntoConstraints = false
+        businessTime.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
 }
 
