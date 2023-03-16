@@ -26,7 +26,7 @@ class BankManagerViewController: UIViewController {
     private var timer = Timer()
     private var startTime: CFAbsoluteTime = .zero
     
-    @objc func measerTime() {
+    @objc func measureTime() {
         let currentTime = CFAbsoluteTimeGetCurrent() - startTime
         
         let milliseconds = Int(currentTime * 1000) % 1000
@@ -37,21 +37,23 @@ class BankManagerViewController: UIViewController {
     }
     
     func setTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(measerTime), userInfo: nil, repeats: true)
+        if timer.isValid { return }
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(measureTime), userInfo: nil, repeats: true)
     }
     
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(startProcess(notification:)),
-            name: Notification.Name("1"),
+            name: Notification.Name("startBankBusiness"),
             object: nil
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(endProcess(notification:)),
-            name: Notification.Name("2"),
+            name: Notification.Name("endBankBusiness"),
             object: nil
         )
     }
@@ -77,10 +79,10 @@ class BankManagerViewController: UIViewController {
         addClientButton.setTitleColor(.systemBlue, for: .normal)
         addClientButton.addTarget(self, action: #selector(touchUpAddClientButton), for: .touchUpInside)
         
-        
         let resetButton: UIButton = .init()
         resetButton.setTitle("초기화", for: .normal)
         resetButton.setTitleColor(.systemRed, for: .normal)
+        addClientButton.addTarget(self, action: #selector(resetClientAndTime), for: .touchUpInside)
         
         let buttonStackView: UIStackView = .init()
         buttonStackView.axis = .horizontal
@@ -97,18 +99,23 @@ class BankManagerViewController: UIViewController {
     
     private func addTimeLabel() {
         let businessTime: UILabel = .init()
-        
-        businessTime.text = "업무 시간 - 04:33:253"
-        businessTime.textAlignment = .center
+        businessTime.text = "업무 시간 - "
+        businessTime.textAlignment = .right
         businessTime.font = .systemFont(ofSize: 24)
         
-        businessTime.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 20)
+        totalTime.text = "00:00:000"
+        totalTime.textAlignment = .left
+        totalTime.font = .systemFont(ofSize: 24)
+    
+        let timeStackView: UIStackView = .init()
+        timeStackView.axis = .horizontal
+        timeStackView.distribution = .fillEqually
+        timeStackView.spacing = 8
         
+        timeStackView.addArrangedSubview(businessTime)
+        timeStackView.addArrangedSubview(totalTime)
         
         mainStackView.addArrangedSubview(businessTime)
-        
-        businessTime.translatesAutoresizingMaskIntoConstraints = false
-        businessTime.heightAnchor.constraint(equalToConstant: 24).isActive = true
     }
     
     private func addQueueLabel() {
@@ -176,6 +183,8 @@ class BankManagerViewController: UIViewController {
     }
     
     @objc func touchUpAddClientButton() {
+        processingClientStackView.startDrawingUI()
+        
         for _ in 1...10 {
             guard let client = bank.makeClient() else { return }
             
@@ -183,6 +192,18 @@ class BankManagerViewController: UIViewController {
         }
         
         bank.processBusiness()
+        setTimer()
+        startTime = CFAbsoluteTimeGetCurrent()
+    }
+    
+    @objc func resetClientAndTime() {
+        waitingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        processingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        totalTime.text = "00:00:000"
+        timer.invalidate()
+        bank.resetOperationQueue()
+        
+        processingClientStackView.stopDrawingUI()
     }
 }
 
