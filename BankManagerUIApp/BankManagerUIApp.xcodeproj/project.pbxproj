@@ -92,6 +92,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA35D90129C2FDDB000C0C36 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
+				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AA35D90229C2FE21000C0C36 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E43259C3EA20053667F /* Assets.xcassets */,
+				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA35D90329C2FE2F000C0C36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9853C41029C2FAFF00A139E4 /* ClientStackView.swift */,
+				C7694E40259C3E9F0053667F /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA35D90429C2FE66000C0C36 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9853C40729C2FAD000A139E4 /* Bank.swift */,
+				9853C40829C2FAD000A139E4 /* BankClient.swift */,
+				9853C40429C2FAD000A139E4 /* Banker.swift */,
+				9853C40629C2FAD000A139E4 /* Business.swift */,
+				9853C40229C2FACF00A139E4 /* LinkedList.swift */,
+				9853C40529C2FAD000A139E4 /* Node.swift */,
+				9853C40329C2FACF00A139E4 /* Queue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AA35D90529C2FE94000C0C36 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3E259C3E9F0053667F /* BankManagerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
@@ -115,21 +164,12 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
-				9853C40729C2FAD000A139E4 /* Bank.swift */,
-				9853C40829C2FAD000A139E4 /* BankClient.swift */,
-				9853C40429C2FAD000A139E4 /* Banker.swift */,
-				9853C40629C2FAD000A139E4 /* Business.swift */,
-				9853C40229C2FACF00A139E4 /* LinkedList.swift */,
-				9853C40529C2FAD000A139E4 /* Node.swift */,
-				9853C40329C2FACF00A139E4 /* Queue.swift */,
-				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
-				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				C7694E3E259C3E9F0053667F /* BankManagerViewController.swift */,
-				C7694E40259C3E9F0053667F /* Main.storyboard */,
-				C7694E43259C3EA20053667F /* Assets.xcassets */,
-				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+				AA35D90429C2FE66000C0C36 /* Model */,
+				AA35D90329C2FE2F000C0C36 /* View */,
+				AA35D90529C2FE94000C0C36 /* Controller */,
+				AA35D90229C2FE21000C0C36 /* Resources */,
+				AA35D90129C2FDDB000C0C36 /* Application */,
 				C7694E48259C3EA20053667F /* Info.plist */,
-				9853C41029C2FAFF00A139E4 /* ClientStackView.swift */,
 			);
 			path = BankManagerUIApp;
 			sourceTree = "<group>";
