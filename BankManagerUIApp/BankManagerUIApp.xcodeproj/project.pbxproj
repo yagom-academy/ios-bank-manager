@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9853C40929C2FAD000A139E4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40229C2FACF00A139E4 /* LinkedList.swift */; };
 		9853C40A29C2FAD000A139E4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40329C2FACF00A139E4 /* Queue.swift */; };
-		9853C40B29C2FAD000A139E4 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40429C2FAD000A139E4 /* Banker.swift */; };
 		9853C40C29C2FAD000A139E4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40529C2FAD000A139E4 /* Node.swift */; };
 		9853C40D29C2FAD000A139E4 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40629C2FAD000A139E4 /* Business.swift */; };
 		9853C40E29C2FAD000A139E4 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40729C2FAD000A139E4 /* Bank.swift */; };
@@ -46,7 +45,6 @@
 /* Begin PBXFileReference section */
 		9853C40229C2FACF00A139E4 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		9853C40329C2FACF00A139E4 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		9853C40429C2FAD000A139E4 /* Banker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
 		9853C40529C2FAD000A139E4 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		9853C40629C2FAD000A139E4 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		9853C40729C2FAD000A139E4 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 			children = (
 				9853C40729C2FAD000A139E4 /* Bank.swift */,
 				9853C40829C2FAD000A139E4 /* BankClient.swift */,
-				9853C40429C2FAD000A139E4 /* Banker.swift */,
 				9853C40629C2FAD000A139E4 /* Business.swift */,
 				9853C40229C2FACF00A139E4 /* LinkedList.swift */,
 				9853C40529C2FAD000A139E4 /* Node.swift */,
@@ -327,7 +324,6 @@
 			files = (
 				9853C40A29C2FAD000A139E4 /* Queue.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,
-				9853C40B29C2FAD000A139E4 /* Banker.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				9853C40F29C2FAD000A139E4 /* BankClient.swift in Sources */,
 				9853C40929C2FAD000A139E4 /* LinkedList.swift in Sources */,

@@ -62,25 +62,10 @@ final class Bank {
         return client
     }
     
-    var loanCompleted = false
-    var depositCompleted = false
-    
     func processBusiness() {
         while let client = clientQueue.dequeue() {
             addClientToOperationQueue(client)
         }
-        
-        let completionBlock = BlockOperation()
-        completionBlock.completionBlock = {
-            self.loanCompleted = true
-        }
-        let completionBlock2 = BlockOperation()
-        completionBlock.completionBlock = {
-            self.depositCompleted = true
-        }
-        
-        loanQueue.addOperation(completionBlock)
-        depositQueue.addOperation(completionBlock2)
     }
     
     func addClientToOperationQueue(_ client: BankClient) {

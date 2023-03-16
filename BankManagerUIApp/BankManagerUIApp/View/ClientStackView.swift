@@ -68,9 +68,14 @@ final class ClientStackView: UIStackView {
     func remove(client: BankClient) {
         self.arrangedSubviews.forEach {
             if $0.tag == client.waitingNumber {
-                self.removeArrangedSubview($0)
                 $0.removeFromSuperview()
             }
+        }
+    }
+    
+    func clear() {
+        self.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
         }
     }
 }

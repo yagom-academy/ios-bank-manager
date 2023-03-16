@@ -28,14 +28,14 @@ class BankManagerViewController: UIViewController {
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(startProcess(notification:)),
+            selector: #selector(startBankBusiness(notification:)),
             name: Notification.Name("startBankBusiness"),
             object: nil
         )
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(endProcess(notification:)),
+            selector: #selector(endBankBusiness(notification:)),
             name: Notification.Name("endBankBusiness"),
             object: nil
         )
@@ -64,7 +64,7 @@ class BankManagerViewController: UIViewController {
         let resetButton: UIButton = .init()
         resetButton.setTitle("초기화", for: .normal)
         resetButton.setTitleColor(.systemRed, for: .normal)
-        resetButton.addTarget(self, action: #selector(resetClientAndTime), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(touchUpClearButton), for: .touchUpInside)
         
         let buttonStackView: UIStackView = .init()
         buttonStackView.axis = .horizontal
@@ -130,19 +130,19 @@ class BankManagerViewController: UIViewController {
         processingClientStackView.setAutoLayout()
     }
     
-    @objc func startProcess(notification: Notification) {
+    @objc func startBankBusiness(notification: Notification) {
         guard let client = notification.object as? BankClient else { return }
         
-        DispatchQueue.main.async {
+        OperationQueue.main.addOperation {
             self.waitingClientStackView.remove(client: client)
             self.processingClientStackView.add(client: client)
         }
     }
     
-    @objc func endProcess(notification: Notification) {
+    @objc func endBankBusiness(notification: Notification) {
         guard let client = notification.object as? BankClient else { return }
         
-        DispatchQueue.main.async {
+        OperationQueue.main.addOperation {
             self.processingClientStackView.remove(client: client)
             
             if self.processingClientStackView.subviews.isEmpty &&
@@ -165,9 +165,9 @@ class BankManagerViewController: UIViewController {
         timerStackView.startTimer()
     }
     
-    @objc func resetClientAndTime() {
-        waitingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        processingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    @objc func touchUpClearButton() {
+        waitingClientStackView.clear()
+        processingClientStackView.clear()
         timerStackView.clearTimer()
         
         NotificationCenter.default.post(name: NSNotification.Name("touchUpResetButton"), object: nil)
