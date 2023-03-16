@@ -11,10 +11,12 @@ extension Notification.Name {
     static let waiting = Notification.Name(rawValue: "waiting")
     static let working = Notification.Name(rawValue: "working")
     static let finished = Notification.Name(rawValue: "finished")
+    static let stop = Notification.Name(rawValue: "stop")
 }
 
 enum NotificationKey: String {
     case waiting
     case working
     case finished
+    case stop
 }

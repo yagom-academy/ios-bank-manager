@@ -169,6 +169,18 @@ final class BankManagerViewController: UIViewController {
                                  selector: #selector(deleteCustomerLabelFromView),
                                  name: .finished,
                                  object: nil)
+        
+        notification.addObserver(self,
+                                 selector: #selector(stopTimer),
+                                 name: .stop,
+                                 object: nil)
+    }
+    
+    @objc func stopTimer() {
+        if waitingStackView.arrangedSubviews.isEmpty {
+            timer.invalidate()
+        }
+        //timer.invalidate()
     }
     
     @objc func registerCustomerView(_ notification:NSNotification) {
@@ -216,9 +228,6 @@ final class BankManagerViewController: UIViewController {
         let view = workingStackView.arrangedSubviews[bindedIndex]
         view.removeFromSuperview()
         
-        if workingStackView.arrangedSubviews.isEmpty {
-            pauseTimer()
-        }
     }
     
     
