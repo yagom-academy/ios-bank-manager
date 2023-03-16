@@ -10,43 +10,19 @@ class BankManagerViewController: UIViewController {
     private let mainStackView: UIStackView = .init()
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
+    private let timerStackView: TimerStackView = .init()
     private let bank: Bank = .init() // 싱글톤?
-    private let totalTime: UILabel = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMainStackView()
         addButton()
-        addTimeLabel()
+        addTimeStackView()
         addQueueLabel()
         addScrollView()
         addNotificationObserver()
         
         bank.open()
-    }
-    
-    private var timer = Timer()
-    private var startTime: CFAbsoluteTime = .zero
-    private var currentTime: CFAbsoluteTime = .zero
-    private var previousTime: CFAbsoluteTime = .zero
-    
-    @objc func measureTime() {
-        currentTime = CFAbsoluteTimeGetCurrent() - startTime + previousTime
-        
-        let milliseconds = Int(currentTime * 1000) % 1000
-        let seconds = (Int(currentTime * 1000) / 1000) % 60
-        let minutes = (Int(currentTime * 1000) / (1000 * 60)) % 60
-        
-        totalTime.text = String(format: "%02d:%02d:%03d", minutes, seconds, milliseconds)
-    }
-    
-    func setTimer() {
-        if timer.isValid { return }
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(measureTime), userInfo: nil, repeats: true)
-        
-        startTime = CFAbsoluteTimeGetCurrent()
-        previousTime = currentTime
     }
     
     private func addNotificationObserver() {
@@ -64,7 +40,6 @@ class BankManagerViewController: UIViewController {
             object: nil
         )
     }
-    
     
     private func setupMainStackView() {
         view.addSubview(mainStackView)
@@ -104,25 +79,8 @@ class BankManagerViewController: UIViewController {
         buttonStackView.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
-    private func addTimeLabel() {
-        let businessTime: UILabel = .init()
-        businessTime.text = "업무 시간 - "
-        businessTime.textAlignment = .right
-        businessTime.font = .systemFont(ofSize: 24)
-        
-        totalTime.text = "00:00:000"
-        totalTime.textAlignment = .left
-        totalTime.font = .systemFont(ofSize: 24)
-    
-        let timeStackView: UIStackView = .init()
-        timeStackView.axis = .horizontal
-        timeStackView.distribution = .fillEqually
-        timeStackView.spacing = 8
-        
-        timeStackView.addArrangedSubview(businessTime)
-        timeStackView.addArrangedSubview(totalTime)
-        
-        mainStackView.addArrangedSubview(timeStackView)
+    private func addTimeStackView() {
+        mainStackView.addArrangedSubview(timerStackView)
     }
     
     private func addQueueLabel() {
@@ -189,7 +147,7 @@ class BankManagerViewController: UIViewController {
             
             if self.processingClientStackView.subviews.isEmpty &&
                 self.waitingClientStackView.subviews.isEmpty  {
-                self.timer.invalidate()
+                self.timerStackView.stopTimer()
             }
         }
     }
@@ -204,19 +162,16 @@ class BankManagerViewController: UIViewController {
         }
         
         bank.processBusiness()
-        setTimer()
+        timerStackView.startTimer()
     }
     
     @objc func resetClientAndTime() {
         waitingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         processingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        totalTime.text = "00:00:000"
-        timer.invalidate()
-        previousTime = .zero
-        currentTime = .zero
+        timerStackView.clearTimer()
+        
         NotificationCenter.default.post(name: NSNotification.Name("touchUpResetButton"), object: nil)
         
         processingClientStackView.stopDrawingUI()
     }
 }
-
