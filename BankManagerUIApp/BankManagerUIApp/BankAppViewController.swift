@@ -20,7 +20,7 @@ final class BankAppViewController: UIViewController {
     //MARK: Timer Properties
     private var timer: Timer?
     private var taskTime: Double = 0
-    private var isOpened: Bool = false
+    private var isOpen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ final class BankAppViewController: UIViewController {
     @objc private func addTenClients() {
         bank.lineUpClient()
         bank.doTask()
-        isOpened = true
+        isOpen = true
     }
     
     private func resetButtonTapped() {
@@ -88,7 +88,7 @@ final class BankAppViewController: UIViewController {
     }
     
     @objc func resetAll() {
-        isOpened = false
+        isOpen = false
         taskTime = 0
         queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView
             .arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -103,7 +103,7 @@ final class BankAppViewController: UIViewController {
     }
     
     @objc private func timeUp() {
-        if isOpened == true {
+        if isOpen == true {
             taskTime += 0.001
         }
         let timeInterval = taskTime
@@ -154,7 +154,7 @@ extension BankAppViewController: BankDelegate {
             if queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView
                 .subviews.isEmpty && queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView
                 .subviews.isEmpty {
-                isOpened = false
+                isOpen = false
             }
         }
     }
