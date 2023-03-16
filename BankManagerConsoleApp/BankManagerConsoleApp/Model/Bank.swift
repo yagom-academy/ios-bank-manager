@@ -5,33 +5,36 @@
 //  Created by Rowan, 릴라 on 2023/03/07.
 //
 
-final class Bank {
-    private var customerQueue: CustomerQueue<Customer> = CustomerQueue()
-    private let bankers: [Banker]
-    private(set) var totalCustomer: Int = 0
+import Foundation
+
+protocol Openable {
+    var processTime: CFAbsoluteTime? { get }
     
-    init(numberOfBanker number: Int = 1) {
-        self.bankers = Bank.registerBankers(numberOfBanker: number)
+    func open(totalCustomer: Int)
+    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) -> String
+}
+
+final class Bank: Openable {
+    private var customerQueue: any CustomerQueueable
+    private let loanDepartment: Respondable
+    private let depositDepartment: Respondable
+    private let workGroup: DispatchGroup = DispatchGroup()
+    var processTime: CFAbsoluteTime?
+    
+    init(loanDepartment: Respondable, depositDepartment: Respondable, customerQueue: any CustomerQueueable) {
+        self.loanDepartment = loanDepartment
+        self.depositDepartment = depositDepartment
+        self.customerQueue = customerQueue
     }
     
-    func open() {
-        receiveCustomer()
-        orderWork()
-    }
-    
-    private static func registerBankers(numberOfBanker: Int) -> [Banker] {
-        let bankers = [1...numberOfBanker].map { _ in
-            let banker = Banker()
-            return banker
-        }
+    func open(totalCustomer: Int) {
+        setCustomerQueue(totalCustomer: totalCustomer)
+        let processTime = ProcessTimer.calculateProcessTime(for: startWork)
         
-        return bankers
+        self.processTime = processTime
     }
     
-    private func receiveCustomer() {
-        let customerRange: ClosedRange<Int> = 10...30
-        totalCustomer = Int.random(in: customerRange)
-        
+    private func setCustomerQueue(totalCustomer: Int) {
         for number in 1...totalCustomer {
             let numberTicket = String(describing: number)
             let customer = Customer(numberTicket: numberTicket)
@@ -39,17 +42,23 @@ final class Bank {
         }
     }
     
-    private func orderWork() {
-        guard let banker = bankers.first else { return }
-        
-        while let customer = customerQueue.dequeue() {
-            banker.doWork(for: customer)
+    private func startWork() {
+        while let customer = customerQueue.dequeue(),
+              let business = customer.business {
+            switch business {
+            case .deposit:
+                depositDepartment.respond(to: customer, workGroup: workGroup)
+            case .loan:
+                loanDepartment.respond(to: customer, workGroup: workGroup)
+            }
         }
+        workGroup.wait()
     }
     
-    func reportResult() {
-        let totalProcessTime = Double(totalCustomer) * Banker.processTime
-        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(totalProcessTime)초 입니다."
-        print(message)
+    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) -> String {
+        let roundedProcessTime = round(processTime * 100) / 100
+        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(roundedProcessTime)초 입니다."
+        
+        return message
     }
 }
