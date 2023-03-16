@@ -97,11 +97,9 @@ class BankManagerViewController: UIViewController {
     private func addScrollView() {
         let waitingScrollView: UIScrollView = .init()
         waitingScrollView.translatesAutoresizingMaskIntoConstraints = false
-        waitingScrollView.backgroundColor = .blue
         
         let businessScrollView: UIScrollView = .init()
         businessScrollView.translatesAutoresizingMaskIntoConstraints = false
-        businessScrollView.backgroundColor = .red
         
         let scrollStackView: UIStackView = .init()
         scrollStackView.axis = .horizontal
@@ -110,6 +108,53 @@ class BankManagerViewController: UIViewController {
         mainStackView.addArrangedSubview(scrollStackView)
         scrollStackView.addArrangedSubview(waitingScrollView)
         scrollStackView.addArrangedSubview(businessScrollView)
+        
+        let waitingStackView: UIStackView = .init()
+        waitingStackView.axis = .vertical
+        waitingStackView.alignment = .center
+        waitingStackView.distribution = .fillEqually
+        
+        let businessStackView: UIStackView = .init()
+        businessStackView.axis = .vertical
+        
+        waitingScrollView.addSubview(waitingStackView)
+        businessScrollView.addSubview(businessStackView)
+        
+        waitingStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            waitingStackView.leadingAnchor.constraint(equalTo: waitingScrollView.leadingAnchor),
+            waitingStackView.trailingAnchor.constraint(equalTo: waitingScrollView.trailingAnchor),
+            waitingStackView.bottomAnchor.constraint(equalTo: waitingScrollView.bottomAnchor),
+            waitingStackView.topAnchor.constraint(equalTo: waitingScrollView.topAnchor)
+        ])
+        
+        businessStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            businessStackView.leadingAnchor.constraint(equalTo: businessScrollView.leadingAnchor),
+            businessStackView.trailingAnchor.constraint(equalTo: businessScrollView.trailingAnchor),
+            businessStackView.bottomAnchor.constraint(equalTo: businessScrollView.bottomAnchor),
+            businessStackView.topAnchor.constraint(equalTo: businessScrollView.topAnchor)
+        ])
+        
+        let clientLabel: UILabel = .init()
+        clientLabel.text = "5-예금"
+        clientLabel.textAlignment = .center
+        clientLabel.font = .systemFont(ofSize: 24)
+        
+        let clientLabel2: UILabel = .init()
+        clientLabel2.text = "8-예금"
+        clientLabel2.textAlignment = .center
+        clientLabel2.font = .systemFont(ofSize: 24)
+        
+        waitingStackView.addArrangedSubview(clientLabel)
+        waitingStackView.addArrangedSubview(clientLabel2)
+        
+        let clientLabel3: UILabel = .init()
+        clientLabel3.text = "11-예금"
+        clientLabel3.textAlignment = .center
+        clientLabel3.font = .systemFont(ofSize: 24)
+        
+        businessStackView.addArrangedSubview(clientLabel3)
     }
 }
 
