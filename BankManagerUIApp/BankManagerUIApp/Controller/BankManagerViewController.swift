@@ -21,6 +21,8 @@ class BankManagerViewController: UIViewController {
         addQueueLabel()
         addScrollView()
         addNotificationObserver()
+        
+        bank.open()
     }
     
     private var timer = Timer()
@@ -179,6 +181,11 @@ class BankManagerViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.processingClientStackView.remove(client: client)
+            
+            if self.processingClientStackView.subviews.isEmpty &&
+                self.waitingClientStackView.subviews.isEmpty  {
+                self.timer.invalidate()
+            }
         }
     }
     
@@ -201,7 +208,8 @@ class BankManagerViewController: UIViewController {
         processingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         totalTime.text = "00:00:000"
         timer.invalidate()
-        bank.resetOperationQueue()
+        
+        NotificationCenter.default.post(name: NSNotification.Name("touchUpResetButton"), object: nil)
         
         processingClientStackView.stopDrawingUI()
     }

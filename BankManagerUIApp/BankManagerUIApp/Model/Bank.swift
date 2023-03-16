@@ -23,12 +23,32 @@ final class Bank {
         return queue
     }()
 
-    func resetOperationQueue() {
-        depositQueue.cancelAllOperations()
-        loanQueue.cancelAllOperations()
+    func open() {
+        addNotificationObserver()
     }
     
-    func open() {
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(allClear),
+            name: Notification.Name("touchUpResetButton"),
+            object: nil
+        )
+    }
+    
+    @objc private func allClear() {
+        clearClient()
+        cancelOperationQueue()
+    }
+    
+    private func clearClient() {
+        clientQueue.clear()
+        numberOfClient = 1
+    }
+    
+    private func cancelOperationQueue() {
+        depositQueue.cancelAllOperations()
+        loanQueue.cancelAllOperations()
     }
     
     func makeClient() -> BankClient? {
@@ -42,10 +62,25 @@ final class Bank {
         return client
     }
     
+    var loanCompleted = false
+    var depositCompleted = false
+    
     func processBusiness() {
         while let client = clientQueue.dequeue() {
             addClientToOperationQueue(client)
         }
+        
+        let completionBlock = BlockOperation()
+        completionBlock.completionBlock = {
+            self.loanCompleted = true
+        }
+        let completionBlock2 = BlockOperation()
+        completionBlock.completionBlock = {
+            self.depositCompleted = true
+        }
+        
+        loanQueue.addOperation(completionBlock)
+        depositQueue.addOperation(completionBlock2)
     }
     
     func addClientToOperationQueue(_ client: BankClient) {
@@ -67,11 +102,5 @@ final class Bank {
         }
         
         return task
-    }
-    
-    private func closeBank(processTime: Double) {
-        let totalWorkTime = String(format: "%0.2f", processTime)
-        
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfClient)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
 }
