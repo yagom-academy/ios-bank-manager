@@ -7,7 +7,7 @@
 
 import UIKit
 
-class QueueStackView: UIStackView {
+final class QueueStackView: UIStackView {
     let subStackView = UIStackView()
     
     override init(frame: CGRect) {
