@@ -13,30 +13,22 @@ protocol Respondable {
 }
 
 final class BankDepartment: Respondable {
-    private let workableBanker: DispatchSemaphore
-    private let taskQueue: DispatchQueue = DispatchQueue(label: "taskQueue", attributes: .concurrent)
-    var tasks: [DispatchWorkItem] = []
+    private let operationQueue: OperationQueue = OperationQueue()
     
     init(workableBankerCount: Int) {
-        self.workableBanker = DispatchSemaphore(value: workableBankerCount)
+        operationQueue.maxConcurrentOperationCount = workableBankerCount
     }
     
     func respond(to customer: Customer) {
-        let task = makeTask(for: customer)
-        guard task.isCancelled == false else { return }
-        taskQueue.async(execute: task)
-        
+        let operation = makeTask(for: customer)
+        operationQueue.addOperation(operation)
     }
     
-    private func makeTask(for customer: Customer) -> DispatchWorkItem {
-        let task = DispatchWorkItem { [weak self] in
-            self?.workableBanker.wait()
-            self?.doWork(for: customer)
-            self?.workableBanker.signal()
+    private func makeTask(for customer: Customer) -> BlockOperation {
+        let task = BlockOperation {
+            self.doWork(for: customer)
         }
-        
-        self.tasks.append(task)
-        
+
         return task
     }
     
@@ -64,8 +56,6 @@ final class BankDepartment: Respondable {
     }
     
     func cancelTasks() {
-        self.tasks.forEach {
-            $0.cancel()
-        }
+        operationQueue.cancelAllOperations()
     }
 }
