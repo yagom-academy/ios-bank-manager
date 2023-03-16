@@ -77,7 +77,7 @@ final class MainViewController: UIViewController {
     private func configureTimer() {
         if timer != nil { return }
         
-        timer = DispatchSource.makeTimerSource(queue: .global())
+        timer = DispatchSource.makeTimerSource(queue: .main)
         timer?.schedule(deadline: .now(), repeating: .milliseconds(BankOption.timerMilliSecond))
         
         timer?.setEventHandler(handler: { [self] in
@@ -113,23 +113,19 @@ final class MainViewController: UIViewController {
     @objc func updateCustomer(_ noti: Notification) {
         guard let customer = noti.object as? Customer else { return }
         
-        DispatchQueue.global().async { [self] in
-            DispatchQueue.main.async { [self] in
-                guard BankManager.isRunningWork else { return }
-                
-                waitingStackView.removeLabel(customer: customer)
-                workingStackView.addLabel(customer: customer)
-            }
+        DispatchQueue.main.async { [self] in
+            guard BankManager.isRunningWork else { return }
+            
+            waitingStackView.removeLabel(customer: customer)
+            workingStackView.addLabel(customer: customer)
         }
     }
 
     @objc func updateCompletionOfCustomerWork(_ noti: Notification) {
         guard let customer = noti.object as? Customer else { return }
         
-        DispatchQueue.global().async { [self] in
-            DispatchQueue.main.async { [self] in
-                workingStackView.removeLabel(customer: customer)
-            }
+        DispatchQueue.main.async { [self] in
+            workingStackView.removeLabel(customer: customer)
         }
         
         BankManager.workingGroup.notify(queue: .global()) { [self] in
