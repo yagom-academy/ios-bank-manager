@@ -97,7 +97,7 @@ final class Bank {
     private func makeBlockOperation(_ client: BankClient) -> BlockOperation {
         let task = BlockOperation {
             NotificationCenter.default.post(name: NSNotification.Name("startBankBusiness"), object: client)
-            Banker.receive(client: client)
+            Thread.sleep(forTimeInterval: client.business.time)
             NotificationCenter.default.post(name: NSNotification.Name("endBankBusiness"), object: client)
         }
         

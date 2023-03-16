@@ -27,21 +27,26 @@ class BankManagerViewController: UIViewController {
     
     private var timer = Timer()
     private var startTime: CFAbsoluteTime = .zero
+    private var currentTime: CFAbsoluteTime = .zero
+    private var previousTime: CFAbsoluteTime = .zero
     
     @objc func measureTime() {
-        let currentTime = CFAbsoluteTimeGetCurrent() - startTime
+        currentTime = CFAbsoluteTimeGetCurrent() - startTime + previousTime
         
         let milliseconds = Int(currentTime * 1000) % 1000
         let seconds = (Int(currentTime * 1000) / 1000) % 60
         let minutes = (Int(currentTime * 1000) / (1000 * 60)) % 60
         
-        totalTime.text = String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
+        totalTime.text = String(format: "%02d:%02d:%03d", minutes, seconds, milliseconds)
     }
     
     func setTimer() {
         if timer.isValid { return }
         
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(measureTime), userInfo: nil, repeats: true)
+        
+        startTime = CFAbsoluteTimeGetCurrent()
+        previousTime = currentTime
     }
     
     private func addNotificationObserver() {
@@ -200,7 +205,6 @@ class BankManagerViewController: UIViewController {
         
         bank.processBusiness()
         setTimer()
-        startTime = CFAbsoluteTimeGetCurrent()
     }
     
     @objc func resetClientAndTime() {
@@ -208,7 +212,8 @@ class BankManagerViewController: UIViewController {
         processingClientStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         totalTime.text = "00:00:000"
         timer.invalidate()
-        
+        previousTime = .zero
+        currentTime = .zero
         NotificationCenter.default.post(name: NSNotification.Name("touchUpResetButton"), object: nil)
         
         processingClientStackView.stopDrawingUI()
