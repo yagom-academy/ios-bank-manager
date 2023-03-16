@@ -7,12 +7,10 @@
 
 import Foundation
 
-struct Banker {
-    static let requiredTime: Double = 0.7
-    
-    func receive(client: BankClient) {
-        print("\(client.waitingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: Banker.requiredTime)
-        print("\(client.waitingNumber)번 고객 업무 완료")
+enum Banker {
+    static func receive(client: BankClient) {
+        print("\(client.waitingNumber)번 고객 \(client.business.rawValue)업무 시작")
+        Thread.sleep(forTimeInterval: client.business.time)
+        print("\(client.waitingNumber)번 고객 \(client.business.rawValue)업무 완료")
     }
 }
