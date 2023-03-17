@@ -19,13 +19,7 @@ final class QueueStackView: UIStackView {
     }
     
     func addLabel(customer: Customer) {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-        label.text = "\(customer.waitingNumber) - \(customer.desiredBanking)"
-        label.textColor = customer.fontColor
-        label.font = .preferredFont(forTextStyle: .title3)
+        let label = CustomerLabel(customer: customer)
         
         customerListStackView.addArrangedSubview(label)
     }
@@ -34,7 +28,7 @@ final class QueueStackView: UIStackView {
         let newCustomer = "\(customer.waitingNumber) - \(customer.desiredBanking)"
         
         customerListStackView.arrangedSubviews.forEach { label in
-            guard let oldLabel = label as? UILabel else { return }
+            guard let oldLabel = label as? CustomerLabel else { return }
             
             if newCustomer == oldLabel.text {
                 customerListStackView.removeArrangedSubview(oldLabel)
