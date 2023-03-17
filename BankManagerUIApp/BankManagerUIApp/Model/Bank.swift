@@ -27,7 +27,7 @@ final class Bank {
         addNotificationObserver()
     }
     
-    func addNotificationObserver() {
+    private func addNotificationObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(allClear),
