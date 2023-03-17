@@ -23,6 +23,10 @@ final class Bank {
         return queue
     }()
     
+    init() {
+        addNotificationObserver()
+    }
+    
     func addNotificationObserver() {
         NotificationCenter.default.addObserver(
             self,

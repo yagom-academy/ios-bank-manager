@@ -17,7 +17,6 @@ final class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         addNotificationObserver()
-        bank.addNotificationObserver()
     }
     
     private func configureUI() {
