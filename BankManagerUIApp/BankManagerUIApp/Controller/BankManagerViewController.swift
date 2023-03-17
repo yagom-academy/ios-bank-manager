@@ -7,7 +7,14 @@
 import UIKit
 
 final class BankManagerViewController: UIViewController {
-    private let mainStackView: UIStackView = .init()
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
     private let timerStackView: TimerStackView = .init()
@@ -46,9 +53,6 @@ final class BankManagerViewController: UIViewController {
     
     private func setupMainStackView() {
         view.addSubview(mainStackView)
-        mainStackView.axis = .vertical
-        mainStackView.spacing = 12
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
