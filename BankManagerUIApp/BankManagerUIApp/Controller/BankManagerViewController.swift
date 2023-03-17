@@ -18,13 +18,15 @@ final class BankManagerViewController: UIViewController {
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
     private let timerStackView: TimerStackView = .init()
-    private let bank: Bank = .init()
     private let bankTimer: BankTimer = .init()
+    private let bank: Bank = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         addNotificationObserver()
+        
+        bankTimer.timeDisplayableDelegate = timerStackView
     }
     
     private func configureUI() {
@@ -195,7 +197,7 @@ final class BankManagerViewController: UIViewController {
             
             if processingClientStackView.subviews.isEmpty &&
                 waitingClientStackView.subviews.isEmpty  {
-                timerStackView.stopTimer()
+                bankTimer.stopTimer()
             }
         }
     }
@@ -208,13 +210,13 @@ final class BankManagerViewController: UIViewController {
         }
         
         bank.startBankBusiness()
-        timerStackView.startTimer()
+        bankTimer.startTimer()
     }
     
     @objc private func touchUpClearButton() {
         clear(clientStackView: waitingClientStackView)
         clear(clientStackView: processingClientStackView)
-        timerStackView.clearTimer()
+        bankTimer.clearTimer()
         
         NotificationCenter.default.post(name: NSNotification.Name(Event.touchUpResetButton), object: nil)
     }
