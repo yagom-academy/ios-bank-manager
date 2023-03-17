@@ -8,7 +8,7 @@
 import UIKit
 
 final class QueueStackView: UIStackView {
-    let subStackView = UIStackView()
+    let customerListStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,17 +27,17 @@ final class QueueStackView: UIStackView {
         label.textColor = customer.fontColor
         label.font = .preferredFont(forTextStyle: .title3)
         
-        subStackView.addArrangedSubview(label)
+        customerListStackView.addArrangedSubview(label)
     }
     
     func removeLabel(customer: Customer) {
         let newCustomer = "\(customer.waitingNumber) - \(customer.desiredBanking)"
         
-        subStackView.arrangedSubviews.forEach { label in
+        customerListStackView.arrangedSubviews.forEach { label in
             guard let oldLabel = label as? UILabel else { return }
             
             if newCustomer == oldLabel.text {
-                subStackView.removeArrangedSubview(oldLabel)
+                customerListStackView.removeArrangedSubview(oldLabel)
                 oldLabel.removeFromSuperview()
                 
                 return
@@ -46,8 +46,8 @@ final class QueueStackView: UIStackView {
     }
     
     func resetLabel() {
-        subStackView.arrangedSubviews.forEach { label in
-            subStackView.removeArrangedSubview(label)
+        customerListStackView.arrangedSubviews.forEach { label in
+            customerListStackView.removeArrangedSubview(label)
             label.removeFromSuperview()
         }
     }
@@ -73,16 +73,16 @@ final class QueueStackView: UIStackView {
     }
     
     private func createLabelStackView() {
-        subStackView.translatesAutoresizingMaskIntoConstraints = false
-        subStackView.axis = .vertical
-        subStackView.alignment = .center
-        subStackView.spacing = 8
+        customerListStackView.translatesAutoresizingMaskIntoConstraints = false
+        customerListStackView.axis = .vertical
+        customerListStackView.alignment = .center
+        customerListStackView.spacing = 8
         
-        self.addArrangedSubview(subStackView)
+        self.addArrangedSubview(customerListStackView)
         
         NSLayoutConstraint.activate([
-            self.leadingAnchor.constraint(equalTo: subStackView.leadingAnchor),
-            self.trailingAnchor.constraint(equalTo: subStackView.trailingAnchor)
+            self.leadingAnchor.constraint(equalTo: customerListStackView.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: customerListStackView.trailingAnchor)
         ])
     }
 }
