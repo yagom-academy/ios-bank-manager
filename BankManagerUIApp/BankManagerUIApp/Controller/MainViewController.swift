@@ -63,7 +63,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureTimer() {
-        if timer != nil { return }
+        guard timer == nil else { return }
         
         var date = Date(timeIntervalSince1970: 0)
         
