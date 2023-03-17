@@ -24,7 +24,7 @@ final class ClientStackView: UIStackView {
     
     func add(client: BankClient) {
         let label: ClientLabel = .init(client)
-        label.text = "\(client.waitingNumber)-\(client.business.type)"
+        label.text = "\(client.waitingNumber)-\(client.business)"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24)
         

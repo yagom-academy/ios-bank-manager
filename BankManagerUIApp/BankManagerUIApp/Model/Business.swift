@@ -5,7 +5,7 @@
 //  Created by vetto, kokkilE on 2023/03/12.
 //
 
-enum Business: CaseIterable {
+enum Business: CaseIterable, CustomStringConvertible {
     case deposit
     case loan
     
@@ -18,7 +18,7 @@ enum Business: CaseIterable {
         }
     }
     
-    var type: String {
+    var description: String {
         switch self {
         case .deposit:
             return "예금"
