@@ -26,7 +26,7 @@ final class MainViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         configureLayout()
-        configureUI()
+        setUIOption()
         configureObserver()
     }
 
@@ -39,7 +39,7 @@ final class MainViewController: UIViewController {
         configureWorkingStackView()
     }
     
-    private func configureUI() {
+    private func setUIOption() {
         addCustomerButton.setTitle("고객 10명 추가", for: .normal)
         addCustomerButton.addTarget(self, action: #selector(didTapAddCustomerButton), for: .touchUpInside)
         
