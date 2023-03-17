@@ -133,7 +133,7 @@ BankManagerUIApp
 
 | 고객 추가 | 일시정지 | 초기화 |
 | :--------: | :--------: | :--------: |
-| <img src="https://i.imgur.com/cLnfpED.gif" width=400 height=450> | <img src="https://i.imgur.com/fjIDLO8.gif" width=400> | <img src="https://i.imgur.com/4an9rMU.gif" width=400 height=450> |
+| <img src="https://i.imgur.com/cLnfpED.gif" width=250> | <img src="https://i.imgur.com/fjIDLO8.gif" width=250> | <img src="https://i.imgur.com/4an9rMU.gif" width=250> |
 
 
 
