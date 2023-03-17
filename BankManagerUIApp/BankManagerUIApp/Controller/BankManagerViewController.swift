@@ -19,6 +19,7 @@ final class BankManagerViewController: UIViewController {
     private let processingClientStackView: ClientStackView = .init()
     private let timerStackView: TimerStackView = .init()
     private let bank: Bank = .init()
+    private let bankTimer: BankTimer = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
