@@ -15,6 +15,7 @@ final class BankManagerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupMainStackView()
         addButton()
         addTimeStackView()
