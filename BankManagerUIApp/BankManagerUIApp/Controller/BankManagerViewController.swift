@@ -133,8 +133,18 @@ final class BankManagerViewController: UIViewController {
         scrollStackView.addArrangedSubview(waitingScrollView)
         scrollStackView.addArrangedSubview(businessScrollView)
         
-        waitingClientStackView.setAutoLayout()
-        processingClientStackView.setAutoLayout()
+        setupStackViewAutoLayout(stackView: waitingClientStackView, equalTo: waitingScrollView)
+        setupStackViewAutoLayout(stackView: processingClientStackView, equalTo: businessScrollView)
+    }
+    
+    private func setupStackViewAutoLayout(stackView: UIStackView, equalTo view: UIView) {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
     }
     
     @objc private func startBankBusiness(notification: Notification) {

@@ -22,18 +22,6 @@ final class ClientStackView: UIStackView {
         self.spacing = 8
     }
     
-    func setAutoLayout() {
-        guard let superScrollView = superview else { return }
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            self.bottomAnchor.constraint(equalTo: superScrollView.bottomAnchor),
-            self.topAnchor.constraint(equalTo: superScrollView.topAnchor),
-            self.widthAnchor.constraint(equalTo: superScrollView.widthAnchor)
-        ])
-    }
-    
     func add(client: BankClient) {
         let label: UILabel = .init()
         label.text = "\(client.waitingNumber)-\(client.business.type)"
