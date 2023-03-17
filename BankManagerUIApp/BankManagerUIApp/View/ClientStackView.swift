@@ -21,34 +21,4 @@ final class ClientStackView: UIStackView {
         self.axis = .vertical
         self.spacing = 8
     }
-    
-    func add(client: BankClient) {
-        let label: ClientLabel = .init(client)
-        label.text = "\(client.waitingNumber)-\(client.business)"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 24)
-        
-        switch client.business {
-        case .loan:
-            label.textColor = .systemPurple
-        case .deposit:
-            label.textColor = .black
-        }
-        
-        self.addArrangedSubview(label)
-    }
-    
-    func remove(client: BankClient) {
-        self.arrangedSubviews.forEach {
-            if ($0 as? ClientLabel)?.client == client {
-                $0.removeFromSuperview()
-            }
-        }
-    }
-    
-    func clear() {
-        self.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
-        }
-    }
 }

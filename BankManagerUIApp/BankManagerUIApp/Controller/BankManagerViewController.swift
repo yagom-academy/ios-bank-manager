@@ -147,24 +147,54 @@ final class BankManagerViewController: UIViewController {
         ])
     }
     
+    private func add(client: BankClient, to clientStackView: ClientStackView) {
+        let label: ClientLabel = .init(client)
+        label.text = "\(client.waitingNumber)-\(client.business)"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 24)
+        
+        switch client.business {
+        case .loan:
+            label.textColor = .systemPurple
+        case .deposit:
+            label.textColor = .black
+        }
+        
+        clientStackView.addArrangedSubview(label)
+    }
+    
+    private func remove(client: BankClient, from clientStackView: ClientStackView) {
+        clientStackView.arrangedSubviews.forEach {
+            if ($0 as? ClientLabel)?.client == client {
+                $0.removeFromSuperview()
+            }
+        }
+    }
+    
+    private func clear(clientStackView: ClientStackView) {
+        clientStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
     @objc private func startBankBusiness(notification: Notification) {
         guard let client = notification.object as? BankClient else { return }
         
-        OperationQueue.main.addOperation {
-            self.waitingClientStackView.remove(client: client)
-            self.processingClientStackView.add(client: client)
+        OperationQueue.main.addOperation { [self] in
+            remove(client: client, from: waitingClientStackView)
+            add(client: client, to: processingClientStackView)
         }
     }
     
     @objc private func endBankBusiness(notification: Notification) {
         guard let client = notification.object as? BankClient else { return }
         
-        OperationQueue.main.addOperation {
-            self.processingClientStackView.remove(client: client)
+        OperationQueue.main.addOperation { [self] in
+            remove(client: client, from: processingClientStackView)
             
-            if self.processingClientStackView.subviews.isEmpty &&
-                self.waitingClientStackView.subviews.isEmpty  {
-                self.timerStackView.stopTimer()
+            if processingClientStackView.subviews.isEmpty &&
+                waitingClientStackView.subviews.isEmpty  {
+                timerStackView.stopTimer()
             }
         }
     }
@@ -173,7 +203,7 @@ final class BankManagerViewController: UIViewController {
         for _ in 1...10 {
             guard let client = bank.makeClient() else { return }
             
-            waitingClientStackView.add(client: client)
+            add(client: client, to: waitingClientStackView)
         }
         
         bank.startBankBusiness()
@@ -181,8 +211,8 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func touchUpClearButton() {
-        waitingClientStackView.clear()
-        processingClientStackView.clear()
+        clear(clientStackView: waitingClientStackView)
+        clear(clientStackView: processingClientStackView)
         timerStackView.clearTimer()
         
         NotificationCenter.default.post(name: NSNotification.Name(Event.touchUpResetButton), object: nil)
