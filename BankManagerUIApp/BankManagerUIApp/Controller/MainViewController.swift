@@ -18,17 +18,7 @@ final class MainViewController: UIViewController {
     private let billboardStackView = UIStackView()
     private let waitingStackView = QueueStackView()
     private let workingStackView = QueueStackView()
-    
-    private let workTimeLabel: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = false
-        label.text = "업무시간 - \(BankOption.defalutWorkTime)"
-        label.font = .preferredFont(forTextStyle: .title3)
-        
-        return label
-    }()
+    private let workTimeLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -220,6 +210,11 @@ extension MainViewController {
 // MARK: - UILabel
 extension MainViewController {
     private func createWorkTimeLabel() {
+        workTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        workTimeLabel.adjustsFontForContentSizeCategory = false
+        workTimeLabel.text = "업무시간 - \(BankOption.defalutWorkTime)"
+        workTimeLabel.font = .preferredFont(forTextStyle: .title3)
+
         mainStackView.addArrangedSubview(workTimeLabel)
     }
 }
