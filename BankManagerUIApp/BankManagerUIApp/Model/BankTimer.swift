@@ -7,16 +7,16 @@
 
 import UIKit
 
-class BankTimer {
+final class BankTimer {
     private var timer: Timer = .init()
     private var startTime: CFAbsoluteTime = .zero
     private var currentTime: CFAbsoluteTime = .zero
     private var previousTime: CFAbsoluteTime = .zero
-    var timeDisplayableDelegate: TimeDisplayable?
+    weak var updateTimerDelegate: UpdateTimerDelegate?
     
-//    init(_ timeDisplayable: TimeDisplayable) {
-//        timeDisplayableDelegate = timeDisplayable
-//    }
+    init(_ updateTimerDelegate: UpdateTimerDelegate) {
+        self.updateTimerDelegate = updateTimerDelegate
+    }
     
     func startTimer() {
         if timer.isValid { return }
@@ -32,7 +32,7 @@ class BankTimer {
     }
 
     func clearTimer() {
-        timeDisplayableDelegate?.totalTime.text = "00:00:000"
+        updateTimerDelegate?.updateTimeLabel(text: "00:00:000")
         timer.invalidate()
         previousTime = .zero
         currentTime = .zero
@@ -45,7 +45,8 @@ class BankTimer {
         let seconds = (Int(currentTime * 1000) / 1000) % 60
         let minutes = (Int(currentTime * 1000) / (1000 * 60)) % 60
         
-        timeDisplayableDelegate?.totalTime.text = String(format: "%02d:%02d:%03d", minutes, seconds, milliseconds)
+        let formattedTime = String(format: "%02d:%02d:%03d", minutes, seconds, milliseconds)
+        updateTimerDelegate?.updateTimeLabel(text: formattedTime)
     }
 }
 

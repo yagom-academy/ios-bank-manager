@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		984BFC4B29C45CAC00CA8495 /* UpdateTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984BFC4A29C45CAC00CA8495 /* UpdateTimerDelegate.swift */; };
 		9853C40929C2FAD000A139E4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40229C2FACF00A139E4 /* LinkedList.swift */; };
 		9853C40A29C2FAD000A139E4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40329C2FACF00A139E4 /* Queue.swift */; };
 		9853C40C29C2FAD000A139E4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853C40529C2FAD000A139E4 /* Node.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		984BFC4A29C45CAC00CA8495 /* UpdateTimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimerDelegate.swift; sourceTree = "<group>"; };
 		9853C40229C2FACF00A139E4 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		9853C40329C2FACF00A139E4 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		9853C40529C2FAD000A139E4 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				9853C40529C2FAD000A139E4 /* Node.swift */,
 				9853C40329C2FACF00A139E4 /* Queue.swift */,
 				AAC9B86F29C4530A00741B40 /* BankTimer.swift */,
+				984BFC4A29C45CAC00CA8495 /* UpdateTimerDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9853C40A29C2FAD000A139E4 /* Queue.swift in Sources */,
+				984BFC4B29C45CAC00CA8495 /* UpdateTimerDelegate.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				9853C40F29C2FAD000A139E4 /* BankClient.swift in Sources */,

@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class TimerStackView: UIStackView, TimeDisplayable {
-    let totalTime: UILabel = .init()
+final class TimerStackView: UIStackView, UpdateTimerDelegate {
+    private let totalTime: UILabel = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,8 +36,9 @@ final class TimerStackView: UIStackView, TimeDisplayable {
         self.addArrangedSubview(businessTime)
         self.addArrangedSubview(totalTime)
     }
+    
+    func updateTimeLabel(text: String) {
+        totalTime.text = text
+    }
 }
 
-protocol TimeDisplayable {
-    var totalTime: UILabel { get }
-}

@@ -18,15 +18,13 @@ final class BankManagerViewController: UIViewController {
     private let waitingClientStackView: ClientStackView = .init()
     private let processingClientStackView: ClientStackView = .init()
     private let timerStackView: TimerStackView = .init()
-    private let bankTimer: BankTimer = .init()
+    private lazy var bankTimer: BankTimer = .init(timerStackView)
     private let bank: Bank = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         addNotificationObserver()
-        
-        bankTimer.timeDisplayableDelegate = timerStackView
     }
     
     private func configureUI() {
