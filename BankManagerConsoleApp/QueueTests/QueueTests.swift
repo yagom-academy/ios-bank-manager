@@ -111,5 +111,3 @@ final class QueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 }
-
-
