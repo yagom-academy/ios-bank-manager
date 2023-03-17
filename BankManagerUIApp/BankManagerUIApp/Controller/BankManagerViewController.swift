@@ -7,11 +7,20 @@
 import UIKit
 
 final class BankManagerViewController: UIViewController {
-    private let mainStackView: UIStackView = {
+    private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 12
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
         
         return stackView
     }()
@@ -29,7 +38,6 @@ final class BankManagerViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-        addMainStackView()
         addButton()
         addTimeStackView()
         addQueueLabel()
@@ -50,17 +58,6 @@ final class BankManagerViewController: UIViewController {
             name: Notification.Name(Event.endBankBusiness),
             object: nil
         )
-    }
-    
-    private func addMainStackView() {
-        view.addSubview(mainStackView)
-        
-        NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        ])
     }
     
     private func addButton() {
@@ -119,12 +116,12 @@ final class BankManagerViewController: UIViewController {
         let waitingScrollView: UIScrollView = .init()
         waitingScrollView.addSubview(waitingClientStackView)
         waitingScrollView.translatesAutoresizingMaskIntoConstraints = false
-        waitingScrollView.contentLayoutGuide.widthAnchor.constraint(lessThanOrEqualTo: waitingScrollView.widthAnchor).isActive = true
+        waitingScrollView.contentLayoutGuide.widthAnchor.constraint(lessThanOrEqualTo: waitingScrollView.contentLayoutGuide.widthAnchor).isActive = true
         
         let businessScrollView: UIScrollView = .init()
         businessScrollView.addSubview(processingClientStackView)
         businessScrollView.translatesAutoresizingMaskIntoConstraints = false
-        businessScrollView.contentLayoutGuide.widthAnchor.constraint(lessThanOrEqualTo: businessScrollView.widthAnchor).isActive = true
+        businessScrollView.contentLayoutGuide.widthAnchor.constraint(lessThanOrEqualTo: businessScrollView.contentLayoutGuide.widthAnchor).isActive = true
         
         let scrollStackView: UIStackView = .init()
         scrollStackView.axis = .horizontal
