@@ -13,7 +13,6 @@ final class BankManagerViewController: UIViewController {
     private let timerLabel = UILabel()
     
     private let bank = Bank(depositBankerCount: 2, loanBankerCount: 1)
-    private let notification = NotificationCenter.default  // 싱글톤인데 굳이 notification으로 두어야 할까?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,35 +146,30 @@ final class BankManagerViewController: UIViewController {
     }
     
     private func resetCustomerStackView() {
-        waitingStackView.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
+        waitingStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
         }
-        workingStackView.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
+        workingStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
         }
     }
     
     // MARK: - Notification
     private func registerObserver() {
-        notification.addObserver(self,
-                                 selector: #selector(registerCustomerView),
-                                 name: .waiting,
-                                 object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(registerCustomerView),
+                                               name: .waiting,
+                                               object: nil)
         
-        notification.addObserver(self,
-                                 selector: #selector(moveToWorkingView),
-                                 name: .working,
-                                 object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(moveToWorkingView),
+                                               name: .working,
+                                               object: nil)
         
-        notification.addObserver(self,
-                                 selector: #selector(deleteCustomerLabelFromView),
-                                 name: .finished,
-                                 object: nil)
-        
-        notification.addObserver(self,
-                                 selector: #selector(stopTimer),
-                                 name: .stop,
-                                 object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deleteCustomerLabelFromView),
+                                               name: .finished,
+                                               object: nil)
     }
     
     @objc private func registerCustomerView(_ notification:NSNotification) {
@@ -188,59 +182,47 @@ final class BankManagerViewController: UIViewController {
     }
     
     @objc private func moveToWorkingView(_ notification:NSNotification) {
-        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer else {
+        guard let customer = notification.userInfo?[NotificationKey.working] as? Customer,
+              let index = findIndex(in: waitingStackView, customer: customer) else {
             return
         }
-        
-        let index = waitingStackView.arrangedSubviews.firstIndex { label  in
-            if let customerLabel = label as? CustomerLabel,
-               customerLabel.identifierNumber == customer.numberTicket {
-                return true
-            }
-            return false
-        }
-        
-        let view = waitingStackView.arrangedSubviews[index!]
+ 
+        let view = waitingStackView.arrangedSubviews[index]
         waitingStackView.removeArrangedSubview(view)
         workingStackView.addArrangedSubview(view)
     }
-    // 반복되는 코드 메서드로 분리하기
+
     @objc private func deleteCustomerLabelFromView(_ notification:NSNotification) {
-        guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer else {
+        guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer,
+              let index = findIndex(in: workingStackView, customer: customer) else {
             return
         }
         
-        let index = workingStackView.arrangedSubviews.firstIndex { label  in
-//            if let customerLabel = label as? CustomerLabel,
-//               customerLabel.identifierNumber == customer.numberTicket {
-//                return true
-//            }
-//            return false
-            
+        let view = workingStackView.arrangedSubviews[index]
+        view.removeFromSuperview()
+        
+        if waitingStackView.arrangedSubviews.isEmpty && workingStackView.arrangedSubviews.isEmpty {
+            timer.invalidate()
+        }
+    }
+    
+    private func findIndex(in stackView: UIStackView, customer: Customer) -> Int? {
+        let index = stackView.arrangedSubviews.firstIndex { label  in
             guard let customerLabel = label as? CustomerLabel else { return false }
             
             return customerLabel.identifierNumber == customer.numberTicket
         }
         
-        guard let bindedIndex = index else { return }
-        
-        let view = workingStackView.arrangedSubviews[bindedIndex]
-        view.removeFromSuperview()
-        
+       return index
     }
-    
-    @objc private func stopTimer() {
-        if waitingStackView.arrangedSubviews.isEmpty && workingStackView.arrangedSubviews.isEmpty {
-            timer.invalidate()
-        }
-    } // 이 내용이 finished에 들어가도 똑같이 작동함
     
     // MARK: - Timer
     private var timer: Timer = Timer()
     private var timerNum: Double = 0
     
     private func startTimer(){
-        if timer.isValid { return } // guard문이 낫지 않나
+        guard timer.isValid == false else { return }
+       
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 0.001,
                                               target: self,
