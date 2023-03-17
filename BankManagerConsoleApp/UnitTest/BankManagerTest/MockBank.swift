@@ -9,6 +9,12 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 class MockBank: Openable {
+    var processTime: CFAbsoluteTime?
+    
+    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) -> String {
+        return ""
+    }
+    
     var open_totalCustomer: Int = 0
     
     func open(totalCustomer: Int) {

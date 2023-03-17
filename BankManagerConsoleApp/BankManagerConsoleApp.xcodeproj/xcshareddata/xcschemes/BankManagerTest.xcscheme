@@ -10,7 +10,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -20,6 +21,26 @@
                BlueprintIdentifier = "AD56811F29BFFA01009923C9"
                BuildableName = "BankManagerTest.xctest"
                BlueprintName = "BankManagerTest"
+               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD56813429C04D26009923C9"
+               BuildableName = "BankTest.xctest"
+               BlueprintName = "BankTest"
+               ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD3774A629B5BA6C00E68DA7"
+               BuildableName = "CustomerQueueTest.xctest"
+               BlueprintName = "CustomerQueueTest"
                ReferencedContainer = "container:BankManagerConsoleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
