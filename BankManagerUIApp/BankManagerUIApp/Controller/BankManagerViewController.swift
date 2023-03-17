@@ -28,7 +28,7 @@ final class BankManagerViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-        setupMainStackView()
+        addMainStackView()
         addButton()
         addTimeStackView()
         addQueueLabel()
@@ -51,7 +51,7 @@ final class BankManagerViewController: UIViewController {
         )
     }
     
-    private func setupMainStackView() {
+    private func addMainStackView() {
         view.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
