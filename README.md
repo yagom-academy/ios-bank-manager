@@ -485,6 +485,12 @@ customer label들이 찌그러지거나 겹치지 않고 쌓이게 하기 위해
 <br/>
 
 ## Reference 📑
-- [Concurrency Programming Guide - Apple Document](https://developer.apple.com/library/archive/documentation/General/Conceptual/ConcurrencyProgrammingGuide/Introduction/Introduction.html)
 - [Concurrency - Swift Language Guide](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/concurrency/)
+- [Concurrency Programming Guide - Apple Document](https://developer.apple.com/library/archive/documentation/General/Conceptual/ConcurrencyProgrammingGuide/Introduction/Introduction.html)
+- [Threading Programming Guide - Apple Document](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html)
+- [RunLoop - Apple Document](https://developer.apple.com/documentation/foundation/runloop)
+- [Operation - Apple Document](https://developer.apple.com/documentation/foundation/operation)
+- [OperationQueue - Apple Document](https://developer.apple.com/documentation/foundation/operationqueue)
+- [Timer - Apple Document](https://developer.apple.com/documentation/foundation/timer)
 - [Concurrency Programming - 야곰닷넷](https://yagom.net/courses/%eb%8f%99%ec%8b%9c%ec%84%b1-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d-concurrency-programming/)
+- [Unit Test 작성하기 - 야곰닷넷](https://yagom.net/courses/unit-test-%ec%9e%91%ec%84%b1%ed%95%98%ea%b8%b0/)
