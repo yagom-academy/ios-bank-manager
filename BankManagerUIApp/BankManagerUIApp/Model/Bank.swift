@@ -7,40 +7,31 @@
 
 import Foundation
 
-protocol Openable {
-    var processTime: CFAbsoluteTime? { get }
-    
-    func open(totalCustomer: Int)
-    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) -> String
-}
-
-final class Bank: Openable {
+final class Bank {
     private var customerQueue: any CustomerQueueable
-    private var loanDepartment: Respondable
     private var depositDepartment: Respondable
+    private var loanDepartment: Respondable
     private var currentNumberTicket: Int = 1
-    var processTime: CFAbsoluteTime?
     
-    init(loanDepartment: Respondable, depositDepartment: Respondable, customerQueue: any CustomerQueueable) {
-        self.loanDepartment = loanDepartment
+    init(depositDepartment: Respondable, loanDepartment: Respondable, customerQueue: any CustomerQueueable) {
         self.depositDepartment = depositDepartment
+        self.loanDepartment = loanDepartment
         self.customerQueue = customerQueue
     }
     
-    convenience init(loanBankerCount: Int, depositBankerCount: Int) {
-        let loanDepartment = BankDepartment(workableBankerCount: 1)
-        let depositDepartment = BankDepartment(workableBankerCount: 2)
+    convenience init(depositBankerCount: Int, loanBankerCount: Int) {
+        let depositDepartment = BankDepartment(workableBankerCount: depositBankerCount)
+        let loanDepartment = BankDepartment(workableBankerCount: loanBankerCount)
         let customerQueue = CustomerQueue()
-        self.init(loanDepartment: loanDepartment,
-                  depositDepartment: depositDepartment,
+        
+        self.init(depositDepartment: depositDepartment,
+                  loanDepartment: loanDepartment,
                   customerQueue: customerQueue)
     }
     
     func open(totalCustomer: Int) {
         setCustomerQueue(totalCustomer: totalCustomer)
-        let processTime = ProcessTimer.calculateProcessTime(for: startWork)
-        let result = self.reportResult(totalCustomer: currentNumberTicket, processTime: processTime)
-        print(result)
+        startWork()
     }
     
     private func setCustomerQueue(totalCustomer: Int) {
@@ -49,7 +40,7 @@ final class Bank: Openable {
             currentNumberTicket += 1
             let customer = Customer(numberTicket: numberTicket)
             customerQueue.enqueue(customer)
- 
+            
             NotificationCenter.default.post(name: .waiting,
                                             object: nil,
                                             userInfo: [NotificationKey.waiting: customer])
@@ -66,13 +57,6 @@ final class Bank: Openable {
                 loanDepartment.respond(to: customer)
             }
         }
-    }
-    
-    func reportResult(totalCustomer: Int, processTime: CFAbsoluteTime) -> String {
-        let roundedProcessTime = round(processTime * 100) / 100
-        let message = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomer)명이며, 총 업무시간은 \(roundedProcessTime)초 입니다."
-        
-        return message
     }
     
     func close() {

@@ -7,13 +7,13 @@
 import UIKit
 
 final class BankManagerViewController: UIViewController {
-    private let mainStackView = VerticalStackView()
     private let workingStackView = VerticalStackView()
     private let waitingStackView = VerticalStackView()
+    private let mainStackView = VerticalStackView()
     private let timerLabel = UILabel()
     
-    private let bank = Bank(loanBankerCount: 1, depositBankerCount: 2)
-    private let notification = NotificationCenter.default
+    private let bank = Bank(depositBankerCount: 2, loanBankerCount: 1)
+    private let notification = NotificationCenter.default  // 싱글톤인데 굳이 notification으로 두어야 할까?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +25,14 @@ final class BankManagerViewController: UIViewController {
     // MARK: - UI Setting
     private func setMainStackView() {
         view.addSubview(mainStackView)
+        mainStackView.setLayoutConstraint(toLayoutGuide: view.safeAreaLayoutGuide)
         mainStackView.distribution = .fill
         mainStackView.spacing = 10
-        mainStackView.setLayoutConstraint(toLayoutGuide: view.safeAreaLayoutGuide)
         
-        let buttonStackView = makeButtonStackView()
         setTimerLabel()
-        let queueLabelStackView = makeQueueLabelStackView()
+        let buttonStackView = makeButtonStackView()
         let customerStackView = makeCustomerStackView()
+        let queueLabelStackView = makeQueueLabelStackView()
         
         mainStackView.addArrangedSubview(buttonStackView)
         mainStackView.addArrangedSubview(timerLabel)
@@ -45,9 +45,7 @@ final class BankManagerViewController: UIViewController {
             let button = UIButton()
             button.setTitle("고객 10명 추가", for: .normal)
             button.setTitleColor(.systemBlue, for: .normal)
-            button.addTarget(self,
-                             action: #selector(addTenCustomer),
-                             for: .touchUpInside)
+            button.addTarget(self, action: #selector(addTenCustomer), for: .touchUpInside)
             
             return button
         }()
@@ -56,9 +54,7 @@ final class BankManagerViewController: UIViewController {
             let button = UIButton()
             button.setTitle("초기화", for: .normal)
             button.setTitleColor(.systemRed, for: .normal)
-            button.addTarget(self,
-                             action: #selector(reset),
-                             for: .touchUpInside)
+            button.addTarget(self, action: #selector(reset), for: .touchUpInside)
             
             return button
         }()
@@ -73,7 +69,6 @@ final class BankManagerViewController: UIViewController {
         timerLabel.font = .preferredFont(forTextStyle: .title2)
         timerLabel.textColor = .black
         timerLabel.textAlignment = .center
-        
     }
     
     private func makeQueueLabelStackView() -> UIStackView {
@@ -115,10 +110,10 @@ final class BankManagerViewController: UIViewController {
         let waitingScrollView = {
             let scrollView = UIScrollView()
             scrollView.addSubview(waitingStackView)
+            scrollView.showsVerticalScrollIndicator = false
             
             return scrollView
         }()
-        
         
         waitingScrollView.addSubview(waitingStackView)
         
@@ -142,7 +137,11 @@ final class BankManagerViewController: UIViewController {
     @objc private func reset() {
         pauseTimer()
         bank.close()
+        resetTimerLabel()
         resetCustomerStackView()
+    }
+    
+    private func resetTimerLabel() {
         timerLabel.text = "업무시간 - 00:00:000"
         timerNum = 0
     }
@@ -205,18 +204,22 @@ final class BankManagerViewController: UIViewController {
         waitingStackView.removeArrangedSubview(view)
         workingStackView.addArrangedSubview(view)
     }
-    
+    // 반복되는 코드 메서드로 분리하기
     @objc private func deleteCustomerLabelFromView(_ notification:NSNotification) {
         guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer else {
             return
         }
         
         let index = workingStackView.arrangedSubviews.firstIndex { label  in
-            if let customerLabel = label as? CustomerLabel,
-               customerLabel.identifierNumber == customer.numberTicket {
-                return true
-            }
-            return false
+//            if let customerLabel = label as? CustomerLabel,
+//               customerLabel.identifierNumber == customer.numberTicket {
+//                return true
+//            }
+//            return false
+            
+            guard let customerLabel = label as? CustomerLabel else { return false }
+            
+            return customerLabel.identifierNumber == customer.numberTicket
         }
         
         guard let bindedIndex = index else { return }
@@ -230,14 +233,14 @@ final class BankManagerViewController: UIViewController {
         if waitingStackView.arrangedSubviews.isEmpty && workingStackView.arrangedSubviews.isEmpty {
             timer.invalidate()
         }
-    }
+    } // 이 내용이 finished에 들어가도 똑같이 작동함
     
     // MARK: - Timer
     private var timer: Timer = Timer()
     private var timerNum: Double = 0
     
     private func startTimer(){
-        if timer.isValid { return }
+        if timer.isValid { return } // guard문이 낫지 않나
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 0.001,
                                               target: self,
@@ -256,11 +259,9 @@ final class BankManagerViewController: UIViewController {
         timerNum += 0.001
         
         let totalSecond = Int(timerNum)
-        
         let minute = totalSecond / 60
         let second = totalSecond % 60
         let miliSecond = Int((timerNum - Double(totalSecond)) * 1000)
-        
         let textFormat = "업무시간 - %02d:%02d:%003d"
         
         self.timerLabel.text = String(format: textFormat, minute, second, miliSecond)
