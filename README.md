@@ -140,6 +140,7 @@ BankManagerUIApp
 ## 트러블 슈팅 🚀
 
 ### 1️⃣ Main Thread의 코드가 비동기 작업 중 실행되는 문제
+#### ▪️ 문제점
 ```swift
 workQueue.async {
     self.depositDepartment.wait()
@@ -149,7 +150,7 @@ workQueue.async {
 ```
 `workQueue`는 concurrent DispatchQueue이기 때문에 비동기 작업은 Main Thread가 아닌 새로운 스레드에서 진행하게 됩니다. 이때, 새로운 스레드의 작업을 기다리지 않아 main Thread의 다음 코드가 실행되는 문제가 있었습니다.
 
-#### 해결방안
+#### ▪️ 해결방안
 ```swift
 workQueue.async(group: workGroup) {
     self.depositDepartment.wait()
@@ -169,6 +170,7 @@ workGroup.wait()
 
 ### 2️⃣ 접근 제어자 설정
 
+#### ▪️ 문제점
 ```swift
 struct LinkedList<T> {
     final private class Node<T> {
@@ -191,8 +193,8 @@ struct LinkedList<T> {
 Node type의 값을 갖는 프로퍼티의 접근 제어자는 nested type `Node` 클래스의 접근 제어자보다 높은 제어 수준을 가질 수 없었습니다.
 
 
-
-그렇기에 기존에 `private(set)`으로 구현한 Node 타입에 대한 접근제어자를 `private` 으로 수정하고 해당 프로퍼티의 data를 리턴해주는 get only 연산프로퍼티를 추가 구현 했습니다.
+#### ▪️ 해결방안
+기존에 `private(set)`으로 구현한 Node 타입에 대한 접근제어자를 `private` 으로 수정하고 해당 프로퍼티의 data를 리턴해주는 get only 연산프로퍼티를 추가 구현 했습니다.
 
 ```swift
 struct LinkedList<T> {
@@ -217,11 +219,11 @@ struct LinkedList<T> {
 
 
 ### 3️⃣ 고객Queue 를 업무별로 가질 것인지, 하나로 처리할 것인지
-
+#### ▪️ 문제점
 - 하나의 Queue에서 dequeue 된 customer의 업무와 순회했을 때의 banker의 업무가 맞지 않을 때가 있기에 customer 의 업무가 무엇인지 검증하는 조건문이 필요했습니다.
 - 이 과정에서 하나의 Queue 로 처리할시 banker들을 forEach 로 검증하는 과정에서 2명의 banker을 보유한 deposit 업무일 경우 첫 번째 banker 가 모든 deposit 업무를 수행하는 이슈가 생겼습니다.
 
-#### 해결방안
+#### ▪️ 해결방안
 ``` swift
         let loanWorkItem = DispatchWorkItem {
             while self.loanCustomerQueue.isEmpty == false {
@@ -249,7 +251,7 @@ struct LinkedList<T> {
 이를 해결하기 위해 처음부터 고객의 업무별로 나누어진 Queue 를 생성해 banker 들에게 고객의 업무를 검증하는 과정을 생략할 수 있게 했습니다.
 
 
-#### 리팩토링
+#### ▪️ 리팩토링
 
 ```swift
     private func startWork() {
@@ -276,20 +278,19 @@ struct LinkedList<T> {
 ```
 
 - 리팩토링을 하는 과정에서 `"Banker의 수를 어떻게 인식할 것인가"` 라는 주제가 있었고,  Banker의 인스턴스가 아닌 작업 `thread` 갯수인 `Semaphore` 로 인식을 하자는 결과가 도출 되었습니다.
-
 - 그렇기에 업무별 Banker의 인스턴스도 필요 없어지게 되었고, 고객의 Queue 도 업무별로가 아닌 하나의 Queue 로 처리가 가능해졌습니다.
-
 - 고객의 업무검증만 된다면 똑같은 Banker 에게 customer 만 넘겨주어 코드의 길이가 확 주는 경험을 했습니다.
 
 </br>
 
 ### 4️⃣ 업무시간 체크
->기존에는 고객수에서 업무시간을 곱하는 방법을 선택해 업무시간을 체크했습니다.
+#### ▪️ 문제점
+> 기존에는 고객 수에서 업무시간을 곱하는 방법을 선택해 업무시간을 체크했습니다.
 
-- 위 방식으로 진행 했을 때 업무를 처리하는 Banker 가 한명일 경우 문제가 없었느나 B`anker 가 여러명일 경우`에는 해당 방식으로 시간을 체크하는게 불가능했습니다.
+- 위 방식으로 진행 했을 때 업무를 처리하는 Banker 가 한명일 경우 문제가 없었느나 `Banker 가 여러명일 경우`에는 해당 방식으로 시간을 체크하는게 불가능하다는 문제가 있었습니다.
 
+#### ▪️ 해결방안
 - Banker 들의 업무는 비동기적으로 이루어지므로 Banker 들의 업무들이 시작되는 시점과 끝나는 시점을 알아야 했기에 다른 방법을 찾아보았습니다.
-
 - 이를 해결하기위해 `CFAbsoluteTime`을 반환하는 메서드 `checkProcessTime`을 정의해 `startWorK` 메서드의 실행 시간을 구하도록 했습니다.
 ```swift
 private func checkProcessTime(for process: () -> Void) -> CFAbsoluteTime {
@@ -304,13 +305,13 @@ private func checkProcessTime(for process: () -> Void) -> CFAbsoluteTime {
 </br>
 
 ### 5️⃣ 스크롤을 하는동안 타이머가 멈추는 문제
-#### 문제점
+#### ▪️ 문제점
 스크롤뷰의 스크롤 동작 시, timer가 멈추는 현상이 있었습니다.
 이는 RunLoop의 mode에 기인한 문제였습니다.
 Run Loop에는 mode가 있고 해당하는 mode에 따라 원치 않는 소스에 대한 이벤트를 필터링 할 수 있습니다.
 Main Run Loop 초기 mode(`.default`)에서 스크롤이 동작하면 mode가 `eventTracking`으로 변경되어 타이머 이벤트를 처리하지 못하기 때문에 타이머가 멈추게 됩니다. 
 
-#### 해결방안
+#### ▪️ 해결방안
 Timer 객체를 생성할 때, RunLoop의 `add(_:forMode:)` 메서드를 사용해 timer 이벤트를 MainRunLoop eventTracking mode에서도 처리할 수 있도록 수정했습니다.
 ```swift
 RunLoop.current.add(self.timer, forMode: .common)
@@ -324,7 +325,7 @@ RunLoop.current.add(self.timer, forMode: .common)
 
 OperationQueue 에 추가한 비동기 작업들이 마지막으로 끝난 시점을 알아야 했습니다. 마지막 비동기 작업이 끝난 시점에 맞춰 타이머를 중지 시켜야 했기 때문에 어떤 방식으로 인식할 수 있을까 고민해봤습니다.
 
-#### 첫 번째 시도
+#### ▪️ 첫 번째 시도
 
 BlockOperation 의 프로퍼티중  completionBlock 이 있단걸 알게 되었습니다. 해당 프로퍼티는 하나의 블록이 끝난 후 실행되는 전달인자와 반환값이 없는 클로저로 이 프로퍼티를 사용할 때 Queue 의 상태를 확인해 Notification 에 Post 를 해보려 했습니다.
 
@@ -341,7 +342,7 @@ operation.completionBlock = {
  
  lldb를 통해 확인한 결과 마지막 작업이 끝난 후에도 isSuspended 는 False 인 상태였습니다. 그렇기에 다른 방법을 찾아야만 했습니다.
 
-#### 두 번째 시도
+#### ▪️ 두 번째 시도
 
 thread의 sleep 후 NotifcationCenter 에 끝났다는 알림을 post 하고 있습니다. 해당 시점에서 StackView 들의 subView 들의 존재 여부를 검증 하는 방식으로 수정 해 보았습니다.
 
@@ -363,13 +364,13 @@ if waitingStackView.arrangedSubviews.isEmpty && workingStackView.arrangedSubview
 초기화 버튼을 클릭 했을 때 진행중인 비동기코드를 중단을 해야 했습니다.
 그래서 workItem 들을 서브 스크립트인 cancel 메서드를 사용하면 간단하게 해결될 줄 알았으나 예상대로 작동하지 않았습니다. 
 
-#### DispatchQueue
+#### ▪️ DispatchQueue
 초기 비동기 코드를 작동할 때는 `DispatchQueue` 를 사용하고 있었습니다. 
 작업 코드블록을 `DispatchWorkItem` 을 사용해 작성했고, 해당 타입에는 내부 메서드로 `cancel()` 메서드가 존재 했습니다. 하지만 해당 메서드는 실제로 작업을 취소해주는 것이 아닌 내부 프로퍼티인 isCancelled 를 true 로 바꿔주는 메서드 였습니다.
 
 cancel() 를 호출하는 시점에는 이미 DispatchQueue 에서 대기하고 있는 상태였기에 취소되지 않고 계속해서 작동을 하고 있었습니다.
 
-#### OperationQueue
+#### ▪️ OperationQueue
 위와 같은 이유로 `OperationQueue`를 채택하기로 했습니다. OperationQueue는 각각의 작업들의 관리면에서 좀 더 용이 했었기에 쉽게 제어할 수 있었습니다. 
 
 OperationQueue의 경우 `maxConcurrentOperationCount`를 설정해주면 Queue에 들어있는 operation의 동시에 실행되는 최대 개수를 지정해 실행되지 않는 Operation이 Queue에서 대기하게 되어 operation을 cancel 상태로 만들어줄 수 있었습니다. 
