@@ -13,8 +13,8 @@ final class MainViewController: UIViewController {
     
     // MARK: UI 프로퍼티
     private let mainStackView = UIStackView()
-    private let addCustomerButton = CustomButton(type: .system)
-    private let resetButton = CustomButton(type: .system)
+    private let addCustomerButton = HeaderButton(type: .system)
+    private let resetButton = HeaderButton(type: .system)
     private let billboardStackView = UIStackView()
     private let waitingStackView = QueueStackView()
     private let workingStackView = QueueStackView()
