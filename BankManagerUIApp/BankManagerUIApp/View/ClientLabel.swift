@@ -12,6 +12,7 @@ final class ClientLabel: UILabel {
     
     init(_ client: BankClient) {
         self.client = client
+
         super.init(frame: .zero)
     }
 
