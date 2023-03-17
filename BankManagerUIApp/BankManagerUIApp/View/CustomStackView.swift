@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HorizontalStackView: UIStackView {
+final class HorizontalStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureProperties()
@@ -24,7 +24,7 @@ class HorizontalStackView: UIStackView {
 
 }
 
-class VerticalStackView: UIStackView {
+final class VerticalStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureProperties()

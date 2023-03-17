@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomerLabel: UILabel {
+final class CustomerLabel: UILabel {
     private let customer: Customer
     var identifierNumber: String { return customer.numberTicket }
     
