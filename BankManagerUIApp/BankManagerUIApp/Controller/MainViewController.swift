@@ -26,7 +26,6 @@ final class MainViewController: UIViewController {
         label.adjustsFontForContentSizeCategory = false
         label.text = "업무시간 - \(BankOption.defalutWorkTime)"
         label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 1
         
         return label
     }()
@@ -160,7 +159,6 @@ extension MainViewController {
     private func configureMainStackView() {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
-        mainStackView.distribution = .fill
         mainStackView.alignment = .center
         mainStackView.spacing = 16
         
@@ -177,7 +175,6 @@ extension MainViewController {
         let stackView = UIStackView(arrangedSubviews: [addCustomerButton, resetButton])
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
         stackView.distribution = .fillEqually
 
         mainStackView.addArrangedSubview(stackView)
@@ -190,7 +187,6 @@ extension MainViewController {
     
     private func configureBillboardStackView() {
         billboardStackView.translatesAutoresizingMaskIntoConstraints = false
-        billboardStackView.axis = .horizontal
         billboardStackView.distribution = .fillEqually
         billboardStackView.alignment = .firstBaseline
         
@@ -205,7 +201,6 @@ extension MainViewController {
     private func configureWaitingStackView() {
         waitingStackView.translatesAutoresizingMaskIntoConstraints = false
         waitingStackView.axis = .vertical
-        waitingStackView.distribution = .fill
         waitingStackView.alignment = .center
         waitingStackView.spacing = 16
         
@@ -215,7 +210,6 @@ extension MainViewController {
     private func configureWorkingStackView() {
         workingStackView.translatesAutoresizingMaskIntoConstraints = false
         workingStackView.axis = .vertical
-        workingStackView.distribution = .fill
         workingStackView.alignment = .center
         workingStackView.spacing = 16
         

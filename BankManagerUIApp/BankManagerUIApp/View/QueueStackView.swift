@@ -26,7 +26,6 @@ final class QueueStackView: UIStackView {
         label.text = "\(customer.waitingNumber) - \(customer.desiredBanking)"
         label.textColor = customer.fontColor
         label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 1
         
         subStackView.addArrangedSubview(label)
     }
@@ -60,7 +59,6 @@ final class QueueStackView: UIStackView {
         label.adjustsFontForContentSizeCategory = false
         label.text = text
         label.font = .preferredFont(forTextStyle: .title1)
-        label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = backgroundColor
@@ -77,7 +75,6 @@ final class QueueStackView: UIStackView {
     private func createLabelStackView() {
         subStackView.translatesAutoresizingMaskIntoConstraints = false
         subStackView.axis = .vertical
-        subStackView.distribution = .fill
         subStackView.alignment = .center
         subStackView.spacing = 8
         
