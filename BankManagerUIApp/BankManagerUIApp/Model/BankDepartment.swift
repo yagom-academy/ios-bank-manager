@@ -1,6 +1,6 @@
 //
 //  Department.swift
-//  BankManagerConsoleApp
+//  BankManagerUIApp
 //
 //  Created by Rowan, 릴라 on 2023/03/07.
 //
@@ -25,8 +25,8 @@ final class BankDepartment: Respondable {
     }
     
     private func makeTask(for customer: Customer) -> BlockOperation {
-        let task = BlockOperation {
-            self.doWork(for: customer)
+        let task = BlockOperation { [weak self] in
+            self?.doWork(for: customer)
         }
         
         return task

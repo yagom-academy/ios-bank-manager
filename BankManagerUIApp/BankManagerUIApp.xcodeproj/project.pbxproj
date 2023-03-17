@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		08BBDEBF29BF1F6C00F0259E /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBDEBE29BF1F6C00F0259E /* CustomStackView.swift */; };
 		08BCEDE729C1A1AF00A49289 /* CustomerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDE629C1A1AF00A49289 /* CustomerLabel.swift */; };
-		08BCEDF529C1A32300A49289 /* ProcessTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEB29C1A32200A49289 /* ProcessTimer.swift */; };
 		08BCEDF629C1A32300A49289 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEC29C1A32200A49289 /* Customer.swift */; };
 		08BCEDF729C1A32300A49289 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEE29C1A32200A49289 /* CustomerQueue.swift */; };
 		08BCEDF829C1A32300A49289 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCEDEF29C1A32200A49289 /* LinkedList.swift */; };
@@ -47,7 +46,6 @@
 /* Begin PBXFileReference section */
 		08BBDEBE29BF1F6C00F0259E /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomStackView.swift; path = BankManagerUIApp/View/CustomStackView.swift; sourceTree = SOURCE_ROOT; };
 		08BCEDE629C1A1AF00A49289 /* CustomerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerLabel.swift; sourceTree = "<group>"; };
-		08BCEDEB29C1A32200A49289 /* ProcessTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessTimer.swift; sourceTree = "<group>"; };
 		08BCEDEC29C1A32200A49289 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		08BCEDEE29C1A32200A49289 /* CustomerQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		08BCEDEF29C1A32200A49289 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				08BCEDEC29C1A32200A49289 /* Customer.swift */,
 				08BCEDED29C1A32200A49289 /* DataStructure */,
 				ADA8C74129C1B59600E1A30B /* Notification.swift */,
-				08BCEDEB29C1A32200A49289 /* ProcessTimer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				08BBDEBF29BF1F6C00F0259E /* CustomStackView.swift in Sources */,
 				08BCEDF629C1A32300A49289 /* Customer.swift in Sources */,
 				C7694E3F259C3E9F0053667F /* BankManagerViewController.swift in Sources */,
-				08BCEDF529C1A32300A49289 /* ProcessTimer.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				08BCEDFB29C1A32300A49289 /* Bank.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,

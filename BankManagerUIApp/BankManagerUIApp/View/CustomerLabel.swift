@@ -20,7 +20,6 @@ class CustomerLabel: UILabel {
     
     convenience init(customer: Customer) {
         self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), customer: customer)
-        
     }
     
     required init(coder: NSCoder) {

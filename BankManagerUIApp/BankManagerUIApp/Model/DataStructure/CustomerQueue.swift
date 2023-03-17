@@ -1,6 +1,6 @@
 //
 //  CustomerQueue.swift
-//  BankManagerConsoleApp
+//  BankManagerUIApp
 //
 //  Created by Rowan, 릴라 on 2023/03/06.
 //

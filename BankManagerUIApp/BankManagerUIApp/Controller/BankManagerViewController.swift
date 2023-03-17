@@ -186,12 +186,12 @@ final class BankManagerViewController: UIViewController {
               let index = findIndex(in: waitingStackView, customer: customer) else {
             return
         }
- 
+        
         let view = waitingStackView.arrangedSubviews[index]
         waitingStackView.removeArrangedSubview(view)
         workingStackView.addArrangedSubview(view)
     }
-
+    
     @objc private func deleteCustomerLabelFromView(_ notification:NSNotification) {
         guard let customer = notification.userInfo?[NotificationKey.finished] as? Customer,
               let index = findIndex(in: workingStackView, customer: customer) else {
@@ -213,24 +213,22 @@ final class BankManagerViewController: UIViewController {
             return customerLabel.identifierNumber == customer.numberTicket
         }
         
-       return index
+        return index
     }
     
     // MARK: - Timer
     private var timer: Timer = Timer()
     private var timerNum: Double = 0
     
-    private func startTimer(){
+    private func startTimer() {
         guard timer.isValid == false else { return }
-       
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 0.001,
-                                              target: self,
-                                              selector: #selector(self.updateTimer),
-                                              userInfo: nil,
-                                              repeats: true)
-            RunLoop.current.add(self.timer, forMode: .common)
-        }
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.001,
+                                          target: self,
+                                          selector: #selector(self.updateTimer),
+                                          userInfo: nil,
+                                          repeats: true)
+        RunLoop.current.add(self.timer, forMode: .common)
     }
     
     private func pauseTimer() {
