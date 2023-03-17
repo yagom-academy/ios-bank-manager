@@ -23,9 +23,8 @@ final class ClientStackView: UIStackView {
     }
     
     func add(client: BankClient) {
-        let label: UILabel = .init()
+        let label: ClientLabel = .init(client)
         label.text = "\(client.waitingNumber)-\(client.business.type)"
-        label.tag = client.waitingNumber
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24)
         
@@ -41,7 +40,7 @@ final class ClientStackView: UIStackView {
     
     func remove(client: BankClient) {
         self.arrangedSubviews.forEach {
-            if $0.tag == client.waitingNumber {
+            if ($0 as? ClientLabel)?.client == client {
                 $0.removeFromSuperview()
             }
         }
