@@ -7,10 +7,10 @@
 ## 목차 📋
 1. [팀원 소개](#팀원-소개)
 2. [타임 라인](#타임라인)
-3. [UML](#UML)
+3. [UML](#uml)
 4. [실행화면](#실행화면)
 5. [트러블 슈팅](#트러블-슈팅)
-6. [Reference](#Reference)
+6. [Reference](#reference)
 7. [팀 회고](#팀-회고)
 
 ## 팀원 소개
@@ -40,7 +40,7 @@
 <details>
 <summary><Big>Class Diagram 보기</Big></summary>
     
-![](https://github.com/hyemory/ios-bank-manager/blob/ee4c63b9a41fea10ca442e8764f5bfe2a1e6ea87/images/ClassDiagram.png?raw=true)
+![](https://github.com/hyemory/ios-bank-manager/blob/93b38405d50fd65bd218d0e48c30fd752af7fd6a/images/ClassDiagram.png?raw=true)
     
 </div>
 </details>
