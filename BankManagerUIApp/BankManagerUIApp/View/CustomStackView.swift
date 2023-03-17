@@ -17,7 +17,7 @@ final class HorizontalStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureProperties() {
+    private func configureProperties() {
         self.distribution = .fillEqually
         self.axis = .horizontal
     }
@@ -34,7 +34,7 @@ final class VerticalStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureProperties() {
+    private func configureProperties() {
         self.distribution = .fillEqually
         self.axis = .vertical
         self.spacing = 8
