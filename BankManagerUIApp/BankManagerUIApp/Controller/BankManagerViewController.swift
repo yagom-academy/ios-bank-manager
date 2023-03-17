@@ -15,28 +15,32 @@ final class BankManagerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+        addNotificationObserver()
+        bank.addNotificationObserver()
+    }
+    
+    private func configureUI() {
         view.backgroundColor = .white
         setupMainStackView()
         addButton()
         addTimeStackView()
         addQueueLabel()
         addScrollView()
-        addNotificationObserver()
-        bank.addNotificationObserver()
     }
     
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(startBankBusiness(notification:)),
-            name: Notification.Name("startBankBusiness"),
+            name: Notification.Name(Event.startBankBusiness),
             object: nil
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(endBankBusiness(notification:)),
-            name: Notification.Name("endBankBusiness"),
+            name: Notification.Name(Event.endBankBusiness),
             object: nil
         )
     }
@@ -168,6 +172,6 @@ final class BankManagerViewController: UIViewController {
         processingClientStackView.clear()
         timerStackView.clearTimer()
         
-        NotificationCenter.default.post(name: NSNotification.Name("touchUpResetButton"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(Event.touchUpResetButton), object: nil)
     }
 }

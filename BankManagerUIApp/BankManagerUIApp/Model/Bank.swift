@@ -27,7 +27,7 @@ final class Bank {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(allClear),
-            name: Notification.Name("touchUpResetButton"),
+            name: Notification.Name(Event.touchUpResetButton),
             object: nil
         )
     }
@@ -77,9 +77,9 @@ final class Bank {
     
     private func makeBlockOperation(_ client: BankClient) -> BlockOperation {
         let task = BlockOperation {
-            NotificationCenter.default.post(name: NSNotification.Name("startBankBusiness"), object: client)
+            NotificationCenter.default.post(name: NSNotification.Name(Event.startBankBusiness), object: client)
             Thread.sleep(forTimeInterval: client.business.time)
-            NotificationCenter.default.post(name: NSNotification.Name("endBankBusiness"), object: client)
+            NotificationCenter.default.post(name: NSNotification.Name(Event.endBankBusiness), object: client)
         }
         
         return task
