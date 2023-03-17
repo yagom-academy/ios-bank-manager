@@ -128,7 +128,7 @@ extension BankAppViewController: BankDelegate {
     }
     
     func startTask(of client: Client) {
-        main.addOperation { [self] in
+        main.addOperation { [unowned self] in
             queueStackView.waitingQueueStackView.waitingScrollView.waitingClientStackView
                 .arrangedSubviews.forEach {
                 let label = $0 as? UILabel
@@ -142,7 +142,7 @@ extension BankAppViewController: BankDelegate {
     }
     
     func completeTask(of client: Client) {
-        main.addOperation { [self] in
+        main.addOperation { [unowned self] in
             queueStackView.doingTaskStackView.doingTaskScrollView.taskClientStackView
                 .arrangedSubviews.forEach {
                 let label = $0 as? UILabel
