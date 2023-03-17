@@ -247,22 +247,3 @@ final class BankManagerViewController: UIViewController {
         self.timerLabel.text = String(format: textFormat, minute, second, miliSecond)
     }
 }
-
-import SwiftUI
-
-struct SwiftUIViewController: UIViewControllerRepresentable {
-    typealias UIViewControllerType = BankManagerViewController
-    
-    func makeUIViewController(context: Context) -> UIViewControllerType {
-        return BankManagerViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
-}
-
-@available(iOS 13.0.0, *)
-struct ViewPreview: PreviewProvider {
-    static var previews: some View {
-        SwiftUIViewController()
-    }
-}
