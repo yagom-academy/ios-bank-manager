@@ -211,7 +211,7 @@ extension MainViewController {
 extension MainViewController {
     private func createWorkTimeLabel() {
         workTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        workTimeLabel.adjustsFontForContentSizeCategory = false
+        workTimeLabel.adjustsFontForContentSizeCategory = true
         workTimeLabel.text = "업무시간 - \(BankOption.defalutWorkTime)"
         workTimeLabel.font = .preferredFont(forTextStyle: .title3)
 

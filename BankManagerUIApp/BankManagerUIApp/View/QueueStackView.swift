@@ -22,7 +22,7 @@ final class QueueStackView: UIStackView {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = false
+        label.adjustsFontForContentSizeCategory = true
         label.text = "\(customer.waitingNumber) - \(customer.desiredBanking)"
         label.textColor = customer.fontColor
         label.font = .preferredFont(forTextStyle: .title3)
@@ -56,7 +56,7 @@ final class QueueStackView: UIStackView {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = false
+        label.adjustsFontForContentSizeCategory = true
         label.text = text
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
