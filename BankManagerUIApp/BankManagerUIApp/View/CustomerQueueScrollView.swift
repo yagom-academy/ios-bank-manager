@@ -43,21 +43,6 @@ final class CustomerQueueScrollView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureContentStackView() {
-        contentStackView.addArrangedSubview(waitingQueueStackView)
-        contentStackView.addArrangedSubview(processingQueueStackView)
-        
-        let contentLayoutGuide = self.contentLayoutGuide
-        let frameLayoutGuide = self.frameLayoutGuide
-        
-        NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: frameLayoutGuide.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: frameLayoutGuide.trailingAnchor),
-            contentStackView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor)
-        ])
-    }
-    
     func addWaitingLabel(customers: [Customer]) {
         customers.forEach {
             self.waitingQueueStackView.addArrangedSubview(CustomerLabel($0))
@@ -89,5 +74,20 @@ final class CustomerQueueScrollView: UIScrollView {
         processingQueueStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
+    }
+    
+    private func configureContentStackView() {
+        contentStackView.addArrangedSubview(waitingQueueStackView)
+        contentStackView.addArrangedSubview(processingQueueStackView)
+        
+        let contentLayoutGuide = self.contentLayoutGuide
+        let frameLayoutGuide = self.frameLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            contentStackView.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: frameLayoutGuide.leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: frameLayoutGuide.trailingAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor)
+        ])
     }
 }

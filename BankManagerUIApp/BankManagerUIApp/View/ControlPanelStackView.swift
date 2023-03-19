@@ -76,19 +76,6 @@ final class ControlPanelStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureControlPanelStackView() {
-        self.axis = .vertical
-        self.spacing = 10
-        self.distribution = .fillEqually
-        
-        controlButtonStackView.addArrangedSubview(addCustomerButton)
-        controlButtonStackView.addArrangedSubview(clearButton)
-        
-        self.addArrangedSubview(controlButtonStackView)
-        self.addArrangedSubview(timerLabel)
-        self.addArrangedSubview(statusLabelStackView)
-    }
-    
     func setControlButtonTarget(addAction: Selector, clearAction: Selector) {
         addCustomerButton.addTarget(nil, action: addAction, for: .touchUpInside)
         clearButton.addTarget(nil, action: clearAction, for: .touchUpInside)
@@ -115,5 +102,18 @@ final class ControlPanelStackView: UIStackView {
     
     func resetTimerLabel() {
         timerLabel.text = "업무시간 - 00:00:000"
+    }
+    
+    private func configureControlPanelStackView() {
+        self.axis = .vertical
+        self.spacing = 10
+        self.distribution = .fillEqually
+        
+        controlButtonStackView.addArrangedSubview(addCustomerButton)
+        controlButtonStackView.addArrangedSubview(clearButton)
+        
+        self.addArrangedSubview(controlButtonStackView)
+        self.addArrangedSubview(timerLabel)
+        self.addArrangedSubview(statusLabelStackView)
     }
 }

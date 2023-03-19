@@ -33,19 +33,6 @@ final class Bank {
         }
     }
     
-    private func work() {
-        while !customerQueue.isEmpty {
-            guard let currentCustomer = customerQueue.dequeue() else { return }
-            
-            switch currentCustomer.businessType {
-            case .loan:
-                loanSection.processJob(for: currentCustomer, group: dispatchGroup)
-            case .deposit:
-                depositSection.processJob(for: currentCustomer, group: dispatchGroup)
-            }
-        }
-    }
-    
     func startBankService() {
         loanSection.isWorking = true
         depositSection.isWorking = true
@@ -60,5 +47,18 @@ final class Bank {
         customerQueue.clear()
         loanSection.isWorking = false
         depositSection.isWorking = false
+    }
+    
+    private func work() {
+        while !customerQueue.isEmpty {
+            guard let currentCustomer = customerQueue.dequeue() else { return }
+            
+            switch currentCustomer.businessType {
+            case .loan:
+                loanSection.processJob(for: currentCustomer, group: dispatchGroup)
+            case .deposit:
+                depositSection.processJob(for: currentCustomer, group: dispatchGroup)
+            }
+        }
     }
 }
