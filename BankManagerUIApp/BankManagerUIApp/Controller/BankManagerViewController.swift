@@ -10,16 +10,23 @@ final class BankManagerViewController: UIViewController {
     private let controlPanelStackView = ControlPanelStackView()
     private let customerQueueScrollView = CustomerQueueScrollView()
     private var bankManager = BankManager()
+    private var customerGenerator = CustomerGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureView()
+        addNotificationObservers()
+    }
+    
+    private func configureView() {
         view.backgroundColor = .white
         
-        addNotificationObservers()
         controlPanelStackView.setControlButtonTarget(
             addAction: #selector(addCustomerButtonTapped),
             clearAction: #selector(clearButtonTapped)
         )
+        
         configureControlPanelStackView()
         configureCustomerQueueScrollView()
     }
@@ -36,13 +43,15 @@ final class BankManagerViewController: UIViewController {
                                                object: nil)
     }
     
-    @objc private func moveCustomerLabel(_ noti: Notification) {
+    @objc
+    private func moveCustomerLabel(_ noti: Notification) {
         guard let customer = noti.userInfo?[NotificationKey.customer] as? Customer else { return }
         
         customerQueueScrollView.moveToProcessingQueue(customer: customer)
     }
     
-    @objc private func removeCustomerLabel(_ noti: Notification) {
+    @objc
+    private func removeCustomerLabel(_ noti: Notification) {
         guard let customer = noti.userInfo?[NotificationKey.customer] as? Customer else { return }
         
         customerQueueScrollView.removeFromProcessingQueue(customer: customer)
@@ -72,22 +81,24 @@ final class BankManagerViewController: UIViewController {
         ])
     }
     
-    @objc private func addCustomerButtonTapped() {
-        let customers = CustomerGenerator.make(numberOfCustomer: 10)
+    @objc
+    private func addCustomerButtonTapped() {
+        let customers = customerGenerator.make(numberOfCustomer: 10)
         
         bankManager.addTenCustomers(customers)
         customerQueueScrollView.addWaitingLabel(customers: customers)
         bankManager.startBusiness()
-        BusinessTimer.start(handler: { [weak self] in
+        bankManager.startTimer { [weak self] in
             self?.updateTimerLabel()
-        })
+        }
     }
     
-    @objc private func clearButtonTapped() {
+    @objc
+    private func clearButtonTapped() {
         customerQueueScrollView.resetAllStackView()
         bankManager.stopAllTask()
-        CustomerGenerator.reset()
-        BusinessTimer.cancel()
+        customerGenerator.reset()
+        bankManager.endTimer()
         controlPanelStackView.resetTimerLabel()
     }
     

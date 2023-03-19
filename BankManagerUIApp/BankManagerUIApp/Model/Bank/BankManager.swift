@@ -18,4 +18,12 @@ struct BankManager {
     func stopAllTask() {
         bank.reset()
     }
+    
+    func startTimer(handler: @escaping ()->()) {
+        bank.timer.start(handler: handler)
+    }
+    
+    func endTimer() {
+        bank.timer.cancel()
+    }
 }

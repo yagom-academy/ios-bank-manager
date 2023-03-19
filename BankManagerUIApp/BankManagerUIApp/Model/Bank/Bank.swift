@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct Bank {
+final class Bank {
     private var loanSection: BusinessSection
     private var depositSection: BusinessSection
     private let customerQueue: BankManagerQueue<Customer> = BankManagerQueue()
     private let dispatchGroup = DispatchGroup()
+    private(set) var timer = BusinessTimer()
     
     init() {
         loanSection = BusinessSection(
@@ -32,7 +33,7 @@ struct Bank {
         }
     }
     
-    private mutating func work() {
+    private func work() {
         while !customerQueue.isEmpty {
             guard let currentCustomer = customerQueue.dequeue() else { return }
             
@@ -45,13 +46,13 @@ struct Bank {
         }
     }
     
-    mutating func startBankService() {
+    func startBankService() {
         loanSection.isWorking = true
         depositSection.isWorking = true
         work()
         
         dispatchGroup.notify(queue: .global()) {
-            BusinessTimer.cancel()
+            self.timer.cancel()
         }
     }
 

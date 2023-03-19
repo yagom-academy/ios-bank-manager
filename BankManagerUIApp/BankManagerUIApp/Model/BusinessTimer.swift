@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum BusinessTimer {
+class BusinessTimer {
     enum TimerState {
         case resumed
         case finished
     }
     
-    static var timer: DispatchSourceTimer?
-    static var state: TimerState = .finished
+    private var timer: DispatchSourceTimer?
+    private var state: TimerState = .finished
     
-    static func start(handler: @escaping () -> ()) {
+    func start(handler: @escaping () -> ()) {
         if state == .finished {
             timer = DispatchSource.makeTimerSource(queue: .main)
             timer?.schedule(deadline: .now(), repeating: 0.001)
@@ -26,7 +26,7 @@ enum BusinessTimer {
         }
     }
     
-    static func cancel() {
+    func cancel() {
         timer?.cancel()
         timer = nil
         state = .finished
