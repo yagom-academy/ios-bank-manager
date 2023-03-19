@@ -1,5 +1,5 @@
 //
-//  Notification+.swift
+//  Notification+Attribute.swift
 //  BankManagerUIApp
 //
 //  Created by brody, christy, harry on 2023/03/15.
