@@ -12,7 +12,6 @@ final class DoingTaskScrollView: UIScrollView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
         setUpTaskScrollView()
         configureConstraint()
     }
@@ -20,13 +19,10 @@ final class DoingTaskScrollView: UIScrollView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func configure() {
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
+
     private func setUpTaskScrollView() {
         self.addSubview(taskClientStackView)
+        self.isScrollEnabled = false
     }
     
     private func configureConstraint() {

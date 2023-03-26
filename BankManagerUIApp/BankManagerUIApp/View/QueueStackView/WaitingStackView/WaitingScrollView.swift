@@ -12,17 +12,12 @@ final class WaitingScrollView: UIScrollView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
         setUpWaitingScrollView()
         configureConstraint()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configure() {
-        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setUpWaitingScrollView() {

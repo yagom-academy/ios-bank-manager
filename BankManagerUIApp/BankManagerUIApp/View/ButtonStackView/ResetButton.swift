@@ -18,7 +18,6 @@ final class ResetButton: UIButton {
     }
     
     private func configure() {
-        self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle("초기화", for: .normal)
         self.setTitleColor(.systemRed, for: .normal)
         self.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)

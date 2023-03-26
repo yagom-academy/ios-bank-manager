@@ -18,7 +18,6 @@ final class DoingTaskLabel: UILabel {
     }
     
     private func configure() {
-        self.translatesAutoresizingMaskIntoConstraints = false
         self.setContentHuggingPriority(.defaultHigh, for: .vertical)
         self.textAlignment = .center
         self.font = UIFont.preferredFont(forTextStyle: .largeTitle)

@@ -18,7 +18,6 @@ final class AddClientButton: UIButton {
     }
     
     private func configure() {
-        self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle("고객 10명 추가", for: .normal)
         self.setTitleColor(.systemBlue, for: .normal)
         self.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
