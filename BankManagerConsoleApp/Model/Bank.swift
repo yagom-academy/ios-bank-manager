@@ -16,6 +16,7 @@ struct Bank {
     private let loanClerk = OperationQueue()
     
     var delegate: BankDelegate?
+
     
     mutating func manageTodayTask() {
         lineUpClient()
@@ -23,6 +24,7 @@ struct Bank {
         notifyTaskCompletion(totalTime)
     }
     
+
     mutating func lineUpClient() {
         clientCount += 10
         var startCount = 1
@@ -51,7 +53,7 @@ struct Bank {
         
         return totalTime
     }
-    
+
     mutating func doTask() {
         for _ in 1...waitingLine.count {
             guard let currentClient = waitingLine.dequeue() else { return }
