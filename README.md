@@ -105,10 +105,10 @@ BankManagerUIApp
 |**STEP2**| **2023.03.07** | - 필요한 Model 타입 추상화 ( Bank, Banker, BankManager, Customer, Business ) </br> - 추상화된 Model 타입 세부구현 |
 |**STEP2**| **2023.03.08** | - 기능 분리 리팩토링 진행 </br> - 기존 로직 최적화 리팩토링 진행 |
 |**STEP3**| **2023.03.09** |  - Concurrent Programming 로직 도입 </br> - 의존성 외부주입 로직으로 리팩토링 |
-|**STEP3**| **2023.03.10** |  - 전체적임 프로그램 구조 재편성 </br> - 재편성된 구조에 맞게 리팩토링 진행 |
+|**STEP3**| **2023.03.10** |  - 전체적 프로그램 구조 재편성 </br> - 재편성된 구조에 맞게 리팩토링 진행 |
 |**STEP3**| **2023.03.13** |  - 피드백 사항 수정작업 |
-|**STEP3**| **2023.03.14** |  - UnitTest 진행 </br> - Unit Test에 필요한 Mock 타입 생성 |
-|**STEP3**| **2023.03.15** |  - UnitTest 진행  |
+|**STEP3**| **2023.03.14** |  - Unit Test 진행 </br> - Unit Test에 필요한 Mock 타입 생성 |
+|**STEP3**| **2023.03.15** |  - Unit Test 진행  |
 |**STEP4**| **2023.03.15** |  - 필요한 기본 UI 틀 구성  |
 |**STEP4**| **2023.03.15** |  - 오토레이아웃 적용 </br> - Console App의 Model 필요에 맞게 병합</br> - 비동기적으로 UI 업데이트 구현 |
 
@@ -184,7 +184,7 @@ struct LinkedList<T> {
 }
 ```
 
-구현 한 Node 타입을 외부에서는 모르게 하고 싶었기에 LinkedList 내부 `Nested Type` 으로 옮겨주었습니다.
+구현한 Node 타입을 외부에서는 모르게 하고 싶었기에 LinkedList 내부 `Nested Type` 으로 옮겨주었습니다.
 
 하지만 내부로 옮겨 주면서 아래와 같은 에러가 발생 했습니다.
 <img src="https://i.imgur.com/lYFVObu.png" width = 500>
