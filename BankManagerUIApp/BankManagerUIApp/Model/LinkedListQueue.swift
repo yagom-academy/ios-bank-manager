@@ -40,4 +40,21 @@ final class LinkedListQueue<T: Equatable> {
             tail = newNode
         }
     }
+    
+    func dequeue() -> T? {
+        let value = head?.value
+       
+        head = head?.next
+        
+        return value
+    }
+    
+    func clear() {
+        guard !isEmpty else {
+            return
+        }
+        
+        head = nil
+        tail = nil
+    }
 }
