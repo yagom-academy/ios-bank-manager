@@ -114,8 +114,8 @@
 		92FEDA252A5C03D90013F991 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E48259C3EA20053667F /* Info.plist */,
+				C7694E43259C3EA20053667F /* Assets.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -481,7 +481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BankManagerUIApp/Info.plist;
+				INFOPLIST_FILE = BankManagerUIApp/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -500,7 +500,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BankManagerUIApp/Info.plist;
+				INFOPLIST_FILE = BankManagerUIApp/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
