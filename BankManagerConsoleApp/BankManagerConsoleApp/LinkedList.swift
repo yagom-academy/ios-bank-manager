@@ -36,4 +36,9 @@ struct LinkedList<Value> {
         
         return value
     }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
