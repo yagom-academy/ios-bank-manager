@@ -20,7 +20,7 @@ class BankManagerUIAppTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue를_호출하여_1과2와3을_넣고_노드개수가_3개면_True를_반환하는지() {
+    func test_enqueue_1과2와3을_넣었을때_노드개수_3개를_반환하는지() {
         // given
         let expectation = 3
         
@@ -45,7 +45,7 @@ class BankManagerUIAppTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_1과2를_넣고_clear를_호출하면_값이_없는지() {
+    func test_clear_1과2를_넣고_clear를_호출하면_isEmpty가_True인지() {
         //given
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
