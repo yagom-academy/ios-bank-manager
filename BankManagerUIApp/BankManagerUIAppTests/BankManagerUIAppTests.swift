@@ -44,4 +44,17 @@ class BankManagerUIAppTests: XCTestCase {
         //then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_1과2를_넣고_clear를_호출하면_값이_없는지() {
+        //given
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        
+        //when
+        sut.clear()
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertTrue(result)
+    }
 }
