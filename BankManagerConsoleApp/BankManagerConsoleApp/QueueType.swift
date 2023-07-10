@@ -8,13 +8,13 @@
 protocol QueueType {
     associatedtype Element
     
-    var headNode: CustomerNode<Element> { get }
-    var tailNode: CustomerNode<Element> { get }
+    var headNode: CustomerNode<Element>? { get }
+    var tailNode: CustomerNode<Element>? { get }
     
-    func enqueue(_ value: Element)
-    func dequeue() -> Element
-    func clear()
-    func peek() -> Element
+    mutating func enqueue(_ value: Element)
+    mutating func dequeue() -> Element?
+    mutating func clear()
+    func peek() -> Element?
     func isEmpty() -> Bool
 }
 
