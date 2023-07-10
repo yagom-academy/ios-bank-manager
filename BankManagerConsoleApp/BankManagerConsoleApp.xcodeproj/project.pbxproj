@@ -11,6 +11,7 @@
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D25040472A5C2BF40018919D /* WaitingLineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040462A5C2BF40018919D /* WaitingLineNode.swift */; };
+		D25040492A5C31FF0018919D /* WaitingLineQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040482A5C31FF0018919D /* WaitingLineQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		D25040462A5C2BF40018919D /* WaitingLineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingLineNode.swift; sourceTree = "<group>"; };
+		D25040482A5C31FF0018919D /* WaitingLineQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingLineQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				D25040482A5C31FF0018919D /* WaitingLineQueue.swift */,
 				45F01F562A5C2F1100CB0FD4 /* WaitingLineLinkedList.swift */,
 				D25040462A5C2BF40018919D /* WaitingLineNode.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
@@ -129,6 +132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25040492A5C31FF0018919D /* WaitingLineQueue.swift in Sources */,
 				45F01F572A5C2F1100CB0FD4 /* WaitingLineLinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				D25040472A5C2BF40018919D /* WaitingLineNode.swift in Sources */,

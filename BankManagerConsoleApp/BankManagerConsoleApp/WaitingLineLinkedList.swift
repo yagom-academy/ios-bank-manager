@@ -9,10 +9,6 @@ final class WaitingLineLinkedList<T> {
     private(set) var head: WaitingLineNode<T>?
     private var tail: WaitingLineNode<T>?
     
-    var isEmpty: Bool {
-        return head == nil
-    }
-    
     func append(_ node: WaitingLineNode<T>) {
         if head == nil {
             head = node
