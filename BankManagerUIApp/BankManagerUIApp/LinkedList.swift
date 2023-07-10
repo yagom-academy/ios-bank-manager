@@ -21,4 +21,16 @@ struct LinkedList<Element> {
         head = nil
         tail = nil
     }
+    
+    mutating func enqueue(data: Element) {
+        let newData = Node(data: data)
+        
+        if isEmpty {
+            head = newData
+            tail = newData
+        } else {
+            tail?.next = newData
+            tail = newData
+        }
+    }
 }
