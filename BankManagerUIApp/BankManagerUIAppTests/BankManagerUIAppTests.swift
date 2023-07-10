@@ -57,4 +57,16 @@ class BankManagerUIAppTests: XCTestCase {
         //then
         XCTAssertTrue(result)
     }
+    
+    func test_peek_2와3을_넣고_peek를_호출하면_값이_2인지() {
+        //given
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
+        
+        //when
+        let result = sut.peek()
+        
+        //then
+        XCTAssertEqual(result, 2)
+    }
 }
