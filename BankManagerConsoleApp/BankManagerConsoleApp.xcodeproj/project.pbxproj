@@ -12,6 +12,8 @@
 		44847F3B2A5C38AF00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
 		ACBF18572A5C10FC00160ADF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18562A5C10FC00160ADF /* Queue.swift */; };
 		ACBF18592A5C110D00160ADF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18582A5C110D00160ADF /* Node.swift */; };
+		ACBF185B2A5C3C2D00160ADF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18562A5C10FC00160ADF /* Queue.swift */; };
+		ACBF185C2A5C3C3200160ADF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18582A5C110D00160ADF /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -76,12 +78,20 @@
 			path = Queue;
 			sourceTree = "<group>";
 		};
+		ACBF185A2A5C3BF000160ADF /* BankManagerConsoleTests */ = {
+			isa = PBXGroup;
+			children = (
+				44847F372A5C308F00653323 /* BankManagerConsoleApp.xctestplan */,
+				44847F312A5C302E00653323 /* QueueTests */,
+			);
+			path = BankManagerConsoleTests;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				44847F372A5C308F00653323 /* BankManagerConsoleApp.xctestplan */,
-				44847F312A5C302E00653323 /* QueueTests */,
+				ACBF185A2A5C3BF000160ADF /* BankManagerConsoleTests */,
 				C7694E77259C3EC00053667F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -194,7 +204,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				44847F3B2A5C38AF00653323 /* LinkedList.swift in Sources */,
+				ACBF185B2A5C3C2D00160ADF /* Queue.swift in Sources */,
 				44847F332A5C302E00653323 /* QueueTests.swift in Sources */,
+				ACBF185C2A5C3C3200160ADF /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
