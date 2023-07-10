@@ -5,7 +5,7 @@
 //  Created by mint, Jusbug on 2023/07/10.
 //
 
-final class LinkedListQueue<T: Equatable> {
+final class LinkedListQueue<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
 
