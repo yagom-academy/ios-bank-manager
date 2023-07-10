@@ -9,7 +9,7 @@ struct LinkedList<Value> {
     private var head: Node<Value>?
     private var tail: Node<Value>?
     
-    var peek: Value? {
+    var first: Value? {
         return head?.value
     }
     
