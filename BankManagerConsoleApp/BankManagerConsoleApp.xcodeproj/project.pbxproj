@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ACBF18552A5C10F400160ADF /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18542A5C10F400160ADF /* LinkedList.swift */; };
+		44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
 		ACBF18572A5C10FC00160ADF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18562A5C10FC00160ADF /* Queue.swift */; };
 		ACBF18592A5C110D00160ADF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18582A5C110D00160ADF /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
@@ -27,7 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		ACBF18542A5C10F400160ADF /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LinkedList.swift; path = "../../../../../../.Trash/ios-bank-manager/BankManagerConsoleApp/BankManagerConsoleApp/LinkedList.swift"; sourceTree = "<group>"; };
+		44847F1C2A5C163B00653323 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		ACBF18562A5C10FC00160ADF /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		ACBF18582A5C110D00160ADF /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,8 +49,8 @@
 		ACBF18532A5C102400160ADF /* Queue */ = {
 			isa = PBXGroup;
 			children = (
-				ACBF18542A5C10F400160ADF /* LinkedList.swift */,
 				ACBF18562A5C10FC00160ADF /* Queue.swift */,
+				44847F1C2A5C163B00653323 /* LinkedList.swift */,
 				ACBF18582A5C110D00160ADF /* Node.swift */,
 			);
 			path = Queue;
@@ -139,9 +139,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACBF18552A5C10F400160ADF /* LinkedList.swift in Sources */,
 				ACBF18592A5C110D00160ADF /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				ACBF18572A5C10FC00160ADF /* Queue.swift in Sources */,
 			);
