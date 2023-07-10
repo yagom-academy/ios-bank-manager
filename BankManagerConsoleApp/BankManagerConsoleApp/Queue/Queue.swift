@@ -7,17 +7,11 @@
 
 struct Queue<T> {
     private var queue: LinkedList = LinkedList<T>()
-    
-    var peek: T? {
-        return queue.first
-    }
-    
-    var isEmpty: Bool {
-        return queue.isEmpty
-    }
-    
-    mutating func enqueue(_ element: T) {
-        queue.append(element)
+    var isEmpty: Bool { return queue.isEmpty }
+    var peek: T? { return queue.first }
+
+    mutating func enqueue(_ newElement: T) {
+        queue.append(newElement)
     }
     
     mutating func dequeue() -> T? {

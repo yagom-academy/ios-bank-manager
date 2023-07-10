@@ -8,21 +8,16 @@
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    
-    var isEmpty: Bool {
-        return head == nil
-    }
-    
-    var first: T? {
-        return head?.element
-    }
+    var isEmpty: Bool { return head == nil }
+    var first: T? { return head?.element }
     
     mutating func append(_ newElement: T) {
+        let node = Node(element: newElement)
+        
         if isEmpty {
-            head = Node(element: newElement)
+            head = node
             tail = head
         } else {
-            let node = Node(element: newElement)
             tail?.next = node
             tail = node
         }
