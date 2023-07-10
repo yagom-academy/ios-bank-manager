@@ -2,7 +2,13 @@
 //  LinkedList.swift
 //  BankManagerUIApp
 //
-//  Created by 예찬 on 2023/07/10.
+//  Created by Yetti, Redmango on 2023/07/10.
 //
 
-import Foundation
+final class LinkedList<Element> {
+    var head: Node<Element>?
+    
+    var isEmpty: Bool {
+        return head == nil ? true : false
+    }
+}
