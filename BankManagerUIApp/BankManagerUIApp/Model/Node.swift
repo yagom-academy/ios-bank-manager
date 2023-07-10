@@ -2,12 +2,10 @@
 //  Node.swift
 //  BankManagerUIApp
 //
-//  Created by 박종화 on 2023/07/10.
+//  Created by mint, Jusbug on 2023/07/10.
 //
 
-import Foundation
-
-class Node<T> {
+final class Node<T> {
     var value: T
     var next: Node<T>?
     
