@@ -33,4 +33,14 @@ struct LinkedList<Element> {
             tail = newData
         }
     }
+    
+    mutating func dequeue() -> Element? {
+        guard let data = head?.data else {
+            return nil
+        }
+        
+        head = head?.next
+        
+        return data
+    }
 }
