@@ -16,6 +16,10 @@ struct CustomerWaitingQueue<Element> {
         return list.isEmpty
     }
     
+    var count: Int {
+        return list.count
+    }
+    
     mutating func enqueue(_ newElemet: Element) {
         list.append(newElemet)
     }

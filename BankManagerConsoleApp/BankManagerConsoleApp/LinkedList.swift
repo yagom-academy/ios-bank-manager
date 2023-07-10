@@ -8,6 +8,7 @@
 struct LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
+    private(set) var count: Int = 0
     
     var isEmpty: Bool {
         return head == nil
@@ -27,6 +28,7 @@ struct LinkedList<Element> {
         
         tail?.next = newNode
         tail = newNode
+        count += 1
     }
     
     mutating func popFirst() -> Element? {
@@ -35,6 +37,7 @@ struct LinkedList<Element> {
         }
         
         head = head?.next
+        count -= 1
         
         return data
     }
