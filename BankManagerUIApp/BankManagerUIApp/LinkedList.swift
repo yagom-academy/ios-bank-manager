@@ -6,8 +6,8 @@
 //
 
 struct LinkedList<Element> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil ? true : false
@@ -15,5 +15,10 @@ struct LinkedList<Element> {
     
     var peek: Element? {
         return head?.data
+    }
+    
+    mutating func clear() {
+        head = nil
+        tail = nil
     }
 }
