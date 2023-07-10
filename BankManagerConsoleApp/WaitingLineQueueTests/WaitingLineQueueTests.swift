@@ -56,4 +56,17 @@ final class WaitingLineQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_clear_메소드_실행_시_isEmpty는_true입니다() {
+        // given
+        let expectation = true
+        //when
+        sut?.enqueue("가")
+        sut?.enqueue("나")
+        sut?.enqueue("다")
+        sut?.clear()
+        let result = sut?.isEmpty
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
