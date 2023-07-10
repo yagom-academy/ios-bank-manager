@@ -7,8 +7,13 @@
 
 final class LinkedList<Element> {
     var head: Node<Element>?
+    var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil ? true : false
+    }
+    
+    var peek: Element? {
+        return head?.data
     }
 }
