@@ -14,14 +14,30 @@ final class LinkedListQueue<T: Equatable> {
     }
 
     var count: Int {
-        var current = head
+        var node = head
         var count = 0
 
-        while current != nil {
+        while node != nil {
             count += 1
-            current = current?.next
+            node = node?.next
         }
 
         return count
+    }
+    
+    func peek() -> T? {
+        return head?.value
+    }
+    
+    func enqueue(value: T) {
+        let newNode = Node(value: value)
+
+        if isEmpty {
+            head = newNode
+            tail = head
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
     }
 }
