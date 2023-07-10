@@ -32,4 +32,16 @@ class BankManagerUIAppTests: XCTestCase {
         // then
         XCTAssertEqual(sut.count, expectation)
     }
+    
+    func test_dequeue_1과2를_넣고_dequeue를_호출하면_값이_1인지() {
+        //given
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
 }
