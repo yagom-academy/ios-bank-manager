@@ -5,8 +5,6 @@
 //  Created by Yetti, Redmango on 2023/07/10.
 //
 
-import Foundation
-
 final class Node<Element> {
     var data: Element?
     var next: Node<Element>?

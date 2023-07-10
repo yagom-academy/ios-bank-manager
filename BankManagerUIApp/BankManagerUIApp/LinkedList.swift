@@ -5,7 +5,7 @@
 //  Created by Yetti, Redmango on 2023/07/10.
 //
 
-final class LinkedList<Element> {
+struct LinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>?
     
