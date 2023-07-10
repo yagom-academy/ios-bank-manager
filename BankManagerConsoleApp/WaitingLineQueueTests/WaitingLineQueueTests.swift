@@ -6,7 +6,6 @@
 //
 
 import XCTest
-
 @testable import BankManagerConsoleApp
 
 final class WaitingLineQueueTests: XCTestCase {
@@ -22,10 +21,20 @@ final class WaitingLineQueueTests: XCTestCase {
     
     func test_Queue가_비었을때_isEmpty가_true입니다() {
         // given
-        let expectaion = true
+        let expectation = true
         // when
         let result = sut?.isEmpty
         // then
-        XCTAssertEqual(result, expectaion)
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_Queue에_가나다를_넣었을때_peek의_값은_가나다입니다() {
+        // given
+        let expectation = "가나다"
+        // when
+        sut?.enqueue("가나다")
+        let result = sut?.peek
+        // then
+        XCTAssertEqual(result, expectation)
     }
 }
