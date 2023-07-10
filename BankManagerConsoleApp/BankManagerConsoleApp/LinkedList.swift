@@ -21,4 +21,19 @@ struct LinkedList<Value> {
         tail?.next = newNode
         tail = tail?.next
     }
+    
+    mutating func removeFirst() -> Value? {
+        guard head != nil else {
+            return nil
+        }
+        
+        let value = head?.value
+        head = head?.next
+        
+        if head == nil {
+            tail = nil
+        }
+        
+        return value
+    }
 }
