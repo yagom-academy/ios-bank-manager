@@ -6,8 +6,12 @@
 //
 
 struct LinkedList<Value> {
-    var head: Node<Value>?
-    var tail: Node<Value>?
+    private var head: Node<Value>?
+    private var tail: Node<Value>?
+    
+    var peek: Value? {
+        return head?.value
+    }
     
     mutating func append(_ value: Value) {
         let newNode = Node(value)
