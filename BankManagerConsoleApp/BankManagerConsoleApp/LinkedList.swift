@@ -13,6 +13,10 @@ struct LinkedList<Value> {
         return head?.value
     }
     
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
     mutating func append(_ value: Value) {
         let newNode = Node(value)
         
