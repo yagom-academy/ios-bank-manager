@@ -6,8 +6,8 @@
 //
 
 struct CustomerQueue<Element>: QueueType {
-    var headNode: CustomerNode<Element>?
-    var tailNode: CustomerNode<Element>?
+    private var headNode: CustomerNode<Element>?
+    private var tailNode: CustomerNode<Element>?
     
     mutating func enqueue(_ value: Element) {
         let node: CustomerNode = CustomerNode(value)
@@ -22,11 +22,7 @@ struct CustomerQueue<Element>: QueueType {
     }
     
     mutating func dequeue() -> Element? {
-        guard self.isEmpty() == false else {
-            return nil
-        }
-        
-        guard let value = headNode?.value else {
+        guard let value = headNode?.value, self.isEmpty() == false else {
             return nil
         }
         
