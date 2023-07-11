@@ -10,11 +10,11 @@ struct MockCustomerQueue<Element>: QueueType {
     var linkedList = LinkedList<Element>()
     
     var headNode: Node<Element>? {
-        return linkedList.firstNode
+        return linkedList.headNode
     }
     
     var tailNode: Node<Element>? {
-        return linkedList.lastNode
+        return linkedList.tailNode
     }
 
     mutating func enqueue(_ value: Element) {

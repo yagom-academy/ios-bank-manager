@@ -6,16 +6,8 @@
 //
 
 struct LinkedList<Element> {
-    private var headNode: Node<Element>?
-    private var tailNode: Node<Element>?
-    
-    var firstNode: Node<Element>? {
-        return headNode
-    }
-    
-    var lastNode: Node<Element>? {
-        return tailNode
-    }
+    private(set) var headNode: Node<Element>?
+    private(set) var tailNode: Node<Element>?
     
     mutating func append(_ value: Element) {
         let node: Node = Node(value)

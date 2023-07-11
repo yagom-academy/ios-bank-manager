@@ -72,6 +72,7 @@
 		3DBAE9552A5CFAAA004F0C81 /* BankManagerConsoleTest */ = {
 			isa = PBXGroup;
 			children = (
+				3DF9328C2A5CFAFC009383D5 /* BankManagerConsoleApp.xctestplan */,
 				3DF932952A5CFBB3009383D5 /* BankManagerConsoleStringTest.swift */,
 				3DBAE9562A5CFAAA004F0C81 /* BankManagerConsoleIntTest.swift */,
 				3DF9328D2A5CFB55009383D5 /* MockCustomerQueue.swift */,
@@ -100,7 +101,6 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
-				3DF9328C2A5CFAFC009383D5 /* BankManagerConsoleApp.xctestplan */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				3DBAE9552A5CFAAA004F0C81 /* BankManagerConsoleTest */,
 				C7694E77259C3EC00053667F /* Products */,
