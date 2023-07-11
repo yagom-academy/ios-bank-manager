@@ -12,11 +12,10 @@ final class LinkedList<Element> {
     func append(_ node: Node<Element>) {
         if head == nil {
             head = node
-            tail = node
         } else {
             tail?.next = node
-            tail = node
         }
+        tail = node
     }
     
     func removeFirst() -> Node<Element>? {
