@@ -6,55 +6,25 @@
 //
 
 struct CustomerQueue<Element>: QueueType {
-    private var headNode: CustomerNode<Element>?
-    private var tailNode: CustomerNode<Element>?
+    private var linkedList: LinkedList<Element> = LinkedList<Element>()
     
     mutating func enqueue(_ value: Element) {
-        let node: CustomerNode = CustomerNode(value)
-        
-        if self.isEmpty() {
-            self.headNode = node
-            self.tailNode = node
-        } else {
-            self.tailNode?.setNextNode(node)
-            self.tailNode = node
-        }
+        linkedList.append(value)
     }
     
     mutating func dequeue() -> Element? {
-        guard let value = headNode?.value, self.isEmpty() == false else {
-            return nil
-        }
-        
-        if headNode === tailNode {
-            self.clear()
-            
-            return value
-        } else {
-            self.headNode = headNode?.nextNode
-            
-            return value
-        }
+        return linkedList.pop()
     }
     
     mutating func clear() {
-        self.headNode = nil
-        self.tailNode = nil
+        linkedList.removeAll()
     }
     
     func peek() -> Element? {
-        guard let value = headNode?.value else {
-            return nil
-        }
-        
-        return value
+        return linkedList.peek()
     }
     
     func isEmpty() -> Bool {
-        if headNode == nil {
-            return true
-        } else {
-            return false
-        }
+        return linkedList.isEmpty()
     }
 }

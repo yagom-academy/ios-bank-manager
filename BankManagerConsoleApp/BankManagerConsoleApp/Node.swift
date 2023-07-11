@@ -5,15 +5,11 @@
 //  Created by kyungmin, Max on 2023/07/10.
 //
 
-class CustomerNode<Element> {
+class Node<Element> {
     var value: Element
-    var nextNode: CustomerNode?
+    var nextNode: Node?
     
     init(_ value: Element) {
         self.value = value
-    }
-    
-    func setNextNode(_ nextNode: CustomerNode) {
-        self.nextNode = nextNode
     }
 }
