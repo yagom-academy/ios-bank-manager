@@ -13,10 +13,10 @@ final class WaitingLineLinkedList<T> {
         if head == nil {
             head = node
             tail = node
+        } else {
+            tail?.next = node
+            tail = node
         }
-        
-        node.next = head
-        head = node
     }
     
     func removeFirst() -> WaitingLineNode<T>? {
