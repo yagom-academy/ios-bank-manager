@@ -5,18 +5,7 @@
 //  Created by Yetti, Redmango on 2023/07/10.
 //
 
-protocol LinkedListable {
-    associatedtype Element
- 
-    var peek: Element? { get }
-    var isEmpty: Bool { get }
-    
-    mutating func clear()
-    mutating func addLast(_ data: Element)
-    mutating func popFirst() -> Element?
-}
-
-struct LinkedList<Element>: LinkedListable {
+struct LinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
