@@ -2,7 +2,7 @@
 //  CustomelQueueTests.swift
 //  BankManagerUIAppTests
 //
-//  Created by redmango1446 on 2023/07/11.
+//  Created by Yetti, Redmango on 2023/07/11.
 //
 
 import XCTest
