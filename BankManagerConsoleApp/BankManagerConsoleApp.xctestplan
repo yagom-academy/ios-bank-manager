@@ -16,7 +16,13 @@
     }
   },
   "testTargets" : [
-
+    {
+      "target" : {
+        "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
+        "identifier" : "3DBAE9532A5CFAA9004F0C81",
+        "name" : "BankManagerConsoleTest"
+      }
+    }
   ],
   "version" : 1
 }
