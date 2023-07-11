@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		631433432A5C01B900CBD580 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631433422A5C01B900CBD580 /* Node.swift */; };
+		BA322CBC2A5D49140046687B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CBB2A5D49140046687B /* Queue.swift */; };
 		BAF22BCF2A5C03A4009BA40A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		631433422A5C01B900CBD580 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		BA322CBB2A5D49140046687B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				631433422A5C01B900CBD580 /* Node.swift */,
 				BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */,
+				BA322CBB2A5D49140046687B /* Queue.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA322CBC2A5D49140046687B /* Queue.swift in Sources */,
 				631433432A5C01B900CBD580 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				BAF22BCF2A5C03A4009BA40A /* LinkedList.swift in Sources */,
