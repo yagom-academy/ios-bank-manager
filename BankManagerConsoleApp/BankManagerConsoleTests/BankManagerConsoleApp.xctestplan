@@ -9,7 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false,
     "targetForVariableExpansion" : {
       "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
       "identifier" : "C7694E75259C3EC00053667F",
