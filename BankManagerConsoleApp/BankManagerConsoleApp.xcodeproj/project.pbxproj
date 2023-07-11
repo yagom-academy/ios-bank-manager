@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C40FBDD2A5D3CEC00DFA6EF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBDC2A5D3CEC00DFA6EF /* Node.swift */; };
+		9C40FBDF2A5D3CFB00DFA6EF /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */; };
+		9C40FBE12A5D3D0E00DFA6EF /* CustomerWatingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +27,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9C40FBDC2A5D3CEC00DFA6EF /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerWatingQueue.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -40,6 +46,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C40FBDB2A5D3CD700DFA6EF /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				9C40FBDC2A5D3CEC00DFA6EF /* Node.swift */,
+				9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */,
+				9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +75,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				9C40FBDB2A5D3CD700DFA6EF /* DataStructure */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
@@ -122,7 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C40FBDD2A5D3CEC00DFA6EF /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				9C40FBDF2A5D3CFB00DFA6EF /* LinkedList.swift in Sources */,
+				9C40FBE12A5D3D0E00DFA6EF /* CustomerWatingQueue.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
