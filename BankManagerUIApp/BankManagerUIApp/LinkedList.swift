@@ -22,7 +22,7 @@ struct LinkedList<Element> {
         tail = nil
     }
     
-    mutating func enqueue(data: Element) {
+    mutating func addLast(_ data: Element) {
         let newData = Node(data: data)
         
         if isEmpty {
@@ -34,7 +34,7 @@ struct LinkedList<Element> {
         }
     }
     
-    mutating func dequeue() -> Element? {
+    mutating func popFirst() -> Element? {
         guard let data = head?.data else {
             return nil
         }
