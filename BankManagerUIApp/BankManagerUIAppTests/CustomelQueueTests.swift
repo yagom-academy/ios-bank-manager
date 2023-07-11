@@ -106,6 +106,7 @@ final class CustomelQueueTests: XCTestCase {
         
         // when
         let result = sut.peek
+        
         // then
         XCTAssertNil(result)
     }
@@ -114,12 +115,12 @@ final class CustomelQueueTests: XCTestCase {
         // given
         sut.enqueue(1)
         
-        //when
-        let expectaion = 1
+        // when
+        let expectation = 1
         let result = sut.peek
         
-        //then
-        XCTAssertEqual(expectaion, result)
+        // then
+        XCTAssertEqual(expectation, result)
     }
     
     func test_peek_1과2를_enqueue했을때_1을_반환한다() {
@@ -128,11 +129,11 @@ final class CustomelQueueTests: XCTestCase {
         sut.enqueue(2)
         
         // when
-        let expectaion = 1
+        let expectation = 1
         let result = sut.peek
         
         // then
-        XCTAssertEqual(expectaion, result)
+        XCTAssertEqual(expectation, result)
     }
     
     func test_peek_1과2를_enqueue하고_한번dequeue하면_peek은_2을_반환한다() {
@@ -142,18 +143,25 @@ final class CustomelQueueTests: XCTestCase {
         let _ = sut.dequeue()
         
         // when
-        let expectaion = 2
+        let expectation = 2
         let result = sut.peek
         
         // then
-        XCTAssertEqual(expectaion, result)
+        XCTAssertEqual(expectation, result)
     }
     
-    func test_clear_() {
+    func test_clear_enqueue를_3번하고_clear를하면_isEmpty가_true를_반환한다() {
         // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         
         // when
+        sut.clear()
+        let expectation = true
+        let result = sut.isEmpty
         
         // then
+        XCTAssertEqual(expectation, result)
     }
 }
