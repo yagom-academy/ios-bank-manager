@@ -5,11 +5,11 @@
 //  Created by Kobe, Hemg on 2023/07/10.
 //
 
-final class Node<Type> {
-    var value: Type
-    var next: Node<Type>?
+final class Node<T> {
+    var value: T
+    var next: Node<T>?
     
-    init(value: Type) {
+    init(value: T) {
         self.value = value
     }
 }
