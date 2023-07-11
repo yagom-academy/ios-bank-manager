@@ -53,12 +53,15 @@ final class CustomelQueueTests: XCTestCase {
         XCTAssertTrue(expectation)
     }
     
-    func test_enqueue_() {
+    func test_enqueue_enqueue로Queue에_1을넣고_dequeue하면_1을반환한다() {
         // given
+        sut.enqueue(1)
         
         // when
+        let expectation = sut.dequeue()
         
         // then
+        XCTAssertEqual(expectation, 1)
     }
     
     func test_dequeue_() {

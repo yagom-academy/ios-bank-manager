@@ -10,7 +10,7 @@ struct LinkedList<Element> {
     private var tail: Node<Element>?
     
     var isEmpty: Bool {
-        return head == nil ? true : false
+        return head == nil
     }
     
     var peek: Element? {
