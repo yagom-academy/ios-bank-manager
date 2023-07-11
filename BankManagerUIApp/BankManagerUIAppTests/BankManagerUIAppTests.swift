@@ -62,4 +62,38 @@ class BankManagerUIAppTests: XCTestCase {
         // then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_list가비어있을때_removeFirst함수호출시_nil을_반환하는지() {
+        // given
+        let expectation: Int? = nil
+        // when
+        let removeElement = sut.removeFirst()
+        // then
+        XCTAssertEqual(expectation, removeElement)
+    }
+    
+    func test_list의노드가_한개일때_removeFirst함수호출시_isEmpty가_true가되는지() {
+        // given
+        let expectation = 10
+        
+        sut.append(10)
+        // when
+        let removeElement = sut.removeFirst()
+        // then
+        XCTAssertEqual(expectation, removeElement)
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_list의노드가_세개일때_removeFirst함수호출시_first값이나오는지() {
+        // given
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
+        
+        let expectation = sut.first
+        // when
+        let removeElement = sut.removeFirst()
+        // then
+        XCTAssertEqual(expectation, removeElement)
+    }
 }
