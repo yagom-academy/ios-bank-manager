@@ -1,6 +1,6 @@
 //
-//  WaitingLineQueueTests.swift
-//  WaitingLineQueueTests
+//  QueueTests.swift
+//  QueueTests
 //
 //  Created by Erick, Serena on 2023/07/10.
 //
@@ -8,11 +8,11 @@
 import XCTest
 @testable import BankManagerConsoleApp
 
-final class WaitingLineQueueTests: XCTestCase {
-    var sut: WaitingLineQueue<String>?
+final class QueueTests: XCTestCase {
+    var sut: Queue<String>?
     
     override func setUpWithError() throws {
-        sut = WaitingLineQueue<String>()
+        sut = Queue<String>()
     }
 
     override func tearDownWithError() throws {

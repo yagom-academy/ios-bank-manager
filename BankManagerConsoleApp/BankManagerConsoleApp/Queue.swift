@@ -1,12 +1,12 @@
 //
-//  WaitingLineQueue.swift
+//  Queue.swift
 //  BankManagerConsoleApp
 //
 //  Created by Erick, Serena on 2023/07/10.
 //
 
-struct WaitingLineQueue<Element> {
-    private var waitingLineLinkedList = WaitingLineLinkedList<Element>()
+struct Queue<Element> {
+    private var waitingLineLinkedList = LinkedList<Element>()
     
     var peek: Element? {
         let node = waitingLineLinkedList.head
@@ -18,7 +18,7 @@ struct WaitingLineQueue<Element> {
     }
     
     func enqueue(_ value: Element) {
-        let node = WaitingLineNode(value: value)
+        let node = Node(value: value)
         
         waitingLineLinkedList.append(node)
     }

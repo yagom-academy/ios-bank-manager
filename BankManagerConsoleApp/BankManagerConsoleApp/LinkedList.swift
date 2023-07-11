@@ -1,15 +1,15 @@
 //
-//  WaitingLineLinkedList.swift
+//  LinkedList.swift
 //  BankManagerConsoleApp
 //
 //  Created by Erick, Serena on 2023/07/10.
 //
 
-final class WaitingLineLinkedList<Element> {
-    private(set) var head: WaitingLineNode<Element>?
-    private var tail: WaitingLineNode<Element>?
+final class LinkedList<Element> {
+    private(set) var head: Node<Element>?
+    private var tail: Node<Element>?
     
-    func append(_ node: WaitingLineNode<Element>) {
+    func append(_ node: Node<Element>) {
         if head == nil {
             head = node
             tail = node
@@ -19,7 +19,7 @@ final class WaitingLineLinkedList<Element> {
         }
     }
     
-    func removeFirst() -> WaitingLineNode<Element>? {
+    func removeFirst() -> Node<Element>? {
         let removeNode = head
         head = head?.next
         
