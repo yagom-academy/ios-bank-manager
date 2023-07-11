@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F96FE622A5D410B0020C741 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96FE612A5D410B0020C741 /* QueueTests.swift */; };
+		1F96FE632A5D41770020C741 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7862DA7C2A5C1591005A5608 /* Queue.swift */; };
 		1FA1723C2A5C0715006C1894 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1723B2A5C0715006C1894 /* LinkedList.swift */; };
 		1FEBA2F22A5CFE7400963E02 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBA2F12A5CFE7400963E02 /* NodeTests.swift */; };
 		7862DA7B2A5C02D8005A5608 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7862DA7A2A5C02D8005A5608 /* Node.swift */; };
@@ -31,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F96FE612A5D410B0020C741 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		1FA1723B2A5C0715006C1894 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		1FEBA2EA2A5CFE3B00963E02 /* BankManagerConsoleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankManagerConsoleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FEBA2F12A5CFE7400963E02 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 			children = (
 				7897B9D42A5D1A22008F207D /* LinkedListTests.swift */,
 				1FEBA2F12A5CFE7400963E02 /* NodeTests.swift */,
+				1F96FE612A5D410B0020C741 /* QueueTests.swift */,
 			);
 			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
@@ -190,7 +194,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FEBA2F22A5CFE7400963E02 /* NodeTests.swift in Sources */,
+				1F96FE632A5D41770020C741 /* Queue.swift in Sources */,
 				7897B9D52A5D1A22008F207D /* LinkedListTests.swift in Sources */,
+				1F96FE622A5D410B0020C741 /* QueueTests.swift in Sources */,
 				7897B9DA2A5D26F5008F207D /* LinkedList.swift in Sources */,
 				7897B9D32A5D0C35008F207D /* Node.swift in Sources */,
 			);

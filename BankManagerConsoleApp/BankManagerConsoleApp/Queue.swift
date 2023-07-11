@@ -6,25 +6,38 @@
 //
 
 struct Queue<Value> {
-    private var elements = LinkedList<Value>()
+    private var list = LinkedList<Value>()
     
     var peek: Value? {
-        return elements.first
+        return list.first
     }
     
     var isEmpty: Bool {
-        return elements.isEmpty
+        return list.isEmpty
     }
     
     mutating func enqueue(_ value: Value) {
-        elements.append(value)
+        list.append(value)
     }
     
     mutating func dequeue() -> Value? {
-        return elements.removeFirst()
+        return list.removeFirst()
     }
     
     mutating func clear() {
-        elements.removeAll()
+        list.removeAll()
     }
 }
+
+//MARK: - Extension for Unit Test
+#if canImport(XCTest)
+extension Queue {
+    var exposedList: LinkedList<Value> {
+        return list
+    }
+    
+    var count: Int {
+        return list.count
+    }
+}
+#endif
