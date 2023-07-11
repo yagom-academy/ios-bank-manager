@@ -46,7 +46,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_요소_1234를_추가하면_요소_1234가_저장된다() {
+    func test_요소_1234를_append하면_요소_1234가_저장된다() {
         // given
         sut.append(1)
         sut.append(2)
