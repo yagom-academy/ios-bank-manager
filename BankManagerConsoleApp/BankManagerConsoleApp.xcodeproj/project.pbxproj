@@ -3,15 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1FA1723C2A5C0715006C1894 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1723B2A5C0715006C1894 /* LinkedList.swift */; };
 		1FEBA2F22A5CFE7400963E02 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBA2F12A5CFE7400963E02 /* NodeTests.swift */; };
-		1FEBA2F32A5CFE7F00963E02 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7862DA7A2A5C02D8005A5608 /* Node.swift */; };
 		7862DA7B2A5C02D8005A5608 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7862DA7A2A5C02D8005A5608 /* Node.swift */; };
 		7862DA7D2A5C1591005A5608 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7862DA7C2A5C1591005A5608 /* Queue.swift */; };
+		7897B9D32A5D0C35008F207D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7862DA7A2A5C02D8005A5608 /* Node.swift */; };
+		7897B9D52A5D1A22008F207D /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7897B9D42A5D1A22008F207D /* LinkedListTests.swift */; };
+		7897B9DA2A5D26F5008F207D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1723B2A5C0715006C1894 /* LinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,7 @@
 		1FEBA2F12A5CFE7400963E02 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		7862DA7A2A5C02D8005A5608 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		7862DA7C2A5C1591005A5608 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		7897B9D42A5D1A22008F207D /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		1FEBA2EB2A5CFE3B00963E02 /* BankManagerConsoleAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				7897B9D42A5D1A22008F207D /* LinkedListTests.swift */,
 				1FEBA2F12A5CFE7400963E02 /* NodeTests.swift */,
 			);
 			path = BankManagerConsoleAppTests;
@@ -138,8 +142,9 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					1FEBA2E92A5CFE3B00963E02 = {
 						CreatedOnToolsVersion = 14.2;
@@ -185,7 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FEBA2F22A5CFE7400963E02 /* NodeTests.swift in Sources */,
-				1FEBA2F32A5CFE7F00963E02 /* Node.swift in Sources */,
+				7897B9D52A5D1A22008F207D /* LinkedListTests.swift in Sources */,
+				7897B9DA2A5D26F5008F207D /* LinkedList.swift in Sources */,
+				7897B9D32A5D0C35008F207D /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +218,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -238,6 +246,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -291,6 +300,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -352,6 +362,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -376,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -385,6 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

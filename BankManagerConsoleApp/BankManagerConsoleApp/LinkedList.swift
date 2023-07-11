@@ -50,3 +50,43 @@ struct LinkedList<Value> {
         tail = nil
     }
 }
+
+//MARK: - Extension for Unit Test
+#if canImport(XCTest)
+extension LinkedList {
+    var exposedHead: Node<Value>? {
+        return head
+    }
+    
+    var exposedTail: Node<Value>? {
+        return tail
+    }
+    
+    var count: Int {
+        var currentCount = 0
+        var copiedHead = head
+        
+        while copiedHead != nil {
+            currentCount += 1
+            copiedHead = copiedHead?.next
+        }
+        
+        return currentCount
+    }
+    
+    var elements: [Value] {
+        var currentElements = [Value]()
+        var copiedHead = head
+        
+        while copiedHead != nil {
+            if let unwrappedValue = copiedHead?.value {
+                currentElements.append(unwrappedValue)
+            }
+            
+            copiedHead = copiedHead?.next
+        }
+        
+        return currentElements
+    }
+}
+#endif
