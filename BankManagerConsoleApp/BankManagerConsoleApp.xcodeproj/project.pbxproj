@@ -72,12 +72,38 @@
 		3DB946402A5C06C10049E2D6 /* BankManagerConsoleTest */ = {
 			isa = PBXGroup;
 			children = (
+				3DE6E2802A5CED1A006FBFCF /* TestDouble */,
 				BA6BA7A12A5CDBDE00ED0CDC /* BankManagerConsoleTest.xctestplan */,
 				3DB946482A5C097A0049E2D6 /* BankManagerConsoleStringTest.swift */,
 				3DB946412A5C06C10049E2D6 /* BankManagerConsoleIntTest.swift */,
-				3DB946462A5C07060049E2D6 /* MockCustomerQueue.swift */,
 			);
 			path = BankManagerConsoleTest;
+			sourceTree = "<group>";
+		};
+		3DE6E27E2A5CECD4006FBFCF /* LinkedList */ = {
+			isa = PBXGroup;
+			children = (
+				BA6BA7A22A5CDCED00ED0CDC /* LinkedList.swift */,
+				3DB946392A5BF8460049E2D6 /* Node.swift */,
+			);
+			path = LinkedList;
+			sourceTree = "<group>";
+		};
+		3DE6E27F2A5CED03006FBFCF /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				3DB946352A5BF5F10049E2D6 /* QueueType.swift */,
+				BA31F74F2A5BFFA200FEA491 /* CustomerQueue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		3DE6E2802A5CED1A006FBFCF /* TestDouble */ = {
+			isa = PBXGroup;
+			children = (
+				3DB946462A5C07060049E2D6 /* MockCustomerQueue.swift */,
+			);
+			path = TestDouble;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {
@@ -101,12 +127,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				3DB946352A5BF5F10049E2D6 /* QueueType.swift */,
-				3DB946392A5BF8460049E2D6 /* Node.swift */,
+				3DE6E27F2A5CED03006FBFCF /* Queue */,
+				3DE6E27E2A5CECD4006FBFCF /* LinkedList */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				BA31F74F2A5BFFA200FEA491 /* CustomerQueue.swift */,
-				BA6BA7A22A5CDCED00ED0CDC /* LinkedList.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";

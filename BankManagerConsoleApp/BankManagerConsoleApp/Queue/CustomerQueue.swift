@@ -6,7 +6,7 @@
 //
 
 struct CustomerQueue<Element>: QueueType {
-    private var linkedList: LinkedList<Element> = LinkedList<Element>()
+    private var linkedList = LinkedList<Element>()
     
     mutating func enqueue(_ value: Element) {
         linkedList.append(value)

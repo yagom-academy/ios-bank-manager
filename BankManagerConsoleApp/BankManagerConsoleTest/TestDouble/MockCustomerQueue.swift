@@ -7,7 +7,7 @@
 import XCTest
 
 struct MockCustomerQueue<Element>: QueueType {
-    var linkedList: LinkedList<Element> = LinkedList<Element>()
+    var linkedList = LinkedList<Element>()
     
     var headNode: Node<Element>? {
         return linkedList.firstNode
