@@ -64,12 +64,39 @@ final class CustomelQueueTests: XCTestCase {
         XCTAssertEqual(expectation, 1)
     }
     
-    func test_dequeue_() {
+    func test_dequeue_1_2_3을_순서대로_enqueue하고_dequeue를_2번하면_마지막으로_반환되는값은_2이다() {
         // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         
         // when
+        var expectation = sut.dequeue()
+        expectation = sut.dequeue()
         
         // then
+        XCTAssertEqual(expectation, 2)
+    }
+    
+    func test_dequeue_enqueue를_하지않고_dequeue를_하면_nil이_반환된다() {
+        // given
+        // when
+        let expectation: Int? = sut.dequeue()
+        
+        // then
+        XCTAssertNil(expectation)
+    }
+    
+    func test_dequeue_1을_enqueue를_하고_dequeue를_2번하면_마지막으로_반환되는값은_nil이다() {
+        // given
+        sut.enqueue(1)
+        
+        // when
+        var expectation = sut.dequeue()
+        expectation = sut.dequeue()
+        
+        // then
+        XCTAssertNil(expectation)
     }
     
     func test_peek_() {
