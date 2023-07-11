@@ -31,8 +31,9 @@ final class QueueTests: XCTestCase {
     func test_Queue에_가나다를_넣었을때_peek의_값은_가나다입니다() {
         // given
         let expectation = "가나다"
+        let input = "가나다"
         // when
-        sut?.enqueue("가나다")
+        sut?.enqueue(input)
         let result = sut?.peek
         // then
         XCTAssertEqual(result, expectation)
@@ -41,8 +42,9 @@ final class QueueTests: XCTestCase {
     func test_Queue에_dequeue를_호출하면_해당_노드의_value를_반환합니다() {
         // given
         let expectation = "가나다"
+        let input = "가나다"
         // when
-        sut?.enqueue("가나다")
+        sut?.enqueue(input)
         let result = sut?.dequeue()
         // then
         XCTAssertEqual(result, expectation)
@@ -60,10 +62,13 @@ final class QueueTests: XCTestCase {
     func test_clear_메소드_실행_시_isEmpty는_true입니다() {
         // given
         let expectation = true
+        let input1 = "가"
+        let input2 = "나"
+        let input3 = "다"
         //when
-        sut?.enqueue("가")
-        sut?.enqueue("나")
-        sut?.enqueue("다")
+        sut?.enqueue(input1)
+        sut?.enqueue(input2)
+        sut?.enqueue(input3)
         sut?.clear()
         let result = sut?.isEmpty
         // then
