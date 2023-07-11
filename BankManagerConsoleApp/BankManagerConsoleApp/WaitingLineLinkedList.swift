@@ -5,11 +5,11 @@
 //  Created by Erick, Serena on 2023/07/10.
 //
 
-final class WaitingLineLinkedList<T> {
-    private(set) var head: WaitingLineNode<T>?
-    private var tail: WaitingLineNode<T>?
+final class WaitingLineLinkedList<Element> {
+    private(set) var head: WaitingLineNode<Element>?
+    private var tail: WaitingLineNode<Element>?
     
-    func append(_ node: WaitingLineNode<T>) {
+    func append(_ node: WaitingLineNode<Element>) {
         if head == nil {
             head = node
             tail = node
@@ -19,7 +19,7 @@ final class WaitingLineLinkedList<T> {
         }
     }
     
-    func removeFirst() -> WaitingLineNode<T>? {
+    func removeFirst() -> WaitingLineNode<Element>? {
         let removeNode = head
         head = head?.next
         

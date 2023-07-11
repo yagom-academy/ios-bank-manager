@@ -5,10 +5,10 @@
 //  Created by Erick, Serena on 2023/07/10.
 //
 
-struct WaitingLineQueue<T> {
-    private var waitingLineLinkedList = WaitingLineLinkedList<T>()
+struct WaitingLineQueue<Element> {
+    private var waitingLineLinkedList = WaitingLineLinkedList<Element>()
     
-    var peek: T? {
+    var peek: Element? {
         let node = waitingLineLinkedList.head
         return node?.value
     }
@@ -17,13 +17,13 @@ struct WaitingLineQueue<T> {
         return waitingLineLinkedList.head == nil
     }
     
-    func enqueue(_ value: T) {
+    func enqueue(_ value: Element) {
         let node = WaitingLineNode(value: value)
         
         waitingLineLinkedList.append(node)
     }
     
-    func dequeue() -> T? {
+    func dequeue() -> Element? {
         return waitingLineLinkedList.removeFirst()?.value
     }
     
