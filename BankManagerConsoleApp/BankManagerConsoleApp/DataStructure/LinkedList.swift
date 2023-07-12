@@ -11,8 +11,8 @@ struct LinkedList<Element> {
     var isEmpty: Bool { return head == nil }
     var peek: Element? { return head?.element }
     
-    mutating func append(_ value: Element) {
-        let newNode = Node(value: value)
+    mutating func append(_ element: Element) {
+        let newNode = Node(element: element)
         
         if isEmpty {
             head = newNode
@@ -26,10 +26,11 @@ struct LinkedList<Element> {
     mutating func removeFirst() -> Element? {
         guard let dequeuedValue = head?.element else { return nil }
         
-        head = head?.next
         if isEmpty {
             head = nil
             tail = nil
+        } else {
+            head = head?.next
         }
         return dequeuedValue
     }
