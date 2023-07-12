@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "EE3EB41F-439C-4D61-8290-716F29A57E33",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
+        "identifier" : "631433472A5D4DA100CBD580",
+        "name" : "BankMangerQueueTests"
+      }
+    }
+  ],
+  "version" : 1
+}
