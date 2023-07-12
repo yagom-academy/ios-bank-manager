@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "7DE0EBC5-1F34-4539-AFE7-25C62CFDF94A",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
+      "identifier" : "C7694E75259C3EC00053667F",
+      "name" : "BankManagerConsoleApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
+        "identifier" : "3DBAE9532A5CFAA9004F0C81",
+        "name" : "BankManagerConsoleTest"
+      }
+    }
+  ],
+  "version" : 1
+}
