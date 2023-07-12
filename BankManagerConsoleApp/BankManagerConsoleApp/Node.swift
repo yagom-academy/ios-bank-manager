@@ -6,7 +6,7 @@
 //
 
 final class Node<Element> {
-    var data: Element
+    private(set) var data: Element
     var next: Node?
     
     init(data: Element, next: Node? = nil) {
