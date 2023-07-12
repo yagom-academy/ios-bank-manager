@@ -18,6 +18,8 @@
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1D259C81BD005510E0 /* BankManager.swift */; };
 		D03E98CE2A5C018F004DF2DF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E98CD2A5C018F004DF2DF /* Node.swift */; };
+		D06DF2232A5E40DD0074F9EF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DF2222A5E40DD0074F9EF /* Queue.swift */; };
+		D06DF2252A5E40ED0074F9EF /* Queuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DF2242A5E40ED0074F9EF /* Queuable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D65D1D259C81BD005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		D03E98CD2A5C018F004DF2DF /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		D06DF2222A5E40DD0074F9EF /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		D06DF2242A5E40ED0074F9EF /* Queuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queuable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 				D03E98CD2A5C018F004DF2DF /* Node.swift */,
 				92FEDA202A5C03900013F991 /* LinkedListQueue.swift */,
 				C7D65D1D259C81BD005510E0 /* BankManager.swift */,
+				D06DF2222A5E40DD0074F9EF /* Queue.swift */,
+				D06DF2242A5E40ED0074F9EF /* Queuable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,9 +306,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
+				D06DF2232A5E40DD0074F9EF /* Queue.swift in Sources */,
 				D03E98CE2A5C018F004DF2DF /* Node.swift in Sources */,
 				92FEDA212A5C03900013F991 /* LinkedListQueue.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
+				D06DF2252A5E40ED0074F9EF /* Queuable.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				C7D65D1E259C81BD005510E0 /* BankManager.swift in Sources */,
 			);
