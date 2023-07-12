@@ -5,6 +5,8 @@
 //  Created by Erick, Serena on 2023/07/12.
 //
 
+import Foundation
+
 struct Bank {
     let bankClerks: BankClerk
     private var waitingLine = Queue<Customer>()
@@ -41,11 +43,18 @@ struct Bank {
     }
     
     private func startBankService() {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
         while !waitingLine.isEmpty {
             if let customerTurn = waitingLine.dequeue() {
                 bankClerks.carryOutBankService(customerTurn)
             }
         }
+        
+        let totalTaskTime = CFAbsoluteTimeGetCurrent() - startTime
+        let formatTaskTime = String(format: "%.2f", totalTaskTime)
+        
+        finish(customerCount, formatTaskTime)
     }
     
     private func finish(_ customerCount: Int, _ taskTime: String) {
