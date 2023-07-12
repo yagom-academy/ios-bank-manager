@@ -48,7 +48,7 @@ struct Bank {
     }
     
     private func startBankService() {
-        let startTime = CFAbsoluteTimeGetCurrent()
+        let startTime = Date()
         
         while !waitingLine.isEmpty {
             if let customerTurn = waitingLine.dequeue() {
@@ -56,7 +56,7 @@ struct Bank {
             }
         }
         
-        let totalTaskTime = CFAbsoluteTimeGetCurrent() - startTime
+        let totalTaskTime = Date().timeIntervalSince(startTime)
         let formatTaskTime = String(format: "%.2f", totalTaskTime)
         
         finish(formatTaskTime)
