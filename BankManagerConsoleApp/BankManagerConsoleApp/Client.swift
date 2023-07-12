@@ -7,4 +7,8 @@
 
 struct Client {
     var turn: Int
+    
+    init(_ turn: Int) {
+        self.turn = turn
+    }
 }

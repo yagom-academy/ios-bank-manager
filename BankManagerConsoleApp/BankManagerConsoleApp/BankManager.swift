@@ -5,6 +5,8 @@
 //  Created by Zion, Whales on 2023/07/12.
 //
 
+import Foundation
+
 struct BankManager {
     func work(client: Client) {
         let number = client.turn
