@@ -7,5 +7,9 @@
 import Foundation
 
 struct BankManager {
-    let bank = Bank(bankClerks: BankClerk())
+    let bank = Bank(bankClerk: BankClerk(), customerCount: Int.random(in: 10...30))
+    
+    func startBank() {
+        bank.start()
+    }
 }

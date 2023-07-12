@@ -8,9 +8,14 @@
 import Foundation
 
 struct Bank {
-    let bankClerks: BankClerk
+    private let bankClerk: BankClerk
+    private let customerCount: Int
     private var waitingLine = Queue<Customer>()
-    private let customerCount = Int.random(in: 10...30)
+    
+    init(bankClerk: BankClerk, customerCount: Int) {
+        self.bankClerk = bankClerk
+        self.customerCount = customerCount
+    }
     
     func start() {
         print("1 : 은행 개점")
@@ -20,7 +25,7 @@ struct Bank {
         selectMenu()
     }
     
-    func selectMenu() {
+    private func selectMenu() {
         guard let userInput = readLine() else { return }
         
         switch userInput {
@@ -47,7 +52,7 @@ struct Bank {
         
         while !waitingLine.isEmpty {
             if let customerTurn = waitingLine.dequeue() {
-                bankClerks.carryOutBankService(customerTurn)
+                bankClerk.carryOutBankService(customerTurn)
             }
         }
         
