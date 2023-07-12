@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443FE2952A5ED25A00AC541B /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FE2942A5ED25A00AC541B /* Bank.swift */; };
 		44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
 		44847F332A5C302E00653323 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F322A5C302E00653323 /* QueueTests.swift */; };
 		44847F3B2A5C38AF00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		443FE2942A5ED25A00AC541B /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		44847F1C2A5C163B00653323 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		44847F302A5C302E00653323 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44847F322A5C302E00653323 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				AC11DED72A5ED04E0061737E /* Customer.swift */,
 				AC11DED92A5ED0870061737E /* BankTeller.swift */,
+				443FE2942A5ED25A00AC541B /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACBF18592A5C110D00160ADF /* Node.swift in Sources */,
+				443FE2952A5ED25A00AC541B /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */,
 				AC11DED82A5ED04E0061737E /* Customer.swift in Sources */,
