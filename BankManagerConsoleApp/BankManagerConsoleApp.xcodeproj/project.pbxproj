@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C93CE262A5E47120083E706 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93CE252A5E47120083E706 /* Node.swift */; };
+		3C93CE282A5E472A0083E706 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93CE272A5E472A0083E706 /* LinkedList.swift */; };
+		3C93CE2A2A5E474A0083E706 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93CE292A5E474A0083E706 /* Queue.swift */; };
+		3C93CE2C2A5E47C10083E706 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93CE2B2A5E47C10083E706 /* BankManager.swift */; };
+		3C93CE2E2A5E48120083E706 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93CE2D2A5E48120083E706 /* Client.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +28,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C93CE252A5E47120083E706 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		3C93CE272A5E472A0083E706 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		3C93CE292A5E474A0083E706 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		3C93CE2B2A5E47C10083E706 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
+		3C93CE2D2A5E48120083E706 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +48,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C93CE242A5E47010083E706 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3C93CE252A5E47120083E706 /* Node.swift */,
+				3C93CE272A5E472A0083E706 /* LinkedList.swift */,
+				3C93CE292A5E474A0083E706 /* Queue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -59,8 +77,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				3C93CE242A5E47010083E706 /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
+				3C93CE2B2A5E47C10083E706 /* BankManager.swift */,
+				3C93CE2D2A5E48120083E706 /* Client.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -122,8 +142,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C93CE2A2A5E474A0083E706 /* Queue.swift in Sources */,
+				3C93CE2C2A5E47C10083E706 /* BankManager.swift in Sources */,
+				3C93CE2E2A5E48120083E706 /* Client.swift in Sources */,
+				3C93CE262A5E47120083E706 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
+				3C93CE282A5E472A0083E706 /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
