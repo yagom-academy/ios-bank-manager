@@ -9,7 +9,7 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class QueueTests: XCTestCase {
-    var sut: Queue<Int>!
+    private var sut: Queue<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -73,16 +73,11 @@ final class QueueTests: XCTestCase {
     
     func test_dequeue_enqueue_3_4_5를하고_dequeue를_3번했을때_3_4_5를_순서대로_반환한다() {
         // given
-        sut.enqueue(3)
-        sut.enqueue(4)
-        sut.enqueue(5)
         let expectation = [3, 4, 5]
+        expectation.forEach { sut.enqueue($0) }
         
         // when
-        var result: [Int?] = [Int?]()
-        for _ in 1...3 {
-            result.append(sut.dequeue())
-        }
+        var result: [Int?] = (0..<expectation.count).map { _ in sut.dequeue() }
 
         // then
         XCTAssertEqual(result, expectation)
