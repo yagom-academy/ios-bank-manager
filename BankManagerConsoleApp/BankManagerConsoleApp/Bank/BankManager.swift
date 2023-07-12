@@ -16,7 +16,8 @@ struct BankManager {
     
     func selectMenu() -> Menu {
         Menu.displayMenu()
-        print("입력 : ", terminator: "")
+        print(BankNamespace.inputLabel, terminator: BankNamespace.inputTerminater)
+        
         guard let inputMenu = readLine(),
               let menu = Menu(rawValue: inputMenu),
               menu == .open else {
