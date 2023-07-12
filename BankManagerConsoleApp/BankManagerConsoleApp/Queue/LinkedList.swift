@@ -24,7 +24,7 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() -> T? {
-        guard let element = head?.element else { return nil }
+        let element = head?.element
         
         head = head?.next
         
