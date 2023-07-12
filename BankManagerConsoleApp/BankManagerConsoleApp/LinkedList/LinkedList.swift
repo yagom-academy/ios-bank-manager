@@ -22,17 +22,17 @@ struct LinkedList<Element> {
     }
     
     mutating func pop() -> Element? {
-        guard let firstNode = headNode else {
+        guard let headNode else {
             return nil
         }
         
-        if let _ = firstNode.nextNode {
-            self.headNode = firstNode.nextNode
-        } else {
+        if headNode.nextNode == nil {
             self.removeAll()
+        } else {
+            self.headNode = headNode.nextNode
         }
         
-        return firstNode.value
+        return headNode.element
     }
     
     mutating func removeAll() {
@@ -41,7 +41,7 @@ struct LinkedList<Element> {
     }
     
     func peek() -> Element? {
-        guard let value = headNode?.value else {
+        guard let value = headNode?.element else {
             return nil
         }
         
