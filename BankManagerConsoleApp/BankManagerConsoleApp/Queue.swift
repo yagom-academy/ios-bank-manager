@@ -10,6 +10,9 @@ struct Queue<T> {
 	var isEmpty: Bool {
 		return linkedNode.isEmpty
 	}
+    var count: Int {
+        return linkedNode.count
+    }
 	
 	var peek: T? {
 		return linkedNode.first

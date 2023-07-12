@@ -23,8 +23,10 @@ final class BankMangerQueueTests: XCTestCase {
     func test_5를_추가했을때_첫번째값이5인지() {
         //given
         let input = 5
+        
         //when
         sut.enqueue(input)
+        
         //then
         XCTAssertEqual(input, sut.peek)
     }
@@ -33,8 +35,10 @@ final class BankMangerQueueTests: XCTestCase {
         //given
         let input = 3
         sut.enqueue(input)
+        
         //when
         let dequeue = sut.dequeue()
+        
         //then
         XCTAssertEqual(input, dequeue)
         XCTAssertTrue(sut.isEmpty)
@@ -45,8 +49,10 @@ final class BankMangerQueueTests: XCTestCase {
         let input = 3
         sut.enqueue(input)
         sut.enqueue(5)
+        
         //when
         let dequeue = sut.dequeue()
+        
         //then
         XCTAssertEqual(input, dequeue)
         XCTAssertFalse(sut.isEmpty)
@@ -58,9 +64,36 @@ final class BankMangerQueueTests: XCTestCase {
         sut.enqueue(2)
         sut.enqueue(3)
         sut.enqueue(4)
+        
         //when
         sut.clear()
+        
         //then
         XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_1_2_3_값을추가한후에_Clear했을때_전부삭제가되는지_확인() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        //when
+        sut.clear()
+        
+        //then
+        XCTAssertNotEqual(sut.isEmpty, false)
+    }
+    
+    func test_1_2_값을추가한후에_첫번째값를지웠을때값이_그값이다른는지_확인() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        //when
+        let dequeue = sut.dequeue()
+        
+        //then
+        XCTAssertNotEqual(dequeue, 3)
     }
 }
