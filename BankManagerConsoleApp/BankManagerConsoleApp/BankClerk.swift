@@ -1,7 +1,8 @@
 //
 //  BankClerk.swift
-//  Created by yagom.
-//  Copyright © yagom academy. All rights reserved.
+//  BankManagerConsoleApp
+//
+//  Created by Erick, Serena on 2023/07/12.
 //
 
 import Foundation
