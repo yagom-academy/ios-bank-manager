@@ -1,12 +1,12 @@
 //
-//  BankManager.swift
+//  BankClerk.swift
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
 //
 
 import Foundation
 
-struct BankManager {
+struct BankClerk {
     func carryOutBankService(_ waitingNumber: Int) {
         startTask(waitingNumber)
         Thread.sleep(forTimeInterval: 0.7)
