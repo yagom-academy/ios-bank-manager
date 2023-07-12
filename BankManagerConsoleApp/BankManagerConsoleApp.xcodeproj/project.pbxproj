@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		450BC4DB2A5E36380048AB68 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BC4DA2A5E36380048AB68 /* Customer.swift */; };
+		450BC4DD2A5E3C030048AB68 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BC4DC2A5E3C030048AB68 /* Bank.swift */; };
 		45F01F572A5C2F1100CB0FD4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F01F562A5C2F1100CB0FD4 /* LinkedList.swift */; };
 		45F01F5F2A5C354400CB0FD4 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F01F5E2A5C354400CB0FD4 /* QueueTests.swift */; };
 		45F01F642A5C35D700CB0FD4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040482A5C31FF0018919D /* Queue.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		450BC4DA2A5E36380048AB68 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		450BC4DC2A5E3C030048AB68 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		45F01F562A5C2F1100CB0FD4 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		45F01F5C2A5C354400CB0FD4 /* WaitingLineQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaitingLineQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F01F5E2A5C354400CB0FD4 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				450BC4DC2A5E3C030048AB68 /* Bank.swift */,
 				C7D65D1A259C8190005510E0 /* BankClerk.swift */,
 				450BC4DA2A5E36380048AB68 /* Customer.swift */,
 				D25040482A5C31FF0018919D /* Queue.swift */,
@@ -206,6 +209,7 @@
 				450BC4DB2A5E36380048AB68 /* Customer.swift in Sources */,
 				D25040472A5C2BF40018919D /* Node.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankClerk.swift in Sources */,
+				450BC4DD2A5E3C030048AB68 /* Bank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
