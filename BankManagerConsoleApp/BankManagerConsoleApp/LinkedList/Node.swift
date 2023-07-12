@@ -6,10 +6,10 @@
 //
 
 class Node<Element> {
-    var value: Element
+    var element: Element
     var nextNode: Node?
     
-    init(_ value: Element) {
-        self.value = value
+    init(_ element: Element) {
+        self.element = element
     }
 }

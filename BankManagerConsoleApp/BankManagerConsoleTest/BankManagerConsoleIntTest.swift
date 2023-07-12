@@ -45,7 +45,7 @@ final class BankManagerConsoleIntTest: XCTestCase {
         sut.enqueue(testValue)
 
         //when
-        let result = sut.tailNode?.value
+        let result = sut.tailNode?.element
 
         //then
         XCTAssertEqual(testValue, result)
@@ -110,7 +110,7 @@ final class BankManagerConsoleIntTest: XCTestCase {
 
         //when
         let result = sut.peek()
-        let headValue = sut.headNode?.value
+        let headValue = sut.headNode?.element
 
         //then
         XCTAssertEqual(result, headValue)
