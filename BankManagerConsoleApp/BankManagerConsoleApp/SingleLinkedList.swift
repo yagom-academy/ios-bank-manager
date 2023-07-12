@@ -1,11 +1,11 @@
 //
-//  LinkedList.swift
+//  SingleLinkedList.swift
 //  BankManagerConsoleApp
 //
 //  Created by idinaloq, EtialMoon on 2023/07/10.
 //
 
-struct LinkedList<Element> {
+struct SingleLinkedList<Element> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
@@ -19,6 +19,14 @@ struct LinkedList<Element> {
         }
         
         return head.data
+    }
+    
+    mutating func currentHead() -> Node<Element>? {
+        return head
+    }
+    
+    mutating func currentTail() -> Node<Element>? {
+        return tail
     }
     
     mutating func clear() {
