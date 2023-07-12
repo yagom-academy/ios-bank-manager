@@ -6,4 +6,5 @@
 //
 
 var bankManager = BankManager(bank: Bank())
+
 bankManager.workBankManager()
