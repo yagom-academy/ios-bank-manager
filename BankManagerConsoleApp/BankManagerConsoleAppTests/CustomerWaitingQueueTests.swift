@@ -46,13 +46,15 @@ final class CustomerWaitingQueueTests: XCTestCase {
 
     func test_enqueue를_3회_하면_count가_3을_반환한다() {
         // given
-        sut.enqueue("1")
-        sut.enqueue("2")
-        sut.enqueue("3")
+        let dummyArray = ["1", "2", "3"]
+        
+        for element in dummyArray {
+            sut.enqueue(element)
+        }
         
         // when
         let result = sut.count
-        let expectedValue = 3
+        let expectedValue = dummyArray.count
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -87,13 +89,15 @@ final class CustomerWaitingQueueTests: XCTestCase {
     
     func test_enqueue_a_b_c후_peek이_a를_반환한다() {
         // given
-        sut.enqueue("a")
-        sut.enqueue("b")
-        sut.enqueue("c")
+        let dummyArray = ["a", "b", "c"]
+        
+        for element in dummyArray {
+            sut.enqueue(element)
+        }
         
         // when
         let result = sut.peek
-        let expectedValue = "a"
+        let expectedValue = dummyArray.first
         
         // then
         XCTAssertEqual(result, expectedValue)
