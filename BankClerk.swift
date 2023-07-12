@@ -7,10 +7,10 @@
 import Foundation
 
 struct BankClerk {
-    func carryOutBankService(_ waitingNumber: Int) {
-        startTask(waitingNumber)
-        Thread.sleep(forTimeInterval: 0.7)
-        endTask(waitingNumber)
+    func carryOutBankService(_ customer: Customer) {
+        startTask(customer.waitingNumber)
+        Thread.sleep(forTimeInterval: customer.taskTime)
+        endTask(customer.waitingNumber)
     }
     
     private func startTask(_ waitingNumber: Int) {
