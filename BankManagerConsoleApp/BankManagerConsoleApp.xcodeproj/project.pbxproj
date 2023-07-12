@@ -21,6 +21,7 @@
 		BA31F7502A5BFFA200FEA491 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA31F74F2A5BFFA200FEA491 /* CustomerQueue.swift */; };
 		BA6BA7A32A5CDCED00ED0CDC /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6BA7A22A5CDCED00ED0CDC /* LinkedList.swift */; };
 		BA6BA7A72A5E7C2A00ED0CDC /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6BA7A62A5E7C2A00ED0CDC /* Customer.swift */; };
+		BA6BA7A92A5E7CAD00ED0CDC /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6BA7A82A5E7CAD00ED0CDC /* Bank.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		BA31F74F2A5BFFA200FEA491 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		BA6BA7A22A5CDCED00ED0CDC /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		BA6BA7A62A5E7C2A00ED0CDC /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		BA6BA7A82A5E7CAD00ED0CDC /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				C7694E79259C3EC00053667F /* main.swift */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				BA6BA7A62A5E7C2A00ED0CDC /* Customer.swift */,
+				BA6BA7A82A5E7CAD00ED0CDC /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA6BA7A32A5CDCED00ED0CDC /* LinkedList.swift in Sources */,
+				BA6BA7A92A5E7CAD00ED0CDC /* Bank.swift in Sources */,
 				BA6BA7A72A5E7C2A00ED0CDC /* Customer.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				3DB9463A2A5BF8460049E2D6 /* Node.swift in Sources */,
