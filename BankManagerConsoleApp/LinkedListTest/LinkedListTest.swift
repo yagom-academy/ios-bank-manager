@@ -90,7 +90,7 @@ final class LinkedListTest: XCTestCase {
         
         // when
         let _ = sut.removeFirst()
-        let result = sut.head?.value
+        let result = sut.headElement
         
         // then
         XCTAssertEqual(result, expectation)

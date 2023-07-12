@@ -6,21 +6,37 @@
 //
 
 struct LinkedList<Element> {
-    private(set) var head: Node<Element>?
-    private(set) var tail: Node<Element>?
+    private final class Node<Element> {
+        let element: Element
+        var next: Node?
+
+        init(element: Element) {
+            self.element = element
+        }
+    }
+    
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     var isEmpty: Bool { return head == nil }
     var peek: Element? { return head?.element }
+    
+    var headElement: Element? {
+        return head?.element
+    }
+
+    var nodeElement: Element? {
+        return head?.element
+    }
     
     mutating func append(_ element: Element) {
         let newNode = Node(element: element)
         
         if isEmpty {
             head = newNode
-            tail = newNode
         } else {
             tail?.next = newNode
-            tail = newNode
         }
+        tail = newNode
     }
     
     mutating func removeFirst() -> Element? {
