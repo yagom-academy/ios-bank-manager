@@ -77,7 +77,7 @@ final class QueueTests: XCTestCase {
         expectation.forEach { sut.enqueue($0) }
         
         // when
-        var result: [Int?] = (0..<expectation.count).map { _ in sut.dequeue() }
+        let result: [Int?] = (0..<expectation.count).map { _ in sut.dequeue() }
 
         // then
         XCTAssertEqual(result, expectation)
