@@ -1,11 +1,11 @@
 //
-//  LinkedListQueue.swift
+//  LinkedList.swift
 //  BankManagerUIApp
 //
 //  Created by mint, Jusbug on 2023/07/10.
 //
 
-final class LinkedListQueue<T> {
+final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
 
@@ -29,7 +29,7 @@ final class LinkedListQueue<T> {
         return head?.value
     }
     
-    func enqueue(value: T) {
+    func append(value: T) {
         let newNode = Node(value: value)
 
         if isEmpty {
@@ -41,7 +41,7 @@ final class LinkedListQueue<T> {
         }
     }
     
-    func dequeue() -> T? {
+    func removeFirst() -> T? {
         let value = head?.value
        
         head = head?.next
@@ -49,7 +49,7 @@ final class LinkedListQueue<T> {
         return value
     }
     
-    func clear() {
+    func removeAll() {
         guard !isEmpty else {
             return
         }
