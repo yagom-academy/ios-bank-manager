@@ -59,10 +59,10 @@ struct Bank {
         let totalTaskTime = CFAbsoluteTimeGetCurrent() - startTime
         let formatTaskTime = String(format: "%.2f", totalTaskTime)
         
-        finish(customerCount, formatTaskTime)
+        finish(formatTaskTime)
     }
     
-    private func finish(_ customerCount: Int, _ taskTime: String) {
+    private func finish(_ taskTime: String) {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(taskTime)초입니다.")
     }
 }
