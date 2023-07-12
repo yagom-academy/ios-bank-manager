@@ -10,8 +10,8 @@ struct CustomerWatingQueue<Element> {
     var isEmpty: Bool { return queue.isEmpty }
     var peek: Element? { return queue.peek }
 
-    mutating func enqueue(_ value: Element) {
-        queue.append(value)
+    mutating func enqueue(_ element: Element) {
+        queue.append(element)
     }
     
     mutating func dequeue() -> Element? {

@@ -40,7 +40,7 @@ struct LinkedList<Element> {
     }
     
     mutating func removeFirst() -> Element? {
-        guard let dequeuedValue = head?.element else { return nil }
+        guard let dequeuedElement = head?.element else { return nil }
         
         if isEmpty {
             head = nil
@@ -48,7 +48,7 @@ struct LinkedList<Element> {
         } else {
             head = head?.next
         }
-        return dequeuedValue
+        return dequeuedElement
     }
     
     mutating func clear() {
