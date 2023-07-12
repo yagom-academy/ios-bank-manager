@@ -17,28 +17,9 @@ struct Bank {
         self.customerCount = customerCount
     }
     
-    func start() {
-        print("1 : 은행 개점")
-        print("2 : 종료")
-        print("입력 :", terminator: " ")
-        
-        selectMenu()
-    }
-    
-    private func selectMenu() {
-        guard let userInput = readLine() else { return }
-        
-        switch userInput {
-        case "1":
-            updateWaitingLine()
-            startBankService()
-        case "2":
-            return
-        default:
-            print("잘못된 입력입니다.")
-        }
-        
-        start()
+    func opening() {
+        updateWaitingLine()
+        startBankService()
     }
     
     private func updateWaitingLine() {

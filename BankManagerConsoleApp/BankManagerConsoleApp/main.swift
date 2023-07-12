@@ -5,4 +5,4 @@
 // 
 
 let bankManeger = BankManager()
-bankManeger.startBank()
+bankManeger.start()
