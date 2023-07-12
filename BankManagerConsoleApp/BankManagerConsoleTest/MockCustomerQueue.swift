@@ -6,8 +6,12 @@
 
 import XCTest
 
-struct MockCustomerQueue<Element>: QueueType {
+struct MockCustomerQueue<Element: Equatable>: QueueType {
     var linkedList = LinkedList<Element>()
+    
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
     
     var headNode: Node<Element>? {
         return linkedList.headNode
@@ -32,9 +36,5 @@ struct MockCustomerQueue<Element>: QueueType {
     
     func peek() -> Element? {
         return linkedList.peek()
-    }
-    
-    func isEmpty() -> Bool {
-        return linkedList.isEmpty()
     }
 }

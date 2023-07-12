@@ -5,8 +5,12 @@
 //  Created by kyungmin, Max on 2023/07/10.
 //
 
-struct CustomerQueue<Element>: QueueType {
+struct CustomerQueue<Element: Equatable>: QueueType {
     private var linkedList = LinkedList<Element>()
+    
+    var isEmpty: Bool {
+        return linkedList.isEmpty
+    }
     
     mutating func enqueue(_ value: Element) {
         linkedList.append(value)
@@ -22,9 +26,5 @@ struct CustomerQueue<Element>: QueueType {
     
     func peek() -> Element? {
         return linkedList.peek()
-    }
-    
-    func isEmpty() -> Bool {
-        return linkedList.isEmpty()
     }
 }

@@ -21,7 +21,7 @@ final class BankManagerConsoleIntTest: XCTestCase {
 
     func test_headNode가_nil일때_isEmpty가_true인지_확인() {
         //given, when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
 
         //then
         XCTAssertTrue(result)
