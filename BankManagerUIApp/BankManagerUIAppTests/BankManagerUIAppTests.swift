@@ -8,25 +8,65 @@ import XCTest
 @testable import BankManagerUIApp
 
 class BankManagerUIAppTests: XCTestCase {
+    var sut: LinkedListQueue<Int>!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = LinkedListQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_enqueue_1과2와3을_넣었을때_노드개수_3개를_반환하는지() {
+        // given
+        let expectation = 3
+        
+        // when
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
+        
+        // then
+        XCTAssertEqual(sut.count, expectation)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_dequeue_1과2를_넣고_dequeue를_호출하면_값이_1인지() {
+        //given
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, 1)
     }
-
+    
+    func test_clear_1과2를_넣고_clear를_호출하면_isEmpty가_True인지() {
+        //given
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        
+        //when
+        sut.clear()
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    func test_peek_2와3을_넣고_peek를_호출하면_값이_2인지() {
+        //given
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
+        
+        //when
+        let result = sut.peek()
+        
+        //then
+        XCTAssertEqual(result, 2)
+    }
 }
