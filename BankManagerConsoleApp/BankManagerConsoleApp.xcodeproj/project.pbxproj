@@ -53,11 +53,30 @@
 		3C93CE242A5E47010083E706 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5BD7F00C2A5F8E3C00429D75 /* Bank */,
+				5BD7F00B2A5F8E2D00429D75 /* Queue */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5BD7F00B2A5F8E2D00429D75 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
 				3C93CE252A5E47120083E706 /* Node.swift */,
 				3C93CE272A5E472A0083E706 /* LinkedList.swift */,
 				3C93CE292A5E474A0083E706 /* Queue.swift */,
 			);
-			path = Model;
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		5BD7F00C2A5F8E3C00429D75 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				3C93CE2D2A5E48120083E706 /* Client.swift */,
+				3C93CE2B2A5E47C10083E706 /* BankManager.swift */,
+				5BD7F0082A5E4A8E00429D75 /* Bank.swift */,
+			);
+			path = Bank;
 			sourceTree = "<group>";
 		};
 		C7694E6D259C3EC00053667F = {
@@ -81,9 +100,6 @@
 			children = (
 				3C93CE242A5E47010083E706 /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				3C93CE2B2A5E47C10083E706 /* BankManager.swift */,
-				3C93CE2D2A5E48120083E706 /* Client.swift */,
-				5BD7F0082A5E4A8E00429D75 /* Bank.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";

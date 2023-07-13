@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
     let bankManagerCount: Int
     var clientQueue = Queue<Client>()
     let bankManger = BankManager()
@@ -31,8 +31,8 @@ class Bank {
     private func startTask() {
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: bankManagerCount)
-        let startTime = Date()
         let clientCount = Int.random(in: 10...30)
+        let startTime = Date()
         
         setUpClientQueue(count: clientCount)
         
