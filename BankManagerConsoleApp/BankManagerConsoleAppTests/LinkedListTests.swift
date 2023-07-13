@@ -32,7 +32,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_요소_1234를_append하면_링크드리스트의_요소가_4개가_된다() {
+    func test_요소_n개를_append하면_링크드리스트의_요소가_n개가_된다() {
         // given
         sut.append(1)
         sut.append(2)
@@ -90,36 +90,24 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result4, expectation4)
     }
     
-    func test_3개의_요소가_들어있는_링크드리스트에서_removeFirst를_3번_호출하면_isEmpty가_true를_반환한다() {
+    func test_removeFirst를_호출하면_첫_번째_요소를_반환하고_count가_1_감소한다() {
         // given
         sut.append(1)
         sut.append(2)
         sut.append(3)
+        sut.append(4)
         
         // when
-        let _ = sut.removeFirst()
-        let _ = sut.removeFirst()
-        let _ = sut.removeFirst()
+        let result = sut.removeFirst()
+        let expectedElement = 1
+        let expectedCount = 3
         
         // then
-        XCTAssertTrue(sut.isEmpty)
+        XCTAssertEqual(result, expectedElement)
+        XCTAssertEqual(sut.count, expectedCount)
     }
-    
-    func test_3개의_요소가_들어있는_링크드리스트에서_removeFirst를_2번_호출하면_isEmpty가_false를_반환한다() {
-        // given
-        sut.append(1)
-        sut.append(2)
-        sut.append(3)
-        
-        // when
-        let _ = sut.removeFirst()
-        let _ = sut.removeFirst()
-        
-        // then
-        XCTAssertFalse(sut.isEmpty)
-    }
-    
-    func test_5개의_요소가_들어있는_링크드리스트에서_removeAll을_호출하면_isEmpty가_true를_반환한다() {
+
+    func test_n개의_요소가_들어있는_링크드리스트에서_removeAll을_호출하면_isEmpty가_true를_반환한다() {
         // given
         sut.append(1)
         sut.append(2)
@@ -134,7 +122,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_3개의_요소가_들어있는_링크드리스트에서_removeAll을_호출하면_head와_tail이_nil로_저장된다() {
+    func test_n개의_요소가_들어있는_링크드리스트에서_removeAll을_호출하면_head와_tail이_nil로_저장된다() {
         // given
         sut.append(1)
         sut.append(2)
