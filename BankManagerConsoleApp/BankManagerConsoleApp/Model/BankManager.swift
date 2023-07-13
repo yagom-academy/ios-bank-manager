@@ -2,6 +2,7 @@
 //  BankManager.swift
 //  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
+//  last modified by Dasan & Mary
 //
 
 struct BankManager {
@@ -12,24 +13,25 @@ struct BankManager {
         while isContinue {
             showMenu()
             
-            guard let inputValue = readLine(),
-                  let inputValue = UInt(inputValue),
-                  Menu.allCases.map({ $0.rawValue }).contains(inputValue),
-                  let menu = Menu(rawValue: inputValue) else {
+            guard let inputValue = readLine() else {
                 continue
             }
                         
-            switch menu {
-            case Menu.bankOpening:
+            switch inputValue {
+            case Menu.bankOpening.number:
                 bank.open()
-            case Menu.quit:
+            case Menu.quit.number:
                 isContinue = false
+            default:
+                continue
             }
         }
     }
     
     private func createBank() -> Bank {
-        return Bank(numberOfCustomer: generateRandomNumber())
+        let randomNumber = generateRandomNumber()
+        
+        return Bank(numberOfCustomer: randomNumber)
     }
     
     private func generateRandomNumber() -> UInt {
@@ -42,11 +44,20 @@ struct BankManager {
 }
 
 extension BankManager {
-    private enum Menu: UInt, CaseIterable {
+    private enum Menu {
         static let message: String = "1 : 은행 개점\n2 : 종료\n입력 : "
         
-        case bankOpening = 1
-        case quit = 2
+        case bankOpening
+        case quit
+        
+        var number: String {
+            switch self {
+            case .bankOpening:
+                return "1"
+            case .quit:
+                return "2"
+            }
+        }
     }
     
     private enum RandomNumberRange {
