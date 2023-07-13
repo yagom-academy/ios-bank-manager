@@ -45,7 +45,7 @@
 		9CFE0DEE2A60AEB600F5C05A /* Teller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +101,7 @@
 		9CFE0DE92A60ADB200F5C05A /* Bank */ = {
 			isa = PBXGroup;
 			children = (
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				9CFE0DEA2A60ADC100F5C05A /* Customer.swift */,
 				9CFE0DEC2A60AE3600F5C05A /* Bank.swift */,
 				9CFE0DEE2A60AEB600F5C05A /* Teller.swift */,
@@ -133,7 +134,6 @@
 			children = (
 				9CFE0DE92A60ADB200F5C05A /* Bank */,
 				9C40FBDB2A5D3CD700DFA6EF /* DataStructure */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
