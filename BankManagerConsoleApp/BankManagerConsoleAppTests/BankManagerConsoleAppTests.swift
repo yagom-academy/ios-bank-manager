@@ -15,46 +15,36 @@ final class BankManagerConsoleAppTests: XCTestCase {
         sut = SingleLinkedList()
     }
     
-    func test_초기head가nil일때_isEmpty는true이다() {
+    func test_초기firstNode가nil일때_isEmpty는true이다() {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_리스트에Node가없는경우_enqueue하면_tail을head로설정한다() {
-        let data: Int = 123
-        
-        sut.enqueue(data)
-        let head = sut.currentHead()
-        let tail = sut.currentTail()
-        
-        XCTAssert(head === tail)
-    }
-    
-    func test_리스트에Node가있는경우_enqueue하면_head는유지되고tail이추가된다() {
+    func test_리스트에Node가있는경우_enqueue하면_firstNode는유지된다() {
         let firstInput: Int = 123
         let secondInput: Int = 456
-        
+
         sut.enqueue(firstInput)
+        let previousFirstNode = sut.currentFirstNode()
         sut.enqueue(secondInput)
-        let head = sut.currentHead()
-        let tail = sut.currentTail()
-        
-        XCTAssert(head !== tail)
+        let currentFirstNode = sut.currentFirstNode()
+
+        XCTAssert(previousFirstNode === currentFirstNode)
     }
     
-    func test_head에데이터가없는경우_peek에nil이저장된다() {
+    func test_firstNode에데이터가없는경우_peek에nil이저장된다() {
         let peek = sut.peek
         
         XCTAssertNil(peek)
     }
     
-    func test_head에데이터가있는경우_head의데이터가_peek에저장된다() {
+    func test_firstNode에데이터가있는경우_firstNode의데이터가_peek에저장된다() {
         let data: Int = 123
         sut.enqueue(data)
         
-        let head = sut.currentHead()
+        let firstNode = sut.currentFirstNode()
         let peek = sut.peek
         
-        XCTAssertEqual(head?.data, peek)
+        XCTAssertEqual(firstNode?.data, peek)
     }
     
     func test_리스트에Node가없는경우_dequeue하면_nil을반환한다() {
@@ -81,43 +71,36 @@ final class BankManagerConsoleAppTests: XCTestCase {
         XCTAssertFalse(input != dequeueData)
     }
     
-    func test_리스트에Node가하나만있는경우_dequeue하면_head와tail이nil이된다() {
+    func test_리스트에Node가하나만있는경우_dequeue하면_firstNode가nil이된다() {
         let firstInput: Int = 123
         sut.enqueue(firstInput)
         
         sut.dequeue()
-        let head = sut.currentHead()
-        let tail = sut.currentTail()
+        let firstNode = sut.currentFirstNode()
         
-        XCTAssertNil(head)
-        XCTAssertNil(tail)
+        XCTAssertNil(firstNode)
     }
     
-    func test_리스트에Node가여러개있는경우_dequeue하면_tail은그대로고head가바뀐다() {
+    func test_리스트에Node가여러개있는경우_dequeue하면_firstNode가바뀐다() {
         let firstInput: Int = 123
         let secondInput: Int = 456
         sut.enqueue(firstInput)
         sut.enqueue(secondInput)
-        let previousHead = sut.currentHead()
-        let previousTail = sut.currentTail()
         
+        let previousFirstNode = sut.currentFirstNode()
         sut.dequeue()
-        let currentHead = sut.currentHead()
-        let currentTail = sut.currentTail()
+        let currentFirstNode = sut.currentFirstNode()
         
-        XCTAssert(previousTail === currentTail)
-        XCTAssert(previousHead !== currentHead)
+        XCTAssert(previousFirstNode !== currentFirstNode)
     }
     
-    func test_리스트에Node가있을때_clear를하면_head와tail이nil이된다() {
+    func test_리스트에Node가있을때_clear를하면_firstNode가nil이된다() {
         let firstInput: Int = 123
         sut.enqueue(firstInput)
         
         sut.clear()
-        let head = sut.currentHead()
-        let tail = sut.currentTail()
+        let firstNode = sut.currentFirstNode()
         
-        XCTAssertNil(head)
-        XCTAssertNil(tail)
+        XCTAssertNil(firstNode)
     }
 }
