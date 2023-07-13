@@ -16,7 +16,7 @@ struct BankManager {
     
     func selectMenu() -> Menu {
         Menu.displayMenu()
-        print(BankNamespace.inputLabel, terminator: BankNamespace.inputTerminater)
+        print(Namespace.inputLabel, terminator: Namespace.inputTerminater)
         
         guard let inputMenu = readLine(),
               inputMenu == Menu.open.menuNumber else {
@@ -24,5 +24,12 @@ struct BankManager {
         }
         
         return Menu.open
+    }
+}
+
+extension BankManager {
+    enum Namespace {
+        static let inputLabel = "입력 : "
+        static let inputTerminater = ""
     }
 }

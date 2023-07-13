@@ -14,7 +14,7 @@ struct Bank {
     private var dailyBusinessHour: Decimal = .zero
     
     init() {
-        banker.maxConcurrentOperationCount = BankConfiguration.numberOfBanker
+        banker.maxConcurrentOperationCount = Configuration.numberOfBanker
     }
     
     mutating func dailyWork() {
@@ -30,11 +30,11 @@ struct Bank {
     
     mutating private func setDailyCustomerQueue() {
         let totalCustomer = Int.random(
-            in: BankConfiguration.minimumCustomer...BankConfiguration.maximumCustomer
+            in: Configuration.minimumCustomer...Configuration.maximumCustomer
         )
         
         for customerNumber in 1...totalCustomer {
-            let customer = Customer(duration: CustomerConfiguration.duration,
+            let customer = Customer(duration: Configuration.taskDuration,
                                     waitingNumber: customerNumber)
             
             dailyCustomerQueue.enqueue(customer)
@@ -43,8 +43,8 @@ struct Bank {
     
     mutating private func customerTask(_ customer: Customer) {
         let task = BlockOperation {
-            print(String(format: BankNamespace.startTask, customer.waitingNumber))
-            print(String(format: BankNamespace.endTask, customer.waitingNumber))
+            print(String(format: Namespace.startTask, customer.waitingNumber))
+            print(String(format: Namespace.endTask, customer.waitingNumber))
         }
         
         banker.addOperation(task)
@@ -54,7 +54,7 @@ struct Bank {
     }
     
     mutating private func closeBank() {
-        print(String(format: BankNamespace.closingMessage, dailyTotalCustomer, "\(dailyBusinessHour)"))
+        print(String(format: Namespace.closingMessage, dailyTotalCustomer, "\(dailyBusinessHour)"))
         resetBank()
     }
     
@@ -62,5 +62,22 @@ struct Bank {
         dailyCustomerQueue = CustomerQueue<Customer>()
         dailyTotalCustomer = .zero
         dailyBusinessHour = .zero
+    }
+}
+
+extension Bank {
+    enum Configuration {
+        static let numberOfBanker = 1
+        static let minimumCustomer = 10
+        static let maximumCustomer = 30
+        static let taskDuration: Decimal = 0.7
+    }
+}
+
+extension Bank {
+    enum Namespace {
+        static let startTask = "%d번 고객 업무 시작"
+        static let endTask = "%d번 고객 업무 완료"
+        static let closingMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %@초입니다."
     }
 }

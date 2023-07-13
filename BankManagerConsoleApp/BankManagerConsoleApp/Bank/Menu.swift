@@ -19,6 +19,6 @@ enum Menu: String, CaseIterable {
     }
     
     static func displayMenu() {
-        Self.allCases.forEach { print("\($0) : \($0.rawValue)") }
+        Self.allCases.forEach { print("\($0.menuNumber) : \($0.rawValue)") }
     }
 }

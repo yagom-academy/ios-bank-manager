@@ -11,3 +11,4 @@ struct Customer: Equatable {
     let duration: Decimal
     let waitingNumber: Int
 }
+
