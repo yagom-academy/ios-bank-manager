@@ -15,6 +15,7 @@
 		921050942A5F87C8007DD39F /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921050932A5F87C8007DD39F /* Bank.swift */; };
 		921050962A5F87D1007DD39F /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921050952A5F87D1007DD39F /* Teller.swift */; };
 		921050982A5F87DA007DD39F /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921050972A5F87DA007DD39F /* Customer.swift */; };
+		9210509A2A5F8ACB007DD39F /* Manageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921050992A5F8ACB007DD39F /* Manageable.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		921050932A5F87C8007DD39F /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		921050952A5F87D1007DD39F /* Teller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
 		921050972A5F87DA007DD39F /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		921050992A5F8ACB007DD39F /* Manageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manageable.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManagerUIApp/BankManagerUIApp/Model/BankManager.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				9210508D2A5F87AA007DD39F /* Queue.swift */,
 				9210508F2A5F87B5007DD39F /* Queuable.swift */,
 				921050912A5F87C1007DD39F /* ProgramManager.swift */,
+				921050992A5F8ACB007DD39F /* Manageable.swift */,
 				921050932A5F87C8007DD39F /* Bank.swift */,
 				921050952A5F87D1007DD39F /* Teller.swift */,
 				921050972A5F87DA007DD39F /* Customer.swift */,
@@ -153,6 +156,7 @@
 				9210508A2A5F8797007DD39F /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				921050902A5F87B5007DD39F /* Queuable.swift in Sources */,
+				9210509A2A5F8ACB007DD39F /* Manageable.swift in Sources */,
 				9210508C2A5F87A2007DD39F /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				921050922A5F87C1007DD39F /* ProgramManager.swift in Sources */,
