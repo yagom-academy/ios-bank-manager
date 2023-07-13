@@ -6,28 +6,28 @@
 //
 
 struct Queue<Element> {
-    private var waitingLineLinkedList = LinkedList<Element>()
+    private var linkedList = LinkedList<Element>()
     
     var peek: Element? {
-        let node = waitingLineLinkedList.head
+        let node = linkedList.head
         return node?.value
     }
     
     var isEmpty: Bool {
-        return waitingLineLinkedList.head == nil
+        return linkedList.head == nil
     }
     
     func enqueue(_ value: Element) {
         let node = Node(value: value)
         
-        waitingLineLinkedList.append(node)
+        linkedList.append(node)
     }
     
     func dequeue() -> Element? {
-        return waitingLineLinkedList.removeFirst()?.value
+        return linkedList.removeFirst()?.value
     }
     
     func clear() {
-        waitingLineLinkedList.clear()
+        linkedList.clear()
     }
 }

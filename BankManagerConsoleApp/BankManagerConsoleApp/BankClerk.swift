@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankClerk {
-    func carryOutBankService(_ customer: Customer) {
+    func carryOutBankService(for customer: Customer) {
         startTask(customer.waitingNumber)
         Thread.sleep(forTimeInterval: customer.taskTime)
         endTask(customer.waitingNumber)
