@@ -5,8 +5,6 @@
 //  Created by mint, Jusbug on 2023/07/12.
 //
 
-import Foundation
-
 protocol Queueable {
     associatedtype T
 
