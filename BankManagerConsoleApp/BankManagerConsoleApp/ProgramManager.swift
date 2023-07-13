@@ -9,9 +9,13 @@ import Foundation
 
 struct ProgramManager {
     var program: Manageable
-    var isWorking: Bool = true
+    private var isWorking: Bool = true
     
-    func displayMenu() {
+    init(program: Manageable) {
+        self.program = program
+    }
+    
+    private func displayMenu() {
         print(
         """
         1 : \(program.name) 개점
@@ -19,6 +23,7 @@ struct ProgramManager {
         입력 :
         """, terminator: " ")
     }
+    
     mutating func selectMenu() {
         while isWorking {
             displayMenu()
