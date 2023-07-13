@@ -40,8 +40,8 @@ final class Bank {
             guard let client = clientQueue.dequeue() else { break }
             
             semaphore.wait()
-            DispatchQueue.global().async(group: group) { [weak self] in
-                self?.bankManger.work(client: client)
+            DispatchQueue.global().async(group: group) {
+                self.bankManger.work(client: client)
                 semaphore.signal()
             }
         }
