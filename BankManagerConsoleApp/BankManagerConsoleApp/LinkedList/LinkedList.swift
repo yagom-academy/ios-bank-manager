@@ -5,14 +5,18 @@
 //  Created by kyungmin, Max on 2023/07/11.
 //
 
-struct LinkedList<Element> {
+struct LinkedList<Element: Equatable> {
     private(set) var headNode: Node<Element>?
     private(set) var tailNode: Node<Element>?
+    
+    var isEmpty: Bool {
+        return headNode == nil
+    }
     
     mutating func append(_ value: Element) {
         let node: Node = Node(value)
         
-        if self.isEmpty() {
+        if self.isEmpty {
             self.headNode = node
             self.tailNode = node
         } else {
@@ -46,10 +50,6 @@ struct LinkedList<Element> {
         }
         
         return value
-    }
-    
-    func isEmpty() -> Bool {
-        return headNode == nil
     }
 }
 
