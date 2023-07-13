@@ -19,4 +19,38 @@ struct ProgramManager {
         입력 :
         """, terminator: " ")
     }
+    mutating func selectMenu() {
+        while isWorking {
+            displayMenu()
+            
+            guard let input = readLine() else {
+                return
+            }
+            
+            switch input {
+            case Menu.startProgram.number:
+                program.start()
+            case Menu.finishProgram.number:
+                isWorking = false
+            default:
+                print("잘못된 입력입니다. 다시 입력해주세요.")
+            }
+        }
+    }
+}
+
+extension ProgramManager {
+    enum Menu {
+        case startProgram
+        case finishProgram
+        
+        var number: String {
+            switch self {
+            case .startProgram:
+                return "1"
+            case .finishProgram:
+                return "2"
+            }
+        }
+    }
 }
