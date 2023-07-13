@@ -19,14 +19,21 @@ struct BankManager {
         guard let userInput = readLine() else { return }
         
         switch userInput {
-        case "1":
+        case MenuNumber.bankOpening:
             bank.open()
-        case "2":
+        case MenuNumber.end:
             return
         default:
             print("잘못된 입력입니다.")
         }
         
         start()
+    }
+}
+
+extension BankManager {
+    enum MenuNumber {
+        static let bankOpening = "1"
+        static let end = "2"
     }
 }

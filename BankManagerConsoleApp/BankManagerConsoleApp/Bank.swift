@@ -33,7 +33,7 @@ struct Bank {
         
         while !waitingLine.isEmpty {
             if let customerTurn = waitingLine.dequeue() {
-                bankClerk.carryOutBankService(customerTurn)
+                bankClerk.carryOutBankService(for: customerTurn)
             }
         }
         
