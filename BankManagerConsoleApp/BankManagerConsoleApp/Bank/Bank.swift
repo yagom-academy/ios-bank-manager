@@ -8,24 +8,24 @@
 import Foundation
 
 struct Bank {
-    private var banker = OperationQueue()
+    private var bankerQueue = OperationQueue()
     private var dailyCustomerQueue = CustomerQueue<Customer>()
     private var dailyTotalCustomer: Int = .zero
     private var dailyBusinessHour: Decimal = .zero
     
     init() {
-        banker.maxConcurrentOperationCount = Configuration.numberOfBanker
+        bankerQueue.maxConcurrentOperationCount = Configuration.numberOfBanker
     }
     
     mutating func dailyWork() {
         setDailyCustomerQueue()
         
         while let customer = dailyCustomerQueue.dequeue() {
-            customerTask(customer)
+            addCustomerTask(customer)
         }
         
-        banker.waitUntilAllOperationsAreFinished()
-        closeBank()
+        bankerQueue.waitUntilAllOperationsAreFinished()
+        close()
     }
     
     mutating private func setDailyCustomerQueue() {
@@ -41,24 +41,24 @@ struct Bank {
         }
     }
     
-    mutating private func customerTask(_ customer: Customer) {
+    mutating private func addCustomerTask(_ customer: Customer) {
         let task = BlockOperation {
             print(String(format: Namespace.startTask, customer.waitingNumber))
             print(String(format: Namespace.endTask, customer.waitingNumber))
         }
         
-        banker.addOperation(task)
+        bankerQueue.addOperation(task)
 
         dailyTotalCustomer += 1
         dailyBusinessHour += customer.duration
     }
     
-    mutating private func closeBank() {
+    mutating private func close() {
         print(String(format: Namespace.closingMessage, dailyTotalCustomer, "\(dailyBusinessHour)"))
-        resetBank()
+        reset()
     }
     
-    mutating private func resetBank() {
+    mutating private func reset() {
         dailyCustomerQueue = CustomerQueue<Customer>()
         dailyTotalCustomer = .zero
         dailyBusinessHour = .zero

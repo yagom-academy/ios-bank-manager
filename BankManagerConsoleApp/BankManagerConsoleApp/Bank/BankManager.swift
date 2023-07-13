@@ -8,7 +8,7 @@
 struct BankManager {
     var bank: Bank
     
-    mutating func workBankManager() {
+    mutating func work() {
         while selectMenu() == .open {
             bank.dailyWork()
         }
