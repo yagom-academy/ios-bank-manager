@@ -10,11 +10,12 @@ struct Bank: Manageable {
     var tellers: [Teller]
     let customerNumber: Int = Int.random(in: 10...30)
     var waiting = Queue<Customer>()
-    var totalTime: Double
+    var totalTime: Double = 0.0
     
     mutating func start() {
         giveTicketNumber(numbers: customerNumber)
         assignCustomer()
+        closeBank()
     }
     
     mutating func giveTicketNumber(numbers: Int) {
@@ -34,6 +35,12 @@ struct Bank: Manageable {
                 
                 teller.processCustomer(customer)
             }
+            
+            totalTime += 0.7
         }
     }
+    
+    func closeBank() {
+           print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(totalTime)초입니다.")
+       }
 }
