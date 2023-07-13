@@ -8,4 +8,9 @@
 import Foundation
 
 struct Customer {
+    let queueNumber: Int
+    
+    init(queueNumber: Int) {
+        self.queueNumber = queueNumber
+    }
 }
