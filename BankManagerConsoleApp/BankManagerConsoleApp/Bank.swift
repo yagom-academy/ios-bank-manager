@@ -10,6 +10,11 @@ struct Bank {
     private var customerWaitingQueue: CustomerWaitingQueue<Customer>
     private var totalCustomerCount: Int = 0
     
+    init(bankClerk: BankClerk, customerWaitingQueue: CustomerWaitingQueue<Customer>) {
+        self.bankClerk = bankClerk
+        self.customerWaitingQueue = customerWaitingQueue
+    }
+    
     mutating func work() {
         totalCustomerCount = customerWaitingQueue.count
         
