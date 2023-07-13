@@ -14,6 +14,8 @@
 		DC1FE8A12A5C1A8F009214C2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FE8A02A5C1A8F009214C2 /* Node.swift */; };
 		DC4B12302A5E542B00DA7A68 /* SingleLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C7EFE92A5C1B15004E0246 /* SingleLinkedList.swift */; };
 		DC4B12322A5E574200DA7A68 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FE8A02A5C1A8F009214C2 /* Node.swift */; };
+		DC5394CC2A5F9CDE004C8D36 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5394CB2A5F9CDE004C8D36 /* Bank.swift */; };
+		DC5394CE2A5F9CE9004C8D36 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5394CD2A5F9CE9004C8D36 /* Customer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +38,8 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 		DC1FE8A02A5C1A8F009214C2 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		DC5394CB2A5F9CDE004C8D36 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		DC5394CD2A5F9CE9004C8D36 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +89,12 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				DC1FE8A02A5C1A8F009214C2 /* Node.swift */,
 				28C7EFE92A5C1B15004E0246 /* SingleLinkedList.swift */,
+				DC5394CB2A5F9CDE004C8D36 /* Bank.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				DC5394CD2A5F9CE9004C8D36 /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -193,6 +199,8 @@
 			files = (
 				DC1FE8A12A5C1A8F009214C2 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				DC5394CC2A5F9CDE004C8D36 /* Bank.swift in Sources */,
+				DC5394CE2A5F9CE9004C8D36 /* Customer.swift in Sources */,
 				28C7EFEA2A5C1B15004E0246 /* SingleLinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
