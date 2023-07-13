@@ -7,7 +7,7 @@
 struct BankManager {
     func selectMenu() {
         while true {
-            print("1 : 은행 개점/n2 : 종료/n입력 : ", terminator: "")
+            print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
             
             guard let userInput = readLine() else { return }
             
