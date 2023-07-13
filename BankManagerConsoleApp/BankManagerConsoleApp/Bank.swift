@@ -2,7 +2,7 @@
 //  Bank.swift
 //  BankManagerConsoleApp
 //
-//  Created by Hyungmin Lee on 2023/07/12.
+//  Created by Zion, Whales on 2023/07/12.
 //
 
 import Foundation
@@ -31,8 +31,10 @@ class Bank {
     private func startTask() {
         let group = DispatchGroup()
         let semaphore = DispatchSemaphore(value: bankManagerCount)
+        let startTime = Date()
+        let clientCount = Int.random(in: 10...30)
         
-        setUpClientQueue()
+        setUpClientQueue(count: clientCount)
         
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { break }
@@ -43,15 +45,23 @@ class Bank {
                 semaphore.signal()
             }
         }
+        
         group.wait()
+        printTaskResult(clientCount, startTime)
         open()
     }
     
-    private func setUpClientQueue() {
-        let randomNumber = Int.random(in: 10...30)
+    private func printTaskResult(_ clientCount: Int, _ startTime: Date) {
+        let totalWorkTime = Date().timeIntervalSince(startTime)
+        let formattedWorkTime = String(format: "%.2f", totalWorkTime)
+        
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(clientCount)명이며, 총 업무시간은 \(formattedWorkTime)초입니다.")
+    }
+    
+    private func setUpClientQueue(count: Int) {
         var client: Client
         
-        for turn in 1...randomNumber {
+        for turn in 1...count {
             client = Client(turn)
             clientQueue.enqueue(client)
         }

@@ -4,6 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let weatherBank = Bank(bankManagerCount: 3)
+let weatherBank = Bank(bankManagerCount: 1)
 
 weatherBank.open()
