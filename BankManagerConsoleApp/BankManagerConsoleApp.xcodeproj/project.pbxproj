@@ -58,6 +58,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9210509B2A5F9A83007DD39F /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				9210508D2A5F87AA007DD39F /* Queue.swift */,
+				9210508F2A5F87B5007DD39F /* Queuable.swift */,
+				9210508B2A5F87A2007DD39F /* LinkedList.swift */,
+				921050892A5F8797007DD39F /* Node.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -77,12 +88,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				9210509B2A5F9A83007DD39F /* Queue */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				921050892A5F8797007DD39F /* Node.swift */,
-				9210508B2A5F87A2007DD39F /* LinkedList.swift */,
-				9210508D2A5F87AA007DD39F /* Queue.swift */,
-				9210508F2A5F87B5007DD39F /* Queuable.swift */,
 				921050912A5F87C1007DD39F /* ProgramManager.swift */,
 				921050992A5F8ACB007DD39F /* Manageable.swift */,
 				921050932A5F87C8007DD39F /* Bank.swift */,

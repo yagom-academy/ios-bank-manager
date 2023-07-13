@@ -6,9 +6,8 @@
 
 import Foundation
 
-let jusbug = Teller(name: "jusbug")
-let mint = Teller(name: "mint")
-let seaBank = Bank(name: "신한은행", tellers: [jusbug, mint])
+let mint = Teller()
+let shinHanBank = Bank(name: "신한은행", tellers: [mint])
 
-var programManager = ProgramManager(program: seaBank)
+var programManager = ProgramManager(program: shinHanBank)
 programManager.selectMenu()
