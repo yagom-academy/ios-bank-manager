@@ -8,6 +8,6 @@
 import Foundation
 
 struct Customer: Equatable {
-    var duration: Decimal
-    var waitingNumber: Int
+    let duration: Decimal
+    let waitingNumber: Int
 }
