@@ -3,18 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9C40FBDF2A5D3CFB00DFA6EF /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */; };
-		9C40FBE12A5D3D0E00DFA6EF /* CustomerWatingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */; };
+		9C40FBE12A5D3D0E00DFA6EF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBE02A5D3D0E00DFA6EF /* Queue.swift */; };
 		9C40FBE92A5D3E2F00DFA6EF /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBE82A5D3E2F00DFA6EF /* LinkedListTest.swift */; };
 		9C40FBEE2A5D3E4C00DFA6EF /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */; };
 		9C40FBF62A5D3ECE00DFA6EF /* QueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBF52A5D3ECE00DFA6EF /* QueueTest.swift */; };
 		9C40FBFB2A5D3EED00DFA6EF /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */; };
-		9C40FBFC2A5D3EF100DFA6EF /* CustomerWatingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */; };
+		9C40FBFC2A5D3EF100DFA6EF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40FBE02A5D3D0E00DFA6EF /* Queue.swift */; };
 		9CFE0DEB2A60ADC100F5C05A /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE0DEA2A60ADC100F5C05A /* Customer.swift */; };
+		9CFE0DED2A60AE3600F5C05A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE0DEC2A60AE3600F5C05A /* Bank.swift */; };
+		9CFE0DEF2A60AEB600F5C05A /* Teller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE0DEE2A60AEB600F5C05A /* Teller.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
@@ -33,12 +35,14 @@
 
 /* Begin PBXFileReference section */
 		9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerWatingQueue.swift; sourceTree = "<group>"; };
+		9C40FBE02A5D3D0E00DFA6EF /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		9C40FBE62A5D3E2F00DFA6EF /* LinkedListTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C40FBE82A5D3E2F00DFA6EF /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
 		9C40FBF32A5D3ECE00DFA6EF /* QueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C40FBF52A5D3ECE00DFA6EF /* QueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTest.swift; sourceTree = "<group>"; };
 		9CFE0DEA2A60ADC100F5C05A /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		9CFE0DEC2A60AE3600F5C05A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		9CFE0DEE2A60AEB600F5C05A /* Teller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teller.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
@@ -73,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				9C40FBDE2A5D3CFB00DFA6EF /* LinkedList.swift */,
-				9C40FBE02A5D3D0E00DFA6EF /* CustomerWatingQueue.swift */,
+				9C40FBE02A5D3D0E00DFA6EF /* Queue.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -98,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				9CFE0DEA2A60ADC100F5C05A /* Customer.swift */,
+				9CFE0DEC2A60AE3600F5C05A /* Bank.swift */,
+				9CFE0DEE2A60AEB600F5C05A /* Teller.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -193,8 +199,9 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					9C40FBE52A5D3E2F00DFA6EF = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -258,7 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C40FBFC2A5D3EF100DFA6EF /* CustomerWatingQueue.swift in Sources */,
+				9C40FBFC2A5D3EF100DFA6EF /* Queue.swift in Sources */,
 				9C40FBFB2A5D3EED00DFA6EF /* LinkedList.swift in Sources */,
 				9C40FBF62A5D3ECE00DFA6EF /* QueueTest.swift in Sources */,
 			);
@@ -270,8 +277,10 @@
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				9CFE0DEB2A60ADC100F5C05A /* Customer.swift in Sources */,
+				9CFE0DEF2A60AEB600F5C05A /* Teller.swift in Sources */,
 				9C40FBDF2A5D3CFB00DFA6EF /* LinkedList.swift in Sources */,
-				9C40FBE12A5D3D0E00DFA6EF /* CustomerWatingQueue.swift in Sources */,
+				9CFE0DED2A60AE3600F5C05A /* Bank.swift in Sources */,
+				9C40FBE12A5D3D0E00DFA6EF /* Queue.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +294,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -305,6 +315,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -325,6 +336,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -345,6 +357,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -393,6 +406,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -454,6 +468,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -478,6 +493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -487,6 +503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

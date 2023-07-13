@@ -5,7 +5,7 @@
 //  Created by karen on 2023/07/11.
 //
 
-struct CustomerWatingQueue<Element> {
+struct Queue<Element> {
     private var queue = LinkedList<Element>()
     var isEmpty: Bool { return queue.isEmpty }
     var peek: Element? { return queue.peek }
