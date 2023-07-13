@@ -9,5 +9,10 @@ import Foundation
 
 struct Bank {
     let bankers: [Banker]
-    let customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    var customerQueue: CustomerQueue<Customer> = CustomerQueue()
+    
+    // 적절한 메서드명 고민해야함
+    mutating func add(to customers: [Customer]) {
+        customers.forEach { customerQueue.enqueue($0) }
+    }
 }
