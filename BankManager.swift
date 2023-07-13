@@ -20,7 +20,7 @@ struct BankManager {
         
         switch userInput {
         case "1":
-            bank.opening()
+            bank.open()
         case "2":
             return
         default:

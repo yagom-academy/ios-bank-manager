@@ -17,7 +17,7 @@ struct Bank {
         self.customerCount = customerCount
     }
     
-    func opening() {
+    func open() {
         updateWaitingLine()
         startBankService()
     }
