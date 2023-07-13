@@ -5,20 +5,20 @@
 //  Created by kyungmin, Max on 2023/07/12.
 //
 
-enum Menu: String, CaseIterable, CustomStringConvertible {
-    case open = "1"
-    case finish = "2"
+enum Menu: String, CaseIterable {
+    case open = "은행개점"
+    case finish = "종료"
 
-    var description: String {
+    var menuNumber: String {
         switch self {
         case .open:
-            return "은행개점"
+            return "1"
         case .finish:
-            return "종료"
+            return "2"
         }
     }
     
     static func displayMenu() {
-        Self.allCases.forEach { print("\($0.rawValue) : \($0)") }
+        Self.allCases.forEach { print("\($0) : \($0.rawValue)") }
     }
 }

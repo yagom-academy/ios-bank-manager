@@ -19,8 +19,7 @@ struct BankManager {
         print(BankNamespace.inputLabel, terminator: BankNamespace.inputTerminater)
         
         guard let inputMenu = readLine(),
-              let menu = Menu(rawValue: inputMenu),
-              menu == .open else {
+              inputMenu == Menu.open.menuNumber else {
             return Menu.finish
         }
         
