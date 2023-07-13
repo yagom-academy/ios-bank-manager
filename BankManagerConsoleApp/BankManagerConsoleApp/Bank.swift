@@ -10,7 +10,7 @@ import Foundation
 struct Bank {
     private let bankManager: BankManager = BankManager()
     private var customerNumber: Int = 0
-    private var singleLinkedList: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
+    private var customerQueue: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 2
@@ -18,14 +18,14 @@ struct Bank {
         return numberFormatter
     }()
     
-    mutating func inputMenu() {
+    mutating func selectMenu() {
         while true {
             print("1 : 은행개점\n2 : 종료\n입력 : ", terminator: "")
-            let input = readLine()
+            let selectedMenu = readLine()
             
-            switch input {
+            switch selectedMenu {
             case "1":
-                start()
+                startBusiness()
             case "2":
                 return
             default:
@@ -34,31 +34,31 @@ struct Bank {
         }
     }
     
-    private mutating func start() {
-        createCustomerNumber()
-        createCustomer()
-        businessProcessing()
-        finish()
+    private mutating func startBusiness() {
+        createCustomerRandomNumber()
+        enqueueCustomers()
+        processBusiness()
+        finishBusiness()
     }
     
-    private mutating func createCustomerNumber() {
+    private mutating func createCustomerRandomNumber() {
          customerNumber = Int.random(in: 10...30)
     }
     
-    private mutating func createCustomer() {
+    private mutating func enqueueCustomers() {
         for number in 1...customerNumber {
             let customer: Customer = Customer(waitingNumber: number)
-            singleLinkedList.enqueue(customer)
+            customerQueue.enqueue(customer)
         }
     }
     
-    private mutating func businessProcessing() {
-        while let customer = singleLinkedList.dequeue() {
-            bankManager.업무처리(customer: customer)
+    private mutating func processBusiness() {
+        while let customer = customerQueue.dequeue() {
+            bankManager.work(for: customer)
         }
     }
     
-    private func finish() {
+    private func finishBusiness() {
         guard let totalTime = numberFormatter.string(for: Double(customerNumber) * 0.7) else { return }
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(totalTime)초입니다.")

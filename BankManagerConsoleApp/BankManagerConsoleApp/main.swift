@@ -6,4 +6,4 @@
 
 var bank: Bank = Bank()
 
-bank.inputMenu()
+bank.selectMenu()
