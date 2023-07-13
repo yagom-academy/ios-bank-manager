@@ -4,6 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let bank: Bank = Bank()
+var bank: Bank = Bank()
 
-bank.start()
+bank.inputMenu()

@@ -36,7 +36,7 @@ struct SingleLinkedList<Element> {
         var nextNode: Node<Element>? = firstNode
         
         while nextNode?.next != nil {
-            nextNode = firstNode?.next
+            nextNode = nextNode?.next
         }
         
         nextNode?.next = node
