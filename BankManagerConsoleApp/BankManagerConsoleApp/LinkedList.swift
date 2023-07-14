@@ -35,8 +35,8 @@ struct LinkedList<T> {
         if isEmpty {
             head = nil
             tail = nil
-            count -= 1
         }
+        count -= 1
         
         return value
     }

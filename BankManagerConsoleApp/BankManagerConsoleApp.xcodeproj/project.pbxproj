@@ -14,6 +14,7 @@
 		631433582A5D50EF00CBD580 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631433422A5C01B900CBD580 /* Node.swift */; };
 		631433592A5D50F100CBD580 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		6314335B2A60CE2E00CBD580 /* Banker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6314335A2A60CE2E00CBD580 /* Banker.swift */; };
+		6314335D2A60CF2800CBD580 /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6314335C2A60CF2800CBD580 /* InputError.swift */; };
 		BA322CBC2A5D49140046687B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CBB2A5D49140046687B /* Queue.swift */; };
 		BA322CFA2A60CD700046687B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CF92A60CD700046687B /* Customer.swift */; };
 		BA322CFC2A60CE920046687B /* TimeCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CFB2A60CE920046687B /* TimeCheck.swift */; };
@@ -40,6 +41,7 @@
 		6314334A2A5D4DA100CBD580 /* BankMangerQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankMangerQueueTests.swift; sourceTree = "<group>"; };
 		631433502A5D4FE400CBD580 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		6314335A2A60CE2E00CBD580 /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
+		6314335C2A60CF2800CBD580 /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 		BA322CBB2A5D49140046687B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		BA322CF92A60CD700046687B /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		BA322CFB2A60CE920046687B /* TimeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCheck.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				BA322CF92A60CD700046687B /* Customer.swift */,
 				6314335A2A60CE2E00CBD580 /* Banker.swift */,
 				BA322CFB2A60CE920046687B /* TimeCheck.swift */,
+				6314335C2A60CF2800CBD580 /* InputError.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6314335B2A60CE2E00CBD580 /* Banker.swift in Sources */,
+				6314335D2A60CF2800CBD580 /* InputError.swift in Sources */,
 				BA322CBC2A5D49140046687B /* Queue.swift in Sources */,
 				631433432A5C01B900CBD580 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
