@@ -6,7 +6,9 @@
 
 struct BankManager {
     func selectMenu() {
-        while true {
+        var isSelectMenuOn = true
+        
+        while isSelectMenuOn {
             print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
             
             guard let userInput = readLine() else { return }
@@ -15,7 +17,7 @@ struct BankManager {
             case "1":
                 openBank()
             case "2":
-                return
+                isSelectMenuOn = false
             default:
                 print("잘못된 입력입니다.")
             }
