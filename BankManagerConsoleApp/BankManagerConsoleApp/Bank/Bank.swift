@@ -34,8 +34,11 @@ struct Bank {
         )
         
         for customerNumber in 1...totalCustomer {
-            let customer = Customer(duration: Configuration.taskDuration,
-                                    waitingNumber: customerNumber)
+            guard let work = Bank.Work.allCases.randomElement() else {
+                continue
+            }
+            
+            let customer = Customer(bankWork: work, waitingNumber: customerNumber)
             
             dailyCustomerQueue.enqueue(customer)
         }
@@ -43,14 +46,14 @@ struct Bank {
     
     mutating private func addCustomerTask(_ customer: Customer) {
         let task = BlockOperation {
-            print(String(format: Namespace.startTask, customer.waitingNumber))
-            print(String(format: Namespace.endTask, customer.waitingNumber))
+            print(String(format: Namespace.startTask, customer.waitingNumber, customer.bankWork.name))
+            print(String(format: Namespace.endTask, customer.waitingNumber, customer.bankWork.name))
         }
         
         bankerQueue.addOperation(task)
 
         dailyTotalCustomer += 1
-        dailyBusinessHour += customer.duration
+        dailyBusinessHour += customer.bankWork.duration
     }
     
     mutating private func close() {
@@ -76,8 +79,33 @@ extension Bank {
 
 extension Bank {
     enum Namespace {
-        static let startTask = "%d번 고객 업무 시작"
-        static let endTask = "%d번 고객 업무 완료"
+        static let startTask = "%d번 고객 %@업무 시작"
+        static let endTask = "%d번 고객 %@업무 완료"
         static let closingMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %@초입니다."
+    }
+}
+
+extension Bank {
+    enum Work: CaseIterable {
+        case deposit
+        case loan
+        
+        var duration: Decimal {
+            switch self {
+            case .deposit:
+                return 0.7
+            case .loan:
+                return 1.1
+            }
+        }
+        
+        var name: String {
+            switch self {
+            case .deposit:
+                return "예금"
+            case .loan:
+                return "대출"
+            }
+        }
     }
 }

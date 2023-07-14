@@ -8,7 +8,7 @@
 import Foundation
 
 struct Customer: Equatable {
-    let duration: Decimal
+    let bankWork: Bank.Work
     let waitingNumber: Int
 }
 
