@@ -6,7 +6,7 @@
 //
 
 struct Bank {
-    private let bankManager = BankManager()
+    private let bankClerk = BankClerk()
     private var customers = Queue<Customer>()
 
     init() {
@@ -21,7 +21,7 @@ struct Bank {
         var totalCustomerCount = 0
         
         while let customer = customers.dequeue() {
-            totalTaskTime += bankManager.work(customer: customer)
+            totalTaskTime += bankClerk.work(customer: customer)
             totalCustomerCount += 1
         }
         

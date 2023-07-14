@@ -4,14 +4,23 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-import Foundation
-
 struct BankManager {
-    func work(customer: Customer) -> Double {
-        print("\(customer.priority)번 고객 업무 시작")
-        usleep(UInt32(customer.taskTime * 1000000))
-        print("\(customer.priority)번 고객 업무 완료")
-        
-        return customer.taskTime
+    static func run() {
+        while true {
+            print("1 : 은행개점")
+            print("2 : 종료")
+            print("입력 : ", terminator: "")
+            let choice = readLine()
+            
+            switch choice {
+            case "1":
+                var bank = Bank()
+                bank.start()
+            case "2":
+                return
+            default:
+                break
+            }
+        }
     }
 }
