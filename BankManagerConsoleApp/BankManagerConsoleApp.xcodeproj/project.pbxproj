@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		443FE2952A5ED25A00AC541B /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FE2942A5ED25A00AC541B /* Bank.swift */; };
-		443FE2982A60262300AC541B /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FE2972A60262300AC541B /* Double+.swift */; };
 		44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
 		44847F332A5C302E00653323 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F322A5C302E00653323 /* QueueTests.swift */; };
 		44847F3B2A5C38AF00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
@@ -36,7 +35,6 @@
 
 /* Begin PBXFileReference section */
 		443FE2942A5ED25A00AC541B /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
-		443FE2972A60262300AC541B /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		44847F1C2A5C163B00653323 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		44847F302A5C302E00653323 /* QueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44847F322A5C302E00653323 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -68,14 +66,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		443FE2962A6025AB00AC541B /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				443FE2972A60262300AC541B /* Double+.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		44847F312A5C302E00653323 /* QueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +77,6 @@
 		AC6192FE2A601BA5000B66B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				443FE2962A6025AB00AC541B /* Extension */,
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				443FE2942A5ED25A00AC541B /* Bank.swift */,
 				AC11DED92A5ED0870061737E /* BankTeller.swift */,
@@ -243,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACBF18592A5C110D00160ADF /* Node.swift in Sources */,
-				443FE2982A60262300AC541B /* Double+.swift in Sources */,
 				443FE2952A5ED25A00AC541B /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */,

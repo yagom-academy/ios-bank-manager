@@ -11,8 +11,15 @@ struct BankTeller {
     let processingTime: Double = 0.7
     
     func doWork(for customer: Customer) {
-        print("\(customer.numberTicket)번 고객 업무 시작")
+        print(String(format: MessageFormat.startTask, customer.numberTicket))
         Thread.sleep(forTimeInterval: processingTime)
-        print("\(customer.numberTicket)번 고객 업무 완료")
+        print(String(format: MessageFormat.finishTask, customer.numberTicket))
+    }
+}
+
+extension BankTeller {
+    private enum MessageFormat {
+        static let startTask: String = "%u번 고객 업무 시작"
+        static let finishTask: String = "%u번 고객 업무 완료"
     }
 }
