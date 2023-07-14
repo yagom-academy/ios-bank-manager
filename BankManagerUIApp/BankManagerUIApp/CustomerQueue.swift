@@ -6,7 +6,7 @@
 //
 
 struct CustomerQueue<Element> {
-    var customerQueue: LinkedList = LinkedList<Element>()
+    private var customerQueue: LinkedList = LinkedList<Element>()
     
     var peek: Element? {
         return customerQueue.peek

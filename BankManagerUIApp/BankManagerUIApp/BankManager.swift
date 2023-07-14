@@ -4,8 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-import Foundation
-
 struct BankManager {
     func selectMenu() {
         var isBankOpen: Bool = true
@@ -23,7 +21,6 @@ struct BankManager {
                 isBankOpen = false
             default:
                 print("잘못된 입력입니다.")
-                return
             }
         }
     }

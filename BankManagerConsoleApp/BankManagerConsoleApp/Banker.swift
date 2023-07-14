@@ -4,13 +4,11 @@
 //
 //  Created by Yetti, redmango1446 on 2023/07/13.
 //
-
 import Foundation
 
 struct Banker {
-    let serviceTime: Double = 0.7
+    private let serviceTime: Double = 0.7
     
-    // 추후 더 정확하게 함수명 변경 고려하기
     mutating func task(_ customer: Customer) -> Double? {
         guard let queueNumber = customer.queueNumber else {
             return nil
