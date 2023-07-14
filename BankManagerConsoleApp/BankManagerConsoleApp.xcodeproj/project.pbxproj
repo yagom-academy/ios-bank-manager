@@ -19,6 +19,7 @@
 		BA322CFA2A60CD700046687B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CF92A60CD700046687B /* Customer.swift */; };
 		BA322CFC2A60CE920046687B /* TimeCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CFB2A60CE920046687B /* TimeCheck.swift */; };
 		BA322CFE2A60CF7D0046687B /* BankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322CFD2A60CF7D0046687B /* BankService.swift */; };
+		BA322D0E2A614B4D0046687B /* BankManagerNameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA322D0D2A614B4D0046687B /* BankManagerNameSpace.swift */; };
 		BAF22BCF2A5C03A4009BA40A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
@@ -47,10 +48,11 @@
 		BA322CF92A60CD700046687B /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		BA322CFB2A60CE920046687B /* TimeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCheck.swift; sourceTree = "<group>"; };
 		BA322CFD2A60CF7D0046687B /* BankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankService.swift; sourceTree = "<group>"; };
+		BA322D0D2A614B4D0046687B /* BankManagerNameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerNameSpace.swift; sourceTree = "<group>"; };
 		BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,53 @@
 			path = BankMangerQueueTests;
 			sourceTree = "<group>";
 		};
+		BA322D0F2A614CE10046687B /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				6314335C2A60CF2800CBD580 /* InputError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		BA322D102A614D020046687B /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */,
+				631433422A5C01B900CBD580 /* Node.swift */,
+				BA322CBB2A5D49140046687B /* Queue.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
+		BA322D112A614D2A0046687B /* BankManager */ = {
+			isa = PBXGroup;
+			children = (
+				BA322D122A614D630046687B /* Model */,
+				BA322CF92A60CD700046687B /* Customer.swift */,
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				6314335A2A60CE2E00CBD580 /* Banker.swift */,
+				BA322CFD2A60CF7D0046687B /* BankService.swift */,
+			);
+			path = BankManager;
+			sourceTree = "<group>";
+		};
+		BA322D122A614D630046687B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA322D132A614DEB0046687B /* Enum */,
+				BA322CFB2A60CE920046687B /* TimeCheck.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA322D132A614DEB0046687B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				BA322D0D2A614B4D0046687B /* BankManagerNameSpace.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -101,16 +150,10 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				631433422A5C01B900CBD580 /* Node.swift */,
-				BAF22BCE2A5C03A4009BA40A /* LinkedList.swift */,
-				BA322CBB2A5D49140046687B /* Queue.swift */,
-				BA322CF92A60CD700046687B /* Customer.swift */,
-				6314335A2A60CE2E00CBD580 /* Banker.swift */,
-				BA322CFB2A60CE920046687B /* TimeCheck.swift */,
-				6314335C2A60CF2800CBD580 /* InputError.swift */,
-				BA322CFD2A60CF7D0046687B /* BankService.swift */,
+				BA322D112A614D2A0046687B /* BankManager */,
+				BA322D102A614D020046687B /* DataStructure */,
+				BA322D0F2A614CE10046687B /* Error */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -221,6 +264,7 @@
 				631433432A5C01B900CBD580 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
 				BA322CFA2A60CD700046687B /* Customer.swift in Sources */,
+				BA322D0E2A614B4D0046687B /* BankManagerNameSpace.swift in Sources */,
 				BAF22BCF2A5C03A4009BA40A /* LinkedList.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				BA322CFC2A60CE920046687B /* TimeCheck.swift in Sources */,
