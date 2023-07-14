@@ -82,7 +82,6 @@ extension Bank {
         static let numberOfLoanBanker = 1
         static let minimumCustomer = 10
         static let maximumCustomer = 30
-        static let taskDuration: Decimal = 0.7
     }
 }
 
