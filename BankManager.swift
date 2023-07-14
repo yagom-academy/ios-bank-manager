@@ -19,7 +19,7 @@ struct BankManager {
             case BankManager.NameSpace.selectExit:
                 isSelectMenuOn = false
             default:
-                print(BankManager.NameSpace.worngInput)
+                print(BankManager.NameSpace.wrongInput)
             }
         }
     }
@@ -43,7 +43,7 @@ struct BankManager {
 extension BankManager {
     private enum NameSpace {
         static let menuGuide: String = "1 : 은행 개점\n2 : 종료\n입력 : "
-        static let worngInput: String = "잘못된 입력입니다."
+        static let wrongInput: String = "잘못된 입력입니다."
         static let selectOpenBank: String = "1"
         static let selectExit: String = "2"
     }

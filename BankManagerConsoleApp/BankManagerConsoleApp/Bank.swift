@@ -18,7 +18,7 @@ struct Bank {
     mutating func work() {
         totalCustomerCount = customerWaitingQueue.count
         
-        while !customerWaitingQueue.isEmpty {
+        while customerWaitingQueue.isEmpty == false {
             guard let customer = customerWaitingQueue.dequeue() else { continue }
             bankClerk.work(customerNumber: customer.number)
         }
