@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct Bank {
     private let teller: UInt = 1
     private var customersQueue: Queue<Customer> = Queue<Customer>()
@@ -26,10 +24,8 @@ struct Bank {
     
     private mutating func lineUpCustomer() {
         let customerCount = UInt.random(in: 10...30)
-        for number in 1...customerCount {
-            let customer = Customer(id: number)
-            customersQueue.enqueue(customer)
-        }
+        let customers = (1...customerCount)
+        customers.map(Customer.init).forEach { customersQueue.enqueue($0) }
     }
     
     private mutating func dailyWork() {
@@ -41,7 +37,7 @@ struct Bank {
         }
     }
     
-    mutating func process(customer: Customer) {
+    private mutating func process(customer: Customer) {
         print("\(customer.id)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: processingTime)
         print("\(customer.id)번 고객 업무 완료")
