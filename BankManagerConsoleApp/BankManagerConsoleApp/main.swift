@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+
+private let bank = BankService(numberOfCustomers: 5)
+bank.start()
