@@ -35,7 +35,7 @@ struct BankManager {
         var bank: Bank = Bank(bankers: bankers)
         
         bank.lineUp(&customers)
-        bank.bankService()
+        bank.startBankService()
     }
     
     private func createBankers(number: Int) -> [Banker] {
