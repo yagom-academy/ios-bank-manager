@@ -39,7 +39,7 @@ struct BankManager {
     
     private func createCustomers() -> [Customer] {
         let customerNumbers: Int = Int.random(in: 10...30)
-        print(customerNumbers)
+        
         return Array(repeating: Customer(), count: customerNumbers)
     }
 }
