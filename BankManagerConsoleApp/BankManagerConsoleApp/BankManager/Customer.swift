@@ -5,10 +5,10 @@
 //  Created by Kobe, Hemg on 2023/07/14.
 //
 
-class Customer {
+final class Customer {
 	let user: Int
 	
-	init(id: Int) {
-		self.user = id
+	init(waitingNumber: Int) {
+		self.user = waitingNumber
 	}
 }

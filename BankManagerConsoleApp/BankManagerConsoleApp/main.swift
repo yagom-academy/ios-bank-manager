@@ -6,5 +6,5 @@
 
 import Foundation
 
-let bank = BankService()
+private let bank = BankService(numberOfCustomers: 5)
 bank.start()
