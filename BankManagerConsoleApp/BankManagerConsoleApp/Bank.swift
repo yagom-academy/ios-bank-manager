@@ -15,23 +15,22 @@ struct Bank {
         self.bankers = bankers
     }
     
-    mutating func lineUp(_ customers: inout [Customer]) {
+    mutating private func lineUp(_ customers: inout [Customer]) {
         for number in 0..<customers.count {
-            customers[number].queueNumber = number + 1
+            customers[number].receiveQueueNumber(queueNumber: number + 1)
             bankQueue.enqueue(customers[number])
         }
     }
     
-    mutating func startBankService() {
+    mutating func startBankService(_ customers: inout [Customer]) {
+        lineUp(&customers)
+        
         while !bankQueue.isEmpty {
-            guard let currentCustomer = bankQueue.dequeue() else {
+            guard let currentCustomer = bankQueue.dequeue(),
+                  let taskTime = bankers[0].task(currentCustomer) else {
                 return
             }
-            
-            guard let taskTime = bankers[0].task(currentCustomer) else {
-                return
-            }
-            
+
             check(to: taskTime)
             finishedCustomerCount()
         }

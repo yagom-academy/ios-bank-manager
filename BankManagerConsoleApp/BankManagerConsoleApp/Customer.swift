@@ -6,5 +6,9 @@
 //
 
 struct Customer {
-    var queueNumber: Int?
+    private(set) var queueNumber: Int?
+    
+    mutating func receiveQueueNumber(queueNumber: Int) {
+        self.queueNumber = queueNumber
+    }
 }

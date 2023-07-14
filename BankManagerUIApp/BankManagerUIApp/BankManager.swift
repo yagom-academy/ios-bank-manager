@@ -30,8 +30,7 @@ struct BankManager {
         var customers = createCustomers()
         var bank: Bank = Bank(bankers: bankers)
         
-        bank.lineUp(&customers)
-        bank.startBankService()
+        bank.startBankService(&customers)
     }
     
     private func createBankers(number: Int) -> [Banker] {
@@ -40,7 +39,7 @@ struct BankManager {
     
     private func createCustomers() -> [Customer] {
         let customerNumbers: Int = Int.random(in: 10...30)
-        
+        print(customerNumbers)
         return Array(repeating: Customer(), count: customerNumbers)
     }
 }
