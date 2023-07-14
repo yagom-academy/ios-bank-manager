@@ -8,12 +8,24 @@
 import Foundation
 
 struct BankClerk {
-    let workType: WorkType
+    private let workType: WorkType
+    private let semaphore: DispatchSemaphore
     
-    func carryOutBankService(for customer: Customer) {
-        startTask(customer.waitingNumber)
-        Thread.sleep(forTimeInterval: workType.taskTime)
-        endTask(customer.waitingNumber)
+    init(workType: WorkType) {
+        self.workType = workType
+        self.semaphore = DispatchSemaphore(value: workType.numberOfBankClerk)
+    }
+    
+    func carryOutBankService(for customer: Customer, of group: DispatchGroup) {
+        DispatchQueue.global().async(group: group) {
+            semaphore.wait()
+            
+            startTask(customer.waitingNumber)
+            Thread.sleep(forTimeInterval: workType.taskTime)
+            endTask(customer.waitingNumber)
+            
+            semaphore.signal()
+        }
     }
     
     private func startTask(_ waitingNumber: Int) {

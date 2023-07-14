@@ -29,13 +29,15 @@ struct Bank {
     }
     
     private func startBankService() {
+        let group = DispatchGroup()
         let startTime = Date()
         
         while !waitingLine.isEmpty {
             if let customerTurn = waitingLine.dequeue() {
-                bankClerk.carryOutBankService(for: customerTurn)
+                bankClerk.carryOutBankService(for: customerTurn, of: group)
             }
         }
+        group.wait()
         
         let totalTaskTime = Date().timeIntervalSince(startTime)
         let formatTaskTime = String(format: "%.2f", totalTaskTime)
