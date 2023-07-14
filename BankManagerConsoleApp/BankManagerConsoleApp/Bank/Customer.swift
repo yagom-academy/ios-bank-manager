@@ -5,6 +5,6 @@
 //  Created by karen on 2023/07/14.
 //
 
-struct Customer {
-    let number: UInt
+struct Customer: Equatable {
+    let id: UInt
 }
