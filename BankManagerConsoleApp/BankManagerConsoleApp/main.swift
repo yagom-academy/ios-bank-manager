@@ -6,4 +6,4 @@
 
 var bankManager = BankManager()
 
-bankManager.selectMenu()
+bankManager.start()

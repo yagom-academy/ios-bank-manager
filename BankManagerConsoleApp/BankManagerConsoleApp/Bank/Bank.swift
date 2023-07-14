@@ -7,9 +7,12 @@
 
 import Foundation
 
+import Foundation
+
 struct Bank {
-    private var teller: Teller = Teller()
-    private var watingCustomer: Queue<Customer> = Queue<Customer>()
+    private let teller: UInt = 1
+    private var customersQueue: Queue<Customer> = Queue<Customer>()
+    private let processingTime: TimeInterval = 0.7
     private var totalProcessingTime = ""
     private var customerCount = UInt.zero
     
@@ -24,18 +27,24 @@ struct Bank {
     private mutating func lineUpCustomer() {
         let customerCount = UInt.random(in: 10...30)
         for number in 1...customerCount {
-            let customer = Customer(number: UInt(number))
-            watingCustomer.enqueue(customer)
+            let customer = Customer(id: number)
+            customersQueue.enqueue(customer)
         }
     }
     
-    private mutating func dailyWork(){
-        while !watingCustomer.isEmpty {
-            guard let customer = watingCustomer.dequeue() else { return }
+    private mutating func dailyWork() {
+        while !customersQueue.isEmpty {
+            guard let customer = customersQueue.dequeue() else { return }
             
-            teller.processCustomer(customer)
+            process(customer: customer)
             customerCount += 1
         }
+    }
+    
+    mutating func process(customer: Customer) {
+        print("\(customer.id)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: processingTime)
+        print("\(customer.id)번 고객 업무 완료")
     }
     
     private func timeCheck(_ block: () -> Void) -> String {
@@ -52,7 +61,7 @@ struct Bank {
     }
     
     private mutating func reset() {
-        watingCustomer = Queue<Customer>()
+        customersQueue.clear()
         customerCount = .zero
     }
 }
