@@ -8,13 +8,15 @@
 import Foundation
 
 struct Bank {
-    private var bankerQueue = OperationQueue()
+    private var depositBankerQueue = OperationQueue()
+    private var loanBankerQueue = OperationQueue()
     private var dailyCustomerQueue = CustomerQueue<Customer>()
     private var dailyTotalCustomer: Int = .zero
     private var dailyBusinessHour: Decimal = .zero
     
     init() {
-        bankerQueue.maxConcurrentOperationCount = Configuration.numberOfBanker
+        depositBankerQueue.maxConcurrentOperationCount = Configuration.numberOfDepositBanker
+        loanBankerQueue.maxConcurrentOperationCount = Configuration.numberOfLoanBanker
     }
     
     mutating func dailyWork() {
@@ -24,7 +26,8 @@ struct Bank {
             addCustomerTask(customer)
         }
         
-        bankerQueue.waitUntilAllOperationsAreFinished()
+        depositBankerQueue.waitUntilAllOperationsAreFinished()
+        loanBankerQueue.waitUntilAllOperationsAreFinished()
         close()
     }
     
@@ -50,7 +53,12 @@ struct Bank {
             print(String(format: Namespace.endTask, customer.waitingNumber, customer.bankWork.name))
         }
         
-        bankerQueue.addOperation(task)
+        switch customer.bankWork {
+        case .deposit:
+            depositBankerQueue.addOperation(task)
+        case .loan:
+            loanBankerQueue.addOperation(task)
+        }
 
         dailyTotalCustomer += 1
         dailyBusinessHour += customer.bankWork.duration
@@ -70,7 +78,8 @@ struct Bank {
 
 extension Bank {
     enum Configuration {
-        static let numberOfBanker = 1
+        static let numberOfDepositBanker = 2
+        static let numberOfLoanBanker = 1
         static let minimumCustomer = 10
         static let maximumCustomer = 30
         static let taskDuration: Decimal = 0.7
