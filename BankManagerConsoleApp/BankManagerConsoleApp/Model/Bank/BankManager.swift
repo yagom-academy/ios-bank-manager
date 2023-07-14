@@ -14,7 +14,7 @@ struct BankManager {
         let number = client.turn
         
         print("\(number)번 고객 업무 시작")
-        usleep(UInt32(taskTime * 1000000))
+        Thread.sleep(forTimeInterval: taskTime)
         print("\(number)번 고객 업무 완료")
     }
 }
