@@ -31,16 +31,17 @@ struct BankManager {
     
     private func openBank() {
         let bankers = createBankers(number: 1)
-        let customers = createCustomers()
+        var customers = createCustomers()
         var bank: Bank = Bank(bankers: bankers)
         
-        bank.add(to: customers)
+        bank.lineUp(&customers)
+        bank.bankService()
     }
     
     private func createBankers(number: Int) -> [Banker] {
         var bankers: [Banker] = []
         
-        for _ in 0...number {
+        for _ in 0..<number {
             bankers.append(Banker())
         }
         

@@ -8,15 +8,14 @@
 import Foundation
 
 struct Banker {
-    var workingTime: Double = 0.0
-    
     // 추후 더 정확하게 함수명 변경 고려하기
-    mutating func task() {
-        usleep(700_000)
-        workingTime += 0.7
-    }
-    
-    func submitWorkingTime() -> Double {
-        return workingTime
+    mutating func task(_ customer: Customer) {
+        guard let queueNumber = customer.queueNumber else {
+            return
+        }
+        
+        print("\(queueNumber)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: 0.7)
+        print("\(queueNumber)번 고객 업무 종료")
     }
 }
