@@ -5,7 +5,7 @@
 //
 
 struct BankManager {
-    private let bank = Bank(bankClerk: BankClerk(workType: .deposit), customerCount: Int.random(in: 10...30))
+    private let bank = Bank(customerCount: Int.random(in: 10...30))
     
     func start() {
         print("1 : 은행 개점")

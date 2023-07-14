@@ -8,12 +8,12 @@
 import Foundation
 
 struct Bank {
-    private let bankClerk: BankClerk
     private let customerCount: Int
+    private let depositBankClerk = BankClerk(workType: .deposit)
+    private let loanBankClerk = BankClerk(workType: .loan)
     private var waitingLine = Queue<Customer>()
     
-    init(bankClerk: BankClerk, customerCount: Int) {
-        self.bankClerk = bankClerk
+    init(customerCount: Int) {
         self.customerCount = customerCount
     }
     
@@ -32,17 +32,29 @@ struct Bank {
         let group = DispatchGroup()
         let startTime = Date()
         
-        while !waitingLine.isEmpty {
-            if let customerTurn = waitingLine.dequeue() {
-                bankClerk.carryOutBankService(for: customerTurn, of: group)
-            }
-        }
+        work(group)
+        
         group.wait()
         
         let totalTaskTime = Date().timeIntervalSince(startTime)
         let formatTaskTime = String(format: "%.2f", totalTaskTime)
         
         finish(formatTaskTime)
+    }
+    
+    private func work(_ group: DispatchGroup) {
+        while !waitingLine.isEmpty {
+            guard let customerTurn = waitingLine.dequeue() else { return }
+            
+            switch customerTurn.workType {
+            case .deposit:
+                depositBankClerk.carryOutBankService(for: customerTurn, of: group)
+            case .loan:
+                loanBankClerk.carryOutBankService(for: customerTurn, of: group)
+            default:
+                print("workType이 nil입니다.")
+            }
+        }
     }
     
     private func finish(_ taskTime: String) {
