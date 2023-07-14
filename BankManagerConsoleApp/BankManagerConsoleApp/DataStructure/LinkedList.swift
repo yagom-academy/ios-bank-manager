@@ -51,7 +51,7 @@ struct LinkedList<Element> {
         return dequeuedElement
     }
     
-    mutating func clear() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }

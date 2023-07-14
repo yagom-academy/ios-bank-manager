@@ -19,7 +19,7 @@ struct Queue<Element> {
     }
     
     mutating func clear() {
-        queue.clear()
+        queue.removeAll()
     }
 }
 
