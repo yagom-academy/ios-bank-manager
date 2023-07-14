@@ -75,9 +75,9 @@
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
 				3B94BC022A5D40B000ED83C9 /* BankManager.swift */,
-				5D4FAA382A60110D001FA74A /* Customer.swift */,
 				5D4FAA3A2A60111D001FA74A /* Bank.swift */,
 				5D4FAA3C2A60113A001FA74A /* Banker.swift */,
+				5D4FAA382A60110D001FA74A /* Customer.swift */,
 				5D4FAA322A6010B1001FA74A /* CustomerQueue.swift */,
 				5D4FAA342A6010B1001FA74A /* LinkedList.swift */,
 				5D4FAA332A6010B1001FA74A /* Node.swift */,
