@@ -8,9 +8,11 @@
 import Foundation
 
 struct BankClerk {
+    let workType: WorkType
+    
     func carryOutBankService(for customer: Customer) {
         startTask(customer.waitingNumber)
-        Thread.sleep(forTimeInterval: customer.taskTime)
+        Thread.sleep(forTimeInterval: workType.taskTime)
         endTask(customer.waitingNumber)
     }
     

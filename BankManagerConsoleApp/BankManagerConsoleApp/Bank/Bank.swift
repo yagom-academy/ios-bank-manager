@@ -24,7 +24,7 @@ struct Bank {
     
     private func updateWaitingLine() {
         (1...customerCount).forEach {
-            waitingLine.enqueue(Customer(waitingNumber: $0, taskTime: 0.7))
+            waitingLine.enqueue(Customer(waitingNumber: $0))
         }
     }
     
