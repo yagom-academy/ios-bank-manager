@@ -9,17 +9,17 @@ struct BankManager {
         var isSelectMenuOn = true
         
         while isSelectMenuOn {
-            print("1 : 은행 개점\n2 : 종료\n입력 : ", terminator: "")
+            print(BankManager.NameSpace.menuGuide, terminator: "")
             
             guard let userInput = readLine() else { return }
             
             switch userInput {
-            case "1":
+            case BankManager.NameSpace.selectOpenBank:
                 openBank()
-            case "2":
+            case BankManager.NameSpace.selectExit:
                 isSelectMenuOn = false
             default:
-                print("잘못된 입력입니다.")
+                print(BankManager.NameSpace.worngInput)
             }
         }
     }
@@ -37,5 +37,14 @@ struct BankManager {
         }
         
         return customerWaitingQueue
+    }
+}
+
+extension BankManager {
+    private enum NameSpace {
+        static let menuGuide: String = "1 : 은행 개점\n2 : 종료\n입력 : "
+        static let worngInput: String = "잘못된 입력입니다."
+        static let selectOpenBank: String = "1"
+        static let selectExit: String = "2"
     }
 }
