@@ -7,7 +7,6 @@
 import Foundation
 
 struct BankManager {
-    
     func selectMenu() {
         var isBankOpen: Bool = true
         
@@ -39,23 +38,12 @@ struct BankManager {
     }
     
     private func createBankers(number: Int) -> [Banker] {
-        var bankers: [Banker] = []
-        
-        for _ in 0..<number {
-            bankers.append(Banker())
-        }
-        
-        return bankers
+        return Array(repeating: Banker(), count: number)
     }
     
     private func createCustomers() -> [Customer] {
-        var customers: [Customer] = []
         let customerNumbers: Int = Int.random(in: 10...30)
         
-        for _ in 1...customerNumbers {
-            customers.append(Customer())
-        }
-        
-        return customers
+        return Array(repeating: Customer(), count: customerNumbers)
     }
 }
