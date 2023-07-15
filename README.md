@@ -9,13 +9,12 @@
 
 1. [팀원](#1.)
 2. [타임 라인](#2.)
-3. [다이어그램](#3.)
-4. [폴더 구조](#4.)
-5. [트러블 슈팅](#5.)
-6. [고민한 부분](#6.)
-7. [실행 화면](#7.)
-8. [참고 링크](#8.)
-9. [팀 회고](#9.)
+3. [시각적 프로젝트 구조](#3.)
+4. [실행 화면](#4.)
+5. [고민한 부분](#5.)
+6. [트러블 슈팅](#6.)
+7. [참고 링크](#7.)
+8. [팀 회고](#8.)
 
 
 ---
@@ -28,7 +27,7 @@
 
 |[Karen ♉️](https://github.com/karenyang835)|
 | :-: |
-| <Img src="https://i.imgur.com/auFOXpc.png" width="150"/>|
+| <Img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/c1954254-be28-4f53-bbe1-5aa01a3d0922" width="250"/>|
 
 
 ---
@@ -54,17 +53,27 @@
 
 <a id="3."></a>
 
-## 3.📊 다이어그램
+## 3.📊 시각적 프로젝트 구조
+### 📂 폴더 구조
+![스크린샷 2023-07-14 오후 5 08 49](https://github.com/karenyang835/ios-bank-manager/assets/124643896/e3e3e361-b93e-4208-846f-e91db20caa67)
+</br>
+
+### 🎨 Class Diagram
+</br>
+
 ![image](https://github.com/karenyang835/ios-bank-manager/assets/124643896/574f21d6-22dc-45d8-aaff-59426c337dda)
 
 ---
 
 </br>
 
+
 <a id="4."></a>
 
-## 4. 📂 폴더 구조
-![스크린샷 2023-07-14 오후 5 08 49](https://github.com/karenyang835/ios-bank-manager/assets/124643896/e3e3e361-b93e-4208-846f-e91db20caa67)
+## 4. 📱실행 화면
+| 1. 은행개점  |2. 종료 |
+| :--------: | :--------: |
+|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/0d032f79-42e8-4784-930f-5bd2bcf49add" style="zoom:80%;" />|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/19e7c683-40ca-4b60-8552-9dc753864697" style="zoom:80%;" />|
 
 ---
 
@@ -145,22 +154,7 @@
 
 <a id="7."></a> 
 
-## 7.📱실행 화면
-
-<br/>
-
-
-
-| 1. 은행개점  |2. 종료 |
-| :--------: | :--------: |
-|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/0d032f79-42e8-4784-930f-5bd2bcf49add" style="zoom:80%;" />|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/19e7c683-40ca-4b60-8552-9dc753864697" style="zoom:80%;" />|
----
-
-</br>
-
-<a id="8."></a> 
-
-## 8. 🔗 참고 링크
+## 7. 🔗 참고 링크
 
 🍎 [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/) <br>
 🍏 [Apple Developer - sleep(_:)](https://developer.apple.com/documentation/swift/task/sleep(_:))<br>
@@ -171,7 +165,7 @@
 
 </br>
 
-<a id="9."></a>
+<a id="8."></a>
 
 ## 9. 💌 팀 회고
 
