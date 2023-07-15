@@ -21,8 +21,8 @@ struct Bank {
     }
     
     mutating private func handOutNumberTickets() {
-        (1...numberOfCustomer).forEach {
-            customerQueue.enqueue(Customer(numberTicket: $0))
+        (0..<numberOfCustomer).forEach {
+            customerQueue.enqueue(Customer(numberTicket: $0 + 1))
         }
     }
     
