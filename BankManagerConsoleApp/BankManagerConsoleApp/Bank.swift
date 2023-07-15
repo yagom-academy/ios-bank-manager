@@ -36,7 +36,7 @@ struct Bank {
     
     private mutating func startBusiness() {
         createCustomerRandomNumber()
-        enqueueCustomers()
+        receiveCustomers()
         processBusiness()
         finishBusiness()
     }
@@ -45,7 +45,7 @@ struct Bank {
          customerNumber = Int.random(in: 10...30)
     }
     
-    private mutating func enqueueCustomers() {
+    private mutating func receiveCustomers() {
         for number in 1...customerNumber {
             let customer: Customer = Customer(waitingNumber: number)
             customerQueue.enqueue(customer)
