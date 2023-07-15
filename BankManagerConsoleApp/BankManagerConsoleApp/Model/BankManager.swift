@@ -8,9 +8,9 @@
 struct BankManager {
     mutating func runProgram() {
         var bank: Bank = createBank()
-        var isContinue: Bool = true
+        var shouldContinue: Bool = true
         
-        while isContinue {
+        while shouldContinue {
             showMenu()
             
             guard let inputValue = readLine() else {
@@ -21,7 +21,7 @@ struct BankManager {
             case Menu.bankOpening.number:
                 bank.open()
             case Menu.quit.number:
-                isContinue = false
+                shouldContinue = false
             default:
                 continue
             }
