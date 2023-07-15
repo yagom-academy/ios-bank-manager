@@ -62,7 +62,7 @@ final class Bank {
         var client: Client
         
         for turn in 1...count {
-            client = Client(turn)
+            client = Client(turn, workType: .loan)
             clientQueue.enqueue(client)
         }
     }
