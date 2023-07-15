@@ -144,7 +144,7 @@
 
 
 #### ✅ 해결 방법
-- 빌드할 타겟을 BankManagerConsoleApp로 설정을 해주면 제대로 동작이 되었습니다.
+- 빌드할 타겟을 `BankManagerConsoleApp`로 설정을 해주면 제대로 동작이 되었습니다.
 ![스크린샷 2023-07-14 오후 5 12 35](https://github.com/karenyang835/ios-bank-manager/assets/124643896/fc2460e9-6ddd-4662-bbf1-b156a9bc630b)
 
 
@@ -167,7 +167,7 @@
 
 <a id="8."></a>
 
-## 9. 💌 팀 회고
+## 8. 💌 팀 회고
 
 ### 👏🏻 우리팀이 잘한 점
 - 개인 공부를 충분히 하고 진행했습니다.
