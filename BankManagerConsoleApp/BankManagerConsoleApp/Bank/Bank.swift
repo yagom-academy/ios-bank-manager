@@ -13,13 +13,14 @@ struct Bank {
     private let processingTime: TimeInterval = 0.7
     private var totalProcessingTime = ""
     private var customerCount = UInt.zero
+    var state: State = .working
     
     mutating func open() {
         lineUpCustomer()
         totalProcessingTime = timeCheck {
             dailyWork()
         }
-        close()
+        finish()
     }
     
     private mutating func lineUpCustomer() {
@@ -38,9 +39,9 @@ struct Bank {
     }
     
     private mutating func process(customer: Customer) {
-        print("\(customer.id)번 고객 업무 시작")
+        print("\(customer.watingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: processingTime)
-        print("\(customer.id)번 고객 업무 완료")
+        print("\(customer.watingNumber)번 고객 업무 완료")
     }
     
     private func timeCheck(_ block: () -> Void) -> String {
@@ -51,13 +52,24 @@ struct Bank {
         return time
     }
     
-    private mutating func close() {
+    private mutating func finish() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(totalProcessingTime)초입니다.")
         reset()
+    }
+    
+    mutating func close() {
+        state = .notWorking
     }
     
     private mutating func reset() {
         customersQueue.clear()
         customerCount = .zero
+    }
+}
+
+extension Bank {
+    enum State {
+        case working
+        case notWorking
     }
 }
