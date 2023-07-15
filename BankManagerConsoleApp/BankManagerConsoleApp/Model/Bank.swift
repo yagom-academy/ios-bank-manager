@@ -9,6 +9,9 @@ struct Bank {
     private let bankTeller: BankTeller = BankTeller()
     private var customerQueue: Queue<Customer> = Queue()
     private let numberOfCustomer: UInt
+    private var workTime: Double {
+        return bankTeller.processingTime * Double(numberOfCustomer)
+    }
     
     init(numberOfCustomer: UInt) {
         self.numberOfCustomer = numberOfCustomer
@@ -33,13 +36,7 @@ struct Bank {
     }
     
     private func closeBusiness() {
-        let workTime = calculateWorkTime()
-        
         print(String(format: MessageFormat.closing, numberOfCustomer, workTime))
-    }
-    
-    private func calculateWorkTime() -> Double {
-        return bankTeller.processingTime * Double(numberOfCustomer)
     }
 }
 
