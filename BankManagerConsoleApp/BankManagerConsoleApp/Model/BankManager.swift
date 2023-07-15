@@ -34,8 +34,8 @@ struct BankManager {
         return Bank(numberOfCustomer: randomNumber)
     }
     
-    private func generateRandomNumber() -> UInt {
-        return UInt.random(in: RandomNumberRange.min...RandomNumberRange.max)
+    private func generateRandomNumber() -> Int {
+        return Int.random(in: RandomNumberRange.min...RandomNumberRange.max)
     }
     
     private func showMenu() {
@@ -61,7 +61,7 @@ extension BankManager {
     }
     
     private enum RandomNumberRange {
-        static let min: UInt = 10
-        static let max: UInt = 30
+        static let min: Int = 10
+        static let max: Int = 30
     }
 }

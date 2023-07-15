@@ -8,12 +8,12 @@
 struct Bank {
     private let bankTeller: BankTeller = BankTeller()
     private var customerQueue: Queue<Customer> = Queue()
-    private let numberOfCustomer: UInt
+    private let numberOfCustomer: Int
     private var workTime: Double {
         return bankTeller.processingTime * Double(numberOfCustomer)
     }
     
-    init(numberOfCustomer: UInt) {
+    init(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
     }
     
