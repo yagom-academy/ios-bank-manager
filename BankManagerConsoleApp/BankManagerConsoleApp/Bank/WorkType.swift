@@ -25,4 +25,13 @@ enum WorkType: CaseIterable {
             return 1
         }
     }
+    
+    var name: String {
+        switch self {
+        case .loan:
+            return "대출"
+        case .deposit:
+            return "예금"
+        }
+    }
 }

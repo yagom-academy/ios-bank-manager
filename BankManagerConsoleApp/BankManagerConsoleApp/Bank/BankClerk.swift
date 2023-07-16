@@ -29,10 +29,10 @@ struct BankClerk {
     }
     
     private func startTask(_ waitingNumber: Int) {
-        print("\(waitingNumber)번 고객 업무 시작")
+        print("\(waitingNumber)번 고객 \(workType.name)업무 시작")
     }
     
     private func endTask(_ waitingNumber: Int) {
-        print("\(waitingNumber)번 고객 업무 완료")
+        print("\(waitingNumber)번 고객 \(workType.name)업무 완료")
     }
 }
