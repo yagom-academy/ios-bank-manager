@@ -11,8 +11,8 @@ struct Bank {
 
     init() {
         let randomRange = 1...Int.random(in: 10...30)
-        randomRange.forEach { priority in
-            customers.enqueue(Customer(priority: priority))
+        randomRange.forEach { numberTicket in
+            customers.enqueue(Customer(numberTicket))
         }
     }
     
