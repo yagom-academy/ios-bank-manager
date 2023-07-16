@@ -32,7 +32,7 @@ struct Bank {
         let group = DispatchGroup()
         let startTime = Date()
         
-        work(group)
+        clockIntoWork(group)
         
         group.wait()
         
@@ -42,7 +42,7 @@ struct Bank {
         finish(formatTaskTime)
     }
     
-    private func work(_ group: DispatchGroup) {
+    private func clockIntoWork(_ group: DispatchGroup) {
         while !waitingLine.isEmpty {
             guard let customerTurn = waitingLine.dequeue() else { return }
             

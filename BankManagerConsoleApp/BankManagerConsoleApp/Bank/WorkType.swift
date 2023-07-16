@@ -10,19 +10,19 @@ enum WorkType: CaseIterable {
     
     var taskTime: Double {
         switch self {
-        case .deposit:
-            return 0.7
         case .loan:
             return 1.1
+        case .deposit:
+            return 0.7
         }
     }
     
     var numberOfBankClerk: Int {
         switch self {
-        case .deposit:
-            return 2
         case .loan:
             return 1
+        case .deposit:
+            return 2
         }
     }
     
