@@ -9,7 +9,7 @@ import Foundation
 
 struct Bank: Manageable {
     var name: String
-    var tellers: [Teller]
+    private var tellers: [Teller]
     private let customerNumber: Int = Int.random(in: 10...30)
     private var waitingLine = Queue<Customer>()
     private var totalTime: Double = 0.0

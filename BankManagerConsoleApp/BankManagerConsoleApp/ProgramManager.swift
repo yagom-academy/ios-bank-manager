@@ -8,7 +8,7 @@
 import Foundation
 
 struct ProgramManager {
-    var program: Manageable
+    private var program: Manageable
     private var isWorking: Bool = true
     
     init(program: Manageable) {
