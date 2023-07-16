@@ -48,7 +48,7 @@
 		78CB78812A613BAA004B1124 /* BankClerk .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankClerk .swift"; sourceTree = "<group>"; };
 		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
+		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +79,27 @@
 			path = BankManagerConsoleAppTests;
 			sourceTree = "<group>";
 		};
+		78069CD32A64329F00AB16A9 /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				7862DA7A2A5C02D8005A5608 /* Node.swift */,
+				1FA1723B2A5C0715006C1894 /* LinkedList.swift */,
+				7862DA7C2A5C1591005A5608 /* Queue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		78069CD42A6432B900AB16A9 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				C7D65D1A259C8190005510E0 /* BankManager.swift */,
+				1F96FE702A60E1B00020C741 /* Bank.swift */,
+				78CB78812A613BAA004B1124 /* BankClerk .swift */,
+				1F96FE6E2A60DF900020C741 /* Customer.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -100,14 +121,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				78069CD42A6432B900AB16A9 /* Bank */,
+				78069CD32A64329F00AB16A9 /* Queue */,
 				C7694E79259C3EC00053667F /* main.swift */,
-				7862DA7A2A5C02D8005A5608 /* Node.swift */,
-				1FA1723B2A5C0715006C1894 /* LinkedList.swift */,
-				7862DA7C2A5C1591005A5608 /* Queue.swift */,
-				1F96FE702A60E1B00020C741 /* Bank.swift */,
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
-				78CB78812A613BAA004B1124 /* BankClerk .swift */,
-				1F96FE6E2A60DF900020C741 /* Customer.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
