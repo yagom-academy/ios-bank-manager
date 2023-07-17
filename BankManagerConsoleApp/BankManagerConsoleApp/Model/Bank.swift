@@ -6,11 +6,12 @@
 //
 
 struct Bank {
-    private let bankTeller: BankTeller = BankTeller(duty: .deposit)
+    private var bankTellers: [BankTeller] = [BankTeller]()
     private var customerQueue: Queue<Customer> = Queue()
     private let numberOfCustomer: Int
     private var workTime: Double {
-        return bankTeller.duty.duration * Double(numberOfCustomer)
+        //return bankTeller.duty.duration * Double(numberOfCustomer)
+        return 0.0
     }
     
     private let printStartMessage: (Customer) -> Void = { customer in
@@ -26,9 +27,17 @@ struct Bank {
     }
     
     mutating func open() {
+        recruitBankTeller(duty: .deposit, number: 2)
+        recruitBankTeller(duty: .loan, number: 1)
         handOutNumberTickets()
         startBusiness()
         closeBusiness()
+    }
+    
+    mutating func recruitBankTeller(duty: BankingService, number: Int) {
+        (0..<number).forEach { _ in
+            bankTellers.append(BankTeller(duty: duty))
+        }
     }
     
     mutating private func handOutNumberTickets() {
@@ -39,7 +48,7 @@ struct Bank {
     
     mutating private func startBusiness() {
         while let currentCustomer = customerQueue.dequeue() {
-            bankTeller.doWork(for: currentCustomer, startHandler: printStartMessage, completionHandler: printFinishMessage)
+            //bankTeller.doWork(for: currentCustomer, startHandler: printStartMessage, completionHandler: printFinishMessage)
         }
     }
     
