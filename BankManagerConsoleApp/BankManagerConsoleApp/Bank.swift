@@ -9,14 +9,12 @@ import Foundation
 
 struct Bank: Manageable {
     var name: String
-    private var tellers: [Teller]
     private let customerNumber: Int = Int.random(in: 10...30)
     private var waitingLine = Queue<Customer>()
     private var totalTime: Double = 0.0
     
-    init(name: String, tellers: [Teller]) {
+    init(name: String) {
         self.name = name
-        self.tellers = tellers
     }
     
     mutating func start() {
@@ -27,7 +25,7 @@ struct Bank: Manageable {
     
     mutating private func giveTicketNumber(numbers: Int) {
         for number in 1...numbers {
-            let customer = Customer(numberTicket: number)
+            let customer = Customer(numberTicket: number, bankTask: BankTask.allCases.randomElement() ?? .deposit)
             
             waitingLine.enqueue(customer)
         }
@@ -35,18 +33,25 @@ struct Bank: Manageable {
     
     mutating private func assignCustomer() {
         while !waitingLine.isEmpty {
-            for teller in tellers {
-                guard let customer = waitingLine.dequeue() else {
-                    return
-                }
-                
-                teller.processCustomer(customer)
-                totalTime += 0.7
+            
+            guard let customer = waitingLine.dequeue() else {
+                return
             }
+            
+            processCustomer(customer)
+            totalTime += 0.7
         }
+        
     }
     
     private func closeBank() {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
        }
+    
+    private func processCustomer(_ customer: Customer) {
+        print("\(customer.numberTicket)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: 0.7)
+        print("\(customer.numberTicket)번 고객 업무 완료")
+    }
 }
+
