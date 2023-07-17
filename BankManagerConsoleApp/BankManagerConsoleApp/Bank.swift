@@ -24,14 +24,14 @@ class Bank: Manageable {
         self.totalTime = totalTime
     }
     
-    func start() {
+    func open() {
         let group = DispatchGroup()
         
         giveTicketNumber(numbers: customerNumber)
         operateWindow(tellerCount: teller.deposit, line: depositLine, group: group)
         operateWindow(tellerCount: teller.loan, line: loanLine, group: group)
         group.wait()
-        closeBank()
+        close()
     }
     
     private func giveTicketNumber(numbers: Int) {
@@ -70,14 +70,14 @@ class Bank: Manageable {
         }
     }
     
-    private func closeBank() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
-       }
-    
     private func processCustomer(_ customer: Customer) {
-        print("\(customer.numberTicket)번 고객 업무 시작")
+        print("\(customer.numberTicket)번 고객 \(customer.bankTask.type)업무 시작")
         Thread.sleep(forTimeInterval: customer.bankTask.time)
-        print("\(customer.numberTicket)번 고객 업무 완료")
+        print("\(customer.numberTicket)번 고객 \(customer.bankTask.type)업무 완료")
+    }
+    
+    private func close() {
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(String(format: "%.2f", totalTime))초입니다.")
     }
 }
 

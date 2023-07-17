@@ -34,7 +34,7 @@ struct ProgramManager {
             
             switch input {
             case Menu.startProgram.number:
-                program.start()
+                program.open()
             case Menu.finishProgram.number:
                 isWorking = false
             default:

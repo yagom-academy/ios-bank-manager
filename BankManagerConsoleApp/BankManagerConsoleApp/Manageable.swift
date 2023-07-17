@@ -8,5 +8,5 @@
 protocol Manageable {
     var name: String { get }
     
-    mutating func start()
+    mutating func open()
 }
