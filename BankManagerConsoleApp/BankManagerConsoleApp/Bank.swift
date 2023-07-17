@@ -7,25 +7,30 @@
 
 import Foundation
 
-struct Bank: Manageable {
+class Bank: Manageable {
     var name: String
+    var teller: (deposit: Int, loan: Int)
     private let customerNumber: Int = Int.random(in: 10...30)
     private var depositLine = Queue<Customer>()
     private var loanLine = Queue<Customer>()
     private var totalTime: Double = 0.0
     
-    init(name: String) {
+    init(name: String, teller: (deposit: Int, loan: Int), depositLine: Queue<Customer> = Queue<Customer>(), loanLine: Queue<Customer> = Queue<Customer>(), totalTime: Double = 0) {
         self.name = name
+        self.teller = teller
+        self.depositLine = depositLine
+        self.loanLine = loanLine
+        self.totalTime = totalTime
     }
     
-    mutating func start() {
+    func start() {
         giveTicketNumber(numbers: customerNumber)
         assignCustomerTask(line: depositLine)
         assignCustomerTask(line: loanLine)
         closeBank()
     }
     
-    mutating private func giveTicketNumber(numbers: Int) {
+    private func giveTicketNumber(numbers: Int) {
         for number in 1...numbers {
             let customer = Customer(numberTicket: number, bankTask: BankTask.allCases.randomElement() ?? .deposit)
             
@@ -38,7 +43,7 @@ struct Bank: Manageable {
         }
     }
     
-    mutating private func assignCustomerTask(line: Queue<Customer>) {
+    private func assignCustomerTask(line: Queue<Customer>) {
         var line = line
         
         while !line.isEmpty {
