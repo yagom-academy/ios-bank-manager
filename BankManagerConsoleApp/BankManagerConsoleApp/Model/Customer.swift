@@ -7,4 +7,5 @@
 
 struct Customer {
     let numberTicket: Int
+    let service: BankingService = BankingService.allCases[Int.random(in: 0...1)]
 }

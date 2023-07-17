@@ -8,13 +8,13 @@
 import Foundation
 
 struct BankTeller {
-    let processingTime: Double = 0.7
+    let duty: BankingService
         
     func doWork(for customer: Customer,
                 startHandler: (Customer) -> Void = { _ in },
                 completionHandler: (Customer) -> Void = { _ in }) {
         startHandler(customer)
-        Thread.sleep(forTimeInterval: processingTime)
+        Thread.sleep(forTimeInterval: duty.duration)
         completionHandler(customer)
     }
 }
