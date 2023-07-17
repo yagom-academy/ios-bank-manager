@@ -14,18 +14,17 @@ class Bank: Manageable {
     private let customerNumber: Int = Int.random(in: 10...30)
     private var totalTime: Double = 0.0
     private let counter = DispatchSemaphore(value: 1)
-    
+    private let group = DispatchGroup()
+
     init(name: String, tellers: [BankTask: Int]) {
         self.name = name
-        self.tellers = teller
+        self.tellers = tellers
     }
     
     func open() {
-        let group = DispatchGroup()
-        
         giveTicketNumber(numbers: customerNumber)
-        operateWindow(task: .deposit, group: group)
-        operateWindow(task: .loan, group: group)
+        operateWindow(task: .deposit)
+        operateWindow(task: .loan)
         group.wait()
         close()
     }
@@ -35,11 +34,10 @@ class Bank: Manageable {
             let customer = Customer(numberTicket: number)
             
             line[customer.bankTask]?.enqueue(customer)
-            }
         }
     }
     
-    private func operateWindow(task: BankTask, group: DispatchGroup) {
+    private func operateWindow(task: BankTask) {
         guard let tellerCount = tellers[task],
               let line = line[task] else {
             return
