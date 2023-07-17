@@ -9,8 +9,8 @@ import Foundation
 struct BankManager {
     private let group: DispatchGroup = DispatchGroup()
     private let semaphore: DispatchSemaphore
-    
-    init(semaphore: Int) {
+
+    init(people semaphore: Int) {
         self.semaphore = DispatchSemaphore(value: semaphore)
     }
     
@@ -25,6 +25,7 @@ struct BankManager {
             semaphore.signal()
         }
     }
+    
     func finishWork() {
         group.wait()
     }

@@ -8,8 +8,8 @@
 import Foundation
 
 struct Bank {
-    private let depositBankManagers: BankManager = BankManager(semaphore: 2)
-    private let loansBankManagers: BankManager = BankManager(semaphore: 1)
+    private let depositBankManagers: BankManager = BankManager(people: 2)
+    private let loansBankManagers: BankManager = BankManager(people: 1)
     private var customerNumber: Int = 0
     private var customerQueue: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
     private let numberFormatter: NumberFormatter = {
@@ -19,7 +19,7 @@ struct Bank {
         return numberFormatter
     }()
     private var totalTime: TimeInterval = 0
-    private var startDate: Date?
+    private var startTime: Date?
     
     mutating func selectMenu() {
         while true {
@@ -56,16 +56,18 @@ struct Bank {
         }
     }
     
-    private mutating func startData() {
-        startDate = Date()
+    private mutating func measureStartTime() {
+        startTime = Date()
     }
     
-    private mutating func totaltime() {
-        totalTime = Date().timeIntervalSince(startDate!)
+    private mutating func measureTotalTime() {
+        guard let startTime else { return }
+        
+        totalTime = Date().timeIntervalSince(startTime)
     }
     
     private mutating func processBusiness() {
-        startData()
+        measureStartTime()
         
         while let customer = customerQueue.dequeue() {
             switch customer.getBankingServiceType() {
@@ -80,7 +82,7 @@ struct Bank {
         
         depositBankManagers.finishWork()
         loansBankManagers.finishWork()
-        totaltime()
+        measureTotalTime()
     }
     
     private func finishBusiness() {
