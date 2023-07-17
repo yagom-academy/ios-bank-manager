@@ -10,7 +10,8 @@ import Foundation
 struct Bank: Manageable {
     var name: String
     private let customerNumber: Int = Int.random(in: 10...30)
-    private var waitingLine = Queue<Customer>()
+    private var depositLine = Queue<Customer>()
+    private var loanLine = Queue<Customer>()
     private var totalTime: Double = 0.0
     
     init(name: String) {
@@ -19,7 +20,8 @@ struct Bank: Manageable {
     
     mutating func start() {
         giveTicketNumber(numbers: customerNumber)
-        assignCustomer()
+        assignCustomerTask(line: depositLine)
+        assignCustomerTask(line: loanLine)
         closeBank()
     }
     
@@ -27,21 +29,25 @@ struct Bank: Manageable {
         for number in 1...numbers {
             let customer = Customer(numberTicket: number, bankTask: BankTask.allCases.randomElement() ?? .deposit)
             
-            waitingLine.enqueue(customer)
+            switch customer.bankTask {
+            case .deposit:
+                depositLine.enqueue(customer)
+            case .loan:
+                loanLine.enqueue(customer)
+            }
         }
     }
     
-    mutating private func assignCustomer() {
-        while !waitingLine.isEmpty {
-            
-            guard let customer = waitingLine.dequeue() else {
+    mutating private func assignCustomerTask(line: Queue<Customer>) {
+        var line = line
+        
+        while !line.isEmpty {
+            guard let customer = line.dequeue() else {
                 return
             }
-            
             processCustomer(customer)
-            totalTime += 0.7
+            totalTime += customer.bankTask.time
         }
-        
     }
     
     private func closeBank() {
