@@ -7,5 +7,11 @@
 
 struct Customer {
     let numberTicket: Int
-    let bankTask: BankTask
+    var bankTask: BankTask {
+        guard let bankTask = BankTask.allCases.randomElement() else {
+            return .deposit
+        }
+
+        return bankTask
+    }
 }

@@ -36,7 +36,7 @@ class Bank: Manageable {
     
     private func giveTicketNumber(numbers: Int) {
         for number in 1...numbers {
-            let customer = Customer(numberTicket: number, bankTask: BankTask.allCases.randomElement() ?? .deposit)
+            let customer = Customer(numberTicket: number)
             
             switch customer.bankTask {
             case .deposit:
