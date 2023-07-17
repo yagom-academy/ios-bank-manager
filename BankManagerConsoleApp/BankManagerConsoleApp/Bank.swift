@@ -26,17 +26,13 @@ struct Bank {
         lineUp(&customers)
         
         while !bankQueue.isEmpty {
-            guard let currentCustomer = bankQueue.dequeue() else {
+            guard let currentCustomer = bankQueue.dequeue(),
+                  let currentBanker = bankers.first else {
                 return
             }
             
-            bankers.first?.work(of: currentCustomer)
-            
-            guard let workTime = bankers.first?.notifyWorkTime() else {
-                return
-            }
-
-            check(to: workTime)
+            currentBanker.work(for: currentCustomer)
+            checkWorkTime(from: currentBanker)
             countFinishedCustomer()
         }
         workFinish()
@@ -46,8 +42,8 @@ struct Bank {
         finishedCustomerCount += 1
     }
     
-    mutating private func check(to workTime: Double) {
-        totalWorkTime += workTime
+    mutating private func checkWorkTime(from banker: Banker) {
+        totalWorkTime += banker.notifyWorkTime()
     }
     
     private func workFinish() {
