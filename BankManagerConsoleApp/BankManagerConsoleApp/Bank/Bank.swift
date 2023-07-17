@@ -39,9 +39,9 @@ struct Bank {
     }
     
     private mutating func process(customer: Customer) {
-        print("\(customer.watingNumber)번 고객 업무 시작")
+        print("\(customer.waitingNumber)번 고객 업무 시작")
         Thread.sleep(forTimeInterval: processingTime)
-        print("\(customer.watingNumber)번 고객 업무 완료")
+        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
     
     private func timeCheck(_ block: () -> Void) -> String {

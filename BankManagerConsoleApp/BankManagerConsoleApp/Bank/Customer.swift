@@ -6,5 +6,5 @@
 //
 
 struct Customer: Equatable {
-    let watingNumber: UInt
+    let waitingNumber: UInt
 }
