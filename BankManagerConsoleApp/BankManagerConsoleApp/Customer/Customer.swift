@@ -9,7 +9,7 @@ import Foundation
 
 struct Customer: Equatable {
     let purpose: String
-    let duration: Decimal
+    let duration: Double
     let waitingNumber: Int
 }
 

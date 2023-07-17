@@ -12,7 +12,6 @@ struct Bank {
     private var loanBankerQueue = OperationQueue()
     private var dailyCustomerQueue = CustomerQueue<Customer>()
     private var dailyTotalCustomer: Int = .zero
-    private var dailyBusinessHour: Decimal = .zero
     
     init() {
         depositBankerQueue.maxConcurrentOperationCount = Configuration.numberOfDepositBanker
@@ -22,13 +21,18 @@ struct Bank {
     mutating func dailyWork() {
         setDailyCustomerQueue()
         
+        let startWorkTime = CFAbsoluteTimeGetCurrent()
+        
         while let customer = dailyCustomerQueue.dequeue() {
             addCustomerTask(customer)
         }
         
         depositBankerQueue.waitUntilAllOperationsAreFinished()
         loanBankerQueue.waitUntilAllOperationsAreFinished()
-        close()
+        
+        let dailyBusinessHour = CFAbsoluteTimeGetCurrent() - startWorkTime
+
+        close(dailyBusinessHour)
     }
     
     mutating private func setDailyCustomerQueue() {
@@ -50,6 +54,7 @@ struct Bank {
     mutating private func addCustomerTask(_ customer: Customer) {
         let task = BlockOperation {
             print(String(format: Namespace.startTask, customer.waitingNumber, customer.purpose))
+            Thread.sleep(forTimeInterval: customer.duration)
             print(String(format: Namespace.endTask, customer.waitingNumber, customer.purpose))
         }
         
@@ -60,18 +65,16 @@ struct Bank {
         }
 
         dailyTotalCustomer += 1
-        dailyBusinessHour += customer.duration
     }
     
-    mutating private func close() {
-        print(String(format: Namespace.closingMessage, dailyTotalCustomer, "\(dailyBusinessHour)"))
+    mutating private func close(_ dailyBusinessHour: CFAbsoluteTime) {
+        print(String(format: Namespace.closingMessage, dailyTotalCustomer, dailyBusinessHour))
         reset()
     }
     
     mutating private func reset() {
         dailyCustomerQueue = CustomerQueue<Customer>()
         dailyTotalCustomer = .zero
-        dailyBusinessHour = .zero
     }
 }
 
@@ -88,7 +91,7 @@ extension Bank {
     enum Namespace {
         static let startTask = "%d번 고객 %@업무 시작"
         static let endTask = "%d번 고객 %@업무 완료"
-        static let closingMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %@초입니다."
+        static let closingMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
     }
 }
 
@@ -97,7 +100,7 @@ extension Bank {
         case deposit
         case loan
         
-        var duration: Decimal {
+        var duration: Double {
             switch self {
             case .deposit:
                 return 0.7
