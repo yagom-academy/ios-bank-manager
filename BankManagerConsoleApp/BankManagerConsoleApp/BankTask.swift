@@ -2,7 +2,7 @@
 //  BankTask.swift
 //  BankManagerConsoleApp
 //
-//  Created by mint, jusbug on 2023/07/17.
+//  Created by mint, Jusbug on 2023/07/17.
 //
 
 import Foundation
