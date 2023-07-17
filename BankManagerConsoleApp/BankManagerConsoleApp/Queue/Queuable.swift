@@ -1,8 +1,8 @@
 //
 //  Queuable.swift
-//  BankManagerUIApp
+//  BankManagerConsoleApp
 //
-//  Created by mint, Jusbug on 2023/07/12.
+//  Created by mint, Jusbug on 2023/07/13.
 //
 
 protocol Queueable {
@@ -18,4 +18,3 @@ protocol Queueable {
 
     mutating func clear()
 }
-
