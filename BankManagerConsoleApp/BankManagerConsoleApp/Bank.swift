@@ -24,9 +24,11 @@ class Bank: Manageable {
     }
     
     func start() {
+        let group = DispatchGroup()
+        
         giveTicketNumber(numbers: customerNumber)
-        assignCustomerTask(line: depositLine)
-        assignCustomerTask(line: loanLine)
+        operateWindow(tellerCount: teller.deposit, line: depositLine, group: group)
+        operateWindow(tellerCount: teller.loan, line: loanLine, group: group)
         closeBank()
     }
     
@@ -39,6 +41,14 @@ class Bank: Manageable {
                 depositLine.enqueue(customer)
             case .loan:
                 loanLine.enqueue(customer)
+            }
+        }
+    }
+    
+    private func operateWindow(tellerCount: Int, line: Queue<Customer>, group: DispatchGroup) {
+        for _ in 1...tellerCount {
+            DispatchQueue.global().async(group: group) {
+                self.assignCustomerTask(line: line)
             }
         }
     }
