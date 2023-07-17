@@ -14,6 +14,7 @@ class Bank: Manageable {
     private var depositLine = Queue<Customer>()
     private var loanLine = Queue<Customer>()
     private var totalTime: Double = 0.0
+    private let counter = DispatchSemaphore(value: 1)
     
     init(name: String, teller: (deposit: Int, loan: Int), depositLine: Queue<Customer> = Queue<Customer>(), loanLine: Queue<Customer> = Queue<Customer>(), totalTime: Double = 0) {
         self.name = name
@@ -29,6 +30,7 @@ class Bank: Manageable {
         giveTicketNumber(numbers: customerNumber)
         operateWindow(tellerCount: teller.deposit, line: depositLine, group: group)
         operateWindow(tellerCount: teller.loan, line: loanLine, group: group)
+        group.wait()
         closeBank()
     }
     
@@ -57,9 +59,12 @@ class Bank: Manageable {
         var line = line
         
         while !line.isEmpty {
+            counter.wait()
             guard let customer = line.dequeue() else {
+                counter.signal()
                 return
             }
+            counter.signal()
             processCustomer(customer)
             totalTime += customer.bankTask.time
         }
@@ -71,7 +76,7 @@ class Bank: Manageable {
     
     private func processCustomer(_ customer: Customer) {
         print("\(customer.numberTicket)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
+        Thread.sleep(forTimeInterval: customer.bankTask.time)
         print("\(customer.numberTicket)번 고객 업무 완료")
     }
 }
