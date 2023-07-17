@@ -25,7 +25,7 @@ struct BankManager {
     }
     
     private func openBank() {
-        var bank = Bank(bankClerk: BankClerk(), customerWaitingQueue: occurrenceCustomer())
+        var bank = Bank(depositBankClerkCount: 2, loanBankClerkCount: 1, customerWaitingQueue: occurrenceCustomer())
         bank.work()
     }
     
@@ -33,7 +33,9 @@ struct BankManager {
         var customerWaitingQueue: CustomerWaitingQueue<Customer> = CustomerWaitingQueue()
         
         for number in 1...Int.random(in: 10...30) {
-            customerWaitingQueue.enqueue(Customer(number: number))
+            guard let workType = ServiceType.allCases.randomElement() else { continue }
+            let customer = Customer(number: number, serviceNeeded: workType)
+            customerWaitingQueue.enqueue(customer)
         }
         
         return customerWaitingQueue
