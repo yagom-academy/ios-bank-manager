@@ -8,7 +8,8 @@
 import Foundation
 
 struct Bank {
-    private let bankManagers: [BankManager]
+    private let depositBankManagers: BankManager = BankManager(semaphore: 2)
+    private let loansBankManagers: BankManager = BankManager(semaphore: 1)
     private var customerNumber: Int = 0
     private var customerQueue: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
     private let numberFormatter: NumberFormatter = {
@@ -17,20 +18,13 @@ struct Bank {
         numberFormatter.minimumFractionDigits = 2
         return numberFormatter
     }()
-    var totalTime: TimeInterval = 0
-    
-    init(numberOfBankManager: Int) {
-        var bankManagers: [BankManager] = []
-        for _ in 1...numberOfBankManager {
-            bankManagers.append(BankManager())
-        }
-        
-        self.bankManagers = bankManagers
-    }
+    private var totalTime: TimeInterval = 0
+    private var startDate: Date?
     
     mutating func selectMenu() {
         while true {
             print("1 : 은행개점\n2 : 종료\n입력 : ", terminator: "")
+            
             let selectedMenu = readLine()
             
             switch selectedMenu {
@@ -62,30 +56,31 @@ struct Bank {
         }
     }
     
+    private mutating func startData() {
+        startDate = Date()
+    }
+    
+    private mutating func totaltime() {
+        totalTime = Date().timeIntervalSince(startDate!)
+    }
+    
     private mutating func processBusiness() {
-        var depositBankManagerNumber = 0
-        let group = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: 3)
-        let startDate = Date()
+        startData()
         
         while let customer = customerQueue.dequeue() {
-            if depositBankManagerNumber == 2 {
-                depositBankManagerNumber = 0
-            }
-            
-            switch customer.getBankingType() {
+            switch customer.getBankingServiceType() {
             case .deposit:
-                bankManagers[depositBankManagerNumber].work(for: customer, group: group, semaphore: semaphore)
-                depositBankManagerNumber += 1
+                depositBankManagers.work(for: customer)
             case .loans:
-                bankManagers[2].work(for: customer, group: group, semaphore: semaphore)
+                loansBankManagers.work(for: customer)
             case .none:
-                print("asdf")
+                print("BankingTypeIsNil")
             }
         }
         
-        group.wait()
-        totalTime = Date().timeIntervalSince(startDate)
+        depositBankManagers.finishWork()
+        loansBankManagers.finishWork()
+        totaltime()
     }
     
     private func finishBusiness() {

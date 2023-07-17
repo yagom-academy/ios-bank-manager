@@ -4,6 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-var bank: Bank = Bank(numberOfBankManager: 3)
+var bank: Bank = Bank()
 
 bank.selectMenu()

@@ -7,13 +7,25 @@
 import Foundation
 
 struct BankManager {
-    func work(for customer: Customer, group: DispatchGroup, semaphore: DispatchSemaphore) {
+    private let group: DispatchGroup = DispatchGroup()
+    private let semaphore: DispatchSemaphore
+    
+    init(semaphore: Int) {
+        self.semaphore = DispatchSemaphore(value: semaphore)
+    }
+    
+    func work(for customer: Customer) {
+        guard let serviceType = customer.getBankingServiceType()?.description else { return }
+        
         DispatchQueue.global().async(group: group) {
             semaphore.wait()
-            print("\(customer.getWaitingNumber())번 고객 업무 시작")
-            Thread.sleep(forTimeInterval: customer.getBankingTime())
-            print("\(customer.getWaitingNumber())번 고객 업무 완료")
+            print("\(customer.getWaitingNumber())번 고객 \(serviceType)업무 시작")
+            Thread.sleep(forTimeInterval: customer.getBankingProcessTime())
+            print("\(customer.getWaitingNumber())번 고객 \(serviceType)업무 완료")
             semaphore.signal()
         }
+    }
+    func finishWork() {
+        group.wait()
     }
 }
