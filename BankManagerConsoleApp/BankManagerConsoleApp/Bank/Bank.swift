@@ -41,7 +41,7 @@ struct Bank {
                 continue
             }
             
-            let customer = Customer(bankWork: work, waitingNumber: customerNumber)
+            let customer = Customer(purpose: work.name, duration: work.duration, waitingNumber: customerNumber)
             
             dailyCustomerQueue.enqueue(customer)
         }
@@ -49,19 +49,18 @@ struct Bank {
     
     mutating private func addCustomerTask(_ customer: Customer) {
         let task = BlockOperation {
-            print(String(format: Namespace.startTask, customer.waitingNumber, customer.bankWork.name))
-            print(String(format: Namespace.endTask, customer.waitingNumber, customer.bankWork.name))
+            print(String(format: Namespace.startTask, customer.waitingNumber, customer.purpose))
+            print(String(format: Namespace.endTask, customer.waitingNumber, customer.purpose))
         }
         
-        switch customer.bankWork {
-        case .deposit:
+        if customer.purpose == Work.deposit.name {
             depositBankerQueue.addOperation(task)
-        case .loan:
+        } else {
             loanBankerQueue.addOperation(task)
         }
 
         dailyTotalCustomer += 1
-        dailyBusinessHour += customer.bankWork.duration
+        dailyBusinessHour += customer.duration
     }
     
     mutating private func close() {
