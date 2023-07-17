@@ -9,27 +9,23 @@ import Foundation
 
 class Bank: Manageable {
     var name: String
-    var teller: (deposit: Int, loan: Int)
+    private var tellers: [BankTask: Int]
+    private var line: [BankTask: Queue<Customer>] = [.deposit: Queue<Customer>(), .loan: Queue<Customer>()]
     private let customerNumber: Int = Int.random(in: 10...30)
-    private var depositLine = Queue<Customer>()
-    private var loanLine = Queue<Customer>()
     private var totalTime: Double = 0.0
     private let counter = DispatchSemaphore(value: 1)
     
-    init(name: String, teller: (deposit: Int, loan: Int), depositLine: Queue<Customer> = Queue<Customer>(), loanLine: Queue<Customer> = Queue<Customer>(), totalTime: Double = 0) {
+    init(name: String, tellers: [BankTask: Int]) {
         self.name = name
-        self.teller = teller
-        self.depositLine = depositLine
-        self.loanLine = loanLine
-        self.totalTime = totalTime
+        self.tellers = teller
     }
     
     func open() {
         let group = DispatchGroup()
         
         giveTicketNumber(numbers: customerNumber)
-        operateWindow(tellerCount: teller.deposit, line: depositLine, group: group)
-        operateWindow(tellerCount: teller.loan, line: loanLine, group: group)
+        operateWindow(task: .deposit, group: group)
+        operateWindow(task: .loan, group: group)
         group.wait()
         close()
     }
@@ -38,16 +34,17 @@ class Bank: Manageable {
         for number in 1...numbers {
             let customer = Customer(numberTicket: number)
             
-            switch customer.bankTask {
-            case .deposit:
-                depositLine.enqueue(customer)
-            case .loan:
-                loanLine.enqueue(customer)
+            line[customer.bankTask]?.enqueue(customer)
             }
         }
     }
     
-    private func operateWindow(tellerCount: Int, line: Queue<Customer>, group: DispatchGroup) {
+    private func operateWindow(task: BankTask, group: DispatchGroup) {
+        guard let tellerCount = tellers[task],
+              let line = line[task] else {
+            return
+        }
+        
         for _ in 1...tellerCount {
             DispatchQueue.global().async(group: group) {
                 self.assignCustomerTask(line: line)
