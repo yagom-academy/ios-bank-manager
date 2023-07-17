@@ -6,7 +6,7 @@
 //
 
 struct Bank {
-    private var bankers: [Banker]
+    private let bankers: [Banker]
     private var bankQueue: CustomerQueue<Customer> = CustomerQueue()
     private var taskFinishedCustomerCount: Int = .zero
     private var totalTaskTime: Double = .zero
@@ -26,18 +26,20 @@ struct Bank {
         lineUp(&customers)
         
         while !bankQueue.isEmpty {
-            guard let currentCustomer = bankQueue.dequeue(),
-                  let taskTime = bankers[0].task(currentCustomer) else {
+            guard let currentCustomer = bankQueue.dequeue() else {
                 return
             }
+            
+            bankers[0].task(of: currentCustomer)
+            let taskTime = bankers[0].notifyTaskTime()
 
             check(to: taskTime)
-            finishedCustomerCount()
+            countFinishedCustomer()
         }
         taskFinish()
     }
     
-    mutating private func finishedCustomerCount() {
+    mutating private func countFinishedCustomer() {
         taskFinishedCustomerCount += 1
     }
     

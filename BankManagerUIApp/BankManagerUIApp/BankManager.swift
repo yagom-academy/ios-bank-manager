@@ -6,9 +6,9 @@
 
 struct BankManager {
     func selectMenu() {
-        var isBankOpen: Bool = true
+        var isBankOpened: Bool = true
         
-        while isBankOpen {
+        while isBankOpened {
             print("1 : 은행개점")
             print("2 : 종료")
             print("입력 :", terminator: " ")
@@ -18,7 +18,7 @@ struct BankManager {
             case "1":
                 openBank()
             case "2":
-                isBankOpen = false
+                isBankOpened = false
             default:
                 print("잘못된 입력입니다.")
             }
