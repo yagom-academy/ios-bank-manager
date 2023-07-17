@@ -8,7 +8,7 @@
 import Foundation
 
 struct Bank {
-    private let bankManager: BankManager = BankManager()
+    private let bankManagers: [BankManager]
     private var customerNumber: Int = 0
     private var customerQueue: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
     private let numberFormatter: NumberFormatter = {
@@ -17,6 +17,16 @@ struct Bank {
         numberFormatter.minimumFractionDigits = 2
         return numberFormatter
     }()
+    var totalTime: TimeInterval = 0
+    
+    init(numberOfBankManager: Int) {
+        var bankManagers: [BankManager] = []
+        for _ in 1...numberOfBankManager {
+            bankManagers.append(BankManager())
+        }
+        
+        self.bankManagers = bankManagers
+    }
     
     mutating func selectMenu() {
         while true {
@@ -53,14 +63,34 @@ struct Bank {
     }
     
     private mutating func processBusiness() {
+        var depositBankManagerNumber = 0
+        let group = DispatchGroup()
+        let semaphore = DispatchSemaphore(value: 3)
+        let startDate = Date()
+        
         while let customer = customerQueue.dequeue() {
-            bankManager.work(for: customer)
+            if depositBankManagerNumber == 2 {
+                depositBankManagerNumber = 0
+            }
+            
+            switch customer.getBankingType() {
+            case .deposit:
+                bankManagers[depositBankManagerNumber].work(for: customer, group: group, semaphore: semaphore)
+                depositBankManagerNumber += 1
+            case .loans:
+                bankManagers[2].work(for: customer, group: group, semaphore: semaphore)
+            case .none:
+                print("asdf")
+            }
         }
+        
+        group.wait()
+        totalTime = Date().timeIntervalSince(startDate)
     }
     
     private func finishBusiness() {
-        guard let totalTime = numberFormatter.string(for: Double(customerNumber) * 0.7) else { return }
+        guard let totalProcessTime = numberFormatter.string(for: totalTime) else { return }
         
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(totalTime)초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(totalProcessTime)초입니다.")
     }
 }
