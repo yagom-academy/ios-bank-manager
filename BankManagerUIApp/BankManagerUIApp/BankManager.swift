@@ -15,9 +15,9 @@ struct BankManager {
             let selection = readLine()
             
             switch selection {
-            case "1":
+            case numberOption.openBank:
                 openBank()
-            case "2":
+            case numberOption.exit:
                 isBankOpened = false
             default:
                 print("잘못된 입력입니다.")
@@ -28,7 +28,7 @@ struct BankManager {
     private func openBank() {
         let bankers = createBankers(number: 1)
         var customers = createCustomers()
-        var bank: Bank = Bank(bankers: bankers)
+        var bank = Bank(bankers: bankers)
         
         bank.startBankService(&customers)
     }
@@ -41,5 +41,12 @@ struct BankManager {
         let customerNumbers: Int = Int.random(in: 10...30)
         
         return Array(repeating: Customer(), count: customerNumbers)
+    }
+}
+
+extension BankManager {
+    enum numberOption {
+        static let openBank = "1"
+        static let exit = "2"
     }
 }

@@ -31,7 +31,10 @@ struct Bank {
             }
             
             bankers.first?.work(of: currentCustomer)
-            guard let workTime = bankers.first?.notifyWorkTime() else { return }
+            
+            guard let workTime = bankers.first?.notifyWorkTime() else {
+                return
+            }
 
             check(to: workTime)
             countFinishedCustomer()
