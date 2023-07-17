@@ -27,7 +27,7 @@ struct Customer {
     let numberTicket: Int
     let task: Task
     
-    init(_ numberTicket: Int) {
+    init(numberTicket: Int) {
         self.numberTicket = numberTicket
         self.task = Task.random
     }
