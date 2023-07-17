@@ -7,20 +7,20 @@
 import Foundation
 
 struct Banker {
-    private let taskTime: Double = 0.7
+    private let workTime: Double = 0.7
     
-    func task(of customer: Customer) {
+    func work(of customer: Customer) {
         guard let queueNumber = customer.queueNumber else {
             return
         }
         
         print("\(queueNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: taskTime)
+        Thread.sleep(forTimeInterval: workTime)
         print("\(queueNumber)번 고객 업무 종료")
         
     }
     
-    func notifyTaskTime() -> Double {
-        return taskTime
+    func notifyWorkTime() -> Double {
+        return workTime
     }
 }

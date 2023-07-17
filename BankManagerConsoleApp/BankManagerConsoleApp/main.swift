@@ -4,6 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-let test = BankManager()
+let bankManager = BankManager()
 
-test.selectMenu()
+bankManager.selectMenu()
