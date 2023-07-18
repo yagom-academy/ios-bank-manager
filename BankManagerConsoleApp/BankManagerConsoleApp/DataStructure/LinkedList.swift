@@ -24,8 +24,8 @@ struct LinkedList<Element> {
         return head?.element
     }
 
-    var nodeElement: Element? {
-        return head?.element
+    var tailElement: Element? {
+        return tail?.element
     }
     
     mutating func append(_ element: Element) {
@@ -51,7 +51,7 @@ struct LinkedList<Element> {
         return dequeuedElement
     }
     
-    mutating func clear() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }
