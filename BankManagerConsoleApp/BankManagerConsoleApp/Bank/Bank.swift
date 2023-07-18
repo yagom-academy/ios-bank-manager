@@ -44,13 +44,13 @@ struct Bank {
     
     private func clockIntoWork(_ group: DispatchGroup) {
         while !waitingLine.isEmpty {
-            guard let customerTurn = waitingLine.dequeue() else { return }
+            guard let currentCustomer = waitingLine.dequeue() else { return }
             
-            switch customerTurn.workType {
+            switch currentCustomer.workType {
             case .deposit:
-                depositBankClerk.carryOutBankService(for: customerTurn, of: group)
+                depositBankClerk.carryOutBankService(for: currentCustomer, of: group)
             case .loan:
-                loanBankClerk.carryOutBankService(for: customerTurn, of: group)
+                loanBankClerk.carryOutBankService(for: currentCustomer, of: group)
             default:
                 print("workType이 nil입니다.")
             }
