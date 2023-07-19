@@ -12,12 +12,7 @@ struct Bank {
     private let loansBankManagers: BankManager = BankManager(people: 1)
     private var customerNumber: Int = 0
     private var customerQueue: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
-    private let numberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.minimumFractionDigits = 2
-        return numberFormatter
-    }()
+    
     private var totalTime: TimeInterval = 0
     private var startTime: Date?
     
@@ -86,7 +81,7 @@ struct Bank {
     }
     
     private func finishBusiness() {
-        guard let totalProcessTime = numberFormatter.string(for: totalTime) else { return }
+        let totalProcessTime: String = TotalTimeFormatter.string(for: totalTime)
         
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(totalProcessTime)초입니다.")
     }

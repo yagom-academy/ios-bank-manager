@@ -17,6 +17,7 @@
 		DC5394CC2A5F9CDE004C8D36 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5394CB2A5F9CDE004C8D36 /* Bank.swift */; };
 		DC5394CE2A5F9CE9004C8D36 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5394CD2A5F9CE9004C8D36 /* Customer.swift */; };
 		DC90814B2A653245000451F9 /* BankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC90814A2A653245000451F9 /* BankingService.swift */; };
+		DC90814D2A67838D000451F9 /* TotalTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC90814C2A67838D000451F9 /* TotalTimeFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 		DC5394CB2A5F9CDE004C8D36 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		DC5394CD2A5F9CE9004C8D36 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		DC90814A2A653245000451F9 /* BankingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingService.swift; sourceTree = "<group>"; };
+		DC90814C2A67838D000451F9 /* TotalTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTimeFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				DC5394CD2A5F9CE9004C8D36 /* Customer.swift */,
 				DC90814A2A653245000451F9 /* BankingService.swift */,
+				DC90814C2A67838D000451F9 /* TotalTimeFormatter.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			files = (
 				DC1FE8A12A5C1A8F009214C2 /* Node.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				DC90814D2A67838D000451F9 /* TotalTimeFormatter.swift in Sources */,
 				DC5394CC2A5F9CDE004C8D36 /* Bank.swift in Sources */,
 				DC5394CE2A5F9CE9004C8D36 /* Customer.swift in Sources */,
 				DC90814B2A653245000451F9 /* BankingService.swift in Sources */,
