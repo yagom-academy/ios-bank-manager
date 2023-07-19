@@ -51,14 +51,14 @@ final class Bank: Manageable {
         
         for _ in 1...tellerCount {
             DispatchQueue.global().async(group: group) {[weak self] in
-                self?.assignCustomerTask(line: line)
+                self?.assignCustomerTask(waitingLine: line)
             }
         }
     }
     
-    private func assignCustomerTask(line: Queue<Customer>) {
+    private func assignCustomerTask(waitingLine: Queue<Customer>) {
         let counter: DispatchSemaphore = DispatchSemaphore(value: 1)
-        var line = line
+        var line = waitingLine
         
         while !line.isEmpty {
             counter.wait()
