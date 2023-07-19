@@ -11,7 +11,7 @@ struct Bank {
     private let customerCount: Int
     private let depositBankClerk = BankClerk(workType: .deposit)
     private let loanBankClerk = BankClerk(workType: .loan)
-    private var waitingLine = Queue<Customer>()
+    private var waitingLine: any CustomerQueueable = CustomerQueue()
     
     init(customerCount: Int) {
         self.customerCount = customerCount

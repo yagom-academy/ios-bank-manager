@@ -9,16 +9,18 @@
 /* Begin PBXBuildFile section */
 		450BC4DB2A5E36380048AB68 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BC4DA2A5E36380048AB68 /* Customer.swift */; };
 		450BC4DD2A5E3C030048AB68 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BC4DC2A5E3C030048AB68 /* Bank.swift */; };
+		45152F232A677F9300C6B618 /* CustomerQueueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45152F222A677F9300C6B618 /* CustomerQueueable.swift */; };
+		45152F252A677FC400C6B618 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45152F242A677FC400C6B618 /* CustomerQueue.swift */; };
 		45F01F572A5C2F1100CB0FD4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F01F562A5C2F1100CB0FD4 /* LinkedList.swift */; };
 		45F01F5F2A5C354400CB0FD4 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F01F5E2A5C354400CB0FD4 /* QueueTests.swift */; };
-		45F01F642A5C35D700CB0FD4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040482A5C31FF0018919D /* Queue.swift */; };
+		45F01F642A5C35D700CB0FD4 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040482A5C31FF0018919D /* Queueable.swift */; };
 		45F01F652A5C36AD00CB0FD4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F01F562A5C2F1100CB0FD4 /* LinkedList.swift */; };
 		45F01F662A5C36B000CB0FD4 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040462A5C2BF40018919D /* Node.swift */; };
 		45F1D0212A610F310020E1EB /* WorkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1D0202A610F310020E1EB /* WorkType.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 		D25040472A5C2BF40018919D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040462A5C2BF40018919D /* Node.swift */; };
-		D25040492A5C31FF0018919D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040482A5C31FF0018919D /* Queue.swift */; };
+		D25040492A5C31FF0018919D /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25040482A5C31FF0018919D /* Queueable.swift */; };
 		D2ED98EA2A5E403E00CC8675 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED98E92A5E403E00CC8675 /* BankClerk.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		450BC4DA2A5E36380048AB68 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		450BC4DC2A5E3C030048AB68 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
+		45152F222A677F9300C6B618 /* CustomerQueueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueable.swift; sourceTree = "<group>"; };
+		45152F242A677FC400C6B618 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		45F01F562A5C2F1100CB0FD4 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		45F01F5C2A5C354400CB0FD4 /* WaitingLineQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaitingLineQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F01F5E2A5C354400CB0FD4 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -45,7 +49,7 @@
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		D25040462A5C2BF40018919D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		D25040482A5C31FF0018919D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		D25040482A5C31FF0018919D /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
 		D2ED98E92A5E403E00CC8675 /* BankClerk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +82,7 @@
 		45F1D01E2A610EE30020E1EB /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				D25040482A5C31FF0018919D /* Queue.swift */,
+				D25040482A5C31FF0018919D /* Queueable.swift */,
 				45F01F562A5C2F1100CB0FD4 /* LinkedList.swift */,
 				D25040462A5C2BF40018919D /* Node.swift */,
 			);
@@ -93,6 +97,8 @@
 				D2ED98E92A5E403E00CC8675 /* BankClerk.swift */,
 				450BC4DA2A5E36380048AB68 /* Customer.swift */,
 				45F1D0202A610F310020E1EB /* WorkType.swift */,
+				45152F222A677F9300C6B618 /* CustomerQueueable.swift */,
+				45152F242A677FC400C6B618 /* CustomerQueue.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -217,7 +223,7 @@
 				45F01F5F2A5C354400CB0FD4 /* QueueTests.swift in Sources */,
 				45F01F662A5C36B000CB0FD4 /* Node.swift in Sources */,
 				45F01F652A5C36AD00CB0FD4 /* LinkedList.swift in Sources */,
-				45F01F642A5C35D700CB0FD4 /* Queue.swift in Sources */,
+				45F01F642A5C35D700CB0FD4 /* Queueable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,12 +231,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25040492A5C31FF0018919D /* Queue.swift in Sources */,
+				D25040492A5C31FF0018919D /* Queueable.swift in Sources */,
 				45F01F572A5C2F1100CB0FD4 /* LinkedList.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
+				45152F232A677F9300C6B618 /* CustomerQueueable.swift in Sources */,
 				D2ED98EA2A5E403E00CC8675 /* BankClerk.swift in Sources */,
 				450BC4DB2A5E36380048AB68 /* Customer.swift in Sources */,
 				D25040472A5C2BF40018919D /* Node.swift in Sources */,
+				45152F252A677FC400C6B618 /* CustomerQueue.swift in Sources */,
 				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 				450BC4DD2A5E3C030048AB68 /* Bank.swift in Sources */,
 				45F1D0212A610F310020E1EB /* WorkType.swift in Sources */,
