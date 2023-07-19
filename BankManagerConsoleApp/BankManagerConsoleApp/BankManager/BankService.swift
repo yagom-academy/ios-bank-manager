@@ -8,13 +8,14 @@
 import Foundation
 
 struct BankService {
-    private var numberOfCustomers: Int = 0
+    private var customerQueue: CustomerQueue
     
     init(numberOfCustomers: Int) {
-        self.numberOfCustomers = numberOfCustomers
+        self.customerQueue = CustomerQueue()
+        generateCustomerQueue(numberOfCustomers)
     }
     
-    func start() {
+    mutating func start() {
         var isExit: Bool = false
         
         while !isExit {
@@ -49,9 +50,8 @@ struct BankService {
               terminator: " ")
     }
     
-    private func processBankWork() {
+    private mutating func processBankWork() {
         let banker = Banker(numberOfBankers: 1)
-        var customerQueue = generateCustomerQueue()
         let customerCount = customerQueue.count
         let sleepTime = TimeInterval(0.7)
         
@@ -67,14 +67,11 @@ struct BankService {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workTime)초입니다.")
     }
     
-    private func generateCustomerQueue() -> Queue<Customer> {
-        var customerQueue = Queue<Customer>()
-        
+    private mutating func generateCustomerQueue(_ numberOfCustomers: Int) {
         for i in 1...numberOfCustomers {
             let customer = Customer(waitingNumber: i)
-            customerQueue.enqueue(customer)
+            customerQueue.enqueue(customer: customer)
         }
         print(BankManagerNameSpace.startBankingService)
-        return customerQueue
     }
 }
