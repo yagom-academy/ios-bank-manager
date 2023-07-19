@@ -53,13 +53,64 @@ final class BankManagerView: UIView {
         return label
     }()
     
+    private let waitAndWorkStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let waitLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.backgroundColor = .systemGreen
+        label.text = "대기중"
+        return label
+    }()
+    
+    private let workLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.backgroundColor = .systemIndigo
+        label.text = "업무중"
+        return label
+    }()
+    
+    private let waitStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let workStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private func configureUI() {
         [addCustomerButton, clearButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
+        [waitLabel, workLabel].forEach {
+            waitAndWorkStackView.addArrangedSubview($0)
+        }
         
-        contentView.addSubview(buttonStackView)
+        contentView.addSubview(workStackView)
+        contentView.addSubview(waitStackView)
+        contentView.addSubview(waitAndWorkStackView)
         contentView.addSubview(timerLabel)
+        contentView.addSubview(buttonStackView)
         scrollView.addSubview(contentView)
         self.addSubview(scrollView)
     }
@@ -69,6 +120,7 @@ final class BankManagerView: UIView {
         setUpContentViewConstraints()
         setUpButtonStackViewConstraints()
         setUpTimerLabelConstraints()
+        setUpWaitAndWorkStackViewConstraints()
     }
 }
 
@@ -107,9 +159,35 @@ extension BankManagerView {
     
     private func setUpTimerLabelConstraints() {
         NSLayoutConstraint.activate([
-            buttonStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            buttonStackView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20)
+            timerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            timerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            timerLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20)
+        ])
+    }
+    
+    private func setUpWaitAndWorkStackViewConstraints() {
+        NSLayoutConstraint.activate([
+            waitAndWorkStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            waitAndWorkStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            waitAndWorkStackView.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 20)
+        ])
+    }
+    
+    private func setUpWaitStackViewConstraints() {
+        NSLayoutConstraint.activate([
+            waitStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            waitStackView.trailingAnchor.constraint(equalTo: contentView.centerXAnchor),
+            waitStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 20),
+            waitStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+        ])
+    }
+    
+    private func setUpWorkStackViewConstraints() {
+        NSLayoutConstraint.activate([
+            workStackView.leadingAnchor.constraint(equalTo: contentView.centerXAnchor),
+            workStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            workStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 20),
+            workStackView.bottomAnchor.constraint(equalTo: waitStackView.bottomAnchor)
         ])
     }
 }
