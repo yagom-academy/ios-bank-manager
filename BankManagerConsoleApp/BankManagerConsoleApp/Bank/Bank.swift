@@ -8,7 +8,6 @@
 import Foundation
 
 struct Bank {
-    private let teller: UInt = 1
     private var customersQueue: Queue<Customer> = Queue<Customer>()
     private let processingTime: TimeInterval = 0.7
     private var totalProcessingTime = ""
@@ -71,5 +70,19 @@ extension Bank {
     enum State {
         case working
         case notWorking
+    }
+    
+    enum TaskType {
+        case deposit
+        case loan
+
+        var tellerCount: Int {
+            switch self {
+            case .deposit:
+                return 2
+            case .loan:
+                return 1
+            }
+        }
     }
 }
