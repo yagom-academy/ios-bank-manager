@@ -24,8 +24,9 @@ final class Bank: Manageable {
         giveTicketNumber(numbers: customerNumber)
         operateWindow(task: .deposit)
         operateWindow(task: .loan)
-        group.wait()
-        close()
+        group.notify(queue: .main) {
+            self.close()
+        }
     }
     
     private func randomTask() -> BankTask {
@@ -51,8 +52,8 @@ final class Bank: Manageable {
         }
         
         for _ in 1...tellerCount {
-            DispatchQueue.global().async(group: group) {
-                self.assignCustomerTask(line: line)
+            DispatchQueue.global().async(group: group) {[weak self] in
+                self?.assignCustomerTask(line: line)
             }
         }
     }
