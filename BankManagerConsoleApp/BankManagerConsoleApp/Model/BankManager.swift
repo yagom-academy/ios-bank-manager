@@ -8,7 +8,7 @@
 struct BankManager {
     mutating func runProgram() {
         var bank: Bank = createBank()
-        var shouldContinue: Bool = true
+        var shouldContinue = true
         
         while shouldContinue {
             showMenu()

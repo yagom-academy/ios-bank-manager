@@ -5,8 +5,9 @@
 //  Created by Dasan & Mary on 2023/07/12.
 //
 
+import Foundation
+
 struct Bank {
-    private var bankTellers: [BankTeller] = [BankTeller]()
     private var customerQueue: Queue<Customer> = Queue()
     private let numberOfCustomer: Int
     private var workTime: Double {
@@ -27,19 +28,11 @@ struct Bank {
     }
     
     mutating func open() {
-        recruitBankTeller(duty: .deposit, number: 2)
-        recruitBankTeller(duty: .loan, number: 1)
         handOutNumberTickets()
         startBusiness()
         closeBusiness()
     }
-    
-    mutating func recruitBankTeller(duty: BankingService, number: Int) {
-        (0..<number).forEach { _ in
-            bankTellers.append(BankTeller(duty: duty))
-        }
-    }
-    
+        
     mutating private func handOutNumberTickets() {
         (0..<numberOfCustomer).forEach {
             customerQueue.enqueue(Customer(numberTicket: $0 + 1))
@@ -47,9 +40,23 @@ struct Bank {
     }
     
     mutating private func startBusiness() {
+        let group = DispatchGroup()
+        let depositDepartment = BankDepartment(responsibility: .deposit, numberOfBankTeller: 2, group: group)
+        let loanBankDepartment = BankDepartment(responsibility: .loan, numberOfBankTeller: 1, group: group)
+        
         while let currentCustomer = customerQueue.dequeue() {
-            //bankTeller.doWork(for: currentCustomer, startHandler: printStartMessage, completionHandler: printFinishMessage)
+            switch currentCustomer.service {
+            case .deposit:
+                depositDepartment.takeOnTask(for: currentCustomer,
+                                             startHandler: printStartMessage,
+                                             completionHandler: printFinishMessage)
+            case .loan:
+                loanBankDepartment.takeOnTask(for: currentCustomer,
+                                              startHandler: printStartMessage,
+                                              completionHandler: printFinishMessage)
+            }
         }
+        group.wait()
     }
     
     private func closeBusiness() {
