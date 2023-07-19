@@ -10,9 +10,12 @@ import Foundation
 struct Bank {
     private var customersQueue: Queue<Customer> = Queue<Customer>()
     private let processingTime: TimeInterval = 0.7
+    private let loanProcessingTime: TimeInterval = 1.1
     private var totalProcessingTime = ""
     private var customerCount = UInt.zero
     var state: State = .working
+    private let depositSemaphore = DispatchSemaphore(value: TaskType.deposit.tellerCount)
+    private let loanSemaphore = DispatchSemaphore(value: TaskType.loan.tellerCount)
     
     mutating func open() {
         lineUpCustomer()
