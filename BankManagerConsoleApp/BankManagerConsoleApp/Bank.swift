@@ -13,6 +13,12 @@ struct Bank {
     private var customerWaitingQueue: CustomerWaitingQueue<Customer>
     private var totalCustomerCount: Int = 0
     
+    init(customerWaitingQueue: CustomerWaitingQueue<Customer>) {
+        self.depositBankClerk = BankClerk(serviceType: .deposit, numberOfBankClerk: ServiceType.deposit.defaultNumberOfClerk)
+        self.loanBankClerk = BankClerk(serviceType: .loan, numberOfBankClerk: ServiceType.loan.defaultNumberOfClerk)
+        self.customerWaitingQueue = customerWaitingQueue
+    }
+    
     init(depositBankClerkCount: Int, loanBankClerkCount: Int, customerWaitingQueue: CustomerWaitingQueue<Customer>) {
         self.depositBankClerk = BankClerk(serviceType: .deposit, numberOfBankClerk: depositBankClerkCount)
         self.loanBankClerk = BankClerk(serviceType: .loan, numberOfBankClerk: loanBankClerkCount)
