@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Bank {
+final class Bank: Manageable {
     var name: String
     private var tellers: [BankTask: Int]
     private var line: [BankTask: Queue<Customer>] = [.deposit: Queue<Customer>(), .loan: Queue<Customer>()]
