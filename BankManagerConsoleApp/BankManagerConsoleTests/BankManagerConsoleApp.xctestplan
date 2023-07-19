@@ -22,6 +22,13 @@
         "identifier" : "44847F2F2A5C302E00653323",
         "name" : "QueueTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
+        "identifier" : "AC60C0152A680453009E4DC9",
+        "name" : "BankManagerTests"
+      }
     }
   ],
   "version" : 1
