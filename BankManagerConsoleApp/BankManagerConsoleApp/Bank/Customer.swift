@@ -7,4 +7,6 @@
 
 struct Customer: Equatable {
     let waitingNumber: UInt
+    let taskType: Bank.TaskType
 }
+
