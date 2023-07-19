@@ -10,10 +10,7 @@ import Foundation
 struct Bank {
     private var customerQueue: Queue<Customer> = Queue()
     private let numberOfCustomer: Int
-    private var workTime: Double {
-        //return bankTeller.duty.duration * Double(numberOfCustomer)
-        return 0.0
-    }
+    private var timer = Timer()
     
     private let printStartMessage: (Customer) -> Void = { customer in
         print(String(format: MessageFormat.startTask, customer.numberTicket, customer.service.description))
@@ -43,6 +40,7 @@ struct Bank {
         let group = DispatchGroup()
         let depositDepartment = BankDepartment(responsibility: .deposit, numberOfBankTeller: 2, group: group)
         let loanBankDepartment = BankDepartment(responsibility: .loan, numberOfBankTeller: 1, group: group)
+        timer.startTime = CFAbsoluteTimeGetCurrent()
         
         while let currentCustomer = customerQueue.dequeue() {
             switch currentCustomer.service {
@@ -57,10 +55,11 @@ struct Bank {
             }
         }
         group.wait()
+        timer.endTime = CFAbsoluteTimeGetCurrent()
     }
     
     private func closeBusiness() {
-        print(String(format: MessageFormat.closing, numberOfCustomer, workTime))
+        print(String(format: MessageFormat.closing, numberOfCustomer, timer.duration))
     }
 }
 
