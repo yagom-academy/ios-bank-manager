@@ -15,7 +15,7 @@ struct BankManager {
     }
     
     func work(for customer: Customer) {
-        guard let serviceType = customer.getBankingServiceType()?.description else { return }
+        guard let serviceType = customer.getBankingServiceType() else { return }
         
         DispatchQueue.global().async(group: group) {
             semaphore.wait()

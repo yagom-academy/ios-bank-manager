@@ -5,7 +5,7 @@
 //  Created by idinaloq, EtialMoon on 2023/07/17.
 //
 
-enum BankingService: CaseIterable {
+enum BankingService: CaseIterable, CustomStringConvertible {
     case deposit
     case loans
     
