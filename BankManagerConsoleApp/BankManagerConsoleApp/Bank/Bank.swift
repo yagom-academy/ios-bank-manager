@@ -13,7 +13,6 @@ final class Bank: Manageable {
     private var line: [BankTask: Queue<Customer>] = [.deposit: Queue<Customer>(), .loan: Queue<Customer>()]
     private let customerNumber: Int = Int.random(in: 10...30)
     private var totalTime: Double = 0.0
-    private let counter: DispatchSemaphore = DispatchSemaphore(value: 1)
     private let group: DispatchGroup = DispatchGroup()
 
     init(name: String, tellers: [BankTask: Int]) {
@@ -59,6 +58,7 @@ final class Bank: Manageable {
     }
     
     private func assignCustomerTask(line: Queue<Customer>) {
+        let counter: DispatchSemaphore = DispatchSemaphore(value: 1)
         var line = line
         
         while !line.isEmpty {
