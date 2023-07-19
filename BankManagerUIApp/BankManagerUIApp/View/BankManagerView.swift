@@ -212,7 +212,7 @@ extension BankManagerView {
             waitStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             waitStackView.trailingAnchor.constraint(equalTo: contentView.centerXAnchor),
             waitStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 16),
-            waitStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: 16)
+            waitStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16)
         ])
     }
     
@@ -221,7 +221,7 @@ extension BankManagerView {
             workStackView.leadingAnchor.constraint(equalTo: contentView.centerXAnchor),
             workStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             workStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 16),
-            workStackView.bottomAnchor.constraint(lessThanOrEqualTo: waitStackView.bottomAnchor, constant: 16)
+            workStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 }
