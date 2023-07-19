@@ -34,6 +34,8 @@ final class BankManagerView: UIView {
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     
@@ -42,12 +44,15 @@ final class BankManagerView: UIView {
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textAlignment = .center
         label.text = "업무시간 - "
@@ -66,6 +71,7 @@ final class BankManagerView: UIView {
     private let waitLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.adjustsFontForContentSizeCategory = true
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
         label.textColor = .white
@@ -76,6 +82,7 @@ final class BankManagerView: UIView {
     private let workLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.adjustsFontForContentSizeCategory = true
         label.backgroundColor = .systemIndigo
         label.textAlignment = .center
         label.textColor = .white
