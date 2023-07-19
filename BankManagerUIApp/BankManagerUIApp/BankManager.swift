@@ -26,21 +26,35 @@ struct BankManager {
     }
     
     private func openBank() {
-        let bankers = createBankers(number: 1)
+        let bankers = createBankers()
         var customers = createCustomers()
         var bank = Bank(bankers: bankers)
         
         bank.startBankService(&customers)
     }
     
-    private func createBankers(number: Int) -> [Banker] {
-        return Array(repeating: Banker(), count: number)
+    private func createBankers() -> [Banker] {
+        let bankers = [Banker(task: .deposit),
+                       Banker(task: .deposit),
+                       Banker(task: .loans)]
+        
+        return bankers
     }
     
     private func createCustomers() -> [Customer] {
-        let customerNumbers: Int = Int.random(in: 10...30)
+        let customerNumbers = Int.random(in: 10...30)
+        var customers = [Customer]()
         
-        return Array(repeating: Customer(), count: customerNumbers)
+        for _ in 0...customerNumbers {
+            guard let task = BankTask.allCases.randomElement() else {
+                
+                return customers //추후 에러처리
+            }
+            
+            customers.append(Customer(task: task))
+        }
+        
+        return customers
     }
 }
 
