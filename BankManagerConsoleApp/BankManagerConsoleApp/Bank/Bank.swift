@@ -29,9 +29,17 @@ final class Bank: Manageable {
         close()
     }
     
+    private func randomTask() -> BankTask {
+        guard let task = BankTask.allCases.randomElement() else {
+            return .deposit
+        }
+        
+        return task
+    }
+    
     private func giveTicketNumber(numbers: Int) {
         for number in 1...numbers {
-            let customer = Customer(numberTicket: number)
+            let customer = Customer(numberTicket: number, bankTask: randomTask())
             
             line[customer.bankTask]?.enqueue(customer)
         }
