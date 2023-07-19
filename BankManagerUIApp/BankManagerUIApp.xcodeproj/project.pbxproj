@@ -101,12 +101,12 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
-				D2E158D92A67A35300052F8B /* View */,
 				C7694E40259C3E9F0053667F /* Main.storyboard */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C7694E48259C3EA20053667F /* Info.plist */,
 				D2E158D62A67A0DB00052F8B /* Application */,
 				D2E158D72A67A33300052F8B /* ViewController */,
+				D2E158D92A67A35300052F8B /* View */,
 				D2E158D82A67A34000052F8B /* Resource */,
 			);
 			path = BankManagerUIApp;

@@ -20,15 +20,55 @@ final class BankManagerView: UIView {
         return contentView
     }()
     
+    private let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let addCustomerButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        return button
+    }()
+    
+    private let clearButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("초기화", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        return button
+    }()
+    
+    private let timerLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.text = "업무시간 - "
+        return label
+    }()
+    
     private func configureUI() {
-        scrollView.addSubview(contentView)
+        [addCustomerButton, clearButton].forEach {
+            buttonStackView.addArrangedSubview($0)
+        }
         
+        contentView.addSubview(buttonStackView)
+        contentView.addSubview(timerLabel)
+        scrollView.addSubview(contentView)
         self.addSubview(scrollView)
     }
     
     private func setUpConstraints() {
         setUpScrollViewConstraints()
         setUpContentViewConstraints()
+        setUpButtonStackViewConstraints()
+        setUpTimerLabelConstraints()
     }
 }
 
@@ -55,5 +95,21 @@ extension BankManagerView {
         let contentViewHeightConstraints = contentView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, constant: 1)
         contentViewHeightConstraints.priority = .init(1)
         contentViewHeightConstraints.isActive = true
+    }
+    
+    private func setUpButtonStackViewConstraints() {
+        NSLayoutConstraint.activate([
+            buttonStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            buttonStackView.topAnchor.constraint(equalTo: contentView.topAnchor)
+        ])
+    }
+    
+    private func setUpTimerLabelConstraints() {
+        NSLayoutConstraint.activate([
+            buttonStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            buttonStackView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20)
+        ])
     }
 }
