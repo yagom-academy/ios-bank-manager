@@ -6,8 +6,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class BankManagerViewController: UIViewController {
+    private let bankManagerView = BankManagerView()
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.view = bankManagerView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

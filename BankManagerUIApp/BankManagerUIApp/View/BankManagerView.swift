@@ -48,7 +48,8 @@ final class BankManagerView: UIView {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textAlignment = .center
         label.text = "업무시간 - "
         return label
     }()
@@ -64,16 +65,20 @@ final class BankManagerView: UIView {
     
     private let waitLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.backgroundColor = .systemGreen
+        label.textAlignment = .center
+        label.textColor = .white
         label.text = "대기중"
         return label
     }()
     
     private let workLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.backgroundColor = .systemIndigo
+        label.textAlignment = .center
+        label.textColor = .white
         label.text = "업무중"
         return label
     }()
@@ -98,6 +103,26 @@ final class BankManagerView: UIView {
         return stackView
     }()
     
+    convenience init() {
+        self.init(frame: CGRectZero)
+        
+        setUpBackgroundColor()
+        configureUI()
+        setUpConstraints()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUpBackgroundColor() {
+        self.backgroundColor = .systemBackground
+    }
+    
     private func configureUI() {
         [addCustomerButton, clearButton].forEach {
             buttonStackView.addArrangedSubview($0)
@@ -121,6 +146,8 @@ final class BankManagerView: UIView {
         setUpButtonStackViewConstraints()
         setUpTimerLabelConstraints()
         setUpWaitAndWorkStackViewConstraints()
+        setUpWaitStackViewConstraints()
+        setUpWorkStackViewConstraints()
     }
 }
 
@@ -161,7 +188,7 @@ extension BankManagerView {
         NSLayoutConstraint.activate([
             timerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             timerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            timerLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 20)
+            timerLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 16)
         ])
     }
     
@@ -169,7 +196,7 @@ extension BankManagerView {
         NSLayoutConstraint.activate([
             waitAndWorkStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             waitAndWorkStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            waitAndWorkStackView.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 20)
+            waitAndWorkStackView.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 16)
         ])
     }
     
@@ -177,8 +204,8 @@ extension BankManagerView {
         NSLayoutConstraint.activate([
             waitStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             waitStackView.trailingAnchor.constraint(equalTo: contentView.centerXAnchor),
-            waitStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 20),
-            waitStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+            waitStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 16),
+            waitStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: 16)
         ])
     }
     
@@ -186,8 +213,8 @@ extension BankManagerView {
         NSLayoutConstraint.activate([
             workStackView.leadingAnchor.constraint(equalTo: contentView.centerXAnchor),
             workStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            workStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 20),
-            workStackView.bottomAnchor.constraint(equalTo: waitStackView.bottomAnchor)
+            workStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 16),
+            workStackView.bottomAnchor.constraint(lessThanOrEqualTo: waitStackView.bottomAnchor, constant: 16)
         ])
     }
 }
