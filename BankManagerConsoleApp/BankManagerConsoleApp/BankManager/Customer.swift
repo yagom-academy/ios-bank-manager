@@ -6,9 +6,6 @@
 //
 
 struct Customer {
-	let user: Int
-	
-	init(waitingNumber: Int) {
-		self.user = waitingNumber
-	}
+	let waitingNumber: Int
+    let bankingWork: BankingOperations
 }

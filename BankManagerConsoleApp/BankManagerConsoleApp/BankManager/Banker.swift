@@ -13,6 +13,6 @@ struct Banker {
     }
     
     func processBankerTask(customer: Customer) {
-        print("\(customer.user)번 고객 업무 완료")
+        print("\(customer.waitingNumber)번 고객 업무 완료")
     }
 }
