@@ -21,7 +21,7 @@ struct Bank {
     
     mutating func work() {
         totalCustomerCount = customerWaitingQueue.count
-        let start = CFAbsoluteTimeGetCurrent()
+        let start = Date()
         let group = DispatchGroup()
         
         while let customer = customerWaitingQueue.dequeue() {
@@ -34,16 +34,16 @@ struct Bank {
         }
         
         group.wait()
-        let totalWorkTime = CFAbsoluteTimeGetCurrent() - start
+        let totalWorkTime = Date().timeIntervalSince(start)
         
         endOfWork(totalWorkTime)
     }
     
-    private func endOfWork(_ totalWorkTime: CFAbsoluteTime) {
+    private func endOfWork(_ totalWorkTime: TimeInterval) {
         printWorkResult(totalWorkTime)
     }
     
-    private func printWorkResult(_ totalWorkTime: CFAbsoluteTime) {
+    private func printWorkResult(_ totalWorkTime: TimeInterval) {
         let totalWorkTime = String(format: "%.2f", totalWorkTime)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(totalCustomerCount)명이며, 총 업무시간은 \(totalWorkTime) 입니다.")
     }
