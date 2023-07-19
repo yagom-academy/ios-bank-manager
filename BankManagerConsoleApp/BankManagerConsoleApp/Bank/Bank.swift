@@ -24,9 +24,7 @@ final class Bank: Manageable {
         giveTicketNumber(numbers: customerNumber)
         operateWindow(task: .deposit)
         operateWindow(task: .loan)
-        group.notify(queue: .main) {
-            self.close()
-        }
+        group.wait()
     }
     
     private func randomTask() -> BankTask {
