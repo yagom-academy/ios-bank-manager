@@ -7,5 +7,5 @@
 
 struct Customer {
     let waitingNumber: Int
-    let taskTime: Double
+    let workType: WorkType? = WorkType.allCases.randomElement()
 }

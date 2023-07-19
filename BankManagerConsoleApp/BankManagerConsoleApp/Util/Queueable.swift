@@ -1,13 +1,23 @@
 //
-//  Queue.swift
+//  Queueable.swift
 //  BankManagerConsoleApp
 //
 //  Created by Erick, Serena on 2023/07/10.
 //
 
-struct Queue<Element> {
-    private var linkedList = LinkedList<Element>()
+protocol Queueable {
+    associatedtype Element
     
+    var linkedList: LinkedList<Element> { get }
+    var peek: Element? { get }
+    var isEmpty: Bool { get }
+    
+    func enqueue(_ value: Element)
+    func dequeue() -> Element?
+    func clear()
+}
+
+extension Queueable {
     var peek: Element? {
         let node = linkedList.head
         return node?.value
