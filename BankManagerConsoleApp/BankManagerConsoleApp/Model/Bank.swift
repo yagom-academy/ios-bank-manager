@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct Bank {
+protocol Openable {
+    mutating func open(numberOfCustomer: Int)
+}
+
+struct Bank: Openable {
     private var customerQueue: Queue<Customer> = Queue()
-    private let numberOfCustomer: Int
+    private var numberOfCustomer: Int = 0
     private var timer = Timer()
     
     private let printStartMessage: (Customer) -> Void = { customer in
@@ -20,11 +24,8 @@ struct Bank {
         print(String(format: MessageFormat.finishTask, customer.numberTicket, customer.service.description))
     }
     
-    init(numberOfCustomer: Int) {
+    mutating func open(numberOfCustomer: Int) {
         self.numberOfCustomer = numberOfCustomer
-    }
-    
-    mutating func open() {
         handOutNumberTickets()
         startBusiness()
         closeBusiness()

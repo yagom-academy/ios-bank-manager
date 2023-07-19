@@ -5,6 +5,6 @@
 //  last modified by Dasan & Mary
 //
 
-var bankManager = BankManager()
+var bankManager = BankManager(bank: Bank())
 
 bankManager.runProgram()

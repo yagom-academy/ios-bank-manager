@@ -6,8 +6,13 @@
 //
 
 struct BankManager {
+    var bank: Openable
+
+    init(bank: Openable) {
+        self.bank = bank
+    }
+        
     mutating func runProgram() {
-        var bank: Bank = createBank()
         var shouldContinue = true
         
         while shouldContinue {
@@ -19,19 +24,13 @@ struct BankManager {
                         
             switch inputValue {
             case Menu.bankOpening.number:
-                bank.open()
+                bank.open(numberOfCustomer: generateRandomNumber())
             case Menu.quit.number:
                 shouldContinue = false
             default:
                 continue
             }
         }
-    }
-    
-    private func createBank() -> Bank {
-        let randomNumber = generateRandomNumber()
-        
-        return Bank(numberOfCustomer: randomNumber)
     }
     
     private func generateRandomNumber() -> Int {

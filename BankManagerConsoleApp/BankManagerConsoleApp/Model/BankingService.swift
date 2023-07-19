@@ -17,7 +17,6 @@ enum BankingService: CaseIterable {
             return 1.1
         }
     }
-    
 }
 
 extension BankingService: CustomStringConvertible {
