@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProgramManager {
+final class ProgramManager {
     private var program: Manageable
     private var isWorking: Bool = true
     
@@ -24,10 +24,9 @@ struct ProgramManager {
         """, terminator: " ")
     }
     
-    mutating func selectMenu() {
+    func selectMenu() {
+        displayMenu()
         while isWorking {
-            displayMenu()
-            
             guard let input = readLine() else {
                 return
             }
@@ -35,6 +34,9 @@ struct ProgramManager {
             switch input {
             case Menu.startProgram.number:
                 program.open()
+                program.sortNext {
+                    self.displayMenu()
+                }
             case Menu.finishProgram.number:
                 isWorking = false
             default:

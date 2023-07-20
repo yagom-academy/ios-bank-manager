@@ -8,12 +8,12 @@
 import Foundation
 
 final class Bank: Manageable {
-    var name: String
+    let name: String
+    let group: DispatchGroup = DispatchGroup()
     private var tellers: [BankTask: Int]
     private var line: [BankTask: Queue<Customer>] = [.deposit: Queue<Customer>(), .loan: Queue<Customer>()]
     private let customerNumber: Int = Int.random(in: 10...30)
     private var totalTime: Double = 0.0
-    private let group: DispatchGroup = DispatchGroup()
 
     init(name: String, tellers: [BankTask: Int]) {
         self.name = name
@@ -24,7 +24,9 @@ final class Bank: Manageable {
         giveTicketNumber(numbers: customerNumber)
         operateWindow(task: .deposit)
         operateWindow(task: .loan)
-        group.wait()
+        group.notify(queue: .global()) {
+            self.close()
+        }
     }
     
     private func randomTask() -> BankTask {
