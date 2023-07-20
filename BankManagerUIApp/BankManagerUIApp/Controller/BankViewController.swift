@@ -27,42 +27,7 @@ class BankViewController: UIViewController {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        return stackView
-    }()
-    
-    private let queueNameStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        
-        let waitingLabel = UILabel()
-        waitingLabel.text = "대기중"
-        waitingLabel.backgroundColor = .systemGreen
-        waitingLabel.textColor = .white
-        waitingLabel.textAlignment = .center
-        waitingLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        
-        let processingLabel = UILabel()
-        processingLabel.text = "업무중"
-        processingLabel.backgroundColor = .systemBlue
-        processingLabel.textColor = .white
-        processingLabel.textAlignment = .center
-        processingLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        
-        stackView.addArrangedSubview(waitingLabel)
-        stackView.addArrangedSubview(processingLabel)
-        
-        return stackView
-    }()
-    
-    private let queueStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .top
-        
-        stackView.distribution = .fillEqually
+        stackView.spacing = SpacingSetting.outerStackView
         
         return stackView
     }()
@@ -75,25 +40,9 @@ class BankViewController: UIViewController {
         return stackView
     }()
     
-    private let waitingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        
-        return stackView
-    }()
-    
-    private let processingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        
-        return stackView
-    }()
-    
     private let addCustomerButton: UIButton = {
         let button = UIButton()
-        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitle(Namespace.addCustomer, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         
         return button
@@ -101,7 +50,7 @@ class BankViewController: UIViewController {
     
     private let resetButton: UIButton = {
         let button = UIButton()
-        button.setTitle("초기화", for: .normal)
+        button.setTitle(Namespace.reset, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         
         return button
@@ -115,6 +64,56 @@ class BankViewController: UIViewController {
         return label
     }()
     
+    private let statusLabelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        
+        let waitingLabel = UILabel()
+        waitingLabel.text = Namespace.waiting
+        waitingLabel.backgroundColor = .systemGreen
+        waitingLabel.textColor = .white
+        waitingLabel.textAlignment = .center
+        waitingLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        
+        let processingLabel = UILabel()
+        processingLabel.text = Namespace.processing
+        processingLabel.backgroundColor = .systemBlue
+        processingLabel.textColor = .white
+        processingLabel.textAlignment = .center
+        processingLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        
+        stackView.addArrangedSubview(waitingLabel)
+        stackView.addArrangedSubview(processingLabel)
+        
+        return stackView
+    }()
+    
+    private let customerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    private let waitingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = SpacingSetting.customerStackView
+        
+        return stackView
+    }()
+    
+    private let processingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = SpacingSetting.customerStackView
+        
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,10 +130,14 @@ class BankViewController: UIViewController {
 
         if !isTimerOn {
             startWorkTime = Date() - timeInterval
-            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
+                                         target: self,
+                                         selector: #selector(updateTimerLabel),
+                                         userInfo: nil,
+                                         repeats: true)
         }
         
-        bank.work(totalCustomer: 10)
+        bank.work(totalCustomer: Configuration.addCustomerAmount)
     }
     
     @objc private func didTapReset() {
@@ -146,7 +149,7 @@ class BankViewController: UIViewController {
             return
         }
         timeInterval = Date().timeIntervalSince(startTime)
-        timerLabel.text = String(format: "업무시간 - %@", timeInterval.formatTimeIntervalToString())
+        timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
     }
     
     private func pauseTimer() {
@@ -164,13 +167,13 @@ extension BankViewController {
         menuStackView.addArrangedSubview(addCustomerButton)
         menuStackView.addArrangedSubview(resetButton)
         
-        queueStackView.addArrangedSubview(waitingStackView)
-        queueStackView.addArrangedSubview(processingStackView)
+        customerStackView.addArrangedSubview(waitingStackView)
+        customerStackView.addArrangedSubview(processingStackView)
         
         outerStackView.addArrangedSubview(menuStackView)
         outerStackView.addArrangedSubview(timerLabel)
-        outerStackView.addArrangedSubview(queueNameStackView)
-        outerStackView.addArrangedSubview(queueStackView)
+        outerStackView.addArrangedSubview(statusLabelStackView)
+        outerStackView.addArrangedSubview(customerStackView)
         
         addCustomerButton.addTarget(self, action: #selector(didTapAddCustomer), for: .touchUpInside)
         
@@ -240,17 +243,41 @@ extension BankViewController: BankViewControllerDelegate {
         waitingDictionary = [:]
         
         timeInterval = .zero
-        timerLabel.text = String(format: "업무시간 - %@", timeInterval.formatTimeIntervalToString())
+        timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
         
         startWorkTime = Date()
         
         guard let isTimerOn = timer?.isValid, isTimerOn else {
-            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
+                                         target: self,
+                                         selector: #selector(updateTimerLabel),
+                                         userInfo: nil,
+                                         repeats: true)
             
             bank.work()
             return
         }
         
         bank.work()
+    }
+}
+
+extension BankViewController {
+    enum Configuration {
+        static let addCustomerAmount = 10
+        static let timeIntervalRepeat = 0.001
+    }
+    
+    enum Namespace {
+        static let waiting = "대기중"
+        static let processing = "업무중"
+        static let addCustomer = "고객 \(Configuration.addCustomerAmount)명 추가"
+        static let reset = "초기화"
+        static let timer = "업무시간 - %@"
+    }
+    
+    enum SpacingSetting {
+        static let outerStackView: CGFloat = 10
+        static let customerStackView: CGFloat = 5
     }
 }

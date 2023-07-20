@@ -17,12 +17,10 @@
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		CDEC1D232A68CFBD00F04DA2 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D222A68CFBD00F04DA2 /* Customer.swift */; };
 		CDEC1D252A68CFDB00F04DA2 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D242A68CFDB00F04DA2 /* Bank.swift */; };
-		CDEC1D272A68CFE700F04DA2 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D262A68CFE700F04DA2 /* BankManager.swift */; };
 		CDEC1D292A68D01800F04DA2 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D282A68D01800F04DA2 /* LinkedList.swift */; };
 		CDEC1D2B2A68D02100F04DA2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D2A2A68D02100F04DA2 /* Node.swift */; };
 		CDEC1D2D2A68D03100F04DA2 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D2C2A68D03100F04DA2 /* CustomerQueue.swift */; };
 		CDEC1D2F2A68D03E00F04DA2 /* QueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D2E2A68D03E00F04DA2 /* QueueType.swift */; };
-		CDEC1D312A68D05400F04DA2 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D302A68D05400F04DA2 /* Menu.swift */; };
 		CDEC1D3F2A68DC7C00F04DA2 /* CustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC1D3E2A68DC7C00F04DA2 /* CustomerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,12 +58,10 @@
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDEC1D222A68CFBD00F04DA2 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		CDEC1D242A68CFDB00F04DA2 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
-		CDEC1D262A68CFE700F04DA2 /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		CDEC1D282A68D01800F04DA2 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		CDEC1D2A2A68D02100F04DA2 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		CDEC1D2C2A68D03100F04DA2 /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		CDEC1D2E2A68D03E00F04DA2 /* QueueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueType.swift; sourceTree = "<group>"; };
-		CDEC1D302A68D05400F04DA2 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		CDEC1D3E2A68DC7C00F04DA2 /* CustomerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,8 +156,6 @@
 				CDEC1D222A68CFBD00F04DA2 /* Customer.swift */,
 				CDEC1D2C2A68D03100F04DA2 /* CustomerQueue.swift */,
 				CDEC1D2E2A68D03E00F04DA2 /* QueueType.swift */,
-				CDEC1D262A68CFE700F04DA2 /* BankManager.swift */,
-				CDEC1D302A68D05400F04DA2 /* Menu.swift */,
 				BA2AD1992A69202A0021D2F2 /* Double+.swift */,
 			);
 			path = Model;
@@ -340,11 +334,9 @@
 				CDEC1D2D2A68D03100F04DA2 /* CustomerQueue.swift in Sources */,
 				CDEC1D252A68CFDB00F04DA2 /* Bank.swift in Sources */,
 				CDEC1D2B2A68D02100F04DA2 /* Node.swift in Sources */,
-				CDEC1D312A68D05400F04DA2 /* Menu.swift in Sources */,
 				CDEC1D2F2A68D03E00F04DA2 /* QueueType.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				CDEC1D232A68CFBD00F04DA2 /* Customer.swift in Sources */,
-				CDEC1D272A68CFE700F04DA2 /* BankManager.swift in Sources */,
 				CDEC1D292A68D01800F04DA2 /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
