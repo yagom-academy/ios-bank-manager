@@ -6,25 +6,11 @@
 //
 
 struct Client {
-    enum WorkType: String {
-        case loan = "대출"
-        case deposit = "예금"
-        
-        var taskTime: Double {
-            switch self {
-            case .loan:
-                return 1.1
-            case .deposit:
-                return 0.7
-            }
-        }
-    }
-    
     let turn: Int
-    let workType: WorkType
+    let banking: BankingType
     
-    init(_ turn: Int, workType: WorkType) {
+    init(_ turn: Int, _ bankingType: BankingType) {
         self.turn = turn
-        self.workType = workType
+        self.banking = bankingType
     }
 }

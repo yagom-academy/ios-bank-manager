@@ -60,9 +60,11 @@ final class Bank {
     
     private func setUpClientQueue(count: Int) {
         var client: Client
+        var bankingType: BankingType
         
         for turn in 1...count {
-            client = Client(turn, workType: .loan)
+            bankingType = BankingType.allCases.randomElement() ?? .deposit
+            client = Client(turn, bankingType)
             clientQueue.enqueue(client)
         }
     }
