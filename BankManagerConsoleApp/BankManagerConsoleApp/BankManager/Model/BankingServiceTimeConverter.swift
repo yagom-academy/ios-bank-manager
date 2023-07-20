@@ -13,8 +13,8 @@ func bankingServiceTimeConverter(_ bankingServiceTime: Double) throws -> String 
     numberFormatter.roundingMode = .halfUp
     
     guard let numberFormatted = numberFormatter.string(for: bankingServiceTime) else {
-        print(NumberFormatError.convertToString.localized)
-        throw NumberFormatError.convertToString
+        print(NumberFormatError.convertedString.localized)
+        throw NumberFormatError.convertedString
     }
     
     return numberFormatted

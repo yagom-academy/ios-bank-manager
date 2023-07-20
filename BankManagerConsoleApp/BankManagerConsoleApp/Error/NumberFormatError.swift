@@ -6,11 +6,11 @@
 //
 
 enum NumberFormatError: Error {
-    case convertToString
+    case convertedString
     
     var localized: String {
         switch self {
-        case .convertToString:
+        case .convertedString:
             return "객체가 올바른 클래스가 아니여서 nil을 반환합니다."
         }
     }
