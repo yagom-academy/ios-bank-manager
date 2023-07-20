@@ -14,7 +14,6 @@ struct Bank {
     private var customerQueue: SingleLinkedList<Customer> = SingleLinkedList<Customer>()
     
     private var totalTime: TimeInterval = 0
-    private var startTime: Date?
     
     mutating func selectMenu() {
         while true {
@@ -51,18 +50,16 @@ struct Bank {
         }
     }
     
-    private mutating func measureStartTime() {
-        startTime = Date()
+    private mutating func measureStartTime() -> Date {
+        return Date()
     }
     
-    private mutating func measureTotalTime() {
-        guard let startTime else { return }
-        
+    private mutating func measureTotalTime(_ startTime: Date) {
         totalTime = Date().timeIntervalSince(startTime)
     }
     
     private mutating func processBusiness() {
-        measureStartTime()
+        let startTime: Date = measureStartTime()
         
         while let customer = customerQueue.dequeue() {
             switch customer.getBankingServiceType() {
@@ -77,7 +74,7 @@ struct Bank {
         
         depositBankManagers.finishWork()
         loansBankManagers.finishWork()
-        measureTotalTime()
+        measureTotalTime(startTime)
     }
     
     private func finishBusiness() {
