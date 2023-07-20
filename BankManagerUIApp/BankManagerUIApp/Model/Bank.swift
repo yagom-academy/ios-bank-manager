@@ -77,7 +77,7 @@ class Bank {
         reset()
     }
     
-    private func reset() {
+    func reset() {
         depositBankerQueue.cancelAllOperations()
         loanBankerQueue.cancelAllOperations()
         dailyCustomerQueue.clear()
