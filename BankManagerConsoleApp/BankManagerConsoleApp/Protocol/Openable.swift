@@ -2,7 +2,9 @@
 //  Openable.swift
 //  BankManagerConsoleApp
 //
-//  Created by MARY on 2023/07/20.
+//  Created by Dasan & Mary on 2023/07/20.
 //
 
-import Foundation
+protocol Openable {
+    mutating func open(numberOfCustomer: Int)
+}

@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol Openable {
-    mutating func open(numberOfCustomer: Int)
-}
-
 struct Bank: Openable {
     private var customerQueue: Queue<Customer> = Queue()
     private var numberOfCustomer: Int = 0

@@ -1,5 +1,5 @@
 //
-//  BankTeller.swift
+//  BankDepartment.swift
 //  BankManagerConsoleApp
 //
 //  Created by Dasan & Mary on 2023/07/12.
