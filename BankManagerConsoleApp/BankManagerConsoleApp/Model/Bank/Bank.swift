@@ -34,24 +34,18 @@ final class Bank {
         let loanSemaphore = DispatchSemaphore(value: 1)
         let clientCount = Int.random(in: 10...30)
         let startTime = Date()
+        var workSemaphore: DispatchSemaphore
         
         setUpClientQueue(count: clientCount)
         
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { break }
+            workSemaphore = client.banking == .deposit ? depositSemaphore : loanSemaphore
             
-            if client.banking == .deposit {
-                depositSemaphore.wait()
-                DispatchQueue.global().async(group: group) {
-                    self.bankManger.work(client: client)
-                    depositSemaphore.signal()
-                }
-            } else {
-                loanSemaphore.wait()
-                DispatchQueue.global().async(group: group) {
-                    self.bankManger.work(client: client)
-                    loanSemaphore.signal()
-                }
+            workSemaphore.wait()
+            DispatchQueue.global().async(group: group) {
+                self.bankManger.work(client: client)
+                workSemaphore.signal()
             }
         }
         
