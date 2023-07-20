@@ -85,6 +85,7 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				C7694E79259C3EC00053667F /* main.swift */,
 				D06DF2262A65A74E0074F9EF /* Bank */,
 				9210509B2A5F9A83007DD39F /* Queue */,
 			);
@@ -100,7 +101,6 @@
 				921050932A5F87C8007DD39F /* Bank.swift */,
 				921050972A5F87DA007DD39F /* Customer.swift */,
 				9210509C2A652A68007DD39F /* BankTask.swift */,
-				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
