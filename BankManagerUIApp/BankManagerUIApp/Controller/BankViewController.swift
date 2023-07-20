@@ -121,15 +121,36 @@ class BankViewController: UIViewController {
         view.backgroundColor = .systemBackground
         bank.delegate = self
         configureUI()
-        bank.work()
+        resetUI()
     }
     
     @objc private func didTapAddCustomer() {
+        guard let isTimerOn = timer?.isValid else {
+            return
+        }
+
+        if !isTimerOn {
+            startWorkTime = Date() - timeInterval
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+        }
+        
         bank.work(totalCustomer: 10)
     }
     
     @objc private func didTapReset() {
         bank.reset()
+    }
+    
+    @objc private func updateTimerLabel() {
+        guard let startTime = startWorkTime else {
+            return
+        }
+        timeInterval = Date().timeIntervalSince(startTime)
+        timerLabel.text = String(format: "업무시간 - %@", timeInterval.formatTimeIntervalToString())
+    }
+    
+    private func pauseTimer() {
+        timer?.invalidate()
     }
 }
 
@@ -199,12 +220,37 @@ extension BankViewController: BankViewControllerDelegate {
         OperationQueue.main.addOperation {
             customerView.removeFromSuperview()
             self.processingDictionary[customer] = nil
+            
+            if self.processingDictionary.isEmpty && self.waitingDictionary.isEmpty {
+                self.pauseTimer()
+            }
         }
     }
     
     func resetUI() {
-//        <#code#>
+        processingStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        
+        waitingStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        
+        processingDictionary = [:]
+        waitingDictionary = [:]
+        
+        timeInterval = .zero
+        timerLabel.text = String(format: "업무시간 - %@", timeInterval.formatTimeIntervalToString())
+        
+        startWorkTime = Date()
+        
+        guard let isTimerOn = timer?.isValid, isTimerOn else {
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+            
+            bank.work()
+            return
+        }
+        
+        bank.work()
     }
-    
-    
 }

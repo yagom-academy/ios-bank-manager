@@ -74,16 +74,13 @@ class Bank {
         }
     }
     
-    private func close(_ dailyBusinessHour: CFAbsoluteTime) {
-        print(String(format: Namespace.closingMessage, dailyTotalCustomer, dailyBusinessHour))
-        reset()
-    }
-    
     func reset() {
         depositBankerQueue.cancelAllOperations()
         loanBankerQueue.cancelAllOperations()
         dailyCustomerQueue.clear()
         dailyTotalCustomer = .zero
+        
+        self.delegate?.resetUI()
     }
 }
 
