@@ -34,33 +34,24 @@ class Bank {
     func startBankService(_ customers: inout [Customer]) {
         lineUp(&customers)
         
-        let firstDepositWindow = DispatchWorkItem { [self] in
-            while let depositCustomer = depositQueue.dequeue() {
-                bankers[0].work(for: depositCustomer)
-                countFinishedCustomer()
-                checkWorkTime(from: bankers[0])
+        for i in 0..<bankers.count {
+            var queue: CustomerQueue<Customer>
+            
+            switch bankers[i].task {
+            case .deposit:
+                queue = depositQueue
+            case .loan:
+                queue = loanQueue
+            }
+            
+            DispatchQueue.global().async(group: group) { [self] in
+                while let customer = queue.dequeue() {
+                    bankers[i].work(for: customer)
+                    countFinishedCustomer()
+                    checkWorkTime(from: bankers[i])
+                }
             }
         }
-        
-        let secondDepositWindow = DispatchWorkItem { [self] in
-            while let depositCustomer = depositQueue.dequeue() {
-                bankers[1].work(for: depositCustomer)
-                countFinishedCustomer()
-                checkWorkTime(from: bankers[1])
-            }
-        }
-        
-        let firstLoanWindow = DispatchWorkItem { [self] in
-            while let loanCustomer = loanQueue.dequeue() {
-                bankers[2].work(for: loanCustomer)
-                countFinishedCustomer()
-                checkWorkTime(from: bankers[2])
-            }
-        }
-        
-        DispatchQueue.global().async(group: group, execute: firstDepositWindow)
-        DispatchQueue.global().async(group: group, execute: secondDepositWindow)
-        DispatchQueue.global().async(group: group, execute: firstLoanWindow)
         
         group.wait()
         workFinish()
