@@ -12,37 +12,41 @@ class Bank {
     private var loanBankerQueue = OperationQueue()
     private var dailyCustomerQueue = CustomerQueue<Customer>()
     private var dailyTotalCustomer: Int = .zero
+    weak var delegate: BankViewControllerDelegate?
     
     init() {
         depositBankerQueue.maxConcurrentOperationCount = Configuration.numberOfDepositBanker
         loanBankerQueue.maxConcurrentOperationCount = Configuration.numberOfLoanBanker
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(workProcess), name: NSNotification.Name("addCustomer"), object: nil)
     }
     
     
     func work() {
         let totalCustomer = configureCustomer()
         addCustomer(totalCustomer)
+        workProcess()
     }
     
     func work(totalCustomer: Int) {
         addCustomer(totalCustomer)
+        workProcess()
     }
     
-    @objc private func workProcess() {
+    private func workProcess() {
         while let customer = dailyCustomerQueue.dequeue() {
             addTask(customer)
+            delegate?.addWaitingQueue(customer)
         }
     }
     
     func addCustomer(_ totalCustomer: Int) {
-        for customerNumber in 1...totalCustomer {
+        for _ in 1...totalCustomer {
             guard let work = Bank.Work.allCases.randomElement() else {
                 continue
             }
             
-            let customer = Customer(purpose: work.name, duration: work.duration, waitingNumber: customerNumber)
+            dailyTotalCustomer += 1
+            
+            let customer = Customer(purpose: work.name, duration: work.duration, waitingNumber: dailyTotalCustomer)
             
             dailyCustomerQueue.enqueue(customer)
         }
@@ -58,9 +62,9 @@ class Bank {
 
     private func addTask(_ customer: Customer) {
         let task = BlockOperation {
-            print(String(format: Namespace.startTask, customer.waitingNumber, customer.purpose))
+            self.delegate?.moveCustomerToProcessQueue(customer)
             Thread.sleep(forTimeInterval: customer.duration)
-            print(String(format: Namespace.endTask, customer.waitingNumber, customer.purpose))
+            self.delegate?.popProcessingQueue(customer)
         }
         
         if customer.purpose == Work.deposit.name {
@@ -68,8 +72,6 @@ class Bank {
         } else {
             loanBankerQueue.addOperation(task)
         }
-
-        dailyTotalCustomer += 1
     }
     
     private func close(_ dailyBusinessHour: CFAbsoluteTime) {

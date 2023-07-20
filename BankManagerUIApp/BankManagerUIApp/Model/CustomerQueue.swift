@@ -16,7 +16,6 @@ struct CustomerQueue<Element: Equatable>: QueueType {
     
     mutating func enqueue(_ value: Element) {
         linkedList.append(value)
-        NotificationCenter.default.post(name: NSNotification.Name("addCustomer"), object: nil)
     }
     
     mutating func dequeue() -> Element? {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Customer: Equatable {
+struct Customer: Equatable, Hashable {
     let purpose: String
     let duration: Double
     let waitingNumber: Int

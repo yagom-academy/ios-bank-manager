@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol BankViewControllerDelegate {
+protocol BankViewControllerDelegate: AnyObject {
     func addWaitingQueue(_ customer: Customer)
     func moveCustomerToProcessQueue(_ customer: Customer)
     func popProcessingQueue(_ customer: Customer)
@@ -16,7 +16,9 @@ protocol BankViewControllerDelegate {
 
 class BankViewController: UIViewController {
     private var bank = Bank()
-    
+    private var waitingDictionary: Dictionary<Customer, CustomerView> = [:]
+    private var processingDictionary: Dictionary<Customer, CustomerView> = [:]
+
     var startWorkTime: Date?
     var timer: Timer?
     var timeInterval: Double = .zero
@@ -51,8 +53,6 @@ class BankViewController: UIViewController {
         
         stackView.addArrangedSubview(waitingLabel)
         stackView.addArrangedSubview(processingLabel)
-        
-        processingLabel.widthAnchor.constraint(equalTo: waitingLabel.widthAnchor).isActive = true
         
         return stackView
     }()
@@ -119,7 +119,9 @@ class BankViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        bank.delegate = self
         configureUI()
+        bank.work()
     }
     
     @objc private func didTapAddCustomer() {
@@ -161,3 +163,48 @@ extension BankViewController {
     }
 }
 
+extension BankViewController: BankViewControllerDelegate {
+    func addWaitingQueue(_ customer: Customer) {
+        OperationQueue.main.addOperation {
+            let customerView = CustomerView()
+            customerView.configureUI(waitingNumber: customer.waitingNumber, purpose: customer.purpose)
+            
+            self.waitingStackView.addArrangedSubview(customerView)
+            self.waitingDictionary[customer] = customerView
+        }
+    }
+    
+    func moveCustomerToProcessQueue(_ customer: Customer) {
+        if waitingDictionary[customer] == nil {
+            OperationQueue.main.waitUntilAllOperationsAreFinished()
+        }
+        
+        guard let customerView = waitingDictionary[customer] else {
+            return
+        }
+        
+        OperationQueue.main.addOperation {
+            customerView.removeFromSuperview()
+            self.waitingDictionary[customer] = nil
+            self.processingStackView.addArrangedSubview(customerView)
+            self.processingDictionary[customer] = customerView
+        }
+    }
+    
+    func popProcessingQueue(_ customer: Customer) {
+        guard let customerView = processingDictionary[customer] else {
+            return
+        }
+        
+        OperationQueue.main.addOperation {
+            customerView.removeFromSuperview()
+            self.processingDictionary[customer] = nil
+        }
+    }
+    
+    func resetUI() {
+//        <#code#>
+    }
+    
+    
+}
