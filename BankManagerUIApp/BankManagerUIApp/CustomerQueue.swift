@@ -5,7 +5,7 @@
 //  Created by Yetti, Redmango on 2023/07/11.
 //
 
-struct CustomerQueue<Element> {
+class CustomerQueue<Element> {
     private var customerQueue: LinkedList = LinkedList<Element>()
     
     var peek: Element? {
@@ -16,15 +16,15 @@ struct CustomerQueue<Element> {
         return customerQueue.isEmpty
     }
     
-    mutating func clear() {
+    func clear() {
         customerQueue.clear()
     }
     
-    mutating func enqueue(_ newElement: Element) {
+    func enqueue(_ newElement: Element) {
         customerQueue.addLast(newElement)
     }
     
-    mutating func dequeue() -> Element? {
+    func dequeue() -> Element? {
         return customerQueue.popFirst()
     }
 }
