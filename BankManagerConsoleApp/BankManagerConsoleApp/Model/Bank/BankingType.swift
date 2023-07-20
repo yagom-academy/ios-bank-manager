@@ -2,7 +2,7 @@
 //  BankingType.swift
 //  BankManagerConsoleApp
 //
-//  Created by Hyungmin Lee on 2023/07/20.
+//  Created by Zion, Whales on 2023/07/20.
 //
 
 enum BankingType: String, CaseIterable {

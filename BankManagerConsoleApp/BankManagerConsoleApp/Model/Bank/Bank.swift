@@ -30,7 +30,8 @@ final class Bank {
     
     private func startTask() {
         let group = DispatchGroup()
-        let semaphore = DispatchSemaphore(value: bankManagerCount)
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
         let clientCount = Int.random(in: 10...30)
         let startTime = Date()
         
@@ -39,10 +40,18 @@ final class Bank {
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { break }
             
-            semaphore.wait()
-            DispatchQueue.global().async(group: group) {
-                self.bankManger.work(client: client)
-                semaphore.signal()
+            if client.banking == .deposit {
+                depositSemaphore.wait()
+                DispatchQueue.global().async(group: group) {
+                    self.bankManger.work(client: client)
+                    depositSemaphore.signal()
+                }
+            } else {
+                loanSemaphore.wait()
+                DispatchQueue.global().async(group: group) {
+                    self.bankManger.work(client: client)
+                    loanSemaphore.signal()
+                }
             }
         }
         
