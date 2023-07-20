@@ -12,8 +12,7 @@ func bankingServiceTimeConverter(_ bankingServiceTime: Double) throws -> String 
     numberFormatter.maximumFractionDigits = 2
     numberFormatter.roundingMode = .halfUp
     
-    guard let numberFormatted = numberFormatter.string(for: bankingServiceTime)
-    else {
+    guard let numberFormatted = numberFormatter.string(for: bankingServiceTime) else {
         print(NumberFormatError.convertToString.localized)
         throw NumberFormatError.convertToString
     }

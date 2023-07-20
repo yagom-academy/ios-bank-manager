@@ -6,5 +6,5 @@
 
 import Foundation
 
-private var bank = BankService(numberOfCustomers: 10)
+private var bank = BankService(numberOfCustomers: 30)
 bank.start()

@@ -33,6 +33,7 @@ struct BankService {
                 
                 switch menuChoice {
                 case 1:
+                    print(BankManagerNameSpace.startBankingService)
                     processBankWork()
                 case 2:
                     isExit = true
@@ -62,7 +63,8 @@ struct BankService {
         
         while !customerQueue.isEmpty {
             if let currentCustomer = customerQueue.dequeue() {
-                bankingServiceTask(currentCustomer)
+                let startTask = bankingServiceStartTask(currentCustomer)
+                bankingServiceEndTask(currentCustomer, startTask: startTask)
             } else {
                 break
             }
@@ -75,8 +77,8 @@ struct BankService {
             let workTime = try bankingServiceTimeConverter(bankingServiceTime)
             
             print(String(format: BankManagerNameSpace.summaryTaskMessage, arguments: ["\(customerCount)","\(workTime)"]))
-            generateCustomerQueue()
             bankingServiceTime = 0.0
+            generateCustomerQueue()
         } catch let error as NumberFormatError {
             print(error.localized)
         } catch {
@@ -85,30 +87,44 @@ struct BankService {
     }
     
     private mutating func generateCustomerQueue() {
-        for i in 1...numberOfCustomers {
+        for i in 1...Int.random(in: 10...numberOfCustomers) {
             guard let bankingOperation = BankingOperations.allCases.randomElement() else {
-                continue
+                return
             }
             
             let customer = Customer(waitingNumber: i, bankingWork: bankingOperation)
             customerQueue.enqueue(customer: customer)
         }
-        print(BankManagerNameSpace.startBankingService)
     }
     
-    private mutating func bankingServiceTask(_ customer: Customer) {
-        let task = BlockOperation {
+    private mutating func bankingServiceStartTask(_ customer: Customer) -> BlockOperation {
+        let startTask = BlockOperation {
             print(String(format: BankManagerNameSpace.startTaskMessage, arguments: ["\(customer.waitingNumber)", "\(customer.bankingWork.financialProductsName)"]))
-            print(String(format: BankManagerNameSpace.endTaskMessage, arguments: ["\(customer.waitingNumber)", "\(customer.bankingWork.financialProductsName)"]))
+            Thread.sleep(forTimeInterval: customer.bankingWork.duration)
         }
         
         switch customer.bankingWork {
         case .deposit:
-            depositBankerQueue.addOperation(task)
+            depositBankerQueue.addOperation(startTask)
         case .loan:
-            loanBankerQueue.addOperation(task)
+            loanBankerQueue.addOperation(startTask)
         }
         
+        return startTask
+    }
+    
+    private mutating func bankingServiceEndTask(_ customer: Customer, startTask: BlockOperation) {
+        let endTask = BlockOperation {
+            print(String(format: BankManagerNameSpace.endTaskMessage, arguments: ["\(customer.waitingNumber)", "\(customer.bankingWork.financialProductsName)"]))
+        }
+        endTask.addDependency(startTask)
+        
+        switch customer.bankingWork {
+        case .deposit:
+            depositBankerQueue.addOperation(endTask)
+        case .loan:
+            loanBankerQueue.addOperation(endTask)
+        }
         bankingServiceTime += customer.bankingWork.duration
     }
 }
