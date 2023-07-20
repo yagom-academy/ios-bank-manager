@@ -16,8 +16,7 @@ public func timeCheck(_ block: () -> Void) -> String {
 	
 	block()
 	
-	guard let numberFormatted = numberFormatter.string(for: Date().timeIntervalSince(start))
-	else {
+	guard let numberFormatted = numberFormatter.string(for: Date().timeIntervalSince(start)) else {
 		return NumberFormattedReturn.empty
 	}
 	

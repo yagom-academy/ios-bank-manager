@@ -8,13 +8,19 @@
 import Foundation
 
 struct BankService {
-    private var numberOfCustomers: Int = 0
+    private var customerQueue: CustomerQueue
+    private var depositBankerQueue = OperationQueue()
+    private var loanBankerQueue = OperationQueue()
+    private var bankingServiceTime: Double = 0.0
+    private var numberOfCustomers: Int
     
     init(numberOfCustomers: Int) {
         self.numberOfCustomers = numberOfCustomers
+        self.customerQueue = CustomerQueue()
+        generateCustomerQueue()
     }
     
-    func start() {
+    mutating func start() {
         var isExit: Bool = false
         
         while !isExit {
@@ -27,6 +33,7 @@ struct BankService {
                 
                 switch menuChoice {
                 case 1:
+                    print(BankManagerNameSpace.startBankingService)
                     processBankWork()
                 case 2:
                     isExit = true
@@ -49,32 +56,75 @@ struct BankService {
               terminator: " ")
     }
     
-    private func processBankWork() {
-        let banker = Banker(numberOfBankers: 1)
-        var customerQueue = generateCustomerQueue()
+    private mutating func processBankWork() {
         let customerCount = customerQueue.count
-        let sleepTime = TimeInterval(0.7)
+        depositBankerQueue.maxConcurrentOperationCount = 2
+        loanBankerQueue.maxConcurrentOperationCount = 1
         
-        let workTime = timeCheck {
-            while !customerQueue.isEmpty {
-                guard let currentCustomer = customerQueue.dequeue() else { return }
-                
-                print("\(currentCustomer.user)번 고객 업무 시작")
-                Thread.sleep(forTimeInterval: sleepTime)
-                banker.processBankerTask(customer: currentCustomer)
+        while !customerQueue.isEmpty {
+            if let currentCustomer = customerQueue.dequeue() {
+                let startTask = bankingServiceStartTask(currentCustomer)
+                bankingServiceEndTask(currentCustomer, startTask: startTask)
+            } else {
+                break
             }
         }
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(workTime)초입니다.")
+        
+        depositBankerQueue.waitUntilAllOperationsAreFinished()
+        loanBankerQueue.waitUntilAllOperationsAreFinished()
+        
+        do {
+            let workTime = try bankingServiceTimeConverter(bankingServiceTime)
+            
+            print(String(format: BankManagerNameSpace.summaryTaskMessage, arguments: ["\(customerCount)","\(workTime)"]))
+            bankingServiceTime = 0.0
+            generateCustomerQueue()
+        } catch let error as NumberFormatError {
+            print(error.localized)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
-    private func generateCustomerQueue() -> Queue<Customer> {
-        var customerQueue = Queue<Customer>()
-        
-        for i in 1...numberOfCustomers {
-            let customer = Customer(waitingNumber: i)
-            customerQueue.enqueue(customer)
+    private mutating func generateCustomerQueue() {
+        for i in 1...Int.random(in: 10...numberOfCustomers) {
+            guard let bankingOperation = BankingOperations.allCases.randomElement() else {
+                return
+            }
+            
+            let customer = Customer(waitingNumber: i, bankingWork: bankingOperation)
+            customerQueue.enqueue(customer: customer)
         }
-        print(BankManagerNameSpace.startBankingService)
-        return customerQueue
+    }
+    
+    private mutating func bankingServiceStartTask(_ customer: Customer) -> BlockOperation {
+        let startTask = BlockOperation {
+            print(String(format: BankManagerNameSpace.startTaskMessage, arguments: ["\(customer.waitingNumber)", "\(customer.bankingWork.financialProductsName)"]))
+            Thread.sleep(forTimeInterval: customer.bankingWork.duration)
+        }
+        
+        switch customer.bankingWork {
+        case .deposit:
+            depositBankerQueue.addOperation(startTask)
+        case .loan:
+            loanBankerQueue.addOperation(startTask)
+        }
+        
+        return startTask
+    }
+    
+    private mutating func bankingServiceEndTask(_ customer: Customer, startTask: BlockOperation) {
+        let endTask = BlockOperation {
+            print(String(format: BankManagerNameSpace.endTaskMessage, arguments: ["\(customer.waitingNumber)", "\(customer.bankingWork.financialProductsName)"]))
+        }
+        endTask.addDependency(startTask)
+        
+        switch customer.bankingWork {
+        case .deposit:
+            depositBankerQueue.addOperation(endTask)
+        case .loan:
+            loanBankerQueue.addOperation(endTask)
+        }
+        bankingServiceTime += customer.bankingWork.duration
     }
 }
