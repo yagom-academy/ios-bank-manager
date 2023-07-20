@@ -7,7 +7,7 @@
 
 struct Customer {
     private(set) var queueNumber: Int?
-    private let task: BankTask
+    private(set) var task: BankTask
 
     init(queueNumber: Int? = nil, task: BankTask) {
         self.queueNumber = queueNumber

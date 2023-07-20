@@ -7,13 +7,13 @@
 
 enum BankTask: CaseIterable {
     case deposit
-    case loans
+    case loan
     
     var time: Double {
         switch self {
         case .deposit:
             return 0.7
-        case .loans:
+        case .loan:
             return 1.1
         }
     }
@@ -22,7 +22,7 @@ enum BankTask: CaseIterable {
         switch self {
         case .deposit:
             return "예금"
-        case .loans:
+        case .loan:
             return "대출"
         }
     }
