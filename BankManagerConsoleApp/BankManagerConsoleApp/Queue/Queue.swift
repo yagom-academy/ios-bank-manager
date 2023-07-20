@@ -5,7 +5,7 @@
 //  Created by mint, Jusbug on 2023/07/13.
 //
 
-struct Queue<T>: Queueable {
+struct Queue<T> {
     private var linkedList: LinkedList = LinkedList<T>()
     
     var isEmpty: Bool {
