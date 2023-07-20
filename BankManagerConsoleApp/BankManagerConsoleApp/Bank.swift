@@ -54,8 +54,8 @@ struct Bank {
         return Date()
     }
     
-    private mutating func measureTotalTime(_ startTime: Date) {
-        totalTime = Date().timeIntervalSince(startTime)
+    private mutating func measureTotalTime(_ startTime: Date) -> TimeInterval {
+        return Date().timeIntervalSince(startTime)
     }
     
     private mutating func processBusiness() {
@@ -74,7 +74,7 @@ struct Bank {
         
         depositBankManagers.finishWork()
         loansBankManagers.finishWork()
-        measureTotalTime(startTime)
+        totalTime = measureTotalTime(startTime)
     }
     
     private func finishBusiness() {
