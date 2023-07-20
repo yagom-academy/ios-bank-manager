@@ -20,6 +20,16 @@ class Bank {
         NotificationCenter.default.addObserver(self, selector: #selector(workProcess), name: NSNotification.Name("addCustomer"), object: nil)
     }
     
+    
+    func work() {
+        let totalCustomer = configureCustomer()
+        addCustomer(totalCustomer)
+    }
+    
+    func work(totalCustomer: Int) {
+        addCustomer(totalCustomer)
+    }
+    
     @objc private func workProcess() {
         while let customer = dailyCustomerQueue.dequeue() {
             addTask(customer)
@@ -45,16 +55,7 @@ class Bank {
         
         return totalCustomer
     }
-    
-    func work() {
-        let totalCustomer = configureCustomer()
-        addCustomer(totalCustomer)
-    }
-    
-    func work(totalCustomer: Int) {
-        addCustomer(totalCustomer)
-    }
-    
+
     private func addTask(_ customer: Customer) {
         let task = BlockOperation {
             print(String(format: Namespace.startTask, customer.waitingNumber, customer.purpose))
@@ -77,7 +78,9 @@ class Bank {
     }
     
     private func reset() {
-        dailyCustomerQueue = CustomerQueue<Customer>()
+        depositBankerQueue.cancelAllOperations()
+        loanBankerQueue.cancelAllOperations()
+        dailyCustomerQueue.clear()
         dailyTotalCustomer = .zero
     }
 }
