@@ -6,15 +6,15 @@
 //
 
 enum BankingType: String, CaseIterable {
-    case loan = "대출"
     case deposit = "예금"
+    case loan = "대출"
     
     var taskTime: Double {
         switch self {
-        case .loan:
-            return 1.1
         case .deposit:
             return 0.7
+        case .loan:
+            return 1.1
         }
     }
 }

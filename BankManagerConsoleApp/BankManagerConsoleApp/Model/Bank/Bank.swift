@@ -8,12 +8,14 @@
 import Foundation
 
 final class Bank {
-    let bankManagerCount: Int
+    let depositBankManagerCount: Int
+    let loanBankManagerCount: Int
     var clientQueue = Queue<Client>()
     let bankManger = BankManager()
     
-    init(bankManagerCount: Int) {
-        self.bankManagerCount = bankManagerCount
+    init(depositBankManagerCount: Int, loanBankManagerCount: Int) {
+        self.depositBankManagerCount = depositBankManagerCount
+        self.loanBankManagerCount = loanBankManagerCount
     }
     
     func open() {
@@ -30,10 +32,10 @@ final class Bank {
     
     private func startTask() {
         let group = DispatchGroup()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
         let clientCount = Int.random(in: 10...30)
         let startTime = Date()
+        let depositSemaphore = DispatchSemaphore(value: depositBankManagerCount)
+        let loanSemaphore = DispatchSemaphore(value: loanBankManagerCount)
         var workSemaphore: DispatchSemaphore
         
         setUpClientQueue(count: clientCount)
