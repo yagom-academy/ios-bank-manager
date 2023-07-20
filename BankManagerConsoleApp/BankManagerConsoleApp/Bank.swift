@@ -4,45 +4,73 @@
 //
 //  Created by Yetti, redmango1446 on 2023/07/13.
 //
+import Foundation
 
-struct Bank {
+class Bank {
     private let bankers: [Banker]
-    private var bankQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var depositQueue: CustomerQueue<Customer> = CustomerQueue()
+    private var loanQueue: CustomerQueue<Customer> = CustomerQueue()
     private var finishedCustomerCount: Int = .zero
     private var totalWorkTime: Double = .zero
+    private let group = DispatchGroup()
     
     init(bankers: [Banker]) {
         self.bankers = bankers
     }
     
-    mutating private func lineUp(_ customers: inout [Customer]) {
+    private func lineUp(_ customers: inout [Customer]) {
         for number in 0..<customers.count {
             customers[number].receiveQueueNumber(queueNumber: number + 1)
-            bankQueue.enqueue(customers[number])
+            
+            switch customers[number].task {
+            case .deposit:
+                depositQueue.enqueue(customers[number])
+            case .loan:
+                loanQueue.enqueue(customers[number])
+            }
         }
     }
     
-    mutating func startBankService(_ customers: inout [Customer]) {
+    func startBankService(_ customers: inout [Customer]) {
         lineUp(&customers)
         
-        while !bankQueue.isEmpty {
-            guard let currentCustomer = bankQueue.dequeue(),
-                  let currentBanker = bankers.first else {
-                return
+        let firstDepositWindow = DispatchWorkItem { [self] in
+            while let depositCustomer = depositQueue.dequeue() {
+                bankers[0].work(for: depositCustomer)
+                countFinishedCustomer()
+                checkWorkTime(from: bankers[0])
             }
-            
-            currentBanker.work(for: currentCustomer)
-            checkWorkTime(from: currentBanker)
-            countFinishedCustomer()
         }
+        
+        let secondDepositWindow = DispatchWorkItem { [self] in
+            while let depositCustomer = depositQueue.dequeue() {
+                bankers[1].work(for: depositCustomer)
+                countFinishedCustomer()
+                checkWorkTime(from: bankers[1])
+            }
+        }
+        
+        let firstLoanWindow = DispatchWorkItem { [self] in
+            while let loanCustomer = loanQueue.dequeue() {
+                bankers[2].work(for: loanCustomer)
+                countFinishedCustomer()
+                checkWorkTime(from: bankers[2])
+            }
+        }
+        
+        DispatchQueue.global().async(group: group, execute: firstDepositWindow)
+        DispatchQueue.global().async(group: group, execute: secondDepositWindow)
+        DispatchQueue.global().async(group: group, execute: firstLoanWindow)
+        
+        group.wait()
         workFinish()
     }
     
-    mutating private func countFinishedCustomer() {
+    private func countFinishedCustomer() {
         finishedCustomerCount += 1
     }
     
-    mutating private func checkWorkTime(from banker: Banker) {
+    private func checkWorkTime(from banker: Banker) {
         totalWorkTime += banker.notifyWorkTime()
     }
     

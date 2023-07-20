@@ -36,7 +36,7 @@ struct BankManager {
     private func createBankers() -> [Banker] {
         let bankers = [Banker(task: .deposit),
                        Banker(task: .deposit),
-                       Banker(task: .loans)]
+                       Banker(task: .loan)]
         
         return bankers
     }
@@ -45,7 +45,7 @@ struct BankManager {
         let customerNumbers = Int.random(in: 10...30)
         var customers = [Customer]()
         
-        for _ in 0...customerNumbers {
+        for _ in 1...customerNumbers {
             guard let task = BankTask.allCases.randomElement() else {
                 
                 return customers //추후 에러처리
