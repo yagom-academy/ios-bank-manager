@@ -1,7 +1,7 @@
 # 🏦은행창구 매니저💰
 
 ## 💬 소개
-> 자료구조 `Queue`를 활용해 은행에 도착한 대기열을 구현하고 1명의 은행원이 10~30명 사이의 고객의 업무를 1:1로 처리해주는 은행 콘솔앱입니다.
+> 자료구조 `Queue`를 활용해 은행에 도착한 대기열을 구현하고, 2명의 은행원은 예금업무를 담당하고 1명의 은행원은 대출업무를 담당하여 10~30명 사이의 고객의 업무를 `DispatchQueue`를 활용해 비동기 처리한 은행 콘솔앱입니다.
 
 </br>
 
@@ -46,6 +46,13 @@
 | 2023.07.12. |🖨️ `value`와 `element`를 `element`로 네이밍 통일 <br> 💥 `Node`를 `LinkedList`에 `nested type`로 수정 <br>    |
 | 2023.07.13. |📝 프로젝트에서 필요로 하는 핵심기능 공부 - 시간 관련 `Thread.sleep`, `CFAbsoluteTimeGetCurrent` <br>    |
 | 2023.07.14. |🖨️ `Queue`의 활용도를 넓히기 위해 `CustomerWatingQueue`에서 `Queue`로 변경 <br> ✴️ 은행 고객을 지칭하는 `Customer` 구조체 구현<br> ✴️ 은행을 지칭하는 `Bank` 구조체 구현 <br> ✴️ 은행원을 지칭하는 `Teller` 구조체 구현<br> ✴️ 전체적으로 컨트롤 할 `BankManager` 구조체 구현<br>|
+| 2023.07.15. |💥 `Teller`을 `Bank`의 프로퍼티로 통합 <br> ✂️ `Customer`에 `Equatable` 프로토콜 채택 <br> ✂️ `BankManager`의 `state`와 `menuchoice`를 각각 `enum`으로 명시 <br>|
+| 2023.07.16. |💥`waitingNumber`로 네이밍 변경, `state`를 `Bank`로 위치 변경  <br> ✍️ `README` 작성|
+| 2023.07.17. |📝 프로젝트에서 필요로 하는 핵심기능 공부 - `OperationQueue` <br>|
+| 2023.07.18. |📝 프로젝트에서 필요로 하는 핵심기능 공부 - `DispatchQueue` <br>|
+| 2023.07.19. |✴️ 업무 분담 및 각 업무별 할당 될 은행원 수를 담은 `enum` 구현 <br> ✴️ 예금과 대출을 관리할 `DispatchSemaphore`프로퍼티로 생성 <br> ✴️ 고객생성 시 작업할 업무 분담 메서드 구현 <br>|
+| 2023.07.20. |✴️ 예금 업무와 대출 업무 `DispatchQueue`를 활용해 비동기 처리 메서드 구현 <br>|
+| 2023.07.21. |✍️ `README` 작성 <br>|
 
 ---
 
@@ -55,13 +62,15 @@
 
 ## 3.📊 시각적 프로젝트 구조
 ### 📂 폴더 구조
-![스크린샷 2023-07-14 오후 5 08 49](https://github.com/karenyang835/ios-bank-manager/assets/124643896/e3e3e361-b93e-4208-846f-e91db20caa67)
+![스크린샷 2023-07-21 오전 8 54 14](https://github.com/karenyang835/ios-bank-manager/assets/124643896/5d594331-5758-4e43-a380-239fc72b63a2)
 </br>
+
 
 ### 🎨 Class Diagram
 </br>
 
-![image](https://github.com/karenyang835/ios-bank-manager/assets/124643896/574f21d6-22dc-45d8-aaff-59426c337dda)
+![image](https://github.com/karenyang835/ios-bank-manager/assets/124643896/0ff651f7-d242-413a-872c-463743d61d36)
+
 
 ---
 
@@ -73,7 +82,7 @@
 ## 4. 📱실행 화면
 | 1. 은행개점  |2. 종료 |
 | :--------: | :--------: |
-|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/0d032f79-42e8-4784-930f-5bd2bcf49add" style="zoom:80%;" />|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/19e7c683-40ca-4b60-8552-9dc753864697" style="zoom:80%;" />|
+|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/1f9cfece-7573-4d1d-be93-4ae7319c054a" style="zoom:80%;" />|<img src="https://github.com/karenyang835/ios-bank-manager/assets/124643896/b7c392bc-17ca-4d8d-917a-84e4140ba22e" style="zoom:80%;" />|
 
 ---
 
@@ -94,7 +103,7 @@
 - `Queue`는 내부에 자료를 갖는 컨테이너를 프로퍼티로 반드시 하나를 갖고 있어야되고, `LinkedList`가 컨테이너의 역할을 하게 되는 것입니다. 즉, 필수적인 요소를 가지고 있어야 되는 프로퍼티가 존재하기에 그 부분을 `LinkedList`가 채워주어야되서 `LinkedList`와 `Queue`를 각각 구현해줘야 된다는 것을 알게 되었습니다.
 
 
-### 2️⃣ Node를 따로 선언해 줄 필요가 있을까?
+### 2️⃣ `Node`를 따로 선언해 줄 필요가 있을까?
 - `Node`는 `LinkedList`안에서만 활용되어지는데 굳이 따로 빼두어야할 지가 의문이었습니다. 그래서 `LinkedList`안에서만 활용되니 `LinkedList`안에 `nested type`으로 구현을 해주었습니다.
 
 
@@ -111,6 +120,14 @@
 |**Thread.sleep**|•`class`타입 메서드 <br> •`Thread.sleep`은 밀리초(1/1000초) 단위로 대기 시간을 지정<br>|
 - 이러한 차이로 인해 `Thread.sleep`을 사용할 때 대기 시간을 더 쉽게 조정할 수 있습니다.
 또한 `Thread.sleep()`이 `Foundation FrameWork`의 `Thread class`에 정의된 메서드로 `swift`에 더 최적화 되어있다고 해서 해당 명령어로 진행했습니다.
+
+### 5️⃣ `Operation Queue` vs `Dispatch Queue`
+- 이번 프로젝트의 비동기 처리를 어떤걸 활용해서 해야될 지 고민을 많이 했습니다. 사실 동기, 비동기 자체를 이해하는데에도 많은 시간이 소요된 것 같습니다.
+- `Operation Queue`는 `KVO`를 통해 작업의 상태 변화를 관찰하고, 작업간의 의존성 관리와 작업 취소, 일시 중지, 재개 등과 같은 기능을 제공해주어 의존성을 명시적으로 관리할 수 있는 장점이 있어 `Dispatch Queue`보다 메모리적으로 효율성이 더 좋을것 같았지만, 실상은 작업을 생성한 큐의 내부 스레드 풀을 활용하여 작업을 실행하고 관리하는 `Dispatch Queue`가 경량적인 구조로 스레드를 생성하고 사용하므로 메모리 사용량이 낮고 작업이 큐에 추가되면 더 작은 단위로 분할하여 처리하는 것이 가능한 `Dispatch Queue`가 작업을 더 효율적으로 관리할 수 있는 등 이점이 많아 `Dispatch Queue`를 선택하게 되었습니다.
+- 또한 현 프로젝트에서는 우선 순위 기반으로 작업을 처리하는 것도 아니고 대기 시간이라는 것이 주어지기는 하지만 프로젝트 명시상 작업시간이 긴 대출 업무가 먼저 끝나게 하는것도 아니기에 `KVO`를 통해 작업의 상태 변화를 관찰하고 추적할 필요성은 없는 것 같아 `Operation Queue`를 적용시키는 것은 적절하지 않다고 생각되어졌습니다.
+
+### 6️⃣ 각각 업무별로 고객을 어떻게 할당해 줄까?
+- `for`문을 활용해서 각각 고객이 은행에서 처리할 업무를 분담해주는 방법이 이례적이겠지만 조금 더 직관적이고 빠르게 연산해서 적용시켜줄 수 있는 방법은 없을까 고민해보고 찾아보았습니다. 현재로서 은행에서 처리할 수 있는 업무는 두 가지이다보니 참, 거짓 두 가지의 값으로도 고객 업무를 할당해줄 수 있지 않을까 싶어 찾아보니 `random`이라는 고차함수를 `Bool`값으로도 활용이 가능하다는 것을 알게 되어서 `Bool.random`을 활용해 구현해보았습니다. 추후에 업무의 종류가 늘어난다면 `for`문으로 적용시키는것이 더 좋겠지만 두 가지의 업무만 진행되어질 때는 간단히 적용시킬 수 있다고 생각되어집니다.
 
 ---
 
