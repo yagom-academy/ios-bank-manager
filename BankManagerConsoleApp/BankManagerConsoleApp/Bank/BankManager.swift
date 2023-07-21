@@ -27,7 +27,7 @@ struct BankManager {
     
     private func openBank() {
         let bankers = createBankers()
-        var bank = Bank(bankers: bankers)
+        let bank = Bank(bankers: bankers)
         guard var customers = try? createCustomers() else {
             return
         }
