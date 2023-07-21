@@ -16,6 +16,7 @@
 		C7694E52259C3EA20053667F /* BankManagerUIAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E51259C3EA20053667F /* BankManagerUIAppTests.swift */; };
 		C7694E5D259C3EA20053667F /* BankManagerUIAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */; };
 		D2E158DB2A67A38A00052F8B /* BankManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E158DA2A67A38A00052F8B /* BankManagerView.swift */; };
+		D2E1591A2A6A283D00052F8B /* CustomerPackage in Frameworks */ = {isa = PBXBuildFile; productRef = D2E159192A6A283D00052F8B /* CustomerPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C7694E5C259C3EA20053667F /* BankManagerUIAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerUIAppUITests.swift; sourceTree = "<group>"; };
 		C7694E5E259C3EA20053667F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2E158DA2A67A38A00052F8B /* BankManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerView.swift; sourceTree = "<group>"; };
+		D2E159172A6A283400052F8B /* CustomerPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CustomerPackage; path = ../CustomerPackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E1591A2A6A283D00052F8B /* CustomerPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,10 +84,12 @@
 		C7694E2E259C3E9F0053667F = {
 			isa = PBXGroup;
 			children = (
+				D2E159162A6A283400052F8B /* Packages */,
 				C7694E39259C3E9F0053667F /* BankManagerUIApp */,
 				C7694E50259C3EA20053667F /* BankManagerUIAppTests */,
 				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
 				C7694E38259C3E9F0053667F /* Products */,
+				D2E159182A6A283D00052F8B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,6 +168,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D2E159162A6A283400052F8B /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		D2E159182A6A283D00052F8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2E159172A6A283400052F8B /* CustomerPackage */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -179,6 +199,9 @@
 			dependencies = (
 			);
 			name = BankManagerUIApp;
+			packageProductDependencies = (
+				D2E159192A6A283D00052F8B /* CustomerPackage */,
+			);
 			productName = BankManagerUIApp;
 			productReference = C7694E37259C3E9F0053667F /* BankManagerUIApp.app */;
 			productType = "com.apple.product-type.application";
@@ -626,6 +649,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D2E159192A6A283D00052F8B /* CustomerPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CustomerPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C7694E2F259C3E9F0053667F /* Project object */;
 }

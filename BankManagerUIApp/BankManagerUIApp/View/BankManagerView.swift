@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CustomerPackage
 
 final class BankManagerView: UIView {
     private let scrollView: UIScrollView = {
