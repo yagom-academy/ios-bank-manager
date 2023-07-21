@@ -10,6 +10,7 @@ import CustomerPackage
 class BankManagerViewController: UIViewController {
     private let bankManagerView = BankManagerView()
     private var bank = Bank()
+    private let workTimer = WorkTimer()
     
     override func loadView() {
         super.loadView()
@@ -21,6 +22,7 @@ class BankManagerViewController: UIViewController {
         super.viewDidLoad()
         
         bankManagerView.delegate = self
+        workTimer.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(addCustomerToWork(_:)), name: NSNotification.Name("업무시작"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomerToWork(_:)), name: NSNotification.Name("업무종료"), object: nil)
@@ -46,6 +48,7 @@ class BankManagerViewController: UIViewController {
     }
 }
 
+// MARK: - BankManagerViewDelegate
 extension BankManagerViewController: BankManagerViewDelegate {
     func didTappedAddCustomerButton() {
         let customers = bank.addCustomer()
@@ -62,3 +65,11 @@ extension BankManagerViewController: BankManagerViewDelegate {
     }
 }
 
+// MARK: - WorkTimerDelegate
+extension BankManagerViewController: WorkTimerDelegate {
+    func updateTime(_ time: String) {
+        OperationQueue.main.addOperation { [self] in
+            bankManagerView.setUpTimerLabel(time)
+        }
+    }
+}
