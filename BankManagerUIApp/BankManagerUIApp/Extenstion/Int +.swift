@@ -6,11 +6,11 @@
 //
 
 extension Int {
-    var minutes: String {
-        String(format: "%02d", (self % 3600) / 60)
+    var minute: String {
+        String(format: "%02d", self / 60)
     }
     
-    var seconds: String {
+    var second: String {
         String(format: "%02d", self % 60)
     }
 }

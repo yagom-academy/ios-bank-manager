@@ -13,41 +13,39 @@ protocol WorkTimerDelegate: AnyObject {
 
 class WorkTimer {
     private var timer: Timer?
-    private var startTime: TimeInterval = WorkTimerNameSpace.zero
-    private var elapsedTime: TimeInterval = WorkTimerNameSpace.zero
+    private var time: Double = WorkTimerNameSpace.zero
     weak var delegate: WorkTimerDelegate?
     var isRunning: Bool = false
     
     func start() {
         isRunning = true
+        timer = Timer.scheduledTimer(timeInterval: WorkTimerNameSpace.aThousandth, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         
-        if timer == nil {
-            startTime = Date.timeIntervalSinceReferenceDate - elapsedTime
-            timer = Timer.scheduledTimer(timeInterval: WorkTimerNameSpace.aThousandth, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .common)
         }
     }
     
     func suspend() {
         isRunning = false
         timer?.invalidate()
-        timer = nil
-        elapsedTime = Date.timeIntervalSinceReferenceDate - startTime
     }
     
     func clear() {
         suspend()
-        startTime = WorkTimerNameSpace.zero
-        elapsedTime = WorkTimerNameSpace.zero
+        timer = nil
+        time = WorkTimerNameSpace.zero
         delegate?.updateTime("00:00:000")
     }
     
     @objc private func updateTimer() {
-        let currentTime = Date.timeIntervalSinceReferenceDate
-        let runTime = currentTime - startTime
-        let runTimeIntger = Int(runTime)
-        let milliseconds = String(format: "%03d", Int(runTime.truncatingRemainder(dividingBy: 1) * 1000))
+        time += 0.001
         
-        delegate?.updateTime("\(runTimeIntger.minutes):\(runTimeIntger.seconds):\(milliseconds)")
+        let totalSecond = Int(time)
+        let miliSecond = Int((time - Double(totalSecond)) * 1000)
+        let formatMiliSecond = String(format: "%03d", miliSecond)
+        
+        delegate?.updateTime("\(totalSecond.minute):\(totalSecond.second):\(formatMiliSecond)")
     }
 }
 
