@@ -5,7 +5,7 @@
 //  Created by kyungmin, Max on 2023/07/20.
 //
 
-class Node<Element: Equatable> {
+final class Node<Element: Equatable> {
     var element: Element
     var nextNode: Node?
     

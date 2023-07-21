@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Bank {
+final class Bank {
     private var depositBankerQueue = OperationQueue()
     private var loanBankerQueue = OperationQueue()
     private var dailyCustomerQueue = CustomerQueue<Customer>()
@@ -38,7 +38,7 @@ class Bank {
         }
     }
     
-    func addCustomer(_ totalCustomer: Int) {
+    private func addCustomer(_ totalCustomer: Int) {
         for _ in 1...totalCustomer {
             guard let work = Bank.Work.allCases.randomElement() else {
                 continue
@@ -52,7 +52,7 @@ class Bank {
         }
     }
     
-    func configureCustomer() -> Int {
+    private func configureCustomer() -> Int {
         let totalCustomer = Int.random(
             in: Configuration.minimumCustomer...Configuration.maximumCustomer
         )
@@ -91,14 +91,6 @@ extension Bank {
         static let numberOfLoanBanker = 1
         static let minimumCustomer = 10
         static let maximumCustomer = 30
-    }
-}
-
-extension Bank {
-    enum Namespace {
-        static let startTask = "%d번 고객 %@업무 시작"
-        static let endTask = "%d번 고객 %@업무 완료"
-        static let closingMessage = "업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 %d명이며, 총 업무시간은 %.2f초입니다."
     }
 }
 

@@ -14,14 +14,14 @@ protocol BankViewControllerDelegate: AnyObject {
     func resetUI()
 }
 
-class BankViewController: UIViewController {
+final class BankViewController: UIViewController {
     private var bank = Bank()
     private var waitingDictionary: Dictionary<Customer, CustomerView> = [:]
     private var processingDictionary: Dictionary<Customer, CustomerView> = [:]
 
-    var startWorkTime: Date?
-    var timer: Timer?
-    var timeInterval: Double = .zero
+    private var startWorkTime: Date?
+    private var timer: Timer?
+    private var timeInterval: Double = .zero
     
     private let outerStackView: UIStackView = {
         let stackView = UIStackView()
