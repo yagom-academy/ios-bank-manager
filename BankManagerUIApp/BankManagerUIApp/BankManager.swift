@@ -27,8 +27,10 @@ struct BankManager {
     
     private func openBank() {
         let bankers = createBankers()
-        var customers = createCustomers()
         var bank = Bank(bankers: bankers)
+        guard var customers = try? createCustomers() else {
+            return
+        }
         
         bank.startBankService(&customers)
     }
@@ -41,14 +43,13 @@ struct BankManager {
         return bankers
     }
     
-    private func createCustomers() -> [Customer] {
+    private func createCustomers() throws -> [Customer] {
         let customerNumbers = Int.random(in: 10...30)
         var customers = [Customer]()
         
         for _ in 1...customerNumbers {
             guard let task = BankTask.allCases.randomElement() else {
-                
-                return customers //추후 에러처리
+                throw BankSystemError.noTask
             }
             
             customers.append(Customer(task: task))
