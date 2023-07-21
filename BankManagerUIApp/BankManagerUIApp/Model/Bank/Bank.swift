@@ -10,9 +10,20 @@ import CustomerPackage
 
 struct Bank {
     private let customerCount: Int
-    private let depositBankClerk = BankClerk(workType: .deposit)
-    private let loanBankClerk = BankClerk(workType: .loan)
     private var waitingLine: any CustomerQueueable = CustomerQueue()
+    private let loanOperationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = WorkType.loan.numberOfBankClerk
+        
+        return operationQueue
+    }()
+    
+    private let depositOperationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = WorkType.deposit.numberOfBankClerk
+        
+        return operationQueue
+    }()
     
     init(customerCount: Int) {
         self.customerCount = customerCount
@@ -30,12 +41,12 @@ struct Bank {
     }
     
     private func startBankService() {
-        let group = DispatchGroup()
         let startTime = Date()
         
-        distributeWork(group)
+        distributeWork()
         
-        group.wait()
+        depositOperationQueue.waitUntilAllOperationsAreFinished()
+        loanOperationQueue.waitUntilAllOperationsAreFinished()
         
         let totalTaskTime = Date().timeIntervalSince(startTime)
         let formatTaskTime = String(format: "%.2f", totalTaskTime)
@@ -43,15 +54,16 @@ struct Bank {
         finish(formatTaskTime)
     }
     
-    private func distributeWork(_ group: DispatchGroup) {
+    private func distributeWork() {
         while !waitingLine.isEmpty {
             guard let currentCustomer = waitingLine.dequeue() else { return }
+            let operation = BlockOperation { BankClerk.carryOutBankService(for: currentCustomer) }
             
             switch currentCustomer.workType {
             case .deposit:
-                depositBankClerk.carryOutBankService(for: currentCustomer, of: group)
+                depositOperationQueue.addOperation(operation)
             case .loan:
-                loanBankClerk.carryOutBankService(for: currentCustomer, of: group)
+                loanOperationQueue.addOperation(operation)
             default:
                 print("workType이 nil입니다.")
             }
