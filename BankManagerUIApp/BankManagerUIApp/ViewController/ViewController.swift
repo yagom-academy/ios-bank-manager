@@ -17,6 +17,17 @@ class BankManagerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addCustomerToWork(_:)), name: NSNotification.Name("업무시작"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomerToWork(_:)), name: NSNotification.Name("업무종료"), object: nil)
+    }
+    
+    @objc private func addCustomerToWork(_ notification: NSNotification) {
+        
+    }
+    
+    @objc private func deleteCustomerToWork(_ notification: NSNotification) {
+        
     }
 }
 
