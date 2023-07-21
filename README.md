@@ -178,6 +178,9 @@
 🍏 [Apple Developer - sleep(_:)](https://developer.apple.com/documentation/swift/task/sleep(_:))<br>
 🍏 [Apple Developer - Thread.sleep(forTimeInterval:)](https://developer.apple.com/documentation/foundation/thread/1413673-sleep)<br>
 🍏 [Apple Developer - CFAbsoluteTimeGetCurrent()](https://developer.apple.com/documentation/corefoundation/1543542-cfabsolutetimegetcurrent)<br>
+🍏 [Apple Developer - random() -> Bool](https://developer.apple.com/documentation/swift/bool/random())<br>
+🍏 [Apple Developer - DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue)<br>
+🍏 [Apple Developer - OperationQueue](https://developer.apple.com/documentation/foundation/operationqueue)
 
 ---
 
