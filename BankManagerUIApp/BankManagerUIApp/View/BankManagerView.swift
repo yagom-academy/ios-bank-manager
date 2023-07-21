@@ -8,7 +8,14 @@
 import UIKit
 import CustomerPackage
 
+protocol BankManagerViewDelegate: AnyObject {
+    func didTappedAddCustomerButton()
+    func didTappedClearButton()
+}
+
 final class BankManagerView: UIView {
+    weak var delegate: BankManagerViewDelegate?
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,23 +37,25 @@ final class BankManagerView: UIView {
         return stackView
     }()
     
-    private let addCustomerButton: UIButton = {
+    private lazy var addCustomerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("고객 10명 추가", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.addTarget(self, action: #selector(didTappedAddCustomerButton), for: .touchUpInside)
         return button
     }()
     
-    private let clearButton: UIButton = {
+    private lazy var clearButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("초기화", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.addTarget(self, action: #selector(didTappedClearButton), for: .touchUpInside)
         return button
     }()
     
@@ -156,6 +165,17 @@ final class BankManagerView: UIView {
         setUpWaitAndWorkStackViewConstraints()
         setUpWaitStackViewConstraints()
         setUpWorkStackViewConstraints()
+    }
+}
+
+// MARK: - Delegate
+extension BankManagerView {
+    @objc private func didTappedAddCustomerButton() {
+        delegate?.didTappedAddCustomerButton()
+    }
+    
+    @objc private func didTappedClearButton() {
+        delegate?.didTappedClearButton()
     }
 }
 
