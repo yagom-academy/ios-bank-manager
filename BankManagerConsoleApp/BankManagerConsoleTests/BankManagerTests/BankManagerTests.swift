@@ -9,14 +9,14 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class BankManagerTests: XCTestCase {
-    private var sut: BankManager!
+    private var sut: BankManagerMock!
     private var bank: BankStub!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         
         bank = BankStub()
-        sut = BankManager(bank: bank)
+        sut = BankManagerMock(bank: bank)
     }
 
     override func tearDownWithError() throws {
@@ -28,31 +28,34 @@ final class BankManagerTests: XCTestCase {
     
     func test_runProgram메서드실행후_2를입력하였때_bank의_isOpening은_false이다() {
         // given
-        sut.runProgram()
+        let enterable = EnterableTestStruct(inputValue: "2")
+        sut.runProgram(enterable: enterable)
         
-        // when : 2을 입력하면
+        // when
         let result = bank.isOpening
         
         // then
         XCTAssertFalse(result)
     }
     
-    func test_runProgram메서드실행후_5을입력후_2를입력하였을때_bank의_isOpening은_false이다() {
+    func test_runProgram메서드실행후_5을입력하였을때_bank의_isOpening은_false이다() {
         // given
-        sut.runProgram()
+        let enterable = EnterableTestStruct(inputValue: "5")
+        sut.runProgram(enterable: enterable)
         
-        // when : 5을 입력하고 2를 입력하면
+        // when
         let result = bank.isOpening
         
         // then
         XCTAssertFalse(result)
     }
     
-    func test_runProgram메서드실행후_1을입력후_2를입력하였을때_bank의_isOpening은_true이다() {
+    func test_runProgram메서드실행후_1을입력하였을때_bank의_isOpening은_true이다() {
         // given
-        sut.runProgram()
+        let enterable = EnterableTestStruct(inputValue: "1")
+        sut.runProgram(enterable: enterable)
         
-        // when : 1을 입력하고 2를 입력하면
+        // when
         let result = bank.isOpening
         
         // then
