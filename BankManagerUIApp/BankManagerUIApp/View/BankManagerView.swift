@@ -65,7 +65,7 @@ final class BankManagerView: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textAlignment = .center
-        label.text = "업무시간 - "
+        label.text = "업무시간 - 00:00:000"
         return label
     }()
     
@@ -176,6 +176,55 @@ extension BankManagerView {
     
     @objc private func didTappedClearButton() {
         delegate?.didTappedClearButton()
+    }
+}
+
+// MARK: - Setup
+extension BankManagerView {
+    func setUpTimerLabel(_ time: String) {
+        timerLabel.text = "업무시간 - " + time
+    }
+    
+    func addLabelInWaitStackView(_ customer: Customer) {
+        waitStackView.addArrangedSubview(addCustomerLabel(customer))
+    }
+    
+    func addLabelInWorkStackView(_ customer: Customer) {
+        workStackView.addArrangedSubview(addCustomerLabel(customer))
+    }
+    
+    func deleteLabelInWaitStackView(_ customer: Customer) {
+        waitStackView.arrangedSubviews.forEach {
+            guard let label = $0 as? UILabel,
+                  let workType = customer.workType else { return }
+            
+            if label.text == "\(customer.waitingNumber) - \(workType.name)" {
+                $0.removeFromSuperview()
+            }
+        }
+    }
+    
+    func deleteLabelInWorkStackView(_ customer: Customer) {
+        workStackView.arrangedSubviews.forEach {
+            guard let label = $0 as? UILabel,
+                  let workType = customer.workType else { return }
+            
+            if label.text == "\(customer.waitingNumber) - \(workType.name)" {
+                $0.removeFromSuperview()
+            }
+        }
+    }
+    
+    private func addCustomerLabel(_ customer: Customer) -> UILabel {
+        guard let workType = customer.workType else { return UILabel() }
+        
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textAlignment = .center
+        label.textColor = workType.tintColor
+        label.text = "\(customer.waitingNumber) - \(workType.name)"
+        
+        return label
     }
 }
 
