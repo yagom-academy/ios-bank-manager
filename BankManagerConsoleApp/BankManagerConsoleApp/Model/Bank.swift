@@ -10,7 +10,7 @@ import Foundation
 struct Bank: Openable {
     private var customerQueue: Queue<Customer> = Queue()
     private var numberOfCustomer: Int = 0
-    private var timer = TimeTracker()
+    private var timeTracker = TimeTracker()
     
     private let printStartMessage: (Customer) -> Void = { customer in
         print(String(format: MessageFormat.startTask, customer.numberTicket, customer.service.description))
@@ -37,7 +37,7 @@ struct Bank: Openable {
         let group = DispatchGroup()
         let depositDepartment = BankDepartment(numberOfBankTeller: 2, group: group)
         let loanBankDepartment = BankDepartment(numberOfBankTeller: 1, group: group)
-        timer.startTime = CFAbsoluteTimeGetCurrent()
+        timeTracker.startTime = CFAbsoluteTimeGetCurrent()
         
         while let currentCustomer = customerQueue.dequeue() {
             switch currentCustomer.service {
@@ -52,11 +52,11 @@ struct Bank: Openable {
             }
         }
         group.wait()
-        timer.endTime = CFAbsoluteTimeGetCurrent()
+        timeTracker.endTime = CFAbsoluteTimeGetCurrent()
     }
     
     private func closeBusiness() {
-        print(String(format: MessageFormat.closing, numberOfCustomer, timer.duration))
+        print(String(format: MessageFormat.closing, numberOfCustomer, timeTracker.duration))
     }
 }
 
