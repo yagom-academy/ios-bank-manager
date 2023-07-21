@@ -69,7 +69,8 @@
 ### 🎨 Class Diagram
 </br>
 
-![image](https://github.com/karenyang835/ios-bank-manager/assets/124643896/0ff651f7-d242-413a-872c-463743d61d36)
+![image](https://github.com/karenyang835/ios-bank-manager/assets/124643896/2ef465df-e2ae-4b37-89ca-86bfb83c1d89)
+
 
 
 ---
