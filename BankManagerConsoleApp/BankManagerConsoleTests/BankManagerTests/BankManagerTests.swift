@@ -10,12 +10,12 @@ import XCTest
 
 final class BankManagerTests: XCTestCase {
     private var sut: BankManager!
-    private var bank: MockBank!
+    private var bank: BankStub!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        bank = MockBank()
+        bank = BankStub()
         sut = BankManager(bank: bank)
     }
 
