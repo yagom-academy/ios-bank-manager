@@ -41,11 +41,7 @@ class WorkTimer {
     @objc private func updateTimer() {
         time += 0.001
         
-        let totalSecond = Int(time)
-        let miliSecond = Int((time - Double(totalSecond)) * 1000)
-        let formatMiliSecond = String(format: "%03d", miliSecond)
-        
-        delegate?.updateTime("\(totalSecond.minute):\(totalSecond.second):\(formatMiliSecond)")
+        delegate?.updateTime("\(time.minute):\(time.second):\(time.millisecond)")
     }
 }
 
