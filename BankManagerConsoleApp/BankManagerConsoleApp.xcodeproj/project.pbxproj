@@ -12,7 +12,7 @@
 		44847F332A5C302E00653323 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F322A5C302E00653323 /* QueueTests.swift */; };
 		44847F3B2A5C38AF00653323 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
 		44CFD3282A6566C400CBAA16 /* BankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFD3272A6566C400CBAA16 /* BankingService.swift */; };
-		44CFD32A2A67DAC700CBAA16 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFD3292A67DAC700CBAA16 /* Timer.swift */; };
+		44CFD32A2A67DAC700CBAA16 /* TimeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFD3292A67DAC700CBAA16 /* TimeTracker.swift */; };
 		44FCDA542A68EE0D0081D9B3 /* Openable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FCDA532A68EE0D0081D9B3 /* Openable.swift */; };
 		AC11DED82A5ED04E0061737E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11DED72A5ED04E0061737E /* Customer.swift */; };
 		AC11DEDA2A5ED0870061737E /* BankDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11DED92A5ED0870061737E /* BankDepartment.swift */; };
@@ -26,7 +26,7 @@
 		AC60C0242A681788009E4DC9 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18562A5C10FC00160ADF /* Queue.swift */; };
 		AC60C0252A6817AF009E4DC9 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44847F1C2A5C163B00653323 /* LinkedList.swift */; };
 		AC60C0262A6817B2009E4DC9 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18582A5C110D00160ADF /* Node.swift */; };
-		AC60C0272A6817BF009E4DC9 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFD3292A67DAC700CBAA16 /* Timer.swift */; };
+		AC60C0272A6817BF009E4DC9 /* TimeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFD3292A67DAC700CBAA16 /* TimeTracker.swift */; };
 		ACBF18572A5C10FC00160ADF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18562A5C10FC00160ADF /* Queue.swift */; };
 		ACBF18592A5C110D00160ADF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18582A5C110D00160ADF /* Node.swift */; };
 		ACBF185B2A5C3C2D00160ADF /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF18562A5C10FC00160ADF /* Queue.swift */; };
@@ -54,7 +54,7 @@
 		44847F322A5C302E00653323 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		44847F372A5C308F00653323 /* BankManagerConsoleApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BankManagerConsoleApp.xctestplan; sourceTree = "<group>"; };
 		44CFD3272A6566C400CBAA16 /* BankingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingService.swift; sourceTree = "<group>"; };
-		44CFD3292A67DAC700CBAA16 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		44CFD3292A67DAC700CBAA16 /* TimeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTracker.swift; sourceTree = "<group>"; };
 		44FCDA532A68EE0D0081D9B3 /* Openable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Openable.swift; sourceTree = "<group>"; };
 		AC11DED72A5ED04E0061737E /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		AC11DED92A5ED0870061737E /* BankDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDepartment.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				ACBF18532A5C102400160ADF /* Queue */,
-				44CFD3292A67DAC700CBAA16 /* Timer.swift */,
+				44CFD3292A67DAC700CBAA16 /* TimeTracker.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -325,7 +325,7 @@
 				AC60C0212A68172D009E4DC9 /* BankDepartment.swift in Sources */,
 				AC60C01E2A68155B009E4DC9 /* MockBank.swift in Sources */,
 				AC60C0222A681730009E4DC9 /* BankingService.swift in Sources */,
-				AC60C0272A6817BF009E4DC9 /* Timer.swift in Sources */,
+				AC60C0272A6817BF009E4DC9 /* TimeTracker.swift in Sources */,
 				AC60C01F2A681724009E4DC9 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,7 +337,7 @@
 				ACBF18592A5C110D00160ADF /* Node.swift in Sources */,
 				443FE2952A5ED25A00AC541B /* Bank.swift in Sources */,
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				44CFD32A2A67DAC700CBAA16 /* Timer.swift in Sources */,
+				44CFD32A2A67DAC700CBAA16 /* TimeTracker.swift in Sources */,
 				44FCDA542A68EE0D0081D9B3 /* Openable.swift in Sources */,
 				44847F1D2A5C163B00653323 /* LinkedList.swift in Sources */,
 				AC11DED82A5ED04E0061737E /* Customer.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 struct Bank: Openable {
     private var customerQueue: Queue<Customer> = Queue()
     private var numberOfCustomer: Int = 0
-    private var timer = Timer()
+    private var timer = TimeTracker()
     
     private let printStartMessage: (Customer) -> Void = { customer in
         print(String(format: MessageFormat.startTask, customer.numberTicket, customer.service.description))
