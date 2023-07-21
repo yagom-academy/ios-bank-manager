@@ -31,7 +31,7 @@ struct Bank {
     
     private func assignClerk() {
         depositQueue.assignBankClerkCount(2)
-        loanQueue.assignBankClerkCount(1)
+        loanQueue.assignBankClerkCount(1)        
     }
     
     private func measureTime(perform: () -> Void) -> CFAbsoluteTime {
@@ -70,7 +70,7 @@ struct Bank {
 }
 
 //MARK: - OperationQueue Extension
-extension OperationQueue {
+private extension OperationQueue  {
     func assignBankClerkCount(_ count: Int) {
         self.maxConcurrentOperationCount = count
     }
