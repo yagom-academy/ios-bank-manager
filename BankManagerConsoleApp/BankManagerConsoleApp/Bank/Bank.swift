@@ -30,8 +30,8 @@ struct Bank {
     }
     
     private func assignClerk() {
-        depositQueue.assignBankClerkCount(2)
-        loanQueue.assignBankClerkCount(1)        
+        depositQueue.assignBankClerkCount(ClerkCount.deposit)
+        loanQueue.assignBankClerkCount(ClerkCount.loan)
     }
     
     private func measureTime(perform: () -> Void) -> CFAbsoluteTime {
@@ -81,12 +81,30 @@ extension Bank {
         
         var information: (title: String, time: Double) {
             switch self {
-            case .loan:
-                return ("대출", 1.1)
             case .deposit:
-                return ("예금", 0.7)
+                return (TaskTitle.deposit, TaskTime.deposit)
+            case .loan:
+                return (TaskTitle.loan, TaskTime.loan)
             }
         }
+    }
+}
+
+//MARK: - Namespace Extension
+private extension Bank {
+    enum ClerkCount {
+        static let deposit = 2
+        static let loan = 1
+    }
+    
+    enum TaskTitle {
+        static let deposit = "예금"
+        static let loan = "대출"
+    }
+    
+    enum TaskTime {
+        static let deposit = 0.7
+        static let loan = 1.1
     }
 }
 
