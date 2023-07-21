@@ -5,6 +5,9 @@
 //  last modified by Dasan & Mary
 //
 
+struct EnterableStruct: Enterable { }
+
+let enterable = EnterableStruct()
 var bankManager = BankManager(bank: Bank())
 
-bankManager.runProgram()
+bankManager.runProgram(enterable: enterable)

@@ -12,13 +12,13 @@ struct BankManager {
         self.bank = bank
     }
         
-    mutating func runProgram() {
+    mutating func runProgram(enterable: Enterable) {
         var shouldContinue = true
         
         while shouldContinue {
             showMenu()
             
-            guard let inputValue = readLine() else {
+            guard let inputValue = enterable.enterUserInput() else {
                 continue
             }
                         
