@@ -29,6 +29,6 @@ struct CustomerWaitingQueue<Element> {
     }
     
     mutating func clear() {
-        list = LinkedList()
+        list.clear()
     }
 }

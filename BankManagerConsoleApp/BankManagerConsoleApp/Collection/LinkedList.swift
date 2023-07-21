@@ -41,4 +41,10 @@ struct LinkedList<Element> {
         
         return data
     }
+    
+    mutating func clear() {
+        head = nil
+        tail = nil
+        count = 0
+    }
 }
