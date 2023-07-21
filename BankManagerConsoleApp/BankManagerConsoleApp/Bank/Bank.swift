@@ -69,6 +69,27 @@ struct Bank {
     }
 }
 
+//MARK: - Bank Task Extension
+extension Bank {
+    enum Task {
+        case loan
+        case deposit
+        
+        static var random: Self {
+            return Int.random(in: 1...2) % 2 == 1 ? .loan : .deposit
+        }
+        
+        var information: (title: String, time: Double) {
+            switch self {
+            case .loan:
+                return ("대출", 1.1)
+            case .deposit:
+                return ("예금", 0.7)
+            }
+        }
+    }
+}
+
 //MARK: - OperationQueue Extension
 private extension OperationQueue  {
     func assignBankClerkCount(_ count: Int) {
