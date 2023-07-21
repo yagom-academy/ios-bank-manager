@@ -7,11 +7,9 @@
 
 struct Customer {
     let numberTicket: Int
-    let service: BankingService
+    let service: BankingService = BankingService.random()
     
     init(numberTicket: Int) {
         self.numberTicket = numberTicket
-        let range = 0..<BankingService.allCases.count
-        self.service = BankingService.allCases[Int.random(in: range)]
     }
 }

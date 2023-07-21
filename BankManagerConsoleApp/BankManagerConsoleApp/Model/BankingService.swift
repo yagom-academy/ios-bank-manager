@@ -17,6 +17,10 @@ enum BankingService: CaseIterable {
             return 1.1
         }
     }
+    
+    static func random() -> Self {
+        return BankingService.allCases.randomElement() ?? .deposit
+    }
 }
 
 extension BankingService: CustomStringConvertible {
