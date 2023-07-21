@@ -16,6 +16,10 @@ protocol BankManagerViewDelegate: AnyObject {
 final class BankManagerView: UIView {
     weak var delegate: BankManagerViewDelegate?
     
+    var waitAndWorkStackViewisEmpty: Bool {
+        return waitStackView.arrangedSubviews.isEmpty && workStackView.arrangedSubviews.isEmpty
+    }
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false

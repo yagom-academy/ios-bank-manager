@@ -23,7 +23,7 @@ class BankManagerViewController: UIViewController {
         
         bankManagerView.delegate = self
         workTimer.delegate = self
-        
+                
         NotificationCenter.default.addObserver(self, selector: #selector(addCustomerToWork(_:)), name: NSNotification.Name("업무시작"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomerToWork(_:)), name: NSNotification.Name("업무종료"), object: nil)
     }
@@ -44,6 +44,10 @@ class BankManagerViewController: UIViewController {
         
         OperationQueue.main.addOperation { [self] in
             bankManagerView.deleteLabelInWorkStackView(customer)
+            
+            if bankManagerView.waitAndWorkStackViewisEmpty {
+                workTimer.suspend()
+            }
         }
     }
 }
@@ -57,11 +61,17 @@ extension BankManagerViewController: BankManagerViewDelegate {
         customers.forEach {
             bankManagerView.addLabelInWaitStackView($0)
         }
+        
+        if !workTimer.isRunning {
+            workTimer.start()
+        }
     }
     
     func didTappedClearButton() {
         bank.stopBankService()
         bankManagerView.clearAllStackView()
+        
+        workTimer.clear()
     }
 }
 

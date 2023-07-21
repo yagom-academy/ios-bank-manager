@@ -20,21 +20,22 @@ class WorkTimer {
     
     func start() {
         isRunning = true
+        
         if timer == nil {
             startTime = Date.timeIntervalSinceReferenceDate - elapsedTime
             timer = Timer.scheduledTimer(timeInterval: WorkTimerNameSpace.aThousandth, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         }
     }
     
-    func suspendTimer() {
+    func suspend() {
         isRunning = false
         timer?.invalidate()
         timer = nil
         elapsedTime = Date.timeIntervalSinceReferenceDate - startTime
     }
     
-    func clearTimer() {
-        suspendTimer()
+    func clear() {
+        suspend()
         startTime = WorkTimerNameSpace.zero
         elapsedTime = WorkTimerNameSpace.zero
         delegate?.updateTime("00:00:000")
@@ -44,9 +45,9 @@ class WorkTimer {
         let currentTime = Date.timeIntervalSinceReferenceDate
         let runTime = currentTime - startTime
         let runTimeIntger = Int(runTime)
-        let milliseconds = Int(runTime.truncatingRemainder(dividingBy: 1))
+        let milliseconds = String(format: "%03d", Int(runTime.truncatingRemainder(dividingBy: 1) * 1000))
         
-        delegate?.updateTime("\(runTimeIntger.minutes):\(runTimeIntger.seconds):\(milliseconds.milliseconds)")
+        delegate?.updateTime("\(runTimeIntger.minutes):\(runTimeIntger.seconds):\(milliseconds)")
     }
 }
 

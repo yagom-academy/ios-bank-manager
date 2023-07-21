@@ -13,8 +13,4 @@ extension Int {
     var seconds: String {
         String(format: "%02d", self % 60)
     }
-    
-    var milliseconds: String {
-        String(format: "%03d", self * 1000)
-    }
 }
