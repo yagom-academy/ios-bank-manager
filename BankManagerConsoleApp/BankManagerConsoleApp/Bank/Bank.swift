@@ -8,11 +8,11 @@ import Foundation
 
 class Bank {
     private let bankers: [Banker]
+    private let group = DispatchGroup()
     private var depositQueue: CustomerQueue<Customer> = CustomerQueue()
     private var loanQueue: CustomerQueue<Customer> = CustomerQueue()
     private var finishedCustomerCount: Int = .zero
     private var totalWorkTime: Double = .zero
-    private let group = DispatchGroup()
     
     init(bankers: [Banker]) {
         self.bankers = bankers

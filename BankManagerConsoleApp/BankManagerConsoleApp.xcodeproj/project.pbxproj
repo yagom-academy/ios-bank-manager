@@ -32,11 +32,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3B94BC022A5D40B000ED83C9 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManagerUIApp/BankManagerUIApp/BankManager.swift; sourceTree = "<group>"; };
+		3B94BC022A5D40B000ED83C9 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		3B94BC042A6A1C7E00ED83C9 /* BankSystemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankSystemError.swift; sourceTree = "<group>"; };
-		5D4FAA322A6010B1001FA74A /* CustomerQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerQueue.swift; path = ../../BankManagerUIApp/BankManagerUIApp/CustomerQueue.swift; sourceTree = "<group>"; };
-		5D4FAA332A6010B1001FA74A /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = ../../BankManagerUIApp/BankManagerUIApp/Node.swift; sourceTree = "<group>"; };
-		5D4FAA342A6010B1001FA74A /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkedList.swift; path = ../../BankManagerUIApp/BankManagerUIApp/LinkedList.swift; sourceTree = "<group>"; };
+		5D4FAA322A6010B1001FA74A /* CustomerQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
+		5D4FAA332A6010B1001FA74A /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		5D4FAA342A6010B1001FA74A /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		5D4FAA382A60110D001FA74A /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		5D4FAA3A2A60111D001FA74A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		5D4FAA3C2A60113A001FA74A /* Banker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banker.swift; sourceTree = "<group>"; };
@@ -57,6 +57,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B94BC062A6A3EBB00ED83C9 /* CustomerQueue */ = {
+			isa = PBXGroup;
+			children = (
+				5D4FAA322A6010B1001FA74A /* CustomerQueue.swift */,
+				5D4FAA342A6010B1001FA74A /* LinkedList.swift */,
+				5D4FAA332A6010B1001FA74A /* Node.swift */,
+			);
+			path = CustomerQueue;
+			sourceTree = "<group>";
+		};
+		3B94BC072A6A3EF400ED83C9 /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				3B94BC022A5D40B000ED83C9 /* BankManager.swift */,
+				5D4FAA3A2A60111D001FA74A /* Bank.swift */,
+				5D4FAA3C2A60113A001FA74A /* Banker.swift */,
+				5D4FAA382A60110D001FA74A /* Customer.swift */,
+				5D4FAA422A677F48001FA74A /* BankTask.swift */,
+				3B94BC042A6A1C7E00ED83C9 /* BankSystemError.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -78,15 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
-				3B94BC022A5D40B000ED83C9 /* BankManager.swift */,
-				5D4FAA3A2A60111D001FA74A /* Bank.swift */,
-				5D4FAA3C2A60113A001FA74A /* Banker.swift */,
-				5D4FAA382A60110D001FA74A /* Customer.swift */,
-				5D4FAA422A677F48001FA74A /* BankTask.swift */,
-				5D4FAA322A6010B1001FA74A /* CustomerQueue.swift */,
-				5D4FAA342A6010B1001FA74A /* LinkedList.swift */,
-				5D4FAA332A6010B1001FA74A /* Node.swift */,
-				3B94BC042A6A1C7E00ED83C9 /* BankSystemError.swift */,
+				3B94BC072A6A3EF400ED83C9 /* Bank */,
+				3B94BC062A6A3EBB00ED83C9 /* CustomerQueue */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
