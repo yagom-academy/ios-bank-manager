@@ -23,7 +23,7 @@
 <br>
 
 ## 👨‍💻 팀원
-| Dasan | Mary |
+| Dasan🌳 | Mary🐿️ |
 | :------: | :------: |
 |<Img src="https://github.com/DasanKim/ios-bank-manager/assets/106504779/ca103b42-8938-447f-9381-29d0bcf55cac.jpg" width="200"> | <img src="https://i.imgur.com/8mg0oKy.jpg" width="200"> |
 |[<img src="https://hackmd.io/_uploads/SJEQuLsEh.png" width="20"/> **Dasan**](https://github.com/DasanKim) |[<img src="https://hackmd.io/_uploads/SJEQuLsEh.png" width="20"/> **Mary**](https://github.com/MaryJo-github)
@@ -226,7 +226,7 @@ func takeOnTask(for customer: Customer,
 <br>
 
 ### 4️⃣ Enumeration의 rawValue와 property
-- 콘솔창에서 `입력받은 값`을 구분하기 위하여 `Menu Enumeration`을 사용하였습니다. `Enumeration`을 활용하는 여러가지 방법 중, `rawValue`와 `property`를 활용하는 방법에 대하여 고민을 하였습니다. 입력값 1과 2가 무엇을 뜻하는지 알 수 있도록 표현하기 위하여 `property`를 활용하는 방법을 선택하였습니다.
+콘솔창에서 `입력받은 값`을 구분하기 위하여 `Menu Enumeration`을 사용하였습니다. `Enumeration`을 활용하는 여러가지 방법 중, `rawValue`와 `property`를 활용하는 방법에 대하여 고민을 하였습니다. 입력값 1과 2가 무엇을 뜻하는지 알 수 있도록 표현하기 위하여 `property`를 활용하는 방법을 선택하였습니다.
 
 ⚠️ **문제점** <br>
 - **enum의 rawValue 활용**
@@ -313,15 +313,29 @@ func takeOnTask(for customer: Customer,
 
 ## 📚 참고 링크
 - [🍎 Apple Docs: enumerations](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations#Initializing-from-a-Raw-Value)
+- [🍎Apple Docs: Closures](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/closures/)
+- [🍎Apple Docs: Dispatchsemaphore](https://developer.apple.com/documentation/dispatch/dispatchsemaphore)
 - [🌐 Apple forums: How do I unittest a command line application?
 ](https://developer.apple.com/forums/thread/52211)
 - [🌐 Blog: How to Unit Test Swift CLI applications in XCode](https://dev.to/sokol8/how-to-unit-test-cli-application-in-swift-5f5o#solution-1)
 - [🌐 Wikipedia: Magic number](https://en.wikipedia.org/wiki/Magic_number_(programming))
-
+- [🌐 야곰닷넷: 동시성 프로그래밍](https://yagom.net/courses/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-concurrency-programming/)
+- [🌐 Blog: [OS] Semaphore, Mutex](https://velog.io/@xogh20321/OS-Semaphore-Mutex)
 
 <br>
 
 ## 👥 팀 회고
 ### 칭찬할 부분
-- 
-- 
+- 스텝 진도보다 해당 스텝에서 경험해봐야할 핵심 경험들에 집중함
+- 모르는 부분에 대해서 자유롭게 질문할 수 있는 분위기를 형성함
+- 매일 스크럼을 통해 일정 관리와 컨디션 관리를 잘 함
+- 서로를 존중하고 배려함
+
+### 서로에게 하고 싶은 말
+- To. Dasan
+    - 차분하고 꼼꼼하게 프로젝트를 이끌어주셔서 감사했습니다 🙇‍♀️
+    - 새로운 기술에 대한 이해도와 활용능력이 매우 좋으셔서 옆에서 많은 것을 배운 것 같습니다. 감사합니다 👍
+- To. Mary
+    - 메리...ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 저 웁니다
+    - 기본기가 얼마나 중요한지 메리를 보면서 느꼈습니다! 뿌리 깊은 나무 메리와 함께하여 프로젝트에서 난관을 만날 때마다 잘 해쳐나갈 수 있었습니다🥹
+    - 2주동안 메리와 함께해서 유익하고 즐거웠어요... 또 뵙고싶습니다 메리!🐿️
