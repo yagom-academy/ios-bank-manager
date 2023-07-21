@@ -8,7 +8,7 @@
 import Foundation
 import CustomerPackage
 
-struct Bank {
+class Bank {
     private var issuedWaitingNumber: Int = 1
     private var waitingLine: any CustomerQueueable = CustomerQueue()
     private let loanOperationQueue: OperationQueue = {
@@ -25,7 +25,7 @@ struct Bank {
         return operationQueue
     }()
     
-    mutating func addCustomer() -> [Customer] {
+    func addCustomer() -> [Customer] {
         var customerList: [Customer] = []
         (issuedWaitingNumber..<issuedWaitingNumber + 10).forEach {
             customerList.append(Customer(waitingNumber: $0))
@@ -39,6 +39,7 @@ struct Bank {
         customers.forEach {
             waitingLine.enqueue($0)
         }
+        
         startBankService()
     }
     
@@ -56,5 +57,12 @@ struct Bank {
                 print("workType이 nil입니다.")
             }
         }
+    }
+    
+    func stopBankService() {
+        issuedWaitingNumber = 1
+        waitingLine.clear()
+        depositOperationQueue.cancelAllOperations()
+        loanOperationQueue.cancelAllOperations()
     }
 }

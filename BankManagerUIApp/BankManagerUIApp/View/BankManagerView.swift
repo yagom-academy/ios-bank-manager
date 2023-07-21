@@ -215,6 +215,15 @@ extension BankManagerView {
         }
     }
     
+    func clearAllStackView() {
+        waitStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        workStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
     private func addCustomerLabel(_ customer: Customer) -> UILabel {
         guard let workType = customer.workType else { return UILabel() }
         
