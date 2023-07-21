@@ -39,7 +39,7 @@ final class BankManagerView: UIView {
     
     private lazy var addCustomerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("고객 10명 추가", for: .normal)
+        button.setTitle(ViewNameSpace.addCustomer, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -50,7 +50,7 @@ final class BankManagerView: UIView {
     
     private lazy var clearButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("초기화", for: .normal)
+        button.setTitle(ViewNameSpace.clear, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -65,7 +65,7 @@ final class BankManagerView: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textAlignment = .center
-        label.text = "업무시간 - 00:00:000"
+        label.text = ViewNameSpace.workTime + ViewNameSpace.initialTime
         return label
     }()
     
@@ -85,7 +85,7 @@ final class BankManagerView: UIView {
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "대기중"
+        label.text = ViewNameSpace.waiting
         return label
     }()
     
@@ -96,7 +96,7 @@ final class BankManagerView: UIView {
         label.backgroundColor = .systemIndigo
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "업무중"
+        label.text = ViewNameSpace.working
         return label
     }()
     
@@ -182,7 +182,7 @@ extension BankManagerView {
 // MARK: - Setup
 extension BankManagerView {
     func setUpTimerLabel(_ time: String) {
-        timerLabel.text = "업무시간 - " + time
+        timerLabel.text = ViewNameSpace.workTime + time
     }
     
     func addLabelInWaitStackView(_ customer: Customer) {
@@ -198,7 +198,7 @@ extension BankManagerView {
             guard let label = $0 as? UILabel,
                   let workType = customer.workType else { return }
             
-            if label.text == "\(customer.waitingNumber) - \(workType.name)" {
+            if label.text == ViewNameSpace.createCustomerForm(customer.waitingNumber, workType.name) {
                 $0.removeFromSuperview()
             }
         }
@@ -209,7 +209,7 @@ extension BankManagerView {
             guard let label = $0 as? UILabel,
                   let workType = customer.workType else { return }
             
-            if label.text == "\(customer.waitingNumber) - \(workType.name)" {
+            if label.text == ViewNameSpace.createCustomerForm(customer.waitingNumber, workType.name) {
                 $0.removeFromSuperview()
             }
         }
@@ -222,7 +222,7 @@ extension BankManagerView {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
         label.textColor = workType.tintColor
-        label.text = "\(customer.waitingNumber) - \(workType.name)"
+        label.text = ViewNameSpace.createCustomerForm(customer.waitingNumber, workType.name)
         
         return label
     }
@@ -293,5 +293,18 @@ extension BankManagerView {
             workStackView.topAnchor.constraint(equalTo: waitAndWorkStackView.bottomAnchor, constant: 16),
             workStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16)
         ])
+    }
+}
+
+private enum ViewNameSpace {
+    static let addCustomer = "고객 10명 추가"
+    static let clear = "초기화"
+    static let workTime = "업무시간 - "
+    static let initialTime = "00:00:000"
+    static let waiting = "대기중"
+    static let working = "업무중"
+    
+    static func createCustomerForm(_ waitingNumber: Int, _ workName: String) -> String {
+        return "\(waitingNumber) - \(workName)"
     }
 }
