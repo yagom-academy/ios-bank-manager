@@ -9,7 +9,7 @@ import Foundation
 import CustomerPackage
 
 final class Bank {
-    private var issuedWaitingNumber: Int = 1
+    private var issuedWaitingNumber: Int = BankNameSpace.defaultIssuedWaitingNumber
     private var waitingLine: any CustomerQueueable = CustomerQueue()
     private let loanOperationQueue: OperationQueue = {
         let operationQueue = OperationQueue()
@@ -27,10 +27,10 @@ final class Bank {
     
     func addedCustomer() -> [Customer] {
         var customerList: [Customer] = []
-        (issuedWaitingNumber..<issuedWaitingNumber + 10).forEach {
+        (issuedWaitingNumber..<issuedWaitingNumber + BankNameSpace.addedCount).forEach {
             customerList.append(Customer(waitingNumber: $0))
         }
-        issuedWaitingNumber += 10
+        issuedWaitingNumber += BankNameSpace.addedCount
         
         return customerList
     }
@@ -60,9 +60,14 @@ final class Bank {
     }
     
     func stopBankService() {
-        issuedWaitingNumber = 1
+        issuedWaitingNumber = BankNameSpace.defaultIssuedWaitingNumber
         waitingLine.clear()
         depositOperationQueue.cancelAllOperations()
         loanOperationQueue.cancelAllOperations()
     }
+}
+
+private enum BankNameSpace {
+    static let defaultIssuedWaitingNumber = 1
+    static let addedCount = 10
 }

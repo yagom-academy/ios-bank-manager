@@ -45,7 +45,7 @@ final class WorkTimer {
     }
 }
 
-enum WorkTimerNameSpace {
+private enum WorkTimerNameSpace {
     static let zero = 0.0
     static let aThousandth = 0.001
 }
