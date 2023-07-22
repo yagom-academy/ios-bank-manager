@@ -14,8 +14,8 @@ protocol WorkTimerDelegate: AnyObject {
 final class WorkTimer {
     private var timer: Timer?
     private var time: Double = WorkTimerNameSpace.zero
+    private(set) var isRunning: Bool = false
     weak var delegate: WorkTimerDelegate?
-    var isRunning: Bool = false
     
     func start() {
         isRunning = true

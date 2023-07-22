@@ -45,7 +45,7 @@ final class BankManagerViewController: UIViewController {
         OperationQueue.main.addOperation { [self] in
             bankManagerView.deleteLabelInWorkStackView(customer)
             
-            if bankManagerView.waitAndWorkStackViewisEmpty {
+            if bankManagerView.isWaitAndWorkStackViewEmpty {
                 workTimer.suspend()
             }
         }

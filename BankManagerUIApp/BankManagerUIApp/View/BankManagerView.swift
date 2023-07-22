@@ -16,7 +16,7 @@ protocol BankManagerViewDelegate: AnyObject {
 final class BankManagerView: UIView {
     weak var delegate: BankManagerViewDelegate?
     
-    var waitAndWorkStackViewisEmpty: Bool {
+    var isWaitAndWorkStackViewEmpty: Bool {
         return waitStackView.arrangedSubviews.isEmpty && workStackView.arrangedSubviews.isEmpty
     }
     
