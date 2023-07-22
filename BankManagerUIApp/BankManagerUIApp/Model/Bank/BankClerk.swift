@@ -18,10 +18,10 @@ enum BankClerk {
     }
     
     private static func startTask(_ customer: Customer) {
-        NotificationCenter.default.post(name: NSNotification.Name("업무시작"), object: nil, userInfo: ["고객": customer])
+        NotificationCenter.default.post(name: NSNotification.Name.workStart, object: nil, userInfo: ["고객": customer])
     }
     
     private static func endTask(_ customer: Customer) {
-        NotificationCenter.default.post(name: NSNotification.Name("업무종료"), object: nil, userInfo: ["고객": customer])
+        NotificationCenter.default.post(name: NSNotification.Name.workEnd, object: nil, userInfo: ["고객": customer])
     }
 }

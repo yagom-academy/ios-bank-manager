@@ -24,8 +24,8 @@ final class BankManagerViewController: UIViewController {
         bankManagerView.delegate = self
         workTimer.delegate = self
                 
-        NotificationCenter.default.addObserver(self, selector: #selector(addCustomerToWork(_:)), name: NSNotification.Name("업무시작"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomerToWork(_:)), name: NSNotification.Name("업무종료"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addCustomerToWork(_:)), name: NSNotification.Name.workStart, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomerToWork(_:)), name: NSNotification.Name.workEnd, object: nil)
     }
     
     @objc private func addCustomerToWork(_ notification: NSNotification) {
