@@ -1,5 +1,5 @@
 //
-//  Notification.Name +.swift
+//  Notification.Name+.swift
 //  BankManagerUIApp
 //
 //  Created by Erick, Serena on 2023/07/22.

@@ -55,7 +55,7 @@ final class BankManagerViewController: UIViewController {
 // MARK: - BankManagerViewDelegate
 extension BankManagerViewController: BankManagerViewDelegate {
     func didTappedAddCustomerButton() {
-        let customers = bank.addedCustomer()
+        let customers = bank.addedCustomers()
         bank.updateWaitingLine(customers)
         
         customers.forEach {

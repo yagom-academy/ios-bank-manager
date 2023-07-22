@@ -25,7 +25,7 @@ final class Bank {
         return operationQueue
     }()
     
-    func addedCustomer() -> [Customer] {
+    func addedCustomers() -> [Customer] {
         var customerList: [Customer] = []
         (issuedWaitingNumber..<issuedWaitingNumber + BankNameSpace.addedCount).forEach {
             customerList.append(Customer(waitingNumber: $0))

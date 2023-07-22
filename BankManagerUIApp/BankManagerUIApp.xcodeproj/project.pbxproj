@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45BDAA642A6C0DD900BFD74C /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BDAA632A6C0DD900BFD74C /* Notification.Name.swift */; };
+		45BDAA642A6C0DD900BFD74C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BDAA632A6C0DD900BFD74C /* Notification.Name+.swift */; };
 		45E1C3202A6A3A4F001EBB88 /* BankClerk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E1C31D2A6A3A4F001EBB88 /* BankClerk.swift */; };
 		45E1C3222A6A3A4F001EBB88 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E1C31F2A6A3A4F001EBB88 /* Bank.swift */; };
 		C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E3A259C3E9F0053667F /* AppDelegate.swift */; };
@@ -21,7 +21,7 @@
 		D2E158DB2A67A38A00052F8B /* BankManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E158DA2A67A38A00052F8B /* BankManagerView.swift */; };
 		D2E1591A2A6A283D00052F8B /* CustomerPackage in Frameworks */ = {isa = PBXBuildFile; productRef = D2E159192A6A283D00052F8B /* CustomerPackage */; };
 		D2E159212A6A6D0B00052F8B /* WorkTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E159202A6A6D0B00052F8B /* WorkTimer.swift */; };
-		D2E159252A6A6D6300052F8B /* Double +.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E159242A6A6D6300052F8B /* Double +.swift */; };
+		D2E159252A6A6D6300052F8B /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E159242A6A6D6300052F8B /* Double+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		45BDAA632A6C0DD900BFD74C /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
+		45BDAA632A6C0DD900BFD74C /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		45E1C31D2A6A3A4F001EBB88 /* BankClerk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankClerk.swift; sourceTree = "<group>"; };
 		45E1C31F2A6A3A4F001EBB88 /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		C7694E37259C3E9F0053667F /* BankManagerUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankManagerUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +62,7 @@
 		D2E158DA2A67A38A00052F8B /* BankManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManagerView.swift; sourceTree = "<group>"; };
 		D2E159172A6A283400052F8B /* CustomerPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CustomerPackage; path = ../CustomerPackage; sourceTree = "<group>"; };
 		D2E159202A6A6D0B00052F8B /* WorkTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkTimer.swift; sourceTree = "<group>"; };
-		D2E159242A6A6D6300052F8B /* Double +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double +.swift"; sourceTree = "<group>"; };
+		D2E159242A6A6D6300052F8B /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,8 +208,8 @@
 		D2E159232A6A6D3300052F8B /* Extenstion */ = {
 			isa = PBXGroup;
 			children = (
-				D2E159242A6A6D6300052F8B /* Double +.swift */,
-				45BDAA632A6C0DD900BFD74C /* Notification.Name.swift */,
+				D2E159242A6A6D6300052F8B /* Double+.swift */,
+				45BDAA632A6C0DD900BFD74C /* Notification.Name+.swift */,
 			);
 			path = Extenstion;
 			sourceTree = "<group>";
@@ -350,13 +350,13 @@
 			files = (
 				C7694E3F259C3E9F0053667F /* ViewController.swift in Sources */,
 				D2E158DB2A67A38A00052F8B /* BankManagerView.swift in Sources */,
-				D2E159252A6A6D6300052F8B /* Double +.swift in Sources */,
+				D2E159252A6A6D6300052F8B /* Double+.swift in Sources */,
 				C7694E3B259C3E9F0053667F /* AppDelegate.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				45E1C3202A6A3A4F001EBB88 /* BankClerk.swift in Sources */,
 				D2E159212A6A6D0B00052F8B /* WorkTimer.swift in Sources */,
 				45E1C3222A6A3A4F001EBB88 /* Bank.swift in Sources */,
-				45BDAA642A6C0DD900BFD74C /* Notification.Name.swift in Sources */,
+				45BDAA642A6C0DD900BFD74C /* Notification.Name+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
