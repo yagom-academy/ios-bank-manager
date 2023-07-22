@@ -8,10 +8,10 @@
 import Foundation
 
 final class Bank {
-    let depositBankManagerCount: Int
-    let loanBankManagerCount: Int
-    var clientQueue = Queue<Client>()
-    let bankManger = BankManager()
+    private let depositBankManagerCount: Int
+    private let loanBankManagerCount: Int
+    private var clientQueue = Queue<Client>()
+    private let bankManger = BankManager()
     
     init(depositBankManagerCount: Int, loanBankManagerCount: Int) {
         self.depositBankManagerCount = depositBankManagerCount
@@ -31,27 +31,27 @@ final class Bank {
     }
     
     private func startTask() {
-        let group = DispatchGroup()
         let clientCount = Int.random(in: 10...30)
         let startTime = Date()
-        let depositSemaphore = DispatchSemaphore(value: depositBankManagerCount)
-        let loanSemaphore = DispatchSemaphore(value: loanBankManagerCount)
-        var workSemaphore: DispatchSemaphore
+        let depositOperationQueue = OperationQueue()
+        let loanOperationQueue = OperationQueue()
+        var operationQueue: OperationQueue
+        var operation: BlockOperation
         
+        depositOperationQueue.maxConcurrentOperationCount = depositBankManagerCount
+        loanOperationQueue.maxConcurrentOperationCount = loanBankManagerCount
         setUpClientQueue(count: clientCount)
         
         while !clientQueue.isEmpty {
             guard let client = clientQueue.dequeue() else { break }
-            workSemaphore = client.banking == .deposit ? depositSemaphore : loanSemaphore
             
-            workSemaphore.wait()
-            DispatchQueue.global().async(group: group) {
-                self.bankManger.work(client: client)
-                workSemaphore.signal()
-            }
+            operation = BlockOperation { self.bankManger.work(client: client) }
+            operationQueue = client.banking == .deposit ? depositOperationQueue : loanOperationQueue
+            operationQueue.addOperation(operation)
         }
         
-        group.wait()
+        depositOperationQueue.waitUntilAllOperationsAreFinished()
+        loanOperationQueue.waitUntilAllOperationsAreFinished()
         printTaskResult(clientCount, startTime)
         open()
     }
