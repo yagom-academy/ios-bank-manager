@@ -10,6 +10,7 @@
 💻 [실행 화면](#실행_화면) </br>
 🧨 [트러블 슈팅](#트러블_슈팅) </br>
 📚 [참고 링크](#참고_링크) </br>
+👥 [팀 회고](#팀_회고) </br>
 
 </br>
 
@@ -21,7 +22,7 @@
 ## 👨‍💻 팀원<a id="팀원"></a>
 | 🐬Whales🐬 | 🍎Zion🍎 |
 | :--------: | :--------: |
-| <Img src = "https://hackmd.io/_uploads/rkhLfDCYh.png" width="180"> | <Img src = "https://hackmd.io/_uploads/ry9ZHwRt2.png" width="200"> |
+| <Img src = "https://hackmd.io/_uploads/BJF3FzK53.png" width="190"> | <Img src = "https://hackmd.io/_uploads/ry9ZHwRt2.png" width="200"> |
 |[Github Profile](https://github.com/WhalesJin) |[Github Profile]() |
 
 </br>
@@ -98,11 +99,78 @@ DispatchQueue와 OpeartionQueue 중 어떤 방식으로 문제를 해결할지 �
 <br>
 
 💡 **해결방법** <br>
-조금 더 객체지향적인 프로그램의 동작을 위해 `DispatchQueue`를 사용하여 구현했습니다.
+OperationQueue를 활용하여 구현했습니다.
 
 `DispatchQueue`을 활용해 해당 요구사항을 구현하는 방법으로는 `DispatchGroup` 및 `DispatchSemaphore`를 활용하는 방법이 있었고 `OperationQueue`를 활용한다면 `maxConcurrentOperationCount` property 및 `waitUntilAllOperationsAreFinished` 메서드의 활용으로 과제를 해결할 수 있었습니다.
 
-하지만 `Bank`, `BankManager`, `Client`가 코드를 읽는 입장에서 조금 더 자연스럽게 객체지향적으로 의사소통할 수 있는 설계에 대해 고민했고 `Operation`을 상속받는 `Type`을 만들어서 `OperationQueue`에 넣어주는 방법보다는 `DispatchQueue async` 로직 내부에서 `BankManager`가 직접적으로 업무를 실행하고 그 업무를 실행하는 데 있어서 `customer`를 주입 받는 방식을 사용했습니다.
+`Thread`생성을 직접적으로 제한할 수 있는 `DispatchSemaphore`을 사용하여 쓰레드의 생성까지 객체지향적으로 접근할 수 있는 `DispatchQueue`를 사용하려 했습니다만, `MainThread`를 멈추지 않고 `Semaphore`를 `wait`하기 위해서는 또 다른 `Thread`가 필요하다는 사실을 알게 되었고 이렇게 구현한다면 원래의 의미가 퇴색된다고 생각했기 때문에 사용하기도 쉽고 `cancel`에 대한 동작도 쉬운 `Operation Queue`를 통해 동작 구현을 완료했습니다.
+
+<details>
+    <summary> DispatchQueue 코드 </summary>
+    
+```swift
+private func startTask() {
+    let group = DispatchGroup()
+    let clientCount = Int.random(in: 10...30)
+    let startTime = Date()
+    let depositSemaphore = DispatchSemaphore(value: depositBankManagerCount)
+    let loanSemaphore = DispatchSemaphore(value: loanBankManagerCount)
+    var workSemaphore: DispatchSemaphore
+
+    setUpClientQueue(count: clientCount)
+
+    while !clientQueue.isEmpty {
+        guard let client = clientQueue.dequeue() else { break }
+        workSemaphore = client.banking == .deposit ? depositSemaphore : loanSemaphore
+
+        workSemaphore.wait()
+        DispatchQueue.global().async(group: group) {
+            self.bankManger.work(client: client)
+            workSemaphore.signal()
+        }
+    }
+
+    group.wait()
+    printTaskResult(clientCount, startTime)
+    open()
+}
+```
+</details>
+</br>
+
+프로젝트를 진행하다보니 콘솔창의 스레드 동작이 요구사항과 맞지 않게 작동하는 것을 보고 `DispatchQueue`의 한계를 느껴 `Operation`으로 다시 작업의 방향을 바꾸었습니다.
+
+<details>
+    <summary> OperationQueue 코드 </summary>
+    
+```swift
+private func startTask() {
+    let clientCount = Int.random(in: 10...30)
+    let startTime = Date()
+    let depositOperationQueue = OperationQueue()
+    let loanOperationQueue = OperationQueue()
+    var operationQueue: OperationQueue
+    var operation: BlockOperation
+
+    depositOperationQueue.maxConcurrentOperationCount = depositBankManagerCount
+    loanOperationQueue.maxConcurrentOperationCount = loanBankManagerCount
+    setUpClientQueue(count: clientCount)
+
+    while !clientQueue.isEmpty {
+        guard let client = clientQueue.dequeue() else { break }
+
+        operation = BlockOperation { self.bankManger.work(client: client) }
+        operationQueue = client.banking == .deposit ? depositOperationQueue : loanOperationQueue
+        operationQueue.addOperation(operation)
+    }
+
+    depositOperationQueue.waitUntilAllOperationsAreFinished()
+    loanOperationQueue.waitUntilAllOperationsAreFinished()
+    printTaskResult(clientCount, startTime)
+    open()
+}
+```
+</details>
 
 물론 같은 결과물을 나타냈겠지만 조금 더 객체지향에 대해서 고민해볼 수 있어서 좋았습니다.
 
@@ -236,6 +304,103 @@ enum BankingType: String, CaseIterable {
 
 <br>
 
+### 7️⃣ Semaphore가 Main Thread를 멈출 수 있도록 설계된 경우
+🚨 **문제점** <br>
+- `DispatchSemapthore`가 의도치 않게 `MainThread`를 멈춤으로써 원하는 동작을 얻지 못했습니다.
+
+```swift
+workSemaphore = client.banking == .deposit ? depositSemaphore : loanSemaphore
+// Main Thread
+workSemaphore.wait()
+DispatchQueue.global().async(group: group) {
+    self.bankManger.work(client: client)
+    workSemaphore.signal()
+}
+```
+
+먼저 위의 코드의 의도는 반복적으로 등록되는 `async` 동작에 대한 중복코드를 줄이고 생성된 쓰레드의 갯수를 제한하기 위함이였습니다. 하지만 가장 큰 문제는 `semaphore를` `loan과` `deposit을` 번갈아가면서 사용하게 된다는 점입니다. `Capture시` 값을 가져오는 기본 형태는 `Strong Reference` 를 기본으로 하므로 사용하게 될 타이밍에서의 `semaphore가` `loan`인지 `deposit`인지 알 수가 없다는 치명적인 단점이 있습니다. 따라서 상기 이유로 하여금 문제가 발생했습니다.
+
+또한, 첫 시도시 반드시 예금2, 대출1  작업이 동시에 일을 시작하지 않는 단점 또한 가지고 있었습니다. 이러한 단점이 왜 발생하는지 분석 중 `Queue`를 2개로 작업했을 때도 동일한 결과를 나타냈습니다.
+
+```swift
+/// Main Thread
+if client.banking == .deposit {
+    depositSemaphore.wait()
+    DispatchQueue.global().async(group: group) {
+        self.bankManger.work(client: client)
+        depositSemaphore.signal()
+    }
+} else {
+    loanSemaphore.wait()
+    DispatchQueue.global().async(group: group) {
+        self.bankManger.work(client: client)
+        loanSemaphore.signal()
+    }
+}
+```
+
+위의 코드는 첫번째와 같이 `semaphore`를 혼동해서 사용하는 이슈는 발생하지 않습니다만 첫 시도시 종종 예금2, 대출1 이 동시에 작업을 시작하지 않는다는 문제를 가지고 있습니다. 
+
+<br>
+
+💡 **해결방법** <br>
+
+그 이유를 분석한 결과, 현재 생성되는 `process`의 갯수를 막기 위해서 `async Block` 외부에 `semaphore`를 삽입하여 생성되는 `Thread`의 갯수를 제한했습니다. 하지만 첫 작업시 대출, 대출 이 연속적으로 들어올 경우 대출에 대한 `semaphore`가 1로 존재하므로 첫번째 대출에 대한 `Thread`생성 이후 더 대출에 대한 작업할 수 있는 `semaphore`의 수가 존재하지 않아 `MainThread` 자체를 멈춰버려서 다른 작업들이 등록되지 못한다는 사실을 알게되었습니다.
+
+따라서 대출이 연속적으로 들어오는 경우 원하는 동작을 하지 않았고 그 밖의 경우에서는 원하는 동작을 했었습니다.
+
+원초적인 문제를 파악하여 코드를 조금 정리했습니다.
+
+```swift
+group.enter()
+DispatchQueue.global().async {
+    if client.banking == .deposit {
+        depositSemaphore.wait()
+        DispatchQueue.global().async(group: group) {
+            self.bankManger.work(client: client)
+            depositSemaphore.signal()
+            group.leave()
+        }
+    } else {
+        loanSemaphore.wait()
+        DispatchQueue.global().async(group: group) {
+            self.bankManger.work(client: client)
+            loanSemaphore.signal()
+            group.leave()
+        }
+    }
+}
+
+```
+
+우선 처음 집중해본 부분은 `group`에서의 `enter`, `leave`의 사용이었습니다. 하지만 2번째로 언급드렸던 코드처럼 정말 중요하게 이슈의 원인이 되었던 부분은 main을 멈출 수 있는 동작이 존재한다는 점이 었습니다. 따라서 2개의 `async block`을 한번더 `async block`으로 감싸서 대출이 중복으로 들어와서 `wait`되는 상황이 오더라도 `main`이 `wait`하는 것이 아닌 등록된 `Thread`를 `wait`시켜서 이외의 동작들은 또다른 `Thread`에 할당되어 정상동작할 수 있도록 설계했고, 이를 제가 원래 적용했던 코드 스타일로 조금 다듬은 결과
+
+```swift
+DispatchQueue.global().async(group: group) {
+    if client.banking == .deposit {
+        depositSemaphore.wait()
+        DispatchQueue.global().async(group: group) {
+            self.bankManger.work(client: client)
+            depositSemaphore.signal()
+        }
+    } else {
+        loanSemaphore.wait()
+        DispatchQueue.global().async(group: group) {
+            self.bankManger.work(client: client)
+            loanSemaphore.signal()
+        }
+    }
+}
+
+```
+
+원래 사용했던 `group`의 스타일로 변경할 수 있었고 이슈를 해결하여 원하는 동작을 수행할 수 있었습니다.
+
+따라서 `DispatchSemaphore`를 사용할 때 해당 `semaphore`가 `Main Thread`를 `wait` 시킬 수 있는 경우의 수를 생각해보고 사용해야합니다.
+
+
+<br>
+
 ## 📚 참고 링크<a id="참고_링크"></a>
 
 - [🍎Apple Docs: DispatchSemaphore](https://developer.apple.com/documentation/dispatch/dispatchsemaphore)
@@ -246,3 +411,9 @@ enum BankingType: String, CaseIterable {
 - <Img src = "https://github.com/WhalesJin/ios-bank-manager/assets/124643545/d1df2d8a-6667-438d-9643-aab8a83a4754" width="20"/> [Apple Github: MutationModel](https://github.com/apple/swift/blob/main/docs/MutationModel.rst)
 - <Img src = "https://github.com/mint3382/ios-calculator-app/assets/124643545/56986ab4-dc23-4e29-bdda-f00ec1db809b" width="20"/> [야곰닷넷: 동시성프로그래밍](https://yagom.net/courses/동시성-프로그래밍-concurrency-programming/lessons/동시성-프로그래밍/)
 - <Img src = "https://hackmd.io/_uploads/ByTEsGUv3.png" width="20"/> [blog: StrongReferenceCycle](https://medium.com/@LeeZion94/strong-reference-cycle-8a88bdd8424b)
+
+
+</br>
+
+## 👥 팀 회고<a id="팀_회고"></a>
+- [팀 회고 링크](https://github.com/WhalesJin/ios-bank-manager/wiki/🏦-은행-창구-매니저_웰시코딩🐶)
