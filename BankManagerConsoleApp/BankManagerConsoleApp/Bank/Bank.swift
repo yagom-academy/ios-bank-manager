@@ -8,40 +8,73 @@
 import Foundation
 
 struct Bank {
-    private let teller: UInt = 1
     private var customersQueue: Queue<Customer> = Queue<Customer>()
-    private let processingTime: TimeInterval = 0.7
+    private let depositSemaphore = DispatchSemaphore(value: TaskType.deposit.tellerCount)
+    private let loanSemaphore = DispatchSemaphore(value: TaskType.loan.tellerCount)
+    private let depositProcessingTime: TimeInterval = 0.7
+    private let loanProcessingTime: TimeInterval = 1.1
     private var totalProcessingTime = ""
     private var customerCount = UInt.zero
     var state: State = .working
     
     mutating func open() {
-        lineUpCustomer()
+        lineUpCustomers()
         totalProcessingTime = timeCheck {
             dailyWork()
         }
         finish()
     }
     
-    private mutating func lineUpCustomer() {
+    private mutating func lineUpCustomers() {
         let customerCount = UInt.random(in: 10...30)
         let customers = (1...customerCount)
-        customers.map(Customer.init).forEach { customersQueue.enqueue($0) }
+        customers.map(createCustomerTask).forEach { customersQueue.enqueue($0) }
+    }
+    
+    private func createCustomerTask(number: UInt) -> Customer {
+        let taskType: TaskType = Bool.random() ? .deposit : .loan
+        return Customer(waitingNumber: number, taskType: taskType)
     }
     
     private mutating func dailyWork() {
+        let group = DispatchGroup()
+        
         while !customersQueue.isEmpty {
             guard let customer = customersQueue.dequeue() else { return }
-            
-            process(customer: customer)
+
+            process(customer: customer, group: group)
             customerCount += 1
+        }
+        group.wait()
+    }
+    
+    private func process(customer: Customer, group: DispatchGroup) {
+        switch customer.taskType {
+        case .deposit:
+            DispatchQueue.global().async(group: group) {
+                depositSemaphore.wait()
+                processDeposit(customer: customer)
+                depositSemaphore.signal()
+            }
+        case .loan:
+            DispatchQueue.global().async(group: group) {
+                loanSemaphore.wait()
+                processLoan(customer: customer)
+                loanSemaphore.signal()
+            }
         }
     }
     
-    private mutating func process(customer: Customer) {
-        print("\(customer.waitingNumber)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: processingTime)
-        print("\(customer.waitingNumber)번 고객 업무 완료")
+    private func processDeposit(customer: Customer) {
+        print("\(customer.waitingNumber)번 고객 예금업무 시작")
+        Thread.sleep(forTimeInterval: depositProcessingTime)
+        print("\(customer.waitingNumber)번 고객 예금업무 완료")
+    }
+
+    private func processLoan(customer: Customer) {
+        print("\(customer.waitingNumber)번 고객 대출업무 시작")
+        Thread.sleep(forTimeInterval: loanProcessingTime)
+        print("\(customer.waitingNumber)번 고객 대출업무 완료")
     }
     
     private func timeCheck(_ block: () -> Void) -> String {
@@ -64,6 +97,7 @@ struct Bank {
     private mutating func reset() {
         customersQueue.clear()
         customerCount = .zero
+        totalProcessingTime = ""
     }
 }
 
@@ -71,5 +105,19 @@ extension Bank {
     enum State {
         case working
         case notWorking
+    }
+    
+    enum TaskType {
+        case deposit
+        case loan
+
+        var tellerCount: Int {
+            switch self {
+            case .deposit:
+                return 2
+            case .loan:
+                return 1
+            }
+        }
     }
 }
