@@ -7,7 +7,7 @@
 import UIKit
 import CustomerPackage
 
-class BankManagerViewController: UIViewController {
+final class BankManagerViewController: UIViewController {
     private let bankManagerView = BankManagerView()
     private var bank = Bank()
     private let workTimer = WorkTimer()
@@ -55,7 +55,7 @@ class BankManagerViewController: UIViewController {
 // MARK: - BankManagerViewDelegate
 extension BankManagerViewController: BankManagerViewDelegate {
     func didTappedAddCustomerButton() {
-        let customers = bank.addCustomer()
+        let customers = bank.addedCustomer()
         bank.updateWaitingLine(customers)
         
         customers.forEach {

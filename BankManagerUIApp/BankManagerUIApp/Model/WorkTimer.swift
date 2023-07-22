@@ -11,7 +11,7 @@ protocol WorkTimerDelegate: AnyObject {
     func updateTime(_ time: String)
 }
 
-class WorkTimer {
+final class WorkTimer {
     private var timer: Timer?
     private var time: Double = WorkTimerNameSpace.zero
     weak var delegate: WorkTimerDelegate?

@@ -8,7 +8,7 @@
 import Foundation
 import CustomerPackage
 
-class Bank {
+final class Bank {
     private var issuedWaitingNumber: Int = 1
     private var waitingLine: any CustomerQueueable = CustomerQueue()
     private let loanOperationQueue: OperationQueue = {
@@ -25,7 +25,7 @@ class Bank {
         return operationQueue
     }()
     
-    func addCustomer() -> [Customer] {
+    func addedCustomer() -> [Customer] {
         var customerList: [Customer] = []
         (issuedWaitingNumber..<issuedWaitingNumber + 10).forEach {
             customerList.append(Customer(waitingNumber: $0))
