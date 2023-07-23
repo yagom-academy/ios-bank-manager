@@ -7,13 +7,13 @@
 
 import UIKit
 
-class CustomerView: UILabel {
+final class CustomerView: UILabel {
     func configureUI(waitingNumber: Int, purpose: String) {
         self.text = "\(waitingNumber) - \(purpose)"
         self.textColor = .black
         self.textAlignment = .center
         
-        if purpose == Bank.Work.loan.name {
+        if purpose == Customer.Work.loan.name {
             self.textColor = .systemPurple
         }
     }

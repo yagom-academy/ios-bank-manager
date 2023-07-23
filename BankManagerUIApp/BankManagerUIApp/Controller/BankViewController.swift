@@ -121,6 +121,7 @@ final class BankViewController: UIViewController {
         bank.delegate = self
         configureUI()
         resetUI()
+        bank.work()
     }
     
     @objc private func didTapAddCustomer() {
@@ -191,7 +192,7 @@ extension BankViewController: BankViewControllerDelegate {
     func addWaitingQueue(_ customer: Customer) {
         OperationQueue.main.addOperation {
             let customerView = CustomerView()
-            customerView.configureUI(waitingNumber: customer.waitingNumber, purpose: customer.purpose)
+//            customerView.configureUI(waitingNumber: customer.waitingNumber, purpose: customer.purpose)
             
             self.waitingStackView.addArrangedSubview(customerView)
             self.waitingDictionary[customer] = customerView
@@ -254,11 +255,8 @@ extension BankViewController: BankViewControllerDelegate {
                                          userInfo: nil,
                                          repeats: true)
             
-            bank.work()
             return
         }
-        
-        bank.work()
     }
 }
 
