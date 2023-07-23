@@ -4,4 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
+let weatherBank = Bank(bankManagerCount: 1)
+
+weatherBank.open()
