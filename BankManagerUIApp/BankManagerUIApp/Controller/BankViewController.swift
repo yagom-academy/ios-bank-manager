@@ -158,8 +158,8 @@ final class BankViewController: UIViewController {
 }
 
 
-extension BankViewController {
-    private func configureUI() {
+private extension BankViewController {
+    func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(outerStackView)
