@@ -113,6 +113,7 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				CD6803FF2A6CCB6900BD6203 /* Extension */,
 				CDEC1D372A68D23D00F04DA2 /* App */,
 				CDEC1D362A68D22D00F04DA2 /* Resource */,
 				CDEC1D352A68D22300F04DA2 /* Controller */,
@@ -140,6 +141,14 @@
 			path = BankManagerUIAppUITests;
 			sourceTree = "<group>";
 		};
+		CD6803FF2A6CCB6900BD6203 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AD1992A69202A0021D2F2 /* Double+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		CDEC1D332A68D20F00F04DA2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +165,6 @@
 				CDEC1D222A68CFBD00F04DA2 /* Customer.swift */,
 				CDEC1D2C2A68D03100F04DA2 /* CustomerQueue.swift */,
 				CDEC1D2E2A68D03E00F04DA2 /* QueueType.swift */,
-				BA2AD1992A69202A0021D2F2 /* Double+.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
