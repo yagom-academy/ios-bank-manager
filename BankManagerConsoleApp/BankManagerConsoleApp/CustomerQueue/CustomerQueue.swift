@@ -5,7 +5,7 @@
 //  Created by Yetti, Redmango on 2023/07/11.
 //
 
-class CustomerQueue<Element> {
+final class CustomerQueue<Element> {
     private var customerQueue: LinkedList = LinkedList<Element>()
     
     var peek: Element? {

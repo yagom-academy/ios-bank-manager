@@ -7,8 +7,8 @@
 import Foundation
 
 struct Banker {
-    private(set) var task: BankTask
-
+    let task: BankTask
+    
     init(task: BankTask) {
         self.task = task
     }

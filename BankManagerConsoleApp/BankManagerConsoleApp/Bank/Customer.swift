@@ -6,12 +6,12 @@
 //
 
 struct Customer {
-    private(set) var queueNumber: Int?
     private(set) var task: BankTask
+    private(set) var queueNumber: Int?
 
-    init(queueNumber: Int? = nil, task: BankTask) {
-        self.queueNumber = queueNumber
+    init(task: BankTask, queueNumber: Int? = nil) {
         self.task = task
+        self.queueNumber = queueNumber
     }
 
     mutating func receiveQueueNumber(queueNumber: Int) {

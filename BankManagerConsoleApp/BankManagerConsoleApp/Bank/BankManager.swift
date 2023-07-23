@@ -26,8 +26,9 @@ struct BankManager {
     }
     
     private func openBank() {
-        let bankers = createBankers()
+        let bankers = createBankersInChargeOf(deposit: 2, loan: 1)
         let bank = Bank(bankers: bankers)
+        
         guard var customers = try? createCustomers() else {
             return
         }
@@ -35,19 +36,24 @@ struct BankManager {
         bank.startBankService(&customers)
     }
     
-    private func createBankers() -> [Banker] {
-        let bankers = [Banker(task: .deposit),
-                       Banker(task: .deposit),
-                       Banker(task: .loan)]
+    private func createBankersInChargeOf(deposit: Int, loan: Int) -> [Banker] {
+        var bankers: [Banker] = []
         
+        for _ in 0..<deposit {
+            bankers.append(Banker(task: .deposit))
+        }
+        
+        for _ in 0..<loan {
+            bankers.append(Banker(task: .loan))
+        }
         return bankers
     }
     
     private func createCustomers() throws -> [Customer] {
-        let customerNumbers = Int.random(in: 10...30)
+        let customerNumbers: ClosedRange<Int> = 10...30
         var customers = [Customer]()
         
-        for _ in 1...customerNumbers {
+        try customerNumbers.forEach { _ in
             guard let task = BankTask.allCases.randomElement() else {
                 throw BankSystemError.noTask
             }

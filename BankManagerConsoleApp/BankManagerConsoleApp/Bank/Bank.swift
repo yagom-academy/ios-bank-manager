@@ -6,11 +6,10 @@
 //
 import Foundation
 
-class Bank {
+final class Bank {
     private let bankers: [Banker]
-    private let group = DispatchGroup()
-    private var depositQueue: CustomerQueue<Customer> = CustomerQueue()
-    private var loanQueue: CustomerQueue<Customer> = CustomerQueue()
+    private let depositQueue: CustomerQueue<Customer> = CustomerQueue()
+    private let loanQueue: CustomerQueue<Customer> = CustomerQueue()
     private var finishedCustomerCount: Int = .zero
     private var totalWorkTime: Double = .zero
     
@@ -32,6 +31,8 @@ class Bank {
     }
     
     func startBankService(_ customers: inout [Customer]) {
+        let group = DispatchGroup()
+        
         lineUp(&customers)
         
         for i in 0..<bankers.count {
@@ -54,7 +55,7 @@ class Bank {
         }
         
         group.wait()
-        workFinish()
+        notifyEndBankService()
     }
     
     private func countFinishedCustomer() {
@@ -65,7 +66,7 @@ class Bank {
         totalWorkTime += banker.notifyWorkTime()
     }
     
-    private func workFinish() {
+    private func notifyEndBankService() {
         let totalWorkTime = String(format: "%.2f", totalWorkTime)
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(finishedCustomerCount)명이며, 총 업무시간은 \(totalWorkTime)초입니다.")
     }
