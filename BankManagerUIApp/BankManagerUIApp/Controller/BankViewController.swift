@@ -117,31 +117,18 @@ final class BankViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         bank.delegate = self
         configureUI()
-        resetUI()
+        setTimer(.zero)
         bank.work()
     }
     
-    @objc private func didTapAddCustomer() {
-        guard let isTimerOn = timer?.isValid else {
-            return
-        }
-
-        if !isTimerOn {
-            startWorkTime = CFAbsoluteTimeGetCurrent() - timeInterval
-            timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
-                                         target: self,
-                                         selector: #selector(updateTimerLabel),
-                                         userInfo: nil,
-                                         repeats: true)
-        }
-        
+    @objc private func didTapAddCustomerButton() {
+        setTimer(timeInterval)
         bank.work(totalCustomer: Configuration.addCustomerAmount)
     }
     
-    @objc private func didTapReset() {
+    @objc private func didTapResetButton() {
         bank.reset()
     }
     
@@ -149,12 +136,29 @@ final class BankViewController: UIViewController {
         guard let startTime = startWorkTime else {
             return
         }
+        
         timeInterval = CFAbsoluteTimeGetCurrent() - startTime
         timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
     }
     
     private func pauseTimer() {
         timer?.invalidate()
+    }
+    
+    private func setTimer(_ timeInterval: Double) {
+        timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
+        
+        startWorkTime = CFAbsoluteTimeGetCurrent() - timeInterval
+        
+        guard timer?.isValid == true else {
+            timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
+                                         target: self,
+                                         selector: #selector(updateTimerLabel),
+                                         userInfo: nil,
+                                         repeats: true)
+            
+            return
+        }
     }
 }
 
@@ -163,6 +167,7 @@ private extension BankViewController {
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
+        view.backgroundColor = .systemBackground
         view.addSubview(outerStackView)
         
         menuStackView.addArrangedSubview(addCustomerButton)
@@ -176,9 +181,9 @@ private extension BankViewController {
         outerStackView.addArrangedSubview(statusLabelStackView)
         outerStackView.addArrangedSubview(customerStackView)
         
-        addCustomerButton.addTarget(self, action: #selector(didTapAddCustomer), for: .touchUpInside)
+        addCustomerButton.addTarget(self, action: #selector(didTapAddCustomerButton), for: .touchUpInside)
         
-        resetButton.addTarget(self, action: #selector(didTapReset), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             outerStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
@@ -192,7 +197,9 @@ extension BankViewController: BankViewControllerDelegate {
     func addWaitingQueue(_ customer: Customer) {
         OperationQueue.main.addOperation {
             let customerView = CustomerView()
-//            customerView.configureUI(waitingNumber: customer.waitingNumber, purpose: customer.purpose)
+            customerView.configureUI(waitingNumber: customer.waitingNumber,
+                                     purpose: customer.purpose.name,
+                                     color: customer.purpose.uiColor)
             
             self.waitingStackView.addArrangedSubview(customerView)
             self.waitingDictionary[customer] = customerView
@@ -239,24 +246,8 @@ extension BankViewController: BankViewControllerDelegate {
         waitingStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
-        
-        processingDictionary = [:]
-        waitingDictionary = [:]
-        
-        timeInterval = .zero
-        timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
-        
-        startWorkTime = CFAbsoluteTimeGetCurrent()
-        
-        guard timer?.isValid == true else {
-            timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
-                                         target: self,
-                                         selector: #selector(updateTimerLabel),
-                                         userInfo: nil,
-                                         repeats: true)
-            
-            return
-        }
+
+        setTimer(.zero)
     }
 }
 

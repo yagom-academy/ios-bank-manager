@@ -8,13 +8,9 @@
 import UIKit
 
 final class CustomerView: UILabel {
-    func configureUI(waitingNumber: Int, purpose: String) {
+    func configureUI(waitingNumber: Int, purpose: String, color: UIColor) {
         self.text = "\(waitingNumber) - \(purpose)"
-        self.textColor = .black
+        self.textColor = color
         self.textAlignment = .center
-        
-        if purpose == Customer.Work.loan.name {
-            self.textColor = .systemPurple
-        }
     }
 }

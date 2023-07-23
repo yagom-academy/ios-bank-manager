@@ -65,7 +65,7 @@ final class Bank {
             self.delegate?.popProcessingQueue(customer)
         }
         
-        if customer.purpose == Customer.Work.deposit {
+        if customer.purpose == Customer.Purpose.deposit {
             depositBankerQueue.addOperation(task)
         } else {
             loanBankerQueue.addOperation(task)

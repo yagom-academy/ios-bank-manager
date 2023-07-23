@@ -5,14 +5,14 @@
 //  Created by kyungmin, Max on 2023/07/20.
 //
 
-import Foundation
+import UIKit
 
 struct Customer: Hashable {
-    let purpose: Work
+    let purpose: Purpose
     let waitingNumber: Int
     
     init?(waitingNumber: Int) {
-        guard let work = Work.allCases.randomElement() else {
+        guard let work = Purpose.allCases.randomElement() else {
             return nil
         }
         purpose = work
@@ -21,7 +21,7 @@ struct Customer: Hashable {
 }
 
 extension Customer {
-    enum Work: CaseIterable {
+    enum Purpose: CaseIterable {
         case deposit
         case loan
         
@@ -40,6 +40,15 @@ extension Customer {
                 return "예금"
             case .loan:
                 return "대출"
+            }
+        }
+        
+        var uiColor: UIColor {
+            switch self {
+            case .deposit:
+                return .black
+            case .loan:
+                return .systemPurple
             }
         }
     }
