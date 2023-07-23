@@ -45,11 +45,15 @@ final class Bank {
                 queue = loanQueue
             }
             
-            DispatchQueue.global().async(group: group) { [self] in
+            DispatchQueue.global().async(group: group) { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
                 while let customer = queue.dequeue() {
-                    bankers[i].work(for: customer)
-                    countFinishedCustomer()
-                    checkWorkTime(from: bankers[i])
+                    self.bankers[i].work(for: customer)
+                    self.countFinishedCustomer()
+                    self.checkWorkTime(from: self.bankers[i])
                 }
             }
         }
