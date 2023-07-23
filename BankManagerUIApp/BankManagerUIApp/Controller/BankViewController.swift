@@ -19,7 +19,7 @@ final class BankViewController: UIViewController {
     private var waitingDictionary: Dictionary<Customer, CustomerView> = [:]
     private var processingDictionary: Dictionary<Customer, CustomerView> = [:]
 
-    private var startWorkTime: Date?
+    private var startWorkTime: CFAbsoluteTime?
     private var timer: Timer?
     private var timeInterval: Double = .zero
     
@@ -129,7 +129,7 @@ final class BankViewController: UIViewController {
         }
 
         if !isTimerOn {
-            startWorkTime = Date() - timeInterval
+            startWorkTime = CFAbsoluteTimeGetCurrent() - timeInterval
             timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
                                          target: self,
                                          selector: #selector(updateTimerLabel),
@@ -148,7 +148,7 @@ final class BankViewController: UIViewController {
         guard let startTime = startWorkTime else {
             return
         }
-        timeInterval = Date().timeIntervalSince(startTime)
+        timeInterval = CFAbsoluteTimeGetCurrent() - startTime
         timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
     }
     
@@ -245,9 +245,9 @@ extension BankViewController: BankViewControllerDelegate {
         timeInterval = .zero
         timerLabel.text = String(format: Namespace.timer, timeInterval.formatTimeIntervalToString())
         
-        startWorkTime = Date()
+        startWorkTime = CFAbsoluteTimeGetCurrent()
         
-        guard let isTimerOn = timer?.isValid, isTimerOn else {
+        guard timer?.isValid == true else {
             timer = Timer.scheduledTimer(timeInterval: Configuration.timeIntervalRepeat,
                                          target: self,
                                          selector: #selector(updateTimerLabel),
