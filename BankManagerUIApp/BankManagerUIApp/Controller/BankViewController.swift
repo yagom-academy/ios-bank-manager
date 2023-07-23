@@ -16,8 +16,8 @@ protocol BankViewControllerDelegate: AnyObject {
 
 final class BankViewController: UIViewController {
     private var bank = Bank()
-    private var waitingDictionary: Dictionary<Customer, CustomerView> = [:]
-    private var processingDictionary: Dictionary<Customer, CustomerView> = [:]
+    private var waitingDictionary: [Customer: CustomerView] = .init()
+    private var processingDictionary: [Customer: CustomerView] = .init()
 
     private var startWorkTime: CFAbsoluteTime?
     private var timer: Timer?
@@ -196,10 +196,8 @@ private extension BankViewController {
 extension BankViewController: BankViewControllerDelegate {
     func addWaitingQueue(_ customer: Customer) {
         OperationQueue.main.addOperation {
-            let customerView = CustomerView()
-            customerView.configureUI(waitingNumber: customer.waitingNumber,
-                                     purpose: customer.purpose.name,
-                                     color: customer.purpose.uiColor)
+            let customerView = CustomerView(customer: customer, frame: self.view.frame)
+            customerView.configureUI()
             
             self.waitingStackView.addArrangedSubview(customerView)
             self.waitingDictionary[customer] = customerView
@@ -247,6 +245,8 @@ extension BankViewController: BankViewControllerDelegate {
             $0.removeFromSuperview()
         }
 
+        waitingDictionary = .init()
+        processingDictionary = .init()
         setTimer(.zero)
     }
 }

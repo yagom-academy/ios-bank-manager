@@ -8,9 +8,20 @@
 import UIKit
 
 final class CustomerView: UILabel {
-    func configureUI(waitingNumber: Int, purpose: String, color: UIColor) {
-        self.text = "\(waitingNumber) - \(purpose)"
-        self.textColor = color
+    let customer: Customer
+    
+    init(customer: Customer, frame: CGRect) {
+        self.customer = customer
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureUI() {
+        self.text = "\(customer.waitingNumber) - \(customer.purpose.name)"
+        self.textColor = customer.purpose.uiColor
         self.textAlignment = .center
     }
 }
