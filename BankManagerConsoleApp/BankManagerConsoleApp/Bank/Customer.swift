@@ -7,9 +7,10 @@
 
 struct Customer {
     let numberTicket: Int
-    let taskTime = 0.7
+    let task: Bank.Task
     
-    init(_ numberTicket: Int) {
+    init(numberTicket: Int) {
         self.numberTicket = numberTicket
+        self.task = Bank.Task.random
     }
 }
