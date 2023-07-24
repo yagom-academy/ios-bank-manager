@@ -5,3 +5,6 @@
 // 
 
 import Foundation
+import BankManager
+
+print(BankManager().text)

@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63222B622A691A3500F197ED /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 63222B612A691A3500F197ED /* BankManager */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
-		C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D65D1A259C8190005510E0 /* BankManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
+		63222B5F2A6919F700F197ED /* BankManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BankManager; path = ../BankManager; sourceTree = "<group>"; };
+		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = BankManagerConsoleApp; path = "/Users/kjs/Documents/dev/prjs/ios-bank-manager/BankManagerConsoleApp/build/Debug/BankManagerConsoleApp"; sourceTree = "<absolute>"; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		C7D65D1A259C8190005510E0 /* BankManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankManager.swift; path = ../../BankManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,32 +34,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63222B622A691A3500F197ED /* BankManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63222B5E2A6919F700F197ED /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				63222B5F2A6919F700F197ED /* BankManager */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		63222B602A691A3500F197ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
+				63222B5E2A6919F700F197ED /* Packages */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
-				C7694E77259C3EC00053667F /* Products */,
+				63222B602A691A3500F197ED /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		C7694E77259C3EC00053667F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C7694E76259C3EC00053667F /* BankManagerConsoleApp */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
-				C7D65D1A259C8190005510E0 /* BankManager.swift */,
 				C7694E79259C3EC00053667F /* main.swift */,
 			);
 			path = BankManagerConsoleApp;
@@ -81,6 +89,9 @@
 			dependencies = (
 			);
 			name = BankManagerConsoleApp;
+			packageProductDependencies = (
+				63222B612A691A3500F197ED /* BankManager */,
+			);
 			productName = BankManagerConsoleApp;
 			productReference = C7694E76259C3EC00053667F /* BankManagerConsoleApp */;
 			productType = "com.apple.product-type.tool";
@@ -91,8 +102,9 @@
 		C7694E6E259C3EC00053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1210;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					C7694E75259C3EC00053667F = {
 						CreatedOnToolsVersion = 12.1;
@@ -108,7 +120,7 @@
 				Base,
 			);
 			mainGroup = C7694E6D259C3EC00053667F;
-			productRefGroup = C7694E77259C3EC00053667F /* Products */;
+			productRefGroup = C7694E6D259C3EC00053667F;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -123,7 +135,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				C7D65D1B259C8190005510E0 /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +175,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -225,6 +237,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -249,6 +262,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -258,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -285,6 +300,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63222B612A691A3500F197ED /* BankManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BankManager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C7694E6E259C3EC00053667F /* Project object */;
 }

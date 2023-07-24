@@ -1,0 +1,3 @@
+# BankManager
+
+A description of this package.
