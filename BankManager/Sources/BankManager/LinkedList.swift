@@ -19,13 +19,13 @@ final public class LinkedList<T> {
     private var tail: Node?
     private var count = 0
     
-    public var checkEmpty: Bool { return head == nil }
+    var checkEmpty: Bool { return head == nil }
     
-    public var elementCount: Int { return count }
+    var elementCount: Int { return count }
     
-    public var headValue: T? { return head?.value }
+    var headValue: T? { return head?.value }
     
-    public func addNode(value: T) {
+    func addNode(value: T) {
         let node = Node(value: value)
         
         if checkEmpty {
@@ -38,7 +38,7 @@ final public class LinkedList<T> {
         count += 1
     }
     
-    public func removeNode() -> T? {
+    func removeNode() -> T? {
         guard let node = head else {
             return nil
         }
@@ -52,7 +52,7 @@ final public class LinkedList<T> {
         return node.value
     }
     
-    public func removeAll() {
+    func removeAll() {
         head = nil
         tail = nil
     }

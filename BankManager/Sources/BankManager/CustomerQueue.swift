@@ -6,7 +6,7 @@
 //
 
 final public class CustomerQueue<T> {
-    public var list = LinkedList<T>()
+    private var list = LinkedList<T>()
     
     public func enqueue(value: T) {
         list.addNode(value: value)
