@@ -19,5 +19,24 @@ final class CustomerQueueTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_queue가비어있을때_isEmpty호출시_true를반환하는지() {
+        //when
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    func test_queue가비어있지않을때_isEmpty호출시_false를반환하는지() {
+        //given
+        sut.enqueue(data: 1)
+        
+        //when
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertFalse(result)
+    }
 
 }
