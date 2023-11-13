@@ -23,4 +23,16 @@ final class LinkedList<T> {
         tail?.next = newNode
         tail = newNode
     }
+    
+    @discardableResult
+    func removeFirst() -> T? {
+        guard isEmpty == false else {
+            return nil
+        }
+        
+        let node = head
+        head = head?.next
+        
+        return node?.data
+    }
 }
