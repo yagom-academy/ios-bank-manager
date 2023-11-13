@@ -123,5 +123,17 @@ final class CustomerQueueTests: XCTestCase {
         //then
         XCTAssertNil(result)
     }
+    
+    func test_queue에1이들어있을때_clear호출시_모두초기화되는지() {
+        //given
+        sut.enqueue(data: 1)
+        
+        //when
+        sut.clear()
+        
+        //then
+        XCTAssertNil(sut.queue.head)
+        XCTAssertNil(sut.queue.tail)
+    }
 
 }
