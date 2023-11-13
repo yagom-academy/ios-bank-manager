@@ -97,4 +97,17 @@ final class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_linkedlist에1과2를넣었을때_removeAll호출시_모두초기화되는지() {
+        //given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        
+        //when
+        sut.removeAll()
+        
+        //then
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+    }
 }
