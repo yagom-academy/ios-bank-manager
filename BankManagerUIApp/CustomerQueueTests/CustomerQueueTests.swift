@@ -38,5 +38,28 @@ final class CustomerQueueTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
+    
+    func test_queue에1을enqueue했을때_queue의head호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        
+        //when
+        let result = sut.queue.head?.data
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_queue에1과2를enqueue했을때_queue의head호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        
+        //when
+        let result = sut.queue.head?.data
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
 
 }
