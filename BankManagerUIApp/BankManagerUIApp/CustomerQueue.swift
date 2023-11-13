@@ -6,7 +6,7 @@
 //
 
 final class CustomerQueue<T> {
-    private var queue: LinkedList<T> = LinkedList()
+    private(set) var queue: LinkedList<T> = LinkedList()
     
     var peek: T? {
         return queue.head?.data
