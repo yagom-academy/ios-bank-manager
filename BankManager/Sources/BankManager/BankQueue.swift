@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankQueue<T> {
-    var list = LinkedList<T>()
+    private var list = LinkedList<T>()
     
     func enqueue(data: T) {
         list.append(data: data)
