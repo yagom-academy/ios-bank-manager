@@ -10,9 +10,7 @@ import BankManager
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()     
     }
-
-
 }
 

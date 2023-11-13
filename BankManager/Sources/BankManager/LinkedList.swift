@@ -5,42 +5,40 @@
 //  Created by uemu, hisop on 2023/11/13.
 //
 
-final class Node<T> {
-    let value: T
-    var next: Node<T>?
-    
-    init(value: T) {
-        self.value = value
-    }
-}
-
-struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    var elementCount = 0
-    
-    var isEmpty: Bool { return head == nil }
-    
-    var count: Int { return elementCount }
-    
-    var peek: T? { return head?.value }
-    
-    mutating func addNode(value: T) {
-        let node = Node(value: value)
-        elementCount += 1
+final public class LinkedList<T> {
+    final private class Node {
+        var value: T
+        var next: Node?
         
-        guard isEmpty == false else {
-            head = node
-            tail = node
-            return
+        init(value: T) {
+            self.value = value
         }
-        
-        tail?.next = node
-        tail = tail?.next
     }
     
-    @discardableResult
-    mutating func removeNode() -> T? {
+    private var head: Node?
+    private var tail: Node?
+    private var count = 0
+    
+    public var checkEmpty: Bool { return head == nil }
+    
+    public var elementCount: Int { return count }
+    
+    public var headValue: T? { return head?.value }
+    
+    public func addNode(value: T) {
+        let node = Node(value: value)
+        
+        if checkEmpty {
+            head = node
+        } else {
+            tail?.next = node
+        }
+        tail = node
+        
+        count += 1
+    }
+    
+    public func removeNode() -> T? {
         guard let node = head else {
             return nil
         }
@@ -49,11 +47,12 @@ struct LinkedList<T> {
         if head == nil {
             tail = nil
         }
-        elementCount -= 1
+        count -= 1
         
         return node.value
     }
-    mutating func removeAll() {
+    
+    public func removeAll() {
         head = nil
         tail = nil
     }
