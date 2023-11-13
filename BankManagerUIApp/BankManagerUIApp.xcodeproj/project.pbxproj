@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F0B20C22B0250150024F68D /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 4F0B20C12B0250150024F68D /* BankManager */; };
+		4F0B20C52B0270EC0024F68D /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0B20C42B0270EC0024F68D /* CustomerQueue.swift */; };
 		4F623C002B023CAF00EA1115 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F623BFF2B023CAF00EA1115 /* Node.swift */; };
 		4F623C022B02408000EA1115 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F623C012B02408000EA1115 /* LinkedList.swift */; };
 		4F623C0A2B02414B00EA1115 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F623C092B02414B00EA1115 /* LinkedListTests.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F0B20C42B0270EC0024F68D /* CustomerQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueue.swift; sourceTree = "<group>"; };
 		4F623BFF2B023CAF00EA1115 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		4F623C012B02408000EA1115 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		4F623C072B02414B00EA1115 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 				C7694E3E259C3E9F0053667F /* ViewController.swift */,
 				4F623BFF2B023CAF00EA1115 /* Node.swift */,
 				4F623C012B02408000EA1115 /* LinkedList.swift */,
+				4F0B20C42B0270EC0024F68D /* CustomerQueue.swift */,
 				C7694E40259C3E9F0053667F /* Main.storyboard */,
 				C7694E43259C3EA20053667F /* Assets.xcassets */,
 				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
@@ -358,6 +361,7 @@
 				4F623C022B02408000EA1115 /* LinkedList.swift in Sources */,
 				C7694E3D259C3E9F0053667F /* SceneDelegate.swift in Sources */,
 				4F623C002B023CAF00EA1115 /* Node.swift in Sources */,
+				4F0B20C52B0270EC0024F68D /* CustomerQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
