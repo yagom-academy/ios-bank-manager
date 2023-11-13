@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0B20C22B0250150024F68D /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 4F0B20C12B0250150024F68D /* BankManager */; };
 		4F623C002B023CAF00EA1115 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F623BFF2B023CAF00EA1115 /* Node.swift */; };
 		4F623C022B02408000EA1115 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F623C012B02408000EA1115 /* LinkedList.swift */; };
 		4F623C0A2B02414B00EA1115 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F623C092B02414B00EA1115 /* LinkedListTests.swift */; };
@@ -78,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F0B20C22B0250150024F68D /* BankManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +100,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0B20C02B0250150024F68D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4F623C082B02414B00EA1115 /* LinkedListTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +132,7 @@
 				C7694E5B259C3EA20053667F /* BankManagerUIAppUITests */,
 				4F623C082B02414B00EA1115 /* LinkedListTests */,
 				C7694E38259C3E9F0053667F /* Products */,
+				4F0B20C02B0250150024F68D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +215,9 @@
 			dependencies = (
 			);
 			name = BankManagerUIApp;
+			packageProductDependencies = (
+				4F0B20C12B0250150024F68D /* BankManager */,
+			);
 			productName = BankManagerUIApp;
 			productReference = C7694E37259C3E9F0053667F /* BankManagerUIApp.app */;
 			productType = "com.apple.product-type.application";
@@ -251,8 +264,9 @@
 		C7694E2F259C3E9F0053667F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					4F623C062B02414B00EA1115 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -411,6 +425,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = L8DVKD4NCR;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -439,6 +454,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = L8DVKD4NCR;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -741,6 +757,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4F0B20C12B0250150024F68D /* BankManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BankManager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C7694E2F259C3E9F0053667F /* Project object */;
 }
