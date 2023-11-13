@@ -24,5 +24,8 @@ let package = Package(
         .testTarget(
             name: "BankManagerTests",
             dependencies: ["BankManager"]),
+        .testTarget(
+            name: "LinkedListTests",
+            dependencies: ["BankManager"])
     ]
 )

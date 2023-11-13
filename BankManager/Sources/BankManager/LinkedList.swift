@@ -1,5 +1,5 @@
-final class LinkedList<T> {
-    final class Node {
+final public class LinkedList<T> {
+    final public class Node {
         private(set) var data: T
         private(set) var next: Node?
         
@@ -20,7 +20,7 @@ final class LinkedList<T> {
         self.tail = tail
     }
     
-    func append(data: T) {
+    public func append(data: T) {
         let newNode = Node(data: data)
         
         if head == nil {
@@ -33,7 +33,7 @@ final class LinkedList<T> {
         
     }
     
-    func removeFirst() -> T? {
+    public func removeFirst() -> T? {
         guard let headData = head?.data else { return nil }
         
         head = head?.next
@@ -41,17 +41,17 @@ final class LinkedList<T> {
         return headData
     }
     
-    func removeAll() {
+    public func removeAll() {
         head = nil
         tail = nil
     }
     
-    func showFirstNode() -> T? {
+    public func showFirstNode() -> T? {
         guard let data = head?.data else { return nil }
         return data
     }
     
-    func count() -> Int {
+    public func count() -> Int {
         guard var currentNode = head else {
             return 0
         }
