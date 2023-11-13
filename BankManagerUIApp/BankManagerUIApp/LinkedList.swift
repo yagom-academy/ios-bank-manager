@@ -12,4 +12,15 @@ final class LinkedList<T> {
     var isEmpty: Bool {
         return head == nil
     }
+    
+    func append(data: T) {
+        let newNode: Node = Node(data: data)
+        if head == nil {
+            head = newNode
+            tail = newNode
+        }
+        
+        tail?.next = newNode
+        tail = newNode
+    }
 }
