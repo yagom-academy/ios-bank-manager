@@ -61,5 +61,36 @@ final class CustomerQueueTests: XCTestCase {
         //then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_queue가비었을때_peek호출시_nil이나오는지() {
+        //when
+        let result = sut.peek
+        
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_queue에1이들어있을때_peek호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        
+        //when
+        let result = sut.peek
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_queue에1과2가들어있을때_peek호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        
+        //when
+        let result = sut.peek
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
 
 }
