@@ -92,5 +92,36 @@ final class CustomerQueueTests: XCTestCase {
         //then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_queue에1이있을때_dequeue호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_queue에1과2가있을때_dequeue호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_queue가비어있을때_dequeue호출시_nil이나오는지() {
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertNil(result)
+    }
 
 }
