@@ -98,6 +98,14 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
+    func test_linkedlist가비었을때_removeFirst호출시_nil이나오는지() {
+        //when
+        let result = sut.removeFirst()
+        
+        //then
+        XCTAssertNil(result)
+    }
+    
     func test_linkedlist에1과2를넣었을때_removeAll호출시_모두초기화되는지() {
         //given
         sut.append(data: 1)
