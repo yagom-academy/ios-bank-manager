@@ -28,4 +28,50 @@ final class LinkedListTests: XCTestCase {
         //then
         XCTAssertTrue(result)
     }
+    
+    func test_linkedlist에1을넣었을때_head호출시_1이나오는지() {
+        //given
+        sut.append(data: 1)
+        
+        //when
+        let result = sut.head?.data
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_linkedlist에1과2를넣었을때_head호출시_1이나오는지() {
+        //given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        
+        //when
+        let result = sut.head?.data
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_linkedlist에1을넣었을때_tail호출시_1이나오는지() {
+        //given
+        sut.append(data: 1)
+        
+        //when
+        let result = sut.tail?.data
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_linkedlist에1과3을넣었을때_tail호출시_3이나오는지() {
+        //given
+        sut.append(data: 1)
+        sut.append(data: 3)
+        
+        //when
+        let result = sut.tail?.data
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
 }
