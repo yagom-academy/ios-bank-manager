@@ -134,6 +134,41 @@
 			path = CustomerQueueTests;
 			sourceTree = "<group>";
 		};
+		4F0B20D32B02907E0024F68D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E3E259C3E9F0053667F /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4F0B20D42B02908A0024F68D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E40259C3E9F0053667F /* Main.storyboard */,
+				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4F0B20D52B0290950024F68D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4F623BFF2B023CAF00EA1115 /* Node.swift */,
+				4F623C012B02408000EA1115 /* LinkedList.swift */,
+				4F0B20C42B0270EC0024F68D /* CustomerQueue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4F0B20D62B0290B50024F68D /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C7694E43259C3EA20053667F /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		4F623C082B02414B00EA1115 /* LinkedListTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,15 +214,12 @@
 		C7694E39259C3E9F0053667F /* BankManagerUIApp */ = {
 			isa = PBXGroup;
 			children = (
+				4F0B20D52B0290950024F68D /* Model */,
+				4F0B20D42B02908A0024F68D /* View */,
+				4F0B20D32B02907E0024F68D /* Controller */,
+				4F0B20D62B0290B50024F68D /* Resource */,
 				C7694E3A259C3E9F0053667F /* AppDelegate.swift */,
 				C7694E3C259C3E9F0053667F /* SceneDelegate.swift */,
-				C7694E3E259C3E9F0053667F /* ViewController.swift */,
-				4F623BFF2B023CAF00EA1115 /* Node.swift */,
-				4F623C012B02408000EA1115 /* LinkedList.swift */,
-				4F0B20C42B0270EC0024F68D /* CustomerQueue.swift */,
-				C7694E40259C3E9F0053667F /* Main.storyboard */,
-				C7694E43259C3EA20053667F /* Assets.xcassets */,
-				C7694E45259C3EA20053667F /* LaunchScreen.storyboard */,
 				C7694E48259C3EA20053667F /* Info.plist */,
 			);
 			path = BankManagerUIApp;
