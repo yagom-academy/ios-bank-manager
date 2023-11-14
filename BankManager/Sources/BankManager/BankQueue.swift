@@ -14,6 +14,7 @@ struct BankQueue<T> {
         list.append(data: data)
     }
     
+    @discardableResult
     func dequeue() -> T? {
         list.removeFirst()
     }
