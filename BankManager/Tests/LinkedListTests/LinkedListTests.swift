@@ -58,6 +58,15 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    
+    func test_LinkedList에_데이터_1_2_3을_넣었을때_removeAll시_head의데이터와_tail의데이터가_nil이된다() {
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        
+        sut.removeAll()
+        
+        XCTAssertEqual(sut.head?.data, nil)
+        XCTAssertEqual(sut.tail?.data, nil)
+    }
     
 }
