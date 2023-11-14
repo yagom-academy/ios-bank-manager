@@ -6,7 +6,7 @@
 //
 
 public class LinkedList<T> {
-    final class Node {
+    public final class Node {
         var value: T
         var next: Node?
         
