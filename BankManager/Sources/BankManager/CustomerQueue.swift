@@ -5,7 +5,7 @@
 //  Created by Hisop on 2023/11/13.
 //
 
-final public class CustomerQueue<T> {
+public struct CustomerQueue<T> {
     var list: LinkedList<T>
     
     init(list: LinkedList<T> = LinkedList<T>()) {
