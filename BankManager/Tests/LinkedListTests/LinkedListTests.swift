@@ -69,4 +69,24 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.tail?.data, nil)
     }
     
+    func test_데이터1_2_3을_추가했을때_count가_3이다() {
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        
+        let result = sut.count()
+        
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_데이터1_2_3을_추가하고_removeFirst시_count는_2이다() {
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        
+        sut.removeFirst()
+        let result = sut.count()
+        
+        XCTAssertEqual(result, 2)
+    }
 }

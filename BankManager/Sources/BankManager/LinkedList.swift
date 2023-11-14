@@ -33,6 +33,7 @@ final public class LinkedList<T> {
         
     }
     
+    @discardableResult
     public func removeFirst() -> T? {
         guard let headData = head?.data else { return nil }
         
