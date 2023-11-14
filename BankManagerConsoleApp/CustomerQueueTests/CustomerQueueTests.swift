@@ -37,7 +37,8 @@ final class CustomerQueueTests: XCTestCase {
     func test_Queue에1을할당할때_peek호출시_1이반환된다() {
         // given
         let element = 1
-        let list = List(head: .init(data: element), tail: .init(data: element))
+        let node = Node(data: element)
+        let list = List(head: node, tail: node)
         sut = Queue(list: list)
         
         // when
@@ -60,7 +61,8 @@ final class CustomerQueueTests: XCTestCase {
     func test_Queue에값이있을때_isEmpty호출시_false가반환된다() {
         // given
         let element = 1
-        let list = List(head: .init(data: element), tail: .init(data: element))
+        let node = Node(data: element)
+        let list = List(head: node, tail: node)
         sut = Queue(list: list)
         
         // when
@@ -82,5 +84,31 @@ final class CustomerQueueTests: XCTestCase {
         // then
         XCTAssertEqual(sut.peek, firstElement)
         XCTAssertNotEqual(sut.peek, secondElemnet)
+    }
+    
+    func test_Queue에값이없을때_deQueue했을때_nil을반환된다() {
+        // given
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_Queue에값이있을때_deQueue했을때_첫번째값이반환된다() {
+        // given
+        let firstElement = 2
+        let secondElement = 1
+        let secondNode = Node(data: secondElement)
+        let firstNode = Node(data: firstElement, next: secondNode)
+        let list = List(head: firstNode, tail: secondNode)
+        sut = Queue(list: list)
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, firstElement)
     }
 }
