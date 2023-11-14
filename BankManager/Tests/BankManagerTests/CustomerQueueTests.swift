@@ -1,8 +1,8 @@
 import XCTest
 @testable import BankManager
 
-class MockLinkedList<T>: LinkedList<T> {
-    var callMethod = false
+final class MockLinkedList<T>: LinkedList<T> {
+    private(set) var callMethod = false
     
     override var checkEmpty: Bool {
         callMethod = true

@@ -6,7 +6,7 @@
 //
 
 public class LinkedList<T> {
-    final private class Node {
+    final class Node {
         var value: T
         var next: Node?
         
@@ -15,9 +15,9 @@ public class LinkedList<T> {
         }
     }
     
-    private var head: Node?
-    private var tail: Node?
-    private var count = 0
+    var head: Node?
+    var tail: Node?
+    var count = 0
     
     var checkEmpty: Bool { return head == nil }
     
