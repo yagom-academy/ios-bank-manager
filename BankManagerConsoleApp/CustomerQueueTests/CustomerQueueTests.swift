@@ -70,5 +70,17 @@ final class CustomerQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
 
-
+    func test_Queue에1과2를enQueue했을때_1이Queue의첫번째값이고2가Queue의마지막값이다() {
+        // given
+        let firstElement = 1
+        let secondElemnet = 2
+        
+        // when
+        sut.enqueue(firstElement)
+        sut.enqueue(secondElemnet)
+        
+        // then
+        XCTAssertEqual(sut.peek, firstElement)
+        XCTAssertNotEqual(sut.peek, secondElemnet)
+    }
 }
