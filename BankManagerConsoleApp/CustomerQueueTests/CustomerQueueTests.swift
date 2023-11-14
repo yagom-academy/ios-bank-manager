@@ -12,7 +12,7 @@ final class CustomerQueueTests: XCTestCase {
     typealias List = LinkedList<Int>
     typealias Queue = CustomerQueue<Int>
     
-    var sut: Queue!
+    private var sut: Queue!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -72,7 +72,7 @@ final class CustomerQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
 
-    func test_Queue에1과2를enQueue했을때_1이Queue의첫번째값이고2가Queue의마지막값이다() {
+    func test_Queue에1과2를enQueue했을때_1이Queue의첫번째값이되고2가마지막값이된다() {
         // given
         let firstElement = 1
         let secondElemnet = 2
@@ -82,8 +82,8 @@ final class CustomerQueueTests: XCTestCase {
         sut.enqueue(secondElemnet)
         
         // then
-        XCTAssertEqual(sut.peek, firstElement)
-        XCTAssertNotEqual(sut.peek, secondElemnet)
+        XCTAssertEqual(sut.dequeue(), firstElement)
+        XCTAssertEqual(sut.dequeue(), secondElemnet)
     }
     
     func test_Queue에값이없을때_deQueue했을때_nil을반환된다() {
