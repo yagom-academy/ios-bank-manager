@@ -9,28 +9,42 @@ import XCTest
 @testable import BankManagerConsoleApp
 
 final class CustomerQueueTests: XCTestCase {
+    typealias List = LinkedList<Int>
+    typealias Queue = CustomerQueue<Int>
+    
+    var sut: Queue!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = Queue(list: List())
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_Queue에값이없을때_peek호출시_nil이반환된다() {
+        // given
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertNil(result)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_head에1을할당할때_peek호출시_1이반환된다() {
+        // given
+        let element = 1
+        let list = List(head: .init(data: element), tail: .init(data: element))
+        sut = Queue(list: list)
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, element)
     }
 
 }

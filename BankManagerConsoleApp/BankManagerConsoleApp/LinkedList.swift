@@ -15,6 +15,11 @@ final class LinkedList<Data> {
     
     var isEmpty: Bool { head == nil }
     
+    init(head: Node<Data>? = nil, tail: Node<Data>? = nil) {
+        self.head = head
+        self.tail = tail
+    }
+    
     func append(value: Data) {
         let newNode: Node = Node(data: value)
         

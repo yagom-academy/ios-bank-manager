@@ -13,6 +13,8 @@
 		3C7538D42B030C9F00D45F35 /* CustomerQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7538BA2B03080400D45F35 /* CustomerQueue.swift */; };
 		63222B622A691A3500F197ED /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 63222B612A691A3500F197ED /* BankManager */; };
 		BF2304F12B0301260074439A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2304F02B0301260074439A /* Node.swift */; };
+		BF2305002B0310B00074439A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7538B82B0302C300D45F35 /* LinkedList.swift */; };
+		BF2305012B0310C30074439A /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2304F02B0301260074439A /* Node.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -196,8 +198,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2305002B0310B00074439A /* LinkedList.swift in Sources */,
 				3C7538D02B030C7300D45F35 /* CustomerQueueTests.swift in Sources */,
 				3C7538D42B030C9F00D45F35 /* CustomerQueue.swift in Sources */,
+				BF2305012B0310C30074439A /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +226,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DX425N2A26;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -244,7 +248,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DX425N2A26;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
