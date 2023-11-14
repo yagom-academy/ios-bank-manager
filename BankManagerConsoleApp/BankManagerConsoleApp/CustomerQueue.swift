@@ -5,16 +5,26 @@
 //  Created by jyubong, Toy on 11/14/23.
 //
 
-import Foundation
-
-struct CustomerQueue<T> {
-    private var list = LinkedList<T>()
+struct CustomerQueue<Element> {
+    private var list: LinkedList<Element>
     
-    func enqueue(_ element: T) {
+    var peek: Element? { list.first }
+    
+    var isEmpty: Bool { list.isEmpty }
+    
+    init(list: LinkedList<Element>) {
+        self.list = list
+    }
+    
+    func enqueue(_ element: Element) {
         list.append(value: element)
     }
     
-    func dequeue() -> T? {
+    func dequeue() -> Element? {
         return list.removeFirst()
+    }
+    
+    func clear() {
+        list.removeAll()
     }
 }

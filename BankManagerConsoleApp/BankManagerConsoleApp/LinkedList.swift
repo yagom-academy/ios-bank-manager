@@ -9,13 +9,9 @@ final class LinkedList<Data> {
     private var head: Node<Data>?
     private var tail: Node<Data>?
     
-    var first: Data? {
-        return head?.data
-    }
+    var first: Data? { head?.data }
     
-    var last: Data? {
-        return tail?.data
-    }
+    var last: Data? { tail?.data }
     
     var isEmpty: Bool { head == nil }
     
