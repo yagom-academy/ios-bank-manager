@@ -111,4 +111,20 @@ final class CustomerQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, firstElement)
     }
+    
+    func test_Queue에값이있을때_clear호출시_isEmpty가true가된다() {
+        // given
+        let firstElement = 2
+        let secondElement = 1
+        let secondNode = Node(data: secondElement)
+        let firstNode = Node(data: firstElement, next: secondNode)
+        let list = List(head: firstNode, tail: secondNode)
+        sut = Queue(list: list)
+        
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }

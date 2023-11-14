@@ -11,8 +11,6 @@ final class LinkedList<Data> {
     
     var first: Data? { head?.data }
     
-    var last: Data? { tail?.data }
-    
     var isEmpty: Bool { head == nil }
     
     init(head: Node<Data>? = nil, tail: Node<Data>? = nil) {
