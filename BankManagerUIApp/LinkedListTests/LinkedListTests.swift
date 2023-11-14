@@ -118,4 +118,17 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
         XCTAssertNil(sut.tail)
     }
+    
+    func test_linkedlist에1과2와3을넣었을때_tail이이전노드와연결이잘되어있는지(){
+        //given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        
+        //when
+        let result = sut.head?.next?.next?.data
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
 }
