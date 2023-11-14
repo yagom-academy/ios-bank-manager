@@ -5,16 +5,23 @@
 //  Created by jyubong, Toy on 11/14/23.
 //
 
-import Foundation
-
 final class LinkedList<Data> {
     private var head: Node<Data>?
     private var tail: Node<Data>?
+    
+    var first: Data? {
+        return head?.data
+    }
+    
+    var last: Data? {
+        return tail?.data
+    }
     
     var isEmpty: Bool { head == nil }
     
     func append(value: Data) {
         let newNode: Node = Node(data: value)
+        
         if isEmpty {
             head = newNode
             tail = head
@@ -22,6 +29,14 @@ final class LinkedList<Data> {
             tail?.setNext(to: newNode)
             tail = newNode
         }
+    }
+    
+    func removeFirst() -> Data? {
+        guard let headData = head?.data else { return nil }
+        
+        head = head?.next
+        
+        return headData
     }
     
     func removeAll() {
