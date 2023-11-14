@@ -5,8 +5,8 @@
 //  Created by uemu, hisop on 2023/11/13.
 //
 
-public class LinkedList<T> {
-    public final class Node {
+class LinkedList<T> {
+    final class Node {
         var value: T
         var next: Node?
         

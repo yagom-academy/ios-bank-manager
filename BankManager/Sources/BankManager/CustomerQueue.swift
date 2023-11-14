@@ -12,6 +12,18 @@ final public class CustomerQueue<T> {
         self.list = list
     }
     
+    public func isEmpty() -> Bool {
+        return list.checkEmpty
+    }
+    
+    public func count() -> Int {
+        return list.elementCount
+    }
+    
+    public func peek() -> T? {
+        return list.headValue
+    }
+    
     public func enqueue(value: T) {
         list.addNode(value: value)
     }
@@ -23,17 +35,5 @@ final public class CustomerQueue<T> {
     
     public func clear() {
         list.removeAll()
-    }
-    
-    public func peek() -> T? {
-        return list.headValue
-    }
-    
-    public func isEmpty() -> Bool {
-        return list.checkEmpty
-    }
-    
-    public func count() -> Int {
-        return list.elementCount
     }
 }
