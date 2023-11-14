@@ -34,7 +34,7 @@ final class CustomerQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
 
-    func test_head에1을할당할때_peek호출시_1이반환된다() {
+    func test_Queue에1을할당할때_peek호출시_1이반환된다() {
         // given
         let element = 1
         let list = List(head: .init(data: element), tail: .init(data: element))
@@ -46,5 +46,29 @@ final class CustomerQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, element)
     }
+    
+    func test_Queue에값이없을때_isEmpty호출시_true가반환된다() {
+        // given
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_Queue에값이있을때_isEmpty호출시_false가반환된다() {
+        // given
+        let element = 1
+        let list = List(head: .init(data: element), tail: .init(data: element))
+        sut = Queue(list: list)
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+
 
 }
