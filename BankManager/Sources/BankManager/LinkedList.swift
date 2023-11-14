@@ -5,7 +5,7 @@
 //  Created by uemu, hisop on 2023/11/13.
 //
 
-final public class LinkedList<T> {
+public class LinkedList<T> {
     final private class Node {
         var value: T
         var next: Node?
