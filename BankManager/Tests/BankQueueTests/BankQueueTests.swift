@@ -40,5 +40,14 @@ final class BankQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 2)
     }
-
+    
+    func test_큐에요소를_추가하고_clear했을시_isEmpty가_true이다() {
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        
+        sut.clear()
+        let result = sut.isEmpty()
+        
+        XCTAssertEqual(result, true)
+    }
 }
