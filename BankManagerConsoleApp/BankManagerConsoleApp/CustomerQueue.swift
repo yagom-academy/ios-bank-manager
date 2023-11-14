@@ -6,7 +6,7 @@
 //
 
 struct CustomerQueue<Element> {
-    private var list: LinkedList<Element>
+    private let list: LinkedList<Element>
     
     var peek: Element? { list.first }
     

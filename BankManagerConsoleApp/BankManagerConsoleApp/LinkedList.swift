@@ -5,32 +5,32 @@
 //  Created by jyubong, Toy on 11/14/23.
 //
 
-final class LinkedList<Data> {
-    private var head: Node<Data>?
-    private var tail: Node<Data>?
+final class LinkedList<NodeData> {
+    private var head: Node<NodeData>?
+    private var tail: Node<NodeData>?
     
-    var first: Data? { head?.data }
+    var first: NodeData? { head?.data }
     
     var isEmpty: Bool { head == nil }
     
-    init(head: Node<Data>? = nil, tail: Node<Data>? = nil) {
+    init(head: Node<NodeData>? = nil, tail: Node<NodeData>? = nil) {
         self.head = head
         self.tail = tail
     }
     
-    func append(value: Data) {
+    func append(value: NodeData) {
         let newNode: Node = Node(data: value)
         
         if isEmpty {
             head = newNode
-            tail = head
         } else {
             tail?.setNext(to: newNode)
-            tail = newNode
         }
+        
+        tail = newNode
     }
     
-    func removeFirst() -> Data? {
+    func removeFirst() -> NodeData? {
         guard let headData = head?.data else { return nil }
         
         head = head?.next
