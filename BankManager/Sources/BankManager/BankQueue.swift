@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankQueue<T> {
-    private var list = LinkedList<T>()
+    private let list = LinkedList<T>()
     
     func enqueue(data: T) {
         list.append(data: data)
@@ -28,6 +28,6 @@ struct BankQueue<T> {
     }
     
     func isEmpty() -> Bool {
-        list.count() == 0 ? true : false
+        list.count() == 0
     }
 }
