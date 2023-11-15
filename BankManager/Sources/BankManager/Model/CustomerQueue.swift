@@ -6,7 +6,7 @@
 //
 
 public struct CustomerQueue<T> {
-    public private(set) var queue: LinkedList<T> = LinkedList()
+    public private(set) var queue: LinkedList<T>
     
     public var peek: T? {
         return queue.head?.data
@@ -14,6 +14,10 @@ public struct CustomerQueue<T> {
     
     public var isEmpty:Bool {
         return queue.isEmpty
+    }
+    
+    public init(queue: LinkedList<T>) {
+        self.queue = queue
     }
     
     public func enqueue(data: T) {
