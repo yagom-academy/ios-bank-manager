@@ -16,6 +16,10 @@ public struct CustomerQueue<T> {
         return queue.isEmpty
     }
     
+    public var count: Int {
+        return queue.count
+    }
+    
     public init(queue: LinkedList<T>) {
         self.queue = queue
     }
