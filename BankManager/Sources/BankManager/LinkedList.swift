@@ -19,11 +19,17 @@ class LinkedList<T> {
     var tail: Node?
     var count = 0
     
-    var checkEmpty: Bool { return head == nil }
+    var checkEmpty: Bool {
+        head == nil
+    }
     
-    var elementCount: Int { return count }
+    var elementCount: Int {
+        count
+    }
     
-    var headValue: T? { return head?.value }
+    var headValue: T? {
+        head?.value
+    }
     
     func addNode(value: T) {
         let node = Node(value: value)

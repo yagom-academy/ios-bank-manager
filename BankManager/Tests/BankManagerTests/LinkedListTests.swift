@@ -128,6 +128,7 @@ extension TestableLinkedList: Equatable {
             currentLhs = currentLhs?.next
             currentRhs = currentRhs?.next
         }
+        
         return true
     }
 }
