@@ -58,7 +58,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_LinkedList에_데이터_1_2_3을_넣었을때_removeAll시_head의데이터와_tail의데이터가_nil이된다() {
+    func test_LinkedList에_데이터를_넣고_removeAll시_head의데이터와_tail의데이터가_nil이된다() {
         sut.append(data: 1)
         sut.append(data: 2)
         sut.append(data: 3)
@@ -69,7 +69,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.tail?.data, nil)
     }
     
-    func test_데이터1_2_3을_추가했을때_count가_3이다() {
+    func test_데이터를_3개_추가했을때_count가_3이다() {
         sut.append(data: 1)
         sut.append(data: 2)
         sut.append(data: 3)
@@ -79,7 +79,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_데이터1_2_3을_추가하고_removeFirst시_count는_2이다() {
+    func test_데이터_3개_추가했을때_removeFirst시_count는_2이다() {
         sut.append(data: 1)
         sut.append(data: 2)
         sut.append(data: 3)
