@@ -8,6 +8,7 @@
 public final class LinkedList<T> {
     public private(set) var head: Node<T>?
     public private(set) var tail: Node<T>?
+    public private(set) var count: Int = 0
     
     public var isEmpty: Bool {
         return head == nil
@@ -22,6 +23,7 @@ public final class LinkedList<T> {
         
         tail?.next = newNode
         tail = newNode
+        count += 1
     }
     
     @discardableResult
@@ -32,6 +34,7 @@ public final class LinkedList<T> {
         
         let node = head
         head = head?.next
+        count -= 1
         
         return node?.data
     }
