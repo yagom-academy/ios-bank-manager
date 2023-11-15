@@ -18,7 +18,7 @@ final class CustomerQueueTests: XCTestCase {
         sut?.enqueue(value: 42)
         
         guard let mockList = sut?.list as? MockLinkedList<Int> else {
-            return
+            return XCTFail("다운캐스팅에 실패하였습니다")
         }
         
         XCTAssertTrue(mockList.callMethod)
@@ -28,7 +28,7 @@ final class CustomerQueueTests: XCTestCase {
         sut?.dequeue()
         
         guard let mockList = sut?.list as? MockLinkedList<Int> else {
-            return
+            return XCTFail("다운캐스팅에 실패하였습니다")
         }
         
         XCTAssertTrue(mockList.callMethod)
@@ -38,7 +38,7 @@ final class CustomerQueueTests: XCTestCase {
         sut?.clear()
         
         guard let mockList = sut?.list as? MockLinkedList<Int> else {
-            return
+            return XCTFail("다운캐스팅에 실패하였습니다")
         }
         
         XCTAssertTrue(mockList.callMethod)
@@ -48,7 +48,7 @@ final class CustomerQueueTests: XCTestCase {
         let _ = sut?.peek()
         
         guard let mockList = sut?.list as? MockLinkedList<Int> else {
-            return
+            return XCTFail("다운캐스팅에 실패하였습니다")
         }
         
         XCTAssertTrue(mockList.callMethod)
@@ -58,7 +58,7 @@ final class CustomerQueueTests: XCTestCase {
         let _ = sut?.isEmpty()
         
         guard let mockList = sut?.list as? MockLinkedList<Int> else {
-            return
+            return XCTFail("다운캐스팅에 실패하였습니다")
         }
         
         XCTAssertTrue(mockList.callMethod)
@@ -68,7 +68,7 @@ final class CustomerQueueTests: XCTestCase {
         let _ = sut?.count()
         
         guard let mockList = sut?.list as? MockLinkedList<Int> else {
-            return
+            return XCTFail("다운캐스팅에 실패하였습니다")
         }
         
         XCTAssertTrue(mockList.callMethod)
