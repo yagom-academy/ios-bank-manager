@@ -5,7 +5,7 @@
 //  Created by Kiseok on 11/13/23.
 //
 
-public final class CustomerQueue<T> {
+public struct CustomerQueue<T> {
     public private(set) var queue: LinkedList<T> = LinkedList()
     
     public var peek: T? {
