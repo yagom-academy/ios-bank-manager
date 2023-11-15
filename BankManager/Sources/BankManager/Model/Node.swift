@@ -5,11 +5,11 @@
 //  Created by Kiseok on 11/13/23.
 //
 
-final class Node<T> {
-    private(set) var data: T
-    var next: Node?
+public final class Node<T> {
+    public private(set) var data: T
+    public var next: Node?
     
-    init(data: T) {
+    public init(data: T) {
         self.data = data
     }
 }

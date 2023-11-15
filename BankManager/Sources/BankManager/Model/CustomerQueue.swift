@@ -5,27 +5,27 @@
 //  Created by Kiseok on 11/13/23.
 //
 
-final class CustomerQueue<T> {
-    private(set) var queue: LinkedList<T> = LinkedList()
+public final class CustomerQueue<T> {
+    public private(set) var queue: LinkedList<T> = LinkedList()
     
-    var peek: T? {
+    public var peek: T? {
         return queue.head?.data
     }
     
-    var isEmpty:Bool {
+    public var isEmpty:Bool {
         return queue.isEmpty
     }
     
-    func enqueue(data: T) {
+    public func enqueue(data: T) {
         queue.append(data: data)
     }
     
     @discardableResult
-    func dequeue() -> T? {
+    public func dequeue() -> T? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
-    func clear() {
+    public func clear() {
         queue.removeAll()
     }
 }
