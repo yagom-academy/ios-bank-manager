@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BankManagerUIApp
+@testable import BankManager
 
 final class CustomerQueueTests: XCTestCase {
     var sut: CustomerQueue<Int>!
