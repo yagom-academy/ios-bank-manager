@@ -16,13 +16,7 @@
     }
   },
   "testTargets" : [
-    {
-      "target" : {
-        "containerPath" : "container:BankManagerConsoleApp.xcodeproj",
-        "identifier" : "3C7538CC2B030C7300D45F35",
-        "name" : "CustomerQueueTests"
-      }
-    }
+
   ],
   "version" : 1
 }

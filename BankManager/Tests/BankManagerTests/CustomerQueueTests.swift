@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BankManagerConsoleApp
+@testable import BankManager
 
 final class CustomerQueueTests: XCTestCase {
     typealias List = LinkedList<Int>
