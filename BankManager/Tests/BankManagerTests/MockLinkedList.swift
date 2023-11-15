@@ -8,33 +8,37 @@
 @testable import BankManager
 
 final class MockLinkedList<T>: LinkedList<T> {
-    private(set) var callMethod = false
-    
+    private(set) var callMethodCount = 0
+        
     override var checkEmpty: Bool {
-        callMethod = true
+        callMethodCount += 1
+        
         return true
     }
     
     override var elementCount: Int {
-        callMethod = true
+        callMethodCount += 1
+        
         return 42
     }
     
     override var headValue: T? {
-        callMethod = true
+        callMethodCount += 1
+        
         return nil
     }
     
     override func addNode(value: T) {
-        callMethod = true
+        callMethodCount += 1
     }
     
     override func removeNode() -> T? {
-        callMethod = true
+        callMethodCount += 1
+        
         return nil
     }
     
     override func removeAll() {
-        callMethod = true
+        callMethodCount += 1
     }
 }

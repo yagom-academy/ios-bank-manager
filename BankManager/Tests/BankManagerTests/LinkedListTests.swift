@@ -9,10 +9,11 @@ import XCTest
 @testable import BankManager
 
 final class LinkedListTests: XCTestCase {
-    var sut: TestableLinkedList<Int>?
+    var sut: LinkedList<Int>?
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        sut = LinkedList<Int>(list: [1, 2, 3])
     }
     
     override func tearDownWithError() throws {
@@ -20,20 +21,18 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_addNode에_1_2을넣었을때_expectation과_일치하는지_확인() throws {
-        let expectation = TestableLinkedList<Int>(list: [1, 2])
+    func test_1_2_3이_들어있는_sut에_addNode로_4_5을넣었을때_expectation과_일치하는지_확인() throws {
+        let expectation = LinkedList<Int>(list: [1, 2, 3, 4, 5])
         
-        sut = TestableLinkedList<Int>()
-        sut?.addNode(value: 1)
-        sut?.addNode(value: 2)
+        sut?.addNode(value: 4)
+        sut?.addNode(value: 5)
         
         XCTAssertEqual(sut, expectation)
     }
     
     func test_1_2_3이_들어있는_sut의_removeNode를_호출했을때_expectation과_일치하는지_확인() throws {
-        let expectation = TestableLinkedList<Int>(list: [2, 3])
+        let expectation = LinkedList<Int>(list: [2, 3])
         
-        sut = TestableLinkedList<Int>(list: [1, 2, 3])
         let _ = sut?.removeNode()
         
         XCTAssertEqual(sut, expectation)
@@ -42,16 +41,14 @@ final class LinkedListTests: XCTestCase {
     func test_1_2_3이_들어있는_sut의_removeNode를_호출했을때_리턴값이_expectation과_일치하는지_확인() throws {
         let expectation = 1
         
-        sut = TestableLinkedList<Int>(list: [1, 2, 3])
         let result = sut?.removeNode()
         
         XCTAssertEqual(result, expectation)
     }
     
     func test_1_2_3이_들어있는_sut의_removeAll을_호출했을때_expectation과_일치하는지_확인() throws {
-        let expectation = TestableLinkedList<Int>()
+        let expectation = LinkedList<Int>()
         
-        sut = TestableLinkedList<Int>(list: [1, 2, 3])
         sut?.removeAll()
         
         XCTAssertEqual(sut, expectation)
@@ -60,17 +57,7 @@ final class LinkedListTests: XCTestCase {
     func test_1_2_3이_들어있는_sut의_headValue를_호출했을때_expectation과_일치하는지_확인() throws {
         let expectation = 1
         
-        sut = TestableLinkedList<Int>(list: [1, 2, 3])
         let result = sut?.headValue
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_비어있는sut의_checkEmpty를_호출했을때_expectation과_일치하는지_확인() throws {
-        let expectation = true
-        
-        sut = TestableLinkedList<Int>()
-        let result = sut?.checkEmpty
         
         XCTAssertEqual(result, expectation)
     }
@@ -78,8 +65,16 @@ final class LinkedListTests: XCTestCase {
     func test_1_2_3이_들어있는_sut의_elementCount를_호출했을때_expectation과_일치하는지_확인() throws {
         let expectation = 3
         
-        sut = TestableLinkedList<Int>(list: [1, 2, 3])
         let result = sut?.elementCount
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_비어있는sut의_checkEmpty를_호출했을때_expectation과_일치하는지_확인() throws {
+        let expectation = true
+        
+        sut = LinkedList<Int>()
+        let result = sut?.checkEmpty
         
         XCTAssertEqual(result, expectation)
     }

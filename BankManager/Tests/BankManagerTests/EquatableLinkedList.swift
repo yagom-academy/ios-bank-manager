@@ -7,10 +7,17 @@
 
 @testable import BankManager
 
-final class TestableLinkedList<T: Equatable>: LinkedList<T> {
-    private var nodeList: [Node] = []
+extension LinkedList: Equatable where T:Equatable {
+    convenience init(list: [T]) {
+        var nodeList: [Node] = []
+        
+        self.init()
+        
+        list.forEach { nodeList.append(Node(value: $0)) }
+        linkNode(nodeList: nodeList)
+    }
     
-    private func linkNode() {
+    private func linkNode(nodeList: [Node]) {
         for node in nodeList {
             if head == nil {
                 head = node
@@ -22,19 +29,7 @@ final class TestableLinkedList<T: Equatable>: LinkedList<T> {
         }
     }
     
-    override init() {
-        super.init()
-    }
-    
-    init(list: [T]) {
-        super.init()
-        list.forEach { nodeList.append(Node(value: $0)) }
-        linkNode()
-    }
-}
-
-extension TestableLinkedList: Equatable {
-    static func == (lhs: TestableLinkedList, rhs: TestableLinkedList) -> Bool {
+    public static func == (lhs: LinkedList, rhs: LinkedList) -> Bool {
         var currentLhs = lhs.head
         var currentRhs = rhs.head
         
