@@ -26,7 +26,6 @@
 /* Begin PBXFileReference section */
 		63222B5F2A6919F700F197ED /* BankManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BankManager; path = ../BankManager; sourceTree = "<group>"; };
 		BF2304EF2B0300C00074439A /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF4509CA2B04B4E300B1126A /* BankManagerTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BankManagerTests.xctestplan; sourceTree = "<group>"; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +59,6 @@
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
-				BF4509CA2B04B4E300B1126A /* BankManagerTests.xctestplan */,
 				63222B5E2A6919F700F197ED /* Packages */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				63222B602A691A3500F197ED /* Frameworks */,
