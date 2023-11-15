@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "9C9C5B75-DD4D-4AC9-BC89-2102FFF89D80",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:",
+          "identifier" : "LinkedListTests",
+          "name" : "LinkedListTests"
+        }
+      ]
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "LinkedListTests",
+        "name" : "LinkedListTests"
+      }
+    }
+  ],
+  "version" : 1
+}
