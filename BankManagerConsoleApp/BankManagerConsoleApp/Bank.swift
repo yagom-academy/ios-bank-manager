@@ -9,5 +9,6 @@ import Foundation
 import BankManager
 
 struct Bank {
+struct Bank: BankBusinesable {
     
 }
