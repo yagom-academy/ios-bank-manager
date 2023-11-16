@@ -14,6 +14,7 @@ enum ConsoleManager {
     
     static func startBank() {
         print(menu, terminator: " ")
+        
         process(userChoice: readLine())
     }
     
@@ -34,11 +35,3 @@ enum ConsoleManager {
         return UInt.random(in: 10...30)
     }
 }
-
-
-
-
-
-
-
-
