@@ -11,6 +11,10 @@ enum ConsoleManager {
                               2 : 종료
                               입력 :
                               """
+    
+    static func startBank() {
+        print(menu, terminator: " ")
+    }
 }
     
 }
