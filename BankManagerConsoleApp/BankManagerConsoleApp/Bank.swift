@@ -17,4 +17,9 @@ struct Bank: BankBusinesable {
     init(customerNumber: UInt) {
         self.customerNumber = customerNumber
     }
+    private func createCustomer(customerNumber: UInt) {
+        (1...customerNumber).forEach {
+            bankManager.standBy(customer: Customer(number: $0))
+        }
+    }
 }
