@@ -10,5 +10,11 @@ import BankManager
 
 struct Bank {
 struct Bank: BankBusinesable {
+    let bankManager = BankManager<BankClerk>()
+    private let bankClerk = BankClerk()
+    private let customerNumber: UInt
     
+    init(customerNumber: UInt) {
+        self.customerNumber = customerNumber
+    }
 }
