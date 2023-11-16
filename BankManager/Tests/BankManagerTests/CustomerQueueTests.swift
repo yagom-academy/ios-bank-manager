@@ -9,8 +9,8 @@ import XCTest
 @testable import BankManager
 
 final class CustomerQueueTests: XCTestCase {
-    typealias List = LinkedList<Int>
-    typealias Queue = CustomerQueue<Int>
+    private typealias List = LinkedList<Int>
+    private typealias Queue = CustomerQueue<Int>
     
     private var sut: Queue!
 
