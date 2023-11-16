@@ -7,5 +7,5 @@
 import BankManager
 
 struct Bank {
-    private let bankManager = BankManager()
+    
 }
