@@ -28,7 +28,7 @@ func start() {
     case "2":
         exit(0)
     default:
-        print("다시 입력해줘")
+        print("다시 입력해주세요")
         start()
     }
 }
