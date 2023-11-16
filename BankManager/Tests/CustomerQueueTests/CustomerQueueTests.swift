@@ -10,10 +10,11 @@ import XCTest
 
 final class CustomerQueueTests: XCTestCase {
     var sut: CustomerQueue<Int>!
+    let linkedList: LinkedList<Int> = LinkedList()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CustomerQueue()
+        sut = CustomerQueue(queue: linkedList)
     }
 
     override func tearDownWithError() throws {
@@ -134,6 +135,29 @@ final class CustomerQueueTests: XCTestCase {
         //then
         XCTAssertNil(sut.queue.head)
         XCTAssertNil(sut.queue.tail)
+    }
+    
+    func test_queue에1을enqueue후_count호출시_1이나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_queue에1과2를enqueue후_count호출시_2가나오는지() {
+        //given
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 2)
     }
 
 }
