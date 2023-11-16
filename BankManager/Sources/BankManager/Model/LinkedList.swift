@@ -14,6 +14,8 @@ public final class LinkedList<T> {
         return head == nil
     }
     
+    public init() { }
+    
     public func append(data: T) {
         let newNode: Node = Node(data: data)
         if head == nil {
@@ -42,5 +44,6 @@ public final class LinkedList<T> {
     public func removeAll() {
         head = nil
         tail = nil
+        count = 0
     }
 }
