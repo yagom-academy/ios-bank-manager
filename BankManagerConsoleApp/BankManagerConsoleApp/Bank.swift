@@ -8,7 +8,6 @@
 import Foundation
 import BankManager
 
-struct Bank {
 struct Bank: BankBusinesable {
     let bankManager = BankManager<BankClerk>()
     private let bankClerk = BankClerk()
@@ -35,5 +34,9 @@ struct Bank: BankBusinesable {
         (1...customerNumber).forEach {
             bankManager.standBy(customer: Customer(number: $0))
         }
+    }
+    
+    private func close(time: String) {
+        print("업무가 마갑되었습니다. 오늘 업무를 처리한 고객은 총 \(customerNumber)명이며, 총 업무시간은 \(time)초입니다.")
     }
 }
