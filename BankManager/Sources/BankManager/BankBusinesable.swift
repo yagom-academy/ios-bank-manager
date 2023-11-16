@@ -11,5 +11,4 @@ public protocol BankBusinesable {
     var bankManager: BankManager<Bankclerk> { get }
     
     func open()
-    func close()
 }
