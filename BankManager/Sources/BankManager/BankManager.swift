@@ -1,6 +1,8 @@
 public struct BankManager<BankClerk: Receivable> {
     private let customerQueue = CustomerQueue<CustomerNumbering>(list: LinkedList<CustomerNumbering>())
     
+    public init() { }
+    
     public func standBy(customer: CustomerNumbering) {
         customerQueue.enqueue(customer)
     }
