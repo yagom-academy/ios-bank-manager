@@ -14,7 +14,31 @@ enum ConsoleManager {
     
     static func startBank() {
         print(menu, terminator: " ")
+        process(userChoice: readLine())
+    }
+    
+    private static func process(userChoice: String?) {
+        switch userChoice {
+        case "1":
+            Bank(customerNumber: randomCustomerNumber()).open()
+        case "2":
+            return
+        default:
+            print("메뉴를 다시 선택해주세요.")
+        }
+        
+        startBank()
+    }
+    
+    private static func randomCustomerNumber() -> UInt {
+        return UInt.random(in: 10...30)
     }
 }
-    
-}
+
+
+
+
+
+
+
+
