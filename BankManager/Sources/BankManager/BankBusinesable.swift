@@ -6,7 +6,9 @@
 //
 
 public protocol BankBusinesable {
-    var bankManager: BankManager { get }
+    associatedtype Bankclerk: Receivable
+    
+    var bankManager: BankManager<Bankclerk> { get }
     
     func open()
     func close()
