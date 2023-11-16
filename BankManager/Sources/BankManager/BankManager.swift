@@ -1,6 +1,14 @@
+import Foundation
+
 public struct BankManager {
-    public private(set) var text = "Hello, World!"
 
     public init() {
+    }
+    
+    public func giveWaitingTicket(customerNumber: Double, customerLine: CustomerQueue<Customer>) {
+        for i in 1...Int(customerNumber) {
+            let customer = Customer(watingTicket: i)
+            customerLine.enqueue(data: customer)
+        }
     }
 }
