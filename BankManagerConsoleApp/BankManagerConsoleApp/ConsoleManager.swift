@@ -1,8 +1,8 @@
 //
-//  ConsolManager.swift
+//  ConsoleManager.swift
 //  BankManagerConsoleApp
 //
-//  Created by 김우현 on 11/16/23.
+//  Created by jyubong, Toy on 11/16/23.
 //
 
 import Foundation
