@@ -64,6 +64,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF10B6652B060F6C0007CE72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3C6E7C612B04BF1B009D24E0 /* Bank.swift */,
+				BF10B6632B05F6BE0007CE72 /* Customer.swift */,
+				3C47067B2B05F84D0001C617 /* BankClerk.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C7694E6D259C3EC00053667F = {
 			isa = PBXGroup;
 			children = (
@@ -77,11 +87,9 @@
 		C7694E78259C3EC00053667F /* BankManagerConsoleApp */ = {
 			isa = PBXGroup;
 			children = (
+				BF10B6652B060F6C0007CE72 /* Model */,
 				C7694E79259C3EC00053667F /* main.swift */,
 				3C47067D2B0605590001C617 /* ConsoleManager.swift */,
-				3C6E7C612B04BF1B009D24E0 /* Bank.swift */,
-				BF10B6632B05F6BE0007CE72 /* Customer.swift */,
-				3C47067B2B05F84D0001C617 /* BankClerk.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
