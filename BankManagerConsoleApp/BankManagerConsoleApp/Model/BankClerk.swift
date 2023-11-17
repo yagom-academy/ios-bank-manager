@@ -12,13 +12,16 @@ struct BankClerk: CustomerReceivable {
     private let startWork: (String) -> Void
     private let endWork: (String) -> Void
     
-    func receive(customer: Customer, work: ((UInt, Double) -> Void)) {
     init(startWork: @escaping (String) -> Void = { print($0) }, endWork: @escaping (String) -> Void = { print($0) }) {
         self.startWork = startWork
         self.endWork = endWork
     }
+    
+    func receive(customer: Customer) {
         let number = customer.number
         
-        work(number, pace)
+        startWork("\(number)번 고객 업무 시작")
+        Thread.sleep(forTimeInterval: pace)
+        endWork("\(number)번 고객 업무 종료")
     }
 }
