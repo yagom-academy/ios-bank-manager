@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:BankManagerConsoleApp.xctestplan"
+            reference = "container:../BankManager/Tests/BankManagerTests/BankManagerTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
