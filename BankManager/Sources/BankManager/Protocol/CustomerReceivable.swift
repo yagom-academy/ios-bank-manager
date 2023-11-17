@@ -9,5 +9,5 @@
 public protocol CustomerReceivable {
     associatedtype Customer: CustomerNumbering
     
-    func receive(customer: Customer, work: ((UInt, Double) -> Void))
+    func receive(customer: Customer)
 }
