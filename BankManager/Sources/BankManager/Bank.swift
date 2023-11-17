@@ -4,6 +4,7 @@
 //
 //  Created by Kiseok on 11/15/23.
 //
+import Foundation
 
 public struct Bank {
     public let bankClerk: BankClerk = BankClerk()
@@ -22,6 +23,7 @@ public struct Bank {
                                       customerLine: self.customerLine
         )
         
+        let taskStart = CFAbsoluteTimeGetCurrent()
         while customerLine.count != 0 {
             guard let ticketNumber = customerLine.dequeue()?.waitingTicket else {
                 return
@@ -29,9 +31,12 @@ public struct Bank {
             
             bankClerk.startTask(count: ticketNumber)
         }
+        let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
+        
+        close(time: taskEnd)
     }
     
-    public func close() {
-        bankClerk.endTask(customerNumber: self.customerNumber)
+    private func close(time: CFAbsoluteTime) {
+        bankClerk.endTask(customerNumber: self.customerNumber, time: time)
     }
 }

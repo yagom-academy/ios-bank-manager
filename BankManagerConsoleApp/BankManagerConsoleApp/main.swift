@@ -23,7 +23,6 @@ func start() {
     switch userInput {
     case "1":
         bank.open()
-        bank.close()
         start()
     case "2":
         exit(0)
