@@ -6,26 +6,32 @@
 //
 
 enum ConsoleManager {
-    private static let menu = """
-                              1 : 은행개점
-                              2 : 종료
-                              입력 :
-                              """
+    private enum Message {
+        static let menu = """
+                          1 : 은행개점
+                          2 : 종료
+                          입력 :
+                          """
+        static let reselection = "메뉴를 다시 선택해주세요."
+        static let numberOne = "1"
+        static let numberTwo = "2"
+    }
+
     
     static func startBank() {
-        print(menu, terminator: " ")
+        print(Message.menu, terminator: " ")
         
         process(userChoice: readLine())
     }
     
     private static func process(userChoice: String?) {
         switch userChoice {
-        case "1":
+        case Message.numberOne:
             Bank(customerNumber: randomCustomerNumber()).open()
-        case "2":
+        case Message.numberTwo:
             return
         default:
-            print("메뉴를 다시 선택해주세요.")
+            print(Message.reselection)
         }
         
         startBank()
