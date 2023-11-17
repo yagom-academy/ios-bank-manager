@@ -10,7 +10,7 @@ public struct Bank {
     public let bankClerk: BankClerk = BankClerk()
     public let bankManager: BankManager = BankManager()
     public let bankClerkCount: Int
-    public let customerNumber = Double.random(in: 10...30)
+    public let customerNumber = Int.random(in: 10...30)
     public let customerLine: CustomerQueue<Customer>
     
     public init(bankClerkCount: Int, customerLine: CustomerQueue<Customer>) {
