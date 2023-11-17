@@ -13,8 +13,6 @@ struct ConsoleManager {
                           입력 :
                           """
         static let reselection = "메뉴를 다시 선택해주세요."
-        static let numberOne = "1"
-        static let numberTwo = "2"
     }
     
     private static var randomCustomerNumber: UInt { UInt.random(in: 10...30) }
