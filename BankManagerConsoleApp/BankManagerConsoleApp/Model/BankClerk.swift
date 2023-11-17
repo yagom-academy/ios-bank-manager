@@ -8,7 +8,7 @@ import Foundation
 import BankManager
 
 struct BankClerk: CustomerReceivable {
-    let pace = 0.7
+    private let pace = 0.7
     
     func receive(customer: Customer) {
         let number = customer.number

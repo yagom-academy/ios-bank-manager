@@ -9,7 +9,5 @@
 public protocol CustomerReceivable {
     associatedtype Customer: CustomerNumbering
     
-    var pace: Double { get }
-    
     func receive(customer: Customer)
 }
