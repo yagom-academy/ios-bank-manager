@@ -4,7 +4,6 @@
 //
 //  Created by Kiseok on 11/15/23.
 //
-import Foundation
 
 public struct Bank {
     public let bankClerk: BankClerk = BankClerk()
