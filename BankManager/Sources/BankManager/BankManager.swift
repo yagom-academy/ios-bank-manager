@@ -1,6 +1,5 @@
 public struct BankManager {
-    public var customerQueue = CustomerQueue<Int>()
-    public private(set) var text = "Hello, World!"
+    public var Bank = Bank(name: "Hisop", employeesCount: 1)()
 
     public init() {
         
