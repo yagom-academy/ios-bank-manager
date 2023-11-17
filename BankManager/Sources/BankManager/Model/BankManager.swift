@@ -1,4 +1,4 @@
-public struct BankManager<BankClerk: Receivable> {
+public struct BankManager<BankClerk: CustomerReceivable> {
     private let customerQueue = CustomerQueue<CustomerNumbering>(list: LinkedList<CustomerNumbering>())
     
     public init() { }

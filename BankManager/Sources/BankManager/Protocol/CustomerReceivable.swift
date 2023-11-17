@@ -6,7 +6,7 @@
 //
 
 
-public protocol Receivable {
+public protocol CustomerReceivable {
     associatedtype Customer: CustomerNumbering
     
     var pace: Double { get }

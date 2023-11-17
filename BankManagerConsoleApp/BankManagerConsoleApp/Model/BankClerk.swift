@@ -7,7 +7,7 @@
 import Foundation
 import BankManager
 
-struct BankClerk: Receivable {
+struct BankClerk: CustomerReceivable {
     let pace = 0.7
     
     func receive(customer: Customer) {

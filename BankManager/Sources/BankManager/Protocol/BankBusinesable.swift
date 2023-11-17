@@ -6,7 +6,7 @@
 //
 
 public protocol BankBusinesable {
-    associatedtype Bankclerk: Receivable
+    associatedtype Bankclerk: CustomerReceivable
     
     var bankManager: BankManager<Bankclerk> { get }
     
