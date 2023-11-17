@@ -16,7 +16,8 @@ enum ConsoleManager {
         static let numberOne = "1"
         static let numberTwo = "2"
     }
-
+    
+    private static var randomCustomerNumber: UInt { UInt.random(in: 10...30) }
     
     static func startBank() {
         print(Message.menu, terminator: " ")
@@ -27,7 +28,7 @@ enum ConsoleManager {
     private static func process(userChoice: String?) {
         switch userChoice {
         case Message.numberOne:
-            Bank(customerNumber: randomCustomerNumber()).open()
+            Bank(customerNumber: randomCustomerNumber).open()
         case Message.numberTwo:
             return
         default:
@@ -35,9 +36,5 @@ enum ConsoleManager {
         }
         
         startBank()
-    }
-    
-    private static func randomCustomerNumber() -> UInt {
-        return UInt.random(in: 10...30)
     }
 }
