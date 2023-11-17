@@ -13,23 +13,23 @@ private func main(){
     let bank = Bank(tellerCount: 1, customerCount: customerCount, bankQueue: BankQueue<Customer>())
     
     while bankOpeningStatus {
-        bankProcessing(
+        bankOpeningStatus = bankProcessing(
             bank: bank,
-            bankOperationSwitch: presentMenu(),
-            bankOpeningStatus: &bankOpeningStatus
+            bankOperationSwitch: presentMenu()
         )
     }
 }
 
-private func bankProcessing(bank: Bank, bankOperationSwitch: String, bankOpeningStatus: inout Bool) {
+private func bankProcessing(bank: Bank, bankOperationSwitch: String) -> Bool {
     switch bankOperationSwitch {
     case "1":
         bank.lineUp()
         bank.tellerProcessing()
+        return true
     case "2":
-        bankOpeningStatus = false
+        return false
     default:
-        return
+        return true
     }
 }
 
