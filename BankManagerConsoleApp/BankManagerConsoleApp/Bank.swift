@@ -6,6 +6,7 @@
 //
 import BankManager
 import Dispatch
+import Foundation
 
 struct Bank {
     private var tellerCount: Int
@@ -34,11 +35,9 @@ struct Bank {
         
         while !bankQueue.isEmpty() {
             guard let customer = bankQueue.dequeue() else { return }
-            var delayTime = UInt32(customer.processingTime * 1000000)
-            
             print("\(customer.waitingNumber)번 고객 업무 시작")
             
-            usleep(delayTime)
+            Thread.sleep(forTimeInterval: customer.processingTime)
             timeChecker += customer.processingTime
             customerChecker += 1
             
