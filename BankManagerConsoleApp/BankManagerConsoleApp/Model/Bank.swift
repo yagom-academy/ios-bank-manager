@@ -9,7 +9,7 @@ import Foundation
 import BankManager
 
 struct Bank: BankBusinesable {
-    let bankManager = BankManager<BankClerk>()
+    private let bankManager = BankManager<BankClerk>()
     private let bankClerk = BankClerk()
     private let customerNumber: UInt
     
