@@ -10,7 +10,7 @@ import BankManager
 private func main(){
     var bankOpeningStatus = true
     let customerCount = Int.random(in: 10...30)
-    let bank = Bank(teller: 1, customerCount: customerCount, bankQueue: BankQueue<Customer>())
+    let bank = Bank(tellerCount: 1, customerCount: customerCount, bankQueue: BankQueue<Customer>())
     
     while bankOpeningStatus {
         bankProcessing(

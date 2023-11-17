@@ -8,12 +8,12 @@ import BankManager
 import Dispatch
 
 struct Bank {
-    private var teller: Int
+    private var tellerCount: Int
     private var customerCount: Int
     private var bankQueue: BankQueue<Customer>
     
-    init(teller: Int, customerCount: Int, bankQueue: BankQueue<Customer>) {
-        self.teller = teller
+    init(tellerCount: Int, customerCount: Int, bankQueue: BankQueue<Customer>) {
+        self.tellerCount = tellerCount
         self.customerCount = customerCount
         self.bankQueue = bankQueue
     }
