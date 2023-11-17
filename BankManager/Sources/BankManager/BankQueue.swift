@@ -7,6 +7,8 @@
 public struct BankQueue<T> {
     private let list = LinkedList<T>()
     
+    public init(){ }
+    
     public func enqueue(data: T) {
         list.append(data: data)
     }
