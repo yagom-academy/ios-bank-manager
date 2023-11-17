@@ -1,3 +1,5 @@
+import Foundation
+
 public struct BankManager<BankClerk: CustomerReceivable> {
     private let customerQueue = CustomerQueue<CustomerNumbering>(list: LinkedList<CustomerNumbering>())
     
@@ -9,7 +11,11 @@ public struct BankManager<BankClerk: CustomerReceivable> {
     
     public func assignCustomer(to bankClerk: BankClerk) {
         while let customer = customerQueue.dequeue() as? BankClerk.Customer {
-            bankClerk.receive(customer: customer)
+            bankClerk.receive(customer: customer) { number in
+                print("\(number)번 고객 업무 시작")
+            } finish: { number in
+                print("\(number)번 고객 업무 종료")
+            }
         }
     }
 }

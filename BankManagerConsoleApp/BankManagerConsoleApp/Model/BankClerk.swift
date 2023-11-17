@@ -10,11 +10,11 @@ import BankManager
 struct BankClerk: CustomerReceivable {
     private let pace = 0.7
     
-    func receive(customer: Customer) {
+    func receive(customer: Customer, start: ((UInt) -> Void), finish: ((UInt) -> Void)) {
         let number = customer.number
-        
-        print("\(number)번 고객 업무 시작")
+
+        start(number)
         Thread.sleep(forTimeInterval: pace)
-        print("\(number)번 고객 업무 완료")
+        finish(number)
     }
 }
