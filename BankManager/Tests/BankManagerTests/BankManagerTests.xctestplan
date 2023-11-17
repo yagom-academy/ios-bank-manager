@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "DE2111D1-869E-4E52-9E1F-77CEE9E34087",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..\/BankManager",
+        "identifier" : "BankManagerTests",
+        "name" : "BankManagerTests"
+      }
+    }
+  ],
+  "version" : 1
+}

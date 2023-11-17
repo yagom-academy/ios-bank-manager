@@ -4,7 +4,4 @@
 //  Copyright © yagom academy. All rights reserved.
 // 
 
-import Foundation
-import BankManager
-
-print(BankManager().text)
+ConsoleManager().startBank()
