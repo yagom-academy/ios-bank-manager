@@ -12,10 +12,9 @@ struct BankClerk: CustomerReceivable {
     
     func receive(customer: Customer) {
         let number = customer.number
-        let uSeconds = UInt32(pace * 1000000)
         
         print("\(number)번 고객 업무 시작")
-        usleep(uSeconds)
+        Thread.sleep(forTimeInterval: pace)
         print("\(number)번 고객 업무 완료")
     }
 }
