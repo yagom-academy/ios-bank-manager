@@ -40,13 +40,15 @@ struct ConsoleManager {
         process(userChoice: readLine())
     }
     
-    private static func process(userChoice: String?) {
-        switch userChoice {
-        case Message.numberOne:
+    private func process(userChoice: String?) {
+        let choice = Choice(userInput: userChoice)
+        
+        switch choice {
+        case .start:
             Bank(customerNumber: randomCustomerNumber).open()
-        case Message.numberTwo:
+        case .end:
             return
-        default:
+        case .wrong:
             print(Message.reselection)
         }
         
