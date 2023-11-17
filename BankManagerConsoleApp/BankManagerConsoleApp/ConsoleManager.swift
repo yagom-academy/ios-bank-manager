@@ -15,9 +15,26 @@ struct ConsoleManager {
         static let reselection = "메뉴를 다시 선택해주세요."
     }
     
-    private static var randomCustomerNumber: UInt { UInt.random(in: 10...30) }
+    private enum Choice {
+        case start
+        case end
+        case wrong
+        
+        init(userInput: String?) {
+            switch userInput {
+            case "1":
+                self = .start
+            case "2":
+                self = .end
+            default:
+                self = .wrong
+            }
+        }
+    }
     
-    static func startBank() {
+    private var randomCustomerNumber: UInt { UInt.random(in: 10...30) }
+    
+    func startBank() {
         print(Message.menu, terminator: " ")
         
         process(userChoice: readLine())
