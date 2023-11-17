@@ -9,8 +9,10 @@ import Foundation
 
 struct Customer {
     private(set) var waitingNumber: Int
+    private(set) var processingTime: Double
     
-    init(waitingNumber : Int) {
+    init(waitingNumber : Int, processingTime: Double) {
         self.waitingNumber = waitingNumber
+        self.processingTime = processingTime
     }
 }

@@ -19,8 +19,10 @@ struct Bank {
     }
     
     func lineUp() {
+        let processingTime: Double = 0.7
+        
         for tiketNumber in 1...customerCount {
-            let customer = Customer(waitingNumber: tiketNumber)
+            let customer = Customer(waitingNumber: tiketNumber, processingTime: processingTime)
             bankQueue.enqueue(data: customer)
         }
     }
@@ -29,13 +31,15 @@ struct Bank {
         var timeChecker = 0.0
         var customerChecker = 0
         
+        
         while !bankQueue.isEmpty() {
             guard let customer = bankQueue.dequeue() else { return }
+            var delayTime = UInt32(customer.processingTime * 1000000)
             
             print("\(customer.waitingNumber)번 고객 업무 시작")
             
-            usleep(700000)
-            timeChecker += 0.7
+            usleep(delayTime)
+            timeChecker += customer.processingTime
             customerChecker += 1
             
             print("\(customer.waitingNumber)번 고객 업무 완료")
