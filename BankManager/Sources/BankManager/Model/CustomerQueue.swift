@@ -6,7 +6,7 @@
 //
 
 public struct CustomerQueue<T: CustomerProtocol> {
-    public private(set) var queue = LinkedList<T>()
+    public private(set) var queue: LinkedList<T> = .init()
     
     public var peek: T? {
         return queue.head?.data
