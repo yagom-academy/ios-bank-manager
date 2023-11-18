@@ -7,11 +7,11 @@
 import Foundation
 
 public struct Bank {
-    public let bankClerk: BankClerk = BankClerk()
-    public let bankManager: BankManager = BankManager()
-    public let bankClerkCount: Int
-    public let customerNumber = Int.random(in: 10...30)
-    public let customerLine: CustomerQueue<Customer>
+    private let bankClerk: BankClerk = BankClerk()
+    private let bankManager: BankManager = BankManager()
+    private let bankClerkCount: Int
+    private let customerNumber = Int.random(in: 10...30)
+    private let customerLine: CustomerQueue<Customer>
     
     public init(bankClerkCount: Int, customerLine: CustomerQueue<Customer>) {
         self.bankClerkCount = bankClerkCount
