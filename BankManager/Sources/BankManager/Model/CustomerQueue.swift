@@ -6,7 +6,7 @@
 //
 
 public struct CustomerQueue<T: CustomerProtocol> {
-    public private(set) var queue: LinkedList<T>
+    public private(set) var queue = LinkedList<T>()
     
     public var peek: T? {
         return queue.head?.data
@@ -20,9 +20,7 @@ public struct CustomerQueue<T: CustomerProtocol> {
         return queue.count
     }
     
-    public init(queue: LinkedList<T>) {
-        self.queue = queue
-    }
+    public init() {}
     
     public func enqueue(customer: T) {
         queue.append(data: customer)

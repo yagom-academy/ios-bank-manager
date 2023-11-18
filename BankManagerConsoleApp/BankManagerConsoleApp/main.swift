@@ -7,9 +7,7 @@
 import Foundation
 import BankManager
 
-let customerLine: LinkedList<Customer> = LinkedList()
-let customerQueue = CustomerQueue(queue: customerLine)
-let bank: Bank = Bank.init(bankClerkCount: 1, customerLine: customerQueue)
+let bank: Bank = Bank.init(bankClerkCount: 1)
 
 func start() {
     print("""
