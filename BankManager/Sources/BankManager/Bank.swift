@@ -9,13 +9,10 @@ import Foundation
 public struct Bank {
     private let bankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
-    private let bankClerkCount: Int
     private let customerNumber = Int.random(in: 10...30)
     private let customerLine: CustomerQueue<Customer> = .init()
     
-    public init(bankClerkCount: Int) {
-        self.bankClerkCount = bankClerkCount
-    }
+    public init() {}
     
     public func open() {
         bankManager.giveWaitingTicket(
