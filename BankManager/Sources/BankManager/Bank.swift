@@ -34,6 +34,9 @@ public struct Bank {
     }
     
     private func close(time: CFAbsoluteTime) {
-        bankClerk.endTask(customerNumber: self.customerNumber, time: time)
+        bankClerk.endTask(
+            customerNumber: self.customerNumber,
+            time: time
+        )
     }
 }
