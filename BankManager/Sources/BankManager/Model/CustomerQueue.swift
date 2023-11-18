@@ -16,7 +16,7 @@ public struct CustomerQueue<T: CustomerProtocol> {
         return queue.isEmpty
     }
     
-    public var count: Int {
+    public var hasCustomer: Int {
         return queue.count
     }
     
@@ -24,8 +24,8 @@ public struct CustomerQueue<T: CustomerProtocol> {
         self.queue = queue
     }
     
-    public func enqueue(data: T) {
-        queue.append(data: data)
+    public func enqueue(customer: T) {
+        queue.append(data: customer)
     }
     
     @discardableResult

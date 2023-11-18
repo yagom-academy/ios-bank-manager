@@ -19,12 +19,13 @@ public struct Bank {
     }
     
     public func open() {
-        bankManager.giveWaitingTicket(customerNumber: self.customerNumber,
-                                      customerLine: self.customerLine
+        bankManager.giveWaitingTicket(
+            customerNumber: self.customerNumber,
+            customerLine: self.customerLine
         )
         
         let taskStart = CFAbsoluteTimeGetCurrent()
-        while customerLine.count != 0 {
+        while customerLine.hasCustomer != 0 {
             guard let ticketNumber = customerLine.dequeue()?.waitingTicket else {
                 return
             }
