@@ -5,7 +5,7 @@
 //  Created by Kiseok on 11/13/23.
 //
 
-public struct CustomerQueue<T> {
+public struct CustomerQueue<T: CustomerProtocol> {
     public private(set) var queue: LinkedList<T>
     
     public var peek: T? {

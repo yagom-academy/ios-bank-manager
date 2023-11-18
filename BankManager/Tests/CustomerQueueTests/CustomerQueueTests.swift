@@ -161,3 +161,5 @@ final class CustomerQueueTests: XCTestCase {
     }
 
 }
+
+extension Int: CustomerProtocol {}
