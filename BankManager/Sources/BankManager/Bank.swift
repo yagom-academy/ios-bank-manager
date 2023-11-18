@@ -11,7 +11,7 @@ public struct Bank {
     private let bankManager: BankManager = BankManager()
     private let bankClerkCount: Int
     private let customerNumber = Int.random(in: 10...30)
-    private let customerLine = CustomerQueue<Customer>()
+    private let customerLine: CustomerQueue<Customer> = CustomerQueue()
     
     public init(bankClerkCount: Int) {
         self.bankClerkCount = bankClerkCount

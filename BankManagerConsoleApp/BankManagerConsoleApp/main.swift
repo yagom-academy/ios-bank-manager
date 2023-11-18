@@ -7,7 +7,7 @@
 import Foundation
 import BankManager
 
-let bank: Bank = Bank.init(bankClerkCount: 1)
+let bank: Bank = .init(bankClerkCount: 1)
 
 func start() {
     print("""
