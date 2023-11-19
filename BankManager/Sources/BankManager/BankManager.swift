@@ -1,7 +1,7 @@
 public struct BankManager {
-    public var Bank = Bank(name: "Hisop", employeesCount: 1)()
+    public var bank: Bank
 
-    public init() {
-        
+    public init(bankName: String, employeesCount: Int = 1) {
+        bank = Bank(name: bankName, employeesCount: employeesCount)
     }
 }
