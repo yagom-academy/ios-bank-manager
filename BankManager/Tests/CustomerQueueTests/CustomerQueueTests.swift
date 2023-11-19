@@ -6,14 +6,15 @@
 //
 
 import XCTest
-@testable import BankManagerUIApp
+@testable import BankManager
 
 final class CustomerQueueTests: XCTestCase {
     var sut: CustomerQueue<Int>!
+    let linkedList: LinkedList<Int> = LinkedList()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CustomerQueue()
+        sut = CustomerQueue(queue: linkedList)
     }
 
     override func tearDownWithError() throws {
@@ -30,7 +31,7 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue가비어있지않을때_isEmpty호출시_false를반환하는지() {
         //given
-        sut.enqueue(data: 1)
+        sut.enqueue(customer: 1)
         
         //when
         let result = sut.isEmpty
@@ -41,7 +42,7 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1을enqueue했을때_queue의head호출시_1이나오는지() {
         //given
-        sut.enqueue(data: 1)
+        sut.enqueue(customer: 1)
         
         //when
         let result = sut.queue.head?.data
@@ -52,8 +53,8 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1과2를enqueue했을때_queue의head호출시_1이나오는지() {
         //given
-        sut.enqueue(data: 1)
-        sut.enqueue(data: 2)
+        sut.enqueue(customer: 1)
+        sut.enqueue(customer: 2)
         
         //when
         let result = sut.queue.head?.data
@@ -72,7 +73,7 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1이들어있을때_peek호출시_1이나오는지() {
         //given
-        sut.enqueue(data: 1)
+        sut.enqueue(customer: 1)
         
         //when
         let result = sut.peek
@@ -83,8 +84,8 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1과2가들어있을때_peek호출시_1이나오는지() {
         //given
-        sut.enqueue(data: 1)
-        sut.enqueue(data: 2)
+        sut.enqueue(customer: 1)
+        sut.enqueue(customer: 2)
         
         //when
         let result = sut.peek
@@ -95,7 +96,7 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1이있을때_dequeue호출시_1이나오는지() {
         //given
-        sut.enqueue(data: 1)
+        sut.enqueue(customer: 1)
         
         //when
         let result = sut.dequeue()
@@ -106,8 +107,8 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1과2가있을때_dequeue호출시_1이나오는지() {
         //given
-        sut.enqueue(data: 1)
-        sut.enqueue(data: 2)
+        sut.enqueue(customer: 1)
+        sut.enqueue(customer: 2)
         
         //when
         let result = sut.dequeue()
@@ -126,7 +127,7 @@ final class CustomerQueueTests: XCTestCase {
     
     func test_queue에1이들어있을때_clear호출시_모두초기화되는지() {
         //given
-        sut.enqueue(data: 1)
+        sut.enqueue(customer: 1)
         
         //when
         sut.clear()
@@ -135,5 +136,30 @@ final class CustomerQueueTests: XCTestCase {
         XCTAssertNil(sut.queue.head)
         XCTAssertNil(sut.queue.tail)
     }
+    
+    func test_queue에1을enqueue후_count호출시_1이나오는지() {
+        //given
+        sut.enqueue(customer: 1)
+        
+        //when
+        let result = sut.hasCustomer
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_queue에1과2를enqueue후_count호출시_2가나오는지() {
+        //given
+        sut.enqueue(customer: 1)
+        sut.enqueue(customer: 2)
+        
+        //when
+        let result = sut.hasCustomer
+        
+        //then
+        XCTAssertEqual(result, 2)
+    }
 
 }
+
+extension Int: CustomerProtocol {}

@@ -5,15 +5,18 @@
 //  Created by Kiseok on 11/13/23.
 //
 
-final class LinkedList<T> {
-    private(set) var head: Node<T>?
-    private(set) var tail: Node<T>?
+public final class LinkedList<T> {
+    public private(set) var head: Node<T>?
+    public private(set) var tail: Node<T>?
+    public private(set) var count: Int = 0
     
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return head == nil
     }
     
-    func append(data: T) {
+    public init() { }
+    
+    public func append(data: T) {
         let newNode: Node = Node(data: data)
         if head == nil {
             head = newNode
@@ -22,22 +25,25 @@ final class LinkedList<T> {
         
         tail?.next = newNode
         tail = newNode
+        count += 1
     }
     
     @discardableResult
-    func removeFirst() -> T? {
+    public func removeFirst() -> T? {
         guard isEmpty == false else {
             return nil
         }
         
         let node = head
         head = head?.next
+        count -= 1
         
         return node?.data
     }
     
-    func removeAll() {
+    public func removeAll() {
         head = nil
         tail = nil
+        count = 0
     }
 }

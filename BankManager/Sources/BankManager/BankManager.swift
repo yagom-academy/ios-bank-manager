@@ -1,6 +1,10 @@
-public struct BankManager {
-    public private(set) var text = "Hello, World!"
 
-    public init() {
+struct BankManager {
+    
+    func giveWaitingTicket(customerNumber: Int, customerLine: CustomerQueue<Customer>) {
+        for i in 1...customerNumber {
+            let customer = Customer(waitingTicket: i)
+            customerLine.enqueue(customer: customer)
+        }
     }
 }

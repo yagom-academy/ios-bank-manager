@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BankManagerUIApp
+@testable import BankManager
 
 final class LinkedListTests: XCTestCase {
     var sut: LinkedList<Int>!
@@ -130,5 +130,28 @@ final class LinkedListTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, 3)
+    }
+    
+    func test_linkedlist에1을넣었을때_count호출시_1이나오는지() {
+        //given
+        sut.append(data: 1)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_linkedlist에1과2를넣었을때_count호출시_2이나오는지() {
+        //given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 2)
     }
 }
