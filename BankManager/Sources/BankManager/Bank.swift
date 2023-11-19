@@ -29,16 +29,37 @@ struct Bank {
     }
     
     func tellerProcessing() {
-        let teller = Teller(processingTime: 0.7)
+        let firstDepositTeller = Teller(processingTime: 0.7, tellerTask: "예금")
+        let secondDepositTeller = Teller(processingTime: 0.7, tellerTask: "예금")
+        let firstLoanTeller = Teller(processingTime: 1.1, tellerTask: "대출")
+        let dispatchGroup = DispatchGroup()
+        
+        
         var timeChecker = 0.0
         var customerChecker = 0
         
         while !bankLine.isEmpty() {
-            guard let customer = bankLine.dequeue() else { return }
-            
-            customerChecker += 1
-        
-            timeChecker += teller.tellerProcessing(customer.waitingNumber)
+            DispatchQueue.global().async {
+                guard let customer = bankLine.dequeue() else { return }
+                
+                customerChecker += 1
+                
+                timeChecker += firstDepositTeller.tellerProcessing(customer.waitingNumber)
+            }
+            DispatchQueue.global().async {
+                guard let customer = bankLine.dequeue() else { return }
+                
+                customerChecker += 1
+                
+                timeChecker += secondDepositTeller.tellerProcessing(customer.waitingNumber)
+            }
+            DispatchQueue.global().async {
+                guard let customer = bankLine.dequeue() else { return }
+                
+                customerChecker += 1
+                
+                timeChecker += firstLoanTeller.tellerProcessing(customer.waitingNumber)
+            }
         }
         bankClosing(timeChecker: timeChecker, customerChecker: customerChecker)
     }
