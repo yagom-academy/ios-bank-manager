@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Bank {
+public final class Bank {
     private var name: String
     private var employeesCount: Int
     private var customerCount: Int = 0
