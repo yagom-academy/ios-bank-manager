@@ -9,7 +9,7 @@ import BankManager
 
 func userMenu(bankManager: BankManager) {
     while true {
-        print(consoleString.menu, terminator: "")
+        print(ConsoleString.menu, terminator: "")
         
         switch readLine() {
         case "1":
@@ -17,7 +17,7 @@ func userMenu(bankManager: BankManager) {
         case "2":
             return
         default:
-            print(consoleString.wrongInput)
+            print(ConsoleString.wrongInput)
         }
     }
 }

@@ -28,7 +28,7 @@ public final class Bank {
     }
     
     private func endWork() {
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(customerCount)명이며, 총 업무시간은 \(String(format: "%.2f", workTime))초입니다.")
+        WorkReport.endWorkString(customerCount: customerCount, workTime: workTime)
         customerCount = 0
         workTime = 0
     }
@@ -51,11 +51,11 @@ public final class Bank {
                     return
                 }
                 semaphore.signal()
-                print("\(customer.number)번 고객 업무 시작")
+                WorkReport.startWork(customerNumber: customer.number)
                 Thread.sleep(forTimeInterval: 0.7)
                 customerCount += 1
                 workTime += 0.7
-                print("\(customer.number)번 고객 업무 완료")
+                WorkReport.endWork(customerNumber: customer.number)
             }
         })
     }

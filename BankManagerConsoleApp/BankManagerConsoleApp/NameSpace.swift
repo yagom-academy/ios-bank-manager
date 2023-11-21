@@ -6,6 +6,6 @@
 //
 
 enum ConsoleString {
-    static var menu = "1 : 은행개점\n2 : 종료\n입력 : "
-    static var wrongInput = "잘못 입력하셨습니다."
+    static let menu = "1 : 은행개점\n2 : 종료\n입력 : "
+    static let wrongInput = "잘못 입력하셨습니다."
 }
