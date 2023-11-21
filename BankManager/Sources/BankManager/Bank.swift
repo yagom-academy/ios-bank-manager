@@ -17,13 +17,20 @@ struct Bank {
         self.customerCount = customerCount
     }
     
+    func bankStart() {
+        lineUp()
+        tellerProcessing()
+    }
+    
     func lineUp() {
-        let processingTime: Double = 0.7
-        
         guard let lastCustomerCount = customerCount else { return }
+        let bankTask = ["예금","대출"]
         
         for tiketNumber in 1...lastCustomerCount {
-            let customer = Customer(waitingNumber: tiketNumber, processingTime: processingTime)
+            guard let customerTask = bankTask.randomElement() else {
+                return
+            }
+            let customer = Customer(waitingNumber: tiketNumber, customerTask: customerTask)
             bankLine.enqueue(data: customer)
         }
     }
@@ -32,9 +39,7 @@ struct Bank {
         let firstDepositTeller = Teller(processingTime: 0.7, tellerTask: "예금")
         let secondDepositTeller = Teller(processingTime: 0.7, tellerTask: "예금")
         let firstLoanTeller = Teller(processingTime: 1.1, tellerTask: "대출")
-        let dispatchGroup = DispatchGroup()
-        
-        
+
         var timeChecker = 0.0
         var customerChecker = 0
         
