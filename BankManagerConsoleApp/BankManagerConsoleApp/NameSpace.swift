@@ -1,5 +1,5 @@
 //
-//  nameSpace.swift
+//  NameSpace.swift
 //  BankManagerConsoleApp
 //
 //  Created by Hisop on 2023/11/17.
