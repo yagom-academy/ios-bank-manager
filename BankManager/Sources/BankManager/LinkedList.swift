@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  LinkedList.swift
+//
 //
 //  Created by uemu, hisop on 2023/11/13.
 //

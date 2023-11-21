@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  CustomerQueue.swift
+//
 //
 //  Created by Hisop on 2023/11/13.
 //
