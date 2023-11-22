@@ -8,11 +8,20 @@ import Foundation
 import BankManager
 
 struct BankClerk: CustomerReceivable {
-    private let pace = 0.7
+    private let work: Banking
+    private var pace: Double {
+        switch work {
+        case .deposit:
+            return 0.7
+        case .loan:
+            return 1.1
+        }
+    }
     private let startWork: (String) -> Void
     private let endWork: (String) -> Void
     
-    init(startWork: @escaping (String) -> Void = { print($0) }, endWork: @escaping (String) -> Void = { print($0) }) {
+    init(work: Banking, startWork: @escaping (String) -> Void = { print($0) }, endWork: @escaping (String) -> Void = { print($0) }) {
+        self.work = work
         self.startWork = startWork
         self.endWork = endWork
     }
