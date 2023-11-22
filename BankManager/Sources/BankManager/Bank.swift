@@ -10,7 +10,8 @@ import Foundation
 struct Bank {
     private var tellerCount: Int?
     private var customerCount: Int?
-    private var bankLine = BankQueue<Customer>()
+    private var depositTaskLine = BankQueue<Customer>()
+    private var loneTaskLine = BankQueue<Customer>()
     
     mutating func setUpBank(tellerCount: Int, customerCount: Int) {
         self.tellerCount = tellerCount
@@ -30,8 +31,13 @@ struct Bank {
             guard let customerTask = bankTask.randomElement() else {
                 return
             }
-            let customer = Customer(waitingNumber: tiketNumber, customerTask: customerTask)
-            bankLine.enqueue(data: customer)
+            if customerTask == "예금" {
+                let customer = Customer(waitingNumber: tiketNumber)
+                depositTaskLine.enqueue(data: customer)
+            } else {
+                let customer = Customer(waitingNumber: tiketNumber)
+                loneTaskLine.enqueue(data: customer)
+            }
         }
     }
     
@@ -41,18 +47,7 @@ struct Bank {
 
         var timeChecker = 0.0
         var customerChecker = 0
-        
-        while !bankLine.isEmpty() {
-            guard let customer = bankLine.dequeue() else { return }
-            customerChecker += 1
-            print(customer.customerTask)
-            
-            if customer.customerTask == "예금" {
-                timeChecker += depositTeller.tellerProcessing(customer.waitingNumber)
-            } else {
-                timeChecker += loanTeller.tellerProcessing(customer.waitingNumber)
-            }
-        }
+
         
         bankClosing(timeChecker: timeChecker, customerChecker: customerChecker)
     }
