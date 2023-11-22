@@ -5,12 +5,12 @@
 //  Created by Hisop on 2023/11/22.
 //
 enum WorkReport {
-    static func startWork(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 시작")
+    static func startWork(customer: Customer) {
+        print("\(customer.number)번 고객 \(customer.business.rawValue)업무 시작")
     }
     
-    static func endWork(customerNumber: Int) {
-        print("\(customerNumber)번 고객 업무 완료")
+    static func endWork(customer: Customer) {
+        print("\(customer.number)번 고객 \(customer.business.rawValue)업무 완료")
     }
     
     static func endWorkString(customerCount: Int, workTime: Double) {
