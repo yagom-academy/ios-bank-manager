@@ -29,8 +29,8 @@ struct BankClerk: CustomerReceivable {
     func receive(customer: Customer) {
         let number = customer.number
         
-        startWork("\(number)번 고객 업무 시작")
+        startWork("\(number)번 고객 \(work.rawValue)업무 시작")
         Thread.sleep(forTimeInterval: pace)
-        endWork("\(number)번 고객 업무 종료")
+        endWork("\(number)번 고객 \(work.rawValue)업무 종료")
     }
 }
