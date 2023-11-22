@@ -8,10 +8,8 @@ public struct BankManager {
         var bankOpeningStatus = true
         
         while bankOpeningStatus {
-            let customerCount = Int.random(in: 10...30)
-            bank.setUpBank(customerCount: customerCount)
-            
             let bankOperationSwitch = presentMenu()
+            
             bankOpeningStatus = bankProcessing(
                 bank: bank,
                 bankOperationSwitch: bankOperationSwitch

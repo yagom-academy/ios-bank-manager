@@ -8,24 +8,19 @@
 import Foundation
 
 struct Bank {
-    private var customerCount: Int?
     private var depositTaskLine = BankQueue<Customer>()
     private var loanTaskLine = BankQueue<Customer>()
-    
-    mutating func setUpBank(customerCount: Int) {
-        self.customerCount = customerCount
-    }
-    
+        
     func bankStart() {
         lineUp()
         tellerProcessing()
     }
     
     func lineUp() {
-        guard let lastCustomerCount = customerCount else { return }
+        let customerCount = Int.random(in: 10...30)
         let bankTask = ["예금","대출"]
         
-        for tiketNumber in 1...lastCustomerCount {
+        for tiketNumber in 1...customerCount {
             guard let customerTask = bankTask.randomElement() else {
                 return
             }
@@ -49,7 +44,6 @@ struct Bank {
         
         var totalDepositTaskTime = 0.0
         var totalLoneTaskTime = 0.0
-        
         
         DispatchQueue.global().async(group: group) {
             depositSemaphore.wait()
