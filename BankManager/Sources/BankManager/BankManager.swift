@@ -9,7 +9,7 @@ public struct BankManager {
         
         while bankOpeningStatus {
             let customerCount = Int.random(in: 10...30)
-            bank.setUpBank(tellerCount: 1, customerCount: customerCount)
+            bank.setUpBank(customerCount: customerCount)
             
             let bankOperationSwitch = presentMenu()
             bankOpeningStatus = bankProcessing(

@@ -8,13 +8,11 @@
 import Foundation
 
 struct Bank {
-    private var tellerCount: Int?
     private var customerCount: Int?
     private var depositTaskLine = BankQueue<Customer>()
-    private var loneTaskLine = BankQueue<Customer>()
+    private var loanTaskLine = BankQueue<Customer>()
     
-    mutating func setUpBank(tellerCount: Int, customerCount: Int) {
-        self.tellerCount = tellerCount
+    mutating func setUpBank(customerCount: Int) {
         self.customerCount = customerCount
     }
     
@@ -36,7 +34,7 @@ struct Bank {
                 depositTaskLine.enqueue(data: customer)
             } else {
                 let customer = Customer(waitingNumber: tiketNumber)
-                loneTaskLine.enqueue(data: customer)
+                loanTaskLine.enqueue(data: customer)
             }
         }
     }
@@ -44,12 +42,36 @@ struct Bank {
     func tellerProcessing() {
         let depositTeller = Teller(processingTime: 0.7, tellerTask: "예금")
         let loanTeller = Teller(processingTime: 1.1, tellerTask: "대출")
-
-        var timeChecker = 0.0
-        var customerChecker = 0
-
         
-        bankClosing(timeChecker: timeChecker, customerChecker: customerChecker)
+        let group = DispatchGroup()
+        let depositSemaphore = DispatchSemaphore(value: 2)
+        let loanSemaphore = DispatchSemaphore(value: 1)
+        
+        var totalDepositTaskTime = 0.0
+        var totalLoneTaskTime = 0.0
+        
+        
+        DispatchQueue.global().async(group: group) {
+            depositSemaphore.wait()
+            while !depositTaskLine.isEmpty() {
+                guard let depositCustomer = depositTaskLine.dequeue() else { break }
+                totalDepositTaskTime += depositTeller.tellerProcessing(depositCustomer.waitingNumber)
+            }
+            depositSemaphore.signal()
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            loanSemaphore.wait()
+            while !loanTaskLine.isEmpty() {
+                guard let loanCustomer = loanTaskLine.dequeue() else { break }
+                totalLoneTaskTime += loanTeller.tellerProcessing(loanCustomer.waitingNumber)
+            }
+            loanSemaphore.signal()
+        }
+
+        group.notify(queue: .main) {
+            bankClosing(timeChecker: totalDepositTaskTime + totalLoneTaskTime, customerChecker: 30)
+        }
     }
     
     private func bankClosing(timeChecker: Double, customerChecker: Int) {
