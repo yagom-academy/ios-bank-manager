@@ -42,14 +42,15 @@ struct Bank {
         let depositSemaphore = DispatchSemaphore(value: 2)
         let loanSemaphore = DispatchSemaphore(value: 1)
         
-        var totalDepositTaskTime = 0.0
-        var totalLoneTaskTime = 0.0
+        var timeChecker = 0.0
+        var customerChecker = 0
         
         DispatchQueue.global().async(group: group) {
             depositSemaphore.wait()
             while !depositTaskLine.isEmpty() {
                 guard let depositCustomer = depositTaskLine.dequeue() else { break }
-                totalDepositTaskTime += depositTeller.tellerProcessing(depositCustomer.waitingNumber)
+                customerChecker += 1
+                timeChecker += depositTeller.tellerProcessing(depositCustomer.waitingNumber)
             }
             depositSemaphore.signal()
         }
@@ -58,14 +59,14 @@ struct Bank {
             loanSemaphore.wait()
             while !loanTaskLine.isEmpty() {
                 guard let loanCustomer = loanTaskLine.dequeue() else { break }
-                totalLoneTaskTime += loanTeller.tellerProcessing(loanCustomer.waitingNumber)
+                customerChecker += 1
+                timeChecker += loanTeller.tellerProcessing(loanCustomer.waitingNumber)
             }
             loanSemaphore.signal()
         }
-
-        group.notify(queue: .main) {
-            bankClosing(timeChecker: totalDepositTaskTime + totalLoneTaskTime, customerChecker: 30)
-        }
+        
+        group.wait()
+        bankClosing(timeChecker: timeChecker, customerChecker: customerChecker)
     }
     
     private func bankClosing(timeChecker: Double, customerChecker: Int) {

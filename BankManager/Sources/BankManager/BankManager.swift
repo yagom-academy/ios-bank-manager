@@ -1,3 +1,5 @@
+import Foundation
+
 public struct BankManager {
     
     public init() { }
@@ -10,7 +12,7 @@ public struct BankManager {
         while bankOpeningStatus {
             let bankOperationSwitch = presentMenu()
             
-            bankOpeningStatus = bankProcessing(
+            let processingResult = bankProcessing(
                 bank: bank,
                 bankOperationSwitch: bankOperationSwitch
             )
