@@ -12,7 +12,7 @@ public struct BankManager {
         while bankOpeningStatus {
             let bankOperationSwitch = presentMenu()
             
-            let processingResult = bankProcessing(
+            bankOpeningStatus = bankProcessing(
                 bank: bank,
                 bankOperationSwitch: bankOperationSwitch
             )
