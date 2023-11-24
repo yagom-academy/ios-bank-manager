@@ -10,10 +10,14 @@ import Foundation
 @available(macOS 10.15, *)
 struct BankClerk {
     
-    func startTask(count: Int) {
-        print("\(count)번 고객 업무 시작")
-        Thread.sleep(forTimeInterval: 0.7)
-        print("\(count)번 고객 업무 완료")
+    func startTask(customer: Customer)  async {
+        print("\(customer.waitingTicket)번 고객 \(customer.bankingCategory.description)업무 시작")
+        do {
+            try await Task.sleep(nanoseconds: customer.bankingCategory.rawValue)
+        } catch {
+            print(error.localizedDescription)
+        }
+        print("\(customer.waitingTicket)번 고객 \(customer.bankingCategory.description)업무 종료")
     }
     
     func endTask(customerNumber: Int, time: CFAbsoluteTime) {
