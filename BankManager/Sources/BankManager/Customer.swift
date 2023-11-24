@@ -7,4 +7,5 @@
 
 public struct Customer: CustomerProtocol {
     let waitingTicket: Int
+    let bankingCategory: BankingCategory
 }
