@@ -36,4 +36,4 @@ func start() {
 }
 
 start()
-
+RunLoop.current.run()
