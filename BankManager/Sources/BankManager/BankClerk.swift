@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(macOS 10.15, *)
 struct BankClerk {
     
     func startTask(count: Int) {

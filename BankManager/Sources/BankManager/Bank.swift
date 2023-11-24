@@ -6,6 +6,7 @@
 //
 import Foundation
 
+@available(macOS 10.15, *)
 public struct Bank {
     private let bankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
