@@ -57,7 +57,10 @@ public struct Bank {
             let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
             
             close(time: taskEnd)
-            NotificationCenter.default.post(name: Bank.notificationName, object: nil)
+            NotificationCenter.default.post(
+                name: Bank.notificationName,
+                object: nil
+            )
         }
     }
     
