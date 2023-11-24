@@ -36,14 +36,6 @@ public final class Bank {
                 return
             }
             let work = makeWork(customer: customer)
-            work.completionBlock = { [self] in
-                BankSemaphore.wait()
-                workTime += customer.business.workTime
-                customerCount += 1
-                BankSemaphore.signal()
-                
-                WorkReport.endWork(customer: customer)
-            }
             switch customer.business {
             case .deposit:
                 depositQueue.addOperation(work)
@@ -54,10 +46,19 @@ public final class Bank {
     }
     
     private func makeWork(customer: Customer) -> BlockOperation {
-        BlockOperation {
+        let work = BlockOperation {
             WorkReport.startWork(customer: customer)
             Thread.sleep(forTimeInterval: customer.business.workTime)
         }
+        work.completionBlock = { [self] in
+            BankSemaphore.wait()
+            workTime += customer.business.workTime
+            customerCount += 1
+            BankSemaphore.signal()
+            
+            WorkReport.endWork(customer: customer)
+        }
+        return work
     }
     
     private func endWork() {
