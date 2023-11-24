@@ -26,18 +26,41 @@ public struct Bank {
             loanLine: loanLine
         )
         
-        let taskStart = CFAbsoluteTimeGetCurrent()
-        while customerLine.hasCustomer != 0 {
-            guard let ticketNumber = customerLine.dequeue()?.waitingTicket else {
-                return
+        let firstBankClerk: BankClerk = .init()
+        let secondBankClerk: BankClerk = .init()
+        let thirdBankClerk: BankClerk = .init()
+        
+        Task {
+            let taskStart = CFAbsoluteTimeGetCurrent()
+            while firstDepositLine.hasCustomer != 0 || secondDepositLine.hasCustomer != 0 || loanLine.hasCustomer != 0 {
+                await withTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        guard let loanCustomer = loanLine.dequeue() else {
+                            return
+                        }
+                        await thirdBankClerk.startTask(customer: loanCustomer)
+                    }
+                    
+                    group.addTask {
+                        guard let depositCustomer = firstDepositLine.dequeue() else {
+                            return
+                        }
+                        await firstBankClerk.startTask(customer: depositCustomer)
+                    }
+                    
+                    group.addTask {
+                        guard let depositCustomer = secondDepositLine.dequeue() else {
+                            return
+                        }
+                        await secondBankClerk.startTask(customer: depositCustomer)
+                    }
+                }
             }
+            let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
             
-            bankClerk.startTask(count: ticketNumber)
+            close(time: taskEnd)
             NotificationCenter.default.post(name: Bank.notificationName, object: nil)
         }
-        let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
-        
-        close(time: taskEnd)
     }
     
     private func close(time: CFAbsoluteTime) {
