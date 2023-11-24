@@ -7,10 +7,9 @@ struct BankManager {
 
             if customer.bankingCategory == .loan {
                 loanLine.enqueue(customer: customer)
-                continue
+            } else {
+                depositLine.enqueue(customer: customer)
             }
-            
-            depositLine.enqueue(customer: customer)
         }
     }
 }
