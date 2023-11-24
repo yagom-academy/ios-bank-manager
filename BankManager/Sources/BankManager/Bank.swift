@@ -11,14 +11,18 @@ public struct Bank {
     private let bankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
     private let customerNumber = Int.random(in: 10...30)
-    private let customerLine: CustomerQueue<Customer> = .init()
+    private let firstDepositLine: CustomerQueue<Customer> = .init()
+    private let secondDepositLine: CustomerQueue<Customer> = .init()
+    private let loanLine: CustomerQueue<Customer> = .init()
     
     public init() {}
     
     public func open() {
-        bankManager.giveWaitingTicket(
-            customerNumber: self.customerNumber,
-            customerLine: self.customerLine
+        bankManager.giveWaitingTicketAndLineUp(
+            customerNumber: customerNumber,
+            firstDepositLine: firstDepositLine,
+            secondDepositLine: secondDepositLine,
+            loanLine: loanLine
         )
         
         let taskStart = CFAbsoluteTimeGetCurrent()
