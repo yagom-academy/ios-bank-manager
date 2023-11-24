@@ -10,7 +10,7 @@ import BankManager
 
 struct Bank: BankBusinesable {
     private let bankManager = BankManager<BankClerk>()
-    private let bankClerk = BankClerk()
+    private let bankClerks: [Banking: BankClerk] = [.deposit: BankClerk(work: .deposit), .loan: BankClerk(work: .loan)]
     private let customerNumber: UInt
     
     init(customerNumber: UInt) {
@@ -22,7 +22,7 @@ struct Bank: BankBusinesable {
         
         let startTime = CFAbsoluteTimeGetCurrent()
         
-        bankManager.assignCustomer(to: bankClerk)
+        bankManager.assignCustomer(to: bankClerks)
         
         let finishTime = CFAbsoluteTimeGetCurrent() - startTime
         let time = String(format: "%.2f", finishTime)
