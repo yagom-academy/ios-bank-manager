@@ -12,8 +12,7 @@ public struct Bank {
     private let bankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
     private let customerNumber = Int.random(in: 10...30)
-    private let firstDepositLine: CustomerQueue<Customer> = .init()
-    private let secondDepositLine: CustomerQueue<Customer> = .init()
+    private let depositLine: CustomerQueue<Customer> = .init()
     private let loanLine: CustomerQueue<Customer> = .init()
     
     public init() {}
@@ -21,8 +20,7 @@ public struct Bank {
     public func open() {
         bankManager.giveWaitingTicketAndLineUp(
             customerNumber: customerNumber,
-            firstDepositLine: firstDepositLine,
-            secondDepositLine: secondDepositLine,
+            depositLine: depositLine,
             loanLine: loanLine
         )
         
@@ -32,7 +30,7 @@ public struct Bank {
         
         Task {
             let taskStart = CFAbsoluteTimeGetCurrent()
-            while firstDepositLine.hasCustomer != 0 || secondDepositLine.hasCustomer != 0 || loanLine.hasCustomer != 0 {
+            while depositLine.hasCustomer != 0 || loanLine.hasCustomer != 0 {
                 await withTaskGroup(of: Void.self) { group in
                     group.addTask {
                         guard let loanCustomer = loanLine.dequeue() else {
@@ -42,14 +40,14 @@ public struct Bank {
                     }
                     
                     group.addTask {
-                        guard let depositCustomer = firstDepositLine.dequeue() else {
+                        guard let depositCustomer = depositLine.dequeue() else {
                             return
                         }
                         await firstBankClerk.startTask(customer: depositCustomer)
                     }
                     
                     group.addTask {
-                        guard let depositCustomer = secondDepositLine.dequeue() else {
+                        guard let depositCustomer = depositLine.dequeue() else {
                             return
                         }
                         await secondBankClerk.startTask(customer: depositCustomer)
