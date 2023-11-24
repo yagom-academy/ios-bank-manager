@@ -8,6 +8,7 @@ import Foundation
 
 @available(macOS 10.15, *)
 public struct Bank {
+    public static let notificationName = Notification.Name("BankNotification")
     private let bankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
     private let customerNumber = Int.random(in: 10...30)
@@ -32,6 +33,7 @@ public struct Bank {
             }
             
             bankClerk.startTask(count: ticketNumber)
+            NotificationCenter.default.post(name: Bank.notificationName, object: nil)
         }
         let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
         
