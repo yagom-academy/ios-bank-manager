@@ -9,7 +9,9 @@ import Foundation
 @available(macOS 10.15, *)
 public struct Bank {
     public static let notificationName = Notification.Name("BankNotification")
-    private let bankClerk: BankClerk = .init()
+    private let firstBankClerk: BankClerk = .init()
+    private let secondBankClerk: BankClerk = .init()
+    private let thirdBankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
     private let customerNumber = Int.random(in: 10...30)
     private let depositLine: CustomerQueue<Customer> = .init()
@@ -24,10 +26,10 @@ public struct Bank {
             loanLine: loanLine
         )
         
-        let firstBankClerk: BankClerk = .init()
-        let secondBankClerk: BankClerk = .init()
-        let thirdBankClerk: BankClerk = .init()
-        
+        bankClerkTask()
+    }
+    
+    private func bankClerkTask() {
         Task {
             let taskStart = CFAbsoluteTimeGetCurrent()
             while depositLine.hasCustomer != 0 || loanLine.hasCustomer != 0 {
@@ -36,14 +38,7 @@ public struct Bank {
                         guard let loanCustomer = loanLine.dequeue() else {
                             return
                         }
-                        await thirdBankClerk.startTask(customer: loanCustomer)
-                    }
-                    
-                    group.addTask {
-                        guard let depositCustomer = depositLine.dequeue() else {
-                            return
-                        }
-                        await firstBankClerk.startTask(customer: depositCustomer)
+                        await firstBankClerk.startTask(customer: loanCustomer)
                     }
                     
                     group.addTask {
@@ -51,6 +46,13 @@ public struct Bank {
                             return
                         }
                         await secondBankClerk.startTask(customer: depositCustomer)
+                    }
+                    
+                    group.addTask {
+                        guard let depositCustomer = depositLine.dequeue() else {
+                            return
+                        }
+                        await thirdBankClerk.startTask(customer: depositCustomer)
                     }
                 }
             }
@@ -65,7 +67,7 @@ public struct Bank {
     }
     
     private func close(time: CFAbsoluteTime) {
-        bankClerk.endTask(
+        firstBankClerk.endTask(
             customerNumber: self.customerNumber,
             time: time
         )
