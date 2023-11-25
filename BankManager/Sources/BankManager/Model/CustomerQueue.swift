@@ -22,7 +22,7 @@ public struct CustomerQueue<T: CustomerProtocol> {
     
     public init() {}
     
-    public func enqueue(customer: T) {
+    public func enqueue(_ customer: T) {
         queue.append(data: customer)
     }
     

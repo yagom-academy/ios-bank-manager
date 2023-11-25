@@ -6,35 +6,68 @@
 //
 import Foundation
 
+@available(macOS 10.15, *)
 public struct Bank {
-    private let bankClerk: BankClerk = .init()
+    public static let notificationName = Notification.Name("BankNotification")
+    private let firstBankClerk: BankClerk = .init()
+    private let secondBankClerk: BankClerk = .init()
+    private let thirdBankClerk: BankClerk = .init()
     private let bankManager: BankManager = .init()
     private let customerNumber = Int.random(in: 10...30)
-    private let customerLine: CustomerQueue<Customer> = .init()
+    private let depositLine: CustomerQueue<Customer> = .init()
+    private let loanLine: CustomerQueue<Customer> = .init()
     
     public init() {}
     
     public func open() {
-        bankManager.giveWaitingTicket(
-            customerNumber: self.customerNumber,
-            customerLine: self.customerLine
+        bankManager.giveWaitingTicketAndLineUp(
+            customerNumber: customerNumber,
+            depositLine: depositLine,
+            loanLine: loanLine
         )
         
-        let taskStart = CFAbsoluteTimeGetCurrent()
-        while customerLine.hasCustomer != 0 {
-            guard let ticketNumber = customerLine.dequeue()?.waitingTicket else {
-                return
+        bankClerkTask()
+    }
+    
+    private func bankClerkTask() {
+        Task {
+            let taskStart = CFAbsoluteTimeGetCurrent()
+            while depositLine.hasCustomer != 0 || loanLine.hasCustomer != 0 {
+                await withTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        guard let loanCustomer = loanLine.dequeue() else {
+                            return
+                        }
+                        await firstBankClerk.startTask(with: loanCustomer)
+                    }
+                    
+                    group.addTask {
+                        guard let depositCustomer = depositLine.dequeue() else {
+                            return
+                        }
+                        await secondBankClerk.startTask(with: depositCustomer)
+                    }
+                    
+                    group.addTask {
+                        guard let depositCustomer = depositLine.dequeue() else {
+                            return
+                        }
+                        await thirdBankClerk.startTask(with: depositCustomer)
+                    }
+                }
             }
+            let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
             
-            bankClerk.startTask(count: ticketNumber)
+            close(time: taskEnd)
+            NotificationCenter.default.post(
+                name: Bank.notificationName,
+                object: nil
+            )
         }
-        let taskEnd = CFAbsoluteTimeGetCurrent() - taskStart
-        
-        close(time: taskEnd)
     }
     
     private func close(time: CFAbsoluteTime) {
-        bankClerk.endTask(
+        firstBankClerk.endTask(
             customerNumber: self.customerNumber,
             time: time
         )

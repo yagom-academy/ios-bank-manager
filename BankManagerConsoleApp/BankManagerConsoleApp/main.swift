@@ -21,7 +21,12 @@ func start() {
     switch userInput {
     case "1":
         bank.open()
-        start()
+        NotificationCenter.default.addObserver(
+            forName: Bank.notificationName,
+            object: nil,
+            queue: nil) { _ in
+                start()
+            }
     case "2":
         exit(0)
     default:
@@ -31,4 +36,4 @@ func start() {
 }
 
 start()
-
+RunLoop.current.run()
