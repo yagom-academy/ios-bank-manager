@@ -38,21 +38,21 @@ public struct Bank {
                         guard let loanCustomer = loanLine.dequeue() else {
                             return
                         }
-                        await firstBankClerk.startTask(customer: loanCustomer)
+                        await firstBankClerk.startTask(with: loanCustomer)
                     }
                     
                     group.addTask {
                         guard let depositCustomer = depositLine.dequeue() else {
                             return
                         }
-                        await secondBankClerk.startTask(customer: depositCustomer)
+                        await secondBankClerk.startTask(with: depositCustomer)
                     }
                     
                     group.addTask {
                         guard let depositCustomer = depositLine.dequeue() else {
                             return
                         }
-                        await thirdBankClerk.startTask(customer: depositCustomer)
+                        await thirdBankClerk.startTask(with: depositCustomer)
                     }
                 }
             }

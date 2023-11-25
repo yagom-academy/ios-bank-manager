@@ -10,7 +10,7 @@ import Foundation
 @available(macOS 10.15, *)
 struct BankClerk {
     
-    func startTask(customer: Customer)  async {
+    func startTask(with customer: Customer) async {
         print("\(customer.waitingTicket)번 고객 \(customer.bankingCategory.description)업무 시작")
         do {
             try await Task.sleep(nanoseconds: customer.bankingCategory.rawValue)
