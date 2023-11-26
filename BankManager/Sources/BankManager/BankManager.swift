@@ -4,8 +4,6 @@ public struct BankManager {
     
     public init() { }
     
-    private var bank = Bank()
-    
     public mutating func start() {
         var bankOpeningStatus = true
         
@@ -13,7 +11,6 @@ public struct BankManager {
             let bankOperationSwitch = presentMenu()
             
             bankOpeningStatus = bankProcessing(
-                bank: bank,
                 bankOperationSwitch: bankOperationSwitch
             )
         }
@@ -32,10 +29,10 @@ public struct BankManager {
         return BankOperation.invalidInput
     }
     
-    private func bankProcessing(bank: Bank, bankOperationSwitch: BankOperation) -> Bool {
+    private func bankProcessing(bankOperationSwitch: BankOperation) -> Bool {
         switch bankOperationSwitch {
         case .bankOpen:
-            bank.start()
+            Bank().start()
             return true
         case .exit:
             return false
