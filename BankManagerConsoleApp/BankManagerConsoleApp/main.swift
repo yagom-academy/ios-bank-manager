@@ -9,4 +9,4 @@ import BankManager
 
 var bankManger = BankManager()
 
-bankManger.bankManageStart()
+bankManger.start()

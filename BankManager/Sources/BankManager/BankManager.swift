@@ -6,7 +6,7 @@ public struct BankManager {
     
     private var bank = Bank()
     
-    public mutating func bankManageStart() {
+    public mutating func start() {
         var bankOpeningStatus = true
         
         while bankOpeningStatus {
