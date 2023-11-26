@@ -7,24 +7,28 @@
 
 import Foundation
 
+enum BankTask: String, CaseIterable {
+    case deposit = "예금"
+    case loan = "대출"
+}
+
 struct Bank {
     private var depositTaskLine = BankQueue<Customer>()
     private var loanTaskLine = BankQueue<Customer>()
         
-    func bankStart() {
+    func start() {
         lineUp()
         tellerProcessing()
     }
     
     func lineUp() {
         let customerCount = Int.random(in: 10...30)
-        let bankTask = ["예금","대출"]
         
         for tiketNumber in 1...customerCount {
-            guard let customerTask = bankTask.randomElement() else {
+            guard let customerTask = BankTask.allCases.randomElement() else {
                 return
             }
-            if customerTask == "예금" {
+            if customerTask == BankTask.deposit {
                 let customer = Customer(waitingNumber: tiketNumber)
                 depositTaskLine.enqueue(data: customer)
             } else {
@@ -45,7 +49,10 @@ struct Bank {
         var timeChecker = 0.0
         var customerChecker = 0
         
-        DispatchQueue.global().async(group: group) {
+        let depositQueue = DispatchQueue(label: "deposit")
+        let loanQueue = DispatchQueue(label: "loan")
+        
+        depositQueue.async(group: group) {
             depositSemaphore.wait()
             while !depositTaskLine.isEmpty() {
                 guard let depositCustomer = depositTaskLine.dequeue() else { break }
@@ -55,7 +62,7 @@ struct Bank {
             depositSemaphore.signal()
         }
         
-        DispatchQueue.global().async(group: group) {
+        loanQueue.async(group: group) {
             loanSemaphore.wait()
             while !loanTaskLine.isEmpty() {
                 guard let loanCustomer = loanTaskLine.dequeue() else { break }

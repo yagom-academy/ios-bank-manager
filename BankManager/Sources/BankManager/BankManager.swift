@@ -35,7 +35,7 @@ public struct BankManager {
     private func bankProcessing(bank: Bank, bankOperationSwitch: BankOperation) -> Bool {
         switch bankOperationSwitch {
         case .bankOpen:
-            bank.bankStart()
+            bank.start()
             return true
         case .exit:
             return false
