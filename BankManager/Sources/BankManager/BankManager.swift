@@ -32,7 +32,8 @@ public struct BankManager {
     private func bankProcessing(bankOperationSwitch: BankOperation) -> Bool {
         switch bankOperationSwitch {
         case .bankOpen:
-            Bank(depositTellerCount: 2, loanTellerCount: 1).start()
+            let randomCount = Int.random(in: 10...30)
+            Bank(depositTellerCount: 2, loanTellerCount: 1, customerCount: randomCount).start()
             return true
         case .exit:
             return false

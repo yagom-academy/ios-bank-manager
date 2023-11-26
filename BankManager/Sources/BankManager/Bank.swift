@@ -17,10 +17,12 @@ struct Bank {
     private var loanTaskLine = BankQueue<Customer>()
     private let depositTellerCount: Int
     private let loanTellerCount: Int
+    private let customerCount: Int
     
-    init(depositTellerCount: Int, loanTellerCount: Int) {
+    init(depositTellerCount: Int, loanTellerCount: Int, customerCount: Int) {
         self.depositTellerCount = depositTellerCount
         self.loanTellerCount = loanTellerCount
+        self.customerCount = customerCount
     }
         
     func start() {
@@ -29,8 +31,6 @@ struct Bank {
     }
     
     func lineUp() {
-        let customerCount = Int.random(in: 10...30)
-        
         for tiketNumber in 1...customerCount {
             guard let customerTask = BankTask.allCases.randomElement() else {
                 return
