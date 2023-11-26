@@ -15,6 +15,13 @@ enum BankTask: String, CaseIterable {
 struct Bank {
     private var depositTaskLine = BankQueue<Customer>()
     private var loanTaskLine = BankQueue<Customer>()
+    private let depositTellerCount: Int
+    private let loanTellerCount: Int
+    
+    init(depositTellerCount: Int, loanTellerCount: Int) {
+        self.depositTellerCount = depositTellerCount
+        self.loanTellerCount = loanTellerCount
+    }
         
     func start() {
         lineUp()
@@ -43,8 +50,8 @@ struct Bank {
         let loanTeller = Teller(processingTime: 1.1, tellerTask: "대출")
         
         let group = DispatchGroup()
-        let depositSemaphore = DispatchSemaphore(value: 2)
-        let loanSemaphore = DispatchSemaphore(value: 1)
+        let depositSemaphore = DispatchSemaphore(value: depositTellerCount)
+        let loanSemaphore = DispatchSemaphore(value: loanTellerCount)
         
         var timeChecker = 0.0
         var customerChecker = 0
