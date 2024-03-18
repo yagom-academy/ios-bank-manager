@@ -11,4 +11,8 @@ struct BankQueue<T> {
     mutating func enqueue(element: T) {
         list.append(element: element)
     }
+    
+    mutating func dequeue() -> T? {
+        return list.removeFirst()
+    }
 }
