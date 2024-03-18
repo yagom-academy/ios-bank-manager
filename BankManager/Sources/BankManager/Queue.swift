@@ -13,11 +13,11 @@ struct Queue<Element> {
     }
     
     mutating func dequeue() -> Element? {
-        return list.dequeue()
+        return list.removeFirst()
     }
     
     mutating func enqueue(_ value: Element) {
-        list.enqueue(value)
+        list.append(value)
     }
     
     mutating func peek() -> Element? {

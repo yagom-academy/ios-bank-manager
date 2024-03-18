@@ -13,7 +13,7 @@ struct LinkedList<Element> {
         return head == nil
     }
     
-    mutating func enqueue(_ value: Element) {
+    mutating func append(_ value: Element) {
         let newNode = Node(value: value)
         guard let tailNode = tail else {
             head = newNode
@@ -23,7 +23,7 @@ struct LinkedList<Element> {
         tail = tail?.next
     }
     
-    mutating func dequeue() -> Element? {
+    mutating func removeFirst() -> Element? {
         if let headNode = head {
             let value = headNode.value
             head = headNode.next
@@ -34,6 +34,29 @@ struct LinkedList<Element> {
         } else {
             return nil
         }
+    }
+    
+    mutating func removeLast() -> Element? {
+        guard let head = head else {
+            return nil
+        }
+        
+        guard head.next != nil else {
+            return head.value
+        }
+        
+        var prev = head
+        var current = head
+        
+        while let next = current.next {
+            prev = current
+            current = next
+        }
+        
+        prev.next = nil
+        tail = prev
+        
+        return current.value
     }
     
     func peek() -> Element? {
