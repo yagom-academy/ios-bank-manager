@@ -15,4 +15,8 @@ struct BankQueue<T> {
     mutating func dequeue() -> T? {
         return list.removeFirst()
     }
+    
+    mutating func clear() {
+        list.removeAll()
+    }
 }
