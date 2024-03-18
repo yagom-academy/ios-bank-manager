@@ -38,5 +38,19 @@ struct BankLinkedList<T> {
             tail?.next = node
         }
     }
-
+    
+    mutating func removeFirst() -> T? {
+        guard let firstNode = head?.data else {
+            return nil
+        }
+        
+        if head?.next == nil {
+            head = nil
+            tail = nil
+            return firstNode
+        }
+        
+        head = head?.next
+        return firstNode
+    }
 }
