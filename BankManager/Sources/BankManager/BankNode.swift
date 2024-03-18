@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  BankNode.swift
 //  
 //
-//  Created by H on 3/18/24.
+//  Created by Gray, Gama on 3/18/24.
 //
 
 class BankNode<T> {

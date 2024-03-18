@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  BankLinkedList.swift
 //  
 //
-//  Created by JIWOONG on 2024/03/18.
+//  Created by Gray, Gama on 2024/03/18.
 //
 
 struct BankLinkedList<T> {

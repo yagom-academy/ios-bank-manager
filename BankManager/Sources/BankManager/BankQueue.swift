@@ -1,12 +1,11 @@
 //
-//  File.swift
+//  BankQueue.swift
 //  
 //
-//  Created by JIWOONG on 2024/03/18.
+//  Created by Gray, Gama on 2024/03/18.
 //
 
 struct BankQueue<T> {
-    var list = BankLinkedList<T>()
     private var list = BankLinkedList<T>()
     
     var isEmpty: Bool {
