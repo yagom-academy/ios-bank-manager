@@ -61,4 +61,9 @@ struct BankLinkedList<T> {
         head = head?.next
         return firstNode
     }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
