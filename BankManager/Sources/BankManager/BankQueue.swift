@@ -16,6 +16,10 @@ struct BankQueue<T> {
         return list.removeFirst()
     }
     
+    func peek() -> T? {
+        return list.first
+    }
+    
     mutating func clear() {
         list.removeAll()
     }
