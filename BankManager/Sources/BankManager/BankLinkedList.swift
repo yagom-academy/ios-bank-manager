@@ -14,4 +14,16 @@ struct BankLinkedList<T> {
     var isEmpty: Bool {
         return head == nil
     }
+    
+    var count: Int {
+        var result = 0
+        var node = head
+        
+        while node?.next != nil {
+            result += 1
+            node = node?.next
+        }
+        
+        return result
+    }
 }
