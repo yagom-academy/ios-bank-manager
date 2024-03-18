@@ -27,6 +27,10 @@ struct BankLinkedList<T> {
         return result
     }
     
+    var first: T? {
+        return isEmpty ? nil : head?.data
+    }
+    
     mutating func append(element: T) {
         let node = BankNode(data: element, next: nil)
         
