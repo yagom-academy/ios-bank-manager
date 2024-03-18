@@ -8,6 +8,10 @@
 struct BankQueue<T> {
     var list = BankLinkedList<T>()
     
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+    
     mutating func enqueue(element: T) {
         list.append(element: element)
     }
