@@ -40,8 +40,8 @@ struct BankLinkedList<T> {
             head = node
             tail = head
         } else {
-            tail = node
             tail?.next = node
+            tail = node
         }
     }
     
