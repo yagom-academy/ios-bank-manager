@@ -23,14 +23,28 @@ final class BankQueueTests: XCTestCase {
     
     func test_비어있는_큐에_3을_enqueue() {
         // Given
-        let expectedFirst = 3
+        let expectedLast = 3
         let expectedCount = 1
         
         // When
         sut.enqueue(element: 3)
         
         // Then
-        XCTAssertEqual(expectedFirst, sut.first)
+        XCTAssertEqual(expectedLast, sut.last)
+        XCTAssertEqual(expectedCount, sut.count)
+    }
+    
+    func test_비어있지_않은_큐에_5를_enqueue() {
+        // Given
+        test_비어있는_큐에_3을_enqueue()
+        let expectedLast = 5
+        let expectedCount = 2
+        
+        // When
+        sut.enqueue(element: 5)
+        
+        // Then
+        XCTAssertEqual(expectedLast, sut.last)
         XCTAssertEqual(expectedCount, sut.count)
     }
     
@@ -42,4 +56,15 @@ final class BankQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
+    func test_비어있지_않은_큐에_dequeue() {
+        // Given
+        test_비어있는_큐에_3을_enqueue()
+        let expectedResult = 3
+        
+        // When
+        let result = sut.dequeue()
+        
+        // Then
+        XCTAssertEqual(expectedResult, result)
+    }
 }
