@@ -35,18 +35,6 @@ final class SinglyLinkedList<T> {
         return isEmpty ? nil : tail?.element
     }
     
-    func addFirst(element: T) {
-        let newNode = Node(element: element)
-        newNode.setNext(node: head)
-        head = newNode
-        
-        if isEmpty {
-            tail = head
-        }
-        
-        count += 1
-    }
-    
     func addLast(element: T) {
         let newNode = Node(element: element)
         
