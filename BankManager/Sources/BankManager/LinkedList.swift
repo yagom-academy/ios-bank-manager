@@ -24,16 +24,18 @@ struct LinkedList<Element> {
     }
     
     mutating func removeFirst() -> Element? {
-        if let headNode = head {
-            let value = headNode.value
-            head = headNode.next
-            if head == nil {
-                tail = nil
-            }
-            return value
-        } else {
+        guard let headNode = head else {
             return nil
         }
+        
+        let value = headNode.value
+        head = headNode.next
+        
+        if head == nil {
+            tail = nil
+        }
+        
+        return value
     }
     
     mutating func removeLast() -> Element? {
