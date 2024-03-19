@@ -36,7 +36,7 @@ final class BankQueue<T>: Queueable {
     }
     
     func enqueue(element: T) {
-        return list.addLast(element: element)
+        list.addLast(element: element)
     }
     
     func dequeue() -> T? {
@@ -44,6 +44,6 @@ final class BankQueue<T>: Queueable {
     }
     
     func clear() {
-        return list.clear()
+        list.clear()
     }
 }
