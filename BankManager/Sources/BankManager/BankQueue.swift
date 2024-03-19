@@ -44,7 +44,7 @@ class BankQueue<T>: Queueable {
     }
     
     func clear() {
-        
+        return list.clear()
     }
     
 }
