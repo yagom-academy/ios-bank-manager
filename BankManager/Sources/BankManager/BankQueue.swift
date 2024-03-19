@@ -27,7 +27,9 @@ class BankQueue<T>: Queueable {
         return list.count
     }
     
-    var first: T?
+    var first: T? {
+        return list.first
+    }
     
     var last: T?
     
