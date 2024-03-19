@@ -20,7 +20,7 @@ class BankQueue<T>: Queueable {
     let list = SinglyLinkedList<T>()
     
     var isEmpty: Bool {
-        return true
+        return list.isEmpty
     }
     
     var count: Int {
