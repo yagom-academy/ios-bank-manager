@@ -24,7 +24,7 @@ class SinglyLinkedList<T> {
     var count: Int = 0
     
     var isEmpty: Bool {
-        return true
+        return count == 0 ? true : false
     }
     
     var first: T? {
