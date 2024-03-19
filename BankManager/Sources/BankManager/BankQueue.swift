@@ -31,7 +31,9 @@ class BankQueue<T>: Queueable {
         return list.first
     }
     
-    var last: T?
+    var last: T? {
+        return list.last
+    }
     
     func enqueue(element: T) {
         
