@@ -33,4 +33,13 @@ final class BankQueueTests: XCTestCase {
         XCTAssertEqual(expectedFirst, sut.first)
         XCTAssertEqual(expectedCount, sut.count)
     }
+    
+    func test_비어있는_큐에_dequeue() {
+        // When
+        let result = sut.dequeue()
+        
+        // Then
+        XCTAssertNil(result)
+    }
+    
 }
