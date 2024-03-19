@@ -7,14 +7,14 @@
 
 final class SinglyLinkedList<T> {
     final class Node {
-        var element: T
-        var next: Node? = nil
+        private(set) var element: T
+        private(set) var next: Node? = nil
         
         init(element: T) {
             self.element = element
         }
         
-        func setNext(node: Node) {
+        func setNext(node: Node?) {
             self.next = node
         }
     }
@@ -37,7 +37,7 @@ final class SinglyLinkedList<T> {
     
     func addFirst(element: T) {
         let newNode = Node(element: element)
-        newNode.next = head
+        newNode.setNext(node: head)
         head = newNode
         
         if isEmpty {
@@ -53,7 +53,7 @@ final class SinglyLinkedList<T> {
         if isEmpty {
             head = newNode
         } else {
-            tail?.next = newNode
+            tail?.setNext(node: newNode)
         }
         
         tail = newNode
