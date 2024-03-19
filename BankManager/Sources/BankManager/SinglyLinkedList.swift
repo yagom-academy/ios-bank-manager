@@ -42,6 +42,13 @@ class SinglyLinkedList<T> {
         count += 1
     }
     
+    func addLast(element: T) {
+        let newNode = Node(element: element)
+        tail?.next = newNode
+        tail = newNode
+        count += 1
+    }
+    
     func clear() {
         
     }
