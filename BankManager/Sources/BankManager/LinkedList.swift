@@ -13,6 +13,20 @@ struct LinkedList<Element> {
         return head == nil
     }
     
+    var count: Int {
+        guard head != nil else { return 0 }
+        
+        var temporary = 0
+        var current = head
+        
+        repeat {
+            temporary += 1
+            current = current?.next
+        } while current != nil
+        
+        return temporary
+    }
+    
     mutating func append(_ value: Element) {
         let newNode = Node(value: value)
         guard let tailNode = tail else {

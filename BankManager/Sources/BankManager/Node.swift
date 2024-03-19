@@ -2,7 +2,7 @@
 //  Node.swift
 //
 //
-//  Created by Yejin Hong on 3/18/24.
+//  Created by Diana, Hamzzi on 3/18/24.
 //
 
 class Node<Element> {
