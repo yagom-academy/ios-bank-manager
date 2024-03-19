@@ -32,7 +32,7 @@ class SinglyLinkedList<T> {
     }
     
     var last: T? {
-        return nil
+        return isEmpty ? nil : tail?.element
     }
     
     func addFirst(element: T) {
