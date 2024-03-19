@@ -19,9 +19,9 @@ final class SinglyLinkedList<T> {
         }
     }
     
-    var head: Node? = nil
-    var tail: Node? = nil
-    var count: Int = 0
+    private var head: Node? = nil
+    private var tail: Node? = nil
+    private(set) var count: Int = 0
     
     var isEmpty: Bool {
         return count == 0 ? true : false
