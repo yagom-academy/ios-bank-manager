@@ -21,6 +21,25 @@ final class BankQueueTests: XCTestCase {
         sut = nil
     }
     
+    func test_비어있는_큐에_isEmpty() {
+        // When
+        let result = sut.isEmpty
+        
+        // Then
+        XCTAssertTrue(result)
+    }
+    
+    func test_비어있지_않은_큐에_isEmpty() {
+        // Given
+        test_비어있는_큐에_3을_enqueue()
+        
+        // When
+        let result = sut.isEmpty
+        
+        // Then
+        XCTAssertFalse(result)
+    }
+    
     func test_비어있는_큐에_3을_enqueue() {
         // Given
         let expectedLast = 3
