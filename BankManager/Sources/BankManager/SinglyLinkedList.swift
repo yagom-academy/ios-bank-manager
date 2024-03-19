@@ -7,11 +7,11 @@
 
 class SinglyLinkedList<T> {
     class Node {
-        var data: T
+        var element: T
         var next: Node? = nil
         
-        init(data: T) {
-            self.data = data
+        init(element: T) {
+            self.element = element
         }
         
         func setNext(node: Node) {
@@ -35,12 +35,11 @@ class SinglyLinkedList<T> {
         return nil
     }
     
-    func enqueue() {
-        
-    }
-    
-    func dequeue() -> T? {
-        return nil
+    func addFirst(element: T) {
+        let newNode = Node(element: element)
+        newNode.next = head
+        head = newNode
+        count += 1
     }
     
     func clear() {
