@@ -67,4 +67,18 @@ final class BankQueueTests: XCTestCase {
         // Then
         XCTAssertEqual(expectedResult, result)
     }
+    
+    func test_큐에_clear() {
+        // Given
+        test_비어있지_않은_큐에_5를_enqueue()
+        let expectedCount = 0
+        
+        // When
+        sut.clear()
+        
+        // Then
+        XCTAssertNil(sut.first)
+        XCTAssertNil(sut.last)
+        XCTAssertEqual(expectedCount, sut.count)
+    }
 }
