@@ -39,14 +39,39 @@ class SinglyLinkedList<T> {
         let newNode = Node(element: element)
         newNode.next = head
         head = newNode
+        
+        if isEmpty {
+            tail = head
+        }
+        
         count += 1
     }
     
     func addLast(element: T) {
         let newNode = Node(element: element)
-        tail?.next = newNode
+        
+        if isEmpty {
+            head = newNode
+        } else {
+            tail?.next = newNode
+        }
+        
         tail = newNode
         count += 1
+    }
+    
+    func removeFirst() -> T? {
+        guard !isEmpty else { return nil }
+        
+        let element = head?.element
+        head = head?.next
+        count -= 1
+        
+        if isEmpty {
+            tail = nil
+        }
+        
+        return element
     }
     
     func clear() {
