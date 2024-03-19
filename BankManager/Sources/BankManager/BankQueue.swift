@@ -16,7 +16,7 @@ protocol Queueable {
     func clear()
 }
 
-class BankQueue<T>: Queueable {
+final class BankQueue<T>: Queueable {
     let list = SinglyLinkedList<T>()
     
     var isEmpty: Bool {

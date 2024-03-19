@@ -5,8 +5,8 @@
 //  Created by Danny, Prism on 3/19/24.
 //
 
-class SinglyLinkedList<T> {
-    class Node {
+final class SinglyLinkedList<T> {
+    final class Node {
         var element: T
         var next: Node? = nil
         
