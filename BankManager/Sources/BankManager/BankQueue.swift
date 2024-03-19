@@ -40,7 +40,7 @@ class BankQueue<T>: Queueable {
     }
     
     func dequeue() -> T? {
-        return nil
+        return list.removeFirst()
     }
     
     func clear() {
