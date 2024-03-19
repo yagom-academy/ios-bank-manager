@@ -75,6 +75,8 @@ class SinglyLinkedList<T> {
     }
     
     func clear() {
-        
+        head = nil
+        tail = nil
+        count = 0
     }
 }
