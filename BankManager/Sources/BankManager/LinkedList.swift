@@ -37,16 +37,18 @@ struct LinkedList<Element> {
     }
     
     mutating func removeLast() -> Element? {
-        guard let head = head else {
+        guard let headNode = head else {
             return nil
         }
         
-        guard head.next != nil else {
-            return head.value
+        guard headNode.next != nil else {
+            head = nil
+            tail = nil
+            return headNode.value
         }
         
-        var prev = head
-        var current = head
+        var prev = headNode
+        var current = headNode
         
         while let next = current.next {
             prev = current
