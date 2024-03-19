@@ -28,7 +28,7 @@ class SinglyLinkedList<T> {
     }
     
     var first: T? {
-        return nil
+        return isEmpty ? nil : head?.element
     }
     
     var last: T? {
