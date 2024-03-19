@@ -17,7 +17,7 @@ protocol Queueable {
 }
 
 final class BankQueue<T>: Queueable {
-    let list = SinglyLinkedList<T>()
+    private let list = SinglyLinkedList<T>()
     
     var isEmpty: Bool {
         return list.isEmpty
@@ -46,5 +46,4 @@ final class BankQueue<T>: Queueable {
     func clear() {
         return list.clear()
     }
-    
 }
