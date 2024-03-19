@@ -29,10 +29,13 @@ struct LinkedList<Element> {
     
     mutating func append(_ value: Element) {
         let newNode = Node(value: value)
-        guard let tailNode = tail else {
+        
+        guard head != nil else {
             head = newNode
+            tail = head
             return
         }
+        
         tail?.next = newNode
         tail = tail?.next
     }
