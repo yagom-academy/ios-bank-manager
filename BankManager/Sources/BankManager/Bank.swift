@@ -15,9 +15,20 @@ struct Bank {
     }
     
     // 대기중인 고객 추가
-    mutating func addCustomer(_ customer: Customer) {
+    mutating func addCustomer() {
+        let number = Int.random(in: 10...30)
+        let customer = Customer(number: number)
         waitingCustomers.enqueue(customer)
     }
     
     // 은행 업무 처리
+    mutating func processWorkforOneBanker(_ banker: Banker) {
+        repeat {
+            guard let customer = waitingCustomers.dequeue() else {
+                return
+            }
+            
+            banker.processCustomer(customer)
+        } while waitingCustomers.isEmpty
+    }
 }
