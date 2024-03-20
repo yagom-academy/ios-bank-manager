@@ -14,7 +14,7 @@ final class BankManagerTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue에_성공하는가() throws {
+    func test_enqueue하면_isEmpty가_false가뜨는가() throws {
         // when
         sut.enqueue(element: 4.0)
         let result = sut.isEmpty
@@ -24,7 +24,7 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_dequeue에_성공하는가() throws {
+    func test_dequeue하면_제대로된값이나오는가() throws {
         // given
         sut.enqueue(element: 4.0)
         
@@ -37,11 +37,12 @@ final class BankManagerTests: XCTestCase {
     }
     
 
-    func test_Queue가_첫번째요소를_반환하는가() throws {
+    func test_dequeue하면_Queue가_첫번째요소를_반환하는가() throws {
         // given
-        sut.enqueue(element: 3.0)
-        sut.enqueue(element: 4.0)
-        sut.enqueue(element: 24.2)
+        let dummys = [3.0, 4.0, 24.2]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
 
         // when
         let result = sut.dequeue()
@@ -51,7 +52,7 @@ final class BankManagerTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_Queue가_없을때_nil을_반환하는가() throws {
+    func test_Queue가_비어있을때_nil을_반환하는가() throws {
         // when
         let result = sut.dequeue()
 
@@ -59,11 +60,12 @@ final class BankManagerTests: XCTestCase {
         XCTAssertNil(result)
     }
 
-    func test_Queue가_비워지는가() throws {
+    func test_clear를하면_Queue가_비워지는가() throws {
         // given
-        sut.enqueue(element: 3.0)
-        sut.enqueue(element: 4.0)
-        sut.enqueue(element: 24.2)
+        let dummys = [3.0, 4.0, 24.2]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         sut.clear()
@@ -107,11 +109,10 @@ final class BankManagerTests: XCTestCase {
     
     func test_enqueue했을때peek을정확히리턴하는지() {
         // given
-        sut.enqueue(element: 0.0)
-        sut.enqueue(element: 1.0)
-        sut.enqueue(element: 2.0)
-        sut.enqueue(element: 3.0)
-        sut.enqueue(element: 4.0)
+        let dummys = [0.0, 1.0, 2.0, 3.0, 4.0]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         let result = sut.peek()
@@ -123,11 +124,10 @@ final class BankManagerTests: XCTestCase {
     
     func test_enqueue했을때isEmpty하면false인지() {
         // given
-        sut.enqueue(element: 0.0)
-        sut.enqueue(element: 1.0)
-        sut.enqueue(element: 2.0)
-        sut.enqueue(element: 3.0)
-        sut.enqueue(element: 4.0)
+        let dummys = [0.0, 1.0, 2.0, 3.0, 4.0]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         let result = sut.isEmpty
@@ -162,8 +162,10 @@ final class BankManagerTests: XCTestCase {
     
     func test_요소가2개있을때_dequeue에_성공하는가() throws {
         // given
-        sut.enqueue(element: 0.0)
-        sut.enqueue(element: 1.0)
+        let dummys = [0.0, 1.0]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         let result = sut.dequeue()
@@ -175,11 +177,10 @@ final class BankManagerTests: XCTestCase {
     
     func test_dequeue1번했을때isEmpty확인() {
         // given
-        sut.enqueue(element: 0.0)
-        sut.enqueue(element: 1.0)
-        sut.enqueue(element: 2.0)
-        sut.enqueue(element: 3.0)
-        sut.enqueue(element: 4.0)
+        let dummys = [0.0, 1.0, 2.0, 3.0, 4.0]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         sut.dequeue()
@@ -192,11 +193,10 @@ final class BankManagerTests: XCTestCase {
 
     func test_dequeue1번했을때peek제대로반영되는지() {
         // given
-        sut.enqueue(element: 0.0)
-        sut.enqueue(element: 1.0)
-        sut.enqueue(element: 2.0)
-        sut.enqueue(element: 3.0)
-        sut.enqueue(element: 4.0)
+        let dummys = [0.0, 1.0, 2.0, 3.0, 4.0]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         sut.dequeue()
@@ -209,11 +209,10 @@ final class BankManagerTests: XCTestCase {
     
     func test_dequeue2번이상했을때맨앞요소를정확히리턴하는지() {
         // given
-        sut.enqueue(element: 0)
-        sut.enqueue(element: 1)
-        sut.enqueue(element: 2)
-        sut.enqueue(element: 3)
-        sut.enqueue(element: 4)
+        let dummys = [0.0, 1.0, 2.0, 3.0, 4.0]
+        for dummy in dummys {
+            sut.enqueue(element: dummy)
+        }
         
         // when
         sut.dequeue()
