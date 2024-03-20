@@ -6,13 +6,13 @@
 //
 
 protocol Queueable {
-    associatedtype T
+    associatedtype Element
     var isEmpty: Bool { get }
     var count: Int { get }
-    var first: T? { get }
-    var last: T? { get }
-    func enqueue(element: T)
-    func dequeue() -> T?
+    var first: Element? { get }
+    var last: Element? { get }
+    func enqueue(element: Element)
+    func dequeue() -> Element?
     func clear()
 }
 
