@@ -5,19 +5,12 @@
 //  Created by Diana, Hamzzi on 3/20/24.
 //
 
-import Foundation
-
 struct Customer {
-    var customerList = Queue<String>()
-    var minCount:Int = 10
-    var maxCount:Int = 30
+    var name: String
+    var processingTime: Double
     
-    // 고객 랜덤 생성 10~30 명
-    func createCustomer() {
-        if customerList.isEmpty {
-            
-        } else {
-            // error
-        }
+    init(number: Int) {
+        self.name = "\(number)번 고객"
+        self.processingTime = 0.7 // 고객 한명 당, 걸리는 시간
     }
 }

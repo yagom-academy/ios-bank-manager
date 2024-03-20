@@ -5,23 +5,19 @@
 //  Created by Diana, Hamzzi on 3/20/24.
 //
 
-import Foundation
-
 struct Bank {
-    var workerList = Queue<Int>()
+    var bankers: [Banker]
+    var waitingCustomers: Queue<Customer>
     
-    mutating func createWorker() {
-        if workerList.isEmpty {
-            workerList.enqueue(1)
-        } else {
-            // error
-        }
+    // 은행원 추가
+    mutating func addBanker(_ banker: Banker) {
+        bankers.append(banker)
     }
     
-    // 은행원 은행창구에 각각 지정
-    func designateWorker() {
-        // 세마포어 시, 필요
+    // 대기중인 고객 추가
+    mutating func addCustomer(_ customer: Customer) {
+        waitingCustomers.enqueue(customer)
     }
-    // queue 가 비어있는지 확인한다.
-    // queue 에 고객을 담는다
+    
+    // 은행 업무 처리
 }
