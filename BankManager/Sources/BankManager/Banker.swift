@@ -11,17 +11,16 @@ struct Banker {
     var totalCustomers: Int = 0
     var totalProcessingTime: Double = 0
     
-//    mutating func processCustomer(_ customer: Customer) async {
-//        print("\(customer.name) 업무 시작")
-//        totalCustomers += 1
-//        totalProcessingTime += customer.processingTime
-//        print("\(customer.name) 업무 완료")
-//    }
-    
-    func processCustomer(_ customer: Customer) {
+    func processCustomer(_ customer: Customer) async {
         print("\(customer.name) 업무 시작")
         
-        sleep(UInt32(0.7))
+        if #available(iOS 13.0, *) {
+            do {
+                try await Task.sleep(nanoseconds: 700_000_000)
+            } catch {
+                //error
+            }
+        }
         
         print("\(customer.name) 업무 완료")
     }
