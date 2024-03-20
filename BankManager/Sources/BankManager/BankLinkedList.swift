@@ -10,7 +10,7 @@ struct BankLinkedList<T> {
     private var tail: BankNode<T>?
     
     var isEmpty: Bool {
-        return head == nil
+        return head == nil && tail == nil
     }
     
     var count: Int {
