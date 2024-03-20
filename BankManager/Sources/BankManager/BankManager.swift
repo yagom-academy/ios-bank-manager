@@ -1,7 +1,5 @@
-public struct BankManager<Element> {
+public struct BankManager {
     public private(set) var text = "Hello, World!"
-
-    public var queue = Queue<Element>()
     
     public init() {
     }
