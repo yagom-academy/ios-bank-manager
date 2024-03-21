@@ -11,7 +11,16 @@ struct Bank {
     let numberOfBankClerk: Int
     let bankQueue = BankQueue<Customer>()
     
+    private func enqueueTodaysVisitors() {
+        (1...Int.random(in: 10...30)).forEach {
+            let customer = Customer(waitingNumber: $0)
+            bankQueue.enqueue(element: customer)
+        }
+    }
+    
     func commenceBanking() {
+        enqueueTodaysVisitors()
+        
         let concurrentLimitingSemaphore = DispatchSemaphore(value: numberOfBankClerk)
         
         while !bankQueue.isEmpty {
