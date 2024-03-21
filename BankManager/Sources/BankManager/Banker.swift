@@ -14,7 +14,7 @@ struct Banker {
     func processCustomer(_ customer: Customer) async {
         print("\(customer.name) 업무 시작")
         
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), #available(macOS 10.15, *) {
             do {
                 try await Task.sleep(nanoseconds: 700_000_000)
             } catch {
