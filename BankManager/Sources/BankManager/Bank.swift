@@ -23,6 +23,7 @@ struct Bank {
         let visitedCustomerNumber = bankQueue.count
         
         let concurrentLimitingSemaphore = DispatchSemaphore(value: numberOfBankClerk)
+        let bankingGroup = DispatchGroup()
         
         let startBankingTime = DispatchTime.now()
         while !bankQueue.isEmpty {
@@ -30,13 +31,16 @@ struct Bank {
             
             guard let customer = bankQueue.dequeue() else { return }
             
-            DispatchQueue.global().async {
+            DispatchQueue.global().async(group: bankingGroup) {
                 print("\(customer.waitingNumber)번 고객 업무 시작")
                 Thread.sleep(forTimeInterval: 0.7)
                 print("\(customer.waitingNumber)번 고객 업무 완료")
                 concurrentLimitingSemaphore.signal()
             }
         }
+        
+        bankingGroup.wait()
+        
         let endBankingTime = DispatchTime.now()
         let elapseBankingTimeNanoseconds = endBankingTime.uptimeNanoseconds - startBankingTime.uptimeNanoseconds
         let elapseBankingTime = (Double(elapseBankingTimeNanoseconds) / 1_000_000_000).rounded(toPlaces: 2)
