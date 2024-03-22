@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		63222B622A691A3500F197ED /* BankManager in Frameworks */ = {isa = PBXBuildFile; productRef = 63222B612A691A3500F197ED /* BankManager */; };
-		8BFAF1FA2BAAB08A00B6F88E /* BankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAF1F92BAAB08A00B6F88E /* BankManager.swift */; };
 		C7694E7A259C3EC00053667F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7694E79259C3EC00053667F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +26,6 @@
 /* Begin PBXFileReference section */
 		63222B5F2A6919F700F197ED /* BankManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BankManager; path = ../BankManager; sourceTree = "<group>"; };
 		8BFAF1F82BAAADB700B6F88E /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BFAF1F92BAAB08A00B6F88E /* BankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankManager.swift; sourceTree = "<group>"; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,7 +70,6 @@
 			isa = PBXGroup;
 			children = (
 				C7694E79259C3EC00053667F /* main.swift */,
-				8BFAF1F92BAAB08A00B6F88E /* BankManager.swift */,
 			);
 			path = BankManagerConsoleApp;
 			sourceTree = "<group>";
@@ -139,7 +136,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7694E7A259C3EC00053667F /* main.swift in Sources */,
-				8BFAF1FA2BAAB08A00B6F88E /* BankManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,8 +6,8 @@
 //
 
 struct Bank {
-    var bankers: [Banker]
-    var waitingCustomers: Queue<Customer>
+    var bankers: [Banker] = []
+    var waitingCustomers: Queue<Customer> = Queue<Customer>()
     
     // 은행원 추가
     mutating func addBanker(_ banker: Banker) {

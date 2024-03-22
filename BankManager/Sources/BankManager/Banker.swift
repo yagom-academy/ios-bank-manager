@@ -8,6 +8,7 @@
 import Foundation
 
 struct Banker {
+    var id: Int
     var totalCustomers: Int = 0
     var totalProcessingTime: Double = 0
     
