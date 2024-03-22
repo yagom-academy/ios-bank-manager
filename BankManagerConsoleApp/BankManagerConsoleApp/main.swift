@@ -9,27 +9,24 @@ import BankManager
 
 let bankManager = BankManager(numberOfBankClerk: 1)
 
-var userInput: String = ""
-var flag: Bool = true
-
-while flag {
-    bankStart()
-}
-
-func bankStart() {
+while true {
     print("1 : 은행개점")
     print("2 : 종료")
     print("입력 : ", terminator: "")
-    guard let userInput = readLine() else {
-        return
+    
+    guard let inputString = readLine() else {
+        break
     }
     
-    switch userInput {
-    case "1":
+    guard let inputInt = Int(inputString),
+          let menu = BankMenu(rawValue: inputInt) else {
+        continue
+    }
+    
+    switch menu {
+    case .commence:
         bankManager.commenceBanking()
-    case "2":
-        flag = false
-    default:
-        flag = true
+    case .exit:
+        exit(0)
     }
 }
