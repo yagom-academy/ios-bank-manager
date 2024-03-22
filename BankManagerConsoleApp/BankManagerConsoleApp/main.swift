@@ -4,7 +4,6 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-import Foundation
 import BankManager
 
 run()
@@ -33,14 +32,12 @@ func inputMenu() throws {
     switch safeInput {
     case "1":
         manageBanking()
+        run()
     case "2":
-        print("프로그램을 종료합니다.")
-        return
+        finishBanking()
     default:
         throw InputError.exceptionalInput
     }
-    
-    run()
 }
 
 func printMenu() {
@@ -63,4 +60,8 @@ func manageBanking() {
     }
     
     bank.manager.finishTasks()
+}
+
+func finishBanking() {
+    print("프로그램을 종료합니다.")
 }
