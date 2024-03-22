@@ -33,9 +33,10 @@ final class BankTests: XCTestCase {
         XCTAssertFalse(sut.bankers.isEmpty)
     }
     
-    func test_은행업무가_정상적으로이루어지는지_확인할수있다() async {
+    func test_은행업무가_정상적으로이루어지는지_확인할수있다() async throws {
         sut.addCustomer()
-        await sut.processWorkforOneBanker(Banker())
+        try await sut.processWorkforOneBanker(Banker())
+        
         XCTAssertTrue(sut.waitingCustomers.isEmpty)
     }
 }

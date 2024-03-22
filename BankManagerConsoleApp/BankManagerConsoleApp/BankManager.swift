@@ -23,7 +23,6 @@ enum InputMenu: String {
 
 struct BankManager {
     func executeBankManager(){
-        
         print("1 : 은행개점\n2 : 종료")
         
         guard let input = readLine(), !input.isEmpty else {

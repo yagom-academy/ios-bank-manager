@@ -25,13 +25,12 @@ struct Bank {
     }
     
     // 은행 업무 처리 -> 비동기적 작업의 체인 유지
-    mutating func processWorkforOneBanker(_ banker: Banker) async {
+    mutating func processWorkforOneBanker(_ banker: Banker) async throws {
         repeat {
             guard let customer = waitingCustomers.dequeue() else {
                 return
             }
-            
-            await banker.processCustomer(customer)
+            try await banker.processCustomer(customer)
         } while waitingCustomers.isEmpty
     }
 }
