@@ -7,6 +7,8 @@
 import Foundation
 import BankManager
 
+let bankManager = BankManager(numberOfBankClerk: 1)
+
 var userInput: String = ""
 var flag: Bool = true
 
@@ -24,14 +26,10 @@ func bankStart() {
     
     switch userInput {
     case "1":
-        print("테스트")
-        // commenceBanking()
+        bankManager.commenceBanking()
     case "2":
         flag = false
     default:
         flag = true
     }
 }
-
-
-
