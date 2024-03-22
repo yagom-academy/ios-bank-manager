@@ -24,7 +24,7 @@ public struct BankManager {
     
     public func commenceBanking() {
         enqueueTodaysVisitors()
-        let visitedCustomerNumber = bankQueue.count
+        let numberOfCustomer = bankQueue.count
         
         let concurrentLimitingSemaphore = DispatchSemaphore(value: numberOfBankClerk)
         let bankingGroup = DispatchGroup()
@@ -47,6 +47,6 @@ public struct BankManager {
         
         let bankingEndTime = DispatchTime.now()
         let bankingElapsedTime = Double(bankingEndTime.uptimeNanoseconds - bankingStartTime.uptimeNanoseconds) / 1_000_000_000
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomerNumber)명이며, 총 업무시간은 \(bankingElapsedTime.rounded(toPlaces: 2))초입니다.")
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(numberOfCustomer)명이며, 총 업무시간은 \(bankingElapsedTime.rounded(toPlaces: 2))초입니다.")
     }
 }
