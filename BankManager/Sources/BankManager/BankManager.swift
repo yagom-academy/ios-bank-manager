@@ -29,7 +29,7 @@ public struct BankManager {
         let concurrentLimitingSemaphore = DispatchSemaphore(value: numberOfBankClerk)
         let bankingGroup = DispatchGroup()
         
-        let startBankingTime = DispatchTime.now()
+        let bankingStartTime = DispatchTime.now()
         while !bankQueue.isEmpty {
             concurrentLimitingSemaphore.wait()
             
@@ -45,9 +45,8 @@ public struct BankManager {
         
         bankingGroup.wait()
         
-        let endBankingTime = DispatchTime.now()
-        let elapseBankingTimeNanoseconds = endBankingTime.uptimeNanoseconds - startBankingTime.uptimeNanoseconds
-        let elapseBankingTime = (Double(elapseBankingTimeNanoseconds) / 1_000_000_000).rounded(toPlaces: 2)
-        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomerNumber)명이며, 총 업무시간은 \(elapseBankingTime)초입니다.")
+        let bankingEndTime = DispatchTime.now()
+        let bankingElapsedTime = Double(bankingEndTime.uptimeNanoseconds - bankingStartTime.uptimeNanoseconds) / 1_000_000_000
+        print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomerNumber)명이며, 총 업무시간은 \(bankingElapsedTime.rounded(toPlaces: 2))초입니다.")
     }
 }
