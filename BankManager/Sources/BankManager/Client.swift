@@ -7,6 +7,9 @@
 
 import Foundation
 
-struct Client {
+public struct Client {
     var ID = UUID()
+    
+    public init() {
+    }
 }

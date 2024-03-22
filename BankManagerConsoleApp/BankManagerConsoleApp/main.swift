@@ -7,4 +7,31 @@
 import Foundation
 import BankManager
 
-print(BankManager().text)
+startMenu()
+
+func startMenu() {
+    print("1 : 은행 개점\n2 : 종료")
+    print("입력 : ", terminator: "")
+    let input = readLine()
+
+    if input! == "1" {
+        var bank = Bank()
+        let randomNumber = Int.random(in: 10...30)
+        
+        for _ in 0..<randomNumber {
+            bank.clients.enqueue(element: Client())
+        }
+        
+        while !bank.clients.isEmpty {
+            bank.manager.startTask()
+            bank.clients.dequeue()
+            bank.manager.endTask()
+        }
+        
+        bank.manager.finishTasks()
+    } else if input! == "2" {
+        return
+    }
+    
+    startMenu()
+}

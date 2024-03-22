@@ -7,7 +7,7 @@ public struct BankManager {
     }
     
     public mutating func endTask() {
-        print("\(taskCount)번 고객 업무 완료")
+        print("\(taskCount + 1)번 고객 업무 완료")
         taskCount += 1
         businessHour += 0.7
     }
