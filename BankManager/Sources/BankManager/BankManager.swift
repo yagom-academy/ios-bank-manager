@@ -51,10 +51,3 @@ public struct BankManager {
         print("업무가 마감되었습니다. 오늘 업무를 처리한 고객은 총 \(visitedCustomerNumber)명이며, 총 업무시간은 \(elapseBankingTime)초입니다.")
     }
 }
-
-extension Double {
-    func rounded(toPlaces: Int) -> Double {
-        let divisor = pow(10.0, Double(toPlaces))
-        return (self * divisor).rounded() / divisor
-    }
-}
