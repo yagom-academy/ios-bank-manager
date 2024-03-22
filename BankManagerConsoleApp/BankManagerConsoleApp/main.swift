@@ -7,11 +7,14 @@
 import Foundation
 import BankManager
 
-startMenu()
+run()
 
-func startMenu() {
-    print("1 : 은행 개점\n2 : 종료")
-    print("입력 : ", terminator: "")
+func run() {
+    printMenu()
+    inputMenu()
+}
+
+func inputMenu() {
     let input = readLine()
 
     if input! == "1" {
@@ -33,5 +36,10 @@ func startMenu() {
         return
     }
     
-    startMenu()
+    run()
+}
+
+func printMenu() {
+    print("1 : 은행 개점\n2 : 종료")
+    print("입력 : ", terminator: "")
 }
