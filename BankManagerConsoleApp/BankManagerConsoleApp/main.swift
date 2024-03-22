@@ -1,8 +1,8 @@
 //
 //  BankManagerConsoleApp - main.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom academy. All rights reserved.
-// 
+//
 
 import Foundation
 import BankManager
@@ -11,20 +11,33 @@ run()
 
 func run() {
     printMenu()
-    inputMenu()
+    
+    do {
+        try inputMenu()
+    } catch InputError.nilInput {
+        print("nil을 입력 받았습니다.")
+    } catch InputError.exceptionalInput {
+        print("1, 2 외의 입력을 받았습니다.")
+    } catch {
+        print("알 수 없는 에러가 발생했습니다.")
+    }
 }
 
-func inputMenu() {
+func inputMenu() throws {
     let input = readLine()
-
-    // 1,2 이외에 입력 받는 상황 검증하기
-    if input! == "1" {
+    
+    guard let safeInput = input else {
+        throw InputError.nilInput
+    }
+    
+    switch safeInput {
+    case "1":
         manageBanking()
-    } else if input! == "2" {
+    case "2":
+        print("프로그램을 종료합니다.")
         return
-    } else {
-        // throw 에러
-        return
+    default:
+        throw InputError.exceptionalInput
     }
     
     run()
