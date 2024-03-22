@@ -20,6 +20,7 @@ public struct BankQueue<T> {
         list.append(element: element)
     }
     
+    @discardableResult
     public mutating func dequeue() -> T? {
         return list.removeFirst()
     }
