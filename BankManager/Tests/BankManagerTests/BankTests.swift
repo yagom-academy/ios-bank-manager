@@ -13,24 +13,29 @@ final class BankTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Bank(bankers: [], waitingCustomers: Queue<Customer>())
+        sut = Bank()
     }
 
     override func tearDownWithError() throws {
         sut = nil
         try super.tearDownWithError()
     }
-    
-    func test_고객추가가_정상적으로이루어지는지_확인할수있다() {
+
+    func test고객추가가정상적으로이루어지는지확인할수있다() {
         sut.addCustomer()
-        
+
         XCTAssertFalse(sut.waitingCustomers.isEmpty)
     }
-    
-    func test_은행업무가_정상적으로이루어지는지_확인할수있다() async throws {
+
+    func test은행업무종료시모든고객이_Queue에서dequeue되었는지확인할수있다() async throws {
+        var isWorking: Bool = true
+
         sut.addCustomer()
-        try await sut.preceedBankWork()
-        
+
+        while isWorking {
+            isWorking = try await sut.preceedBankWork()
+        }
+
         XCTAssertTrue(sut.waitingCustomers.isEmpty)
     }
 }
