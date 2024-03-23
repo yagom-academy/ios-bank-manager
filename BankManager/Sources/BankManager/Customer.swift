@@ -11,6 +11,6 @@ struct Customer {
     
     init(number: Int) {
         self.name = "\(number)번 고객"
-        self.processingTime = 0.7 // 고객 한명 당, 걸리는 시간
+        self.processingTime = 0.7
     }
 }
