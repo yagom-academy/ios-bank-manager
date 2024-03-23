@@ -17,7 +17,7 @@ class Bank {
         }
     }
     
-    func preceedBankWork() async throws -> Bool {
+    func processBankWork() async throws -> Bool {
         if waitingCustomers.isEmpty {
             return false
         }
