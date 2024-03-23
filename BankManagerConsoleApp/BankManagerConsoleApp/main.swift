@@ -7,26 +7,47 @@
 import Foundation
 import BankManager
 
-var shouldRun:Bool = true
-
-while shouldRun {
-    print("1 : 은행개점")
-    print("2 : 종료")
-    print("입력 : ", terminator: " ")
+enum BankWork {
+    case start
+    case stop
     
-    guard let input = readLine(), let choice = Int(input) else {
-        print("아무것도 입력되지 않았습니다!")
-        continue
-    }
-    
-    switch choice {
-    case 1:
-        var bankManager = BankManager()
-        bankManager.openBank()
-    case 2:
-        print("프로그램을 종료합니다")
-        shouldRun = false
-    default:
-        print("잘못된 입력입니다. 1 또는 2를 입력해주세요.")
+    init?(input: String) {
+        switch input {
+        case "1":
+            self = .start
+        case "2":
+            self = .stop
+        default:
+            return nil
+        }
     }
 }
+
+func startBanking() async throws {
+    var nowWorking: Bool = true
+    
+    while nowWorking {
+        print("1 : 은행개점")
+        print("2 : 종료")
+        print("입력 : ", terminator: " ")
+        
+        guard let input = readLine(), let choice = BankWork(input: input) else {
+            print("잘못된 입력입니다! 1 또는 2를 입력해주세요.")
+            continue
+        }
+        
+        switch choice {
+        case .start:
+            var bankManager = BankManager()
+            do {
+                try await bankManager.openBank()
+            } catch {
+                print("Error")
+            }
+        case .stop:
+            nowWorking = false
+        }
+    }
+}
+
+try await startBanking()

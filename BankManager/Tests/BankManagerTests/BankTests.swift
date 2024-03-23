@@ -28,14 +28,14 @@ final class BankTests: XCTestCase {
     }
     
     func test_은행원추가가_정상적으로이루어지는지_확인할수있다() {
-        sut.addBanker(Banker())
+        sut.addBanker(Banker(id: 1))
         
         XCTAssertFalse(sut.bankers.isEmpty)
     }
     
     func test_은행업무가_정상적으로이루어지는지_확인할수있다() async throws {
         sut.addCustomer()
-        try await sut.processWorkforOneBanker(Banker())
+        try await sut.preceedBankWork(Banker(id: 1))
         
         XCTAssertTrue(sut.waitingCustomers.isEmpty)
     }
