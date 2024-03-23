@@ -5,15 +5,10 @@
 //  Created by Diana, Hamzzi on 3/20/24.
 //
 
-struct Bank {
-    var bankers: [Banker] = []
+class Bank {
     var waitingCustomers: Queue<Customer> = Queue<Customer>()
     
-    mutating func addBanker(_ banker: Banker) {
-        bankers.append(banker)
-    }
-    
-    mutating func addCustomer() {
+    func addCustomer() {
         let totalCustomers = Int.random(in: 10...30)
         
         for number in 1...totalCustomers {
@@ -22,7 +17,7 @@ struct Bank {
         }
     }
     
-    mutating func preceedBankWork(_ banker: Banker) async throws -> Bool {
+    func preceedBankWork() async throws -> Bool {
         if waitingCustomers.isEmpty {
             return false
         }
@@ -31,8 +26,18 @@ struct Bank {
             return false
         }
         
-        try await banker.processCustomer(customer)
+        try await processCustomer(customer)
         
         return true
+    }
+    
+    func processCustomer(_ customer: Customer) async throws {
+        print("\(customer.name) 업무 시작")
+        
+        if #available(iOS 13.0, *), #available(macOS 10.15, *) {
+            try await Task.sleep(nanoseconds: 700_000_000)
+        }
+        
+        print("\(customer.name) 업무 완료")
     }
 }

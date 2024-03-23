@@ -40,7 +40,7 @@ func startBanking() async throws {
         case .start:
             var bankManager = BankManager()
             do {
-                try await bankManager.openBank()
+                try await bankManager.openBank(workTime: 0.7)
             } catch {
                 print("Error")
             }
