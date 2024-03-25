@@ -15,7 +15,7 @@ public struct BankManager {
         bank.addCustomer()
         
         while isWorking {
-            isWorking = try await bank.preceedBankWork()
+            isWorking = try await bank.processBankWork()
             totalCustomer += 1
             totalTime += workTime
         }
