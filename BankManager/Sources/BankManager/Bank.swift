@@ -7,6 +7,9 @@
 
 class Bank {
     var waitingCustomers: Queue<Customer> = Queue<Customer>()
+    let timer = DispatchSource.makeTimerSource()
+    timer.setEventHandler {
+    }
     
     func addCustomer() {
         let totalCustomers = Int.random(in: 10...30)
@@ -34,7 +37,8 @@ class Bank {
     func processCustomer(_ customer: Customer) async throws {
         print("\(customer.name) 업무 시작")
         
-        try await Task.sleep(nanoseconds: 700_000_000)
+        timer.schedule(deadline: .now() + 0.7, repeating: .never)
+        timer.activate()
         
         print("\(customer.name) 업무 완료")
     }
