@@ -4,6 +4,7 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
+import Foundation
 import BankManager
 
 run()
@@ -56,6 +57,7 @@ func manageBanking() {
     while !bank.clients.isEmpty {
         bank.manager.startTask()
         bank.clients.dequeue()
+        Thread.sleep(forTimeInterval: 0.7)
         bank.manager.endTask()
     }
     
