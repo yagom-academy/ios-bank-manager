@@ -8,8 +8,6 @@
 import Foundation
 
 public struct Client {
-    var ID = UUID()
-    
     public init() {
     }
 }
