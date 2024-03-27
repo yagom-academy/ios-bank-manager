@@ -22,7 +22,7 @@ final class BankTests: XCTestCase {
     }
 
     func test고객추가가정상적으로이루어지는지확인할수있다() {
-        sut.addCustomer()
+        sut.addCustomer(with: 10...30)
 
         XCTAssertFalse(sut.waitingCustomers.isEmpty)
     }

@@ -9,12 +9,12 @@ import Foundation
 
 struct Customer: Equatable, Identifiable {
     let id: String
-    let name: String
+    let waitingNumber: String
     let processingTime: Double
     
     init(number: Int) {
         self.id = UUID().uuidString
-        self.name = "\(number)번 고객"
+        self.waitingNumber = "\(number)번 고객"
         self.processingTime = 0.7
     }
     
