@@ -5,12 +5,20 @@
 //  Created by Diana, Hamzzi on 3/20/24.
 //
 
-struct Customer {
+import Foundation
+
+struct Customer: Equatable, Identifiable {
+    var id: String
     var name: String
     var processingTime: Double
     
     init(number: Int) {
+        self.id = UUID().uuidString
         self.name = "\(number)번 고객"
         self.processingTime = 0.7
+    }
+    
+    static func ==(lhs: Customer, rhs: Customer) -> Bool {
+        return lhs.id == rhs.id
     }
 }
