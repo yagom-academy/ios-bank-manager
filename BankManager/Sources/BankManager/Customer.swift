@@ -8,9 +8,9 @@
 import Foundation
 
 struct Customer: Equatable, Identifiable {
-    var id: String
-    var name: String
-    var processingTime: Double
+    let id: String
+    let name: String
+    let processingTime: Double
     
     init(number: Int) {
         self.id = UUID().uuidString
