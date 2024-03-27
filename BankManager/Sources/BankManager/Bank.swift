@@ -5,7 +5,7 @@
 //  Created by Diana, Hamzzi on 3/20/24.
 //
 
-class Bank {
+final class Bank {
     var waitingCustomers: Queue<Customer> = Queue<Customer>()
     
     func hasWaitingCustomers() -> Bool {
@@ -22,7 +22,7 @@ class Bank {
     }
     
     func processBankWork() async throws -> Bool {
-        guard !waitingCustomers.isEmpty { return false }
+        guard !waitingCustomers.isEmpty else { return false }
         guard let customer = waitingCustomers.dequeue() else { return false }
         
         try await processCustomer(customer)
