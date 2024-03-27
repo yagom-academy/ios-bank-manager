@@ -8,14 +8,13 @@ public struct BankManager {
     }
     
     public mutating func openBank(workTime: Double) async throws {
-        var isWorking: Bool = true
         var totalCustomer: Int = 0
         var totalTime: Double = 0
         
         bank.addCustomer()
         
-        while isWorking {
-            isWorking = try await bank.processBankWork()
+        while bank.hasWaitingCustomers() {
+            let _ = try await bank.processBankWork()
             totalCustomer += 1
             totalTime += workTime
         }

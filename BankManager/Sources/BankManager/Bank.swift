@@ -8,6 +8,10 @@
 class Bank {
     var waitingCustomers: Queue<Customer> = Queue<Customer>()
     
+    func hasWaitingCustomers() -> Bool {
+        return !waitingCustomers.isEmpty
+    }
+    
     func addCustomer() {
         let totalCustomers = Int.random(in: 10...30)
         
