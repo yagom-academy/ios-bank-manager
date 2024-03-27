@@ -7,11 +7,11 @@ public struct BankManager {
         self.bank = Bank()
     }
     
-    public mutating func openBank(workTime: Double) async throws {
+    public mutating func openBank(workTime: Double, customers: ClosedRange<Int>) async throws {
         var totalCustomer: Int = 0
         var totalTime: Double = 0
         
-        bank.addCustomer()
+        bank.addCustomer(with: customers)
         
         while bank.hasWaitingCustomers() {
             let _ = try await bank.processBankWork()

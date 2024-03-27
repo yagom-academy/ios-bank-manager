@@ -12,8 +12,8 @@ final class Bank {
         return !waitingCustomers.isEmpty
     }
     
-    func addCustomer() {
-        let totalCustomers = Int.random(in: 10...30)
+    func addCustomer(with range: ClosedRange<Int>) {
+        let totalCustomers = Int.random(in: range)
         
         for number in 1...totalCustomers {
             let customer = Customer(number: number)
