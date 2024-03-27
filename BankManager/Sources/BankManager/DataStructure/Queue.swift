@@ -5,30 +5,30 @@
 //  Created by Diana, Hamzzi on 3/18/24.
 //
 
-public struct Queue<Element> {
+struct Queue<Element> {
     private var list = LinkedList<Element>()
     
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         list.isEmpty
     }
     
-    public var count: Int {
+    var count: Int {
         list.count
     }
     
-    public mutating func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         return list.removeFirst()
     }
     
-    public mutating func enqueue(_ value: Element) {
+    mutating func enqueue(_ value: Element) {
         list.append(value)
     }
     
-    public mutating func peek() -> Element? {
+    mutating func peek() -> Element? {
         return list.peek()
     }
     
-    public mutating func clear() {
+    mutating func clear() {
         list.clear()
     }
 }
