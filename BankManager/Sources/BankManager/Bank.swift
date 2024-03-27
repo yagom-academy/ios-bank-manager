@@ -31,12 +31,12 @@ final class Bank {
     }
     
     func processCustomer(_ customer: Customer) async throws {
-        print("\(customer.name) 업무 시작")
+        print("\(customer.waitingNumber) 업무 시작")
         
         if #available(iOS 13.0, *), #available(macOS 10.15, *) {
             try await Task.sleep(nanoseconds: 700_000_000)
         }
         
-        print("\(customer.name) 업무 완료")
+        print("\(customer.waitingNumber) 업무 완료")
     }
 }

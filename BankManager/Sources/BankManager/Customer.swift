@@ -6,11 +6,11 @@
 //
 
 struct Customer {
-    var name: String
+    var waitingNumber: String
     var processingTime: Double
     
     init(number: Int) {
-        self.name = "\(number)번 고객"
+        self.waitingNumber = "\(number)번 고객"
         self.processingTime = 0.7
     }
 }
