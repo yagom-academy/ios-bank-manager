@@ -22,13 +22,8 @@ class Bank {
     }
     
     func processBankWork() async throws -> Bool {
-        if waitingCustomers.isEmpty {
-            return false
-        }
-        
-        guard let customer = waitingCustomers.dequeue() else {
-            return false
-        }
+        guard !waitingCustomers.isEmpty { return false }
+        guard let customer = waitingCustomers.dequeue() else { return false }
         
         try await processCustomer(customer)
         
