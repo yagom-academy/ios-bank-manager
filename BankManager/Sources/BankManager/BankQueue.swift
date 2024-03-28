@@ -5,26 +5,31 @@
 //  Created by Gray, Gama on 2024/03/18.
 //
 
-struct BankQueue<T> {
-    private var list = BankLinkedList<T>()
+public struct BankQueue<T> {
+    private var list: BankLinkedList<T>
     
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return list.isEmpty
     }
     
-    mutating func enqueue(element: T) {
+    public init() {
+        self.list = BankLinkedList()
+    }
+    
+    public mutating func enqueue(element: T) {
         list.append(element: element)
     }
     
-    mutating func dequeue() -> T? {
+    @discardableResult
+    public mutating func dequeue() -> T? {
         return list.removeFirst()
     }
     
-    func peek() -> T? {
+    public func peek() -> T? {
         return list.first
     }
     
-    mutating func clear() {
+    public mutating func clear() {
         list.removeAll()
     }
 }

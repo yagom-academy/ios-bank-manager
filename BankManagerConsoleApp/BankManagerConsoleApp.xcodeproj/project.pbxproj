@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,8 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0601776B2BAD1C8F00DC493D /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BankManagerConsoleApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		63222B5F2A6919F700F197ED /* BankManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BankManager; path = ../BankManager; sourceTree = "<group>"; };
-		C7694E76259C3EC00053667F /* BankManagerConsoleApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = BankManagerConsoleApp; path = "/Users/kjs/Documents/dev/prjs/ios-bank-manager/BankManagerConsoleApp/build/Debug/BankManagerConsoleApp"; sourceTree = "<absolute>"; };
 		C7694E79259C3EC00053667F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +62,7 @@
 				63222B5E2A6919F700F197ED /* Packages */,
 				C7694E78259C3EC00053667F /* BankManagerConsoleApp */,
 				63222B602A691A3500F197ED /* Frameworks */,
+				0601776B2BAD1C8F00DC493D /* BankManagerConsoleApp */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,7 +94,7 @@
 				63222B612A691A3500F197ED /* BankManager */,
 			);
 			productName = BankManagerConsoleApp;
-			productReference = C7694E76259C3EC00053667F /* BankManagerConsoleApp */;
+			productReference = 0601776B2BAD1C8F00DC493D /* BankManagerConsoleApp */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */

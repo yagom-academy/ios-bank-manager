@@ -5,15 +5,15 @@
 //  Created by Gray, Gama on 2024/03/18.
 //
 
-struct BankLinkedList<T> {
+public struct BankLinkedList<T> {
     private var head: BankNode<T>?
     private var tail: BankNode<T>?
     
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return head == nil && tail == nil
     }
     
-    var count: Int {
+    public var count: Int {
         var result = 0
         var node = head
         
@@ -25,15 +25,15 @@ struct BankLinkedList<T> {
         return result
     }
     
-    var first: T? {
+    public var first: T? {
         return isEmpty ? nil : head?.data
     }
     
-    var last: T? {
+    public var last: T? {
         return isEmpty ? nil : tail?.data
     }
     
-    mutating func append(element: T) {
+    public mutating func append(element: T) {
         let node = BankNode(data: element, next: nil)
         
         if isEmpty {
@@ -45,7 +45,7 @@ struct BankLinkedList<T> {
         }
     }
     
-    mutating func removeFirst() -> T? {
+    public mutating func removeFirst() -> T? {
         guard let firstNode = head?.data else {
             return nil
         }
@@ -60,7 +60,7 @@ struct BankLinkedList<T> {
         return firstNode
     }
     
-    mutating func removeAll() {
+    public mutating func removeAll() {
         head = nil
         tail = nil
     }
